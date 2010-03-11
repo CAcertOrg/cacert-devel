@@ -1,0 +1,94 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 0 0 596 842
+%%Title: 
+%%Creator: gpg-key2ps 0.1
+%%CreationDate: Mon Sep 27 01:14:05 EST 2004
+%%Pages: 1
+%%EndComments
+
+%%Page: 1 1
+
+/w 596 def
+/h 842 def
+
+/Times-Roman findfont 9 scalefont setfont 
+
+/newline {
+	/y y 10 sub def
+} def
+
+/hline {
+	30 y 3 add moveto
+	w 2 div 30 sub y 3 add lineto stroke
+	newline
+} def
+
+/needhline {
+	/condhline { hline } def
+} def
+
+/noneedhline {
+	/condhline { } def
+} def
+
+/pub {
+	condhline
+	20 y moveto (pub) show
+	40 y moveto show show (/) show show
+	120 y moveto show
+	170 y moveto show
+	newline
+	needhline
+} def
+
+/fpr {
+	40 y moveto (Key fingerprint = ) show show
+	newline
+} def
+
+/uid {
+	20 y moveto (uid) show
+	170 y moveto show
+	newline
+} def
+
+/revuid {} def
+
+/sbk {
+	20 y moveto (sub) show
+	40 y moveto show show (/) show show
+	120 y moveto show
+	newline
+} def
+
+/key {
+	noneedhline
+	(CA Cert Signing Authority (Root CA) <gpg@cacert.org>) (2003-07-11) (65D0FD58) (D) (1024) pub
+	(A31D 4F81 EF4E BD07 B456  FA04 D2BB 0D01 65D0 FD58) fpr
+	(2003-07-11) (113ED0F2) (g) (2048) sbk
+} def
+
+/numlines 3 def
+/num w 16 sub 10 div numlines div def
+
+/column {
+	/y w 10 sub def
+	1 1 num {
+		/upper y 10 add def
+		key
+		newline
+		/lower y 10 add def
+		0 upper h 2 div upper h 2 div lower 0 lower 0 upper moveto lineto lineto lineto lineto stroke
+	} for
+} def
+
+w 0 translate
+90 rotate
+column
+h 2 div 0 translate
+column
+
+showpage
+
+%%Trailer
+%%EOF

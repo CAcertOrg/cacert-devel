@@ -1,0 +1,5146 @@
+# translation of messages.po to fa_IR.po
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: de\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
+"PO-Revision-Date: 2009-06-25 19:17:51+0000\n"
+"Last-Translator: Someone <someone@someisp.com>\n"
+"Language-Team:  <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: http://www.TransLingo.org\n"
+
+#: www/account/43.php:43 www/account/49.php:43
+#, php-format
+msgid "%s rows displayed."
+msgstr "سطر نشان داده شده است %s"
+
+#: www/account/43.php:71
+#, php-format
+msgid "%s's Account Details"
+msgstr ""
+
+#: www/account/32.php:21
+#, php-format
+msgid "%s's Administrators"
+msgstr ""
+
+#: www/account/26.php:21
+#, php-format
+msgid "%s's Domains"
+msgstr ""
+
+#: includes/account.php:1388
+#, php-format
+msgid "'%s' has just been successfully added as an organisation to the database."
+msgstr ""
+
+#: includes/account.php:1444
+#, php-format
+msgid "'%s' has just been successfully added to the database."
+msgstr "به بانک اطلاعات اضافه شد '%s'"
+
+#: includes/account.php:1503
+#, php-format
+msgid "'%s' has just been successfully deleted from the database."
+msgstr "از بانک اطلاعات پاک شد '%s'"
+
+#: includes/account.php:1416 includes/account.php:1491
+#, php-format
+msgid "'%s' has just been successfully updated in the database."
+msgstr "در بانک اطلاعات تغییر داده شد '%s'"
+
+#: www/help/3.php:64
+msgid "...then click 'Next'."
+msgstr "دکمه 'بعد' را فشار دهید"
+
+#: www/wot/3.php:42
+msgid "A CAcert Assurer who knowingly, or reasonably ought to have known, assures an applicant contrary to this policy may be held liable."
+msgstr ""
+
+#: www/wot/4.php:17
+msgid "A trusted 3rd party is simply someone in your country that is responsible for witnessing signatures and ID documents. This role is covered by many different titles such as public notary, justice of the peace and so on. Other people are allowed to be authoritative in this area as well, such as bank managers, accountants and lawyers."
+msgstr ""
+
+#: www/account/38.php:21 www/index/13.php:21
+msgid "ANY amount will be appreciated - the more funding CAcert receives, the sooner it can achieve the goals of the community."
+msgstr ""
+
+#: includes/account_stuff.php:182
+msgid "About"
+msgstr "درباره"
+
+#: www/account/37.php:15 www/index/12.php:15
+msgid "About CAcert.org"
+msgstr "درباره CAcert.org"
+
+#: includes/account_stuff.php:209 includes/general_stuff.php:108
+msgid "About Us"
+msgstr "درباره ما"
+
+#: includes/account_stuff.php:150 includes/account_stuff.php:158
+#: www/account/1.php:26 www/account/16.php:21 www/account/26.php:21
+#: www/account/28.php:29 www/account/3.php:30 www/account/32.php:21
+#: www/account/33.php:47 www/account/7.php:27
+msgid "Add"
+msgstr "اضافه کنید"
+
+#: www/account/7.php:19
+msgid "Add Domain"
+msgstr "اضافه کنید Domain"
+
+#: www/account/1.php:18
+msgid "Add Email"
+msgstr "پست الکترونیکی اضافه کنید"
+
+#: www/account/16.php:22 www/account/2.php:24 www/account/3.php:31
+#: www/account/9.php:23
+msgid "Address"
+msgstr "آدرس"
+
+#: www/account/32.php:24
+msgid "Administrator"
+msgstr "Administrator"
+
+#: www/account/25.php:22 www/account/25.php:39 www/account/35.php:21
+#: www/account/35.php:35
+msgid "Admins"
+msgstr "Admins"
+
+#: www/wot/3.php:28
+msgid "After the meeting, visit the CAcert Web site's make an Assurance page and:"
+msgstr "After the meeting, visit the CAcert Web site's make an Assurance page and:"
+
+#: www/help/3.php:44
+msgid "After your certificate has been emailed to you, follow this process to install the certificate."
+msgstr ""
+
+#: www/account/39.php:32 www/index/10.php:32
+msgid "Aggregated tracking information"
+msgstr ""
+
+#: www/account/36.php:21 www/index/1.php:110
+msgid "Alert me if"
+msgstr "خبر کن اگر"
+
+#: www/index.php:332
+msgid "All fields are mandatory."
+msgstr "تمامی اطلاعات ضروری میباشند"
+
+#: www/account/43.php:157
+msgid "Alternate Verified Email Addresses"
+msgstr ""
+
+#: www/help/7.php:9
+msgid "Alternatively as things progress we can add more layers of security with say 4 webservers talking to 2 intermediate servers, talking to the root store, and acting in a token ring fashion, anything happening out of sequence, and the server directly upstream shuts itself down, which if that were in place and there were multiple paths, any down time in this fashion would fall over to the servers not compromised, anyways just some food for thought."
+msgstr ""
+
+#: www/account/40.php:52 www/index/11.php:52
+msgid "Alternatively you can get in contact with us via the following methods:"
+msgstr "از طرق زیر میتوانید با ما تماس بگیرید"
+
+#: www/help/2.php:49
+msgid "And they are making mistakes"
+msgstr "و آنها اشتباه میکنند"
+
+#: www/help/3.php:70
+msgid "And you're done!"
+msgstr "و شما کار را تمام کردید"
+
+#: www/account/16.php:39
+msgid "Another Email"
+msgstr "پست الکترونیکی اضافه"
+
+#: includes/account.php:404
+msgid "Any valid certificates will be revoked as well"
+msgstr "پروانهای معتبر نیز رد میشوند"
+
+#: www/help/7.php:5
+msgid "Apart from the boot stuff, all data resides on an encrypted partition on the root store server and only manual intervention in the boot up process by entering the password will start it again."
+msgstr ""
+
+#: www/index/17.php:61
+msgid "Can't start the CEnroll control:"
+msgstr ""
+
+#: www/account/30.php:31
+#, php-format
+msgid "Are you really sure you want to remove %s and all certificates issued under this domain?"
+msgstr "و تمامی پروانه های صادر شده تحت این دامین را پاک کنید؟  %s آیا شما اطمینان دارید که"
+
+#: www/account/31.php:27
+#, php-format
+msgid "Are you really sure you want to remove %s and all certificates issued under this organisation?"
+msgstr ""
+
+#: www/account/34.php:31
+#, php-format
+msgid "Are you really sure you want to remove %s from administering this organisation?"
+msgstr ""
+
+#: www/help/2.php:22
+msgid "As anyone who has received an email containing a virus from a strange address knows, emails can be easily spoofed. The identity of the sender is very easy to forge via email. Thus a great advantage is that digital signing provides a means of ensuring that an email is really from the person you think it is. If everyone digitally signed their emails, it would be much easier to know whether an email is legitimate and unchanged and to the great relief of many, spamming would be much easier to control, and viruses that forge the sender's address would be obvious and therefore easier to control."
+msgstr ""
+
+#: www/wot/6.php:24
+msgid "Assurance Confirmation"
+msgstr "تاییده اطمینان"
+
+#: www/account/43.php:146 www/wot/3.php:44
+msgid "Assurance Points"
+msgstr ""
+
+#: www/account/43.php:225 www/wot/10.php:52
+msgid "Assurance Points You Issued"
+msgstr ""
+
+#: www/stats.php:51
+msgid "Assurances Made"
+msgstr ""
+
+#: includes/account_stuff.php:182 www/wot/5.php:19
+msgid "Assure Someone"
+msgstr ""
+
+#: www/index/0.php:60
+msgid "Assured client certificates"
+msgstr ""
+
+#: www/index/0.php:90
+msgid "Assured server certificates"
+msgstr ""
+
+#: pages/index/0.php:25
+msgid "For CAcert Community Members"
+msgstr ""
+
+#: www/index/51.php:28
+msgid "Based on OpenSSL, PHP, a little bit of C and MySQL, we were able to build not only a free certificate authority that could verify your email address or domain, but actually build in a highly effective trust model. Our model goes further than that used by some commercial CAs to prove your identity."
+msgstr ""
+
+#: www/index/0.php:110
+msgid "Become a member of the CAcert Association"
+msgstr ""
+
+#: www/index/0.php:100
+msgid "Become an assurer in CAcert Web of Trust"
+msgstr ""
+
+#: includes/account_stuff.php:182
+msgid "Becoming an Assurer"
+msgstr ""
+
+#: pages/account/10.php:34
+msgid "Paste your CSR(Certificate Signing Request) below..."
+msgstr ""
+
+#: www/account/0.php:24
+msgid "Before you can start issuing certificates for your website, irc server, smtp server, pop3, imap etc you will need to add domains to your account under the domain menu. You can also remove domains from here as well. Once you've added a domain you are free then to go into the Server Certificate section and start pasting CSR into the website and have the website return you a valid certificate for up to 2 years if you have 50 trust points, or 6 months for no trust points."
+msgstr ""
+
+#: www/account/15.php:32 www/account/23.php:32
+msgid "Below is your Server Certificate"
+msgstr "در پایین پروانه ' سرور'  خو را دریافت کنید"
+
+#: www/index/0.php:53 www/index/0.php:63 www/index/0.php:73 www/index/0.php:83
+#: www/index/0.php:93 www/index/0.php:103 www/index/0.php:113
+msgid "Benefits"
+msgstr "مزایا"
+
+#: includes/account.php:49 includes/account.php:389 www/index.php:316
+#: www/wot.php:222 www/wot.php:234 scripts/removedead.php:59
+msgid "Best regards"
+msgstr "با احترامات فراوان"
+
+#: www/help/3.php:60
+msgid "Browse to the location you saved the .cer file to in step 1"
+msgstr "را در مرحله 1 ضبط کردید.cer  بروید به جاییکه فایل  "
+
+#: www/help/2.php:25
+msgid "But perhaps, fundamentally, the most important reason for digital signing is awareness and privacy. It creates awareness of the (lack of) security of the Internet, and the tools that we can arm ourselves with to ensure our personal security. And in sensitising people to digital signatures, we become aware of the possibility of privacy and encryption."
+msgstr ""
+
+#: www/help/2.php:7 www/help/2.php:35
+msgid "But, er, is this really proof of your email identity?"
+msgstr ""
+
+#: www/help/2.php:48
+msgid "But, with all this money, and all this responsibility, they must be taking a lot of care to ensure the Certificate Authorities do their jobs well, and keep doing their jobs well, right? Well right?!"
+msgstr ""
+
+#: www/account/10.php:15 www/account/20.php:15 www/account/3.php:15
+msgid "CAcert Certficate Acceptable Use Policy"
+msgstr ""
+
+#: www/account/38.php:19 www/index/13.php:19
+msgid "CAcert Inc. is a non-profit association which is legally able to accept donations. CAcert adheres to strict guidelines about how this money can to be used. If you'd like to make a donation, you can do so via"
+msgstr ""
+
+#: www/account/10.php:20 www/account/20.php:20 www/account/3.php:20
+msgid "CAcert Inc.'s public certification services are governed by a CPS as amended from time to time which is incorporated into this Agreement by reference. The Subscriber will use the SSL Server Certificate in accordance with CAcert Inc.'s CPS and supporting documentation published at"
+msgstr ""
+
+#: www/index/51.php:25
+msgid "CAcert Inc., as a community-based project, is not driven by profits - it is driven by the community's desire for privacy and security."
+msgstr ""
+
+#: www/wot.php:223 www/wot.php:235 scripts/removedead.php:60
+msgid "CAcert Support Team"
+msgstr ""
+
+#: includes/account_stuff.php:181 www/account/0.php:27 www/wot/0.php:15
+msgid "CAcert Web of Trust"
+msgstr ""
+
+#: www/wot/3.php:15
+msgid "CAcert Web of Trust Rules"
+msgstr ""
+
+#: www/wot/3.php:45
+msgid "CAcert may, from time to time, alter the amount of Assurance Points that a class of assurer may assign as is necessary to effect a policy or rule change.  We may also alter the amount of Assurance Points available to an individual, or new class of assurer, should another policy of CAcert require this."
+msgstr ""
+
+#: www/help/6.php:11
+msgid "CAcert then sends you an email with a signed copy of your certificate. Hopefully the rest should be pretty straight forward."
+msgstr ""
+
+#: www/account/37.php:19 www/index/12.php:19
+#, php-format
+msgid "CAcert's goal is to promote awareness and education on computer security through the use of encryption, specifically with the X.509 family of standards. We have compiled a %sdocument base%s that has helpful hints and tips on setting up encryption with common software, and general information about Public Key Infrastructures (PKI)."
+msgstr ""
+
+#: www/account/0.php:17
+msgid "CAcert.org"
+msgstr ""
+
+#: www/index/51.php:15
+msgid "CAcert.org Mission Statement"
+msgstr ""
+
+#: includes/account.php:49 includes/account.php:389 www/index.php:316
+msgid "CAcert.org Support!"
+msgstr ""
+
+#: www/account/37.php:17 www/index/12.php:17
+msgid "CAcert.org is a community driven, Certificate Authority that issues certificates to the public at large for free."
+msgstr ""
+
+#: www/wot/0.php:17
+msgid "CAcert.org was designed to be by the community for the community, and instead of placing all the labour on a central authority and in turn increasing the cost of certificates, the idea was to get community in conjunction with this website to have trust maintained in a dispersed and automated manner!"
+msgstr ""
+
+#: includes/account.php:1464 includes/account.php:1515 www/account/30.php:34
+#: www/account/31.php:30 www/account/34.php:34
+msgid "Cancel"
+msgstr ""
+
+#: includes/general_stuff.php:58
+msgid "Cert Login"
+msgstr ""
+
+#: www/account/19.php:101 www/account/6.php:99
+msgid "Certificate Installation Complete!"
+msgstr ""
+
+#: www/account/19.php:97 www/account/6.php:95
+msgid "Certificate Installation Error"
+msgstr ""
+
+#: www/help/3.php:43
+msgid "Certificate Installation process for IIS 5.0"
+msgstr ""
+
+#: includes/general_stuff.php:65
+msgid "CAcert Logos"
+msgstr ""
+
+#: includes/account.php:669 includes/account.php:1066
+#, php-format
+msgid "Certificate for '%s' has been renewed."
+msgstr ""
+
+#: includes/account.php:594 includes/account.php:705 includes/account.php:1103
+#: includes/account.php:1319
+#, php-format
+msgid "Certificate for '%s' has been revoked."
+msgstr ""
+
+#: www/account/19.php:95 www/account/6.php:93
+msgid "Certificate installation failed!"
+msgstr ""
+
+#: www/stats.php:31
+msgid "Certificates Issued"
+msgstr ""
+
+#: pages/help/4.php:21
+msgid "writing new private key to 'private.key'"
+msgstr ""
+
+#: includes/account.php:837 includes/account.php:1312 pages/account/19.php:45
+#: pages/account/6.php:43
+msgid "to install your certificate."
+msgstr ""
+
+#: www/account/14.php:18
+msgid "Change Pass Phrase"
+msgstr ""
+
+#: includes/account_stuff.php:146 www/account/43.php:98 www/account/43.php:99
+#: www/account/44.php:19 www/account/50.php:19
+msgid "Change Password"
+msgstr ""
+
+#: www/help/3.php:36
+msgid "Choose a filename to save the request to"
+msgstr ""
+
+#: includes/account.php:671 includes/account.php:1068
+#: includes/account.php:1445 includes/account.php:1492
+#: includes/account.php:1504 www/account/19.php:45 www/account/6.php:43
+msgid "Click here"
+msgstr ""
+
+#: www/account/40.php:21 www/index/11.php:21
+msgid "Click here to go to the Support List"
+msgstr ""
+
+#: www/account/40.php:38 www/index/11.php:38
+msgid "Click here to view all lists available"
+msgstr ""
+
+#: includes/account_stuff.php:153 www/account/18.php:18 www/account/5.php:18
+msgid "Client Certificates"
+msgstr ""
+
+#: www/index/0.php:50
+msgid "Client certificates (un-assured)"
+msgstr ""
+
+#: www/account/3.php:63
+msgid "Code Signing"
+msgstr ""
+
+#: www/index/0.php:70
+msgid "Code signing certificates"
+msgstr ""
+
+#: www/account/24.php:41 www/account/27.php:44 www/account/32.php:27
+#: www/account/33.php:43
+msgid "Comments"
+msgstr ""
+
+#: www/help/4.php:14
+msgid "Common Name (eg, YOUR name) []:"
+msgstr ""
+
+#: www/account/11.php:22 www/account/12.php:23 www/account/18.php:23
+#: www/account/21.php:25 www/account/22.php:23
+msgid "CommonName"
+msgstr ""
+
+#: includes/account.php:1733 includes/account.php:1780
+#: includes/account.php:1792
+msgid "to continue."
+msgstr ""
+
+#: includes/general_stuff.php:63
+msgid "CAcert News"
+msgstr ""
+
+#: includes/general_stuff.php:66
+msgid "CAcert Statistics"
+msgstr ""
+
+#: pages/account/11.php:26 pages/account/21.php:31
+msgid "subjectAltName"
+msgstr ""
+
+#: www/wot/3.php:31
+msgid "Compare the online information to the information recorded on the paper form;"
+msgstr ""
+
+#: www/wot/3.php:24
+msgid "Complete the assurance form if the applicant has not already done so.  Ensure that all information matches."
+msgstr ""
+
+#: www/help/3.php:39
+msgid "Confirm your request details"
+msgstr ""
+
+#: www/wot/3.php:19
+msgid "Contact"
+msgstr ""
+
+#: www/wot/9.php:39
+msgid "Contact Assurer"
+msgstr ""
+
+#: www/wot/1.php:121
+msgid "Contact Details"
+msgstr ""
+
+#: www/account/24.php:25 www/account/27.php:28
+msgid "Contact Email"
+msgstr ""
+
+#: includes/account_stuff.php:210 includes/general_stuff.php:110
+#: www/account/40.php:15 www/index/11.php:15
+msgid "Contact Us"
+msgstr ""
+
+#: www/wot/8.php:31
+msgid "Contact information"
+msgstr ""
+
+#: www/account/39.php:37 www/index/10.php:37
+msgid "Cookies"
+msgstr ""
+
+#: www/help/2.php:38
+msgid "Cool man! How do I create my own digital signature?!"
+msgstr ""
+
+#: www/help/3.php:47
+msgid "Copy the contents of the email including the"
+msgstr ""
+
+#: www/index/51.php:20
+msgid "Core members of CAcert generally have a strong information technology and security background, and a stronger desire to give back to the community."
+msgstr ""
+
+#: includes/account.php:617 includes/account.php:726 includes/account.php:1125
+#: includes/account.php:1343
+#, php-format
+msgid "Couldn't remove the request for `%s`, request had already been processed."
+msgstr ""
+
+#: www/account/11.php:32 www/account/21.php:35 www/account/24.php:37
+#: www/account/27.php:40
+msgid "Country"
+msgstr ""
+
+#: www/account/36.php:23 www/index/1.php:112
+msgid "Country Announcements"
+msgstr ""
+
+#: www/help/4.php:9
+msgid "Country Name (2 letter code) [AU]:"
+msgstr ""
+
+#: www/account/17.php:133 www/account/4.php:133
+msgid "Create Certificate Request"
+msgstr ""
+
+#: includes/general_stuff.php:72 www/index/7.php:15
+msgid "Credits"
+msgstr ""
+
+#: www/help/7.php:2
+msgid "Currently there is 2 main servers, one for webserver, one for root store, with the root store only connected to the webserver via serial cable, with a daemon running as non-root processes on each end of the serial listening/sending requests/info."
+msgstr ""
+
+#: www/stats.php:73 www/stats.php:109 www/ttp.php:95 www/ttp.php:142
+#: www/account/43.php:200 www/account/43.php:235 www/wot/10.php:43
+#: www/wot/10.php:76 www/wot/6.php:91
+msgid "Date"
+msgstr ""
+
+#: www/cap.php:62 www/ttp.php:126 www/account/13.php:46 www/account/13.php:94
+#: www/account/43.php:93 www/account/52.php:44 www/index/1.php:47
+#: www/index/5.php:25 www/wot/6.php:65
+msgid "Date of Birth"
+msgstr ""
+
+#: www/account/2.php:21
+msgid "Default"
+msgstr ""
+
+#: includes/account_stuff.php:146
+msgid "Default Language"
+msgstr ""
+
+#: www/account/2.php:23 www/account/2.php:50 www/account/25.php:24
+#: www/account/25.php:41 www/account/26.php:26 www/account/26.php:36
+#: www/account/30.php:35 www/account/31.php:31 www/account/32.php:28
+#: www/account/32.php:43 www/account/34.php:35 www/account/9.php:21
+#: www/account/9.php:49
+msgid "Delete"
+msgstr ""
+
+#: www/account/43.php:102 www/account/43.php:103
+msgid "Delete Account"
+msgstr ""
+
+#: www/account/34.php:28
+#, php-format
+msgid "Delete Admin for %s"
+msgstr ""
+
+#: www/account/30.php:28
+#, php-format
+msgid "Delete Domain for %s"
+msgstr ""
+
+#: www/account/31.php:24
+#, php-format
+msgid "Delete Organisation"
+msgstr ""
+
+#: www/account/32.php:26 www/account/33.php:30
+msgid "Department"
+msgstr ""
+
+#: www/help/2.php:17
+msgid "Digital signing thus provides security on the Internet."
+msgstr ""
+
+#: www/index/0.php:73
+msgid "Digitally sign code, web applets, installers, etc. including your name and location in the certificates."
+msgstr ""
+
+#: www/wot/8.php:22
+msgid "Directory Listing"
+msgstr ""
+
+#: www/help/2.php:61
+msgid "Disclaimer : These are the author's opinions, but they should not be considered 'truth' without personal verification. The author may have made mistakes and any mistakes will be willingly rectified by contacting the administrator of elucido.net, contact details available from the normal domain registration information services (e.g. whois.net).&amp;nbsp; No recommendation to install a Certificate Authority's root certificate is either intended nor implied."
+msgstr ""
+
+#: www/account/26.php:24 www/account/28.php:25 www/account/29.php:31
+#: www/account/43.php:181 www/account/48.php:22 www/account/49.php:34
+#: www/account/7.php:22
+msgid "Domain"
+msgstr ""
+
+#: www/account/12.php:18 www/account/22.php:18
+msgid "Domain Certificates"
+msgstr ""
+
+#: includes/account_stuff.php:157 www/account/25.php:21 www/account/25.php:38
+#: www/account/9.php:18
+msgid "Domains"
+msgstr ""
+
+#: www/account/0.php:23
+msgid "Domains and Server Certificates."
+msgstr ""
+
+#: includes/account_stuff.php:209 includes/general_stuff.php:108
+#: www/account/38.php:15 www/index/13.php:15
+msgid "Donations"
+msgstr ""
+
+#: www/error404.php:21
+msgid "Due to recent site changes bookmarks may no longer be valid, please update your bookmarks."
+msgstr ""
+
+#: www/help/2.php:39
+msgid "Easy. Ish. Go to CAcert.org, install their root certificate and then follow their joining instructions. Once you have joined, request a certificate from the menu. You will receive an email with a link to the certificate. Click on the link from your email software, and hopefully it will be seamlessly installed. Next find the security section of the settings in your email software and configure digital signatures using the certificate you just downloaded. Hmm. Call me if you want, I'll guide you through it."
+msgstr ""
+
+#: includes/account_stuff.php:146 www/account/25.php:23 www/account/25.php:40
+#: www/account/26.php:25 www/account/26.php:35
+msgid "Edit"
+msgstr ""
+
+#: www/account/27.php:21
+msgid "Edit Organisation"
+msgstr ""
+
+#: www/account/16.php:26 www/account/16.php:31 www/account/33.php:26
+#: www/account/42.php:22 www/account/43.php:34 www/account/43.php:74
+#: www/account/44.php:22 www/account/50.php:22 www/wot/5.php:22
+msgid "Email"
+msgstr ""
+
+#: includes/account_stuff.php:149 www/account/2.php:18
+msgid "Email Accounts"
+msgstr ""
+
+#: www/account/0.php:21
+msgid "Email Accounts and Client Certificates"
+msgstr ""
+
+#: www/cap.php:72 www/account/1.php:22 www/account/11.php:34
+#: www/account/5.php:23 www/index/1.php:75 www/index/4.php:26
+#: www/index/5.php:21 www/gpg/2.php:21 www/disputes/1.php:23 www/help/4.php:29
+
+msgid "Email Address"
+msgstr ""
+
+#: www/index.php:244
+msgid "Email Address was blank"
+msgstr ""
+
+#: www/wot/1.php:122
+msgid "Email Assurer"
+msgstr ""
+
+#: includes/account.php:51 includes/account.php:391
+msgid "Email Probe"
+msgstr ""
+
+#: www/help/2.php:20
+msgid "Emails are not secure. In fact emails are VERY not secure!"
+msgstr ""
+
+#: www/index/0.php:83
+msgid "Enable encrypted data transfer for users accessing your web, email, or other SSL enabled service on your server; wildcard certificates are allowed."
+msgstr ""
+
+#: www/help/3.php:58
+msgid "Ensure 'Process the pending request and install the certificate' is selected and click on 'Next'."
+msgstr ""
+
+#: www/help/3.php:63
+msgid "Ensure that you are processing the correct certificate"
+msgstr ""
+
+#: www/help/3.php:17
+msgid "Enter a certificate name and select Certificate strength"
+msgstr ""
+
+#: www/help/3.php:26
+msgid "Enter the Organisation name: this must be the full legal name of the Organisation that is applying for the certificate."
+msgstr ""
+
+#: www/wot/3.php:30
+msgid "Enter the applicant's email address;"
+msgstr ""
+
+#: www/help/3.php:33
+msgid "Enter the geographical details"
+msgstr ""
+
+#: www/help/3.php:30
+msgid "Enter your Common Name"
+msgstr ""
+
+#: www/help/3.php:25
+msgid "Enter your Organisation Information"
+msgstr ""
+
+#: www/help/2.php:57
+msgid "Erroneous Verisign Issued Digital Certificates Pose Spoofing Hazard"
+msgstr ""
+
+#: includes/account.php:67 www/verify.php:33 www/verify.php:45
+#: www/verify.php:76 www/verify.php:89
+msgid "Error!"
+msgstr ""
+
+#: www/help/2.php:21
+msgid "Ever requested a password that you lost to be emailed to you? That password was wide open to inspection by potential crackers."
+msgstr ""
+
+#: www/account/12.php:50 www/account/18.php:50 www/account/22.php:50
+#: www/account/5.php:54
+msgid "Expired"
+msgstr ""
+
+#: www/account/12.php:25 www/account/18.php:25 www/account/22.php:25
+#: www/account/5.php:25
+msgid "Expires"
+msgstr ""
+
+#: www/wot/3.php:38
+msgid "Fees"
+msgstr ""
+
+#: www/error404.php:19
+msgid "File not found!"
+msgstr ""
+
+#: www/help/4.php:16
+msgid "Finally you will be asked information about 'extra' attribute, you simply hit enter to both these questions."
+msgstr ""
+
+#: includes/account_stuff.php:191
+msgid "Find Domain"
+msgstr ""
+
+#: includes/account_stuff.php:191 www/account/42.php:19
+msgid "Find User"
+msgstr ""
+
+#: www/account/48.php:19
+msgid "Find User by Domain"
+msgstr ""
+
+#: includes/account_stuff.php:182
+msgid "Find an Assurer"
+msgstr ""
+
+#: www/help/3.php:41
+msgid "Finish up and exit IIS Certificate Wizard"
+msgstr ""
+
+#: www/account/13.php:27 www/account/13.php:75 www/account/43.php:78
+#: www/index/1.php:22
+msgid "First Name"
+msgstr ""
+
+#: includes/account.php:769
+msgid "First and Last name fields can not be blank."
+msgstr ""
+
+#: www/index.php:233
+msgid "First and/or last names were blank."
+msgstr ""
+
+#: www/help/6.php:1
+msgid "Firstly you need to join CAcert to do that go:"
+msgstr ""
+
+#: www/help/4.php:1
+msgid "Firstly you will need to run the following command, preferably in secured directory no one else can access, however protecting your private keys is beyond the scope of this document."
+msgstr ""
+
+#: www/help/0.php:2
+msgid "Following are several tips you may find useful."
+msgstr ""
+
+#: www/account/37.php:23 www/index/12.php:23
+msgid "For administrators looking to protect the services they offer, we provide host and wild card certificates which you can issue almost immediately. Not only can you use these to protect websites, but also POP3, SMTP and IMAP connections, to list but a few. Unlike other certificate authorities, we don't limit the strength of the certificates, or the use of wild card certificates. Everyone should have the right to security and to protect their privacy, not just those looking to run ecommerce sites."
+msgstr ""
+
+#: www/help/3.php:71
+msgid "For more information, refer to your server documentation or visit"
+msgstr ""
+
+#: www/account/37.php:21 www/index/12.php:21
+msgid "For the enthusiast looking to dip their toe in the water, we have an easy way of obtaining certificates you can use with your email program. You can use these not only to encrypt, but to prove to your friends and family that your email really does come from you."
+msgstr ""
+
+#: www/index/0.php:19
+msgid "For years we've all been charged high amounts of money to pay for security that doesn't and shouldn't cost the earth."
+msgstr ""
+
+#: www/account/12.php:78 www/account/18.php:84 www/account/22.php:80
+#: www/account/5.php:84
+msgid "From here you can delete pending requests, or revoke valid certificates."
+msgstr ""
+
+#: www/stats.php:55
+msgid "Users with 50-99 Points"
+msgstr ""
+
+#: includes/account_stuff.php:185
+msgid "GPG/PGP Keys"
+msgstr ""
+
+#: www/account/36.php:22 www/index/1.php:111
+msgid "General Announcements"
+msgstr ""
+
+#: www/account/40.php:17 www/index/11.php:17
+msgid "General Questions"
+msgstr ""
+
+#: www/disputes.php:320
+#, php-format
+msgid "The domain '%s' doesn't exist in the system. Can't continue."
+msgstr ""
+
+#: www/disputes.php:247
+#, php-format
+msgid "The email address '%s' doesn't exist in the system. Can't continue."
+msgstr ""
+
+#: www/stats.php:51
+msgid "Users with 1-49 Points"
+msgstr ""
+
+#: www/help/4.php:4
+msgid "Generating a 1024 bit RSA private key"
+msgstr ""
+
+#: www/help/3.php:1
+msgid "Generating a Key Pair and Certificate Signing Request (CSR) for a Microsoft Internet Information Server (IIS) 5.0."
+msgstr ""
+
+#: includes/account_stuff.php:142
+msgid "Go Home"
+msgstr ""
+
+#: www/account/40.php:19 www/index/11.php:19
+msgid "Go here for more details."
+msgstr ""
+
+#: www/help/2.php:16
+msgid "Good question"
+msgstr ""
+
+#: www/stats.php:102
+msgid "Growth by year"
+msgstr ""
+
+#: www/stats.php:66
+msgid "Growth in the last 12 months"
+msgstr ""
+
+#: www/help/0.php:1
+msgid "Help!"
+msgstr ""
+
+#: www/account/10.php:29 www/account/16.php:41 www/account/20.php:26
+#: www/account/3.php:53
+msgid "Sign by class 3 root certificate"
+msgstr ""
+
+#: www/account/19.php:54 www/account/6.php:52
+msgid "Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above."
+msgstr ""
+
+#: www/account/30.php:24
+msgid "Hitting delete will also revoke all existing certificates issued under this domain"
+msgstr ""
+
+#: www/account/29.php:24
+msgid "Hitting update will also revoke all existing certificates issued under this domain"
+msgstr ""
+
+#: www/wot/1.php:23 www/wot/7.php:26
+msgid "Home"
+msgstr ""
+
+#: www/help/2.php:8
+msgid "How do I create my own digital signature?!"
+msgstr ""
+
+#: www/help/0.php:8
+msgid "How do I generate a private key and CSR using OpenSSL?"
+msgstr ""
+
+#: www/help/0.php:9
+msgid "How do I get a secured by CAcert emblem on my site?"
+msgstr ""
+
+#: www/index/7.php:23
+msgid "Has put so much effort into CAcert I don't know where to begin, he managed to get the CPS Christian had started up to draft status, he has given countless hours to assuring people and attending conferences to help spread the word"
+msgstr ""
+
+#: www/help/2.php:4 www/help/2.php:21 www/help/2.php:24
+msgid "How it prepares us to protect our freedom"
+msgstr ""
+
+#: www/account/39.php:50 www/index/10.php:50
+msgid "How to update, correct, or delete your information"
+msgstr ""
+
+#: www/index/51.php:27
+msgid "How?"
+msgstr ""
+
+#: includes/general_stuff.php:64
+msgid "Howto Information"
+msgstr ""
+
+#: www/wot/6.php:112
+msgid "I am sure of myself"
+msgstr ""
+
+#: www/wot/6.php:101
+msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that CAcert may challenge this assurance and call upon me to prove the basis for it, and that I may be held responsible if I cannot provide such proof."
+msgstr ""
+
+#: www/help/2.php:9 www/help/2.php:41
+msgid "I can't wait to start sending encrypted emails!"
+msgstr ""
+
+#: includes/account.php:884
+msgid "I couldn't match any emails against your organisational account."
+msgstr ""
+
+#: includes/account.php:120 includes/account.php:152 includes/account.php:254
+#: includes/account.php:904 includes/account.php:991
+msgid "I didn't receive a valid Certificate Request, hit the back button and try again."
+msgstr ""
+
+#: www/wot/8.php:25
+msgid "I don't want to be listed"
+msgstr ""
+
+#: www/wot/6.php:105
+msgid "I have read and understood the Rules For Assurers and am making this assurance subject to and in compliance with these rules."
+msgstr ""
+
+#: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
+msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
+msgstr ""
+
+#: www/wot/8.php:26
+msgid "I want to be listed"
+msgstr ""
+
+#: www/help/8.php:2
+msgid "I'll anwser the why part first, as that's reasonably easy. The short answer is it takes most of the key handling responsibilty away from you and/or your group. If you need to revoke your key for any reason (such as a developer leaving the project) it won't effect your ability to revoke the existing key or keys, and issue new ones."
+msgstr ""
+
+#: www/account/43.php:62
+msgid "I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!"
+msgstr ""
+
+#: www/wot.php:42
+msgid "I'm sorry, there was no email matching what you entered in the system. Please double check your information."
+msgstr ""
+
+#: www/account/38.php:17 www/index/13.php:17
+msgid "If I'd like to donate to CAcert Inc., how can I do it?"
+msgstr ""
+
+#: www/account/10.php:22 www/account/20.php:22
+msgid "If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence."
+msgstr ""
+
+#: www/account/3.php:22
+msgid "If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed andwill not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence."
+msgstr ""
+
+#: www/help/7.php:3
+msgid "If the root store detects a bad request it assumes the webserver is compromised and shuts itself down."
+msgstr ""
+
+#: www/help/7.php:4
+msgid "If the root store doesn't receive a 'ping' reply over the serial link within a determined amount of time it assumes the webserver is compromised or the root store itself has been stolen and shuts itself down."
+msgstr ""
+
+#: www/account/39.php:47 www/index/10.php:47
+msgid "If we change our Privacy Policy, we will post those changes on www.CAcert.org. If we decide to use personally identifiable information in a manner different from that stated at the time it was collected, we will notify users via email. Users will be able to opt out of any new use of their personal information."
+msgstr ""
+
+#: www/wot/7.php:140
+msgid "If you are happy with this location, click 'Make my location here' to update your location details."
+msgstr ""
+
+#: www/account/40.php:41 www/index/11.php:41
+msgid "If you have questions, comments or otherwise and information you're sending to us contains sensitive details, you should use the contact form below. Due to the large amounts of support emails we receive, sending general questions via this contact form will generally take longer then using the support mailing list. Also sending queries in anything but english could cause delays in supporting you as we'd need to find a translator to help."
+msgstr ""
+
+#: www/account/39.php:55 www/index/10.php:55
+msgid "If you need to contact us in writing, address your mail to:"
+msgstr ""
+
+#: scripts/removedead.php:57
+msgid "If you needed more time or any other extenuating circumstances you should contact us immediately so this situation can be dealt with immediately."
+msgstr ""
+
+#: www/account/0.php:18
+msgid "If you would like to view news items or change languages you can click the logout or go home links. Go home doesn't log you out of the system, just returns you to the front of the website. Logout logs you out of the system."
+msgstr ""
+
+#: www/account/37.php:25 www/index/12.php:25
+msgid "If you're extremely serious about encryption, you can join CAcert's Assurance Programme and Web of Trust. This allows you to have your identity verified to obtain added benefits, including longer length certificates and the ability to include your name on email certificates."
+msgstr ""
+
+#: www/wot/3.php:32
+msgid "If, and only if, the two match completely - you may award trust points up to the maximum points you are able to allocate;"
+msgstr ""
+
+#: www/help/7.php:1
+msgid "In light of a request on the bugzilla list for more information about how our root certificate is protected I've decided to do a write up here and see if there is anything more people suggest could be done, or a better way of handling things altogether."
+msgstr ""
+
+#: www/help/3.php:9
+msgid "In the 'Directory Security' folder click on the 'Server Certificate' button in the 'Secure communications' section. If you have not used this option before the 'Edit' button will not be active."
+msgstr ""
+
+#: www/help/3.php:57
+msgid "In the 'IIS Certificate Wizard' you should find a 'Pending Certificate Request'."
+msgstr ""
+
+#: www/account/0.php:20
+msgid "In this section you will be able to edit your personal information (if you haven't been assured), update your pass phrase, and lost pass phrase questions. You will also be able to set your location for the Web of Trust, it also effects the email announcement settings which among other things can be set to notify you if you're within 200km of a planned assurance event. You'll also be able to set additional contact information when you become fully trusted, so others can contact you to meet up outside official events."
+msgstr ""
+
+#: www/account/3.php:53 www/account/3.php:54 www/account/3.php:55
+#: www/account/3.php:56
+msgid "Include"
+msgstr ""
+
+#: www/index/0.php:23
+msgid "Inclusion into mainstream browsers!"
+msgstr ""
+
+#: www/index.php:195
+msgid "Incorrect email address and/or Pass Phrase."
+msgstr ""
+
+#: www/account/19.php:60 www/account/6.php:58
+msgid "Install Your Certificate"
+msgstr ""
+
+#: www/help/3.php:51
+msgid "Installation steps"
+msgstr ""
+
+#: www/account/19.php:43 www/account/19.php:52 www/account/6.php:41
+#: www/account/6.php:50
+msgid "Installing your certificate"
+msgstr ""
+
+#: www/index/0.php:15
+msgid "Introduction"
+msgstr ""
+
+#: includes/account.php:517 includes/account.php:583 includes/account.php:611
+#: includes/account.php:644 includes/account.php:694 includes/account.php:720
+#: includes/account.php:1042 includes/account.php:1092
+#: includes/account.php:1119 includes/account.php:1253
+#: includes/account.php:1308 includes/account.php:1337
+#, php-format
+msgid "Invalid ID '%s' presented, can't do anything with it."
+msgstr ""
+
+#: includes/account.php:776 www/index.php:239
+msgid "Invalid date of birth"
+msgstr ""
+
+#: www/wot/6.php:78
+msgid "Issuing a temporary increase will automatically boost their points to 200 points for a nomindated amount of days, after which the person will be reduced to 150 points regardless of the amount of points they had previously. Regardless of method chosen above it will be recorded in the system as an Administrative Increase and there is a maximum amount of 45 days that points can be issued for."
+msgstr ""
+
+#: www/wot/3.php:17
+msgid "It is essential that CAcert Assurers understand and follow the rules below to ensure that applicants for assurance are suitably identified, which, in turn, maintains trust in the system."
+msgstr ""
+
+#: www/wot/3.php:36
+msgid "It is imperative that you maintain the confidentiality and privacy of the applicant, and never disclose the information obtained without the applicant's consent."
+msgstr ""
+
+#: includes/account.php:589 includes/account.php:700 includes/account.php:1048
+#: includes/account.php:1098 includes/account.php:1259
+#: includes/account.php:1314
+#, php-format
+msgid "It would seem '%s' has already been revoked. I'll skip this for now."
+msgstr ""
+
+#: www/index/0.php:17
+msgid "It's been a long time coming, but the wait was worthwhile, finally you are able to get security at the right price... Free!"
+msgstr ""
+
+#: www/index/1.php:107
+msgid "It's possible to get notifications of up and coming events and even just general announcements, untick any notifications you don't wish to receive. For country, regional and radius notifications to work you must choose your location once you've verified your account and logged in."
+msgstr ""
+
+#: includes/general_stuff.php:53
+msgid "Join"
+msgstr ""
+
+#: includes/general_stuff.php:52
+msgid "Join CAcert.org"
+msgstr ""
+
+#: www/account/17.php:21 www/account/4.php:21
+msgid "Key Strength:"
+msgstr ""
+
+#: www/help/3.php:4
+msgid "Key generation process"
+msgstr ""
+
+#: www/account/17.php:131 www/account/4.php:131
+msgid "Keysize:"
+msgstr ""
+
+#: www/wot/9.php:47
+msgid "Language"
+msgstr ""
+
+#: www/account/13.php:37 www/account/13.php:85 www/account/43.php:86
+#: www/index/1.php:32
+msgid "Last Name"
+msgstr ""
+
+#: www/index/0.php:28
+msgid "Latest News"
+msgstr ""
+
+#: www/wot/3.php:41
+msgid "Liability"
+msgstr ""
+
+#: www/index/0.php:54 www/index/0.php:64 www/index/0.php:74 www/index/0.php:84
+#: www/index/0.php:94 www/index/0.php:104 www/index/0.php:114
+msgid "Limitations"
+msgstr ""
+
+#: www/wot/1.php:23 www/wot/1.php:30 www/wot/1.php:43 www/wot/1.php:56
+#: www/wot/1.php:74 www/wot/1.php:87 www/wot/1.php:102 www/wot/7.php:26
+#: www/wot/7.php:35 www/wot/7.php:46 www/wot/7.php:58
+msgid "Listed"
+msgstr ""
+
+#: www/help/4.php:11
+msgid "Locality Name (eg, city) [Sydney]:"
+msgstr ""
+
+#: www/account/11.php:30 www/account/21.php:33 www/account/43.php:196
+#: www/account/43.php:231 www/wot/10.php:25 www/wot/10.php:58 www/wot/6.php:69
+msgid "Location"
+msgstr ""
+
+#: www/wot/7.php:123
+msgid "Location Name"
+msgstr ""
+
+#: www/index/4.php:23 www/index/4.php:34
+msgid "Login"
+msgstr ""
+
+#: includes/account_stuff.php:142
+msgid "Logout"
+msgstr ""
+
+#: www/index/5.php:18
+msgid "Lost Pass Phrase"
+msgstr ""
+
+#: www/index/6.php:18
+msgid "Lost Pass Phrase - Step 2"
+msgstr ""
+
+#: www/account/13.php:100
+msgid "Lost Pass Phrase Questions"
+msgstr ""
+
+#: pages/index/0.php:24
+#, php-format
+msgid "Have you passed the CAcert %s Assurer Challenge %s yet?"
+msgstr ""
+
+#: includes/general_stuff.php:59 www/account/43.php:106 www/account/43.php:110
+#: www/account/43.php:114 www/account/43.php:118 www/account/43.php:122
+#: www/account/43.php:126 www/account/43.php:130 www/account/43.php:134
+#: www/account/43.php:138 www/account/43.php:142
+msgid "Lost Password"
+msgstr ""
+
+#: www/index.php:318
+msgid "Mail Probe"
+msgstr ""
+
+#: www/account/2.php:49
+msgid "Make Default"
+msgstr ""
+
+#: www/wot/7.php:138
+msgid "Make my location here"
+msgstr ""
+
+#: www/index/51.php:21
+msgid "Many are just the users of the system who by just making use of the project contribute to the wider community by word-of-mouth."
+msgstr ""
+
+#: www/index/51.php:24
+msgid "Many people are currently dissatisfied with the commercial offerings. Many people wish only to connect or share with people they know, or simply secure their webmail from people potentially sniffing their traffic. Why subscribe to a service that is not structured to handle this, and furthermore charges a king's ransom for the privilege?"
+msgstr ""
+
+#: www/index/7.php:17
+msgid "Many people to thank, if you've had a large input with the CAcert project with code, documentation, translations, or assurances and would like recognition let me know."
+msgstr ""
+
+#: www/account/32.php:25 www/account/33.php:35
+msgid "Master Account"
+msgstr ""
+
+#: www/wot/1.php:120
+msgid "Max Points"
+msgstr ""
+
+#: www/wot/9.php:56
+msgid "Message"
+msgstr ""
+
+#: www/account/43.php:197 www/account/43.php:232 www/wot/10.php:26
+#: www/wot/10.php:59 www/wot/6.php:52
+msgid "Method"
+msgstr ""
+
+#: www/help/2.php:58
+msgid "Microsoft Root Certificate Program"
+msgstr ""
+
+#: www/help/3.php:71
+msgid "Microsoft Support Online"
+msgstr ""
+
+#: www/account/43.php:82
+msgid "Middle Name"
+msgstr ""
+
+#: www/account/13.php:31 www/account/13.php:79 www/index/1.php:26
+msgid "Middle Name(s)"
+msgstr ""
+
+#: www/help/2.php:26
+msgid "Most people would object if they found that all their postal letters are being opened, read and possibly recorded by the Government before being passed on to the intended recipient, resealed as if nothing had happened. And yet this is what happens every day with your emails (in the UK). There are some who have objected to this intrusion of privacy, but their voices are small and fall on deaf ears. However the most effective way to combat this intrusion is to seal the envelope shut in a miniature bank vault, i.e. encrypt your email. If all emails were encrypted, it would be very hard for Government, or other organisations/individual crackers, to monitor the general public. They would only realistically have enough resources to monitor those they had reason to suspect. Why? Because encryption can be broken, but it takes a lot of computing power and there wouldn't be enough to monitor the whole population of any given country."
+msgstr ""
+
+#: includes/general_stuff.php:56 www/account/0.php:15
+msgid "My Account"
+msgstr ""
+
+#: includes/account_stuff.php:146 www/account/36.php:18
+msgid "My Alert Settings"
+msgstr ""
+
+#: includes/account.php:24 includes/account.php:35 includes/account.php:53
+#: includes/account.php:76 includes/account.php:85 includes/account.php:119
+#: includes/account.php:151 includes/account.php:176 includes/account.php:253
+#: includes/account.php:280 includes/account.php:303 includes/account.php:362
+#: includes/account.php:372 includes/account.php:393 includes/account.php:402
+#: includes/account.php:447 includes/account.php:460 includes/account.php:490
+#: includes/account.php:503 includes/account.php:536 includes/account.php:569
+#: includes/account.php:632 includes/account.php:682 includes/account.php:813
+#: includes/account.php:826 includes/account.php:883 includes/account.php:903
+#: includes/account.php:990 includes/account.php:1016
+#: includes/account.php:1028 includes/account.php:1079
+#: includes/account.php:1163 includes/account.php:1176
+#: includes/account.php:1226 includes/account.php:1238
+#: includes/account.php:1293 includes/account.php:1361
+#: includes/account.php:1387 includes/account.php:1415
+#: includes/account.php:1443 includes/account.php:1490
+#: includes/account.php:1502 includes/account.php:1565
+#: includes/account.php:1668 includes/account.php:1675
+#: includes/account.php:1685 includes/account.php:1728
+#: includes/account.php:1754 includes/account.php:1773
+#: includes/account.php:1801 includes/general.php:296 includes/general.php:374
+#: www/account.php:41 www/error404.php:17 www/wot.php:22 www/wot.php:124
+#: www/wot.php:132 www/wot.php:145 www/wot.php:246 www/wot.php:265
+#: www/wot.php:277 www/wot.php:288 www/account/15.php:23 www/account/19.php:23
+#: www/account/19.php:42 www/account/19.php:50 www/account/23.php:23
+#: www/account/6.php:21 www/account/6.php:40 www/account/6.php:48
+msgid "My CAcert.org Account!"
+msgstr ""
+
+#: includes/account_stuff.php:145 www/account/0.php:19 www/account/13.php:23
+#: www/index/1.php:19
+msgid "My Details"
+msgstr ""
+
+#: www/account/41.php:18
+msgid "My Language Settings"
+msgstr ""
+
+#: includes/account_stuff.php:146 www/wot/8.php:19
+msgid "My Listing"
+msgstr ""
+
+#: includes/account_stuff.php:146
+msgid "My Location"
+msgstr ""
+
+#: www/account/41.php:21
+msgid "My prefered language"
+msgstr ""
+
+#: www/account/2.php:41
+msgid "N/A"
+msgstr ""
+
+#: www/account/16.php:35 www/wot/1.php:119 www/wot/6.php:43
+msgid "Name"
+msgstr ""
+
+#: includes/account_stuff.php:154 includes/account_stuff.php:162
+#: includes/account_stuff.php:167 includes/account_stuff.php:171
+#: includes/account_stuff.php:186
+msgid "New"
+msgstr ""
+
+#: www/account/33.php:23
+#, php-format
+msgid "New Admin for %s"
+msgstr ""
+
+#: www/stats.php:71 www/stats.php:107
+msgid "New Assurers"
+msgstr ""
+
+#: www/stats.php:72 www/stats.php:108
+msgid "New Certificates"
+msgstr ""
+
+#: www/account/16.php:18 www/account/3.php:27
+msgid "New Client Certificate"
+msgstr ""
+
+#: www/account/28.php:22
+#, php-format
+msgid "New Domain for %s"
+msgstr ""
+
+#: includes/account_stuff.php:177 www/account/24.php:18
+msgid "New Organisation"
+msgstr ""
+
+#: www/account/14.php:25 www/index/6.php:43
+msgid "New Pass Phrase"
+msgstr ""
+
+#: includes/account.php:829 www/index.php:92
+msgid "New Pass Phrases specified don't match or were blank."
+msgstr ""
+
+#: www/account/44.php:26
+msgid "New Password"
+msgstr ""
+
+#: www/stats.php:70 www/stats.php:106
+msgid "New Users"
+msgstr ""
+
+#: www/account/16.php:40 www/account/24.php:45 www/account/3.php:70
+#: www/account/42.php:26 www/account/44.php:30 www/account/48.php:26
+#: www/index/1.php:117 www/index/5.php:53 www/index/6.php:54 www/wot/5.php:26
+msgid "Next"
+msgstr ""
+
+#: www/help/4.php:17
+msgid "Next step is that you submit the contents of server.csr to the CAcert website, it should look *EXACTLY* like the following example otherwise the server may reject your request because it appears to be invalid."
+msgstr ""
+
+#: www/account/50.php:29
+msgid "No"
+msgstr ""
+
+#: www/account/3.php:52
+msgid "No Name"
+msgstr ""
+
+#: www/account/12.php:42 www/account/22.php:42 www/account/9.php:32
+msgid "No domains are currently listed."
+msgstr ""
+
+#: pages/account/53.php:83
+msgid "move"
+msgstr ""
+
+#: pages/index/1.php:90
+msgid "Lost Pass Phrase Questions - Please enter five questions and your responses to be used for security verification."
+msgstr ""
+
+#: www/account/15.php:24 www/account/19.php:24 www/account/23.php:24
+#: www/account/6.php:22
+msgid "No such certificate attached to your account."
+msgstr ""
+
+#: includes/account.php:1731
+msgid "No such user found."
+msgstr ""
+
+#: www/account/43.php:51
+#, php-format
+msgid "No users found matching %s"
+msgstr ""
+
+#: www/index/0.php:114
+msgid "None, the sky is the limit for CAcert."
+msgstr ""
+
+#: www/index/0.php:115
+msgid "None; $10 USD per year membership fee."
+msgstr ""
+
+#: includes/general_stuff.php:57
+msgid "Normal Login"
+msgstr ""
+
+#: www/account/12.php:56 www/account/18.php:56 www/account/22.php:56
+#: www/account/5.php:60
+msgid "Not Revoked"
+msgstr ""
+
+#: includes/account.php:25
+#, php-format
+msgid "Not a valid email address. Can't continue."
+msgstr ""
+
+#: www/help/2.php:10 www/help/2.php:44
+msgid "Notes for the strangely curious"
+msgstr ""
+
+#: www/account/39.php:45 www/index/10.php:45
+msgid "Notification of changes"
+msgstr ""
+
+#: www/help/3.php:12
+msgid "Now 'Create a new certificate'."
+msgstr ""
+
+#: includes/account.php:600 includes/account.php:711 includes/account.php:1109
+#: includes/account.php:1325
+msgid "Now deleting the following pending requests:"
+msgstr ""
+
+#: includes/account.php:506 includes/account.php:635 includes/account.php:1032
+#: includes/account.php:1241
+msgid "Now renewing the following certificates:"
+msgstr ""
+
+#: includes/account.php:572 includes/account.php:685 includes/account.php:1082
+#: includes/account.php:1296
+msgid "Now revoking the following certificates:"
+msgstr ""
+
+#: www/wot/6.php:81
+msgid "Number of days"
+msgstr ""
+
+#: pages/gpg/2.php:23
+msgid "Key ID"
+msgstr ""
+
+#: www/help/2.php:30
+msgid "Of the biggest reasons why most people haven't started doing this, apart from being slightly technical, the reason is financial. You need your own certificate to digitally sign your emails. And the Certificate Authorities charge money to provide you with your own certificate. Need I say more. Dosh = no thanks I'd rather walk home. But organisations are emerging to provide the common fool in the street with a free alternative. However, given the obvious lack of funding and the emphasis on money to get enrolled, these organisations do not yet have the money to get themselves established as trusted Certificate Authorities. Thus it is currently down to trust. The decision of the individual to trust an unknown Certificate Authority. However once you have put your trust in a Certificate Authority you can implicitly trust the digital signatures generated using their certificates. In other words, if you trust (and accept the certificate of) the Certificate Authority that I use, you can automatically trust my digital signature. Trust me!"
+msgstr ""
+
+#: www/account/14.php:21
+msgid "Old Pass Phrase"
+msgstr ""
+
+#: www/account/10.php:16 www/account/20.php:16 www/account/3.php:16
+msgid "Once you decide to subscribe for an SSL Server Certificate you will need to complete this agreement. Please read it carefully. Your Certificate Request can only be processed with your acceptance and understanding of this agreement."
+msgstr ""
+
+#: www/account/0.php:26
+msgid "Once you have verified your company you will see these menu options. They allow you to issue as many certificates as you like without proving individual email accounts as you like, further more you are able to get your company details on the certificate."
+msgstr ""
+
+#: www/help/4.php:28
+msgid "Once you've submitted it the system will process your request and send an email back to you containing your server certificate."
+msgstr ""
+
+#: www/help/2.php:45
+msgid "One assumes that if a site has an SSL certificate (that's what enables secure communication, for exchanging personal details, credit card numbers, etc. and gives the 'lock' icon in the browser) that they have obtained that certificate from a reliable source (a Certificate Authority), which has the appropriate stringent credentials for issuing something so vital to the security of the Internet, and the security of your communications. You have probably never even asked yourself the question of who decided to trust these Certificate Authorities, because your browser comes with their (root) certificates pre-installed, so any web site that you come across that has an SSL certificate signed by one of them, is automatically accepted (by your browser) as trustworthy."
+msgstr ""
+
+#: www/wot/6.php:74
+msgid "Only fill this in if you assured the person on a different day"
+msgstr ""
+
+#: www/account/43.php:39 www/account/49.php:39
+msgid "Only the first 100 rows are displayed."
+msgstr ""
+
+#: www/wot/6.php:61
+msgid "Only tick the next box if the Assurance was face to face."
+msgstr ""
+
+#: www/help/3.php:8
+msgid "Open Directory Security folder"
+msgstr ""
+
+#: includes/account_stuff.php:176
+msgid "Org Admin"
+msgstr ""
+
+#: includes/account_stuff.php:166
+msgid "Org Client Certs"
+msgstr ""
+
+#: www/account/0.php:25
+msgid "Org Client and Server Certificates"
+msgstr ""
+
+#: includes/account_stuff.php:170
+msgid "Org Server Certs"
+msgstr ""
+
+#: www/account/11.php:29 www/account/21.php:32
+msgid "Org. Unit"
+msgstr ""
+
+#: www/account/11.php:28 www/account/21.php:31 www/account/25.php:20
+#: www/account/35.php:20
+msgid "Organisation"
+msgstr ""
+
+#: www/account/24.php:21 www/account/27.php:24
+msgid "Organisation Name"
+msgstr ""
+
+#: includes/account.php:1379 includes/account.php:1406
+msgid "Organisation Name and Contact Email are required fields."
+msgstr ""
+
+#: www/account/25.php:17 www/account/35.php:17
+msgid "Organisations"
+msgstr ""
+
+#: www/help/4.php:12
+msgid "Organization Name (eg, company) [XYZ Corp]:"
+msgstr ""
+
+#: www/help/4.php:13
+msgid "Organizational Unit Name (eg, section) [Server Administration]:."
+msgstr ""
+
+#: www/account/40.php:36 www/index/11.php:36
+msgid "Other Mailing Lists"
+msgstr ""
+
+#: www/index/16.php:16 www/index/3.php:16
+msgid "PKI Key"
+msgstr ""
+
+#: www/account/10.php:28 www/account/16.php:40 www/account/20.php:25
+#: www/account/3.php:52
+msgid "Sign by class 1 root certificate"
+msgstr ""
+
+#: pages/account/13.php:41 pages/account/13.php:51 pages/account/13.php:89
+#: pages/account/13.php:99 pages/index/1.php:33 pages/index/1.php:43
+msgid "optional"
+msgstr ""
+
+#: www/wot/6.php:28
+msgid "PLEASE NOTE: You have already assured this person before! If this is unintentional please DO NOT CONTINUE with this assurance."
+msgstr ""
+
+#: www/index/1.php:73 www/index/4.php:30
+msgid "Pass Phrase"
+msgstr ""
+
+#: www/account/14.php:29 www/index/1.php:77
+msgid "Pass Phrase Again"
+msgstr ""
+
+#: www/index.php:254
+msgid "Pass Phrases don't match"
+msgstr ""
+
+#: www/index.php:249
+msgid "Pass Phrases were blank"
+msgstr ""
+
+#: www/account/10.php:26 www/account/20.php:24 www/account/45.php:15
+msgid "Paste your CSR below..."
+msgstr ""
+
+#: www/account/12.php:52 www/account/12.php:59 www/account/18.php:52
+#: www/account/18.php:63 www/account/22.php:52 www/account/22.php:61
+#: www/account/5.php:56 www/account/5.php:63
+msgid "Pending"
+msgstr ""
+
+#: www/account/19.php:99 www/account/6.php:97
+msgid "Personal Certificate Installed."
+msgstr ""
+
+#: www/account/39.php:24 www/index/10.php:24
+msgid "Personal information"
+msgstr ""
+
+#: pages/wot/11.php:48
+msgid "for more information about Organizational Support."
+msgstr ""
+
+#: pages/wot/13.php:73
+msgid "(hit enter to submit)"
+msgstr ""
+
+#: www/capnew.php:1326
+msgid "location of the assurance"
+msgstr ""
+
+#: www/capnew.php:732 www/coapnew.php:753
+msgid "generated"
+msgstr ""
+
+#: pages/wot/12.php:32 pages/wot/13.php:72
+msgid "Location:"
+msgstr ""
+
+#: www/account/3.php:65
+msgid "Please Note: By ticking this box you will automatically have your name included in any certificates."
+msgstr ""
+
+#: www/account/2.php:56 www/account/9.php:56
+msgid "Please Note: You can not set an unverified account as a default account, and you can not remove a default account. To remove the default account you must set another verified account as the default."
+msgstr ""
+
+#: www/account/7.php:32
+msgid "Please Note: You only need to enter the main part of your domain, eg. mydomain.com rather then www.mydomain.com. Once you have verified your domain you are able to enter any sub-domain, such as www.mydomain.com or www.this.is.mydomain.com as the system checks from right to left, rather then specific hostnames when you upload a CSR to the system."
+msgstr ""
+
+#: www/wot.php:233
+#, php-format
+msgid "Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."
+msgstr ""
+
+#: www/wot.php:220
+#, php-format
+msgid "Please Note: this is a temporary increase for %s days only. After that time your points will be reduced to 150 points."
+msgstr ""
+
+#: www/account/8.php:19
+msgid "Please choose an authority email address"
+msgstr ""
+
+#: www/account/11.php:16 www/account/21.php:19
+msgid "Please make sure the following details are correct before proceeding any further."
+msgstr ""
+
+#: www/index/0.php:120
+msgid "Please note a general limitation is that, unlike long-time players like Verisign, CAcert's root certificate is not included by default in mainstream browsers, email clients, etc. This means people to whom you send encrypted email, or users who visit your SSL-enabled web server, will first have to import CAcert's root certificate, or they will have to agree to pop-up security warnings (which may look a little scary to non-techy users)."
+msgstr ""
+
+#: www/account/14.php:33 www/index/1.php:81 www/index/6.php:51
+msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol."
+msgstr ""
+
+#: www/wot/8.php:40
+msgid "Please note: All html will be stripped from the contact information box, a link to an email form will automatically be inserted to ensure your privacy."
+msgstr ""
+
+#: www/account/43.php:195 www/account/43.php:230 www/wot/10.php:24
+#: www/wot/10.php:57 www/wot/6.php:108
+msgid "Points"
+msgstr ""
+
+#: www/stats.php:59
+msgid "Points Issued"
+msgstr ""
+
+#: www/account/40.php:54 www/index/11.php:54
+msgid "Postal Address:"
+msgstr ""
+
+#: www/help/3.php:14
+msgid "Prepare the request"
+msgstr ""
+
+#: pages/index/8.php:5
+msgid "Secretary"
+msgstr ""
+
+#: www/wot/3.php:35
+msgid "Privacy"
+msgstr ""
+
+#: includes/account_stuff.php:210 includes/general_stuff.php:109
+#: www/account/39.php:15 www/index/10.php:15
+msgid "Privacy Policy"
+msgstr ""
+
+#: www/account/8.php:29
+msgid "Probe"
+msgstr ""
+
+#: www/wot/3.php:27
+msgid "Processing"
+msgstr ""
+
+#: www/help/8.php:1
+msgid "Question: I'm a software developer for linux and I want to use CAcert/openssl to distribute my packages with detached signatures, is this possible and why would I do this over PGP/GPG detached signatures?"
+msgstr ""
+
+#: www/help/2.php:11 www/help/2.php:54
+msgid "References"
+msgstr ""
+
+#: www/account/36.php:24 www/index/1.php:113
+msgid "Regional Announcements"
+msgstr ""
+
+#: includes/account.php:623 includes/account.php:732 includes/account.php:1131
+#: includes/account.php:1349
+#, php-format
+msgid "Removed a pending request for '%s'"
+msgstr ""
+
+#: www/account/12.php:71 www/account/18.php:77 www/account/22.php:73
+#: www/account/5.php:77
+msgid "Renew"
+msgstr ""
+
+#: www/account/12.php:21 www/account/18.php:21 www/account/22.php:21
+#: www/account/5.php:21
+msgid "Renew/Revoke/Delete"
+msgstr ""
+
+#: includes/account.php:548 includes/account.php:1270
+msgid "Renewing"
+msgstr ""
+
+#: www/index/6.php:47
+msgid "Repeat"
+msgstr ""
+
+#: www/help/3.php:52
+msgid "Return to the 'Internet Information Services' screen in 'Administrative Tools' under 'Control Panel'. Right click on 'Default Web Site' and select 'Properties'."
+msgstr ""
+
+#: www/account/12.php:72 www/account/18.php:78 www/account/22.php:74
+#: www/account/5.php:78
+msgid "Revoke/Delete"
+msgstr ""
+
+#: www/account/12.php:24 www/account/12.php:54 www/account/18.php:24
+#: www/account/18.php:54 www/account/22.php:24 www/account/22.php:54
+#: www/account/5.php:24 www/account/5.php:58
+msgid "Revoked"
+msgstr ""
+
+#: www/index/51.php:31
+msgid "Right now it's happening all around you - there are secured websites and email protocols being protected and trusted by people, signed by CAcert."
+msgstr ""
+
+#: includes/general_stuff.php:67
+msgid "Root Certificate"
+msgstr ""
+
+#: www/index/16.php:18 www/index/3.php:18
+msgid "Root Certificate (DER Format)"
+msgstr ""
+
+#: www/index/16.php:17 www/index/3.php:17
+msgid "Root Certificate (PEM Format)"
+msgstr ""
+
+#: includes/account_stuff.php:182
+msgid "Rules"
+msgstr ""
+
+#: www/index/7.php:20
+msgid "Put a lot of effort convincing people in Germany to signup and be assured, he started work on a new RFC compliant CPS, spent countless hours helping with tech support, and so much more"
+msgstr ""
+
+#: www/index/0.php:63
+msgid "Same as above plus you can include your full name in the certificates."
+msgstr ""
+
+#: www/index/0.php:94
+msgid "Same as above, except certificates expire in 24 months."
+msgstr ""
+
+#: www/index/0.php:95
+msgid "Same as above, plus get 50 assurance points by meeting with assurer(s) from the CAcert Web of Trust, who verify your identity using your government issued photo identity documents."
+msgstr ""
+
+#: www/index/0.php:65
+msgid "Same as above, plus you must get a minimum of 50 assurance points by meeting with one or more assurers from the CAcert Web of Trust, who verify your identity using your government issued photo identity documents."
+msgstr ""
+
+#: www/index/0.php:93
+msgid "Same as above."
+msgstr ""
+
+#: www/help/3.php:46
+msgid "Saving the certificate"
+msgstr ""
+
+#: www/help/3.php:6 www/help/3.php:7 www/help/3.php:10 www/help/3.php:13
+#: www/help/3.php:16 www/help/3.php:19 www/help/3.php:29 www/help/3.php:32
+#: www/help/3.php:35 www/help/3.php:38 www/help/3.php:50 www/help/3.php:53
+#: www/help/3.php:56 www/help/3.php:59 www/help/3.php:62 www/help/3.php:65
+#: www/help/3.php:68
+msgid "Screenshot of IIS 5.0"
+msgstr ""
+
+#: www/wot/7.php:127
+msgid "Search"
+msgstr ""
+
+#: www/wot/7.php:120
+msgid "Search this region"
+msgstr ""
+
+#: www/account/43.php:163
+msgid "Secondary Emails"
+msgstr ""
+
+#: pages/wot/13.php:40
+msgid "Your location has been updated"
+msgstr ""
+
+#: www/account.php:49 www/index.php:475
+msgid "Your message has been sent to the general support list."
+msgstr ""
+
+#: www/account.php:35 www/index.php:464
+msgid "Your message has been sent."
+msgstr ""
+
+#: includes/account.php:2480
+msgid "Your vote has been accepted."
+msgstr ""
+
+#: www/cap.php:43 www/ttp.php:48 pages/help/3.php:62
+msgid "and"
+msgstr ""
+
+#: www/ttp.php:107
+msgid "as applicable"
+msgstr ""
+
+#: pages/account/13.php:56 pages/account/13.php:104 pages/index/1.php:48
+#: pages/index/5.php:26
+msgid "dd/mm/yyyy"
+msgstr ""
+
+#: pages/wot/13.php:65
+msgid "eg Sydney, New South Wales, Australia"
+msgstr ""
+
+#: includes/account.php:98
+msgid "has changed the default email on your account."
+msgstr ""
+
+#: includes/account.php:1076
+msgid "has changed the password on your account."
+msgstr ""
+
+#: pages/account/13.php:23
+msgid "has viewed your lost password questions."
+msgstr ""
+
+#: pages/help/3.php:63
+msgid "lines. Do not copy any extra line feeds or carriage returns at the beginning or end of the certificate. Save the certificate into a text editor like Notepad. Save the certificate with an extension of .cer and a meaningful name like certificate.cer"
+msgstr ""
+
+#: www/help/3.php:18
+msgid "Select 'Bit length'. We advise a key length of 1024 bits."
+msgstr ""
+
+#: www/help/3.php:11
+msgid "Select 'Create a new certificate'"
+msgstr ""
+
+#: www/help/3.php:55
+msgid "Select 'Server Certificate' at the bottom of the tab in the 'Secure communications' section."
+msgstr ""
+
+#: www/account/43.php:28 www/account/49.php:28
+msgid "Select Specific Account Details"
+msgstr ""
+
+#: www/help/3.php:37
+msgid "Select an easy to locate folder. You'll have to open this file up with Notepad. The CSR must be copied and pasted into our online form. Once the CSR has been submitted, you won't need this CSR any more as IIS won't reuse old CSR to generate new certificates."
+msgstr ""
+
+#: www/help/3.php:61
+msgid "Select the .cer file and click 'Next'."
+msgstr ""
+
+#: www/help/3.php:54
+msgid "Select the Directory Security tab"
+msgstr ""
+
+#: www/account/40.php:30 www/account/40.php:48 www/index/11.php:30
+#: www/index/11.php:48 www/wot/9.php:60
+msgid "Send"
+msgstr ""
+
+#: www/account/40.php:40 www/index/11.php:40
+msgid "Sensitive Information"
+msgstr ""
+
+#: includes/account_stuff.php:161
+msgid "Server Certificates"
+msgstr ""
+
+#: www/index/0.php:80
+msgid "Server certificates (un-assured)"
+msgstr ""
+
+#: www/wot.php:247
+msgid "Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this."
+msgstr ""
+
+#: www/account/40.php:51 www/index/11.php:51
+msgid "Snail Mail"
+msgstr ""
+
+#: www/help/2.php:50
+msgid "So if you don't pass the audit, you don't get to be a Certificate Authority. And to pass the audit, well, you've got to show that you can do a good job issuing certificates. That they're secure, you only give them to the right people, etc. So what happens when you make a mistake and you erroneously issue a certificate that risks the entire Internet browsing population, like Verisign did? Well, er, nothing actually. They already paid for their audit, and damn it, they're so big now, we couldn't possibly revoke their Certificate Authority status. (There's too much money at stake!)"
+msgstr ""
+
+#: www/index/51.php:33
+msgid "So what can I do to help the cause?"
+msgstr ""
+
+#: www/help/2.php:52
+msgid "So, dammit, what's the point of all this then?"
+msgstr ""
+
+#: www/account/39.php:39 www/index/10.php:39
+msgid "Some of our advertisers use a third-party ad server to display ads. These ads may contain cookies. The ad server receives these cookies, and we don't have access to them."
+msgstr ""
+
+#: www/wot/9.php:19 www/wot/9.php:29
+msgid "Sorry, I was unable to locate that user."
+msgstr ""
+
+#: www/wot/6.php:85
+msgid "Sponsoring Member"
+msgstr ""
+
+#: www/help/4.php:10
+msgid "State or Province Name (full name) [NSW]:"
+msgstr ""
+
+#: www/account/11.php:31 www/account/21.php:34 www/account/24.php:33
+#: www/account/27.php:36
+msgid "State/Province"
+msgstr ""
+
+#: includes/general_stuff.php:66 www/stats.php:5 www/stats.php:9
+msgid "Statistics"
+msgstr ""
+
+#: www/account/12.php:22 www/account/18.php:22 www/account/2.php:22
+#: www/account/22.php:22 www/account/5.php:22 www/account/9.php:22
+msgid "Status"
+msgstr ""
+
+#: www/account/40.php:28 www/account/40.php:46 www/index/11.php:28
+#: www/index/11.php:46 www/wot/9.php:52
+msgid "Subject"
+msgstr ""
+
+#: www/gpg.php:22 www/account/10.php:29 www/account/11.php:36
+#: www/account/20.php:27 www/account/21.php:38 www/account/45.php:18
+msgid "Submit"
+msgstr ""
+
+#: www/account/13.php:41 www/account/13.php:89 www/account/43.php:90
+#: www/index/1.php:36
+msgid "Suffix"
+msgstr ""
+
+#: includes/account_stuff.php:190
+msgid "System Admin"
+msgstr ""
+
+#: www/help/6.php:7
+msgid "System will send you an email with a link in it, you just open the link in a webbrowser."
+msgstr ""
+
+#: includes/account_stuff.php:182
+msgid "TTP Form"
+msgstr ""
+
+#: includes/general.php:24 www/wot/6.php:99
+msgid "Temporary Increase"
+msgstr ""
+
+#: scripts/removedead.php:62
+msgid "Temporary points increase has expired."
+msgstr ""
+
+#: www/help/2.php:55
+msgid "Ten Risks of PKI: What You're not Being Told about Public Key Infrastructure"
+msgstr ""
+
+#: www/account/38.php:23 www/index/13.php:23
+msgid "Thank you very much for your support, your donations help CAcert to continue to operate."
+msgstr ""
+
+#: www/index.php:314
+msgid "Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!"
+msgstr ""
+
+#: www/help/2.php:47
+msgid "That situation has changed, and Internet Explorer, being the most obvious example, now insists that any Certificate Authorities are 'audited' by an 'independent' organisation, the American Institute for Certified Public Accountant's (AICPA). So now, if you have the money needed (from US$75000 up to US$250000 and beyond) you can get these accountants, who clearly know a lot about money, to approve you as having the required technical infrastructure and business processes to be a Certificate Authority. And they get a nice wad of money for the pleasure. And the Certificate Authorities, having a kind of monopoly as a result, charge a lot for certificates and also get a nice wad of money. And everyone's happy."
+msgstr ""
+
+#: www/account/17.php:89 www/account/4.php:89
+msgid "The 1024-bit key generation failed. Would you like to try 512 instead?"
+msgstr ""
+
+#: www/help/3.php:31
+msgid "The Common Name is the fully qualified host and Domain Name or website address that you will be securing. Both 'www.CAcert.org' and 'secure.CAcert.com' are valid Common Names. IP addresses are usually not used."
+msgstr ""
+
+#: www/verify.php:46
+msgid "The ID or Hash has already been verified, or something weird happened."
+msgstr ""
+
+#: www/verify.php:90
+msgid "The ID or Hash has already been verified, the domain no longer exists in the system, or something weird happened."
+msgstr ""
+
+#: www/help/3.php:28
+msgid "The Organisational Unit field is the 'free' field. It is often the department or Server name for reference."
+msgstr ""
+
+#: includes/account.php:838
+msgid "The Pass Phrase you submitted was too short."
+msgstr ""
+
+#: www/index.php:94
+msgid "The Pass Phrase you submitted was too short. It must be at least 6 characters."
+msgstr ""
+
+#: www/help/2.php:59
+msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
+msgstr ""
+
+#: www/account/0.php:28
+msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons. You can also get trust points via the Trust Third Party system where you go to a lawyer, bank manager, accountant, or public notary/juctise of the peace and they via your ID and fill in the TTP form to state they have viewed your ID documents and it appears authentic and true. More information on the TTP system can be found in the TTP sub-menu"
+msgstr ""
+
+#: www/index/0.php:103
+msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
+msgstr ""
+
+#: includes/account.php:363
+msgid "The address you submitted isn't a valid authority address for the domain."
+msgstr ""
+
+#: www/index/8.php:1
+#, php-format
+msgid "The current %s board, and roles."
+msgstr ""
+
+#: includes/account.php:394
+#, php-format
+msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
+msgstr ""
+
+#: includes/account.php:304 includes/account.php:373 includes/account.php:1428
+#: includes/account.php:1458
+#, php-format
+msgid "The domain '%s' is already in the system and is listed as valid. Can't continue."
+msgstr ""
+
+#: www/account/0.php:22
+msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
+msgstr ""
+
+#: includes/account.php:54
+#, php-format
+msgid "The email address '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
+msgstr ""
+
+#: includes/account.php:36
+#, php-format
+msgid "The email address '%s' is already in the system. Can't continue."
+msgstr ""
+
+#: includes/account.php:86
+msgid "The following accounts have been removed:"
+msgstr ""
+
+#: includes/account.php:403
+msgid "The following domains have been removed:"
+msgstr ""
+
+#: www/index/0.php:104
+msgid "The number of assurance point you have will limit the maximum assurance points you can issue for people you assure."
+msgstr ""
+
+#: www/account/10.php:30 www/account/20.php:27
+msgid "Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people."
+msgstr ""
+
+#: www/help/2.php:62
+#, php-format
+msgid "The page has been reproduced on %s with explicit permission from %sthe author%s with the information being copyrighted to the author (name with held by request)"
+msgstr ""
+
+#: includes/account.php:1735
+#, php-format
+msgid "The password for %s has been updated successfully in the system."
+msgstr ""
+
+#: www/index/0.php:21
+msgid "The primary goals are:"
+msgstr ""
+
+#: www/help/2.php:15
+msgid "The purpose of digital signing is to prove, electronically, one's identity"
+msgstr ""
+
+#: www/help/2.php:27
+msgid "The reason digital signatures prepare us for encryption is that if everyone were setup to be able to generate their own digital signatures, it would be technically very easy to make the next step from digital signatures to encryption. And that would be great for privacy, the fight against spamming, and a safer Internet."
+msgstr ""
+
+#: www/help/7.php:6
+msgid "The requests sent to the root store, are stored in a file for another process triggered by cron to parse and sign them, then stored in a reply file to be sent back to the webserver. Causing things to be separated into different users, basic privilege separation stuff. So being actually able to hack the serial daemons will only at the VERY worst cause fraudulent certificates, not the root to be revealed."
+msgstr ""
+
+#: www/index/51.php:34
+msgid "The simplest and most effective thing you can do is spread the word, by telling your friends, colleagues and relatives about us and join."
+msgstr ""
+
+#: www/help/4.php:3
+msgid "Then the system will try to generate some very random numbers to get a secure key."
+msgstr ""
+
+#: www/help/6.php:3
+msgid "Then you need to generate a Certificate Signing Request, for more details go:"
+msgstr ""
+
+#: www/help/6.php:9
+msgid "Then you need to submit the contents from the CSR file to CAcert, you need to go:"
+msgstr ""
+
+#: www/account/40.php:37 www/index/11.php:37
+msgid "There are a number of other mailing lists CAcert runs, some are general discussion, others are technical (such as the development list) or platform specific help (such as the list for Apple Mac users)"
+msgstr ""
+
+#: www/account/16.php:42 www/account/3.php:54
+msgid "Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"
+msgstr ""
+
+#: www/wot.php:284
+msgid "There was an error and I couldn't proceed"
+msgstr ""
+
+#: www/help/0.php:25
+msgid "How does CAcert protect its root private key?"
+msgstr ""
+
+#: www/index/19.php:15
+msgid "Information"
+msgstr ""
+
+#: www/help/2.php:42
+msgid "There's nothing to it. I mean literally, you can already start sending your emails encrypted. Assuming of course you have your own digital signature certificate (e.g. as per above), and the person you want to send an encrypted email to also has a digital signature certificate, and has recently sent you a digitally signed email with it. If all these conditions hold, you just have to change the settings in your email software to send the email encrypted and hey presto! Your email software (probably Outlook I guess) should suss out the rest."
+msgstr ""
+
+#: www/index.php:272
+msgid "This email address is currently valid in the system."
+msgstr ""
+
+#: includes/account.php:1957 includes/account.php:1974
+#: includes/account.php:1984
+msgid "Your language setting has been updated."
+msgstr ""
+
+#: www/wot/6.php:32
+#, php-format
+msgid "This person already has %s assurance points. Any points you give this person may be rounded down, or they may not even get any points. If you have less then 150 points you will still receive 2 points for assuring them."
+msgstr ""
+
+#: pages/index/2.php:16
+msgid "Your information has been submitted into our system. You will now be sent an email with a web link, you need to open that link in your web browser within 24 hours or your information will be removed from our system!"
+msgstr ""
+
+#: www/help/2.php:46
+msgid "Thus, having now asked the question, you suppose that it's the people who make the browser software that have carefully decided who is a trustworthy Certificate Authority. Funnily enough, the mainstream browsers have not, historically, had public policies on how they decide whether a Certificate Authority gets added to their browser. All of the Certificate Authorities that have found themselves in the browser software, are big names, probably with big profits (so they must be doing a good job!)."
+msgstr ""
+
+#: www/wot/9.php:42
+msgid "To"
+msgstr ""
+
+#: www/help/5.php:1
+msgid "To be completed"
+msgstr ""
+
+#: www/wot/2.php:15
+msgid "To become an Assurer"
+msgstr ""
+
+#: www/index/51.php:17
+msgid "To create a Non-Profit Certificate Authority; an alternative to the commercial CAs."
+msgstr ""
+
+#: www/help/2.php:33
+msgid "To fully understand, read the section directly above. I am using a free Certificate Authority to provide me with the ability to digitally sign my emails. As a result, this Certificate Authority is not (yet) recognised by your email software as it is a new organisation that is not yet fully established, although it is probably being included in the Mozilla browser. If you choose to, you can go the their site at CAcert.org to install the root certificate. You may be told that the certificate is untrusted - that is normal and I suggest that you continue installation regardless. Be aware that this implies your acceptance that you trust their secure distribution and storing of digital signatures, such as mine. (You already do this all the time). The CAcert.org root certificate will then automatically provide the safe validation of my digital signature, which I have entrusted to them. Or you can simply decide that you've wasted your time reading this and do nothing (humbug!). Shame on you! :-)"
+msgstr ""
+
+#: www/help/3.php:2
+msgid "To generate a public and private key pair and CSR for a Microsoft IIS 5 Server:"
+msgstr ""
+
+#: www/help/2.php:21
+msgid "To get from computer Internet User A to Internet User B an email may pass through tens of anonymous computers on the Internet. These 'Internet infrastructure' computers are all free to inspect and change the contents of your email as they see fit. Governments systematically browse the contents of all emails going in/out/within their country, e.g. the"
+msgstr ""
+
+#: www/index/0.php:24
+msgid "To provide a trust mechanism to go with the security aspects of encryption."
+msgstr ""
+
+#: www/account/43.php:217 www/account/43.php:252 www/wot/10.php:44
+msgid "Total Points"
+msgstr ""
+
+#: www/wot/10.php:79
+msgid "Total Points Issued"
+msgstr ""
+
+#: www/account/24.php:29 www/account/27.php:32
+msgid "Town/Suburb"
+msgstr ""
+
+#: includes/general_stuff.php:76
+msgid "Translations"
+msgstr ""
+
+#: pages/index/8.php:4
+msgid "Public Officer"
+msgstr ""
+
+#: includes/account_stuff.php:205 includes/general.php:23 www/wot/4.php:15
+msgid "Trusted Third Parties"
+msgstr ""
+
+#: www/help/2.php:60
+msgid "U.K. e-mail snooping bill passed"
+msgstr ""
+
+#: www/help/2.php:21
+msgid "UK Government has done this since the year 2000"
+msgstr ""
+
+#: www/index.php:126
+msgid "Unable to match your details with any user accounts on file"
+msgstr ""
+
+#: www/help/3.php:5
+msgid "Under 'Administrative Tools', open the 'Internet Services Manager'. Then open up the properties window for the website you wish to request the certificate for. Right-clicking on the particular website will open up its properties."
+msgstr ""
+
+#: www/help/0.php:12
+msgid "Unofficial FAQ/Wiki"
+msgstr ""
+
+#: www/account/2.php:34 www/account/9.php:40
+msgid "Unverified"
+msgstr ""
+
+#: www/account/13.php:123 www/account/27.php:48 www/account/29.php:35
+#: www/account/41.php:36 www/wot/8.php:35
+msgid "Update"
+msgstr ""
+
+#: www/account/29.php:28
+#, php-format
+msgid "Update Domain for %s"
+msgstr ""
+
+#: www/account/36.php:28
+msgid "Update My Settings"
+msgstr ""
+
+#: www/account/14.php:36
+msgid "Update Pass Phrase"
+msgstr ""
+
+#: www/verify.php:55 www/verify.php:97
+msgid "Updated"
+msgstr ""
+
+#: www/account/12.php:48 www/account/18.php:48 www/account/18.php:59
+#: www/account/22.php:48 www/account/22.php:59 www/account/5.php:52
+msgid "Valid"
+msgstr ""
+
+#: www/stats.php:43
+msgid "Valid Certificates"
+msgstr ""
+
+#: www/index/0.php:55 www/index/0.php:65 www/index/0.php:75 www/index/0.php:85
+#: www/index/0.php:95 www/index/0.php:105 www/index/0.php:115
+msgid "Verification needed"
+msgstr ""
+
+#: www/account/2.php:32 www/account/9.php:38
+msgid "Verified"
+msgstr ""
+
+#: www/stats.php:20 www/account/43.php:175
+msgid "Verified Domains"
+msgstr ""
+
+#: www/stats.php:16
+msgid "Verified Emails"
+msgstr ""
+
+#: www/stats.php:12
+msgid "Verified Users"
+msgstr ""
+
+#: pages/index/8.php:3
+msgid "President"
+msgstr ""
+
+#: includes/account_stuff.php:150 includes/account_stuff.php:154
+#: includes/account_stuff.php:158 includes/account_stuff.php:162
+#: includes/account_stuff.php:167 includes/account_stuff.php:171
+#: includes/account_stuff.php:177 includes/account_stuff.php:186
+msgid "View"
+msgstr ""
+
+#: includes/account_stuff.php:177
+msgid "View Organisations"
+msgstr ""
+
+#: www/account/29.php:23 www/account/30.php:23
+msgid "Warning!"
+msgstr ""
+
+#: www/index/1.php:15 www/index/4.php:19
+msgid "Warning! This site requires cookies to be enabled to ensure your privacy and security. This site uses session cookies to store temporary values to prevent people from copying and pasting the session ID to someone else exposing their account, personal details and identity theft as a result."
+msgstr ""
+
+#: www/capnew.php:1025
+msgid "driver license"
+msgstr ""
+
+#: www/capnew.php:1117
+msgid "email address as e.g. john.family@gmail.com"
+msgstr ""
+
+#: www/capnew.php:1331
+msgid "date of assurance"
+msgstr ""
+
+#: www/capnew.php:1025
+msgid "certificate"
+msgstr ""
+
+#: includes/account.php:1609
+#, php-format
+msgid "Wasn't able to match '%s' against any user in the system"
+msgstr ""
+
+#: www/account/39.php:34 www/index/10.php:34
+msgid "We analyse visitors' use of our sites by tracking information such as page views, traffic flow, search terms, and click through. We use this information to improve our sites. We also share this anonymous traffic and demographic information in aggregate form with advertisers and other business partners. We do not share any information with advertisers that can identify an individual user."
+msgstr ""
+
+#: www/verify.php:124
+msgid "Your domain has been verified. You can now start issuing certificates for this domain."
+msgstr ""
+
+#: www/wot.php:439
+msgid "Your email has been sent to"
+msgstr ""
+
+#: pages/wot/7-old.php:174
+msgid "Your details have been updated."
+msgstr ""
+
+#: www/account/39.php:42 www/index/10.php:42
+msgid "We don't use cookies to store personal information, we do use sessions, and if cookies are enabled, the session will be stored in a cookie, and we do not look for cookies, apart from the session id. However if cookies are disabled then no information will be stored on or looked for on your computer."
+msgstr ""
+
+#: www/help/2.php:56
+msgid "WebTrust for Certification Authorities"
+msgstr ""
+
+#: www/account.php:27 www/account.php:36 www/cps.php:3 www/gpg.php:160
+#: www/gpg.php:179 www/help.php:20 www/index.php:105 www/index.php:342
+#: www/index.php:353 www/index.php:362 www/logos.php:3 www/news.php:20
+#: www/stats.php:3
+msgid "Welcome to CAcert.org"
+msgstr ""
+
+#: www/account/0.php:16
+msgid "Welcome to your account section of the website. Below is a description of the different sections and what they're for."
+msgstr ""
+
+#: www/index/0.php:46
+msgid "What can CAcert provide to you, to increase your privacy and security for free?"
+msgstr ""
+
+#: www/help/2.php:2 www/help/2.php:14
+msgid "What is it for?"
+msgstr ""
+
+#: www/index/51.php:30
+msgid "When and Where?"
+msgstr ""
+
+#: www/help/3.php:67
+msgid "When you have read this information, click 'Finish'."
+msgstr ""
+
+#: pages/wot/13.php:67
+#, php-format
+msgid "Your current location is set as: %s"
+msgstr ""
+
+#: includes/account.php:109
+#, php-format
+msgid "Your default email address has been updated to '%s'."
+msgstr ""
+
+#: includes/account.php:1033
+msgid "Your details have been updated with the database."
+msgstr ""
+
+#: www/account/43.php:194 www/account/43.php:229 www/wot/10.php:23
+#: www/wot/10.php:56
+msgid "Who"
+msgstr ""
+
+#: www/index/51.php:19
+msgid "Who?"
+msgstr ""
+
+#: www/help/2.php:3 www/help/2.php:19
+msgid "Why digitally sign your own emails?! (weirdo..)"
+msgstr ""
+
+#: www/help/2.php:6 www/help/2.php:32
+msgid "Why is the digital signature described as 'not valid/not trusted'?"
+msgstr ""
+
+#: www/help/2.php:5 www/help/2.php:29
+msgid "Why isn't it being adopted by everyone?"
+msgstr ""
+
+#: www/help/7.php:7
+msgid "Why use serial you ask? Well certificate requests are low bandwidth for starters, then of course simpler systems in security are less prone to exploits, and finally serial code is pretty mature and well tested and hopefully all exploits were found and fixed a long time ago."
+msgstr ""
+
+#: www/index/51.php:23
+msgid "Why?"
+msgstr ""
+
+#: www/help/7.php:8
+msgid "With the proposed root certificate changes, there would be a new root, this would sign at least 1 sub-root, then the private key stored offline in a bank vault, with the sub-root doing all the signing, or alternatively 2 sub-roots, 1 for client certificates, one for server, the thinking behind this, if any of the sub-roots are compromised they can be revoked and reissued."
+msgstr ""
+
+#: www/account/36.php:25 www/index/1.php:114
+msgid "Within 200km Announcements"
+msgstr ""
+
+#: includes/account_stuff.php:182
+msgid "WoT Form"
+msgstr ""
+
+#: www/cap.php:64 www/ttp.php:128 www/wot/6.php:66
+msgid "YYYY-MM-DD"
+msgstr ""
+
+#: www/account/50.php:29
+msgid "Yes"
+msgstr ""
+
+#: www/account/39.php:52 www/index/10.php:52
+msgid "You are able to update, add and remove your information at any time via our web interface, log into the 'My Account' and then click on the 'My Details' section, and then click the relevant link"
+msgstr ""
+
+#: www/account/19.php:44 www/account/6.php:42
+msgid "You are about to install a certificate, if you are using mozilla/netscape based browsers you will not be informed that the certificate was installed successfully, you can go into the options dialog box, security and manage certificates to view if it was installed correctly however."
+msgstr ""
+
+#: www/wot.php:54
+msgid "You are never allowed to Assure yourself!"
+msgstr ""
+
+#: www/wot.php:68
+msgid "You are only allowed to Assure someone once!"
+msgstr ""
+
+#: www/help/2.php:45
+msgid "You are putting your trust in people you don't know!"
+msgstr ""
+
+#: scripts/removedead.php:56
+msgid "You are receiving this email because you had a temporary increase to 200 points. This has since expired and you have been reduced to 150 points."
+msgstr ""
+
+#: www/wot.php:230
+#, php-format
+msgid "You are receiving this email because you have assured %s %s (%s)."
+msgstr ""
+
+#: www/wot.php:206
+#, php-format
+msgid "You are receiving this email because you have been assured by %s %s (%s)."
+msgstr ""
+
+#: includes/general_stuff.php:112 includes/tverify_stuff.php:78
+msgid "Further Information"
+msgstr ""
+
+#: www/index/7.php:26
+msgid "Has been involved in translating this website into Portuguese"
+msgstr ""
+
+#: www/index/7.php:24
+msgid "Has put a lot of time and effort into promoting and assuring people in Brazil and South America, and for helping to translate this site into Portuguese"
+msgstr ""
+
+#: www/wot/6.php:44
+#, php-format
+msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. Gross negligence may cause you to be liable."
+msgstr ""
+
+#: includes/general_stuff.php:74
+msgid "CAcert Board"
+msgstr ""
+
+#: www/account/40.php:22 www/index/11.php:22
+msgid "You can alternatively use the form below, however joining the list is the prefered option to support your queries"
+msgstr ""
+
+#: includes/account.php:346 includes/account.php:617 includes/account.php:629
+#: includes/account.php:718 includes/account.php:833 includes/account.php:1259
+#: includes/account.php:1308 includes/account.php:1514
+#: includes/account.php:1567 includes/account.php:2233
+#, php-format
+msgid "Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."
+msgstr ""
+
+#: pages/help/3.php:48
+msgid "Your country, state and city."
+msgstr ""
+
+#: www/index/0.php:53
+msgid "You can send digitally signed/encrypted emails; others can send encrypted emails to you."
+msgstr ""
+
+#: includes/account.php:68
+msgid "You currently don't have access to the email address you selected, or you haven't verified it yet."
+msgstr ""
+
+#: www/wot.php:133
+msgid "You didn't list a valid sponsor for this action."
+msgstr ""
+
+#: includes/account.php:1362 includes/account.php:1566
+#: includes/account.php:1686
+msgid "You don't have access to this area."
+msgstr ""
+
+#: pages/account/40.php:68 pages/index/11.php:68
+msgid "Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on &lt;a href='https://bugs.cacert.org/'&gt;bugs.cacert.org&lt;/a&gt; and mark it as private."
+msgstr ""
+
+#: www/wot.php:92 www/wot.php:99
+msgid "You failed to check all boxes to validate your adherence to the rules and policies of CAcert"
+msgstr ""
+
+#: includes/account.php:842
+msgid "You failed to correctly enter your current Pass Phrase."
+msgstr ""
+
+#: www/wot.php:109
+msgid "You failed to enter a location of your meeting."
+msgstr ""
+
+#: www/index.php:97
+msgid "You failed to get all answers correct or you didn't configure enough lost password questions for your account. System admins have been notified."
+msgstr ""
+
+#: www/gpg.php:24
+msgid "You failed to paste a valid GPG/PGP key."
+msgstr ""
+
+#: www/index/0.php:113
+msgid "You get a vote in how CAcert (a non-profit association incorporated in Australia) is run; be eligible for positions on the CAcert board."
+msgstr ""
+
+#: www/help/3.php:21
+msgid "You have now created a public/private key pair. The private key is stored locally on your machine. The public portion is sent to CAcert in the form of a CSR."
+msgstr ""
+
+#: www/gpg.php:166
+msgid "Your certificate request has failed to be processed correctly, please try submitting it again."
+msgstr ""
+
+#: pages/help/2.php:30
+msgid "Your browser includes special digital (root) certificates from a number of these 'Certificate Authorities' by default, and all web sites use certificates that are validated by one of these companies, which you as a user implicitly trust every time you go to the secure part of a web site. (You might ask, who validates the security of the Certificate Authorities, and why should you trust them?!"
+msgstr ""
+
+#: www/disputes.php:107
+msgid "Your attempt to accept or reject a disputed email is invalid due to the hash string not matching with the email ID. Your attempt has been logged and the request will be removed from the system as a result."
+msgstr ""
+
+#: www/disputes.php:110
+msgid "Your attempt to accept or reject a disputed email is invalid due to the hash string not matching with the email ID."
+msgstr ""
+
+#: www/disputes.php:198
+msgid "Your attempt to accept or reject a disputed domain is invalid due to the hash string not matching with the domain ID. Your attempt has been logged and the request will be removed from the system as a result."
+msgstr ""
+
+#: www/index.php:231
+msgid "Your account has not been verified yet, please check your email account for the signup messages."
+msgstr ""
+
+#: www/wot.php:415
+msgid "Your account information has been updated."
+msgstr ""
+
+#: www/disputes.php:201
+msgid "Your attempt to accept or reject a disputed domain is invalid due to the hash string not matching with the domain ID."
+msgstr ""
+
+#: www/verify.php:66
+msgid "Your account and/or email address has been verified. You can now start issuing certificates for this address."
+msgstr ""
+
+#: includes/account.php:1072 www/index.php:117
+msgid "Your Pass Phrase has been updated and your primary email account has been notified of the change."
+msgstr ""
+
+#: pages/account/40.php:31 pages/account/40.php:54 pages/index/11.php:31
+#: pages/index/11.php:54
+msgid "Your Name"
+msgstr ""
+
+#: pages/account/40.php:32 pages/account/40.php:55 pages/index/11.php:32
+#: pages/index/11.php:55
+msgid "Your Email"
+msgstr ""
+
+#: www/verify.php:42
+msgid "You've attempted to verify the same email address a fourth time with an invalid hash, subsequently this request has been deleted in the system"
+msgstr ""
+
+#: www/wot.php:344
+msgid "You've been Assured."
+msgstr ""
+
+#: pages/account/43.php:287 pages/wot/10.php:40
+msgid "Your Assurance Points"
+msgstr ""
+
+#: www/wot.php:360
+msgid "You've Assured Another Member."
+msgstr ""
+
+#: www/verify.php:101
+msgid "You've attempted to verify the same domain a fourth time with an invalid hash, subsequantly this request has been deleted in the system"
+msgstr ""
+
+#: pages/help/3.php:29
+msgid "You'll prepare the request now, but you can only submit the request via the online request forms. We do not accept CSRs via email."
+msgstr ""
+
+#: pages/help/4.php:22
+msgid "You will then be asked to enter information about your company into the certificate. Below is a valid example:"
+msgstr ""
+
+#: pages/help/3.php:80
+msgid "You will see a confirmation screen."
+msgstr ""
+
+#: pages/help/3.php:37
+msgid "You will now create a CSR. This information will be displayed on your certificate, and identifies the owner of the key to users. The CSR is only used to request the certificate. The following characters must be excluded from your CSR fields, or your certificate may not work:"
+msgstr ""
+
+#: pages/index/19.php:77
+msgid "You will need to be issued 100 points by meeting with existing assurers from the CAcert Web of Trust, who verify your identity using your government issued photo identity documents; OR if it is too difficult to meet up with existing assurers in your area, meet with two Trusted Third Party assurers (notary public, justice of the peace, lawyer, bank manager, accountant) to do the verifying."
+msgstr ""
+
+#: www/wot.php:320
+#, php-format
+msgid "You were issued %s points however the system has rounded this down to %s and you now have %s points in total."
+msgstr ""
+
+#: www/wot.php:212
+msgid "You tried to give a temporary points increase to someone that already has more then 150 points. Can't continue."
+msgstr ""
+
+#: includes/account.php:1964
+msgid "You tried to use an invalid language."
+msgstr ""
+
+#: www/wot.php:322
+#, php-format
+msgid "You were issued %s points and you now have %s points in total."
+msgstr ""
+
+#: includes/account.php:233
+msgid "You submitted invalid email addresses, or email address you no longer have control of. Can't continue with certificate request."
+msgstr ""
+
+#: pages/help/6.php:19
+msgid "You then need to add the domain you have control of to your account, which you can do:"
+msgstr ""
+
+#: pages/help/2.php:29
+msgid "You see this all the time on the Internet - every time you go to a secure page on a web site, for example to enter personal details, or to make a purchase, every day you browse web sites that have been digitally signed by a Certificate Authority that is accepted as having the authority to sign it. This is all invisible to the user, except that you may be aware that you are entering a secure zone (e.g. SSL and HTTPS)."
+msgstr ""
+
+#: www/disputes.php:269
+msgid "You only dispute the primary email address of an account if there is no longer any email addresses or domains linked to it."
+msgstr ""
+
+#: www/wot.php:326
+msgid "You now have over 50 points, and can now have your name added to client certificates, and issue server certificates for up to 2 years."
+msgstr ""
+
+#: www/wot.php:196
+msgid "You must enter the number of points you wish to allocate to this person."
+msgstr ""
+
+#: pages/wot/3.php:21
+msgid "You must meet the applicant in person;"
+msgstr ""
+
+#: pages/wot/3.php:22
+msgid "You must sight at least one form of government issued photo identification.  It's preferable if 2 forms of Government issued photo ID are presented, as less points may be issued if there is any doubt on the person by the person issuing points;"
+msgstr ""
+
+#: pages/account/17.php:17 pages/account/19.php:57 pages/account/4.php:17
+#: pages/account/6.php:55
+msgid "You must enable ActiveX for this to work."
+msgstr ""
+
+#: pages/index/19.php:57
+msgid "You must confirm that you are the owner (or authorized administrator) of the domain by responding to a 'ping' email sent to either the email address listed in the whois record, or one of the RFC-mandatory addresses (hostmaster/postmaster/etc)."
+msgstr ""
+
+#: www/analyse.php:25
+msgid "Analyse"
+msgstr ""
+
+#: includes/account.php:840 www/index.php:100
+#, php-format
+msgid "The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored %s points out of 6."
+msgstr ""
+
+#: www/src-lic.php:20
+msgid "CAcert Source License"
+msgstr ""
+
+#: www/index/7.php:25
+msgid "Did a substantial amount of work on the previous website design, and has been floating about on the mailing lists often giving invaluble insight into what we should be doing better."
+msgstr ""
+
+#: includes/account.php:25 includes/account.php:302
+msgid "Due to the possibility for punycode domain exploits we currently do not allow any certificates to sign punycode domains or email addresses."
+msgstr ""
+
+#: www/help/9.php:28
+msgid "Firstly you need mod-ssl and apache setup (this is beyond the scope of this FAQ item and you will need to search on google etc for LAMP setup information). I recommend mod-ssl over apache-ssl because it means you need less resources to achieve the same result."
+msgstr ""
+
+#: www/help/0.php:26 www/help/9.php:26
+msgid "How can I do a single sign on similar to CAcert using client certificates?"
+msgstr ""
+
+#: www/index/1.php:17
+msgid "In light of the number of people having issues with making up a password we have the following suggestions:"
+msgstr ""
+
+#: www/index/17.php:142
+msgid "Install a Root Certificate using Internet Explorer and the CEnroll ActiveX control. This avoids the Microsoft Certificate Installation wizard and all of its complexity and extra screens for users. This however will ONLY work for Microsoft Internet Explorer."
+msgstr ""
+
+#: includes/general_stuff.php:111
+msgid "Mission Statement"
+msgstr ""
+
+#: www/help/9.php:30
+msgid "Once you have everything setup and working you will need to add lines similar to below to your apache.conf"
+msgstr ""
+
+#: www/help/9.php:49
+msgid "Once you have everything working and you've tested sending a client certificate to your site and you're happy all is well you can start adding code to PHP (or any other language you like that can pull server environment information). At present I only have PHP code available and the example is in PHP"
+msgstr ""
+
+#: www/help/9.php:47
+msgid "Please note, you will need to alter the paths, hostname and IP of the above example, which is just that an example! The SSLCACertificateFile directive is supposed to point to a file with the root certificate you wish to verify your client certificates against, for the CAcert website we obviously only accept certificates issued by our own website and use our root certificate to initially verify this."
+msgstr ""
+
+#: includes/general_stuff.php:69
+msgid "RSS News Feed"
+msgstr ""
+
+#: www/help/2.php:67
+msgid "The point is, as the current situation holds, you should be wary of anyone making decisions for you (i.e. pre-installed certificates in your browser), and you should be weary of anyone else's certificates that you install. But at the end of the day, it all boils down to trust. If an independent Certificate Authority seems to be reputable to you, and you can find evidence to support this claim, there's no reason why you shouldn't trust it any less than you implicitly trust the people who have already made mistakes."
+msgstr ""
+
+#: www/wot.php:233
+msgid "You listed an invalid sponsor for this action."
+msgstr ""
+
+#: pages/wot/3.php:38
+msgid "You may charge a fee for your expenses if the applicant has been advised of the amount prior to the meeting."
+msgstr ""
+
+#: pages/index/19.php:27
+msgid "You must confirm it is your email address by responding to a 'ping' email sent to it."
+msgstr ""
+
+#: includes/account_stuff.php:153 includes/general_stuff.php:48
+#: includes/tverify_stuff.php:34
+msgid "Free digital certificates!"
+msgstr ""
+
+#: www/wot.php:353
+#, php-format
+msgid "You issued %s points and they now have %s points in total."
+msgstr ""
+
+#: www/wot.php:351
+#, php-format
+msgid "You issued %s points however the system has rounded this down to %s and they now have %s points in total."
+msgstr ""
+
+#: www/wot.php:49
+msgid "A reminder notice has been sent."
+msgstr ""
+
+#: includes/account_stuff.php:214 www/disputes/0.php:19
+msgid "Abuses"
+msgstr ""
+
+#: www/disputes/4.php:26 www/disputes/6.php:26
+msgid "Accept Dispute"
+msgstr ""
+
+#: www/wot/10.php:19
+msgid "Assurer Ranking"
+msgstr ""
+
+#: www/index/16.php:24 www/index/3.php:24
+msgid "CAcert's GPG Key"
+msgstr ""
+
+#: www/account/52.php:39
+msgid "Certificate Subject"
+msgstr ""
+
+#: pages/index/47.php:10
+msgid "As described in the Style Guide, the monochrome version of the logo must be used in situations where the logo colours cannot be reproduced correctly."
+msgstr ""
+
+#: www/account/52.php:48
+msgid "Comment"
+msgstr ""
+
+#: includes/account.php:478 includes/account.php:491 includes/account.php:592
+#: includes/account.php:1238 includes/account.php:1251
+#: includes/account.php:1859 includes/account.php:1884
+msgid "CommonName field was blank. This is usually caused by entering your own name when openssl prompt's you for 'YOUR NAME', or if you try to issue certificates for domains you haven't already verified, as such this process can't continue."
+msgstr ""
+
+#: www/account/52.php:42
+msgid "Current Points"
+msgstr ""
+
+#: www/disputes/6.php:16
+#, php-format
+msgid "Currently the domain '%s' is in dispute, you have been sent an email to resolve the issue, below you have the option to accept, reject or report the request as fraudulent."
+msgstr ""
+
+#: www/disputes/4.php:16
+#, php-format
+msgid "Currently the email '%s' is in dispute, you have been sent an email to resolve the issue, below you have the option to accept, reject or report the request as fraudulent."
+msgstr ""
+
+#: www/account/1.php:31 www/account/7.php:33
+msgid "Currently we only issue certificates for Punycode domains if the person requesting them has code signing attributes attached to their account, as these have potentially slightly higher security risk."
+msgstr ""
+
+#: pages/account/53.php:84
+msgid "aliases"
+msgstr ""
+
+#: www/index/1.php:18
+msgid "To get a password that will work, we suggest the following example"
+msgstr ""
+
+#: www/disputes/2.php:20
+msgid "Dispute Domain"
+msgstr ""
+
+#: www/disputes.php:286 www/disputes.php:420
+msgid "Dispute Probe"
+msgstr ""
+
+#: www/disputes/0.php:17
+msgid "Disputes"
+msgstr ""
+
+#: www/disputes/0.php:15
+msgid "Disputes and Abuse Reporting"
+msgstr ""
+
+#: includes/account_stuff.php:213
+msgid "Disputes/Abuses"
+msgstr ""
+
+#: includes/account_stuff.php:214 www/disputes.php:138 www/disputes.php:147
+#: www/disputes.php:154 www/disputes.php:181 www/disputes.php:195
+#: www/disputes.php:205 www/disputes.php:215 www/disputes.php:299
+#: www/disputes.php:309 www/disputes.php:319 www/disputes.php:328
+#: www/disputes.php:377 www/disputes.php:422 www/disputes/2.php:15
+#: www/disputes/6.php:15 www/disputes/6.php:20
+msgid "Domain Dispute"
+msgstr ""
+
+#: www/disputes.php:399
+msgid "Domain Dispute!"
+msgstr ""
+
+#: www/disputes.php:428
+msgid "Domain and Email Disputes"
+msgstr ""
+
+#: pages/account/3.php:82
+msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
+msgstr ""
+
+#: pages/index/8.php:4
+msgid "Treasurer"
+msgstr ""
+
+#: includes/account.php:50 includes/account.php:402 www/index.php:293
+msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
+msgstr ""
+
+#: includes/account_stuff.php:214 www/disputes.php:28 www/disputes.php:39
+#: www/disputes.php:46 www/disputes.php:90 www/disputes.php:104
+#: www/disputes.php:114 www/disputes.php:124 www/disputes.php:226
+#: www/disputes.php:235 www/disputes.php:246 www/disputes.php:256
+#: www/disputes.php:268 www/disputes.php:288 www/disputes/1.php:15
+#: www/disputes/4.php:15 www/disputes/4.php:20
+msgid "Email Dispute"
+msgstr ""
+
+#: www/disputes/1.php:27 www/disputes/2.php:28
+msgid "File Dispute"
+msgstr ""
+
+#: www/index/7.php:22
+msgid "For much of the art work that exists on the website, t-shirt designs, much of the organisational work for Usenix '04, as well as a few published articles and written documents."
+msgstr ""
+
+#: www/index/16.php:23 www/index/3.php:23
+msgid "GPG Key"
+msgstr ""
+
+#: www/account/40.php:20 www/index/11.php:20
+msgid "General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question."
+msgstr ""
+
+#: www/capnew.php:1001
+msgid "abbreviated:"
+msgstr ""
+
+#: www/help/0.php:21
+msgid "Generating a new key pair and CSR for IIS 5.0"
+msgstr ""
+
+#: www/help/0.php:24
+msgid "How do I get a server certificate from CAcert?"
+msgstr ""
+
+#: includes/account_stuff.php:162
+msgid "My Points"
+msgstr ""
+
+#: www/index/7.php:21
+msgid "He's constantly helping out on the support list, building up documentation and all round nice guy, he was even offered a free book and turned down the offer until there is a book on CAcert available!"
+msgstr ""
+
+#: www/account/52.php:49
+msgid "I agree with this Application"
+msgstr ""
+
+#: www/account/52.php:50
+msgid "I don't agree with this Application"
+msgstr ""
+
+#: www/disputes/0.php:18
+msgid "If you want to dispute who has control of your email address or domain, select 'Dispute Email' or 'Dispute Domain' on the right hand side."
+msgstr ""
+
+#: www/disputes/0.php:20
+msgid "If you would like to report an abuse of our certificates that breaches our policies please select the Abuse menu on the right."
+msgstr ""
+
+#: www/disputes/2.php:16
+msgid "If your dispute is successful the domain will be removed from the current account and any certificates will be revoked."
+msgstr ""
+
+#: www/disputes/1.php:16
+msgid "If your dispute is successful you will have the email address removed from the system, you will need add the email address as per usual afterwards. The email will be removed from the current account and any certificates will be revoked."
+msgstr ""
+
+#: www/disputes.php:91 www/disputes.php:115 www/disputes.php:182
+#: www/disputes.php:206
+msgid "Invalid request. Can't continue."
+msgstr ""
+
+#: includes/tverify_stuff.php:39
+msgid "Main Website"
+msgstr ""
+
+#: includes/account_stuff.php:214
+msgid "More Information"
+msgstr ""
+
+#: www/account/52.php:37
+msgid "Name on file"
+msgstr ""
+
+#: www/account/11.php:36
+msgid "No additional information will be included on certificates because it can not be automatically checked by the system."
+msgstr ""
+
+#: www/disputes.php:300
+msgid "Not a valid Domain. Can't continue."
+msgstr ""
+
+#: www/account/52.php:40
+msgid "Notary URL"
+msgstr ""
+
+#: includes/account_stuff.php:198
+msgid "Organisation Assurance"
+msgstr ""
+
+#: www/wot/11.php:19
+msgid "Organisational Assurance"
+msgstr ""
+
+#: www/wot/11.php:22
+msgid "Organisation Title"
+msgstr ""
+
+#: www/index/16.php:28 www/index/3.php:28
+msgid "PKI finger/thumb print signed by the CAcert GPG Key"
+msgstr ""
+
+#: www/account/52.php:41
+msgid "Photo ID URL"
+msgstr ""
+
+#: www/disputes/0.php:16
+msgid "Please select the most appropriate section to report your problem."
+msgstr ""
+
+#: www/account/52.php:43
+msgid "Potential Points"
+msgstr ""
+
+#: www/account/52.php:38
+msgid "Primary email address"
+msgstr ""
+
+#: www/wot/1.php:133
+msgid "Email Me"
+msgstr ""
+
+#: www/disputes/4.php:23 www/disputes/6.php:23
+msgid "Reject Dispute"
+msgstr ""
+
+#: www/account/11.php:40
+msgid "Rejected"
+msgstr ""
+
+#: www/disputes/4.php:29 www/disputes/6.php:29
+msgid "Report Dispute as Abuse"
+msgstr ""
+
+#: www/account/52.php:36
+msgid "Request Details"
+msgstr ""
+
+#: www/index/0.php:75
+msgid "Same as above plus get 100 assurance points by meeting with multiple assurers from the CAcert Web of Trust, who verify your identity using your government issued photo identity documents."
+msgstr ""
+
+#: www/wot/5.php:20
+msgid "Send reminder notice"
+msgstr ""
+
+#: www/disputes.php:310
+#, php-format
+msgid "The domain '%s' already exists in the dispute system. Can't continue."
+msgstr ""
+
+#: www/coapnew.php:1243
+msgid "The organisation assurer will check the trade office registry for company information (name, location, country of jurisdiction, director names, trade office Identification number, domain name ownership, and system admin reference). Any associated costs for this research will be reimborsed by the assurer from the organisation."
+msgstr ""
+
+#: www/disputes.php:423
+#, php-format
+msgid "The domain '%s' has been entered into the dispute system, the email address you choose will now be sent an email which will give the recipent the option of accepting or rejecting the request, if after 2 days we haven't received a valid response for or against we will discard the request."
+msgstr ""
+
+#: www/disputes.php:400
+#, php-format
+msgid "The domain '%s' isn't in the system. Can't continue."
+msgstr ""
+
+#: www/disputes.php:236
+#, php-format
+msgid "The email address '%s' already exists in the dispute system. Can't continue."
+msgstr ""
+
+#: www/wot/9.php:48
+#, php-format
+msgid "%s prefers to be contacted in %s"
+msgstr ""
+
+#: www/disputes.php:289
+#, php-format
+msgid "The email address '%s' has been entered into the dispute system, the email address will now be sent an email which will give the recipent the option of accepting or rejecting the request, if after 2 days we haven't received a valid response for or against we will discard the request."
+msgstr ""
+
+#: includes/account.php:2056
+msgid "The following comments were made by reviewers"
+msgstr ""
+
+#: www/account/11.php:38
+msgid "The following hostnames were rejected because the system couldn't link them to your account, if they are valid please verify the domains against your account."
+msgstr ""
+
+#: www/index/7.php:18
+msgid "The list of names are in no sense of order"
+msgstr ""
+
+#: www/wot/2.php:28
+msgid "The only other way to receive assurance points is to have had your identity checked by a third party CA, whose policies are suitably set to not let identity fraud run rampant. Please contact us if you would like more details about this."
+msgstr ""
+
+#: www/wot/2.php:17
+msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
+msgstr ""
+
+#: www/account/51.php:27 www/account/52.php:59
+msgid "This UID has already been voted on."
+msgstr ""
+
+#: www/disputes.php:29 www/disputes.php:139
+msgid "This dispute no longer seems to be in the database, can't continue."
+msgstr ""
+
+#: www/disputes.php:76
+msgid "This was the primary email on the account, and no emails or domains were left linked so the account has also been removed from the system."
+msgstr ""
+
+#: www/logos.php:8
+#, php-format
+msgid "If you want to use the graphics and design, or you want to contribute something, please read the %sCAcert Styleguide%s"
+msgstr ""
+
+#: www/logos.php:7
+#, php-format
+msgid "On this page you find a number of logos to add to your website. Help CAcert to get some publicity by using a logo to link back to %s or to indicate that you or your website are using a CAcert certificates for security and privacy."
+msgstr ""
+
+#: www/account/43.php:101
+msgid "Tverify Account"
+msgstr ""
+
+#: www/account/11.php:48
+msgid "Unable to continue as no valid commonNames or subjectAltNames were present on your certificate request."
+msgstr ""
+
+#: includes/account.php:1997
+msgid "Unable to find a valid tverify request for this ID."
+msgstr ""
+
+#: www/account/51.php:29 www/account/52.php:61
+msgid "Unable to locate a valid request for that UID."
+msgstr ""
+
+#: includes/account.php:2075
+msgid "Unfortunately your request for a points increase has been denied, below is the comments from people that reviewed your request as to why they rejected your application."
+msgstr ""
+
+#: www/disputes/4.php:32 www/disputes/5.php:29 www/disputes/6.php:32
+msgid "Update Dispute"
+msgstr ""
+
+#: www/wot/2.php:26
+msgid "Upon receiving your documents you will be notified, and points will be added to your account."
+msgstr ""
+
+#: www/account/12.php:18 www/account/5.php:18
+msgid "View all certificates"
+msgstr ""
+
+#: www/disputes/1.php:20
+msgid "Which Email?"
+msgstr ""
+
+#: www/wot/6.php:40
+msgid "You are about to assure a person that isn't currently verified. If you continue and they do not verify their account within 48 hours the account could automatically be removed by the system."
+msgstr ""
+
+#: includes/account.php:2081
+msgid "You are welcome to try submitting another request at any time in the future, please make sure you take the reviewer comments into consideration or you risk having your application rejected again."
+msgstr ""
+
+#: www/disputes.php:257 www/disputes.php:329
+msgid "You aren't allowed to dispute your own email addresses. Can't continue."
+msgstr ""
+
+#: www/wot/2.php:19
+msgid "You can also become a CAcert Assurer by seeking out a public notary, justice of the peace, accountant, lawyer or bank manager. You will need to download and print out a copy of the TTP.pdf and fill in your sections. You will need to produce a photo copy of your ID, which the person assuring you will inspect against the originals. Once they are satisfied the documents appear to be genuine they need to sign the back of the photo copies, and fill in their sections of the TTP document. Once you have had your ID verified by 2 different people, pop the copies + forms in an envelope and post them to:"
+msgstr ""
+
+#: www/wot.php:257
+msgid "You can list your location by going to:"
+msgstr ""
+
+#: includes/account.php:2010
+msgid "You have already voted on this request."
+msgstr ""
+
+#: www/disputes.php:416
+#, php-format
+msgid "You have been sent this email as the domain '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"
+msgstr ""
+
+#: www/disputes.php:282
+#, php-format
+msgid "You have been sent this email as the email address '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"
+msgstr ""
+
+#: www/wot/10.php:34
+#, php-format
+msgid "You have made %s assurances which ranks you as the #%s top assurer."
+msgstr ""
+
+#: www/disputes.php:155
+msgid "You have opted to accept this dispute and the request will now remove this domain from the existing account, and revoke any current certificates."
+msgstr ""
+
+#: www/disputes.php:47
+msgid "You have opted to accept this dispute and the request will now remove this email address from the existing account, and revoke any current certificates."
+msgstr ""
+
+#: www/disputes.php:40 www/disputes.php:148
+msgid "You have opted to reject this dispute and the request will be removed from the database"
+msgstr ""
+
+#: www/logos.php:26
+msgid "The result should get you something like:"
+msgstr ""
+
+#: www/ttp.php:67
+msgid "You have viewed two of the Applicant's photo identity documents and you are convinced of their authenticity, and are convinced that the photos indeed depict the Applicant (allowed documents are government-issued documents with photos such as driver's license, passport, or others that are normally accepted as legal identification in your country; expired documents are allowed)."
+msgstr ""
+
+#: www/index/17.php:3
+msgid "Install CAcert Root using CEnroll Active-X component and PKCS-7"
+msgstr ""
+
+#: www/index/17.php:65
+msgid "Problems were detected with the CAcert root certificate download error:"
+msgstr ""
+
+#: www/index/17.php:67
+msgid "The CAcert root certificate was successfully installed"
+msgstr ""
+
+#: www/wot/6.php:70
+#, php-format
+msgid "I certify that %s %s %s has appeared in person"
+msgstr ""
+
+#: www/cap.php:83
+msgid "Applicant's signature"
+msgstr ""
+
+#: www/cap.php:39
+msgid "As the assurer, you are required to keep the signed document on file for 7 years. Should Cacert Inc. have any concerns about a meeting taking place, Cacert Inc. can request proof, in the form of this signed document, to ensure the process is being followed correctly. After 7 years if you wish to dispose of this form it's preferred that you shred and burn it. You do not need to retain copies of ID at all."
+msgstr ""
+
+#: www/cap.php:103 www/cap.php:107
+msgid "Assurer's Name"
+msgstr ""
+
+#: www/cap.php:111
+msgid "Assurer's signature"
+msgstr ""
+
+#: www/cap.php:12
+msgid "CAcert Assurance Programme"
+msgstr ""
+
+#: www/cap.php:85 www/cap.php:113
+msgid "Date (YYYY-MM-DD)"
+msgstr ""
+
+#: includes/general.php:885
+msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
+msgstr ""
+
+#: www/cap.php:15 www/ttp.php:24
+msgid "Identity Verification Form"
+msgstr ""
+
+#: www/cap.php:129
+msgid "Location of Face-to-face Meeting"
+msgstr ""
+
+#: www/cap.php:133
+msgid "Maximum Points"
+msgstr ""
+
+#: www/cap.php:51 www/ttp.php:75
+msgid "Names"
+msgstr ""
+
+#: www/cap.php:123
+msgid "Photo ID Shown: (ID types, not numbers. eg Drivers license, Passport)"
+msgstr ""
+
+#: www/cap.php:131
+msgid "Points Allocated"
+msgstr ""
+
+#: www/cap.php:37
+#, php-format
+msgid "To the Assurer: The CAcert Assurance Programme (CAP) aims to verify the identities of Internet users through face-to-face witnessing of government issued identity documents. The Applicant asks you to verify to CAcert.org that you have met them and verified their identity against one or more original, trusted, government photo identity documents. If you have ANY doubts or concerns about the Applicant's identity, DO NOT COMPLETE OR SIGN this form. For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit: %s"
+msgstr ""
+
+#: www/cap.php:46
+msgid "Applicant's Statement"
+msgstr ""
+
+#: www/cap.php:26 www/ttp.php:35
+msgid "CAcert's Root Certificate fingerprints"
+msgstr ""
+
+#: www/ttp.php:109
+msgid "Applicant Information"
+msgstr ""
+
+#: www/ttp.php:84
+msgid "Bar Association, CPA Number or Bank Name and Branch, JP/Notary Number"
+msgstr ""
+
+#: www/ttp.php:91
+msgid "Email (if applicable)"
+msgstr ""
+
+#: www/ttp.php:136
+msgid "First ID Number (driver's license, passport etc)"
+msgstr ""
+
+#: www/ttp.php:112
+msgid "Full Name (as shown on ID)"
+msgstr ""
+
+#: www/ttp.php:56
+#, php-format
+msgid "If you have ANY doubts or concerns about the identity of the Applicant then please DO NOT COMPLETE AND SIGN this form. For more information about the Web of Trust, including detailed guides for Trusted Third Parties, please see: %s"
+msgstr ""
+
+#: www/ttp.php:82
+msgid "Justice of the Peace, Public Notary, Lawyer, Accountant, or Bank Manager"
+msgstr ""
+
+#: www/ttp.php:119
+msgid "Main email (so we can find you)"
+msgstr ""
+
+#: www/ttp.php:89
+msgid "Office Phone"
+msgstr ""
+
+#: www/ttp.php:77
+msgid "Office Street Address"
+msgstr ""
+
+#: www/ttp.php:58
+msgid "PLEASE NOTE: You must get 2 fully completed TTP forms before sending anything to CAcert. Failure to do so will only cause your application to be delayed until all forms have been received by CAcert!"
+msgstr ""
+
+#: www/ttp.php:72
+msgid "Person Verifying Applicant's Identity"
+msgstr ""
+
+#: www/ttp.php:50
+msgid "Please complete and sign this form, and sign the photocopies of the IDs, to acknowledge that"
+msgstr ""
+
+#: www/ttp.php:80
+msgid "Profession (Please circle one)"
+msgstr ""
+
+#: www/ttp.php:138
+msgid "Second ID Number (driver's license, passport etc)"
+msgstr ""
+
+#: www/ttp.php:93 www/ttp.php:140
+msgid "Signature"
+msgstr ""
+
+#: pages/help/2.php:50
+msgid "Security is a serious matter. For a digital certificate with full rights to  be issued to an individual by a Certificate Authority, stringent tests must be conducted, including meeting the physical person to verify their identity. At the current moment in time, my physical identity has not been verified by CAcert.org, but they have verified my email address. Installing their root certificate (see above) will thus automatically allow you to validate my digital signature. You can then be confident of the authenticity of my email address - only I have the ability to digitally sign my emails using my CAcert.org certificate, so if you get an email that I digitally signed and which is validated by your email software using the CAcert.org root certificate that you installed, you know it's from me. (Visually you get a simple indication that my email is signed and trusted). Technically, they haven't verified that I really am me! But you have the guarantee that emails from my address are sent by the person who physically administers that address, i.e. me! The only way that someone could forge my digital signature would be if they logged on to my home computer (using the password) and ran my email software (using the password) to send you a digitally signed email from my address. Although I have noticed the cats watching me logon..."
+msgstr ""
+
+#: www/ttp.php:46
+msgid "The CAcert Trusted Third Party (TTP) Programme is designed to assure Internet user identities through personal verification of government issued identity documents."
+msgstr ""
+
+#: www/ttp.php:21
+msgid "Trusted Third Party"
+msgstr ""
+
+#: www/ttp.php:54
+msgid "You have verified that the Full Name, Date of Birth, and ID Numbers on the identity documents matches those filled in the Applicant section below and in the photocopies provided."
+msgstr ""
+
+#: www/logos.php:30
+msgid "Create more badges"
+msgstr ""
+
+#: pages/account/52.php:41
+msgid "Here"
+msgstr ""
+
+#: www/logos.php:19
+msgid "How can I put a logo on to my website?"
+msgstr ""
+
+#: www/logos.php:21
+msgid "It is extremly easy! Just pick an image from the collections above and use it for example with the following html code fragment:"
+msgstr ""
+
+#: www/logos.php:9
+msgid "Collection 1 created by Christoph Probst (November 2004)"
+msgstr ""
+
+#: www/cap.php:102
+msgid "CAcert Assurer"
+msgstr ""
+
+#: www/wot/5.php:15
+msgid "ERROR"
+msgstr ""
+
+#: www/wot/10.php:105
+msgid "Go Back"
+msgstr ""
+
+#: includes/general.php:23
+msgid "Administrative Increase"
+msgstr ""
+
+#: includes/general.php:24
+msgid "CT Magazine - Germany"
+msgstr ""
+
+#: includes/general.php:23
+msgid "Face to Face Meeting"
+msgstr ""
+
+#: includes/general.php:23
+msgid "Thawte Points Transfer"
+msgstr ""
+
+#: includes/general.php:24
+msgid "Unknown"
+msgstr ""
+
+#: www/index/0.php:37
+msgid "Full Story"
+msgstr ""
+
+#: www/index/0.php:40
+msgid "More News Items"
+msgstr ""
+
+#: www/index/6.php:92
+msgid "You do not have enough/any lost password questions set. You will not be able to continue to reset your password via this method."
+msgstr ""
+
+#: includes/general.php:618
+msgid "Failed to make a connection to the mail server"
+msgstr ""
+
+#: includes/account.php:904 www/index.php:204 www/index.php:254
+msgid "For your own security you must enter 5 lost password questions and answers."
+msgstr ""
+
+#: www/wot.php:169
+msgid "Race condition discovered, user altered details during assurance procedure. PLEASE MAKE SURE THE NEW DETAILS BELOW MATCH THE ID DOCUMENTS."
+msgstr ""
+
+#: www/wot.php:53
+msgid "Reminder Notice"
+msgstr ""
+
+#: www/wot.php:49
+#, php-format
+msgid "This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."
+msgstr ""
+
+#: pages/wot/9.php:59
+#, php-format
+msgid "%s will also accept email in %s - %s"
+msgstr ""
+
+#: pages/account/17.php:25
+msgid "'Enhanced Provider' is generally the best option, which has a key size of 1024bit. If you need a bigger key size you will need to use a different browser."
+msgstr ""
+
+#: pages/account/39.php:69 pages/index/10.php:69
+msgid "A CAcert arbitrator may override this policy in a dispute."
+msgstr ""
+
+#: pages/account/43.php:146
+msgid "Account Locking"
+msgstr ""
+
+#: pages/account/54.php:65
+msgid "Add Location"
+msgstr ""
+
+#: pages/account/54.php:25
+msgid "Add Region"
+msgstr ""
+
+#: pages/account/41.php:56 pages/wot/9.php:58
+msgid "Additional Language"
+msgstr ""
+
+#: pages/account/41.php:46
+msgid "Additional Language Preferences"
+msgstr ""
+
+#: pages/account/43.php:162
+msgid "Admin"
+msgstr ""
+
+#: pages/index/5.php:58
+#, php-format
+msgid "Alternatively visit our %sinformation page%s on this subject for more details."
+msgstr ""
+
+#: pages/account/43.php:312 pages/account/43.php:349
+msgid "Are you sure you want to revoke this assurance?"
+msgstr ""
+
+#: www/verify.php:130
+#, php-format
+msgid "Are you sure you want to verify the domain %s?"
+msgstr ""
+
+#: www/verify.php:72
+#, php-format
+msgid "Are you sure you want to verify the email %s?"
+msgstr ""
+
+#: includes/account_stuff.php:211
+msgid "Assurance Form"
+msgstr ""
+
+#: includes/account.php:70 includes/account.php:477
+msgid "Below is the link you need to open to verify your email address. Once your address is verified you will be able to start issuing certificates to your heart's content!"
+msgstr ""
+
+#: includes/account_stuff.php:211
+msgid "Blank CAP Form"
+msgstr ""
+
+#: includes/account_stuff.php:211
+msgid "Blank TTP Form"
+msgstr ""
+
+#: includes/general_stuff.php:85
+msgid "Bug Database"
+msgstr ""
+
+#: includes/account_stuff.php:201
+msgid "CAP/TTP Forms"
+msgstr ""
+
+#: pages/account/39.php:64 pages/index/10.php:64
+msgid "CAcert Assurers can see the name, birthday and the number of points by looking up the correct email address. No other person related data is published by CAcert."
+msgstr ""
+
+#: pages/account/37.php:27 pages/index/12.php:27
+msgid "CAcert Inc. is a non-profit association, incorporated in New South Wales Australia."
+msgstr ""
+
+#: pages/account/39.php:75 pages/index/10.php:75
+msgid "CAcert adopts the Australian privacy regulations."
+msgstr ""
+
+#: pages/account/39.php:59 pages/index/10.php:59
+msgid "CAcert does not automatically publish the certificates through a directory service or the website to other people than the user who requested the certificate. In the future, the user might be able to opt-in for publication of the certificates through a directory server by CAcert."
+msgstr ""
+
+#: includes/general_stuff.php:81
+msgid "Certificate Login"
+msgstr ""
+
+#: pages/account/40.php:23 pages/index/11.php:23
+msgid "Before contacting us, be sure to read the information on our official and unofficial HowTo and FAQ pages."
+msgstr ""
+
+#: pages/index/19.php:56
+msgid "Certificates expire in 6 months; only the domain name itself can be entered into the certificates (not your full name, company name, location, etc.)."
+msgstr ""
+
+#: includes/account.php:102
+msgid "Default Account Changed"
+msgstr ""
+
+#: pages/wot/10.php:95
+msgid "Deleted before Verification"
+msgstr ""
+
+#: pages/wot/12.php:98
+msgid "Distance"
+msgstr ""
+
+#: www/verify.php:137
+msgid "Do not verify this domain"
+msgstr ""
+
+#: www/verify.php:79
+msgid "Do not verify this email"
+msgstr ""
+
+#: pages/account/35.php:51
+msgid "Domain available"
+msgstr ""
+
+#: pages/account/54.php:101
+msgid "Edit Location"
+msgstr ""
+
+#: pages/account/54.php:47
+msgid "Edit Region"
+msgstr ""
+
+#: pages/account/13.php:27
+msgid "Email Notification"
+msgstr ""
+
+#: pages/account/39.php:67 pages/index/10.php:67
+msgid "Exceptions"
+msgstr ""
+
+#: includes/account.php:963 www/index.php:300
+msgid "For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer."
+msgstr ""
+
+#: pages/account/39.php:77 pages/index/10.php:77
+msgid "Governmental warrants and civil supoenas will be processed through the dispute resolution system, which ensures that valid authority is given to whoever complies with the supoena or the warrant."
+msgstr ""
+
+#: includes/account.php:96 includes/account.php:1074 pages/account/13.php:21
+#, php-format
+msgid "Hi %s,"
+msgstr ""
+
+#: pages/wot/13.php:42
+msgid "I was unable to match your location with places in my database."
+msgstr ""
+
+#: pages/wot/10.php:43 pages/wot/10.php:78
+msgid "ID"
+msgstr ""
+
+#: www/wot.php:270
+msgid "Identical Assurance attempted, will not continue."
+msgstr ""
+
+#: www/gpg.php:167
+msgid "If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you."
+msgstr ""
+
+#: pages/account/40.php:21 pages/index/11.php:21 pages/index/4.php:41
+#, php-format
+msgid "If you are having trouble with your username or password, please visit our %swiki page%s for more information"
+msgstr ""
+
+#: www/wot.php:426
+msgid "It looks like you were trying to contact multiple people, this isn't allowed due to data security reasons."
+msgstr ""
+
+#: pages/account/54.php:76 pages/account/54.php:112
+msgid "Latitude"
+msgstr ""
+
+#: pages/account/39.php:73 pages/index/10.php:73
+msgid "Legal mandates"
+msgstr ""
+
+#: pages/account/43.php:158
+msgid "Location Admin"
+msgstr ""
+
+#: pages/account/54.php:135
+msgid "Location Alias"
+msgstr ""
+
+#: pages/account/54.php:130
+msgid "Location Aliases"
+msgstr ""
+
+#: includes/account_stuff.php:222
+msgid "Location DB"
+msgstr ""
+
+#: pages/account/54.php:72 pages/account/54.php:108
+msgid "Longitude"
+msgstr ""
+
+#: includes/general_stuff.php:85
+msgid "Mailing Lists"
+msgstr ""
+
+#: pages/account/54.php:175
+msgid "Move Location"
+msgstr ""
+
+#: includes/general_stuff.php:80
+msgid "Net Cafe Login"
+msgstr ""
+
+#: www/verify.php:78 www/verify.php:136
+msgid "Notify support about this"
+msgstr ""
+
+#: pages/account/3.php:79
+msgid "Optional Client CSR, no information on the certificate will be used"
+msgstr ""
+
+#: pages/account/40.php:20 pages/index/11.php:20
+msgid "PLEASE NOTE: Due to the large amounts of support questions, incorrectly directed emails may be over looked, this is a volunteer effort and directing general questions to the right place will help everyone, including yourself as you will get a reply quicker."
+msgstr ""
+
+#: includes/general_stuff.php:78
+msgid "Password Login"
+msgstr ""
+
+#: includes/account.php:1080
+msgid "Password Update Notification"
+msgstr ""
+
+#: pages/wot/13.php:64
+msgid "Please enter your town or suburb name, followed by region or state or province and then the country (please separate by commas)"
+msgstr ""
+
+#: pages/account/39.php:76 pages/index/10.php:76
+msgid "Please see &lt;a href='http://www.privacy.gov.au/'&gt;http://www.privacy.gov.au/&lt;/a&gt; for further details."
+msgstr ""
+
+#: includes/general_stuff.php:85
+msgid "Point System"
+msgstr ""
+
+#: pages/account/39.php:57 pages/index/10.php:57
+msgid "Privacy of certificates"
+msgstr ""
+
+#: pages/account/39.php:62 pages/index/10.php:62
+msgid "Privacy of user data"
+msgstr ""
+
+#: pages/account/54.php:28 pages/account/54.php:50
+msgid "Region"
+msgstr ""
+
+#: pages/account/43.php:295 pages/account/43.php:312 pages/account/43.php:332
+#: pages/account/43.php:349
+msgid "Revoke"
+msgstr ""
+
+#: pages/account/41.php:62
+msgid "Secondary languages"
+msgstr ""
+
+#: pages/account/54.php:182
+msgid "Set Region"
+msgstr ""
+
+#: pages/account/43.php:198
+msgid "Show Lost Password Details"
+msgstr ""
+
+#: pages/wot/9.php:19
+msgid "Sorry, I was unable to locate that user, the person doesn't wish to be contacted, or isn't an assurer."
+msgstr ""
+
+#: pages/account/43.php:154
+msgid "TTP Admin"
+msgstr ""
+
+#: pages/index/0.php:15
+msgid "Are you new to CAcert?"
+msgstr ""
+
+#: includes/general_stuff.php:74
+msgid "Community Agreement"
+msgstr ""
+
+#: pages/index/0.php:34
+msgid "Do you want to help CAcert?"
+msgstr ""
+
+#: pages/index/0.php:28
+#, php-format
+msgid "For general documentation and help, please visit the CAcert %sWiki Documentation site %s."
+msgstr ""
+
+#: pages/index/0.php:29
+#, php-format
+msgid "For specific policies, see the CAcert %sApproved Policies page%s."
+msgstr ""
+
+#: includes/shutdown.php:21
+#, php-format
+msgid "This function is currently disabled. Please visit %s for more information."
+msgstr ""
+
+#: pages/wot/13.php:66
+msgid "This is an AJAX form which depends heavily on javascript for auto-complete functionality and while it will work without javascript the usability will be heavily degraded."
+msgstr ""
+
+#: pages/wot/11.php:46
+msgid "This page is a work in Progress. Please see this"
+msgstr ""
+
+#: pages/account/39.php:18 pages/index/10.php:18
+msgid "This policy discloses what information we gather about you when you visit any of our Web site, and when you issue or use our certificates. It describes how we use that information and how you can control it."
+msgstr ""
+
+#: pages/index/1.php:19
+msgid "This wouldn't match your name or email at all, it contains at least 1 lower case letter, 1 upper case letter, a number, white space and a misc symbol. You get additional security for being over 15 characters and a second additional point for having it over 30. The system starts reducing security if you include any section of your name, or password or email address or if it matches a word from the english dictionary..."
+msgstr ""
+
+#: pages/account/39.php:70 pages/index/10.php:70
+msgid "To obtain access to confidential data, a dispute has to be filed."
+msgstr ""
+
+#: pages/account/43.php:42
+msgid "User ID"
+msgstr ""
+
+#: pages/account/39.php:23 pages/index/10.php:23
+msgid "We collect two kinds of information about website users: 1) data that users volunteer by signing up to our website or when you send us an email via our contact form; and 2) aggregated tracking data we collect when users interact with our site."
+msgstr ""
+
+#: www/index.php:364
+#, php-format
+msgid "We don't allow signups from people using email addresses from %s"
+msgstr ""
+
+#: pages/account/39.php:31 pages/index/10.php:31
+msgid "We only share your information with any other organisation when so instructed by a CAcert arbitrator."
+msgstr ""
+
+#: pages/account/39.php:21 pages/index/10.php:21
+msgid "Website information"
+msgstr ""
+
+#: pages/account/39.php:28 pages/index/10.php:28
+msgid "When you post to the contact form, you must provide your name and email address. When you sign up to the website, you must provide your name, email address, date of birth and some lost pass phrase question and answers."
+msgstr ""
+
+#: includes/general_stuff.php:85
+msgid "Wiki Documentation"
+msgstr ""
+
+#: www/verify.php:135
+msgid "Yes verify this domain"
+msgstr ""
+
+#: www/verify.php:77
+msgid "Yes verify this email"
+msgstr ""
+
+#: includes/account.php:97 includes/account.php:1075 pages/account/13.php:22
+msgid "You are receiving this email because you or someone else"
+msgstr ""
+
+#: includes/account.php:501
+#, php-format
+msgid "Below is the link you need to open to verify your domain '%s'. Once your address is verified you will be able to start issuing certificates to your heart's content!"
+msgstr ""
+
+#: pages/index/16.php:17 pages/index/3.php:17
+msgid "Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x"
+msgstr ""
+
+#: pages/account/52.php:80
+msgid "The following requests are still open:"
+msgstr ""
+
+#: pages/account/52.php:95
+msgid "There are no pending requests where you haven't voted yet."
+msgstr ""
+
+#: includes/account.php:148
+msgid "You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken."
+msgstr ""
+
+#: www/cap.php:264
+msgid "I, the Assurer, hereby confirm that I have verified the Member according to CAcert Assurance Policy."
+msgstr ""
+
+#: pages/account/3.php:101
+msgid "SSO WIKI Entry"
+msgstr ""
+
+#: includes/account_stuff.php:268 includes/general_stuff.php:145
+#: includes/tverify_stuff.php:80
+msgid "by CAcert"
+msgstr ""
+
+#: www/wot.php:343
+msgid "Assurer Challenge"
+msgstr ""
+
+#: www/cap.php:143
+msgid "I hereby confirm that the information stated above is both true and correct, and request the CAcert Assurer (identified below) to verify me according to CAcert Assurance Policy."
+msgstr ""
+
+#: pages/account/21.php:50
+msgid "OCSP certificate"
+msgstr ""
+
+#: includes/account.php:753
+msgid "Processing request"
+msgstr ""
+
+#: pages/account/18.php:51 pages/account/5.php:57
+msgid "No client certificates are currently listed."
+msgstr ""
+
+#: pages/index/4.php:59
+msgid "If you want to use certificate login instead of username+password, please"
+msgstr ""
+
+#: pages/index/0.php:129
+msgid "If you want to participate in CAcert.org, have a look"
+msgstr ""
+
+#: pages/account/43.php:109
+msgid "Are you sure you want to modify this DOB and/or last name?"
+msgstr ""
+
+#: pages/account/43.php:412
+msgid "Show Assurances the user gave"
+msgstr ""
+
+#: pages/account/43.php:365
+msgid "Show Assurances the user got"
+msgstr ""
+
+#: pages/account/50.php:29
+msgid "Are you sure you want to delete this user, while not actually deleting the account it will completely disable it and revoke any/all certificates currently issued."
+msgstr ""
+
+#: includes/sponsorinfo.php:2
+msgid "CAcert operations are sponsored by"
+msgstr ""
+
+#: includes/account.php:322 includes/account.php:1380
+msgid "The challenge-response code of your certificate request did not match. Can't continue with certificaterequest."
+msgstr ""
+
+#: www/gpg.php:176
+msgid "The format of the UID was not recognized. Please use 'Name (comment) &amp;lt;email@domain&gt;'"
+msgstr ""
+
+#: www/gpg.php:104
+msgid "The following UIDs were found in your key:"
+msgstr ""
+
+#: pages/account/40.php:67 pages/index/11.php:67
+msgid "Security Issues"
+msgstr ""
+
+#: pages/account/42.php:26
+msgid "use % as wildcard"
+msgstr ""
+
+#: includes/account_stuff.php:220
+msgid "Trusted ThirdParties"
+msgstr ""
+
+#: www/index.php:445
+msgid "You have to agree to the CAcert Community agreement."
+msgstr ""
+
+#: www/cap.html.php:81
+msgid "yyyy-dd-mm"
+msgstr ""
+
+#: www/cap.html.php:237 www/coap.html.php:320
+msgid "yes, the CCA is attached to the form."
+msgstr ""
+
+#: www/coap.html.php:108
+msgid "type"
+msgstr ""
+
+#: www/coap.html.php:137
+msgid "reg. number"
+msgstr ""
+
+#: www/coap.html.php:109
+msgid "state"
+msgstr ""
+
+#: www/coap.html.php:138
+msgid "trade office"
+msgstr ""
+
+#: www/cap.html.php:230 www/coap.html.php:311
+msgid "portrait"
+msgstr ""
+
+#: www/cap.html.php:234 www/coap.html.php:317
+msgid "paper format"
+msgstr ""
+
+#: www/coap.html.php:171 www/coap.html.php:203 www/coap.html.php:254
+msgid "phone"
+msgstr ""
+
+#: www/cap.html.php:104 www/cap.html.php:115 www/cap.html.php:125
+msgid "identity card"
+msgstr ""
+
+#: www/cap.html.php:106 www/cap.html.php:117 www/cap.html.php:127
+msgid "other"
+msgstr ""
+
+#: www/coap.html.php:99
+msgid "comma separated"
+msgstr ""
+
+#: www/coap.html.php:110
+msgid "country code"
+msgstr ""
+
+#: www/cap.html.php:240 www/coap.html.php:343
+msgid "generate PDF file"
+msgstr ""
+
+#: www/coap.html.php:136
+msgid "Trade Office info"
+msgstr ""
+
+#: www/coap.html.php:227
+msgid "and organisation stamp"
+msgstr ""
+
+#: www/coap.html.php:166
+msgid "Organisation Administrator(s)"
+msgstr ""
+
+#: www/cap.html.php:240 www/coap.html.php:343
+msgid "Submit the form"
+msgstr ""
+
+#: www/cap.html.php:63
+msgid "If there are any doubts or concerns about the Applicant's identity, do not allocate points.  You are encouraged to perform a mutual Assurance."
+msgstr ""
+
+#: www/coap.html.php:107
+msgid "Jurisdiction info"
+msgstr ""
+
+#: www/cap.html.php:157
+msgid "I hereby confirm that the information stating my Identity Information above is both true and correct and request the CAcert Assurer (see below) to witness my identity in the CAcert Assurance Programme."
+msgstr ""
+
+#: www/capnew.php:1170
+msgid "a and y umlaut, and o/slash examples of accepted transliterations for the full name(s)"
+msgstr ""
+
+#: pages/index/8.php:24 pages/index/8.php:25 pages/index/8.php:26
+msgid "member"
+msgstr ""
+
+#: www/capnew.php:825 www/coapnew.php:843
+msgid "policy document"
+msgstr ""
+
+#: www/cap.html.php:222 www/coap.html.php:297
+msgid "How To Print this CAP form"
+msgstr ""
+
+#: pages/index/8.php:21
+msgid "Vice-President"
+msgstr ""
+
+#: includes/general.php:877
+msgid "You are not an Assurer, but the reason is not stored in the database. Please contact"
+msgstr ""
+
+#: www/capnew.php:1354
+msgid "The exact name of the assurer may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
+msgstr ""
+
+#: www/index.php:564
+msgid "This seems like potential spam, or you have cookies or Javascript disabled, cannot continue."
+msgstr ""
+
+#: www/coapnew.php:980
+msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."
+msgstr ""
+
+#: www/capnew.php:1113
+msgid "The exact name of the assuree may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
+msgstr ""
+
+#: includes/general.php:875
+msgid "Sorry, you are not allowed to be an Assurer. Please contact"
+msgstr ""
+
+#: pages/wot/2.php:33
+msgid "Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at"
+msgstr ""
+
+#: www/capnew.php:1073
+msgid "type of ID shown"
+msgstr ""
+
+#: www/capnew.php:1000
+msgid "transliterated:"
+msgstr ""
+
+#: www/capnew.php:1025
+msgid "passport"
+msgstr ""
+
+#: www/coapnew.php:1032
+msgid "phone nr"
+msgstr ""
+
+#: www/coapnew.php:1107
+msgid "Trade Office Registry information, as organisation registration Identification number or license number, name of the trade office registry, trade office operating region, and optionally date of extract."
+msgstr ""
+
+#: pages/account/40.php:38 pages/index/11.php:38
+msgid "Warning: Please do not enter confidential data into this form, it is being sent to a public mailinglist. Use the form further below instead."
+msgstr ""
+
+#: pages/account/43.php:170
+msgid "Ad Admin"
+msgstr ""
+
+#: pages/account/3.php:81
+msgid "Add Single Sign On ID Information"
+msgstr ""
+
+#: includes/account_stuff.php:244 includes/general_stuff.php:92
+msgid "Advertising"
+msgstr ""
+
+#: includes/account_stuff.php:263 includes/general_stuff.php:127
+#: includes/tverify_stuff.php:75
+msgid "Association Membership"
+msgstr ""
+
+#: pages/account/6.php:91
+msgid "Certificate installed successfully. Please don't forget to backup now"
+msgstr ""
+
+#: pages/account/4.php:112
+msgid "Error while generating the certificate-request. Please make sure that you have added this website to the list of trusted sites in the Internet-Options menu!"
+msgstr ""
+
+#: www/advertising.php:81
+msgid "CAcert.org Advertising Section"
+msgstr ""
+
+#: www/capnew.php:1025
+msgid "mil. ID"
+msgstr ""
+
+#: pages/index/5.php:58
+msgid "Due to the increasing number of people that haven't been able to recover their passwords via the lost password form, there are now two other options available. 1.) If you don't care about your account you can signup under a new account and file dispute forms to recover your email accounts and domains. 2.) If you would like to recover your password via help from support staff, this requires a small payment to cover a real person's time to verify your claim of ownership on an account.  After you pay the required fee you will have to contact the proper person to arrange the verification. Click the payment button below to continue."
+msgstr ""
+
+#: pages/index/16.php:22 pages/index/16.php:23 pages/index/16.php:32
+#: pages/index/16.php:33 pages/index/3.php:22 pages/index/3.php:23
+#: pages/index/3.php:32 pages/index/3.php:33
+msgid "Fingerprint"
+msgstr ""
+
+#: pages/account/40.php:21 pages/index/11.php:21
+msgid "If you are contacting us about advertising, please use the form at the bottom of the website, the first contact form is not the correct place."
+msgstr ""
+
+#: pages/index/16.php:29 pages/index/3.php:29
+msgid "Intermediate Certificate (DER Format)"
+msgstr ""
+
+#: pages/index/16.php:28 pages/index/3.php:28
+msgid "Intermediate Certificate (PEM Format)"
+msgstr ""
+
+#: pages/index/16.php:30 pages/index/3.php:30
+msgid "Intermediate Certificate (Text Format)"
+msgstr ""
+
+#: www/cap.php:64
+msgid "It's encouraged that you tear the top of this form off and give it to the person you are assuring as a reminder to sign up, and as a side benefit the tear off section also contains a method of offline verification of our fingerprints."
+msgstr ""
+
+#: www/advertising.php:63
+msgid "Link URI was too short.&lt;br /&gt;"
+msgstr ""
+
+#: www/advertising.php:55
+msgid "Link title was too short.&lt;br /&gt;"
+msgstr ""
+
+#: pages/wot/14.php:3
+#, php-format
+msgid "If you have a %sSignaturecard%s (also called 'Buergerkarte'), you can digitally sign your assurance request here, and get 50 CAcert points:"
+msgstr ""
+
+#: includes/account_stuff.php:245
+msgid "New Ad"
+msgstr ""
+
+#: pages/account/3.php:80
+msgid "No Single Sign On ID"
+msgstr ""
+
+#: pages/account/13.php:110 pages/account/13.php:115
+msgid "Not displayed"
+msgstr ""
+
+#: pages/account/13.php:109
+msgid "OTP Hash"
+msgstr ""
+
+#: pages/account/13.php:114
+msgid "OTP PIN"
+msgstr ""
+
+#: pages/index/16.php:20 pages/index/3.php:20
+msgid "Root Certificate (Text Format)"
+msgstr ""
+
+#: www/wot.php:332
+msgid "To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:"
+msgstr ""
+
+#: includes/account_stuff.php:245
+msgid "View Ads"
+msgstr ""
+
+#: www/advertising.php:47
+msgid "You can only place an advertisement for up to 12 months.&lt;br /&gt;"
+msgstr ""
+
+#: includes/account.php:750 includes/account.php:872 includes/account.php:1364
+#: includes/account.php:1636
+msgid "You did not select any certificates for renewal."
+msgstr ""
+
+#: includes/account.php:788 includes/account.php:909 includes/account.php:1401
+#: includes/account.php:1674
+msgid "You did not select any certificates for revocation."
+msgstr ""
+
+#: includes/account.php:529
+msgid "You did not select any domains for removal."
+msgstr ""
+
+#: includes/account.php:148
+msgid "You did not select any email accounts for removal."
+msgstr ""
+
+#: www/advertising.php:78
+msgid "Your advertisement request has been lodge in the system and administrators notified. Once the information has been reviewed, you will be notified if the link was acceptable or declined and the reason for the decline. If the request is successful the system will generate an invoice."
+msgstr ""
+
+#: includes/general.php:689
+#, php-format
+msgid "Your certificate request is still queued and hasn't been processed yet. Please wait, and go to Certificates -&gt; View to see it's status."
+msgstr ""
+
+#: pages/account/4.php:17
+msgid "You must enable ActiveX for this to work. On Vista you have to add this website to the list of trusted sites in the internet-settings."
+msgstr ""
+
+#: pages/account/4.php:17
+msgid "Go to Extras-&gt;Internet Options-&gt;Security-&gt;Trusted Websites, click on Custom Level, check ActiveX control elements that are not marked as safe initialized on start in scripts"
+msgstr ""
+
+#: pages/account/10.php:26
+msgid "Please Note. All information on your certificate will be removed except the CommonName and SubjectAltName field, this is because it's an automated service and cannot automatically verify other details on your certificates are valid or not. If you are a valid organisation and would like more details to appear on certificates, you will need to have at least 50 assurance points and you need to send us a copy of your document of incorporation. Then we can add those details to your certificates. Contact us for more information on our organisational services."
+msgstr ""
+
+#: pages/wot/12.php:17
+msgid "Maximum Distance:"
+msgstr ""
+
+#: pages/wot/12.php:68
+msgid "Unable to find suitable location"
+msgstr ""
+
+#: pages/wot/4.php:19
+msgid "You can become a CAcert Assurer by seeking out trusted 3rd parties. You will also need to download and print out a copy of the TTP Form (found under 'CAP/TTP Forms') and fill in your sections. You will need to produce a photo copy of your ID, which the person assuring you will inspect against the originals. Once they are satisfied the documents appear to be genuine they need to sign the back of the photo copies, and fill in their sections of the TTP document. Once you have had your ID verified by 2 different people, pop the copies + forms in an envelope and post them to:"
+msgstr ""
+
+#: pages/wot/11.php:47
+msgid "article on the Wiki"
+msgstr ""
+
+#: pages/account/38.php:23 pages/index/13.php:23
+msgid "CAcert Donation through PayPal"
+msgstr ""
+
+#: pages/index/47.php:14
+msgid "CAcert Logo, Encapsulated PostScript (EPS) format"
+msgstr ""
+
+#: pages/index/47.php:20
+msgid "CAcert Logo, colour version, PNG format"
+msgstr ""
+
+#: pages/index/47.php:32
+msgid "CAcert Logo, monochrome version, PNG format"
+msgstr ""
+
+#: pages/index/47.php:1
+msgid "CAcert Public Relations materials"
+msgstr ""
+
+#: pages/index/47.php:16
+msgid "Colour version"
+msgstr ""
+
+#: includes/about_menu.php:8
+msgid "Disclaimer"
+msgstr ""
+
+#: www/gpg.php:176
+msgid "Error: Both Name and Email address are empty"
+msgstr ""
+
+#: www/gpg.php:172
+msgid "Error: UID is revoked"
+msgstr ""
+
+#: pages/index/0.php:26
+#, php-format
+msgid "For general documentation and help please see our %s site"
+msgstr ""
+
+#: pages/index/47.php:8
+#, php-format
+msgid "Here you find a number of logos to use in documents or to add to your website. Help CAcert to get some publicity by using a logo to link back to %s or to indicate that you or your website are using a CAcert certificates for security and privacy."
+msgstr ""
+
+#: pages/index/47.php:17
+msgid "Monochrome version"
+msgstr ""
+
+#: www/gpg.php:151
+msgid "Multiple Email Adresses per UID are not allowed."
+msgstr ""
+
+#: www/gpg.php:181
+msgid "Name and Email OK."
+msgstr ""
+
+#: www/gpg.php:185
+msgid "Name and Email both cannot be matched with your account."
+msgstr ""
+
+#: www/gpg.php:234
+msgid "No valid UIDs found on your key"
+msgstr ""
+
+#: pages/index/47.php:3
+msgid "On this page you find materials that can be used for CAcert publicity"
+msgstr ""
+
+#: www/coap.html.php:78
+msgid "For the CAcert Individual Assurance Programme there is a separate special CAP form."
+msgstr ""
+
+#: pages/index/5.php:62
+msgid "Password Reset Payment through PayPal"
+msgstr ""
+
+#: www/gpg.php:199
+msgid "The email address has not been registered and verified in your account. Please add the email address to your account first."
+msgstr ""
+
+#: www/gpg.php:190
+msgid "The email is OK. The name is empty."
+msgstr ""
+
+#: www/gpg.php:203
+msgid "The name in the UID does not match the name in your account. Please verify the name."
+msgstr ""
+
+#: www/gpg.php:195
+msgid "The name is OK. The email is empty."
+msgstr ""
+
+#: www/gpg.php:243
+msgid "The unverified UIDs have been removed, the verified UIDs have been signed."
+msgstr ""
+
+#: pages/index/47.php:4
+#, php-format
+msgid "Use of these materials is subject to the rules described in the %s."
+msgstr ""
+
+#: includes/about_menu.php:19
+msgid "Sourcecode"
+msgstr ""
+
+#: www/ttp.php:63
+msgid "The Applicant asks you to certify to CAcert that you have met with the Applicant and verified the Full Name, Date of Birth, and ID Numbers of the Applicant against two separate original government issued photo-identity documents. Once the photocopies of the photo IDs have been verified by the TTP they must be signed by the TTP with the statement 'I certify that this copy is a true copy of the original document'.  The verified and signed photocopies of IDs are then to be included with the completed TTP forms and returned to CAcert Inc."
+msgstr ""
+
+#: pages/wot/14.php:5
+#, php-format
+msgid "To get assured with your Signaturecard, you need the Software from &lt;a href='http://www.buergerkarte.at/bku/'&gt;http://www.buergerkarte.at/bku/&lt;/a&gt;. To activate your E-Card, please go to &lt;a href='https://www.sozialversicherung.at/signon2-Registrierung/'&gt;https://www.sozialversicherung.at/signon2-Registrierung/&lt;/a&gt;."
+msgstr ""
+
+#: pages/index/1.php:124
+msgid "When you click on next, we will send a confirmation email to the email address you have entered above."
+msgstr ""
+
+#: pages/index/0.php:26
+#, php-format
+msgid "Have you read the CAcert %sCommunity Agreement%s yet?"
+msgstr ""
+
+#: includes/account.php:221
+msgid "I didn't receive a valid Certificate Request, please try a different browser."
+msgstr ""
+
+#: pages/index/0.php:17
+#, php-format
+msgid "If you want to have free certificates issued to you, join the %s CAcert Community %s."
+msgstr ""
+
+#: pages/index/0.php:19
+#, php-format
+msgid "If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."
+msgstr ""
+
+#: pages/account/37.php:28 pages/index/12.php:28
+msgid "More information about CAcert Incorporated:"
+msgstr ""
+
+#: includes/about_menu.php:7
+msgid "Policies"
+msgstr ""
+
+#: pages/index/0.php:54
+msgid "CAcert bank account details:"
+msgstr ""
+
+#: pages/account/43.php:157
+msgid "Blocked Assurer"
+msgstr ""
+
+#: pages/index/0.php:38
+msgid "AU$50 per year for this button"
+msgstr ""
+
+#: pages/account/38.php:27 pages/index/13.php:27
+msgid "If you are located in Australia, please use bank transfer instead:"
+msgstr ""
+
+#: pages/account/5.php:73
+msgid "empty"
+msgstr ""
+
+#: includes/account.php:2291
+msgid "You are receiving this email because a CAcert administrator"
+msgstr ""
+
+#: www/stats.php:86
+msgid "Assurer Candidates"
+msgstr ""
+
+#: www/stats.php:90
+msgid "Assurers with test"
+msgstr ""
+
+#: pages/index/0.php:25
+msgid "For CAcert Association Members"
+msgstr ""
+
+#: pages/index/0.php:34
+msgid "Have you paid your CAcert Association membership fees for the year?"
+msgstr ""
+
+#: pages/index/0.php:35
+msgid "If not then select this PayPal button to pay your US$10 membership fee for the year."
+msgstr ""
+
+#: pages/index/0.php:42
+msgid "If you are located in Australia, you can use bank transfer instead and pay the equivalent of US$10 in AU$."
+msgstr ""
+
+#: pages/account/55.php:67
+msgid "Internal Error"
+msgstr ""
+
+#: pages/index/0.php:44
+msgid "Please also include Your name in the transaction so we know who it came from or send an email to robert at cacert dot org with the details:"
+msgstr ""
+
+#: pages/account/55.php:32
+msgid "Test"
+msgstr ""
+
+#: pages/account/55.php:25
+msgid "The list of tests you did pass at"
+msgstr ""
+
+#: pages/gpg/0.php:20
+msgid "Paste your own public OpenPGP key below. It should not contain a picture. CAcert will sign your key after submission."
+msgstr ""
+
+#: pages/index/0.php:23
+#, php-format
+msgid "This license applies to using the CAcert %s root keys %s."
+msgstr ""
+
+#: includes/account_stuff.php:220
+msgid "Training"
+msgstr ""
+
+#: pages/account/55.php:33
+msgid "Variant"
+msgstr ""
+
+#: pages/account/55.php:74
+msgid "You have at least 100 Assurance Points, if you want to become an assurer try the"
+msgstr ""
+
+#: pages/account/55.php:72
+msgid "You have passed the Assurer Challenge and collected at least 100 Assurance Points, you are an Assurer."
+msgstr ""
+
+#: pages/account/55.php:76
+msgid "You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!"
+msgstr ""
+
+#: pages/account/55.php:22
+msgid "Your passed Tests"
+msgstr ""
+
+#: pages/index/0.php:52
+msgid "If you are located in Australia, use bank transfer instead."
+msgstr ""
+
+#: pages/index/0.php:37
+msgid "If you can, please donate."
+msgstr ""
+
+#: pages/account/43.php:153
+msgid "Is Assurer"
+msgstr ""
+
+#: pages/account/55.php:44
+msgid "Passed Tests of"
+msgstr ""
+
+#: pages/account/43.php:149
+msgid "Trainings"
+msgstr ""
+
+#: pages/index/0.php:35
+msgid "We are facing an uphill battle to fund this service and could do with your help?"
+msgstr ""
+
+#: pages/index/0.php:45
+msgid "or a one off donation for this button whatever you can afford to help"
+msgstr ""
+
+#: includes/account.php:65 includes/account.php:493 www/index.php:492
+msgid "The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes."
+msgstr ""
+
+#: pages/index/19.php:29
+msgid "Certificates expire in 6 months. Only the email address itself can be entered into the certificate (not your full name)"
+msgstr ""
+
+#: pages/index/19.php:39
+msgid "Certificates expire in 24 months."
+msgstr ""
+
+#: includes/account.php:1005
+msgid "Certificate settings have been changed."
+msgstr ""
+
+#: pages/account/3.php:85
+msgid "By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ ."
+msgstr ""
+
+#: pages/account/5.php:102
+msgid "Change settings"
+msgstr ""
+
+#: pages/account/3.php:84
+msgid "Enable certificate login with this certificate"
+msgstr ""
+
+#: pages/account/5.php:94
+msgid "Hide old certificates"
+msgstr ""
+
+#: pages/account/3.php:92
+msgid "Show advanced options"
+msgstr ""
+
+#: pages/gpg/3.php:30
+msgid "Below is your OpenPGP key"
+msgstr ""
+
+#: pages/account/5.php:110
+msgid "By allowing certificate login, this certificate can be used to login into your account at https://secure.cacert.org/ ."
+msgstr ""
+
+#: pages/gpg/2.php:40
+msgid "No OpenPGP keys are currently listed."
+msgstr ""
+
+#: pages/gpg/3.php:24
+msgid "No such OpenPGP key attached to your account."
+msgstr ""
+
+#: pages/gpg/2.php:20
+msgid "OpenPGP Keys"
+msgstr ""
+
+#: pages/account/43.php:374
+msgid "Assurance Points The User Issued"
+msgstr ""
+
+#: pages/index/4.php:20
+msgid "Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your Email/Pass Phrase to get a new certificate, by clicking on 'Normal Login' to the right of your screen."
+msgstr ""
+
+#: pages/account/6.php:124
+msgid "Your certificate:"
+msgstr ""
+
+#: www/coapnew.php:1090
+msgid "Type, jurisdiction (state)"
+msgstr ""
+
+#: www/coapnew.php:1128 www/coapnew.php:1141
+msgid "The organisation administrator (CAcert Assurer) contact information. The administrator is appointed by the organisation director to administer the organisation domain certificates, secure the certificates and maintain them."
+msgstr ""
+
+#: www/coapnew.php:1063
+msgid "The organisation name, director name and signature, and applicable company law is checked by the Organisation Assurer with the official Trade Office Registration (Extract) or by other means. The organisation domain name(s) are checked of ownership against the internet domain DNS records."
+msgstr ""
+
+#: www/coapnew.php:1089
+msgid "The legal organisation type: eg Ltd, EPS, society, foundation, association, etc. The state/country under which jurisdiction the organisation operates."
+msgstr ""
+
+#: www/coapnew.php:1074
+msgid "The official full name of the organisation equal to the name of the organisation registered e.g. at the trade office registration of the state."
+msgstr ""
+
+#: pages/index/1.php:18
+msgid "By joining CAcert and becoming a Member, you agree to the CAcert Community Agreement. Please take a moment now to read that and agree to it; this will be required to complete the process of joining."
+msgstr ""
+
+#: pages/index/21.php:22
+msgid "If not then select this PayPal button to establish annual payment of your US$10 membership fee."
+msgstr ""
+
+#: www/coapnew.php:1080
+msgid "The organisation address which should be equal to the address registered with the trade office."
+msgstr ""
+
+#: pages/index/21.php:30
+msgid "To do a single US$10 Membership-Fee Payment, please use this button:"
+msgstr ""
+
+#: www/coapnew.php:1116
+msgid "The internet domain name(s) the organisation controls and owns. The names will be checked with WHOIS with e.g. the DNS official top domain registrar e.g. the country ccTLD .&lt;country code&gt; registrar."
+msgstr ""
+
+#: pages/account/7.php:30
+msgid "I own or am authorised to control this domain"
+msgstr ""
+
+#: www/coapnew.php:1006
+msgid "The exact name of the individual may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name."
+msgstr ""
+
+#: pages/account/1.php:29 pages/index/1.php:80
+msgid "I own or am authorised to control this email address"
+msgstr ""
+
+#: www/capnew.php:1078
+#, php-format
+msgid "max"
+msgstr ""
+
+#: pages/index/1.php:132
+msgid "I agree to the terms and conditions of the CAcert Community Agreement"
+msgstr ""
+
+#: includes/account.php:34
+msgid "Several CAcert Services are currently unavailable. Please try again later."
+msgstr ""
+
+#: www/coapnew.php:959
+msgid "The email address, which matches the CAcert account email address, is handy for administrative and contact reasons. For organisation administrator the email address is required."
+msgstr ""
+
+#: includes/general.php:875
+msgid "if you feel that this is not corect."
+msgstr ""
+
+#: www/coapnew.php:866
+msgid "The CAcert Organisation Programme (COAP) aims to verify the identity of the organisation."
+msgstr ""
+
+#: www/coapnew.php:1187
+msgid "The Director indicated by the Trade Office Registry Extract, has to underwrite the correctness of the information for the organisation and allowance of certificate operations by the administrators."
+msgstr ""
+
+#: www/coapnew.php:1252
+msgid "The Organisation Assurer contact information. This assurer will verify the organisation identity and registration information."
+msgstr ""
+
+#: www/capnew.php:845
+msgid "The CAcert Assurance Programme (CAP) aims to verify the identities of Internet users through face to face witnessing of government-issued photo identity documents."
+msgstr ""
+
+#: www/coapnew.php:867
+msgid "The Applicant asks the Organisation Assurer to verify to CAcert Community that the information provided by the Applicant is correct, and according to the official trade office registration bodies."
+msgstr ""
+
+#: www/coapnew.php:1108
+msgid "Registration (id, name, region)"
+msgstr ""
+
+#: www/coapnew.php:1221
+msgid "Signature and organisation stamp"
+msgstr ""
+
+#: www/capnew.php:1055
+msgid "Some examples of possible standard transliterations in a full individual name. If more than one transliteration of a character is possible, it is denoted within parentheses."
+msgstr ""
+
+#: pages/account/53.php:99
+msgid "Start"
+msgstr ""
+
+#: www/capnew.php:1025
+msgid "TTP"
+msgstr ""
+
+#: www/capnew.php:846
+msgid "The Applicant asks the Assurer to verify to the CAcert Community that the Assurer has met and verified the Applicant's identity against original documents."
+msgstr ""
+
+#: pages/index/0.php:26
+msgid "Most CAcert functions are currently unavailable. Please come back later."
+msgstr ""
+
+#: www/coapnew.php:1186
+msgid "Organisation's Statement"
+msgstr ""
+
+#: www/coapnew.php:1098
+msgid "Other registered trade names of the organisation. (comma separated)"
+msgstr ""
+
+#: pages/account/53.php:100
+msgid "Previous"
+msgstr ""
+
+#: www/coapnew.php:1099
+msgid "Registered Trade Names"
+msgstr ""
+
+#: www/coapnew.php:748
+msgid "Organisation Information (COAP) form"
+msgstr ""
+
+#: www/coapnew.php:1271
+msgid "Organisation Assurer's signature"
+msgstr ""
+
+#: www/coapnew.php:1061
+msgid "Organisation Identity Information"
+msgstr ""
+
+#: www/coapnew.php:1241
+msgid "Organisation Assurer's Statement"
+msgstr ""
+
+#: www/coapnew.php:1253
+msgid "Organisation Assurer"
+msgstr ""
+
+#: www/capnew.php:1218
+msgid "One is advised for a mutual assurance. If done so the exact full name, email address and date of birth of the Assurer is also required on a form. In this case the Assuree assures the Assurer as well. In this case two copies are needed of the CAP form."
+msgstr ""
+
+#: www/coapnew.php:1129 www/coapnew.php:1142
+msgid "Organisation Administrator"
+msgstr ""
+
+#: www/capnew.php:1067
+msgid "On comparing names"
+msgstr ""
+
+#: www/coapnew.php:1194
+msgid "On director's statement"
+msgstr ""
+
+#: www/capnew.php:1223 www/coapnew.php:1248
+msgid "On mutual assurance"
+msgstr ""
+
+#: www/capnew.php:1278
+msgid "On mutual assurance provide email address of Assurer."
+msgstr ""
+
+#: www/coapnew.php:1070
+msgid "On organisation identity information"
+msgstr ""
+
+#: www/capnew.php:1006
+msgid "On the assuree full name"
+msgstr ""
+
+#: www/capnew.php:1247 www/coapnew.php:1013
+msgid "On the full name of the Assurer"
+msgstr ""
+
+#: www/coapnew.php:1075
+msgid "Name of the organisation"
+msgstr ""
+
+#: www/verify.php:36
+msgid "Email has been sent."
+msgstr ""
+
+#: includes/general.php:772 includes/general.php:779
+msgid "CSRF Hash is wrong. Please try again."
+msgstr ""
+
+#: pages/index/19.php:49
+#, php-format
+msgid "Certificates expire in 12 months. Certificates %s must%s include your full name."
+msgstr ""
+
+#: www/coapnew.php:1205
+msgid "Name and contact details (organisation email address &amp; optionally phone number), of the Director of the organisation as is referred to in the trade office extract."
+msgstr ""
+
+#: www/coapnew.php:1117
+msgid "Internet Domain(s)"
+msgstr ""
+
+#: www/cap.html.php:188
+msgid "Assurer's email address"
+msgstr ""
+
+#: www/capnew.php:1178 www/coapnew.php:1196
+msgid "Make sure you have read and agreed with the CAcert Community Agreement"
+msgstr ""
+
+#: www/capnew.php:1025
+msgid "ID card"
+msgstr ""
+
+#: www/capnew.php:727
+msgid "Identity Verification Form (CAP) form"
+msgstr ""
+
+#: www/capnew.php:848
+msgid "If there are any doubts or concerns about the Applicant's identity, do not allocate points. You are encouraged to perform a mutual Assurance."
+msgstr ""
+
+#: www/capnew.php:1185
+msgid "I hereby confirm that the information stating my Identity Information above is both true and correct, and request the CAcert Assurer (see below) to witness my identity in the CAcert Assurance Programme."
+msgstr ""
+
+#: www/capnew.php:1284
+msgid "I, the Assurer, hereby confirm that I have verified the Applicant's Identity Information, I will witness the Applicant's identity in the CAcert Assurance Programme, and allocate Assurance Points."
+msgstr ""
+
+#: www/coapnew.php:1260
+msgid "I, the Assurer, hereby confirm that I have verified the official Information for the organisation, I will witness the organisation's identity in the CAcert Organisation Assurance Programme, and complete the Assurance."
+msgstr ""
+
+#: www/coapnew.php:1210
+msgid "I hereby confirm that all information is complete and accurate and will notify CAcert of any updates or changes thereof."
+msgstr ""
+
+#: www/coapnew.php:1261
+msgid "I am a CAcert Community Member, have passed the Organisation Assurance Challenge, and have been appointed for Organisation Assurances within the country where the organisation is registered."
+msgstr ""
+
+#: www/disputes.php:333
+msgid "You aren't allowed to dispute your own domains. Can't continue."
+msgstr ""
+
+#: www/coapnew.php:1211
+msgid "I am duly authorised to act on behalf of the organisation, I grant operational certificate administrative privileges to the specified Organisation Administrator and, I request the Organisation Assurer to verify the organisation information according to the Assurance Policies."
+msgstr ""
+
+#: www/capnew.php:1285
+msgid "I am a CAcert Community Member, have passed the Assurance Challenge, and have been assured with at least 100 Assurance Points."
+msgstr ""
+
+#: www/capnew.php:1186 www/coapnew.php:1209
+msgid "I agree to the CAcert Community Agreement."
+msgstr ""
+
+#: www/coapnew.php:1017
+msgid "Full exact name of the individual."
+msgstr ""
+
+#: www/capnew.php:1274
+msgid "Full exact name of Assurer. On mutual assurance provide date of birth as well."
+msgstr ""
+
+#: includes/general.php:765
+msgid "CSRF Hash is missing. Please try again."
+msgstr ""
+
+#: www/capnew.php:852
+msgid "For the CAcert Organisation Assurance Programme there is a separate special COAP form."
+msgstr ""
+
+#: pages/account/49.php:91
+#, php-format
+msgid "No organisational domains found matching %s"
+msgstr ""
+
+#: pages/account/49.php:60
+#, php-format
+msgid "No personal domains found matching %s"
+msgstr ""
+
+#: www/verify.php:35
+msgid "Notification"
+msgstr ""
+
+#: www/verify.php:160
+msgid "Parameters are missing. Please try the complete URL."
+msgstr ""
+
+#: www/coapnew.php:1033 www/coapnew.php:1048
+msgid "For organisation administrators and assurer: provide email address and optionally your phone number."
+msgstr ""
+
+#: www/coapnew.php:869
+msgid "For more information about the CAcert Organisation Assurance Programme, including detailed guides to CAcert Organisation Assurers, please visit:"
+msgstr ""
+
+#: includes/account.php:684
+msgid "Domain not verified."
+msgstr ""
+
+#: www/capnew.php:850
+msgid "For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit:"
+msgstr ""
+
+#: www/capnew.php:1072
+msgid "Exact full name on the ID"
+msgstr ""
+
+#: www/capnew.php:1059
+msgid "Examples of accepted abbreviation(s) for full name(s)"
+msgstr ""
+
+#: www/capnew.php:1313
+msgid "Date and location of the face-to-face meeting"
+msgstr ""
+
+#: www/capnew.php:980
+msgid "Exact full name as on shown ID for this name."
+msgstr ""
+
+#: www/coapnew.php:1206
+msgid "Director"
+msgstr ""
+
+#: pages/account/53.php:108
+msgid "End"
+msgstr ""
+
+#: pages/index/4.php:22
+msgid "This function is currently unavailable. Please come back later."
+msgstr ""
+
+#: www/coapnew.php:748
+msgid "CAcert Organisation Assurance Programme"
+msgstr ""
+
+#: www/capnew.php:807 www/coapnew.php:828
+msgid "CAcert's Root Certificate sha1 fingerprints"
+msgstr ""
+
+#: www/coapnew.php:965
+msgid "COAP form help"
+msgstr ""
+
+#: www/capnew.php:842
+msgid "CAcert CAP form"
+msgstr ""
+
+#: www/coapnew.php:863
+msgid "CAcert COAP form"
+msgstr ""
+
+#: www/coap.html.php:335
+msgid "Applicable Organisation Policy documents and information can be attached to the pdf output file. Mark those documents, which need to be attached"
+msgstr ""
+
+#: www/capnew.php:1216
+msgid "Assurer's Statement"
+msgstr ""
+
+#: www/capnew.php:847
+msgid "Assurer may leave a copy of the details with the Applicant, and may complete and sign her final form after the meeting."
+msgstr ""
+
+#: www/capnew.php:1058
+msgid "As an example standard abbreviation on given names is provided here. If a given name is counted as first given name part of the name is denoted with parentheses around the name."
+msgstr ""
+
+#: pages/account/53.php:67
+msgid "Are you sure you want to delete this region and all connected locations?"
+msgstr ""
+
+#: www/capnew.php:1053
+msgid "Applicant's Identity Information"
+msgstr ""
+
+#: www/coapnew.php:1081
+msgid "Address (comma separated)"
+msgstr ""
+
+#: www/cap.html.php:229 www/coap.html.php:310
+msgid "2-up"
+msgstr ""
+
+#: www/cap.html.php:230 www/coap.html.php:311
+msgid "1-up"
+msgstr ""
+
+#: www/capnew.php:851
+msgid "A CAcert Arbitrator can require the Assurer to deliver the completed form in the event of a dispute. After 7 years this form should be securely disposed of to prevent identity misuse. E.g. shred or burn the form. The Assurer does not retain copies of ID at all."
+msgstr ""
+
+#: www/cap.html.php:227 www/coap.html.php:305
+msgid "A printer ready file with the form and attachments can be generated as follows:"
+msgstr ""
+
+#: www/capnew.php:405 www/capnew.php:1344 www/coapnew.php:441
+#: www/coapnew.php:1291
+msgid "page"
+msgstr ""

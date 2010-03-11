@@ -1,0 +1,40 @@
+CAcert Assurer Training Event im Rahmen der GUUG Hamburg
+---------------------------------------------------------
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher
+eher "mündlich überlieferten" Regeln wurden in Policies gegossen.
+Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen
+(z.B. in dem CAcert Community Agreement) wurden beschlossen. Die Assurer
+Training Events wollen versuchen, die ganzen Informationen "unter's
+Volk" zu bringen:
+
+- Wovor schützt die CCA jedes CAcert-Community-Mitglied und somit auch dich?
+- Kannst du die 5 Statements der "Purpose of Assurance" aufzählen?
+- Kannst du auf Anhieb 10 Sicherheitsmerkmale des deutschen
+  Personalausweises aufzählen?
+
+Antworten auf diese und weitere Fragen erhälst du bei den Assurer Training Events (ATE's).
+
+Die kommenden Veranstaltungen finden statt:
+
+- Hamburg, Donnerstag 7. Mai [http://wiki.cacert.org/wiki/Events/20090507ATE-Hamburg]
+- Düsseldorf, Dienstag 12. Mai [http://wiki.cacert.org/wiki/Events/20090514ATE-Duesseldorf]
+- München, Samstag 16. Mai [http://wiki.cacert.org/wiki/Events/20090509muc_AssurerTraining]
+- Stuttgart, Dienstag 26. Mai [http://wiki.cacert.org/wiki/Events/20090526ATE-Stuttgart]
+
+Die Termine für Frankfurt/M. und Berlin stehen noch nicht fest.
+Die Teilnahme der Veranstaltungen ist kostenlos, Spenden werden aber gerne gesehen.
+
+
+Hamburg:
+--------
+Im Rahmen der regelmässigen Veranstaltungsreihe der GUUG
+(German Unix User Group) Hamburg [http://www.guug.de/lokal/hamburg/]
+findet das ATE-Hamburg statt am:
+- Donnerstag, 7. Mai in der Zeit von 20:00 bis 22:00
+- in der Lehmanns Fachbuchhandlung, Kurze Mühren 6, Hamburg
+
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Anmeldung und Kontakt: events@cacert.org

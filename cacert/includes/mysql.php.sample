@@ -1,0 +1,119 @@
+<? /*
+    LibreSSL - CAcert web application
+    Copyright (C) 2004-2008  CAcert Inc.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; version 2 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+        mysql_connect("localhost", "username", "password");
+        mysql_select_db("database");
+
+	$_SESSION['_config']['normalhostname'] = "www.cacert.org";
+	$_SESSION['_config']['securehostname'] = "secure.cacert.org";
+	$_SESSION['_config']['tverify'] = "tverify.cacert.org";
+
+	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $extra="")
+	{
+		$lines = explode('\n', $message);
+		$message = "";
+		foreach($lines as $line)
+		{
+			$line = trim($line);
+			if($line == ".")
+				$message .= " .\n";
+			else
+				$message .= $line."\n";
+		}
+
+		if($fromname == "")
+			$fromname = $from;
+
+		$bits = explode(",", $from);
+		$from = addslashes($bits['0']);
+		$fromname = addslashes($fromname);
+
+		$smtp = fsockopen("localhost", 25);
+		if(!$smtp)
+		{
+                  echo("Could not connect to mailserver at localhost:25\n");
+		  return;
+		}
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "HELO hlin.cacert.org\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "MAIL FROM: <returns@cacert.org>\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		$bits = explode(",", $to);
+		foreach($bits as $user)
+			fputs($smtp, "RCPT TO: <".trim($user).">\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "DATA\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "X-Mailer: CAcert.org Website\r\n");
+		fputs($smtp, "X-OriginatingIP: ".$_SERVER["REMOTE_ADDR"]."\r\n");
+		fputs($smtp, "Sender: $errorsto\r\n");
+		fputs($smtp, "Errors-To: $errorsto\r\n");
+		if($replyto != "")
+			fputs($smtp, "Reply-To: $replyto\r\n");
+		else
+			fputs($smtp, "Reply-To: $from\r\n");
+		fputs($smtp, "From: $from\r\n");
+		fputs($smtp, "To: $to\r\n");
+		if(preg_match("/[^a-zA-Z0-9 .-\[\]!_@]/",$subject))
+		{
+			fputs($smtp, "Subject: =?utf-8?B?".base64_encode(recode("html..utf-8", $subject))."?=\r\n");
+		}
+		else
+		{
+			fputs($smtp, "Subject: $subject\r\n");
+		}
+		fputs($smtp, "Mime-Version: 1.0\r\n");
+		if($extra == "")
+		{
+			fputs($smtp, "Content-Type: text/plain; charset=\"utf-8\"\r\n");
+			fputs($smtp, "Content-Transfer-Encoding: 8bit\r\n");
+		} else {
+			fputs($smtp, "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n");
+			fputs($smtp, "Content-Transfer-Encoding: quoted-printable\r\n");
+			fputs($smtp, "Content-Disposition: inline\r\n");
+		}
+//		fputs($smtp, "Content-Transfer-Encoding: BASE64\r\n");
+		fputs($smtp, "\r\n");
+//		fputs($smtp, chunk_split(base64_encode(recode("html..utf-8", $message)))."\r\n.\r\n");
+		fputs($smtp, recode("html..utf-8", $message)."\r\n.\r\n");
+		fputs($smtp, "QUIT\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fclose($smtp);
+	}
+
+	function make_hash()
+	{
+		if(function_exists("dio_open"))
+		{
+			$rnd = dio_open("/dev/urandom",O_RDONLY);
+			$hash = md5(dio_read($rnd,64));
+			dio_close($rnd);
+		} else {
+			$rnd = fopen("/dev/urandom", "r");
+			$hash = md5(fgets($rnd, 64));
+			fclose($rnd);
+		}
+		return($hash);
+	}
+
+	function clean_csr($CSR)
+	{
+		return(preg_replace("/[^A-Za-z0-9\n\r\-\:\=\+\/ ]/","",$CSR));
+	}
+?>

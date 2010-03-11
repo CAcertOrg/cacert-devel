@@ -1,0 +1,47 @@
+Dear Valued CAcert Member,
+
+CAcert has implemented a policy for certifying assurers, which was
+announced on 30th of May 2008. Since the implementation of the
+CAcert Assurer Challenge Test System (CATS) last year more than
+1600 Assurers have taken and passed the challenge and are now
+official CAcert Assurers, fully compliant with the CAcert Assurance
+Policy.  This email is being sent to those of you who have been
+active in performing assurances in the past year, but who have not
+taken and passed the Assurer Challenge Test yet.
+
+It is no longer permissible for anyone to assure for CAcert who
+has not passed the CATS.  Please visit the CAcert Wiki documentation
+pages for the Assurer-Challenge 
+<http://wiki.cacert.org/wiki/AssurerChallenge> and follow the
+instructions.  Make sure you have installed your CAcert client
+certificate  into your browser as this system only allows you to
+login with a client  certificate.  The Assurers Handbook
+<http://wiki.cacert.org/wiki/AssuranceHandbook2> will provide you
+with more detailed information about CAcert Assurances and how to
+make those assurances successful.
+
+Why is CAcert doing all this?  CAcert has been and still is
+undergoing many changes since early 2008.  CAcert has become a
+Community with policies in place to issue secure, free and highly
+qualified signed certificates.  CAcert has become a recognized and
+accepted Certificate Authority on the internet.  To maintain this
+status CAcert will be audited, and the audit must validate that
+assurers have an understanding of the CAcert policies and the
+assurance process.  A successful audit has the potential for our
+new CAcert Root Key to be included into the Mozilla CA list this
+year.  It is our hope that all our assurers will complete the
+CATS, the audit will be successful and CAcert will be featured
+on Mozilla.
+
+You have been involved with CAcert and have helped to increase
+the assured member community we have today.  Your contribution
+is greatly appreciated because CAcert success and acceptance
+depends on you.  We will be very happy to give you any support
+you may need to complete this process, so please let us know if
+you have any questions (support@cacert.org).
+
+Thank you,
+
+CAcert Inc. Committee
+Teus Hagen
+President

@@ -1,0 +1,164 @@
+#!/usr/bin/php -q
+<? /*
+    LibreSSL - CAcert web application
+    Copyright (C) 2004-2008  CAcert Inc.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; version 2 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+	include_once("../includes/mysql.php");
+
+	$lines = "";
+	$fp = fopen("ate-hh-email.txt", "r");
+	while(!feof($fp))
+	{
+		$line = trim(fgets($fp, 4096));
+		$lines .= wordwrap($line, 75, "\n")."\n";
+	}
+	fclose($fp);
+
+
+//	$locid = intval($_REQUEST['location']);
+//	$maxdist = intval($_REQUEST['maxdist']);
+  $maxdist = 200;
+
+
+// location      location.ID
+//   verified: 29.4.09 u.schroeter
+//   $locid = 7902857;       // Paris
+//   $locid = 238568;        // Bielefeld  
+//   $locid = 715191;        // Hamburg    
+//   $locid = 1102495;       // London     
+//   $locid = 520340;        // Duesseldorf
+//   $locid = 1260319;       // Muenchen   
+//   $locid = 606058;        // Frankfurt  
+//   $locid = 1775784;       // Stuttgart  
+//   $locid = 228950;        // Berlin  
+
+  $locid = 715191;        // Hamburg    
+  $city = "Hamburg 7.5.2009";
+
+
+	$query = "select * from `locations` where `id`='$locid'";
+        $loc = mysql_fetch_assoc(mysql_query($query));
+
+	$query = "SELECT ROUND(6378.137 * ACOS(0.9999999*((SIN(PI() * $loc[lat] / 180) * SIN(PI() * `locations`.`lat` / 180)) + 
+			(COS(PI() * $loc[lat] / 180 ) * COS(PI() * `locations`.`lat` / 180) * 
+			 COS(PI() * `locations`.`long` / 180 - PI() * $loc[long] / 180)))), -1) AS `distance`, sum(`points`) as pts, `users`.* 
+			FROM `locations`
+				inner join `users`  on `users`.`locid` = `locations`.`id` 
+				inner join `alerts` on `users`.`id`=`alerts`.`memid`
+				inner join `notary` on `users`.`id`=`notary`.`to`
+			WHERE 	(`alerts`.`general`=1 OR `alerts`.`country`=1 OR `alerts`.`regional`=1 OR `alerts`.`radius`=1)
+			GROUP BY `users`.`id`
+			HAVING `distance` <= '$maxdist' 
+			ORDER BY `distance` ";
+	echo $query;
+
+    // comment next line when starting to send mail not only to me 
+    //	$query = "select * from `users` where `email` like 'cacerttest%'";
+
+	$res = mysql_query($query);
+	$xrows = mysql_num_rows($res);
+
+	while($row = mysql_fetch_assoc($res))
+	{
+		 echo $row['pts']."..".$row['email']."...\n";
+    //    uncomment next line to send mails ...
+		 sendEmail($row['email'], "[CAcert.org] ATE-$city", $lines, "events@cacert.org", "", "", "CAcert Events Organisation", "returns@cacert.org", 1);
+	}
+  // 1x cc to events.cacert.org
+	sendEmail("events@cacert.org", "[CAcert.org] ATE-$city", $lines, "events@cacert.org", "", "", "CAcert Events Organisation", "returns@cacert.org", 1);
+	// 1x mailing report to events.cacert.org
+  sendEmail("events@cacert.org", "[CAcert.org] ATE-$city Report", "invitation sent to $xrows recipients.", "support@cacert.org", "", "", "CAcert Events Organisation", "returns@cacert.org", 1);	
+
+
+
+	function sendEmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $extra="")
+	{
+		$lines = explode('\n', $message);
+		$message = "";
+		foreach($lines as $line)
+		{
+			$line = trim($line);
+			if($line == ".")
+				$message .= " .\n";
+			else
+				$message .= $line."\n";
+		}
+
+		if($fromname == "")
+			$fromname = $from;
+
+		$bits = explode(",", $from);
+		$from = addslashes($bits['0']);
+		$fromname = addslashes($fromname);
+
+		$smtp = fsockopen("localhost", 25);
+		if(!$smtp)
+		{
+                  echo("Could not connect to mailserver at localhost:25\n");
+		  return;
+		}
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "HELO hlin.cacert.org\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "MAIL FROM: <returns@cacert.org>\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		$bits = explode(",", $to);
+		foreach($bits as $user)
+			fputs($smtp, "RCPT TO: <".trim($user).">\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "DATA\r\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fputs($smtp, "X-Mailer: CAcert.org Website\r\n");
+		fputs($smtp, "X-OriginatingIP: ".$_SERVER["REMOTE_ADDR"]."\r\n");
+		fputs($smtp, "Sender: $errorsto\r\n");
+		fputs($smtp, "Errors-To: $errorsto\r\n");
+		if($replyto != "")
+			fputs($smtp, "Reply-To: $replyto\r\n");
+		else
+			fputs($smtp, "Reply-To: $from\r\n");
+		fputs($smtp, "From: $from\r\n");
+		fputs($smtp, "To: $to\r\n");
+		if(preg_match("/[^a-zA-Z0-9 .-\[\]!_@]/",$subject))
+		{
+			fputs($smtp, "Subject: =?utf-8?B?".base64_encode( $subject)."?=\r\n");
+//			fputs($smtp, "Subject: =?utf-8?B?".base64_encode(recode("html..utf-8", $subject))."?=\r\n");
+		}
+		else
+		{
+			fputs($smtp, "Subject: $subject\r\n");
+		}
+		fputs($smtp, "Mime-Version: 1.0\r\n");
+		if($extra == "")
+		{
+			fputs($smtp, "Content-Type: text/plain; charset=\"utf-8\"\r\n");
+//			fputs($smtp, "Content-Transfer-Encoding: 8bit\r\n");
+		} else {
+			fputs($smtp, "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n");
+//			fputs($smtp, "Content-Transfer-Encoding: quoted-printable\r\n");
+			fputs($smtp, "Content-Disposition: inline\r\n");
+		}
+		fputs($smtp, "Content-Transfer-Encoding: BASE64\r\n");
+		fputs($smtp, "\r\n");
+		fputs($smtp, chunk_split(base64_encode($message))."\r\n.\r\n");
+//		fputs($smtp, chunk_split(base64_encode(recode("html..utf-8", $message)))."\r\n.\r\n");
+//		fputs($smtp, recode("html..utf-8", $message)."\r\n.\r\n");
+//		fputs($smtp, $message."\r\n.\r\n");
+		fputs($smtp, "QUIT\n");
+		$InputBuffer = fgets($smtp, 1024);
+		fclose($smtp);
+	}
+
+?>

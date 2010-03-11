@@ -1,0 +1,40 @@
+CAcert Assurer Training Event Stuttgart
+:::::::::::::::::::::::::::::::::::::::
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher eher "muendlich ueberlieferten" Regeln wurden in Policies gegossen. Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B. in dem CAcert Community Agreement) wurden beschlossen. Die Assurer Training Events wollen versuchen, die ganzen Informationen "unter's Volk" zu bringen:
+
+- Wovor schuetzt die CCA jedes CAcert-Community-Mitglied und somit auch dich?
+- Kannst du die 5 Statements der "Purpose of Assurance" aufzaehlen?
+- Kannst du auf Anhieb 10 Sicherheitsmerkmale des deutschen
+  Personalausweises aufzaehlen?
+
+Antworten auf diese und weitere Fragen erhaelst du bei den Assurer Training Events (ATEs).
+
+Die kommenden Veranstaltungen finden statt:
+
+- Muenchen, Samstag 16. Mai
+  [http://wiki.cacert.org/wiki/Events/20090509muc_AssurerTraining]
+- Stuttgart, Dienstag 26. Mai
+  [http://wiki.cacert.org/wiki/Events/20090526ATE-Stuttgart]
+- Frankfurt, Donnerstag 28. Mai
+  [http://wiki.cacert.org/wiki/Events/20090528ATE-Frankfurt]
+
+Der Termin fuer Berlin steht noch nicht fest.
+Die Teilnahme an den Veranstaltungen ist kostenlos, Spenden werden aber gerne gesehen.
+
+
+Stuttgart:
+---------
+
+Das ATE Stuttgart [http://wiki.cacert.org/wiki/Events/20090526ATE-Stuttgart] findet statt am
+
+  Dienstag, den 26.Mai in der Zeit von 20:00 Uhr bis ca. 22:00 Uhr
+  in der "Troedlerburg" (Burgschenke) in Esslingen.
+
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Details zum Veranstaltungsort und Anfahrthinweise findet Ihr im Wiki, siehe der Link oben.
+
+Unverbindliche Anmeldung und Registrierung: Rueckantwort mit 'Ich moechte teilnehmen'
+Kontakt: events@cacert.org

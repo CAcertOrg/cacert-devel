@@ -1,0 +1,36 @@
+CAcert Assurer Training Event Muenchen
+::::::::::::::::::::::::::::::::::::::
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher eher "muendlich ueberlieferten" Regeln wurden in Policies gegossen. Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B. in dem CAcert Community Agreement) wurden beschlossen. Die Assurer Training Events wollen versuchen, die ganzen Informationen "unter's Volk" zu bringen:
+
+- Wovor schuetzt die CCA jedes CAcert-Community-Mitglied und somit auch dich?
+- Kannst du die 5 Statements der "Purpose of Assurance" aufzaehlen?
+- Kannst du auf Anhieb 10 Sicherheitsmerkmale des deutschen
+  Personalausweises aufzaehlen?
+
+Antworten auf diese und weitere Fragen erhaelst du bei den Assurer Training Events (ATE's).
+
+Die kommenden Veranstaltungen finden statt:
+
+- Muenchen, Samstag 16. Mai
+  [http://wiki.cacert.org/wiki/Events/20090509muc_AssurerTraining]
+- Stuttgart, Dienstag 26. Mai
+  [http://wiki.cacert.org/wiki/Events/20090526ATE-Stuttgart]
+- Frankfurt, Donnerstag 28. Mai
+  [http://wiki.cacert.org/wiki/Events/20090528ATE-Frankfurt]
+
+Der Termin fuer Berlin steht noch nicht fest.
+Die Teilnahme der Veranstaltungen ist kostenlos, Spenden werden aber gerne gesehen.
+
+
+Muenchen:
+---------
+Das ATE-Muenchen [http://wiki.cacert.org/wiki/Events/20090509muc_AssurerTraining] findet statt am:
+- Samstag, 16. Mai in der Zeit von 13:00 bis ca. 16:00
+- Leonrodstr. 68, bei der Fa. convey im Untergeschoss
+
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Unverbindliche Anmeldung und Registrierung: Rueckantwort mit 'Ich moechte teilnehmen'
+Kontakt: events@cacert.org
