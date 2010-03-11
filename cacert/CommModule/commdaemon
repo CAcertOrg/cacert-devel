@@ -1,0 +1,45 @@
+#! /bin/bash
+# @(#)(CAcert) $Id: commdaemon,v 1.2 2009-12-28 15:14:40 wytze Exp $
+# commdaemon - script to run CommModule script in a loop,
+#              while checking for removal of activation by external script
+
+NAME=CommModule/commdaemon
+PID=$$
+TAG=${NAME}\[${PID}]
+
+case $# in
+    1)	SCRIPT=$1
+	ACTIVE=${SCRIPT}-active
+    	;;
+    *)	echo "Usage: $0 <script>" 1>&2
+    	exit 1
+	;;
+esac
+
+syslog_error()
+{
+	logger -t ${TAG} -p user.err $1
+}
+
+syslog_notice()
+{
+	logger -t ${TAG} -p user.notice $1
+}
+
+if [ ! -x ${SCRIPT} ]
+then
+	syslog_error "${SCRIPT} not found or not executable"
+	exit 1
+fi
+
+(echo -n "${TAG}: "; date) >${ACTIVE}
+
+syslog_notice "main loop started"
+while [ -f ${ACTIVE} ]
+do
+	syslog_notice "${SCRIPT} started"
+	${SCRIPT} >>nohup.out 2>&1
+	syslog_notice "${SCRIPT} ended"
+	sleep 1
+done
+syslog_notice "main loop stopped"

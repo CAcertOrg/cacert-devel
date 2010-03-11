@@ -1,0 +1,12 @@
+LISA'09: CACert BoF session, Tues, Need a few assurers to help
+get things rolling.
+
+Greeting,
+
+I will be leading GPG Key signing and CACert.org BoF sessions next Tuesday evening at the LISA 2009 conference in Baltimore, MD.  At LISA'04 in Atlanta, I led a GPG key signing BoF and I attended a CACert BoF.  I became an assurer at that conference.  I helped 35 people gain assurance points at the 2004 conference.  I hope we can add a good number of new assurers at this years conference.
+
+In order to do that, I need some help from a few qualified assurers. With as few as three already qualified assurers, we can bring several new people into the community.  More assurers means we can split the work and move through everything quicker and easier.  So far, I have just myself, so I really NEED some help.  If you will be available, please contact me.
+
+Ken Schumacher
+
+Event Listing: http://wiki.cacert.org/events/LISA2009

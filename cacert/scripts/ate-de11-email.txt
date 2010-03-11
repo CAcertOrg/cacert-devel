@@ -1,0 +1,37 @@
+CAcert Assurer Training Event Berlin-Brandenburg
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher eher
+"muendlich ueberlieferten" Regeln wurden in Policies gegossen. Neue
+Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B. in dem
+CAcert Community Agreement) wurden beschlossen. Die Assurer Training Events
+wollen nun versuchen, die ganzen Informationen "unter's Volk" zu bringen:
+
+- Wovor schuetzt die CCA jedes CAcert-Community-Mitglied und somit auch
+  dich?
+- Kannst du die 5 Statements der "Purpose of Assurance" aufzaehlen?
+- Kannst du auf Anhieb 10 Sicherheitsmerkmale des deutschen  Personal-
+  ausweises aufzaehlen?
+  
+Antworten auf diese und weitere Fragen erhaelst du bei den Assurer
+Training Events (ATEs).
+
+Der Termin fuer Berlin steht nun fest.
+
+Berlin-Wilmerdorf,
+Donnerstag 09. Juli 2009 in der Zeit von 19:00 bis 21:00 Uhr
+Restaurant Prometheus
+Schlangenbader Strasse
+12345 Berlin-Wilmerdorf
+[http://wiki.cacert.org/wiki/Events/20090709ATE-Berlin]
+  
+Anmeldungen erfolgen bitte ausschliesslich ueber folgende Seite:
+[http://cacert-berlin.mixxt.de/networks/events/show_event.7105]
+
+Die Teilnahme an der Veranstaltung ist kostenlos, Spenden werden aber
+gerne gesehen.
+
+Details zum Veranstaltungsort und Anfahrthinweise findet Ihr im Wiki und
+bei mixxt.de, siehe die Links oben.
+
+Kontakt: events@cacert.org
