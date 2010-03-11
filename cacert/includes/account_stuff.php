@@ -171,56 +171,56 @@ function hideall() {
       <ul class="menu" id="home"><li><a href="index.php"><?=_("Go Home")?></a></li><li><a href="account.php?id=logout"><?=_("Logout")?></a></li></ul>
     </div>
     <div class="relatedLinks">
-      <h3 onclick="explode('mydetails')">+ <?=_("My Details")?></h3>
+      <h3 class="pointer" onclick="explode('mydetails')">+ <?=_("My Details")?></h3>
       <ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li><?
 	if($_SESSION['profile']['id'] == 1 || $_SESSION['profile']['id'] == 5897)
 		echo "<li><a href='sqldump.php'>SQL Dump</a></li>";
 	?></ul>
     </div>
     <div class="relatedLinks">
-      <h3 onclick="explode('emailacc')">+ <?=_("Email Accounts")?></h3>
+      <h3 class="pointer" onclick="explode('emailacc')">+ <?=_("Email Accounts")?></h3>
       <ul class="menu" id="emailacc"><li><a href="account.php?id=1"><?=_("Add")?></a></li><li><a href="account.php?id=2"><?=_("View")?></a></li></ul>
     </div>
     <div class="relatedLinks">
-      <h3 onclick="explode('clicerts')">+ <?=_("Client Certificates")?></h3>
+      <h3 class="pointer" onclick="explode('clicerts')">+ <?=_("Client Certificates")?></h3>
       <ul class="menu" id="clicerts"><li><a href="account.php?id=3"><?=_("New")?></a></li><li><a href="account.php?id=5"><?=_("View")?></a></li></ul>
     </div>
 <? if($_SESSION['profile']['points'] >= 50) { ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('gpg')">+ <?=_("GPG/PGP Keys")?></h3>
+      <h3 class="pointer" onclick="explode('gpg')">+ <?=_("GPG/PGP Keys")?></h3>
       <ul class="menu" id="gpg"><li><a href="gpg.php?id=0"><?=_("New")?></a></li><li><a href="gpg.php?id=2"><?=_("View")?></a></li></ul>
     </div>
 <? } ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('domains')">+ <?=_("Domains")?></h3>
+      <h3 class="pointer" onclick="explode('domains')">+ <?=_("Domains")?></h3>
       <ul class="menu" id="domains"><li><a href="account.php?id=7"><?=_("Add")?></a></li><li><a href="account.php?id=9"><?=_("View")?></a></li></ul>
     </div>
     <div class="relatedLinks">
-      <h3 onclick="explode('servercert')">+ <?=_("Server Certificates")?></h3>
+      <h3 class="pointer" onclick="explode('servercert')">+ <?=_("Server Certificates")?></h3>
       <ul class="menu" id="servercert"><li><a href="account.php?id=10"><?=_("New")?></a></li><li><a href="account.php?id=12"><?=_("View")?></a></li></ul>
     </div>
 <? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('clientorg')">+ <?=_("Org Client Certs")?></h3>
+      <h3 class="pointer" onclick="explode('clientorg')">+ <?=_("Org Client Certs")?></h3>
       <ul class="menu" id="clientorg"><li><a href="account.php?id=16"><?=_("New")?></a></li><li><a href="account.php?id=18"><?=_("View")?></a></li></ul>
     </div>
     <div class="relatedLinks">
-      <h3 onclick="explode('serverorg')">+ <?=_("Org Server Certs")?></h3>
+      <h3 class="pointer" onclick="explode('serverorg')">+ <?=_("Org Server Certs")?></h3>
       <ul class="menu" id="serverorg"><li><a href="account.php?id=20"><?=_("New")?></a></li><li><a href="account.php?id=22"><?=_("View")?></a></li></ul>
     </div>
 <? } ?>
 <? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."' and `masteracc`='1'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('orgadmin')">+ <?=_("Org Admin")?></h3>
+      <h3 class="pointer" onclick="explode('orgadmin')">+ <?=_("Org Admin")?></h3>
       <ul class="menu" id="orgadmin"><? if($_SESSION['profile']['orgadmin'] == 1) { ?><li><a href="account.php?id=24"><?=_("New Organisation")?></a></li><li><a href="account.php?id=25"><?=_("View Organisations")?></a></li><? } ?><li><a href="account.php?id=35"><?=_("View")?></a></li></ul>
     </div>
 <? } ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('WoT')">+ <?=_("CAcert Web of Trust")?></h3>
+      <h3 class="pointer" onclick="explode('WoT')">+ <?=_("CAcert Web of Trust")?></h3>
       <ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?><li><a href="account.php?id=55"><?=_("Training")?></a></li></ul>
     </div>
     <div class="relatedLinks">
-      <h3 onclick="explode('WoTForms')">+ <?=_("CAP/TTP Forms")?></h3><?
+      <h3 class="pointer" onclick="explode('WoTForms')">+ <?=_("CAP/TTP Forms")?></h3><?
         $name = $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'];
         while(strstr($name, "  "))
                 $name = str_replace("  ", " ", $name);
@@ -234,17 +234,17 @@ function hideall() {
     </div>
 <? if($_SESSION['profile']['admin'] == 1 || $_SESSION['profile']['locadmin'] == 1) { ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('sysadmin')">+ <?=_("System Admin")?></h3>
+      <h3 class="pointer" onclick="explode('sysadmin')">+ <?=_("System Admin")?></h3>
       <ul class="menu" id="sysadmin"><? if($_SESSION['profile']['admin'] == 1) { ?><li><a href="account.php?id=42"><?=_("Find User")?></a></li><li><a href="account.php?id=48"><?=_("Find Domain")?></a></li><? } if($_SESSION['profile']['locadmin'] == 1) { ?><li><a href="account.php?id=53"><?=_("Location DB")?></a></li><? } ?></ul>
     </div>
 <? } ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('disputes')">+ <?=_("Disputes/Abuses")?></h3>
+      <h3 class="pointer" onclick="explode('disputes')">+ <?=_("Disputes/Abuses")?></h3>
       <ul class="menu" id="disputes"><li><a href="disputes.php?id=0"><?=_("More Information")?></a></li><li><a href="disputes.php?id=1"><?=_("Email Dispute")?></a></li><li><a href="disputes.php?id=2"><?=_("Domain Dispute")?></a></li><? if($_SESSION['profile']['admin'] == 1) { ?><li><a href="disputes.php?id=3"><?=_("Abuses")?></a></li><? } ?></ul>
     </div>
 <? if($_SESSION['profile']['adadmin'] >= 1) { ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('advertising')">+ <?=_("Advertising")?></h3>
+      <h3 class="pointer" onclick="explode('advertising')">+ <?=_("Advertising")?></h3>
       <ul class="menu" id="advertising"><li><a href="advertising.php?id=1"><?=_("New Ad")?></a></li><li><a href="advertising.php?id=0"><?=_("View Ads")?></a></li></ul>
     </div>
 <? } ?>

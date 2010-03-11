@@ -46,7 +46,7 @@
 	$fp = @fopen("/www/pages/index/feed.rss", "r");
 	if($fp)
 	{
-		echo '<p><u>'._('Latest News').'</u></p>';
+		echo '<p id="lnews">'._('Latest News').'</p>';
 
 
 		while(!feof($fp))

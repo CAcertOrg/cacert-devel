@@ -48,8 +48,11 @@ h3{
  color: #334d55;
  margin: 0px;
  padding: 0px;
+}
+
+h3.pointer{
  cursor: pointer;
-/* cursor: hand; */
+ /* cursor: hand; */
 }
 
 h4{
@@ -626,6 +629,11 @@ img.sponsorlogo {
 }
 
 /************ Newsbox *************/
+
+#lnews {             /* class for the text "Latest News" */
+      font-size: small;
+      font-variant: small-caps;
+}
 
 div.newsbox {
       border-top: 1px solid #cccccc;

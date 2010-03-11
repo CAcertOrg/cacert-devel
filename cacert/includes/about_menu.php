@@ -1,5 +1,5 @@
     <div class="relatedLinks">
-      <h3 onclick="explode('misc')">+ <?=_("About CAcert.org")?></h3>
+      <h3 class="pointer" onclick="explode('misc')">+ <?=_("About CAcert.org")?></h3>
       <ul class="menu" id="misc">
         <li><a href="http://blog.cacert.org/"><?=_("CAcert News")?></a></li>
 	<li><a href="/help.php"><?=_("Howto Information")?></a></li>

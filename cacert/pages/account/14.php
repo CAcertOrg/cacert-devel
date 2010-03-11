@@ -35,7 +35,7 @@
     <td class="DataTD"><input type="password" name="pword2"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><font color="red">*</font><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
+    <td class="DataTD" colspan="2"><font color="red">*</font><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol (all white spaces at the beginning and end are removed).")?></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update Pass Phrase")?>"></td>

@@ -50,7 +50,7 @@ google_color_border = "FFFFFF";
     </div>
     <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
-      <h3><?=_("My Account")?></h3>
+      <h3 class="pointer"><?=_("My Account")?></h3>
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4"><?=_("Password Login")?></a> 
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=5"><?=_("Lost Password")?></a>
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4&amp;noauto=1"><?=_("Net Cafe Login")?></a> 
@@ -59,12 +59,12 @@ google_color_border = "FFFFFF";
     <? } ?>
     <? include("about_menu.php"); ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('trans')">+ <?=_("Translations")?></h3>
+      <h3 class="pointer" onclick="explode('trans')">+ <?=_("Translations")?></h3>
       <ul class="menu" id="trans"><? foreach($_SESSION['_config']['translations'] as $key => $val) { ?><li><a href="<?=$_SERVER['SCRIPT_NAME']?>?id=<?=intval(array_key_exists('id',$_REQUEST)?$_REQUEST['id']:0)?>&amp;lang=<?=$key?>"><?=$val?></a></li><? } ?></ul>
     </div>
     <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
-      <h3 onclick="explode('recom')"><?=_("Advertising")?></h3>
+      <h3 class="pointer" onclick="explode('recom')"><?=_("Advertising")?></h3>
       <ul class="menu" id="recom"><?
 	$query = "select * from `advertising` where `expires`>NOW() and `active`=1";
 	$res = mysql_query($query);

@@ -17,11 +17,12 @@
 */ ?>
 <p><b><? printf(_("The current %s board, and roles."), "CAcert Inc."); ?></b></p>
 <p>
-Teus Hagen - <?=_("President")?><br/>
-Evaldo Gardenali - <?=_("Vice-President")?><br/>
-Robert Cruikshank - <?=_("Treasurer")?>, <?=_("Public Officer")?><br/>
-Guillaume Romagny - <?=_("Secretary")?><br/>
-Philipp Dunkel - <?=_("member")?><br/>
-Greg Stark - <?=_("member")?><br/>
-Alejandro Mery Pellegrini - <?=_("member")?><br/>
+Nick Bebout - <?=_("President")?><br/>
+Mark Lipscombe - <?=_("Vice-President")?><br/>
+Philipp Dunkel - <?=_("Secretary")?><br/>
+Ernestine Schwob - <?=_("Treasurer")?><br/>
+Andreas B&uuml;rki - <?=_("member")?><br/>
+Guillaume Romagny - <?=_("member")?><br/>
+Ian Grigg - <?=_("member")?><br/>
+Robert Cruikshank - <?=_("Public Officer")?><br/>
 </p>

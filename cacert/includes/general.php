@@ -661,6 +661,8 @@
 				{
 				
 					$line = fgets($fp, 4096);
+                                        while(substr($line, 0, 4) == "220-")
+                                               $line = fgets($fp, 4096);
 					if(substr($line, 0, 3) != "220")
 						continue;
 					fputs($fp, "HELO hlin.cacert.org\r\n");
@@ -720,7 +722,7 @@
 				$found = 1;
 				break;
 			}
-			sleep(2);
+			sleep(3);
 		}
 
 		if(!$found)
@@ -881,9 +883,9 @@
 		} elseif ($Status == 3) {
 			$Result = _("You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!");
 		} elseif ($Status == 5) {
-			$Result = _("You have at least 100 Assurance Points, if you want to become an assurer try the").' <a href="https://cats.cacert.org/"><?=_("Assurer Challenge")?></a>!';
+			$Result = _("You have at least 100 Assurance Points, if you want to become an assurer try the").' <a href="https://cats.cacert.org/">'._("Assurer Challenge").'</a>!';
 		} elseif ($Status == 7) {
-			$Result = _("To become an Assurer you have to collect 100 Assurance Points and pass the").' <a href="https://cats.cacert.org/"><?=_("Assurer Challenge")?></a>!';
+			$Result = _("To become an Assurer you have to collect 100 Assurance Points and pass the").' <a href="https://cats.cacert.org/">'._("Assurer Challenge").'</a>!';
 		} elseif ($Status & 8 > 0) {
 			$Result = _("Sorry, you are not allowed to be an Assurer. Please contact").' <a href="mailto:cacert-support@lists.cacert.org">cacert-support@lists.cacert.org</a>'._(" if you feel that this is not corect.");
 		} else {

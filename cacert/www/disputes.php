@@ -226,6 +226,7 @@
 
 	if($oldid == "1")
 	{
+		csrf_check('emaildispute');
 		$email = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
 		if($email == "")
 		{
@@ -297,6 +298,7 @@
 
 	if($oldid == "2")
 	{
+		csrf_check('domaindispute');
 		$domain = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
 		if($domain == "")
 		{

@@ -421,6 +421,15 @@
 
 	if($oldid == 7)
 	{
+		csrf_check("adddomain");
+		if(strstr($_REQUEST['newdomain'],"\x00"))
+		{
+                        showheader(_("My CAcert.org Account!"));
+                        echo _("Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes.");
+                        showfooter();
+                        exit;
+		}
+
 		list($newdomain) = explode(" ", $_REQUEST['newdomain'], 2); // Ignore the rest
 		while($newdomain['0'] == '-')
 			$newdomain = substr($newdomain, 1);
@@ -496,6 +505,7 @@
 
 	if($process != "" && $oldid == 8)
 	{
+		csrf_check('ctcinfo');
 		$oldid=0;
 		$id = 8;
 
@@ -742,6 +752,7 @@
 
 	if($oldid == 12 && array_key_exists('renew',$_REQUEST) && $_REQUEST['renew'] != "")
 	{
+		csrf_check('srvcerchange');
 		$id = 12;
 		showheader(_("My CAcert.org Account!"));
 		if(is_array($_REQUEST['revokeid']))
@@ -844,6 +855,7 @@
 
 	if($oldid == 12 && array_key_exists('revoke',$_REQUEST) && $_REQUEST['revoke'] != "")
 	{
+		csrf_check('srvcerchange');
 		$id = 12;
 		showheader(_("My CAcert.org Account!"));
 		if(is_array($_REQUEST['revokeid']))
@@ -976,7 +988,7 @@
 	{
 		$id = 5;
 		showheader(_("My CAcert.org Account!"));
-		if(is_array($_REQUEST['revokeid']))
+		if(array_key_exists('revokeid',$_REQUEST) && is_array($_REQUEST['revokeid']))
 		{
 			echo _("Now revoking the following certificates:")."<br>\n";
 			foreach($_REQUEST['revokeid'] as $id)
@@ -1470,6 +1482,7 @@
 
 	if($oldid == 18 && array_key_exists('renew',$_REQUEST) && $_REQUEST['renew'] != "")
 	{
+		csrf_check('clicerchange');
 		showheader(_("My CAcert.org Account!"));
 		if(is_array($_REQUEST['revokeid']))
 		{
@@ -1532,6 +1545,7 @@
 
 	if($oldid == 18 && array_key_exists('revoke',$_REQUEST) && $_REQUEST['revoke'] != "")
 	{
+		csrf_check('clicerchange');
 		$id = 18;
 		showheader(_("My CAcert.org Account!"));
 		if(is_array($_REQUEST['revokeid']))
@@ -1751,6 +1765,7 @@
 
 	if($oldid == 22 && array_key_exists('renew',$_REQUEST) && $_REQUEST['renew'] != "")
 	{
+		csrf_check('orgsrvcerchange');
 		showheader(_("My CAcert.org Account!"));
 		if(is_array($_REQUEST['revokeid']))
 		{
@@ -1818,6 +1833,7 @@
 
 	if($oldid == 22 && array_key_exists('revoke',$_REQUEST) && $_REQUEST['revoke'] != "")
 	{
+		csrf_check('orgsrvcerchange');
 		showheader(_("My CAcert.org Account!"));
 		if(is_array($_REQUEST['revokeid']))
 		{
@@ -1924,6 +1940,7 @@
 
 	if($oldid == 27 && $process != "")
 	{
+		csrf_check('orgdetchange');
 		$id = intval($oldid);
 		$_SESSION['_config']['O'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['O'])));
 		$_SESSION['_config']['contact'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['contact'])));
@@ -2108,6 +2125,7 @@
 
 	if($oldid == 33 && $process != "")
 	{
+		csrf_check('orgadmadd');
 		if($_SESSION['profile']['orgadmin'] == 1)
 			$masteracc = $_SESSION['_config'][masteracc] = intval($_REQUEST['masteracc']);
 		else
@@ -2510,6 +2528,7 @@
 
   if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0)
   {
+    csrf_check('admsetassuret');
     $memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
     $query = "select * from `users` where `id`='$memid'";
     $row = mysql_fetch_assoc(mysql_query($query));
@@ -2528,6 +2547,7 @@
 
 	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0)
 	{
+		csrf_check('admactlock');	
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locked']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
@@ -2537,6 +2557,7 @@
 
 	if($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0)
 	{
+		csrf_check('admcodesign');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['codesign']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
@@ -2546,6 +2567,7 @@
 
 	if($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0)
 	{
+		csrf_check('admorgadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
@@ -2555,6 +2577,7 @@
 
 	if($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0)
 	{
+		csrf_check('admttpadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
@@ -2584,6 +2607,7 @@
 
 	if($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0)
 	{
+		csrf_check('admsetadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['admin']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));

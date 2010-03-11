@@ -21,7 +21,7 @@
     <td colspan="2" class="title"><?=_("Lost Pass Phrase")?></td>
   </tr>
   <tr>
-    <td class="DataTD" width="125"><?=_("Email Address")?>: </td>
+    <td class="DataTD" width="125"><?=_("Email Address (primary)")?>: </td>
     <td class="DataTD" width="125"><input type="text" name="email" autocomplete="off"></td>
   </tr>
   <tr>
