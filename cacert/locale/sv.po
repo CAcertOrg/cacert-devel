@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-06-25 19:17:51+0000\n"
+"PO-Revision-Date: 2009-12-26 19:01:20+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -942,14 +942,6 @@ msgstr "Hur?"
 msgid "Howto Information"
 msgstr "Howto-information"
 
-#: www/wot/6.php:112
-msgid "I am sure of myself"
-msgstr "Jag &auml;r s&auml;ker"
-
-#: www/wot/6.php:101
-msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that CAcert may challenge this assurance and call upon me to prove the basis for it, and that I may be held responsible if I cannot provide such proof."
-msgstr "Jag f&ouml;rs&auml;krar att verifieringen jag utf&ouml;r &auml;r korrekt, fullst&auml;ndig och bevisad. Jag har sett identitetshandlingar i original. Jag accepterar att CAcert kan ifr&aring;gas&auml;tta verifieringen och avkr&auml;va mig bevisning. Jag kan bli ansvarsskyldig om jag inte kan presentera godk&auml;nda bevis."
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "Jag vill genast b&ouml;rja skicka krypterade e-brev!"
@@ -966,10 +958,6 @@ msgstr "Jag tog inte emot en giltig certfikatbeg&auml;ran. Tryck p&aring; Bak&ar
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
 msgstr "Jag vill inte bli listad"
-
-#: www/wot/6.php:105
-msgid "I have read and understood the Rules For Assurers and am making this assurance subject to and in compliance with these rules."
-msgstr "Jag har l&auml;st och f&ouml;rst&aring;tt reglerna f&ouml;r verifierare och utf&ouml;r denna verifiering i enlighet med dessa regler."
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
@@ -2025,10 +2013,6 @@ msgstr "Systemadministrat&ouml;r"
 msgid "System will send you an email with a link in it, you just open the link in a webbrowser."
 msgstr "Systemet skickar ett e-brev till dig med en l&auml;nk i, &ouml;ppna helt enkelt l&auml;nken i en webbl&auml;sare."
 
-#: includes/account_stuff.php:182
-msgid "TTP Form"
-msgstr "TTP-formul&auml;r"
-
 #: includes/general.php:24 www/wot/6.php:99
 msgid "Temporary Increase"
 msgstr "Tillf&auml;llig &ouml;kning"
@@ -2085,10 +2069,6 @@ msgstr "L&ouml;senfrasen du angav var f&ouml;r kort. L&ouml;senfrasen m&aring;st
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; (officiell myndighetssajt f&ouml;r 'Snooping Bill', Storbritannien)"
 
-#: www/account/0.php:28
-msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons. You can also get trust points via the Trust Third Party system where you go to a lawyer, bank manager, accountant, or public notary/juctise of the peace and they via your ID and fill in the TTP form to state they have viewed your ID documents and it appears authentic and true. More information on the TTP system can be found in the TTP sub-menu"
-msgstr "Systemet som CAcerts Web of Trust anv&auml;nder liknar det som m&aring;nga GPG/PGP-anv&auml;ndare anv&auml;nder n&auml;r de tr&auml;ffar andra personer och verifierar att deras ID-handlingar matchar informationen i GPG/PGP-nyckeln. Det som skiljer sig &auml;r att vi har anpassat systemet f&ouml;r att fungera med PKI-ramverket p&aring; s&aring; vis att du bara kan bli verifierad av n&aring;gon som sj&auml;lv redan &auml;r verifierad. En s&aring;dan s&aring; kallad verifierare kan ge dig olika m&aring;nga po&auml;ng beroende p&aring; hur m&aring;nga verifieringar personen har genomf&ouml;rt tidigare (hur m&aring;nga po&auml;ng en verifierare kan ge visas i verifierarkatalogen). N&auml;r ni tr&auml;ffas visar du dina ID-handlingar och fyller i ett CAP-formul&auml;r som verifieraren m&aring;ste beh&aring;lla av verifierbarhetssk&auml;l.Du kan ocks&aring; f&aring; po&auml;ng via systemet med p&aring;litliga tredjeparter (TTP), d&auml;r exempelvis advokater, bankdirekt&ouml;rer, revisorer eller notarius publicus kontrollerar dina ID-handlingar och fyller i ett TTP-formul&auml;r d&auml;r de intygar att ID-handlingarna &auml;r &auml;kta och korrekta. Mer information om TTP-systemet finns under menyvalet 'P&aring;litliga tredjeparter'."
-
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr "M&ouml;jlighet att verifiera andra nya CAcert-anv&auml;ndare; bidra till att f&ouml;rst&auml;rka och bredda CAcerts Web of Trust."
@@ -2107,12 +2087,6 @@ msgstr "Nuvarande styrelse f&ouml;r %s med roller"
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Dom&auml;nen '%s' har lagts till i systemet, men innan n&aring;gra certifikat kan utf&auml;rdas s&aring; m&aring;ste du &ouml;ppna l&auml;nken som skickats till din e-postadress."
 
-#: includes/account.php:304 includes/account.php:373 includes/account.php:1428
-#: includes/account.php:1458
-#, php-format
-msgid "The domain '%s' is already in the system and is listed as valid. Can't continue."
-msgstr "Dom&auml;nen '%s' finns redan i systemet och &auml;r listad som giltig. Kan inte forts&auml;tta."
-
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
 msgstr "I avdelningen f&ouml;r e-postadresser kan du l&auml;gga till, uppdatera och ta bort e-postadresser f&ouml;r att utf&auml;rda klientcertifikat till. Avdelningen Klientcertifikat ger dig v&auml;gledning att generera en certifikatsigneringsbeg&auml;ran f&ouml;r en eller flera e-postadresser som du har registrerat i den h&auml;r avdelningen."
@@ -2121,11 +2095,6 @@ msgstr "I avdelningen f&ouml;r e-postadresser kan du l&auml;gga till, uppdatera 
 #, php-format
 msgid "The email address '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "E-postadressen '%s' har lagts till i systemet, men innan n&aring;gra certifikat kan utf&auml;rdas s&aring; m&aring;ste du &ouml;ppna l&auml;nken som skickats till din e-postadress."
-
-#: includes/account.php:36
-#, php-format
-msgid "The email address '%s' is already in the system. Can't continue."
-msgstr "E-postadressen '%s' finns redan i systemet. Kan inte forts&auml;tta."
 
 #: includes/account.php:86
 msgid "The following accounts have been removed:"
@@ -2567,10 +2536,13 @@ msgstr "Har varit inblandad i att &ouml;vers&auml;tta den h&auml;r webbplatsen t
 msgid "Has put a lot of time and effort into promoting and assuring people in Brazil and South America, and for helping to translate this site into Portuguese"
 msgstr "Har lagt mycket tid och m&ouml;da p&aring; fr&auml;mjande och att verifiera m&auml;nniskor i Brasilien och Sydamerika, och hj&auml;lpa till att &ouml;vers&auml;tta den h&auml;r webbplatsen till portugisiska"
 
-#: www/wot/6.php:44
-#, php-format
-msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. Gross negligence may cause you to be liable."
-msgstr "Kontrollera att f&ouml;ljande uppgifter st&auml;mmer &ouml;verens med vad du bevittnade n&auml;r du tr&auml;ffade %s personligen. Du F&Aring;R INTE forts&auml;tta annat &auml;n om du &auml;r s&auml;ker p&aring; att uppgifterna &auml;r korrekta. Omd&ouml;mesl&ouml;st slarv kan f&aring; dig att h&aring;llas ansvarig."
+#: www/index.php:586 www/index.php:593
+msgid "This seems like potential spam, cannot continue."
+msgstr ""
+
+#: www/index.php:572 www/index.php:579
+msgid "This seems like you have cookies or Javascript disabled, cannot continue."
+msgstr ""
 
 #: includes/general_stuff.php:74
 msgid "CAcert Board"
@@ -2611,7 +2583,7 @@ msgstr "Du har inte tillg&aring;ng till det h&auml;r omr&aring;det."
 
 #: pages/account/40.php:68 pages/index/11.php:68
 msgid "Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on &lt;a href='https://bugs.cacert.org/'&gt;bugs.cacert.org&lt;/a&gt; and mark it as private."
-msgstr ""
+msgstr "Anv&auml;nd n&aring;got av f&ouml;ljande s&auml;tt f&ouml;r att rapportera s&auml;kerhetsproblem: F&ouml;r k&auml;nslig information kan du anv&auml;nda ovanst&aring;ende kontaktformul&auml;r. Du kan skicka e-post till support@cacert.org. Du kan l&auml;mna en buggrapport p&aring; &lt;a href='https://bugs.cacert.org/'&gt;bugs.cacert.org&lt;/a&gt; och markera den som privat."
 
 #: www/wot.php:92 www/wot.php:99
 msgid "You failed to check all boxes to validate your adherence to the rules and policies of CAcert"
@@ -3195,9 +3167,10 @@ msgstr "F&ouml;ljande v&auml;rdnamn avslogs eftersom systemet inte kunde knyta d
 msgid "The list of names are in no sense of order"
 msgstr "Listan &ouml;ver namn &auml;r utan n&aring;gon inb&ouml;rdes ordning."
 
-#: www/wot/2.php:28
-msgid "The only other way to receive assurance points is to have had your identity checked by a third party CA, whose policies are suitably set to not let identity fraud run rampant. Please contact us if you would like more details about this."
-msgstr "Det enda &ouml;vriga s&auml;ttet att f&aring; verifikationspo&auml;ng &auml;r att ha f&aring;tt din identitet kontrollerad av en tredjeparts-CA vars policyer &auml;r l&auml;mpligt uppsatta f&ouml;r att inte l&aring;ta identitetsbedr&auml;gerier frodas. Kontakta oss om du vill veta mer om det."
+#: includes/account.php:70
+#, php-format
+msgid "The email address '%s' is already in a different account. Can't continue."
+msgstr ""
 
 #: www/wot/2.php:17
 msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
@@ -3363,7 +3336,7 @@ msgstr "Datum (&Aring;&Aring;&Aring;&Aring;-MM-DD)"
 
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
-msgstr ""
+msgstr "F&ouml;r att bli verifierare m&aring;ste du samla ihop 100 verifikationspo&auml;ng och klara"
 
 #: www/cap.php:15 www/ttp.php:24
 msgid "Identity Verification Form"
@@ -3636,17 +3609,15 @@ msgstr "Nedan &auml;r adressen till sidan du beh&ouml;ver &ouml;ppna f&ouml;r at
 msgid "Blank CAP Form"
 msgstr "Blankt CAP-formul&auml;r"
 
-#: includes/account_stuff.php:211
-msgid "Blank TTP Form"
-msgstr "Blankt TTP-formul&auml;r"
+#: includes/account.php:460 includes/account.php:540 includes/account.php:1990
+#: includes/account.php:2020
+#, php-format
+msgid "The domain '%s' is already in a different account and is listed as valid. Can't continue."
+msgstr ""
 
 #: includes/general_stuff.php:85
 msgid "Bug Database"
 msgstr "Buggdatabas"
-
-#: includes/account_stuff.php:201
-msgid "CAP/TTP Forms"
-msgstr "CAP/TTP-formul&auml;r"
 
 #: pages/account/39.php:64 pages/index/10.php:64
 msgid "CAcert Assurers can see the name, birthday and the number of points by looking up the correct email address. No other person related data is published by CAcert."
@@ -3972,22 +3943,91 @@ msgstr "Det finns inga v&auml;ntande f&ouml;rfr&aring;gningar d&auml;r du inte r
 msgid "You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken."
 msgstr "Du valde inte inga e-postadresser att ta bort, eller s&aring; f&ouml;rs&ouml;kte du ta bort den prim&auml;ra e-postadressen. Ingenting utf&ouml;rdes."
 
+#: www/index.php:123
+msgid "Your Pass Phrase has been changed now. You can now login with your new password."
+msgstr ""
+
+#: pages/account/0.php:32
+msgid "The former TTP (Trusted Third Party) System has been stopped, and is currently not available."
+msgstr ""
+
+#: pages/account/0.php:31
+msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons."
+msgstr ""
+
+#: pages/wot/6.php:85
+#, php-format
+msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."
+msgstr ""
+
+#: pages/wot/6.php:153
+msgid "Policy"
+msgstr ""
+
+#: pages/wot/6.php:165
+msgid "I confirm this Assurance"
+msgstr ""
+
+#: pages/wot/6.php:150
+msgid "I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."
+msgstr ""
+
+#: pages/wot/6.php:146
+msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."
+msgstr ""
+
+#: pages/account/14.php:38
+msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol (all white spaces at the beginning and end are removed)."
+msgstr ""
+
+#: pages/wot/1.php:115
+msgid "Not yet!"
+msgstr ""
+
+#: includes/account_stuff.php:223
+msgid "CAP Forms"
+msgstr ""
+
+#: pages/index/21.php:39
+msgid "Please also include your name in the transaction so we know who it came from and send an email to ernestine at cacert dot org with the details:"
+msgstr ""
+
+#: pages/wot/6.php:154
+msgid "Assurance Handbook"
+msgstr ""
+
+#: pages/index/5.php:24
+msgid "Email Address (primary)"
+msgstr ""
+
+#: pages/account/56.php:18
+msgid "List of Organisation Assurers:"
+msgstr ""
+
+#: pages/index/1.php:24
+msgid "Note: White spaces at the beginning and end of a password will be removed."
+msgstr ""
+
+#: pages/wot/6.php:154
+msgid "Assurance Policy"
+msgstr ""
+
 #: www/cap.php:264
 msgid "I, the Assurer, hereby confirm that I have verified the Member according to CAcert Assurance Policy."
 msgstr ""
 
 #: pages/account/3.php:101
 msgid "SSO WIKI Entry"
-msgstr ""
+msgstr "Wikiuppslag f&ouml;r SSO"
 
 #: includes/account_stuff.php:268 includes/general_stuff.php:145
 #: includes/tverify_stuff.php:80
 msgid "by CAcert"
-msgstr ""
+msgstr "av CAcert"
 
 #: www/wot.php:343
 msgid "Assurer Challenge"
-msgstr ""
+msgstr "Verifierarprov"
 
 #: www/cap.php:143
 msgid "I hereby confirm that the information stated above is both true and correct, and request the CAcert Assurer (identified below) to verify me according to CAcert Assurance Policy."
@@ -3995,59 +4035,59 @@ msgstr ""
 
 #: pages/account/21.php:50
 msgid "OCSP certificate"
-msgstr ""
+msgstr "OCSP-certifikat"
 
 #: includes/account.php:753
 msgid "Processing request"
-msgstr ""
+msgstr "Behandlar beg&auml;ran"
 
 #: pages/account/18.php:51 pages/account/5.php:57
 msgid "No client certificates are currently listed."
-msgstr ""
+msgstr "Inga klientcertifikat finns f&ouml;r tillf&auml;llet listade."
 
 #: pages/index/4.php:59
 msgid "If you want to use certificate login instead of username+password, please"
-msgstr ""
+msgstr "Om du vill anv&auml;nda certifikatinloggning ist&auml;llet f&ouml;r anv&auml;ndarnamn och l&ouml;senord,"
 
 #: pages/index/0.php:129
 msgid "If you want to participate in CAcert.org, have a look"
-msgstr ""
+msgstr "Om du vill delta i CAcert.org, ta en titt"
 
 #: pages/account/43.php:109
 msgid "Are you sure you want to modify this DOB and/or last name?"
-msgstr ""
+msgstr "&Auml;r du s&auml;ker p&aring; att du vill &auml;ndra detta f&ouml;delsedatum och/eller efternamn?"
 
 #: pages/account/43.php:412
 msgid "Show Assurances the user gave"
-msgstr ""
+msgstr "Visa verifieringar anv&auml;ndaren gjort"
 
 #: pages/account/43.php:365
 msgid "Show Assurances the user got"
-msgstr ""
+msgstr "Visa verifieringar anv&auml;ndaren f&aring;tt"
 
 #: pages/account/50.php:29
 msgid "Are you sure you want to delete this user, while not actually deleting the account it will completely disable it and revoke any/all certificates currently issued."
-msgstr ""
+msgstr "&Auml;r du s&auml;ker p&aring; att du vill ta bort den h&auml;r anv&auml;ndaren? Detta tar inte bort kontot men det avaktiverar det fullst&auml;ndigt och annulerar alla certifikat som f&ouml;r tillf&auml;llet &auml;r utf&auml;rdade."
 
 #: includes/sponsorinfo.php:2
 msgid "CAcert operations are sponsored by"
-msgstr ""
+msgstr "CAcerts verksamheter sponsras av"
 
 #: includes/account.php:322 includes/account.php:1380
 msgid "The challenge-response code of your certificate request did not match. Can't continue with certificaterequest."
-msgstr ""
+msgstr "Challenge-response&ndash;koden f&ouml;r din certifikatbeg&auml;ran st&auml;mde inte. Kan inte forts&auml;tta med certifikatbeg&auml;ran."
 
 #: www/gpg.php:176
 msgid "The format of the UID was not recognized. Please use 'Name (comment) &amp;lt;email@domain&gt;'"
-msgstr ""
+msgstr "Formatet p&aring; UID:t k&auml;ndes inte igen. Anv&auml;nd 'Namn (kommentar) &amp;lt;e-post@dom&auml;n&gt;'"
 
 #: www/gpg.php:104
 msgid "The following UIDs were found in your key:"
-msgstr ""
+msgstr "F&ouml;ljande UID:er p&aring;tr&auml;ffades i din nyckel:"
 
 #: pages/account/40.php:67 pages/index/11.php:67
 msgid "Security Issues"
-msgstr ""
+msgstr "S&auml;kerhetsproblem"
 
 #: pages/account/42.php:26
 msgid "use % as wildcard"
@@ -4055,7 +4095,7 @@ msgstr "anv&auml;nd % som jokertecken"
 
 #: includes/account_stuff.php:220
 msgid "Trusted ThirdParties"
-msgstr ""
+msgstr "betrodda tredjeparter"
 
 #: www/index.php:445
 msgid "You have to agree to the CAcert Community agreement."
@@ -4165,6 +4205,15 @@ msgstr "Utskrift av detta CAP-formul&auml;r"
 msgid "Vice-President"
 msgstr "Vicepresident"
 
+#: pages/index/1.php:49
+#, php-format
+msgid "Please only write %sName Suffixes%s into this field."
+msgstr ""
+
+#: www/stats.php:263
+msgid "Statistical data from cache, created at"
+msgstr ""
+
 #: includes/general.php:877
 msgid "You are not an Assurer, but the reason is not stored in the database. Please contact"
 msgstr "Du &auml;r inte verifierare, men anledningen till det finns inte lagrad i databasen. V&auml;nligen kontakta"
@@ -4173,9 +4222,9 @@ msgstr "Du &auml;r inte verifierare, men anledningen till det finns inte lagrad 
 msgid "The exact name of the assurer may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
 msgstr ""
 
-#: www/index.php:564
-msgid "This seems like potential spam, or you have cookies or Javascript disabled, cannot continue."
-msgstr "Det h&auml;r ser ut som potentiell spam, eller s&aring; har du kakor eller javascript avst&auml;ngt. Kan inte forts&auml;tta."
+#: includes/account.php:428
+msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
+msgstr ""
 
 #: www/coapnew.php:980
 msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."
@@ -4597,7 +4646,7 @@ msgstr "Listan &ouml;ver test du klarade p&aring;"
 
 #: pages/gpg/0.php:20
 msgid "Paste your own public OpenPGP key below. It should not contain a picture. CAcert will sign your key after submission."
-msgstr ""
+msgstr "Klistra in din egna publika OpenPGP-nyckel nedan. Den b&ouml;r inte inneh&aring;lla n&aring;gon bild. CAcert kommer att signera nyckeln efter att du skickat in den."
 
 #: pages/index/0.php:23
 #, php-format
@@ -4714,7 +4763,7 @@ msgstr "OpenPGP-nycklar"
 
 #: pages/account/43.php:374
 msgid "Assurance Points The User Issued"
-msgstr ""
+msgstr "Verifikationspo&auml;ng anv&auml;ndaren utf&auml;rdat"
 
 #: pages/index/4.php:20
 msgid "Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your Email/Pass Phrase to get a new certificate, by clicking on 'Normal Login' to the right of your screen."

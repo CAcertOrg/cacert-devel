@@ -78,7 +78,7 @@
 				`subject`='$csrsubject', `codesign`='$codesign'";
 	mysql_query($query);
 	$certid = mysql_insert_id();
-	$CSRname = "/www/csr/client-$certid.csr";
+	$CSRname = generatecertpath("csr","client",$certid);
 	rename($checkedcsr, $CSRname);
 
 	mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='$certid'");

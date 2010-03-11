@@ -17,12 +17,11 @@
 */ ?>
 <p><b><? printf(_("The current %s board, and roles."), "CAcert Inc."); ?></b></p>
 <p>
-Nick Bebout - <?=_("President")?><br/>
-Mark Lipscombe - <?=_("Vice-President")?><br/>
-Philipp Dunkel - <?=_("Secretary")?><br/>
+Lambert Hofstra - <?=_("President")?><br/>
+Daniel Black - <?=_("Vice-President")?><br/>
+Mark Lipscombe - <?=_("Secretary")?>, <?=_("Public Officer")?><br/>
 Ernestine Schwob - <?=_("Treasurer")?><br/>
-Andreas B&uuml;rki - <?=_("member")?><br/>
-Guillaume Romagny - <?=_("member")?><br/>
+Nick Bebout - <?=_("member")?><br/>
 Ian Grigg - <?=_("member")?><br/>
-Robert Cruikshank - <?=_("Public Officer")?><br/>
+Mario Lipinski - <?=_("member")?><br/>
 </p>

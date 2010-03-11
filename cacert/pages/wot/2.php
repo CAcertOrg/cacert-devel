@@ -15,6 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+<span style="background-color: #FF8080; font-size: 150%">
+Note that the <strong>TTP</strong> programme is effectively <strong>Frozen</strong><br>
+Until a subsidiary policy under AP is written, it is against AP rules.<br>
+</span>
+&nbsp;<br>
 <h3><?=_("To become an Assurer")?></h3>
 
 <p><?=_("There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!).")?></p>
@@ -27,7 +32,5 @@ Denistone East NSW 2112<br>
 Australia</p>
 
 <p><?=_("Upon receiving your documents you will be notified, and points will be added to your account.")?></p>
-
-<p><?=_("The only other way to receive assurance points is to have had your identity checked by a third party CA, whose policies are suitably set to not let identity fraud run rampant. Please contact us if you would like more details about this.")?></p>
 
 <p><?=_("Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at").' <a href="https://cats.cacert.org/">https://cats.cacert.org/</a>!'?></p>

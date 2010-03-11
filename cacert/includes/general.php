@@ -25,6 +25,8 @@
 //	if($_SESSION['profile']['id'] > 0)
 //		session_regenerate_id();
 
+	$pageLoadTime_Start = microtime(true);
+
 	$junk = array(_("Face to Face Meeting"), _("Trusted Third Parties"), _("Thawte Points Transfer"), _("Administrative Increase"),
 			_("CT Magazine - Germany"), _("Temporary Increase"), _("Unknown"));
 
@@ -907,5 +909,37 @@
                return no_assurer_text(get_assurer_status($userID));
 	}
 
+	function generatecertpath($type,$kind,$id)
+	{
+		$name="../$type/$kind-".intval($id).".$type";
+		$newlayout=1;
+		if($newlayout)
+		{
+			$name="../$type/$kind/".intval($id/1000)."/$kind-".intval($id).".$type";
+			mkdir("../csr/$kind",0777);
+			mkdir("../crt/$kind",0777);
+			mkdir("../csr/$kind/".intval($id/1000));
+			mkdir("../crt/$kind/".intval($id/1000));
+		}
+		return $name;
+	}
+
+	/**
+	  * Run the sql query given in $sql.
+	  * The resource returned by mysql_query is
+	  * returned by this function.
+	  *
+	  * It should be safe to replace every mysql_query
+	  * call by a mysql_extended_query call.
+	  */
+	function mysql_timed_query($sql)
+	{
+		global $sql_data_log;
+		$query_start = microtime(true);
+		$res = mysql_query($sql);
+		$query_end = microtime(true);
+		$sql_data_log[] = array("sql" => $sql, "duration" => $query_end - $query_start);
+		return $res;
+	}
 
 ?>

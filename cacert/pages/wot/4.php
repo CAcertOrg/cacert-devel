@@ -15,6 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+<span style="background-color: #FF8080; font-size: 150%">
+Note that the <strong>TTP</strong> programme is effectively <strong>Frozen</strong><br>
+Until a subsidiary policy under AP is written, it is against AP rules.<br>
+</span>
+&nbsp;<br>
 <h3><?=_("Trusted Third Parties")?></h3>
 
 <p><?=_("A trusted 3rd party is simply someone in your country that is responsible for witnessing signatures and ID documents. This role is covered by many different titles such as public notary, justice of the peace and so on. Other people are allowed to be authoritative in this area as well, such as bank managers, accountants and lawyers.")?></p>

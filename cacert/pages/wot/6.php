@@ -82,7 +82,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2" align="left"><? printf(_("Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. Gross negligence may cause you to be liable."), $row['fname']); ?></td>
+    <td class="DataTD" colspan="2" align="left"><? printf(_("Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $row['fname']); ?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Name")?>:</td>
@@ -143,11 +143,15 @@
 <? } ?>
   <tr>
     <td class="DataTD"><input type="checkbox" name="assertion" value="1"<? if(array_key_exists('assertion',$_POST) && $_POST['assertion'] == 1) echo " checked='checked'"; ?>></td>
-    <td class="DataTD"><?=_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that CAcert may challenge this assurance and call upon me to prove the basis for it, and that I may be held responsible if I cannot provide such proof.")?></td>
+    <td class="DataTD"><?=_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible.")?></td>
   </tr>
   <tr>
     <td class="DataTD"><input type="checkbox" name="rules" value="1"<? if(array_key_exists('rules',$_POST) && $_POST['rules'] == 1) echo " checked='checked'"; ?>></td>
-    <td class="DataTD"><?=_("I have read and understood the Rules For Assurers and am making this assurance subject to and in compliance with these rules.")?></td>
+    <td class="DataTD"><?=_("I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook.")?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("Policy")?>:</td>
+    <td class="DataTD"><a href="/policy/AssurancePolicy.php" target="_NEW"><?=_("Assurance Policy")?></a> - <a href="http://wiki.cacert.org/AssuranceHandbook2" target="_NEW"><?=_("Assurance Handbook")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Points")?>:<br><nobr>(Max <?=maxpoints()?>)</nobr></td>
@@ -158,7 +162,7 @@
     <td class="DataTD"><a href="<?=$cap?>" target="_NEW">A4 - <?=_("WoT Form")?></a> <a href="<?=$cap?>&amp;format=letter" target="_NEW">US - <?=_("WoT Form")?></a></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("I am sure of myself")?>"> <input type="submit" name="cancel" value="<?=_("Cancel")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("I confirm this Assurance")?>"> <input type="submit" name="cancel" value="<?=_("Cancel")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="pagehash" value="<?=$_SESSION['_config']['wothash']?>">

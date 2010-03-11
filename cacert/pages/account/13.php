@@ -24,11 +24,19 @@
 	$month = intval(substr($user['dob'], 5, 2));
 	$day = intval(substr($user['dob'], 8, 2));
 
-	$body  = sprintf(_("Hi %s,"),$user['fname'])."\n";
-	$body .= _("You are receiving this email because you or someone else")."\n";
-	$body .= _("has viewed your lost password questions.")."\n";
+	$body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
+	$body .= _("You receive this automatic mail since you yourself or")."\n";
+	$body .= _("someone else looked up your secret questions and answers")."\n";
+	$body .= _("for a forgotten password.")."\n\n";
+	$body .= _("If it was you who looked up or changed that data, or clicked")."\n";
+	$body .= _("through the menu in your account, everything is in best order and")."\n";
+	$body .= _("you can ignore this mail.")."\n\n";
+	$body .= _("But if you received this mail without a recognisable reason,")."\n";
+	$body .= _("there is a danger that an unauthorised person accessed your")."\n";
+	$body .= _("account, and you should promptly change your password and your")."\n";
+	$body .= _("secret questions and answers.")."\n\n";
 
-	$body .= _("Best regards")."\n"._("CAcert.org Support!");
+	$body .= _("With kind regards,")."\n\n"._("CAcert Support");
 
 	sendmail($user['email'], "[CAcert.org] "._("Email Notification"), $body, "support@cacert.org", "", "", "CAcert Support");
 ?>
@@ -125,24 +133,24 @@
     <td class="DataTD" colspan="2"><?=_("Lost Pass Phrase Questions")?></td>
   </tr>
   <tr>
-    <td class="DataTD">1)&nbsp;<input type="text" name="Q1" size="15" value="<?=$user['Q1']?>"></td>
-    <td class="DataTD"><input type="text" name="A1" value="<?=$user['A1']?>"></td>
+    <td class="DataTD">1)&nbsp;<input type="text" name="Q1" size="15" value="<?=sanitizeHTML($user['Q1'])?>"></td>
+    <td class="DataTD"><input type="text" name="A1" value="<?=sanitizeHTML($user['A1'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">2)&nbsp;<input type="text" name="Q2" size="15" value="<?=$user['Q2']?>"></td>
-    <td class="DataTD"><input type="text" name="A2" value="<?=$user['A2']?>"></td>
+    <td class="DataTD">2)&nbsp;<input type="text" name="Q2" size="15" value="<?=sanitizeHTML($user['Q2'])?>"></td>
+    <td class="DataTD"><input type="text" name="A2" value="<?=sanitizeHTML($user['A2'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">3)&nbsp;<input type="text" name="Q3" size="15" value="<?=$user['Q3']?>"></td>
-    <td class="DataTD"><input type="text" name="A3" value="<?=$user['A3']?>"></td>
+    <td class="DataTD">3)&nbsp;<input type="text" name="Q3" size="15" value="<?=sanitizeHTML($user['Q3'])?>"></td>
+    <td class="DataTD"><input type="text" name="A3" value="<?=sanitizeHTML($user['A3'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">4)&nbsp;<input type="text" name="Q4" size="15" value="<?=$user['Q4']?>"></td>
-    <td class="DataTD"><input type="text" name="A4" value="<?=$user['A4']?>"></td>
+    <td class="DataTD">4)&nbsp;<input type="text" name="Q4" size="15" value="<?=sanitizeHTML($user['Q4'])?>"></td>
+    <td class="DataTD"><input type="text" name="A4" value="<?=sanitizeHTML($user['A4'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">5)&nbsp;<input type="text" name="Q5" size="15" value="<?=$user['Q5']?>"></td>
-    <td class="DataTD"><input type="text" name="A5" value="<?=$user['A5']?>"></td>
+    <td class="DataTD">5)&nbsp;<input type="text" name="Q5" size="15" value="<?=sanitizeHTML($user['Q5'])?>"></td>
+    <td class="DataTD"><input type="text" name="A5" value="<?=sanitizeHTML($user['A5'])?>"></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>

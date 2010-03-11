@@ -87,7 +87,8 @@
 	} elseif($locid > 0){
 		echo "</ul>\n</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n<br>\n";
 	}
-
+        if($locid>0 || $regid>0 || $ccid>0)
+	{
 	$query = "select *, `users`.`id` as `id` from `users`,`notary` where `listme`='1' and
 			`ccid`='".$ccid."' and `regid`='".$regid."' and
 			`locid`='".$locid."' and `users`.`id`=`notary`.`to`
@@ -102,6 +103,8 @@
     <td class="title"><?=_("Max Points")?></td>
     <td class="title"><?=_("Contact Details")?></td>
     <td class="title"><?=_("Email Assurer")?></td>
+    <td class="title"><?=_("Assurer Challenge")?></td>
+
   </tr>
 <? while($row = mysql_fetch_assoc($list)) { ?>
   <tr>
@@ -109,8 +112,12 @@
     <td class="DataTD"><?=maxpoints($row['id'])?></td>
     <td class="DataTD"><?=$row['contactinfo']?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['id'])?>"><?=_("Email Me")?></a></td>
+    <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
+
   </tr>
-<? } ?>
+<? } 
+        }
+?>
 </table>
 <br>
 <? } ?>

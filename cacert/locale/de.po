@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-06-25 19:17:40+0000\n"
+"PO-Revision-Date: 2009-12-26 19:01:08+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "%s Zeilen angezeigt."
 #: www/account/43.php:71
 #, php-format
 msgid "%s's Account Details"
-msgstr "Kontakt Details von %s"
+msgstr "Kontakt-Details von %s"
 
 #: www/account/32.php:21
 #, php-format
@@ -114,7 +114,7 @@ msgstr "Administratoren"
 
 #: www/wot/3.php:28
 msgid "After the meeting, visit the CAcert Web site's make an Assurance page and:"
-msgstr "Gehen Sie nach dem Treffen auf die CAcert Website zur Identit&auml;ts-Best&auml;tigung und:"
+msgstr "Gehen Sie nach dem Treffen auf die CAcert-Website zur Identit&auml;ts-Best&auml;tigung und:"
 
 #: www/help/3.php:44
 msgid "After your certificate has been emailed to you, follow this process to install the certificate."
@@ -122,7 +122,7 @@ msgstr "Nachdem ihnen ihr Zertifikat per E-Mail zugeschickt wurde, folgen Sie bi
 
 #: www/account/39.php:32 www/index/10.php:32
 msgid "Aggregated tracking information"
-msgstr "Zusammengefasste Tracking Information"
+msgstr "Zusammengefasste Tracking-Information"
 
 #: www/account/36.php:21 www/index/1.php:110
 msgid "Alert me if"
@@ -134,7 +134,7 @@ msgstr "Alle Felder m&uuml;ssen ausgef&uuml;llt werden."
 
 #: www/account/43.php:157
 msgid "Alternate Verified Email Addresses"
-msgstr "Verifizierte E-Mail Adresse &auml;ndern"
+msgstr "Verifizierte E-Mail-Adresse &auml;ndern"
 
 #: www/help/7.php:9
 msgid "Alternatively as things progress we can add more layers of security with say 4 webservers talking to 2 intermediate servers, talking to the root store, and acting in a token ring fashion, anything happening out of sequence, and the server directly upstream shuts itself down, which if that were in place and there were multiple paths, any down time in this fashion would fall over to the servers not compromised, anyways just some food for thought."
@@ -162,7 +162,7 @@ msgstr "Auch alle g&uuml;ltigen Zertifikate dieser Domains werden widerrufen."
 
 #: www/help/7.php:5
 msgid "Apart from the boot stuff, all data resides on an encrypted partition on the root store server and only manual intervention in the boot up process by entering the password will start it again."
-msgstr "Von den Dateien die zum Booten ben&ouml;tigt werden mal abgesehen, befinden sich alle Daten auf einer verschl&uuml;sselten Partition auf dem Haupt-Server (root store server). Nach einem Ausfall ist eine manuelle Passphase-Eingabe notwendig, um den Server wieder zu starten zu k&ouml;nnen.."
+msgstr "Von den Dateien, die zum Booten ben&ouml;tigt werden mal abgesehen, befinden sich alle Daten auf einer verschl&uuml;sselten Partition auf dem Haupt-Server (root store server). Nach einem Ausfall ist eine manuelle Passphase-Eingabe notwendig, um den Server wieder zu starten zu k&ouml;nnen."
 
 #: www/index/17.php:61
 msgid "Can't start the CEnroll control:"
@@ -193,11 +193,11 @@ msgstr "Assurance Best&auml;tigung"
 
 #: www/account/43.php:146 www/wot/3.php:44
 msgid "Assurance Points"
-msgstr "Assurance Punkte"
+msgstr "Assurance-Punkte"
 
 #: www/account/43.php:225 www/wot/10.php:52
 msgid "Assurance Points You Issued"
-msgstr "Assurance Punkte, die Sie vergeben haben"
+msgstr "Assurance-Punkte, die Sie vergeben haben"
 
 #: www/stats.php:51
 msgid "Assurances Made"
@@ -209,19 +209,19 @@ msgstr "Jemanden best&auml;tigen"
 
 #: www/index/0.php:60
 msgid "Assured client certificates"
-msgstr "Best&auml;tigte Client Zertifikate"
+msgstr "Best&auml;tigte Client-Zertifikate"
 
 #: www/index/0.php:90
 msgid "Assured server certificates"
-msgstr "Best&auml;tigte Server Zertifikate"
+msgstr "Best&auml;tigte Server-Zertifikate"
 
 #: pages/index/0.php:25
 msgid "For CAcert Community Members"
-msgstr "F&uuml;r CAcert Community Mitglieder"
+msgstr "F&uuml;r CAcert Community-Mitglieder"
 
 #: www/index/51.php:28
 msgid "Based on OpenSSL, PHP, a little bit of C and MySQL, we were able to build not only a free certificate authority that could verify your email address or domain, but actually build in a highly effective trust model. Our model goes further than that used by some commercial CAs to prove your identity."
-msgstr "Auf OpenSSL, PHP, ein wenig C und MySQL basierend haben wir es nicht nur fertig gebracht  eine kostenlose Certificate Authority (CA) die Ihre EMail-Adresse oder Dom&auml;ne &uuml;berpr&uuml;ft zu errichten, sondern auch ein hoch effizientes Vertrauens-Verfahren. Unser Verfahren geht in der Feststellung Ihrer Identit&auml;t &uuml;ber Verfahren anderer, kommerzieller CAs hinaus."
+msgstr "Auf OpenSSL, PHP, ein wenig C und MySQL basierend haben wir es nicht nur fertig gebracht  eine kostenlose Certificate Authority (CA), die Ihre E-Mail-Adresse oder Dom&auml;ne &uuml;berpr&uuml;ft zu errichten, sondern auch ein hoch effizientes Vertrauens-Verfahren. Unser Verfahren geht in der Feststellung Ihrer Identit&auml;t &uuml;ber Verfahren anderer, kommerzieller CAs hinaus."
 
 #: www/index/0.php:110
 msgid "Become a member of the CAcert Association"
@@ -263,7 +263,7 @@ msgstr "&Ouml;ffnen sie den Ordner, in dem Sie in Schritt 1 die .cer-Datei gespe
 
 #: www/help/2.php:25
 msgid "But perhaps, fundamentally, the most important reason for digital signing is awareness and privacy. It creates awareness of the (lack of) security of the Internet, and the tools that we can arm ourselves with to ensure our personal security. And in sensitising people to digital signatures, we become aware of the possibility of privacy and encryption."
-msgstr "Aber der vermutlich wichtigste Grund f&uuml;r Digitale Signaturen ist das entstehende Sicherheitsbewusstsein und die Privatsph&auml;re. Den meisten Menschen fehlt einfach das Wissen &uuml;ber die (fehlende) Sicherheit im Internet und die M&ouml;glichkeiten, die jedermann zum Selbstschutz zur Verf&uuml;gung stehen."
+msgstr "Aber der vermutlich wichtigste Grund f&uuml;r digitale Signaturen ist das entstehende Sicherheitsbewusstsein und die Privatsph&auml;re. Den meisten Menschen fehlt einfach das Wissen &uuml;ber die (fehlende) Sicherheit im Internet und die M&ouml;glichkeiten, die jederman zum Selbstschutz zur Verf&uuml;gung stehen."
 
 #: www/help/2.php:7 www/help/2.php:35
 msgid "But, er, is this really proof of your email identity?"
@@ -275,7 +275,7 @@ msgstr "Aber mit all diesem Geld und all dieser Verwantwortung werden die sicher
 
 #: www/account/10.php:15 www/account/20.php:15 www/account/3.php:15
 msgid "CAcert Certficate Acceptable Use Policy"
-msgstr "CAcert Zertifikat Verwendungsregeln"
+msgstr "CAcert-Zertifikat-Verwendungsregeln"
 
 #: www/account/38.php:19 www/index/13.php:19
 msgid "CAcert Inc. is a non-profit association which is legally able to accept donations. CAcert adheres to strict guidelines about how this money can to be used. If you'd like to make a donation, you can do so via"
@@ -324,7 +324,7 @@ msgstr "CAcert.org: Unsere Mission"
 
 #: includes/account.php:49 includes/account.php:389 www/index.php:316
 msgid "CAcert.org Support!"
-msgstr "CAcert.org Support!"
+msgstr "CAcert.org-Support!"
 
 #: www/account/37.php:17 www/index/12.php:17
 msgid "CAcert.org is a community driven, Certificate Authority that issues certificates to the public at large for free."
@@ -341,7 +341,7 @@ msgstr "Abbrechen"
 
 #: includes/general_stuff.php:58
 msgid "Cert Login"
-msgstr "Login mit Zertifikat"
+msgstr "Anmelden mit Zertifikat"
 
 #: www/account/19.php:101 www/account/6.php:99
 msgid "Certificate Installation Complete!"
@@ -357,7 +357,7 @@ msgstr "Zertifikat-Installation f&uuml;r IIS 5.0"
 
 #: includes/general_stuff.php:65
 msgid "CAcert Logos"
-msgstr "CAcert Logos"
+msgstr "CAcert-Logos"
 
 #: includes/account.php:669 includes/account.php:1066
 #, php-format
@@ -416,7 +416,7 @@ msgstr "Klicken Sie hier, um alle verf&uuml;gbaren Mailinglisten anzuzeigen."
 
 #: includes/account_stuff.php:153 www/account/18.php:18 www/account/5.php:18
 msgid "Client Certificates"
-msgstr "Client Zertifikate"
+msgstr "Client-Zertifikate"
 
 #: www/index/0.php:50
 msgid "Client certificates (un-assured)"
@@ -424,11 +424,11 @@ msgstr "Client-Zertifikate (nicht assured)"
 
 #: www/account/3.php:63
 msgid "Code Signing"
-msgstr "Code Zertifikate"
+msgstr "Code-Zertifikate"
 
 #: www/index/0.php:70
 msgid "Code signing certificates"
-msgstr "Code signierende Zertifikate"
+msgstr "Codesignierende Zertifikate"
 
 #: www/account/24.php:41 www/account/27.php:44 www/account/32.php:27
 #: www/account/33.php:43
@@ -442,7 +442,7 @@ msgstr "Common Name (z. B. IHR Name)"
 #: www/account/11.php:22 www/account/12.php:23 www/account/18.php:23
 #: www/account/21.php:25 www/account/22.php:23
 msgid "CommonName"
-msgstr "Zertifikats-Name ('Common Name')"
+msgstr "Zertifikatsname ('Common Name')"
 
 #: includes/account.php:1733 includes/account.php:1780
 #: includes/account.php:1792
@@ -451,11 +451,11 @@ msgstr "um fortzufahren."
 
 #: includes/general_stuff.php:63
 msgid "CAcert News"
-msgstr "CAcert News"
+msgstr "CAcert-Neugigkeiten"
 
 #: includes/general_stuff.php:66
 msgid "CAcert Statistics"
-msgstr "CAcert Statistik"
+msgstr "CAcert-Statistik"
 
 #: pages/account/11.php:26 pages/account/21.php:31
 msgid "subjectAltName"
@@ -471,7 +471,7 @@ msgstr "F&uuml;llen Sie das Formular fertig aus, wenn es nicht bereits fertig au
 
 #: www/help/3.php:39
 msgid "Confirm your request details"
-msgstr "Best&auml;tigen Sie Ihre Request-Details"
+msgstr "Best&auml;tigen Sie Ihre Anfrage-Details"
 
 #: www/wot/3.php:19
 msgid "Contact"
@@ -479,15 +479,15 @@ msgstr "Kontakt"
 
 #: www/wot/9.php:39
 msgid "Contact Assurer"
-msgstr "Kontaktiere Assurer"
+msgstr "Assurer kontaktieren"
 
 #: www/wot/1.php:121
 msgid "Contact Details"
-msgstr "Kontakt Details"
+msgstr "Kontakt-Details"
 
 #: www/account/24.php:25 www/account/27.php:28
 msgid "Contact Email"
-msgstr "Kontakt E-Mail"
+msgstr "Kontakt-E-Mail"
 
 #: includes/account_stuff.php:210 includes/general_stuff.php:110
 #: www/account/40.php:15 www/index/11.php:15
@@ -496,7 +496,7 @@ msgstr "Kontakt"
 
 #: www/wot/8.php:31
 msgid "Contact information"
-msgstr "Kontakt Informationen"
+msgstr "Kontakt-Informationen"
 
 #: www/account/39.php:37 www/index/10.php:37
 msgid "Cookies"
@@ -580,17 +580,17 @@ msgstr "Konto l&ouml;schen"
 #: www/account/34.php:28
 #, php-format
 msgid "Delete Admin for %s"
-msgstr "L&ouml;sche Administrator f&uuml;r %s"
+msgstr "Administrator f&uuml;r %s l&ouml;schen"
 
 #: www/account/30.php:28
 #, php-format
 msgid "Delete Domain for %s"
-msgstr "L&ouml;sche Domain f&uuml;r %s"
+msgstr "Domain f&uuml;r %s l&ouml;schen"
 
 #: www/account/31.php:24
 #, php-format
 msgid "Delete Organisation"
-msgstr "L&ouml;sche Organisation"
+msgstr "Organisation l&ouml;schen"
 
 #: www/account/32.php:26 www/account/33.php:30
 msgid "Department"
@@ -606,7 +606,7 @@ msgstr "Signieren Sie Ihren Code, Web Applets, Installer, etc. mit Ihrem Namen u
 
 #: www/wot/8.php:22
 msgid "Directory Listing"
-msgstr "Verzeichnis Auflistung"
+msgstr "Verzeichnis-Auflistung"
 
 #: www/help/2.php:61
 msgid "Disclaimer : These are the author's opinions, but they should not be considered 'truth' without personal verification. The author may have made mistakes and any mistakes will be willingly rectified by contacting the administrator of elucido.net, contact details available from the normal domain registration information services (e.g. whois.net).&amp;nbsp; No recommendation to install a Certificate Authority's root certificate is either intended nor implied."
@@ -620,7 +620,7 @@ msgstr "Domain"
 
 #: www/account/12.php:18 www/account/22.php:18
 msgid "Domain Certificates"
-msgstr "Domain Zertifikate"
+msgstr "Domain-Zertifikate"
 
 #: includes/account_stuff.php:157 www/account/25.php:21 www/account/25.php:38
 #: www/account/9.php:18
@@ -651,7 +651,7 @@ msgstr "Bearbeiten"
 
 #: www/account/27.php:21
 msgid "Edit Organisation"
-msgstr "Bearbeite Organisation"
+msgstr "Organisation bearbeiten"
 
 #: www/account/16.php:26 www/account/16.php:31 www/account/33.php:26
 #: www/account/42.php:22 www/account/43.php:34 www/account/43.php:74
@@ -661,22 +661,22 @@ msgstr "E-Mail"
 
 #: includes/account_stuff.php:149 www/account/2.php:18
 msgid "Email Accounts"
-msgstr "E-Mail Konto"
+msgstr "E-Mail-Konto"
 
 #: www/account/0.php:21
 msgid "Email Accounts and Client Certificates"
-msgstr "E-Mail Konten und Client-Zertifikate"
+msgstr "E-Mail-Konten und Client-Zertifikate"
 
 #: www/cap.php:72 www/account/1.php:22 www/account/11.php:34
 #: www/account/5.php:23 www/index/1.php:75 www/index/4.php:26
 #: www/index/5.php:21 www/gpg/2.php:21 www/disputes/1.php:23 www/help/4.php:29
 
 msgid "Email Address"
-msgstr "E-Mail Adresse"
+msgstr "E-Mail-Adresse"
 
 #: www/index.php:244
 msgid "Email Address was blank"
-msgstr "E-Mail Adresse war leer"
+msgstr "E-Mail-Adresse war leer"
 
 #: www/wot/1.php:122
 msgid "Email Assurer"
@@ -684,7 +684,7 @@ msgstr "E-Mail an den Assurer"
 
 #: includes/account.php:51 includes/account.php:391
 msgid "Email Probe"
-msgstr "Test E-Mail"
+msgstr "Test-E-Mail"
 
 #: www/help/2.php:20
 msgid "Emails are not secure. In fact emails are VERY not secure!"
@@ -712,7 +712,7 @@ msgstr "Geben Sie den Organisationsnamen ein: Dies muss der offiziell g&uuml;lti
 
 #: www/wot/3.php:30
 msgid "Enter the applicant's email address;"
-msgstr "Geben Sie die E-Mail Adresse des Antragsstellers ein;"
+msgstr "Geben Sie die E-Mail-Adresse des Antragsstellers ein;"
 
 #: www/help/3.php:33
 msgid "Enter the geographical details"
@@ -728,7 +728,7 @@ msgstr "Informationen zu Ihrer Organisation:"
 
 #: www/help/2.php:57
 msgid "Erroneous Verisign Issued Digital Certificates Pose Spoofing Hazard"
-msgstr "Fehlerhaft ausgestellte Digitale Zertifikate von Verisign erlauben Manipulationen (Englischer Text)"
+msgstr "Fehlerhaft ausgestellte digitale Zertifikate von Verisign erlauben Manipulationen (Englischer Text)"
 
 #: includes/account.php:67 www/verify.php:33 www/verify.php:45
 #: www/verify.php:76 www/verify.php:89
@@ -767,15 +767,15 @@ msgstr "Domain finden"
 
 #: includes/account_stuff.php:191 www/account/42.php:19
 msgid "Find User"
-msgstr "Finde Benutzer"
+msgstr "Benutzer finden"
 
 #: www/account/48.php:19
 msgid "Find User by Domain"
-msgstr "Finde Benutzer anhand der Dom&auml;ne"
+msgstr "Benutzer anhand der Dom&auml;ne finden"
 
 #: includes/account_stuff.php:182
 msgid "Find an Assurer"
-msgstr "Finde einen Assurer"
+msgstr "Einen Assurer finden"
 
 #: www/help/3.php:41
 msgid "Finish up and exit IIS Certificate Wizard"
@@ -833,7 +833,7 @@ msgstr "Benutzer mit 50 - 99 Punkten"
 
 #: includes/account_stuff.php:185
 msgid "GPG/PGP Keys"
-msgstr "GPG/PGP Schl&uuml;ssel"
+msgstr "GPG/PGP-Schl&uuml;ssel"
 
 #: www/account/36.php:22 www/index/1.php:111
 msgid "General Announcements"
@@ -859,15 +859,15 @@ msgstr "Benutzer mit 1 - 49 Punkten"
 
 #: www/help/4.php:4
 msgid "Generating a 1024 bit RSA private key"
-msgstr "Erzeuge einen Privaten RSA Schl&uuml;ssel der L&auml;ge 1024-bit"
+msgstr "Einen privaten RSA-Schl&uuml;ssel mit der L&auml;nge 1024-bit erzeugen"
 
 #: www/help/3.php:1
 msgid "Generating a Key Pair and Certificate Signing Request (CSR) for a Microsoft Internet Information Server (IIS) 5.0."
-msgstr "Erzeuge ein Schl&uuml;sselpaar und einen Certificate Signing Request (CSR) f&uuml;r einen Microsoft Internet Information Server (IIS) 5.0."
+msgstr "Ein Schl&uuml;sselpaar und einen Certificate Signing Request (CSR) f&uuml;r einen Microsoft Internet Information Server (IIS) 5.0. erzeugen"
 
 #: includes/account_stuff.php:142
 msgid "Go Home"
-msgstr "Gehe zur Startseite"
+msgstr "Zur Startseite gehen"
 
 #: www/account/40.php:19 www/index/11.php:19
 msgid "Go here for more details."
@@ -892,7 +892,7 @@ msgstr "Hilfe"
 #: www/account/10.php:29 www/account/16.php:41 www/account/20.php:26
 #: www/account/3.php:53
 msgid "Sign by class 3 root certificate"
-msgstr "Signieren mit dem Klasse 3 Root Zertifikat"
+msgstr "Mit dem Klasse 3 Root-Zertifikat signieren"
 
 #: www/account/19.php:54 www/account/6.php:52
 msgid "Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above."
@@ -912,7 +912,7 @@ msgstr "Startseite"
 
 #: www/help/2.php:8
 msgid "How do I create my own digital signature?!"
-msgstr "Wie erzeuge ich meine eigene Digitale Signatur?!"
+msgstr "Wie erzeuge ich meine eigene digitale Signatur?!"
 
 #: www/help/0.php:8
 msgid "How do I generate a private key and CSR using OpenSSL?"
@@ -942,21 +942,13 @@ msgstr "Wie?"
 msgid "Howto Information"
 msgstr "Hilfestellung"
 
-#: www/wot/6.php:112
-msgid "I am sure of myself"
-msgstr "Ich bin mir selbst sicher"
-
-#: www/wot/6.php:101
-msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that CAcert may challenge this assurance and call upon me to prove the basis for it, and that I may be held responsible if I cannot provide such proof."
-msgstr "Ich bin mir sicher, dass die Identit&auml;t die ich hier best&auml;tige, korrekt, komplett und &uuml;berpr&uuml;fbar ist. Ich habe die Originaldokumente gesehen und best&auml;tige deren Richtigkeit. Ich akzeptiere, dass CAcert jederzeit diese Best&auml;tigung anzweifeln und mich zum Nachweis der &Uuml;berpr&uuml;fung auffordern darf. Ich bin pers&ouml;nlich daf&uuml;r verantwortlich, wenn ich diesen Nachweis nicht erbringen kann!"
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "Ich kann es nicht erwarten eigene verschl&uuml;sselte E-Mails zu versenden!"
 
 #: includes/account.php:884
 msgid "I couldn't match any emails against your organisational account."
-msgstr "Es passt leider keine E-Mail Adresse zu Ihrer Organisation."
+msgstr "Es passt leider keine E-Mail-Adresse zu Ihrer Organisation."
 
 #: includes/account.php:120 includes/account.php:152 includes/account.php:254
 #: includes/account.php:904 includes/account.php:991
@@ -966,10 +958,6 @@ msgstr "Wir haben keine g&uuml;ltige Zertifikat-Anfrage (CSR) bekommen. Klicken 
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
 msgstr "Ich will nicht im Benutzerverzeichnis aufgelistet werden"
-
-#: www/wot/6.php:105
-msgid "I have read and understood the Rules For Assurers and am making this assurance subject to and in compliance with these rules."
-msgstr "Ich habe die Regeln f&uuml;r Assurer gelesen und verstanden und mache diese Assurance im Sinne und in &Uuml;bereinstimmung mit diesen Regeln."
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
@@ -985,7 +973,7 @@ msgstr "Ich werden den Wieso?-Teil zuerst beantworten, da dies offentsichtlich e
 
 #: www/account/43.php:62
 msgid "I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!"
-msgstr "Es tut mir leid, den Benutzer nach dem Sie suchen scheint es es nicht mehr zu geben!"
+msgstr "Es tut mir leid, den Benutzer nach dem Sie suchen, scheint es es nicht mehr zu geben!"
 
 #: www/wot.php:42
 msgid "I'm sorry, there was no email matching what you entered in the system. Please double check your information."
@@ -1179,7 +1167,7 @@ msgstr "Eintr&auml;ge"
 
 #: www/help/4.php:11
 msgid "Locality Name (eg, city) [Sydney]:"
-msgstr "Standort Name (z.B. Stadt) [Sydney]:"
+msgstr "Standort-Name (z.B. Stadt) [Sydney]:"
 
 #: www/account/11.php:30 www/account/21.php:33 www/account/43.php:196
 #: www/account/43.php:231 www/wot/10.php:25 www/wot/10.php:58 www/wot/6.php:69
@@ -1200,11 +1188,11 @@ msgstr "Ausloggen"
 
 #: www/index/5.php:18
 msgid "Lost Pass Phrase"
-msgstr "Passwort Vergessen"
+msgstr "Passwort vergessen"
 
 #: www/index/6.php:18
 msgid "Lost Pass Phrase - Step 2"
-msgstr "Passwort Vergessen - Schritt 2"
+msgstr "Passwort vergessen - Schritt 2"
 
 #: www/account/13.php:100
 msgid "Lost Pass Phrase Questions"
@@ -1213,14 +1201,14 @@ msgstr "Ich-habe-mein-Passwort-vergessen-Fragen"
 #: pages/index/0.php:24
 #, php-format
 msgid "Have you passed the CAcert %s Assurer Challenge %s yet?"
-msgstr "Haben Sie schon die CAcert %s Assurer Pr&uuml;fung %s bestanden?"
+msgstr "Haben Sie schon die CAcert %s Assurer-Pr&uuml;fung %s bestanden?"
 
 #: includes/general_stuff.php:59 www/account/43.php:106 www/account/43.php:110
 #: www/account/43.php:114 www/account/43.php:118 www/account/43.php:122
 #: www/account/43.php:126 www/account/43.php:130 www/account/43.php:134
 #: www/account/43.php:138 www/account/43.php:142
 msgid "Lost Password"
-msgstr "Passwort Vergessen"
+msgstr "Passwort vergessen"
 
 #: www/index.php:318
 msgid "Mail Probe"
@@ -1318,7 +1306,7 @@ msgstr "Meine Benachrichtigungen"
 #: www/account/19.php:42 www/account/19.php:50 www/account/23.php:23
 #: www/account/6.php:21 www/account/6.php:40 www/account/6.php:48
 msgid "My CAcert.org Account!"
-msgstr "Mein CAcert.org Konto!"
+msgstr "Mein CAcert.org-Konto!"
 
 #: includes/account_stuff.php:145 www/account/0.php:19 www/account/13.php:23
 #: www/index/1.php:19
@@ -1327,7 +1315,7 @@ msgstr "Meine Details"
 
 #: www/account/41.php:18
 msgid "My Language Settings"
-msgstr "Meine Sprach Einstellungen"
+msgstr "Meine Sprach-Einstellungen"
 
 #: includes/account_stuff.php:146 www/wot/8.php:19
 msgid "My Listing"
@@ -1391,7 +1379,7 @@ msgstr "Die neuen Passw&ouml;rter sind leer oder passen nicht zusammen."
 
 #: www/account/44.php:26
 msgid "New Password"
-msgstr "Passwort &Auml;ndern"
+msgstr "Passwort &auml;ndern"
 
 #: www/stats.php:70 www/stats.php:106
 msgid "New Users"
@@ -1405,7 +1393,7 @@ msgstr "Weiter"
 
 #: www/help/4.php:17
 msgid "Next step is that you submit the contents of server.csr to the CAcert website, it should look *EXACTLY* like the following example otherwise the server may reject your request because it appears to be invalid."
-msgstr "Der n&auml;chste Schritt ist, dass Sie auf der CAcert Website den Inhalt der Datei server.csr abschicken. Dieser sollte vom Aufbau her *EXAKT* so aussehen, wie das folgende Beispiel - ansonsten wird der Server Ihre Anfrage vermutlich als fehlerhaft zur&uuml;ckweisen."
+msgstr "Der n&auml;chste Schritt ist, dass Sie auf der CAcert- Website den Inhalt der Datei server.csr abschicken. Dieser sollte vom Aufbau her *EXAKT* so aussehen, wie das folgende Beispiel - ansonsten wird der Server Ihre Anfrage vermutlich als fehlerhaft zur&uuml;ckweisen."
 
 #: www/account/50.php:29
 msgid "No"
@@ -1496,7 +1484,7 @@ msgstr "Anzahl von Tagen"
 
 #: pages/gpg/2.php:23
 msgid "Key ID"
-msgstr "Schl&uuml;ssel ID"
+msgstr "Schl&uuml;ssel-ID"
 
 #: www/help/2.php:30
 msgid "Of the biggest reasons why most people haven't started doing this, apart from being slightly technical, the reason is financial. You need your own certificate to digitally sign your emails. And the Certificate Authorities charge money to provide you with your own certificate. Need I say more. Dosh = no thanks I'd rather walk home. But organisations are emerging to provide the common fool in the street with a free alternative. However, given the obvious lack of funding and the emphasis on money to get enrolled, these organisations do not yet have the money to get themselves established as trusted Certificate Authorities. Thus it is currently down to trust. The decision of the individual to trust an unknown Certificate Authority. However once you have put your trust in a Certificate Authority you can implicitly trust the digital signatures generated using their certificates. In other words, if you trust (and accept the certificate of) the Certificate Authority that I use, you can automatically trust my digital signature. Trust me!"
@@ -1544,7 +1532,7 @@ msgstr "Org Admin"
 
 #: includes/account_stuff.php:166
 msgid "Org Client Certs"
-msgstr "Organisations Client Zertifikate"
+msgstr "Organisations-Client-Zertifikate"
 
 #: www/account/0.php:25
 msgid "Org Client and Server Certificates"
@@ -1552,11 +1540,11 @@ msgstr "Organisations Client- und Server Zertifikate"
 
 #: includes/account_stuff.php:170
 msgid "Org Server Certs"
-msgstr "Organisations Server Zertifikate"
+msgstr "Organisations-Server-Zertifikate"
 
 #: www/account/11.php:29 www/account/21.php:32
 msgid "Org. Unit"
-msgstr "Organisations Einheit"
+msgstr "Organisations-Einheit"
 
 #: www/account/11.php:28 www/account/21.php:31 www/account/25.php:20
 #: www/account/35.php:20
@@ -1569,7 +1557,7 @@ msgstr "Name der Organisation"
 
 #: includes/account.php:1379 includes/account.php:1406
 msgid "Organisation Name and Contact Email are required fields."
-msgstr "Organisations Name und Kontakt E-Mail sind beides ben&ouml;tigte Felder."
+msgstr "Organisations-Name und Kontakt-E-Mail sind beides ben&ouml;tigte Felder."
 
 #: www/account/25.php:17 www/account/35.php:17
 msgid "Organisations"
@@ -1577,7 +1565,7 @@ msgstr "Organisationen"
 
 #: www/help/4.php:12
 msgid "Organization Name (eg, company) [XYZ Corp]:"
-msgstr "Organization Name (z. B. Firmenname) [XYZ Corp]"
+msgstr "Organizations-Name (z. B. Firmenname) [XYZ Corp]"
 
 #: www/help/4.php:13
 msgid "Organizational Unit Name (eg, section) [Server Administration]:."
@@ -1925,11 +1913,11 @@ msgstr "W&auml;hlen Sie eine Account Eigenschaft"
 
 #: www/help/3.php:37
 msgid "Select an easy to locate folder. You'll have to open this file up with Notepad. The CSR must be copied and pasted into our online form. Once the CSR has been submitted, you won't need this CSR any more as IIS won't reuse old CSR to generate new certificates."
-msgstr "W&auml;hlen Sie einen leicht zu lokalisierenden Ordner aus. Sie m&uuml;ssen den CSR mit dem Editor &ouml;ffnen. Der CSR muss aussgeschnitten und in unser Online-Formular eingf&uuml;gt werden. Wurde der CSR einmal abgeschickt, kann es gel&ouml;scht werden, denn der IIS erlaubt es nicht einen alten CSR zur Erstellung eines neuen CSR zu verwenden."
+msgstr "W&auml;hlen Sie einen leicht zu findendes Verzeichnis aus. Sie m&uuml;ssen den CSR mit dem Editor &ouml;ffnen. Der CSR muss ausgeschnitten und in unser Online-Formular eingf&uuml;gt werden. Wurde der CSR einmal abgeschickt, kann es gel&ouml;scht werden, denn der IIS erlaubt es nicht einen alten CSR zur Erstellung eines neuen CSR zu verwenden."
 
 #: www/help/3.php:61
 msgid "Select the .cer file and click 'Next'."
-msgstr "W&auml;hlen Sie die .cer-Datei und kliecken Sie auf 'weiter'."
+msgstr "W&auml;hlen Sie die .cer-Datei und klicken Sie auf 'weiter'."
 
 #: www/help/3.php:54
 msgid "Select the Directory Security tab"
@@ -1946,11 +1934,11 @@ msgstr "Senstive Informationen"
 
 #: includes/account_stuff.php:161
 msgid "Server Certificates"
-msgstr "Server Zertifikate"
+msgstr "Server-Zertifikate"
 
 #: www/index/0.php:80
 msgid "Server certificates (un-assured)"
-msgstr "Server Zertifikate (unbest&auml;tigt)"
+msgstr "Server-Zertifikate (unbest&auml;tigt)"
 
 #: www/wot.php:247
 msgid "Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this."
@@ -2019,15 +2007,11 @@ msgstr "Suffix"
 
 #: includes/account_stuff.php:190
 msgid "System Admin"
-msgstr "System Administrator"
+msgstr "System-Administrator"
 
 #: www/help/6.php:7
 msgid "System will send you an email with a link in it, you just open the link in a webbrowser."
 msgstr "Das System wird Ihnen eine E-Mail mit einem Link senden. &Ouml;ffnen Sie diesen Link mit einem Webbrowser."
-
-#: includes/account_stuff.php:182
-msgid "TTP Form"
-msgstr "TTP Formular"
 
 #: includes/general.php:24 www/wot/6.php:99
 msgid "Temporary Increase"
@@ -2085,13 +2069,9 @@ msgstr "Das Passwort das Sie angegeben haben ist zu kurz. Es muss mindestens 6 Z
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr "Der 'Regulation of Investigational Powers Act' (RIPA) (offizielle 'Snooping Bill' Regierungs-Seite , Grossbritiannien)"
 
-#: www/account/0.php:28
-msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons. You can also get trust points via the Trust Third Party system where you go to a lawyer, bank manager, accountant, or public notary/juctise of the peace and they via your ID and fill in the TTP form to state they have viewed your ID documents and it appears authentic and true. More information on the TTP system can be found in the TTP sub-menu"
-msgstr "Das Web of Trust System das CAcert benutzt &auml;hnelt dem, das auch f&uuml;r GPG/PGP benutzt wird: Mitglieder treffen sich pers&ouml;nlich und &uuml;berpr&uuml;fen gegenseitig, ob der Name im GPG/PGP-Schl&uuml;es mit dem Namen auf einem offiziellen Dokument (z. B. Personalausweis) des Schl&uuml;sselbesitzers &uuml;bereinstimmt. Bei CAcert unterscheidet sich sich das ganze etwas, da das PKI System (Public Key Infrastructure) etwas angepasst werden musste: Um in das Web of Trust aufgenommen (assured) zu werden, m&uuml;ssen Sie zun&auml;chst jemanden finden, dem bereits vertraut wird (Assurer). Diese Person kann eine gewisse Anzahl an Punkten an andere vergeben, die davon abh&auml;ngt, wie viele andere Personen dieser Person selbst vertrauen. Die Anzahl der m&ouml;glichen Punkte eines Assurers kann man im Bereich 'Finde einen Assurer' abfragen. Sobald Sie sich mit dem Assurer getroffen haben und dieser Ihre Personalien &uuml;berpr&uuml;ft hat, m&uuml;ssen Sie ein CAP-Formular ausf&uuml;llen und dem Assurer aush&auml;ndigen. Sie k&ouml;nnen ebenfalls Punkte erhalten, wenn Sie sich im Rahmen des TTP-Systems (Trust Third Party) an einen Anwalt, einen Notar oder z. B. Fillialleiter einer Bank oder vereidigten Wirtschaftspr&uuml;fer wenden und dieser Ihre Identit&auml;t &uuml;berpr&uuml;ft und das TTP Formular ausf&uuml;llt. Mehr Informationen zum TTP System finden Sie im TTP Untermen&uuml;."
-
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
-msgstr "Die Erlaubnis, andere neue CAcert Benutzer zu assuren; zur St&auml;rkung und Erweiterung des CAcert Web of Trust beitragen."
+msgstr "Die Erlaubnis, andere neue CAcert-Benutzer zu assuren; zur St&auml;rkung und Erweiterung des CAcert Web of Trust beitragen."
 
 #: includes/account.php:363
 msgid "The address you submitted isn't a valid authority address for the domain."
@@ -2107,12 +2087,6 @@ msgstr "Der aktuelle %s Vorstand und die jeweiligen Funktionen."
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Die Domain '%s' wurde hinzugef&uuml;gt, aber bevor Sie Zertifikate f&uuml;r diese Domain ausstellen k&ouml;nnen, m&uuml;ssen Sie den Link der an Ihre Email Adresse geschickt wurde, in einem Browser &ouml;ffnen."
 
-#: includes/account.php:304 includes/account.php:373 includes/account.php:1428
-#: includes/account.php:1458
-#, php-format
-msgid "The domain '%s' is already in the system and is listed as valid. Can't continue."
-msgstr "Die Domain '%s' ist bereits im System und als g&uuml;ltig markiert."
-
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
 msgstr "Der E-Mail-Konto Bereich ist dazu gedacht, E-Mail-Konten hinzuzuf&uuml;gen, zu aktualisieren und wieder zu entfernen. F&uuml;r die dort eingetragenen E-Mail-Adressen k&ouml;nnen Client-Zertifikate ausgestellt werden.  Der Client-Zertifikat Bereich hilft Ihnen dabei, eine Client-Zertifikat-Anfrage (CSR) f&uuml;r eine oder mehrere E-Mail-Adressen zu erstellen, die Sie im E-Mail-Konto Bereich registriert haben.."
@@ -2120,12 +2094,7 @@ msgstr "Der E-Mail-Konto Bereich ist dazu gedacht, E-Mail-Konten hinzuzuf&uuml;g
 #: includes/account.php:54
 #, php-format
 msgid "The email address '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
-msgstr "Die Email Adresse '%s' wurde hinzugef&uuml;gt, bevor Sie f&uuml;r diese Adresse irgendwelche Zertifikate ausstellen k&ouml;nnen, m&uuml;ssen Sie den Link in einem Browser &ouml;ffnen, der Ihnen an die Email Adresse geschickt wurde."
-
-#: includes/account.php:36
-#, php-format
-msgid "The email address '%s' is already in the system. Can't continue."
-msgstr "Die E-Mail-Adresse '%s' ist bereits im System!"
+msgstr "Die E-Mail-Adresse '%s' wurde hinzugef&uuml;gt, bevor Sie f&uuml;r diese Adresse irgendwelche Zertifikate ausstellen k&ouml;nnen, m&uuml;ssen Sie den Link in einem Browser &ouml;ffnen, der Ihnen an die E-Mail-Adresse geschickt wurde."
 
 #: includes/account.php:86
 msgid "The following accounts have been removed:"
@@ -2376,7 +2345,7 @@ msgstr "Anzeigen"
 
 #: includes/account_stuff.php:177
 msgid "View Organisations"
-msgstr "Zeige Organisationen"
+msgstr "Organisationen anschauen"
 
 #: www/account/29.php:23 www/account/30.php:23
 msgid "Warning!"
@@ -2507,7 +2476,7 @@ msgstr "Nach den vorgeschlagenen Root-Zertifikat &Auml;nderungen g&auml;be es ei
 
 #: www/account/36.php:25 www/index/1.php:114
 msgid "Within 200km Announcements"
-msgstr "Ank&uuml;ndigungen innerhalb von 200km"
+msgstr "Ank&uuml;ndigungen innerhalb von 200 km"
 
 #: includes/account_stuff.php:182
 msgid "WoT Form"
@@ -2567,10 +2536,13 @@ msgstr "War daran beteiligt, diese Webseite ins Portugisische zu &uuml;bersetzen
 msgid "Has put a lot of time and effort into promoting and assuring people in Brazil and South America, and for helping to translate this site into Portuguese"
 msgstr "Hat viel Zeit und Engagement investiert, um CAcert in Brasilien und S&uuml;d Amerika bekannt zu machen und Leute dort zu assuren. Er hat wesentliche Teile der Portugisischen &Uuml;bersetzung erstellt."
 
-#: www/wot/6.php:44
-#, php-format
-msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. Gross negligence may cause you to be liable."
-msgstr "Bitte pr&uuml;fen Sie, ob die folgenden Details mit dem &uuml;bereinstimmen, was Sie mit eigenen Augen in den Dokumenten gesehen haben, als Sie sich pers&ouml;nlich mit %s getroffen haben. Sie d&uuml;rfen NICHT fortfahren, wenn Sie sich nicht sicher sind, dann diese Angaben korrekt sind. F&uuml;r grobe Fahrl&auml;ssigkeit k&ouml;nnen Sie zur Verantwortung gezogen werden."
+#: www/index.php:586 www/index.php:593
+msgid "This seems like potential spam, cannot continue."
+msgstr ""
+
+#: www/index.php:572 www/index.php:579
+msgid "This seems like you have cookies or Javascript disabled, cannot continue."
+msgstr ""
 
 #: includes/general_stuff.php:74
 msgid "CAcert Board"
@@ -2663,7 +2635,7 @@ msgstr "Der Versuch eine einzutragende Domain anzunehmen oder abzulehnen wegen e
 
 #: www/index.php:231
 msgid "Your account has not been verified yet, please check your email account for the signup messages."
-msgstr "Ihr Account ist noch nicht verifiziert, &uuml;berpr&uuml;fen Sie bitte Ihre E-Mails um weitere Informationen zu erhalten."
+msgstr "Ihr Konto ist noch nicht verifiziert, &uuml;berpr&uuml;fen Sie bitte Ihre E-Mails, um weitere Informationen zu erhalten."
 
 #: www/wot.php:415
 msgid "Your account information has been updated."
@@ -2675,11 +2647,11 @@ msgstr "Der Versuch eine angemahnte Domain anzunehmen bzw. abzulehnen schlug weg
 
 #: www/verify.php:66
 msgid "Your account and/or email address has been verified. You can now start issuing certificates for this address."
-msgstr "Ihr Account und/oder E-Mail Adresse ist &uuml;berpr&uuml;ft worden. Sie k&ouml;nnen nun Ihre Zertifikate ausstellen."
+msgstr "Ihr Konto und/oder E-Mail-Adresse ist &uuml;berpr&uuml;ft worden. Sie k&ouml;nnen nun Ihre Zertifikate ausstellen."
 
 #: includes/account.php:1072 www/index.php:117
 msgid "Your Pass Phrase has been updated and your primary email account has been notified of the change."
-msgstr "Ihr Anmeldepasswort wurde erneuert und Sie wurden dar&uuml;ber &uuml;ber ihre Prim&auml;re E-mail Adresse (Hauptadresse des Accounts) informiert."
+msgstr "Ihr Anmeldepasswort wurde erneuert und Sie wurden dar&uuml;ber &uuml;ber ihre Prim&auml;re E-Mail-Adresse (Hauptadresse des Kontos) informiert."
 
 #: pages/account/40.php:31 pages/account/40.php:54 pages/index/11.php:31
 #: pages/index/11.php:54
@@ -2693,7 +2665,7 @@ msgstr "Ihre E-Mail"
 
 #: www/verify.php:42
 msgid "You've attempted to verify the same email address a fourth time with an invalid hash, subsequently this request has been deleted in the system"
-msgstr "Sie haben versucht, die gleiche E-Mail Addresse ein viertes Mal mit einem unzul&auml;ssigen Hash zu &uuml;berpr&uuml;fen, zwischenzeitlich ist dieser Antrag aus dem System entfernt worden"
+msgstr "Sie haben versucht, die gleiche E-Mail-Adresse ein viertes Mal mit einem unzul&auml;ssigen Hash zu &uuml;berpr&uuml;fen, zwischenzeitlich ist dieser Antrag aus dem System entfernt worden"
 
 #: www/wot.php:344
 msgid "You've been Assured."
@@ -2729,7 +2701,7 @@ msgstr "Sie erstellen gerade einen CSR. Die hier eingetragene Information &uuml;
 
 #: pages/index/19.php:77
 msgid "You will need to be issued 100 points by meeting with existing assurers from the CAcert Web of Trust, who verify your identity using your government issued photo identity documents; OR if it is too difficult to meet up with existing assurers in your area, meet with two Trusted Third Party assurers (notary public, justice of the peace, lawyer, bank manager, accountant) to do the verifying."
-msgstr "Sie muessen erst 100 Punkte bei einem pers&ouml;nlichen Treffen von den CAcert-Assurern erhalten, die Ihre Identit&auml;t anhand Ihres Personalausweises oder eines anderen amtlichen Lichtbildausweises &uuml;berpr&uuml;fen."
+msgstr "Sie m&uuml;ssen erst 100 Punkte bei einem pers&ouml;nlichen Treffen von den CAcert-Assurern erhalten, die Ihre Identit&auml;t anhand Ihres Personalausweises oder eines anderen amtlichen Lichtbildausweises &uuml;berpr&uuml;fen."
 
 #: www/wot.php:320
 #, php-format
@@ -2763,11 +2735,11 @@ msgstr "Sie sehen das jedesmal wenn Sie eine sichere Seite im Internet aufrufen 
 
 #: www/disputes.php:269
 msgid "You only dispute the primary email address of an account if there is no longer any email addresses or domains linked to it."
-msgstr "Sie haben eine Prim&auml;re E-mail Adresse von einem Account angegeben, worauf keine E-Mail Adresse oder Domain passt.&#13;"
+msgstr "Sie haben eine Prim&auml;re E-Mail-Adresse von einem Account angegeben, worauf keine E-Mail-Adresse oder Domain passt."
 
 #: www/wot.php:326
 msgid "You now have over 50 points, and can now have your name added to client certificates, and issue server certificates for up to 2 years."
-msgstr "Sie haben jetzt &uuml;ber 50 Punkte und k&ouml;nnen Ihren Namen zu den Client Zertifikaten hinzuf&uuml;gen, und Serverzertifikate sind nun 2 Jahre g&uuml;ltig."
+msgstr "Sie haben jetzt &uuml;ber 50 Punkte und k&ouml;nnen Ihren Namen zu den Client-Zertifikaten hinzuf&uuml;gen, und Server-Zertifikate sind nun 2 Jahre g&uuml;ltig."
 
 #: www/wot.php:196
 msgid "You must enter the number of points you wish to allocate to this person."
@@ -2817,7 +2789,7 @@ msgstr "Zuerst brauchen Sie mod-ssl und Apache (eine Installationsanleitung kann
 
 #: www/help/0.php:26 www/help/9.php:26
 msgid "How can I do a single sign on similar to CAcert using client certificates?"
-msgstr "Wie macht man ein Single-Sign_On &auml;hnlich wie CAcert mit Client Zertifikaten?"
+msgstr "Wie macht man ein Single-Sign_On &auml;hnlich wie CAcert mit Client- Zertifikaten?"
 
 #: www/index/1.php:17
 msgid "In light of the number of people having issues with making up a password we have the following suggestions:"
@@ -2833,7 +2805,7 @@ msgstr "Unsere Ziele"
 
 #: www/help/9.php:30
 msgid "Once you have everything setup and working you will need to add lines similar to below to your apache.conf"
-msgstr "Sobald Sie alles aufgesetzt und laufen haben, m&uuml;ssen Sie folgende Zeilen zu Ihrer apache.conf Datei hinzuf&uuml;gen"
+msgstr "Sobald Sie alles aufgesetzt und laufen haben, m&uuml;ssen Sie folgende Zeilen zu Ihrer apache.conf-Datei hinzuf&uuml;gen"
 
 #: www/help/9.php:49
 msgid "Once you have everything working and you've tested sending a client certificate to your site and you're happy all is well you can start adding code to PHP (or any other language you like that can pull server environment information). At present I only have PHP code available and the example is in PHP"
@@ -2845,7 +2817,7 @@ msgstr "Bitte beachten Sie, dass Sie Pfade, Hostnamen und IP des obigen Beispiel
 
 #: includes/general_stuff.php:69
 msgid "RSS News Feed"
-msgstr "RSS Nachrichten"
+msgstr "RSS-Nachrichten"
 
 #: www/help/2.php:67
 msgid "The point is, as the current situation holds, you should be wary of anyone making decisions for you (i.e. pre-installed certificates in your browser), and you should be weary of anyone else's certificates that you install. But at the end of the day, it all boils down to trust. If an independent Certificate Authority seems to be reputable to you, and you can find evidence to support this claim, there's no reason why you shouldn't trust it any less than you implicitly trust the people who have already made mistakes."
@@ -2857,11 +2829,11 @@ msgstr "Sie verzeichneten einen unzul&auml;ssigen Sponsor f&uuml;r diese Aktion.
 
 #: pages/wot/3.php:38
 msgid "You may charge a fee for your expenses if the applicant has been advised of the amount prior to the meeting."
-msgstr "Sie k&ouml;nnen eine Geb&uuml;hr f&uuml;r Ihre Unkosten erheben, wenn der Bewerber von der H&ouml;he vor der Sitzung in Kenntnis gesetzt worden ist."
+msgstr "Sie k&ouml;nnen eine Geb&uuml;hr f&uuml;r Ihre Unkosten erheben, wenn der Bewerber von der H&ouml;he vor dem Treffen in Kenntnis gesetzt worden ist."
 
 #: pages/index/19.php:27
 msgid "You must confirm it is your email address by responding to a 'ping' email sent to it."
-msgstr "Sie m&uuml;ssen die E-Mail Adresse best&auml;tigen indem Sie auf die &quot;ping&quot; E-mail Adresse entsprechend antworten."
+msgstr "Sie m&uuml;ssen die E-Mail-Adresse best&auml;tigen indem Sie auf die 'ping' E-Mail-Adresse entsprechend antworten."
 
 #: includes/account_stuff.php:153 includes/general_stuff.php:48
 #: includes/tverify_stuff.php:34
@@ -2892,7 +2864,7 @@ msgstr "Streitfall-&Uuml;berpr&uuml;fung aktzeptieren"
 
 #: www/wot/10.php:19
 msgid "Assurer Ranking"
-msgstr "Assurer Rangliste"
+msgstr "Assurer-Rangliste"
 
 #: www/index/16.php:24 www/index/3.php:24
 msgid "CAcert's GPG Key"
@@ -2900,7 +2872,7 @@ msgstr "CAcerts GPG Key"
 
 #: www/account/52.php:39
 msgid "Certificate Subject"
-msgstr "Zertifikat Betreff"
+msgstr "Zertifikat-Betreff"
 
 #: pages/index/47.php:10
 msgid "As described in the Style Guide, the monochrome version of the logo must be used in situations where the logo colours cannot be reproduced correctly."
@@ -2969,15 +2941,15 @@ msgstr "Streitf&auml;lle/Mi&szlig;brauch"
 #: www/disputes.php:377 www/disputes.php:422 www/disputes/2.php:15
 #: www/disputes/6.php:15 www/disputes/6.php:20
 msgid "Domain Dispute"
-msgstr "Domain Streitfall"
+msgstr "Domain-Streitfall"
 
 #: www/disputes.php:399
 msgid "Domain Dispute!"
-msgstr "Domain Streitfall!"
+msgstr "Domain-Streitfall!"
 
 #: www/disputes.php:428
 msgid "Domain and Email Disputes"
-msgstr "Domain und E-Mail Streitf&auml;lle"
+msgstr "Domain-  und E-Mail-Streitf&auml;lle"
 
 #: pages/account/3.php:82
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
@@ -3010,7 +2982,7 @@ msgstr "Zust&auml;ndig f&uuml;r viele Grafiken und Design, die auf der Webseite,
 
 #: www/index/16.php:23 www/index/3.php:23
 msgid "GPG Key"
-msgstr "GPG/PGP Schl&uuml;ssel"
+msgstr "GPG/PGP-Schl&uuml;ssel"
 
 #: www/account/40.php:20 www/index/11.php:20
 msgid "General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question."
@@ -3046,7 +3018,7 @@ msgstr "Ich stimme diesem Antrag nicht zu"
 
 #: www/disputes/0.php:18
 msgid "If you want to dispute who has control of your email address or domain, select 'Dispute Email' or 'Dispute Domain' on the right hand side."
-msgstr "Wenn Sie &uuml;berpr&uuml;fen lassen wollen, wer die Kontrolle &uuml;ber Ihre E-Mail-Adresse oder Domain hat, dann w&auml;hlen Sie 'E-Mail Streitfall' oder 'Domain Streitfall' rechts im Men&uuml;."
+msgstr "Wenn Sie &uuml;berpr&uuml;fen lassen wollen, wer die Kontrolle &uuml;ber Ihre E-Mail-Adresse oder Domain hat, dann w&auml;hlen Sie 'E-Mail-Streitfall' oder 'Domain-Streitfall' rechts im Men&uuml;."
 
 #: www/disputes/0.php:20
 msgid "If you would like to report an abuse of our certificates that breaches our policies please select the Abuse menu on the right."
@@ -3156,7 +3128,7 @@ msgstr "Die E-Mail-Adresse '%s' ist bereits im &Uuml;berpr&uuml;fungssystem. Vor
 
 #: www/coapnew.php:1243
 msgid "The organisation assurer will check the trade office registry for company information (name, location, country of jurisdiction, director names, trade office Identification number, domain name ownership, and system admin reference). Any associated costs for this research will be reimborsed by the assurer from the organisation."
-msgstr ""
+msgstr "Der Organisations Assurer wird die Angaben zur Organisation beim Handelsregister &uuml;berpr&uuml;fen (Name, Ort, Rechtsstandort, Gesch&auml;ftsf&uuml;hrer, Registrierungsnummer, Domainen Besitzstatus und Systemadministrator Referenz). Alle hierbei anfallenden Kosten f&uuml;r die &Uuml;berpr&uuml;fung durch den Assurer hat die Organisation zu tragen."
 
 #: www/disputes.php:423
 #, php-format
@@ -3195,9 +3167,10 @@ msgstr "Die folgenden Hostnamen wurden abgelehnt, da das System sie nicht Ihrem 
 msgid "The list of names are in no sense of order"
 msgstr "Die Reihenfolge der folgenden Namen ist rein zuf&auml;llig:"
 
-#: www/wot/2.php:28
-msgid "The only other way to receive assurance points is to have had your identity checked by a third party CA, whose policies are suitably set to not let identity fraud run rampant. Please contact us if you would like more details about this."
-msgstr "Der einzigste andere Weg, Ihre Best&auml;tigungspunkte zu bekommen, ist Ihre Identit&auml;t von einer anderen Zertifizierungsstelle kontrollieren zu lassen, deren Policy geeignet sind und keinen Identit&auml;tsdiebstahl erm&ouml;glichen. Bitte kontaktieren Sie uns, wenn Sie mehr Details dar&uuml;ber wissen wollen."
+#: includes/account.php:70
+#, php-format
+msgid "The email address '%s' is already in a different account. Can't continue."
+msgstr ""
 
 #: www/wot/2.php:17
 msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
@@ -3363,7 +3336,7 @@ msgstr "Datum (JJJJ-MM-TT)"
 
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
-msgstr ""
+msgstr "Um Assurer zu werden musst du 100 Assurance Punkte sammeln und die"
 
 #: www/cap.php:15 www/ttp.php:24
 msgid "Identity Verification Form"
@@ -3636,17 +3609,15 @@ msgstr "Unten ist ein Link, der aufgerufen werden sollte um die E-Mail Adresse z
 msgid "Blank CAP Form"
 msgstr "leeres CAP Formular"
 
-#: includes/account_stuff.php:211
-msgid "Blank TTP Form"
-msgstr "leeres TTP Formular"
+#: includes/account.php:460 includes/account.php:540 includes/account.php:1990
+#: includes/account.php:2020
+#, php-format
+msgid "The domain '%s' is already in a different account and is listed as valid. Can't continue."
+msgstr ""
 
 #: includes/general_stuff.php:85
 msgid "Bug Database"
 msgstr "Fehler-Datenbank"
-
-#: includes/account_stuff.php:201
-msgid "CAP/TTP Forms"
-msgstr "CAP/TTP Formulare"
 
 #: pages/account/39.php:64 pages/index/10.php:64
 msgid "CAcert Assurers can see the name, birthday and the number of points by looking up the correct email address. No other person related data is published by CAcert."
@@ -3878,7 +3849,7 @@ msgstr "M&ouml;chtest du CAcert unterst&uuml;tzen?"
 #: pages/index/0.php:28
 #, php-format
 msgid "For general documentation and help, please visit the CAcert %sWiki Documentation site %s."
-msgstr "F&uuml;r allgemeine Dokumentation und Hilfe besuchen Sie bitte die CAcert %sWiki Dokumentations Webseite %s."
+msgstr "F&uuml;r allgemeine Dokumentation und Hilfe besuchen Sie bitte die CAcert %sWiki-Dokumentations-Webseite %s."
 
 #: pages/index/0.php:29
 #, php-format
@@ -3972,13 +3943,82 @@ msgstr "Es gibt keine offenen Antr&auml;ge, bei denen Sie noch nicht abgestimmt 
 msgid "You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken."
 msgstr "Die Auswahl des Accounts oder die L&ouml;schung des Default Accounts schlug fehl. Es wurde keine Aktion durchgef&uuml;hrt.&#13;"
 
+#: www/index.php:123
+msgid "Your Pass Phrase has been changed now. You can now login with your new password."
+msgstr "Dein Passwort wurde nun ge&auml;ndert. Du kannst dich nun mit deinem neuen Kennwort anmelden."
+
+#: pages/account/0.php:32
+msgid "The former TTP (Trusted Third Party) System has been stopped, and is currently not available."
+msgstr "Das fr&uuml;here TTP (Trusted Third Party) Programm wurde gestoppt und steht derzeit nicht zur Verf&uuml;gung."
+
+#: pages/account/0.php:31
+msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons."
+msgstr "Das Web of Trust System das CAcert benutzt ist &auml;hnlich dem durch viele benutztem GPG/PGP, die pers&ouml;nliche Treffen nutzen um sich anhand von amtlichen Lichtbildausweisen mit den Angaben im GPG/PGP Key die Identit&auml;t zu best&auml;tigen. CAcert unterscheidet sich aber in einigen Punkten da wir innerhalb einer PKI Umgebung agieren. Um Vertrauen zu erhalten musst du erst jemanden finden dem bereits vertraut wurde. Das Vertrauen der Person h&auml;ngt davon ab, wieviele Personen diese bereits getroffen haben und ihr vertrauen bevor sie Vertrauenspunkte dir ausstellen kann (die Anzahl Punkte die ein Assurer vergeben kann ist in der Liste 'Finde einen Assurer' zu finden). Wenn du einmal einen Assurer triffst kannst du deinen amtlichen Lichtbildausweis vorzeigen, das CAP Formular ausf&uuml;llen dass die Informationen zu deiner Person enth&auml;lt. Das muss dann vom Assurer zu &Uuml;berpr&uuml;fungszwecken aufbewahrt werden."
+
+#: pages/wot/6.php:85
+#, php-format
+msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."
+msgstr "Bitte &uuml;berpr&uuml;fe die nachfolgenden Details gegen&uuml;ber dem was du beim pers&ouml;nlichen Treffen mit %s erfasst hast. Du darfst nicht weiterfahren solange du nicht sicher bist, das alle Angaben korrekt sind. Du kannst von einem CAcert Arbitrator f&uuml;r diese Assurance zur Verantwortung gezogen werden."
+
+#: pages/wot/6.php:153
+msgid "Policy"
+msgstr "Policy"
+
+#: pages/wot/6.php:165
+msgid "I confirm this Assurance"
+msgstr "Ich best&auml;tige diese Assurance"
+
+#: pages/wot/6.php:150
+msgid "I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."
+msgstr "Ich habe die Assurance Policy und das Assurance Handbuch gelesen und verstanden und ich f&uuml;hre die Assurance im Sinne der Policy und des Handbuchs durch und befolge diese Regeln."
+
+#: pages/wot/6.php:146
+msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."
+msgstr "Ich bin mir sicher, dass die Identit&auml;t die ich &uuml;berpr&uuml;ft habe korrekt, vollst&auml;ndig und &uuml;berpr&uuml;fbar ist. Ich habe die orginalen Dokumente gesehen die diese Identit&auml;t best&auml;tigen. Ich akzeptiere, dass ein CAcert Arbitrator im Falle eines Disputes mich auffordern kann Beweise zur Verf&uuml;gung zu stellen und ich daf&uuml;r zur Verantwortung gezogen werden kann."
+
+#: pages/account/14.php:38
+msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol (all white spaces at the beginning and end are removed)."
+msgstr "Merken Sie sich bitte, f&uuml;r eine hohe Sicherheit muss das Passwort mindestens einen Grossbuchstaben, Kleinbuchstaben, Zahlen und Sonderzeichen enthalten (alle Leerzeichen am Anfang und am Ende werden entfernt)."
+
+#: pages/wot/1.php:115
+msgid "Not yet!"
+msgstr "Noch nicht!"
+
+#: includes/account_stuff.php:223
+msgid "CAP Forms"
+msgstr "CAP Formulare"
+
+#: pages/index/21.php:39
+msgid "Please also include your name in the transaction so we know who it came from and send an email to ernestine at cacert dot org with the details:"
+msgstr "Bitte f&uuml;ge auch deinen Namen in die Transaktion ein, so das wir wissen von wem sie stammt und sende eine E-Mail an ernestine at cacert dot org mit den Details:"
+
+#: pages/wot/6.php:154
+msgid "Assurance Handbook"
+msgstr "Assurance Handbuch"
+
+#: pages/index/5.php:24
+msgid "Email Address (primary)"
+msgstr "E-Mail Adresse (prim&auml;re)"
+
+#: pages/account/56.php:18
+msgid "List of Organisation Assurers:"
+msgstr "Liste der Organisations Assurer:"
+
+#: pages/index/1.php:24
+msgid "Note: White spaces at the beginning and end of a password will be removed."
+msgstr "Hinweis: Leerzeichen am Anfang und am Ende eines Passworts werden entfernt."
+
+#: pages/wot/6.php:154
+msgid "Assurance Policy"
+msgstr "Assurance Policy"
+
 #: www/cap.php:264
 msgid "I, the Assurer, hereby confirm that I have verified the Member according to CAcert Assurance Policy."
-msgstr "Hiermit best&auml;tige ich als Assurer, da&szlig; ich das Mitglied entsprechend der CAcert Assurance Policy &uuml;berpr&uuml;ft habe."
+msgstr "Hiermit best&auml;tige ich als Assurer, da&szlig; ich das Mitglied entsprechend der CAcert Assurance-Richtlinie &uuml;berpr&uuml;ft habe."
 
 #: pages/account/3.php:101
 msgid "SSO WIKI Entry"
-msgstr "SSO WIKI Eintrag"
+msgstr "SSO-Wiki-Eintrag"
 
 #: includes/account_stuff.php:268 includes/general_stuff.php:145
 #: includes/tverify_stuff.php:80
@@ -3987,7 +4027,7 @@ msgstr "von CAcert"
 
 #: www/wot.php:343
 msgid "Assurer Challenge"
-msgstr "Assurer Pr&uuml;fung"
+msgstr "Assurer-Pr&uuml;fung"
 
 #: www/cap.php:143
 msgid "I hereby confirm that the information stated above is both true and correct, and request the CAcert Assurer (identified below) to verify me according to CAcert Assurance Policy."
@@ -3995,7 +4035,7 @@ msgstr "Hiermit best&auml;tige ich, da&szlig; meine obigen Informationen zu mein
 
 #: pages/account/21.php:50
 msgid "OCSP certificate"
-msgstr "OCSP Zertifikat"
+msgstr "OCSP-Zertifikat"
 
 #: includes/account.php:753
 msgid "Processing request"
@@ -4003,11 +4043,11 @@ msgstr "Verarbeitung des Antrags"
 
 #: pages/account/18.php:51 pages/account/5.php:57
 msgid "No client certificates are currently listed."
-msgstr "Zur Zeit sind keine Client Zertifikate aufgelistet."
+msgstr "Zur Zeit sind keine Client-Zertifikate aufgelistet."
 
 #: pages/index/4.php:59
 msgid "If you want to use certificate login instead of username+password, please"
-msgstr "Wenn Sie statt des Username+Passwort Logins das Zertifikatslogin benutzen m&ouml;chten, bitte"
+msgstr "Wenn Sie statt der Benutzername+Passwort-Anmeldung das Anmelden mit Zertifikat benutzen m&ouml;chten, bitte"
 
 #: pages/index/0.php:129
 msgid "If you want to participate in CAcert.org, have a look"
@@ -4019,11 +4059,11 @@ msgstr "Sind Sie sicher, dass Sie das Geburtsdatum und/oder den Nachnamen &auml;
 
 #: pages/account/43.php:412
 msgid "Show Assurances the user gave"
-msgstr "Zeige Assurances die der User durchf&uuml;hrte"
+msgstr "Assurances, die der Benutzer durchf&uuml;hrte, anzeigen"
 
 #: pages/account/43.php:365
 msgid "Show Assurances the user got"
-msgstr "Zeige Assurances die der User erhielt"
+msgstr "Assurances, die der Benutzer erhielt, anzeigen"
 
 #: pages/account/50.php:29
 msgid "Are you sure you want to delete this user, while not actually deleting the account it will completely disable it and revoke any/all certificates currently issued."
@@ -4031,7 +4071,7 @@ msgstr "Sind Sie sich sicher diesen User zu l&ouml;schen, auch wenn der Account 
 
 #: includes/sponsorinfo.php:2
 msgid "CAcert operations are sponsored by"
-msgstr "Der CAcert Betrieb wird gesponsert von"
+msgstr "Der CAcert-Betrieb wird gesponsert von"
 
 #: includes/account.php:322 includes/account.php:1380
 msgid "The challenge-response code of your certificate request did not match. Can't continue with certificaterequest."
@@ -4165,6 +4205,15 @@ msgstr "Wie dieses CAP Formular gedruckt werden kann"
 msgid "Vice-President"
 msgstr "Vizepr&auml;sident"
 
+#: pages/index/1.php:49
+#, php-format
+msgid "Please only write %sName Suffixes%s into this field."
+msgstr ""
+
+#: www/stats.php:263
+msgid "Statistical data from cache, created at"
+msgstr "Statistische Daten aus dem Cache, erstellt am"
+
 #: includes/general.php:877
 msgid "You are not an Assurer, but the reason is not stored in the database. Please contact"
 msgstr "Du bist kein Assurer, aber der Grund ist nicht aus der Datenbank heraus zu lesen. Bitte kontaktiere"
@@ -4173,13 +4222,13 @@ msgstr "Du bist kein Assurer, aber der Grund ist nicht aus der Datenbank heraus 
 msgid "The exact name of the assurer may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
 msgstr "Der vollst&auml;ndige Name des Assurers kann umgewandelte Zeichen enthalten und/oder einige Vornamen k&ouml;nnen abgek&uuml;rzt sein. Wenn der erste Vorname abgek&uuml;rzt erscheint und Klammern um den letzten Teil des Vornamens hat.\n"
 
-#: www/index.php:564
-msgid "This seems like potential spam, or you have cookies or Javascript disabled, cannot continue."
-msgstr "Dies sieht nach potentielem Spam aus, oder du hast die Cookies oder Javascript deaktiviert, Fortsetzung nicht m&ouml;glich."
+#: includes/account.php:428
+msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
+msgstr "Aufgrund der M&ouml;glichkeit eines Null-Byte Domain Angriffs erlauben wir derzeit keine Domainennamen mit einem Nullbyte Zeichen."
 
 #: www/coapnew.php:980
 msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."
-msgstr ""
+msgstr "Ein CAcert Arbitrator kann vom Organisations Assurer die Aush&auml;ndigung der kompletten Formulare und alle relevanten Dokumente im Falle eines Disputes verlangen."
 
 #: www/capnew.php:1113
 msgid "The exact name of the assuree may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
@@ -4211,7 +4260,7 @@ msgstr "Telefonnr."
 
 #: www/coapnew.php:1107
 msgid "Trade Office Registry information, as organisation registration Identification number or license number, name of the trade office registry, trade office operating region, and optionally date of extract."
-msgstr ""
+msgstr "Handelsregister Information wie Organisations Registrierungsnummer oder Lizenznummer, Name der Registrierungsbeh&ouml;rde, Gesch&auml;ftsgebiet, und optional Datum des Auszugs."
 
 #: pages/account/40.php:38 pages/index/11.php:38
 msgid "Warning: Please do not enter confidential data into this form, it is being sent to a public mailinglist. Use the form further below instead."
@@ -4262,7 +4311,7 @@ msgstr "Fingerabdruck"
 
 #: pages/account/40.php:21 pages/index/11.php:21
 msgid "If you are contacting us about advertising, please use the form at the bottom of the website, the first contact form is not the correct place."
-msgstr "Wenn Sie bei uns Werbung schalten m&ouml;chten benutzen sie bitte das Formular am Ende der Seite, das erste Kontaktformular ist hierf&uuml;r nicht geeignet."
+msgstr "Wenn Sie bei uns Werbung schalten m&ouml;chten, benutzen Sie bitte das Formular am Ende der Seite, das erste Kontaktformular ist hierf&uuml;r nicht geeignet."
 
 #: pages/index/16.php:29 pages/index/3.php:29
 msgid "Intermediate Certificate (DER Format)"
@@ -4286,7 +4335,7 @@ msgstr "Die angegebene URL war zu kurz."
 
 #: www/advertising.php:55
 msgid "Link title was too short.&lt;br /&gt;"
-msgstr "Der Link Titel ist zu kurz."
+msgstr "Der Link-Titel ist zu kurz."
 
 #: pages/wot/14.php:3
 #, php-format
@@ -4307,15 +4356,15 @@ msgstr "Nicht angezeigt."
 
 #: pages/account/13.php:109
 msgid "OTP Hash"
-msgstr "OTP Hash"
+msgstr "OTP-Hash"
 
 #: pages/account/13.php:114
 msgid "OTP PIN"
-msgstr "OTP PIN"
+msgstr "OTP-PIN"
 
 #: pages/index/16.php:20 pages/index/3.php:20
 msgid "Root Certificate (Text Format)"
-msgstr "Root Zertifikat (Text-Format)"
+msgstr "Root-Zertifikat (Text-Format)"
 
 #: www/wot.php:332
 msgid "To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:"
@@ -4323,7 +4372,7 @@ msgstr "Um es f&uuml;r Andere in Ihrer Gegend einfacher zu machen Sie zu finden,
 
 #: includes/account_stuff.php:245
 msgid "View Ads"
-msgstr "Ansicht Werbung"
+msgstr "Werbung anzeigen"
 
 #: www/advertising.php:47
 msgid "You can only place an advertisement for up to 12 months.&lt;br /&gt;"
@@ -4394,11 +4443,11 @@ msgstr "CAcert Logo, Encapsulated PostScript (EPS) Format"
 
 #: pages/index/47.php:20
 msgid "CAcert Logo, colour version, PNG format"
-msgstr "CAcert Logo, Farbversion, PNG Format"
+msgstr "CAcert-Logo, Farbversion, PNG-Format"
 
 #: pages/index/47.php:32
 msgid "CAcert Logo, monochrome version, PNG format"
-msgstr "CAcert Logo, Graustufen-Version, PNG Format"
+msgstr "CAcert-Logo, Graustufen-Version, PNG-Format"
 
 #: pages/index/47.php:1
 msgid "CAcert Public Relations materials"
@@ -4436,15 +4485,15 @@ msgstr "Einf&auml;rbige Version"
 
 #: www/gpg.php:151
 msgid "Multiple Email Adresses per UID are not allowed."
-msgstr "Mehrere Email Adressen pro UID sind nicht erlaubt."
+msgstr "Mehrere E-Mail-Adressen pro UID sind nicht erlaubt."
 
 #: www/gpg.php:181
 msgid "Name and Email OK."
-msgstr "Name und Email OK."
+msgstr "Name und E-Mail OK."
 
 #: www/gpg.php:185
 msgid "Name and Email both cannot be matched with your account."
-msgstr "Weder Name noch Email Adresse stimmen mit Ihrem Konto &uuml;berein."
+msgstr "Weder Name noch E-Mail-Adresse stimmen mit Ihrem Konto &uuml;berein."
 
 #: www/gpg.php:234
 msgid "No valid UIDs found on your key"
@@ -4452,31 +4501,31 @@ msgstr "Keine g&uuml;ltigen UIDs auf dem Schl&uuml;ssel gefunden"
 
 #: pages/index/47.php:3
 msgid "On this page you find materials that can be used for CAcert publicity"
-msgstr "Auf dieser Seite findest du Material dass zur CAcert Darstellung eingesetz werden kann."
+msgstr "Auf dieser Seite findest du Material, dass zur CAcert-&Ouml;ffentlichkeitsarbeit eingesetzt werden kann."
 
 #: www/coap.html.php:78
 msgid "For the CAcert Individual Assurance Programme there is a separate special CAP form."
-msgstr ""
+msgstr "F&uuml;r das individuelle CAcert Assurance Programm gibt es eigene spezielle CAP Formulare."
 
 #: pages/index/5.php:62
 msgid "Password Reset Payment through PayPal"
-msgstr "Bezahlung f&uuml;r Password Reset mittels PayPal"
+msgstr "Bezahlung f&uuml;r Password-R&uuml;cksetzung mittels PayPal"
 
 #: www/gpg.php:199
 msgid "The email address has not been registered and verified in your account. Please add the email address to your account first."
-msgstr "Die Email Adresse wurde nicht registriert und verifiziert in Ihrem Konto. Bitte f&uuml;gen Sie die EMail Adresse zuerst Ihrem Account hinzu."
+msgstr "Die E-Mail-Adresse wurde nicht registriert und verifiziert in Ihrem Konto. Bitte f&uuml;gen Sie die E-Mail-Adresse zuerst Ihrem Account hinzu."
 
 #: www/gpg.php:190
 msgid "The email is OK. The name is empty."
-msgstr "Die EMail ist OK. Der Name ist leer."
+msgstr "Die E-Mail ist OK. Der Name ist leer."
 
 #: www/gpg.php:203
 msgid "The name in the UID does not match the name in your account. Please verify the name."
-msgstr "Der Name in der UID entspricht nicht dem Namen deines Accounts. Bitte &uuml;berpr&uuml;fe den Namen."
+msgstr "Der Name in der UID entspricht nicht dem Namen Ihres Kontos. Bitte &uuml;berpr&uuml;fen Sie den Namen."
 
 #: www/gpg.php:195
 msgid "The name is OK. The email is empty."
-msgstr "Der Name ist OK. Die Email Adresse ist leer."
+msgstr "Der Name ist OK. Die E-Mail-Adresse ist leer."
 
 #: www/gpg.php:243
 msgid "The unverified UIDs have been removed, the verified UIDs have been signed."
@@ -4493,7 +4542,7 @@ msgstr "Quellcode"
 
 #: www/ttp.php:63
 msgid "The Applicant asks you to certify to CAcert that you have met with the Applicant and verified the Full Name, Date of Birth, and ID Numbers of the Applicant against two separate original government issued photo-identity documents. Once the photocopies of the photo IDs have been verified by the TTP they must be signed by the TTP with the statement 'I certify that this copy is a true copy of the original document'.  The verified and signed photocopies of IDs are then to be included with the completed TTP forms and returned to CAcert Inc."
-msgstr "Der Anmelder fragt dich, ob du ihn f&uuml;r CAcert zertifizieren w&uuml;rdest, in dem du dich mit ihm triffst und seinen vollen Namen, Geburtsdatum und ID Nummern durch zwei unterschiedliche amtliche Lichtbildausweise &uuml;berpr&uuml;fst. Wenn die Fotokopien der Lichtbildausweise von TTPs gepr&uuml;ft wurden, m&uuml;ssen diese den Vermerk 'Ich best&auml;tige dass diese Kopien g&uuml;ltige Kopien der Originaldokumente sind' mit der Signatur des TTP tragen. Die best&auml;tigten Fotokopien der amtlichen Lichtbildausweise m&uuml;ssen dann zusammen mit den ausgef&uuml;llten TTP Formularen an CAcert Inc. zur&uuml;ckgeschickt werden."
+msgstr "Der Anmelder fragt Sie, ob Sie ihn f&uuml;r CAcert zertifizieren w&uuml;rden, indem Sie sich mit ihm treffen und seinen vollen Namen, Geburtsdatum und ID-Nummern durch zwei unterschiedliche amtliche Lichtbildausweise &uuml;berpr&uuml;fst. Wenn die Fotokopien der Lichtbildausweise von TTPs gepr&uuml;ft wurden, m&uuml;ssen diese den Vermerk 'Ich best&auml;tige, dass diese Kopien g&uuml;ltige Kopien der Originaldokumente sind' mit der Signatur des TTP tragen. Die best&auml;tigten Fotokopien der amtlichen Lichtbildausweise m&uuml;ssen dann zusammen mit den ausgef&uuml;llten TTP Formularen an CAcert Inc. zur&uuml;ckgeschickt werden."
 
 #: pages/wot/14.php:5
 #, php-format
@@ -4502,7 +4551,7 @@ msgstr "Um mit deiner Signaturcard assured zu werden, ben&ouml;tigst du die Soft
 
 #: pages/index/1.php:124
 msgid "When you click on next, we will send a confirmation email to the email address you have entered above."
-msgstr "Wenn du auf Weiter klickst, werden wir eine Best&auml;tigungs E-Mail an deine E-Mail Addresse die du oben eingetragen hast schicken."
+msgstr "Wenn Sie Weiter klicken, werden wir eine Best&auml;tigungsnachricht an Ihre E-Mail-Adresse, die Sie oben eingetragen haben, schicken."
 
 #: pages/index/0.php:26
 #, php-format
@@ -4516,12 +4565,12 @@ msgstr "Ich habe keine g&uuml;ltige Zertifikatsanfrage bekommen, bitte versuchen
 #: pages/index/0.php:17
 #, php-format
 msgid "If you want to have free certificates issued to you, join the %s CAcert Community %s."
-msgstr "Wenn Sie kostenlose Zertifikate ausgestellt haben wollen, treten Sie der %s CAcert Gemeinschaft %s bei."
+msgstr "Wenn Sie kostenlose Zertifikate ausgestellt haben wollen, treten Sie der %s CAcert-Gemeinschaft %s bei."
 
 #: pages/index/0.php:19
 #, php-format
 msgid "If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."
-msgstr "Wenn Sie die von CAcert ausgestellten Zertifikate verwenden wollen, lesen Sie bitte CAcert %s Haftungsausschluss und Lizenz %s."
+msgstr "Wenn Sie die von CAcert ausgestellten Zertifikate verwenden wollen, lesen Sie bitte CAcert-%s Haftungsausschluss und Lizenz %s."
 
 #: pages/account/37.php:28 pages/index/12.php:28
 msgid "More information about CAcert Incorporated:"
@@ -4529,11 +4578,11 @@ msgstr "Weitere Informationen zu CAcert Incorporated:"
 
 #: includes/about_menu.php:7
 msgid "Policies"
-msgstr "Policys"
+msgstr "Richtlinien"
 
 #: pages/index/0.php:54
 msgid "CAcert bank account details:"
-msgstr "CAcert Bank Konto Informationen:"
+msgstr "CAcert-Bankkonto-Informationen:"
 
 #: pages/account/43.php:157
 msgid "Blocked Assurer"
@@ -4545,7 +4594,7 @@ msgstr "AU$50 pro Jahr f&uuml;r dieses Button"
 
 #: pages/account/38.php:27 pages/index/13.php:27
 msgid "If you are located in Australia, please use bank transfer instead:"
-msgstr "Wenn du in Australien beheimatet bist, benutze bitte stattdessen die Bank &Uuml;berweisung:"
+msgstr "Wenn Sie in Australien beheimatet sind, benutzen Sie bitte stattdessen die Bank-&Uuml;berweisung:"
 
 #: pages/account/5.php:73
 msgid "empty"
@@ -4553,7 +4602,7 @@ msgstr "leer"
 
 #: includes/account.php:2291
 msgid "You are receiving this email because a CAcert administrator"
-msgstr "Du erh&auml;lst diese E-Mail als CAcert Administrator"
+msgstr "Sie erhalten diese Nachricht, weil ein CAcert-Administrator"
 
 #: www/stats.php:86
 msgid "Assurer Candidates"
@@ -4593,7 +4642,7 @@ msgstr "Test"
 
 #: pages/account/55.php:25
 msgid "The list of tests you did pass at"
-msgstr "Die Liste der Pr&uuml;fungen, die du bestanden hast bei "
+msgstr "Die Liste der Pr&uuml;fungen, die Sie bestanden haben bei "
 
 #: pages/gpg/0.php:20
 msgid "Paste your own public OpenPGP key below. It should not contain a picture. CAcert will sign your key after submission."
@@ -4602,7 +4651,7 @@ msgstr "F&uuml;gen Sie ihren eigenen &ouml;ffentlichen OpenPGP Schl&uuml;ssel un
 #: pages/index/0.php:23
 #, php-format
 msgid "This license applies to using the CAcert %s root keys %s."
-msgstr "Diese Lizenz gilt um die CAcert %s root keys %s benutzen zu d&uuml;rfen."
+msgstr "Diese Lizenz gilt, um die CAcert %s root keys %s benutzen zu d&uuml;rfen."
 
 #: includes/account_stuff.php:220
 msgid "Training"
@@ -4614,7 +4663,7 @@ msgstr "Variante"
 
 #: pages/account/55.php:74
 msgid "You have at least 100 Assurance Points, if you want to become an assurer try the"
-msgstr "Du hast jetzt mindestens 100 Assurance Punkte. Wenn du ein Assurer werden m&ouml;chtest, versuche die"
+msgstr "Sie haben jetzt mindestens 100 Assurance-Punkte. Wenn Sie ein Assurer werden m&ouml;chten, versuchen Sie die"
 
 #: pages/account/55.php:72
 msgid "You have passed the Assurer Challenge and collected at least 100 Assurance Points, you are an Assurer."
@@ -4622,11 +4671,11 @@ msgstr "Du hast die Assurer Pr&uuml;fung bestanden und mindestens 100 Assurance 
 
 #: pages/account/55.php:76
 msgid "You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!"
-msgstr "Du hast zwar die Assurer Pr&uuml;fung bestanden, aber um ein Assurer werden zu k&ouml;nnen, ben&ouml;tigst du mindestens 100 Assurance Punkte!"
+msgstr "Sie haben zwar die Assurer-Pr&uuml;fung bestanden, aber um ein Assurer werden zu k&ouml;nnen, ben&ouml;tigen Sie mindestens 100 Assurance-Punkte!"
 
 #: pages/account/55.php:22
 msgid "Your passed Tests"
-msgstr "Deine erfolgreichen Pr&uuml;fungen"
+msgstr "Ihre erfolgreichen Pr&uuml;fungen"
 
 #: pages/index/0.php:52
 msgid "If you are located in Australia, use bank transfer instead."
@@ -4634,7 +4683,7 @@ msgstr "Wenn du in Australien beheimatet bist, benutze bitte stattdessen eine Ba
 
 #: pages/index/0.php:37
 msgid "If you can, please donate."
-msgstr "Wenn du kannst, spende bitte."
+msgstr "Wenn Sie k&ouml;nnen, spenden Sie bitte."
 
 #: pages/account/43.php:153
 msgid "Is Assurer"
@@ -4658,11 +4707,11 @@ msgstr "oder mit diesem Button eine kleine Spende was auch immer du bieten kanns
 
 #: includes/account.php:65 includes/account.php:493 www/index.php:492
 msgid "The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes."
-msgstr "Der Mailserver der f&uuml;r deine Domaine zust&auml;ndig ist zeigt einen tempor&auml;ren Fehler auf. Dies mag von Anti-SPAM Mechanismen wie Greylisting herr&uuml;hren. Bitte versuche es in einigen Minuten noch einmal."
+msgstr "Der Mailserver, der f&uuml;r Ihre Domaine zust&auml;ndig ist, zeigt einen tempor&auml;ren Fehler auf. Dies kann von Anti-SPAM-Mechanismen, wie Greylisting, herr&uuml;hren. Bitte versuche es in einigen Minuten noch einmal."
 
 #: pages/index/19.php:29
 msgid "Certificates expire in 6 months. Only the email address itself can be entered into the certificate (not your full name)"
-msgstr "Zertifikat l&auml;uft nach 6 Monaten ab. Nur die E-Mail Addresse selbst kann in das Zertifikat eingetragen werden (nicht Ihr voller Name)"
+msgstr "Zertifikat l&auml;uft nach 6 Monaten ab. Nur die E-Mail-Adresse selbst kann in das Zertifikat eingetragen werden (nicht Ihr voller Name)"
 
 #: pages/index/19.php:39
 msgid "Certificates expire in 24 months."
@@ -4670,11 +4719,11 @@ msgstr "Das Zertifikat l&auml;uft in 24 Monaten aus."
 
 #: includes/account.php:1005
 msgid "Certificate settings have been changed."
-msgstr "Zertifikats Einstellungen wurden ge&auml;ndert."
+msgstr "Zertifikats-Einstellungen wurden ge&auml;ndert."
 
 #: pages/account/3.php:85
 msgid "By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ ."
-msgstr "Bei Aktivierung des Zertifikat Logins kannst du dieses Zertifikat dazu benutzen, um dich an deinen Account bei https://secure.cacert.org/ einzuloggen."
+msgstr "Bei Aktivierung des Zertifikats-Anmeldung k&ouml;nnen Sie dieses Zertifikat dazu benutzen, um sich an Ihrem Konto bei https://secure.cacert.org/ anzumelden."
 
 #: pages/account/5.php:102
 msgid "Change settings"
@@ -4682,7 +4731,7 @@ msgstr "Einstellungen &auml;ndern"
 
 #: pages/account/3.php:84
 msgid "Enable certificate login with this certificate"
-msgstr "Aktiviere Zertifikats Login mit diesem Zertifikat"
+msgstr "Zertifikats-Anmeldung mit diesem Zertifikat aktivieren"
 
 #: pages/account/5.php:94
 msgid "Hide old certificates"
@@ -4690,7 +4739,7 @@ msgstr "Alte Zertifikate ausblenden"
 
 #: pages/account/3.php:92
 msgid "Show advanced options"
-msgstr "Zeige Erweiterte Optionen"
+msgstr "Erweiterte Optionen anzeigen"
 
 #: pages/gpg/3.php:30
 msgid "Below is your OpenPGP key"
@@ -4714,7 +4763,7 @@ msgstr "OpenPGP-Schl&uuml;ssel"
 
 #: pages/account/43.php:374
 msgid "Assurance Points The User Issued"
-msgstr "Assurance Punkte die der User vergeben hat"
+msgstr "Assurance-Punkte, die der Benutzer vergeben hat"
 
 #: pages/index/4.php:20
 msgid "Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your Email/Pass Phrase to get a new certificate, by clicking on 'Normal Login' to the right of your screen."
@@ -4726,23 +4775,23 @@ msgstr "Ihr Zertifikat:"
 
 #: www/coapnew.php:1090
 msgid "Type, jurisdiction (state)"
-msgstr ""
+msgstr "Typ, Gerichtsstand (Status)"
 
 #: www/coapnew.php:1128 www/coapnew.php:1141
 msgid "The organisation administrator (CAcert Assurer) contact information. The administrator is appointed by the organisation director to administer the organisation domain certificates, secure the certificates and maintain them."
-msgstr ""
+msgstr "Kontaktinformation des Organisations Administrators (CAcert Assurers). Der Administrator wird vom Organisations Direktor benannt um die Organisations Domain Zertifikate zu administrieren, diese zu sichern und sie zu warten."
 
 #: www/coapnew.php:1063
 msgid "The organisation name, director name and signature, and applicable company law is checked by the Organisation Assurer with the official Trade Office Registration (Extract) or by other means. The organisation domain name(s) are checked of ownership against the internet domain DNS records."
-msgstr ""
+msgstr "Der Organisationsname, der Name des Gesch&auml;ftsf&uuml;hrers und die Unterschrift und das anwendbare Gesellschaftsrecht wurde durch den Organisations Assurer mit den Handelsregisterauszug &uuml;berpr&uuml;ft. Die Organisations Domain Name(n) Registrierung wurden gegen&uuml;ber den Internet Domain DNS Eintragungen hin &uuml;berpr&uuml;ft."
 
 #: www/coapnew.php:1089
 msgid "The legal organisation type: eg Ltd, EPS, society, foundation, association, etc. The state/country under which jurisdiction the organisation operates."
-msgstr ""
+msgstr "Der zugelassene Organisations Typ: z.B. Ltd, EPS, Gesellschaft, Foundation, Verein, usw. Dem Staat/Land unter der die jeweilige Organisation operiert."
 
 #: www/coapnew.php:1074
 msgid "The official full name of the organisation equal to the name of the organisation registered e.g. at the trade office registration of the state."
-msgstr ""
+msgstr "Der offizielle vollst&auml;ndige Name der Organisation entsprechend der Namens Registrierungs Beh&ouml;rde z.B. beim Handelsregister des Landes."
 
 #: pages/index/1.php:18
 msgid "By joining CAcert and becoming a Member, you agree to the CAcert Community Agreement. Please take a moment now to read that and agree to it; this will be required to complete the process of joining."
@@ -4754,7 +4803,7 @@ msgstr "Wenn nicht, dann w&auml;hle diesen PayPal Button um den Mitgliedsbeitrag
 
 #: www/coapnew.php:1080
 msgid "The organisation address which should be equal to the address registered with the trade office."
-msgstr ""
+msgstr "Die Adresse der Organisation so wie sie beim Handelsregister hinterlegt ist."
 
 #: pages/index/21.php:30
 msgid "To do a single US$10 Membership-Fee Payment, please use this button:"
@@ -4762,7 +4811,7 @@ msgstr "Um den Mitgliedsbeitrag in H&ouml;he von US$10 einmalig zu bezahlen, ben
 
 #: www/coapnew.php:1116
 msgid "The internet domain name(s) the organisation controls and owns. The names will be checked with WHOIS with e.g. the DNS official top domain registrar e.g. the country ccTLD .&lt;country code&gt; registrar."
-msgstr ""
+msgstr "Die Internet Domain Name(n) die die Organisation besitzt und kontrolliert. Die Namen werden mittels WHOIS mit z.B. den DNS Top Level Domain Registrierungen, z.B. der L&auml;nder ccTLD .&lt;L&auml;ndercode&gt; Registrierung &uuml;berpr&uuml;ft."
 
 #: pages/account/7.php:30
 msgid "I own or am authorised to control this domain"
@@ -4770,7 +4819,7 @@ msgstr "Ich bin der Dom&auml;neninhaber oder ich bin dazu authorisiert die Dom&a
 
 #: www/coapnew.php:1006
 msgid "The exact name of the individual may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name."
-msgstr ""
+msgstr "Der exakte Name der jeweiligen Person kann transkribierte Buchstaben und/oder einige Abgek&uuml;rzungen enthalten. Wenn das der Fall ist, sollte der erste Teil des Vornamens die Abgek&uuml;rzung zeigen und durch Klammern um den hinteren Teil den Rest des Vornamens (Bsp.: Wil(helm))"
 
 #: pages/account/1.php:29 pages/index/1.php:80
 msgid "I own or am authorised to control this email address"
@@ -4791,7 +4840,7 @@ msgstr "Einige CAcert Services sind zur Zeit nicht verf&uuml;gbar. Bitte versuch
 
 #: www/coapnew.php:959
 msgid "The email address, which matches the CAcert account email address, is handy for administrative and contact reasons. For organisation administrator the email address is required."
-msgstr ""
+msgstr "Die E-Mail Adresse, die mit der E-Mail Adresse im CAcert Account &uuml;bereinstimmt ist f&uuml;r administrative und sonstige Kontaktaufnahmegr&uuml;nde n&uuml;tzlich. F&uuml;r Organisationsadministratoren wird die Adresse ben&ouml;tigt."
 
 #: includes/general.php:875
 msgid "if you feel that this is not corect."
@@ -4803,11 +4852,11 @@ msgstr "Das CAcert Organisations Programm (COAP) hat zum Ziel die Identit&auml;t
 
 #: www/coapnew.php:1187
 msgid "The Director indicated by the Trade Office Registry Extract, has to underwrite the correctness of the information for the organisation and allowance of certificate operations by the administrators."
-msgstr ""
+msgstr "Der aufgrund der Anzeige im Gesch&auml;fts-Register-Auszug zust&auml;ndige Direktor hat f&uuml;r die Korrektheit der Informationen f&uuml;r die Organisation und die Erlaubnis zur Ausstellung von Zertifikaten durch den Administrator zu unterzeichnen."
 
 #: www/coapnew.php:1252
 msgid "The Organisation Assurer contact information. This assurer will verify the organisation identity and registration information."
-msgstr ""
+msgstr "Kontaktinformationen des Organisations Assurers. Dieser Assurer wird die Organisations Identit&auml;t und Registrierungsinformationen verifizieren."
 
 #: www/capnew.php:845
 msgid "The CAcert Assurance Programme (CAP) aims to verify the identities of Internet users through face to face witnessing of government-issued photo identity documents."
@@ -4895,7 +4944,7 @@ msgstr "Beim Vergleichen von Namen"
 
 #: www/coapnew.php:1194
 msgid "On director's statement"
-msgstr ""
+msgstr "Auf Aussage des Direktors"
 
 #: www/capnew.php:1223 www/coapnew.php:1248
 msgid "On mutual assurance"
@@ -4907,7 +4956,7 @@ msgstr "Bei beidseitiger Assurance schreibe dir die E-Mail Adresse des Assurers 
 
 #: www/coapnew.php:1070
 msgid "On organisation identity information"
-msgstr ""
+msgstr "Auf Organisationsidentit&auml;tsinformationen"
 
 #: www/capnew.php:1006
 msgid "On the assuree full name"
@@ -4927,7 +4976,7 @@ msgstr "Ihre E-Mail wurde gesendet."
 
 #: includes/general.php:772 includes/general.php:779
 msgid "CSRF Hash is wrong. Please try again."
-msgstr "CSRF Hash ist falsch. Bitte versuchen Sie es erneut."
+msgstr "CSRF-Hash ist falsch. Bitte versuchen Sie es erneut."
 
 #: pages/index/19.php:49
 #, php-format
@@ -5090,15 +5139,15 @@ msgstr "COAP Formular Hilfe"
 
 #: www/capnew.php:842
 msgid "CAcert CAP form"
-msgstr "CAcert CAP Formular"
+msgstr "CAcert CAP-Formular"
 
 #: www/coapnew.php:863
 msgid "CAcert COAP form"
-msgstr "CAcert COAP Formular"
+msgstr "CAcert COAP-Formular"
 
 #: www/coap.html.php:335
 msgid "Applicable Organisation Policy documents and information can be attached to the pdf output file. Mark those documents, which need to be attached"
-msgstr ""
+msgstr "Geeignete Organisations Policy Dokumente und Informationen k&ouml;nnen dem PDF Ausdruck angef&uuml;gt werden. Markiere die Dokumente, die angef&uuml;gt werden sollen."
 
 #: www/capnew.php:1216
 msgid "Assurer's Statement"
@@ -5110,7 +5159,7 @@ msgstr "Der Assurer kann dem Antragsteller eine Kopie der Angaben aush&auml;ndig
 
 #: www/capnew.php:1058
 msgid "As an example standard abbreviation on given names is provided here. If a given name is counted as first given name part of the name is denoted with parentheses around the name."
-msgstr "Das Beispiel einer Standard Abk&uuml;rzung von Vornamen ist hier aufgef&uuml;hrt. Wenn der Vorname als erster Vorname und der Teil des Namens mit Klammern drumherum aufgef&uuml;hrt ist."
+msgstr "Das Beispiel einer Standard-Abk&uuml;rzung von Vornamen ist hier aufgef&uuml;hrt. Wenn der Vorname als erster Vorname und der Teil des Namens mit Klammern drumherum aufgef&uuml;hrt ist."
 
 #: pages/account/53.php:67
 msgid "Are you sure you want to delete this region and all connected locations?"
@@ -5134,7 +5183,7 @@ msgstr "1-seitig hochkant"
 
 #: www/capnew.php:851
 msgid "A CAcert Arbitrator can require the Assurer to deliver the completed form in the event of a dispute. After 7 years this form should be securely disposed of to prevent identity misuse. E.g. shred or burn the form. The Assurer does not retain copies of ID at all."
-msgstr "Ein CAcert Schiedsrichter kann im Falle von Unstimmigkeiten vom Assurer die Herausgabe des ausgef&uuml;llten Formulars einfordern. Nach Ablauf von 7 Jahren sollte dieses Formular zuverl&auml;ssig vernichtet werden, um Identit&auml;ts-Missbrauch auszuschlie&szlig;en. Dies kann z. B. durch Schreddern oder Verbrennen des Formulars sichergestellt werden. Der Assurer beh&auml;lt keinerlei Kopien von Ausweisen."
+msgstr "Ein CAcert-Schiedsrichter kann im Falle von Unstimmigkeiten vom Assurer die Herausgabe des ausgef&uuml;llten Formulars einfordern. Nach Ablauf von 7 Jahren sollte dieses Formular zuverl&auml;ssig vernichtet werden, um Identit&auml;ts-Missbrauch auszuschlie&szlig;en. Dies kann z. B. durch Schreddern oder Verbrennen des Formulars sichergestellt werden. Der Assurer beh&auml;lt keinerlei Kopien von Ausweisen."
 
 #: www/cap.html.php:227 www/coap.html.php:305
 msgid "A printer ready file with the form and attachments can be generated as follows:"

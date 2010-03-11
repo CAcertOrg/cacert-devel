@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 # CommModule - CAcert Communication Module
-# Copyright (C) 2006-2008  CAcert Inc.
+# Copyright (C) 2006-2009  CAcert Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -50,8 +50,9 @@ my $opensslbin="/usr/bin/openssl";
 
 my $mysqlphp="/home/cacert/www/includes/mysql.php";
 
-my %revokefile=(2=>"../www/class3-revoke.crl",1=>"../www/revoke.crl",0=>"../www/revoke.crl");
+my %revokefile=(2=>"../www/class3-revoke.crl",1=>"../www/revoke.crl");
 
+my $newlayout=1;
 
 #End of configurations
 
@@ -64,14 +65,19 @@ my %monarr = ("Jan" => 1, "Feb" => 2, "Mar" => 3, "Apr" => 4, "May" => 5, "Jun" 
 my $password="";
 if(open IN,"<$mysqlphp")
 {
-my $content="";
+  my $content="";
 undef $/;
 $content=<IN>;
-$password=$1 if($content=~m/mysql_connect\("[^"]+",\s*"\w+",\s*"(\w+)"/);
+$password=$1 if($content=~m/mysql_connect\s*\("[^"]+",\s*"\w+",\s*"(\w+)"/);
 close IN;
 $/="\n";
 
 }
+else
+{
+  die "Could not read file: $!\n";
+}
+
 
 my $dbh = DBI->connect("DBI:mysql:cacert:localhost","cacert",$password, { RaiseError => 1, AutoCommit => 1 }) || die ("Error with the database connection.\n");
 
@@ -86,13 +92,6 @@ sub readfile($)
   return $content;
 }
 
-
-#mkdir "revokehashes";
-foreach (keys %revokefile)
-{
-  my $revokehash=sha1_hex(readfile($revokefile{$_}));
-  print "Root $_: Hash $revokefile{$_} = $revokehash\n";
-}
 
 
 #Logging functions:
@@ -123,6 +122,15 @@ die $_[0];
 
 
 my $timestamp=strftime("%Y-%m-%d %H:%M:%S",localtime);
+
+#mkdir "revokehashes";
+foreach (keys %revokefile)
+{
+  next unless (-f $revokefile{$_});
+  my $revokehash=sha1_hex(readfile($revokefile{$_}));
+  SysLog "Root $_: Hash $revokefile{$_} = $revokehash\n";
+}
+
 
 
 sub mysql_query($)
@@ -292,7 +300,7 @@ sub SendHandshaked($)
   SysLog "Shaking hands ...\n" if($debug);
   SendIt("\x02");
 
-  Error "Handshake uncompleted. Connection lost2!\n" if(!scalar($sel->can_read(20)));
+  Error "Handshake uncompleted. Connection lost2! $!\n" if(!scalar($sel->can_read(20)));
   my $data="";
   my $length=read SER,$data,1;
   if($length && $data eq "\x10")
@@ -363,12 +371,12 @@ my $tries=100000;
 while(!$blockfinished)
 {
 Error("Tried reading too often\n") if(($tries--)<=0);
-print ("tries: $tries\n") if(!($tries%10));
+# SysLog ("tries: $tries") if(!($tries%10));
 
 $data="";
 if(!scalar($sel->can_read(5)))
 {
-Error "Handshake uncompleted. Connection lost variant2!\n" ;
+Error "Handshake uncompleted. Connection lost variant3! $!\n" ;
 return;
 }
 $length=read SER,$data,100,0;
@@ -483,6 +491,30 @@ sub X509extractExpiryDate($)
   }
   return "";
 }
+
+sub CRLuptodate($)
+{
+  return 0 unless(-f $_[0]);
+  my $data=`$opensslbin crl -in "$_[0]" -noout -lastupdate -inform der`;
+  SysLog "CRL: $data\n";
+  #lastUpdate=Aug  8 10:26:34 2007 GMT
+  # Is the timezone handled properly?
+  if($data=~m/lastUpdate=(\w{2,4}) *(\d{1,2}) *(\d{1,2}:\d{1,2}:\d{1,2}) (\d{4}) GMT/)
+  {
+    my $date=sprintf("%04d-%02d-%02d",$4,$monarr{$1},$2);
+    SysLog "CRL Issueing Date found: $date\n" if($debug);
+    my $compare = strftime("%Y-%m-%d", localtime);
+    SysLog "Comparing $date with $compare\n" if($debug);
+    return $date eq $compare;
+  }
+  else
+  {
+    SysLog "Expiry Date not found. Perhaps DER format is necessary? Hint: $data\n";
+  }
+  return 0;
+}
+
+
 sub X509extractSerialNumber($)
 {
   # TIMEZONE ?!?
@@ -583,6 +615,7 @@ sub setUsersLanguage($)
 
 sub getUserData($)
 {
+  return() unless($_[0]=~m/^\d+$/);
   my $sth = $dbh->prepare("select * from users where id='$_[0]'");
   $sth->execute();
   #SysLog "USER DUMP:\n";
@@ -673,7 +706,9 @@ sub sendmail($$$$$$$)
   {
   	print $smtp "Content-Type: text/plain; charset=\"utf-8\"\r\n";
   	print $smtp "Content-Transfer-Encoding: 8bit\r\n";
-  } else {
+  }
+  else 
+  {
   	print $smtp "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n";
   	print $smtp "Content-Transfer-Encoding: quoted-printable\r\n";
   	print $smtp "Content-Disposition: inline\r\n";
@@ -705,10 +740,17 @@ sub HandleCerts($$)
   while ( my $rowdata = $sth->fetchrow_hashref() )
   {
     my %row=%{$rowdata};
+    my $prefix=$org.($server?"server":"client");
+    my $short=int($row{'id'}/1000);
+    my $csrname = "../csr/$prefix-".$row{'id'}.".csr";
+    $csrname = "../csr/$prefix/$short/$prefix-".$row{'id'}.".csr" if($newlayout);
+    SysLog("New Layout: "."../csr/$prefix/$short/$prefix-".$row{'id'}.".csr\n");
 
-    my $csrname = "../csr/".$org.($server?"server-":"client-").$row{'id'}.".csr";
-    my $crtname = "../crt/".$org.($server?"server-":"client-").$row{'id'}.".crt";
-
+    #my $crtname = "../crt/$prefix-".$row{'id'}.".crt";
+    my $crtname=$csrname; $crtname=~s/^\.\.\/csr/..\/crt/; $crtname=~s/\.csr$/.crt/;
+    my $dirname=$crtname; $dirname=~s/\/[^\/]*\.crt//;
+    mkdir $dirname,0777;
+    SysLog("New Layout: $crtname\n");
 
     if($server)
     {
@@ -851,10 +893,80 @@ sub HandleCerts($$)
       $body .= "Root cert fingerprint = 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33\n\n";
       $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
       sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
-    } else {
-
+    }
+    else 
+    {
       SysLog("Could not find the issued certificate. $crtname ".$row{"id"}."\n");
       $dbh->do("update `$table` set warning=warning+1 where `id`='".$row{'id'}."'");
+    }
+  }
+}
+
+
+sub DoCRL($$)
+{
+  my $crl=$_[0];
+  my $crlname=$_[1];
+  
+  if(length($crl))
+  {
+    if($crl=~m/^-----BEGIN X509 CRL-----/)
+    {
+      open OUT,">$crlname.pem";
+      print OUT $crl;
+      close OUT;
+      system "$opensslbin crl -in $crlname.pem -outform der -out $crlname.tmp";
+    }
+    else
+    {
+      open OUT,">$crlname.patch";
+      print OUT $crl;
+      close OUT;
+      my $res=system "xdelta patch $crlname.patch $crlname $crlname.tmp"; 
+      #print "xdelta res: $res\n";
+      if($res==512)
+      {
+        open OUT,">$crlname.tmp";
+        print OUT $crl;
+        close OUT;
+      }
+    }
+
+    my $res=`openssl crl -verify -in $crlname.tmp -inform der -noout 2>&1`;	
+    SysLog "verify: $res\n";
+    if($res=~m/verify OK/)
+    {
+      rename "$crlname.tmp","$crlname";
+    }
+    else
+    {
+      SysLog "VERIFICATION OF NEW CRL DID NOT SUCCEED! PLEASE REPAIR!\n";
+      SysLog "Broken CRL is available as $crlname.tmp\n";
+      #Override for testing:
+      rename "$crlname.tmp","$crlname";
+    }
+    return 1;
+  }
+  else
+  {
+    SysLog("RECEIVED AN EMPTY CRL!\n");
+  }
+  return 0;
+}
+
+
+sub RefreshCRLs()
+{
+  foreach my $rootcert (keys %revokefile)
+  {
+    if(!CRLuptodate($revokefile{$rootcert}))
+    {
+      SysLog "Update of the CRL $rootcert is necessary!\n";
+      my $crlname = $revokefile{$rootcert};
+      my $revokehash=sha1_hex(readfile($crlname));
+      my $crl=Request($ver,2,1,$rootcert-1,0,0,365,0,"","",$revokehash);
+      #print "Received ".length($crl)." ".hexdump($crl)."\n";
+      DoCRL($crl,$crlname);
     }
   }
 }
@@ -874,8 +986,19 @@ sub RevokeCerts($$)
   {
     my %row=%{$rowdata};
 
-    my $csrname = "../csr/".$org.($server?"server-":"client-").$row{'id'}.".csr";
-    my $crtname = "../crt/".$org.($server?"server-":"client-").$row{'id'}.".crt";
+    my $prefix=$org.($server?"server":"client");
+    my $short=int($row{'id'}/1000);
+
+    my $csrname = "../csr/$prefix-".$row{'id'}.".csr";
+    $csrname = "../csr/$prefix/$short/$prefix-".$row{'id'}.".csr" if($newlayout);
+    SysLog("New Layout: "."../csr/$prefix/$short/$prefix-".$row{'id'}.".csr\n");
+
+    #my $crtname = "../crt/$prefix-".$row{'id'}.".crt";
+    my $crtname=$csrname; $crtname=~s/^\.\.\/csr/..\/crt/; $crtname=~s/\.csr$/.crt/;
+    SysLog("New Layout: $crtname\n");
+
+    #my $csrname = "../csr/".$org.($server?"server-":"client-").$row{'id'}.".csr";
+    #my $crtname = "../crt/".$org.($server?"server-":"client-").$row{'id'}.".crt";
     my $crlname = $revokefile{$row{'rootcert'}};
 
     my $crt="";
@@ -889,34 +1012,9 @@ sub RevokeCerts($$)
       my $revokehash=sha1_hex(readfile($crlname));
 
       my $crl=Request($ver,2,1,$row{'rootcert'}-1,0,0,365,0,$content,"",$revokehash);
-      if(length($crl))
-      {
-        if(1)
-	{
-          open OUT,">$crlname.patch";
-          print OUT $crl;
-          close OUT;
-          system "xdelta patch $crlname.patch $crlname $crlname.tmp"; 
+      my $result=DoCRL($crl,$crlname);
 
-	}
-        #if($crl=~m/^-----BEGIN X509 CRL-----/)
-        #{
-        #  open OUT,">$crlname.pem";
-        #  print OUT $crl;
-        #  close OUT;
-        #  system "$opensslbin crl -in $crlname.pem -outform der -out $crlname.tmp";
-        #}
-        #else
-        #{
-        #  open OUT,">$crlname.tmp";
-        #  print OUT $crl;
-        #  close OUT;
-        #}
-        rename "$crlname.tmp","$crlname";
-
-      }
-
-      if(-s $crlname)
+      if($result)
       {
         setUsersLanguage($row{memid});
 
@@ -934,13 +1032,12 @@ sub RevokeCerts($$)
     }
     else
     {
-      SysLog("Error: $crtname $!\n") if($debug);
+      SysLog("Error in RevokeCerts: $crtname $!\n") if($debug);
     }
 
   }
 
 }
-
 
 
 
@@ -954,8 +1051,19 @@ sub HandleGPG()
   {
     my %row=%{$rowdata};
   
-    my $csrname = "../csr/gpg-".$row{'id'}.".csr";
-    my $crtname = "../crt/gpg-".$row{'id'}.".crt";
+    my $prefix="gpg";
+    my $short=int($row{'id'}/1000);
+    my $csrname = "../csr/$prefix-".$row{'id'}.".csr";
+    $csrname = "../csr/$prefix/$short/$prefix-".$row{'id'}.".csr" if($newlayout);
+    SysLog("New Layout: "."../csr/$prefix/$short/$prefix-".$row{'id'}.".csr\n");
+
+    #my $crtname = "../crt/$prefix-".$row{'id'}.".crt";
+    my $crtname=$csrname; $crtname=~s/^\.\.\/csr/..\/crt/; $crtname=~s/\.csr$/.crt/;
+    SysLog("New Layout: $crtname\n");
+
+
+    #my $csrname = "../csr/gpg-".$row{'id'}.".csr";
+    #my $crtname = "../crt/gpg-".$row{'id'}.".crt";
   
     SysLog "Opening $csrname\n";
   
@@ -1010,7 +1118,9 @@ sub HandleGPG()
 
 # Main program loop
 
-while(1)
+my $crlcheck=0;
+
+while ( -f "./client.pl-active" )
 {
   SysLog("Handling GPG database ...\n");
   HandleGPG();
@@ -1025,6 +1135,9 @@ while(1)
   RevokeCerts(1,0); #org client certs
   RevokeCerts(1,1); #org server certs
 
+  $crlcheck++;
+  RefreshCRLs() if(($crlcheck%100) == 1);
+
   #print "Sign Request X.509, Root0\n";
   #my $reqcontent="";
   #Request($ver,1,1,0,5,2,365,0,$reqcontent,"","/CN=supertest.cacert.at");
@@ -1032,5 +1145,6 @@ while(1)
   SysLog("NUL Request:\n");
   my $timestamp=strftime("%m%d%H%M%Y.%S",gmtime);
   Request($ver,0,0,0,0,0,0,0,$timestamp,"","");
-  usleep(700000); 
+  sleep(1);
+  usleep(1700000); 
 }

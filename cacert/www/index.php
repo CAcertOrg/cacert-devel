@@ -120,7 +120,7 @@
 						where `id`='".intval($_SESSION['lostpw']['user']['id'])."'";
 				mysql_query($query) || die(mysql_error());
 				showheader(_("Welcome to CAcert.org"));
-				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
+				echo _("Your Pass Phrase has been changed now. You can now login with your new password.");
 				showfooter();
 				exit;
 			}
@@ -565,21 +565,35 @@
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
 
-		if($_SESSION['_config']['secrethash'] != $secrethash || $secrethash == "" || $_SESSION['_config']['secrethash'] == "" ||
-			strstr($subject, "botmetka") || strstr($subject, "servermetka") || strstr($who,"\n") || strstr($email,"\n") || strstr($subject,"\n") )
+		if($_SESSION['_config']['secrethash'] != $secrethash || $secrethash == "" || $_SESSION['_config']['secrethash'] == "")
 		{
 			$id = $oldid;
 			$process = "";
-			$_SESSION['_config']['errmsg'] = _("This seems like potential spam, or you have cookies or Javascript disabled, cannot continue.");
+			$_SESSION['_config']['errmsg'] = _("This seems like you have cookies or Javascript disabled, cannot continue.");
 			$oldid = 0;
 
 			$message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
 			sendmail("support@cacert.org", "[CAcert.org] Possible SPAM", $message, $email, "", "", "CAcert Support");
 			//echo "Alert! Alert! Alert! SPAM SPAM SPAM!!!<br><br><br>";
 			//if($_SESSION['_config']['secrethash'] != $secrethash) echo "Hash does not match: $secrethash vs. ".$_SESSION['_config']['secrethash']."\n";
-			echo "This seems like potential spam, or you have cookies or Javascript disabled, cannot continue.";
+			echo _("This seems like you have cookies or Javascript disabled, cannot continue.");
 			die;
 		}
+		if(strstr($subject, "botmetka") || strstr($subject, "servermetka") || strstr($who,"\n") || strstr($email,"\n") || strstr($subject,"\n") )
+		{
+			$id = $oldid;
+			$process = "";
+			$_SESSION['_config']['errmsg'] = _("This seems like potential spam, cannot continue.");
+			$oldid = 0;
+
+			$message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
+			sendmail("support@cacert.org", "[CAcert.org] Possible SPAM", $message, $email, "", "", "CAcert Support");
+			//echo "Alert! Alert! Alert! SPAM SPAM SPAM!!!<br><br><br>";
+			//if($_SESSION['_config']['secrethash'] != $secrethash) echo "Hash does not match: $secrethash vs. ".$_SESSION['_config']['secrethash']."\n";
+			echo _("This seems like potential spam, cannot continue.");
+			die;
+		}
+
 
 		if(trim($who) == "" || trim($email) == "" || trim($subject) == "" || trim($message) == "")
 		{

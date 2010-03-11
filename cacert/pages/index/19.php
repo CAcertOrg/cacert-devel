@@ -15,6 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+<span style="background-color: #FF8080; font-size: 150%">
+Note that the <strong>TTP</strong> programme is effectively <strong>Frozen</strong><br>
+Until a subsidiary policy under AP is written, it is against AP rules.<br>
+</span>
+&nbsp;<br>
 <h3><?=_("Information")?></h3>
 <table border="0" align="center" cellspacing="0" cellpadding="0">
   <tr>

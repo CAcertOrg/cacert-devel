@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-06-25 19:17:45+0000\n"
+"PO-Revision-Date: 2009-12-26 19:01:13+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr "Egy CAcert hiteles&iacute;t&#337; aki tudatosan, vagy ismert okokb&oacut
 
 #: www/wot/4.php:17
 msgid "A trusted 3rd party is simply someone in your country that is responsible for witnessing signatures and ID documents. This role is covered by many different titles such as public notary, justice of the peace and so on. Other people are allowed to be authoritative in this area as well, such as bank managers, accountants and lawyers."
-msgstr "Egy megb&iacute;zhat&oacute; harmadik szem&eacute;ly egy olyan valaki aki a te orsz&aacute;godban aki felel&#337;s az&eacute;rt, hogy leellen&#337;r&iacute;zze az al&aacute;&iacute;r&aacute;sodat &eacute;s a szem&eacute;lyi azonos&iacute;t&oacute; dokumentumaidat. Ezt a szerepet t&ouml;bben is bet&ouml;lthetik, mint k&ouml;zjegyz&#337;k, b&eacute;keb&iacute;r&oacute;k stb. M&aacute;s szem&eacute;lyek is jogosultak erre, p&eacute;ld&aacute;ul bank managerek, hivatalnokok &eacute;s &uuml;gyv&eacute;dek."
+msgstr "Egy megb&iacute;zhat&oacute; harmadik szem&eacute;ly egy olyan valaki a te orsz&aacute;godban aki felelős az&eacute;rt, hogy leellenőr&iacute;zze az al&aacute;&iacute;r&aacute;sodat &eacute;s a szem&eacute;lyi azonos&iacute;t&oacute; dokumentumaidat. Ezt a szerepet t&ouml;bben is bet&ouml;lthetik, mint k&ouml;zjegyzők, b&eacute;keb&iacute;r&oacute;k stb. M&aacute;s szem&eacute;lyek is jogosultak erre, p&eacute;ld&aacute;ul banki &uuml;gyint&eacute;zők, k&ouml;nyvelők &eacute;s &uuml;gyv&eacute;dek."
 
 #: www/account/38.php:21 www/index/13.php:21
 msgid "ANY amount will be appreciated - the more funding CAcert receives, the sooner it can achieve the goals of the community."
@@ -134,7 +134,7 @@ msgstr "Minden mez&#337; sz&uuml;ks&eacute;ges"
 
 #: www/account/43.php:157
 msgid "Alternate Verified Email Addresses"
-msgstr "Ellen&#337;rz&ouml;tt"
+msgstr "Egy&eacute;b ellenőrz&ouml;tt email c&iacute;mek"
 
 #: www/help/7.php:9
 msgid "Alternatively as things progress we can add more layers of security with say 4 webservers talking to 2 intermediate servers, talking to the root store, and acting in a token ring fashion, anything happening out of sequence, and the server directly upstream shuts itself down, which if that were in place and there were multiple paths, any down time in this fashion would fall over to the servers not compromised, anyways just some food for thought."
@@ -197,11 +197,11 @@ msgstr "Hiteles&iacute;t&eacute;si pontok"
 
 #: www/account/43.php:225 www/wot/10.php:52
 msgid "Assurance Points You Issued"
-msgstr "Hiteles&iacute;t&eacute;si pontok"
+msgstr "Adott Hiteles&iacute;t&eacute;si pontok"
 
 #: www/stats.php:51
 msgid "Assurances Made"
-msgstr "Hiteles&iacute;t&eacute;si pontok"
+msgstr "Hiteles&iacute;t&eacute;sek"
 
 #: includes/account_stuff.php:182 www/wot/5.php:19
 msgid "Assure Someone"
@@ -233,7 +233,7 @@ msgstr "CAcert webes hiteles&iacute;t&eacute;s"
 
 #: includes/account_stuff.php:182
 msgid "Becoming an Assurer"
-msgstr "K&ouml;zjegyz&#337;v&eacute; v&aacute;lik"
+msgstr "Hiteles&iacute;tőv&eacute; v&aacute;lik"
 
 #: pages/account/10.php:34
 msgid "Paste your CSR(Certificate Signing Request) below..."
@@ -353,7 +353,7 @@ msgstr "A tan&uacute;s&iacute;tv&aacute;ny telep&iacute;t&eacute;si hiba"
 
 #: www/help/3.php:43
 msgid "Certificate Installation process for IIS 5.0"
-msgstr "A tan&uacute;s&iacute;tv&aacute;ny telep&iacute;t&eacute;si hiba"
+msgstr "A tan&uacute;s&iacute;tv&aacute;ny telep&iacute;t&eacute;s&eacute;nek l&eacute;p&eacute;sei IIS 5.0 eset&eacute;n"
 
 #: includes/general_stuff.php:65
 msgid "CAcert Logos"
@@ -942,14 +942,6 @@ msgstr "Hogyan?"
 msgid "Howto Information"
 msgstr "Kapcsolat inform&aacute;ci&oacute;"
 
-#: www/wot/6.php:112
-msgid "I am sure of myself"
-msgstr "Biztos vagyok magamban"
-
-#: www/wot/6.php:101
-msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that CAcert may challenge this assurance and call upon me to prove the basis for it, and that I may be held responsible if I cannot provide such proof."
-msgstr "Ugy gondolom, hogy a szem&eacute;lyazonoss&aacute;g amit ellen&ouml;r&iacute;tem, val&oacute;s, teljes &eacute;s ellen&#337;r&iacute;zhet&#337;. L&aacute;ttam az eredeti dokument&aacute;ci&oacute;kat ami tan&uacute;s&iacute;tja a szem&eacute;lyt. Elfogadom, hogy a CAcert leellen&#337;r&iacute;zheti ezt a hiteles&iacute;t&eacute;st &eacute;s felh&iacute;vhat, hogy igazoljam azt, tov&aacute;bb&aacute; felel&#337;s&eacute;ggel tartozom, ha nem tudom ezt al&aacute;t&aacute;masztani."
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "Nem gy&#337;z&ouml;m kiv&aacute;rni, hogy titkos&iacute;tott leveleket k&uuml;ldhessek!"
@@ -966,10 +958,6 @@ msgstr "Nem kaptam &eacute;rv&eacute;nyes tan&uacute;s&iacute;tv&aacute;ny k&eac
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
 msgstr "Nem szeretn&eacute;m, hogy felsoroljanak"
-
-#: www/wot/6.php:105
-msgid "I have read and understood the Rules For Assurers and am making this assurance subject to and in compliance with these rules."
-msgstr "Elolvastam &eacute;s elfogadtam a hiteles&iacute;t&eacute;s szab&aacute;lyait &eacute;s ezt a hiteles&iacute;t&eacute;st annak megfelel&#337;en, aszerint v&eacute;geztem."
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
@@ -1649,7 +1637,7 @@ msgstr ""
 
 #: www/capnew.php:1326
 msgid "location of the assurance"
-msgstr ""
+msgstr "A Hiteles&iacute;t&eacute;s helye"
 
 #: www/capnew.php:732 www/coapnew.php:753
 msgid "generated"
@@ -2025,10 +2013,6 @@ msgstr "Rendszeradminisztr&aacute;tor"
 msgid "System will send you an email with a link in it, you just open the link in a webbrowser."
 msgstr "A rendszer k&uuml;ld neked egy emailt, benne egy linkkel, neked meg kell ezt nyitnod egy b&ouml;ng&eacute;sz&#337;ben."
 
-#: includes/account_stuff.php:182
-msgid "TTP Form"
-msgstr "TTP &#368;rlap"
-
 #: includes/general.php:24 www/wot/6.php:99
 msgid "Temporary Increase"
 msgstr "Ideiglenes n&ouml;vekm&eacute;ny"
@@ -2085,10 +2069,6 @@ msgstr "A jelsz&oacute;, amit megadott, t&uacute;l r&ouml;vid volt."
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; (Magyarul: a nyomozati szervek szab&aacute;lyoz&aacute;s&aacute;nak t&ouml;rv&eacute;nye. Az 'email snooping bill', email-szagl&aacute;sz&oacute; t&ouml;rv&eacute;ny hivatalos korm&aacute;nyzati honlapja.)"
 
-#: www/account/0.php:28
-msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons. You can also get trust points via the Trust Third Party system where you go to a lawyer, bank manager, accountant, or public notary/juctise of the peace and they via your ID and fill in the TTP form to state they have viewed your ID documents and it appears authentic and true. More information on the TTP system can be found in the TTP sub-menu"
-msgstr "A CAcert web bizalmi rendszer hasonl&oacute; a sokak &aacute;ltal haszn&aacute;lt GPG/PGP-hez, &#337;k szem&eacute;lyes tal&aacute;lkoz&aacute;sok alkalm&aacute;val ellen&ouml;rzik egym&aacute;s f&eacute;nyk&eacute;pes igazolv&aacute;nyait &eacute;s a GPG/PGP inform&aacute;ci&oacute;it. CAcert azonban annyiban k&uuml;l&ouml;nb&ouml;zik, hogy mi m&oacute;dos&iacute;tottuk ezt az&eacute;rt, hogy a PKI k&ouml;rnyezetben m&#369;k&ouml;dj&ouml;n, ahhoz, hogy &Ouml;nben megb&iacute;zzunk &Ouml;nnek el&ouml;sz&ouml;r keresnie kell valakit, akiben m&aacute;r megb&iacute;zunk. Az hat&aacute;rozza meg, hogy megb&iacute;zhat&oacute; szem&eacute;lynek mennyi pontot adhat &Ouml;nnek, hogy h&aacute;ny szem&eacute;lyben b&iacute;zik vagy mennyivel tal&aacute;lkozott m&aacute;r (hogy mennyi pontot adhat, azt a hely adatai mellett tal&aacute;lhat&oacute;). Mikor tal&aacute;lkoznak, meg kell mutatni az igazolv&aacute;nyait &eacute;s ki kell t&ouml;ltenie a CAP nyomtatv&aacute;nyt, melyet a hiteles&iacute;t&#337; meg&#337;riz ellen&#337;rz&eacute;s c&eacute;lj&aacute;b&oacute;l. Szint&eacute;n kaphat bizalmi pontokat a Megb&iacute;zhat&oacute; harmadik szem&eacute;ly rendszeren kereszt&uuml;l, amikor is egy &uuml;gyv&eacute;d, bank manager, hivatalnok vagy k&ouml;zjegyz&#337;/b&eacute;keb&iacute;r&oacute; t&ouml;lti ki a TTP nyomtatv&aacute;nyt az igazolv&aacute;nyai alapj&aacute;n, igazolva azok val&oacute;dis&aacute;g&aacute;t. Tov&aacute;bbi inform&aacute;ci&oacute;k a TTP rendszerr&#337;l a TTP almen&uuml;ben tal&aacute;lhat&oacute;k."
-
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr "Az &uacute;j CAcert felhaszn&aacute;l&oacute;k hiteles&iacute;t&eacute;s&eacute;nek lehet&#337;s&eacute;ge hozz&aacute;j&aacute;rul&aacute;s a CAcert WOT (a bizalom h&aacute;l&oacute;ja) rendszer er&#337;s&iacute;t&eacute;s&eacute;hez, illetve sz&eacute;les&iacute;t&eacute;s&eacute;hez."
@@ -2107,12 +2087,6 @@ msgstr "A jelenlegi %s bizotts&aacute;g &eacute;s tagjai."
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "A tartom&aacute;ny '%s' hozz&aacute;adva a rendszerhez, azonban miel&otilde;tt b&aacute;rmilyen tan&uacute;s&iacute;tv&aacute;nyt kiadna, meg kell nyitnia a keres&otilde;j&eacute;vel a linket, melyet email c&iacute;m&eacute;re elk&uuml;ldt&uuml;nk &Ouml;nnek"
 
-#: includes/account.php:304 includes/account.php:373 includes/account.php:1428
-#: includes/account.php:1458
-#, php-format
-msgid "The domain '%s' is already in the system and is listed as valid. Can't continue."
-msgstr "A domain '%s' m&aacute;r a rendszerben van &eacute;s &eacute;rv&eacute;nyes. Nem lehet folytatni."
-
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
 msgstr "Az email azonos&iacute;t&oacute;k r&eacute;sz arra val&oacute;, hogy hozz&aacute;adjon/firss&iacute;tsen/t&ouml;r&ouml;lj&ouml;n email c&iacute;met, melyekkel kliens tanus&iacute;tv&aacute;nyokat ig&eacute;nyelhet. A kliens tanus&iacute;tv&aacute;nyok r&eacute;sz v&eacute;gigvezeti a tanus&iacute;tv&aacute;ny ig&eacute;ny k&eacute;sz&iacute;t&eacute;s l&eacute;p&eacute;sein egy vagy t&ouml;bb email c&iacute;mhez, melyeket az email azonos&iacute;t&oacute;k r&eacute;szben hozott l&eacute;tre."
@@ -2121,11 +2095,6 @@ msgstr "Az email azonos&iacute;t&oacute;k r&eacute;sz arra val&oacute;, hogy hoz
 #, php-format
 msgid "The email address '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Az email c&iacute;m '%s' hozz&aacute;adva a rendszerhez, azonban miel&otilde;tt b&aacute;rmilyen tan&uacute;s&iacute;tv&aacute;nyt k&eacute;rhetne, nyissa meg keres&otilde;j&eacute;vel az email c&iacute;m&eacute;re k&uuml;ld&ouml;tt linket."
-
-#: includes/account.php:36
-#, php-format
-msgid "The email address '%s' is already in the system. Can't continue."
-msgstr "Ez az email c&iacute;m '%s'  m&aacute;r a rendszerben van. Nem tudjuk folytatni."
 
 #: includes/account.php:86
 msgid "The following accounts have been removed:"
@@ -2396,7 +2365,7 @@ msgstr ""
 
 #: www/capnew.php:1331
 msgid "date of assurance"
-msgstr ""
+msgstr "Hiteles&iacute;t&eacute;s ideje"
 
 #: www/capnew.php:1025
 msgid "certificate"
@@ -2567,10 +2536,13 @@ msgstr "R&eacute;szt vett ennek a honlapnak portug&aacute;l nyelvre t&ouml;rt&ea
 msgid "Has put a lot of time and effort into promoting and assuring people in Brazil and South America, and for helping to translate this site into Portuguese"
 msgstr "Sok id&#337;t &eacute;s energi&aacute;t ford&iacute;tott n&eacute;pszer&#369;s&iacute;t&eacute;sre &eacute;s &uacute;j tagok hiteles&iacute;t&eacute;s&eacute;re Braz&iacute;li&aacute;ban &eacute;s D&eacute;l-Amerik&aacute;ban, tov&aacute;bb&aacute; seg&iacute;tette ennek a honlapnak potug&aacute;l nyelvre t&ouml;rt&eacute;n&#337; leford&iacute;t&aacute;s&aacute;t"
 
-#: www/wot/6.php:44
-#, php-format
-msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. Gross negligence may cause you to be liable."
-msgstr "Ellen&#337;rizd le, hogy a k&ouml;vetkez&#337; r&eacute;szletek megegyeznek-e azzal, amit akkor l&aacute;tt&aacute;l, amikor az illet&#337;vel (%s) szem&eacute;lyesen tal&aacute;lkozt&aacute;l. Addig NEM SZABAD tov&aacute;bbl&eacute;pned, am&iacute;g nem vagy biztos az adatok pontoss&aacute;g&aacute;ban! Ennek figyelmen k&iacute;v&uuml;l hagy&aacute;s&aacute;&eacute;rt felel&#337;ss&eacute;ggel tartozol."
+#: www/index.php:586 www/index.php:593
+msgid "This seems like potential spam, cannot continue."
+msgstr ""
+
+#: www/index.php:572 www/index.php:579
+msgid "This seems like you have cookies or Javascript disabled, cannot continue."
+msgstr ""
 
 #: includes/general_stuff.php:74
 msgid "CAcert Board"
@@ -3195,9 +3167,10 @@ msgstr "A k&ouml;vetkez&#337; hosztnevek el lettek utas&iacute;tva, mert a rends
 msgid "The list of names are in no sense of order"
 msgstr "A nevek list&aacute;ja nincs sorrendben"
 
-#: www/wot/2.php:28
-msgid "The only other way to receive assurance points is to have had your identity checked by a third party CA, whose policies are suitably set to not let identity fraud run rampant. Please contact us if you would like more details about this."
-msgstr "Egyetlen tov&aacute;bbi m&oacute;dja, hogy hiteles&iacute;t&eacute;si pontokat kapj&aacute;l, ha egy m&aacute;sik CA (hiteles&iacute;t&eacute;si hat&oacute;s&aacute;g), amelynek szab&aacute;lyzata megfelel&#337;en biztos&iacute;tja a csal&aacute;s lehet&#337;s&eacute;g&eacute;nek elker&uuml;l&eacute;s&eacute;t, m&aacute;r ellen&#337;rizte szem&eacute;lyazonoss&aacute;godat. Vedd fel vel&uuml;nk a kapcsolatot, ha tov&aacute;bbi r&eacute;szleteket szeretn&eacute;l megtudni err&#337;l."
+#: includes/account.php:70
+#, php-format
+msgid "The email address '%s' is already in a different account. Can't continue."
+msgstr ""
 
 #: www/wot/2.php:17
 msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
@@ -3343,7 +3316,7 @@ msgstr "K&eacute;rv&eacute;nyez&#337; al&aacute;&iacute;r&aacute;sa"
 
 #: www/cap.php:39
 msgid "As the assurer, you are required to keep the signed document on file for 7 years. Should Cacert Inc. have any concerns about a meeting taking place, Cacert Inc. can request proof, in the form of this signed document, to ensure the process is being followed correctly. After 7 years if you wish to dispose of this form it's preferred that you shred and burn it. You do not need to retain copies of ID at all."
-msgstr "Mint hiteles&iacute;t&#337;, az al&aacute;&iacute;rt nyomtatv&aacute;nyt 7 &eacute;vig meg kell &#337;rizned. A szem&eacute;lyazonoss&aacute;g igazol&aacute;s&aacute;ra szolg&aacute;lt dokumentumok m&aacute;solatait nem kell csatolni. Amennyiben a CAcert Inc. r&eacute;sz&eacute;r&#337;l b&aacute;rmi k&eacute;ts&eacute;g mer&uuml;lne fel a tal&aacute;lkoz&oacute; megt&ouml;rt&eacute;nt&eacute;t illet&#337;en, az al&aacute;&iacute;rt &#369;rlapot bizony&iacute;t&eacute;kk&eacute;nt bek&eacute;rhetik, hogy meggy&#337;z&#337;djenek r&oacute;la, miszerint az elj&aacute;r&aacute;s szab&aacute;lyos volt. A 7 &eacute;v eltelt&eacute;vel a nyomtatv&aacute;nyokat iratmegsemmis&iacute;t&#337;n vagy el&eacute;get&eacute;ssel meg kell semmis&iacute;teni."
+msgstr "Mint hiteles&iacute;tő, az al&aacute;&iacute;rt nyomtatv&aacute;nyt 7 &eacute;vig meg kell őrizned. A szem&eacute;lyazonoss&aacute;g igazol&aacute;s&aacute;ra szolg&aacute;lt dokumentumok m&aacute;solatait nem kell csatolni. Amennyiben a CAcert Inc. r&eacute;sz&eacute;ről b&aacute;rmi k&eacute;ts&eacute;g mer&uuml;lne fel a tal&aacute;lkoz&oacute; megt&ouml;rt&eacute;nt&eacute;t illetően, az al&aacute;&iacute;rt űrlapot bizony&iacute;t&eacute;kk&eacute;nt bek&eacute;rhetik, hogy meggyőződjenek r&oacute;la, miszerint az elj&aacute;r&aacute;s szab&aacute;lyos volt. 7 &eacute;v eltelt&eacute;vel, ha meg akarod semmis&iacute;teni ezt a dokumentumot akkor javasoljuk, hogy t&eacute;pd sz&eacute;t &eacute;s &eacute;gesd el. Nem kell, hogy az igazolv&aacute;nyokr&oacute;l megtarts&aacute;l m&aacute;solatot."
 
 #: www/cap.php:103 www/cap.php:107
 msgid "Assurer's Name"
@@ -3509,7 +3482,7 @@ msgstr "CAcert hiteles&iacute;t&#337;"
 
 #: www/wot/5.php:15
 msgid "ERROR"
-msgstr ""
+msgstr "Hiba!"
 
 #: www/wot/10.php:105
 msgid "Go Back"
@@ -3579,7 +3552,7 @@ msgstr ""
 
 #: pages/account/39.php:69 pages/index/10.php:69
 msgid "A CAcert arbitrator may override this policy in a dispute."
-msgstr ""
+msgstr "Egy CACert-es d&ouml;ntőb&iacute;r&oacute; felűlb&iacute;r&aacute;lhatja ezt a szab&aacute;lyzatot egy vit&aacute;ban.r"
 
 #: pages/account/43.php:146
 msgid "Account Locking"
@@ -3636,17 +3609,15 @@ msgstr ""
 msgid "Blank CAP Form"
 msgstr "&Uuml;res CAP &#369;rlap"
 
-#: includes/account_stuff.php:211
-msgid "Blank TTP Form"
-msgstr "&Uuml;res TTP &#369;rlap"
+#: includes/account.php:460 includes/account.php:540 includes/account.php:1990
+#: includes/account.php:2020
+#, php-format
+msgid "The domain '%s' is already in a different account and is listed as valid. Can't continue."
+msgstr ""
 
 #: includes/general_stuff.php:85
 msgid "Bug Database"
 msgstr "Hibat&aacute;r"
-
-#: includes/account_stuff.php:201
-msgid "CAP/TTP Forms"
-msgstr "CAP/TTP &#369;rlapok"
 
 #: pages/account/39.php:64 pages/index/10.php:64
 msgid "CAcert Assurers can see the name, birthday and the number of points by looking up the correct email address. No other person related data is published by CAcert."
@@ -3702,7 +3673,7 @@ msgstr ""
 
 #: pages/account/54.php:101
 msgid "Edit Location"
-msgstr ""
+msgstr "El&eacute;rhetős&eacute;ged szerkeszt&eacute;se"
 
 #: pages/account/54.php:47
 msgid "Edit Region"
@@ -3743,12 +3714,12 @@ msgstr ""
 
 #: www/gpg.php:167
 msgid "If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you."
-msgstr ""
+msgstr "Ha a probl&eacute;ma tov&aacute;bbra is fenn&aacute;ll, akkor k&eacute;rj&uuml;k k&uuml;ldje el az al&aacute;&iacute;rni k&iacute;v&aacute;nt kulcsot a support@cacert.org-ra. K&ouml;sz&ouml;nj&uuml;k."
 
 #: pages/account/40.php:21 pages/index/11.php:21 pages/index/4.php:41
 #, php-format
 msgid "If you are having trouble with your username or password, please visit our %swiki page%s for more information"
-msgstr ""
+msgstr "Ha gondjai ad&oacute;dnak a felhaszn&aacute;l&oacute;i nev&eacute;vel vagy jelszav&aacute;val, akkor k&eacute;rj&uuml;k l&aacute;togassa meg a %swiki page%s oldalt tov&aacute;bbi seg&iacute;ts&eacute;g&eacute;rt."
 
 #: www/wot.php:426
 msgid "It looks like you were trying to contact multiple people, this isn't allowed due to data security reasons."
@@ -3972,6 +3943,75 @@ msgstr ""
 msgid "You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken."
 msgstr ""
 
+#: www/index.php:123
+msgid "Your Pass Phrase has been changed now. You can now login with your new password."
+msgstr ""
+
+#: pages/account/0.php:32
+msgid "The former TTP (Trusted Third Party) System has been stopped, and is currently not available."
+msgstr ""
+
+#: pages/account/0.php:31
+msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons."
+msgstr ""
+
+#: pages/wot/6.php:85
+#, php-format
+msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."
+msgstr ""
+
+#: pages/wot/6.php:153
+msgid "Policy"
+msgstr ""
+
+#: pages/wot/6.php:165
+msgid "I confirm this Assurance"
+msgstr ""
+
+#: pages/wot/6.php:150
+msgid "I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."
+msgstr ""
+
+#: pages/wot/6.php:146
+msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."
+msgstr ""
+
+#: pages/account/14.php:38
+msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol (all white spaces at the beginning and end are removed)."
+msgstr ""
+
+#: pages/wot/1.php:115
+msgid "Not yet!"
+msgstr ""
+
+#: includes/account_stuff.php:223
+msgid "CAP Forms"
+msgstr ""
+
+#: pages/index/21.php:39
+msgid "Please also include your name in the transaction so we know who it came from and send an email to ernestine at cacert dot org with the details:"
+msgstr ""
+
+#: pages/wot/6.php:154
+msgid "Assurance Handbook"
+msgstr ""
+
+#: pages/index/5.php:24
+msgid "Email Address (primary)"
+msgstr ""
+
+#: pages/account/56.php:18
+msgid "List of Organisation Assurers:"
+msgstr ""
+
+#: pages/index/1.php:24
+msgid "Note: White spaces at the beginning and end of a password will be removed."
+msgstr ""
+
+#: pages/wot/6.php:154
+msgid "Assurance Policy"
+msgstr ""
+
 #: www/cap.php:264
 msgid "I, the Assurer, hereby confirm that I have verified the Member according to CAcert Assurance Policy."
 msgstr ""
@@ -3987,11 +4027,11 @@ msgstr ""
 
 #: www/wot.php:343
 msgid "Assurer Challenge"
-msgstr ""
+msgstr "Hiteles&iacute;tői vizsga"
 
 #: www/cap.php:143
 msgid "I hereby confirm that the information stated above is both true and correct, and request the CAcert Assurer (identified below) to verify me according to CAcert Assurance Policy."
-msgstr ""
+msgstr "Kijelentem, hogy a fenti inform&aacute;ci&oacute; igaz &eacute;s pontos, &eacute;s k&eacute;rem a CAcert hiteles&iacute;tőt (azonos&iacute;t&aacute;s lejjebb), hogy igazolja a szem&eacute;lyazonoss&aacute;gomat a CAcert Hiteles&iacute;t&eacute;si szab&aacute;lyzatnak megfelelően."
 
 #: pages/account/21.php:50
 msgid "OCSP certificate"
@@ -4003,7 +4043,7 @@ msgstr ""
 
 #: pages/account/18.php:51 pages/account/5.php:57
 msgid "No client certificates are currently listed."
-msgstr ""
+msgstr "Nincs megjelen&iacute;thet&otilde; szem&eacute;lyes tan&uacute;s&iacute;tv&aacute;ny."
 
 #: pages/index/4.php:59
 msgid "If you want to use certificate login instead of username+password, please"
@@ -4015,7 +4055,7 @@ msgstr ""
 
 #: pages/account/43.php:109
 msgid "Are you sure you want to modify this DOB and/or last name?"
-msgstr ""
+msgstr "Biztos, hogy m&oacute;dos&iacute;tani akarod ezt a sz&uuml;let&eacute;si d&aacute;tumot &eacute;s/vagy vezet&eacute;knevet?"
 
 #: pages/account/43.php:412
 msgid "Show Assurances the user gave"
@@ -4055,7 +4095,7 @@ msgstr ""
 
 #: includes/account_stuff.php:220
 msgid "Trusted ThirdParties"
-msgstr ""
+msgstr "Megb&iacute;zhat&oacute; harmadik szem&eacute;lyek"
 
 #: www/index.php:445
 msgid "You have to agree to the CAcert Community agreement."
@@ -4111,7 +4151,7 @@ msgstr ""
 
 #: www/coap.html.php:110
 msgid "country code"
-msgstr ""
+msgstr "Orsz&aacute;gk&oacute;d"
 
 #: www/cap.html.php:240 www/coap.html.php:343
 msgid "generate PDF file"
@@ -4143,7 +4183,7 @@ msgstr ""
 
 #: www/cap.html.php:157
 msgid "I hereby confirm that the information stating my Identity Information above is both true and correct and request the CAcert Assurer (see below) to witness my identity in the CAcert Assurance Programme."
-msgstr ""
+msgstr "Kijelentem, hogy a fenti inform&aacute;ci&oacute; igaz &eacute;s pontos, &eacute;s k&eacute;rem a CAcert hiteles&iacute;tőt (azonos&iacute;t&aacute;s lejjebb), hogy igazolja a szem&eacute;lyazonoss&aacute;gomat a CAcert Hiteles&iacute;t&eacute;si Programban."
 
 #: www/capnew.php:1170
 msgid "a and y umlaut, and o/slash examples of accepted transliterations for the full name(s)"
@@ -4165,6 +4205,15 @@ msgstr ""
 msgid "Vice-President"
 msgstr ""
 
+#: pages/index/1.php:49
+#, php-format
+msgid "Please only write %sName Suffixes%s into this field."
+msgstr ""
+
+#: www/stats.php:263
+msgid "Statistical data from cache, created at"
+msgstr ""
+
 #: includes/general.php:877
 msgid "You are not an Assurer, but the reason is not stored in the database. Please contact"
 msgstr ""
@@ -4173,8 +4222,8 @@ msgstr ""
 msgid "The exact name of the assurer may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
 msgstr ""
 
-#: www/index.php:564
-msgid "This seems like potential spam, or you have cookies or Javascript disabled, cannot continue."
+#: includes/account.php:428
+msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
 msgstr ""
 
 #: www/coapnew.php:980
@@ -4694,7 +4743,7 @@ msgstr ""
 
 #: pages/gpg/3.php:30
 msgid "Below is your OpenPGP key"
-msgstr ""
+msgstr "Lentebb l&aacute;sd a OpenPGP tan&uacute;s&iacute;tv&aacute;nyodat"
 
 #: pages/account/5.php:110
 msgid "By allowing certificate login, this certificate can be used to login into your account at https://secure.cacert.org/ ."
@@ -4702,7 +4751,7 @@ msgstr ""
 
 #: pages/gpg/2.php:40
 msgid "No OpenPGP keys are currently listed."
-msgstr ""
+msgstr "Nincs megjelen&iacute;thet&otilde; OpenGPG kulcs."
 
 #: pages/gpg/3.php:24
 msgid "No such OpenPGP key attached to your account."
@@ -4710,7 +4759,7 @@ msgstr ""
 
 #: pages/gpg/2.php:20
 msgid "OpenPGP Keys"
-msgstr ""
+msgstr "OpenPGP kulcsok"
 
 #: pages/account/43.php:374
 msgid "Assurance Points The User Issued"
@@ -4722,7 +4771,7 @@ msgstr ""
 
 #: pages/account/6.php:124
 msgid "Your certificate:"
-msgstr ""
+msgstr "A tan&uacute;s&iacute;tv&aacute;nyod:"
 
 #: www/coapnew.php:1090
 msgid "Type, jurisdiction (state)"
@@ -4774,7 +4823,7 @@ msgstr ""
 
 #: pages/account/1.php:29 pages/index/1.php:80
 msgid "I own or am authorised to control this email address"
-msgstr ""
+msgstr "Ez az email c&iacute;m az eny&eacute;m vagy jogom van haszn&aacute;lni"
 
 #: www/capnew.php:1078
 #, php-format
@@ -4811,7 +4860,7 @@ msgstr ""
 
 #: www/capnew.php:845
 msgid "The CAcert Assurance Programme (CAP) aims to verify the identities of Internet users through face to face witnessing of government-issued photo identity documents."
-msgstr ""
+msgstr "A CAcert Assurance Programme (CAP, magyarul megb&iacute;zhat&oacute; CACert hiteles&iacute;t&eacute;si program) c&eacute;lja az internetet haszn&aacute;l&oacute;k szem&eacute;lyazonoss&aacute;g&aacute;nak igazol&aacute;sa szem&eacute;lyes tal&aacute;lkoz&aacute;s sor&aacute;n bemutatott, &aacute;llami hat&oacute;s&aacute;g &aacute;ltal kiadott f&eacute;nyk&eacute;pes dokumentumaik alapj&aacute;n."
 
 #: www/coapnew.php:867
 msgid "The Applicant asks the Organisation Assurer to verify to CAcert Community that the information provided by the Applicant is correct, and according to the official trade office registration bodies."
@@ -4823,7 +4872,7 @@ msgstr ""
 
 #: www/coapnew.php:1221
 msgid "Signature and organisation stamp"
-msgstr ""
+msgstr "Hivatalos al&aacute;&iacute;r&aacute;s &eacute;s pecs&eacute;t"
 
 #: www/capnew.php:1055
 msgid "Some examples of possible standard transliterations in a full individual name. If more than one transliteration of a character is possible, it is denoted within parentheses."
@@ -4863,11 +4912,11 @@ msgstr ""
 
 #: www/coapnew.php:748
 msgid "Organisation Information (COAP) form"
-msgstr ""
+msgstr "Szervezeti inform&aacute;ci&oacute;s (COAP) űrlap"
 
 #: www/coapnew.php:1271
 msgid "Organisation Assurer's signature"
-msgstr ""
+msgstr "Szervezeti Hiteles&iacute;tő al&aacute;&iacute;r&aacute;sa"
 
 #: www/coapnew.php:1061
 msgid "Organisation Identity Information"
@@ -4875,11 +4924,11 @@ msgstr ""
 
 #: www/coapnew.php:1241
 msgid "Organisation Assurer's Statement"
-msgstr ""
+msgstr "Szervezet hiteles&iacute;t&eacute;si nyilatkozat"
 
 #: www/coapnew.php:1253
 msgid "Organisation Assurer"
-msgstr ""
+msgstr "Szervezet hiteles&iacute;tő"
 
 #: www/capnew.php:1218
 msgid "One is advised for a mutual assurance. If done so the exact full name, email address and date of birth of the Assurer is also required on a form. In this case the Assuree assures the Assurer as well. In this case two copies are needed of the CAP form."
@@ -4899,7 +4948,7 @@ msgstr ""
 
 #: www/capnew.php:1223 www/coapnew.php:1248
 msgid "On mutual assurance"
-msgstr ""
+msgstr "K&ouml;cs&ouml;n&ouml;s hiteles&iacute;t&eacute;skor"
 
 #: www/capnew.php:1278
 msgid "On mutual assurance provide email address of Assurer."
@@ -4919,11 +4968,11 @@ msgstr ""
 
 #: www/coapnew.php:1075
 msgid "Name of the organisation"
-msgstr ""
+msgstr "A szervezet neve"
 
 #: www/verify.php:36
 msgid "Email has been sent."
-msgstr ""
+msgstr "Az emailed elk&uuml;ld&eacute;sre ker&uuml;lt ide"
 
 #: includes/general.php:772 includes/general.php:779
 msgid "CSRF Hash is wrong. Please try again."
@@ -4940,11 +4989,11 @@ msgstr ""
 
 #: www/coapnew.php:1117
 msgid "Internet Domain(s)"
-msgstr ""
+msgstr "Internetes domain(ek)"
 
 #: www/cap.html.php:188
 msgid "Assurer's email address"
-msgstr ""
+msgstr "A hiteles&iacute;tő email c&iacute;m"
 
 #: www/capnew.php:1178 www/coapnew.php:1196
 msgid "Make sure you have read and agreed with the CAcert Community Agreement"
@@ -4956,7 +5005,7 @@ msgstr ""
 
 #: www/capnew.php:727
 msgid "Identity Verification Form (CAP) form"
-msgstr ""
+msgstr "Szem&eacute;lyazonoss&aacute;g igazol&oacute; (CAP) űrlap"
 
 #: www/capnew.php:848
 msgid "If there are any doubts or concerns about the Applicant's identity, do not allocate points. You are encouraged to perform a mutual Assurance."
@@ -4964,7 +5013,7 @@ msgstr ""
 
 #: www/capnew.php:1185
 msgid "I hereby confirm that the information stating my Identity Information above is both true and correct, and request the CAcert Assurer (see below) to witness my identity in the CAcert Assurance Programme."
-msgstr ""
+msgstr "Kijelentem, hogy a fenti inform&aacute;ci&oacute; igaz &eacute;s pontos, &eacute;s k&eacute;rem a CAcert hiteles&iacute;tőt (azonos&iacute;t&aacute;s lejjebb), hogy igazolja a szem&eacute;lyazonoss&aacute;gomat a CAcert Hiteles&iacute;t&eacute;si Programban."
 
 #: www/capnew.php:1284
 msgid "I, the Assurer, hereby confirm that I have verified the Applicant's Identity Information, I will witness the Applicant's identity in the CAcert Assurance Programme, and allocate Assurance Points."
@@ -4984,7 +5033,7 @@ msgstr ""
 
 #: www/disputes.php:333
 msgid "You aren't allowed to dispute your own domains. Can't continue."
-msgstr ""
+msgstr "A saj&aacute;t domain-edet nem vitathatod el. Nem folytathat&oacute;."
 
 #: www/coapnew.php:1211
 msgid "I am duly authorised to act on behalf of the organisation, I grant operational certificate administrative privileges to the specified Organisation Administrator and, I request the Organisation Assurer to verify the organisation information according to the Assurance Policies."
@@ -5017,12 +5066,12 @@ msgstr ""
 #: pages/account/49.php:91
 #, php-format
 msgid "No organisational domains found matching %s"
-msgstr ""
+msgstr "%s - nincs ilyen szervezeti domain"
 
 #: pages/account/49.php:60
 #, php-format
 msgid "No personal domains found matching %s"
-msgstr ""
+msgstr "%s - nincs ilyen szem&eacute;lyes domain"
 
 #: www/verify.php:35
 msgid "Notification"
@@ -5042,7 +5091,7 @@ msgstr ""
 
 #: includes/account.php:684
 msgid "Domain not verified."
-msgstr ""
+msgstr "A domain nincs elenőrizve"
 
 #: www/capnew.php:850
 msgid "For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit:"
@@ -5058,7 +5107,7 @@ msgstr ""
 
 #: www/capnew.php:1313
 msgid "Date and location of the face-to-face meeting"
-msgstr ""
+msgstr "A szem&eacute;lyes tal&aacute;lkoz&oacute; helye &eacute;s ideje"
 
 #: www/capnew.php:980
 msgid "Exact full name as on shown ID for this name."
@@ -5078,11 +5127,11 @@ msgstr ""
 
 #: www/coapnew.php:748
 msgid "CAcert Organisation Assurance Programme"
-msgstr ""
+msgstr "CAcert Hiteles&iacute;t&eacute;si Program Szervezeteknek"
 
 #: www/capnew.php:807 www/coapnew.php:828
 msgid "CAcert's Root Certificate sha1 fingerprints"
-msgstr ""
+msgstr "A CAcert gy&ouml;k&eacute;rtan&uacute;s&iacute;tv&aacute;ny&aacute;nak ujjlenyomata"
 
 #: www/coapnew.php:965
 msgid "COAP form help"
@@ -5090,11 +5139,11 @@ msgstr ""
 
 #: www/capnew.php:842
 msgid "CAcert CAP form"
-msgstr ""
+msgstr "CAcert CAP űrlap"
 
 #: www/coapnew.php:863
 msgid "CAcert COAP form"
-msgstr ""
+msgstr "CAcert COAP űrlap"
 
 #: www/coap.html.php:335
 msgid "Applicable Organisation Policy documents and information can be attached to the pdf output file. Mark those documents, which need to be attached"
@@ -5102,7 +5151,7 @@ msgstr ""
 
 #: www/capnew.php:1216
 msgid "Assurer's Statement"
-msgstr ""
+msgstr "Hiteles&iacute;t&eacute;si nyilatkozat"
 
 #: www/capnew.php:847
 msgid "Assurer may leave a copy of the details with the Applicant, and may complete and sign her final form after the meeting."
@@ -5118,7 +5167,7 @@ msgstr ""
 
 #: www/capnew.php:1053
 msgid "Applicant's Identity Information"
-msgstr ""
+msgstr "K&eacute;rv&eacute;nyező adatai"
 
 #: www/coapnew.php:1081
 msgid "Address (comma separated)"

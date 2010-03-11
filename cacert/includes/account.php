@@ -67,7 +67,7 @@
 		if(mysql_num_rows($res) > 0)
 		{
 			showheader(_("My CAcert.org Account!"));
-			printf(_("The email address '%s' is already in the system. Can't continue."), sanitizeHTML($_REQUEST['email']));
+			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['email']));
 			showfooter();
 			exit;
 		}
@@ -295,6 +295,9 @@
 				if($_SESSION['_config']['incname'] == 4)
 					$emails .= "commonName = ".$user['fname']." ".$user['mname']." ".$user['lname']." ".$user['suffix']."\n";
 			}
+			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
+				$_SESSION['_config']['rootcert'] = 1;
+
 			$emails .= "SPKAC = $spkac";
 			$query = "insert into emailcerts set
 						`CN`='$defaultemail', 
@@ -309,7 +312,7 @@
 			if(is_array($addys))
 			foreach($addys as $addy)
 				mysql_query("insert into `emaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
-			$CSRname = $_SESSION['_config']['filepath']."/csr/client-".intval($emailid).".csr";
+			$CSRname=generatecertpath("csr","client",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $emails);
 			fclose($fp);
@@ -374,6 +377,8 @@
 				$csr .= $data;
 			fclose($fp);
 			@unlink($tmpname);
+			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
+				$_SESSION['_config']['rootcert'] = 1;
 
 			if($csr == "")
 			{
@@ -396,7 +401,7 @@
 			if(is_array($addys))
 			foreach($addys as $addy)
 				mysql_query("insert into `emaillink` set `emailcertsid`='$emailid', `emailid`='".mysql_real_escape_string($addy)."'");
-			$CSRname = $_SESSION['_config']['filepath']."/csr/client-$emailid.csr";
+			$CSRname=generatecertpath("csr","client",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $csr);
 			fclose($fp);
@@ -452,7 +457,7 @@
 			$oldid=0;
 			$id = 7;
 			showheader(_("My CAcert.org Account!"));
-			printf(_("The domain '%s' is already in the system and is listed as valid. Can't continue."), sanitizeHTML($newdomain));
+			printf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($newdomain));
 			showfooter();
 			exit;
 		}
@@ -532,7 +537,7 @@
 		if(mysql_num_rows($res) > 0)
 		{
 			showheader(_("My CAcert.org Account!"));
-			printf(_("The domain '%s' is already in the system and is listed as valid. Can't continue."), sanitizeHTML($_SESSION['_config']['domain']));
+			printf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($_SESSION['_config']['domain']));
 			showfooter();
 			exit;
 		}
@@ -690,6 +695,8 @@
 					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
 				}
 			}
+		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
+			$_SESSION['_config']['rootcert'] = 1;
 
 		if(array_key_exists('0',$_SESSION['_config']['rowid']) && $_SESSION['_config']['rowid']['0'] > 0)
 		{
@@ -722,7 +729,7 @@
 		foreach($_SESSION['_config']['altid'] as $dom)
 			mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 
-		$CSRname = $_SESSION['_config']['filepath']."/csr/server-$CSRid.csr";
+		$CSRname=generatecertpath("csr","server",$CSRid);
 		if(!file_exists($_SESSION['_config']['tmpfname']))
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -786,7 +793,7 @@
 						`pkhash`='".$row['pkhash']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
-				$newfile = $_SESSION['_config']['filepath']."/csr/server-$newid.csr";
+				$newfile=generatecertpath("csr","server",$newid);
 				copy($row['csr_name'], $newfile);
 				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep "Subject:"`);
 				$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
@@ -953,7 +960,7 @@
 						`rootcert`='".$row['rootcert']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
-				$newfile = $_SESSION['_config']['filepath']."/csr/client-$newid.csr";
+				$newfile=generatecertpath("csr","client",$newid);
 				copy($row['csr_name'], $newfile);
 				mysql_query("update `emailcerts` set `csr_name`='$newfile' where `id`='$newid'");
 				$res = mysql_query("select * from `emaillink` where `emailcertsid`='".$row['id']."'");
@@ -970,14 +977,14 @@
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
 					printf(_("Certificate for '%s' has been renewed."), $row['CN']);
-					echo "<a href='account.php?id=6&cert=$newid' target='_new'>".
-						_("Click here")."</a> "._("to install your certificate.");
+					echo "<br/>\n<a href='account.php?id=6&cert=$newid' target='_new'>".
+						_("Click here")."</a> "._("to install your certificate.")."<br/><br/>\n";
 				}
 			}
 		}
 		else
 		{
-			echo _("You did not select any certificates for renewal.");
+			echo _("You did not select any certificates for renewal.")."<br/>";
 		}
 
 		showfooter();
@@ -1366,6 +1373,8 @@
 				$emails .= "stateOrProvinceName = ".$org['ST']."\n";
 			if($org['C'])
 				$emails .= "countryName = ".$org['C']."\n";
+			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
+				$_SESSION['_config']['rootcert'] = 1;
 
 			$emails .= "SPKAC = $spkac";
 			$query = "insert into `orgemailcerts` set 
@@ -1381,7 +1390,7 @@
 			foreach($_SESSION['_config']['domids'] as $addy)
 				mysql_query("insert into `domemaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
 
-			$CSRname = $_SESSION['_config']['filepath']."/csr/orgclient-$emailid.csr";
+			$CSRname=generatecertpath("csr","orgclient",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $emails);
 			fclose($fp);
@@ -1444,6 +1453,9 @@
 				showfooter();
 				exit;
 			}
+			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
+				$_SESSION['_config']['rootcert'] = 1;
+
 			$query = "insert into `orgemailcerts` set 
 						`CN`='$defaultemail', 
 						`keytype`='" . sanitizeHTML($_REQUEST['keytype']) . "',
@@ -1458,7 +1470,7 @@
 			foreach($_SESSION['_config']['domids'] as $addy)
 				mysql_query("insert into `domemaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
 
-			$CSRname = $_SESSION['_config']['filepath']."/csr/orgclient-$emailid.csr";
+			$CSRname=generatecertpath("csr","orgclient",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $csr);
 			fclose($fp);
@@ -1520,7 +1532,7 @@
 						`rootcert`='".$row['rootcert']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
-				$newfile = $_SESSION['_config']['filepath']."/csr/orgclient-$newid.csr";
+				$newfile=generatecertpath("csr","orgclient",$newid);
 				copy($row['csr_name'], $newfile);
 				mysql_query("update `orgemailcerts` set `csr_name`='$newfile' where `id`='$newid'");
 				waitForResult("orgemailcerts", $newid,$oldid,0);
@@ -1715,6 +1727,8 @@
 
 		$type="";
 		if($_REQUEST["ocspcert"]!="" && $_SESSION['profile']['admin'] == 1) $type="8";
+		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
+			$_SESSION['_config']['rootcert'] = 1;
 
                 if($_SESSION['_config']['rowid']['0'] > 0)
                 {
@@ -1737,7 +1751,7 @@
                 mysql_query($query);
 		$CSRid = mysql_insert_id();
 
-		$CSRname = $_SESSION['_config']['filepath']."/csr/orgserver-$CSRid.csr";
+		$CSRname=generatecertpath("csr","orgserver",$CSRid);
 		rename($_SESSION['_config']['tmpfname'], $CSRname);
 		chmod($CSRname,0644);
 		mysql_query("update `orgdomaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
@@ -1803,7 +1817,7 @@
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
-				$newfile = $_SESSION['_config']['filepath']."/csr/orgserver-$newid.csr";
+				$newfile=generatecertpath("csr","orgserver",$newid);
 				copy($row['csr_name'], $newfile);
 				mysql_query("update `orgdomaincerts` set `csr_name`='$newfile' where `id`='$newid'");
 				echo _("Renewing").": ".$row['CN']."<br>\n";
@@ -1973,7 +1987,7 @@
 		$res1 = mysql_query("select * from `orgdomains` where `domain`='$domain'");
 		if(mysql_num_rows($res1) > 0)
 		{
-			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in the system and is listed as valid. Can't continue."), sanitizeHTML($domain));
+			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
 			$id = $oldid;
 			$oldid=0;
 		}
@@ -2003,7 +2017,7 @@
 		$res2 = mysql_query("select * from `domains` where `domain` like '$domain' and `deleted`=0");
 		if(mysql_num_rows($res1) > 0 || mysql_num_rows($res2) > 0)
 		{
-			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in the system and is listed as valid. Can't continue."), sanitizeHTML($domain));
+			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
 			$id = $oldid;
 			$oldid=0;
 		}
@@ -2275,8 +2289,8 @@
 		$newreg = intval(array_key_exists('newreg',$_REQUEST)?$_REQUEST['newreg']:0);
 		$locid = intval(array_key_exists('locid',$_REQUEST)?$_REQUEST['locid']:0);
 		$name = array_key_exists('name',$_REQUEST)?mysql_real_escape_string(strip_tags($_REQUEST['name'])):"";
-		$long = array_key_exists('longitude',$_REQUEST)?doubleval($_REQUEST['longitude']):"";
-		$lat =  array_key_exists('latitude', $_REQUEST)?doubleval($_REQUEST['latitude']):"";
+		$long = array_key_exists('longitude',$_REQUEST)?ereg_replace("[^-0-9\.]","",$_REQUEST['longitude']):"";
+		$lat =  array_key_exists('latitude', $_REQUEST)?ereg_replace("[^-0-9\.]","",$_REQUEST['latitude']):"";
 		$action = array_key_exists('action',$_REQUEST)?$_REQUEST['action']:"";
 
 		if($locid > 0 && $action == "edit")
@@ -2496,7 +2510,7 @@
 		foreach($_SESSION['_config']['altid'] as $dom)
 			mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 
-		$CSRname = $_SESSION['_config']['filepath']."/csr/server-$CSRid.csr";
+		$CSRname=generatecertpath("csr","server",$CSRid);
 		$fp = fopen($CSRname, "w");
 		fputs($fp, $_SESSION['_config']['CSR']);
 		fclose($fp);

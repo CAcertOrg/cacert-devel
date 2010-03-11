@@ -16,9 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-        mysql_connect("localhost", "username", "password");
-        mysql_select_db("database");
-
+	$_SESSION['mconn'] = mysql_connect("127.0.0.1", "username", "password");
+	if ($_SESSION['mconn'] != FALSE)
+	{
+		mysql_select_db("database");
+		$_SESSION['mconn'] = TRUE;
+	}
 	$_SESSION['_config']['normalhostname'] = "www.cacert.org";
 	$_SESSION['_config']['securehostname'] = "secure.cacert.org";
 	$_SESSION['_config']['tverify'] = "tverify.cacert.org";
@@ -97,23 +100,4 @@
 		fclose($smtp);
 	}
 
-	function make_hash()
-	{
-		if(function_exists("dio_open"))
-		{
-			$rnd = dio_open("/dev/urandom",O_RDONLY);
-			$hash = md5(dio_read($rnd,64));
-			dio_close($rnd);
-		} else {
-			$rnd = fopen("/dev/urandom", "r");
-			$hash = md5(fgets($rnd, 64));
-			fclose($rnd);
-		}
-		return($hash);
-	}
-
-	function clean_csr($CSR)
-	{
-		return(preg_replace("/[^A-Za-z0-9\n\r\-\:\=\+\/ ]/","",$CSR));
-	}
 ?>

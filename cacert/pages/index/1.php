@@ -46,7 +46,7 @@
   <tr>
     <td class="DataTD"><?=_("Suffix")?><br>
       (<?=_("optional")?>)</td>
-    <td class="DataTD"><input type="text" name="suffix" value="<?=array_key_exists('suffix',$_REQUEST)?sanitizeHTML($_REQUEST['suffix']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="suffix" value="<?=array_key_exists('suffix',$_REQUEST)?sanitizeHTML($_REQUEST['suffix']):""?>" autocomplete="off"><br><?=sprintf(_("Please only write %sName Suffixes%s into this field."),'<a href="http://en.wikipedia.org/wiki/Suffix_%28name%29" target="_blank">','</a>')?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?><br>

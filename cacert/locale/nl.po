@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-06-25 19:17:47+0000\n"
+"PO-Revision-Date: 2009-12-26 19:01:16+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -942,14 +942,6 @@ msgstr "Hoe?"
 msgid "Howto Information"
 msgstr "'Howto' informatie"
 
-#: www/wot/6.php:112
-msgid "I am sure of myself"
-msgstr "Ik ben zeker"
-
-#: www/wot/6.php:101
-msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that CAcert may challenge this assurance and call upon me to prove the basis for it, and that I may be held responsible if I cannot provide such proof."
-msgstr "Ik ben ervan overtuigd dat de identificatie die ik uitgevoerd heb correct, compleet en verifieerbaar is. Ik heb originele documenten gezien die de identificatie ondersteunen. Ik aanvaard dat CAcert deze waarmerking kan nagaan en zich met mij in verbinding  kan stellen om verdere bewijsgegevens te controleren. Ik kan verantwoordelijk gesteld worden indien ik deze bewijsgegevens niet kan leveren."
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "Ik kan niet wachten om te beginnen met versleutelde e-mail berichten"
@@ -966,10 +958,6 @@ msgstr "Er is geen geldige certificaatsaanvraag ontvangen. Klik op de 'terug' kn
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
 msgstr "Ik wil niet op de lijst vermeld worden"
-
-#: www/wot/6.php:105
-msgid "I have read and understood the Rules For Assurers and am making this assurance subject to and in compliance with these rules."
-msgstr "Ik heb de Regels Voor Waarmerkers gelezen en begrepen en ik onderwerp deze waarmerking aan deze regels en verklaar dat ze voldoet aan deze regels."
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
@@ -1013,7 +1001,7 @@ msgstr "Als de 'root' opslag server geen 'ping' antwoord over de seri&euml;le ve
 
 #: www/account/39.php:47 www/index/10.php:47
 msgid "If we change our Privacy Policy, we will post those changes on www.CAcert.org. If we decide to use personally identifiable information in a manner different from that stated at the time it was collected, we will notify users via email. Users will be able to opt out of any new use of their personal information."
-msgstr "Als we onze Privacy Policy aanpassen dan zullen de veranderingen gepubliceerd worden op www.CAcert.org. Indien er in de toekomst beslist zou worden om persoonlijke informatie op een andere manier te verwerken dan dat er vermeld werd op het ogenblik dat de informatie verzameld werd dan zullen de betreffende gebruikers via een e-mail op de hoogte gesteld worden. De gebruikers zullen dan de kans hebben om het gebruik van hun persoonlijke informatie onder de nieuwe regels te verbieden."
+msgstr "Als we ons Privacy beleid aanpassen dan zullen de veranderingen gepubliceerd worden op www.CAcert.org. Indien er in de toekomst beslist zou worden om persoonlijke informatie op een andere manier te verwerken dan dat er vermeld werd op het ogenblik dat de informatie verzameld werd dan zullen de betreffende gebruikers via een e-mail op de hoogte gesteld worden. De gebruikers zullen dan de kans hebben om het gebruik van hun persoonlijke informatie onder de nieuwe regels te verbieden."
 
 #: www/wot/7.php:140
 msgid "If you are happy with this location, click 'Make my location here' to update your location details."
@@ -1729,7 +1717,7 @@ msgstr "Privacy"
 #: includes/account_stuff.php:210 includes/general_stuff.php:109
 #: www/account/39.php:15 www/index/10.php:15
 msgid "Privacy Policy"
-msgstr "Privacy Policy"
+msgstr "Privacy Beleid"
 
 #: www/account/8.php:29
 msgid "Probe"
@@ -2025,10 +2013,6 @@ msgstr "Systeem beheer"
 msgid "System will send you an email with a link in it, you just open the link in a webbrowser."
 msgstr "Het systeem stuurt u een e-mail met een link er in, u moet die link openen met een webbrowser."
 
-#: includes/account_stuff.php:182
-msgid "TTP Form"
-msgstr "TTP formulier"
-
 #: includes/general.php:24 www/wot/6.php:99
 msgid "Temporary Increase"
 msgstr "Tijdelijke opwaardering"
@@ -2085,10 +2069,6 @@ msgstr "Het nieuwe wachtwoord dat u hebt ingegeven is te kort. Het dient tenmins
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr "De 'Regulation of Investigational Powers Act' (RIPA)&lt;/a&gt; ('E-Mail afluister wet' Offici&euml;le overheids website, UK)"
 
-#: www/account/0.php:28
-msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons. You can also get trust points via the Trust Third Party system where you go to a lawyer, bank manager, accountant, or public notary/juctise of the peace and they via your ID and fill in the TTP form to state they have viewed your ID documents and it appears authentic and true. More information on the TTP system can be found in the TTP sub-menu"
-msgstr "Het Vertrouwens Netwerk systeem wat gebruikt wordt door CAcert is vergelijkbaar met het systeem wat GPG/PGP gebruikt. Er worden bijeenkomsten georganiseerd om de identiteit van elkaar vast te stellen door een geldig identiteitsdocument aan elkaar te laten zien. Het verschil wat het CAcert systeem echter heeft is dat het werkt met een PKI systeem. Om als entiteit opgenomen te worden in het web moet u eerst iemand zien te vinden die reeds opgenomen is. De reeds opgenomen persoon kan u, afhankelijk van het aantal punten die hij mag uitdelen, een aantal punten geven. Op het moment dat u elkaar ontmoet, moet de reeds opgenomen persoon uw identiteit controleren aan de hand van een identiteits bewijs en u zult een CAP formulier in moeten vullen en ondertekenen. Een andere mogelijkheid om punten te krijgen in het Trust Third Party systeem is om naar een advocaat, een bank directeur, een accountant of een notaris te gaan. Zij kunnen een TTP formulier invullen, uw identiteit vaststellen met behulp van uw identiteitsbewijs. Meer informatie over het TTP kunt u vinden in het TTP menu."
-
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr "De mogelijkheid om andere nieuwe CAcert gebruikers te waarmerken; bijdragen aan het versterken en verbreden van het CAcert Vertrouwens Netwerk."
@@ -2107,12 +2087,6 @@ msgstr "Het huidige %s bestuur, en functies."
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Het domein '%s' is aan het systeem toegevoegd. Voordat u hiervoor certificaten kunt uitschrijven moet u de link openen die naar uw e-mail adres is doorgestuurd."
 
-#: includes/account.php:304 includes/account.php:373 includes/account.php:1428
-#: includes/account.php:1458
-#, php-format
-msgid "The domain '%s' is already in the system and is listed as valid. Can't continue."
-msgstr "Het domein '%s' is reeds geregistreerd en is geldig bevonden. Kan niet verdergaan."
-
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
 msgstr "Het e-mail account gedeelte is voor het toevoegen, wijzigen en verwijderen van e-mail adressen. Deze kunnen worden gebruikt om certificaten op aan te vragen. Het Client Certificaten gedeelte helpt u met het maken van een certificaat voor een of meerdere e-mail adressen die u heeft geregistreerd in e-mail account gedeelte."
@@ -2121,11 +2095,6 @@ msgstr "Het e-mail account gedeelte is voor het toevoegen, wijzigen en verwijder
 #, php-format
 msgid "The email address '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Het e-mail adres '%s' is geregistreerd in het systeem. Voordat u kunt beginnen met het uitschrijven van certificaten moet u met uw webbrowser de link openen die naar het opgegeven mailadres verstuurd is."
-
-#: includes/account.php:36
-#, php-format
-msgid "The email address '%s' is already in the system. Can't continue."
-msgstr "Het e-mail adres '%s' is reeds geregistreerd. Bewerking geannuleerd."
 
 #: includes/account.php:86
 msgid "The following accounts have been removed:"
@@ -2567,10 +2536,13 @@ msgstr "Is betrokken geweest bij de vertaling van deze website naar het Portugee
 msgid "Has put a lot of time and effort into promoting and assuring people in Brazil and South America, and for helping to translate this site into Portuguese"
 msgstr "Heeft een hele hoop tijd en inspanning besteed aan het promoten en aan het waarmerken in Brazili&euml; en Zuid-Amerika, en heeft meegeholpen om deze site in het Portugees te vertalen"
 
-#: www/wot/6.php:44
-#, php-format
-msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. Gross negligence may cause you to be liable."
-msgstr "Controleer alstublieft dat de volgende details kloppen met wat u zelf geconstateerd heeft toen u %s persoonlijk hebt ontmoet. U moet NIET DOORGAAN behalve wanneer u er zeker van bent dat de details kloppen. Grove nalatigheid kan ertoe leiden dat u aansprakelijk gesteld wordt."
+#: www/index.php:586 www/index.php:593
+msgid "This seems like potential spam, cannot continue."
+msgstr ""
+
+#: www/index.php:572 www/index.php:579
+msgid "This seems like you have cookies or Javascript disabled, cannot continue."
+msgstr ""
 
 #: includes/general_stuff.php:74
 msgid "CAcert Board"
@@ -3050,7 +3022,7 @@ msgstr "Als u ter discussie wilt stellen wie er controle heeft over uw e-mail ad
 
 #: www/disputes/0.php:20
 msgid "If you would like to report an abuse of our certificates that breaches our policies please select the Abuse menu on the right."
-msgstr "Als u een misbruik van onze certificaten waarbij tegen onze policy ingegaan wordt wilt melden selecteer dan het Misbruik menu aan de rechterkant."
+msgstr "Als u een misbruik van onze certificaten waarbij tegen ons beleid ingegaan wordt wilt melden selecteer dan het Misbruik menu aan de rechterkant."
 
 #: www/disputes/2.php:16
 msgid "If your dispute is successful the domain will be removed from the current account and any certificates will be revoked."
@@ -3195,9 +3167,10 @@ msgstr "De volgende hostnamen werden verworpen omdat het systeem ze niet in verb
 msgid "The list of names are in no sense of order"
 msgstr "De lijst met namen is in willekeurige volgorde"
 
-#: www/wot/2.php:28
-msgid "The only other way to receive assurance points is to have had your identity checked by a third party CA, whose policies are suitably set to not let identity fraud run rampant. Please contact us if you would like more details about this."
-msgstr "De enige andere manier om een Waarmerker te worden is door uw gegevens te laten verifieren door een andere Certificatie Organisatie wiens handelspraktijken erop voorzien zijn om fraude zoveel mogelijk te voorkomen. Neem contact met ons op indien u hierover meer informatie wenst."
+#: includes/account.php:70
+#, php-format
+msgid "The email address '%s' is already in a different account. Can't continue."
+msgstr ""
 
 #: www/wot/2.php:17
 msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
@@ -3392,7 +3365,7 @@ msgstr "Toegekend aantal punten"
 #: www/cap.php:37
 #, php-format
 msgid "To the Assurer: The CAcert Assurance Programme (CAP) aims to verify the identities of Internet users through face-to-face witnessing of government issued identity documents. The Applicant asks you to verify to CAcert.org that you have met them and verified their identity against one or more original, trusted, government photo identity documents. If you have ANY doubts or concerns about the Applicant's identity, DO NOT COMPLETE OR SIGN this form. For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit: %s"
-msgstr "Voor de waarmerker: Het CAcert Assurance Programma (CAP) is bedoeld om de identiteit van Internet gebruikers vast te stellen door middel van een persoonlijke ontmoeting, aan de hand van door de overheid uitgegeven identiteitsdocumenten. De Aanvrager vraagt u (de Assurer/Waarmerker) om ten overstaan van CAcert.org te verklaren dat u de Aanvrager persoonlijk heeft ontmoet en de identiteit heeft vastgesteld aan de hand van &eacute;&eacute;n of meerdere offici&euml;le en wettige identiteitsdocumenten met pasfoto. Als u ook maar ENIGE TWIJFEL heeft over de identiteit van de Aanvrager, ROND DAN DE AANVRAAG NIET AF en teken het formulier niet! Voor meer informatie en voor de volledige instructies voor CAcert Assurers, zie %s"
+msgstr "Voor de waarmerker: Het CAcert Waarmerk Programma (CAP) is bedoeld om de identiteit van Internet gebruikers vast te stellen door middel van een persoonlijke ontmoeting, aan de hand van door de overheid uitgegeven identiteitsdocumenten. De Aanvrager vraagt u (de Waarmerker) om ten overstaan van CAcert.org te verklaren dat u de Aanvrager persoonlijk heeft ontmoet en de identiteit heeft vastgesteld aan de hand van &eacute;&eacute;n of meerdere offici&euml;le en wettige identiteitsdocumenten met pasfoto. Als u ook maar ENIGE TWIJFEL heeft over de identiteit van de Aanvrager, ROND DAN DE AANVRAAG NIET AF en teken het formulier niet! Voor meer informatie en voor de volledige instructies voor CAcert Waarmerkers, zie %s"
 
 #: www/cap.php:46
 msgid "Applicant's Statement"
@@ -3566,7 +3539,7 @@ msgstr "Herinneringsbericht"
 #: www/wot.php:49
 #, php-format
 msgid "This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."
-msgstr "Dit is een korte herinnering dat u formulieren hebt ingevuld om door CAcert.org gewaarmerkt te worden, en %s heeft geprobeerd u waarmerkpunten toe te kennen. Maak u.a.b. zo spoedig mogelijk een account aan bij %s, en stuur vervolgens een berichtje naar %s zodat de waarmerkpunten kunnen worden toegekend."
+msgstr "Dit is een korte herinnering dat u formulieren hebt ingevuld om door CAcert.org gewaarmerkt te worden, en %s heeft geprobeerd u waarmerkpunten toe te kennen. Maak a.u.b. zo spoedig mogelijk een account aan bij %s, en stuur vervolgens een berichtje naar %s zodat de waarmerkpunten kunnen worden toegekend."
 
 #: pages/wot/9.php:59
 #, php-format
@@ -3636,17 +3609,15 @@ msgstr "Hieronder is de link die u moet openen om uw e-mailadres te verifi&euml;
 msgid "Blank CAP Form"
 msgstr "leeg waarmerkformulier"
 
-#: includes/account_stuff.php:211
-msgid "Blank TTP Form"
-msgstr "Leeg TTP formulier"
+#: includes/account.php:460 includes/account.php:540 includes/account.php:1990
+#: includes/account.php:2020
+#, php-format
+msgid "The domain '%s' is already in a different account and is listed as valid. Can't continue."
+msgstr ""
 
 #: includes/general_stuff.php:85
 msgid "Bug Database"
 msgstr "probleem database"
-
-#: includes/account_stuff.php:201
-msgid "CAP/TTP Forms"
-msgstr "Waarmerk/TTP formulieren"
 
 #: pages/account/39.php:64 pages/index/10.php:64
 msgid "CAcert Assurers can see the name, birthday and the number of points by looking up the correct email address. No other person related data is published by CAcert."
@@ -3972,9 +3943,78 @@ msgstr "Er zijn geen openstaande verzoeken waarover u nog niet heeft gestemd."
 msgid "You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken."
 msgstr "U heeft geen account geselecteerd om te verwijderen, of u probeerde om het hoofdaccount te verwijderen. Er is geen aktie uitgevoerd."
 
+#: www/index.php:123
+msgid "Your Pass Phrase has been changed now. You can now login with your new password."
+msgstr "Uw wachtwoord is nu aangepast. U kunt nu aanloggen met uw nieuwe wachtwoord."
+
+#: pages/account/0.php:32
+msgid "The former TTP (Trusted Third Party) System has been stopped, and is currently not available."
+msgstr "Het voormalige TTP (Vertrouwde Derde Partij / Trusted Third Party) systeem is gestopt, en is op dit moment niet beschikbaar."
+
+#: pages/account/0.php:31
+msgid "The Web of Trust system CAcert uses is similar to that many involved with GPG/PGP use, they hold face to face meetings to verify each others photo identities match their GPG/PGP key information. CAcert differs however in that we have modified things to work within the PKI framework, for you to gain trust in the system you must first locate someone already trusted. The trust person depending how many people they've trusted or meet before will determine how many points they can issue to you (the number of points they can issue is listed in the locate assurer section). Once you've met up you can show your ID and you will need to fill out a CAP form which the person assuring your details must retain for verification reasons."
+msgstr "Het Vertrouwens Netwerk systeem wat gebruikt wordt door CAcert is vergelijkbaar met het systeem wat GPG/PGP gebruikt. Er worden bijeenkomsten georganiseerd om de identiteit van elkaar vast te stellen door een geldig identiteitsdocument aan elkaar te laten zien. Het verschil wat het CAcert systeem echter heeft is dat het werkt met een PKI systeem. Om als entiteit opgenomen te worden in het web moet u eerst iemand zien te vinden die reeds opgenomen is. De reeds opgenomen persoon kan u, afhankelijk van het aantal punten die hij mag uitdelen, een aantal punten geven. Op het moment dat u elkaar ontmoet, moet de reeds opgenomen persoon uw identiteit controleren aan de hand van een identiteitsdocument en u zult een CAP formulier in moeten vullen en ondertekenen. De waarmerker bewaart dit formulier ten behoeve van latere verificatie."
+
+#: pages/wot/6.php:85
+#, php-format
+msgid "Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."
+msgstr "Controleer alstublieft dat de volgende details kloppen met wat u zelf geconstateerd heeft toen u %s persoonlijk hebt ontmoet. U moet NIET DOORGAAN behalve wanneer u er zeker van bent dat de details kloppen. U kunt door een CAcert Arbiter verantwoordelijk gesteld worden voor problemen met deze waarmerking."
+
+#: pages/wot/6.php:153
+msgid "Policy"
+msgstr "Beleid"
+
+#: pages/wot/6.php:165
+msgid "I confirm this Assurance"
+msgstr "Ik bevestig deze waarmerking"
+
+#: pages/wot/6.php:150
+msgid "I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."
+msgstr "Ik heb het Waarmerk Beleid en het Waarmerk Handboek gelezen en begrepen en ik verklaar dat deze waarmerking conform  dit beleid en het Handboek is."
+
+#: pages/wot/6.php:146
+msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."
+msgstr "Ik ben ervan overtuigd dat de identificatie die ik uitgevoerd heb correct, compleet en verifieerbaar is. Ik heb originele documenten gezien die de identificatie ondersteunen. Ik aanvaard dat een CAcert Arbiter van mij kan vragen om bewijs te leveren ingeval van een dispuut, en dat ik verantwoordelijk gesteld kan worden."
+
+#: pages/account/14.php:38
+msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol (all white spaces at the beginning and end are removed)."
+msgstr "Let op, om tot een sterk wachtwoord te komen, moet het woord bestaan uit een hoofdletter, kleine letter, cijfer en symbool (alle spaties aan begin en eind worden verwijderd)."
+
+#: pages/wot/1.php:115
+msgid "Not yet!"
+msgstr "Nog niet!"
+
+#: includes/account_stuff.php:223
+msgid "CAP Forms"
+msgstr "CAP Formulieren"
+
+#: pages/index/21.php:39
+msgid "Please also include your name in the transaction so we know who it came from and send an email to ernestine at cacert dot org with the details:"
+msgstr "Voeg a.u.b. uw naam aan de overschrijving toe zodat we weten van wie de betaling komt, of stuur een e-mail naar ernestine at cacert dot org met de details:"
+
+#: pages/wot/6.php:154
+msgid "Assurance Handbook"
+msgstr "Waarmerk Handboek"
+
+#: pages/index/5.php:24
+msgid "Email Address (primary)"
+msgstr "Email Adres (primair)"
+
+#: pages/account/56.php:18
+msgid "List of Organisation Assurers:"
+msgstr "Lijst van Organisatie Waarmerkers (Org-Assurers):"
+
+#: pages/index/1.php:24
+msgid "Note: White spaces at the beginning and end of a password will be removed."
+msgstr "Let op: Spaties (white-space) aan begin of eind van een wachtwoord worden verwijderd."
+
+#: pages/wot/6.php:154
+msgid "Assurance Policy"
+msgstr "Waarmerk beleid"
+
 #: www/cap.php:264
 msgid "I, the Assurer, hereby confirm that I have verified the Member according to CAcert Assurance Policy."
-msgstr "Ik, de Assurer, bevestig hierbij dat ik de deelnemer geverifi&euml;erd heb volgens de CAcert Assurance Policy."
+msgstr "Ik, de Waarmerker, bevestig hierbij dat ik de deelnemer geverifieerd heb conform het CAcert Waarmerk Beleid."
 
 #: pages/account/3.php:101
 msgid "SSO WIKI Entry"
@@ -3991,7 +4031,7 @@ msgstr "Waarmerker Test"
 
 #: www/cap.php:143
 msgid "I hereby confirm that the information stated above is both true and correct, and request the CAcert Assurer (identified below) to verify me according to CAcert Assurance Policy."
-msgstr "Hierbij bevestig ik dat bovenstaande informatie naar waarheid, compleet &amp; correct is ingevuld. Tevens verzoek ik de CAcert Assurer (zie onder) om mij te verifi&euml;ren volgens de CAcert Assurance Policy."
+msgstr "Hierbij bevestig ik dat bovenstaande informatie naar waarheid, compleet &amp; correct is ingevuld. Tevens verzoek ik de CAcert Waarmerker (zie onder) om mij te verifi&euml;ren conform het CAcert Waarmerk Beleid."
 
 #: pages/account/21.php:50
 msgid "OCSP certificate"
@@ -4143,7 +4183,7 @@ msgstr "Jurisdictie informatie"
 
 #: www/cap.html.php:157
 msgid "I hereby confirm that the information stating my Identity Information above is both true and correct and request the CAcert Assurer (see below) to witness my identity in the CAcert Assurance Programme."
-msgstr "Ik verklaar hierbij uitdrukkelijk dat bovenstaande informatie omtrent mijn identiteit zowel correct als waarheidsgetrouw is. Ik verzoek de CAcert Assurer/Waarmerker, die hieronder aangegeven is, om mijn identiteit te bevestigen in het CAcert Waarmerk Programma."
+msgstr "Ik verklaar hierbij uitdrukkelijk dat bovenstaande informatie omtrent mijn identiteit zowel correct als waarheidsgetrouw is. Ik verzoek de CAcert Waarmerker, die hieronder aangegeven is, om mijn identiteit te bevestigen in het CAcert Waarmerk Programma."
 
 #: www/capnew.php:1170
 msgid "a and y umlaut, and o/slash examples of accepted transliterations for the full name(s)"
@@ -4155,7 +4195,7 @@ msgstr "lid"
 
 #: www/capnew.php:825 www/coapnew.php:843
 msgid "policy document"
-msgstr "policy document"
+msgstr "beleidsdocument"
 
 #: www/cap.html.php:222 www/coap.html.php:297
 msgid "How To Print this CAP form"
@@ -4165,6 +4205,15 @@ msgstr "Hoe kan ik dit CAP formulier afdrukken"
 msgid "Vice-President"
 msgstr "Vice-Voorzitter"
 
+#: pages/index/1.php:49
+#, php-format
+msgid "Please only write %sName Suffixes%s into this field."
+msgstr ""
+
+#: www/stats.php:263
+msgid "Statistical data from cache, created at"
+msgstr ""
+
 #: includes/general.php:877
 msgid "You are not an Assurer, but the reason is not stored in the database. Please contact"
 msgstr "U bent geen waarmerker, maar de reden hiervan is niet opgeslagen in de database. Neem a.u.b. kontakt op met"
@@ -4173,9 +4222,9 @@ msgstr "U bent geen waarmerker, maar de reden hiervan is niet opgeslagen in de d
 msgid "The exact name of the assurer may have transliterated characters and/or some given names may be abbreviated. If present the first given name will be shown abbreviated and parentheses around the last part of the given name.\n"
 msgstr "De exacte naam van de waarmerker kan enkele vervangings-karakters bevatten en/of sommige voornamen kunnen zijn afgekort. Indien aanwezig zal de eerste voornaam afgekort weergegeven worden, met tussen haakjes het laatste gedeelte van deze voornaam.\n"
 
-#: www/index.php:564
-msgid "This seems like potential spam, or you have cookies or Javascript disabled, cannot continue."
-msgstr "Dit lijkt sterk op spam, of u hebt cookies of JavaScript uit staan. Doorgaan is niet mogelijk."
+#: includes/account.php:428
+msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
+msgstr "In verband met de mogelijkheid van null-byte domein exploits staan we momenteel geen domeinnamen met null-bytes toe."
 
 #: www/coapnew.php:980
 msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."

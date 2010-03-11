@@ -20,7 +20,7 @@
 
 
 
-	mysql_query("update users set assurer=0");
+	//mysql_query("update users set assurer=0");
 	$query = "select notary.`to` as uid from notary group by notary.`to` having sum(points)>=100;";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))

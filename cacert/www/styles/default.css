@@ -640,3 +640,14 @@ div.newsbox {
       color: #101010;
       padding: 10px 10px 10px 10px;
 }
+
+/************ SQL Performance ***********/
+
+div.footerbar {
+  clear: both;
+  border-top: 1px solid #cccccc;
+  font-size: small;
+  color: black;
+  padding: 10px 10px 10px 10px;
+}
+

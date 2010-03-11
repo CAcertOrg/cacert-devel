@@ -463,23 +463,11 @@ function verifyEmail($email)
 		}
 
 
+		$csrname=generatecertpath("csr","gpg",$id);
+		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $keyid >$csrname`;
 
-		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $keyid >../csr/gpg-$id.csr`;
-
-		//echo "Export: $do\n";
-
-		//$fp = fopen("../csr/gpg-$id.csr", "w");
-		//fputs($fp, clean_csr($CSR'));
-		//fclose($fp);
-
-
-if(1)
-{
-
-		mysql_query("update `gpg` set `csr`='../csr/gpg-$id.csr' where `id`='$id'");
-
+		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$id'");
 		waitForResult('gpg', $id);
-}
 
 		showheader(_("Welcome to CAcert.org"));
 		echo $resulttable;
@@ -491,7 +479,7 @@ if(1)
 			echo _("If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you.");
 		} else {
 			echo "<pre>";
-			readfile("../crt/gpg-$id.crt");
+			readfile(generatecertpath("crt","gpg",$id));
 			echo "</pre>";
 		}
 
