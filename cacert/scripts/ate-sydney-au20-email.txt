@@ -1,0 +1,30 @@
+CAcert Assurer Training Event Sdney
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Much has happened during the past 3 years. The old way of 
+orally-transmitted procedures has now gone, and our rules have been cast 
+into formal policies. New procedures (e.g. the Assurer Challenge) and 
+obligations (e.g. in the CAcert Community Agreement) have been approved. 
+The Assurer Training Events bring all this to you, the Community:
+
+- How does the CCA protect you and every CAcert Community Member?
+- Can you recall the 5 parts of the Assurance Statement?
+- Can you tick off the security features of the Australian passport?
+- What do you when something goes drastically wrong?
+
+Answers to these and many other questions are given at the Assurer 
+Training Events (ATEs).
+
+ATE-Sydney takes place on:
+- Wednesday, March 24th from 6:00pm till 9:30pm
+- Sydney University School of IT, Building J12
+   Ground Floor Lecture Room, room 123.
+- directions: [http://www.cs.usyd.edu.au/about/directions.shtml]
+
+The Event-Team is looking forward to hearing from you.  Participation in 
+ATEs is free, contributions are however appreciated.
+
+Registration for ATE-Sydney: please reply 'I will attend: Sydney'
+contact: events@cacert.org
+
+web: [http://wiki.cacert.org/events/20100324Sydney]
