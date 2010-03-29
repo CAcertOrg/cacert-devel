@@ -82,7 +82,7 @@ function verifyEmail($email)
 	$state=0;
 	if($oldid == "0" && $CSR != "")
 	{
-		$debugkey = $gpgkey = clean_csr($CSR);
+		$debugkey = $gpgkey = clean_gpgcsr($CSR);
 		$debugpg = $gpg = trim(`echo "$gpgkey"|gpg --with-colons --homedir /tmp 2>&1`);
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
@@ -268,7 +268,7 @@ function verifyEmail($email)
 		mkdir($cwd,0755);
 
 		$fp = fopen("$cwd/gpg.csr", "w");
-		fputs($fp, clean_csr($CSR));
+		fputs($fp, clean_gpgcsr($CSR));
 		fclose($fp);
 
 

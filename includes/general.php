@@ -826,6 +826,10 @@
 		$newcsr = str_replace("\n\n","\n",$newcsr);
 		return(preg_replace("/[^A-Za-z0-9\n\r\-\:\=\+\/ ]/","",$newcsr));
 	}
+	function clean_gpgcsr($CSR)
+	{
+		return(preg_replace("/[^A-Za-z0-9\n\r\-\:\=\+\/ ]/","",trim($CSR)));
+	}
 
 	function sanitizeFilename($text)
 	{
