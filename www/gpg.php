@@ -83,7 +83,15 @@ function verifyEmail($email)
 	if($oldid == "0" && $CSR != "")
 	{
 		$debugkey = $gpgkey = clean_gpgcsr($CSR);
-		$debugpg = $gpg = trim(`echo "$gpgkey"|gpg --with-colons --homedir /tmp 2>&1`);
+		#$debugpg = $gpg = trim(`echo "$gpgkey"|gpg --with-colons --homedir /tmp 2>&1`);
+
+                $tnam = tempnam('/tmp/', '__gpg');
+                $fp = fopen($tnam, 'w');
+                fwrite($fp, $gpgkey);
+                fclose($fp);
+                $debugpg = $gpg = trim(`gpg --with-colons --homedir /tmp 2>&1 < $tnam`);
+                unlink($tnam);
+
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
