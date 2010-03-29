@@ -104,11 +104,25 @@ function verifyEmail($email)
 		$resulttable=_("The following UIDs were found in your key:")."<br/><table border='1'><tr><td>#</td><td>"._("Name")."</td><td>"._("Email")."</td><td>Result</td>";
 		$i=0;
 		$lastvalidemail="";
+                $npubs=0;
 		foreach(explode("\n", $gpg) as $line)
 		{
 			$bits = explode(":", $line);
 			$resulttable.="<tr><td>".++$i."</td>";
 			$name = $comment = "";
+			if($bits[0] == "pub")
+			{
+				$npubs++;
+			}
+			if($npubs>1)
+			{
+				showheader(_("Welcome to CAcert.org"));
+				echo "<font color='#ff0000'>"._("Please upload only one key at a time.")."</font>";
+				unset($_REQUEST['process']);
+				$id = $oldid;
+				unset($oldid);
+				exit();
+			}
 			if($bits[0] == "pub" && (!$keyid || !$when))
 			{
 				$keyid = $bits[4];
