@@ -57,17 +57,29 @@
     <td class="DataTD"><b><?=_("Method")?></b></td>
   </tr>
 <?
-	$query = "select * from `notary` where `to`='".intval($_SESSION['profile']['id'])."'";
+        $points = 0;
+        $query = "select sum(points) as apoints from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `from`=`to` ";
+        $res = mysql_query($query);
+	$row = mysql_fetch_assoc($res);
+
+	$maxpoints=intval($_SESSION['profile']['points'])-$row['apoints'];
+
+	$points = 0;
+	$query = "select * from `notary` where `to`='".intval($_SESSION['profile']['id'])."' order by `id` desc ";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
+		$awarded = $row['awarded'];
+		if ($points+$awarded > $maxpoints)
+			$awarded = $maxpoints-$points;
+		$points = $points + $awarded;
 		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['from'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?=$row['id']?></td>
     <td class="DataTD"><?=$row['date']?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from'])?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
-    <td class="DataTD"><?=$row['points']?></td>
+    <td class="DataTD"><?=$awarded?></td>
     <td class="DataTD"><?=$row['location']?></td>
     <td class="DataTD"><?=_(sprintf("%s", $row['method']))?></td>
   </tr>
@@ -93,12 +105,12 @@
   </tr>
 <?
 	$points = 0;
-	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'";
+	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."' order by `id` desc";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
 		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['to'])."'"));
-		$points += $row['points'];
+		$points += $row['awarded'];
 		$name = trim($fromuser['fname']." ".$fromuser['lname']);
 		if($name == "")
 			$name = _("Deleted before Verification");
@@ -109,7 +121,7 @@
     <td class="DataTD"><?=intval($row['id'])?></td>
     <td class="DataTD"><?=$row['date']?></td>
     <td class="DataTD"><?=$name?></td>
-    <td class="DataTD"><?=intval($row['points'])?></td>
+    <td class="DataTD"><?=intval($row['awarded'])?></td>
     <td class="DataTD"><?=$row['location']?></td>
     <td class="DataTD"><?=$row['method']==""?"":_(sprintf("%s", $row['method']))?></td>
   </tr>
