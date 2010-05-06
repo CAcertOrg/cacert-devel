@@ -488,6 +488,7 @@
 				$line = trim(str_replace("\t", " ", $line));
 				$line = trim(str_replace("(", "", $line));
 				$line = trim(str_replace(")", " ", $line));
+				$line = trim(str_replace(":", " ", $line));
 
 				$bits = explode(" ", $line);
 				foreach($bits as $bit)

@@ -89,7 +89,7 @@ experience and circumstances. It is also more readable.
 </p>
 <p>
 See also Organisation Assurance Policy (<a href="http://www.cacert.org/policy/OrganisationAssurancePolicy.php" target="_blank">OAP</a>)
-and CAcert Policy Statement (<a href="http://svn.cacert.org/CAcert/policy.htm" target="_blank">CPS</a>).
+and CAcert Policy Statement (<a href="http://www.cacert.org/policy/CertificationPracticeStatement.php" target="_blank">CPS</a>).
 </p>
 
 <h2><a name="1">1.</a> Assurance Purpose</h2>
@@ -135,7 +135,7 @@ the Assurance Points. </p>
 <p>The primary goal of the Assurance Statement is for the express
 purpose of certificates to meet the needs of the <i>Relying Party
 Statement</i>, which latter is found in the Certification Practice
-Statement (<a href="http://svn.cacert.org/CAcert/policy.htm" target="_blank">CPS</a>).
+Statement (<a href="http://www.cacert.org/policy/CertificationPracticeStatement.php" target="_blank">CPS</a>).
 </p>
 <p>When a certificate is issued, some of the Assurance Statement may
 be incorporated, e.g. Name. Other parts may be implied, e.g.
@@ -290,7 +290,7 @@ The number of Assurance Points for each Member is not published.
 
 <p>
 The CAcert Policy Statement
-(<a href="http://svn.cacert.org/CAcert/policy.htm" target="_blank">CPS</a>)
+(<a href="http://www.cacert.org/policy/CertificationPracticeStatement.php" target="_blank">CPS</a>)
 and other policies may list other capabilities that rely on Assurance
 Points.
 </p>

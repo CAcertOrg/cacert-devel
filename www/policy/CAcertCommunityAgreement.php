@@ -451,7 +451,7 @@ You are also bound by
 </p>
 
 <ol><li>
-    <a href="http://svn.cacert.org/CAcert/policy.htm">
+    <a href="http://www.cacert.org/policy/CertificationPracticeStatement.php">
     Certification Practice Statement</a> (CPS => COD6).
   </li><li>
     <a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">
