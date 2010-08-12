@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-07-06 10:45:54+0000\n"
+"PO-Revision-Date: 2010-08-02 20:57:13+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr "Da alle der har modtaget en epost indeholdende virus fra en fremmed afse
 
 #: www/wot/6.php:24
 msgid "Assurance Confirmation"
-msgstr "Personlig information"
+msgstr "Forsikringsbekr&aelig;ftigelse"
 
 #: www/account/43.php:146 www/wot/3.php:44
 msgid "Assurance Points"
@@ -205,7 +205,7 @@ msgstr "Besked ved &aelig;ndringer"
 
 #: includes/account_stuff.php:182 www/wot/5.php:19
 msgid "Assure Someone"
-msgstr "Personlig information"
+msgstr "Forsikre en person"
 
 #: www/index/0.php:60
 msgid "Assured client certificates"
@@ -496,7 +496,7 @@ msgstr "Kontakt os"
 
 #: www/wot/8.php:31
 msgid "Contact information"
-msgstr "Personlig information"
+msgstr "Kontaktoplysninger"
 
 #: www/account/39.php:37 www/index/10.php:37
 msgid "Cookies"
@@ -724,7 +724,7 @@ msgstr "CommonName"
 
 #: www/help/3.php:25
 msgid "Enter your Organisation Information"
-msgstr "Personlig information"
+msgstr "Indtast din organistaions oplysninger"
 
 #: www/help/2.php:57
 msgid "Erroneous Verisign Issued Digital Certificates Pose Spoofing Hazard"
@@ -940,7 +940,7 @@ msgstr "Hvordan?"
 
 #: includes/general_stuff.php:64
 msgid "Howto Information"
-msgstr "Personlig information"
+msgstr "Howto info"
 
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
@@ -1240,7 +1240,7 @@ msgstr "Hovedkonto"
 
 #: www/wot/1.php:120
 msgid "Max Points"
-msgstr "Dom&aelig;ner"
+msgstr "Max points"
 
 #: www/wot/9.php:56
 msgid "Message"
@@ -1692,7 +1692,7 @@ msgstr "Bem&aelig;rk venligst: Al html vil blive str&oslash;get fra kontaktinfor
 #: www/account/43.php:195 www/account/43.php:230 www/wot/10.php:24
 #: www/wot/10.php:57 www/wot/6.php:108
 msgid "Points"
-msgstr "Dom&aelig;ner"
+msgstr "Points"
 
 #: www/stats.php:59
 msgid "Points Issued"
@@ -1930,7 +1930,7 @@ msgstr "Send"
 
 #: www/account/40.php:40 www/index/11.php:40
 msgid "Sensitive Information"
-msgstr "Personlig information"
+msgstr "f&oslash;lsom information"
 
 #: includes/account_stuff.php:161
 msgid "Server Certificates"
@@ -2278,7 +2278,7 @@ msgstr "At tilbyde en tillidsmekanisme der g&aring;r under sikkerhedsaspekterne 
 
 #: www/account/43.php:217 www/account/43.php:252 www/wot/10.php:44
 msgid "Total Points"
-msgstr "Dom&aelig;ner"
+msgstr "Total points"
 
 #: www/wot/10.php:79
 msgid "Total Points Issued"
@@ -2997,10 +2997,6 @@ msgstr ""
 
 #: pages/account/3.php:82
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
-msgstr ""
-
-#: pages/index/8.php:4
-msgid "Treasurer"
 msgstr ""
 
 #: includes/account.php:50 includes/account.php:402 www/index.php:293
@@ -4249,10 +4245,6 @@ msgstr ""
 msgid "How To Print this CAP form"
 msgstr ""
 
-#: pages/index/8.php:21
-msgid "Vice-President"
-msgstr ""
-
 #: pages/index/1.php:49
 #, php-format
 msgid "Please only write %sName Suffixes%s into this field."
@@ -5203,7 +5195,7 @@ msgstr ""
 
 #: www/capnew.php:1216
 msgid "Assurer's Statement"
-msgstr ""
+msgstr "Forsikringsagentens bem&aelig;rkning"
 
 #: www/capnew.php:847
 msgid "Assurer may leave a copy of the details with the Applicant, and may complete and sign her final form after the meeting."

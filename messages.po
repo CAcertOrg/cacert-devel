@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-06 12:44+0200\n"
+"POT-Creation-Date: 2010-08-02 22:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3330,7 +3330,7 @@ msgstr ""
 msgid "Profession (Please circle one)"
 msgstr ""
 
-#: pages/index/8.php:22
+#: pages/index/8.php:21
 msgid "Public Officer"
 msgstr ""
 
@@ -3520,7 +3520,7 @@ msgstr ""
 msgid "Secondary languages"
 msgstr ""
 
-#: pages/index/8.php:22
+#: pages/index/8.php:21
 msgid "Secretary"
 msgstr ""
 
@@ -4263,10 +4263,6 @@ msgstr ""
 msgid "Translations"
 msgstr ""
 
-#: pages/index/8.php:23
-msgid "Treasurer"
-msgstr ""
-
 #: includes/general.php:30 pages/wot/4.php:23
 msgid "Trusted Third Parties"
 msgstr ""
@@ -4417,10 +4413,6 @@ msgstr ""
 
 #: www/stats.php:159
 msgid "Verified Users"
-msgstr ""
-
-#: pages/index/8.php:21
-msgid "Vice-President"
 msgstr ""
 
 #: includes/account_stuff.php:182 includes/account_stuff.php:186
@@ -5220,7 +5212,8 @@ msgstr ""
 msgid "max"
 msgstr ""
 
-#: pages/index/8.php:24 pages/index/8.php:25 pages/index/8.php:26
+#: pages/index/8.php:22 pages/index/8.php:23 pages/index/8.php:24
+#: pages/index/8.php:25
 msgid "member"
 msgstr ""
 

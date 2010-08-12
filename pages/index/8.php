@@ -18,10 +18,9 @@
 <p><b><? printf(_("The current %s board, and roles."), "CAcert Inc."); ?></b></p>
 <p>
 Lambert Hofstra - <?=_("President")?><br/>
-Daniel Black - <?=_("Vice-President")?><br/>
 Mark Lipscombe - <?=_("Secretary")?>, <?=_("Public Officer")?><br/>
-Ernestine Schwob - <?=_("Treasurer")?><br/>
 Nick Bebout - <?=_("member")?><br/>
 Ian Grigg - <?=_("member")?><br/>
 Mario Lipinski - <?=_("member")?><br/>
+Alexander Prinsier - <?=_("member")?><br/>
 </p>

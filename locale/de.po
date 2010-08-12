@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-07-06 10:45:59+0000\n"
+"PO-Revision-Date: 2010-08-02 20:57:14+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2121,7 +2121,7 @@ msgstr "Die Domain '%s' wurde hinzugef&uuml;gt, aber bevor Sie Zertifikate f&uum
 
 #: pages/account/3.php:20
 msgid "CAcert Certificate Acceptable Use Policy"
-msgstr ""
+msgstr "CAcert Zertifikate akzeptierte Nutzungsbedingungen"
 
 #: pages/account/13.php:31
 msgid "If it was you who looked up or changed that data, or clicked"
@@ -2999,10 +2999,6 @@ msgstr "Domain-  und E-Mail-Streitf&auml;lle"
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
 msgstr "Das Hinzuf&uuml;gen von Single Sign On (SSO) ID Informationen zu deinem Zertifikat hinterl&auml;sst Spuren die dazu benutzt werden k&ouml;nnen um dich zu identifizieren. Du kannst auch Zertifikate ohne E-Mail Addressen ausstellen die nur f&uuml;r Authentifizierung sinnvoll sind. F&uuml;r eine weitere, detailliertere Beschreibung schaue bitte in unser WIKI."
 
-#: pages/index/8.php:4
-msgid "Treasurer"
-msgstr "Schatzmeister"
-
 #: includes/account.php:50 includes/account.php:402 www/index.php:293
 msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
 msgstr "Die angegebene E-Mail-Adresse war ung&uuml;ltig oder eine Test-Verbindung zu Ihrem Server konnte nicht aufgebaut werden oder Ihr Server hat Ihre E-Mail-Adresse als ung&uuml;ltig abgewiesen."
@@ -3360,7 +3356,7 @@ msgstr "Unterschrift des Antragstellers"
 
 #: www/cap.php:39
 msgid "As the assurer, you are required to keep the signed document on file for 7 years. Should Cacert Inc. have any concerns about a meeting taking place, Cacert Inc. can request proof, in the form of this signed document, to ensure the process is being followed correctly. After 7 years if you wish to dispose of this form it's preferred that you shred and burn it. You do not need to retain copies of ID at all."
-msgstr "Als Assurer sind Sie verpflichtet, dieses unterschriebene Dokument f&uuml;r 7 Jahre aufzubewahren. Sollten bei CAcert Inc. jemals Zweifel am korrekten Ablauf des pers&ouml;nlichen Treffens aufkommen, dann wird sie einen Nachweis in Form dieses unterschriebenen Dokuments einfordern. Nach 7 Jahren k&ouml;nnen Sie dieses Dokument auf geeignete Weise vernichten (Schredder oder Feuer!). Kopien der Ausweise des Antragstellers sind zu keinem Zeitpunkt anzufertigen oder aufzubewahren!"
+msgstr "Als Assurer sind Sie verpflichtet, dieses unterschriebene Dokument f&uuml;r 7 Jahre aufzubewahren. Sollten bei CAcert jemals Zweifel am korrekten Ablauf des pers&ouml;nlichen Treffens aufkommen, dann wird CAcert einen Nachweis in Form dieses unterschriebenen Dokuments einfordern. Nach 7 Jahren k&ouml;nnen Sie dieses Dokument auf geeignete Weise vernichten (Schredder oder Feuer!). Kopien der Ausweise des Antragstellers sind zu keinem Zeitpunkt anzufertigen oder aufzubewahren!"
 
 #: www/cap.php:103 www/cap.php:107
 msgid "Assurer's Name"
@@ -4248,10 +4244,6 @@ msgstr "Policy Dokument"
 #: www/cap.html.php:222 www/coap.html.php:297
 msgid "How To Print this CAP form"
 msgstr "Wie dieses CAP Formular gedruckt werden kann"
-
-#: pages/index/8.php:21
-msgid "Vice-President"
-msgstr "Vizepr&auml;sident"
 
 #: pages/index/1.php:49
 #, php-format

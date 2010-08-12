@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-07-06 10:46:11+0000\n"
+"PO-Revision-Date: 2010-08-02 20:57:24+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,36 +28,36 @@ msgstr "&Atilde;&ccedil;&Otilde;&acirc;&Yacute;&ETH;&iuml; &times;&ETH;&szlig;&O
 #: www/account/32.php:21
 #, php-format
 msgid "%s's Administrators"
-msgstr "&deg;&Ocirc;&Uuml;&Oslash;&Yacute;&Oslash;&aacute;&acirc;&agrave;&ETH;&acirc;&THORN;&agrave;&euml; %s"
+msgstr "Администраторы %s"
 
 #: www/account/26.php:21
 #, php-format
 msgid "%s's Domains"
-msgstr "&acute;&THORN;&Uuml;&Otilde;&Yacute;&euml; %s"
+msgstr "Домены %s"
 
 #: includes/account.php:1388
 #, php-format
 msgid "'%s' has just been successfully added as an organisation to the database."
-msgstr "&frac34;&agrave;&Oacute;&ETH;&Yacute;&Oslash;&times;&ETH;&aelig;&Oslash;&iuml; %s &atilde;&aacute;&szlig;&Otilde;&egrave;&Yacute;&THORN; &Ograve;&Yacute;&Otilde;&aacute;&Otilde;&Yacute;&ETH; &Ograve; &Ntilde;&ETH;&times;&atilde; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&aring;."
+msgstr "'%s' успешно добавлено в базу данных как организация."
 
 #: includes/account.php:1444
 #, php-format
 msgid "'%s' has just been successfully added to the database."
-msgstr "'%s' &Ntilde;&euml;&Ucirc; &atilde;&aacute;&szlig;&Otilde;&egrave;&Yacute;&THORN; &Ocirc;&THORN;&Ntilde;&ETH;&Ograve;&Ucirc;&Otilde;&Yacute; &Ograve; &Ntilde;&ETH;&times;&atilde; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&aring;."
+msgstr "'%s' успешно добавлено в базу данных."
 
 #: includes/account.php:1503
 #, php-format
 msgid "'%s' has just been successfully deleted from the database."
-msgstr "'%s' &Ntilde;&euml;&Ucirc; &atilde;&aacute;&szlig;&Otilde;&egrave;&Yacute;&THORN; &atilde;&Ocirc;&ETH;&Ucirc;&Otilde;&Yacute; &Oslash;&times; &Ntilde;&ETH;&times;&euml; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&aring;."
+msgstr "'%s' успешно удалено из базы данных."
 
 #: includes/account.php:1416 includes/account.php:1491
 #, php-format
 msgid "'%s' has just been successfully updated in the database."
-msgstr "&acute;&ETH;&Yacute;&Yacute;&euml;&Otilde; '%s' &Ntilde;&euml;&Ucirc;&Oslash; &atilde;&aacute;&szlig;&Otilde;&egrave;&Yacute;&THORN; &THORN;&Ntilde;&Yacute;&THORN;&Ograve;&Ucirc;&Otilde;&Yacute;&euml; &Ograve; &Ntilde;&ETH;&times;&Otilde; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&aring;."
+msgstr "'%s' успешно обновлено в базе данных."
 
 #: www/help/3.php:64
 msgid "...then click 'Next'."
-msgstr "...&times;&ETH;&acirc;&Otilde;&Uuml; &Yacute;&ETH;&Ouml;&Uuml;&Oslash;&acirc;&Otilde; &quot;&acute;&ETH;&Ucirc;&Otilde;&Otilde;&quot;."
+msgstr "... затем щелкните 'Далее'."
 
 #: www/wot/3.php:42
 msgid "A CAcert Assurer who knowingly, or reasonably ought to have known, assures an applicant contrary to this policy may be held liable."
@@ -69,48 +69,48 @@ msgstr "&acute;&THORN;&Ograve;&Otilde;&agrave;&Otilde;&Yacute;&Yacute;&THORN;&Ot
 
 #: www/account/38.php:21 www/index/13.php:21
 msgid "ANY amount will be appreciated - the more funding CAcert receives, the sooner it can achieve the goals of the community."
-msgstr "&frac14;&euml; &Ntilde;&Ucirc;&ETH;&Oacute;&THORN;&Ocirc;&ETH;&agrave;&Yacute;&euml; &times;&ETH; &raquo;&Icirc;&plusmn;&Atilde;&Icirc; &aacute;&atilde;&Uuml;&Uuml;&atilde;. &Ccedil;&Otilde;&Uuml; &Ntilde;&THORN;&Ucirc;&igrave;&egrave;&ETH;&iuml; &auml;&Oslash;&Yacute;&ETH;&Yacute;&aacute;&THORN;&Ograve;&ETH;&iuml; &szlig;&THORN;&Ocirc;&Ocirc;&Otilde;&agrave;&Ouml;&Uacute;&ETH; &Ntilde;&atilde;&Ocirc;&Otilde;&acirc; &THORN;&Uacute;&ETH;&times;&ETH;&Yacute;&ETH; CAcert, &acirc;&Otilde;&Uuml; &aacute;&Uacute;&THORN;&agrave;&Otilde;&Otilde; &THORN;&Yacute;&ETH; &aacute;&Uuml;&THORN;&Ouml;&Otilde;&acirc; &Ocirc;&THORN;&aacute;&acirc;&Oslash;&ccedil;&igrave; &aelig;&Otilde;&Ucirc;&Otilde;&Ugrave;, &szlig;&THORN;&aacute;&acirc;&ETH;&Ograve;&Ucirc;&Otilde;&Yacute;&Yacute;&euml;&aring; &aacute;&THORN;&THORN;&Ntilde;&eacute;&Otilde;&aacute;&acirc;&Ograve;&THORN;&Uuml; &szlig;&THORN;&Ucirc;&igrave;&times;&THORN;&Ograve;&ETH;&acirc;&Otilde;&Ucirc;&Otilde;&Ugrave;."
+msgstr "Ценна ЛЮБАЯ сумма - чем больше средств получит CAcert, тем скорее он достигнет целей нашего сообщества."
 
 #: includes/account_stuff.php:182
 msgid "About"
-msgstr "&frac34;"
+msgstr "О"
 
 #: www/account/37.php:15 www/index/12.php:15
 msgid "About CAcert.org"
-msgstr "&frac34; CAcert.org"
+msgstr "О CAcert.org"
 
 #: includes/account_stuff.php:209 includes/general_stuff.php:108
 msgid "About Us"
-msgstr "&frac34; &Yacute;&ETH;&aacute;"
+msgstr "О нас"
 
 #: includes/account_stuff.php:150 includes/account_stuff.php:158
 #: www/account/1.php:26 www/account/16.php:21 www/account/26.php:21
 #: www/account/28.php:29 www/account/3.php:30 www/account/32.php:21
 #: www/account/33.php:47 www/account/7.php:27
 msgid "Add"
-msgstr "&acute;&THORN;&Ntilde;&ETH;&Ograve;&Oslash;&acirc;&igrave;"
+msgstr "Добавить"
 
 #: www/account/7.php:19
 msgid "Add Domain"
-msgstr "&acute;&THORN;&Ntilde;&ETH;&Ograve;&Oslash;&acirc;&igrave; &Ocirc;&THORN;&Uuml;&Otilde;&Yacute;"
+msgstr "Добавить домен"
 
 #: www/account/1.php:18
 msgid "Add Email"
-msgstr "&acute;&THORN;&Ntilde;&ETH;&Ograve;&Oslash;&acirc;&igrave; &ETH;&Ocirc;&agrave;&Otilde;&aacute; email"
+msgstr "Добавить электропочту"
 
 #: www/account/16.php:22 www/account/2.php:24 www/account/3.php:31
 #: www/account/9.php:23
 msgid "Address"
-msgstr "&deg;&Ocirc;&agrave;&Otilde;&aacute;"
+msgstr "Адрес"
 
 #: www/account/32.php:24
 msgid "Administrator"
-msgstr "&deg;&Ocirc;&Uuml;&Oslash;&Yacute;&Oslash;&aacute;&acirc;&agrave;&ETH;&acirc;&THORN;&agrave;"
+msgstr "Администратор"
 
 #: www/account/25.php:22 www/account/25.php:39 www/account/35.php:21
 #: www/account/35.php:35
 msgid "Admins"
-msgstr "&deg;&Ocirc;&Uuml;&Oslash;&Yacute;&euml;"
+msgstr "Админы"
 
 #: www/wot/3.php:28
 msgid "After the meeting, visit the CAcert Web site's make an Assurance page and:"
@@ -118,7 +118,7 @@ msgstr "&iquest;&THORN;&aacute;&Ucirc;&Otilde; &Ograve;&aacute;&acirc;&agrave;&O
 
 #: www/help/3.php:44
 msgid "After your certificate has been emailed to you, follow this process to install the certificate."
-msgstr "&iquest;&THORN;&Ucirc;&atilde;&ccedil;&Oslash;&Ograve; &aacute;&THORN;&THORN;&Ntilde;&eacute;&Otilde;&Yacute;&Oslash;&Otilde; &aacute; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&THORN;&Uuml;, &Ograve;&THORN;&aacute;&szlig;&THORN;&Ucirc;&igrave;&times;&atilde;&Ugrave;&acirc;&Otilde;&aacute;&igrave; &aacute;&Ucirc;&Otilde;&Ocirc;&atilde;&icirc;&eacute;&Otilde;&Ugrave; &szlig;&agrave;&THORN;&aelig;&Otilde;&Ocirc;&atilde;&agrave;&THORN;&Ugrave; &Ocirc;&Ucirc;&iuml; &Otilde;&Oacute;&THORN; &atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&Oslash;."
+msgstr "После отправки вам сертификата электропочтой следуйте инструкциям, чтобы установить сертификат."
 
 #: www/account/39.php:32 www/index/10.php:32
 msgid "Aggregated tracking information"
@@ -126,39 +126,39 @@ msgstr "&#1053;&#1072;&#1082;&#1086;&#1087;&#1083;&#1077;&#1085;&#1085;&#1072;&#
 
 #: www/account/36.php:21 www/index/1.php:110
 msgid "Alert me if"
-msgstr "&Aacute;&THORN;&THORN;&Ntilde;&eacute;&Oslash;&acirc;&Otilde; &Uuml;&Yacute;&Otilde;, &Otilde;&aacute;&Ucirc;&Oslash;"
+msgstr "Предупредить, если"
 
 #: www/index.php:332
 msgid "All fields are mandatory."
-msgstr "&sup2;&aacute;&Otilde; &szlig;&THORN;&Ucirc;&iuml; &THORN;&Ntilde;&iuml;&times;&ETH;&acirc;&Otilde;&Ucirc;&igrave;&Yacute;&euml;."
+msgstr "Все поля обязательны."
 
 #: www/account/43.php:157
 msgid "Alternate Verified Email Addresses"
-msgstr "&deg;&Ucirc;&igrave;&acirc;&Otilde;&agrave;&Yacute;&ETH;&acirc;&Oslash;&Ograve;&Yacute;&euml;&Ugrave; &szlig;&agrave;&THORN;&Ograve;&Otilde;&agrave;&Otilde;&Yacute;&Yacute;&euml;&Ugrave; &ETH;&Ocirc;&agrave;&Otilde;&aacute; email"
+msgstr "Изменить проверенную электропочту"
 
 #: www/help/7.php:9
 msgid "Alternatively as things progress we can add more layers of security with say 4 webservers talking to 2 intermediate servers, talking to the root store, and acting in a token ring fashion, anything happening out of sequence, and the server directly upstream shuts itself down, which if that were in place and there were multiple paths, any down time in this fashion would fall over to the servers not compromised, anyways just some food for thought."
-msgstr "&#1040;&#1083;&#1090;&#1077;&#1088;&#1085;&#1072;&#1090;&#1080;&#1074;&#1085;&#1086;, &#1089;&#1086; &#1074;&#1088;&#1077;&#1084;&#1077;&#1085;&#1077;&#1084; &#1084;&#1099; &#1084;&#1086;&#1078;&#1077;&#1084; &#1076;&#1086;&#1073;&#1072;&#1074;&#1080;&#1090;&#1100; &#1089;&#1083;&#1086;&#1080; &#1073;&#1077;&#1079;&#1086;&#1087;&#1072;&#1089;&#1085;&#1086;&#1089;&#1090;&#1080;, &#1085;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1103; 4 &#1080;&#1085;&#1090;&#1077;&#1088;&#1085;&#1077;&#1090; &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1072;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1073;&#1091;&#1076;&#1091;&#1090; &#1089;&#1086;&#1077;&#1076;&#1077;&#1085;&#1077;&#1085;&#1099; &#1082; 2-&#1091;&#1084; &#1087;&#1088;&#1086;&#1084;&#1077;&#1078;&#1091;&#1090;&#1086;&#1095;&#1085;&#1099;&#1084; &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1072;&#1084;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1077; &#1074; &#1089;&#1074;&#1086;&#1102; &#1086;&#1095;&#1077;&#1088;&#1077;&#1076;&#1100; &#1073;&#1091;&#1076;&#1091;&#1090; &#1089;&#1086;&#1077;&#1076;&#1077;&#1085;&#1077;&#1085;&#1099; &#1082; &#1082;&#1086;&#1088;&#1085;&#1077;&#1074;&#1086;&#1084;&#1091; &#1093;&#1088;&#1072;&#1085;&#1080;&#1083;&#1080;&#1097;&#1091; &#1089;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1074;, &#1088;&#1072;&#1073;&#1086;&#1090;&#1072;&#1102;&#1097;&#1080;&#1093; &#1074; &#1089;&#1090;&#1088;&#1086;&#1075;&#1086;&#1081; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1080;, &#1075;&#1076;&#1077; &#1083;&#1102;&#1073;&#1072;&#1103; &#1086;&#1087;&#1077;&#1088;&#1072;&#1094;&#1080;&#1103; &#1087;&#1088;&#1086;&#1080;&#1089;&#1093;&#1086;&#1076;&#1103;&#1097;&#1072;&#1103; &#1074;&#1085;&#1077; &#1086;&#1095;&#1077;&#1088;&#1077;&#1076;&#1080; &#1087;&#1088;&#1080;&#1074;&#1077;&#1076;&#1105;&#1090; &#1082; &#1086;&#1090;&#1082;&#1083;&#1102;&#1095;&#1077;&#1085;&#1080;&#1102; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1077;&#1075;&#1086; &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1072; &#1074; &#1094;&#1077;&#1087;&#1086;&#1095;&#1082;&#1080;. &#1042; &#1101;&#1090;&#1086;&#1084; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077;, &#1080; &#1087;&#1088;&#1080; &#1089;&#1091;&#1097;&#1077;&#1089;&#1090;&#1074;&#1086;&#1074;&#1072;&#1085;&#1080;&#1080; &#1091; &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1086;&#1074; &#1084;&#1085;&#1086;&#1075;&#1080;&#1093; &#1084;&#1072;&#1088;&#1096;&#1088;&#1091;&#1090;&#1086;&#1074;, &#1083;&#1102;&#1073;&#1072;&#1103; &#1085;&#1077;&#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1085;&#1086;&#1089;&#1090;&#1100; &#1073;&#1091;&#1076;&#1077;&#1090; &#1082;&#1086;&#1084;&#1087;&#1077;&#1085;&#1089;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1085;&#1072; &#1076;&#1088;&#1091;&#1075;&#1080;&#1084;&#1080;, &#1085;&#1077;&#1082;&#1086;&#1084;&#1087;&#1088;&#1086;&#1084;&#1077;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080;, &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1072;&#1084;&#1080;. &#1042; &#1083;&#1102;&#1073;&#1086;&#1084; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077;, &#1101;&#1090;&#1086; &#1074;&#1089;&#1105; - &#1087;&#1080;&#1097;&#1072; &#1076;&#1083;&#1072; &#1088;&#1072;&#1079;&#1084;&#1099;&#1096;&#1083;&#1077;&#1085;&#1080;&#1081;."
+msgstr ""
 
 #: www/account/40.php:52 www/index/11.php:52
 msgid "Alternatively you can get in contact with us via the following methods:"
-msgstr "&acute;&agrave;&atilde;&Oacute;&Oslash;&Otilde; &Ograve;&THORN;&times;&Uuml;&THORN;&Ouml;&Yacute;&THORN;&aacute;&acirc;&Oslash; &aacute;&Ograve;&iuml;&times;&ETH;&acirc;&igrave;&aacute;&iuml; &aacute; &Yacute;&ETH;&Uuml;&Oslash;:"
+msgstr ""
 
 #: www/help/2.php:49
 msgid "And they are making mistakes"
-msgstr "&cedil; &THORN;&Yacute;&Oslash; &THORN;&egrave;&Oslash;&Ntilde;&ETH;&icirc;&acirc;&aacute;&iuml;"
+msgstr "И они ошибаются"
 
 #: www/help/3.php:70
 msgid "And you're done!"
-msgstr "&sup3;&THORN;&acirc;&THORN;&Ograve;&THORN;!"
+msgstr "Готово!"
 
 #: www/account/16.php:39
 msgid "Another Email"
-msgstr "&acute;&agrave;&atilde;&Oacute;&THORN;&Ugrave; &ETH;&Ocirc;&agrave;&Otilde;&aacute; email"
+msgstr "Другая электропочта"
 
 #: includes/account.php:404
 msgid "Any valid certificates will be revoked as well"
-msgstr "&sup2;&aacute;&Otilde; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&Oslash;&acirc;&Otilde;&Ucirc;&igrave;&Yacute;&euml;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml; &acirc;&ETH;&Uacute;&Ouml;&Otilde; &Ntilde;&atilde;&Ocirc;&atilde;&acirc; &ETH;&Yacute;&Yacute;&atilde;&Ucirc;&Oslash;&agrave;&THORN;&Ograve;&ETH;&Yacute;&euml;"
+msgstr "Также будут аннулированы любые действующие сертификаты"
 
 #: www/help/7.php:5
 msgid "Apart from the boot stuff, all data resides on an encrypted partition on the root store server and only manual intervention in the boot up process by entering the password will start it again."
@@ -171,17 +171,17 @@ msgstr "&#1053;&#1077; &#1084;&#1086;&#1075;&#1091; &#1085;&#1072;&#1095;&#1072;
 #: www/account/30.php:31
 #, php-format
 msgid "Are you really sure you want to remove %s and all certificates issued under this domain?"
-msgstr "&sup2;&euml; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&Oslash;&acirc;&Otilde;&Ucirc;&igrave;&Yacute;&THORN; &aring;&THORN;&acirc;&Oslash;&acirc;&Otilde; &atilde;&Ocirc;&ETH;&Ucirc;&Oslash;&acirc;&igrave; %s &Oslash; &Ograve;&aacute;&Otilde; &szlig;&THORN;&Ucirc;&atilde;&ccedil;&Otilde;&Yacute;&Yacute;&euml;&Otilde; &Ocirc;&Ucirc;&iuml; &iacute;&acirc;&THORN;&Oacute;&THORN; &Ocirc;&THORN;&Uuml;&Otilde;&Yacute;&ETH; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml;?"
+msgstr "Вы действительно хотите удалить %s и все сертификаты, выпущенные для данного домена?"
 
 #: www/account/31.php:27
 #, php-format
 msgid "Are you really sure you want to remove %s and all certificates issued under this organisation?"
-msgstr "&sup2;&euml; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&Oslash;&acirc;&Otilde;&Ucirc;&igrave;&Yacute;&THORN; &aring;&THORN;&acirc;&Oslash;&acirc;&Otilde; &atilde;&Ocirc;&ETH;&Ucirc;&Oslash;&acirc;&igrave; %s &Oslash; &Ograve;&aacute;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml;, &aacute;&THORN;&times;&Ocirc;&ETH;&Yacute;&Yacute;&euml;&Otilde; &THORN;&acirc; &Oslash;&Uuml;&Otilde;&Yacute;&Oslash; &iacute;&acirc;&THORN;&Ugrave; &THORN;&agrave;&Oacute;&ETH;&Yacute;&Oslash;&times;&ETH;&aelig;&Oslash;&Oslash;?"
+msgstr "Вы действительно хотите удалить %s и все сертификаты, выпущенные для данной организации?"
 
 #: www/account/34.php:31
 #, php-format
 msgid "Are you really sure you want to remove %s from administering this organisation?"
-msgstr "&sup2;&euml; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&Oslash;&acirc;&Otilde;&Ucirc;&igrave;&Yacute;&THORN; &aring;&THORN;&acirc;&Oslash;&acirc;&Otilde; &atilde;&Ocirc;&ETH;&Ucirc;&Oslash;&acirc;&igrave; %s &Oslash;&times; &aacute;&szlig;&Oslash;&aacute;&Uacute;&ETH; &ETH;&Ocirc;&Uuml;&Oslash;&Yacute;&Oslash;&aacute;&acirc;&agrave;&ETH;&acirc;&THORN;&agrave;&THORN;&Ograve; &iacute;&acirc;&THORN;&Ugrave; &THORN;&agrave;&Oacute;&ETH;&Yacute;&Oslash;&times;&ETH;&aelig;&Oslash;&Oslash;?"
+msgstr "Вы действительно хотите удалить %s из числа администраторов данной организации?"
 
 #: www/help/2.php:22
 msgid "As anyone who has received an email containing a virus from a strange address knows, emails can be easily spoofed. The identity of the sender is very easy to forge via email. Thus a great advantage is that digital signing provides a means of ensuring that an email is really from the person you think it is. If everyone digitally signed their emails, it would be much easier to know whether an email is legitimate and unchanged and to the great relief of many, spamming would be much easier to control, and viruses that forge the sender's address would be obvious and therefore easier to control."
@@ -217,7 +217,7 @@ msgstr "&iquest;&THORN;&Ocirc;&szlig;&Oslash;&aacute;&ETH;&Yacute;&Yacute;&euml;
 
 #: pages/index/0.php:25
 msgid "For CAcert Community Members"
-msgstr ""
+msgstr "Для членов сообщества CAcert"
 
 #: www/index/51.php:28
 msgid "Based on OpenSSL, PHP, a little bit of C and MySQL, we were able to build not only a free certificate authority that could verify your email address or domain, but actually build in a highly effective trust model. Our model goes further than that used by some commercial CAs to prove your identity."
@@ -225,7 +225,7 @@ msgstr "&#1054;&#1089;&#1085;&#1086;&#1074;&#1099;&#1074;&#1072;&#1089;&#1100; &
 
 #: www/index/0.php:110
 msgid "Become a member of the CAcert Association"
-msgstr "&Aacute;&acirc;&ETH;&acirc;&igrave; &ccedil;&Ucirc;&Otilde;&Yacute;&THORN;&Uuml; &deg;&aacute;&aacute;&THORN;&aelig;&Oslash;&ETH;&aelig;&Oslash;&Oslash; CAcert"
+msgstr "Стать членом ассоциации CAcert"
 
 #: www/index/0.php:100
 msgid "Become an assurer in CAcert Web of Trust"
@@ -237,7 +237,7 @@ msgstr "&ordm;&ETH;&Uacute; &aacute;&acirc;&ETH;&acirc;&igrave; &middot;&ETH;&Og
 
 #: pages/account/10.php:34
 msgid "Paste your CSR(Certificate Signing Request) below..."
-msgstr ""
+msgstr "Вставьте ваш CSR (Certificate Signing Request, запрос подписи сертификата) ниже..."
 
 #: www/account/0.php:24
 msgid "Before you can start issuing certificates for your website, irc server, smtp server, pop3, imap etc you will need to add domains to your account under the domain menu. You can also remove domains from here as well. Once you've added a domain you are free then to go into the Server Certificate section and start pasting CSR into the website and have the website return you a valid certificate for up to 2 years if you have 50 trust points, or 6 months for no trust points."
@@ -250,12 +250,12 @@ msgstr "&#1053;&#1080;&#1078;&#1077; &#1042;&#1072;&#1096; &#1057;&#1077;&#1088;
 #: www/index/0.php:53 www/index/0.php:63 www/index/0.php:73 www/index/0.php:83
 #: www/index/0.php:93 www/index/0.php:103 www/index/0.php:113
 msgid "Benefits"
-msgstr "&iquest;&THORN;&Ucirc;&igrave;&times;&ETH;"
+msgstr "Преимущества"
 
 #: includes/account.php:49 includes/account.php:389 www/index.php:316
 #: www/wot.php:222 www/wot.php:234 scripts/removedead.php:59
 msgid "Best regards"
-msgstr "&Aacute; &Yacute;&ETH;&Oslash;&Ucirc;&atilde;&ccedil;&egrave;&Oslash;&Uuml;&Oslash; &szlig;&THORN;&Ouml;&Otilde;&Ucirc;&ETH;&Yacute;&Oslash;&iuml;&Uuml;&Oslash;"
+msgstr "С наилучшими пожеланиями"
 
 #: www/help/3.php:60
 msgid "Browse to the location you saved the .cer file to in step 1"
@@ -267,11 +267,11 @@ msgstr "&#1053;&#1086; &#1074;&#1086;&#1079;&#1084;&#1086;&#1078;&#1085;&#1086;,
 
 #: www/help/2.php:7 www/help/2.php:35
 msgid "But, er, is this really proof of your email identity?"
-msgstr "&#1053;&#1086;, &#1091;&#1074;&#1099;, &#1088;&#1072;&#1079;&#1074;&#1077; &#1101;&#1090;&#1086; &#1085;&#1072; &#1089;&#1072;&#1084;&#1086;&#1084; &#1076;&#1077;&#1083;&#1077; &#1076;&#1086;&#1082;&#1072;&#1079;&#1072;&#1090;&#1077;&#1083;&#1100;&#1089;&#1090;&#1074;&#1086; &#1076;&#1086;&#1089;&#1090;&#1086;&#1074;&#1077;&#1088;&#1085;&#1086;&#1089;&#1090;&#1080; &#1042;&#1072;&#1096;&#1077;&#1081; &#1077;&#1083;&#1077;&#1082;&#1090;&#1086;&#1085;&#1085;&#1086;&#1081; &#1087;&#1086;&#1095;&#1090;&#1099;?"
+msgstr "Но, эм, разве это в самом деле доказательство подлинности вашей электопочты?"
 
 #: www/help/2.php:48
 msgid "But, with all this money, and all this responsibility, they must be taking a lot of care to ensure the Certificate Authorities do their jobs well, and keep doing their jobs well, right? Well right?!"
-msgstr "&#1053;&#1086; &#1089;&#1086; &#1074;&#1089;&#1077;&#1084;&#1080; &#1101;&#1090;&#1080;&#1084;&#1080; &#1076;&#1077;&#1085;&#1100;&#1075;&#1072;&#1084;&#1080;, &#1080; &#1089;&#1086; &#1074;&#1089;&#1077;&#1081; &#1101;&#1090;&#1086;&#1081; &#1086;&#1090;&#1074;&#1077;&#1090;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1086;&#1089;&#1090;&#1100;&#1102;, &#1086;&#1085;&#1080; &#1076;&#1086;&#1083;&#1078;&#1085;&#1099; &#1086;&#1095;&#1077;&#1085;&#1100; &#1089;&#1080;&#1083;&#1100;&#1085;&#1086; &#1089;&#1090;&#1072;&#1088;&#1072;&#1090;&#1100;&#1089;&#1103; &#1091;&#1076;&#1086;&#1089;&#1090;&#1086;&#1074;&#1077;&#1088;&#1080;&#1090;&#1100;&#1089;&#1103;, &#1095;&#1090;&#1086; &#1089;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1085;&#1099;&#1077; &#1072;&#1074;&#1090;&#1086;&#1088;&#1080;&#1090;&#1077;&#1090;&#1099; &#1093;&#1086;&#1088;&#1086;&#1096;&#1086; &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1103;&#1102;&#1090; &#1089;&#1074;&#1086;&#1102; &#1088;&#1072;&#1073;&#1086;&#1090;&#1091;, &#1087;&#1088;&#1072;&#1074;&#1076;&#1072;? &#1053;&#1091; &#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1100;&#1085;&#1086;?"
+msgstr ""
 
 #: www/account/10.php:15 www/account/20.php:15 www/account/3.php:15
 msgid "CAcert Certficate Acceptable Use Policy"
@@ -279,7 +279,7 @@ msgstr "&#1055;&#1088;&#1072;&#1074;&#1080;&#1083;&#1072; &#1076;&#1086;&#1087;&
 
 #: www/account/38.php:19 www/index/13.php:19
 msgid "CAcert Inc. is a non-profit association which is legally able to accept donations. CAcert adheres to strict guidelines about how this money can to be used. If you'd like to make a donation, you can do so via"
-msgstr "CAcert &#1103;&#1074;&#1083;&#1103;&#1077;&#1090;&#1089;&#1103; &#1085;&#1077;&#1082;&#1086;&#1084;&#1084;&#1077;&#1088;&#1095;&#1077;&#1089;&#1082;&#1086;&#1081; &#1072;&#1089;&#1089;&#1086;&#1094;&#1080;&#1072;&#1094;&#1080;&#1077;&#1081;, &#1082;&#1086;&#1090;&#1086;&#1088;&#1072;&#1103; &#1084;&#1086;&#1078;&#1077;&#1090; &#1079;&#1072;&#1082;&#1086;&#1085;&#1085;&#1086; &#1087;&#1088;&#1080;&#1085;&#1080;&#1084;&#1072;&#1090;&#1100; &#1087;&#1086;&#1078;&#1077;&#1088;&#1090;&#1074;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;. &#1042; CAcert &#1077;&#1089;&#1090;&#1100; &#1095;&#1105;&#1090;&#1082;&#1080;&#1077; &#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1072; &#1087;&#1086; &#1094;&#1077;&#1083;&#1077;&#1074;&#1086;&#1084;&#1091; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1085;&#1080;&#1102; &#1076;&#1077;&#1085;&#1077;&#1075;. &#1045;&#1089;&#1083;&#1080; &#1042;&#1099; &#1093;&#1086;&#1090;&#1080;&#1090;&#1077; &#1089;&#1076;&#1077;&#1083;&#1072;&#1090;&#1100; &#1087;&#1086;&#1078;&#1077;&#1088;&#1090;&#1074;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077;, &#1074;&#1086;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1091;&#1081;&#1090;&#1077;&#1089;&#1100; &#1089;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1080;&#1084;&#1080; &#1089;&#1087;&#1086;&#1089;&#1086;&#1073;&#1072;&#1084;&#1080;:"
+msgstr "CAcert Inc. является некоммерческой ассоциацией, которая может законно принимать пожертвования. В CAcert есть четкие правила по целевому использованию денег. Если вы хотите сделать пожертвование, воспользуйтесь следующими способами:"
 
 #: www/account/10.php:20 www/account/20.php:20 www/account/3.php:20
 msgid "CAcert Inc.'s public certification services are governed by a CPS as amended from time to time which is incorporated into this Agreement by reference. The Subscriber will use the SSL Server Certificate in accordance with CAcert Inc.'s CPS and supporting documentation published at"
@@ -291,15 +291,15 @@ msgstr "CAcert, &#1082;&#1072;&#1082; &#1086;&#1073;&#1097;&#1077;&#1089;&#1090;
 
 #: www/wot.php:223 www/wot.php:235 scripts/removedead.php:60
 msgid "CAcert Support Team"
-msgstr "&sup3;&agrave;&atilde;&szlig;&szlig;&ETH; &szlig;&THORN;&Ocirc;&Ocirc;&Otilde;&agrave;&Ouml;&Uacute;&Oslash; CAcert"
+msgstr "Команда поддержки CAcert"
 
 #: includes/account_stuff.php:181 www/account/0.php:27 www/wot/0.php:15
 msgid "CAcert Web of Trust"
-msgstr "&Aacute;&Otilde;&acirc;&igrave; &Ocirc;&THORN;&Ograve;&Otilde;&agrave;&Oslash;&iuml; CAcert"
+msgstr "Сеть доверия CAcert"
 
 #: www/wot/3.php:15
 msgid "CAcert Web of Trust Rules"
-msgstr "&Aacute;&Otilde;&acirc;&igrave; &Ocirc;&THORN;&Ograve;&Otilde;&agrave;&Oslash;&iuml; CAcert. &iquest;&agrave;&ETH;&Ograve;&Oslash;&Ucirc;&ETH;"
+msgstr "Правила сети доверия CAcert"
 
 #: www/wot/3.php:45
 msgid "CAcert may, from time to time, alter the amount of Assurance Points that a class of assurer may assign as is necessary to effect a policy or rule change.  We may also alter the amount of Assurance Points available to an individual, or new class of assurer, should another policy of CAcert require this."
@@ -307,7 +307,7 @@ msgstr "CAcert &#1084;&#1086;&#1078;&#1077;&#1090;, &#1074;&#1088;&#1077;&#1084;
 
 #: www/help/6.php:11
 msgid "CAcert then sends you an email with a signed copy of your certificate. Hopefully the rest should be pretty straight forward."
-msgstr "CAcert &#1087;&#1086;&#1089;&#1083;&#1077; &#1101;&#1090;&#1086;&#1075;&#1086; &#1087;&#1086;&#1089;&#1099;&#1083;&#1072;&#1077;&#1090; &#1042;&#1072;&#1084; &#1101;&#1083;&#1077;&#1082;&#1090;&#1088;&#1086;&#1085;&#1085;&#1086;&#1077; &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;, &#1087;&#1086;&#1076;&#1087;&#1080;&#1089;&#1072;&#1085;&#1085;&#1086;&#1077; &#1082;&#1086;&#1087;&#1080;&#1077;&#1081; &#1042;&#1072;&#1096;&#1077;&#1075;&#1086; &#1089;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1072;. &#1053;&#1072;&#1076;&#1077;&#1077;&#1084;&#1089;&#1103;, &#1095;&#1090;&#1086; &#1086;&#1089;&#1090;&#1072;&#1083;&#1100;&#1085;&#1086;&#1077; &#1073;&#1091;&#1076;&#1077;&#1090; &#1085;&#1077; &#1090;&#1088;&#1091;&#1076;&#1085;&#1086;."
+msgstr "Затем CAcert отправляет вам электронное письмо с подписанное копией вашего сертификата. Надеемся, что остальное будет нетрудно."
 
 #: www/account/37.php:19 www/index/12.php:19
 #, php-format
@@ -328,7 +328,7 @@ msgstr "&#1055;&#1086;&#1076;&#1076;&#1077;&#1088;&#1078;&#1082;&#1072; CAcert.o
 
 #: www/account/37.php:17 www/index/12.php:17
 msgid "CAcert.org is a community driven, Certificate Authority that issues certificates to the public at large for free."
-msgstr "CAcert.org - &#1091;&#1087;&#1088;&#1072;&#1074;&#1083;&#1103;&#1077;&#1084;&#1086;&#1077; &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1089;&#1090;&#1074;&#1086;, &#1062;&#1077;&#1085;&#1090;&#1088; &#1057;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080; &#1082;&#1086;&#1090;&#1086;&#1088;&#1086;&#1077; &#1074;&#1099;&#1087;&#1091;&#1089;&#1082;&#1072;&#1077;&#1090; &#1091;&#1076;&#1086;&#1089;&#1090;&#1086;&#1074;&#1077;&#1088;&#1077;&#1085;&#1080;&#1103; &#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1077; &#1073;&#1077;&#1089;&#1087;&#1083;&#1072;&#1090;&#1085;&#1086;."
+msgstr ""
 
 #: www/wot/0.php:17
 msgid "CAcert.org was designed to be by the community for the community, and instead of placing all the labour on a central authority and in turn increasing the cost of certificates, the idea was to get community in conjunction with this website to have trust maintained in a dispersed and automated manner!"
@@ -337,7 +337,7 @@ msgstr "CAcert.org &#1073;&#1099;&#1083; &#1088;&#1072;&#1079;&#1088;&#1072;&#10
 #: includes/account.php:1464 includes/account.php:1515 www/account/30.php:34
 #: www/account/31.php:30 www/account/34.php:34
 msgid "Cancel"
-msgstr "&frac34;&acirc;&Uuml;&Otilde;&Yacute;&Oslash;&acirc;&igrave;"
+msgstr "Отмена"
 
 #: includes/general_stuff.php:58
 msgid "Cert Login"
@@ -345,15 +345,15 @@ msgstr "&sup2;&aring;&THORN;&Ocirc; &szlig;&agrave;&Oslash; &szlig;&THORN;&Uuml;
 
 #: www/account/19.php:101 www/account/6.php:99
 msgid "Certificate Installation Complete!"
-msgstr "&Atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&ETH; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&ETH; &times;&ETH;&Uacute;&THORN;&Yacute;&ccedil;&Otilde;&Yacute;&ETH;!"
+msgstr "Установка сертификата завершена!"
 
 #: www/account/19.php:97 www/account/6.php:95
 msgid "Certificate Installation Error"
-msgstr "&frac34;&egrave;&Oslash;&Ntilde;&Uacute;&ETH; &szlig;&agrave;&Oslash; &atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&ETH;"
+msgstr "Ошибка установки сертификата"
 
 #: www/help/3.php:43
 msgid "Certificate Installation process for IIS 5.0"
-msgstr "&frac34;&szlig;&Oslash;&aacute;&ETH;&Yacute;&Oslash;&Otilde; &atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&Oslash; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&ETH; &Yacute;&ETH; IIS 5.0"
+msgstr "Процесс установки сертификата на IIS 5.0"
 
 #: includes/general_stuff.php:65
 msgid "CAcert Logos"
@@ -362,39 +362,39 @@ msgstr ""
 #: includes/account.php:669 includes/account.php:1066
 #, php-format
 msgid "Certificate for '%s' has been renewed."
-msgstr "&Aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc; &Ocirc;&Ucirc;&iuml; '%s' &THORN;&Ntilde;&Yacute;&THORN;&Ograve;&Ucirc;&Otilde;&Yacute;."
+msgstr "Сертификат для '%s' обновлен."
 
 #: includes/account.php:594 includes/account.php:705 includes/account.php:1103
 #: includes/account.php:1319
 #, php-format
 msgid "Certificate for '%s' has been revoked."
-msgstr "&Aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc; &Ocirc;&Ucirc;&iuml; '%s' &ETH;&Yacute;&Yacute;&atilde;&Ucirc;&Oslash;&agrave;&THORN;&Ograve;&ETH;&Yacute;."
+msgstr "Сертификат для '%s' аннулирован."
 
 #: www/account/19.php:95 www/account/6.php:93
 msgid "Certificate installation failed!"
-msgstr "&Atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Oslash;&acirc;&igrave; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc; &Yacute;&Otilde; &atilde;&Ocirc;&ETH;&Ucirc;&THORN;&aacute;&igrave;!"
+msgstr "Установка сертификата не удалась!"
 
 #: www/stats.php:31
 msgid "Certificates Issued"
-msgstr "&#1042;&#1099;&#1076;&#1072;&#1085;&#1085;&#1099;&#1077; &#1057;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1099;"
+msgstr "Выданные сертификаты"
 
 #: pages/help/4.php:21
 msgid "writing new private key to 'private.key'"
-msgstr "&#1087;&#1080;&#1096;&#1077;&#1084; &#1085;&#1086;&#1074;&#1099;&#1081; &#1087;&#1088;&#1080;&#1074;&#1072;&#1090;&#1085;&#1099;&#1081; &#1082;&#1083;&#1102;&#1095; &#1074; ' private.key '"
+msgstr "записываем новый закрытый ключ в 'private.key'"
 
 #: includes/account.php:837 includes/account.php:1312 pages/account/19.php:45
 #: pages/account/6.php:43
 msgid "to install your certificate."
-msgstr "&#1091;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1080;&#1090;&#1100; &#1074;&#1072;&#1096; &#1089;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;."
+msgstr ""
 
 #: www/account/14.php:18
 msgid "Change Pass Phrase"
-msgstr "&cedil;&times;&Uuml;&Otilde;&Yacute;&Oslash;&acirc;&igrave; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&atilde;&icirc; &auml;&agrave;&ETH;&times;&atilde;"
+msgstr "Изменить ключевую фразу"
 
 #: includes/account_stuff.php:146 www/account/43.php:98 www/account/43.php:99
 #: www/account/44.php:19 www/account/50.php:19
 msgid "Change Password"
-msgstr "&cedil;&times;&Uuml;&Otilde;&Yacute;&Oslash;&acirc;&igrave; &szlig;&ETH;&agrave;&THORN;&Ucirc;&igrave;"
+msgstr "Изменить пароль"
 
 #: www/help/3.php:36
 msgid "Choose a filename to save the request to"
@@ -404,19 +404,19 @@ msgstr "&#1042;&#1099;&#1073;&#1077;&#1088;&#1080;&#1090;&#1077; &#1085;&#1072;&
 #: includes/account.php:1445 includes/account.php:1492
 #: includes/account.php:1504 www/account/19.php:45 www/account/6.php:43
 msgid "Click here"
-msgstr "&frac12;&ETH;&Ouml;&ETH;&acirc;&igrave; &times;&Ocirc;&Otilde;&aacute;&igrave;"
+msgstr "Щелкните сюда"
 
 #: www/account/40.php:21 www/index/11.php:21
 msgid "Click here to go to the Support List"
-msgstr "&#1065;&#1105;&#1083;&#1082;&#1085;&#1080;&#1090;&#1077; &#1079;&#1076;&#1077;&#1089;&#1100; &#1076;&#1083;&#1103; &#1090;&#1086;&#1075;&#1086;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1087;&#1086;&#1081;&#1090;&#1080; &#1085;&#1072; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091; &#1089;&#1086; &#1057;&#1087;&#1080;&#1089;&#1082;&#1086;&#1084; &#1055;&#1086;&#1076;&#1076;&#1077;&#1088;&#1078;&#1082;&#1080;"
+msgstr ""
 
 #: www/account/40.php:38 www/index/11.php:38
 msgid "Click here to view all lists available"
-msgstr "&frac12;&ETH;&Ouml;&ETH;&acirc;&igrave; &times;&Ocirc;&Otilde;&aacute;&igrave;, &ccedil;&acirc;&THORN;&Ntilde;&euml; &szlig;&THORN;&aacute;&Uuml;&THORN;&acirc;&agrave;&Otilde;&acirc;&igrave; &Ograve;&aacute;&Otilde; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&atilde;&icirc;&eacute;&Oslash;&Otilde; &aacute;&szlig;&Oslash;&aacute;&Uacute;&Oslash; &agrave;&ETH;&aacute;&aacute;&euml;&Ucirc;&Uacute;&Oslash;"
+msgstr "Щелкните сюда, чтобы посмотреть все доступные списки"
 
 #: includes/account_stuff.php:153 www/account/18.php:18 www/account/5.php:18
 msgid "Client Certificates"
-msgstr "&ordm;&Ucirc;&Oslash;&Otilde;&Yacute;&acirc;&aacute;&Uacute;&Oslash;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml;"
+msgstr ""
 
 #: www/index/0.php:50
 msgid "Client certificates (un-assured)"
@@ -433,11 +433,11 @@ msgstr "&Aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc
 #: www/account/24.php:41 www/account/27.php:44 www/account/32.php:27
 #: www/account/33.php:43
 msgid "Comments"
-msgstr "&ordm;&THORN;&Uuml;&Uuml;&Otilde;&Yacute;&acirc;&ETH;&agrave;&Oslash;&Oslash;"
+msgstr "Комментарии"
 
 #: www/help/4.php:14
 msgid "Common Name (eg, YOUR name) []:"
-msgstr "&frac34;&Ntilde;&eacute;&Otilde;&Otilde; &cedil;&Uuml;&iuml; (&Yacute;&ETH;&szlig;&agrave;., &sup2;&deg;&Egrave;&micro; &Oslash;&Uuml;&iuml;) []:"
+msgstr "Название (например, ВАШЕ имя) []:"
 
 #: www/account/11.php:22 www/account/12.php:23 www/account/18.php:23
 #: www/account/21.php:25 www/account/22.php:23
@@ -447,7 +447,7 @@ msgstr "CommonName"
 #: includes/account.php:1733 includes/account.php:1780
 #: includes/account.php:1792
 msgid "to continue."
-msgstr "&#1087;&#1088;&#1086;&#1076;&#1086;&#1083;&#1078;&#1072;&#1090;&#1100;."
+msgstr ""
 
 #: includes/general_stuff.php:63
 msgid "CAcert News"
@@ -500,11 +500,11 @@ msgstr "&#1050;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090;&#1085;&#1072;&#1103; &
 
 #: www/account/39.php:37 www/index/10.php:37
 msgid "Cookies"
-msgstr "Cookies"
+msgstr ""
 
 #: www/help/2.php:38
 msgid "Cool man! How do I create my own digital signature?!"
-msgstr "&#1052;&#1086;&#1083;&#1086;&#1076;&#1086;&#1081; &#1095;&#1077;&#1083;&#1086;&#1074;&#1077;&#1082;! &#1050;&#1072;&#1082; &#1103; &#1084;&#1086;&#1075;&#1091; &#1089;&#1086;&#1079;&#1076;&#1072;&#1090;&#1100; &#1084;&#1086;&#1102; &#1089;&#1086;&#1073;&#1089;&#1090;&#1074;&#1077;&#1085;&#1085;&#1091;&#1102; &#1094;&#1080;&#1092;&#1088;&#1086;&#1074;&#1091;&#1102; &#1087;&#1086;&#1076;&#1087;&#1080;&#1089;&#1100;?!"
+msgstr ""
 
 #: www/help/3.php:47
 msgid "Copy the contents of the email including the"
@@ -518,52 +518,52 @@ msgstr "&#1054;&#1089;&#1085;&#1086;&#1074;&#1085;&#1099;&#1077; &#1095;&#1083;&
 #: includes/account.php:1343
 #, php-format
 msgid "Couldn't remove the request for `%s`, request had already been processed."
-msgstr "&#1053;&#1077; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1083;&#1086;&#1089;&#1100; &#1080;&#1079;&#1074;&#1083;&#1077;&#1095;&#1100; &#1079;&#1072;&#1087;&#1088;&#1086;&#1089; &#1076;&#1083;&#1103; `%s`, &#1079;&#1072;&#1087;&#1088;&#1086;&#1089; &#1091;&#1078;&#1077; &#1086;&#1073;&#1088;&#1072;&#1073;&#1086;&#1090;&#1072;&#1085;."
+msgstr "Не получилось удалить запрос для '%s', запрос уже обработан."
 
 #: www/account/11.php:32 www/account/21.php:35 www/account/24.php:37
 #: www/account/27.php:40
 msgid "Country"
-msgstr "&Aacute;&acirc;&agrave;&ETH;&Yacute;&ETH;"
+msgstr "Страна"
 
 #: www/account/36.php:23 www/index/1.php:112
 msgid "Country Announcements"
-msgstr "&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1103; &#1057;&#1090;&#1088;&#1072;&#1085;&#1099;"
+msgstr "Объявления страны"
 
 #: www/help/4.php:9
 msgid "Country Name (2 letter code) [AU]:"
-msgstr "&#1048;&#1084;&#1103; &#1089;&#1090;&#1088;&#1072;&#1085;&#1099; (2-&#1093; &#1073;&#1091;&#1082;&#1074;&#1077;&#1085;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;) [ AU ]:"
+msgstr "Название страны (двухбуквенный код) [AU]:"
 
 #: www/account/17.php:133 www/account/4.php:133
 msgid "Create Certificate Request"
-msgstr "&#1057;&#1086;&#1079;&#1076;&#1072;&#1081;&#1090;&#1077; &#1047;&#1072;&#1087;&#1088;&#1086;&#1089; &#1057;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1072;"
+msgstr "Создать запрос на сертификат"
 
 #: includes/general_stuff.php:72 www/index/7.php:15
 msgid "Credits"
-msgstr "&#1050;&#1088;&#1077;&#1076;&#1080;&#1090;&#1099;"
+msgstr "В ролях"
 
 #: www/help/7.php:2
 msgid "Currently there is 2 main servers, one for webserver, one for root store, with the root store only connected to the webserver via serial cable, with a daemon running as non-root processes on each end of the serial listening/sending requests/info."
-msgstr "&#1042; &#1085;&#1072;&#1089;&#1090;&#1086;&#1103;&#1097;&#1077;&#1077; &#1074;&#1088;&#1077;&#1084;&#1103; &#1080;&#1084;&#1077;&#1102;&#1090;&#1089;&#1103; 2 &#1075;&#1083;&#1072;&#1074;&#1085;&#1099;&#1093; &#1089;&#1077;&#1088;&#1074;&#1077;&#1088;&#1072;, &#1086;&#1076;&#1080;&#1085; &#1076;&#1083;&#1103; webserver, &#1086;&#1076;&#1080;&#1085; &#1076;&#1083;&#1103; &#1075;&#1083;&#1072;&#1074;&#1085;&#1086;&#1075;&#1086; &#1089;&#1082;&#1083;&#1072;&#1076;&#1072; (root server), &#1074; &#1089;&#1082;&#1083;&#1072;&#1076;&#1077; &#1093;&#1088;&#1072;&#1085;&#1103;&#1090; &#1090;&#1086;&#1083;&#1100;&#1082;&#1086; &#1089;&#1074;&#1103;&#1079;&#1072;&#1085;&#1085;&#1099;&#1081; &#1089; webserver &#1095;&#1077;&#1088;&#1077;&#1079; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1099;&#1081; &#1082;&#1072;&#1073;&#1077;&#1083;&#1100; &#1089;&#1086; &#1089;&#1083;&#1091;&#1078;&#1073;&#1086;&#1081;, &#1074;&#1099;&#1087;&#1086;&#1083;&#1085;&#1103;&#1102;&#1097;&#1080;&#1077;&#1081; &#1082;&#1072;&#1082; &#1087;&#1088;&#1086;&#1094;&#1077;&#1089;&#1089;, &#1085;&#1072; &#1082;&#1072;&#1078;&#1076;&#1086;&#1084; &#1082;&#1086;&#1085;&#1094;&#1077; &#1087;&#1086;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100;&#1085;&#1099;&#1093; &#1089;&#1083;&#1091;&#1096;&#1072;&#1085;&#1080;&#1081; (&#1087;&#1086;&#1089;&#1099;&#1083;&#1082;&#1080; &#1079;&#1072;&#1087;&#1088;&#1086;&#1089;&#1086;&#1074;) &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1080;."
+msgstr "В настоящее время имеется два основных сервера: один используется в качестве веб-сервера, другой &amp;mdash; как корневое хранилище, причем корневое хранилище соединено с веб-сервером последовательным кабелем; демон в виде непривилегированного процесса запущен на каждом конце этого кабеля для получения и отправки запросов и информации."
 
 #: www/stats.php:73 www/stats.php:109 www/ttp.php:95 www/ttp.php:142
 #: www/account/43.php:200 www/account/43.php:235 www/wot/10.php:43
 #: www/wot/10.php:76 www/wot/6.php:91
 msgid "Date"
-msgstr "&acute;&ETH;&acirc;&ETH;"
+msgstr "Дата"
 
 #: www/cap.php:62 www/ttp.php:126 www/account/13.php:46 www/account/13.php:94
 #: www/account/43.php:93 www/account/52.php:44 www/index/1.php:47
 #: www/index/5.php:25 www/wot/6.php:65
 msgid "Date of Birth"
-msgstr "&acute;&ETH;&acirc;&ETH; &agrave;&THORN;&Ouml;&Ocirc;&Otilde;&Yacute;&Oslash;&iuml;"
+msgstr "Дата рождения"
 
 #: www/account/2.php:21
 msgid "Default"
-msgstr "&#1057;&#1090;&#1072;&#1085;&#1076;&#1072;&#1088;&#1090;"
+msgstr "По умолчанию"
 
 #: includes/account_stuff.php:146
 msgid "Default Language"
-msgstr "&Iuml;&times;&euml;&Uacute; &szlig;&THORN; &atilde;&Uuml;&THORN;&Ucirc;&ccedil;&ETH;&Yacute;&Oslash;&icirc;"
+msgstr "Язык по умолчанию"
 
 #: www/account/2.php:23 www/account/2.php:50 www/account/25.php:24
 #: www/account/25.php:41 www/account/26.php:26 www/account/26.php:36
@@ -571,11 +571,11 @@ msgstr "&Iuml;&times;&euml;&Uacute; &szlig;&THORN; &atilde;&Uuml;&THORN;&Ucirc;&
 #: www/account/32.php:43 www/account/34.php:35 www/account/9.php:21
 #: www/account/9.php:49
 msgid "Delete"
-msgstr "&Atilde;&Ocirc;&ETH;&Ucirc;&Oslash;&acirc;&igrave;"
+msgstr "Удалить"
 
 #: www/account/43.php:102 www/account/43.php:103
 msgid "Delete Account"
-msgstr "&frac34;&aacute;&Yacute;&THORN;&Ograve;&Yacute;&ETH;&iuml; &atilde;&ccedil;&Otilde;&acirc;&Yacute;&ETH;&iuml; &times;&ETH;&szlig;&Oslash;&aacute;&igrave;"
+msgstr "Удалить учетную запись"
 
 #: www/account/34.php:28
 #, php-format
@@ -590,42 +590,42 @@ msgstr "&#1059;&#1076;&#1072;&#1083;&#1080;&#1090;&#1100; &#1076;&#1086;&#1084;&
 #: www/account/31.php:24
 #, php-format
 msgid "Delete Organisation"
-msgstr "&Atilde;&Ocirc;&ETH;&Ucirc;&Oslash;&acirc;&igrave; &THORN;&agrave;&Oacute;&ETH;&Yacute;&Oslash;&times;&ETH;&aelig;&Oslash;&icirc;"
+msgstr "Удалить организацию"
 
 #: www/account/32.php:26 www/account/33.php:30
 msgid "Department"
-msgstr "&frac34;&acirc;&Ocirc;&Otilde;&Ucirc;"
+msgstr "Отдел"
 
 #: www/help/2.php:17
 msgid "Digital signing thus provides security on the Internet."
-msgstr "&Acirc;&ETH;&Uacute;&Oslash;&Uuml; &THORN;&Ntilde;&agrave;&ETH;&times;&THORN;&Uuml;, &aelig;&Oslash;&auml;&agrave;&THORN;&Ograve;&euml;&Otilde; &szlig;&THORN;&Ocirc;&szlig;&Oslash;&aacute;&Oslash; &aacute;&Ucirc;&atilde;&Ouml;&ETH;&acirc; &Ntilde;&Otilde;&times;&THORN;&szlig;&ETH;&aacute;&Yacute;&THORN;&aacute;&acirc;&Oslash; &Ograve; &cedil;&Yacute;&acirc;&Otilde;&agrave;&Yacute;&Otilde;&acirc;&Otilde;."
+msgstr "Таким образом, цифровая подпись дает безопасность в интернете."
 
 #: www/index/0.php:73
 msgid "Digitally sign code, web applets, installers, etc. including your name and location in the certificates."
-msgstr "&sup2;&THORN;&times;&Uuml;&THORN;&Ouml;&Yacute;&THORN;&aacute;&acirc;&igrave; &szlig;&THORN;&Ocirc;&szlig;&Oslash;&aacute;&euml;&Ograve;&ETH;&acirc;&igrave; &aelig;&Oslash;&auml;&agrave;&THORN;&Ograve;&THORN;&Ugrave; &szlig;&THORN;&Ocirc;&szlig;&Oslash;&aacute;&igrave;&icirc; &szlig;&agrave;&THORN;&Oacute;&agrave;&ETH;&Uuml;&Uuml;&Yacute;&euml;&Ugrave; &Uacute;&THORN;&Ocirc;, &Ograve;&Otilde;&Ntilde;-&ETH;&szlig;&szlig;&Ucirc;&Otilde;&acirc;&euml;, &Oslash;&Yacute;&aacute;&acirc;&ETH;&Ucirc;&Ucirc;&iuml;&acirc;&THORN;&agrave;&euml; &Oslash; &acirc;.&Ocirc;., &Ograve;&Uacute;&Ucirc;&icirc;&ccedil;&ETH;&iuml; &szlig;&agrave;&Oslash; &iacute;&acirc;&THORN;&Uuml; &Ograve; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc; &aacute;&Ograve;&THORN;&Otilde; &Oslash;&Uuml;&iuml; &Oslash; &ETH;&Ocirc;&agrave;&Otilde;&aacute;."
+msgstr ""
 
 #: www/wot/8.php:22
 msgid "Directory Listing"
-msgstr "&#1055;&#1077;&#1088;&#1077;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1077; &#1044;&#1080;&#1088;&#1077;&#1082;&#1090;&#1086;&#1088;&#1080;&#1081;"
+msgstr "Список каталогов"
 
 #: www/help/2.php:61
 msgid "Disclaimer : These are the author's opinions, but they should not be considered 'truth' without personal verification. The author may have made mistakes and any mistakes will be willingly rectified by contacting the administrator of elucido.net, contact details available from the normal domain registration information services (e.g. whois.net).&amp;nbsp; No recommendation to install a Certificate Authority's root certificate is either intended nor implied."
-msgstr "Disclaimer: &#1069;&#1090;&#1086; &#1084;&#1085;&#1077;&#1085;&#1080;&#1103; &#1072;&#1074;&#1090;&#1086;&#1088;&#1072;, &#1085;&#1086; &#1086;&#1085;&#1080; &#1085;&#1077; &#1076;&#1086;&#1083;&#1078;&#1085;&#1099; &#1088;&#1072;&#1089;&#1089;&#1084;&#1086;&#1090;&#1088;&#1077;&#1090;&#1100;&#1089;&#1103; '&#1087;&#1088;&#1072;&#1074;&#1076;&#1086;&#1081;' &#1073;&#1077;&#1079; &#1087;&#1077;&#1088;&#1089;&#1086;&#1085;&#1072;&#1083;&#1100;&#1085;&#1086;&#1081; &#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1080;. &#1040;&#1074;&#1090;&#1086;&#1088;, &#1074;&#1086;&#1079;&#1084;&#1086;&#1078;&#1085;&#1086;, &#1089;&#1076;&#1077;&#1083;&#1072;&#1083; &#1086;&#1096;&#1080;&#1073;&#1082;&#1080;, &#1080; &#1083;&#1102;&#1073;&#1099;&#1077; &#1086;&#1096;&#1080;&#1073;&#1082;&#1080; &#1073;&#1091;&#1076;&#1091;&#1090; &#1086;&#1093;&#1086;&#1090;&#1085;&#1086; &#1080;&#1089;&#1087;&#1088;&#1072;&#1074;&#1083;&#1077;&#1085;&#1099;,  &#1082;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090;&#1080;&#1088;&#1091;&#1103; &#1089; &#1072;&#1076;&#1084;&#1080;&#1085;&#1080;&#1089;&#1090;&#1088;&#1072;&#1090;&#1086;&#1088;&#1086;&#1084; elucido.net, &#1074;&#1093;&#1086;&#1076;&#1080;&#1090;&#1100; &#1074; &#1082;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090; &#1089; &#1076;&#1077;&#1090;&#1072;&#1083;&#1103;&#1084;&#1080;, &#1076;&#1086;&#1089;&#1090;&#1091;&#1087;&#1085;&#1099;&#1084;&#1080; &#1086;&#1090; &#1085;&#1086;&#1088;&#1084;&#1072;&#1083;&#1100;&#1085;&#1099;&#1093; &#1080;&#1085;&#1092;&#1086;&#1088;&#1084;&#1072;&#1094;&#1080;&#1086;&#1085;&#1085;&#1099;&#1093; &#1089;&#1083;&#1091;&#1078;&#1073; &#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1072;&#1094;&#1080;&#1080; &#1076;&#1086;&#1084;&#1077;&#1085;&#1072; (&#1085;&#1072;&#1087;&#1088;&#1080;&#1084;&#1077;&#1088; whois.net).*nbsp; &#1053;&#1080;&#1082;&#1072;&#1082;&#1072;&#1103; &#1088;&#1077;&#1082;&#1086;&#1084;&#1077;&#1085;&#1076;&#1072;&#1094;&#1080;&#1103;, &#1095;&#1090;&#1086;&#1073;&#1099; &#1091;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1080;&#1090;&#1100; &#1089;&#1074;&#1080;&#1076;&#1077;&#1090;&#1077;&#1083;&#1100;&#1089;&#1090;&#1074;&#1086; &#1082;&#1086;&#1088;&#1085;&#1103; &#1062;&#1077;&#1085;&#1090;&#1088;&#1072; &#1057;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080; &#1085;&#1077; &#1080;&#1083;&#1080; &#1087;&#1088;&#1077;&#1076;&#1085;&#1072;&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1072;, &#1085;&#1080; &#1087;&#1086;&#1076;&#1088;&#1072;&#1079;&#1091;&#1084;&#1077;&#1074;&#1072;&#1077;&#1090;&#1089;&#1103;."
+msgstr "Отречение: это мнения автора, и они не должны считаться истинными без личной проверки. Автор мог совершить ошибки, и любые ошибки будут охотно исправлены, для чего необходимо связаться с администратором elucido.net; контактная информация доступна на обычных службах информации по зарегистрированным доменам (например, whois.net).&amp;nbsp; Мы никоим образом не настаиваем на установке корневого сертификата Центра Сертификации."
 
 #: www/account/26.php:24 www/account/28.php:25 www/account/29.php:31
 #: www/account/43.php:181 www/account/48.php:22 www/account/49.php:34
 #: www/account/7.php:22
 msgid "Domain"
-msgstr "&acute;&THORN;&Uuml;&Otilde;&Yacute;"
+msgstr "Домен"
 
 #: www/account/12.php:18 www/account/22.php:18
 msgid "Domain Certificates"
-msgstr "&#1057;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1099; &#1044;&#1086;&#1084;&#1077;&#1085;&#1072;"
+msgstr "Сертификаты домена"
 
 #: includes/account_stuff.php:157 www/account/25.php:21 www/account/25.php:38
 #: www/account/9.php:18
 msgid "Domains"
-msgstr "&acute;&THORN;&Uuml;&Otilde;&Yacute;&euml;"
+msgstr "Домены"
 
 #: www/account/0.php:23
 msgid "Domains and Server Certificates."
@@ -634,11 +634,11 @@ msgstr "&#1044;&#1086;&#1084;&#1077;&#1085;&#1099; &#1080; &#1089;&#1077;&#1088;
 #: includes/account_stuff.php:209 includes/general_stuff.php:108
 #: www/account/38.php:15 www/index/13.php:15
 msgid "Donations"
-msgstr "&iquest;&THORN;&Ouml;&Otilde;&agrave;&acirc;&Ograve;&THORN;&Ograve;&ETH;&Yacute;&Oslash;&iuml;"
+msgstr "Пожертвования"
 
 #: www/error404.php:21
 msgid "Due to recent site changes bookmarks may no longer be valid, please update your bookmarks."
-msgstr ""
+msgstr "Из-за недавних изменений на сайте закладки могут оказаться неверными; пожалуйста, обновите ваши закладки."
 
 #: www/help/2.php:39
 msgid "Easy. Ish. Go to CAcert.org, install their root certificate and then follow their joining instructions. Once you have joined, request a certificate from the menu. You will receive an email with a link to the certificate. Click on the link from your email software, and hopefully it will be seamlessly installed. Next find the security section of the settings in your email software and configure digital signatures using the certificate you just downloaded. Hmm. Call me if you want, I'll guide you through it."
@@ -647,17 +647,17 @@ msgstr ""
 #: includes/account_stuff.php:146 www/account/25.php:23 www/account/25.php:40
 #: www/account/26.php:25 www/account/26.php:35
 msgid "Edit"
-msgstr "&Agrave;&Otilde;&Ocirc;&ETH;&Uacute;&acirc;&Oslash;&agrave;&THORN;&Ograve;&ETH;&acirc;&igrave;"
+msgstr "Изменить"
 
 #: www/account/27.php:21
 msgid "Edit Organisation"
-msgstr "&Agrave;&Otilde;&Ocirc;&ETH;&Uacute;&acirc;&Oslash;&agrave;&THORN;&Ograve;&ETH;&acirc;&igrave; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&Otilde; &frac34;&agrave;&Oacute;&ETH;&Yacute;&Oslash;&times;&ETH;&aelig;&Oslash;&Oslash;"
+msgstr "Изменить организацию"
 
 #: www/account/16.php:26 www/account/16.php:31 www/account/33.php:26
 #: www/account/42.php:22 www/account/43.php:34 www/account/43.php:74
 #: www/account/44.php:22 www/account/50.php:22 www/wot/5.php:22
 msgid "Email"
-msgstr "Email"
+msgstr "Электропочта"
 
 #: includes/account_stuff.php:149 www/account/2.php:18
 msgid "Email Accounts"
@@ -676,7 +676,7 @@ msgstr "&deg;&Ocirc;&agrave;&Otilde;&aacute; email"
 
 #: www/index.php:244
 msgid "Email Address was blank"
-msgstr "&frac12;&Otilde; &Ograve;&szlig;&Oslash;&aacute;&ETH;&Yacute; &ETH;&Ocirc;&agrave;&Otilde;&aacute; Email"
+msgstr "Адрес электропочты был пуст"
 
 #: www/wot/1.php:122
 msgid "Email Assurer"
@@ -684,11 +684,11 @@ msgstr "&frac12;&ETH;&szlig;&Oslash;&aacute;&ETH;&acirc;&igrave; &szlig;&Oslash;
 
 #: includes/account.php:51 includes/account.php:391
 msgid "Email Probe"
-msgstr "&iquest;&agrave;&THORN;&Ograve;&Otilde;&agrave;&Uacute;&ETH; &ETH;&Ocirc;&agrave;&Otilde;&aacute;&ETH; email"
+msgstr "Проба электропочты"
 
 #: www/help/2.php:20
 msgid "Emails are not secure. In fact emails are VERY not secure!"
-msgstr "&Iacute;&Ucirc;&Otilde;&Uacute;&acirc;&agrave;&THORN;&Yacute;&Yacute;&ETH;&iuml; &szlig;&Otilde;&agrave;&Otilde;&szlig;&Oslash;&aacute;&Uacute;&ETH; &Yacute;&Otilde;&Ntilde;&Otilde;&times;&THORN;&szlig;&ETH;&aacute;&Yacute;&ETH;. &frac34;&Yacute;&ETH; &frac34;&Ccedil;&micro;&frac12;&Igrave; &Yacute;&Otilde;&Ntilde;&Otilde;&times;&THORN;&szlig;&ETH;&aacute;&Yacute;&ETH;!"
+msgstr "Электропочта небезопасна. Фактически, электропочта НАИМЕНЕЕ безопасна."
 
 #: www/index/0.php:83
 msgid "Enable encrypted data transfer for users accessing your web, email, or other SSL enabled service on your server; wildcard certificates are allowed."
@@ -696,19 +696,19 @@ msgstr ""
 
 #: www/help/3.php:58
 msgid "Ensure 'Process the pending request and install the certificate' is selected and click on 'Next'."
-msgstr ""
+msgstr "Убедитесь, что выбран пункт 'Обработать ожидающий запрос и установить сертификат', и щелкните 'Далее'."
 
 #: www/help/3.php:63
 msgid "Ensure that you are processing the correct certificate"
-msgstr ""
+msgstr "Убедитесь, что вы работаете с соответствующим сертификатом"
 
 #: www/help/3.php:17
 msgid "Enter a certificate name and select Certificate strength"
-msgstr ""
+msgstr "Введите название сертификата и выберите силу сертификата"
 
 #: www/help/3.php:26
 msgid "Enter the Organisation name: this must be the full legal name of the Organisation that is applying for the certificate."
-msgstr ""
+msgstr "Введите название организации: это должно быть полное юридическое название организации, прилагаемое к сертификату."
 
 #: www/wot/3.php:30
 msgid "Enter the applicant's email address;"
@@ -716,7 +716,7 @@ msgstr "&sup2;&Ograve;&Otilde;&Ocirc;&Oslash;&acirc;&Otilde; &ETH;&Ocirc;&agrave
 
 #: www/help/3.php:33
 msgid "Enter the geographical details"
-msgstr ""
+msgstr "Введите географические подробности"
 
 #: www/help/3.php:30
 msgid "Enter your Common Name"
@@ -724,7 +724,7 @@ msgstr ""
 
 #: www/help/3.php:25
 msgid "Enter your Organisation Information"
-msgstr ""
+msgstr "Введите информацию о вашей организации"
 
 #: www/help/2.php:57
 msgid "Erroneous Verisign Issued Digital Certificates Pose Spoofing Hazard"
@@ -733,29 +733,29 @@ msgstr ""
 #: includes/account.php:67 www/verify.php:33 www/verify.php:45
 #: www/verify.php:76 www/verify.php:89
 msgid "Error!"
-msgstr "&frac34;&egrave;&Oslash;&Ntilde;&Uacute;&ETH;!"
+msgstr "Ошибка!"
 
 #: www/help/2.php:21
 msgid "Ever requested a password that you lost to be emailed to you? That password was wide open to inspection by potential crackers."
-msgstr ""
+msgstr "Все еще требуете отправить потерянный пароль электропочтой? Этот пароль стал доступен всем потенциальным взломщикам."
 
 #: www/account/12.php:50 www/account/18.php:50 www/account/22.php:50
 #: www/account/5.php:54
 msgid "Expired"
-msgstr "&Aacute;&agrave;&THORN;&Uacute; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&Oslash;&iuml; &Oslash;&aacute;&acirc;&Otilde;&Uacute;"
+msgstr "Истекло"
 
 #: www/account/12.php:25 www/account/18.php:25 www/account/22.php:25
 #: www/account/5.php:25
 msgid "Expires"
-msgstr "&Aacute;&agrave;&THORN;&Uacute; &Ocirc;&Otilde;&Ugrave;&aacute;&acirc;&Ograve;&Oslash;&iuml; &Oslash;&aacute;&acirc;&Otilde;&Uacute;&ETH;&Otilde;&acirc;"
+msgstr "Истекает"
 
 #: www/wot/3.php:38
 msgid "Fees"
-msgstr "&frac34;&szlig;&Ucirc;&ETH;&acirc;&ETH;"
+msgstr ""
 
 #: www/error404.php:19
 msgid "File not found!"
-msgstr "&Auml;&ETH;&Ugrave;&Ucirc; &Yacute;&Otilde; &Yacute;&ETH;&Ugrave;&Ocirc;&Otilde;&Yacute;!"
+msgstr "Файл не найден!"
 
 #: www/help/4.php:16
 msgid "Finally you will be asked information about 'extra' attribute, you simply hit enter to both these questions."
@@ -763,15 +763,15 @@ msgstr ""
 
 #: includes/account_stuff.php:191
 msgid "Find Domain"
-msgstr "&acute;&THORN;&Ntilde;&ETH;&Ograve;&Oslash;&acirc;&igrave; &Ocirc;&THORN;&Uuml;&Otilde;&Yacute;"
+msgstr "Найти домен"
 
 #: includes/account_stuff.php:191 www/account/42.php:19
 msgid "Find User"
-msgstr "&frac12;&ETH;&Ugrave;&acirc;&Oslash; &iquest;&THORN;&Ucirc;&igrave;&times;&THORN;&Ograve;&ETH;&acirc;&Otilde;&Ucirc;&iuml;"
+msgstr "Найти пользователя"
 
 #: www/account/48.php:19
 msgid "Find User by Domain"
-msgstr "&frac12;&ETH;&Ugrave;&acirc;&Oslash; &iquest;&THORN;&Ucirc;&igrave;&times;&THORN;&Ograve;&ETH;&acirc;&Otilde;&Ucirc;&iuml;"
+msgstr "Найти пользователя по домену"
 
 #: includes/account_stuff.php:182
 msgid "Find an Assurer"
@@ -779,40 +779,40 @@ msgstr "&frac12;&ETH;&Ugrave;&acirc;&Oslash; &middot;&ETH;&Ograve;&Otilde;&agrav
 
 #: www/help/3.php:41
 msgid "Finish up and exit IIS Certificate Wizard"
-msgstr ""
+msgstr "Завершить работу мастера сертификатов IIS и выйти"
 
 #: www/account/13.php:27 www/account/13.php:75 www/account/43.php:78
 #: www/index/1.php:22
 msgid "First Name"
-msgstr "&cedil;&Uuml;&iuml;"
+msgstr "Имя"
 
 #: includes/account.php:769
 msgid "First and Last name fields can not be blank."
-msgstr "&iquest;&THORN;&Ucirc;&iuml; &quot;&cedil;&Uuml;&iuml;&quot; &Oslash; &quot;&Auml;&ETH;&Uuml;&Oslash;&Ucirc;&Oslash;&iuml;&quot; &Ocirc;&THORN;&Ucirc;&Ouml;&Yacute;&euml; &Ntilde;&euml;&acirc;&igrave; &times;&ETH;&szlig;&THORN;&Ucirc;&Yacute;&Otilde;&Yacute;&euml;."
+msgstr "Поля 'Имя' и 'Фамилия' не могут быть пустыми."
 
 #: www/index.php:233
 msgid "First and/or last names were blank."
-msgstr "&iquest;&THORN;&Ucirc;&iuml; &quot;&cedil;&Uuml;&iuml;&quot; &Oslash;/&Oslash;&Ucirc;&Oslash; &quot;&Auml;&ETH;&Uuml;&Oslash;&Ucirc;&Oslash;&iuml;&quot; &Yacute;&Otilde; &Ntilde;&euml;&Ucirc;&Oslash; &times;&ETH;&szlig;&THORN;&Ucirc;&Yacute;&Otilde;&Yacute;&euml;."
+msgstr "Имя и/или фамилия были пусты."
 
 #: www/help/6.php:1
 msgid "Firstly you need to join CAcert to do that go:"
-msgstr ""
+msgstr "Прежде всего вам нужно присоединиться к CAcert, чтобы это сделать, перейдите:"
 
 #: www/help/4.php:1
 msgid "Firstly you will need to run the following command, preferably in secured directory no one else can access, however protecting your private keys is beyond the scope of this document."
-msgstr ""
+msgstr "Во-первых, вам необходимо запустить следующую команду, лучше всего в безопасном каталоге, куда никто другой не имеет доступа; впрочем, защита ваших закрытых ключей не является темой данного документа."
 
 #: www/help/0.php:2
 msgid "Following are several tips you may find useful."
-msgstr "&frac12;&Oslash;&Ouml;&Otilde; &sup2;&euml; &Yacute;&ETH;&Ugrave;&Ocirc;&Otilde;&acirc;&Otilde; &Yacute;&Otilde;&aacute;&Uacute;&THORN;&Ucirc;&igrave;&Uacute;&THORN; &szlig;&THORN;&Ucirc;&Otilde;&times;&Yacute;&euml;&aring; &aacute;&THORN;&Ograve;&Otilde;&acirc;&THORN;&Ograve;."
+msgstr "Несколько следующих советов могут оказаться для вас полезными."
 
 #: www/account/37.php:23 www/index/12.php:23
 msgid "For administrators looking to protect the services they offer, we provide host and wild card certificates which you can issue almost immediately. Not only can you use these to protect websites, but also POP3, SMTP and IMAP connections, to list but a few. Unlike other certificate authorities, we don't limit the strength of the certificates, or the use of wild card certificates. Everyone should have the right to security and to protect their privacy, not just those looking to run ecommerce sites."
-msgstr ""
+msgstr "Администраторам, ищущим защиту предлагаемых ими услуг, мы предлагаем сертификаты для хоста и сертификаты-шаблоны, которые вы можете выпустить практически сразу. Их можно использовать не только для защиты веб-сайтов, но также соединений POP3, SMTP, IMAP и др. В отличие от прочих центров сертификации мы не ограничиваем силу сертификатов или использование сертификатов-шаблонов. У любого должно быть право обезопасить и защитить свои личные данные, а не только у коммерческих сайтов."
 
 #: www/help/3.php:71
 msgid "For more information, refer to your server documentation or visit"
-msgstr ""
+msgstr "Для получения дополнительной информации обратитесь к документации вашего сервера или зайдите на"
 
 #: www/account/37.php:21 www/index/12.php:21
 msgid "For the enthusiast looking to dip their toe in the water, we have an easy way of obtaining certificates you can use with your email program. You can use these not only to encrypt, but to prove to your friends and family that your email really does come from you."
@@ -825,37 +825,37 @@ msgstr "&acute;&THORN;&Ucirc;&Oacute;&Oslash;&Otilde; &Oacute;&THORN;&Ocirc;&eum
 #: www/account/12.php:78 www/account/18.php:84 www/account/22.php:80
 #: www/account/5.php:84
 msgid "From here you can delete pending requests, or revoke valid certificates."
-msgstr ""
+msgstr "Отсюда вы можете удалить необработанные запросы или аннулировать действующие сертификаты."
 
 #: www/stats.php:55
 msgid "Users with 50-99 Points"
-msgstr ""
+msgstr "Пользователи с 50-99 баллами"
 
 #: includes/account_stuff.php:185
 msgid "GPG/PGP Keys"
-msgstr "&ordm;&Ucirc;&icirc;&ccedil;&Oslash; GPG/PGP"
+msgstr "Ключи GPG/PGP"
 
 #: www/account/36.php:22 www/index/1.php:111
 msgid "General Announcements"
-msgstr "&frac34;&Ntilde;&eacute;&Oslash;&Otilde; &Ograve;&THORN;&szlig;&agrave;&THORN;&aacute;&euml;"
+msgstr "Общие объявления"
 
 #: www/account/40.php:17 www/index/11.php:17
 msgid "General Questions"
-msgstr "&frac34;&Ntilde;&eacute;&Oslash;&Otilde; &Ograve;&THORN;&szlig;&agrave;&THORN;&aacute;&euml;"
+msgstr "Общие вопросы"
 
 #: www/disputes.php:320
 #, php-format
 msgid "The domain '%s' doesn't exist in the system. Can't continue."
-msgstr ""
+msgstr "Домен '%s' не существует в системе. Невозможно продолжить."
 
 #: www/disputes.php:247
 #, php-format
 msgid "The email address '%s' doesn't exist in the system. Can't continue."
-msgstr ""
+msgstr "Адрес электропочты '%s' не существует в системе. Невозможно продолжить."
 
 #: www/stats.php:51
 msgid "Users with 1-49 Points"
-msgstr ""
+msgstr "Пользователи с 1-49 баллами"
 
 #: www/help/4.php:4
 msgid "Generating a 1024 bit RSA private key"
@@ -863,31 +863,31 @@ msgstr ""
 
 #: www/help/3.php:1
 msgid "Generating a Key Pair and Certificate Signing Request (CSR) for a Microsoft Internet Information Server (IIS) 5.0."
-msgstr ""
+msgstr "Создать пару ключей и запрос на подпись сертификата (CSR) для Microsoft Internet Information Server (IIS) 5.0."
 
 #: includes/account_stuff.php:142
 msgid "Go Home"
-msgstr "&frac12;&ETH; &Ocirc;&THORN;&Uuml;&ETH;&egrave;&Yacute;&icirc;&icirc; &aacute;&acirc;&agrave;&ETH;&Yacute;&Oslash;&aelig;&atilde;"
+msgstr "Домой"
 
 #: www/account/40.php:19 www/index/11.php:19
 msgid "Go here for more details."
-msgstr ""
+msgstr "Пройдите сюда за подробностями."
 
 #: www/help/2.php:16
 msgid "Good question"
-msgstr "&Aring;&THORN;&agrave;&THORN;&egrave;&Oslash;&Ugrave; &Ograve;&THORN;&szlig;&agrave;&THORN;&aacute;"
+msgstr "Хороший вопрос"
 
 #: www/stats.php:102
 msgid "Growth by year"
-msgstr "&micro;&Ouml;&Otilde;&Oacute;&THORN;&Ocirc;&Yacute;&euml;&Ugrave; &agrave;&THORN;&aacute;&acirc;"
+msgstr "Годовой прирост"
 
 #: www/stats.php:66
 msgid "Growth in the last 12 months"
-msgstr "&Agrave;&THORN;&aacute;&acirc; &times;&ETH; &szlig;&THORN;&aacute;&Ucirc;&Otilde;&Ocirc;&Yacute;&Oslash;&Otilde; 12 &Uuml;&Otilde;&aacute;&iuml;&aelig;&Otilde;&Ograve;"
+msgstr "Прирост за последние 12 месяцев"
 
 #: www/help/0.php:1
 msgid "Help!"
-msgstr "&iquest;&THORN;&Uuml;&THORN;&Oacute;&Oslash;&acirc;&Otilde;!"
+msgstr "Помогите!"
 
 #: www/account/10.php:29 www/account/16.php:41 www/account/20.php:26
 #: www/account/3.php:53
@@ -896,31 +896,31 @@ msgstr ""
 
 #: www/account/19.php:54 www/account/6.php:52
 msgid "Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above."
-msgstr "&acute;&Ucirc;&iuml; &atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&Oslash; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&ETH; &Ograve; MS IE 5.x &Oslash; &Ograve;&euml;&egrave;&Otilde; &Yacute;&ETH;&Ouml;&Uuml;&Oslash;&acirc;&Otilde; &Uacute;&Yacute;&THORN;&szlig;&Uacute;&atilde; &quot;&Atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Oslash;&acirc;&igrave; &Aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&quot;."
+msgstr "Нажмите внизу кнопку 'Установить ваш сертификат', чтобы установить сертификат в MS IE 5.x или выше."
 
 #: www/account/30.php:24
 msgid "Hitting delete will also revoke all existing certificates issued under this domain"
-msgstr ""
+msgstr "Нажатие 'удалить' также аннулирует все существующие сертификаты, выпущенные для данного домена"
 
 #: www/account/29.php:24
 msgid "Hitting update will also revoke all existing certificates issued under this domain"
-msgstr ""
+msgstr "Нажатие 'обновить' также аннулирует все существующие сертификаты, выпущенные для данного домена"
 
 #: www/wot/1.php:23 www/wot/7.php:26
 msgid "Home"
-msgstr "&acute;&THORN;&Uuml;&ETH;&egrave;&Yacute;&iuml;&iuml; &aacute;&acirc;&agrave;&ETH;&Yacute;&Oslash;&aelig;&ETH;"
+msgstr "Домой"
 
 #: www/help/2.php:8
 msgid "How do I create my own digital signature?!"
-msgstr ""
+msgstr "Как мне создать собственную цифровую подпись?!"
 
 #: www/help/0.php:8
 msgid "How do I generate a private key and CSR using OpenSSL?"
-msgstr ""
+msgstr "Как мне сгенерировать закрытый ключ и CSR, используя OpenSSL?"
 
 #: www/help/0.php:9
 msgid "How do I get a secured by CAcert emblem on my site?"
-msgstr ""
+msgstr "Как мне получить эмблему 'под защитой CAcert' для моего сайта?"
 
 #: www/index/7.php:23
 msgid "Has put so much effort into CAcert I don't know where to begin, he managed to get the CPS Christian had started up to draft status, he has given countless hours to assuring people and attending conferences to help spread the word"
@@ -932,11 +932,11 @@ msgstr ""
 
 #: www/account/39.php:50 www/index/10.php:50
 msgid "How to update, correct, or delete your information"
-msgstr "&ordm;&ETH;&Uacute; &THORN;&Ntilde;&Yacute;&THORN;&Ograve;&Ucirc;&iuml;&acirc;&igrave;, &Oslash;&aacute;&szlig;&agrave;&ETH;&Ograve;&Ucirc;&iuml;&acirc;&igrave; &Oslash; &atilde;&Ocirc;&ETH;&Ucirc;&iuml;&acirc;&igrave; &aacute;&Ograve;&THORN;&Oslash; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&Otilde;"
+msgstr "Теперь обновите, поправьте или удалите вашу информацию"
 
 #: www/index/51.php:27
 msgid "How?"
-msgstr ""
+msgstr "Как?"
 
 #: includes/general_stuff.php:64
 msgid "Howto Information"
@@ -944,16 +944,16 @@ msgstr ""
 
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
-msgstr "&frac12;&Otilde; &Uuml;&THORN;&Oacute;&atilde; &Ocirc;&THORN;&Ouml;&Ocirc;&ETH;&acirc;&igrave;&aacute;&iuml;, &Uacute;&THORN;&Oacute;&Ocirc;&ETH; &Yacute;&ETH;&Uacute;&THORN;&Yacute;&Otilde;&aelig; &aacute;&Uuml;&THORN;&Oacute;&atilde; &THORN;&acirc;&szlig;&agrave;&ETH;&Ograve;&Ucirc;&iuml;&acirc;&igrave; &times;&ETH;&egrave;&Oslash;&auml;&agrave;&THORN;&Ograve;&ETH;&Yacute;&Yacute;&euml;&Otilde; &aacute;&THORN;&THORN;&Ntilde;&eacute;&Otilde;&Yacute;&Oslash;&iuml;!"
+msgstr "Я не могу дождаться, чтобы начать отправлять зашифрованные письма!"
 
 #: includes/account.php:884
 msgid "I couldn't match any emails against your organisational account."
-msgstr ""
+msgstr "Я не могу найти ни одного адреса электропочты, соответствующего записи вашей организации."
 
 #: includes/account.php:120 includes/account.php:152 includes/account.php:254
 #: includes/account.php:904 includes/account.php:991
 msgid "I didn't receive a valid Certificate Request, hit the back button and try again."
-msgstr ""
+msgstr "Я не получил верный запрос на сертификат, нажмите кнопку 'Назад' и попробуйте снова."
 
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
@@ -981,7 +981,7 @@ msgstr ""
 
 #: www/account/38.php:17 www/index/13.php:17
 msgid "If I'd like to donate to CAcert Inc., how can I do it?"
-msgstr ""
+msgstr "Если я захочу пожертвовать CAcert Inc., как мне это сделать?"
 
 #: www/account/10.php:22 www/account/20.php:22
 msgid "If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence."
@@ -993,7 +993,7 @@ msgstr ""
 
 #: www/help/7.php:3
 msgid "If the root store detects a bad request it assumes the webserver is compromised and shuts itself down."
-msgstr ""
+msgstr "Если корневое хранилище обнаружит неверный запрос, оно предположит, что веб-сервер скомпрометирован, и отключится."
 
 #: www/help/7.php:4
 msgid "If the root store doesn't receive a 'ping' reply over the serial link within a determined amount of time it assumes the webserver is compromised or the root store itself has been stolen and shuts itself down."
@@ -1013,7 +1013,7 @@ msgstr ""
 
 #: www/account/39.php:55 www/index/10.php:55
 msgid "If you need to contact us in writing, address your mail to:"
-msgstr ""
+msgstr "Если вам необходимо письменно связаться с нами, отправляйте вашу почту по следующему адресу:"
 
 #: scripts/removedead.php:57
 msgid "If you needed more time or any other extenuating circumstances you should contact us immediately so this situation can be dealt with immediately."
@@ -1058,24 +1058,24 @@ msgstr "&cedil;&Yacute;&acirc;&Otilde;&Oacute;&agrave;&ETH;&aelig;&Oslash;&iuml;
 
 #: www/index.php:195
 msgid "Incorrect email address and/or Pass Phrase."
-msgstr "&frac12;&Otilde;&Ograve;&Otilde;&agrave;&Yacute;&euml;&Ugrave; &ETH;&Ocirc;&agrave;&Otilde;&aacute; email &Oslash;/&Oslash;&Ucirc;&Oslash; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&ETH;&iuml; &auml;&agrave;&ETH;&times;&ETH;."
+msgstr "Неверная электропочта и/или ключевая фраза."
 
 #: www/account/19.php:60 www/account/6.php:58
 msgid "Install Your Certificate"
-msgstr "&Atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Oslash;&acirc;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;"
+msgstr "Установить сертификат"
 
 #: www/help/3.php:51
 msgid "Installation steps"
-msgstr "&iquest;&THORN;&agrave;&iuml;&Ocirc;&THORN;&Uacute; &atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&Oslash;"
+msgstr "Шаги установки"
 
 #: www/account/19.php:43 www/account/19.php:52 www/account/6.php:41
 #: www/account/6.php:50
 msgid "Installing your certificate"
-msgstr "&Atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&ETH; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&ETH;"
+msgstr "Установка сертификата"
 
 #: www/index/0.php:15
 msgid "Introduction"
-msgstr "&sup2;&Ograve;&Otilde;&Ocirc;&Otilde;&Yacute;&Oslash;&Otilde;"
+msgstr "Введение"
 
 #: includes/account.php:517 includes/account.php:583 includes/account.php:611
 #: includes/account.php:644 includes/account.php:694 includes/account.php:720
@@ -1084,11 +1084,11 @@ msgstr "&sup2;&Ograve;&Otilde;&Ocirc;&Otilde;&Yacute;&Oslash;&Otilde;"
 #: includes/account.php:1308 includes/account.php:1337
 #, php-format
 msgid "Invalid ID '%s' presented, can't do anything with it."
-msgstr "&sup2;&Ograve;&Otilde;&Ocirc;&Otilde;&Yacute; &Yacute;&Otilde;&Ograve;&Otilde;&agrave;&Yacute;&euml;&Ugrave; ID '%s'. &frac12;&Otilde; &Uuml;&THORN;&Oacute;&atilde; &szlig;&agrave;&THORN;&Ocirc;&THORN;&Ucirc;&Ouml;&ETH;&acirc;&igrave;."
+msgstr "Неверный идентификатор '%s', с ним ничего невозможно сделать."
 
 #: includes/account.php:776 www/index.php:239
 msgid "Invalid date of birth"
-msgstr "&frac12;&Otilde;&Ograve;&Otilde;&agrave;&Yacute;&ETH;&iuml; &Ocirc;&ETH;&acirc;&ETH; &agrave;&THORN;&Ouml;&Ocirc;&Otilde;&Yacute;&Oslash;&iuml;"
+msgstr "Неверная дата рождения"
 
 #: www/wot/6.php:78
 msgid "Issuing a temporary increase will automatically boost their points to 200 points for a nomindated amount of days, after which the person will be reduced to 150 points regardless of the amount of points they had previously. Regardless of method chosen above it will be recorded in the system as an Administrative Increase and there is a maximum amount of 45 days that points can be issued for."
@@ -1100,64 +1100,64 @@ msgstr ""
 
 #: www/wot/3.php:36
 msgid "It is imperative that you maintain the confidentiality and privacy of the applicant, and never disclose the information obtained without the applicant's consent."
-msgstr ""
+msgstr "Вам категорически необходимо охранять конфиденциальность и частную жизнь кандидата и никогда не раскрывать полученную информацию без согласия кандидата."
 
 #: includes/account.php:589 includes/account.php:700 includes/account.php:1048
 #: includes/account.php:1098 includes/account.php:1259
 #: includes/account.php:1314
 #, php-format
 msgid "It would seem '%s' has already been revoked. I'll skip this for now."
-msgstr ""
+msgstr "Похоже, '%s' аннулирован. Пока я его пропущу."
 
 #: www/index/0.php:17
 msgid "It's been a long time coming, but the wait was worthwhile, finally you are able to get security at the right price... Free!"
-msgstr "&sup2;&euml; &Ocirc;&THORN;&Ucirc;&Oacute;&THORN; &iacute;&acirc;&THORN;&Oacute;&THORN; &Ouml;&Ocirc;&ETH;&Ucirc;&Oslash;, &Yacute;&THORN; &Ouml;&Ocirc;&ETH;&acirc;&igrave; &aacute;&acirc;&THORN;&Oslash;&Ucirc;&THORN;, &szlig;&THORN;&acirc;&THORN;&Uuml;&atilde; &ccedil;&acirc;&THORN; &acirc;&Otilde;&szlig;&Otilde;&agrave;&igrave; &Uuml;&THORN;&Ouml;&Otilde;&acirc;&Otilde; &THORN;&Ntilde;&Otilde;&aacute;&szlig;&Otilde;&ccedil;&Oslash;&acirc;&igrave; &aacute;&Ograve;&THORN;&icirc; &Ntilde;&Otilde;&times;&THORN;&szlig;&ETH;&aacute;&Yacute;&THORN;&aacute;&acirc;&igrave; &szlig;&THORN; &Yacute;&ETH;&Oslash;&Ntilde;&THORN;&Ucirc;&Otilde;&Otilde; &szlig;&THORN;&Ocirc;&aring;&THORN;&Ocirc;&iuml;&eacute;&Otilde;&Ugrave; &aelig;&Otilde;&Yacute;&Otilde; - &plusmn;&micro;&Aacute;&iquest;&raquo;&deg;&Acirc;&frac12;&frac34;!"
+msgstr "Прошло много времени, но ожидание того стоило, и вот, наконец, вы сможете получить безопасность по правильной цене... Бесплатно!"
 
 #: www/index/1.php:107
 msgid "It's possible to get notifications of up and coming events and even just general announcements, untick any notifications you don't wish to receive. For country, regional and radius notifications to work you must choose your location once you've verified your account and logged in."
-msgstr ""
+msgstr "Возможно получать уведомления о наступающих событиях и просто общие объявления; снимите отметки с тех уведомлений, которые вы не желаете получать. Чтобы работали уведомления по стране, области и округу, вы должны выбрать ваше местоположение как только проверите учетную запись и войдете."
 
 #: includes/general_stuff.php:53
 msgid "Join"
-msgstr "&Agrave;&Otilde;&Oacute;&Oslash;&aacute;&acirc;&agrave;&ETH;&aelig;&Oslash;&iuml;"
+msgstr "Присоединиться"
 
 #: includes/general_stuff.php:52
 msgid "Join CAcert.org"
-msgstr "&Agrave;&Otilde;&Oacute;&Oslash;&aacute;&acirc;&agrave;&ETH;&aelig;&Oslash;&iuml; &Ograve; CAcert"
+msgstr "Присоединиться к CAcert"
 
 #: www/account/17.php:21 www/account/4.php:21
 msgid "Key Strength:"
-msgstr "&acute;&Ucirc;&Oslash;&Yacute;&ETH; &Uacute;&Ucirc;&icirc;&ccedil;&ETH;:"
+msgstr "Сила ключа:"
 
 #: www/help/3.php:4
 msgid "Key generation process"
-msgstr "&sup3;&Otilde;&Yacute;&Otilde;&agrave;&ETH;&aelig;&Oslash;&iuml; &Uacute;&Ucirc;&icirc;&ccedil;&ETH;"
+msgstr "Генерация ключа"
 
 #: www/account/17.php:131 www/account/4.php:131
 msgid "Keysize:"
-msgstr "&Agrave;&ETH;&times;&Uuml;&Otilde;&agrave; &Uacute;&Ucirc;&icirc;&ccedil;&ETH;"
+msgstr "Размер ключа:"
 
 #: www/wot/9.php:47
 msgid "Language"
-msgstr "&Iuml;&times;&euml;&Uacute;"
+msgstr "Язык"
 
 #: www/account/13.php:37 www/account/13.php:85 www/account/43.php:86
 #: www/index/1.php:32
 msgid "Last Name"
-msgstr "&Auml;&ETH;&Uuml;&Oslash;&Ucirc;&Oslash;&iuml;"
+msgstr "Фамилия"
 
 #: www/index/0.php:28
 msgid "Latest News"
-msgstr "&iquest;&THORN;&aacute;&Ucirc;&Otilde;&Ocirc;&Yacute;&Oslash;&Otilde; &Yacute;&THORN;&Ograve;&THORN;&aacute;&acirc;&Oslash;"
+msgstr "Последние известия"
 
 #: www/wot/3.php:41
 msgid "Liability"
-msgstr "&frac34;&acirc;&Ograve;&Otilde;&acirc;&aacute;&acirc;&Ograve;&Otilde;&Yacute;&Yacute;&THORN;&aacute;&acirc;&igrave;"
+msgstr ""
 
 #: www/index/0.php:54 www/index/0.php:64 www/index/0.php:74 www/index/0.php:84
 #: www/index/0.php:94 www/index/0.php:104 www/index/0.php:114
 msgid "Limitations"
-msgstr "&frac34;&Oacute;&agrave;&ETH;&Yacute;&Oslash;&ccedil;&Otilde;&Yacute;&Oslash;&iuml;"
+msgstr "Ограничения"
 
 #: www/wot/1.php:23 www/wot/1.php:30 www/wot/1.php:43 www/wot/1.php:56
 #: www/wot/1.php:74 www/wot/1.php:87 www/wot/1.php:102 www/wot/7.php:26
@@ -1167,12 +1167,12 @@ msgstr ""
 
 #: www/help/4.php:11
 msgid "Locality Name (eg, city) [Sydney]:"
-msgstr "&frac12;&ETH;&aacute;&Otilde;&Ucirc;&Otilde;&Yacute;&Yacute;&euml;&Ugrave; &szlig;&atilde;&Yacute;&Uacute;&acirc; [&Iuml;&Ucirc;&acirc;&ETH;]:"
+msgstr "Местоположение (напр., город) [Сидней]:"
 
 #: www/account/11.php:30 www/account/21.php:33 www/account/43.php:196
 #: www/account/43.php:231 www/wot/10.php:25 www/wot/10.php:58 www/wot/6.php:69
 msgid "Location"
-msgstr ""
+msgstr "Местоположение"
 
 #: www/wot/7.php:123
 msgid "Location Name"
@@ -1180,23 +1180,23 @@ msgstr ""
 
 #: www/index/4.php:23 www/index/4.php:34
 msgid "Login"
-msgstr "&sup2;&aring;&THORN;&Ocirc;"
+msgstr "Войти"
 
 #: includes/account_stuff.php:142
 msgid "Logout"
-msgstr "&sup2;&euml;&aring;&THORN;&Ocirc;"
+msgstr "Выйти"
 
 #: www/index/5.php:18
 msgid "Lost Pass Phrase"
-msgstr "&iquest;&THORN;&acirc;&Otilde;&agrave;&iuml; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&THORN;&Ugrave; &auml;&agrave;&ETH;&times;&euml;"
+msgstr "Потерянная ключевая фраза"
 
 #: www/index/6.php:18
 msgid "Lost Pass Phrase - Step 2"
-msgstr "&iquest;&THORN;&acirc;&Otilde;&agrave;&iuml; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&THORN;&Ugrave; &auml;&agrave;&ETH;&times;&euml; - &egrave;&ETH;&Oacute; 2"
+msgstr "Потерянная ключевая фраза - шаг 2"
 
 #: www/account/13.php:100
 msgid "Lost Pass Phrase Questions"
-msgstr "&sup2;&THORN;&szlig;&agrave;&THORN;&aacute;&euml; &Ocirc;&Ucirc;&iuml; &Ograve;&THORN;&aacute;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Ucirc;&Otilde;&Yacute;&Oslash;&iuml; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&THORN;&Ugrave; &auml;&agrave;&ETH;&times;&euml;"
+msgstr "Потерянная ключевая фраза. Вопросы"
 
 #: pages/index/0.php:24
 #, php-format
@@ -1208,19 +1208,19 @@ msgstr ""
 #: www/account/43.php:126 www/account/43.php:130 www/account/43.php:134
 #: www/account/43.php:138 www/account/43.php:142
 msgid "Lost Password"
-msgstr "&iquest;&THORN;&acirc;&Otilde;&agrave;&iuml; &szlig;&ETH;&agrave;&THORN;&Ucirc;&iuml;"
+msgstr ""
 
 #: www/index.php:318
 msgid "Mail Probe"
-msgstr ""
+msgstr "Проба почты"
 
 #: www/account/2.php:49
 msgid "Make Default"
-msgstr "&Aacute;&Ocirc;&Otilde;&Ucirc;&ETH;&acirc;&igrave; &aacute;&acirc;&ETH;&Yacute;&Ocirc;&ETH;&agrave;&acirc;&Yacute;&euml;&Uuml;"
+msgstr "Установить по умолчанию"
 
 #: www/wot/7.php:138
 msgid "Make my location here"
-msgstr ""
+msgstr "Переместить меня сюда"
 
 #: www/index/51.php:21
 msgid "Many are just the users of the system who by just making use of the project contribute to the wider community by word-of-mouth."
@@ -1236,20 +1236,20 @@ msgstr ""
 
 #: www/account/32.php:25 www/account/33.php:35
 msgid "Master Account"
-msgstr "&frac34;&aacute;&Yacute;&THORN;&Ograve;&Yacute;&ETH;&iuml; &atilde;&ccedil;&Otilde;&acirc;&Yacute;&ETH;&iuml; &times;&ETH;&szlig;&Oslash;&aacute;&igrave;"
+msgstr "Главная учетная запись"
 
 #: www/wot/1.php:120
 msgid "Max Points"
-msgstr "&frac14;&ETH;&Uacute;&aacute;. &Uacute;-&Ograve;&THORN; &szlig;&atilde;&Yacute;&Uacute;&acirc;&THORN;&Ograve;"
+msgstr "Максимальные баллы"
 
 #: www/wot/9.php:56
 msgid "Message"
-msgstr "&Aacute;&THORN;&THORN;&Ntilde;&eacute;&Otilde;&Yacute;&Oslash;&Otilde;"
+msgstr "Сообщение"
 
 #: www/account/43.php:197 www/account/43.php:232 www/wot/10.php:26
 #: www/wot/10.php:59 www/wot/6.php:52
 msgid "Method"
-msgstr "&Aacute;&szlig;&THORN;&aacute;&THORN;&Ntilde;"
+msgstr "Метод"
 
 #: www/help/2.php:58
 msgid "Microsoft Root Certificate Program"
@@ -1257,15 +1257,15 @@ msgstr ""
 
 #: www/help/3.php:71
 msgid "Microsoft Support Online"
-msgstr "Microsoft. &iquest;&THORN;&Ocirc;&Ocirc;&Otilde;&agrave;&Ouml;&Uacute;&ETH; &THORN;&Yacute;&Ucirc;&ETH;&Ugrave;&Yacute;"
+msgstr "Онлайн-поддержка Microsoft"
 
 #: www/account/43.php:82
 msgid "Middle Name"
-msgstr "&sup2;&acirc;&THORN;&agrave;&THORN;&Otilde; &Oslash;&Uuml;&iuml;"
+msgstr "Второе имя"
 
 #: www/account/13.php:31 www/account/13.php:79 www/index/1.php:26
 msgid "Middle Name(s)"
-msgstr "&sup2;&acirc;&THORN;&agrave;&THORN;&Otilde; &Oslash;&Uuml;&iuml; (&Oslash;&Uuml;&Otilde;&Yacute;&ETH;)"
+msgstr "Второе имя (имена)"
 
 #: www/help/2.php:26
 msgid "Most people would object if they found that all their postal letters are being opened, read and possibly recorded by the Government before being passed on to the intended recipient, resealed as if nothing had happened. And yet this is what happens every day with your emails (in the UK). There are some who have objected to this intrusion of privacy, but their voices are small and fall on deaf ears. However the most effective way to combat this intrusion is to seal the envelope shut in a miniature bank vault, i.e. encrypt your email. If all emails were encrypted, it would be very hard for Government, or other organisations/individual crackers, to monitor the general public. They would only realistically have enough resources to monitor those they had reason to suspect. Why? Because encryption can be broken, but it takes a lot of computing power and there wouldn't be enough to monitor the whole population of any given country."
@@ -1273,11 +1273,11 @@ msgstr ""
 
 #: includes/general_stuff.php:56 www/account/0.php:15
 msgid "My Account"
-msgstr "&frac14;&THORN;&iuml; &atilde;&ccedil;&Otilde;&acirc;&Yacute;&ETH;&iuml; &times;&ETH;&szlig;&Oslash;&aacute;&igrave;"
+msgstr "Моя учетная запись"
 
 #: includes/account_stuff.php:146 www/account/36.php:18
 msgid "My Alert Settings"
-msgstr ""
+msgstr "Настройки моих предупреждений"
 
 #: includes/account.php:24 includes/account.php:35 includes/account.php:53
 #: includes/account.php:76 includes/account.php:85 includes/account.php:119
@@ -1306,16 +1306,16 @@ msgstr ""
 #: www/account/19.php:42 www/account/19.php:50 www/account/23.php:23
 #: www/account/6.php:21 www/account/6.php:40 www/account/6.php:48
 msgid "My CAcert.org Account!"
-msgstr "&frac14;&THORN;&iuml; &atilde;&ccedil;&Otilde;&acirc;&Yacute;&ETH;&iuml; &times;&ETH;&szlig;&Oslash;&aacute;&igrave; &Yacute;&ETH; CAcert.org!"
+msgstr "Моя учетная запись в CAcert.org!"
 
 #: includes/account_stuff.php:145 www/account/0.php:19 www/account/13.php:23
 #: www/index/1.php:19
 msgid "My Details"
-msgstr "&frac34;&Ntilde;&THORN; &Uuml;&Yacute;&Otilde;"
+msgstr "Подробнее обо мне"
 
 #: www/account/41.php:18
 msgid "My Language Settings"
-msgstr "&Atilde;&aacute;&acirc;&ETH;&Yacute;&THORN;&Ograve;&Uacute;&ETH; &iuml;&times;&euml;&Uacute;&ETH;"
+msgstr "Мои настройки языка"
 
 #: includes/account_stuff.php:146 www/wot/8.php:19
 msgid "My Listing"
@@ -1323,15 +1323,15 @@ msgstr "&frac14;&THORN;&iuml; &szlig;&THORN;&times;&Oslash;&aelig;&Oslash;&iuml;
 
 #: includes/account_stuff.php:146
 msgid "My Location"
-msgstr "&frac14;&Otilde;&aacute;&acirc;&THORN; &Ouml;&Oslash;&acirc;&Otilde;&Ucirc;&igrave;&aacute;&acirc;&Ograve;&ETH;"
+msgstr "Мое местоположение"
 
 #: www/account/41.php:21
 msgid "My prefered language"
-msgstr "&iquest;&agrave;&Otilde;&Ocirc;&szlig;&THORN;&ccedil;&Oslash;&acirc;&ETH;&Otilde;&Uuml;&euml;&Ugrave; &iuml;&times;&euml;&Uacute;"
+msgstr "Предпочитаемый язык"
 
 #: www/account/2.php:41
 msgid "N/A"
-msgstr "&frac34;&acirc;&aacute;&atilde;&acirc;&aacute;&acirc;&Ograve;&atilde;&Otilde;&acirc;"
+msgstr "Н/д"
 
 #: www/account/16.php:35 www/wot/1.php:119 www/wot/6.php:43
 msgid "Name"
@@ -1341,12 +1341,12 @@ msgstr ""
 #: includes/account_stuff.php:167 includes/account_stuff.php:171
 #: includes/account_stuff.php:186
 msgid "New"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Ugrave;"
+msgstr "Новый"
 
 #: www/account/33.php:23
 #, php-format
 msgid "New Admin for %s"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Ugrave; &deg;&Ocirc;&Uuml;&Oslash;&Yacute; %s"
+msgstr "Новый админ %s"
 
 #: www/stats.php:71 www/stats.php:107
 msgid "New Assurers"
@@ -1354,7 +1354,7 @@ msgstr "&frac12;&THORN;&Ograve;&euml;&Otilde; &middot;&ETH;&Ograve;&Otilde;&agra
 
 #: www/stats.php:72 www/stats.php:108
 msgid "New Certificates"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml;"
+msgstr "Новые сертификаты"
 
 #: www/account/16.php:18 www/account/3.php:27
 msgid "New Client Certificate"
@@ -1371,37 +1371,37 @@ msgstr "&frac12;&THORN;&Ograve;&ETH;&iuml; &THORN;&agrave;&Oacute;&ETH;&Yacute;&
 
 #: www/account/14.php:25 www/index/6.php:43
 msgid "New Pass Phrase"
-msgstr "&frac12;&THORN;&Ograve;&ETH;&iuml; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&ETH;&iuml; &auml;&agrave;&ETH;&times;&ETH;"
+msgstr "Новая ключевая фраза"
 
 #: includes/account.php:829 www/index.php:92
 msgid "New Pass Phrases specified don't match or were blank."
-msgstr "&Atilde;&Uacute;&ETH;&times;&ETH;&Yacute;&Yacute;&euml;&Otilde; &Oslash;&Ocirc;&Otilde;&Yacute;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&aelig;&Oslash;&THORN;&Yacute;&Yacute;&euml;&Otilde; &auml;&agrave;&ETH;&times;&euml; &Yacute;&Otilde; &aacute;&THORN;&Ograve;&szlig;&ETH;&Ucirc;&Oslash; &Oslash;&Ucirc;&Oslash; &Yacute;&Otilde; &Ograve;&szlig;&Oslash;&aacute;&ETH;&Yacute;&euml;."
+msgstr ""
 
 #: www/account/44.php:26
 msgid "New Password"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Ugrave; &szlig;&ETH;&agrave;&THORN;&Ucirc;&igrave;"
+msgstr "Новый пароль"
 
 #: www/stats.php:70 www/stats.php:106
 msgid "New Users"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Otilde; &szlig;&THORN;&Ucirc;&igrave;&times;&THORN;&Ograve;&ETH;&acirc;&Otilde;&Ucirc;&Oslash;"
+msgstr "Новые пользователи"
 
 #: www/account/16.php:40 www/account/24.php:45 www/account/3.php:70
 #: www/account/42.php:26 www/account/44.php:30 www/account/48.php:26
 #: www/index/1.php:117 www/index/5.php:53 www/index/6.php:54 www/wot/5.php:26
 msgid "Next"
-msgstr "&acute;&ETH;&Ucirc;&Otilde;&Otilde;"
+msgstr "Далее"
 
 #: www/help/4.php:17
 msgid "Next step is that you submit the contents of server.csr to the CAcert website, it should look *EXACTLY* like the following example otherwise the server may reject your request because it appears to be invalid."
-msgstr ""
+msgstr "Следующий шаг - это отправить содержимое server.csr на сайт CAcert, причем оно должно выглядеть *СТРОГО* как в примере; в противном случае сервер может отклонить ваш запрос, поскольку он будет выглядеть неверно."
 
 #: www/account/50.php:29
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: www/account/3.php:52
 msgid "No Name"
-msgstr ""
+msgstr "Безымянный"
 
 #: www/account/12.php:42 www/account/22.php:42 www/account/9.php:32
 msgid "No domains are currently listed."
@@ -1409,25 +1409,25 @@ msgstr ""
 
 #: pages/account/53.php:83
 msgid "move"
-msgstr ""
+msgstr "переместить"
 
 #: pages/index/1.php:90
 msgid "Lost Pass Phrase Questions - Please enter five questions and your responses to be used for security verification."
-msgstr ""
+msgstr "Потерянная ключевая фраза. Вопросы - Пожалуйста, введите пять вопросов и ваши ответы, которые будут использованы при проверке безопасности."
 
 #: www/account/15.php:24 www/account/19.php:24 www/account/23.php:24
 #: www/account/6.php:22
 msgid "No such certificate attached to your account."
-msgstr ""
+msgstr "Нет такого сертификата у вашей записи."
 
 #: includes/account.php:1731
 msgid "No such user found."
-msgstr "&iquest;&THORN;&Ucirc;&igrave;&times;&THORN;&Ograve;&ETH;&acirc;&Otilde;&Ucirc;&igrave; &Yacute;&Otilde; &Yacute;&ETH;&Ugrave;&Ocirc;&Otilde;&Yacute;."
+msgstr "Такого пользователя не найдено."
 
 #: www/account/43.php:51
 #, php-format
 msgid "No users found matching %s"
-msgstr "&iquest;&THORN; &Ocirc;&ETH;&Yacute;&Yacute;&euml;&Uuml; &Uacute;&agrave;&Oslash;&acirc;&Otilde;&agrave;&Oslash;&iuml;&Uuml; (%s) &szlig;&THORN;&Ucirc;&igrave;&times;&THORN;&Ograve;&ETH;&acirc;&Otilde;&Ucirc;&Otilde;&Ugrave; &Yacute;&Otilde; &Yacute;&ETH;&Ugrave;&Ocirc;&Otilde;&Yacute;&THORN;"
+msgstr "Не найдены пользователи, соответствующие %s"
 
 #: www/index/0.php:114
 msgid "None, the sky is the limit for CAcert."
@@ -1435,25 +1435,25 @@ msgstr ""
 
 #: www/index/0.php:115
 msgid "None; $10 USD per year membership fee."
-msgstr ""
+msgstr "Нисколько; членский взнос - 10 $ США в год."
 
 #: includes/general_stuff.php:57
 msgid "Normal Login"
-msgstr "&frac34;&Ntilde;&euml;&ccedil;&Yacute;&euml;&Ugrave; &Ograve;&aring;&THORN;&Ocirc;"
+msgstr "Обычный вход"
 
 #: www/account/12.php:56 www/account/18.php:56 www/account/22.php:56
 #: www/account/5.php:60
 msgid "Not Revoked"
-msgstr ""
+msgstr "Не аннулировано"
 
 #: includes/account.php:25
 #, php-format
 msgid "Not a valid email address. Can't continue."
-msgstr ""
+msgstr "Неверная электропочта. Невозможно продолжить."
 
 #: www/help/2.php:10 www/help/2.php:44
 msgid "Notes for the strangely curious"
-msgstr ""
+msgstr "Заметки для необычайно любопытных"
 
 #: www/account/39.php:45 www/index/10.php:45
 msgid "Notification of changes"
@@ -1466,21 +1466,21 @@ msgstr ""
 #: includes/account.php:600 includes/account.php:711 includes/account.php:1109
 #: includes/account.php:1325
 msgid "Now deleting the following pending requests:"
-msgstr ""
+msgstr "Удаляем следующие ожидающие запросы:"
 
 #: includes/account.php:506 includes/account.php:635 includes/account.php:1032
 #: includes/account.php:1241
 msgid "Now renewing the following certificates:"
-msgstr ""
+msgstr "Обновляем следующие сертификаты:"
 
 #: includes/account.php:572 includes/account.php:685 includes/account.php:1082
 #: includes/account.php:1296
 msgid "Now revoking the following certificates:"
-msgstr ""
+msgstr "Аннулируем следующие сертификаты:"
 
 #: www/wot/6.php:81
 msgid "Number of days"
-msgstr ""
+msgstr "Количество дней"
 
 #: pages/gpg/2.php:23
 msgid "Key ID"
@@ -1492,11 +1492,11 @@ msgstr ""
 
 #: www/account/14.php:21
 msgid "Old Pass Phrase"
-msgstr ""
+msgstr "Старая ключевая фраза"
 
 #: www/account/10.php:16 www/account/20.php:16 www/account/3.php:16
 msgid "Once you decide to subscribe for an SSL Server Certificate you will need to complete this agreement. Please read it carefully. Your Certificate Request can only be processed with your acceptance and understanding of this agreement."
-msgstr ""
+msgstr "Как только вы решите подписаться на сертификат SSL-сервера, вам будет необходимо выполнять это соглашение. Пожалуйста, прочтите его внимательно. Ваш запрос на сертификат может быть обработан лишь в том случае, если вы понимаете и принимаете это соглашение."
 
 #: www/account/0.php:26
 msgid "Once you have verified your company you will see these menu options. They allow you to issue as many certificates as you like without proving individual email accounts as you like, further more you are able to get your company details on the certificate."
@@ -1549,11 +1549,11 @@ msgstr ""
 #: www/account/11.php:28 www/account/21.php:31 www/account/25.php:20
 #: www/account/35.php:20
 msgid "Organisation"
-msgstr ""
+msgstr "Организация"
 
 #: www/account/24.php:21 www/account/27.php:24
 msgid "Organisation Name"
-msgstr ""
+msgstr "Название организации"
 
 #: includes/account.php:1379 includes/account.php:1406
 msgid "Organisation Name and Contact Email are required fields."
@@ -1565,15 +1565,15 @@ msgstr ""
 
 #: www/help/4.php:12
 msgid "Organization Name (eg, company) [XYZ Corp]:"
-msgstr ""
+msgstr "Название организации (напр., компании) [XYZ Corp]:"
 
 #: www/help/4.php:13
 msgid "Organizational Unit Name (eg, section) [Server Administration]:."
-msgstr ""
+msgstr "Название подразделения организации (напр., отдел) [Администраторы серверов]:."
 
 #: www/account/40.php:36 www/index/11.php:36
 msgid "Other Mailing Lists"
-msgstr ""
+msgstr "Остальные списки рассылки"
 
 #: www/index/16.php:16 www/index/3.php:16
 msgid "PKI Key"
@@ -1595,23 +1595,23 @@ msgstr ""
 
 #: www/index/1.php:73 www/index/4.php:30
 msgid "Pass Phrase"
-msgstr ""
+msgstr "Ключевая фраза"
 
 #: www/account/14.php:29 www/index/1.php:77
 msgid "Pass Phrase Again"
-msgstr ""
+msgstr "Повтор ключевой фразы"
 
 #: www/index.php:254
 msgid "Pass Phrases don't match"
-msgstr ""
+msgstr "Ключевые фразы не совпадают"
 
 #: www/index.php:249
 msgid "Pass Phrases were blank"
-msgstr ""
+msgstr "Ключевая фраза пуста"
 
 #: www/account/10.php:26 www/account/20.php:24 www/account/45.php:15
 msgid "Paste your CSR below..."
-msgstr ""
+msgstr "Вставьте ниже ваш CSR..."
 
 #: www/account/12.php:52 www/account/12.php:59 www/account/18.php:52
 #: www/account/18.php:63 www/account/22.php:52 www/account/22.php:61
@@ -1621,7 +1621,7 @@ msgstr ""
 
 #: www/account/19.php:99 www/account/6.php:97
 msgid "Personal Certificate Installed."
-msgstr ""
+msgstr "Личный сертификат установлен."
 
 #: www/account/39.php:24 www/index/10.php:24
 msgid "Personal information"
@@ -1633,7 +1633,7 @@ msgstr ""
 
 #: pages/wot/13.php:73
 msgid "(hit enter to submit)"
-msgstr ""
+msgstr "(нажмите 'Enter', чтобы отправить)"
 
 #: www/capnew.php:1326
 msgid "location of the assurance"
@@ -1645,7 +1645,7 @@ msgstr ""
 
 #: pages/wot/12.php:32 pages/wot/13.php:72
 msgid "Location:"
-msgstr ""
+msgstr "Местоположение:"
 
 #: www/account/3.php:65
 msgid "Please Note: By ticking this box you will automatically have your name included in any certificates."
@@ -1692,7 +1692,7 @@ msgstr ""
 #: www/account/43.php:195 www/account/43.php:230 www/wot/10.php:24
 #: www/wot/10.php:57 www/wot/6.php:108
 msgid "Points"
-msgstr ""
+msgstr "Баллы"
 
 #: www/stats.php:59
 msgid "Points Issued"
@@ -1700,7 +1700,7 @@ msgstr ""
 
 #: www/account/40.php:54 www/index/11.php:54
 msgid "Postal Address:"
-msgstr ""
+msgstr "Почтовый адрес:"
 
 #: www/help/3.php:14
 msgid "Prepare the request"
@@ -1721,7 +1721,7 @@ msgstr ""
 
 #: www/account/8.php:29
 msgid "Probe"
-msgstr ""
+msgstr "Проба"
 
 #: www/wot/3.php:27
 msgid "Processing"
@@ -1743,17 +1743,17 @@ msgstr ""
 #: includes/account.php:1349
 #, php-format
 msgid "Removed a pending request for '%s'"
-msgstr ""
+msgstr "Удалить ожидающий запрос для '%s'"
 
 #: www/account/12.php:71 www/account/18.php:77 www/account/22.php:73
 #: www/account/5.php:77
 msgid "Renew"
-msgstr ""
+msgstr "Обновить"
 
 #: www/account/12.php:21 www/account/18.php:21 www/account/22.php:21
 #: www/account/5.php:21
 msgid "Renew/Revoke/Delete"
-msgstr ""
+msgstr "Обновить/аннулировать/удалить"
 
 #: includes/account.php:548 includes/account.php:1270
 msgid "Renewing"
@@ -1770,13 +1770,13 @@ msgstr ""
 #: www/account/12.php:72 www/account/18.php:78 www/account/22.php:74
 #: www/account/5.php:78
 msgid "Revoke/Delete"
-msgstr ""
+msgstr "Аннулировать/удалить"
 
 #: www/account/12.php:24 www/account/12.php:54 www/account/18.php:24
 #: www/account/18.php:54 www/account/22.php:24 www/account/22.php:54
 #: www/account/5.php:24 www/account/5.php:58
 msgid "Revoked"
-msgstr ""
+msgstr "Аннулировано"
 
 #: www/index/51.php:31
 msgid "Right now it's happening all around you - there are secured websites and email protocols being protected and trusted by people, signed by CAcert."
@@ -1784,19 +1784,19 @@ msgstr ""
 
 #: includes/general_stuff.php:67
 msgid "Root Certificate"
-msgstr ""
+msgstr "Корневой сертификат"
 
 #: www/index/16.php:18 www/index/3.php:18
 msgid "Root Certificate (DER Format)"
-msgstr ""
+msgstr "Корневой сертификат (формат DER)"
 
 #: www/index/16.php:17 www/index/3.php:17
 msgid "Root Certificate (PEM Format)"
-msgstr ""
+msgstr "Корневой сертификат (формат PEM)"
 
 #: includes/account_stuff.php:182
 msgid "Rules"
-msgstr ""
+msgstr "Правила"
 
 #: www/index/7.php:20
 msgid "Put a lot of effort convincing people in Germany to signup and be assured, he started work on a new RFC compliant CPS, spent countless hours helping with tech support, and so much more"
@@ -1804,11 +1804,11 @@ msgstr ""
 
 #: www/index/0.php:63
 msgid "Same as above plus you can include your full name in the certificates."
-msgstr "&Acirc;&THORN; &Ouml;&Otilde;, &ccedil;&acirc;&THORN; &Oslash; &Ograve;&euml;&egrave;&Otilde;, &szlig;&Ucirc;&icirc;&aacute; &Ograve;&THORN;&times;&Uuml;&THORN;&Ouml;&Yacute;&THORN;&aacute;&acirc;&igrave; &Ograve;&Yacute;&THORN;&aacute;&Oslash;&acirc;&igrave; &Ograve; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml; &aacute;&Ograve;&THORN;&Otilde; &Oslash;&Uuml;&iuml; &Oslash; &auml;&ETH;&Uuml;&Oslash;&Ucirc;&Oslash;&icirc;."
+msgstr "Как выше, и еще вы можете включить ваше имя в сертификаты."
 
 #: www/index/0.php:94
 msgid "Same as above, except certificates expire in 24 months."
-msgstr ""
+msgstr "Как выше, за исключением того, что сертификат истекает через 24 месяца."
 
 #: www/index/0.php:95
 msgid "Same as above, plus get 50 assurance points by meeting with assurer(s) from the CAcert Web of Trust, who verify your identity using your government issued photo identity documents."
@@ -1820,7 +1820,7 @@ msgstr "&Acirc;&THORN; &Ouml;&Otilde;, &ccedil;&acirc;&THORN; &Oslash; &Ograve;&
 
 #: www/index/0.php:93
 msgid "Same as above."
-msgstr ""
+msgstr "См. выше."
 
 #: www/help/3.php:46
 msgid "Saving the certificate"
@@ -1832,23 +1832,23 @@ msgstr ""
 #: www/help/3.php:56 www/help/3.php:59 www/help/3.php:62 www/help/3.php:65
 #: www/help/3.php:68
 msgid "Screenshot of IIS 5.0"
-msgstr ""
+msgstr "Снимок экрана с IIS 5.0"
 
 #: www/wot/7.php:127
 msgid "Search"
-msgstr ""
+msgstr "Искать"
 
 #: www/wot/7.php:120
 msgid "Search this region"
-msgstr ""
+msgstr "Искать в этой области"
 
 #: www/account/43.php:163
 msgid "Secondary Emails"
-msgstr ""
+msgstr "Дополнительная электропочта"
 
 #: pages/wot/13.php:40
 msgid "Your location has been updated"
-msgstr ""
+msgstr "Выше местоположение обновлено"
 
 #: www/account.php:49 www/index.php:475
 msgid "Your message has been sent to the general support list."
@@ -1856,11 +1856,11 @@ msgstr ""
 
 #: www/account.php:35 www/index.php:464
 msgid "Your message has been sent."
-msgstr ""
+msgstr "Ваше сообщение отправлено."
 
 #: includes/account.php:2480
 msgid "Your vote has been accepted."
-msgstr ""
+msgstr "Ваш голос принят."
 
 #: www/cap.php:43 www/ttp.php:48 pages/help/3.php:62
 msgid "and"
@@ -1873,11 +1873,11 @@ msgstr ""
 #: pages/account/13.php:56 pages/account/13.php:104 pages/index/1.php:48
 #: pages/index/5.php:26
 msgid "dd/mm/yyyy"
-msgstr ""
+msgstr "дд/мм/гггг"
 
 #: pages/wot/13.php:65
 msgid "eg Sydney, New South Wales, Australia"
-msgstr ""
+msgstr "напр., Сидней, Новый Южный Уэльс, Австралия"
 
 #: includes/account.php:98
 msgid "has changed the default email on your account."
@@ -1889,7 +1889,7 @@ msgstr ""
 
 #: www/gpg.php:127
 msgid "Please upload only one key at a time."
-msgstr ""
+msgstr "Загружайте только один ключ за раз."
 
 #: pages/help/3.php:63
 msgid "lines. Do not copy any extra line feeds or carriage returns at the beginning or end of the certificate. Save the certificate into a text editor like Notepad. Save the certificate with an extension of .cer and a meaningful name like certificate.cer"
@@ -1917,7 +1917,7 @@ msgstr ""
 
 #: www/help/3.php:61
 msgid "Select the .cer file and click 'Next'."
-msgstr ""
+msgstr "Выберите .cer-файл и щелкните 'Далее'."
 
 #: www/help/3.php:54
 msgid "Select the Directory Security tab"
@@ -1926,7 +1926,7 @@ msgstr ""
 #: www/account/40.php:30 www/account/40.php:48 www/index/11.php:30
 #: www/index/11.php:48 www/wot/9.php:60
 msgid "Send"
-msgstr ""
+msgstr "Отправить"
 
 #: www/account/40.php:40 www/index/11.php:40
 msgid "Sensitive Information"
@@ -1934,7 +1934,7 @@ msgstr ""
 
 #: includes/account_stuff.php:161
 msgid "Server Certificates"
-msgstr ""
+msgstr "Сертификаты сервера"
 
 #: www/index/0.php:80
 msgid "Server certificates (un-assured)"
@@ -1954,7 +1954,7 @@ msgstr ""
 
 #: www/index/51.php:33
 msgid "So what can I do to help the cause?"
-msgstr ""
+msgstr "Итак, чем я могу помочь в таком случае?"
 
 #: www/help/2.php:52
 msgid "So, dammit, what's the point of all this then?"
@@ -1966,7 +1966,7 @@ msgstr ""
 
 #: www/wot/9.php:19 www/wot/9.php:29
 msgid "Sorry, I was unable to locate that user."
-msgstr ""
+msgstr "К сожалению, мне не удалось обнаружить этого пользователя."
 
 #: www/wot/6.php:85
 msgid "Sponsoring Member"
@@ -1974,7 +1974,7 @@ msgstr ""
 
 #: www/help/4.php:10
 msgid "State or Province Name (full name) [NSW]:"
-msgstr ""
+msgstr "Название штата или провинции (полностью) [NSW]:"
 
 #: www/account/11.php:31 www/account/21.php:34 www/account/24.php:33
 #: www/account/27.php:36
@@ -1988,22 +1988,22 @@ msgstr ""
 #: www/account/12.php:22 www/account/18.php:22 www/account/2.php:22
 #: www/account/22.php:22 www/account/5.php:22 www/account/9.php:22
 msgid "Status"
-msgstr ""
+msgstr "Состояние"
 
 #: www/account/40.php:28 www/account/40.php:46 www/index/11.php:28
 #: www/index/11.php:46 www/wot/9.php:52
 msgid "Subject"
-msgstr ""
+msgstr "Тема"
 
 #: www/gpg.php:22 www/account/10.php:29 www/account/11.php:36
 #: www/account/20.php:27 www/account/21.php:38 www/account/45.php:18
 msgid "Submit"
-msgstr ""
+msgstr "Отправить"
 
 #: www/account/13.php:41 www/account/13.php:89 www/account/43.php:90
 #: www/index/1.php:36
 msgid "Suffix"
-msgstr ""
+msgstr "Суффикс"
 
 #: includes/account_stuff.php:190
 msgid "System Admin"
@@ -2015,7 +2015,7 @@ msgstr ""
 
 #: includes/general.php:24 www/wot/6.php:99
 msgid "Temporary Increase"
-msgstr ""
+msgstr "Временно увеличить"
 
 #: scripts/removedead.php:62
 msgid "Temporary points increase has expired."
@@ -2039,7 +2039,7 @@ msgstr ""
 
 #: www/account/17.php:89 www/account/4.php:89
 msgid "The 1024-bit key generation failed. Would you like to try 512 instead?"
-msgstr ""
+msgstr "Сгенерировать 1024-битный ключ не удалось. Попробовать вместо этого 512?"
 
 #: www/help/3.php:31
 msgid "The Common Name is the fully qualified host and Domain Name or website address that you will be securing. Both 'www.CAcert.org' and 'secure.CAcert.com' are valid Common Names. IP addresses are usually not used."
@@ -2059,11 +2059,11 @@ msgstr ""
 
 #: includes/account.php:838
 msgid "The Pass Phrase you submitted was too short."
-msgstr ""
+msgstr "Отправленная вами ключевая фраза слишком коротка."
 
 #: www/index.php:94
 msgid "The Pass Phrase you submitted was too short. It must be at least 6 characters."
-msgstr ""
+msgstr "Отправленная вами ключевая фраза слишком коротка. В ней должно быть по меньшей мере 6 знаков."
 
 #: www/help/2.php:59
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
@@ -2083,11 +2083,11 @@ msgstr ""
 
 #: pages/account/13.php:37
 msgid "secret questions and answers."
-msgstr ""
+msgstr "секретные вопросы и ответы."
 
 #: pages/account/13.php:29
 msgid "someone else looked up your secret questions and answers"
-msgstr ""
+msgstr "кто-то подсмотрел ваши секретные вопросы и ответы"
 
 #: pages/account/13.php:35
 msgid "there is a danger that an unauthorised person accessed your"
@@ -2099,7 +2099,7 @@ msgstr ""
 
 #: pages/account/13.php:33
 msgid "you can ignore this mail."
-msgstr ""
+msgstr "вы можете игнорировать это письмо."
 
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
@@ -2121,7 +2121,7 @@ msgstr ""
 
 #: pages/account/3.php:20
 msgid "CAcert Certificate Acceptable Use Policy"
-msgstr ""
+msgstr "Правила допустимого использования сертификатов CACert."
 
 #: pages/account/13.php:31
 msgid "If it was you who looked up or changed that data, or clicked"
@@ -2129,7 +2129,7 @@ msgstr ""
 
 #: pages/account/13.php:39
 msgid "With kind regards,"
-msgstr ""
+msgstr "С сердечным приветом,"
 
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
@@ -2142,11 +2142,11 @@ msgstr ""
 
 #: includes/account.php:86
 msgid "The following accounts have been removed:"
-msgstr ""
+msgstr "Удалены следующие учетные записи:"
 
 #: includes/account.php:403
 msgid "The following domains have been removed:"
-msgstr ""
+msgstr "Удалены следующие домены:"
 
 #: www/index/0.php:104
 msgid "The number of assurance point you have will limit the maximum assurance points you can issue for people you assure."
@@ -2168,7 +2168,7 @@ msgstr ""
 
 #: www/index/0.php:21
 msgid "The primary goals are:"
-msgstr "&iquest;&Otilde;&agrave;&Ograve;&THORN;&THORN;&ccedil;&Otilde;&agrave;&Otilde;&Ocirc;&Yacute;&euml;&Otilde; &times;&ETH;&Ocirc;&ETH;&ccedil;&Oslash;:"
+msgstr "Основные цели:"
 
 #: www/help/2.php:15
 msgid "The purpose of digital signing is to prove, electronically, one's identity"
@@ -2208,15 +2208,15 @@ msgstr ""
 
 #: www/wot.php:284
 msgid "There was an error and I couldn't proceed"
-msgstr ""
+msgstr "Произошла ошибка и продолжение невозможно"
 
 #: www/help/0.php:25
 msgid "How does CAcert protect its root private key?"
-msgstr ""
+msgstr "Как CAcert защищает свой корневой закрытый ключ?"
 
 #: www/index/19.php:15
 msgid "Information"
-msgstr "&Atilde;&Ograve;&Otilde;&Ocirc;&THORN;&Uuml;&Ucirc;&Otilde;&Yacute;&Oslash;&Otilde; &THORN; &middot;&ETH;&Ograve;&Otilde;&agrave;&Otilde;&Yacute;&Oslash;&Oslash;"
+msgstr "Информация"
 
 #: www/help/2.php:42
 msgid "There's nothing to it. I mean literally, you can already start sending your emails encrypted. Assuming of course you have your own digital signature certificate (e.g. as per above), and the person you want to send an encrypted email to also has a digital signature certificate, and has recently sent you a digitally signed email with it. If all these conditions hold, you just have to change the settings in your email software to send the email encrypted and hey presto! Your email software (probably Outlook I guess) should suss out the rest."
@@ -2229,7 +2229,7 @@ msgstr ""
 #: includes/account.php:1957 includes/account.php:1974
 #: includes/account.php:1984
 msgid "Your language setting has been updated."
-msgstr ""
+msgstr "Ваши настройки языка обновлены."
 
 #: www/wot/6.php:32
 #, php-format
@@ -2278,7 +2278,7 @@ msgstr "&frac34;&Ntilde;&Otilde;&aacute;&szlig;&Otilde;&ccedil;&Otilde;&Yacute;&
 
 #: www/account/43.php:217 www/account/43.php:252 www/wot/10.php:44
 msgid "Total Points"
-msgstr "&frac34;&Ntilde;&eacute;&Otilde;&Otilde; &Uacute;&THORN;&Ucirc;&Oslash;&ccedil;&Otilde;&aacute;&acirc;&Ograve;&THORN; &szlig;&atilde;&Yacute;&Uacute;&acirc;&THORN;&Ograve;"
+msgstr "Всего баллов"
 
 #: www/wot/10.php:79
 msgid "Total Points Issued"
@@ -2290,7 +2290,7 @@ msgstr "&sup3;&THORN;&agrave;&THORN;&Ocirc;/&iquest;&agrave;&Oslash;&Oacute;&THO
 
 #: includes/general_stuff.php:76
 msgid "Translations"
-msgstr "&acute;&agrave;&atilde;&Oacute;&Oslash;&Otilde; &iuml;&times;&euml;&Uacute;&Oslash;"
+msgstr ""
 
 #: pages/index/8.php:4
 msgid "Public Officer"
@@ -2336,64 +2336,64 @@ msgstr ""
 
 #: www/account/36.php:28
 msgid "Update My Settings"
-msgstr ""
+msgstr "Обновить мои настройки"
 
 #: www/account/14.php:36
 msgid "Update Pass Phrase"
-msgstr ""
+msgstr "Обновить ключевую фразу"
 
 #: www/verify.php:55 www/verify.php:97
 msgid "Updated"
-msgstr ""
+msgstr "Обновлено"
 
 #: www/account/12.php:48 www/account/18.php:48 www/account/18.php:59
 #: www/account/22.php:48 www/account/22.php:59 www/account/5.php:52
 msgid "Valid"
-msgstr ""
+msgstr "Верный"
 
 #: www/stats.php:43
 msgid "Valid Certificates"
-msgstr ""
+msgstr "Верные сертификаты"
 
 #: www/index/0.php:55 www/index/0.php:65 www/index/0.php:75 www/index/0.php:85
 #: www/index/0.php:95 www/index/0.php:105 www/index/0.php:115
 msgid "Verification needed"
-msgstr "&frac12;&Otilde;&THORN;&Ntilde;&aring;&THORN;&Ocirc;&Oslash;&Uuml;&ETH;&iuml; &szlig;&agrave;&THORN;&Ograve;&Otilde;&agrave;&Uacute;&ETH;"
+msgstr "Необходима проверка"
 
 #: www/account/2.php:32 www/account/9.php:38
 msgid "Verified"
-msgstr ""
+msgstr "Проверенный"
 
 #: www/stats.php:20 www/account/43.php:175
 msgid "Verified Domains"
-msgstr ""
+msgstr "Проверенные домены"
 
 #: www/stats.php:16
 msgid "Verified Emails"
-msgstr ""
+msgstr "Проверенная электропочта"
 
 #: www/stats.php:12
 msgid "Verified Users"
-msgstr ""
+msgstr "Проверенные пользователи"
 
 #: pages/index/8.php:3
 msgid "President"
-msgstr ""
+msgstr "Президент"
 
 #: includes/account_stuff.php:150 includes/account_stuff.php:154
 #: includes/account_stuff.php:158 includes/account_stuff.php:162
 #: includes/account_stuff.php:167 includes/account_stuff.php:171
 #: includes/account_stuff.php:177 includes/account_stuff.php:186
 msgid "View"
-msgstr ""
+msgstr "Посмотреть"
 
 #: includes/account_stuff.php:177
 msgid "View Organisations"
-msgstr ""
+msgstr "Посмотреть организации"
 
 #: www/account/29.php:23 www/account/30.php:23
 msgid "Warning!"
-msgstr ""
+msgstr "Внимание!"
 
 #: www/index/1.php:15 www/index/4.php:19
 msgid "Warning! This site requires cookies to be enabled to ensure your privacy and security. This site uses session cookies to store temporary values to prevent people from copying and pasting the session ID to someone else exposing their account, personal details and identity theft as a result."
@@ -2401,11 +2401,11 @@ msgstr ""
 
 #: www/capnew.php:1025
 msgid "driver license"
-msgstr ""
+msgstr "водительские права"
 
 #: www/capnew.php:1117
 msgid "email address as e.g. john.family@gmail.com"
-msgstr ""
+msgstr "электропочта, напр., john.family@gmail.com"
 
 #: www/capnew.php:1331
 msgid "date of assurance"
@@ -2413,20 +2413,20 @@ msgstr ""
 
 #: www/capnew.php:1025
 msgid "certificate"
-msgstr ""
+msgstr "сертификат"
 
 #: includes/account.php:1609
 #, php-format
 msgid "Wasn't able to match '%s' against any user in the system"
-msgstr ""
+msgstr "Не удается найти ни одного пользователя системы, совпадающего с '%s'"
 
 #: www/account/39.php:34 www/index/10.php:34
 msgid "We analyse visitors' use of our sites by tracking information such as page views, traffic flow, search terms, and click through. We use this information to improve our sites. We also share this anonymous traffic and demographic information in aggregate form with advertisers and other business partners. We do not share any information with advertisers that can identify an individual user."
-msgstr ""
+msgstr "Мы анализируем использование нашего сайта посетителями, отслеживая просмотренные страницы, трафик, искомые слова и переходы. Мы используем эту информацию, чтобы улучшать наши сайты. Также мы предоставляем этот анонимный трафик и демографическую информацию в обобщенном виде нашим рекламодателям и другим партнерам по бизнесу. Мы не предоставляем рекламодателям никакой информации, которая могла бы идентифицировать лично вас."
 
 #: www/verify.php:124
 msgid "Your domain has been verified. You can now start issuing certificates for this domain."
-msgstr ""
+msgstr "Ваш домен был проверен. Теперь вы можете начать выпускать сертификаты для этого домена."
 
 #: www/wot.php:439
 msgid "Your email has been sent to"
@@ -2438,48 +2438,48 @@ msgstr ""
 
 #: www/account/39.php:42 www/index/10.php:42
 msgid "We don't use cookies to store personal information, we do use sessions, and if cookies are enabled, the session will be stored in a cookie, and we do not look for cookies, apart from the session id. However if cookies are disabled then no information will be stored on or looked for on your computer."
-msgstr ""
+msgstr "Мы не используем куки, чтобы хранить личную информацию. Нам необходимо использовать сессии, и если куки включены, сессия сохраняется в куки, и мы не смотрим в куки, кроме как чтобы найти идентификатор сессии. Однако, если куки выключены, то никакой инфорфмации не будет ни сохраняться, ни считываться с вашего компьютера."
 
 #: www/help/2.php:56
 msgid "WebTrust for Certification Authorities"
-msgstr ""
+msgstr "Сеть доверия Центров Сертификации"
 
 #: www/account.php:27 www/account.php:36 www/cps.php:3 www/gpg.php:160
 #: www/gpg.php:179 www/help.php:20 www/index.php:105 www/index.php:342
 #: www/index.php:353 www/index.php:362 www/logos.php:3 www/news.php:20
 #: www/stats.php:3
 msgid "Welcome to CAcert.org"
-msgstr "&acute;&THORN;&Ntilde;&agrave;&THORN; &szlig;&THORN;&Ouml;&ETH;&Ucirc;&THORN;&Ograve;&ETH;&acirc;&igrave; &Yacute;&ETH; CAcert.org"
+msgstr "Добро пожаловать на CAcert.org"
 
 #: www/account/0.php:16
 msgid "Welcome to your account section of the website. Below is a description of the different sections and what they're for."
-msgstr ""
+msgstr "Добро пожаловать в раздел вашей учетной записи. Ниже приведено описание различных разделов и их назначения."
 
 #: www/index/0.php:46
 msgid "What can CAcert provide to you, to increase your privacy and security for free?"
-msgstr "&Ccedil;&acirc;&THORN; &Uuml;&THORN;&Ouml;&Otilde;&acirc; &sup2;&ETH;&Uuml; &Ntilde;&Otilde;&aacute;&szlig;&Ucirc;&ETH;&acirc;&Yacute;&THORN; &Ocirc;&ETH;&acirc;&igrave; CAcert, &ccedil;&acirc;&THORN;&Ntilde;&euml; &szlig;&THORN;&Uuml;&THORN;&ccedil;&igrave; &szlig;&THORN;&Ucirc;&Yacute;&Otilde;&Otilde; &agrave;&Otilde;&ETH;&Ucirc;&Oslash;&times;&THORN;&Ograve;&ETH;&acirc;&igrave; &aacute;&Ograve;&THORN;&Otilde; &szlig;&agrave;&ETH;&Ograve;&THORN; &Yacute;&ETH; &szlig;&agrave;&Oslash;&Ograve;&ETH;&acirc;&Yacute;&THORN;&aacute;&acirc;&igrave; &Oslash; &Ntilde;&Otilde;&times;&THORN;&szlig;&ETH;&aacute;&Yacute;&THORN;&aacute;&acirc;&igrave;?"
+msgstr "Что вам может дать CAcert, чтобы бесплатно увеличить вашу безопасность?"
 
 #: www/help/2.php:2 www/help/2.php:14
 msgid "What is it for?"
-msgstr "&acute;&Ucirc;&iuml; &ccedil;&Otilde;&Oacute;&THORN; &iacute;&acirc;&THORN; &Yacute;&atilde;&Ouml;&Yacute;&THORN;?"
+msgstr "Для чего?"
 
 #: www/index/51.php:30
 msgid "When and Where?"
-msgstr ""
+msgstr "Где и когда?"
 
 #: www/help/3.php:67
 msgid "When you have read this information, click 'Finish'."
-msgstr ""
+msgstr "Когда вы закончите читать это, щелкните 'Завершить'."
 
 #: pages/wot/13.php:67
 #, php-format
 msgid "Your current location is set as: %s"
-msgstr ""
+msgstr "Ваше текущее местоположение: %s"
 
 #: includes/account.php:109
 #, php-format
 msgid "Your default email address has been updated to '%s'."
-msgstr ""
+msgstr "Ваша электропочта по умолчанию обновлена до '%s'."
 
 #: includes/account.php:1033
 msgid "Your details have been updated with the database."
@@ -2488,31 +2488,31 @@ msgstr ""
 #: www/account/43.php:194 www/account/43.php:229 www/wot/10.php:23
 #: www/wot/10.php:56
 msgid "Who"
-msgstr ""
+msgstr "Кто"
 
 #: www/index/51.php:19
 msgid "Who?"
-msgstr ""
+msgstr "Кто?"
 
 #: www/help/2.php:3 www/help/2.php:19
 msgid "Why digitally sign your own emails?! (weirdo..)"
-msgstr ""
+msgstr "Зачем подписывать свою же почту?! (странно...)"
 
 #: www/help/2.php:6 www/help/2.php:32
 msgid "Why is the digital signature described as 'not valid/not trusted'?"
-msgstr ""
+msgstr "Почему цифровая подпись обозначена как 'неверная/недостоверная'?"
 
 #: www/help/2.php:5 www/help/2.php:29
 msgid "Why isn't it being adopted by everyone?"
-msgstr ""
+msgstr "Почему это не принято каждым?"
 
 #: www/help/7.php:7
 msgid "Why use serial you ask? Well certificate requests are low bandwidth for starters, then of course simpler systems in security are less prone to exploits, and finally serial code is pretty mature and well tested and hopefully all exploits were found and fixed a long time ago."
-msgstr ""
+msgstr "Зачем использовать последовательное соединение, спросите вы? Ну, для начала, запросы сертификатов малы, а потом, разумеется, более простые системы в плане безопасности надежнее, и, наконец, последовательному коду много лет, он хорошо протестирован, и, будем надеяться, все уязвимости были найдены и исправлены много лет назад."
 
 #: www/index/51.php:23
 msgid "Why?"
-msgstr ""
+msgstr "Почему?"
 
 #: www/help/7.php:8
 msgid "With the proposed root certificate changes, there would be a new root, this would sign at least 1 sub-root, then the private key stored offline in a bank vault, with the sub-root doing all the signing, or alternatively 2 sub-roots, 1 for client certificates, one for server, the thinking behind this, if any of the sub-roots are compromised they can be revoked and reissued."
@@ -2524,15 +2524,15 @@ msgstr ""
 
 #: includes/account_stuff.php:182
 msgid "WoT Form"
-msgstr "&deg;&Yacute;&Uacute;&Otilde;&acirc;&ETH; WoT"
+msgstr "Форма WoT"
 
 #: www/cap.php:64 www/ttp.php:128 www/wot/6.php:66
 msgid "YYYY-MM-DD"
-msgstr "&sup3;&sup3;&sup3;&sup3;-&frac14;&frac14;-&acute;&acute;"
+msgstr "ГГГГ-ММ-ДД"
 
 #: www/account/50.php:29
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: www/account/39.php:52 www/index/10.php:52
 msgid "You are able to update, add and remove your information at any time via our web interface, log into the 'My Account' and then click on the 'My Details' section, and then click the relevant link"
@@ -2582,15 +2582,15 @@ msgstr ""
 
 #: www/index.php:586 www/index.php:593
 msgid "This seems like potential spam, cannot continue."
-msgstr ""
+msgstr "Похоже на потенциальный спам, невозможно продолжить."
 
 #: www/index.php:572 www/index.php:579
 msgid "This seems like you have cookies or Javascript disabled, cannot continue."
-msgstr ""
+msgstr "Похоже, у вас отключен Javascript или куки, невозможно продолжить."
 
 #: includes/general_stuff.php:74
 msgid "CAcert Board"
-msgstr "CAcert.org"
+msgstr ""
 
 #: www/account/40.php:22 www/index/11.php:22
 msgid "You can alternatively use the form below, however joining the list is the prefered option to support your queries"
@@ -2606,7 +2606,7 @@ msgstr ""
 
 #: pages/help/3.php:48
 msgid "Your country, state and city."
-msgstr ""
+msgstr "Ваша страна, штат и город."
 
 #: www/index/0.php:53
 msgid "You can send digitally signed/encrypted emails; others can send encrypted emails to you."
@@ -2623,7 +2623,7 @@ msgstr ""
 #: includes/account.php:1362 includes/account.php:1566
 #: includes/account.php:1686
 msgid "You don't have access to this area."
-msgstr "&sup2;&euml; &Yacute;&Otilde; &Oslash;&Uuml;&Otilde;&Otilde;&acirc;&Otilde; &aacute;&icirc;&Ocirc;&ETH; &Ocirc;&THORN;&aacute;&acirc;&atilde;&szlig;&ETH;."
+msgstr "У вас нет доступа в эту зону."
 
 #: pages/account/40.php:68 pages/index/11.php:68
 msgid "Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on &lt;a href='https://bugs.cacert.org/'&gt;bugs.cacert.org&lt;/a&gt; and mark it as private."
@@ -2631,15 +2631,15 @@ msgstr ""
 
 #: www/wot.php:92 www/wot.php:99
 msgid "You failed to check all boxes to validate your adherence to the rules and policies of CAcert"
-msgstr ""
+msgstr "Вы не отметили все пункты, удостоверяющие вашу приверженность правилам и политике CAcert."
 
 #: includes/account.php:842
 msgid "You failed to correctly enter your current Pass Phrase."
-msgstr ""
+msgstr "Вам не удалось верно ввести текущую ключевую фразу."
 
 #: www/wot.php:109
 msgid "You failed to enter a location of your meeting."
-msgstr ""
+msgstr "Вам не удалось ввести местоположение вашей встречи."
 
 #: www/index.php:97
 msgid "You failed to get all answers correct or you didn't configure enough lost password questions for your account. System admins have been notified."
@@ -2647,7 +2647,7 @@ msgstr ""
 
 #: www/gpg.php:24
 msgid "You failed to paste a valid GPG/PGP key."
-msgstr ""
+msgstr "Вам не удалось вставить верный ключ GPG/PGP."
 
 #: www/index/0.php:113
 msgid "You get a vote in how CAcert (a non-profit association incorporated in Australia) is run; be eligible for positions on the CAcert board."
@@ -2655,7 +2655,7 @@ msgstr ""
 
 #: www/help/3.php:21
 msgid "You have now created a public/private key pair. The private key is stored locally on your machine. The public portion is sent to CAcert in the form of a CSR."
-msgstr ""
+msgstr "Вы создали пару из открытого и закрытого ключей. Закрытый ключ хранится локальной на вашей машине. Открытая часть отправляется в CAcert в виде CSR."
 
 #: www/gpg.php:166
 msgid "Your certificate request has failed to be processed correctly, please try submitting it again."
@@ -2691,21 +2691,21 @@ msgstr ""
 
 #: www/verify.php:66
 msgid "Your account and/or email address has been verified. You can now start issuing certificates for this address."
-msgstr ""
+msgstr "Ваша учетная запись и/или электропочта была проверена. Теперь вы можете начать выпуск сертификатов для этого адреса."
 
 #: includes/account.php:1072 www/index.php:117
 msgid "Your Pass Phrase has been updated and your primary email account has been notified of the change."
-msgstr ""
+msgstr "Ваша ключевая фраза обновлена, и на вашу основную электропочту отправлено уведомление об этом изменении."
 
 #: pages/account/40.php:31 pages/account/40.php:54 pages/index/11.php:31
 #: pages/index/11.php:54
 msgid "Your Name"
-msgstr ""
+msgstr "Ваше имя"
 
 #: pages/account/40.php:32 pages/account/40.php:55 pages/index/11.php:32
 #: pages/index/11.php:55
 msgid "Your Email"
-msgstr ""
+msgstr "Ваша электропочта"
 
 #: www/verify.php:42
 msgid "You've attempted to verify the same email address a fourth time with an invalid hash, subsequently this request has been deleted in the system"
@@ -2737,7 +2737,7 @@ msgstr ""
 
 #: pages/help/3.php:80
 msgid "You will see a confirmation screen."
-msgstr ""
+msgstr "Вы увидите экран подтверждения."
 
 #: pages/help/3.php:37
 msgid "You will now create a CSR. This information will be displayed on your certificate, and identifies the owner of the key to users. The CSR is only used to request the certificate. The following characters must be excluded from your CSR fields, or your certificate may not work:"
@@ -2754,11 +2754,11 @@ msgstr ""
 
 #: www/wot.php:212
 msgid "You tried to give a temporary points increase to someone that already has more then 150 points. Can't continue."
-msgstr ""
+msgstr "Вы попытались дать временные баллы кому-то, у кого их уже больше 150. Невозможно продолжить."
 
 #: includes/account.php:1964
 msgid "You tried to use an invalid language."
-msgstr ""
+msgstr "Вы попытались использовать неверный язык."
 
 #: www/wot.php:322
 #, php-format
@@ -2800,7 +2800,7 @@ msgstr ""
 #: pages/account/17.php:17 pages/account/19.php:57 pages/account/4.php:17
 #: pages/account/6.php:55
 msgid "You must enable ActiveX for this to work."
-msgstr ""
+msgstr "Вы должны включить ActiveX, чтобы это работало."
 
 #: pages/index/19.php:57
 msgid "You must confirm that you are the owner (or authorized administrator) of the domain by responding to a 'ping' email sent to either the email address listed in the whois record, or one of the RFC-mandatory addresses (hostmaster/postmaster/etc)."
@@ -2808,7 +2808,7 @@ msgstr ""
 
 #: www/analyse.php:25
 msgid "Analyse"
-msgstr ""
+msgstr "Анализировать"
 
 #: includes/account.php:840 www/index.php:100
 #, php-format
@@ -2845,7 +2845,7 @@ msgstr ""
 
 #: includes/general_stuff.php:111
 msgid "Mission Statement"
-msgstr ""
+msgstr "Миссия"
 
 #: www/help/9.php:30
 msgid "Once you have everything setup and working you will need to add lines similar to below to your apache.conf"
@@ -2877,12 +2877,12 @@ msgstr ""
 
 #: pages/index/19.php:27
 msgid "You must confirm it is your email address by responding to a 'ping' email sent to it."
-msgstr ""
+msgstr "Вы должны подтвердить, что это ваша электропочта, ответом на 'пинговое' письмо, отправленное на этот адрес."
 
 #: includes/account_stuff.php:153 includes/general_stuff.php:48
 #: includes/tverify_stuff.php:34
 msgid "Free digital certificates!"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml;"
+msgstr "Бесплатные цифровые сертификаты"
 
 #: www/wot.php:353
 #, php-format
@@ -2912,19 +2912,19 @@ msgstr "&middot;&ETH;&Ograve;&Otilde;&agrave;&Oslash;&acirc;&Otilde;&Ucirc;&Osla
 
 #: www/index/16.php:24 www/index/3.php:24
 msgid "CAcert's GPG Key"
-msgstr "&ordm;&Ucirc;&icirc;&ccedil; GPG. &frac12;&Oslash;&times;&Uacute;&Oslash;&Ugrave; &atilde;&agrave;&THORN;&Ograve;&Otilde;&Yacute;&igrave; &Ocirc;&THORN;&Ograve;&Otilde;&agrave;&Oslash;&iuml;"
+msgstr "GPG-ключ CAcert"
 
 #: www/account/52.php:39
 msgid "Certificate Subject"
-msgstr "&frac12;&THORN;&Ograve;&euml;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Oslash;&auml;&Oslash;&Uacute;&ETH;&acirc;&euml;"
+msgstr ""
 
 #: pages/index/47.php:10
 msgid "As described in the Style Guide, the monochrome version of the logo must be used in situations where the logo colours cannot be reproduced correctly."
-msgstr ""
+msgstr "Как написано в руководстве по стилю, черно-белая версия логотипа должна использоваться в тех случаях, когда цветной логотип не может быть воспроизведен корректно."
 
 #: www/account/52.php:48
 msgid "Comment"
-msgstr "&ordm;&THORN;&Uuml;&Uuml;&Otilde;&Yacute;&acirc;&ETH;&agrave;&Oslash;&Oslash;"
+msgstr ""
 
 #: includes/account.php:478 includes/account.php:491 includes/account.php:592
 #: includes/account.php:1238 includes/account.php:1251
@@ -2956,7 +2956,7 @@ msgstr ""
 
 #: www/index/1.php:18
 msgid "To get a password that will work, we suggest the following example"
-msgstr ""
+msgstr "Чтобы получить рабочий пароль, мы предлагаем пример"
 
 #: www/disputes/2.php:20
 msgid "Dispute Domain"
@@ -2999,10 +2999,6 @@ msgstr ""
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
 msgstr ""
 
-#: pages/index/8.php:4
-msgid "Treasurer"
-msgstr ""
-
 #: includes/account.php:50 includes/account.php:402 www/index.php:293
 msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
 msgstr ""
@@ -3026,7 +3022,7 @@ msgstr ""
 
 #: www/index/16.php:23 www/index/3.php:23
 msgid "GPG Key"
-msgstr "&ordm;&Ucirc;&icirc;&ccedil;&Oslash; GPG"
+msgstr "Ключ GPG"
 
 #: www/account/40.php:20 www/index/11.php:20
 msgid "General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question."
@@ -3042,11 +3038,11 @@ msgstr ""
 
 #: www/help/0.php:24
 msgid "How do I get a server certificate from CAcert?"
-msgstr "&#1050;&#1072;&#1082; &#1084;&#1085;&#1077; &#1087;&#1086;&#1083;&#1091;&#1095;&#1080;&#1090;&#1100; &#1074; CAcert &#1089;&#1077;&#1088;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090; &#1076;&#1083;&#1103; &#1057;&#1077;&#1088;&#1074;&#1077;&#1088;&#1072;?"
+msgstr "Как мне получить в CAcert сертификат для сервера?"
 
 #: includes/account_stuff.php:162
 msgid "My Points"
-msgstr "&frac14;&ETH;&Uacute;&aacute;. &Uacute;-&Ograve;&THORN; &szlig;&atilde;&Yacute;&Uacute;&acirc;&THORN;&Ograve;"
+msgstr "Мои баллы"
 
 #: www/index/7.php:21
 msgid "He's constantly helping out on the support list, building up documentation and all round nice guy, he was even offered a free book and turned down the offer until there is a book on CAcert available!"
@@ -3054,11 +3050,11 @@ msgstr ""
 
 #: www/account/52.php:49
 msgid "I agree with this Application"
-msgstr ""
+msgstr "Я согласен с этим Приложением"
 
 #: www/account/52.php:50
 msgid "I don't agree with this Application"
-msgstr ""
+msgstr "Я не согласен с этим приложением"
 
 #: www/disputes/0.php:18
 msgid "If you want to dispute who has control of your email address or domain, select 'Dispute Email' or 'Dispute Domain' on the right hand side."
@@ -3079,15 +3075,15 @@ msgstr ""
 #: www/disputes.php:91 www/disputes.php:115 www/disputes.php:182
 #: www/disputes.php:206
 msgid "Invalid request. Can't continue."
-msgstr "&iquest;&THORN;&Ucirc;&Otilde; &quot;CommonName&quot; &szlig;&atilde;&aacute;&acirc;&THORN;. &frac12;&Otilde; &Uuml;&THORN;&Oacute;&atilde; &szlig;&agrave;&THORN;&Ocirc;&THORN;&Ucirc;&Ouml;&ETH;&acirc;&igrave;."
+msgstr "Неверный запрос. Невозможно продолжить."
 
 #: includes/tverify_stuff.php:39
 msgid "Main Website"
-msgstr ""
+msgstr "Главный сайт"
 
 #: includes/account_stuff.php:214
 msgid "More Information"
-msgstr "&Atilde;&Ograve;&Otilde;&Ocirc;&THORN;&Uuml;&Ucirc;&Otilde;&Yacute;&Oslash;&Otilde; &THORN; &middot;&ETH;&Ograve;&Otilde;&agrave;&Otilde;&Yacute;&Oslash;&Oslash;"
+msgstr "Больше информации"
 
 #: www/account/52.php:37
 msgid "Name on file"
@@ -3115,7 +3111,7 @@ msgstr "&frac12;&THORN;&Ograve;&ETH;&iuml; &THORN;&agrave;&Oacute;&ETH;&Yacute;&
 
 #: www/wot/11.php:22
 msgid "Organisation Title"
-msgstr "&frac12;&THORN;&Ograve;&ETH;&iuml; &THORN;&agrave;&Oacute;&ETH;&Yacute;&Oslash;&times;&ETH;&aelig;&Oslash;&iuml;"
+msgstr "Название организации"
 
 #: www/index/16.php:28 www/index/3.php:28
 msgid "PKI finger/thumb print signed by the CAcert GPG Key"
@@ -3182,7 +3178,7 @@ msgstr ""
 #: www/disputes.php:400
 #, php-format
 msgid "The domain '%s' isn't in the system. Can't continue."
-msgstr ""
+msgstr "В системе нет домена '%s'. Невозможно продолжить."
 
 #: www/disputes.php:236
 #, php-format
@@ -3276,7 +3272,7 @@ msgstr "&frac12;&THORN;&Ograve;&euml;&Otilde; &aacute;&Otilde;&agrave;&acirc;&Os
 
 #: www/disputes/1.php:20
 msgid "Which Email?"
-msgstr ""
+msgstr "Которая электропочта?"
 
 #: www/wot/6.php:40
 msgid "You are about to assure a person that isn't currently verified. If you continue and they do not verify their account within 48 hours the account could automatically be removed by the system."
@@ -3347,7 +3343,7 @@ msgstr ""
 
 #: www/index/17.php:67
 msgid "The CAcert root certificate was successfully installed"
-msgstr ""
+msgstr "Корневой сертификат CAcert успешно установлен"
 
 #: www/wot/6.php:70
 #, php-format
@@ -3376,7 +3372,7 @@ msgstr ""
 
 #: www/cap.php:85 www/cap.php:113
 msgid "Date (YYYY-MM-DD)"
-msgstr ""
+msgstr "Дата (ГГГ-ММ-ДД)"
 
 #: pages/account/13.php:34
 msgid "But if you received this mail without a recognisable reason,"
@@ -3478,7 +3474,7 @@ msgstr ""
 
 #: www/ttp.php:80
 msgid "Profession (Please circle one)"
-msgstr ""
+msgstr "Профессия (обведите одно)"
 
 #: www/ttp.php:138
 msgid "Second ID Number (driver's license, passport etc)"
@@ -3486,7 +3482,7 @@ msgstr ""
 
 #: www/ttp.php:93 www/ttp.php:140
 msgid "Signature"
-msgstr ""
+msgstr "Подпись"
 
 #: pages/help/2.php:50
 msgid "Security is a serious matter. For a digital certificate with full rights to  be issued to an individual by a Certificate Authority, stringent tests must be conducted, including meeting the physical person to verify their identity. At the current moment in time, my physical identity has not been verified by CAcert.org, but they have verified my email address. Installing their root certificate (see above) will thus automatically allow you to validate my digital signature. You can then be confident of the authenticity of my email address - only I have the ability to digitally sign my emails using my CAcert.org certificate, so if you get an email that I digitally signed and which is validated by your email software using the CAcert.org root certificate that you installed, you know it's from me. (Visually you get a simple indication that my email is signed and trusted). Technically, they haven't verified that I really am me! But you have the guarantee that emails from my address are sent by the person who physically administers that address, i.e. me! The only way that someone could forge my digital signature would be if they logged on to my home computer (using the password) and ran my email software (using the password) to send you a digitally signed email from my address. Although I have noticed the cats watching me logon..."
@@ -3530,11 +3526,11 @@ msgstr ""
 
 #: www/wot/5.php:15
 msgid "ERROR"
-msgstr ""
+msgstr "ОШИБКА"
 
 #: www/wot/10.php:105
 msgid "Go Back"
-msgstr ""
+msgstr "Назад"
 
 #: includes/general.php:23
 msgid "Administrative Increase"
@@ -3558,7 +3554,7 @@ msgstr ""
 
 #: www/index/0.php:37
 msgid "Full Story"
-msgstr ""
+msgstr "Целиком"
 
 #: www/index/0.php:40
 msgid "More News Items"
@@ -3604,27 +3600,27 @@ msgstr ""
 
 #: pages/account/43.php:146
 msgid "Account Locking"
-msgstr ""
+msgstr "Блокировка учетной записи"
 
 #: pages/account/54.php:65
 msgid "Add Location"
-msgstr ""
+msgstr "Добавить местоположение"
 
 #: pages/account/54.php:25
 msgid "Add Region"
-msgstr ""
+msgstr "Добавить область"
 
 #: pages/account/41.php:56 pages/wot/9.php:58
 msgid "Additional Language"
-msgstr ""
+msgstr "Дополнительный язык"
 
 #: pages/account/41.php:46
 msgid "Additional Language Preferences"
-msgstr ""
+msgstr "Настройки дополнительного языка"
 
 #: pages/account/43.php:162
 msgid "Admin"
-msgstr ""
+msgstr "Админ"
 
 #: pages/index/5.php:58
 #, php-format
@@ -3709,11 +3705,11 @@ msgstr ""
 
 #: www/verify.php:137
 msgid "Do not verify this domain"
-msgstr ""
+msgstr "Не проверять этот домен"
 
 #: www/verify.php:79
 msgid "Do not verify this email"
-msgstr ""
+msgstr "Не проверять эту электропочту"
 
 #: pages/account/35.php:51
 msgid "Domain available"
@@ -3721,11 +3717,11 @@ msgstr ""
 
 #: pages/account/54.php:101
 msgid "Edit Location"
-msgstr ""
+msgstr "Изменить местоположение"
 
 #: pages/account/54.php:47
 msgid "Edit Region"
-msgstr ""
+msgstr "Изменить область"
 
 #: pages/account/13.php:27
 msgid "Email Notification"
@@ -3733,7 +3729,7 @@ msgstr ""
 
 #: pages/account/39.php:67 pages/index/10.php:67
 msgid "Exceptions"
-msgstr ""
+msgstr "Исключения"
 
 #: includes/account.php:963 www/index.php:300
 msgid "For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer."
@@ -3746,7 +3742,7 @@ msgstr ""
 #: includes/account.php:96 includes/account.php:1074 pages/account/13.php:21
 #, php-format
 msgid "Hi %s,"
-msgstr ""
+msgstr "Привет %s,"
 
 #: pages/wot/13.php:42
 msgid "I was unable to match your location with places in my database."
@@ -3775,7 +3771,7 @@ msgstr ""
 
 #: pages/account/54.php:76 pages/account/54.php:112
 msgid "Latitude"
-msgstr ""
+msgstr "Широта"
 
 #: pages/account/39.php:73 pages/index/10.php:73
 msgid "Legal mandates"
@@ -3799,7 +3795,7 @@ msgstr ""
 
 #: pages/account/54.php:72 pages/account/54.php:108
 msgid "Longitude"
-msgstr ""
+msgstr "Долгота"
 
 #: includes/general_stuff.php:85
 msgid "Mailing Lists"
@@ -3855,20 +3851,20 @@ msgstr ""
 
 #: pages/account/54.php:28 pages/account/54.php:50
 msgid "Region"
-msgstr ""
+msgstr "Область"
 
 #: pages/account/43.php:295 pages/account/43.php:312 pages/account/43.php:332
 #: pages/account/43.php:349
 msgid "Revoke"
-msgstr ""
+msgstr "Аннулировать"
 
 #: pages/account/41.php:62
 msgid "Secondary languages"
-msgstr ""
+msgstr "Дополнительные языки"
 
 #: pages/account/54.php:182
 msgid "Set Region"
-msgstr ""
+msgstr "Задать область"
 
 #: pages/account/43.php:198
 msgid "Show Lost Password Details"
@@ -3884,7 +3880,7 @@ msgstr ""
 
 #: pages/index/0.php:15
 msgid "Are you new to CAcert?"
-msgstr ""
+msgstr "Вы новичок в CAcert?"
 
 #: includes/general_stuff.php:74
 msgid "Community Agreement"
@@ -3892,7 +3888,7 @@ msgstr ""
 
 #: pages/index/0.php:34
 msgid "Do you want to help CAcert?"
-msgstr ""
+msgstr "Вы хотите помочь CAcert?"
 
 #: pages/index/0.php:28
 #, php-format
@@ -3960,11 +3956,11 @@ msgstr ""
 
 #: www/verify.php:135
 msgid "Yes verify this domain"
-msgstr ""
+msgstr "Да, проверить этот домен"
 
 #: www/verify.php:77
 msgid "Yes verify this email"
-msgstr ""
+msgstr "Да, проверить эту электропочту"
 
 #: includes/account.php:97 includes/account.php:1075 pages/account/13.php:22
 msgid "You are receiving this email because you or someone else"
@@ -3977,7 +3973,7 @@ msgstr ""
 
 #: pages/index/16.php:17 pages/index/3.php:17
 msgid "Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x"
-msgstr ""
+msgstr "Щелкните сюда, если вы хотите импортировать корневой сертификат в Microsoft Internet Explorer 5.x/6.x"
 
 #: pages/account/52.php:80
 msgid "The following requests are still open:"
@@ -3993,7 +3989,7 @@ msgstr ""
 
 #: www/index.php:123
 msgid "Your Pass Phrase has been changed now. You can now login with your new password."
-msgstr ""
+msgstr "Ваша ключевая фраза изменена. Теперь вы можете войти с новым паролем."
 
 #: pages/account/0.php:32
 msgid "The former TTP (Trusted Third Party) System has been stopped, and is currently not available."
@@ -4046,7 +4042,7 @@ msgstr ""
 
 #: pages/index/5.php:24
 msgid "Email Address (primary)"
-msgstr ""
+msgstr "Основная электропочта"
 
 #: pages/account/56.php:18
 msgid "List of Organisation Assurers:"
@@ -4071,7 +4067,7 @@ msgstr ""
 #: includes/account_stuff.php:268 includes/general_stuff.php:145
 #: includes/tverify_stuff.php:80
 msgid "by CAcert"
-msgstr ""
+msgstr "CAcert.org"
 
 #: www/wot.php:343
 msgid "Assurer Challenge"
@@ -4151,7 +4147,7 @@ msgstr ""
 
 #: www/cap.html.php:81
 msgid "yyyy-dd-mm"
-msgstr ""
+msgstr "гггг-дд-мм"
 
 #: www/cap.html.php:237 www/coap.html.php:320
 msgid "yes, the CCA is attached to the form."
@@ -4163,11 +4159,11 @@ msgstr ""
 
 #: www/coap.html.php:137
 msgid "reg. number"
-msgstr ""
+msgstr "рег. номер"
 
 #: www/coap.html.php:109
 msgid "state"
-msgstr ""
+msgstr "штат"
 
 #: www/coap.html.php:138
 msgid "trade office"
@@ -4249,10 +4245,6 @@ msgstr ""
 msgid "How To Print this CAP form"
 msgstr ""
 
-#: pages/index/8.php:21
-msgid "Vice-President"
-msgstr ""
-
 #: pages/index/1.php:49
 #, php-format
 msgid "Please only write %sName Suffixes%s into this field."
@@ -4276,7 +4268,7 @@ msgstr ""
 
 #: pages/account/13.php:39
 msgid "CAcert Support"
-msgstr ""
+msgstr "Поддержка CAcert"
 
 #: www/coapnew.php:980
 msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."
@@ -4304,11 +4296,11 @@ msgstr ""
 
 #: www/capnew.php:1025
 msgid "passport"
-msgstr ""
+msgstr "паспорт"
 
 #: www/coapnew.php:1032
 msgid "phone nr"
-msgstr ""
+msgstr "телефон"
 
 #: www/coapnew.php:1107
 msgid "Trade Office Registry information, as organisation registration Identification number or license number, name of the trade office registry, trade office operating region, and optionally date of extract."
@@ -4333,7 +4325,7 @@ msgstr ""
 #: includes/account_stuff.php:263 includes/general_stuff.php:127
 #: includes/tverify_stuff.php:75
 msgid "Association Membership"
-msgstr ""
+msgstr "Членство в ассоциации"
 
 #: pages/account/6.php:91
 msgid "Certificate installed successfully. Please don't forget to backup now"
@@ -4367,15 +4359,15 @@ msgstr ""
 
 #: pages/index/16.php:29 pages/index/3.php:29
 msgid "Intermediate Certificate (DER Format)"
-msgstr ""
+msgstr "Промежуточный сертификат (формат DER)"
 
 #: pages/index/16.php:28 pages/index/3.php:28
 msgid "Intermediate Certificate (PEM Format)"
-msgstr ""
+msgstr "Промежуточный сертификат (формат PEM)"
 
 #: pages/index/16.php:30 pages/index/3.php:30
 msgid "Intermediate Certificate (Text Format)"
-msgstr ""
+msgstr "Промежуточный сертификат (текстовый формат)"
 
 #: www/cap.php:64
 msgid "It's encouraged that you tear the top of this form off and give it to the person you are assuring as a reminder to sign up, and as a side benefit the tear off section also contains a method of offline verification of our fingerprints."
@@ -4416,7 +4408,7 @@ msgstr ""
 
 #: pages/index/16.php:20 pages/index/3.php:20
 msgid "Root Certificate (Text Format)"
-msgstr ""
+msgstr "Корневой сертификат (текстовый формат)"
 
 #: www/wot.php:332
 msgid "To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:"
@@ -4424,7 +4416,7 @@ msgstr ""
 
 #: includes/account_stuff.php:245
 msgid "View Ads"
-msgstr ""
+msgstr "Посмотреть рекламу"
 
 #: www/advertising.php:47
 msgid "You can only place an advertisement for up to 12 months.&lt;br /&gt;"
@@ -4471,11 +4463,11 @@ msgstr ""
 
 #: pages/wot/12.php:17
 msgid "Maximum Distance:"
-msgstr ""
+msgstr "Максимальное расстояние:"
 
 #: pages/wot/12.php:68
 msgid "Unable to find suitable location"
-msgstr ""
+msgstr "Не удалось найти подходящее местоположение"
 
 #: pages/wot/4.php:19
 msgid "You can become a CAcert Assurer by seeking out trusted 3rd parties. You will also need to download and print out a copy of the TTP Form (found under 'CAP/TTP Forms') and fill in your sections. You will need to produce a photo copy of your ID, which the person assuring you will inspect against the originals. Once they are satisfied the documents appear to be genuine they need to sign the back of the photo copies, and fill in their sections of the TTP document. Once you have had your ID verified by 2 different people, pop the copies + forms in an envelope and post them to:"
@@ -4483,23 +4475,23 @@ msgstr ""
 
 #: pages/wot/11.php:47
 msgid "article on the Wiki"
-msgstr ""
+msgstr "статья в вики"
 
 #: pages/account/38.php:23 pages/index/13.php:23
 msgid "CAcert Donation through PayPal"
-msgstr ""
+msgstr "Пожертвования CAcert через PayPal"
 
 #: pages/index/47.php:14
 msgid "CAcert Logo, Encapsulated PostScript (EPS) format"
-msgstr ""
+msgstr "Логотип CAcert, формат Encapsulated PostScript (EPS)"
 
 #: pages/index/47.php:20
 msgid "CAcert Logo, colour version, PNG format"
-msgstr ""
+msgstr "Логотип CAcert, цветной вариант, формат PNG"
 
 #: pages/index/47.php:32
 msgid "CAcert Logo, monochrome version, PNG format"
-msgstr ""
+msgstr "Логотип CAcert, черно-белый вариант, формат PNG"
 
 #: pages/index/47.php:1
 msgid "CAcert Public Relations materials"
@@ -4507,11 +4499,11 @@ msgstr ""
 
 #: pages/index/47.php:16
 msgid "Colour version"
-msgstr ""
+msgstr "Цветной вариант"
 
 #: includes/about_menu.php:8
 msgid "Disclaimer"
-msgstr ""
+msgstr "Отречение"
 
 #: www/gpg.php:176
 msgid "Error: Both Name and Email address are empty"
@@ -4577,7 +4569,7 @@ msgstr ""
 
 #: www/gpg.php:195
 msgid "The name is OK. The email is empty."
-msgstr ""
+msgstr "Имя в порядке. Электропочта пуста."
 
 #: www/gpg.php:243
 msgid "The unverified UIDs have been removed, the verified UIDs have been signed."
@@ -4988,7 +4980,7 @@ msgstr ""
 
 #: www/coapnew.php:1129 www/coapnew.php:1142
 msgid "Organisation Administrator"
-msgstr ""
+msgstr "Администратор организации"
 
 #: www/capnew.php:1067
 msgid "On comparing names"
@@ -4996,7 +4988,7 @@ msgstr ""
 
 #: www/coapnew.php:1194
 msgid "On director's statement"
-msgstr ""
+msgstr "По указанию руководителя"
 
 #: www/capnew.php:1223 www/coapnew.php:1248
 msgid "On mutual assurance"
@@ -5109,7 +5101,7 @@ msgstr ""
 
 #: includes/general.php:765
 msgid "CSRF Hash is missing. Please try again."
-msgstr ""
+msgstr "Отсутствует хеш CSRF. Попробуйте еще раз."
 
 #: www/capnew.php:852
 msgid "For the CAcert Organisation Assurance Programme there is a separate special COAP form."
@@ -5127,7 +5119,7 @@ msgstr ""
 
 #: www/verify.php:35
 msgid "Notification"
-msgstr ""
+msgstr "Уведомление"
 
 #: www/verify.php:160
 msgid "Parameters are missing. Please try the complete URL."
@@ -5143,7 +5135,7 @@ msgstr ""
 
 #: includes/account.php:684
 msgid "Domain not verified."
-msgstr ""
+msgstr "Домен не проверен."
 
 #: www/capnew.php:850
 msgid "For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit:"
@@ -5167,11 +5159,11 @@ msgstr ""
 
 #: www/coapnew.php:1206
 msgid "Director"
-msgstr ""
+msgstr "Руководитель"
 
 #: pages/account/53.php:108
 msgid "End"
-msgstr ""
+msgstr "Конец"
 
 #: pages/index/4.php:22
 msgid "This function is currently unavailable. Please come back later."
@@ -5215,7 +5207,7 @@ msgstr ""
 
 #: pages/account/53.php:67
 msgid "Are you sure you want to delete this region and all connected locations?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить область и все прикрепленные местоположения?"
 
 #: www/capnew.php:1053
 msgid "Applicant's Identity Information"
@@ -5223,7 +5215,7 @@ msgstr ""
 
 #: www/coapnew.php:1081
 msgid "Address (comma separated)"
-msgstr ""
+msgstr "Адрес (разделяется запятой)"
 
 #: www/cap.html.php:229 www/coap.html.php:310
 msgid "2-up"
@@ -5239,9 +5231,9 @@ msgstr ""
 
 #: www/cap.html.php:227 www/coap.html.php:305
 msgid "A printer ready file with the form and attachments can be generated as follows:"
-msgstr ""
+msgstr "Готовый к печати файл с формой и приложениями может быть получен так:"
 
 #: www/capnew.php:405 www/capnew.php:1344 www/coapnew.php:441
 #: www/coapnew.php:1291
 msgid "page"
-msgstr ""
+msgstr "страница"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-07-06 10:46:01+0000\n"
+"PO-Revision-Date: 2010-08-02 20:57:15+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgstr "Adresse de courrier &eacute;lectronique alternative v&eacute;rifi&eacute
 
 #: www/help/7.php:9
 msgid "Alternatively as things progress we can add more layers of security with say 4 webservers talking to 2 intermediate servers, talking to the root store, and acting in a token ring fashion, anything happening out of sequence, and the server directly upstream shuts itself down, which if that were in place and there were multiple paths, any down time in this fashion would fall over to the servers not compromised, anyways just some food for thought."
-msgstr "Alternativement, alors que le projet se poursuit, nous pourrons ajouter des couches de s&eacute;curit&eacute; suppl&eacute;mentaires avec des serveurs Web (disons 4) communiquant avec 2 serveurs interm&eacute;diaires qui s'&eacute;changent des donn&eacute;es avec le magasin de certificat racine, et avec un fonctionnement bas&eacute; sur l'&eacute;change de jetons, si quelque chose se produit en dehors de l'ordre d&eacute;termin&eacute; alors le serveur racine s'arr&ecirc;te directement en amont. Mais si cela est mis en place, il y aura des chemins multiples entre les souscripteurs et le serveur de certificat racine, aussi dans cette configuration n'importe quelle panne ferait tomber aussi les serveurs non compromis, ce qui nous laisse mati&egrave;re &agrave; r&eacute;flexion &agrave; l'avenir."
+msgstr "Alternativement, alors que le projet se poursuit, nous pourrons ajouter des couches de s&eacute;curit&eacute; suppl&eacute;mentaires avec des serveurs Web (disons 4) communiquant avec 2 serveurs interm&eacute;diaires qui s'&eacute;changent des donn&eacute;es avec le d&eacute;p&ocirc;t de certificat racine, et avec un fonctionnement bas&eacute; sur l'&eacute;change de jetons, si quelque chose se produit en dehors de l'ordre d&eacute;termin&eacute; alors le serveur racine s'arr&ecirc;te directement en amont. Mais si cela est mis en place, il y aura des chemins multiples entre les souscripteurs et le serveur de certificat racine, aussi dans cette configuration n'importe quelle panne ferait tomber aussi les serveurs non compromis, ce qui nous laisse mati&egrave;re &agrave; r&eacute;flexion &agrave; l'avenir."
 
 #: www/account/40.php:52 www/index/11.php:52
 msgid "Alternatively you can get in contact with us via the following methods:"
@@ -233,7 +233,7 @@ msgstr "Devenir un accr&eacute;diteur de la toile de confiance CAcert"
 
 #: includes/account_stuff.php:182
 msgid "Becoming an Assurer"
-msgstr "Devenir Notaire"
+msgstr "Devenir Accr&eacute;diteur"
 
 #: pages/account/10.php:34
 msgid "Paste your CSR(Certificate Signing Request) below..."
@@ -408,7 +408,7 @@ msgstr "Cliquez ici"
 
 #: www/account/40.php:21 www/index/11.php:21
 msgid "Click here to go to the Support List"
-msgstr "Cliuez ici pour acc&eacute;der &agrave; la liste du support"
+msgstr "Cliquez ici pour acc&eacute;der &agrave; la liste du support"
 
 #: www/account/40.php:38 www/index/11.php:38
 msgid "Click here to view all lists available"
@@ -437,7 +437,7 @@ msgstr "Commentaires"
 
 #: www/help/4.php:14
 msgid "Common Name (eg, YOUR name) []:"
-msgstr "Nom commun (rx: votre nom)[]:"
+msgstr "Nom commun (p. ex.: VOTRE nom)[]:"
 
 #: www/account/11.php:22 www/account/12.php:23 www/account/18.php:23
 #: www/account/21.php:25 www/account/22.php:23
@@ -471,7 +471,7 @@ msgstr "Remplissez le formulaire de certification si le demandeur ne l'a pas d&e
 
 #: www/help/3.php:39
 msgid "Confirm your request details"
-msgstr "confirmer le d&eacute;tail de votre requ&ecirc;te"
+msgstr "Confirmer le d&eacute;tail de votre requ&ecirc;te"
 
 #: www/wot/3.php:19
 msgid "Contact"
@@ -512,7 +512,7 @@ msgstr "Copier le contenu du courrier comprenant "
 
 #: www/index/51.php:20
 msgid "Core members of CAcert generally have a strong information technology and security background, and a stronger desire to give back to the community."
-msgstr "Les membres de l'&eacute;quipe de CAcert poss&egrave;dent en g&eacute;n&eacute;rale une tr&egrave;s bonne comp&eacute;tence en technologie de l'information et en s&eacute;curit&eacute;, et un fort d&eacute;sir d'en faire profiter la communaut&eacute;."
+msgstr "Les membres de l'&eacute;quipe de CAcert poss&egrave;dent en g&eacute;n&eacute;ral une tr&egrave;s bonne comp&eacute;tence en technologie de l'information et en s&eacute;curit&eacute;, et un fort d&eacute;sir d'en faire profiter la communaut&eacute;."
 
 #: includes/account.php:617 includes/account.php:726 includes/account.php:1125
 #: includes/account.php:1343
@@ -543,7 +543,7 @@ msgstr "Cr&eacute;dits"
 
 #: www/help/7.php:2
 msgid "Currently there is 2 main servers, one for webserver, one for root store, with the root store only connected to the webserver via serial cable, with a daemon running as non-root processes on each end of the serial listening/sending requests/info."
-msgstr "Actuellement, il y a deux serveurs principaux. Un pour le serveur Web et un autre pour le stockage de l'IGC. Ils sont connect&eacute;s entre eux par un simple c&acirc;ble s&eacute;rie. Un seul service est actif avec des droits restreints, ce service &eacute;coute, envoie les requ&ecirc;tes, adresse des informations par le port s&eacute;rie. "
+msgstr "Actuellement, il y a deux serveurs principaux. Un pour le serveur Web et un autre pour le stockage de l'IGC. Ils sont connect&eacute;s entre eux par un simple c&acirc;ble s&eacute;rie. Un service avec des droits restreints est actif &agrave; chaque extr&eacute;mit&eacute; de ce c&acirc;ble s&eacute;rie. Ce service &eacute;coute les requ&ecirc;tes et renvoie les informations demand&eacute;es. "
 
 #: www/stats.php:73 www/stats.php:109 www/ttp.php:95 www/ttp.php:142
 #: www/account/43.php:200 www/account/43.php:235 www/wot/10.php:43
@@ -602,7 +602,7 @@ msgstr "la Signature num&eacute;rique fournit une s&eacute;curit&eacute; sur Int
 
 #: www/index/0.php:73
 msgid "Digitally sign code, web applets, installers, etc. including your name and location in the certificates."
-msgstr "LA Signature de code, d'applets, d'installeurs, etc. fournit votre nom et votre ville dans les certificats.  "
+msgstr ""
 
 #: www/wot/8.php:22
 msgid "Directory Listing"
@@ -610,7 +610,7 @@ msgstr "Annuaire"
 
 #: www/help/2.php:61
 msgid "Disclaimer : These are the author's opinions, but they should not be considered 'truth' without personal verification. The author may have made mistakes and any mistakes will be willingly rectified by contacting the administrator of elucido.net, contact details available from the normal domain registration information services (e.g. whois.net).&amp;nbsp; No recommendation to install a Certificate Authority's root certificate is either intended nor implied."
-msgstr "Avertissement : ce sont les avis de l'auteur, mais elles ne devraient pas &ecirc;tre consid&eacute;r&eacute;es comme une 'v&eacute;rit&eacute;' sans autre v&eacute;rification personnelle. L'auteur a pu avoir fait des erreurs et toutes les erreurs seront volontairement rectifi&eacute;es en contactant l'administrateur d'elucido.net ; entrez en contact avec lui avec les d&eacute;tails fournis par les services d'information d'enregistrement de domaine (par exemple whois.net). Ni voyez aucune recommandation implicite ou explicite d'installer le certificat racine d'une Autorit&eacute; de Certification.  "
+msgstr "Avertissement : ce sont les avis de l'auteur, mais elles ne devraient pas &ecirc;tre consid&eacute;r&eacute;es comme une 'v&eacute;rit&eacute;' sans autre v&eacute;rification personnelle. L'auteur a pu avoir fait des erreurs et toutes les erreurs seront volontairement rectifi&eacute;es en contactant l'administrateur d'elucido.net ; entrez en contact avec lui avec les d&eacute;tails fournis par les services d'information d'enregistrement de domaine (par exemple whois.net). N'y voyez aucune recommandation implicite ou explicite d'installer le certificat racine d'une Autorit&eacute; de Certification.  "
 
 #: www/account/26.php:24 www/account/28.php:25 www/account/29.php:31
 #: www/account/43.php:181 www/account/48.php:22 www/account/49.php:34
@@ -620,7 +620,7 @@ msgstr "Domaine"
 
 #: www/account/12.php:18 www/account/22.php:18
 msgid "Domain Certificates"
-msgstr "Certificats de domaines"
+msgstr "Certificats de domaine"
 
 #: includes/account_stuff.php:157 www/account/25.php:21 www/account/25.php:38
 #: www/account/9.php:18
@@ -638,11 +638,11 @@ msgstr "Dons"
 
 #: www/error404.php:21
 msgid "Due to recent site changes bookmarks may no longer be valid, please update your bookmarks."
-msgstr "A cause de r&eacute;cents changements dans le site, vos marques-pages peuvent ne plus &ecirc;tre valides, veuillez les mettre &agrave; jour."
+msgstr "A cause de r&eacute;cents changements au site, vos marques-pages peuvent ne plus &ecirc;tre valides, veuillez les mettre &agrave; jour."
 
 #: www/help/2.php:39
 msgid "Easy. Ish. Go to CAcert.org, install their root certificate and then follow their joining instructions. Once you have joined, request a certificate from the menu. You will receive an email with a link to the certificate. Click on the link from your email software, and hopefully it will be seamlessly installed. Next find the security section of the settings in your email software and configure digital signatures using the certificate you just downloaded. Hmm. Call me if you want, I'll guide you through it."
-msgstr "Facile. Allez &agrave; CAcert.org, installez leur certificat racine et puis suivez les instructions d'inscription. Une fois que vous vous &ecirc;tes inscrit, demandez un certificat &agrave; partir du menu. Vous recevrez un email avec un lien vers le certificat. Cliquez sur le lien dans votre logiciel d'email, et si tout va bien il sera install&eacute; sans plus de manipulation. Ensuite, trouver la section concernant les certificat dans votre logiciel d'email et configurez les signatures num&eacute;riques en utilisant le certificat que vous avez juste t&eacute;l&eacute;charg&eacute;. Humm ! Appelez-moi si n&eacute;cessaire, je vous guiderais dans l'ach&egrave;vement de ce processus."
+msgstr "Facile. Allez &agrave; CAcert.org, installez leur certificat racine et puis suivez les instructions d'inscription. Une fois que vous vous &ecirc;tes inscrit, demandez un certificat &agrave; partir du menu. Vous recevrez un email avec un lien vers le certificat. Cliquez sur le lien dans votre logiciel d'email, et, si tout va bien, il sera install&eacute; sans plus de manipulation. Ensuite, trouvez la section concernant les certificats dans votre logiciel d'email et configurez les signatures num&eacute;riques en utilisant le certificat que vous avez juste t&eacute;l&eacute;charg&eacute;. Humm ! Appelez-moi si n&eacute;cessaire, je vous guiderais dans l'ach&egrave;vement de ce processus."
 
 #: includes/account_stuff.php:146 www/account/25.php:23 www/account/25.php:40
 #: www/account/26.php:25 www/account/26.php:35
@@ -680,7 +680,7 @@ msgstr "L'adresse &eacute;lectronique &eacute;tait vide"
 
 #: www/wot/1.php:122
 msgid "Email Assurer"
-msgstr "Adresse email"
+msgstr ""
 
 #: includes/account.php:51 includes/account.php:391
 msgid "Email Probe"
@@ -688,23 +688,23 @@ msgstr "Test de l'email"
 
 #: www/help/2.php:20
 msgid "Emails are not secure. In fact emails are VERY not secure!"
-msgstr "Le courrier &eacute;lectronique n'est pas s&eacute;curis&eacute;. En fait, le courrier n'est r&eacute;ellement pas s&eacute;curis&eacute; ! "
+msgstr "Le courrier &eacute;lectronique n'est pas s&eacute;curis&eacute;. En fait, le courrier n'est ABSOLUMENT PAS s&eacute;curis&eacute; ! "
 
 #: www/index/0.php:83
 msgid "Enable encrypted data transfer for users accessing your web, email, or other SSL enabled service on your server; wildcard certificates are allowed."
-msgstr "Permet le transfert de donn&eacute;es chiffr&eacute;s pour des utilisateurs acc&eacute;dant &agrave; votre site Web, courrier num&eacute;rique, ou &agrave; tout autre service SSL que fournit votre serveur; Les certificats de wildcard sont autoris&eacute;s"
+msgstr ""
 
 #: www/help/3.php:58
 msgid "Ensure 'Process the pending request and install the certificate' is selected and click on 'Next'."
-msgstr "Assurez vous que le 'processus de demande en attente et installer le certificat 'est s&eacute;lectionner et cliquer sur 'suivants'. "
+msgstr ""
 
 #: www/help/3.php:63
 msgid "Ensure that you are processing the correct certificate"
-msgstr "Assurez vous que vous utilisez le bon certificat"
+msgstr ""
 
 #: www/help/3.php:17
 msgid "Enter a certificate name and select Certificate strength"
-msgstr "Saisiez un nom de certificat et sa force"
+msgstr "Saisiez un nom de certificat et la force (de chiffrage)"
 
 #: www/help/3.php:26
 msgid "Enter the Organisation name: this must be the full legal name of the Organisation that is applying for the certificate."
@@ -728,7 +728,7 @@ msgstr "Informations personnelles"
 
 #: www/help/2.php:57
 msgid "Erroneous Verisign Issued Digital Certificates Pose Spoofing Hazard"
-msgstr "Certificat num&eacute;rique 'Verisign' erron&eacute; pouvant marqu&eacute; la preuve d'un risque d'impersonnification"
+msgstr ""
 
 #: includes/account.php:67 www/verify.php:33 www/verify.php:45
 #: www/verify.php:76 www/verify.php:89
@@ -737,7 +737,7 @@ msgstr "Erreur!"
 
 #: www/help/2.php:21
 msgid "Ever requested a password that you lost to be emailed to you? That password was wide open to inspection by potential crackers."
-msgstr "Vous n'avez jamais demand&eacute; un mot de passe perdu et renvoy&eacute; &agrave; vous par email ? Ce mot de passe est pass&eacute; en clair sur Internet et il est potentiellement visible &agrave; des personnes mal intentionn&eacute;e."
+msgstr "N'avez-vous jamais demand&eacute; un mot de passe perdu et qui vous a &eacute;t&eacute; renvoy&eacute; par email ? Ce mot de passe a transit&eacute; en clair sur Internet et il a pu &ecirc;tre vu par des personnes mal intentionn&eacute;es (ou des op&eacute;rateurs de r&eacute;seau/email)."
 
 #: www/account/12.php:50 www/account/18.php:50 www/account/22.php:50
 #: www/account/5.php:54
@@ -755,7 +755,7 @@ msgstr "Tarifs"
 
 #: www/error404.php:19
 msgid "File not found!"
-msgstr "Fichier non trouv&eacute;!"
+msgstr "Fichier non trouv&eacute; !"
 
 #: www/help/4.php:16
 msgid "Finally you will be asked information about 'extra' attribute, you simply hit enter to both these questions."
@@ -796,11 +796,11 @@ msgstr "Le nom et/ou le pr&eacute;nom &eacute;taient vides."
 
 #: www/help/6.php:1
 msgid "Firstly you need to join CAcert to do that go:"
-msgstr "La premi&egrave;re &eacute;tape est de s'inscrire &agrave; CAcert pour se faire :"
+msgstr "La premi&egrave;re &eacute;tape est de s'inscrire &agrave; CAcert. Pour ce faire :"
 
 #: www/help/4.php:1
 msgid "Firstly you will need to run the following command, preferably in secured directory no one else can access, however protecting your private keys is beyond the scope of this document."
-msgstr "Dans un premier temps, vous allez devoir rentrer les instructions suivantes, de pr&eacute;f&eacute;rence dans un r&eacute;pertoire s&eacute;curis&eacute; qui n'est accessible que de vous, mais quoi qu'il en soit la protection de vos clefs priv&eacute;es d&eacute;passe l'objet de ce document."
+msgstr "Dans un premier temps, vous allez devoir ex&eacute;cuter les instructions suivantes, de pr&eacute;f&eacute;rence dans un r&eacute;pertoire s&eacute;curis&eacute; qui n'est accessible que par vous. Quoi qu'il en soit, la protection de vos clefs priv&eacute;es d&eacute;passe l'objet de ce document."
 
 #: www/help/0.php:2
 msgid "Following are several tips you may find useful."
@@ -808,11 +808,11 @@ msgstr "Plusieurs conseils pouvant vous &ecirc;tre utiles suivent."
 
 #: www/account/37.php:23 www/index/12.php:23
 msgid "For administrators looking to protect the services they offer, we provide host and wild card certificates which you can issue almost immediately. Not only can you use these to protect websites, but also POP3, SMTP and IMAP connections, to list but a few. Unlike other certificate authorities, we don't limit the strength of the certificates, or the use of wild card certificates. Everyone should have the right to security and to protect their privacy, not just those looking to run ecommerce sites."
-msgstr "Pour des administrateurs d&eacute;sirant prot&eacute;ger les services qu'ils offrent, nous fournissons les certificats pour leur serveur ou leur domaine dont la d&eacute;livrance est presque imm&eacute;diate. Non seulement vous pouvez employer ces derniers pour prot&eacute;ger des sites Web, mais &eacute;galement les services POP3, de SMTP et IMAP, pour ne siter qu'eux. A la diff&eacute;rence d'autres Autorit&eacute; de Certification, nous ne limitons pas la taille des clefs des certificats ou l'utilisation de certificat pour un domaine complet. Tout le monde a droit &agrave; la s&eacute;curit&eacute; et &agrave; la protection de leur vie priv&eacute;e, pas seulement ceux qui g&egrave;rent les sites de commerce &eacute;lectronique."
+msgstr "Pour des administrateurs d&eacute;sirant prot&eacute;ger les services qu'ils offrent, nous fournissons les certificats pour leur serveur ou leur domaine dont la d&eacute;livrance est presque imm&eacute;diate. Non seulement vous pouvez employer ces derniers pour prot&eacute;ger des sites Web, mais &eacute;galement les services POP3, de SMTP et IMAP, pour ne citer qu'eux. A la diff&eacute;rence d'autres Autorit&eacute;s de Certification, nous ne limitons pas la taille des clefs des certificats ou l'utilisation de certificat pour un domaine complet. Tout le monde a droit &agrave; la s&eacute;curit&eacute; et &agrave; la protection de sa vie priv&eacute;e, pas seulement ceux qui g&egrave;rent les sites de commerce &eacute;lectronique."
 
 #: www/help/3.php:71
 msgid "For more information, refer to your server documentation or visit"
-msgstr "Pour de plus ample informations, referez-vous &agrave; la documentation de votre serveur ou visitez"
+msgstr "Pour de plus ample informations, r&eacute;f&eacute;rez-vous &agrave; la documentation de votre serveur ou visitez"
 
 #: www/account/37.php:21 www/index/12.php:21
 msgid "For the enthusiast looking to dip their toe in the water, we have an easy way of obtaining certificates you can use with your email program. You can use these not only to encrypt, but to prove to your friends and family that your email really does come from you."
@@ -825,7 +825,7 @@ msgstr "Pendant des ann&eacute;es, nous avons tous &eacute;t&eacute; contraints 
 #: www/account/12.php:78 www/account/18.php:84 www/account/22.php:80
 #: www/account/5.php:84
 msgid "From here you can delete pending requests, or revoke valid certificates."
-msgstr "D'ici vous pouvez supprimer les demandes en attente ou revoquer les certificats valides."
+msgstr "D'ici vous pouvez supprimer les demandes en attente ou r&eacute;voquer les certificats valides."
 
 #: www/stats.php:55
 msgid "Users with 50-99 Points"
@@ -883,7 +883,7 @@ msgstr "Croissance par ann&eacute;e "
 
 #: www/stats.php:66
 msgid "Growth in the last 12 months"
-msgstr "Croissance par ann&eacute;e "
+msgstr "Croissance sur les 12 dernier mois"
 
 #: www/help/0.php:1
 msgid "Help!"
@@ -900,7 +900,7 @@ msgstr "Cliquez sur le bouton 'Installez votre Certificat' ci-dessous pour insta
 
 #: www/account/30.php:24
 msgid "Hitting delete will also revoke all existing certificates issued under this domain"
-msgstr "Cliquer sur supprimer r&eacute;voquera aussi tous les certificats existants publi&eacute; pour ce domaine."
+msgstr "Cliquer sur supprimer r&eacute;voquera aussi tous les certificats existants publi&eacute;s pour ce domaine."
 
 #: www/account/29.php:24
 msgid "Hitting update will also revoke all existing certificates issued under this domain"
@@ -944,7 +944,7 @@ msgstr "Informations G&eacute;n&eacute;rales"
 
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
-msgstr "Je ne peux plus attendre pour envoyer des emails chiffr&eacute;s"
+msgstr "Je ne peux plus attendre d'envoyer des emails chiffr&eacute;s !"
 
 #: includes/account.php:884
 msgid "I couldn't match any emails against your organisational account."
@@ -961,7 +961,7 @@ msgstr "Je ne veux pas &ecirc;tre list&eacute;"
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
-msgstr "Je d&eacute;clare par la pr&eacute;sente que je suis autoris&eacute; par le propri&eacute;taire des informations contenues dans le CSR envoy&eacute; &agrave; CAcert Inc. &agrave; demander un certificat num&eacute;rique pour s&eacute;curiser et authentifier des transactions &eacute;lectroniques. Je comprend qu'un certificat &eacute;lectronique permet d'identifier le souscripteur &agrave; des fins de communication &eacute;lectronique et que la gestion des clefs priv&eacute;es associ&eacute;es &agrave; ces certificats reste &agrave; la responsabilit&eacute; de l'&eacute;quipe technique du souscripteur."
+msgstr ""
 
 #: www/wot/8.php:26
 msgid "I want to be listed"
@@ -985,7 +985,7 @@ msgstr "Si je veux faire une donation &agrave; CAcert Inc, comment puis-je le fa
 
 #: www/account/10.php:22 www/account/20.php:22
 msgid "If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence."
-msgstr "Si le nom du souscripteur et/ou le nom de domaine d'enregistrement changent, le souscripteur avertira CAcert Inc. imm&eacute;diatement afin que le certificat &eacute;lectronique soit r&eacute;voqu&eacute;. Lorsque le certificat &eacute;lectronique expire ou est r&eacute;voqu&eacute; l'entreprise devra le supprimer du serveur o&ugrave; il est h&eacute;berg&eacute; et ne devra plus jamais l'utiliser pour quelque utilisation que ce soit. La personne responsable de la gestion des cl&eacute;s et de la s&eacute;curit&eacute; est pleinement autoris&eacute;e &agrave; installer et utiliser le certificat pour atester de la pr&eacute;sence &eacute;lectronique de l'organisation."
+msgstr ""
 
 #: www/account/3.php:22
 msgid "If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed andwill not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence."
@@ -993,23 +993,23 @@ msgstr "Si le nom du souscripteur et/ou le nom de domaine d'enregistrement chang
 
 #: www/help/7.php:3
 msgid "If the root store detects a bad request it assumes the webserver is compromised and shuts itself down."
-msgstr "Si le magasin des certificats racines d&eacute;tecte une mauvaise requ&ecirc;te, il d&eacute;duit que la s&eacute;curit&eacute; du serveur web est compromise et il s'&eacute;teint automatiquement."
+msgstr "Si le d&eacute;p&ocirc;t des certificats racines d&eacute;tecte une mauvaise requ&ecirc;te, il d&eacute;duit que la s&eacute;curit&eacute; du serveur web est compromise et il s'&eacute;teint automatiquement."
 
 #: www/help/7.php:4
 msgid "If the root store doesn't receive a 'ping' reply over the serial link within a determined amount of time it assumes the webserver is compromised or the root store itself has been stolen and shuts itself down."
-msgstr "Si l'entrepot des certificats racine ne re&ccedil;oit plus l'acquitement &agrave; travers la ligne s&eacute;rie dans un laps de temps d&eacute;termin&eacute;, il soupsonne que l'int&eacute;grit&eacute; du serveur Web est compromise ou que le magasin racine a lui-m&ecirc;me &eacute;t&eacute; vol&eacute;, alors l'entrepot s'arr&ecirc;te imm&eacute;diatement."
+msgstr "Si le d&eacute;p&ocirc;t des certificats racine ne re&ccedil;oit plus l'acquitement &agrave; travers la ligne s&eacute;rie dans un laps de temps d&eacute;termin&eacute;, il soup&ccedil;onne que l'int&eacute;grit&eacute; du serveur Web est compromise ou que le d&eacute;pot racine a lui-m&ecirc;me &eacute;t&eacute; vol&eacute;. Le d&eacute;p&ocirc;t s'arr&ecirc;te alors imm&eacute;diatement."
 
 #: www/account/39.php:47 www/index/10.php:47
 msgid "If we change our Privacy Policy, we will post those changes on www.CAcert.org. If we decide to use personally identifiable information in a manner different from that stated at the time it was collected, we will notify users via email. Users will be able to opt out of any new use of their personal information."
-msgstr "Si nous changeons nos r&egrave;gles de confidentialit&eacute;, nous signalerons ces changements sur www.cacert.org. Si nous d&eacute;cidons d'employer des informations personnelles identifiables d'une mani&egrave;re diff&eacute;rente de celle indiqu&eacute;e au moment de la collecte, nous informerons les utilisateurs par l'interm&eacute;diaire d'un email. Ainsi, les utilisateurs auront le choix se d&eacute;sinscrire avant tout nouvelle utilisation de leurs informations personnelles."
+msgstr "Si nous changeons nos r&egrave;gles de confidentialit&eacute;, nous signalerons ces changements sur www.cacert.org. Si nous d&eacute;cidons d'employer des informations personnelles identifiables d'une mani&egrave;re diff&eacute;rente de celle indiqu&eacute;e au moment de la collecte, nous informerons les utilisateurs par l'interm&eacute;diaire d'un email. Ainsi, les utilisateurs auront le choix de se d&eacute;sinscrire avant tout nouvelle utilisation de leurs informations personnelles."
 
 #: www/wot/7.php:140
 msgid "If you are happy with this location, click 'Make my location here' to update your location details."
-msgstr "Si cet emplacement vous convient, cliquez sur '"
+msgstr "Si cet emplacement vous convient, cliquez sur 'Je me trouve ici' pour mettre &agrave; jour vos informations de localisation."
 
 #: www/account/40.php:41 www/index/11.php:41
 msgid "If you have questions, comments or otherwise and information you're sending to us contains sensitive details, you should use the contact form below. Due to the large amounts of support emails we receive, sending general questions via this contact form will generally take longer then using the support mailing list. Also sending queries in anything but english could cause delays in supporting you as we'd need to find a translator to help."
-msgstr "Si vous nous envoyez des questions ou des commentaires contenant des d&eacute;tails sensibles (li&eacute;s &agrave; la vie priv&eacute;e), vous devriez employer le formulaire de contact ci-dessous. En raison des grandes quantit&eacute;s d'email que nous recevons, l'envoi de questions g&eacute;n&eacute;rales par l'interm&eacute;diaire de ce formulaire de contact prendra g&eacute;n&eacute;ralement plus longtemps que d'utiliser la mailing liste du support. En outre, l'envoi des questions dans une langue autre que l'anglais pourrait causer  un retard dans la r&eacute;ponse du support de vous car nous devrions trouver un traducteur pour nous aider. "
+msgstr "Si vous nous envoyez des questions ou des commentaires contenant des d&eacute;tails sensibles (li&eacute;s &agrave; la vie priv&eacute;e), vous devriez employer le formulaire de contact ci-dessous. En raison des grandes quantit&eacute;s d'email que nous recevons, l'envoi de questions g&eacute;n&eacute;rales par l'interm&eacute;diaire de ce formulaire de contact prendra g&eacute;n&eacute;ralement plus longtemps que d'utiliser la mailing liste du support. En outre, l'envoi des questions dans une langue autre que l'anglais pourrait causer  un retard dans la r&eacute;ponse du support car nous devrions trouver un traducteur pour nous aider. "
 
 #: www/account/39.php:55 www/index/10.php:55
 msgid "If you need to contact us in writing, address your mail to:"
@@ -1021,7 +1021,7 @@ msgstr "Si vous aviez besoin de plus de temps ou en cas de circonstances att&eac
 
 #: www/account/0.php:18
 msgid "If you would like to view news items or change languages you can click the logout or go home links. Go home doesn't log you out of the system, just returns you to the front of the website. Logout logs you out of the system."
-msgstr "Si vous voulez voir de nouveaux objets ou changer de langue, vous pouvez cliquez sur &quot;Se d&eacute;connecter&quot; ou allez sur le lien de la page d'accueil. Se rendre sur la page d'accueil ne vous d&eacute;connecte pas du syst&egrave;me mais affiche seulement cette page. &quot;Se deconnecter&quot; vous d&eacute;connecte du syst&egrave;me."
+msgstr "Si vous voulez voir de nouveaux objets ou changer de langue, vous pouvez cliquez sur 'Se d&eacute;connecter' ou allez sur le lien de la page d'accueil. Se rendre sur la page d'accueil ne vous d&eacute;connecte pas du syst&egrave;me mais affiche seulement cette page. 'Se d&eacute;connecter' vous d&eacute;connecte du syst&egrave;me."
 
 #: www/account/37.php:25 www/index/12.php:25
 msgid "If you're extremely serious about encryption, you can join CAcert's Assurance Programme and Web of Trust. This allows you to have your identity verified to obtain added benefits, including longer length certificates and the ability to include your name on email certificates."
@@ -1029,11 +1029,11 @@ msgstr "Si vous &ecirc;tes extr&ecirc;mement interess&eacute; &agrave; propos du
 
 #: www/wot/3.php:32
 msgid "If, and only if, the two match completely - you may award trust points up to the maximum points you are able to allocate;"
-msgstr "Si, et seulement si, les deux correspondent parfaitement, vous pourrez attribuer des points de confiance jusqu'au nombre maximum de points que vous avez le droit d'attribuer ; "
+msgstr "Si, et seulement si, les deux correspondent parfaitement, vous pourrez attribuer des points de confiance jusqu'au nombre maximum de points que vous avez le droit d'attribuer;"
 
 #: www/help/7.php:1
 msgid "In light of a request on the bugzilla list for more information about how our root certificate is protected I've decided to do a write up here and see if there is anything more people suggest could be done, or a better way of handling things altogether."
-msgstr "Suite &agrave; une demande sur la liste de bugzilla pour plus d'informations sur la fa&ccedil;on dont nos certificats racine sont prot&eacute;g&eacute;s, j'ai d&eacute;cid&eacute; de pr&eacute;parer une description ici et de voir si d'autres personnes sugg&egrave;rent des solutions qui pourraient &ecirc;tre r&eacute;alis&eacute;es, ou une meilleure mani&egrave;re de g&eacute;rer le fonctionnement. "
+msgstr "Suite &agrave; une demande sur la liste de bugzilla pour plus d'informations sur la fa&ccedil;on dont nos certificats racine sont prot&eacute;g&eacute;s, j'ai d&eacute;cid&eacute; de la d&eacute;crire ici et de voir si d'autres personnes sugg&egrave;rent des solutions qui pourraient &ecirc;tre r&eacute;alis&eacute;es, ou une meilleure mani&egrave;re de g&eacute;rer le fonctionnement. "
 
 #: www/help/3.php:9
 msgid "In the 'Directory Security' folder click on the 'Server Certificate' button in the 'Secure communications' section. If you have not used this option before the 'Edit' button will not be active."
@@ -1127,11 +1127,11 @@ msgstr "S'inscrire &agrave; CAcert.org"
 
 #: www/account/17.php:21 www/account/4.php:21
 msgid "Key Strength:"
-msgstr "Taille de la cl&eacute;:"
+msgstr "Force de la cl&eacute; (longueur):"
 
 #: www/help/3.php:4
 msgid "Key generation process"
-msgstr "processus de g&eacute;n&eacute;ration de clef"
+msgstr "Processus de g&eacute;n&eacute;ration de clef"
 
 #: www/account/17.php:131 www/account/4.php:131
 msgid "Keysize:"
@@ -1232,7 +1232,7 @@ msgstr "De nombreuses personnes ne sont pas satisfaites avec les offres commerci
 
 #: www/index/7.php:17
 msgid "Many people to thank, if you've had a large input with the CAcert project with code, documentation, translations, or assurances and would like recognition let me know."
-msgstr "Merci &agrave; tous, si vous avez contribu&eacute; &agrave; CAcert avec des lignes de code, de la documentation, des traductions ou des accr&eacute;ditations, si vous souhaitez une reconnaissance, faites moi le savoir."
+msgstr "Merci &agrave; tous, si vous avez contribu&eacute; &agrave; CAcert avec des lignes de code, de la documentation, des traductions ou des accr&eacute;ditations, si vous souhaitez une reconnaissance, faites-le moi savoir."
 
 #: www/account/32.php:25 www/account/33.php:35
 msgid "Master Account"
@@ -1269,7 +1269,7 @@ msgstr "Pr&eacute;nom(s) additionnel(s)"
 
 #: www/help/2.php:26
 msgid "Most people would object if they found that all their postal letters are being opened, read and possibly recorded by the Government before being passed on to the intended recipient, resealed as if nothing had happened. And yet this is what happens every day with your emails (in the UK). There are some who have objected to this intrusion of privacy, but their voices are small and fall on deaf ears. However the most effective way to combat this intrusion is to seal the envelope shut in a miniature bank vault, i.e. encrypt your email. If all emails were encrypted, it would be very hard for Government, or other organisations/individual crackers, to monitor the general public. They would only realistically have enough resources to monitor those they had reason to suspect. Why? Because encryption can be broken, but it takes a lot of computing power and there wouldn't be enough to monitor the whole population of any given country."
-msgstr "La plupart des gens s'offusquerait s'ils d&eacute;couvrait que tout leur courrier postal est ouvert, lu et vraisemblablement enregistr&eacute; par leur Gouvernement puis referm&eacute; proprement - comme si de rien n'&eacute;tait - avant qu'ils ne le r&eacute;cup&egrave;rent. Et pourtant, c'est ce qui se produit tous les jours avec vos emails (en Grande Bretagne). Certains ont &eacute;t&eacute; choqu&eacute;s par cette intrusion dans leur vie priv&eacute;e, mais leur voix est faible et elle tombe dans des oreilles sourdes. La m&eacute;thode la plus efficace de combattre cette intrusion est de sceller l'enveloppe enferm&eacute;e dans un coffre-fort miniature, i.e. votre mail chiffr&eacute;. Si tous les mails &eacute;taient chiffr&eacute;s, il deviendrait difficile, au Gouvernement ou d'autres organisation/pirates individuels, de surveiller le commun des mortels. Ils auraient, de mani&egrave;re r&eacute;aliste, seulement les ressources n&eacute;cessaires pour surveiller ceux qu'ils suspectent pour de bonnes raisons. Pourquoi ? Parce que tout chiffrage peut-&ecirc;tre cass&eacute;, mais cela consomme beaucoup de puissance informatique alors il n'y aurait pas assez de ressources pour surveiller toute la population d'un pays donn&eacute;."
+msgstr "La plupart des gens s'offusquerait s'ils d&eacute;couvrait que tout leur courrier postal est ouvert, lu et vraisemblablement enregistr&eacute; par leur Gouvernement puis referm&eacute; proprement - comme si de rien n'&eacute;tait - avant qu'ils ne le r&eacute;cup&egrave;rent. Et pourtant, c'est ce qui se produit tous les jours avec vos emails (en Grande Bretagne). Certains ont &eacute;t&eacute; choqu&eacute;s par cette intrusion dans leur vie priv&eacute;e, mais leur voix est faible et elle tombe dans des oreilles sourdes. La m&eacute;thode la plus efficace de combattre cette intrusion est de sceller l'enveloppe enferm&eacute;e dans un coffre-fort miniature, i.e. de chiffer votre mail. Si tous les mails &eacute;taient chiffr&eacute;s, il deviendrait difficile, au Gouvernement ou d'autres organisation/pirates individuels, de surveiller le commun des mortels. Ils auraient, de mani&egrave;re r&eacute;aliste, seulement les ressources n&eacute;cessaires pour surveiller ceux qu'ils suspectent pour de bonnes raisons. Pourquoi ? Parce que tout chiffrage peut-&ecirc;tre cass&eacute;, mais cela consomme beaucoup de puissance informatique alors il n'y aurait pas assez de ressources pour surveiller toute la population d'un pays donn&eacute;."
 
 #: includes/general_stuff.php:56 www/account/0.php:15
 msgid "My Account"
@@ -1327,7 +1327,7 @@ msgstr "Ma localisation"
 
 #: www/account/41.php:21
 msgid "My prefered language"
-msgstr "Ma langue pr&eacute;f&eacute;r&eacute;"
+msgstr "Ma langue pr&eacute;f&eacute;r&eacute;e"
 
 #: www/account/2.php:41
 msgid "N/A"
@@ -1375,7 +1375,7 @@ msgstr "Nouveau mot de passe"
 
 #: includes/account.php:829 www/index.php:92
 msgid "New Pass Phrases specified don't match or were blank."
-msgstr "les mots de passent de correspondent pas ou sont vides."
+msgstr "Les mots de passe ne correspondent pas ou sont vides."
 
 #: www/account/44.php:26
 msgid "New Password"
@@ -1393,7 +1393,7 @@ msgstr "Suivant"
 
 #: www/help/4.php:17
 msgid "Next step is that you submit the contents of server.csr to the CAcert website, it should look *EXACTLY* like the following example otherwise the server may reject your request because it appears to be invalid."
-msgstr "L'&eacute;tape suivante est que vous envoyez le contenu du fichier server.csr au site CAcert, cela doit ressembler *EXACTEMENT* &agrave; l'exemple suivant sinon le serveur rejettera votre requ&ecirc;te apparement invalide."
+msgstr "L'&eacute;tape suivante est que vous envoyez le contenu du fichier server.csr au site CAcert, cela doit ressembler *EXACTEMENT* &agrave; l'exemple suivant sinon le serveur rejettera votre requ&ecirc;te car elle lui semblera invalide."
 
 #: www/account/50.php:29
 msgid "No"
@@ -1418,7 +1418,7 @@ msgstr "Questions en cas de perte de phrase secr&egrave;te - S'il vous pla&icirc
 #: www/account/15.php:24 www/account/19.php:24 www/account/23.php:24
 #: www/account/6.php:22
 msgid "No such certificate attached to your account."
-msgstr "Aucun certificat &eacute;quivalant n'est attach&eacute; &agrave; votre compte."
+msgstr "Aucun certificat &eacute;quivalent n'est attach&eacute; &agrave; votre compte."
 
 #: includes/account.php:1731
 msgid "No such user found."
@@ -1435,7 +1435,7 @@ msgstr "Aucune, le ciel est la limite pour CAcert."
 
 #: www/index/0.php:115
 msgid "None; $10 USD per year membership fee."
-msgstr "Aucune, le tarifs est de 10$ US pour &ecirc;tre membre. "
+msgstr "Aucune, le tarif est de 10$ US par ann&eacute;e pour &ecirc;tre membre. "
 
 #: includes/general_stuff.php:57
 msgid "Normal Login"
@@ -1471,7 +1471,7 @@ msgstr "Suppression des requ&ecirc;tes de certificat en cours :"
 #: includes/account.php:506 includes/account.php:635 includes/account.php:1032
 #: includes/account.php:1241
 msgid "Now renewing the following certificates:"
-msgstr "Renouveller les certificats client :"
+msgstr "Renouveler les certificats client :"
 
 #: includes/account.php:572 includes/account.php:685 includes/account.php:1082
 #: includes/account.php:1296
@@ -1488,7 +1488,7 @@ msgstr "ID de la cl&eacute;"
 
 #: www/help/2.php:30
 msgid "Of the biggest reasons why most people haven't started doing this, apart from being slightly technical, the reason is financial. You need your own certificate to digitally sign your emails. And the Certificate Authorities charge money to provide you with your own certificate. Need I say more. Dosh = no thanks I'd rather walk home. But organisations are emerging to provide the common fool in the street with a free alternative. However, given the obvious lack of funding and the emphasis on money to get enrolled, these organisations do not yet have the money to get themselves established as trusted Certificate Authorities. Thus it is currently down to trust. The decision of the individual to trust an unknown Certificate Authority. However once you have put your trust in a Certificate Authority you can implicitly trust the digital signatures generated using their certificates. In other words, if you trust (and accept the certificate of) the Certificate Authority that I use, you can automatically trust my digital signature. Trust me!"
-msgstr "Parmi les plus grandes raisons pour lesquelles la plupart des personnes n'ont pas commenc&eacute; &agrave; faire ceci, ind&eacute;pendamment d'&ecirc;tre l&eacute;g&egrave;rement techniques, la raison est financi&egrave;re. Vous avez besoin de votre propre certificat pour signer num&eacute;riquement vos emails. Et les autorit&eacute;s de certificat demandent de l'argent pour vous fournir votre propre certificat. Ai-je besoin d'en dire plus ? R&eacute;sultat = Non merci, je pr&eacute;f&egrave;re rentrer chez moi. Mais des organisations &eacute;mergent pour fournir au commun des mortels une alternative libre. Cependant, &eacute;tant donn&eacute; le manque &eacute;vident de financement et le verrou financier pour &ecirc;tre inscrit, ces organisations n'ont pas encore l'argent pour s'&eacute;tablir comme Autorit&eacute; de Certification reconnue. Ainsi, on revient une confiance de base. C'est la d&eacute;cision de l'individu de faire confiance &agrave; une Autorit&eacute; de Certification non-reconnue. Cependant, une fois que vous avez mis votre confiance dans une Autorit&eacute; de Certification, vous pouvez implicitement faire confiance aux signatures num&eacute;riques produites en utilisant leurs certificats. En d'autres termes, si vous faites confiance (et acceptez le certificat) d'une Autorit&eacute; de Certification que j'emploie, vous pouvez automatiquement faire confiance &agrave; ma signature num&eacute;rique. Faites-moi confiance ! "
+msgstr "Parmi les raisons pour lesquelles la plupart des personnes n'ont pas commenc&eacute; &agrave; faire ceci, les simples raisons techniques mises &agrave; part, la principale raison est d'ordre financier. Vous avez besoin de votre propre certificat pour signer num&eacute;riquement vos emails. Et les autorit&eacute;s de certificat demandent de l'argent pour vous fournir votre propre certificat. Ai-je besoin d'en dire plus ? R&eacute;sultat = Non merci, je pr&eacute;f&egrave;re rentrer chez moi. Mais des organisations &eacute;mergent pour fournir au commun des mortels une alternative gratuite. Cependant, &eacute;tant donn&eacute; le manque &eacute;vident de financement et le verrou financier pour &ecirc;tre inscrit, ces organisations n'ont pas encore l'argent pour s'&eacute;tablir comme Autorit&eacute; de Certification reconnue. Ainsi, on en revient &agrave; une confiance de base. C'est la d&eacute;cision de l'individu de faire confiance &agrave; une Autorit&eacute; de Certification non-reconnue. Cependant, une fois que vous avez mis votre confiance dans une Autorit&eacute; de Certification, vous pouvez implicitement faire confiance aux signatures num&eacute;riques produites en utilisant leurs certificats. En d'autres termes, si vous faites confiance (et acceptez le certificat) d'une Autorit&eacute; de Certification que j'emploie, vous pouvez automatiquement faire confiance &agrave; ma signature num&eacute;rique. Faites-moi confiance ! "
 
 #: www/account/14.php:21
 msgid "Old Pass Phrase"
@@ -1496,19 +1496,19 @@ msgstr "Ancien mot de passe"
 
 #: www/account/10.php:16 www/account/20.php:16 www/account/3.php:16
 msgid "Once you decide to subscribe for an SSL Server Certificate you will need to complete this agreement. Please read it carefully. Your Certificate Request can only be processed with your acceptance and understanding of this agreement."
-msgstr "Une fois que vous avez d&eacute;cid&eacute; de souscrire &agrave; un certificat serveur SSL vous aurez besoin de consentir &agrave; cet accord. S'il vous plait, lisez-le avec attention. Votre demande de certificat ne peut &ecirc;tre valid&eacute; qu'avec votre acceptation et votre consentement &agrave; cet accord."
+msgstr ""
 
 #: www/account/0.php:26
 msgid "Once you have verified your company you will see these menu options. They allow you to issue as many certificates as you like without proving individual email accounts as you like, further more you are able to get your company details on the certificate."
-msgstr "Une fois que vous avez authentifi&eacute; votre soci&eacute;t&eacute;, vous verrez ces options dans le menu. Elles vous permettent de g&eacute;n&eacute;rer autant de certificat que vous le voulez sans &agrave; avoir &agrave; approuver les comptes emails individuellement, et de plus les d&eacute;tails concernant votre compagnie apparaissent sur le certificat."
+msgstr "Une fois que vous avez authentifi&eacute; votre soci&eacute;t&eacute;, vous verrez ces options dans le menu. Elles vous permettent de g&eacute;n&eacute;rer autant de certificat que vous le voulez sans avoir &agrave; approuver chaque compte email individuellement. De plus, les d&eacute;tails concernant votre compagnie apparaissent sur le certificat."
 
 #: www/help/4.php:28
 msgid "Once you've submitted it the system will process your request and send an email back to you containing your server certificate."
-msgstr "Une fois que vous l'avez soumis, le syst&egrave;me traitera votre requ&ecirc;te et renverra un email contenant votre certificat serveur."
+msgstr "Une fois que vous l'avez soumise, le syst&egrave;me traitera votre requ&ecirc;te et renverra un email contenant votre certificat serveur."
 
 #: www/help/2.php:45
 msgid "One assumes that if a site has an SSL certificate (that's what enables secure communication, for exchanging personal details, credit card numbers, etc. and gives the 'lock' icon in the browser) that they have obtained that certificate from a reliable source (a Certificate Authority), which has the appropriate stringent credentials for issuing something so vital to the security of the Internet, and the security of your communications. You have probably never even asked yourself the question of who decided to trust these Certificate Authorities, because your browser comes with their (root) certificates pre-installed, so any web site that you come across that has an SSL certificate signed by one of them, is automatically accepted (by your browser) as trustworthy."
-msgstr "Une personne supposera que si le site poss&egrave;de un certificat SSL (ce qui permet une communication s&eacute;curis&eacute;e, pour &eacute;changer des informations personnelles, les num&eacute;ros de carte de paiement, etc. et affiche l'ic&ocirc;ne &quot;communication s&eacute;curis&eacute;e&quot; dans le navigateur) alors elles ont obtenu ce certificat d'une source fiable (Une Autorit&eacute; de Certification), qui dispose de toutes les accr&eacute;ditations appropri&eacute;es pour fournir une chose aussi vitale pour la s&eacute;curit&eacute; sur l'Internet, et la s&eacute;curit&eacute; de vos communications. Vous ne vous &ecirc;tes jamais pos&eacute; la question de savoir qui avait d&eacute;cid&eacute; de faire confiance en ces m&ecirc;mes Autorit&eacute;s de Certification, parce que votre navigateur est fourni avec leur certificat racine pr&eacute;-install&eacute;, ainsi n'importe quel site Web qui dispose d'un certificat SSL sign&eacute; par eux est reconnu automatiquement (par votre navigateur) comme de pleine confiance."
+msgstr "Une personne supposera que si le site poss&egrave;de un certificat SSL (ce qui permet une communication s&eacute;curis&eacute;e, pour &eacute;changer des informations personnelles, les num&eacute;ros de carte de paiement, etc. et affiche l'ic&ocirc;ne 'communication s&eacute;curis&eacute;e' dans le navigateur), alors ce certificat &eacute;mane d'une source fiable (Une Autorit&eacute; de Certification), qui dispose de toutes les accr&eacute;ditations appropri&eacute;es pour fournir un &eacute;l&eacute;ment aussi vital pour la s&eacute;curit&eacute; sur l'Internet, et la s&eacute;curit&eacute; de vos communications. Vous ne vous &ecirc;tes jamais pos&eacute; la question de savoir qui avait d&eacute;cid&eacute; de faire confiance &agrave; ces m&ecirc;mes Autorit&eacute;s de Certification, parce que votre navigateur est fourni avec leur certificat racine pr&eacute;-install&eacute;, ainsi n'importe quel site Web qui dispose d'un certificat SSL sign&eacute; par eux est reconnu automatiquement (par votre navigateur) comme digne de confiance."
 
 #: www/wot/6.php:74
 msgid "Only fill this in if you assured the person on a different day"
@@ -1520,7 +1520,7 @@ msgstr "Seulement les 100 premi&egrave;res lignes sont affich&eacute;es."
 
 #: www/wot/6.php:61
 msgid "Only tick the next box if the Assurance was face to face."
-msgstr "Cocher seulement la boite suivante si la certification s'est d&eacute;roul&eacute;e en face &agrave; face. "
+msgstr "Cocher seulement la bo&icirc;te suivante si la certification s'est d&eacute;roul&eacute;e en face &agrave; face. "
 
 #: www/help/3.php:8
 msgid "Open Directory Security folder"
@@ -1536,11 +1536,11 @@ msgstr "Certificats Client"
 
 #: www/account/0.php:25
 msgid "Org Client and Server Certificates"
-msgstr "Nouveau certificat client"
+msgstr ""
 
 #: includes/account_stuff.php:170
 msgid "Org Server Certs"
-msgstr "Nouveau certificat client"
+msgstr ""
 
 #: www/account/11.php:29 www/account/21.php:32
 msgid "Org. Unit"
@@ -1549,15 +1549,15 @@ msgstr "Unit&eacute; d'organisation"
 #: www/account/11.php:28 www/account/21.php:31 www/account/25.php:20
 #: www/account/35.php:20
 msgid "Organisation"
-msgstr "Organisation"
+msgstr ""
 
 #: www/account/24.php:21 www/account/27.php:24
 msgid "Organisation Name"
-msgstr "Organisation"
+msgstr ""
 
 #: includes/account.php:1379 includes/account.php:1406
 msgid "Organisation Name and Contact Email are required fields."
-msgstr "Le nom de l'organisation et l'adresse de courrier num&eacute;rique sont des champs obligatoires."
+msgstr "Le nom de l'organisation et l'adresse de courrier &eacute;lectronique sont des champs obligatoires."
 
 #: www/account/25.php:17 www/account/35.php:17
 msgid "Organisations"
@@ -1591,7 +1591,7 @@ msgstr "optionnel"
 
 #: www/wot/6.php:28
 msgid "PLEASE NOTE: You have already assured this person before! If this is unintentional please DO NOT CONTINUE with this assurance."
-msgstr "NOTEZ BIEN : Vous avez d&eacute;j&agrave; accr&eacute;dit&eacute; cette personne auparavent ! Si c'est par inadvertence, s'il vous plait, NE POURSUIVEZ PAS avec cette accr&eacute;ditation."
+msgstr "NOTEZ BIEN : Vous avez d&eacute;j&agrave; accr&eacute;dit&eacute; cette personne auparavent ! Si c'est par inadvertence, vous &ecirc;tes pri&eacute; de NE PAS CONTINUER cette accr&eacute;ditation."
 
 #: www/index/1.php:73 www/index/4.php:30
 msgid "Pass Phrase"
@@ -1603,7 +1603,7 @@ msgstr "Confirmation du mot de passe"
 
 #: www/index.php:254
 msgid "Pass Phrases don't match"
-msgstr "Les mots de passes ne correspondent pas"
+msgstr "Les mots de passe ne correspondent pas"
 
 #: www/index.php:249
 msgid "Pass Phrases were blank"
@@ -1649,7 +1649,7 @@ msgstr "Emplacement :"
 
 #: www/account/3.php:65
 msgid "Please Note: By ticking this box you will automatically have your name included in any certificates."
-msgstr "Prenez note : en cochant cette case, vous aurez automatiquement votre nom inclu dans vos certificats."
+msgstr "Prenez note : en cochant cette case, votre nom sera automatiquement inclus dans vos certificats."
 
 #: www/account/2.php:56 www/account/9.php:56
 msgid "Please Note: You can not set an unverified account as a default account, and you can not remove a default account. To remove the default account you must set another verified account as the default."
@@ -1657,7 +1657,7 @@ msgstr "Prenez note : vous ne pouvez pas choisir un compte non v&eacute;rifi&eac
 
 #: www/account/7.php:32
 msgid "Please Note: You only need to enter the main part of your domain, eg. mydomain.com rather then www.mydomain.com. Once you have verified your domain you are able to enter any sub-domain, such as www.mydomain.com or www.this.is.mydomain.com as the system checks from right to left, rather then specific hostnames when you upload a CSR to the system."
-msgstr "Prenez note : Vous avez seulement besoin de saisir la partie principale de votre domaine, par exemple mondomaine.com plut&ocirc;t que www.mondomaine.com ou www.ceci.est.mon.domaine.com comme le syst&egrave;me v&eacute;rifie le nom de domaine de droite &agrave; gauche, c&rsquo;est pr&eacute;f&eacute;rable &agrave; la cr&eacute;ation de noms de sous-domaines quand vous chargez un CSR dans le syst&egrave;me."
+msgstr "Prenez note : vous avez seulement besoin de saisir la partie principale de votre domaine, par exemple mondomaine.com plut&ocirc;t que www.mondomaine.com ou www.ceci.est.mon.domaine.com comme le syst&egrave;me v&eacute;rifie le nom de domaine de droite &agrave; gauche. C&rsquo;est pr&eacute;f&eacute;rable &agrave; la cr&eacute;ation de noms de sous-domaines quand vous chargez un CSR dans le syst&egrave;me."
 
 #: www/wot.php:233
 #, php-format
@@ -1679,11 +1679,11 @@ msgstr "Veuillez svp vous assurer que les d&eacute;tails suivants sont corrects 
 
 #: www/index/0.php:120
 msgid "Please note a general limitation is that, unlike long-time players like Verisign, CAcert's root certificate is not included by default in mainstream browsers, email clients, etc. This means people to whom you send encrypted email, or users who visit your SSL-enabled web server, will first have to import CAcert's root certificate, or they will have to agree to pop-up security warnings (which may look a little scary to non-techy users)."
-msgstr "Prenez note d&rsquo;une limitation g&eacute;n&eacute;rale, &agrave; la diff&eacute;rence des corporations renomm&eacute;e comme Verisign, les certificats racine de Cacert ne sont pas inclus par d&eacute;faut dans les navigateurs du march&eacute;, les clients d&rsquo;email, etc&hellip; Cela signifie que les personnes auxquelles vous envoyez des mails chiffr&eacute;s ou les utilisateurs visitant votre serveur web s&eacute;curis&eacute; SSL, devront importer les certificats racine de Cacert ou bien il devront valider une fen&ecirc;tre de s&eacute;curit&eacute; qui leur appara&icirc;tra pour leur signaler le probl&egrave;me (Cela pourra sembler surprenant pour les utilisateurs non techniciens)."
+msgstr "Notez cette limitation g&eacute;n&eacute;rale : &agrave; la diff&eacute;rence des corporations renomm&eacute;e comme Verisign, les certificats racine de Cacert ne sont pas (encore ?) inclus par d&eacute;faut dans les navigateurs du march&eacute;, les clients d&rsquo;email, etc&hellip; Cela signifie que les personnes auxquelles vous envoyez des mails chiffr&eacute;s ou les utilisateurs visitant votre serveur web s&eacute;curis&eacute; SSL, devront importer les certificats racine de Cacert ou bien il devront valider une fen&ecirc;tre de s&eacute;curit&eacute; qui leur appara&icirc;tra pour leur signaler le probl&egrave;me (Cela pourra sembler surprenant pour les utilisateurs non techniciens)."
 
 #: www/account/14.php:33 www/index/1.php:81 www/index/6.php:51
 msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol."
-msgstr "Prenez note que dans l'inter&ecirc;t d'une bonne s&eacute;curit&eacute;, le mot de passe doit &ecirc;tre compos&eacute; de lettres minuscules et majuscules, des nombres et d'autres symboles."
+msgstr "Notez bien que dans l'inter&ecirc;t d'une bonne s&eacute;curit&eacute;, le mot de passe doit &ecirc;tre compos&eacute; de lettres minuscules et majuscules, des nombres et d'autres symboles."
 
 #: www/wot/8.php:40
 msgid "Please note: All html will be stripped from the contact information box, a link to an email form will automatically be inserted to ensure your privacy."
@@ -1700,7 +1700,7 @@ msgstr "Points attribu&eacute;s"
 
 #: www/account/40.php:54 www/index/11.php:54
 msgid "Postal Address:"
-msgstr "Adresse postale:"
+msgstr "Adresse postale :"
 
 #: www/help/3.php:14
 msgid "Prepare the request"
@@ -1757,7 +1757,7 @@ msgstr "Renouveler/R&eacute;voquer/Effacer"
 
 #: includes/account.php:548 includes/account.php:1270
 msgid "Renewing"
-msgstr "Renouveler"
+msgstr ""
 
 #: www/index/6.php:47
 msgid "Repeat"
@@ -1765,7 +1765,7 @@ msgstr "R&eacute;p&eacute;tez"
 
 #: www/help/3.php:52
 msgid "Return to the 'Internet Information Services' screen in 'Administrative Tools' under 'Control Panel'. Right click on 'Default Web Site' and select 'Properties'."
-msgstr "Retournez &agrave; l'&eacute;cran 'Internet Information Services' dans les 'Outils d'administration' sous le 'panneau de contr&ocirc;le'. Faites un clic droit sur 'site web par d&eacute;faut' et choisir 'Propri&eacute;t&eacute;s'."
+msgstr "Retournez &agrave; l'&eacute;cran 'Internet Information Services' dans les 'Outils d'administration' sous le 'panneau de contr&ocirc;le'. Faites un clic droit sur 'site web par d&eacute;faut' et choisissez 'Propri&eacute;t&eacute;s'."
 
 #: www/account/12.php:72 www/account/18.php:78 www/account/22.php:74
 #: www/account/5.php:78
@@ -1780,7 +1780,7 @@ msgstr "R&eacute;voqu&eacute;"
 
 #: www/index/51.php:31
 msgid "Right now it's happening all around you - there are secured websites and email protocols being protected and trusted by people, signed by CAcert."
-msgstr "Maintenant, cela se produit partout autour de vous, il y a des sites web s&eacute;curis&eacute;s et des protocoles d'&eacute;change d'email prot&eacute;g&eacute;s et dont les gens font confiance, sign&eacute;s par CAcert."
+msgstr "Actuellemnt, cela se produit partout autour de vous: il y a des sites web s&eacute;curis&eacute;s et des protocoles d'&eacute;change d'email prot&eacute;g&eacute;s et auxquels les gens font confiance, sign&eacute;s par CAcert."
 
 #: includes/general_stuff.php:67
 msgid "Root Certificate"
@@ -1804,7 +1804,7 @@ msgstr "Il a fait beaucoup d'efforts pour convaincre des personnes en Allemagne 
 
 #: www/index/0.php:63
 msgid "Same as above plus you can include your full name in the certificates."
-msgstr "Le m&ecirc;me d'au dessus plus la posibilit&eacute; d'inclure votre nom complet dans vos certificats."
+msgstr "Le m&ecirc;me que ci-dessus, plus la posibilit&eacute; d'inclure votre nom complet dans vos certificats."
 
 #: www/index/0.php:94
 msgid "Same as above, except certificates expire in 24 months."
@@ -1820,7 +1820,7 @@ msgstr "Le m&ecirc;me qu'au dessus, plus un minimum de 50 points d'accr&eacute;d
 
 #: www/index/0.php:93
 msgid "Same as above."
-msgstr "Le m&ecirc;me qu'au dessus."
+msgstr "Le m&ecirc;me que ci-dessus."
 
 #: www/help/3.php:46
 msgid "Saving the certificate"
@@ -1844,7 +1844,7 @@ msgstr "Rechercher dans cette r&eacute;gion"
 
 #: www/account/43.php:163
 msgid "Secondary Emails"
-msgstr "Email de contact"
+msgstr ""
 
 #: pages/wot/13.php:40
 msgid "Your location has been updated"
@@ -1913,7 +1913,7 @@ msgstr "Selectionner les d&eacute;tails sp&eacute;cifiques du compte"
 
 #: www/help/3.php:37
 msgid "Select an easy to locate folder. You'll have to open this file up with Notepad. The CSR must be copied and pasted into our online form. Once the CSR has been submitted, you won't need this CSR any more as IIS won't reuse old CSR to generate new certificates."
-msgstr "Choisir un r&eacute;pertoire facile &agrave; retrouver. Vous devrez ouvrir ce fichier avec le 'Bloc-notes'. Le CSR doit &ecirc;tre copier et coller dans le formulaire en ligne. Une fois que le CSR a &eacute;t&eacute; soumis, vous n'aurez plus besoin de ce CSR puisque IIS ne r&eacute;utilisera plus des anciens CSR pour g&eacute;n&eacute;rer de nouveaux certificats."
+msgstr "Choisir un r&eacute;pertoire facile &agrave; retrouver. Vous devrez ouvrir ce fichier avec le 'Bloc-notes'. Le CSR doit &ecirc;tre copi&eacute; et coll&eacute; dans le formulaire en ligne. Une fois que le CSR a &eacute;t&eacute; soumis, vous n'avez plus besoin de ce CSR puisque IIS ne r&eacute;utilisera plus des anciens CSR pour g&eacute;n&eacute;rer de nouveaux certificats."
 
 #: www/help/3.php:61
 msgid "Select the .cer file and click 'Next'."
@@ -1930,7 +1930,7 @@ msgstr "Envoyer"
 
 #: www/account/40.php:40 www/index/11.php:40
 msgid "Sensitive Information"
-msgstr "Informations personnelles"
+msgstr ""
 
 #: includes/account_stuff.php:161
 msgid "Server Certificates"
@@ -1942,7 +1942,7 @@ msgstr "Certificats de domaines (utilisateur non-accr&eacute;dit&eacute;)"
 
 #: www/wot.php:247
 msgid "Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this."
-msgstr "Dans un court instant, la personne que vous accr&eacute;ditez et vous m&ecirc;me recevrez une email de confirmation. Ils n'y a pas d'action suppl&eacute;mentaire &agrave; effectuer pour terminer le processus."
+msgstr "Dans un court instant, la personne que vous accr&eacute;ditez et vous m&ecirc;me recevrez une email de confirmation. Il n'y a pas d'action suppl&eacute;mentaire &agrave; effectuer pour terminer le processus."
 
 #: www/account/40.php:51 www/index/11.php:51
 msgid "Snail Mail"
@@ -1950,7 +1950,7 @@ msgstr "Courrier postal"
 
 #: www/help/2.php:50
 msgid "So if you don't pass the audit, you don't get to be a Certificate Authority. And to pass the audit, well, you've got to show that you can do a good job issuing certificates. That they're secure, you only give them to the right people, etc. So what happens when you make a mistake and you erroneously issue a certificate that risks the entire Internet browsing population, like Verisign did? Well, er, nothing actually. They already paid for their audit, and damn it, they're so big now, we couldn't possibly revoke their Certificate Authority status. (There's too much money at stake!)"
-msgstr "Alors, si vous ne r&eacute;ussissez pas l&rsquo;audit, vous ne pouvez pas devenir une Autorit&eacute; de Certification reconnue. Et pour r&eacute;ussir l&rsquo;audit, bien, vous devez prouvez que votre m&eacute;thodologie de travail pour fournir des certificats est correcte. Que les certificats soient fiables, que vous ne les attribuer qu&rsquo;aux personnes concern&eacute;es, etc&hellip; Alors que ce passe t-il si vous faites une erreur et que vous attribuez un certificat erron&eacute; qui risque de compromettre toute la communaut&eacute; naviguant sur Internet, comme Verisign l&rsquo;a fait ? Bien, hum, rien en fait. Ils ont pay&eacute; leur audit, et nom de Zeus, ils sont tellement gigantesques que nous ne pouvons plus r&eacute;voquer leur statut d&rsquo;Autorit&eacute; de Certification. (Il y a trop d&rsquo;argent en jeu)"
+msgstr "Alors, si vous ne r&eacute;ussissez pas l&rsquo;audit, vous ne pouvez pas devenir une Autorit&eacute; de Certification reconnue. Et pour r&eacute;ussir l&rsquo;audit, bien, vous devez prouvez que votre m&eacute;thodologie de travail pour fournir des certificats est correcte. Que les certificats soient fiables, que vous ne les attribuez qu&rsquo;aux personnes concern&eacute;es, etc&hellip; Alors que se passe-t-il si vous faites une erreur et que vous attribuez un certificat erron&eacute; qui risque de compromettre toute la communaut&eacute; naviguant sur Internet, comme Verisign l&rsquo;a fait ? Bien, hum, rien en fait. Ils ont pay&eacute; leur audit, et nom de Zeus, ils sont tellement gigantesques que nous ne pouvons plus r&eacute;voquer leur statut d&rsquo;Autorit&eacute; de Certification. (Il y a trop d&rsquo;argent en jeu)"
 
 #: www/index/51.php:33
 msgid "So what can I do to help the cause?"
@@ -2027,7 +2027,7 @@ msgstr "Les 10 risques des infrastructures &agrave; clefs publiques (PKI) : ce q
 
 #: www/account/38.php:23 www/index/13.php:23
 msgid "Thank you very much for your support, your donations help CAcert to continue to operate."
-msgstr "Merci pour votre soutien et vos donations qui aident CAcert &agrave; poursuivre son projet."
+msgstr "Merci pour votre soutien, vos donations aident CAcert &agrave; poursuivre son projet."
 
 #: www/index.php:314
 msgid "Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!"
@@ -2047,15 +2047,15 @@ msgstr "Le Nom Commun (Common Name) est le nom qualifi&eacute; complet de l'h&oc
 
 #: www/verify.php:46
 msgid "The ID or Hash has already been verified, or something weird happened."
-msgstr "L'identifiant ou le Hachage a d&eacute;j&agrave; &eacute;t&eacute; v&eacute;rifi&eacute; ou une chose &eacute;trange s'est produite."
+msgstr "L'identifiant ou le Hachage a d&eacute;j&agrave; &eacute;t&eacute; v&eacute;rifi&eacute;, ou quelque chose d'inattendu s'est produit."
 
 #: www/verify.php:90
 msgid "The ID or Hash has already been verified, the domain no longer exists in the system, or something weird happened."
-msgstr "L'identifiant ou le Hachage a d&eacute;j&agrave; &eacute;t&eacute; v&eacute;rifi&eacute;, le nom de domaine n'existe plus dans le syst&egrave;me ou une chose &eacute;trange s'est produite."
+msgstr "L'identifiant ou le Hachage a d&eacute;j&agrave; &eacute;t&eacute; v&eacute;rifi&eacute;, le nom de domaine n'existe plus dans le syst&egrave;me, ou quelque chose d'inattendu s'est produit."
 
 #: www/help/3.php:28
 msgid "The Organisational Unit field is the 'free' field. It is often the department or Server name for reference."
-msgstr "Le champ Unit&eacute; d'Organisation (Organisational Unit) est un champ libre. C'est souvent le d&eacute;partement ou le nom de serveur de r&eacute;f&eacute;rence."
+msgstr ""
 
 #: includes/account.php:838
 msgid "The Pass Phrase you submitted was too short."
@@ -2071,19 +2071,19 @@ msgstr "La loi sur la r&egrave;glementation du pouvoir d'investigation AKA 'The 
 
 #: pages/account/13.php:28
 msgid "You receive this automatic mail since you yourself or"
-msgstr "Vous recevez ce message automatique depuis que vous avez vous-m&ecirc;me ou"
+msgstr "Vous recevez ce message automatique puisque vous-m&ecirc;me ou"
 
 #: pages/account/13.php:36
 msgid "account, and you should promptly change your password and your"
-msgstr "compte, et vous devez rapidement modifier votre mot de passe et votre"
+msgstr "compte, et vous devez rapidement modifier votre mot de passe et vos"
 
 #: pages/account/13.php:30
 msgid "for a forgotten password."
-msgstr "mot de passe oubli&eacute;."
+msgstr "en cas de mot de passe oubli&eacute;."
 
 #: pages/account/13.php:37
 msgid "secret questions and answers."
-msgstr "questions secr&egrave;te de  et r&eacute;ponses."
+msgstr "questions secr&egrave;tes ainsi que leur r&eacute;ponse."
 
 #: pages/account/13.php:29
 msgid "someone else looked up your secret questions and answers"
@@ -2091,23 +2091,23 @@ msgstr "quelqu'un d'autre a examin&eacute; vos questions secr&egrave;tes et les 
 
 #: pages/account/13.php:35
 msgid "there is a danger that an unauthorised person accessed your"
-msgstr "Il y a un risque qu'une personne non autoris&eacute;e d'acc&eacute;der votre"
+msgstr "il y a un risque qu'une personne non autoris&eacute;e ait acc&eacute;d&eacute; &agrave; votre"
 
 #: pages/account/13.php:32
 msgid "through the menu in your account, everything is in best order and"
-msgstr "via le menu dans votre compte, tout est en ordre de meilleur et"
+msgstr "via le menu dans votre compte, tout est parfaitement en ordre et"
 
 #: pages/account/13.php:33
 msgid "you can ignore this mail."
-msgstr "Vous pouvez ignorer ce message."
+msgstr "vous pouvez ignorer ce message."
 
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
-msgstr "La capacit&eacute; d'accr&eacute;diter de nouveaux utilisateur de CAcert ; Une contribution pour renforcer et populariser la Toile de Confiance CACert."
+msgstr ""
 
 #: includes/account.php:363
 msgid "The address you submitted isn't a valid authority address for the domain."
-msgstr "L'adresse que vous avez soumise n'est pas d'adresse mail faisant autorit&eacute; pour ce domaine."
+msgstr "L'adresse que vous avez soumise n'est pas une adresse mail faisant autorit&eacute; pour ce domaine."
 
 #: www/index/8.php:1
 #, php-format
@@ -2129,7 +2129,7 @@ msgstr "Si c'est vous qui avez recherch&eacute; ou chang&eacute; ces donn&eacute
 
 #: pages/account/13.php:39
 msgid "With kind regards,"
-msgstr "Avec de sinc&egrave;res amiti&eacute;s,"
+msgstr "Avec nos meilleures salutations,"
 
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
@@ -2150,7 +2150,7 @@ msgstr "Les domaines suivants ont &eacute;t&eacute; supprim&eacute;s :"
 
 #: www/index/0.php:104
 msgid "The number of assurance point you have will limit the maximum assurance points you can issue for people you assure."
-msgstr "Le nombre de points d'accr&eacute;ditation que vous disposez limite le nombre maximum de points d'accr&eacute;ditation que vous pourrez donner aux personnes que vous accr&eacute;diterez."
+msgstr "Le nombre de points d'accr&eacute;ditation dont vous disposez limite le nombre maximum de points d'accr&eacute;ditation que vous pourrez donner aux personnes que vous accr&eacute;diterez."
 
 #: www/account/10.php:30 www/account/20.php:27
 msgid "Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people."
@@ -2168,7 +2168,7 @@ msgstr "Le mot de passe de %s a &eacute;t&eacute; mis &agrave; jour avec succ&eg
 
 #: www/index/0.php:21
 msgid "The primary goals are:"
-msgstr "Les buts principaux sont:"
+msgstr "Les principaux objectifs sont :"
 
 #: www/help/2.php:15
 msgid "The purpose of digital signing is to prove, electronically, one's identity"
@@ -2176,11 +2176,11 @@ msgstr "L'objectif de la signature num&eacute;rique est de prouver, de mani&egra
 
 #: www/help/2.php:27
 msgid "The reason digital signatures prepare us for encryption is that if everyone were setup to be able to generate their own digital signatures, it would be technically very easy to make the next step from digital signatures to encryption. And that would be great for privacy, the fight against spamming, and a safer Internet."
-msgstr "La raison qui fait de la signature num&eacute;rique une premi&egrave;re &eacute;tape pour le chiffrage est que si chacun de nous &eacute;tait capable de g&eacute;n&eacute;rer leur propre signature num&eacute;rique, il n'y aurait plus qu'un simple pas &agrave; faire pour passer de la signature au chiffrement. Et quelle avanc&eacute;e cela sera pour la protection de la vie priv&eacute;e, le combat contre le spam et pour un Internet plus s&ucirc;r."
+msgstr "La raison qui fait de la signature num&eacute;rique une premi&egrave;re &eacute;tape pour le chiffrage est que si chacun de nous &eacute;tait capable de g&eacute;n&eacute;rer sa propre signature num&eacute;rique, il n'y aurait plus qu'un simple pas &agrave; faire pour passer de la signature au chiffrement. Et quelle avanc&eacute;e ce serait pour la protection de la vie priv&eacute;e, le combat contre le spam et pour un Internet plus s&ucirc;r !"
 
 #: www/help/7.php:6
 msgid "The requests sent to the root store, are stored in a file for another process triggered by cron to parse and sign them, then stored in a reply file to be sent back to the webserver. Causing things to be separated into different users, basic privilege separation stuff. So being actually able to hack the serial daemons will only at the VERY worst cause fraudulent certificates, not the root to be revealed."
-msgstr "Les requ&ecirc;tes, envoy&eacute;es au magasin des certificats racine, sont stock&eacute;es dans un fichier pour qu'un autre processus lanc&eacute; p&eacute;riodiquement puisse le traiter et g&eacute;n&eacute;rer les signature. Puis il est stock&eacute; dans un fichier de r&eacute;ponse retourn&eacute; au serveur Web. Aussi, les t&acirc;ches sont s&eacute;par&eacute;es entre diff&eacute;rents utilisateurs avec des privil&egrave;ges s&eacute;par&eacute;s et limit&eacute;s. Ainsi, l'intru qui prendrait le contr&ocirc;le du processus serveur derri&egrave;re la liaison s&eacute;rie pourrait dans le PIRE des cas g&eacute;n&eacute;rer des certificats frauduleux, &agrave; aucun moment les clefs priv&eacute;es des certificats racine ne peuvent &ecirc;tre r&eacute;v&eacute;l&eacute;s."
+msgstr "Les requ&ecirc;tes envoy&eacute;es au d&eacute;p&ocirc;t des certificats racine, sont stock&eacute;es dans un fichier pour qu'un autre processus lanc&eacute; p&eacute;riodiquement (cron) puisse les traiter et g&eacute;n&eacute;rer les signatures. Puis il est stock&eacute; dans un fichier de r&eacute;ponse qui est retourn&eacute; au serveur Web. Ceci afin de s&eacute;parer les t&acirc;ches entre diff&eacute;rents utilisateurs, un &eacute;l&eacute;ment basique de s&eacute;paration des privil&egrave;ges. Ainsi, dans le PIRE des cas, l'intru qui aurait r&eacute;ussi &agrave; prendre le contr&ocirc;le du processus serveur derri&egrave;re la liaison s&eacute;rie pourrait au plus g&eacute;n&eacute;rer des certificats frauduleux. A aucun moment les clefs priv&eacute;es des certificats racine ne peuvent &ecirc;tre r&eacute;v&eacute;l&eacute;es."
 
 #: www/index/51.php:34
 msgid "The simplest and most effective thing you can do is spread the word, by telling your friends, colleagues and relatives about us and join."
@@ -2188,15 +2188,15 @@ msgstr "L'action la plus simple et la plus efficace que vous pouvez faire est de
 
 #: www/help/4.php:3
 msgid "Then the system will try to generate some very random numbers to get a secure key."
-msgstr "Alors le syst&egrave;me g&eacute;n&eacute;rera des nombres fortement al&eacute;atoires pour g&eacute;n&eacute;rer une clef priv&eacute;e."
+msgstr "Ensuite le syst&egrave;me g&eacute;n&eacute;rera des nombres fortement al&eacute;atoires pour g&eacute;n&eacute;rer une clef priv&eacute;e."
 
 #: www/help/6.php:3
 msgid "Then you need to generate a Certificate Signing Request, for more details go:"
-msgstr "Alors vous aurez besoin de g&eacute;n&eacute;rer une CSR (Requ&ecirc;te de Signature de Certificat), pour plus de d&eacute;tails allez &agrave; :"
+msgstr "Ensuite vous aurez besoin de g&eacute;n&eacute;rer une CSR (Requ&ecirc;te de Signature de Certificat), pour plus de d&eacute;tails allez &agrave; :"
 
 #: www/help/6.php:9
 msgid "Then you need to submit the contents from the CSR file to CAcert, you need to go:"
-msgstr "Alors vous aurez besoin de soumettre le contenu du fichier CSR &agrave; CAcert, vous devrez aller &agrave; :"
+msgstr "Ensuite vous aurez besoin de soumettre le contenu du fichier CSR &agrave; CAcert, vous devrez aller &agrave; :"
 
 #: www/account/40.php:37 www/index/11.php:37
 msgid "There are a number of other mailing lists CAcert runs, some are general discussion, others are technical (such as the development list) or platform specific help (such as the list for Apple Mac users)"
@@ -2220,11 +2220,11 @@ msgstr "Informations"
 
 #: www/help/2.php:42
 msgid "There's nothing to it. I mean literally, you can already start sending your emails encrypted. Assuming of course you have your own digital signature certificate (e.g. as per above), and the person you want to send an encrypted email to also has a digital signature certificate, and has recently sent you a digitally signed email with it. If all these conditions hold, you just have to change the settings in your email software to send the email encrypted and hey presto! Your email software (probably Outlook I guess) should suss out the rest."
-msgstr "Pas de probl&egrave;me. Je veux dire que vous pouvez d&eacute;j&agrave; envoyer vos emails chiffr&eacute;s. Cela suppose, bien s&ucirc;r, que vous avez d&eacute;j&agrave; votre propre certificat pour signer num&eacute;riquement (voir au dessus), et que la personne &agrave; laquelle vous destinez ce mail chiffr&eacute; vous ait envoy&eacute;e r&eacute;cemment un mail sign&eacute; contenant son propre certificat de signature num&eacute;rique. Si toutes ces conditions sont remplies, vous avez juste &agrave; r&eacute;gler votre logiciel de courrier &eacute;lectronique pour envoyer votre mail chiffr&eacute; et hop ! c'est parti ! Votre logiciel de courrier &eacute;lectronique (je suppose probablement Outlook) se chargera du reste."
+msgstr "Pas de probl&egrave;me. Je veux dire que vous pouvez d&eacute;j&agrave; envoyer vos emails chiffr&eacute;s. Cela suppose, bien s&ucirc;r, que vous ayez d&eacute;j&agrave; votre propre certificat pour signer num&eacute;riquement (voir au dessus), et que la personne &agrave; laquelle vous destinez ce mail chiffr&eacute; vous ait envoy&eacute;e r&eacute;cemment un mail sign&eacute; contenant son propre certificat de signature num&eacute;rique. Si toutes ces conditions sont remplies, vous avez juste &agrave; r&eacute;gler votre logiciel de courrier &eacute;lectronique pour envoyer votre mail chiffr&eacute; et hop ! c'est parti ! Votre logiciel de courrier &eacute;lectronique (je suppose probablement Outlook) se chargera du reste."
 
 #: www/index.php:272
 msgid "This email address is currently valid in the system."
-msgstr "Cette adresse email is d&eacute;j&agrave; valid&eacute; dans le syst&egrave;me."
+msgstr "Cette adresse email est d&eacute;j&agrave; valid&eacute;e dans le syst&egrave;me."
 
 #: includes/account.php:1957 includes/account.php:1974
 #: includes/account.php:1984
@@ -2234,7 +2234,7 @@ msgstr "Vos pr&eacute;f&eacute;rences linguistiques ont &eacute;t&eacute; mises 
 #: www/wot/6.php:32
 #, php-format
 msgid "This person already has %s assurance points. Any points you give this person may be rounded down, or they may not even get any points. If you have less then 150 points you will still receive 2 points for assuring them."
-msgstr "Cette personne a d&eacute;j&agrave; %s points d'accr&eacute;ditation. Tous les points suppl&eacute;mentaires que vous lui attribuerez seront arrondis par le bas ou m&ecirc;me ils ne recevront m&ecirc;me aucun points suppl&eacute;mentaires. Si vous avez moins de 150 points, vous receverez tout de m&ecirc;me 2 points suppl&eacute;mentaires pour les avoir accr&eacute;dit&eacute;."
+msgstr "Cette personne a d&eacute;j&agrave; %s points d'accr&eacute;ditation. Tous les points suppl&eacute;mentaires que vous lui attribuerez seront arrondis vers le bas ou m&ecirc;me ils ne recevront aucun point suppl&eacute;mentaire. Si vous avez moins de 150 points, vous receverez tout de m&ecirc;me 2 points suppl&eacute;mentaires pour les avoir accr&eacute;dit&eacute;s."
 
 #: pages/index/2.php:16
 msgid "Your information has been submitted into our system. You will now be sent an email with a web link, you need to open that link in your web browser within 24 hours or your information will be removed from our system!"
@@ -2242,7 +2242,7 @@ msgstr "Vos informations ont &eacute;t&eacute; envoy&eacute;es &agrave; notre sy
 
 #: www/help/2.php:46
 msgid "Thus, having now asked the question, you suppose that it's the people who make the browser software that have carefully decided who is a trustworthy Certificate Authority. Funnily enough, the mainstream browsers have not, historically, had public policies on how they decide whether a Certificate Authority gets added to their browser. All of the Certificate Authorities that have found themselves in the browser software, are big names, probably with big profits (so they must be doing a good job!)."
-msgstr "Alors, ayant maintenant pos&eacute; la question, vous supposez que les personnes qui produisent les navigateurs Web ont pris soin de verifier qui peut devenir une Autorit&eacute; de Certification de confiance. C'est assez marrant, mais les &eacute;diteurs des navigateurs courants n'ont pas eu historiquement de politique publique concernant la mani&egrave;re dont ils choissisent les Autorit&eacute;s de Certification int&eacute;gr&eacute;s dans leur navigateur. Toutes les Autorit&eacute;s de Certication incluses dans les navigateurs sont des acteurs renomm&eacute;s g&eacute;n&eacute;rant des profits importants (C'est bien pour cela qu'ils font un bon travail !)."
+msgstr "Donc, maintenant que la question est pos&eacute;e, vous supposez que les personnes qui produisent les navigateurs Web ont pris soin de verifier qui peut devenir une Autorit&eacute; de Certification de confiance. C'est assez marrant, mais les &eacute;diteurs des navigateurs courants n'ont pas eu historiquement de politique publique concernant la mani&egrave;re dont ils choissisent les Autorit&eacute;s de Certification int&eacute;gr&eacute;s dans leur navigateur. Toutes les Autorit&eacute;s de Certification incluses dans les navigateurs sont des acteurs renomm&eacute;s g&eacute;n&eacute;rant des profits importants (C'est bien pour cela qu'ils font un bon travail !)."
 
 #: www/wot/9.php:42
 msgid "To"
@@ -2254,7 +2254,7 @@ msgstr "&Agrave; terminer"
 
 #: www/wot/2.php:15
 msgid "To become an Assurer"
-msgstr "Devenir Notaire"
+msgstr "Devenir Accr&eacute;diteur"
 
 #: www/index/51.php:17
 msgid "To create a Non-Profit Certificate Authority; an alternative to the commercial CAs."
@@ -2262,7 +2262,7 @@ msgstr "L'objectif est de cr&eacute;er une Autorit&eacute; de Certification &agr
 
 #: www/help/2.php:33
 msgid "To fully understand, read the section directly above. I am using a free Certificate Authority to provide me with the ability to digitally sign my emails. As a result, this Certificate Authority is not (yet) recognised by your email software as it is a new organisation that is not yet fully established, although it is probably being included in the Mozilla browser. If you choose to, you can go the their site at CAcert.org to install the root certificate. You may be told that the certificate is untrusted - that is normal and I suggest that you continue installation regardless. Be aware that this implies your acceptance that you trust their secure distribution and storing of digital signatures, such as mine. (You already do this all the time). The CAcert.org root certificate will then automatically provide the safe validation of my digital signature, which I have entrusted to them. Or you can simply decide that you've wasted your time reading this and do nothing (humbug!). Shame on you! :-)"
-msgstr "Lisez la section suivante afin de comprendre parfaitement. J&rsquo;utilise une Autorit&eacute; de Certification gratuite pour me fournir la capacit&eacute; de signer num&eacute;riquement mes emails. Cette Autorit&eacute; de Certification n&rsquo;est pas (encore) accept&eacute;e par votre logiciel client d&rsquo;email puisque c&rsquo;est une nouvelle organisation qui n&rsquo;est pas parfaitement reconnue, mais il est probable qu&rsquo;elle soit int&eacute;gr&eacute;e dans le navigateur Mozilla. Si vous la choisissez, vous pouvez allez sur le site Web de CAcert.org pour y installer son certificat racine. Vous aurez certainement un message indiquant que ce certificat n&rsquo;est pas de reconnu, ce qui est normal et je vous sugg&egrave;re de poursuivre l&rsquo;installation malgr&eacute; cela. Soyez conscient que vous mettez votre confiance dans leur mode de distribution et de stockage s&eacute;curis&eacute;s des signatures num&eacute;riques, comme la mienne. (Vous faites &ccedil;a tout le temps en fait). Le Certificat Racine de CAcert.org fournira alors automatiquement la validation de ma signature num&eacute;rique en laquelle j&rsquo;ai mis ma confiance. Ou bien, vous pouvez simplement d&eacute;cider que vous avez perdu votre temps en lisant ce message et de ne rien faire (la bonne blague !). Honte &agrave; vous ! ;)"
+msgstr "Lisez la section suivante afin de comprendre parfaitement. J&rsquo;utilise une Autorit&eacute; de Certification gratuite pour me fournir la capacit&eacute; de signer num&eacute;riquement mes emails. Cette Autorit&eacute; de Certification n&rsquo;est pas (encore) accept&eacute;e par votre logiciel client d&rsquo;email puisque c&rsquo;est une nouvelle organisation qui n&rsquo;est pas parfaitement reconnue, mais il est probable qu&rsquo;elle soit int&eacute;gr&eacute;e dans le navigateur Mozilla. Si vous la choisissez, vous pouvez allez sur le site Web de CAcert.org pour y installer son certificat racine. Vous aurez certainement un message indiquant que ce certificat n&rsquo;est pas reconnu, ce qui est normal et je vous sugg&egrave;re de poursuivre l&rsquo;installation malgr&eacute; cela. Soyez conscient que vous mettez votre confiance dans leur mode de distribution et de stockage s&eacute;curis&eacute;s des signatures num&eacute;riques, comme la mienne. (Vous faites &ccedil;a tout le temps en fait). Le Certificat Racine de CAcert.org fournira alors automatiquement la validation de ma signature num&eacute;rique en laquelle j&rsquo;ai mis ma confiance. Ou bien, vous pouvez simplement d&eacute;cider que vous avez perdu votre temps en lisant ce message et de ne rien faire (la bonne blague !). Honte &agrave; vous ! ;)"
 
 #: www/help/3.php:2
 msgid "To generate a public and private key pair and CSR for a Microsoft IIS 5 Server:"
@@ -2306,15 +2306,15 @@ msgstr "La loi sur la surveillance des courriers &eacute;lectroniques a &eacute;
 
 #: www/help/2.php:21
 msgid "UK Government has done this since the year 2000"
-msgstr "Le Gouvernement Britannique l'a fait depuis l'ann&eacute;e 2000"
+msgstr "Le Gouvernement Britannique l'a fait depuis l'an 2000"
 
 #: www/index.php:126
 msgid "Unable to match your details with any user accounts on file"
-msgstr "Incapable to v&eacute;rifier vos d&eacute;tails avec le compte d'un utilisateur sur nos fichiers."
+msgstr "Incapable de faire correspondre vos d&eacute;tails avec le compte d'un utilisateur sur nos fichiers."
 
 #: www/help/3.php:5
 msgid "Under 'Administrative Tools', open the 'Internet Services Manager'. Then open up the properties window for the website you wish to request the certificate for. Right-clicking on the particular website will open up its properties."
-msgstr "Dans les &quot;Outils d'Administration&quot;, ouvrez le 'Gestionnaire de Services Internet'. Alors ouvrez la fen&ecirc;tre des propri&eacute;t&eacute;s pour le site Web pour lequel vous d&eacute;sirez &eacute;tablir une requ&ecirc;te de certificat. Faites un clic droit sur ce site Web ouvrira ses propri&eacute;t&eacute;s."
+msgstr "Dans les 'Outils d'Administration', ouvrez le 'Gestionnaire de Services Internet'. Alors ouvrez la fen&ecirc;tre des propri&eacute;t&eacute;s pour le site Web pour lequel vous d&eacute;sirez &eacute;tablir une requ&ecirc;te de certificat. Un clic droit sur le site Web concern&eacute; ouvrira ses propri&eacute;t&eacute;s."
 
 #: www/help/0.php:12
 msgid "Unofficial FAQ/Wiki"
@@ -2358,7 +2358,7 @@ msgstr "Certificats valides"
 #: www/index/0.php:55 www/index/0.php:65 www/index/0.php:75 www/index/0.php:85
 #: www/index/0.php:95 www/index/0.php:105 www/index/0.php:115
 msgid "Verification needed"
-msgstr "Accr&eacute;ditation n&eacute;cessaire"
+msgstr ""
 
 #: www/account/2.php:32 www/account/9.php:38
 msgid "Verified"
@@ -2397,7 +2397,7 @@ msgstr "ATTENTION !"
 
 #: www/index/1.php:15 www/index/4.php:19
 msgid "Warning! This site requires cookies to be enabled to ensure your privacy and security. This site uses session cookies to store temporary values to prevent people from copying and pasting the session ID to someone else exposing their account, personal details and identity theft as a result."
-msgstr "Attention ! Ce site requi&egrave;re que les &lsquo;cookies&rsquo; soit autoris&eacute;s pour assurer l&rsquo;int&eacute;grit&eacute; de votre vie priv&eacute;e et votre s&eacute;curit&eacute;. Ce site utilise des &lsquo;cookies&rsquo; de session pour stocker temporairement les valeurs pour &eacute;viter que des personnes puissent copier et coller votre identifiant de session pour le compte d&rsquo;une autre personne en divulguant le contenu de votre compte, vos informations personnelles ayant comme cons&eacute;quence l&rsquo;usurpation de votre identit&eacute;."
+msgstr "Attention ! Ce site requiert que les &lsquo;cookies&rsquo; soit autoris&eacute;s pour assurer l&rsquo;int&eacute;grit&eacute; de votre vie priv&eacute;e et votre s&eacute;curit&eacute;. Ce site utilise des &lsquo;cookies&rsquo; de session pour stocker temporairement les valeurs afin d'&eacute;viter que des personnes puissent copier et coller votre identifiant de session pour le compte d&rsquo;une autre personne, ce qui aurait pour r&eacute;sultat de divulguant le contenu de votre compte, vos informations personnelles et l&rsquo;usurpation de votre identit&eacute;."
 
 #: www/capnew.php:1025
 msgid "driver license"
@@ -2418,7 +2418,7 @@ msgstr "certificat"
 #: includes/account.php:1609
 #, php-format
 msgid "Wasn't able to match '%s' against any user in the system"
-msgstr "N'est pas capable de verifier '%s' avec un utilisateur contenu dans le syst&egrave;me"
+msgstr "Incapable de trouver l'utilisateur '%s' dans le syst&egrave;me"
 
 #: www/account/39.php:34 www/index/10.php:34
 msgid "We analyse visitors' use of our sites by tracking information such as page views, traffic flow, search terms, and click through. We use this information to improve our sites. We also share this anonymous traffic and demographic information in aggregate form with advertisers and other business partners. We do not share any information with advertisers that can identify an individual user."
@@ -2504,11 +2504,11 @@ msgstr "Pourquoi la signature num&eacute;rique est d&eacute;crite comme 'non val
 
 #: www/help/2.php:5 www/help/2.php:29
 msgid "Why isn't it being adopted by everyone?"
-msgstr "Pourquoi cela n'est-il pas adopt&eacute; par tout le monde ?"
+msgstr "Pourquoi tout le monde ne l'a-t-il pas adopt&eacute; ?"
 
 #: www/help/7.php:7
 msgid "Why use serial you ask? Well certificate requests are low bandwidth for starters, then of course simpler systems in security are less prone to exploits, and finally serial code is pretty mature and well tested and hopefully all exploits were found and fixed a long time ago."
-msgstr "Pourquoi utiliser une liaison s&eacute;rie ? En fait, les requ&ecirc;tes de certificat consomment peu de bande passante, et bien s&ucirc;r les syst&egrave;mes plus simples sont moins susceptibles &agrave; des attaques et comme les programmes g&eacute;rant les liaisons s&eacute;rie sont stables et compl&egrave;tement test&eacute;es et heureusement toutes les attaques ont &eacute;t&eacute; trouv&eacute;es et corrig&eacute;es depuis longtemps."
+msgstr "Pourquoi utiliser une liaison s&eacute;rie ? En fait, les requ&ecirc;tes de certificat consomment peu de bande passante; et bien s&ucirc;r les syst&egrave;mes plus simples sont moins susceptibles &agrave; des attaques; et comme les programmes g&eacute;rant les liaisons s&eacute;rie sont stables et compl&egrave;tement test&eacute;s, et il y a de meilleures chances que toutes les attaques ait &eacute;t&eacute; trouv&eacute;es et corrig&eacute;es depuis longtemps."
 
 #: www/index/51.php:23
 msgid "Why?"
@@ -2524,7 +2524,7 @@ msgstr "Annonces dans un rayon de 200 km"
 
 #: includes/account_stuff.php:182
 msgid "WoT Form"
-msgstr "Formulaire WoT"
+msgstr "Formulaire WoT (R&eacute;seau de Confiance)"
 
 #: www/cap.php:64 www/ttp.php:128 www/wot/6.php:66
 msgid "YYYY-MM-DD"
@@ -2536,11 +2536,11 @@ msgstr "Oui"
 
 #: www/account/39.php:52 www/index/10.php:52
 msgid "You are able to update, add and remove your information at any time via our web interface, log into the 'My Account' and then click on the 'My Details' section, and then click the relevant link"
-msgstr "Vous pouvez mettre &agrave; jour, ajouter et enlever vos informations &agrave; tout moment par l'interm&eacute;diaire de notre site, loguez vous sous 'mon compte', cliquez sur la section 'mes d&eacute;tails' et puis cliquez le lien appropri&eacute;"
+msgstr "Vous pouvez mettre &agrave; jour, ajouter et enlever vos informations &agrave; tout moment par l'interm&eacute;diaire de notre site, loguez-vous sous 'mon compte', cliquez sur la section 'mes d&eacute;tails' et puis cliquez le lien appropri&eacute;"
 
 #: www/account/19.php:44 www/account/6.php:42
 msgid "You are about to install a certificate, if you are using mozilla/netscape based browsers you will not be informed that the certificate was installed successfully, you can go into the options dialog box, security and manage certificates to view if it was installed correctly however."
-msgstr "Vous &ecirc;tes sur le point d&rsquo;installer un certificat, si vous utilisez un navigateur bas&eacute; sur mozilla ou netscape, vous ne serez pas averti du succ&egrave;s de l&rsquo;installation , vous pouvez allez dans la boite de dialogue des options, dans s&eacute;curit&eacute; et gestion des certificats pour v&eacute;rifier que l&rsquo;installation s&rsquo;est pass&eacute;e correctement."
+msgstr "Vous &ecirc;tes sur le point d&rsquo;installer un certificat, si vous utilisez un navigateur bas&eacute; sur mozilla ou netscape, vous ne serez pas averti du succ&egrave;s de l&rsquo;installation, vous pouvez aller dans la bo&icirc;te de dialogue des options, dans 's&eacute;curit&eacute; et gestion des certificats' pour v&eacute;rifier que l&rsquo;installation s&rsquo;est d&eacute;roul&eacute;e correctement."
 
 #: www/wot.php:54
 msgid "You are never allowed to Assure yourself!"
@@ -2548,7 +2548,7 @@ msgstr "Vous n'&ecirc;tes pas autoris&eacute; &agrave; vous accr&eacute;diter vo
 
 #: www/wot.php:68
 msgid "You are only allowed to Assure someone once!"
-msgstr "Vous n'&ecirc;tes autoris&eacute; &agrave; accr&eacute;dit&eacute; une personne qu'une fois uniquement !"
+msgstr "Vous n'&ecirc;tes autoris&eacute; &agrave; accr&eacute;diter une personne qu'une seule fois uniquement !"
 
 #: www/help/2.php:45
 msgid "You are putting your trust in people you don't know!"
@@ -2614,7 +2614,7 @@ msgstr "Vous pouvez envoyer des emails sign&eacute;s et chiffr&eacute;s num&eacu
 
 #: includes/account.php:68
 msgid "You currently don't have access to the email address you selected, or you haven't verified it yet."
-msgstr "Vous n'avez pas acc&egrave;s actuellement &agrave; l'adresse email que vous avez s&eacute;lectionn&eacute;e ou vous ne l'avez pas suivi le processus de v&eacute;rification."
+msgstr "Vous n'avez pas acc&egrave;s actuellement &agrave; l'adresse email que vous avez s&eacute;lectionn&eacute;e ou vous ne l'avez pas encore valid&eacute;e."
 
 #: www/wot.php:133
 msgid "You didn't list a valid sponsor for this action."
@@ -2635,15 +2635,15 @@ msgstr "Vous n'avez pas coch&eacute; tous les cases validant votre consentement 
 
 #: includes/account.php:842
 msgid "You failed to correctly enter your current Pass Phrase."
-msgstr "Vous n'avez pas saisie correctement votre mot de passe actuel."
+msgstr ""
 
 #: www/wot.php:109
 msgid "You failed to enter a location of your meeting."
-msgstr "Vous avez &eacute;chou&eacute; dans la saisie de la position g&eacute;ographique de  votre rencontre."
+msgstr "Vous n'avez pas saisi le lieu de  votre rencontre."
 
 #: www/index.php:97
 msgid "You failed to get all answers correct or you didn't configure enough lost password questions for your account. System admins have been notified."
-msgstr "Vous avez &eacute;chou&eacute; &agrave; rentrer tous les r&eacute;ponses correctes, les administrateurs syst&egrave;mes en sont notifi&eacute;s."
+msgstr "Vous n'avez pas donn&eacute; toutes les r&eacute;ponses correctes ou vous n'avez pas configur&eacute; suffisamment de question en cas de perte de mon de passe dans votre compte, les administrateurs syst&egrave;mes ont &eacute;t&eacute; notifi&eacute;s."
 
 #: www/gpg.php:24
 msgid "You failed to paste a valid GPG/PGP key."
@@ -2829,7 +2829,7 @@ msgstr "A cause du risque d'attaque sur les domaines contenant des caract&egrave
 
 #: www/help/9.php:28
 msgid "Firstly you need mod-ssl and apache setup (this is beyond the scope of this FAQ item and you will need to search on google etc for LAMP setup information). I recommend mod-ssl over apache-ssl because it means you need less resources to achieve the same result."
-msgstr "En premier lieu, vous avez besoin de mod_ssl et de la configuration apache (C&rsquo;est en dehors du sujet de cette FAQ et vous devriez chercher sur Google pour de plus amples informations). Je recommande mod_ssl au dessus d&rsquo;Apache car cette configuration consomme moins de ressources pour le m&ecirc;me r&eacute;sultat."
+msgstr "En premier lieu, vous avez besoin de mod_ssl et de la configuration apache (C&rsquo;est en dehors du sujet de cette FAQ et vous devriez chercher sur Google pour de plus amples informations. 'LAMP' est un bon mot cl&eacute; de recherche). Je recommande mod_ssl de pr&eacute;f&eacute;rence &agrave; apache-ssl car cette configuration consomme moins de ressources pour le m&ecirc;me r&eacute;sultat."
 
 #: www/help/0.php:26 www/help/9.php:26
 msgid "How can I do a single sign on similar to CAcert using client certificates?"
@@ -2837,7 +2837,7 @@ msgstr "Comment puis-je faire une connexion avec authentification Single Sign On
 
 #: www/index/1.php:17
 msgid "In light of the number of people having issues with making up a password we have the following suggestions:"
-msgstr "A la lumi&egrave;re du nombre de personne ayant des difficult&eacute;s &agrave; g&eacute;rer leur mot de passe, nous proposons les suggestions suivantes :"
+msgstr "A la lumi&egrave;re du nombre de personnes ayant des difficult&eacute;s &agrave; g&eacute;rer leur mot de passe, nous proposons les suggestions suivantes :"
 
 #: www/index/17.php:142
 msgid "Install a Root Certificate using Internet Explorer and the CEnroll ActiveX control. This avoids the Microsoft Certificate Installation wizard and all of its complexity and extra screens for users. This however will ONLY work for Microsoft Internet Explorer."
@@ -2849,7 +2849,7 @@ msgstr "Expos&eacute; des Missions de CAcert.org"
 
 #: www/help/9.php:30
 msgid "Once you have everything setup and working you will need to add lines similar to below to your apache.conf"
-msgstr "Une fois que tout est configur&eacute; et fonctionne, you devrez ajouter des lignes similaires &agrave; votre fichier apache.conf"
+msgstr "Une fois que tout est configur&eacute; et fonctionne, vous devrez ajouter dans votre fichier apache.conf des lignes similaires &agrave; ce qui suit"
 
 #: www/help/9.php:49
 msgid "Once you have everything working and you've tested sending a client certificate to your site and you're happy all is well you can start adding code to PHP (or any other language you like that can pull server environment information). At present I only have PHP code available and the example is in PHP"
@@ -2861,11 +2861,11 @@ msgstr "Prenez note : vous allez avoir besoin de changer les chemins, les noms d
 
 #: includes/general_stuff.php:69
 msgid "RSS News Feed"
-msgstr "Source d'information au format RSS."
+msgstr "Flux RSS"
 
 #: www/help/2.php:67
 msgid "The point is, as the current situation holds, you should be wary of anyone making decisions for you (i.e. pre-installed certificates in your browser), and you should be weary of anyone else's certificates that you install. But at the end of the day, it all boils down to trust. If an independent Certificate Authority seems to be reputable to you, and you can find evidence to support this claim, there's no reason why you shouldn't trust it any less than you implicitly trust the people who have already made mistakes."
-msgstr "Il faut remarquer que dans la situation actuelle, vous devez vous inqui&eacute;ter des personnes qui prennent des d&eacute;cisions &agrave; votre place (par exemple les certificats pr&eacute;-install&eacute;s dans votre navigateur) et vous devriez aussi vous m&eacute;fier des certificats que vous installez d&rsquo;une autre provenance. Mais &agrave; la fin, tout revient &agrave; une question de confiance. Si une Autorit&eacute; de Certification ind&eacute;pendante semble &ecirc;tre pour vous de bonne r&eacute;putation et que vous pouvez trouver des preuves de cette affirmation, il n&rsquo;y a pas de raison pour laquelle vous devriez leur consentir moins de confiance que les acteurs qui ont d&eacute;j&agrave; commis publiquement des erreurs."
+msgstr "Il faut remarquer que dans la situation actuelle, vous devez vous inqui&eacute;ter des personnes qui prennent des d&eacute;cisions &agrave; votre place (par exemple les certificats pr&eacute;-install&eacute;s dans votre navigateur) et vous devriez aussi vous m&eacute;fier des certificats que vous installez d&rsquo;une autre provenance. Mais &agrave; la fin, tout revient &agrave; une question de confiance. Si une Autorit&eacute; de Certification ind&eacute;pendante semble &ecirc;tre pour vous de bonne r&eacute;putation et que vous pouvez trouver des preuves de cette affirmation, il n&rsquo;y a pas de raison pour laquelle vous devriez leur accorder moins de confiance que vous n'accordez implicitement aux acteurs qui ont d&eacute;j&agrave; commis publiquement des erreurs."
 
 #: www/wot.php:233
 msgid "You listed an invalid sponsor for this action."
@@ -2999,10 +2999,6 @@ msgstr "Contestations de Domaines et d'Emails"
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
 msgstr ""
 
-#: pages/index/8.php:4
-msgid "Treasurer"
-msgstr "Tr&eacute;sorier"
-
 #: includes/account.php:50 includes/account.php:402 www/index.php:293
 msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
 msgstr "L'adresse email donn&eacute;e &eacute;tait invalide, ou un test de connexion ne pouvait pas &ecirc;tre &eacute;tabli &agrave; votre serveur, ou le serveur a rejet&eacute; comme invalide l'adresse email"
@@ -3070,7 +3066,7 @@ msgstr "Si vous voulez d&eacute;clarer un abus de nos certificats qui enfreint n
 
 #: www/disputes/2.php:16
 msgid "If your dispute is successful the domain will be removed from the current account and any certificates will be revoked."
-msgstr "Si votre contestation est valid&eacute;e, le domaine sera enlev&eacute; du compte actuel et tous les certificats seront revoqu&eacute;s. "
+msgstr "Si votre contestation est valid&eacute;e, le domaine sera enlev&eacute; du compte actuel et tous les certificats seront r&eacute;voqu&eacute;s. "
 
 #: www/disputes/1.php:16
 msgid "If your dispute is successful you will have the email address removed from the system, you will need add the email address as per usual afterwards. The email will be removed from the current account and any certificates will be revoked."
@@ -3319,11 +3315,11 @@ msgstr "Vous avez r&eacute;alis&eacute; %s accr&eacute;ditations ce qui vous cla
 
 #: www/disputes.php:155
 msgid "You have opted to accept this dispute and the request will now remove this domain from the existing account, and revoke any current certificates."
-msgstr "Vous avez choisi d'accepter cette contestation et la requ&ecirc;te va maintenant retirer ce domaine du compte actuel, et revoquera tous les certificats actuels."
+msgstr "Vous avez choisi d'accepter cette contestation et la requ&ecirc;te va maintenant retirer ce domaine du compte actuel, et r&eacute;voquera tous les certificats actuels."
 
 #: www/disputes.php:47
 msgid "You have opted to accept this dispute and the request will now remove this email address from the existing account, and revoke any current certificates."
-msgstr "Vous avez choisi d'accepter cette contestation et la requ&ecirc;te va maintenant retirer cette adresse email du compte existant, et revoquera tous les certificats actuels."
+msgstr "Vous avez choisi d'accepter cette contestation et la requ&ecirc;te va maintenant retirer cette adresse email du compte existant, et r&eacute;voquera tous les certificats actuels."
 
 #: www/disputes.php:40 www/disputes.php:148
 msgid "You have opted to reject this dispute and the request will be removed from the database"
@@ -3380,7 +3376,7 @@ msgstr "Date (AAAA-MM-JJ)"
 
 #: pages/account/13.php:34
 msgid "But if you received this mail without a recognisable reason,"
-msgstr "Mais si vous avez re&ccedil;u ce courrier sans raison reconnaissable,"
+msgstr "Mais si vous avez re&ccedil;u ce courrier sans en conna&icirc;tre la raison,"
 
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
@@ -4248,10 +4244,6 @@ msgstr ""
 #: www/cap.html.php:222 www/coap.html.php:297
 msgid "How To Print this CAP form"
 msgstr "Comment imprimer ce formulaire CAP"
-
-#: pages/index/8.php:21
-msgid "Vice-President"
-msgstr "Vice-Pr&eacute;sident"
 
 #: pages/index/1.php:49
 #, php-format

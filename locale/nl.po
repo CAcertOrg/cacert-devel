@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-07-06 10:46:08+0000\n"
+"PO-Revision-Date: 2010-08-02 20:57:21+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2999,10 +2999,6 @@ msgstr "Domein en e-mail discussies"
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
 msgstr "Door Single Sign On (SSO) informatie aan uw certificaten toe te voegen zou dit kunnen worden gebruikt om u te volgen, u kunt ook certificaten zonder e-mailadressen aanmaken die uitsluitend voor Authenticatie te gebruiken zijn. Kijk voor een uitvoerigere beschrijving op onze WIKI."
 
-#: pages/index/8.php:4
-msgid "Treasurer"
-msgstr "Penningmeester"
-
 #: includes/account.php:50 includes/account.php:402 www/index.php:293
 msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
 msgstr "Het e-mail adres dat u heeft opgegeven is ongeldig, of er kon geen proefverbinding gemaakt worden met uw server, of de server heeft het e-mail adres als zijnde ongeldig afgekeurd"
@@ -4248,10 +4244,6 @@ msgstr "beleidsdocument"
 #: www/cap.html.php:222 www/coap.html.php:297
 msgid "How To Print this CAP form"
 msgstr "Hoe kan ik dit CAP formulier afdrukken"
-
-#: pages/index/8.php:21
-msgid "Vice-President"
-msgstr "Vice-Voorzitter"
 
 #: pages/index/1.php:49
 #, php-format

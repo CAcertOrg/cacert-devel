@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-07-06 10:46:11+0000\n"
+"PO-Revision-Date: 2010-08-02 20:57:25+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2999,10 +2999,6 @@ msgstr ""
 msgid "By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."
 msgstr ""
 
-#: pages/index/8.php:4
-msgid "Treasurer"
-msgstr ""
-
 #: includes/account.php:50 includes/account.php:402 www/index.php:293
 msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
 msgstr ""
@@ -4247,10 +4243,6 @@ msgstr ""
 
 #: www/cap.html.php:222 www/coap.html.php:297
 msgid "How To Print this CAP form"
-msgstr ""
-
-#: pages/index/8.php:21
-msgid "Vice-President"
 msgstr ""
 
 #: pages/index/1.php:49
