@@ -667,7 +667,7 @@
                                                $line = fgets($fp, 4096);
 					if(substr($line, 0, 3) != "220")
 						continue;
-					fputs($fp, "HELO hlin.cacert.org\r\n");
+					fputs($fp, "HELO www.cacert.org\r\n");
 					$line = fgets($fp, 4096);
 					while(substr($line, 0, 3) == "220")
 						$line = fgets($fp, 4096);

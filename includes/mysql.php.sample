@@ -53,7 +53,7 @@
 		  return;
 		}
 		$InputBuffer = fgets($smtp, 1024);
-		fputs($smtp, "HELO hlin.cacert.org\r\n");
+		fputs($smtp, "HELO www.cacert.org\r\n");
 		$InputBuffer = fgets($smtp, 1024);
 		fputs($smtp, "MAIL FROM: <returns@cacert.org>\r\n");
 		$InputBuffer = fgets($smtp, 1024);
