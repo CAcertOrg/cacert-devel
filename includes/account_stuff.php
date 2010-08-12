@@ -168,7 +168,7 @@ function hideall() {
   <div id="pageNav">
     <div class="relatedLinks">
       <h3>CAcert.org</h3>
-      <ul class="menu" id="home"><li><a href="index.php"><?=_("Go Home")?></a></li><li><a href="account.php?id=logout"><?=_("Logout")?></a></li></ul>
+      <ul class="menu" id="home"><li><a href="/index.php"><?=_("Go Home")?></a></li><li><a href="account.php?id=logout"><?=_("Logout")?></a></li></ul>
     </div>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('mydetails')">+ <?=_("My Details")?></h3>

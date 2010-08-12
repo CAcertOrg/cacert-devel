@@ -19,7 +19,7 @@
 
 <p><?=sprintf(_("If you want to have free certificates issued to you, join the %s CAcert Community %s."),"<a href=\"https://www.cacert.org/index.php?id=1\">","</a>")?></p>
 
-<p><?=sprintf(_("If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."),'<a href="/policy/NRPDisclaimerAndLicence.php">',"</a>")?>
+<p><?=sprintf(_("If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."),'<a href="/policy/RootDistributionLicense.php">',"</a>")?>
 <?=sprintf(_("This license applies to using the CAcert %s root keys %s."),'<a href="/index.php?id=3">','</a>')?></p>
 
 

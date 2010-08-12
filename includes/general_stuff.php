@@ -46,7 +46,7 @@ google_color_border = "FFFFFF";
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=1"><?=_("Join")?></a>
       <? } ?>
       <a href="/policy/CAcertCommunityAgreement.php"><?=_("Community Agreement")?></a>
-      <a href="index.php?id=3"><?=_("Root Certificate")?></a>
+      <a href="/index.php?id=3"><?=_("Root Certificate")?></a>
     </div>
     <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
@@ -139,9 +139,9 @@ if(!function_exists("showfooter"))
 </a>
 </noscript>
 <!--ONESTAT SCRIPTCODE END--><? } ?>
-	<a href="index.php?id=12"><?=_("About Us")?></a> | <a href="index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-        <a href="index.php?id=10"><?=_("Privacy Policy")?></a> |
-        <a href="index.php?id=51"><?=_("Mission Statement")?></a> | <a href="index.php?id=11"><?=_("Contact Us")?></a> |
+	<a href="/index.php?id=12"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
+        <a href="/index.php?id=10"><?=_("Privacy Policy")?></a> |
+        <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
 	&copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
 </div>  
 </body>             

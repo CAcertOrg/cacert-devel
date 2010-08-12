@@ -15,6 +15,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+
+<p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.php'>","</a>")?></p>
+
 <p>
 Class 1 <?=_("PKI Key")?><br>
 <a href="index.php?id=17"><?=_("Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x")?></a><br>

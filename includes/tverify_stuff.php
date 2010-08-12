@@ -74,10 +74,10 @@ if(!function_exists("showfooter"))
 </a>
 </noscript>
 <!--ONESTAT SCRIPTCODE END--><? } ?>
-        <a href="index.php?id=12"><?=_("About Us")?></a> | <a href="index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-        <a href="index.php?id=10"><?=_("Privacy Policy")?></a> |
-        <a href="index.php?id=51"><?=_("Mission Statement")?></a> | <a href="index.php?id=11"><?=_("Contact Us")?></a> |
-        <a href="index.php?id=19"><?=_("Further Information")?></a> | &copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
+        <a href="/index.php?id=12"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
+        <a href="/index.php?id=10"><?=_("Privacy Policy")?></a> |
+        <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
+        <a href="/index.php?id=19"><?=_("Further Information")?></a> | &copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
 </div>  
 </body>             
 </html><?
