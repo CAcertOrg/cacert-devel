@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-12-26 19:01:08+0000\n"
+"PO-Revision-Date: 2010-07-06 10:45:59+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1881,15 +1881,15 @@ msgstr "z.B. Sydney, New-South.Wales, Australien"
 
 #: includes/account.php:98
 msgid "has changed the default email on your account."
-msgstr "hat die &Auml;nderung Ihres Standard E-mail Accounts durchgef&uuml;hrt.&#13;"
+msgstr "die vorgegebene E-Mail-Adresse f&uuml;r Ihren Account ge&auml;ndert wurde."
 
 #: includes/account.php:1076
 msgid "has changed the password on your account."
 msgstr "das Kennwort zu Ihrem Account ge&auml;ndert hat."
 
-#: pages/account/13.php:23
-msgid "has viewed your lost password questions."
-msgstr "Ihre Kennwortfragen angezeigt hat."
+#: www/gpg.php:127
+msgid "Please upload only one key at a time."
+msgstr "Bitte jeweils nur einen Schl&uuml;ssel hochladen."
 
 #: pages/help/3.php:63
 msgid "lines. Do not copy any extra line feeds or carriage returns at the beginning or end of the certificate. Save the certificate into a text editor like Notepad. Save the certificate with an extension of .cer and a meaningful name like certificate.cer"
@@ -2069,6 +2069,38 @@ msgstr "Das Passwort das Sie angegeben haben ist zu kurz. Es muss mindestens 6 Z
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr "Der 'Regulation of Investigational Powers Act' (RIPA) (offizielle 'Snooping Bill' Regierungs-Seite , Grossbritiannien)"
 
+#: pages/account/13.php:28
+msgid "You receive this automatic mail since you yourself or"
+msgstr "Sie erhalten diese Nachricht, weil Sie selber oder"
+
+#: pages/account/13.php:36
+msgid "account, and you should promptly change your password and your"
+msgstr "account, and you should promptly change your password and yourhello"
+
+#: pages/account/13.php:30
+msgid "for a forgotten password."
+msgstr "f&uuml;r ein vergessenes Passwort."
+
+#: pages/account/13.php:37
+msgid "secret questions and answers."
+msgstr "geheime Fragen und Antworten."
+
+#: pages/account/13.php:29
+msgid "someone else looked up your secret questions and answers"
+msgstr "jemand anderes hat Ihre geheimen Fragen und Antworten abgefragt"
+
+#: pages/account/13.php:35
+msgid "there is a danger that an unauthorised person accessed your"
+msgstr "besteht die Gefahr, da&szlig; eine unauthorisierte Person Zugriff hatte auf Ihr"
+
+#: pages/account/13.php:32
+msgid "through the menu in your account, everything is in best order and"
+msgstr "durch das Men&uuml; in ihrem Account, dann ist alles korrekt und"
+
+#: pages/account/13.php:33
+msgid "you can ignore this mail."
+msgstr "Sie k&ouml;nnen diese Nachricht ignorieren."
+
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr "Die Erlaubnis, andere neue CAcert-Benutzer zu assuren; zur St&auml;rkung und Erweiterung des CAcert Web of Trust beitragen."
@@ -2086,6 +2118,18 @@ msgstr "Der aktuelle %s Vorstand und die jeweiligen Funktionen."
 #, php-format
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Die Domain '%s' wurde hinzugef&uuml;gt, aber bevor Sie Zertifikate f&uuml;r diese Domain ausstellen k&ouml;nnen, m&uuml;ssen Sie den Link der an Ihre Email Adresse geschickt wurde, in einem Browser &ouml;ffnen."
+
+#: pages/account/3.php:20
+msgid "CAcert Certificate Acceptable Use Policy"
+msgstr ""
+
+#: pages/account/13.php:31
+msgid "If it was you who looked up or changed that data, or clicked"
+msgstr "Wenn Sie die Daten gesucht oder ge&auml;ndert haben, oder Sie geklickt haben auf"
+
+#: pages/account/13.php:39
+msgid "With kind regards,"
+msgstr "Freundliche Gr&uuml;sse"
 
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
@@ -2538,11 +2582,11 @@ msgstr "Hat viel Zeit und Engagement investiert, um CAcert in Brasilien und S&uu
 
 #: www/index.php:586 www/index.php:593
 msgid "This seems like potential spam, cannot continue."
-msgstr ""
+msgstr "Dies scheint m&ouml;glicherweise Spam zu sein. Fortsetzen nicht m&ouml;glich."
 
 #: www/index.php:572 www/index.php:579
 msgid "This seems like you have cookies or Javascript disabled, cannot continue."
-msgstr ""
+msgstr "Cookies oder JavaScript scheinen deaktivert zu sein. Fortsetzung nicht m&ouml;glich."
 
 #: includes/general_stuff.php:74
 msgid "CAcert Board"
@@ -3170,7 +3214,7 @@ msgstr "Die Reihenfolge der folgenden Namen ist rein zuf&auml;llig:"
 #: includes/account.php:70
 #, php-format
 msgid "The email address '%s' is already in a different account. Can't continue."
-msgstr ""
+msgstr "Die E-Mail-Adresse '%s' ist bereit einem anderen Konto zugeordnet. Fortsetzen nicht m&ouml;glich."
 
 #: www/wot/2.php:17
 msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
@@ -3333,6 +3377,10 @@ msgstr "CAcert Assurance Programm"
 #: www/cap.php:85 www/cap.php:113
 msgid "Date (YYYY-MM-DD)"
 msgstr "Datum (JJJJ-MM-TT)"
+
+#: pages/account/13.php:34
+msgid "But if you received this mail without a recognisable reason,"
+msgstr "Wenn Sie aber diese Nachricht ohne erkennbaren Grund erhalten, "
 
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
@@ -3613,7 +3661,7 @@ msgstr "leeres CAP Formular"
 #: includes/account.php:2020
 #, php-format
 msgid "The domain '%s' is already in a different account and is listed as valid. Can't continue."
-msgstr ""
+msgstr "Die Domain '%s' ist bereits in einem anderen Konto und als g&uuml;ltig aufgelistet. Fortsetzen nicht m&ouml;glich."
 
 #: includes/general_stuff.php:85
 msgid "Bug Database"
@@ -3920,7 +3968,7 @@ msgstr "Ja, bitte verifizieren Sie diese E-mail Adresse."
 
 #: includes/account.php:97 includes/account.php:1075 pages/account/13.php:22
 msgid "You are receiving this email because you or someone else"
-msgstr "Sie empfangen diese E-Mail, weil Sie oder jemand anderes"
+msgstr "Sie empfangen diese Nachricht, da durch Sie oder eine andere Person"
 
 #: includes/account.php:501
 #, php-format
@@ -4208,7 +4256,7 @@ msgstr "Vizepr&auml;sident"
 #: pages/index/1.php:49
 #, php-format
 msgid "Please only write %sName Suffixes%s into this field."
-msgstr ""
+msgstr "Bitte schreiben Sie %sName Suffixes%s in dieses Feld."
 
 #: www/stats.php:263
 msgid "Statistical data from cache, created at"
@@ -4225,6 +4273,10 @@ msgstr "Der vollst&auml;ndige Name des Assurers kann umgewandelte Zeichen enthal
 #: includes/account.php:428
 msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
 msgstr "Aufgrund der M&ouml;glichkeit eines Null-Byte Domain Angriffs erlauben wir derzeit keine Domainennamen mit einem Nullbyte Zeichen."
+
+#: pages/account/13.php:39
+msgid "CAcert Support"
+msgstr "CAcert Support"
 
 #: www/coapnew.php:980
 msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."

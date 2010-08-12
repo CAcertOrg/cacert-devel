@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-12-26 19:01:15+0000\n"
+"PO-Revision-Date: 2010-07-06 10:46:07+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1887,8 +1887,8 @@ msgstr ""
 msgid "has changed the password on your account."
 msgstr ""
 
-#: pages/account/13.php:23
-msgid "has viewed your lost password questions."
+#: www/gpg.php:127
+msgid "Please upload only one key at a time."
 msgstr ""
 
 #: pages/help/3.php:63
@@ -2069,6 +2069,38 @@ msgstr "&#12497;&#12473;&#12501;&#12524;&#12540;&#12474;&#12364;&#30701;&#12377;
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr "&#35519;&#26619;&#27177;&#38480;&#35215;&#23450;&#27861; (RIPA) ('&#38651;&#23376;&#12513;&#12540;&#12523;&#12398;&#12382;&#12365;&#35211;&#27861;&#26696;' &#12452;&#12462;&#12522;&#12473;&#25919;&#24220;&#20844;&#24335;&#12469;&#12452;&#12488;)"
 
+#: pages/account/13.php:28
+msgid "You receive this automatic mail since you yourself or"
+msgstr ""
+
+#: pages/account/13.php:36
+msgid "account, and you should promptly change your password and your"
+msgstr ""
+
+#: pages/account/13.php:30
+msgid "for a forgotten password."
+msgstr ""
+
+#: pages/account/13.php:37
+msgid "secret questions and answers."
+msgstr ""
+
+#: pages/account/13.php:29
+msgid "someone else looked up your secret questions and answers"
+msgstr ""
+
+#: pages/account/13.php:35
+msgid "there is a danger that an unauthorised person accessed your"
+msgstr ""
+
+#: pages/account/13.php:32
+msgid "through the menu in your account, everything is in best order and"
+msgstr ""
+
+#: pages/account/13.php:33
+msgid "you can ignore this mail."
+msgstr ""
+
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr "&#20182;&#12398;&#26032;&#12375;&#12356;CAcert&#12398;&#12518;&#12540;&#12470;&#12540;&#12434;&#20445;&#35388;&#12391;&#12365;&#12427;&#12424;&#12358;&#12395;&#12394;&#12426;&#12414;&#12377;; CAcert&#20449;&#38972;&#12398;&#36650;&#12434;&#24375;&#21270;&#12375;&#25313;&#22823;&#12377;&#12427;&#36002;&#29486;&#12434;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&#12290;"
@@ -2086,6 +2118,18 @@ msgstr ""
 #, php-format
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "&#12489;&#12513;&#12452;&#12531;'%s'&#12434;&#12471;&#12473;&#12486;&#12512;&#12395;&#36861;&#21152;&#12375;&#12414;&#12375;&#12383;&#12290;&#12375;&#12363;&#12375;&#12289;&#12371;&#12428;&#12395;&#23550;&#12377;&#12427;&#20309;&#12425;&#12363;&#12398;&#35388;&#26126;&#26360;&#12434;&#30330;&#34892;&#12391;&#12365;&#12427;&#12424;&#12358;&#12395;&#12377;&#12427;&#12395;&#12399;&#12289;&#25351;&#23450;&#12375;&#12383;&#12513;&#12540;&#12523;&#12450;&#12489;&#12524;&#12473;&#12395;&#36865;&#12425;&#12428;&#12383;&#12522;&#12531;&#12463;&#12434;&#12502;&#12521;&#12454;&#12470;&#12391;&#38283;&#12367;&#24517;&#35201;&#12364;&#12354;&#12426;&#12414;&#12377;&#12290;"
+
+#: pages/account/3.php:20
+msgid "CAcert Certificate Acceptable Use Policy"
+msgstr ""
+
+#: pages/account/13.php:31
+msgid "If it was you who looked up or changed that data, or clicked"
+msgstr ""
+
+#: pages/account/13.php:39
+msgid "With kind regards,"
+msgstr ""
 
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
@@ -3334,6 +3378,10 @@ msgstr "CAcert&#20445;&#35388;&#12503;&#12525;&#12464;&#12521;&#12512;"
 msgid "Date (YYYY-MM-DD)"
 msgstr "&#26085;&#20184;(YYYY-MM-DD)"
 
+#: pages/account/13.php:34
+msgid "But if you received this mail without a recognisable reason,"
+msgstr ""
+
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
 msgstr ""
@@ -4224,6 +4272,10 @@ msgstr ""
 
 #: includes/account.php:428
 msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
+msgstr ""
+
+#: pages/account/13.php:39
+msgid "CAcert Support"
 msgstr ""
 
 #: www/coapnew.php:980

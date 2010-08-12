@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-12-26 19:01:08+0000\n"
+"PO-Revision-Date: 2010-07-06 10:45:54+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1637,7 +1637,7 @@ msgstr ""
 
 #: www/capnew.php:1326
 msgid "location of the assurance"
-msgstr ""
+msgstr "sted for forsikringen"
 
 #: www/capnew.php:732 www/coapnew.php:753
 msgid "generated"
@@ -1679,7 +1679,7 @@ msgstr "V&aelig;re venligst sikker p&aring; at f&oslash;lgende oplysninger er ko
 
 #: www/index/0.php:120
 msgid "Please note a general limitation is that, unlike long-time players like Verisign, CAcert's root certificate is not included by default in mainstream browsers, email clients, etc. This means people to whom you send encrypted email, or users who visit your SSL-enabled web server, will first have to import CAcert's root certificate, or they will have to agree to pop-up security warnings (which may look a little scary to non-techy users)."
-msgstr ""
+msgstr "Bem&aelig;rk venligst en generel begr&aelig;nsning er at, modsat gamle spillere som Verisign, er CAcerts rodcertifikat ikke som standard medtaget i mainstream browsere, e-post-klienter o.l. Dette betyder at folk du har sendt krypteret e-post, eller brugere som bes&oslash;ger din SSL-aktiverede webserver, skal f&oslash;rst importere CAcers rodcertifikat, eller de m&aring; godkende pop op-sikkerhedsadvarsler (som kan virke lidt afskr&aelig;kkende for ikke ikke-tekniske brugere)."
 
 #: www/account/14.php:33 www/index/1.php:81 www/index/6.php:51
 msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol."
@@ -1687,7 +1687,7 @@ msgstr "God passwordsikkerhed fordrer at kodeordet/passwordet indeholder: store 
 
 #: www/wot/8.php:40
 msgid "Please note: All html will be stripped from the contact information box, a link to an email form will automatically be inserted to ensure your privacy."
-msgstr ""
+msgstr "Bem&aelig;rk venligst: Al html vil blive str&oslash;get fra kontaktinformationsboksen, og en e-post-formular vil automatisk blive indsat for at sikre dit privatliv."
 
 #: www/account/43.php:195 www/account/43.php:230 www/wot/10.php:24
 #: www/wot/10.php:57 www/wot/6.php:108
@@ -1729,7 +1729,7 @@ msgstr "Behandler"
 
 #: www/help/8.php:1
 msgid "Question: I'm a software developer for linux and I want to use CAcert/openssl to distribute my packages with detached signatures, is this possible and why would I do this over PGP/GPG detached signatures?"
-msgstr ""
+msgstr "Sp&oslash;rgsm&aring;l: Jeg udvikler programmel til linux og &oslash;nsker at bruge CAcert/openssl til at distribuere mine pakker med separate signaturer, er dette muligt og hvorfor skulle jeg g&oslash;re dette fremfor at bruge separate PGP/GPG-signaturer?"
 
 #: www/help/2.php:11 www/help/2.php:54
 msgid "References"
@@ -1765,7 +1765,7 @@ msgstr "Gentag"
 
 #: www/help/3.php:52
 msgid "Return to the 'Internet Information Services' screen in 'Administrative Tools' under 'Control Panel'. Right click on 'Default Web Site' and select 'Properties'."
-msgstr ""
+msgstr "G&aring; tilbage til sk&aelig;rmbilledet 'Internet Information Services' i 'Administrative Tools' under 'Control Panel'. H&oslash;jreklik p&aring; 'Default Web Site' and v&aelig;lg 'Properties'."
 
 #: www/account/12.php:72 www/account/18.php:78 www/account/22.php:74
 #: www/account/5.php:78
@@ -1887,8 +1887,8 @@ msgstr ""
 msgid "has changed the password on your account."
 msgstr ""
 
-#: pages/account/13.php:23
-msgid "has viewed your lost password questions."
+#: www/gpg.php:127
+msgid "Please upload only one key at a time."
 msgstr ""
 
 #: pages/help/3.php:63
@@ -1913,7 +1913,7 @@ msgstr "Kontakt email"
 
 #: www/help/3.php:37
 msgid "Select an easy to locate folder. You'll have to open this file up with Notepad. The CSR must be copied and pasted into our online form. Once the CSR has been submitted, you won't need this CSR any more as IIS won't reuse old CSR to generate new certificates."
-msgstr ""
+msgstr "V&aelig;lg en mappe der er let at finde. Du kan &aring;bne denne fil med Notepad. CSR'en skal kopieres og s&aelig;ttes ind i vores online formular. N&aring;r CSR'en er indsendt, har du ikke l&aelig;ngere brug for CSR'en da IIS ikke vil genbruge en gammel CSR til at danne nye certifikater."
 
 #: www/help/3.php:61
 msgid "Select the .cer file and click 'Next'."
@@ -2069,6 +2069,38 @@ msgstr "Kodeordet du sendte var for kort."
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr ""
 
+#: pages/account/13.php:28
+msgid "You receive this automatic mail since you yourself or"
+msgstr ""
+
+#: pages/account/13.php:36
+msgid "account, and you should promptly change your password and your"
+msgstr ""
+
+#: pages/account/13.php:30
+msgid "for a forgotten password."
+msgstr ""
+
+#: pages/account/13.php:37
+msgid "secret questions and answers."
+msgstr ""
+
+#: pages/account/13.php:29
+msgid "someone else looked up your secret questions and answers"
+msgstr ""
+
+#: pages/account/13.php:35
+msgid "there is a danger that an unauthorised person accessed your"
+msgstr ""
+
+#: pages/account/13.php:32
+msgid "through the menu in your account, everything is in best order and"
+msgstr ""
+
+#: pages/account/13.php:33
+msgid "you can ignore this mail."
+msgstr ""
+
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr "Muligheden for at kunne bekr&aelig;fte andre nye CAcert brugere, bidrager til styrkelsen og udvidelsen af CAcerts Bekr&aelig;ftelsesnetv&aelig;rk."
@@ -2086,6 +2118,18 @@ msgstr ""
 #, php-format
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
 msgstr "Dom&aelig;net '%s' er blevet tilf&oslash;jet til systemet, du skal &aring;bne det link i en browser som er blevet sendt til din email f&oslash;r du kan udstede nogle certifikater hertil."
+
+#: pages/account/3.php:20
+msgid "CAcert Certificate Acceptable Use Policy"
+msgstr ""
+
+#: pages/account/13.php:31
+msgid "If it was you who looked up or changed that data, or clicked"
+msgstr ""
+
+#: pages/account/13.php:39
+msgid "With kind regards,"
+msgstr "Venlig hilsen"
 
 #: www/account/0.php:22
 msgid "The email account section is for adding/updating/removing email accounts which can be used to issue client certificates against. The client certificate section steps you through generating a certificate signing request for one or more emails you've registered in the email account section."
@@ -2365,11 +2409,11 @@ msgstr ""
 
 #: www/capnew.php:1331
 msgid "date of assurance"
-msgstr ""
+msgstr "dator for forsikring"
 
 #: www/capnew.php:1025
 msgid "certificate"
-msgstr ""
+msgstr "certifikat"
 
 #: includes/account.php:1609
 #, php-format
@@ -2386,7 +2430,7 @@ msgstr ""
 
 #: www/wot.php:439
 msgid "Your email has been sent to"
-msgstr ""
+msgstr "Din mail er sendt til"
 
 #: pages/wot/7-old.php:174
 msgid "Your details have been updated."
@@ -3170,7 +3214,7 @@ msgstr "Listen af navne angivet i tilf&aelig;ldig orden."
 #: includes/account.php:70
 #, php-format
 msgid "The email address '%s' is already in a different account. Can't continue."
-msgstr ""
+msgstr "E-post-adressen '%s' er allerede i en anden konto. Kan ikke forts&aelig;tte."
 
 #: www/wot/2.php:17
 msgid "There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!)."
@@ -3334,6 +3378,10 @@ msgstr ""
 msgid "Date (YYYY-MM-DD)"
 msgstr ""
 
+#: pages/account/13.php:34
+msgid "But if you received this mail without a recognisable reason,"
+msgstr ""
+
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
 msgstr ""
@@ -3482,7 +3530,7 @@ msgstr ""
 
 #: www/wot/5.php:15
 msgid "ERROR"
-msgstr ""
+msgstr "FEJL"
 
 #: www/wot/10.php:105
 msgid "Go Back"
@@ -3613,7 +3661,7 @@ msgstr ""
 #: includes/account.php:2020
 #, php-format
 msgid "The domain '%s' is already in a different account and is listed as valid. Can't continue."
-msgstr ""
+msgstr "Dom&aelig;net '%s' er allerede i en anden konto og noteret som g&aelig;ldende. Kan ikke forts&aelig;tte."
 
 #: includes/general_stuff.php:85
 msgid "Bug Database"
@@ -3962,23 +4010,23 @@ msgstr ""
 
 #: pages/wot/6.php:153
 msgid "Policy"
-msgstr ""
+msgstr "Police"
 
 #: pages/wot/6.php:165
 msgid "I confirm this Assurance"
-msgstr ""
+msgstr "Jeg bekr&aelig;fter denne forsikring"
 
 #: pages/wot/6.php:150
 msgid "I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."
-msgstr ""
+msgstr "Jeg har l&aelig;st og forst&aring;et forsikringspolicen og forsikringsh&aring;ndbogen og laver denne forsikring if&oslash;lge og i overensstemmelse med police og h&aring;ndbog."
 
 #: pages/wot/6.php:146
 msgid "I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."
-msgstr ""
+msgstr "Jeg er overbevist om at identitetsvurderingen jeg foretager er korrekt, fuldst&aelig;ndig og sporbar. Jeg har set original dokumentation som attesterer denne identitet. Jeg accepterer at CAcerts voldgiftsmand kan anmode mig om at udlevere dokumentation ved enhver tvist, og jeg kan holdes ansvarlig."
 
 #: pages/account/14.php:38
 msgid "Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol (all white spaces at the beginning and end are removed)."
-msgstr ""
+msgstr "Bem&aelig;rk venligst, af hensyn til god sikkerhed, at kodefrasen skal indeholder et stort bogstav, et lille bogstav, et nummer og et symbol (al luft i begyndelsen og slutningen fjernes)."
 
 #: pages/wot/1.php:115
 msgid "Not yet!"
@@ -3986,7 +4034,7 @@ msgstr ""
 
 #: includes/account_stuff.php:223
 msgid "CAP Forms"
-msgstr ""
+msgstr "CAP-formularer"
 
 #: pages/index/21.php:39
 msgid "Please also include your name in the transaction so we know who it came from and send an email to ernestine at cacert dot org with the details:"
@@ -3994,15 +4042,15 @@ msgstr ""
 
 #: pages/wot/6.php:154
 msgid "Assurance Handbook"
-msgstr ""
+msgstr "Forsikringsh&aring;ndbog"
 
 #: pages/index/5.php:24
 msgid "Email Address (primary)"
-msgstr ""
+msgstr "E-post-adresse (prim&aelig;r)"
 
 #: pages/account/56.php:18
 msgid "List of Organisation Assurers:"
-msgstr ""
+msgstr "Liste over organisationsforsikringsagenter:"
 
 #: pages/index/1.php:24
 msgid "Note: White spaces at the beginning and end of a password will be removed."
@@ -4010,7 +4058,7 @@ msgstr ""
 
 #: pages/wot/6.php:154
 msgid "Assurance Policy"
-msgstr ""
+msgstr "Forsikringspolitik"
 
 #: www/cap.php:264
 msgid "I, the Assurer, hereby confirm that I have verified the Member according to CAcert Assurance Policy."
@@ -4023,11 +4071,11 @@ msgstr ""
 #: includes/account_stuff.php:268 includes/general_stuff.php:145
 #: includes/tverify_stuff.php:80
 msgid "by CAcert"
-msgstr ""
+msgstr "af CAcert"
 
 #: www/wot.php:343
 msgid "Assurer Challenge"
-msgstr ""
+msgstr "Forsikringsagentsudfordring"
 
 #: www/cap.php:143
 msgid "I hereby confirm that the information stated above is both true and correct, and request the CAcert Assurer (identified below) to verify me according to CAcert Assurance Policy."
@@ -4035,15 +4083,15 @@ msgstr ""
 
 #: pages/account/21.php:50
 msgid "OCSP certificate"
-msgstr ""
+msgstr "OCSP-certifikat"
 
 #: includes/account.php:753
 msgid "Processing request"
-msgstr ""
+msgstr "Behandler foresp&oslash;rgsel"
 
 #: pages/account/18.php:51 pages/account/5.php:57
 msgid "No client certificates are currently listed."
-msgstr ""
+msgstr "Ingen klientcertifikater er i &oslash;jeblikket noteret."
 
 #: pages/index/4.php:59
 msgid "If you want to use certificate login instead of username+password, please"
@@ -4055,7 +4103,7 @@ msgstr ""
 
 #: pages/account/43.php:109
 msgid "Are you sure you want to modify this DOB and/or last name?"
-msgstr ""
+msgstr "Er du sikker p&aring; at du vil &aelig;ndre denne f&oslash;dselsdato og/eller efternavn?"
 
 #: pages/account/43.php:412
 msgid "Show Assurances the user gave"
@@ -4095,7 +4143,7 @@ msgstr ""
 
 #: includes/account_stuff.php:220
 msgid "Trusted ThirdParties"
-msgstr ""
+msgstr "Betroede tredjeparter"
 
 #: www/index.php:445
 msgid "You have to agree to the CAcert Community agreement."
@@ -4119,7 +4167,7 @@ msgstr ""
 
 #: www/coap.html.php:109
 msgid "state"
-msgstr ""
+msgstr "stat"
 
 #: www/coap.html.php:138
 msgid "trade office"
@@ -4151,7 +4199,7 @@ msgstr ""
 
 #: www/coap.html.php:110
 msgid "country code"
-msgstr ""
+msgstr "landekode"
 
 #: www/cap.html.php:240 www/coap.html.php:343
 msgid "generate PDF file"
@@ -4163,11 +4211,11 @@ msgstr ""
 
 #: www/coap.html.php:227
 msgid "and organisation stamp"
-msgstr ""
+msgstr "og organisationsstempel"
 
 #: www/coap.html.php:166
 msgid "Organisation Administrator(s)"
-msgstr ""
+msgstr "Organisationsadministrator(er)"
 
 #: www/cap.html.php:240 www/coap.html.php:343
 msgid "Submit the form"
@@ -4226,6 +4274,10 @@ msgstr ""
 msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
 msgstr ""
 
+#: pages/account/13.php:39
+msgid "CAcert Support"
+msgstr "CAcert support"
+
 #: www/coapnew.php:980
 msgid "A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."
 msgstr ""
@@ -4236,7 +4288,7 @@ msgstr ""
 
 #: includes/general.php:875
 msgid "Sorry, you are not allowed to be an Assurer. Please contact"
-msgstr ""
+msgstr "Desv&aelig;rre, du er ikke tilladt at blive forsikringsagent. Kontakt venligst"
 
 #: pages/wot/2.php:33
 msgid "Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at"
@@ -4755,23 +4807,23 @@ msgstr "Ingen OpenPGP n&oslash;gler er pt. listet."
 
 #: pages/gpg/3.php:24
 msgid "No such OpenPGP key attached to your account."
-msgstr ""
+msgstr "Det PGP/GPG certifikat er ikke tilknyttet din konto."
 
 #: pages/gpg/2.php:20
 msgid "OpenPGP Keys"
-msgstr ""
+msgstr "OpenPGP n&oslash;gler"
 
 #: pages/account/43.php:374
 msgid "Assurance Points The User Issued"
-msgstr ""
+msgstr "Forsikringspoint brugeren udstedte"
 
 #: pages/index/4.php:20
 msgid "Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your Email/Pass Phrase to get a new certificate, by clicking on 'Normal Login' to the right of your screen."
-msgstr ""
+msgstr "Advarsel! Du pr&oslash;vede at logge ind i systemet med et klientcertifikat, men det lykkedes ikke, da certifikatet er udl&oslash;bet, tilbagekaldt eller simpelthen ikke gyldig for denne side. Du kan logge ind med din email/kode for at f&aring; et nyt certifikat, ved at klikke p&aring; 'Normalt login' til h&oslash;jre p&aring; sk&aelig;rmen."
 
 #: pages/account/6.php:124
 msgid "Your certificate:"
-msgstr ""
+msgstr "Dit certifikat:"
 
 #: www/coapnew.php:1090
 msgid "Type, jurisdiction (state)"
@@ -4823,7 +4875,7 @@ msgstr ""
 
 #: pages/account/1.php:29 pages/index/1.php:80
 msgid "I own or am authorised to control this email address"
-msgstr ""
+msgstr "Jeg ejer eller er autoriseret til at styre denne e-post-adresse"
 
 #: www/capnew.php:1078
 #, php-format
@@ -4872,7 +4924,7 @@ msgstr ""
 
 #: www/coapnew.php:1221
 msgid "Signature and organisation stamp"
-msgstr ""
+msgstr "Underskrift og organisationsstempel"
 
 #: www/capnew.php:1055
 msgid "Some examples of possible standard transliterations in a full individual name. If more than one transliteration of a character is possible, it is denoted within parentheses."
@@ -4880,7 +4932,7 @@ msgstr ""
 
 #: pages/account/53.php:99
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: www/capnew.php:1025
 msgid "TTP"
@@ -4912,7 +4964,7 @@ msgstr ""
 
 #: www/coapnew.php:748
 msgid "Organisation Information (COAP) form"
-msgstr ""
+msgstr "Organisationsidentitetsformular (COAP)"
 
 #: www/coapnew.php:1271
 msgid "Organisation Assurer's signature"
@@ -4920,7 +4972,7 @@ msgstr ""
 
 #: www/coapnew.php:1061
 msgid "Organisation Identity Information"
-msgstr ""
+msgstr "Organisations identitetsinformation"
 
 #: www/coapnew.php:1241
 msgid "Organisation Assurer's Statement"
@@ -4936,7 +4988,7 @@ msgstr ""
 
 #: www/coapnew.php:1129 www/coapnew.php:1142
 msgid "Organisation Administrator"
-msgstr ""
+msgstr "Organisations administrator"
 
 #: www/capnew.php:1067
 msgid "On comparing names"
@@ -4948,7 +5000,7 @@ msgstr ""
 
 #: www/capnew.php:1223 www/coapnew.php:1248
 msgid "On mutual assurance"
-msgstr ""
+msgstr "Om gensidig forsikring"
 
 #: www/capnew.php:1278
 msgid "On mutual assurance provide email address of Assurer."
@@ -4956,7 +5008,7 @@ msgstr ""
 
 #: www/coapnew.php:1070
 msgid "On organisation identity information"
-msgstr ""
+msgstr "Om organisationsidentitetsforsikring"
 
 #: www/capnew.php:1006
 msgid "On the assuree full name"
@@ -4968,11 +5020,11 @@ msgstr ""
 
 #: www/coapnew.php:1075
 msgid "Name of the organisation"
-msgstr ""
+msgstr "Navn p&aring; organisationen"
 
 #: www/verify.php:36
 msgid "Email has been sent."
-msgstr ""
+msgstr "Der er sendt en mail."
 
 #: includes/general.php:772 includes/general.php:779
 msgid "CSRF Hash is wrong. Please try again."
@@ -4989,11 +5041,11 @@ msgstr ""
 
 #: www/coapnew.php:1117
 msgid "Internet Domain(s)"
-msgstr ""
+msgstr "Internet-dom&aelig;ne(r)"
 
 #: www/cap.html.php:188
 msgid "Assurer's email address"
-msgstr ""
+msgstr "Forsikringsagents e-post-adresse"
 
 #: www/capnew.php:1178 www/coapnew.php:1196
 msgid "Make sure you have read and agreed with the CAcert Community Agreement"
@@ -5005,7 +5057,7 @@ msgstr ""
 
 #: www/capnew.php:727
 msgid "Identity Verification Form (CAP) form"
-msgstr ""
+msgstr "Identitetsverifikationsformular (CAP)"
 
 #: www/capnew.php:848
 msgid "If there are any doubts or concerns about the Applicant's identity, do not allocate points. You are encouraged to perform a mutual Assurance."
@@ -5033,7 +5085,7 @@ msgstr ""
 
 #: www/disputes.php:333
 msgid "You aren't allowed to dispute your own domains. Can't continue."
-msgstr ""
+msgstr "Det er ikke tilladt at meddele strid omkring dit eget dom&aelig;ne. Der kan ikke forts&aelig;ttes."
 
 #: www/coapnew.php:1211
 msgid "I am duly authorised to act on behalf of the organisation, I grant operational certificate administrative privileges to the specified Organisation Administrator and, I request the Organisation Assurer to verify the organisation information according to the Assurance Policies."
@@ -5066,16 +5118,16 @@ msgstr ""
 #: pages/account/49.php:91
 #, php-format
 msgid "No organisational domains found matching %s"
-msgstr ""
+msgstr "Der blev ikke fundet organisatoriske dom&aelig;ner som passer med %s"
 
 #: pages/account/49.php:60
 #, php-format
 msgid "No personal domains found matching %s"
-msgstr ""
+msgstr "Der blev ikke fundet personlige dom&aelig;ner som passer med %s"
 
 #: www/verify.php:35
 msgid "Notification"
-msgstr ""
+msgstr "Orientering"
 
 #: www/verify.php:160
 msgid "Parameters are missing. Please try the complete URL."
@@ -5091,7 +5143,7 @@ msgstr ""
 
 #: includes/account.php:684
 msgid "Domain not verified."
-msgstr ""
+msgstr "Dom&aelig;ne ikke verificeret."
 
 #: www/capnew.php:850
 msgid "For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit:"
@@ -5127,7 +5179,7 @@ msgstr ""
 
 #: www/coapnew.php:748
 msgid "CAcert Organisation Assurance Programme"
-msgstr ""
+msgstr "CAcert Organisationsforsikringsprogram"
 
 #: www/capnew.php:807 www/coapnew.php:828
 msgid "CAcert's Root Certificate sha1 fingerprints"
@@ -5139,11 +5191,11 @@ msgstr ""
 
 #: www/capnew.php:842
 msgid "CAcert CAP form"
-msgstr ""
+msgstr "CAcert CAP-formular"
 
 #: www/coapnew.php:863
 msgid "CAcert COAP form"
-msgstr ""
+msgstr "CAcert COAP-formular"
 
 #: www/coap.html.php:335
 msgid "Applicable Organisation Policy documents and information can be attached to the pdf output file. Mark those documents, which need to be attached"
@@ -5163,11 +5215,11 @@ msgstr ""
 
 #: pages/account/53.php:67
 msgid "Are you sure you want to delete this region and all connected locations?"
-msgstr ""
+msgstr "Er du sikker p&aring; at du vil fjerne denne region og alle tilknyttede steder?"
 
 #: www/capnew.php:1053
 msgid "Applicant's Identity Information"
-msgstr ""
+msgstr "Ans&oslash;gers identitetsinformation"
 
 #: www/coapnew.php:1081
 msgid "Address (comma separated)"
@@ -5192,4 +5244,4 @@ msgstr ""
 #: www/capnew.php:405 www/capnew.php:1344 www/coapnew.php:441
 #: www/coapnew.php:1291
 msgid "page"
-msgstr ""
+msgstr "side"

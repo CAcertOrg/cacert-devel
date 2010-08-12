@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2009-12-26 19:01:24+0000\n"
+"PO-Revision-Date: 2010-07-06 10:46:17+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -233,7 +233,7 @@ msgstr "Zosta&#324; Kontrolerem w  Sieci Zaufania CAcert - 'Web of Trust'"
 
 #: includes/account_stuff.php:182
 msgid "Becoming an Assurer"
-msgstr ""
+msgstr "Jak zostać Kontrolerem"
 
 #: pages/account/10.php:34
 msgid "Paste your CSR(Certificate Signing Request) below..."
@@ -1629,7 +1629,7 @@ msgstr "Dane Osobowe"
 
 #: pages/wot/11.php:48
 msgid "for more information about Organizational Support."
-msgstr ""
+msgstr "aby uzyskać więcej informacji na temat wsparcia organizacji."
 
 #: pages/wot/13.php:73
 msgid "(hit enter to submit)"
@@ -1641,7 +1641,7 @@ msgstr ""
 
 #: www/capnew.php:732 www/coapnew.php:753
 msgid "generated"
-msgstr ""
+msgstr "generowane"
 
 #: pages/wot/12.php:32 pages/wot/13.php:72
 msgid "Location:"
@@ -1868,7 +1868,7 @@ msgstr ""
 
 #: www/ttp.php:107
 msgid "as applicable"
-msgstr ""
+msgstr "w stosownych"
 
 #: pages/account/13.php:56 pages/account/13.php:104 pages/index/1.php:48
 #: pages/index/5.php:26
@@ -1877,18 +1877,18 @@ msgstr "dd/mm/rrrr"
 
 #: pages/wot/13.php:65
 msgid "eg Sydney, New South Wales, Australia"
-msgstr ""
+msgstr "na przykład Sydney, New South Wales, Australia"
 
 #: includes/account.php:98
 msgid "has changed the default email on your account."
-msgstr ""
+msgstr "zmienił na koncie domyślny adres e-mail."
 
 #: includes/account.php:1076
 msgid "has changed the password on your account."
 msgstr ""
 
-#: pages/account/13.php:23
-msgid "has viewed your lost password questions."
+#: www/gpg.php:127
+msgid "Please upload only one key at a time."
 msgstr ""
 
 #: pages/help/3.php:63
@@ -1979,7 +1979,7 @@ msgstr ""
 #: www/account/11.php:31 www/account/21.php:34 www/account/24.php:33
 #: www/account/27.php:36
 msgid "State/Province"
-msgstr ""
+msgstr "Stan/Prowincja"
 
 #: includes/general_stuff.php:66 www/stats.php:5 www/stats.php:9
 msgid "Statistics"
@@ -2069,6 +2069,38 @@ msgstr "Twoje has&#322;o jest zbyt kr&oacute;tkie. Has&#322;o powinno posiada&#2
 msgid "The Regulation of Investigational Powers Act (RIPA)&lt;/a&gt; ('Snooping Bill' official gov site, UK)"
 msgstr ""
 
+#: pages/account/13.php:28
+msgid "You receive this automatic mail since you yourself or"
+msgstr ""
+
+#: pages/account/13.php:36
+msgid "account, and you should promptly change your password and your"
+msgstr ""
+
+#: pages/account/13.php:30
+msgid "for a forgotten password."
+msgstr "do zapomnianego hasła."
+
+#: pages/account/13.php:37
+msgid "secret questions and answers."
+msgstr "tajne pytania i odpowiedzi."
+
+#: pages/account/13.php:29
+msgid "someone else looked up your secret questions and answers"
+msgstr "ktoś spojrzał na tajne pytania i odpowiedzi"
+
+#: pages/account/13.php:35
+msgid "there is a danger that an unauthorised person accessed your"
+msgstr ""
+
+#: pages/account/13.php:32
+msgid "through the menu in your account, everything is in best order and"
+msgstr ""
+
+#: pages/account/13.php:33
+msgid "you can ignore this mail."
+msgstr ""
+
 #: www/index/0.php:103
 msgid "The ability to assure other new CAcert users; contribute to the strengthening and broadening of the CAcert Web of Trust."
 msgstr ""
@@ -2085,6 +2117,18 @@ msgstr "Obecny Zarząd %s i role jego członk&oacute;w."
 #: includes/account.php:394
 #, php-format
 msgid "The domain '%s' has been added to the system, however before any certificates for this can be issued you need to open the link in a browser that has been sent to your email address."
+msgstr ""
+
+#: pages/account/3.php:20
+msgid "CAcert Certificate Acceptable Use Policy"
+msgstr ""
+
+#: pages/account/13.php:31
+msgid "If it was you who looked up or changed that data, or clicked"
+msgstr ""
+
+#: pages/account/13.php:39
+msgid "With kind regards,"
 msgstr ""
 
 #: www/account/0.php:22
@@ -2538,7 +2582,7 @@ msgstr ""
 
 #: www/index.php:586 www/index.php:593
 msgid "This seems like potential spam, cannot continue."
-msgstr ""
+msgstr "Wygląda to na potencjalny spam, nie można kontynuować."
 
 #: www/index.php:572 www/index.php:579
 msgid "This seems like you have cookies or Javascript disabled, cannot continue."
@@ -3333,6 +3377,10 @@ msgstr "Program Uwierzytelniania CAcert"
 #: www/cap.php:85 www/cap.php:113
 msgid "Date (YYYY-MM-DD)"
 msgstr "Data (RRRR-MM-DD)"
+
+#: pages/account/13.php:34
+msgid "But if you received this mail without a recognisable reason,"
+msgstr ""
 
 #: includes/general.php:885
 msgid "To become an Assurer you have to collect 100 Assurance Points and pass the"
@@ -4224,6 +4272,10 @@ msgstr ""
 
 #: includes/account.php:428
 msgid "Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes."
+msgstr ""
+
+#: pages/account/13.php:39
+msgid "CAcert Support"
 msgstr ""
 
 #: www/coapnew.php:980
