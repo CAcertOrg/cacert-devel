@@ -2,11 +2,9 @@
       <h3 class="pointer" onclick="explode('misc')">+ <?=_("About CAcert.org")?></h3>
       <ul class="menu" id="misc">
         <li><a href="http://blog.cacert.org/"><?=_("CAcert News")?></a></li>
-	<li><a href="/help.php"><?=_("Howto Information")?></a></li>
 	<li><a href="http://wiki.CAcert.org/"><?=_("Wiki Documentation")?></a></li>
 	<li><a href="/policy/"><?=_("Policies")?></a></li>
 	<li><a href="/index.php?id=19"><?=_("Point System")?></a></li>
-	<li><a href="/policy/NRPDisclaimerAndLicence.php" target="_blank"><?=_("Disclaimer")?></a></li>
 	<li><a href="http://bugs.CAcert.org/"><?=_("Bug Database")?></a></li>
 <? //	<li><a href="/index.php?id=47"><  = _ ("PR Materials" )  > </a></li> ?>
 <? //	<li><a href="/logos.php">< ? = _ ( " CAcert Logos " ) ? > </a></li> ?>

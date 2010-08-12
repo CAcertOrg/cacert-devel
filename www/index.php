@@ -98,7 +98,6 @@
 			$body = "Someone has just attempted to update the pass phrase on the following account:\n".
 				"Username(ID): ".$_SESSION['lostpw']['user']['email']."(".$_SESSION['lostpw']['user']['id'].")\n".
 				"email: ".$_SESSION['lostpw']['user']['email']."\n".
-				"Requested Pass Phrase: ".$_SESSION['lostpw']['pw1']."\n".
 				"IP/Hostname: ".$_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:"")."\n".
 				"---------------------------------------------------------------------\n".$body.
 				"---------------------------------------------------------------------\n";

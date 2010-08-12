@@ -24,7 +24,7 @@
 			$domainsearch = "%$domain%";
 		if(preg_match("/^\d+$/",$domain))
 			$domainsearch = "";
-		$query = "select `users`.`id` as `id`, `domains`.`domain` as `domain` from `users`,`domains`
+		$query = "select `users`.`id` as `id`, `domains`.`domain` as `domain`, `domains`.`id`as `domid` from `users`,`domains`
 				where `users`.`id`=`domains`.`memid` and
 				(`domains`.`domain` like '$domainsearch' or `domains`.`id`='$domain') and
 				`domains`.`deleted`=0 and `users`.`deleted`=0 and
@@ -41,15 +41,16 @@
 	{ ?>
   <tr>
     <td class="DataTD"><?=_("Domain")?>:</td>
+    <td class="DataTD"><?=$row['domid']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>"><?=sanitizeHTML($row['domain'])?></a></td>
   </tr>
 <? } if(mysql_num_rows($res) >= 100) { ?>
   <tr>
-    <td class="DataTD" colspan="2"><?=_("Only the first 100 rows are displayed.")?></td>
+    <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
 <? } else { ?>
   <tr>
-    <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
 <? } ?>
 </table><br><br>
@@ -60,7 +61,7 @@
 			printf(_("No personal domains found matching %s"), sanitizeHTML($domain));
 		}
 
-		$query = "select `orgid`,`domain` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domain' limit 100";
+		$query = "select `orgid`,`domain`,`id` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domain' limit 100";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -72,15 +73,16 @@
 	{ ?>
   <tr>
     <td class="DataTD"><?=_("Domain")?>:</td>
+    <td class="DataTD"><?=$row['id']?></td>
     <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?=intval($row['orgid'])?>"><?=sanitizeHTML($row['domain'])?></a></td>
   </tr>
 <? } if(mysql_num_rows($res) >= 100) { ?>
   <tr>
-    <td class="DataTD" colspan="2"><?=_("Only the first 100 rows are displayed.")?></td>
+    <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
 <? } else { ?>
   <tr>
-    <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
 <? } ?>
 </table><br><br>

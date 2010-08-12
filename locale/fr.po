@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-08-02 20:57:15+0000\n"
+"PO-Revision-Date: 2010-08-05 13:29:00+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -938,10 +938,6 @@ msgstr "Comment mettre &agrave; jour, corriger ou supprimer vos informations"
 msgid "How?"
 msgstr "Comment ?"
 
-#: includes/general_stuff.php:64
-msgid "Howto Information"
-msgstr "Informations G&eacute;n&eacute;rales"
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "Je ne peux plus attendre d'envoyer des emails chiffr&eacute;s !"
@@ -958,6 +954,11 @@ msgstr "Je n'ai pas re&ccedil;u de requ&ecirc;te de certificat valide, cliquez s
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
 msgstr "Je ne veux pas &ecirc;tre list&eacute;"
+
+#: pages/index/0.php:22
+#, php-format
+msgid "If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."
+msgstr ""
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
@@ -4501,10 +4502,6 @@ msgstr "Documents de relations publiques CAcert"
 msgid "Colour version"
 msgstr "Version couleur"
 
-#: includes/about_menu.php:8
-msgid "Disclaimer"
-msgstr "Avertissement"
-
 #: www/gpg.php:176
 msgid "Error: Both Name and Email address are empty"
 msgstr "Erreur: le nom et l'adresse email sont vides"
@@ -4611,10 +4608,10 @@ msgstr "Je n'ai pas re&ccedil;u une demande de certificat valide, merci d'essaye
 msgid "If you want to have free certificates issued to you, join the %s CAcert Community %s."
 msgstr "Si vous souhaitez recevoir des certificats gratuits &agrave; votre nom, rejoignez la %s Communaut&eacute; CAcert %s."
 
-#: pages/index/0.php:19
+#: pages/index/16.php:19 pages/index/3.php:19
 #, php-format
-msgid "If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."
-msgstr "Si vous souhaitez utiliser des certificats d&eacute;livr&eacute;s par CAcert, lisez les %s avertissements et licence %s."
+msgid "You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."
+msgstr ""
 
 #: pages/account/37.php:28 pages/index/12.php:28
 msgid "More information about CAcert Incorporated:"

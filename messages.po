@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 22:55+0200\n"
+"POT-Creation-Date: 2010-08-05 15:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "%s prefers to be contacted in %s"
 msgstr ""
 
-#: pages/account/43.php:72 pages/account/49.php:52 pages/account/49.php:83
+#: pages/account/43.php:72 pages/account/49.php:53 pages/account/49.php:85
 #, php-format
 msgid "%s rows displayed."
 msgstr ""
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Alert me if"
 msgstr ""
 
-#: www/index.php:602
+#: www/index.php:601
 msgid "All fields are mandatory."
 msgstr ""
 
@@ -503,7 +503,7 @@ msgstr ""
 #: includes/account.php:1269 includes/account.php:2441
 #: includes/account.php:2791 includes/account.php:2812
 #: includes/general.php:750 www/disputes.php:289 www/disputes.php:425
-#: www/index.php:551 www/wot.php:64 www/wot.php:353 www/wot.php:369
+#: www/index.php:550 www/wot.php:64 www/wot.php:353 www/wot.php:369
 #: scripts/removedead.php:78
 msgid "Best regards"
 msgstr ""
@@ -520,7 +520,7 @@ msgstr ""
 msgid "Browse to the location you saved the .cer file to in step 1"
 msgstr ""
 
-#: includes/about_menu.php:10
+#: includes/about_menu.php:8
 msgid "Bug Database"
 msgstr ""
 
@@ -572,7 +572,7 @@ msgstr ""
 msgid "CAcert Assurers can see the name, birthday and the number of points by looking up the correct email address. No other person related data is published by CAcert."
 msgstr ""
 
-#: includes/about_menu.php:16
+#: includes/about_menu.php:14
 msgid "CAcert Board"
 msgstr ""
 
@@ -644,7 +644,7 @@ msgstr ""
 msgid "CAcert Source License"
 msgstr ""
 
-#: includes/about_menu.php:13
+#: includes/about_menu.php:11
 msgid "CAcert Statistics"
 msgstr ""
 
@@ -693,7 +693,7 @@ msgstr ""
 msgid "CAcert then sends you an email with a signed copy of your certificate. Hopefully the rest should be pretty straight forward."
 msgstr ""
 
-#: pages/index/16.php:41 pages/index/3.php:41
+#: pages/index/16.php:44 pages/index/3.php:44
 msgid "CAcert's GPG Key"
 msgstr ""
 
@@ -726,7 +726,7 @@ msgstr ""
 #: includes/account.php:95 includes/account.php:123 includes/account.php:569
 #: includes/account.php:1269 includes/account.php:2441
 #: includes/general.php:750 www/disputes.php:289 www/disputes.php:425
-#: www/index.php:551
+#: www/index.php:550
 msgid "CAcert.org Support!"
 msgstr ""
 
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Click here"
 msgstr ""
 
-#: pages/index/16.php:20 pages/index/3.php:20
+#: pages/index/16.php:23 pages/index/3.php:23
 msgid "Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x"
 msgstr ""
 
@@ -1117,10 +1117,6 @@ msgstr ""
 msgid "Directory Listing"
 msgstr ""
 
-#: includes/about_menu.php:9
-msgid "Disclaimer"
-msgstr ""
-
 #: pages/help/2.php:78
 msgid "Disclaimer : These are the author's opinions, but they should not be considered 'truth' without personal verification. The author may have made mistakes and any mistakes will be willingly rectified by contacting the administrator of elucido.net, contact details available from the normal domain registration information services (e.g. whois.net).&nbsp; No recommendation to install a Certificate Authority's root certificate is either intended nor implied."
 msgstr ""
@@ -1163,7 +1159,7 @@ msgstr ""
 
 #: pages/account/26.php:27 pages/account/28.php:28 pages/account/29.php:34
 #: pages/account/43.php:313 pages/account/48.php:25 pages/account/49.php:43
-#: pages/account/49.php:74 pages/account/7.php:26 pages/disputes/2.php:26
+#: pages/account/49.php:75 pages/account/7.php:26 pages/disputes/2.php:26
 msgid "Domain"
 msgstr ""
 
@@ -1285,11 +1281,11 @@ msgstr ""
 msgid "Email Address (primary)"
 msgstr ""
 
-#: includes/account.php:82 includes/account.php:554 www/index.php:506
+#: includes/account.php:82 includes/account.php:554 www/index.php:505
 msgid "Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid"
 msgstr ""
 
-#: www/index.php:452
+#: www/index.php:451
 msgid "Email Address was blank"
 msgstr ""
 
@@ -1470,9 +1466,9 @@ msgstr ""
 msgid "Find an Assurer"
 msgstr ""
 
-#: pages/index/16.php:25 pages/index/16.php:26 pages/index/16.php:35
-#: pages/index/16.php:36 pages/index/3.php:25 pages/index/3.php:26
-#: pages/index/3.php:35 pages/index/3.php:36
+#: pages/index/16.php:28 pages/index/16.php:29 pages/index/16.php:38
+#: pages/index/16.php:39 pages/index/3.php:28 pages/index/3.php:29
+#: pages/index/3.php:38 pages/index/3.php:39
 msgid "Fingerprint"
 msgstr ""
 
@@ -1493,7 +1489,7 @@ msgstr ""
 msgid "First and Last name fields can not be blank."
 msgstr ""
 
-#: www/index.php:434
+#: www/index.php:433
 msgid "First and/or last names were blank."
 msgstr ""
 
@@ -1576,11 +1572,11 @@ msgstr ""
 msgid "For years we've all been charged high amounts of money to pay for security that doesn't and shouldn't cost the earth."
 msgstr ""
 
-#: includes/account.php:1128 www/index.php:421
+#: includes/account.php:1128 www/index.php:420
 msgid "For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer."
 msgstr ""
 
-#: includes/account.php:1137 www/index.php:333 www/index.php:429
+#: includes/account.php:1137 www/index.php:332 www/index.php:428
 msgid "For your own security you must enter 5 lost password questions and answers."
 msgstr ""
 
@@ -1614,7 +1610,7 @@ msgstr ""
 msgid "Further Information"
 msgstr ""
 
-#: pages/index/16.php:40 pages/index/3.php:40
+#: pages/index/16.php:43 pages/index/3.php:43
 msgid "GPG Key"
 msgstr ""
 
@@ -1789,10 +1785,6 @@ msgstr ""
 
 #: pages/index/51.php:30
 msgid "How?"
-msgstr ""
-
-#: includes/about_menu.php:5
-msgid "Howto Information"
 msgstr ""
 
 #: www/cap.html.php:160 www/cap.php:149 www/capnew.php:1300
@@ -2060,7 +2052,7 @@ msgstr ""
 
 #: pages/index/0.php:22
 #, php-format
-msgid "If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."
+msgid "If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."
 msgstr ""
 
 #: www/logos.php:24
@@ -2121,7 +2113,7 @@ msgstr ""
 msgid "Inclusion into mainstream browsers!"
 msgstr ""
 
-#: www/index.php:348
+#: www/index.php:347
 msgid "Incorrect email address and/or Pass Phrase."
 msgstr ""
 
@@ -2150,15 +2142,15 @@ msgstr ""
 msgid "Installing your certificate"
 msgstr ""
 
-#: pages/index/16.php:32 pages/index/3.php:32
+#: pages/index/16.php:35 pages/index/3.php:35
 msgid "Intermediate Certificate (DER Format)"
 msgstr ""
 
-#: pages/index/16.php:31 pages/index/3.php:31
+#: pages/index/16.php:34 pages/index/3.php:34
 msgid "Intermediate Certificate (PEM Format)"
 msgstr ""
 
-#: pages/index/16.php:33 pages/index/3.php:33
+#: pages/index/16.php:36 pages/index/3.php:36
 msgid "Intermediate Certificate (Text Format)"
 msgstr ""
 
@@ -2184,7 +2176,7 @@ msgstr ""
 msgid "Invalid ID '%s' presented, can't do anything with it."
 msgstr ""
 
-#: includes/account.php:1169 www/index.php:442
+#: includes/account.php:1169 www/index.php:441
 msgid "Invalid date of birth"
 msgstr ""
 
@@ -2394,11 +2386,11 @@ msgstr ""
 msgid "Lost Password"
 msgstr ""
 
-#: www/index.php:553
+#: www/index.php:552
 msgid "Mail Probe"
 msgstr ""
 
-#: includes/about_menu.php:17
+#: includes/about_menu.php:15
 msgid "Mailing Lists"
 msgstr ""
 
@@ -2662,7 +2654,7 @@ msgstr ""
 msgid "New Pass Phrase"
 msgstr ""
 
-#: includes/account.php:1240 www/index.php:109
+#: includes/account.php:1240 www/index.php:108
 msgid "New Pass Phrases specified don't match or were blank."
 msgstr ""
 
@@ -2713,12 +2705,12 @@ msgstr ""
 msgid "No domains are currently listed."
 msgstr ""
 
-#: pages/account/49.php:91
+#: pages/account/49.php:93
 #, php-format
 msgid "No organisational domains found matching %s"
 msgstr ""
 
-#: pages/account/49.php:60
+#: pages/account/49.php:61
 #, php-format
 msgid "No personal domains found matching %s"
 msgstr ""
@@ -2927,7 +2919,7 @@ msgstr ""
 msgid "Only fill this in if you assured the person on a different day"
 msgstr ""
 
-#: pages/account/43.php:68 pages/account/49.php:48 pages/account/49.php:79
+#: pages/account/43.php:68 pages/account/49.php:49 pages/account/49.php:81
 msgid "Only the first 100 rows are displayed."
 msgstr ""
 
@@ -3044,12 +3036,12 @@ msgstr ""
 msgid "Other registered trade names of the organisation. (comma separated)"
 msgstr ""
 
-#: pages/index/16.php:19 pages/index/16.php:30 pages/index/3.php:19
-#: pages/index/3.php:30
+#: pages/index/16.php:22 pages/index/16.php:33 pages/index/3.php:22
+#: pages/index/3.php:33
 msgid "PKI Key"
 msgstr ""
 
-#: pages/index/16.php:45 pages/index/3.php:45
+#: pages/index/16.php:48 pages/index/3.php:48
 msgid "PKI finger/thumb print signed by the CAcert GPG Key"
 msgstr ""
 
@@ -3077,11 +3069,11 @@ msgstr ""
 msgid "Pass Phrase Again"
 msgstr ""
 
-#: www/index.php:462
+#: www/index.php:461
 msgid "Pass Phrases don't match"
 msgstr ""
 
-#: www/index.php:457
+#: www/index.php:456
 msgid "Pass Phrases were blank"
 msgstr ""
 
@@ -3244,7 +3236,7 @@ msgstr ""
 msgid "Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on <a href='https://bugs.cacert.org/'>bugs.cacert.org</a> and mark it as private."
 msgstr ""
 
-#: includes/about_menu.php:8
+#: includes/about_menu.php:7
 msgid "Point System"
 msgstr ""
 
@@ -3261,7 +3253,7 @@ msgstr ""
 msgid "Points Issued"
 msgstr ""
 
-#: includes/about_menu.php:7
+#: includes/about_menu.php:6
 msgid "Policies"
 msgstr ""
 
@@ -3342,7 +3334,7 @@ msgstr ""
 msgid "Question: I'm a software developer for linux and I want to use CAcert/openssl to distribute my packages with detached signatures, is this possible and why would I do this over PGP/GPG detached signatures?"
 msgstr ""
 
-#: includes/about_menu.php:14
+#: includes/about_menu.php:12
 msgid "RSS News Feed"
 msgstr ""
 
@@ -3443,15 +3435,15 @@ msgstr ""
 msgid "Root Certificate"
 msgstr ""
 
-#: pages/index/16.php:22 pages/index/3.php:22
+#: pages/index/16.php:25 pages/index/3.php:25
 msgid "Root Certificate (DER Format)"
 msgstr ""
 
-#: pages/index/16.php:21 pages/index/3.php:21
+#: pages/index/16.php:24 pages/index/3.php:24
 msgid "Root Certificate (PEM Format)"
 msgstr ""
 
-#: pages/index/16.php:23 pages/index/3.php:23
+#: pages/index/16.php:26 pages/index/3.php:26
 msgid "Root Certificate (Text Format)"
 msgstr ""
 
@@ -3544,7 +3536,7 @@ msgstr ""
 msgid "Select 'Server Certificate' at the bottom of the tab in the 'Secure communications' section."
 msgstr ""
 
-#: pages/account/43.php:53 pages/account/49.php:37 pages/account/49.php:68
+#: pages/account/43.php:53 pages/account/49.php:37 pages/account/49.php:69
 msgid "Select Specific Account Details"
 msgstr ""
 
@@ -3663,7 +3655,7 @@ msgstr ""
 msgid "Sorry, you are not allowed to be an Assurer. Please contact"
 msgstr ""
 
-#: includes/about_menu.php:18
+#: includes/about_menu.php:16
 msgid "Sourcecode"
 msgstr ""
 
@@ -3753,7 +3745,7 @@ msgstr ""
 msgid "Thank you very much for your support, your donations help CAcert to continue to operate."
 msgstr ""
 
-#: www/index.php:549
+#: www/index.php:548
 msgid "Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!"
 msgstr ""
 
@@ -3821,7 +3813,7 @@ msgstr ""
 msgid "The Organisational Unit field is the 'free' field. It is often the department or Server name for reference."
 msgstr ""
 
-#: includes/account.php:1258 www/index.php:117
+#: includes/account.php:1258 www/index.php:116
 #, php-format
 msgid "The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored %s points out of 6."
 msgstr ""
@@ -3830,7 +3822,7 @@ msgstr ""
 msgid "The Pass Phrase you submitted was too short."
 msgstr ""
 
-#: www/index.php:111
+#: www/index.php:110
 msgid "The Pass Phrase you submitted was too short. It must be at least 6 characters."
 msgstr ""
 
@@ -3991,7 +3983,7 @@ msgstr ""
 msgid "The list of tests you did pass at"
 msgstr ""
 
-#: includes/account.php:80 includes/account.php:552 www/index.php:504
+#: includes/account.php:80 includes/account.php:552 www/index.php:503
 msgid "The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes."
 msgstr ""
 
@@ -4109,7 +4101,7 @@ msgstr ""
 msgid "This dispute no longer seems to be in the database, can't continue."
 msgstr ""
 
-#: www/index.php:482
+#: www/index.php:481
 msgid "This email address is currently valid in the system."
 msgstr ""
 
@@ -4149,11 +4141,11 @@ msgstr ""
 msgid "This policy discloses what information we gather about you when you visit any of our Web site, and when you issue or use our certificates. It describes how we use that information and how you can control it."
 msgstr ""
 
-#: www/index.php:586 www/index.php:593
+#: www/index.php:585 www/index.php:592
 msgid "This seems like potential spam, cannot continue."
 msgstr ""
 
-#: www/index.php:572 www/index.php:579
+#: www/index.php:571 www/index.php:578
 msgid "This seems like you have cookies or Javascript disabled, cannot continue."
 msgstr ""
 
@@ -4307,7 +4299,7 @@ msgstr ""
 msgid "Unable to locate a valid request for that UID."
 msgstr ""
 
-#: www/index.php:143
+#: www/index.php:142
 msgid "Unable to match your details with any user accounts on file"
 msgstr ""
 
@@ -4468,7 +4460,7 @@ msgstr ""
 msgid "We collect two kinds of information about website users: 1) data that users volunteer by signing up to our website or when you send us an email via our contact form; and 2) aggregated tracking data we collect when users interact with our site."
 msgstr ""
 
-#: www/index.php:492
+#: www/index.php:491
 #, php-format
 msgid "We don't allow signups from people using email addresses from %s"
 msgstr ""
@@ -4491,8 +4483,8 @@ msgstr ""
 
 #: www/account.php:37 www/account.php:52 www/analyse.php:21 www/gpg.php:53
 #: www/gpg.php:126 www/gpg.php:149 www/gpg.php:257 www/gpg.php:493
-#: www/gpg.php:513 www/help.php:23 www/index.php:122 www/index.php:612
-#: www/index.php:623 www/index.php:632 www/logos.php:19 www/news.php:23
+#: www/gpg.php:513 www/help.php:23 www/index.php:121 www/index.php:611
+#: www/index.php:622 www/index.php:631 www/logos.php:19 www/news.php:23
 #: www/stats.php:21
 msgid "Welcome to CAcert.org"
 msgstr ""
@@ -4558,7 +4550,7 @@ msgstr ""
 msgid "Why?"
 msgstr ""
 
-#: includes/about_menu.php:6 pages/index/0.php:168
+#: includes/about_menu.php:5 pages/index/0.php:168
 msgid "Wiki Documentation"
 msgstr ""
 
@@ -4605,6 +4597,11 @@ msgstr ""
 
 #: pages/account/19.php:50 pages/account/6.php:49
 msgid "You are about to install a certificate, if you are using mozilla/netscape based browsers you will not be informed that the certificate was installed successfully, you can go into the options dialog box, security and manage certificates to view if it was installed correctly however."
+msgstr ""
+
+#: pages/index/16.php:19 pages/index/3.php:19
+#, php-format
+msgid "You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."
 msgstr ""
 
 #: www/wot.php:118
@@ -4730,7 +4727,7 @@ msgstr ""
 msgid "You failed to enter a location of your meeting."
 msgstr ""
 
-#: www/index.php:107
+#: www/index.php:106
 msgid "You failed to get all answers correct or you didn't configure enough lost password questions for your account. System admins have been notified."
 msgstr ""
 
@@ -4797,7 +4794,7 @@ msgstr ""
 msgid "You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!"
 msgstr ""
 
-#: www/index.php:447
+#: www/index.php:446
 msgid "You have to agree to the CAcert Community agreement."
 msgstr ""
 
@@ -4947,7 +4944,7 @@ msgstr ""
 msgid "Your Name"
 msgstr ""
 
-#: www/index.php:123
+#: www/index.php:122
 msgid "Your Pass Phrase has been changed now. You can now login with your new password."
 msgstr ""
 
@@ -4959,7 +4956,7 @@ msgstr ""
 msgid "Your account and/or email address has been verified. You can now start issuing certificates for this address."
 msgstr ""
 
-#: www/index.php:350
+#: www/index.php:349
 msgid "Your account has not been verified yet, please check your email account for the signup messages."
 msgstr ""
 
@@ -5055,11 +5052,11 @@ msgstr ""
 msgid "Your location has been updated"
 msgstr ""
 
-#: www/account.php:53 www/index.php:624
+#: www/account.php:53 www/index.php:623
 msgid "Your message has been sent to the general support list."
 msgstr ""
 
-#: www/account.php:38 www/index.php:613
+#: www/account.php:38 www/index.php:612
 msgid "Your message has been sent."
 msgstr ""
 

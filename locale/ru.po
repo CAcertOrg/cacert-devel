@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-08-02 20:57:24+0000\n"
+"PO-Revision-Date: 2010-08-05 13:29:09+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -938,10 +938,6 @@ msgstr "Теперь обновите, поправьте или удалите 
 msgid "How?"
 msgstr "Как?"
 
-#: includes/general_stuff.php:64
-msgid "Howto Information"
-msgstr ""
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "Я не могу дождаться, чтобы начать отправлять зашифрованные письма!"
@@ -957,6 +953,11 @@ msgstr "Я не получил верный запрос на сертифика
 
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
+msgstr ""
+
+#: pages/index/0.php:22
+#, php-format
+msgid "If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."
 msgstr ""
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
@@ -4501,10 +4502,6 @@ msgstr ""
 msgid "Colour version"
 msgstr "Цветной вариант"
 
-#: includes/about_menu.php:8
-msgid "Disclaimer"
-msgstr "Отречение"
-
 #: www/gpg.php:176
 msgid "Error: Both Name and Email address are empty"
 msgstr ""
@@ -4611,9 +4608,9 @@ msgstr ""
 msgid "If you want to have free certificates issued to you, join the %s CAcert Community %s."
 msgstr ""
 
-#: pages/index/0.php:19
+#: pages/index/16.php:19 pages/index/3.php:19
 #, php-format
-msgid "If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."
+msgid "You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."
 msgstr ""
 
 #: pages/account/37.php:28 pages/index/12.php:28

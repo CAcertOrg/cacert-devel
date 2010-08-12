@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-09 08:25:26+0000\n"
-"PO-Revision-Date: 2010-08-02 20:57:20+0000\n"
+"PO-Revision-Date: 2010-08-05 13:29:05+0000\n"
 "Last-Translator: Someone <someone@someisp.com>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -938,10 +938,6 @@ msgstr "&#12354;&#12394;&#12383;&#12398;&#24773;&#22577;&#12398;&#26356;&#26032;
 msgid "How?"
 msgstr "&#12393;&#12358;&#12420;&#12387;&#12390;?"
 
-#: includes/general_stuff.php:64
-msgid "Howto Information"
-msgstr "HowTo &#24773;&#22577;"
-
 #: www/help/2.php:9 www/help/2.php:41
 msgid "I can't wait to start sending encrypted emails!"
 msgstr "&#26263;&#21495;&#21270;&#12375;&#12383;&#12513;&#12540;&#12523;&#12434;&#20170;&#12377;&#12368;&#36865;&#12426;&#12383;&#12356;&#12435;&#12384;&#12369;&#12393;!"
@@ -958,6 +954,11 @@ msgstr "&#26377;&#21177;&#12394;&#35388;&#26126;&#26360;&#35201;&#27714;&#12434;
 #: www/wot/8.php:25
 msgid "I don't want to be listed"
 msgstr "&#12522;&#12473;&#12488;&#12395;&#36861;&#21152;&#12375;&#12394;&#12356;&#12391;&#12411;&#12375;&#12356;"
+
+#: pages/index/0.php:22
+#, php-format
+msgid "If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."
+msgstr ""
 
 #: www/account/10.php:18 www/account/20.php:18 www/account/3.php:18
 msgid "I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors."
@@ -4501,10 +4502,6 @@ msgstr ""
 msgid "Colour version"
 msgstr ""
 
-#: includes/about_menu.php:8
-msgid "Disclaimer"
-msgstr ""
-
 #: www/gpg.php:176
 msgid "Error: Both Name and Email address are empty"
 msgstr ""
@@ -4611,9 +4608,9 @@ msgstr ""
 msgid "If you want to have free certificates issued to you, join the %s CAcert Community %s."
 msgstr ""
 
-#: pages/index/0.php:19
+#: pages/index/16.php:19 pages/index/3.php:19
 #, php-format
-msgid "If you want to use certificates issued by CAcert, read the CAcert %s Disclaimer and Licence %s."
+msgid "You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."
 msgstr ""
 
 #: pages/account/37.php:28 pages/index/12.php:28
