@@ -25,7 +25,7 @@ showheader(_("CAcert - Policies"));
 
 foreach (glob("*.php") as $filename) 
 {
-   if($filename != "index.php")
+   if($filename != "index.php" && $filename != "NRPDisclaimerAndLicence.php")
    {
      echo "<li><a href='$filename'>$filename</a></li>\n";
    }
