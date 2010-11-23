@@ -66,14 +66,6 @@ if(!function_exists("showfooter"))
       </div>
     </div>
   <div id="siteInfo">
-<? if(!$_SERVER["HTTPS"]) { ?><!--ONESTAT SCRIPTCODE START-->
-<script type="text/javascript" src="onestat.js"></script>
-<noscript>
-<a href="http://www.onestat.com/asp/login.asp?sid=164863">
-<img src="http://stat.onestat.com/asp/stat.asp?tagver=1&amp;sid=164863&amp;js=no&amp;" alt="this site tracked by onestat.com" />
-</a>
-</noscript>
-<!--ONESTAT SCRIPTCODE END--><? } ?>
         <a href="/index.php?id=12"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
         <a href="/index.php?id=10"><?=_("Privacy Policy")?></a> |
         <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |

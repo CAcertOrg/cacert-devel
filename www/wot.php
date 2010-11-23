@@ -245,7 +245,7 @@
 
 		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
 		{
-			$_POST['method'] == "Administrative Increase";
+			$_POST['method'] = "Administrative Increase";
 			$newpoints = 200 - $drow['total'];
 			if(intval($_POST['expire']) > 45)
 				$_POST['expire'] = 45;

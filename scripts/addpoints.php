@@ -47,7 +47,7 @@
 						`points`='$newpoints', `method`='Administrative Increase', `date`=NOW()";
 				mysql_query($query);
 				$drow['points'] += $newpoints;
-				fix_assurer_flag($drow['id'])
+				fix_assurer_flag($drow['id']);
 			}
 		}
 	}

@@ -1,0 +1,26 @@
+Dear CAcert Assurer,
+
+If you are attending the LISA'2010 conference in San Jose, CA, or if you live in the area, please consider attending the BoF (Birds of a Feather) sessions on Tuesday evening, 11/09/2010.  I will be leading two seperate hour long BoF sessions.  Both will be held in the Blossom Hill room of the San Jose Convention Center.  The first is a GPG key signing event at 8:00pm.  The second is a CAcert BoF, where we hope to educate and enroll some new assurers.
+
+I presented these same two BoF sessions at the LISA'09 conference in Baltimore.  In order to bring any new assurers up to the 100 point level, we will need a few other assurers to help them earn their first trust points.  I will also encourage them to them assurer each other on paper.  They can then go on-line after the event and once they complete the Assurer Challenge, they start earning experience points.
+
+I can't pull off a successful CAcert event without a few other assurers.  I am qualified to give out 35 points.  I have one other assurer who has already contacted me and he is good for up to 15 points (and looking to earn more experience points himself).  There were a few assurers who showed up to help last year, but I did not know in advance who was coming.  If you can help, please reply to this e-mail letting me know you can attend and how many points you are qualified to assign.
+
+For more details on the events, please visit the following web pages or contact Ken.  I don't really need help with the GPG key signing BoF, but you are certainly welcome to join us.  
+
+[http://www.usenix.org/events/lisa10/bofs.html#gpg]
+[http://www.usenix.org/events/lisa10/bofs.html#cacert]
+
+I have updated the Event entry on the CAcert Wiki.  The listing is found at:
+[https://wiki.cacert.org/events/LISA2010]
+Feel free to add your own information if you can attend, or I can add your information if you like.
+
+Ken Schumacher
+My own CAcert Assurance web page at [http://wiki.cacert.org/KenSchumacher]
+
+CAcert Bof Session, Tues Nov 9, 2010 9:00pm till 10:00pm
+Blossom Hill Room at the San Jose Marriott Hotel
+Free Admission to BoFs, no badge or ticket required
+
+
+Contact: events@cacert.org
