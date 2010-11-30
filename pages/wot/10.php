@@ -23,20 +23,13 @@
   </tr>
   <tr>
 <?
-	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
-			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
-			AND `from`='".intval($_SESSION['profile']['id'])."' GROUP BY `notary`.`from`";
+	$query = "SELECT COUNT(1) as `assurances` FROM `notary` WHERE `from`=".intval($_SESSION['profile']['id'])." AND `from` != `to`";
+	
 	$res = mysql_query($query);
 	$row = mysql_fetch_assoc($res);
-	$rc = intval($row['list']);
-/*
-	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
-			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
-			GROUP BY `notary`.`from` HAVING count(*) > '$rc' ORDER BY `notary`.`when` DESC";
-*/
-	$query = "SELECT count(*) AS `list` FROM `users` 
-			inner join `notary` on `users`.`id` = `notary`.`from` 
-			GROUP BY `notary`.`from` HAVING count(*) > '$rc'";
+	$rc = intval($row['assurances']);
+
+	$query = "SELECT COUNT(1) FROM `notary` GROUP BY `from` HAVING COUNT(1) > {$rc}";
 
 	$rank = mysql_num_rows(mysql_query($query)) + 1;
 ?>
@@ -65,7 +58,7 @@
 	$maxpoints=intval($_SESSION['profile']['points'])-$row['apoints'];
 
 	$points = 0;
-	$query = "select * from `notary` where `to`='".intval($_SESSION['profile']['id'])."' order by `id` desc ";
+	$query = "SELECT n.`id`, n.`date`, n.`awarded`, n.`from` as `from_id`, u.`fname` AS `from_fname`, u.`lname` AS `from_lname`, n.`location`, n.`method` FROM `notary` n LEFT JOIN `users` u ON n.`from`=u.`id` WHERE n.`to`=".intval($_SESSION['profile']['id'])." ORDER BY n.`when` DESC, n.`id` DESC";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
@@ -73,12 +66,11 @@
 		if ($points+$awarded > $maxpoints)
 			$awarded = $maxpoints-$points;
 		$points = $points + $awarded;
-		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['from'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?=$row['id']?></td>
     <td class="DataTD"><?=$row['date']?></td>
-    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from'])?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
+    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from_id'])?>"><?=$row['from_fname']." ".$row['from_lname']?></td>
     <td class="DataTD"><?=$awarded?></td>
     <td class="DataTD"><?=$row['location']?></td>
     <td class="DataTD"><?=_(sprintf("%s", $row['method']))?></td>
@@ -105,17 +97,16 @@
   </tr>
 <?
 	$points = 0;
-	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."' order by `id` desc";
+	$query = "SELECT n.`id`, n.`date`, n.`awarded`, n.`location`, n.`method`, n.`to` AS `to_id`, u.`fname` AS `to_fname`, u.`lname` AS `to_lname` FROM `notary` n LEFT JOIN `users` u ON n.`to`=u.`id` WHERE n.`from`=".intval($_SESSION['profile']['id'])." AND n.`to`!=".intval($_SESSION['profile']['id'])." ORDER BY n.`when` DESC, n.`id` DESC";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['to'])."'"));
 		$points += $row['awarded'];
-		$name = trim($fromuser['fname']." ".$fromuser['lname']);
+		$name = trim($row['to_fname']." ".$row['to_lname']);
 		if($name == "")
-			$name = _("Deleted before Verification");
+			$name = '<i>'._("Deleted before Verification").'</i>';
 		else
-			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to'])."'>$name</a>";
+			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to_id'])."'>$name</a>";
 ?>
   <tr>
     <td class="DataTD"><?=intval($row['id'])?></td>
