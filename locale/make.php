@@ -17,6 +17,7 @@
 			{		
 				$do = `wget -O $key.po "http://translingo.cacert.org/export2.php?pid=1&editlanguage=$val" 2>&1`;
 echo $do;
+				echo `mkdir -p $key/LC_MESSAGES/`;
 				$do = `msgfmt -o $key/LC_MESSAGES/messages.mo $key.po 2>&1`;
 echo $do;
 			}
@@ -26,6 +27,7 @@ echo $do;
 		{
 		$do = `wget -O $key.po "http://translingo.cacert.org/export2.php?pid=1&editlanguage=$val" 2>&1`;
 echo $do;
+		echo `mkdir -p $key/LC_MESSAGES/`;
 		$do = `msgfmt -o $key/LC_MESSAGES/messages.mo $key.po 2>&1`;
 echo $do;
 		}
