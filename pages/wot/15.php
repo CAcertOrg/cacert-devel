@@ -187,7 +187,14 @@ $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".i
 		$sumexperienceOut = 50-$sumexperienceA;
 	else
 		$sumexperienceOut = $sumexperience;
-
+$points=70;
+	if ($points < 100)
+		{
+		$sumexperienceAHold = $sumexperienceA;
+		$sumexperienceA = 0;
+		$sumexperienceOutHold = $sumexperienceOut;
+		$sumexperienceOut = 0;
+		}
 ?>
   <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Assurance Points")?>:</b></td>
@@ -197,7 +204,12 @@ $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".i
   <tr>
       <td class="DataTD" colspan="3"><b><?=_("Total Experience Points by Assurance")?>:</b></td>
       <td class="DataTD"><?=$sumexperienceA?></td>
-      <td class="DataTD" colspan="3">&nbsp;</td>
+      <td class="DataTD" colspan="3">
+<? if ($points < 100)
+   {?>
+<?=sprintf(_("%s Points on hold due to less Assurance points"),$sumexperienceAHold)?>
+<? }?>
+      </td>
   </tr>
   <tr>
         <td class="DataTD" colspan="3"><b><?=_("Total Experience Points (other ways)")?>:</b></td>
@@ -206,7 +218,12 @@ $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".i
 	<? if ($sumexperience != $sumexperienceOut)
 		{
 	?>
-	<?=_("Limit reached")?>
+		<? if (points <100)
+    			{ ?>
+			<?=sprintf(_("%s Points on hold due to less Assurance points"),$sumexperienceOutHold)?>
+		<?  	} else { ?>
+    			<?=_("Limit reached")?>
+		<?  	} ?>
 	<?	}
 	?>
 	</td>
