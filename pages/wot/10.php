@@ -45,6 +45,11 @@
     <td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($rc), intval($rank))?></td>
   </tr>
 </table>
+<center>
+<br>
+<?=sprintf(_("The calculation of points will be changed in the near future. Please check the new calculation %s here %s"),"<a href='/wot.php?id=15'></strong>","</a>")?>
+<br>
+</center>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -83,8 +88,16 @@
 </table>
 <?
 if ($thawte)
-        echo "<br><strong style='color: red'>Your Thawte-Points will be revoked as of November 16, 2010. Please check new calculation <a href='/wot.php?id=15'></strong>here</a>";
+{
 ?>
+<br>
+<center>
+<strong style='color: red'>
+<?=_("Your Thawte-Points will be revoked in the near future. Please check new calculation!");?>
+<br>
+</strong>
+</center>
+<?}?>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
