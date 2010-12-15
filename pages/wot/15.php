@@ -187,7 +187,6 @@ $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".i
 		$sumexperienceOut = 50-$sumexperienceA;
 	else
 		$sumexperienceOut = $sumexperience;
-$points=70;
 	if ($points < 100)
 		{
 		$sumexperienceAHold = $sumexperienceA;
