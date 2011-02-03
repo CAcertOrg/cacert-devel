@@ -166,14 +166,19 @@
 	if($_SESSION['_config']['language'] == "zh_CN")
 	{
 		$_SESSION['_config']['recode'] = "html..gb2312";
+		header('Content-type: text/html; charset=gb2312');
 	} else if($_SESSION['_config']['language'] == "pl_PL" || $_SESSION['_config']['language'] == "hu_HU") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-2";
+		header('Content-type: text/html; charset=ISO-8859-2');
 	} else if($_SESSION['_config']['language'] == "ja_JP") {
 		$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
+		header('Content-type: text/html; charset=SHIFT-JIS');
 	} else if($_SESSION['_config']['language'] == "ru_RU") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-5";
+		header('Content-type: text/html; charset=ISO-8859-5');
 	} else if($_SESSION['_config']['language'] == "lt_LT") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-13";
+		header('Content-type: text/html; charset=ISO-8859-13');
 	}
 
 	putenv("LANG=".$_SESSION['_config']['language']);
