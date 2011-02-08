@@ -11,7 +11,7 @@
 <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>	<li><a href="/stats.php"><?=_("CAcert Statistics")?></a></li> <? } ?>
 	<li><a href="http://blog.CAcert.org/feed/"><?=_("RSS News Feed")?></a></li>
 <? //-	<li><a href="/index.php?id=7"> < ? = _ ( " Credits " ) ? > </a></li> ?>
-	<li><a href="/index.php?id=8"><?=_("CAcert Board")?></a></li>
+	<li><a href="//wiki.cacert.org/Board"><?=_("CAcert Board")?></a></li>
 	<li><a href="https://lists.cacert.org/wws"><?=_("Mailing Lists")?></a></li>
 	<li><a href="/src-lic.php"><?=_("Sourcecode")?></a></li>
       </ul>
