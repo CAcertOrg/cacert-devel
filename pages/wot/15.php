@@ -59,7 +59,8 @@
   </tr>
 <?
 
-$points = 0;
+	$points = 0;
+	$sumexperienceA = 0;
 	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."' order by `id` desc";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
@@ -73,9 +74,11 @@ $points = 0;
 			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to'])."'>$name</a>";
 		$experience="";
 		if ($row['method'] == "Face to Face Meeting")
+		{
 			if ($sumexperienceA < 50)
 				$sumexperienceA=$sumexperienceA+2;
 			$experience="2";
+		}
 		
 ?>
   <tr>
@@ -92,7 +95,7 @@ $points = 0;
     <td class="DataTD" colspan="3"><b><?=_("Total Points Issued")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD">&nbsp;</td>
-    <td class="DataTD"><strong><?=_("Total Points")?>:</strong></td>
+    <td class="DataTD"><strong><?=_("Total Experience Points")?>:</strong></td>
     <td class="DataTD"><?=$sumexperienceA?></td>
   </tr>
 </table>
@@ -114,6 +117,7 @@ $points = 0;
 <?
         $points = 0;
 	$maxpoints = 100;
+	$sumexperience = 0;
 //        $query = "select sum(points) as apoints from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `from`=`to` ";
 //        $res = mysql_query($query);
 //	$row = mysql_fetch_assoc($res);
@@ -205,9 +209,9 @@ $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".i
       <td class="DataTD"><?=$sumexperienceA?></td>
       <td class="DataTD" colspan="3">
 <? if ($points < 100)
-   {?>
-<?=sprintf(_("%s Points on hold due to less Assurance points"),$sumexperienceAHold)?>
-<? }?>
+   {
+	printf(_("%s Points on hold due to less Assurance points"), $sumexperienceAHold);
+   }?>
       </td>
   </tr>
   <tr>
@@ -215,16 +219,14 @@ $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".i
         <td class="DataTD"><?=$sumexperienceOut?></td>
         <td class="DataTD" colspan="3">&nbsp;
 	<? if ($sumexperience != $sumexperienceOut)
-		{
-	?>
-		<? if (points <100)
-    			{ ?>
-			<?=sprintf(_("%s Points on hold due to less Assurance points"),$sumexperienceOutHold)?>
-		<?  	} else { ?>
-    			<?=_("Limit reached")?>
-		<?  	} ?>
-	<?	}
-	?>
+	{
+		if (points <100)
+    		{
+    			printf(_("%s Points on hold due to less Assurance points"), $sumexperienceOutHold);
+    		} else {
+    			echo _("Limit reached");
+    		}
+	}?>
 	</td>
   </tr>
   <tr>

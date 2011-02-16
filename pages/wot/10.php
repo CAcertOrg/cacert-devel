@@ -47,7 +47,7 @@
 </table>
 <center>
 <br>
-<?=sprintf(_("The calculation of points will be changed in the near future. Please check the new calculation %s here %s"),"<a href='/wot.php?id=15'></strong>","</a>")?>
+<?=sprintf(_("The calculation of points will be changed in the near future. Please check the %s new calculation %s"), "<a href='/wot.php?id=15'>", "</a>")?>
 <br>
 </center>
 <br>
@@ -81,6 +81,7 @@
 <?
   $thawte = ($row['method'] == "Thawte Points Transfer") or $thawte;
 } ?>
+  <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=intval($_SESSION['profile']['points'])?></td>
     <td class="DataTD" colspan="2">&nbsp;</td>
