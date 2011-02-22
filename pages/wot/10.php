@@ -79,7 +79,7 @@
     <td class="DataTD"><?=_(sprintf("%s", $row['method']))?></td>
   </tr>
 <?
-  $thawte = ($row['method'] == "Thawte Points Transfer") or $thawte;
+  $thawte = ($row['method'] == "Thawte Points Transfer") || $thawte;
 } ?>
   <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Points")?>:</b></td>
