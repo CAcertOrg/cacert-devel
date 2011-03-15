@@ -36,7 +36,7 @@
 
 <p><?=_("If you are located in Australia, you can use bank transfer instead and pay the equivalent of US$10 in AU$.")?></p>
 
-<p><?=_("Please also include your name in the transaction so we know who it came from and send an email to ernestine at cacert dot org with the details:")?></p>
+<p><?=_("Please also include your name in the transaction so we know who it came from and send an email to secretary at cacert dot org with the details:")?></p>
 
 <ul>
 <li>Account Name: CAcert Inc</li>
