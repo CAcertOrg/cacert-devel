@@ -25,6 +25,6 @@ Piers Lauder - <?=_("member")?><br/>
 Ian Grigg - <?=_("member")?><br/>
 Dirk Astrath - <?=_("member")?><br/>
 </p>
-Kevin Dawson - <?=_("Public Officer")?>
-
+Kevin Dawson - <?=_("Public Officer")?><br />
+<br />
 More detailed informations can be found in the CAcert wiki under <a href="//wiki.cacert.org/Board"><?=_("CAcert Board")?></a>
