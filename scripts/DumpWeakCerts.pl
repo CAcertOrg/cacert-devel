@@ -14,7 +14,7 @@ my $cacert_db_password;
 # Read database access data from the config file
 eval `cat perl_mysql`;
 
-my $dbh = DBI->connect($cacert_db_config, $cacert_db_user, $cacert_db_password, { RaiseError => 1 } ) || die "Cannot connect database: $DBI::errstr";
+my $dbh = DBI->connect($cacert_db_config, $cacert_db_user, $cacert_db_password, { RaiseError => 1, AutoCommit => 0 } ) || die "Cannot connect database: $DBI::errstr";
 
 my $sth_certs;
 my $sth_userdata;
