@@ -61,15 +61,15 @@ sub IsWeak($) {
 # Select only certificates expiring in more than two weeks, since two weeks will probably be needed as turnaround time
 # Get all domain certificates
 $sth_certs = $dbh->prepare(
-  "SELECT dc.domid, dc.CN, dc.expire, dc.crt_name ".
-  "  FROM domaincerts AS dc ".
-  "  WHERE dc.expire > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "SELECT `dc`.`domid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name` ".
+  "  FROM `domaincerts` AS `dc` ".
+  "  WHERE `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
-  "SELECT u.email, u.fname ".
-  "  FROM domains AS d, users AS u ".
-  "  WHERE d.memid=u.id AND  d.id=?");
+  "SELECT `u`.`email`, `u`.`fname` ".
+  "  FROM `domains` AS `d`, `users` AS `u` ".
+  "  WHERE `d`.`memid`=`u`.`id` AND `d`.`id`=?");
   
 while(($cert_domid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
@@ -85,15 +85,15 @@ $sth_certs->finish();
 
 # Get all email certificates
 $sth_certs = $dbh->prepare(
-  "SELECT ec.memid, ec.CN, ec.expire, ec.crt_name ".
-  "  FROM emailcerts AS ec ".
-  "  WHERE ec.expire > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "SELECT `ec`.`memid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name` ".
+  "  FROM `emailcerts` AS `ec` ".
+  "  WHERE `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
-  "SELECT u.email, u.fname ".
-  "  FROM users AS u ".
-  "  WHERE u.id=?");
+  "SELECT `u`.`email`, `u`.`fname` ".
+  "  FROM `users` AS `u` ".
+  "  WHERE `u`.`id`=?");
   
 while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
@@ -109,15 +109,15 @@ $sth_certs->finish();
 
 # Get all Org Server certificates, notify all admins of the Org!
 $sth_certs = $dbh->prepare(
-  "SELECT dc.orgid, dc.CN, dc.expire, dc.crt_name ".
-  "  FROM orgdomaincerts AS dc ".
-  "  WHERE dc.expire > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "SELECT `dc`.`orgid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name` ".
+  "  FROM `orgdomaincerts` AS `dc` ".
+  "  WHERE `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
-  "SELECT u.email, u.fname ".
-  "  FROM users AS u, org ".
-  "  WHERE u.id=org.memid and org.orgid=?");
+  "SELECT `u`.`email`, `u`.`fname` ".
+  "  FROM `users` AS `u`, `org` ".
+  "  WHERE `u`.`id`=`org`.`memid` and `org`.`orgid`=?");
   
 while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
@@ -134,15 +134,15 @@ $sth_certs->finish();
 
 # Get all Org Email certificates, notify all admins of the Org!
 $sth_certs = $dbh->prepare(
-  "SELECT ec.orgid, ec.CN, ec.expire, ec.crt_name ".
-  "  FROM orgemailcerts AS ec ".
-  "  WHERE ec.expire > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "SELECT `ec`.`orgid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name` ".
+  "  FROM `orgemailcerts` AS `ec` ".
+  "  WHERE `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
-  "SELECT u.email, u.fname ".
-  "  FROM users AS u, org ".
-  "  WHERE u.id=org.memid and org.orgid=?");
+  "SELECT `u`.`email`, `u`.`fname` ".
+  "  FROM `users` AS `u`, `org` ".
+  "  WHERE `u`.`id`=`org`.`memid` and `org`.`orgid`=?");
   
 while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
