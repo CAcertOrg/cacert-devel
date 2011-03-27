@@ -21,6 +21,7 @@ my $sth_userdata;
 
 my $cert_domid;
 my $cert_userid;
+my $cert_orgid;
 my $cert_CN;
 my $cert_expire;
 my $cert_filename;
@@ -119,10 +120,10 @@ $sth_userdata = $dbh->prepare(
   "  FROM `users` AS `u`, `org` ".
   "  WHERE `u`.`id`=`org`.`memid` and `org`.`orgid`=?");
   
-while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
+while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
     if (IsWeak($cert_filename)) {
-      $sth_userdata->execute($cert_userid);
+      $sth_userdata->execute($cert_orgid);
       while(($user_email, $user_firstname) = $sth_userdata->fetchrow_array()) {
         print join("\t", ('OrgServerCert', $user_email, $user_firstname, $cert_expire, $cert_CN)). "\n";
       }
@@ -144,10 +145,10 @@ $sth_userdata = $dbh->prepare(
   "  FROM `users` AS `u`, `org` ".
   "  WHERE `u`.`id`=`org`.`memid` and `org`.`orgid`=?");
   
-while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
+while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
     if (IsWeak($cert_filename)) {
-      $sth_userdata->execute($cert_userid);
+      $sth_userdata->execute($cert_orgid);
       while(($user_email, $user_firstname) = $sth_userdata->fetchrow_array()) {
         print join("\t", ('OrgEmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN)). "\n";
       }
