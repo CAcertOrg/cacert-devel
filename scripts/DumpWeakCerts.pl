@@ -7,7 +7,14 @@ use warnings;
 
 use DBI;
 
-my $dbh = DBI->connect('DBI:mysql:database=cacert;host=127.0.0.1', 'cacert', 'FKj54eZQsZIW', { RaiseError => 1 } ) || die "Cannot connect database: $DBI::errstr";
+my $cacert_db_config;
+my $cacert_db_user;
+my $cacert_db_password;
+
+# Read database access data from the config file
+eval `cat perl_mysql`;
+
+my $dbh = DBI->connect($cacert_db_config, $cacert_db_user, $cacert_db_password, { RaiseError => 1 } ) || die "Cannot connect database: $DBI::errstr";
 
 my $sth_certs;
 my $sth_userdata;
