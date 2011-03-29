@@ -29,6 +29,8 @@ my $cert_filename;
 my $user_email;
 my $user_firstname;
 
+my $reason;
+
 my @row;
 
 sub IsWeak($) {
@@ -37,7 +39,8 @@ sub IsWeak($) {
   my $ModulusSize = 0;
   my $Exponent = 0;
   my $result = 0;
-    
+  
+  # Do key size and exponent checking for RSA keys
   open(CERTTEXT, '-|', "openssl x509 -in $CertFileName -noout -text") || die "Cannot start openssl";
   while (<CERTTEXT>) {
     if (/^ +([^ ]+) Public Key:/) {
@@ -54,9 +57,19 @@ sub IsWeak($) {
   close(CERTTEXT);
   if ($ModulusSize > 0 && $Exponent > 0) {
     if ($ModulusSize < 1024 || $Exponent==3) {
-      $result = 1;
+      $result = "SmallKey";
     }
   }
+  
+  if (!$result) {
+    # Check with openssl-vulnkey
+    # This is currently not tested, if you don't know what you are doing leave it commented!
+    #if (system("openssl-vulnkey -q$CertFileName") != 0) {
+    #  $result = "openssl-vulnkey";
+    #}
+  }
+  
+  return $result;
 }
 
 # Select only certificates expiring in more than two weeks, since two weeks will probably be needed as turnaround time
@@ -74,10 +87,11 @@ $sth_userdata = $dbh->prepare(
   
 while(($cert_domid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
-    if (IsWeak($cert_filename)) {
+    $reason = IsWeak($cert_filename);
+    if ($reason) {
       $sth_userdata->execute($cert_domid);
       ($user_email, $user_firstname) = $sth_userdata->fetchrow_array();
-      print join("\t", ('DomainCert', $user_email, $user_firstname, $cert_expire, $cert_CN)). "\n";
+      print join("\t", ('DomainCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
       $sth_userdata->finish();
     }
   }
@@ -98,10 +112,11 @@ $sth_userdata = $dbh->prepare(
   
 while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
-    if (IsWeak($cert_filename)) {
+    $reason = IsWeak($cert_filename);
+    if ($reason) {
       $sth_userdata->execute($cert_userid);
       ($user_email, $user_firstname) = $sth_userdata->fetchrow_array();
-      print join("\t", ('EmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN)). "\n";
+      print join("\t", ('EmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
       $sth_userdata->finish();
     }
   }
@@ -122,10 +137,11 @@ $sth_userdata = $dbh->prepare(
   
 while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
-    if (IsWeak($cert_filename)) {
+    $reason = IsWeak($cert_filename);
+    if ($reason) {
       $sth_userdata->execute($cert_orgid);
       while(($user_email, $user_firstname) = $sth_userdata->fetchrow_array()) {
-        print join("\t", ('OrgServerCert', $user_email, $user_firstname, $cert_expire, $cert_CN)). "\n";
+        print join("\t", ('OrgServerCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
       }
       $sth_userdata->finish();
     }
@@ -147,10 +163,11 @@ $sth_userdata = $dbh->prepare(
   
 while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
-    if (IsWeak($cert_filename)) {
+    $reason = IsWeak($cert_filename);
+    if ($reason) {
       $sth_userdata->execute($cert_orgid);
       while(($user_email, $user_firstname) = $sth_userdata->fetchrow_array()) {
-        print join("\t", ('OrgEmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN)). "\n";
+        print join("\t", ('OrgEmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
       }
       $sth_userdata->finish();
     }
