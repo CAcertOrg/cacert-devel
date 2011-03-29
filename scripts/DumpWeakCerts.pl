@@ -64,7 +64,7 @@ sub IsWeak($) {
   if (!$result) {
     # Check with openssl-vulnkey
     # This is currently not tested, if you don't know what you are doing leave it commented!
-    #if (system("openssl-vulnkey -q$CertFileName") != 0) {
+    #if (system("openssl-vulnkey -q $CertFileName") != 0) {
     #  $result = "openssl-vulnkey";
     #}
   }
