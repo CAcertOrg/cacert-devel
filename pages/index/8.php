@@ -18,9 +18,13 @@
 <p><b><? printf(_("The current %s board, and roles."), "CAcert Inc."); ?></b></p>
 <p>
 Lambert Hofstra - <?=_("President")?><br/>
-Mark Lipscombe - <?=_("Secretary")?>, <?=_("Public Officer")?><br/>
-Nick Bebout - <?=_("member")?><br/>
+Peter Yuill - <?=_("Vice President")?><br/>
+Alexander Prinsier - <?=_("Treasurer")?><br/>
+Mario Lipinski - <?=_("Secretary")?><br/>
+Piers Lauder - <?=_("member")?><br/>
 Ian Grigg - <?=_("member")?><br/>
-Mario Lipinski - <?=_("member")?><br/>
-Alexander Prinsier - <?=_("member")?><br/>
+Dirk Astrath - <?=_("member")?><br/>
 </p>
+Kevin Dawson - <?=_("Public Officer")?><br />
+<br />
+More detailed informations can be found in the CAcert wiki under <a href="//wiki.cacert.org/Board"><?=_("CAcert Board")?></a>
