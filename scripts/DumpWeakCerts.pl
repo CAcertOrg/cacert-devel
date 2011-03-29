@@ -64,7 +64,7 @@ sub IsWeak($) {
 $sth_certs = $dbh->prepare(
   "SELECT `dc`.`domid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name` ".
   "  FROM `domaincerts` AS `dc` ".
-  "  WHERE `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "  WHERE `dc`.`revoked`=0 AND `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
@@ -88,7 +88,7 @@ $sth_certs->finish();
 $sth_certs = $dbh->prepare(
   "SELECT `ec`.`memid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name` ".
   "  FROM `emailcerts` AS `ec` ".
-  "  WHERE `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "  WHERE `ec`.`revoked`=0 AND `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
@@ -112,7 +112,7 @@ $sth_certs->finish();
 $sth_certs = $dbh->prepare(
   "SELECT `dc`.`orgid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name` ".
   "  FROM `orgdomaincerts` AS `dc` ".
-  "  WHERE `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "  WHERE `dc`.`revoked`=0 AND `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
@@ -137,7 +137,7 @@ $sth_certs->finish();
 $sth_certs = $dbh->prepare(
   "SELECT `ec`.`orgid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name` ".
   "  FROM `orgemailcerts` AS `ec` ".
-  "  WHERE `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
+  "  WHERE `ec`.`revoked`=0 AND `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
 
 $sth_userdata = $dbh->prepare(
