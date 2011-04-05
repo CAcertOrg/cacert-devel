@@ -332,7 +332,7 @@ function hideall() {
 		/* Check for the debian OpenSSL vulnerability */
 		
 		$csr = escapeshellarg($csr);
-		exec("echo $csr | openssl-vulnkey -q -", NULL, $debianVuln);
+		exec("echo $csr | openssl-vulnkey -q -", $dummy, $debianVuln);
 		if ($debianVuln === -1)
 		{
 			return sprintf(_("The keys you use have very likely been ".
@@ -406,7 +406,7 @@ function hideall() {
 					
 					$keysize = escapeshellarg($keysize);
 					$modulus = escapeshellarg($modulus);
-					exec("openssl-vulnkey -q -b $keysize -m $modulus", NULL,
+					exec("openssl-vulnkey -q -b $keysize -m $modulus", $dummy,
 						$debianVuln);
 					if ($debianVuln === -1)
 					{
