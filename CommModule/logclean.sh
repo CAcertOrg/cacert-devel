@@ -13,9 +13,9 @@ syslog_notice()
 }
 
 # determine location of CommModule
-if [ -d /home/cacert/www/CommModule ]
+if [ -d /home/signer/cacert-devel/CommModule ]
 then	# webdb server
-	cd /home/cacert/www/CommModule
+	cd /home/signer/cacert-devel/CommModule
 elif [ -d /root/CommModule ]
 then	# signing server
 	cd /root/CommModule

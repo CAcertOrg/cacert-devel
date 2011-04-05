@@ -21,7 +21,7 @@
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="CAcert CommModule processes start/stop"
-NAME=commmodule
+NAME=commmodule-signer
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
@@ -154,8 +154,8 @@ case "$1" in
 	chown root.root /etc/init.d/${NAME}
 	update-rc.d -f ${NAME} remove
 	update-rc.d ${NAME} defaults 90 20
-	(echo "COMMROOT=/home/cacert/www/CommModule";
-	 echo "COMMROLE=client") >/etc/default/${NAME}
+	(echo "COMMROOT=/home/signer/cacert-devel/CommModule";
+	 echo "COMMROLE=server") >/etc/default/${NAME}
 	;;
   *)
 	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload|setup}" >&2

@@ -21,8 +21,8 @@ my $debug=0;
 
 my $paranoid=1;
 
-my $serialport="/dev/ttyUSB0";
-#my $serialport="/dev/ttyS0";
+#my $serialport="/dev/ttyUSB0";
+my $serialport="/dev/ttyS0";
 
 my $CPSUrl="http://www.cacert.org/cps.php";
 
