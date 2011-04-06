@@ -340,7 +340,7 @@ function hideall() {
 					"distributed by debian. Please generate new keys. More ".
 					"information about this issue can be found in %sthe ".
 					"wiki%s"),
-				"<a href='//wiki.cacert.org/DebianVulnerabilityHandling'>",
+				"<a href='//wiki.cacert.org/WeakKeys#DebianVulnerability'>",
 				"</a>");
 		} elseif ($debianVuln !== 0) {
 			trigger_error("checkWeakKeyCSR(): Something went wrong in the ".
@@ -415,7 +415,7 @@ function hideall() {
 								"distributed by debian. Please generate new keys. More ".
 								"information about this issue can be found in %sthe ".
 								"wiki%s"),
-							"<a href='//wiki.cacert.org/DebianVulnerabilityHandling'>",
+							"<a href='//wiki.cacert.org/WeakKeys#DebianVulnerability'>",
 							"</a>");
 					} elseif ($debianVuln !== 0) {
 						trigger_error("checkWeakKeySPKAC(): Something went ".
@@ -470,7 +470,7 @@ function hideall() {
 							"and therefore insecure. Please generate stronger ".
 							"keys. More information about this issue can be ".
 							"found in %sthe wiki%s"),
-						"<a href='//wiki.cacert.org/'>",
+						"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
 						"</a>");
 				} elseif ($keysize < 2048) {
 					// not critical but log so we have some statistics about
@@ -498,7 +498,7 @@ function hideall() {
 							"keys. Please generate stronger keys. More ".
 							"information about this issue can be found in ".
 							"%sthe wiki%s"),
-						"<a href='//wiki.cacert.org/'>",
+						"<a href='//wiki.cacert.org/WeakKeys#SmallExponent'>",
 						"</a>");
 				} elseif (!(bccomp($exponent, "65537") >= 0 &&
 						(bccomp($exponent, "100000") === -1 ||
