@@ -25,6 +25,7 @@ my $cert_orgid;
 my $cert_CN;
 my $cert_expire;
 my $cert_filename;
+my $cert_serial;
 
 my $user_email;
 my $user_firstname;
@@ -75,7 +76,7 @@ sub IsWeak($) {
 # Select only certificates expiring in more than two weeks, since two weeks will probably be needed as turnaround time
 # Get all domain certificates
 $sth_certs = $dbh->prepare(
-  "SELECT `dc`.`domid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name` ".
+  "SELECT `dc`.`domid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name`, `dc`.`serial` ".
   "  FROM `domaincerts` AS `dc` ".
   "  WHERE `dc`.`revoked`=0 AND `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
@@ -85,13 +86,13 @@ $sth_userdata = $dbh->prepare(
   "  FROM `domains` AS `d`, `users` AS `u` ".
   "  WHERE `d`.`memid`=`u`.`id` AND `d`.`id`=?");
   
-while(($cert_domid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
+while(($cert_domid, $cert_CN, $cert_expire, $cert_filename, $cert_serial) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
     $reason = IsWeak($cert_filename);
     if ($reason) {
       $sth_userdata->execute($cert_domid);
       ($user_email, $user_firstname) = $sth_userdata->fetchrow_array();
-      print join("\t", ('DomainCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
+      print join("\t", ('DomainCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason, $cert_serial)). "\n";
       $sth_userdata->finish();
     }
   }
@@ -100,7 +101,7 @@ $sth_certs->finish();
 
 # Get all email certificates
 $sth_certs = $dbh->prepare(
-  "SELECT `ec`.`memid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name` ".
+  "SELECT `ec`.`memid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name`, `ec`.`serial` ".
   "  FROM `emailcerts` AS `ec` ".
   "  WHERE `ec`.`revoked`=0 AND `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
@@ -110,13 +111,13 @@ $sth_userdata = $dbh->prepare(
   "  FROM `users` AS `u` ".
   "  WHERE `u`.`id`=?");
   
-while(($cert_userid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
+while(($cert_userid, $cert_CN, $cert_expire, $cert_filename, $cert_serial) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
     $reason = IsWeak($cert_filename);
     if ($reason) {
       $sth_userdata->execute($cert_userid);
       ($user_email, $user_firstname) = $sth_userdata->fetchrow_array();
-      print join("\t", ('EmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
+      print join("\t", ('EmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason, $cert_serial)). "\n";
       $sth_userdata->finish();
     }
   }
@@ -125,7 +126,7 @@ $sth_certs->finish();
 
 # Get all Org Server certificates, notify all admins of the Org!
 $sth_certs = $dbh->prepare(
-  "SELECT `dc`.`orgid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name` ".
+  "SELECT `dc`.`orgid`, `dc`.`CN`, `dc`.`expire`, `dc`.`crt_name`, `dc`.`serial` ".
   "  FROM `orgdomaincerts` AS `dc` ".
   "  WHERE `dc`.`revoked`=0 AND `dc`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
@@ -135,13 +136,13 @@ $sth_userdata = $dbh->prepare(
   "  FROM `users` AS `u`, `org` ".
   "  WHERE `u`.`id`=`org`.`memid` and `org`.`orgid`=?");
   
-while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
+while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename, $cert_serial) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
     $reason = IsWeak($cert_filename);
     if ($reason) {
       $sth_userdata->execute($cert_orgid);
       while(($user_email, $user_firstname) = $sth_userdata->fetchrow_array()) {
-        print join("\t", ('OrgServerCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
+        print join("\t", ('OrgServerCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason, $cert_serial)). "\n";
       }
       $sth_userdata->finish();
     }
@@ -151,7 +152,7 @@ $sth_certs->finish();
 
 # Get all Org Email certificates, notify all admins of the Org!
 $sth_certs = $dbh->prepare(
-  "SELECT `ec`.`orgid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name` ".
+  "SELECT `ec`.`orgid`, `ec`.`CN`, `ec`.`expire`, `ec`.`crt_name`, `ec`.`serial` ".
   "  FROM `orgemailcerts` AS `ec` ".
   "  WHERE `ec`.`revoked`=0 AND `ec`.`expire` > DATE_ADD(NOW(), INTERVAL 14 DAY)");
 $sth_certs->execute();
@@ -161,13 +162,13 @@ $sth_userdata = $dbh->prepare(
   "  FROM `users` AS `u`, `org` ".
   "  WHERE `u`.`id`=`org`.`memid` and `org`.`orgid`=?");
   
-while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename) = $sth_certs->fetchrow_array) {
+while(($cert_orgid, $cert_CN, $cert_expire, $cert_filename, $cert_serial) = $sth_certs->fetchrow_array) {
   if (-f $cert_filename) {
     $reason = IsWeak($cert_filename);
     if ($reason) {
       $sth_userdata->execute($cert_orgid);
       while(($user_email, $user_firstname) = $sth_userdata->fetchrow_array()) {
-        print join("\t", ('OrgEmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason)). "\n";
+        print join("\t", ('OrgEmailCert', $user_email, $user_firstname, $cert_expire, $cert_CN, $reason, $cert_serial)). "\n";
       }
       $sth_userdata->finish();
     }
