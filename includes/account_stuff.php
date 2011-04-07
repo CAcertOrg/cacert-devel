@@ -286,6 +286,27 @@ function hideall() {
 	}
 	
 	/**
+	 * Produces a log entry with the error message with log level E_USER_WARN
+	 * and a random ID an returns a message that can be displayed to the user
+	 * including the generated ID
+	 * 
+	 * @param $errormessage string
+	 * 		The error message that should be logged
+	 * @return string containing the generated ID that can be displayed to the
+	 * 		user
+	 */
+	function failWithId($errormessage) {
+		$errorId = rand();
+		trigger_error("$errormessage. ID: $errorId", E_USER_WARNING);
+		return sprintf(_("Something went wrong when processing your request. ".
+				"Please contact %s for help and provide them with the ".
+				"following ID: %d"),
+			"<a href='mailto:support@cacert.org?subject=System%20Error%20-%20".
+				"ID%3A%20$errorId'>support@cacert.org</a>",
+			$errorId);
+	}
+	
+	/**
 	 * Checks whether the given CSR contains a vulnerable key
 	 * 
 	 * @param $csr string
@@ -446,9 +467,8 @@ function hideall() {
 		if (!preg_match('/^\s*Public Key Algorithm: ([^\s]+)$/m', $text,
 				$algorithm))
 		{
-			trigger_error("checkWeakKeyText(): Couldn't extract the public ".
-					"key algorithm used", E_USER_WARNING);
-			return "";
+			return failWithId("checkWeakKeyText(): Couldn't extract the ".
+					"public key algorithm used");
 		} else {
 			$algorithm = $algorithm[1];
 		}
@@ -459,32 +479,33 @@ function hideall() {
 			if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text,
 					$keysize))
 			{
-				trigger_error("checkWeakKeyText(): Couldn't parse the RSA key ".
-						"size", E_USER_WARNING);
+				return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
+						"key size");
 			} else {
 				$keysize = intval($keysize[1]);
-				
-				if ($keysize < 1024)
-				{
-					return sprintf(_("The keys that you use are very small ".
-							"and therefore insecure. Please generate stronger ".
-							"keys. More information about this issue can be ".
-							"found in %sthe wiki%s"),
-						"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
-						"</a>");
-				} elseif ($keysize < 2048) {
-					// not critical but log so we have some statistics about
-					// affected users
-					trigger_error("checkWeakKeyText(): Certificate for small ".
-							"key (< 2048 bit) requested", E_USER_NOTICE);
-				}
 			}
+			
+			if ($keysize < 1024)
+			{
+				return sprintf(_("The keys that you use are very small ".
+						"and therefore insecure. Please generate stronger ".
+						"keys. More information about this issue can be ".
+						"found in %sthe wiki%s"),
+					"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
+					"</a>");
+			} elseif ($keysize < 2048) {
+				// not critical but log so we have some statistics about
+				// affected users
+				trigger_error("checkWeakKeyText(): Certificate for small ".
+						"key (< 2048 bit) requested", E_USER_NOTICE);
+			}
+			
 			
 			if (!preg_match('/^\s*Exponent: (\d+) \(0x[0-9a-fA-F]+\)$/m', $text,
 					$exponent))
 			{
-				trigger_error("checkWeakKeyText(): Couldn't parse the RSA ".
-						"exponent", E_USER_WARNING);
+				return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
+						"exponent");
 			} else {
 				$exponent = $exponent[1]; // exponent might be very big =>
 					//handle as string using bc*()  
