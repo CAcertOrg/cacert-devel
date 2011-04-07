@@ -373,7 +373,7 @@ function hideall() {
 		$spkacText = `echo $spkac | openssl spkac -spkac $spkacname`;
 		
 		/* Which public key algorithm? */
-		if (!preg_match('/^\s*Public Key Algorithm: ([^\s])$/m', $spkacText,
+		if (!preg_match('/^\s*Public Key Algorithm: ([^\s]+)$/m', $spkacText,
 				$algorithm))
 		{
 			trigger_error("checkWeakKeySPKAC(): Couldn't extract the public ".
@@ -443,7 +443,7 @@ function hideall() {
 	function checkWeakKeyText($text)
 	{
 		/* Which public key algorithm? */
-		if (!preg_match('/^\s*Public Key Algorithm: ([^\s])$/m', $text,
+		if (!preg_match('/^\s*Public Key Algorithm: ([^\s]+)$/m', $text,
 				$algorithm))
 		{
 			trigger_error("checkWeakKeyText(): Couldn't extract the public ".
