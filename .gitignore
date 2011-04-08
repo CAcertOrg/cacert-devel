@@ -2,3 +2,6 @@
 # => ignore it
 # run "make all" to generate a new one and upload it to translingo
 /messages.po
+
+# Ignore file with the account data
+/password.dat
