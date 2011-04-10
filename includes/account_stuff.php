@@ -354,6 +354,53 @@ function hideall() {
 	}
 	
 	/**
+	 * Checks whether the given X509 certificate contains a vulnerable key
+	 * 
+	 * @param $cert string
+	 * 		The X509 certificate to be checked
+	 * @param $encoding string [optional]
+	 * 		The encoding the certificate is in (for the "-inform" parameter of
+	 * 		OpenSSL, currently only "PEM" (default), "DER" or "NET" allowed)
+	 * @return string containing the reason if the key is considered weak,
+	 * 		empty string otherwise
+	 */
+	function checkWeakKeyX509($cert, $encoding = "PEM")
+	{
+		// non-PEM-encodings may be binary so don't use echo
+		$descriptorspec = array(
+			0 => array("pipe", "r"), // STDIN for child
+			1 => array("pipe", "w"), // STDOUT for child
+		);
+		$encoding = escapeshellarg($encoding);
+		$proc = proc_open("openssl x509 -inform $encoding -text -noout",
+			$descriptorspec, $pipes);
+		
+		if (is_resource($proc))
+		{
+			fwrite($pipes[0], $cert);
+			fclose($pipes[0]);
+			
+			$certText = ""; 
+			while (!feof($pipes[1]))
+			{
+				$certText .= fread($pipes[1], 8192);
+			}
+			fclose($pipes[1]);
+			
+			if (($status = proc_close($proc)) !== 0 || $certText === "")
+			{
+				return _("I didn't receive a valid Certificate Request, hit ".
+				"the back button and try again.");
+			}
+		} else {
+			return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
+		}
+		
+		
+		return checkWeakKeyText($certText);
+	}
+	
+	/**
 	 * Checks whether the given SPKAC contains a vulnerable key
 	 * 
 	 * @param $spkac string
