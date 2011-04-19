@@ -16,9 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
-<b><?=_("In light of the number of people having issues with making up a password we have the following suggestions:")?></b><br><br>
-<?=_("To get a password that will work, we suggest the following example")?>: Fr3d Sm|7h<br><br>
-<?=_("This wouldn't match your name or email at all, it contains at least 1 lower case letter, 1 upper case letter, a number, white space and a misc symbol. You get additional security for being over 15 characters and a second additional point for having it over 30. The system starts reducing security if you include any section of your name, or password or email address or if it matches a word from the english dictionary...")?>
+<?=_("A proper password wouldn't match your name or email at all, it contains at least 1 lower case letter, 1 upper case letter, a number, white space and a misc symbol. You get additional security for being over 15 characters and a second additional point for having it over 30. The system starts reducing security if you include any section of your name, or password or email address or if it matches a word from the english dictionary...")?>
 </p>
 
 <form method="post" action="index.php" autocomplete="off">
