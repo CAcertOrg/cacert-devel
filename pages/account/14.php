@@ -15,6 +15,16 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+<?
+	if (intval($_REQUEST['force']) === 1)
+{
+?>
+
+<p style="border:dotted 1px #900;padding:0.3em;bold;color:#ffffff;background-color:#ff0000;"><strong><center>
+<?=_("For your own security you should change your pass phrase immediately!"); ?></center></strong>
+</p>
+<?}?>
+
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
   <tr>
