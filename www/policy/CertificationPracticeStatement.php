@@ -3623,7 +3623,7 @@ or rulings by Arbitrator.
 Privacy is covered by the
 CCA (COD9)
 and the Privacy Policy
-(<a href="http://www.cacert.org/index.php?id=10">COD5</a>).
+(<a href="PrivacyPolicy.html">COD5</a>).
 </p>
 
 <h4><a name="p9.4.1" id="p9.4.1">9.4.1. Privacy plan</a></h4>
