@@ -66,7 +66,7 @@ a:hover {
 
 <h1>CAcert CPS and CP</h1>
 
-<a href="PolicyOnPolicy.html"><img src="cacert-draft.png" alt="CAcert Policy Status" height="31" width="88" style="border-style: none;" /></a><br />
+<a href="PolicyOnPolicy.php"><img src="cacert-draft.png" alt="CAcert Policy Status" height="31" width="88" style="border-style: none;" /></a><br />
 Creation date: 20060726<br />
 Status: DRAFT p20091108<br />
 <!-- $Id: CertificationPracticeStatement.php,v 1.1 2009-11-21 22:34:00 philipp Exp $ -->
@@ -239,7 +239,7 @@ for each class of certificate.
   <li>
     Issued under the CAcert document licence policy,
     as and when made policy.
-    See <a href="http://wiki.cacert.org/wiki/PolicyDrafts/DocumentLicence">
+    See <a href="//wiki.cacert.org/wiki/PolicyDrafts/DocumentLicence">
     PolicyDrafts/DocumentLicence</a>.
      <ul class="q">
        <li> The cited page discusses 2 options:  CCau Attribute-Share-alike and GNU Free Document License.  Refer to that.  </li>
@@ -297,12 +297,12 @@ an Association registered in 2002 in
 New South Wales, Australia,
 on behalf of the wider Community of Members of CAcert.
 The Association details are at the
-<a href="http://wiki.cacert.org/wiki/CAcertIncorporated">CAcert wiki</a>.
+<a href="//wiki.cacert.org/wiki/CAcertIncorporated">CAcert wiki</a>.
 </p>
 
 <p>
 CAcert is a Community formed of Members who agree to the
-<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">
+<a href="CAcertCommunityAgreement.php">
 CAcert Community Agreement</a>.
 The CA is technically operated by the Community,
 under the direction of the Board of CAcert Incorporated.
@@ -320,7 +320,7 @@ intermediate CAs under the present CPS.
 <h4><a name="p1.3.2" id="p1.3.2">1.3.2. Registration authorities</a></h4>
 <p>
 Registration Authorities (RAs) are controlled under Assurance Policy
-(<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+(<a href="AssurancePolicy.php">COD13</a>).
 </p>
 
 <h4><a name="p1.3.3" id="p1.3.3">1.3.3. Subscribers</a></h4>
@@ -337,7 +337,7 @@ Such Members then become Subscribers.
 A relying party is a Member,
 having agreed to the
 CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>),
+(<a href="CAcertCommunityAgreement.php">COD9</a>),
 who, in the act of using a CAcert certificate,
 makes a decision on the basis of that certificate.
 </p>
@@ -347,7 +347,7 @@ makes a decision on the basis of that certificate.
 <p>
 <b>Member.</b>
 Membership of the Community is as defined in the
-<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>.
+<a href="CAcertCommunityAgreement.php">COD9</a>.
 Only Members may RELY or may become Subscribers.
 Membership is free.
 </p>
@@ -358,7 +358,7 @@ A senior and experienced Member of the CAcert Community
 who resolves disputes between Members, including ones
 of certificate reliance, under
 Dispute Resolution Policy
-(<a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">COD7</a>).
+(<a href="DisputeResolutionPolicy.php">COD7</a>).
 </p>
 
 <p>
@@ -835,7 +835,7 @@ and will only be used where new roots do not serve:
 
   <ul class="q">
     <li> Current Mozilla position has drifted from Class 1,2,3s to DV, IV+OV and EV posture.  Except, the actual posture is either unstated or difficult to fathom.</li>
-    <li> scheme for future roots is at <a href="http://wiki.cacert.org/wiki/Roots/NewRootsTaskForce">NewRootsTaskForce</a>.</li>
+    <li> scheme for future roots is at <a href="//wiki.cacert.org/wiki/Roots/NewRootsTaskForce">NewRootsTaskForce</a>.</li>
     <li>END OLD ROOTS </li>
   </ul>
 
@@ -848,7 +848,7 @@ and will only be used where new roots do not serve:
 
 <p>
 This document is administered by the policy group of
-the CAcert Community under Policy on Policy (<a href="http://www.cacert.org/policy/PolicyOnPolicy.php">COD1</a>).
+the CAcert Community under Policy on Policy (<a href="PolicyOnPolicy.php">COD1</a>).
 </p>
 
 <h4><a name="p1.5.2" id="p1.5.2">1.5.2. Contact person</a></h4>
@@ -875,7 +875,7 @@ Community found at policy forum.  See discussion forums above.
 <p>
 CPS is controlled and updated according to the
 Policy on Policy
-(<a href="http://www.cacert.org/policy/PolicyOnPolicy.php">COD1</a>)
+(<a href="PolicyOnPolicy.php">COD1</a>)
 which is part of
 Configuration-Control Specification (COD2).
 </p>
@@ -913,7 +913,7 @@ As per above.
 <b><a name="d_member" id="d_member">Member</a></b>.
   Everyone who agrees to the
   CAcert Community Agreement
-  (<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>).
+  (<a href="CAcertCommunityAgreement.php">COD9</a>).
   This generally implies having an account registered
   at CAcert and making use of CAcert's data, programs or services.
   A Member may be an individual ("natural person")
@@ -923,7 +923,7 @@ As per above.
 <b><a name="d_community" id="d_community">Community</a></b>.
   The group of Members who agree to the
   CAcert Community Agreement
-  (<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>)
+  (<a href="CAcertCommunityAgreement.php">COD9</a>)
   or equivalent agreements.
 </p>
 <p>
@@ -949,7 +949,7 @@ As per above.
 <b><a name="d_name" id="d_name">Name</a></b>.
     As defined in the
     Assurance Policy
-    (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>),
+    (<a href="AssurancePolicy.php">COD13</a>),
     to describe a name of a Member
     that is verified by the Assurance process.
 <p>
@@ -972,7 +972,7 @@ As per above.
   CAcert or the certificates that they may use, and
   are unaware of the ramifications of usage.
   They are not permitted to RELY, but may USE, under the 
-  Non-Related Persons - Disclaimer and Licence (<a href="http://www.cacert.org/policy/NRPDisclaimerAndLicence.php">COD4</a>).
+  Non-Related Persons - Disclaimer and Licence (<a href="NRPDisclaimerAndLicence.php">COD4</a>).
 </p>
 <p>
 <b><a name="rel" id="d_reliance">Reliance</a></b>.
@@ -1058,7 +1058,7 @@ for the general public.
 </p>
 
 <p>
-Under the Assurance Policy (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>),
+Under the Assurance Policy (<a href="AssurancePolicy.php">COD13</a>),
 there are means for Members to search, retrieve
 and verify certain data about themselves and others.
 </p>
@@ -1139,7 +1139,7 @@ The Subscriber Naming consists of:
 
   <ul class="q">
     <li> <a href="http://bugs.cacert.org/view.php?id=672"> bug 672</a> filed on subjectAltName.</li>
-    <li> O-Admin must verify as per <a href="http://wiki.cacert.org/wiki/PolicyDecisions">p20081016</a>. </li>
+    <li> O-Admin must verify as per <a href="//wiki.cacert.org/wiki/PolicyDecisions">p20081016</a>. </li>
     <li> it is a wip for OAP to state how this is done. </li>
     <li> curiously, (RFC5280) verification is only mandated for subjectAltName not subject field. </li>
     <li> what Directory String is used in above?  UTF8String is specified by RFC52804.1.2.6?  is this important for the CPS to state?</li>
@@ -1196,7 +1196,7 @@ does not go into the certificate.
 
 <p>
 Each Member's Name (<tt>CN=</tt> field)
-is assured under the Assurance Policy (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>)
+is assured under the Assurance Policy (<a href="AssurancePolicy.php">COD13</a>)
 or subsidiary policies (such as Organisation Assurance Policy).
 Refer to those documents for meanings and variations.
 </p>
@@ -1237,7 +1237,7 @@ Uniqueness of Names within certificates is not guaranteed.
 Each certificate has a unique serial number which maps
 to a unique account, and thus maps to a unique Member.
 See the Assurance Statement within Assurance Policy
-(<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+(<a href="AssurancePolicy.php">COD13</a>).
 </p>
 
 <p>
@@ -1249,7 +1249,7 @@ can only be registered to one Member.
 
 <p>
 Organisation Assurance Policy
-(<a href="http://www.cacert.org/policy/OrganisationAssurancePolicy.php">COD11</a>)
+(<a href="OrganisationAssurancePolicy.php">COD11</a>)
 controls issues such as trademarks where applicable.
 A trademark can be disputed by filing a dispute.
 See
@@ -1493,8 +1493,8 @@ The CAcert Inc. Board has the authority to decide to add or remove accepted TLD 
 
 <p>
 Identity verification is controlled by the
-<a href="http://svn.cacert.org/CAcert/Policies/AssurancePolicy.html">
-Assurance Policy</a> (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+<a href="//svn.cacert.org/CAcert/Policies/AssurancePolicy.html">
+Assurance Policy</a> (<a href="AssurancePolicy.php">COD13</a>).
 The reader is refered to the Assurance Policy,
 the following is representative and brief only.
 </p>
@@ -1524,7 +1524,7 @@ to check the private key dynamically.
 <b>Agreement.</b>
 An Internet user becomes a Member by agreeing to the
 CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>)
+(<a href="CAcertCommunityAgreement.php">COD9</a>)
 and registering an account on the online website.
 During the registration process Members are asked to
 supply information about themselves:
@@ -1546,7 +1546,7 @@ for all service requests such as certificates.
 <p>
 <b>Assurance.</b>
 Each Member is assured according to Assurance Policy
-(<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+(<a href="AssurancePolicy.php">COD13</a>).
 </p>
 
 <!-- <center><a href="http://xkcd.com/364/"> <img src="http://imgs.xkcd.com/comics/responsible_behavior.png"> </a> </center> -->
@@ -1617,7 +1617,7 @@ certificates that state their Assured Name(s).
 Verification of organisations is delegated by
 the Assurance Policy to the
 Organisation Assurance Policy
-(<a href="http://www.cacert.org/policy/OrganisationAssurancePolicy.php">COD11</a>).
+(<a href="OrganisationAssurancePolicy.php">COD11</a>).
 The reader is refered to the Organisation Assurance Policy,
 the following is representative and brief only.
 </p>
@@ -1645,15 +1645,15 @@ stated in the OAP, briefly presented here:
   </li><li>
    the organisation has agreed to the terms of the
    CAcert Community Agreement
-   (<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>),
+   (<a href="CAcertCommunityAgreement.php">COD9</a>),
    and is therefore subject to Arbitration. 
 </li></ol>
 
   <ul class="error">
     <li> As of the current time of writing, OA lacks critical documentation and there are bugs identified with no response.</li>
-    <li> <a href="http://wiki.cacert.org/wiki/PolicyDrafts/OrganisationAssurance">documented bugs</a>. </li>
+    <li> <a href="//wiki.cacert.org/wiki/PolicyDrafts/OrganisationAssurance">documented bugs</a>. </li>
     <li> Therefore Organisations will not participate in the current audit cycle of roots. </li>
-    <li> See <a href="http://wiki.cacert.org/wiki/OrganisationAssurance">wiki</a> for any progress on this. </li>
+    <li> See <a href="//wiki.cacert.org/wiki/OrganisationAssurance">wiki</a> for any progress on this. </li>
   </ul>
 
 
@@ -1682,7 +1682,7 @@ when adding the address,  <a href="#p4.1.2">&sect;4.1.2</a>.
 <b>Individuals.</b>
 The authority to participate as a Member is established
 by the CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>).
+(<a href="CAcertCommunityAgreement.php">COD9</a>).
 Assurances are requested by means of the signed CAP form.
 </p>
 
@@ -1791,7 +1791,7 @@ There are these controls:
 <p>
 Members generate their own key-pairs.
 The CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>)
+(<a href="CAcertCommunityAgreement.php">COD9</a>)
 obliges the Member as responsible for security.
 See CCA2.5, &sect;9.6.
 </p>
@@ -1986,7 +1986,7 @@ and the Organisation Handbook.
 
   <ul class="q">
      <li> As of time of writing, there is no Handbook for Organisation Assurers or for the Organisation, and the policy needs rework; so (audit) roots will not have OA certs ....  </li>
-     <li> <a href="http://wiki.cacert.org/wiki/PolicyDrafts/OrganisationAssurance"> Drafts </a> for ongoing story. </li>
+     <li> <a href="//wiki.cacert.org/wiki/PolicyDrafts/OrganisationAssurance"> Drafts </a> for ongoing story. </li>
   </ul>
 
 <h3><a name="p4.3" id="p4.3">4.3. Certificate issuance</a></h3>
@@ -2132,7 +2132,7 @@ There are no external entities that are notified about issued certificates.
 All Members (subscribers and relying parties)
 are obliged according to the
 CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>)
+(<a href="CAcertCommunityAgreement.php">COD9</a>)
 See especially 2.3 through 2.5.
 </p>
 <h4><a name="p4.5.1" id="p4.5.1">4.5.1. Subscriber Usage and Responsibilities</a></h4>
@@ -2193,7 +2193,7 @@ The term Verification as used in the Relying Party Statement means one of
 Relying parties are Members,
 and as such are bound by this CPS and the
 CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>).
+(<a href="CAcertCommunityAgreement.php">COD9</a>).
 The licence and permission to rely is not assignable.
 </p>
 
@@ -2223,7 +2223,7 @@ that binds the parties to dispute resolution within CAcert's forum,
 a person is a Non-Related-Person (NRP).
 An NRP is not permitted to rely and is not a Relying Party.
 For more details, see the
-NRP - Disclaimer and Licence (<a href="http://www.cacert.org/policy/NRPDisclaimerAndLicence.php">COD4</a>).
+NRP - Disclaimer and Licence (<a href="NRPDisclaimerAndLicence.php">COD4</a>).
 </p>
 
 <h5>4.5.2.c The Act of Reliance </h5>
@@ -2671,7 +2671,7 @@ Refer to Security Policy 4.3 (<a href="http://svn.cacert.org/CAcert/Policies/Sec
        <li>Assurers</li>
        <li> Any others authorised under COD13  </li>
    </ul>
-   Refer to Assurance Policy (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>)
+   Refer to Assurance Policy (<a href="AssurancePolicy.php">COD13</a>)
    </li>
 
    <li><b>Governance:</b>
@@ -2698,7 +2698,7 @@ or with two persons controlling (<i>dual control</i>).
 <p>
 All important roles are generally required to be assured
 at least to the level of Assurer, as per AP.
-Refer to Assurance Policy (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+Refer to Assurance Policy (<a href="AssurancePolicy.php">COD13</a>).
 </p>
 
 <p>
@@ -2723,13 +2723,13 @@ Roles strive in general for separation of duties, either along the lines of
   <td><b>Role</b></td> <td><b>Policy</b></td> <td><b>Comments</b></td>
  </tr><tr>
   <td>Assurer</td>
-  <td><a href="http://www.cacert.org/policy/AssurancePolicy.php"> COD13</td>
+  <td><a href="AssurancePolicy.php"> COD13</td>
   <td>
     Passes Challenge, Assured to 100 points.
   </td>
  </tr><tr>
   <td>Organisation Assurer</td>
-  <td><a href="http://www.cacert.org/policy/OrganisationAssurancePolicy.php">COD11</a></td>
+  <td><a href="OrganisationAssurancePolicy.php">COD11</a></td>
   <td>
     Trained and tested by two supervising OAs.
   </td>
@@ -2741,7 +2741,7 @@ Roles strive in general for separation of duties, either along the lines of
   </td>
  </tr><tr>
   <td>Arbitrator</td>
-  <td><a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">COD7</a></td>
+  <td><a href="DisputeResolutionPolicy.php">COD7</a></td>
   <td>
     Experienced Assurers.
   </td>
@@ -3131,7 +3131,7 @@ but their availability is a subscriber responsibility.
 <p>
 The operational period of a certificate and its key pair
 depends on the Assurance status of the Member,
-see <a href="#p1.4.5">&sect;1.4.5</a> and Assurance Policy (<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+see <a href="#p1.4.5">&sect;1.4.5</a> and Assurance Policy (<a href="AssurancePolicy.php">COD13</a>).
 </p>
 
 <p>
@@ -3373,7 +3373,7 @@ There are two major threads of assessment:
 
 <p>
 See the Audit page at
-<a href="http://wiki.cacert.org/wiki/Audit/">
+<a href="//wiki.cacert.org/wiki/Audit/">
 wiki.cacert.org/wiki/Audit/</a>
 for more information.
 </p>
@@ -3515,9 +3515,9 @@ should be reworked to conform, or should be dropped
 <h3><a name="p8.5" id="p8.5">8.5. Actions taken as a result of deficiency</a></h3>
 <p>
 See the current
-<a href="http://wiki.cacert.org/wiki/Audit/Done">Audit Done list</a>
+<a href="//wiki.cacert.org/wiki/Audit/Done">Audit Done list</a>
 for work completed, and
-<a href="http://wiki.cacert.org/wiki/AuditToDo">Audit Todo list</a>
+<a href="//wiki.cacert.org/wiki/AuditToDo">Audit Todo list</a>
 for work in progress.
 </p>
 
@@ -3537,7 +3537,7 @@ as the criteria, above.
 
 <p>
 The
-<a href="http://wiki.cacert.org/wiki/AuditDirectives">
+<a href="//wiki.cacert.org/wiki/AuditDirectives">
 wiki.cacert.org/wiki/AuditDirectives</a>
 documents issued directives and actions.
 </p>
@@ -3546,14 +3546,14 @@ documents issued directives and actions.
 
 <p>
 Current and past Audit information is available at
-<a href="http://wiki.cacert.org/wiki/Audit/">wiki.CAcert.org/wiki/Audit/</a>.
+<a href="//wiki.cacert.org/wiki/Audit/">wiki.CAcert.org/wiki/Audit/</a>.
 CAcert runs an open disclosure policy and
 Audit is no exception.
 </p>
 
 <p>
 This CPS and other documents are subject to
-the process in Policy on Policy (<a href="http://www.cacert.org/policy/PolicyOnPolicy.php">COD1</a>).
+the process in Policy on Policy (<a href="PolicyOnPolicy.php">COD1</a>).
 Audits cover the overall processes more
 than any one document, and documents may vary
 even as Audit reports are delivered.
@@ -3569,9 +3569,9 @@ even as Audit reports are delivered.
 
 <p>
 The current fees structure is posted at
-<a href="http://wiki.cacert.org/wiki/Price">wiki.cacert.org/wiki/Price</a>.
+<a href="//wiki.cacert.org/wiki/Price">wiki.cacert.org/wiki/Price</a>.
 Changes to the fees structure will be announced
-from time to time on the <a href="http://blog.cacert.org/">blog</a>.
+from time to time on the <a href="//blog.cacert.org/">blog</a>.
 CAcert retains the right to charge fees for services.
 All fees are non-refundable.
 </p>
@@ -3582,7 +3582,7 @@ All fees are non-refundable.
 <p>
 Financial risks are dealt with primarily by
 the Dispute Resolution Policy
-(<a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">COD7</a>).
+(<a href="DisputeResolutionPolicy.php">COD7</a>).
 </p>
 
 <h4><a name="p9.2.1" id="p9.2.1">9.2.1. Insurance coverage</a></h4>
@@ -3643,7 +3643,7 @@ Names, domains, email addresses, and certificate serial numbers.
 </p>
 <p>
 Under Assurance Policy
-(<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>)
+(<a href="AssurancePolicy.php">COD13</a>)
 the Member's status (as Assured, Assurer, etc) is available
 to other Members.
 </p>
@@ -3701,9 +3701,9 @@ some deviations are necessary.
 Assets that fall under the control of CCS
 must be transferred to CAcert.
 See PoP 6.2
-(<a href="http://www.cacert.org/policy/PolicyOnPolicy.php#6.2">COD1</a>),
+(<a href="PolicyOnPolicy.php#6.2">COD1</a>),
 CCA 1.3
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#1.3">COD9</a>).
+(<a href="CAcertCommunityAgreement.php#1.3">COD9</a>).
 That is, CAcert is free to use, modify,
 distribute, and otherwise conduct the business
 of the CA as CAcert sees fit with the asset.
@@ -3715,7 +3715,7 @@ The brand of CAcert
 is made up of its logo, name, trademark, service marks, etc.
 Use of the brand is strictly limited by the Board,
 and permission is required.
-See <a href="http://wiki.cacert.org/wiki/TopMinutes-20070917">
+See <a href="//wiki.cacert.org/wiki/TopMinutes-20070917">
 m20070917.5</a>.
 </p>
 
@@ -3725,17 +3725,17 @@ m20070917.5</a>.
 CAcert owns or requires full control over its documents,
 especially those covered by CCS.
 See PoP 6.2
-(<a href="http://www.cacert.org/policy/PolicyOnPolicy.php#6.2">COD1</a>).
+(<a href="PolicyOnPolicy.php#6.2">COD1</a>).
 Contributors transfer the rights,
 see CCA 1.3
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#1.3">COD9</a>).
+(<a href="CAcertCommunityAgreement.php#1.3">COD9</a>).
 Contributors warrant that they have the right to transfer.
 </p>
 
 <p>
 Documents are generally licensed under free and open licence.
 See
-<a href="http://wiki.cacert.org/wiki/PolicyDrafts/DocumentLicence">
+<a href="//wiki.cacert.org/wiki/PolicyDrafts/DocumentLicence">
 wiki.cacert.org/wiki/PolicyDrafts/DocumentLicence</a>.
 Except where explicitly negotiated,
 CAcert extends back to contributors a
@@ -3743,9 +3743,9 @@ non-exclusive, unrestricted perpetual
 licence, permitting them to to re-use
 their original work freely.
 See PoP 6.4
-(<a href="http://www.cacert.org/policy/PolicyOnPolicy.php#6.4">COD1</a>),
+(<a href="PolicyOnPolicy.php#6.4">COD1</a>),
 CCA 1.3
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#1.3">COD9</a>).
+(<a href="CAcertCommunityAgreement.php#1.3">COD9</a>).
 </p>
 
 <h4><a name="p9.5.4" id="p9.5.4">9.5.4. Code</a></h4>
@@ -3777,15 +3777,15 @@ their original work freely.
 CAcert asserts its intellectual property rights over certificates
 issued to Members and over roots.
 See CCA 4.4
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#4.4">COD9</a>),
+(<a href="CAcertCommunityAgreement.php#4.4">COD9</a>),
 CCS.
 The certificates may only be used by Members under
-<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#4.4">COD9</a>,
+<a href="CAcertCommunityAgreement.php#4.4">COD9</a>,
 and,
 by others under the licences offered,
 such as
 Non-Related Persons - Disclaimer and Licence
-(<a href="http://www.cacert.org/policy/NRPDisclaimerAndLicence.php">COD4</a>).
+(<a href="NRPDisclaimerAndLicence.php">COD4</a>).
 </p>
 
 <h3><a name="p9.6" id="p9.6">9.6. Representations and warranties</a></h3>
@@ -3795,7 +3795,7 @@ Non-Related Persons - Disclaimer and Licence
 <b>Members.</b>
 All Members of the Community agree to the
 CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>),
+(<a href="CAcertCommunityAgreement.php">COD9</a>),
 which is the primary document for
 representations and warranties.
 Members include Subscribers, Relying Parties,
@@ -3806,7 +3806,7 @@ Registration Agents and the CA itself.
 <b>RAs.</b>
 Registration Agents are obliged additionally by Assurance Policy,
 especially 3.1, 4.1
-(<a href="http://www.cacert.org/policy/AssurancePolicy.php">COD13</a>).
+(<a href="AssurancePolicy.php">COD13</a>).
 </p>
 
 <p>
@@ -3832,7 +3832,7 @@ to be Members in the Community.
 <p>
 Persons who have not accepted the above Agreements are offered the
 Non-Related Persons - Disclaimer and Licence
-(<a href="http://www.cacert.org/policy/NRPDisclaimerAndLicence.php">COD4</a>).
+(<a href="NRPDisclaimerAndLicence.php">COD4</a>).
 Any representations and
 warranties are strictly limited to nominal usage.
 In essence, NRPs may USE but must not RELY.
@@ -3868,7 +3868,7 @@ CAcert on behalf of related parties
 (RAs, Subscribers, etc) and itself
 disclaims all liability to NRPs
 in their usage of CA's certificates.
-See <a href="http://www.cacert.org/policy/NRPDisclaimerAndLicence.php">COD4</a>.
+See <a href="NRPDisclaimerAndLicence.php">COD4</a>.
 </p>
 
 <h3><a name="p9.8.2" id="p9.8.2">9.8.2 Liabilities Between Members</a></h3>
@@ -3900,11 +3900,11 @@ No stipulation.
 <p>
 Members file a dispute to terminate their agreement.
 See <a href="#p9.13">&sect;9.13</a> and CCA 3.3
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#3.3">COD9</a>).
+(<a href="CAcertCommunityAgreement.php#3.3">COD9</a>).
 </p>
 
 <p>
-Documents are varied (including terminated) under <a href="http://www.cacert.org/policy/PolicyOnPolicy.php">COD1</a>.
+Documents are varied (including terminated) under <a href="PolicyOnPolicy.php">COD1</a>.
 </p>
 
 <p>
@@ -3923,16 +3923,16 @@ No stipulation.
 All participants are obliged to keep their listed
 primary email addresses in good working order.
 See CCA 3.5
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#3.5">COD9</a>).
+(<a href="CAcertCommunityAgreement.php#3.5">COD9</a>).
 </p>
 
 
 <h3><a name="p9.12" id="p9.12">9.12. Amendments</a></h3>
 
 <p>
-Amendments to the CPS are controlled by <a href="http://www.cacert.org/policy/PolicyOnPolicy.php">COD1</a>.
+Amendments to the CPS are controlled by <a href="PolicyOnPolicy.php">COD1</a>.
 Any changes in Member's Agreements are notified under CCA 3.4
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php#3.4">COD9</a>).
+(<a href="CAcertCommunityAgreement.php#3.4">COD9</a>).
 </p>
 
 <h3><a name="p9.13" id="p9.13">9.13. Dispute resolution provisions</a></h3>
@@ -3945,7 +3945,7 @@ or other related party to file a dispute.
 <ul><li>
     The CAcert
     Dispute Resolution Policy
-    (<a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">COD7</a>)
+    (<a href="DisputeResolutionPolicy.php">COD7</a>)
     includes rules for dispute resolution.
   </li><li>
     Filing is done via email to
@@ -3999,7 +3999,7 @@ obligations, risks and liabilities on the parties.
 
 <p>
 See the Privacy Policy
-(<a href="http://www.cacert.org/index.php?id=10">COD5</a>).
+(<a href="PrivacyPolicy.html">COD5</a>).
 </p>
 
 <h3><a name="p9.15.3" id="p9.15.3">9.15.3 Legal Process from External Forums</a></h3>
@@ -4014,7 +4014,7 @@ treated as under the Dispute Resolution Policy
 See
 <a href="#p9.13">&sect;9.13</a>
 and
-<a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">COD7</a>.
+<a href="DisputeResolutionPolicy.php">COD7</a>.
 That is, all requests are treated as disputes,
 as only a duly empanelled Arbitrator has the
 authorisation and authority to rule on the
@@ -4038,7 +4038,7 @@ Members or not
 <p>
 All Members of the Community agree to the
 CAcert Community Agreement
-(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">COD9</a>).
+(<a href="CAcertCommunityAgreement.php">COD9</a>).
 This agreement also incorporates other key
 documents, being this CPS, DRP and PP.
 See CCA 4.2.
@@ -4051,7 +4051,7 @@ Community, of which the above documents are part.
 See COD2.
 Documents that have reached full POLICY status
 are located at
-<a href="http://www.cacert.org/policy/">
+<a href="./">
 www.cacert.org/policy/</a>.
 Although detailed practices may
 be found in other places on the website
