@@ -458,7 +458,7 @@
 		{
 			$experience_total = $sum_experience_countable+$sum_experience_other_countable;
 			$issue_points_txt = "";
-			if ($sum_points_countable = $max_points)
+			if ($sum_points_countable == $max_points)
 				$issue_points = 10;
 			if ($experience_total >= 10)
 				$issue_points = 15;
