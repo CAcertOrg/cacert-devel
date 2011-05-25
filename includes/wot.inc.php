@@ -101,7 +101,7 @@
 	function get_cats_state ($userid)
 	{
 
-		$res = query_init ("select * from `cats_passed` inner join `cats_variant` on `cats_passed`.`variant_id` = `cats_variant`.`id` and `cats_variant`.`type_id` = 11
+		$res = query_init ("select * from `cats_passed` inner join `cats_variant` on `cats_passed`.`variant_id` = `cats_variant`.`id` and `cats_variant`.`type_id` = 1
 			WHERE `cats_passed`.`user_id` = '".intval($userid)."'");
 		return mysql_num_rows($res);
 	}
@@ -402,7 +402,7 @@
 			switch ($row['method'])
 			{
 				case 'Face to Face Meeting':	 		// count Face to Face only
-					$sum_experience += 2;
+					$sum_experience += 2*intval($row['number']);
 					break;
 			}
 
