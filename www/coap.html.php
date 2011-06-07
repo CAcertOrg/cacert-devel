@@ -61,7 +61,7 @@ table#TAB1 td { border: 0 }
 </tr>
 <tr>
     <td border=0></td>
-    <td border=0 align="right"><font size=-7>class 3: DB4C 4269 073F E9C2 A37D 890A 5C1B 18C4 184E 2A2D</font></td>
+    <td border=0 align="right"><font size=-7>class 3: AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE</font></td>
 <tr>
 </font>
 </td>

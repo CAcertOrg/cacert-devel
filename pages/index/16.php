@@ -35,8 +35,12 @@ Class 3 <?=_("PKI Key")?><br>
 <a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a><br/>
 <a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a><br/>
 <a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a><br/>
-<?=_("Fingerprint")?> SHA1: DB:4C:42:69:07:3F:E9:C2:A3:7D:89:0A:5C:1B:18:C4:18:4E:2A:2D<br/>
-<?=_("Fingerprint")?> MD5: 73:3F:35:54:1D:44:C9:E9:5A:4A:EF:51:AD:03:06:B6<br/>
+<?php /*
+  class3 subroot fingerprint updated: 2011-05-23  class3 Re-sign project
+  https://wiki.cacert.org/Roots/Class3ResignProcedure/Migration
+*/ ?>
+<?=_("Fingerprint")?> SHA1: AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE<br/>
+<?=_("Fingerprint")?> MD5: F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42<br/>
 </p>
 
 <p>
