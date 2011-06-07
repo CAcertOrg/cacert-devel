@@ -83,3 +83,10 @@ TG1yj+lkktROGGyn0hJ5SbM=
 -----END PGP SIGNATURE-----
 </pre>
 </p>
+
+<p>
+<? printf(_('An overview over all CA certificates ever issued can be found in '.
+        '%sthe wiki%s.'),
+    '<a href="//wiki.cacert.org/Roots/StateOverview">',
+    '</a>') ?>
+</p>
