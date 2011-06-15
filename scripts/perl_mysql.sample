@@ -1,0 +1,6 @@
+# This file contains the data needed to connect to the database to be
+# used in perl scripts
+
+$cacert_db_config = 'DBI:mysql:database=cacert;host=127.0.0.1';
+$cacert_db_user = 'cacert';
+$cacert_db_password = '<put_password_here>';
