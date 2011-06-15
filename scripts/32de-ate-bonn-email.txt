@@ -1,0 +1,38 @@
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher eher "muendlich ueberlieferten" Regeln wurden in Policies gegossen. Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B. in dem CAcert Community Agreement) wurden beschlossen. Die Assurer Training Events wollen versuchen, die ganzen Informationen unter’s Volk zu bringen:
+
+Ein ATE ist eine Veranstaltung zur Qualitaetssicherung des CAcert Web-of-Trusts, denn im Gegensatz zu vielen kommerziellen Zertifikats-Ausstellern findet bei CAcert keine zentralisierte Identitaetsueberpruefung beim Aussteller statt.
+
+Statt dessen gibt es ein Netzwerk aus Freiwilligen (Assurern), gegenueber denen sich ein Interessent (Assuree) ausweisen kann, um sich seine Identitaet bestaetigen zu lassen. 
+Diese Bestaetigung ist Voraussetzung dafuer, dass sich der Interessent spaeter Zertifikate generieren lassen kann, die seinen Namen enthalten.
+
+Fuer das Web-of-Trust gibt es ein Regelwerk, CAcert Community Agreement (CCA), Assurance Policy und Assurance Handbook seien beispielhaft genannt.
+
+Das ATE schult die CAcert Assurer ueber Neuerungen im Regelwerk und hilft, Kenntnisse aufzufrischen:
+
+- Was hast du auf dem CAP Formular hinzuzufuegen, wenn du Minderjaehrige ueberpruefst ?
+- Was sind die 2 wesentlichen Punkte der CCA die du einem Assuree vermitteln koennen sollst ?
+- Unter welchen Umstaenden koennen z.Bsp. niederlaendische Rufnamen akzeptiert werden? 
+
+Antworten auf diese und weitere Fragen erhaelst du bei den Assurer Training Events (ATEs).
+
+Darueberhinaus wird beim ATE der Vorgang der Identitaetsueberpruefung trainiert und auditiert, um die Qualitaet der Assurances in der taeglichen Praxis zu erfassen. Dabei gilt es moegliche Fehler und Fallstricke zu erkennen und aufzudecken. Die Assurer haben also die Moeglichkeit, sich mit den Fehlern auseinanderzusetzen und zu erfahren, wie diese vermieden werden koennen.
+
+As IanG said: The ATE or Assurer Training Event is exceptionally recommended for all Assurers, and include parts which contribute directly to our audit. Come and find out how you can also contribute.
+
+Die kommende Veranstaltung in deiner Naehe findet statt am:
+
+- Mittwoch den 08. Juni 2011
+- in der Zeit von: 19:00 - ca. 22:00 Uhr 
+- im Jugendzentrum St. Martin
+- Heilsbachstr. 4
+- 53123 Bonn 
+
+Details zum Veranstaltungsort und Anfahrthinweise findet Ihr im
+Wiki [http://wiki.cacert.org/Events/2011-06-08-ATE-Bonn]
+Blog [http://blog.cacert.org/2011/05/514.html]
+
+Teilnehmer Registrierung mit Rueckantwort: 'Ich moechte am ATE-Bonn teilnehmen'
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Kontakt: events@cacert.org

@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
         loadem("index");
         showheader(_("Identity Verification Form (CAP) form"));
-	Version: $Id: cap.html.php,v 1.1 2009-03-02 23:09:05 root Exp $
+	Version: $Id: cap.html.php,v 1.2 2011-06-10 18:30:41 wytze Exp $
 */
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">', "\n";
 	echo '<html>', "\n";
@@ -49,7 +49,7 @@
 	echo '</tr>', "\n";
 	echo '<tr>', "\n";
 	echo '    <td></td>', "\n";
-	echo '    <td align="right"><font size=-7>class 3: DB4C 4269 073F E9C2 A37D 890A 5C1B 18C4 184E 2A2D</font></td>', "\n";
+	echo '    <td align="right"><font size=-7>class 3: AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE</font></td>', "\n";
 	echo '<tr>', "\n";
 	echo '</font>', "\n";
 	echo '</td>', "\n";
