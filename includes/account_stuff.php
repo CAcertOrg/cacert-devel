@@ -284,4 +284,361 @@ function hideall() {
 </body>             
 </html><?
 	}
+	
+	/**
+	 * Produces a log entry with the error message with log level E_USER_WARN
+	 * and a random ID an returns a message that can be displayed to the user
+	 * including the generated ID
+	 * 
+	 * @param $errormessage string
+	 * 		The error message that should be logged
+	 * @return string containing the generated ID that can be displayed to the
+	 * 		user
+	 */
+	function failWithId($errormessage) {
+		$errorId = rand();
+		trigger_error("$errormessage. ID: $errorId", E_USER_WARNING);
+		return sprintf(_("Something went wrong when processing your request. ".
+				"Please contact %s for help and provide them with the ".
+				"following ID: %d"),
+			"<a href='mailto:support@cacert.org?subject=System%20Error%20-%20".
+				"ID%3A%20$errorId'>support@cacert.org</a>",
+			$errorId);
+	}
+	
+	/**
+	 * Checks whether the given CSR contains a vulnerable key
+	 * 
+	 * @param $csr string
+	 * 		The CSR to be checked
+	 * @param $encoding string [optional]
+	 * 		The encoding the CSR is in (for the "-inform" parameter of OpenSSL,
+	 * 		currently only "PEM" (default) or "DER" allowed)
+	 * @return string containing the reason if the key is considered weak,
+	 * 		empty string otherwise
+	 */
+	function checkWeakKeyCSR($csr, $encoding = "PEM")
+	{
+		// non-PEM-encodings may be binary so don't use echo
+		$descriptorspec = array(
+			0 => array("pipe", "r"), // STDIN for child
+			1 => array("pipe", "w"), // STDOUT for child
+		);
+		$encoding = escapeshellarg($encoding);
+		$proc = proc_open("openssl req -inform $encoding -text -noout",
+			$descriptorspec, $pipes);
+		
+		if (is_resource($proc))
+		{
+			fwrite($pipes[0], $csr);
+			fclose($pipes[0]);
+			
+			$csrText = ""; 
+			while (!feof($pipes[1]))
+			{
+				$csrText .= fread($pipes[1], 8192);
+			}
+			fclose($pipes[1]);
+			
+			if (($status = proc_close($proc)) !== 0 || $csrText === "")
+			{
+				return _("I didn't receive a valid Certificate Request, hit ".
+				"the back button and try again.");
+			}
+		} else {
+			return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
+		}
+		
+		
+		return checkWeakKeyText($csrText);
+	}
+	
+	/**
+	 * Checks whether the given X509 certificate contains a vulnerable key
+	 * 
+	 * @param $cert string
+	 * 		The X509 certificate to be checked
+	 * @param $encoding string [optional]
+	 * 		The encoding the certificate is in (for the "-inform" parameter of
+	 * 		OpenSSL, currently only "PEM" (default), "DER" or "NET" allowed)
+	 * @return string containing the reason if the key is considered weak,
+	 * 		empty string otherwise
+	 */
+	function checkWeakKeyX509($cert, $encoding = "PEM")
+	{
+		// non-PEM-encodings may be binary so don't use echo
+		$descriptorspec = array(
+			0 => array("pipe", "r"), // STDIN for child
+			1 => array("pipe", "w"), // STDOUT for child
+		);
+		$encoding = escapeshellarg($encoding);
+		$proc = proc_open("openssl x509 -inform $encoding -text -noout",
+			$descriptorspec, $pipes);
+		
+		if (is_resource($proc))
+		{
+			fwrite($pipes[0], $cert);
+			fclose($pipes[0]);
+			
+			$certText = ""; 
+			while (!feof($pipes[1]))
+			{
+				$certText .= fread($pipes[1], 8192);
+			}
+			fclose($pipes[1]);
+			
+			if (($status = proc_close($proc)) !== 0 || $certText === "")
+			{
+				return _("I didn't receive a valid Certificate Request, hit ".
+				"the back button and try again.");
+			}
+		} else {
+			return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
+		}
+		
+		
+		return checkWeakKeyText($certText);
+	}
+	
+	/**
+	 * Checks whether the given SPKAC contains a vulnerable key
+	 * 
+	 * @param $spkac string
+	 * 		The SPKAC to be checked
+	 * @param $spkacname string [optional]
+	 * 		The name of the variable that contains the SPKAC. The default is
+	 * 		"SPKAC"
+	 * @return string containing the reason if the key is considered weak,
+	 * 		empty string otherwise
+	 */
+	function checkWeakKeySPKAC($spkac, $spkacname = "SPKAC")
+	{
+		/* Check for the debian OpenSSL vulnerability */
+		
+		$spkac = escapeshellarg($spkac);
+		$spkacname = escapeshellarg($spkacname);
+		$spkacText = `echo $spkac | openssl spkac -spkac $spkacname`;
+		if ($spkacText === null) {
+			return _("I didn't receive a valid Certificate Request, hit the ".
+				"back button and try again.");
+		}
+		
+		return checkWeakKeyText($spkacText);
+	}
+	
+	/**
+	 * Checks whether the given text representation of a CSR or a SPKAC contains
+	 * a weak key
+	 * 
+	 * @param $text string
+	 * 		The text representation of a key as output by the
+	 * 		"openssl <foo> -text -noout" commands
+	 * @return string containing the reason if the key is considered weak,
+	 * 		empty string otherwise
+	 */
+	function checkWeakKeyText($text)
+	{
+		/* Which public key algorithm? */
+		if (!preg_match('/^\s*Public Key Algorithm: ([^\s]+)$/m', $text,
+				$algorithm))
+		{
+			return failWithId("checkWeakKeyText(): Couldn't extract the ".
+					"public key algorithm used");
+		} else {
+			$algorithm = $algorithm[1];
+		}
+		
+		
+		if ($algorithm === "rsaEncryption")
+		{
+			if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text,
+					$keysize))
+			{
+				return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
+						"key size");
+			} else {
+				$keysize = intval($keysize[1]);
+			}
+			
+			if ($keysize < 1024)
+			{
+				return sprintf(_("The keys that you use are very small ".
+						"and therefore insecure. Please generate stronger ".
+						"keys. More information about this issue can be ".
+						"found in %sthe wiki%s"),
+					"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
+					"</a>");
+			} elseif ($keysize < 2048) {
+				// not critical but log so we have some statistics about
+				// affected users
+				trigger_error("checkWeakKeyText(): Certificate for small ".
+						"key (< 2048 bit) requested", E_USER_NOTICE);
+			}
+			
+			
+			$debianVuln = checkDebianVulnerability($text, $keysize);
+			if ($debianVuln === true)
+			{
+				return sprintf(_("The keys you use have very likely been ".
+						"generated with a vulnerable version of OpenSSL which ".
+						"was distributed by debian. Please generate new keys. ".
+						"More information about this issue can be found in ".
+						"%sthe wiki%s"),
+					"<a href='//wiki.cacert.org/WeakKeys#DebianVulnerability'>",
+					"</a>");
+			} elseif ($debianVuln === false) {
+				// not vulnerable => do nothing
+			} else {
+				return failWithId("checkWeakKeyText(): Something went wrong in".
+					"checkDebianVulnerability()");
+			}
+			
+			if (!preg_match('/^\s*Exponent: (\d+) \(0x[0-9a-fA-F]+\)$/m', $text,
+					$exponent))
+			{
+				return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
+						"exponent");
+			} else {
+				$exponent = $exponent[1]; // exponent might be very big =>
+					//handle as string using bc*()  
+				
+				if (bccomp($exponent, "3") === 0)
+				{
+					return sprintf(_("The keys you use might be insecure. ".
+							"Although there is currently no known attack for ".
+							"reasonable encryption schemes, we're being ".
+							"cautious and don't allow certificates for such ".
+							"keys. Please generate stronger keys. More ".
+							"information about this issue can be found in ".
+							"%sthe wiki%s"),
+						"<a href='//wiki.cacert.org/WeakKeys#SmallExponent'>",
+						"</a>");
+				} elseif (!(bccomp($exponent, "65537") >= 0 &&
+						(bccomp($exponent, "100000") === -1 ||
+							// speed things up if way smaller than 2^256
+						bccomp($exponent, bcpow("2", "256")) === -1) )) {
+					// 65537 <= exponent < 2^256 recommended by NIST
+					// not critical but log so we have some statistics about
+					// affected users
+					trigger_error("checkWeakKeyText(): Certificate for ".
+							"unsuitable exponent '$exponent' requested",
+							E_USER_NOTICE);
+				}
+			}
+		}
+		
+		/* No weakness found */
+		return "";
+	}
+	
+	/**
+	 * Reimplement the functionality of the openssl-vulnkey tool
+	 * 
+	 * @param $text string
+	 * 		The text representation of a key as output by the
+	 * 		"openssl <foo> -text -noout" commands
+	 * @param $keysize int [optional]
+	 * 		If the key size is already known it can be provided so it doesn't
+	 * 		have to be parsed again. This also skips the check whether the key
+	 * 		is an RSA key => use wisely
+	 * @return TRUE if key is vulnerable, FALSE otherwise, NULL in case of error
+	 */
+	function checkDebianVulnerability($text, $keysize = 0)
+	{
+		$keysize = intval($keysize);
+		
+		if ($keysize === 0)
+		{
+			/* Which public key algorithm? */
+			if (!preg_match('/^\s*Public Key Algorithm: ([^\s]+)$/m', $text,
+				$algorithm))
+			{
+				trigger_error("checkDebianVulnerability(): Couldn't extract ".
+					"the public key algorithm used", E_USER_WARNING);
+				return null;
+			} else {
+				$algorithm = $algorithm[1];
+			}
+			
+			if ($algorithm !== "rsaEncryption") return false;
+			
+			/* Extract public key size */
+			if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text,
+				$keysize))
+			{
+				trigger_error("checkDebianVulnerability(): Couldn't parse the ".
+					"RSA key size", E_USER_WARNING);
+				return null;
+			} else {
+				$keysize = intval($keysize[1]);
+			}
+		}
+		
+		// $keysize has been made sure to contain an int
+		$blacklist = "/usr/share/openssl-blacklist/blacklist.RSA-$keysize";
+		if (!(is_file($blacklist) && is_readable($blacklist)))
+		{
+			if (in_array($keysize, array(512, 1024, 2048, 4096)))
+			{
+				trigger_error("checkDebianVulnerability(): Blacklist for ".
+						"$keysize bit keys not accessible. Expected at ".
+						"$blacklist", E_USER_ERROR);
+				return null;
+			}
+			
+			trigger_error("checkDebianVulnerability(): $blacklist is not ".
+				"readable. Unsupported key size?", E_USER_WARNING);
+			return false;
+		}
+		
+		
+		/* Extract RSA modulus */
+		if (!preg_match('/^\s*Modulus \(\d+ bit\):\n'.
+				'((?:\s*[0-9a-f][0-9a-f]:(?:\n)?)+[0-9a-f][0-9a-f])$/m',
+			$text, $modulus))
+		{
+			trigger_error("checkDebianVulnerability(): Couldn't extract the ".
+				"RSA modulus", E_USER_WARNING);
+			return null;
+		} else {
+			$modulus = $modulus[1];
+			// strip whitespace and colon leftovers
+			$modulus = str_replace(array(" ", "\t", "\n", ":"), "", $modulus);
+			
+			// when using "openssl xxx -text" first byte was 00 in all my test
+			// cases but 00 not present in the "openssl xxx -modulus" output
+			if ($modulus[0] === "0" && $modulus[1] === "0")
+			{
+				$modulus = substr($modulus, 2);
+			} else {
+				trigger_error("checkDebianVulnerability(): First byte is not ".
+					"zero", E_USER_NOTICE);
+			}
+			
+			$modulus = strtoupper($modulus);
+		}
+		
+		
+		/* calculate checksum and look it up in the blacklist */
+		$checksum = substr(sha1("Modulus=$modulus\n"), 20);
+		
+		// $checksum and $blacklist should be safe, but just to make sure
+		$checksum = escapeshellarg($checksum);
+		$blacklist = escapeshellarg($blacklist);
+		exec("grep $checksum $blacklist", $dummy, $debianVuln);
+		if ($debianVuln === 0) // grep returned something => it is on the list
+		{
+			return true;
+		} elseif ($debianVuln === 1) { // grep returned nothing
+			return false;
+		} else {
+			trigger_error("checkDebianVulnerability(): Something went wrong ".
+				"when looking up the key with checksum $checksum in the ".
+				"blacklist $blacklist", E_USER_ERROR);
+			return null;
+		}
+		
+		// Should not get here
+		return null;
+	}
 ?>
