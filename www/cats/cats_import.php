@@ -24,6 +24,8 @@
    API for CATS to import passed tests into main CAcert database.
 */
 
+require_once('../../includes/lib/account.php');
+
 function sanitize_string($buffer) {
  return htmlentities(utf8_decode($buffer), (int)ENQ_QUOTES);
 }
@@ -154,11 +156,7 @@ if (!$query) {
 }
 
 // Update Assurer-Flag on users table if 100 points. Should the number of points be SUM(points) or SUM(awarded)?
-$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 1 '.
-                       'WHERE `u`.`id` = \''.(int)intval($userID).'\' '.
-                         'AND EXISTS(SELECT 1 FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = `u`.`id`) '.
-                         'AND (SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` AND `expire` < now()) >= 100;'); // Challenge has been passed and non-expired points >= 100
-if (!$query) {
+if (!fix_assurer_flag($userID)) {
   echo 'Invalid query'."\r\n";
   trigger_error('Invalid query', E_USER_ERROR);
   exit();
