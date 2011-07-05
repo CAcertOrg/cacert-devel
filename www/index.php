@@ -148,7 +148,12 @@
 
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
-		$query = "select * from `emailcerts` where `serial`='$_SERVER[SSL_CLIENT_M_SERIAL]' and `revoked`=0 and disablelogin=0 and
+		include_once("../includes/lib/general.php");
+		/* identify unique certs serial number related to root or subroot */
+		$query = "select * from `emailcerts` where
+				`serial`='".$_SERVER['SSL_CLIENT_M_SERIAL']."' and
+				`rootcert`='".rootcertid($_SERVER['SSL_CLIENT_I_DN_CN'])."' and
+				`revoked`=0 and disablelogin=0 and
 				UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
