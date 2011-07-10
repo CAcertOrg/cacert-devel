@@ -44,6 +44,16 @@ sub IsWeak($) {
   my $ModulusSize = 0;
   my $Exponent = 0;
   my $result = 0;
+
+
+# Code for Testing only! Hardcoding some filenames to fail the tests.
+#
+#  if ($CertFileName eq '../crt/server/301/server-301988.crt' ||
+#      $CertFileName eq '../crt/client/258/client-258856.crt' ||
+#      $CertFileName eq '../crt/orgserver/2/orgserver-2635.crt' ||
+#      $CertFileName eq '../crt/orgclient/0/orgclient-808.crt') {
+#    return "Test";
+#  }
   
   # Do key size and exponent checking for RSA keys
   open(CERTTEXT, '-|', "openssl x509 -in $CertFileName -noout -text") || die "Cannot start openssl";
