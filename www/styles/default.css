@@ -621,6 +621,18 @@ div.sponsorinfo {
       padding: 10px 10px 10px 10px;
 }
 
+div.sponsorinfo_top {
+        clear: both;
+        font-size: small;
+        color: #000000;
+        padding: 10px 10px 10px 10px;
+        position: absolute;
+        top: 35px;
+        right: 0px;
+        z-index: 10;
+        vertical-align: middle;
+}
+
 img.sponsorlogo {
       margin-left: 10px;
       margin-right: 10px;

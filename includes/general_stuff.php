@@ -23,21 +23,9 @@ if(!function_exists("showheader"))
 ?> <div id="pagecell1">
   <div id="pageName"><br>
     <div id="pageLogo"><a href="http://<?=$_SESSION['_config']['normalhostname']?>"><img src="/images/cacert4.png" border="0" alt="CAcert.org logo"></a></div>
-<div id="googlead"><? if(!array_key_exists('HTTPS',$_SERVER) || $_SERVER['HTTPS'] != "on") { ?><script type="text/javascript">
-<!--
-google_ad_client = "pub-0959373285729680";
-google_alternate_ad_url = "http://www.cacert.org/";
-google_ad_width = 468;
-google_ad_height = 60;
-google_ad_format = "468x60_as";
-google_color_link = "000000";
-google_color_url = "000000";
-google_color_text = "000000";
-google_color_border = "FFFFFF";
-//-->
-</script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><? } else { 
-?><h2><?=_("Free digital certificates!")?></h2><? } ?></div>
+<? // if(!array_key_exists('HTTPS',$_SERVER) || $_SERVER['HTTPS'] != "on") { ?>
+<? include("sponsorinfo_top.php") ?>
+<? // } ?>
   </div>
   <div id="pageNav">
     <div class="relatedLinks">
@@ -131,8 +119,8 @@ if(!function_exists("showfooter"))
     </div>
   <? include("sponsorinfo.php") ?>
   <div id="siteInfo">
-	<a href="/index.php?id=12"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-        <a href="/index.php?id=10"><?=_("Privacy Policy")?></a> |
+	<a href="/index.php?id=12"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/CAcertIncorporated"><?=_("Association Membership")?></a> |
+        <a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> |
         <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
 	&copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
 </div>  
