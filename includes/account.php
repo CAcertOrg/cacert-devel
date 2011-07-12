@@ -1291,7 +1291,7 @@
 		if($_SESSION['_config']['user']['pword1'] == "" || $_SESSION['_config']['user']['pword1'] != $_SESSION['_config']['user']['pword2'])
 		{
 			echo '<h3 style="color:red">', _("Failure: Password not Changed"),
-				'</h3>';
+				'</h3>', "\n";
 			echo _("New Pass Phrases specified don't match or were blank.");
 		} else {
 			$score = checkpw($_SESSION['_config']['user']['pword1'], $_SESSION['profile']['email'], $_SESSION['profile']['fname'],
@@ -1309,20 +1309,20 @@
 
 			if(strlen($_SESSION['_config']['user']['pword1']) < 6) {
 				echo '<h3 style="color:red">',
-					_("Failure: Password not Changed"), '</h3>';
+					_("Failure: Password not Changed"), '</h3>', "\n";
 				echo _("The Pass Phrase you submitted was too short.");
 			} else if($score < 3) {
 				echo '<h3 style="color:red">',
-					_("Failure: Password not Changed"), '</h3>';
+					_("Failure: Password not Changed"), '</h3>', "\n";
 				printf(_("The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored %s points out of 6."), $score);
 			} else if($rc <= 0) {
 				echo '<h3 style="color:red">',
-					_("Failure: Password not Changed"), '</h3>';
+					_("Failure: Password not Changed"), '</h3>', "\n";
 				echo _("You failed to correctly enter your current Pass Phrase.");
 			} else {
 				mysql_query("update `users` set `password`=sha1('".$_SESSION['_config']['user']['pword1']."')
 						where `id`='".$_SESSION['profile']['id']."'");
-				echo '<h3>', _("Password Changed Successfully"), '</h3>';
+				echo '<h3>', _("Password Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
 				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
 				$body .= _("You are receiving this email because you or someone else")."\n";
