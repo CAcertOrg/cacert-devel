@@ -626,10 +626,6 @@ div.sponsorinfo_top {
         font-size: small;
         color: #000000;
         padding: 10px 10px 10px 10px;
-        position: absolute;
-        top: 35px;
-        right: 0px;
-        z-index: 10;
         vertical-align: middle;
 }
 
