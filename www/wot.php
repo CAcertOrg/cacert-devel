@@ -206,9 +206,13 @@
 	if($oldid == 6)
 	{
 		$max =  maxpoints();
-		$awarded = $newpoints = intval($_POST['points']);
-		if($newpoints > $max)
-			$newpoints = $max;
+		
+		if (intval($_POST['points']) > $max) {
+			$awarded = $newpoints = $max;
+		} else {
+			$awarded = $newpoints = intval($_POST['points']);
+		}
+		
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
