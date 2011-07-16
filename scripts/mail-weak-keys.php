@@ -137,7 +137,7 @@ CAcert Suport Team
   $num_client = 0;
   $num_orgdomain = 0;
   $num_orgclient = 0;
-	$action_date = '2011-04-??';
+	$action_date = '2011-07-15';
 	$in = fopen("php://stdin", "r");
 	while($in_string = rtrim(fgets($in, 255))) {
 		list($cert_type, $cert_email, $owner_name, $cert_expire, $cert_CN, $reason, $cert_serial) = explode("\t", $in_string);
