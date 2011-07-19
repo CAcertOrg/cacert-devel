@@ -540,7 +540,7 @@ sub OpenPGPextractExpiryDate ($)
     print OUT $_;
     unless ($r) 
     {
-      if ( /^\s*version \d+, created (\d+), md5len 0, sigclass \d+\s*$/ ) 
+      if ( /^\s*version \d+, created (\d+), md5len 0, sigclass (?:0x[0-9a-fA-F]+|\d+)\s*$/ )
       {
         SysLog "Detected CTS: $1\n";
         $cts = int($1);
