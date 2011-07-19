@@ -209,6 +209,8 @@
 		
 		if (intval($_POST['points']) > $max) {
 			$awarded = $newpoints = $max;
+		} elseif (intval($_POST['points']) < 0) {
+			$awarded = $newpoints = 0;
 		} else {
 			$awarded = $newpoints = intval($_POST['points']);
 		}
