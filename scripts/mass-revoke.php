@@ -36,7 +36,7 @@ $in = fopen("php://stdin", "r");
 # The restriction on revoked timestamp os only "to be sure" for non-Org certs,
 # but Org certs (email and serer) may be included multiple times in the output
 # of DumpWeakCerts.pl (once for each OrgAdmin).
-while($in_string = rtrim(fgets($in, 255))) {
+while($in_string = rtrim(fgets($in))) {
 	list($cert_type, $cert_email, $owner_name, $cert_expire, $cert_CN, $reason,
 		$cert_serial, $cert_recid) = explode("\t", $in_string);
 	
