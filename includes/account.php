@@ -299,6 +299,15 @@
 				$_SESSION['_config']['rootcert'] = 1;
 
 			$emails .= "SPKAC = $spkac";
+			if (($weakKey = checkWeakKeySPKAC($emails)) !== "")
+			{
+				$id = 4;
+				showheader(_("My CAcert.org Account!"));
+				echo $weakKey;
+				showfooter();
+				exit;
+			}
+			
 			$query = "insert into emailcerts set
 						`CN`='$defaultemail', 
 						`keytype`='NS',
@@ -330,6 +339,16 @@
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype'] == "VI") {
 			if($csr == "")
 				$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."\n-----END CERTIFICATE REQUEST-----\n";
+			
+			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
+			{
+				$id = 4;
+				showheader(_("My CAcert.org Account!"));
+				echo $weakKey;
+				showfooter();
+				exit;
+			}
+			
 			$tmpfname = tempnam("/tmp", "id4CSR");
 			$fp = fopen($tmpfname, "w");
 			fputs($fp, $csr);
@@ -613,17 +632,23 @@
 	if($process != "" && $oldid == 10)
 	{
 		$CSR = clean_csr($_REQUEST['CSR']);
-		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
-		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		if(strpos($CSR,"---BEGIN")===FALSE)
 		{
 		  // In case the CSR is missing the ---BEGIN lines, add them automatically:
-		  fputs($fp,"-----BEGIN CERTIFICATE REQUEST-----\n".$CSR."\n-----END CERTIFICATE REQUEST-----\n");
+		  $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n".$CSR."\n-----END CERTIFICATE REQUEST-----\n";
 		}
-   		else
+		
+		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
-		  fputs($fp, $CSR);
+			showheader(_("My CAcert.org Account!"));
+			echo $weakKey;
+			showfooter();
+			exit;
 		}
+		
+		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
+		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
+		fputs($fp, $CSR);
 		fclose($fp);
 		$CSR = $_SESSION['_config']['tmpfname'];
 		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep "Subject:"`);
@@ -658,6 +683,23 @@
 
 	if($process != "" && $oldid == 11)
 	{
+		if(!file_exists($_SESSION['_config']['tmpfname']))
+		{
+			showheader(_("My CAcert.org Account!"));
+			printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
+			showfooter();
+			exit;
+		}
+		
+		if (($weakKey = checkWeakKeyCSR(file_get_contents(
+				$_SESSION['_config']['tmpfname']))) !== "")
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo $weakKey;
+			showfooter();
+			exit;
+		}
+		
 		$id = 11;
 		if($_SESSION['_config']['0.CN'] == "" && $_SESSION['_config']['0.subjectAltName'] == "")
 		{
@@ -731,13 +773,6 @@
 			mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 
 		$CSRname=generatecertpath("csr","server",$CSRid);
-		if(!file_exists($_SESSION['_config']['tmpfname']))
-		{
-			showheader(_("My CAcert.org Account!"));
-			printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
-			showfooter();
-			exit;
-		}
 		rename($_SESSION['_config']['tmpfname'], $CSRname);
 		chmod($CSRname,0644);
 		mysql_query("update `domaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
@@ -780,8 +815,17 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br/>\n", $id);
 					continue;
 				}
-				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
+				
 				$row = mysql_fetch_assoc($res);
+				
+				if (($weakKey = checkWeakKeyX509(file_get_contents(
+						$row['crt_name']))) !== "")
+				{
+					echo $weakKey, "<br/>\n";
+					continue;
+				}
+				
+				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into `domaincerts` set 
 						`domid`='".$row['domid']."', 
 						`CN`='".mysql_real_escape_string($row['CN'])."',
@@ -946,8 +990,17 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
+				
 				$row = mysql_fetch_assoc($res);
+				
+				if (($weakKey = checkWeakKeyX509(file_get_contents(
+						$row['crt_name']))) !== "")
+				{
+					echo $weakKey, "<br/>\n";
+					continue;
+				}
+				
+				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into emailcerts set 
 						`memid`='".$row['memid']."', 
 						`CN`='".mysql_real_escape_string($row['CN'])."',
@@ -1378,6 +1431,15 @@
 				$_SESSION['_config']['rootcert'] = 1;
 
 			$emails .= "SPKAC = $spkac";
+			if (($weakKey = checkWeakKeySPKAC($emails)) !== "")
+			{
+				$id = 17;
+				showheader(_("My CAcert.org Account!"));
+				echo $weakKey;
+				showfooter();
+				exit;
+			}
+			
 			$query = "insert into `orgemailcerts` set 
 						`CN`='$defaultemail', 
 						`keytype`='NS',
@@ -1408,6 +1470,16 @@
 			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype']=="VI") {
 			$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."-----END CERTIFICATE REQUEST-----\n";
+			
+			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
+			{
+				$id = 17;
+				showheader(_("My CAcert.org Account!"));
+				echo $weakKey;
+				showfooter();
+				exit;
+			}
+			
 			$tmpfname = tempnam("/tmp", "id17CSR");
 			$fp = fopen($tmpfname, "w");
 			fputs($fp, $csr);
@@ -1514,8 +1586,17 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				mysql_query("update `orgemailcerts` set `renewed`='1' where `id`='$id'");
+				
 				$row = mysql_fetch_assoc($res);
+				
+				if (($weakKey = checkWeakKeyX509(file_get_contents(
+						$row['crt_name']))) !== "")
+				{
+					echo $weakKey, "<br/>\n";
+					continue;
+				}
+				
+				mysql_query("update `orgemailcerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
@@ -1625,6 +1706,16 @@
 	if($process != "" && $oldid == 20)
 	{
 		$CSR = clean_csr($_REQUEST['CSR']);
+		
+		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
+		{
+			$id = 20;
+			showheader(_("My CAcert.org Account!"));
+			echo $weakKey;
+			showfooter();
+			exit;
+		}
+		
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -1674,6 +1765,23 @@
 	if($process != "" && $oldid == 21)
 	{
 		$id = 21;
+		
+		if(!file_exists($_SESSION['_config']['tmpfname']))
+		{
+			showheader(_("My CAcert.org Account!"));
+			printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
+			showfooter();
+			exit;
+		}
+		
+		if (($weakKey = checkWeakKeyCSR(file_get_contents(
+				$_SESSION['_config']['tmpfname']))) !== "")
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo $weakKey;
+			showfooter();
+			exit;
+		}
 
 		if($_SESSION['_config']['0.CN'] == "" && $_SESSION['_config']['0.subjectAltName'] == "")
 		{
@@ -1799,8 +1907,17 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				mysql_query("update `orgdomaincerts` set `renewed`='1' where `id`='$id'");
+				
 				$row = mysql_fetch_assoc($res);
+				
+				if (($weakKey = checkWeakKeyX509(file_get_contents(
+						$row['crt_name']))) !== "")
+				{
+					echo $weakKey, "<br/>\n";
+					continue;
+				}
+				
+				mysql_query("update `orgdomaincerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
@@ -2494,6 +2611,14 @@
 		{
 			showheader(_("My CAcert.org Account!"));
 			echo _("CommonName field was blank. This is usually caused by entering your own name when openssl prompt's you for 'YOUR NAME', or if you try to issue certificates for domains you haven't already verified, as such this process can't continue.");
+			showfooter();
+			exit;
+		}
+		
+		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo $weakKey;
 			showfooter();
 			exit;
 		}

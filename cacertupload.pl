@@ -20,6 +20,12 @@ use LWP::UserAgent;
 $ua = LWP::UserAgent->new(agent => 'Translingo Client 1.0');
 use HTTP::Request::Common qw(POST);
 
+my $translingo_password;
+my $translingo_account;
+
+# Read Account&Password from file
+eval `cat password.dat`;
+
 $ua->cookie_jar({});
 $ua->timeout(10000);
 
@@ -33,8 +39,8 @@ $req->referer('http://translingo.cacert.org/');
 # 1.Test - Umgebung
 my $req = POST 'http://translingo.cacert.org/login.php',
 [
- username => 'support@cacert.org',
- password => 'ilccSSAMNIemU',
+ username => $translingo_account,
+ password => $translingo_password,
  submit => 'Login',
 ];
 # ggf. Referer faken
