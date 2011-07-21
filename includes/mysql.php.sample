@@ -55,11 +55,11 @@
 		$InputBuffer = fgets($smtp, 1024);
 		fputs($smtp, "HELO www.cacert.org\r\n");
 		$InputBuffer = fgets($smtp, 1024);
-		fputs($smtp, "MAIL FROM: <returns@cacert.org>\r\n");
+		fputs($smtp, "MAIL FROM:<returns@cacert.org>\r\n");
 		$InputBuffer = fgets($smtp, 1024);
 		$bits = explode(",", $to);
 		foreach($bits as $user)
-			fputs($smtp, "RCPT TO: <".trim($user).">\r\n");
+			fputs($smtp, "RCPT TO:<".trim($user).">\r\n");
 		$InputBuffer = fgets($smtp, 1024);
 		fputs($smtp, "DATA\r\n");
 		$InputBuffer = fgets($smtp, 1024);

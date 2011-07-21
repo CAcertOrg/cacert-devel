@@ -670,13 +670,13 @@ sub sendmail($$$$$$$)
   SysLog "SMTP: ".<$smtp>;
   print $smtp "HELO hlin.cacert.org\r\n";
   SysLog "SMTP: ".<$smtp>;
-  print $smtp "MAIL FROM: <returns\@cacert.org>\r\n";
+  print $smtp "MAIL FROM:<returns\@cacert.org>\r\n";
   SysLog "MAIL FROM: ".<$smtp>;
  
   @bits = split(",", $to);
   foreach my $user (@bits)
   {
-    print $smtp "RCPT TO: <".trim($user).">\r\n";
+    print $smtp "RCPT TO:<".trim($user).">\r\n";
     SysLog "RCPT TO: ".<$smtp>;
   }
   print $smtp "DATA\r\n";

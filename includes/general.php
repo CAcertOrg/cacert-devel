@@ -673,12 +673,12 @@
 						$line = fgets($fp, 4096);
 					if(substr($line, 0, 3) != "250")
 						continue;
-					fputs($fp, "MAIL FROM: <returns@cacert.org>\r\n");
+					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
 					$line = fgets($fp, 4096);
 
 					if(substr($line, 0, 3) != "250")
 						continue;
-					fputs($fp, "RCPT TO: <$email>\r\n");
+					fputs($fp, "RCPT TO:<$email>\r\n");
 					$line = trim(fgets($fp, 4096));
 					fputs($fp, "QUIT\r\n");
 					fclose($fp);
