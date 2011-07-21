@@ -17,8 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//   $Id: coapnew.php,v 1.2 2009-03-02 23:09:05 root Exp $
-define('REV', '$Revision: 1.2 $');
+//   $Id: coapnew.php,v 1.3 2011-06-10 18:30:42 wytze Exp $
+define('REV', '$Revision: 1.3 $');
 
 /*
 **  Created from old cap.php 2003, which used the now obsoleted ftpdf package
@@ -347,11 +347,11 @@ define('CCA', "CAcertCommunityAgreement"); // default policy to print
 define('POLICY','policy/'); // default polciy doc directory
 define('EXT','.php'); // default polciy doc extention, should be html
 /* finger print CAcert Root Key */ // should obtain this automatically
-define("CLASS1_SHA1","135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33");
-define("CLASS3_SHA1","DB4C 4269 073F E9C2 A37D 890A 5C1B 18C4 184E 2A2D");
+define('CLASS1_SHA1','135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33');
+define('CLASS3_SHA1','AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE');
 // next two are not used on the form
-define("CLASS1_MD5","A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B");
-define("CLASS3_MD5","73:3F:35:54:1D:44:C9:E9:5A:4A:EF:51:AD:03:06:B6");
+define('CLASS1_MD5','A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B');
+define('CLASS3_MD5','F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42');
 // if on draft provide std message
 define('WATERMARK',"");
 
@@ -422,7 +422,7 @@ function utf8_is_ascii_ctrl($str) {
 // extend TCPF with custom functions
 class COAPPDF extends TCPDF {
 
-    // do cap form version numbering automatically "$Revision: 1.2 $"
+    // do cap form version numbering automatically "$Revision: 1.3 $"
     /*public*/ function Version() {
 	strtok(REV, " ");
         return(strtok(" "));
