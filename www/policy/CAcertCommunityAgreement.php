@@ -279,7 +279,7 @@ the Community.
     work within the spirit of the Principles
     of the Community.
     These are described in
-    <a href="//svn.cacert.org/CAcert/principles.html">Principles of the Community</a>.
+    <a href="http://svn.cacert.org/CAcert/principles.html">Principles of the Community</a>.
 </p>
 
 <h4> <a name="2.5"> 2.5 </a>  Security </h4>
@@ -451,16 +451,16 @@ You are also bound by
 </p>
 
 <ol><li>
-    <a href="CertificationPracticeStatement.php">
+    <a href="http://www.cacert.org/policy/CertificationPracticeStatement.php">
     Certification Practice Statement</a> (CPS => COD6).
   </li><li>
-    <a href="DisputeResolutionPolicy.php">
+    <a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">
     Dispute Resolution Policy</a> (DRP => COD7).
   </li><li>
     <a href="PrivacyPolicy.html">
     Privacy Policy</a> (PP => COD5).
   </li><li>
-    <a href="//svn.cacert.org/CAcert/principles.html">
+    <a href="http://svn.cacert.org/CAcert/principles.html">
     Principles of the Community</a>.
 </li></ol>
 
