@@ -3999,7 +3999,7 @@ obligations, risks and liabilities on the parties.
 
 <p>
 See the Privacy Policy
-(<a href="http://www.cacert.org/index.php?id=10">COD5</a>).
+(<a href="PrivacyPolicy.html">COD5</a>).
 </p>
 
 <h3><a name="p9.15.3" id="p9.15.3">9.15.3 Legal Process from External Forums</a></h3>
