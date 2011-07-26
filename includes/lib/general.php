@@ -16,15 +16,32 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function rootcertid($CertIssuerCN)
+/**
+ * Checks if the user may log in and retrieve the user id
+ * 
+ * Usually called with $_SERVER['SSL_CLIENT_M_SERIAL'] and
+ * 	$_SERVER['SSL_CLIENT_I_DN_CN']
+ * 
+ * @param $serial string
+ * 	usually $_SERVER['SSL_CLIENT_M_SERIAL']
+ * @param $issuer_cn string
+ * 	usually $_SERVER['SSL_CLIENT_I_DN_CN']
+ * @return int
+ * 	the user id, -1 in case of error
+ */
+function get_user_id_from_cert($serial, $issuer_cn)
 {
-	$query = "select * from `root_certs` where `Cert_Text`='".$CertIssuerCN."'";
+	$query = "select `id` from `emailcerts` where
+			`serial`='".mysql_escape_string($serial)."' and
+			`rootcert`= (select `id` from `root_certs` where
+				`Cert_Text`='".mysql_escape_string($issuer_cn)."') and
+			`revoked`=0 and disablelogin=0 and
+			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) > 0)
 	{
 		$row = mysql_fetch_assoc($res);
-		$rootcertid = intval($row['id']);
-		return $rootcertid;
+		return intval($row['id']);
 	}
 	
 	return -1;

@@ -49,11 +49,12 @@
 				`revoked`=0 and disablelogin=0 and
 				UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
 		$res = mysql_query($query);
+		
+		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
+				$_SERVER['SSL_CLIENT_I_DN_CN']);
 
-		if(mysql_num_rows($res) > 0)
+		if($user_id >= 0)
 		{
-			$row = mysql_fetch_assoc($res);
-
 			$_SESSION['profile']['loggedin'] = 0;
 			$_SESSION['profile'] = "";
 			foreach($_SESSION as $key)
@@ -66,7 +67,8 @@
        			        session_unregister($key);
 			}
 
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".$row['memid']."'"));
+			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
+					"select * from `users` where `id`='".$user_id."'"));
 			if($_SESSION['profile']['locked'] == 0)
 				$_SESSION['profile']['loggedin'] = 1;
 			else
