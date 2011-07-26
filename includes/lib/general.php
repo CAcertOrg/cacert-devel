@@ -31,7 +31,7 @@
  */
 function get_user_id_from_cert($serial, $issuer_cn)
 {
-	$query = "select `id` from `emailcerts` where
+	$query = "select `memid` from `emailcerts` where
 			`serial`='".mysql_escape_string($serial)."' and
 			`rootcert`= (select `id` from `root_certs` where
 				`Cert_Text`='".mysql_escape_string($issuer_cn)."') and
@@ -41,7 +41,7 @@ function get_user_id_from_cert($serial, $issuer_cn)
 	if(mysql_num_rows($res) > 0)
 	{
 		$row = mysql_fetch_assoc($res);
-		return intval($row['id']);
+		return intval($row['memid']);
 	}
 	
 	return -1;
