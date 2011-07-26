@@ -42,14 +42,6 @@
   
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && ($_SESSION['profile']['id'] == 0 || $_SESSION['profile']['loggedin'] == 0))
 	{
-		/* identify unique certs serial number related to root or subroot */
-		$query = "select * from `emailcerts` where
-				`serial`='${_SERVER['SSL_CLIENT_M_SERIAL']}' and
-				`rootcert`='".rootcertid($_SERVER['SSL_CLIENT_I_DN_CN'])."' and
-				`revoked`=0 and disablelogin=0 and
-				UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
-		$res = mysql_query($query);
-		
 		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
 				$_SERVER['SSL_CLIENT_I_DN_CN']);
 
