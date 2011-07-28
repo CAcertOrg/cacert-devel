@@ -69,7 +69,7 @@ a:hover {
 <a href="PolicyOnPolicy.html"><img src="cacert-draft.png" alt="CAcert Policy Status" height="31" width="88" style="border-style: none;" /></a><br />
 Creation date: 20060726<br />
 Status: DRAFT p20091108<br />
-<!-- $Id: CertificationPracticeStatement.php,v 1.1 2009-11-21 22:34:00 philipp Exp $ -->
+<!-- $Id: CertificationPracticeStatement.php,v 1.2 2011-07-27 10:41:01 wytze Exp $ -->
 
 
 <font size="-1">
@@ -3623,7 +3623,7 @@ or rulings by Arbitrator.
 Privacy is covered by the
 CCA (COD9)
 and the Privacy Policy
-(<a href="http://www.cacert.org/index.php?id=10">COD5</a>).
+(<a href="PrivacyPolicy.html">COD5</a>).
 </p>
 
 <h4><a name="p9.4.1" id="p9.4.1">9.4.1. Privacy plan</a></h4>
@@ -3999,7 +3999,7 @@ obligations, risks and liabilities on the parties.
 
 <p>
 See the Privacy Policy
-(<a href="http://www.cacert.org/index.php?id=10">COD5</a>).
+(<a href="PrivacyPolicy.html">COD5</a>).
 </p>
 
 <h3><a name="p9.15.3" id="p9.15.3">9.15.3 Legal Process from External Forums</a></h3>
