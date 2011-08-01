@@ -19,6 +19,11 @@
   <tr>
     <td colspan="5" class="title"><?=_("Organisations")?></td>
   </tr>
+
+<tr>
+  <td colspan="5" class="title">Order by: <a href="account.php?id=25">Id</a> - <a href="account.php?id=25&amp;ord=1">Country</a> - <a href="account.php?id=25&amp;ord=2">Name</a></td>
+</tr>
+
   <tr>
     <td class="DataTD" width="350"><?=_("Organisation")?></td>
     <td class="DataTD"><?=_("Domains")?></td>
@@ -27,7 +32,28 @@
     <td class="DataTD"><?=_("Delete")?></td>
   </tr>
 <?
-	$query = "select * from `orginfo` ORDER BY `id`";
+        $order = 0;
+        if (array_key_exists('ord',$_REQUEST)) {
+          if ( $_REQUEST['ord'] != '') {
+            $order = intval($_REQUEST['ord']);
+          }
+          if($order>0 && $order<3) {
+            if($order==1) {
+              $query = "select * from `orginfo` ORDER BY `C`,`O`";
+            } else {
+              $query = "select * from `orginfo` ORDER BY `O`";
+            }
+          } else {
+            $order=0;
+            $query = "select * from `orginfo` ORDER BY `id`";
+          }
+        } else {
+          $order=0;
+          $query = "select * from `orginfo` ORDER BY `id`";
+        }
+
+// echo "<tr><td colspan='5'>(".$order.") ".$query."</td></tr>\r\n";
+
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
