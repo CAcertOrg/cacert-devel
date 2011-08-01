@@ -248,8 +248,7 @@
 		}
 	}
 
-	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
-	{
+	function checkpwlight($pwd) {
 		$points = 0;
 
 		if(strlen($pwd) > 15)
@@ -279,7 +278,19 @@
 			$points++;
 
 		//echo "Points due to length and charset: $points<br/>";
+		
+		// check for historical password proposal
+		if ($pwd === "Fr3d Sm|7h") {
+			return 0;
+		}
+		
+		return $points;
+	}
 
+	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
+	{
+		$points = checkpwlight($pwd);
+		
 		if(@strstr(strtolower($pwd), strtolower($email)))
 			$points--;
 
