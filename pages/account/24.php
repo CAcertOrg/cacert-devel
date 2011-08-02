@@ -22,19 +22,19 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Organisation Name")?>:</td>
-    <td class="DataTD"><input type="text" name="O" value="<?=array_key_exists('O',$_SESSION['_config'])?$_SESSION['_config']['O']:""?>" maxlength="50"></td>
+    <td class="DataTD"><input type="text" name="O" value="<?=array_key_exists('O',$_SESSION['_config'])?$_SESSION['_config']['O']:""?>" maxlength="50" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Contact Email")?>:</td>
-    <td class="DataTD"><input type="text" name="contact" value="<?=array_key_exists('contact',$_SESSION['_config'])?$_SESSION['_config']['contact']:""?>"></td>
+    <td class="DataTD"><input type="text" name="contact" value="<?=array_key_exists('contact',$_SESSION['_config'])?$_SESSION['_config']['contact']:""?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Town/Suburb")?>:</td>
-    <td class="DataTD"><input type="text" name="L" value="<?=array_key_exists('L',$_SESSION['_config'])?$_SESSION['_config']['L']:""?>"></td>
+    <td class="DataTD"><input type="text" name="L" value="<?=array_key_exists('L',$_SESSION['_config'])?$_SESSION['_config']['L']:""?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("State/Province")?>:</td>
-    <td class="DataTD"><input type="text" name="ST" value="<?=array_key_exists('ST',$_SESSION['_config'])?$_SESSION['_config']['ST']:""?>"></td>
+    <td class="DataTD"><input type="text" name="ST" value="<?=array_key_exists('ST',$_SESSION['_config'])?$_SESSION['_config']['ST']:""?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Country")?>:</td>

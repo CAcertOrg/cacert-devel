@@ -25,23 +25,23 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Organisation Name")?>:</td>
-    <td class="DataTD"><input type="text" name="O" value="<?=$row['O']?>"></td>
+    <td class="DataTD"><input type="text" name="O" value="<?=$row['O']?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Contact Email")?>:</td>
-    <td class="DataTD"><input type="text" name="contact" value="<?=($row['contact'])?>"></td>
+    <td class="DataTD"><input type="text" name="contact" value="<?=($row['contact'])?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Town/Suburb")?>:</td>
-    <td class="DataTD"><input type="text" name="L" value="<?=($row['L'])?>"></td>
+    <td class="DataTD"><input type="text" name="L" value="<?=($row['L'])?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("State/Province")?>:</td>
-    <td class="DataTD"><input type="text" name="ST" value="<?=($row['ST'])?>"></td>
+    <td class="DataTD"><input type="text" name="ST" value="<?=($row['ST'])?>" size="79"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Country")?>:</td>
-    <td class="DataTD"><input type="text" name="C" value="<?=($row['C'])?>"></td>
+    <td class="DataTD"><input type="text" name="C" value="<?=($row['C'])?>" size="5"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
