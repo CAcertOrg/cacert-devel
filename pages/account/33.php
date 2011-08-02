@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Department")?>:</td>
-    <td class="DataTD"><input type="text" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?$_SESSION['_config']['OU']:""?>"></td>
+    <td class="DataTD"><input type="text" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['OU']):""?>"></td>
   </tr>
 <? if($_SESSION['profile']['orgadmin'] == 1) { ?>
   <tr>
@@ -44,7 +44,7 @@
 <? } ?>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><input type="text" name="comments" value="<?=array_key_exists('comments',$_SESSION['_config'])?$_SESSION['_config']['comments']:""?>"></td>
+    <td class="DataTD"><input type="text" name="comments" size=27 maxlength=20 value="<?=array_key_exists('comments',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['comments']):""?>"></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>

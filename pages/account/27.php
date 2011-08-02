@@ -45,7 +45,7 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><textarea name="comments" cols=15 rows=5><?=($row['comments'])?></textarea></td>
+    <td class="DataTD"><textarea name="comments" cols=60 rows=10><?=($row['comments'])?></textarea></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>

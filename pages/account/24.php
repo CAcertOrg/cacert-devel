@@ -42,7 +42,7 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><textarea name="comments" cols="35" rows="5"><?=array_key_exists('comments',$_SESSION['_config'])?$_SESSION['_config']['comments']:""?></textarea></td>
+    <td class="DataTD"><textarea name="comments" cols="60" rows="10"><?=array_key_exists('comments',$_SESSION['_config'])?$_SESSION['_config']['comments']:""?></textarea></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
