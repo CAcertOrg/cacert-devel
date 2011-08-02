@@ -2286,7 +2286,7 @@
 			$id = 32;
 	}
 
-	if($oldid == 34 && $process != "")
+	if($oldid == 34 && $process == "Delete")
 	{
 		$orgid = intval($_SESSION['_config']['orgid']);
 		$memid = intval($_REQUEST['memid']);
