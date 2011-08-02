@@ -332,8 +332,6 @@
 				$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>";
 				$_SESSION['_config']['oldlocation'] = "account.php?id=13";
 			}
-			if (checkpwlight($pword) < 3)
-				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
 			if($_SESSION['_config']['oldlocation'] != "")
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
 			else
@@ -629,6 +627,13 @@
 
 	if(!array_key_exists('signup',$_SESSION) || $_SESSION['signup']['year'] < 1900)
 		$_SESSION['signup']['year'] = "19XX";
+
+	if ($id == 12)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
 	
 	if ($id == 19)
 	{
