@@ -34,9 +34,8 @@
 
 	function get_number_of_assurances ($userid)
 	{
-		$res = query_init ("SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
-		     	WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to` AND `from`='".intval($userid)."' 
-			GROUP BY `notary`.`from`");
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
+		     	WHERE `notary`.`from` != `notary`.`to` AND `notary`.`from`='".intval($userid)."'");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -44,9 +43,8 @@
 
 	function get_number_of_assurees ($userid)
 	{
-		$res = query_init ("SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
-			WHERE `users`.`id` = `notary`.`to` AND `notary`.`from` != `notary`.`to` AND `to`='".intval($userid)."'
-			GROUP BY `notary`.`to`");
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
+			WHERE `notary`.`from` != `notary`.`to` AND `notary`.`to`='".intval($userid)."'");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -54,16 +52,14 @@
 
 	function get_top_assurer_position ($no_of_assurances)
 	{
-		$res = query_init ("SELECT count(*) AS `list` FROM `users`
-				    inner join `notary` on `users`.`id` = `notary`.`from`
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
 			GROUP BY `notary`.`from` HAVING count(*) > '".intval($no_of_assurances)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
 	function get_top_assuree_position ($no_of_assurees)
 	{
-		$res = query_init ("SELECT count(*) AS `list` FROM `users`
-				    inner join `notary` on `users`.`id` = `notary`.`to`
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
 			GROUP BY `notary`.`to` HAVING count(*) > '".intval($no_of_assurees)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
