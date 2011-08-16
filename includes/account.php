@@ -35,6 +35,12 @@
 		exit;
 	}
 
+	if ($process == _("Cancel"))
+	{
+		// General reset CANCEL process requests
+		$process = "";
+	}
+
 
 	if($id == 45 || $id == 46 || $oldid == 45 || $oldid == 46)
 	{
@@ -2286,7 +2292,7 @@
 			$id = 32;
 	}
 
-	if($oldid == 34 && $process == "Delete")
+	if($oldid == 34 && $process != "")
 	{
 		$orgid = intval($_SESSION['_config']['orgid']);
 		$memid = intval($_REQUEST['memid']);
