@@ -412,7 +412,7 @@
 		else
 			{
 			$sum_points_countable = $sum_points;
-			$remark_points = "&nbsp";
+			$remark_points = "&nbsp;";
 			}
 		if ($sum_experience > $max_experience)
 			{
@@ -439,7 +439,7 @@
 		if ($sum_points_countable < $max_points)
 			{
 			if ($sum_experience_countable != 0)
-				$remark_experience = $points_on_hold_txt;_("Points on hold due to less assurance points");
+				$remark_experience = _("Points on hold due to less assurance points");
 			$sum_experience_countable = 0;
 			if ($sum_experience_other_countable != 0)
 				$remark_experience_other = _("Points on hold due to less assurance points");
