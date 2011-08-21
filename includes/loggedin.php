@@ -131,13 +131,12 @@
 		$normalhost=$_SESSION['_config']['normalhostname'];
 		$_SESSION['profile']['loggedin'] = 0;
 		$_SESSION['profile'] = "";
-		foreach($_SESSION as $key)
+		foreach($_SESSION as $key => $value)
 		{
 	                unset($_SESSION[$key]);
 	                unset($$key);
         	        session_unregister($key);
 		}
-                unset($_SESSION);
 
 		header("location: https://".$normalhost."/index.php");
 		exit;
