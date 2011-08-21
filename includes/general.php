@@ -38,6 +38,7 @@
 	$_SESSION['_config']['filepath'] = "/www";
 
 	require_once($_SESSION['_config']['filepath']."/includes/mysql.php");
+	require_once($_SESSION['_config']['filepath'].'/includes/lib/account.php');
 
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
@@ -248,8 +249,7 @@
 		}
 	}
 
-	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
-	{
+	function checkpwlight($pwd) {
 		$points = 0;
 
 		if(strlen($pwd) > 15)
@@ -279,7 +279,19 @@
 			$points++;
 
 		//echo "Points due to length and charset: $points<br/>";
+		
+		// check for historical password proposal
+		if ($pwd === "Fr3d Sm|7h") {
+			return 0;
+		}
+		
+		return $points;
+	}
 
+	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
+	{
+		$points = checkpwlight($pwd);
+		
 		if(@strstr(strtolower($pwd), strtolower($email)))
 			$points--;
 
@@ -835,19 +847,6 @@
 	{
 		$text=preg_replace("/[^\w-.@]/","",$text);
 		return($text);
-	}
-
-	function fix_assurer_flag($userID)
-	{
-		// Update Assurer-Flag on users table if 100 points. Should the number of points be SUM(points) or SUM(awarded)?
-		$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 1 WHERE `u`.`id` = \''.(int)intval($userID).
-			 '\' AND EXISTS(SELECT 1 FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = `u`.`id`)'.
-			 ' AND (SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` AND `expire` < now()) >= 100'); // Challenge has been passed and non-expired points >= 100
-	 
-		// Reset flag if requirements are not met
-		$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 0 WHERE `u`.`id` = \''.(int)intval($userID).
-			'\' AND (NOT EXISTS(SELECT 1 FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = `u`.`id`)'.
-			 ' OR (SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` AND `n`.`expire` < now()) < 100)');
 	}
 	
 	// returns 0 if $userID is an Assurer
