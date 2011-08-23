@@ -178,7 +178,7 @@
     <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>"><?=$row['codesign']?></a></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Org Admin")?>:</td>
+    <td class="DataTD"><?=_("Org Assurer")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>"><?=$row['orgadmin']?></a></td>
   </tr>
   <tr>
@@ -318,15 +318,79 @@
 <br>
 <? } ?>
 
+<? //  Begin - Debug infos
+
+ // list total, expired, deleted, latest_expire_date  ?
+
+ $query = "select COUNT(*) as countdomains  from `domains` inner join `domaincerts` on `domaincerts`.`domid` = `domains`.`id` where `memid`='".intval($row['id'])."' ";
+  $dres = mysql_query($query);
+  $drow = mysql_fetch_assoc($dres);
+  $rc = $drow['countdomains'];  
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td colspan="2" class="title"><?=_("Total Certificates State")?></td>
+  </tr>
+
+  <tr>
+    <td class="DataTD"><?=_("Total domain-certificates")?>:</td>
+<?
+  if($rc > 0) {
+?>
+    <td class="DataTD"><?=_("Yes")?></td>
+  </tr>
+<? } else { ?>
+    <td class="DataTD"><?=_("None")?></td>
+  </tr>
+<? }
+
+  $query = "select COUNT(*) as countemailcerts from `emailcerts` where `memid`='".intval($row['id'])."' ";
+  $dres = mysql_query($query);
+  $drow = mysql_fetch_assoc($dres);  
+  if($drow['countemailcerts'] > 0) {
+?>
+  <tr>
+    <td class="DataTD"><?=_("Total email-certificates")?>:</td>
+    <td class="DataTD"><?=_("Yes")?></td>
+  </tr>
+<? } else { ?>
+  <tr>
+    <td class="DataTD"><?=_("Total email-certificates")?>:</td>
+    <td class="DataTD"><?=_("None")?></td>
+  </tr>
+<? }
+  $query = "select COUNT(*) as countgpgcerts from `gpg` where `memid`='".intval($row['id'])."' ";
+  $dres = mysql_query($query);
+  $drow = mysql_fetch_assoc($dres);  
+  if($drow['countgpgcerts'] > 0) {
+?>    
+ <tr>
+    <td class="DataTD"><?=_("Total GPG keys")?>:</td>
+    <td class="DataTD"><?=_("Yes")?></td>
+  </tr>
+<? } else { ?> 
+ <tr>
+    <td class="DataTD"><?=_("Total GPG keys")?>:</td>
+    <td class="DataTD"><?=_("None")?></td>
+  </tr>
+<? } ?>
+</table>
+<br>
+<?
+   //  End - Debug infos
+?>
+
+
 <?
   if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
 ?>
 
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="7" class="title"><?=_("Assurance Points")?></td>
+    <td colspan="8" class="title"><?=_("Assurance Points")?></td>
   </tr>
   <tr>
+    <td class="DataTD"><b><?=_("Assurance When")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -345,6 +409,7 @@
     $points += $drow['points'];
 ?>
   <tr>
+    <td class="DataTD"><?=sanitizeHTML($drow['when'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['date'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -355,7 +420,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -371,9 +436,10 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="7" class="title"><?=_("Assurance Points The User Issued")?></td>
+    <td colspan="8" class="title"><?=_("Assurance Points The User Issued")?></td>
   </tr>
   <tr>
+    <td class="DataTD"><b><?=_("When")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -392,6 +458,7 @@
     $points += $drow['points'];
 ?>
   <tr>
+    <td class="DataTD"><?=$drow['when']?></td>
     <td class="DataTD"><?=$drow['date']?></td>
     <td class="DataTD"><a href="wot.php?id=9&userid=<?=$drow['to']?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -402,7 +469,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -414,4 +481,3 @@
 <? } ?>
 <br><br>
 <? } } ?>
-
