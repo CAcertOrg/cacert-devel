@@ -62,7 +62,7 @@
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
 			WHERE `method` = 'Face to Face Meeting'
-			GROUP BY .`to` HAVING count(*) > '".intval($no_of_assurees)."'");
+			GROUP BY `to` HAVING count(*) > '".intval($no_of_assurees)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
