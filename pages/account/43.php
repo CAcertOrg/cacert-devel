@@ -49,7 +49,7 @@
       // $email contains non-digits ==> search for mail addresses
       // Be defensive here (outer join) if primary mail is not listed in email table
       $query = "select `users`.`id` as `id`, `email`.`email` as `email` 
-          from `users` left oter join `email` on (`users`.`id`=`email`.`memid`)
+          from `users` left outer join `email` on (`users`.`id`=`email`.`memid`)
           where ((`email`.`email` like '$emailsearch' 
                    and `email`.`hash`='' and `email`.`deleted`=0)
                  or `users`.`email` like '$emailsearch')
