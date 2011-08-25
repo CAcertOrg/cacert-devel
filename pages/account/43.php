@@ -38,14 +38,24 @@
     //if(!strstr($email, "%"))
     //  $emailsearch = "%$email%";
 
-    if(intval($email) > 0)
-      $emailsearch = "";
-
-    $query = "select `users`.`id` as `id`, `email`.`email` as `email` from `users`,`email`
-        where `users`.`id`=`email`.`memid` and
-        (`email`.`email` like '$emailsearch' or `email`.`id`='$email' or `users`.`id`='$email') and
-        `email`.`hash`='' and `email`.`deleted`=0 and `users`.`deleted`=0
-        group by `users`.`id` limit 100";
+    if(preg_match("/^[0-9]+$/", $email)) {
+      // $email consists of digits only ==> search for IDs
+      $query = "select `users`.`id` as `id`, `email`.`email` as `email` from `users`,`email`
+          where `users`.`id`=`email`.`memid` 
+            and (`email`.`id`='$email' or `users`.`id`='$email')
+            and `email`.`hash`='' and `email`.`deleted`=0 and `users`.`deleted`=0
+          group by `users`.`id` limit 100";
+    } else {
+      // $email contains non-digits ==> search for mail addresses
+      // Be defensive here (outer join) if primary mail is not listed in email table
+      $query = "select `users`.`id` as `id`, `email`.`email` as `email` 
+          from `users` left oter join `email` on (`users`.`id`=`email`.`memid`)
+          where ((`email`.`email` like '$emailsearch' 
+                   and `email`.`hash`='' and `email`.`deleted`=0)
+                 or `users`.`email` like '$emailsearch')
+            and `users`.`deleted`=0
+          group by `users`.`id` limit 100";
+    }
     $res = mysql_query($query);
     if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -138,7 +148,7 @@
         {
                 echo "<option";
                 if($day == $i)
-			echo " selected='selected'";
+      echo " selected='selected'";
                 echo ">$i</option>";
         }
 ?>
@@ -178,7 +188,7 @@
     <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>"><?=$row['codesign']?></a></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Org Assurer")?>:</td>
+    <td class="DataTD"><?=_("Org Admin")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>"><?=$row['orgadmin']?></a></td>
   </tr>
   <tr>
@@ -318,354 +328,15 @@
 <br>
 <? } ?>
 
-<? //  Begin - Debug infos
-
-  // ---  bug-794 begin ---
-
-  // list total, expired, deleted, latest_expire_date  ?
-
- $query = "select COUNT(domaincerts.id) as countdomaincerts  from `domains` inner join `domaincerts` on `domaincerts`.`domid` = `domains`.`id` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $rctotal = $drow['countdomaincerts'];
-  if($rctotal > 0) {
-    // select domid's
-    $query = "select id as domids from `domains` where `memid`='".intval($row['id'])."' ";
-    $dres = mysql_query($query);
-    $rcexpired = 0;
-    $rcrevoked = 0;
-    $rcexpiremax = "0000-00-00 00:00:00";    
-    while ($drow = mysql_fetch_assoc($dres)) {
-      $ndomid = intval($drow['domids']); 
-
-      $query2 = "select COUNT(id) as dexpired  from `domaincerts` where `domid`='".$ndomid."' and revoked = '0000-00-00 00:00:00' and expire < now() ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcexpired += intval($drow2['dexpired']);
-
-      $query2 = "select COUNT(id) as drevoked  from `domaincerts` where `domid`='".$ndomid."' and revoked != '0000-00-00 00:00:00' ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcrevoked += intval($drow2['drevoked']);
-
-      $query2 = "select expire as mexpire  from `domaincerts` where `domid`='".$ndomid."' and revoked = '0000-00-00 00:00:00' order by expire desc ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcexpiremax = max($rcexpiremax,$drow2['mexpire']);      
-
-      $rcactive = intval($rctotal)-intval($rcexpired)-intval($rcrevoked);
-    }
-  }    
-?>
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="6" class="title"><?=_("Total Certificates State")?></td>
-  </tr>
-
-  <tr>
-    <td class="DataTD"><?=_("Certificates")?>:</td>
-    <td class="DataTD"><?=_("Total")?></td>
-    <td class="DataTD"><?=_("Active")?></td>
-    <td class="DataTD"><?=_("Expired")?></td>
-    <td class="DataTD"><?=_("Revoked")?></td>
-    <td class="DataTD"><?=_("Latest Expire")?></td>
-  </tr>
-
-  <tr>
-    <td class="DataTD"><?=_("Total domain-certificates")?>:</td>
-<?
-  if($rctotal > 0) {
-?>
-    <td class="DataTD"><?=intval($rctotal)?></td>
-    <td class="DataTD"><?=intval($rcactive)?></td>
-    <td class="DataTD"><?=intval($rcexpired)?></td>
-    <td class="DataTD"><?=intval($rcrevoked)?></td>
-    <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>            
-  </tr>
-<? } else { ?>
-    <td colspan="5" class="DataTD"><?=_("None")?></td>
-  </tr>
-<? }
-
-  $query = "select COUNT(id) as countemailcerts from `emailcerts` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $rctotal = $drow['countemailcerts'];
-  if($rctotal > 0) {
-    $rcexpired = 0;
-    $rcrevoked = 0;
-    $rcexpiremax = "0000-00-00 00:00:00";    
-
-    $query2 = "select COUNT(id) as eexpired  from `emailcerts` where `memid`='".intval($row['id'])."' and revoked = '0000-00-00 00:00:00' and expire < now() ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpired = intval($drow2['dexpired']);
-
-    $query2 = "select COUNT(id) as erevoked  from `emailcerts` where `memid`='".intval($row['id'])."' and revoked != '0000-00-00 00:00:00' ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcrevoked = intval($drow2['erevoked']);
-
-    $query2 = "select expire as eexpire  from `emailcerts` where `memid`='".intval($row['id'])."' and revoked = '0000-00-00 00:00:00' order by expire desc ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpiremax = $drow2['eexpire'];
-    
-    $rcactive = intval($rctotal)-intval($rcexpired)-intval($rcrevoked);      
-
-?>
-  <tr>
-    <td class="DataTD"><?=_("Total email-certificates")?>:</td>
-    <td class="DataTD"><?=intval($rctotal)?></td>
-    <td class="DataTD"><?=intval($rcactive)?></td>
-    <td class="DataTD"><?=intval($rcexpired)?></td>
-    <td class="DataTD"><?=intval($rcrevoked)?></td>
-    <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-  </tr>
-<? } else { ?>
-  <tr>
-    <td class="DataTD"><?=_("Total email-certificates")?>:</td>
-    <td colspan="5" class="DataTD"><?=_("None")?></td>
-  </tr>
-<? }
-  $query = "select COUNT(id) as countgpgcerts from `gpg` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);  
-  $rctotal = $drow['countgpgcerts'];
-  if($rctotal > 0) {
-    $rcexpired = 0;
-    $rcexpiremax = "0000-00-00 00:00:00";    
-
-    $query2 = "select COUNT(id) as gexpired  from `gpg` where `memid`='".intval($row['id'])."' and expire < now() ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpired = intval($drow2['gexpired']);
-
-/*
-    $query2 = "select COUNT(id) as erevoked  from `gpg` where `memid`='".intval($row['id'])."' and revoked != '0000-00-00 00:00:00' ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcrevoked = intval($drow2['erevoked']);
- */
- 
-    $query2 = "select expire as gexpire  from `gpg` where `memid`='".intval($row['id'])."' order by expire desc ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpiremax = $drow2['gexpire'];
-    
-    $rcactive = intval($rctotal)-intval($rcexpired);      
-?>    
- <tr>
-    <td class="DataTD"><?=_("Total GPG keys")?>:</td>
-    <td class="DataTD"><?=intval($rctotal)?></td>
-    <td class="DataTD"><?=intval($rcactive)?></td>
-    <td class="DataTD"><?=intval($rcexpired)?></td>
-    <td class="DataTD">&nbsp;</td>
-    <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-  </tr>
-<? } else { ?> 
- <tr>
-    <td class="DataTD"><?=_("Total GPG keys")?>:</td>
-    <td colspan="5" class="DataTD"><?=_("None")?></td>
-  </tr>
-<? } ?>
-</table>
-<br>
-<?
-  // ---  bug-794 end ---
-
-  // ---  bug-859 begin ---
-  // ---  display account creation information
-
-  $query = "select users.created as created, users.modified as lastact from `users` where `id`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $ucreated  = $drow['created'];
-  $umodified = $drow['lastact'];
-  $now = date("Y-m-d H:i:s");  
-  $ucrtdisp = "";
-  $umoddisp = "";
-  if (substr($ucreated,0,7)==substr($now,0,7)) {
-     $ucrtdisp = _("this month");
-  } elseif (substr($ucreated,0,4)==substr($now,0,4)) {
-     $ucrtdisp = _("this year");  
-  } elseif (substr($ucreated,0,7)>"2009-06") {
-     $ucrtdisp = _("between June 2009 and this year");  
-  } elseif (substr($ucreated,0,7)>="2009-01") {
-     $ucrtdisp = _("between January and June 2009");
-  } else {  
-     $ucrtdisp = _("before January 2009");
-  }
-
-  if (substr($umodified,0,7)==substr($now,0,7)) {
-     $umoddisp = _("this month");
-  } elseif (substr($umodified,0,4)==substr($now,0,4)) {
-     $umoddisp = _("this year");  
-  } elseif (substr($umodified,0,7)< (intval(substr($now,0,4))-2)."-".substr($now,5,2) ) {
-     $umoddisp = _("before 2 years");  
-  } elseif (substr($umodified,0,7)< (intval(substr($now,0,4))-1)."-".substr($now,5,2)) {
-     $umoddisp = _("before 1 year");
-  } else {  
-     $umoddisp = _("within last 12 months");
-  }
-
-  
-?>
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="2" class="title"><?=_("Account State")?></td>
-  </tr>
-
-  <tr>
-    <td class="DataTD"><?=_("Account created")?>:</td>
-    <td class="DataTD"><?=$ucrtdisp?></td>
-  </tr>
-
-  <tr>
-    <td class="DataTD"><?=_("Last activity")?>:</td>
-    <td class="DataTD"><?=$umoddisp?></td>
-  </tr>
-<?
-  // ---  bug-859 end ---
-
-  // ---  bug-975 begin ---
-  //  potential db inconsistency like in a20110804.1
-  //    Admin console -> don't list user account
-  //    User login -> impossible
-  //    Assurer, assure someone -> user displayed
-  /*  regular user account search with regular settings
-
-    --- Admin Console find user query
-    $query = "select `users`.`id` as `id`, `email`.`email` as `email` from `users`,`email`
-        where `users`.`id`=`email`.`memid` and
-        (`email`.`email` like '$emailsearch' or `email`.`id`='$email' or `users`.`id`='$email') and
-        `email`.`hash`='' and `email`.`deleted`=0 and `users`.`deleted`=0
-        group by `users`.`id` limit 100";
-     => requirements
-       1.  email.hash = ''
-       2.  email.deleted = 0
-       3.  users.deleted = 0
-       4.  email.email = primary-email       (???) or'd
-      not covered by admin console find user routine, but may block users login
-       5.  users.verified = 0|1
-      further "special settings"   
-       6.  users.locked  (setting displayed in display form)
-       7.  users.assurer_blocked   (setting displayed in display form)
-
-    --- User login user query
-    select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
-						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0
-		=> requirements
-       1. users.verified = 1
-       2. users.deleted = 0
-       3. users.locked = 0
-       4. users.email = primary-email 				
-
-    --- Assurer, assure someone find user query
-    select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."'
-           and `deleted`=0
-		=> requirements
-       1. users.deleted = 0
-       2. users.email = primary-email
-                                     Admin      User        Assurer
-      bit                            Console    Login       assure someone
-
-       1.  email.hash = ''            Yes        No           No
-       2.  email.deleted = 0          Yes        No           No
-       3.  users.deleted = 0          Yes        Yes          Yes
-       4.  users.verified = 1         No         Yes          No       
-       5.  users.locked = 0           No         Yes          No
-       6.  users.email = prim-email   No         Yes          Yes
-       7.  email.email = prim-email   Yes        No           No
-                 
-    full usable account needs all 7 requirements fulfilled
-    so if one setting isn't set/cleared there is an inconsistency either way
-    if eg email.email is not avail, admin console cannot open user info
-    but user can login and assurer can display user info
-    if user verified is not set to 1, admin console displays user record
-    but user cannot login, but assurer can search for the user and the data displays
-
-    consistency check:
-    1. search primary-email in users.email
-    2. search primary-email in email.email
-    3. userid = email.memid
-    4. check settings from table 1. - 5.
-
-   */
-
-  $inconsistency = 0;
-  $inconsistencydisp = "";
-  $inccause = "";
-   // current userid  intval($row['id'])
-  $query = "select email as uemail, deleted as udeleted, verified, locked from `users` where `id`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $uemail    = $drow['uemail'];
-  $udeleted  = $drow['udeleted'];
-  $uverified = $drow['verified'];
-  $ulocked   = $drow['locked'];
-
-  $query = "select hash, deleted as edeleted, email as eemail from `email` where `memid`='".intval($row['id'])."' and email='".$uemail."' ";
-  $dres = mysql_query($query);
-  if ($drow = mysql_fetch_assoc($dres)) {
-    $eemail    = $drow['eemail'];
-    $edeleted  = $drow['edeleted'];
-    $ehash     = $drow['hash'];
-    if ($udeleted!=0) {
-      $inconsistency += 1;
-      $inccause .= (empty($inccause)?"":"<br>")._("Users record set to deleted");
-    }
-    if ($uverified!=1) {
-      $inconsistency += 2;
-      $inccause .= (empty($inccause)?"":"<br>")._("Users record verified not set");
-    }
-    if ($ulocked!=0) {
-      $inconsistency += 4;
-      $inccause .= (empty($inccause)?"":"<br>")._("Users record locked set");
-    }
-    if ($edeleted!=0) {
-      $inconsistency += 8;
-      $inccause .= (empty($inccause)?"":"<br>")._("Email record set deleted");    
-    }
-    if ($ehash!='') {
-      $inconsistency += 16;
-      $inccause .= (empty($inccause)?"":"<br>")._("Email record hash not unset");        
-    }
-  } else {
-    $inconsistency = 32;
-    $inccause = _("Prim. email, Email record doesn't exist");
-  }
-  if ($inconsistency>0) {
-     // $inconsistencydisp = _("Yes");
-?>
-  <tr>
-    <td class="DataTD"><?=_("Account inconsistency")?>:</td>
-    <td class="DataTD"><?=$inccause?><br>code: <?=$inconsistency?></td>
-  </tr>
-  <tr>
-    <td colspan="2" class="DataTD"><?=_("Account inconsistency can cause problems in daily account operations<br>that needs to be fixed manualy thru arbitration/critical team.")?></td>
-  </tr>  
-<? }
-
-  // ---  bug-975 end ---
-?>
-</table>
-<br>
-<?    
- //  End - Debug infos
-?>
-
-
 <?
   if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
 ?>
 
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="8" class="title"><?=_("Assurance Points")?></td>
+    <td colspan="7" class="title"><?=_("Assurance Points")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><b><?=_("Assurance When")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -684,7 +355,6 @@
     $points += $drow['points'];
 ?>
   <tr>
-    <td class="DataTD"><?=sanitizeHTML($drow['when'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['date'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -695,7 +365,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -711,10 +381,9 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="8" class="title"><?=_("Assurance Points The User Issued")?></td>
+    <td colspan="7" class="title"><?=_("Assurance Points The User Issued")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><b><?=_("When")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -733,7 +402,6 @@
     $points += $drow['points'];
 ?>
   <tr>
-    <td class="DataTD"><?=$drow['when']?></td>
     <td class="DataTD"><?=$drow['date']?></td>
     <td class="DataTD"><a href="wot.php?id=9&userid=<?=$drow['to']?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -744,7 +412,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -756,3 +424,4 @@
 <? } ?>
 <br><br>
 <? } } ?>
+
