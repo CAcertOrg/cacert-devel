@@ -84,7 +84,7 @@
 
   <tr>
     <td class="DataTD"><?=_("Email Address")?>: </td>
-    <td class="DataTD"><input type="text" name="email" value="<?=array_key_exists('email',$_REQUEST)?sanitizeHTML($_REQUEST['email']):""?>" autocomplete="off"></td/>
+    <td class="DataTD"><input type="text" name="email" value="<?=array_key_exists('email',$_REQUEST)?sanitizeHTML($_REQUEST['email']):""?>" autocomplete="off"></td>
     <td class="DataTD"><?=_("I own or am authorised to control this email address")?></td>
   </tr>
 
