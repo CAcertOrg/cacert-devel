@@ -2195,7 +2195,7 @@
 		$orgid = 0;
 	}
 
-	if($oldid == 31 && $process != _("Cancel"))
+	if($oldid == 31 && $process != "")
 	{
 		$query = "select * from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'";
 		$dres = mysql_query($query);
