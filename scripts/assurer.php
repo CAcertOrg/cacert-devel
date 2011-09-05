@@ -30,7 +30,7 @@
 	$query = "
 select u.email, fname, lname, sum(n.points) from users u, notary n
  where n.to=u.id
-   and not exists(select 1 from cats_passed cp where cp.user_id=u.id)
+   and not EXISTS(SELECT 1 FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = `u`.`id`)
    and exists(select 1 from notary n2 where n2.from=u.id and year(n2.`when`)>2007)
    and (select count(*) from notary n3 where n3.from=u.id) > 1
  group by email, fname, lname

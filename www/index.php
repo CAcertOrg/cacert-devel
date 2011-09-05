@@ -148,13 +148,16 @@
 
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
-		$query = "select * from `emailcerts` where `serial`='$_SERVER[SSL_CLIENT_M_SERIAL]' and `revoked`=0 and disablelogin=0 and
-				UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		include_once("../includes/lib/general.php");
+		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
+				$_SERVER['SSL_CLIENT_I_DN_CN']);
+		
+		if($user_id >= 0)
 		{
-			$row = mysql_fetch_assoc($res);
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$row[memid]' and `deleted`=0 and `locked`=0"));
+			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
+				"select * from `users` where 
+				`id`='$user_id' and `deleted`=0 and `locked`=0"));
+			
 			if($_SESSION['profile']['id'] != 0)
 			{
 				$_SESSION['profile']['loggedin'] = 1;
