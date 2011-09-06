@@ -109,6 +109,8 @@
    End Sub
 </SCRIPT>
 
+<p><?=_("Your certificate:")?></p>
+<pre><?=$cert?></pre>
 <? 
 		showfooter();
 		exit;

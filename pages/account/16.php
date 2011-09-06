@@ -17,7 +17,9 @@
 */
 	include_once("../includes/shutdown.php");
 ?>
-<form method="post" action="account.php">
+<h3><?=_("New Organisation Client Certificate")?></h3>
+<br>
+<form name="manual" method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="2" class="title"><?=_("New Client Certificate")?></td>
@@ -56,6 +58,21 @@
     <td class="DataTD" colspan="2" align="left"><input type="checkbox" name="codesign" value="1" /><?=_("Code Signing")?></td>
   </tr>
 <? } ?>
+
+  <tr>
+    <td class="DataTD" colspan="2" align="left">
+      <input type="checkbox" name="login" value="1" checked="checked"> <?=_("Enable certificate login with this certificate")?><br>
+      <?=_("By allowing certificate login, this certificate can be used to login into websites with client cert login enabled.")?><br/>
+    </td>
+  </tr>
+
+ <tr>
+    <td class="DataTD" colspan="2"><?=_("Optional Client CSR, no information on the certificate will be used")?></td>
+ </tr>
+ <tr>
+    <td class="DataTD" colspan="2"><textarea name="optionalCSR" cols="80" rows="5"></textarea></td>
+ </tr>
+
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Another Email")?>">
 			<input type="submit" name="process" value="<?=_("Next")?>"></td>

@@ -17,7 +17,7 @@
 */ ?>
 <? if(array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_AGENT'], "MSIE")) { ?>
 <object classid="clsid:127698e4-e730-4e5c-a2b1-21490a70c8a1" codebase="/xenroll.cab#Version=5,131,3659,0" id="cec">
-<?=_("You must enable ActiveX for this to work.")?>
+<?=_("You must enable ActiveX for this to work.  On Vista you have to add this website to the list of trusted sites in the internet-settings.")?><?=_("Go to Extras->Internet Options->Security->Trusted Websites, click on Custom Level, check ActiveX control elements that are not marked as safe initialized on start in scripts")?>
 </object>
 <form method="post" action="account.php" name="CertReqForm"><p>
 <input type="hidden" name="session" value="UsedXenroll">
@@ -40,7 +40,23 @@ Function GetProviderList()
   CspList = ""
   ProviderName = ""
 
-  For ProvType = 0 to 13
+  // Vista:
+  Set csps = CreateObject("X509Enrollment.CCspInformations")
+  If IsObject(csps) Then
+    csps.AddAvailableCsps()
+    Document.CertReqForm.keytype.value="VI"
+    For j = 0 to csps.Count-1
+      Set oOption = document.createElement("OPTION")
+      oOption.text = csps.ItemByIndex(j).Name
+      oOption.value = j
+      Document.CertReqForm.CspProvider.add(oOption)
+    Next
+
+  Else
+
+  // 2000,XP:
+
+   For ProvType = 0 to 13
     cspIndex = 0
     cec.ProviderType = ProvType
     ProviderName = cec.enumProviders(cspIndex,0)
@@ -60,17 +76,55 @@ Function GetProviderList()
      ProviderName = ""
      ProviderName = cec.enumProviders(cspIndex,0)
      count = count + 1
-   wend
-  Next
-  Document.CertReqForm.CspProvider.selectedIndex = base
-  if enhanced then
+    wend
+   Next
+   Document.CertReqForm.CspProvider.selectedIndex = base
+   if enhanced then
     Document.CertReqForm.CspProvider.selectedIndex = enhanced
-  end if
+   end if
+  End If
 End Function
+
 
 Function CSR(keyflags)
   CSR = ""
   szName  = ""
+
+  // Vista
+  if Document.CertReqForm.keytype.value="VI" Then
+
+    Dim g_objClassFactory
+    Dim obj
+    Dim objPrivateKey
+    Dim g_objRequest
+    Dim g_objRequestCMC
+  
+    Set g_objClassFactory=CreateObject("X509Enrollment.CX509EnrollmentWebClassFactory")
+    Set obj=g_objClassFactory.CreateObject("X509Enrollment.CX509Enrollment")
+    Set objPrivateKey=g_objClassFactory.CreateObject("X509Enrollment.CX509PrivateKey")
+    Set objRequest=g_objClassFactory.CreateObject("X509Enrollment.CX509CertificateRequestPkcs10")
+    //Msgbox     exit function
+    objPrivateKey.ProviderName = Document.CertReqForm.CspProvider(Document.CertReqForm.CspProvider.selectedIndex).text
+    // "Microsoft Enhanced RSA and AES Cryptographic Provider"
+    objPrivateKey.ProviderType = "24"
+    objPrivateKey.KeySpec = "1"
+    objPrivateKey.ExportPolicy = 1
+    objRequest.InitializeFromPrivateKey 1, objPrivateKey, ""
+    Set objDN = g_objClassFactory.CreateObject("X509Enrollment.CX500DistinguishedName")
+    objDN.Encode("CN=CAcertRequest")
+    objRequest.Subject = objDN
+
+    //  obj.Initialize(1)
+    obj.InitializeFromRequest(objRequest)
+    obj.CertificateDescription="Description"
+    obj.CertificateFriendlyName="FriendlyName"
+    CSR=obj.CreateRequest(1)
+    If len(CSR)<>0 Then Exit Function
+    Msgbox "<?=_("Error while generating the certificate-request. Please make sure that you have added this website to the list of trusted sites in the Internet-Options menu!")?>"
+
+  else
+  // XP
+  
   cec.HashAlgorithm = "MD5"
   err.clear
   On Error Resume Next
@@ -104,6 +158,7 @@ Function CSR(keyflags)
   if len(CSR)<>0 then Exit Function
   cec.GenKeyFlags = 0
   CSR = cec.createPKCS10(szName, "1.3.6.1.5.5.7.3.2")
+  End if
 End Function
 
 Sub GenReq_OnClick
@@ -128,7 +183,6 @@ GetProviderList()
 <form method="post" action="account.php">
 <input type="hidden" name="keytype" value="NS">
 <?=_("Keysize:")?> <keygen name="SPKAC" challenge="<? $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
-
 
 <input type="submit" name="submit" value="<?=_("Create Certificate Request")?>">
 <input type="hidden" name="oldid" value="<?=$id?>">
