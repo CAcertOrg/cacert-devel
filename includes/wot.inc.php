@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+*/ 
 
 	function query_init ($query)
 	{
@@ -35,7 +35,7 @@
 	function get_number_of_assurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-		     	WHERE `notary`.`from` != `notary`.`to` AND `notary`.`from`='".intval($userid)."'");
+		     	WHERE `method` = 'Face to Face Meeting' AND `from`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -44,7 +44,7 @@
 	function get_number_of_assurees ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE `notary`.`from` != `notary`.`to` AND `notary`.`to`='".intval($userid)."'");
+			WHERE `method` = 'Face to Face Meeting' AND `to`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -52,39 +52,41 @@
 
 	function get_top_assurer_position ($no_of_assurances)
 	{
-		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			GROUP BY `notary`.`from` HAVING count(*) > '".intval($no_of_assurances)."'");
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary` 
+			WHERE `method` = 'Face to Face Meeting' 
+			GROUP BY `from` HAVING count(*) > '".intval($no_of_assurances)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
 	function get_top_assuree_position ($no_of_assurees)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			GROUP BY `notary`.`to` HAVING count(*) > '".intval($no_of_assurees)."'");
+			WHERE `method` = 'Face to Face Meeting'
+			GROUP BY `to` HAVING count(*) > '".intval($no_of_assurees)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
 	function get_given_assurances ($userid)
 	{
-		$res = query_init ("select * from `notary` where `notary`.`from`='".intval($userid)."' and `notary`.`from` != `to` order by `notary`.`id` asc");
+		$res = query_init ("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` order by `id` asc");
 		return $res;
 	}
 
 	function get_received_assurances ($userid)
 	{
-		$res = query_init ("select * from `notary` where `notary`.`to`='".intval($userid)."' and `notary`.`from` != `notary`.`to` order by `notary`.`id` asc ");
+		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` order by `id` asc ");
 		return $res;
 	}
 
 	function get_given_assurances_summary ($userid)
 	{
-		$res = query_init ("select count(*) as number,points,awarded,method from notary where `notary`.`from`='".intval($userid)."' group by points,awarded,method");
+		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' group by points,awarded,method");
 		return $res;
 	}
-
+	
 	function get_received_assurances_summary ($userid)
 	{
-		$res = query_init ("select count(*) as number,points,awarded,method from notary where `notary`.`to`='".intval($userid)."' group by points,awarded,method");
+		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' group by points,awarded,method");
 		return $res;
 	}
 
@@ -124,7 +126,7 @@
 			$awarded = 100;
 		}
 		else
-			$experience = 0;
+			$experience = 0;	
 
 		switch ($row['method'])
 		{
@@ -272,15 +274,6 @@
 <?
 	}
 
-	function output_cats_needed()
-	{
-?>
-    <tr>
-	<td class="DataTD" colspan=4><strong style='color: red'><?=_("You have to pass the CAcert Assurer Challenge (CATS-Test) to be an Assurer")?></strong></td>
-    </tr>
-<?
-	}
-
 
 // ************* output given assurances ******************
 
@@ -291,7 +284,7 @@
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['to']));
+			$fromuser = get_user (intval($row['to'])); 
 			calc_experience ($row,$points,$experience,$sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
 			output_assurances_row (intval($row['id']),$row['date'],$name,intval($row['awarded']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
@@ -309,7 +302,7 @@
 		{
 			$fromuser = get_user (intval($row['from']));
 			calc_assurances ($row,$points,$experience,$sum_experience,$awarded);
-			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
+			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
 			output_assurances_row (intval($row['id']),$row['date'],$name,$awarded,$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
 		}
 	}
@@ -412,7 +405,7 @@
 		else
 			{
 			$sum_points_countable = $sum_points;
-			$remark_points = "&nbsp";
+			$remark_points = "&nbsp;";
 			}
 		if ($sum_experience > $max_experience)
 			{
@@ -439,7 +432,7 @@
 		if ($sum_points_countable < $max_points)
 			{
 			if ($sum_experience_countable != 0)
-				$remark_experience = $points_on_hold_txt;_("Points on hold due to less assurance points");
+				$remark_experience = _("Points on hold due to less assurance points");
 			$sum_experience_countable = 0;
 			if ($sum_experience_other_countable != 0)
 				$remark_experience_other = _("Points on hold due to less assurance points");
@@ -449,7 +442,15 @@
 		$issue_points = 0;
 		$cats_test_passed = get_cats_state ($userid);
 		if ($cats_test_passed == 0)
+		{
 			$issue_points_txt = "<strong style='color: red'>"._("You have to pass the CAcert Assurer Challenge (CATS-Test) to be an Assurer")."</strong>";
+			if ($sum_points_countable < $max_points)
+			{
+				$issue_points_txt = "<strong style='color: red'>";
+				$issue_points_txt .= sprintf(_("You need %s assurance points and the passed CATS-Test to be an Assurer"), intval($max_points));
+				$issue_points_txt .= "</strong>";
+			}
+		}
 		else
 		{
 			$experience_total = $sum_experience_countable+$sum_experience_other_countable;
