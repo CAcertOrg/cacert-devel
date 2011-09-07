@@ -333,8 +333,8 @@
 				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
 					$points = 0;
 				break;
-			case 'unknown':			 // to be revoked in the future? limit to max 50 pts?
-			case 'Trusted 3rd Parties':	     // to be revoked in the future? limit to max 35 pts?
+			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
+			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
 			case '':				// to be revoked in the future? limit to max 50 pts?
 			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
 				break;
