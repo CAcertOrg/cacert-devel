@@ -152,7 +152,7 @@
 		if($name == "")
 			$name = _("Deleted before Verification");
 		else
-			$name = "<a href='wot.php?id=9&amp;userid=".intval($userid)."'>$name</a>";
+			$name = "<a href='wot.php?id=9&amp;userid=".intval($userid)."'>".sanitizeHTML($name)."</a>";
 		return $name;
 	}
 
@@ -162,7 +162,7 @@
 		if($email == "")
 			$email = _("Deleted before Verification");
 		else
-			$email = "<a href='account.php?id=".intval($userid)."'>".sanitizeHTML($email)."</a>";
+			$email = "<a href='account.php?id=43&amp;userid=".intval($userid)."'>".sanitizeHTML($email)."</a>";
 		return $email;
 	}
 
