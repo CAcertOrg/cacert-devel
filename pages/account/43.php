@@ -16,6 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
+include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
+
+
   if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
   {
     $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
@@ -178,7 +181,7 @@
     <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>"><?=$row['codesign']?></a></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Org Assurer")?>:</td>
+    <td class="DataTD"><?=_("Org Admin")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>"><?=$row['orgadmin']?></a></td>
   </tr>
   <tr>
@@ -318,16 +321,25 @@
 <br>
 <? } ?>
 
-<?
-  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
-?>
+<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
+ (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
+<br />
+<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
+ (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)
+<br />
 
+<?
+//  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
+
+function showassuredto()
+{
+?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="8" class="title"><?=_("Assurance Points")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><b><?=_("Assurance When")?></b></td>
+    <td class="DataTD"><b><?=_("ID")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -337,7 +349,7 @@
     <td class="DataTD"><b><?=_("Revoke")?></b></td>
   </tr>
 <?
-  $query = "select * from `notary` where `to`='".intval($row['id'])."'";
+  $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'";
   $dres = mysql_query($query);
   $points = 0;
   while($drow = mysql_fetch_assoc($dres))
@@ -346,7 +358,7 @@
     $points += $drow['points'];
 ?>
   <tr>
-    <td class="DataTD"><?=sanitizeHTML($drow['when'])?></td>
+    <td class="DataTD"><?=$drow['id']?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['date'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -357,26 +369,23 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
 </table>
-<? } else { ?>
-  <tr>
-    <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;assuredto=yes"><?=_("Show Assurances the user got")?></a></td>
-  </tr>
 <? } ?>
-<br>
+
 <?
-  if(array_key_exists('assuredby',$_GET) && $_GET['assuredby'] == "yes") {
+function showassuredby()
+{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="8" class="title"><?=_("Assurance Points The User Issued")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><b><?=_("When")?></b></td>
+    <td class="DataTD"><b><?=_("ID")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -386,7 +395,7 @@
     <td class="DataTD"><b><?=_("Revoke")?></b></td>
   </tr>
 <?
-  $query = "select * from `notary` where `from`='".$row['id']."' and `to`!='".$row['id']."'";
+  $query = "select * from `notary` where `from`='".intval($_GET['userid'])."'";
   $dres = mysql_query($query);
   $points = 0;
   while($drow = mysql_fetch_assoc($dres))
@@ -395,7 +404,7 @@
     $points += $drow['points'];
 ?>
   <tr>
-    <td class="DataTD"><?=$drow['when']?></td>
+    <td class="DataTD"><?=$drow['id']?></td>
     <td class="DataTD"><?=$drow['date']?></td>
     <td class="DataTD"><a href="wot.php?id=9&userid=<?=$drow['to']?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -406,15 +415,26 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
 </table>
-<? } else { ?>
-  <tr>
-    <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;assuredby=yes"><?=_("Show Assurances the user gave")?></a></td>
-  </tr>
 <? } ?>
 <br><br>
-<? } } ?>
+<? } } 
+
+switch ($_GET['shownotary'])
+        {
+	case 'assuredto': 	showassuredto();
+				break;
+	case 'assuredby':	showassuredby();
+				break;
+	case 'assuredto15':	output_received_assurances(intval($_GET['userid']),1);
+				break;
+	case 'assuredby15': 	output_given_assurances(intval($_GET['userid']),1);
+				break;
+	}
+
+
+?>
