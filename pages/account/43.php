@@ -361,7 +361,7 @@ function showassuredto()
     <td class="DataTD"><?=$drow['id']?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['date'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
-    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
     <td class="DataTD"><?=intval($drow['points'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
