@@ -156,6 +156,16 @@
 		return $name;
 	}
 
+	function show_email_link ($email,$userid)
+	{
+		$email = trim($email);
+		if($email == "")
+			$email = _("Deleted before Verification");
+		else
+			$email = "<a href='account.php?id=".intval($userid)."'>".sanitizeHTML($email)."</a>";
+		return $email;
+	}
+
 	function get_assurer_ranking($userid,&$num_of_assurances,&$rank_of_assurer)
 	{
 		$num_of_assurances = get_number_of_assurances (intval($userid));
@@ -201,7 +211,7 @@
 	if ($support == "1")
 	{
 ?>
-    	<td colspan="8" class="title"><?=$title?></td>
+    	<td colspan="10" class="title"><?=$title?></td>
 <?
 	} else {
 ?>
@@ -212,6 +222,13 @@
     <tr>
     	<td class="DataTD"><strong><?=_("ID")?></strong></td>
     	<td class="DataTD"><strong><?=_("Date")?></strong></td>
+<?
+	if ($support == "1")
+	{
+?>
+    	<td class="DataTD"><strong><?=_("When")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Email")?></strong></td>
+<?	} ?>
     	<td class="DataTD"><strong><?=_("Who")?></strong></td>
     	<td class="DataTD"><strong><?=_("Points")?></strong></td>
     	<td class="DataTD"><strong><?=_("Location")?></strong></td>
@@ -233,7 +250,7 @@
 	{
 ?>
     <tr>
-    	<td class="DataTD" colspan="3"><strong><?=$points_txt?>:</strong></td>
+    	<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
     	<td class="DataTD"><?=$points?></td>
     	<td class="DataTD">&nbsp;</td>
     	<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
@@ -253,12 +270,20 @@
 <?
 	}
 
-	function output_assurances_row($assuranceid,$date,$name,$points,$location,$method,$experience,$userid,$support,$revoked)
+	function output_assurances_row($assuranceid,$date,$when,$email,$name,$points,$location,$method,$experience,$userid,$support,$revoked)
 	{
 ?>
     <tr>
 	<td class="DataTD"><?=$assuranceid?></td>
     	<td class="DataTD"><?=$date?></td>
+<?
+	if ($support == "1")
+	{
+?>
+    	<td class="DataTD"><?=$when?></td>
+    	<td class="DataTD"><?=$email?></td>
+<?	} 
+?>
     	<td class="DataTD"><?=$name?></td>
     	<td class="DataTD"><?=$points?></td>
     	<td class="DataTD"><?=$location?></td>
@@ -331,7 +356,8 @@
 			$fromuser = get_user (intval($row['to'])); 
 			calc_experience ($row,$points,$experience,$sum_experience,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$name,intval($row['awarded']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			$email = show_email_link ($fromuser['email'],intval($row['to']));
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,intval($row['awarded']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
 
@@ -347,7 +373,8 @@
 			$fromuser = get_user (intval($row['from']));
 			calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$name,$awarded,$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			$email = show_email_link ($fromuser['email'],intval($row['from']));
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
 
