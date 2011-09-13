@@ -31,7 +31,7 @@
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
     <td class="DataTD" width="125"><input type="text" name="fname" value="<?=array_key_exists('fname',$_REQUEST)?sanitizeHTML($_REQUEST['fname']):""?>" autocomplete="off"></td>
-    <td rowspan="4" class="DataTD" width="125"><?=sprintf(_("Help on Names"))?><br><?=sprintf(_("%sin the wiki%s"),'<a href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
+    <td rowspan="4" class="DataTD" width="125"><? printf(_("Help on Names %sin the wiki%s"),'<a href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
   </tr>
 
   <tr>
@@ -150,7 +150,7 @@
     <td class="DataTD" colspan="3"><?=_("When you click on next, we will send a confirmation email to the email address you have entered above.")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="3"><input type="checkbox" name="cca_agree" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php">//www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
+    <td class="DataTD" colspan="3"><input type="checkbox" name="cca_agree" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php">http://www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
   </tr>
 
   <tr>
