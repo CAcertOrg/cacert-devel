@@ -21,7 +21,11 @@
   </tr>
 
 <tr>
-  <td colspan="5" class="title">Order by: <a href="account.php?id=25">Id</a> - <a href="account.php?id=25&amp;ord=1">Country</a> - <a href="account.php?id=25&amp;ord=2">Name</a></td>
+  <td colspan="5" class="title"><?=_("Order by:")?>
+    <a href="account.php?id=25"><?=_("Id")?></a> -
+    <a href="account.php?id=25&amp;ord=1"><?=_("Country")?></a> -
+    <a href="account.php?id=25&amp;ord=2"><?=_("Name")?></a>
+  </td>
 </tr>
 
   <tr>
@@ -32,28 +36,24 @@
     <td class="DataTD"><?=_("Delete")?></td>
   </tr>
 <?
-        $order = 0;
-        if (array_key_exists('ord',$_REQUEST)) {
-          if ( $_REQUEST['ord'] != '') {
-            $order = intval($_REQUEST['ord']);
-          }
-          if($order>0 && $order<3) {
-            if($order==1) {
-              $query = "select * from `orginfo` ORDER BY `C`,`O`";
-            } else {
-              $query = "select * from `orginfo` ORDER BY `O`";
-            }
-          } else {
-            $order=0;
-            $query = "select * from `orginfo` ORDER BY `id`";
-          }
-        } else {
-          $order=0;
-          $query = "select * from `orginfo` ORDER BY `id`";
-        }
-
-// echo "<tr><td colspan='5'>(".$order.") ".$query."</td></tr>\r\n";
-
+	$order = 0;
+	if (array_key_exists('ord',$_REQUEST)) {
+		$order = intval($_REQUEST['ord']);
+	}
+	
+	$order_by = "`id`";
+	switch ($order) {
+		case 1:
+			$order_by = "`C`,`O`";
+			break;
+		case 2:
+			$order_by = "`O`";
+			break;
+		// the 0 and default case are handled by the preset
+	}
+	
+	// Safe because $order_by only contains fixed strings
+	$query = sprintf("select * from `orginfo` ORDER BY %s", $order_by);
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
