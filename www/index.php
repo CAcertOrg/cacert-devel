@@ -635,13 +635,6 @@
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
 	
-	if ($id == 19)
-	{
-		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
-		$newUrl = $protocol . '://wiki.cacert.org/FAQ/Privileges';
-		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
-	}
-
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
