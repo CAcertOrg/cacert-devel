@@ -41,9 +41,10 @@
     // bug-975 ted+uli changes --- begin
     if(preg_match("/^[0-9]+$/", $email)) {
       // $email consists of digits only ==> search for IDs
-      $query = "select `users`.`id` as `id`, `email`.`email` as `email` from `users`,`email`
-          where `users`.`id`=`email`.`memid` 
-            and (`email`.`id`='$email' or `users`.`id`='$email')
+      // Be defensive here (outer join) if primary mail is not listed in email table
+      $query = "select `users`.`id` as `id`, `email`.`email` as `email`
+          from `users` left outer join `email` on (`users`.`id`=`email`.`memid`)
+          where (`email`.`id`='$email' or `users`.`id`='$email')
             and `users`.`deleted`=0
           group by `users`.`id` limit 100";
     } else {
@@ -149,7 +150,7 @@
         {
                 echo "<option";
                 if($day == $i)
-      echo " selected='selected'";
+                    echo " selected='selected'";
                 echo ">$i</option>";
         }
 ?>
@@ -404,7 +405,8 @@
   $inconsistencydisp = "";
   $inccause = "";
    // current userid  intval($row['id'])
-  $query = "select email as uemail, deleted as udeleted, verified, locked from `users` where `id`='".intval($row['id'])."' ";
+  $query = "select `email` as `uemail`, `deleted` as `udeleted`, `verified`, `locked`
+      from `users` where `id`='".intval($row['id'])."' ";
   $dres = mysql_query($query);
   $drow = mysql_fetch_assoc($dres);
   $uemail    = $drow['uemail'];
@@ -412,9 +414,23 @@
   $uverified = $drow['verified'];
   $ulocked   = $drow['locked'];
 
-  $query = "select hash, deleted as edeleted, email as eemail from `email` where `memid`='".intval($row['id'])."' and email='".$uemail."' ";
+  $query = "select `hash`, `email` as `eemail` from `email`
+      where `memid`='".intval($row['id'])."' and
+      `email` ='".$uemail."' and
+      `deleted` = 0";
   $dres = mysql_query($query);
   if ($drow = mysql_fetch_assoc($dres)) {
+    $drow['edeleted'] = 0;
+  } else {
+  	// try if there are deleted entries
+    $query = "select `hash`, `deleted` as `edeleted`, `email` as `eemail` from `email`
+        where `memid`='".intval($row['id'])."' and
+        `email` ='".$uemail."'";
+    $dres = mysql_query($query);
+    $drow = mysql_fetch_assoc($dres);
+  }
+  
+  if ($drow) {
     $eemail    = $drow['eemail'];
     $edeleted  = $drow['edeleted'];
     $ehash     = $drow['hash'];
@@ -450,7 +466,11 @@
     <td class="DataTD"><?=$inccause?><br>code: <?=$inconsistency?></td>
   </tr>
   <tr>
-    <td colspan="2" class="DataTD"><?=_("Account inconsistency can cause problems in daily account operations<br>that needs to be fixed manualy thru arbitration/critical team.")?></td>
+    <td colspan="2" class="DataTD" style="max-width: 75ex">
+      <?=_("Account inconsistency can cause problems in daily account ".
+      "operations and needs to be fixed manually through arbitration/critical ".
+      "team.")?>
+     </td>
   </tr>  
 <? }
 
