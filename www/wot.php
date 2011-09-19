@@ -471,7 +471,7 @@ $query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION[
 	}
 
 //	showheader(_("My CAcert.org Account!"));
-echo "ID now = ".$id."/".$oldid.">>".$iecho;
+// echo "ID now = ".$id."/".$oldid.">>".$iecho;
 //	includeit($id, "wot");
 //	showfooter();
 show_page ($id,"","");
