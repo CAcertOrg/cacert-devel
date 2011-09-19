@@ -147,7 +147,12 @@
 	{
 		$name = trim($name);
 		if($name == "")
-			$name = _("Deleted before Verification");
+		{
+			if ($userid == 0)
+				$name = _("System");
+			else
+				$name = _("Deleted account");
+		}
 		else
 			$name = "<a href='wot.php?id=9&amp;userid=".intval($userid)."'>$name</a>";
 		return $name;
