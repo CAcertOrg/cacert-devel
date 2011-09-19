@@ -150,7 +150,12 @@
 	{
 		$name = trim($name);
 		if($name == "")
-			$name = _("Deleted before Verification");
+		{
+			if ($userid == 0)
+				$name = _("System");
+			else
+				$name = _("Deleted account");
+		}
 		else
 			$name = "<a href='wot.php?id=9&amp;userid=".intval($userid)."'>".sanitizeHTML($name)."</a>";
 		return $name;
@@ -159,9 +164,7 @@
 	function show_email_link ($email,$userid)
 	{
 		$email = trim($email);
-		if($email == "")
-			$email = _("Deleted before Verification");
-		else
+		if($email != "")
 			$email = "<a href='account.php?id=43&amp;userid=".intval($userid)."'>".sanitizeHTML($email)."</a>";
 		return $email;
 	}
