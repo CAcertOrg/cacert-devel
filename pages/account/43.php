@@ -324,13 +324,13 @@
 
   // list total, expired, deleted, latest_expire_date  ?
 
- $query = "select COUNT(domaincerts.id) as countdomaincerts  from `domains` inner join `domaincerts` on `domaincerts`.`domid` = `domains`.`id` where `memid`='".intval($row['id'])."' ";
+ $query = "select COUNT(`domaincerts`.`id`) as `countdomaincerts`  from `domains` inner join `domaincerts` on `domaincerts`.`domid` = `domains`.`id` where `memid`='".intval($row['id'])."' ";
   $dres = mysql_query($query);
   $drow = mysql_fetch_assoc($dres);
   $rctotal = $drow['countdomaincerts'];
   if($rctotal > 0) {
     // select domid's
-    $query = "select id as domids from `domains` where `memid`='".intval($row['id'])."' ";
+    $query = "select `id` as `domids` from `domains` where `memid`='".intval($row['id'])."' ";
     $dres = mysql_query($query);
     $rcexpired = 0;
     $rcrevoked = 0;
@@ -338,18 +338,18 @@
     while ($drow = mysql_fetch_assoc($dres)) {
       $ndomid = intval($drow['domids']); 
 
-      $query2 = "select COUNT(id) as dexpired  from `domaincerts` where `domid`='".$ndomid."' and revoked = '0000-00-00 00:00:00' and expire < now() ";
+      $query2 = "select COUNT(`id`) as `dexpired`  from `domaincerts` where `domid`='".$ndomid."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcexpired += intval($drow2['dexpired']);
 
-      $query2 = "select COUNT(id) as drevoked  from `domaincerts` where `domid`='".$ndomid."' and revoked != '0000-00-00 00:00:00' ";
+      $query2 = "select COUNT(`id`) as `drevoked`  from `domaincerts` where `domid`='".$ndomid."' and `revoked` != '0000-00-00 00:00:00' ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcrevoked += intval($drow2['drevoked']);
 
       // For Arbitration purpose expiry dates of revoked certs are also relevant!
-      $query2 = "select expire as mexpire  from `domaincerts` where `domid`='".$ndomid."' order by expire desc ";
+      $query2 = "select `expire` as `mexpire`  from `domaincerts` where `domid`='".$ndomid."' order by `expire` desc ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcexpiremax = max($rcexpiremax,$drow2['mexpire']);      
@@ -388,7 +388,7 @@
   </tr>
 <? }
 
-  $query = "select COUNT(id) as countemailcerts from `emailcerts` where `memid`='".intval($row['id'])."' ";
+  $query = "select COUNT(`id`) as `countemailcerts` from `emailcerts` where `memid`='".intval($row['id'])."' ";
   $dres = mysql_query($query);
   $drow = mysql_fetch_assoc($dres);
   $rctotal = $drow['countemailcerts'];
@@ -397,17 +397,17 @@
     $rcrevoked = 0;
     $rcexpiremax = "0000-00-00 00:00:00";    
 
-    $query2 = "select COUNT(id) as eexpired  from `emailcerts` where `memid`='".intval($row['id'])."' and revoked = '0000-00-00 00:00:00' and expire < now() ";
+    $query2 = "select COUNT(`id`) as `eexpired`  from `emailcerts` where `memid`='".intval($row['id'])."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
     $rcexpired = intval($drow2['dexpired']);
 
-    $query2 = "select COUNT(id) as erevoked  from `emailcerts` where `memid`='".intval($row['id'])."' and revoked != '0000-00-00 00:00:00' ";
+    $query2 = "select COUNT(`id`) as `erevoked`  from `emailcerts` where `memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
     $rcrevoked = intval($drow2['erevoked']);
 
-    $query2 = "select expire as eexpire  from `emailcerts` where `memid`='".intval($row['id'])."' and revoked = '0000-00-00 00:00:00' order by expire desc ";
+    $query2 = "select `expire` as `eexpire`  from `emailcerts` where `memid`='".intval($row['id'])."' order by `expire` desc ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
     $rcexpiremax = $drow2['eexpire'];
@@ -429,7 +429,7 @@
     <td colspan="5" class="DataTD"><?=_("None")?></td>
   </tr>
 <? }
-  $query = "select COUNT(id) as countgpgcerts from `gpg` where `memid`='".intval($row['id'])."' ";
+  $query = "select COUNT(`id`) as `countgpgcerts` from `gpg` where `memid`='".intval($row['id'])."' ";
   $dres = mysql_query($query);
   $drow = mysql_fetch_assoc($dres);  
   $rctotal = $drow['countgpgcerts'];
@@ -437,19 +437,19 @@
     $rcexpired = 0;
     $rcexpiremax = "0000-00-00 00:00:00";    
 
-    $query2 = "select COUNT(id) as gexpired  from `gpg` where `memid`='".intval($row['id'])."' and expire < now() ";
+    $query2 = "select COUNT(`id`) as `gexpired`  from `gpg` where `memid`='".intval($row['id'])."' and `expire` < now() ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
     $rcexpired = intval($drow2['gexpired']);
 
 /*
-    $query2 = "select COUNT(id) as erevoked  from `gpg` where `memid`='".intval($row['id'])."' and revoked != '0000-00-00 00:00:00' ";
+    $query2 = "select COUNT(`id`) as `erevoked`  from `gpg` where `memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
     $rcrevoked = intval($drow2['erevoked']);
  */
  
-    $query2 = "select expire as gexpire  from `gpg` where `memid`='".intval($row['id'])."' order by expire desc ";
+    $query2 = "select `expire` as `gexpire`  from `gpg` where `memid`='".intval($row['id'])."' order by `expire` desc ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
     $rcexpiremax = $drow2['gexpire'];
