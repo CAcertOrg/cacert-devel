@@ -348,7 +348,8 @@
       $drow2  = mysql_fetch_assoc($dres2);
       $rcrevoked += intval($drow2['drevoked']);
 
-      $query2 = "select expire as mexpire  from `domaincerts` where `domid`='".$ndomid."' and revoked = '0000-00-00 00:00:00' order by expire desc ";
+      // For Arbitration purpose expiry dates of revoked certs are also relevant!
+      $query2 = "select expire as mexpire  from `domaincerts` where `domid`='".$ndomid."' order by expire desc ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcexpiremax = max($rcexpiremax,$drow2['mexpire']);      
@@ -359,7 +360,7 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="6" class="title"><?=_("Total Certificates State")?></td>
+    <td colspan="6" class="title"><?=_("Total Certificates Status")?></td>
   </tr>
 
   <tr>
