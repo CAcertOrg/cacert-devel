@@ -392,8 +392,11 @@
 
 	function calc_points($row)
 	{
-		if (intval($row['points']) < intval($row['awarded']))
-			$points = intval($row['awarded']);      // if 'sum of added points' > 100, awarded shows correct value
+		$awarded = intval($row['awarded']);
+		if ($awarded == "")
+			$awarded = 0;
+		if (intval($row['points']) < $awarded)
+			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
 		else
 			$points = intval($row['points']);       // on very old assurances, awarded is '0' instead of correct value
 		switch ($row['method'])
