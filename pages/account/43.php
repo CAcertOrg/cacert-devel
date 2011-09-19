@@ -400,7 +400,7 @@
     $query2 = "select COUNT(`id`) as `eexpired`  from `emailcerts` where `memid`='".intval($row['id'])."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
     $dres2  = mysql_query($query2);
     $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpired = intval($drow2['dexpired']);
+    $rcexpired = intval($drow2['eexpired']);
 
     $query2 = "select COUNT(`id`) as `erevoked`  from `emailcerts` where `memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
     $dres2  = mysql_query($query2);
