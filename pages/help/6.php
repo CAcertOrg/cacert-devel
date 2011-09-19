@@ -15,14 +15,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<p><?=_("Firstly you need to join CAcert to do that go:")?> <a href='https://www.cacert.org/index.php?id=1'><?=("here")?></a></p>
-
-<p><?=_("Then you need to generate a Certificate Signing Request, for more details go:")?> <a href=http://www.cacert.org/help.php><?=_("here")?></a></p>
-
-<p><?=_("You then need to add the domain you have control of to your account, which you can do:")?> <a href='https://www.cacert.org/account.php?id=7'><?=_("here")?></a></p>
-
-<p><?=_("System will send you an email with a link in it, you just open the link in a webbrowser.")?></p>
-
-<p><?=_("Then you need to submit the contents from the CSR file to CAcert, you need to go:")?> <a href='https://www.cacert.org/account.php?id=10'><?=_("here")?></a></p>
-
-<p><?=_("CAcert then sends you an email with a signed copy of your certificate. Hopefully the rest should be pretty straight forward.")?></p>
+<p style="background-color: #FF8080; font-size: 150%">
+<?
+printf(_("This page has been moved to the %swiki%s. Please update your ".
+		"bookmarks and report any broken links."),
+	'<a href="//wiki.cacert.org/HELP/6">', '</a>');
+?>
+</p>

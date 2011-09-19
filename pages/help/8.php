@@ -15,6 +15,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<p><i><?=_("Question: I'm a software developer for linux and I want to use CAcert/openssl to distribute my packages with detached signatures, is this possible and why would I do this over PGP/GPG detached signatures?")?></i></p>
-<p><?=_("I'll anwser the why part first, as that's reasonably easy. The short answer is it takes most of the key handling responsibilty away from you and/or your group. If you need to revoke your key for any reason (such as a developer leaving the project) it won't effect your ability to revoke the existing key or keys, and issue new ones.")?></p>
-
+<p style="background-color: #FF8080; font-size: 150%">
+<?
+printf(_("This page has been moved to the %swiki%s. Please update your ".
+		"bookmarks and report any broken links."),
+	'<a href="//wiki.cacert.org/HELP/8">', '</a>');
+?>
+</p>

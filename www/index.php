@@ -640,6 +640,13 @@
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
 
+	if ($id == 8)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/Board';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+	
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
