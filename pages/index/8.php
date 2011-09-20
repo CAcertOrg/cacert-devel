@@ -15,16 +15,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<p><b><? printf(_("The current %s board, and roles."), "CAcert Inc."); ?></b></p>
-<p>
-Lambert Hofstra - <?=_("President")?><br/>
-Peter Yuill - <?=_("Vice President")?><br/>
-Alexander Prinsier - <?=_("Treasurer")?><br/>
-Mario Lipinski - <?=_("Secretary")?><br/>
-Piers Lauder - <?=_("member")?><br/>
-Ian Grigg - <?=_("member")?><br/>
-Dirk Astrath - <?=_("member")?><br/>
+<p style="background-color: #FF8080; font-size: 150%">
+<?
+printf(_("This page has been moved to the %swiki%s. Please update your ".
+		"bookmarks and report any broken links."),
+	'<a href="//wiki.cacert.org/Board">', '</a>');
+?>
 </p>
-Kevin Dawson - <?=_("Public Officer")?><br />
-<br />
-More detailed informations can be found in the CAcert wiki under <a href="//wiki.cacert.org/Board"><?=_("CAcert Board")?></a>
