@@ -471,7 +471,7 @@
   </tr>
 <? }
 
-  $query = "SELECT count(org.orgid) as countorgs FROM org where memid='".intval($row['id'])."' ";
+  $query = "SELECT count(`org`.`orgid`) as `countorgs` FROM `org` where `memid`='".intval($row['id'])."' ";
   $dres = mysql_query($query);
   $drow = mysql_fetch_assoc($dres);
   $rctotal = $drow['countorgs'];
@@ -479,14 +479,14 @@
     // user account is linked into orgs
 
     // $query = "select COUNT(`orgdomaincerts`.`id`) as `orgcountdomaincerts`  from `orgdomains` inner join `orgdomaincerts` on `orgdomaincerts`.`orgid` = `orgdomains`.`id` where `memid`='".intval($row['id'])."' ";
-    $query = "SELECT count(orgdomaincerts.id) as countorgdomcerts FROM orgdomaincerts inner join orgdomains on orgdomaincerts.orgid=orgdomains.orgid inner join org on orgdomains.orgid=org.orgid where memid='".intval($row['id'])."' ";
+    $query = "SELECT count(`orgdomaincerts`.`id`) as `countorgdomcerts` FROM `orgdomaincerts` inner join `orgdomains` on `orgdomaincerts`.`orgid`=`orgdomains`.`orgid` inner join `org` on `orgdomains`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' ";
 
     $dres = mysql_query($query);
     $drow = mysql_fetch_assoc($dres);
     $rctotal = $drow['countorgdomcerts'];
     if($rctotal > 0) {
       // select domid's
-      $query = "select `orgdomains`.`orgid` as `orgdomorgids` from `orgdomains` inner join org on orgdomains.orgid=org.orgid where memid='".intval($row['id'])."' ";
+      $query = "select `orgdomains`.`orgid` as `orgdomorgids` from `orgdomains` inner join `org` on `orgdomains`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' ";
       $dres = mysql_query($query);
       $rcexpired = 0;
       $rcrevoked = 0;
@@ -531,7 +531,7 @@
 <?  }
 
     // $query = "select COUNT(`id`) as `countorgemailcerts` from `orgemailcerts`
-    $query = "SELECT count(orgemailcerts.id) as countorgemailcerts FROM orgemailcerts inner join org on orgemailcerts.orgid=org.orgid where memid='".intval($row['id'])."' ";
+    $query = "SELECT count(`orgemailcerts`.`id`) as `countorgemailcerts` FROM `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' ";
     $dres = mysql_query($query);
     $drow = mysql_fetch_assoc($dres);
     $rctotal = $drow['countorgemailcerts'];
@@ -539,17 +539,17 @@
       $rcexpired = 0;
       $rcrevoked = 0;
       $rcexpiremax = "0000-00-00 00:00:00";
-      $query2 = "select COUNT(`orgemailcerts`.`id`) as `eexpired`  from `orgemailcerts` inner join org on orgemailcerts.orgid=org.orgid where `org.memid`='".intval($row['id'])."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
+      $query2 = "select COUNT(`orgemailcerts`.`id`) as `eexpired`  from `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `org`.`memid`='".intval($row['id'])."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcexpired = intval($drow2['eexpired']);
 
-      $query2 = "select COUNT(`orgemailcerts`.`id`) as `erevoked`  from `orgemailcerts` inner join org on orgemailcerts.orgid=org.orgid where `org.memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
+      $query2 = "select COUNT(`orgemailcerts`.`id`) as `erevoked`  from `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `org`.`memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcrevoked = intval($drow2['erevoked']);
 
-      $query2 = "select `expire` as `eexpire`  from `orgemailcerts` inner join org on orgemailcerts.orgid=org.orgid where `memid`='".intval($row['id'])."' order by `expire` desc ";
+      $query2 = "select `expire` as `eexpire`  from `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' order by `expire` desc ";
       $dres2  = mysql_query($query2);
       $drow2  = mysql_fetch_assoc($dres2);
       $rcexpiremax = $drow2['eexpire'];
