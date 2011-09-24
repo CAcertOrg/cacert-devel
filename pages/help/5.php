@@ -15,4 +15,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?=_("To be completed")?>
+<p style="background-color: #FF8080; font-size: 150%">
+<?
+printf(_("This page has been moved to the %swiki%s. Please update your ".
+		"bookmarks and report any broken links."),
+	'<a href="//wiki.cacert.org/HELP/5">', '</a>');
+?>
+</p>
