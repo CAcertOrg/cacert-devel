@@ -170,7 +170,7 @@
   		showheader(_("My CAcert.org Account!"));
 	  	$delcount = 0;
 			echo _("You did not select any email accounts for removal.");
-			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
+			echo _("You failed to select any email addresses to be removed, or you attempted to remove the default email address. No action was taken.");
   		showfooter();
 	  	exit;
 		}
@@ -3044,7 +3044,7 @@
 		  printf(_("%s email address(es) and associated client certificates have been removed."), intval($delcount));
       echo "<br>\n";
 		} else {
-			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
+			echo _("You failed to select any email addresses to be removed, or you attempted to remove the default email address. No action was taken.");
 		}
 
 		showfooter();

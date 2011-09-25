@@ -127,12 +127,12 @@
 <input type="hidden" name="csrf" value="<?=make_csrf('chgdefcnfd')?>" />
 </form>
 <p>
-<?=_("Please Note: You can not set an unverified account as a default account, and you can not remove a default account. To remove the default account you must set another verified account as the default.")?>
+<?=_("Please Note: You can not set an unverified email as a default email, and you can not remove a default email. To remove the default email you must set another verified email as the default.")?>
 </p>
 <?
     } else {
       echo _("You did not select any email accounts for removal.");
-      echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
+      echo _("You failed to select any email addresses to be removed, or you attempted to remove the default email address. No action was taken.");
       $oldid = 0;
       $id = 0;
       showfooter();
