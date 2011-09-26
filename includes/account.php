@@ -2147,9 +2147,6 @@
 			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
 			$id = $oldid;
 			$oldid=0;
-			// reset domid into its original state
-			$domid = $_SESSION['_config']['domid'];
-			$_REQUEST['domid'] = $domid;
 		}
 	}
 
