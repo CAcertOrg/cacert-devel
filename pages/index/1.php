@@ -25,27 +25,33 @@
 <form method="post" action="index.php" autocomplete="off">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
   <tr>
-    <td colspan="2" class="title"><?=_("My Details")?></td>
+    <td colspan="3" class="title"><?=_("My Details")?></td>
   </tr>
+
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
     <td class="DataTD" width="125"><input type="text" name="fname" value="<?=array_key_exists('fname',$_REQUEST)?sanitizeHTML($_REQUEST['fname']):""?>" autocomplete="off"></td>
+    <td rowspan="4" class="DataTD" width="125"><? printf(_("Help on Names %sin the wiki%s"),'<a href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
   </tr>
+
   <tr>
     <td class="DataTD" valign="top"><?=_("Middle Name(s)")?><br>
       (<?=_("optional")?>)
     </td>
     <td class="DataTD"><input type="text" name="mname" value="<?=array_key_exists('mname',$_REQUEST)?sanitizeHTML($_REQUEST['mname']):""?>" autocomplete="off"></td>
   </tr>
+
   <tr>
     <td class="DataTD"><?=_("Last Name")?>: </td>
     <td class="DataTD"><input type="text" name="lname" value="<?=array_key_exists('lname',$_REQUEST)?sanitizeHTML($_REQUEST['lname']):""?>" autocomplete="off"></td>
   </tr>
+
   <tr>
     <td class="DataTD"><?=_("Suffix")?><br>
       (<?=_("optional")?>)</td>
-    <td class="DataTD"><input type="text" name="suffix" value="<?=array_key_exists('suffix',$_REQUEST)?sanitizeHTML($_REQUEST['suffix']):""?>" autocomplete="off"><br><?=sprintf(_("Please only write %sName Suffixes%s into this field."),'<a href="http://en.wikipedia.org/wiki/Suffix_%28name%29" target="_blank">','</a>')?></td>
+    <td class="DataTD"><input type="text" name="suffix" value="<?=array_key_exists('suffix',$_REQUEST)?sanitizeHTML($_REQUEST['suffix']):""?>" autocomplete="off"><br><?=sprintf(_("Please only write Name Suffixes into this field."))?></td>
   </tr>
+
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?><br>
 	    (<?=_("dd/mm/yyyy")?>)</td>
@@ -73,49 +79,63 @@
     </select>
     <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['signup']) ? sanitizeHTML($_SESSION['signup']['year']):""?>" size="4" autocomplete="off"></nobr>
     </td>
+    <td class="DataTD">&nbsp;</td>
   </tr>
+
   <tr>
     <td class="DataTD"><?=_("Email Address")?>: </td>
-    <td class="DataTD"><input type="text" name="email" value="<?=array_key_exists('email',$_REQUEST)?sanitizeHTML($_REQUEST['email']):""?>" autocomplete="off"><br/><?=_("I own or am authorised to control this email address")?>
-</td>
+    <td class="DataTD"><input type="text" name="email" value="<?=array_key_exists('email',$_REQUEST)?sanitizeHTML($_REQUEST['email']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><?=_("I own or am authorised to control this email address")?></td>
   </tr>
+
   <tr>
     <td class="DataTD"><?=_("Pass Phrase")?><font color="red">*</font>: </td>
     <td class="DataTD"><input type="password" name="pword1" autocomplete="off"></td>
+    <td class="DataTD" rowspan="2">&nbsp;</td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Pass Phrase Again")?><font color="red">*</font>: </td>
     <td class="DataTD"><input type="password" name="pword2" autocomplete="off"></td>
   </tr>
+
   <tr>
-    <td class="DataTD" colspan="2"><font color="red">*</font><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
+    <td class="DataTD" colspan="3"><font color="red">*</font><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
   </tr>
+
   <tr>
-    <td class="DataTD" colspan="2"><?=_("Lost Pass Phrase Questions - Please enter five questions and your responses to be used for security verification.")?></td>
+    <td class="DataTD" colspan="3"><?=_("Lost Pass Phrase Questions - Please enter five questions and your responses to be used for security verification.")?></td>
   </tr>
+
   <tr>
     <td class="DataTD">1)&nbsp;<input type="text" name="Q1" size="15" value="<?=array_key_exists('Q1',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q1']):""?>"></td>
     <td class="DataTD"><input type="text" name="A1" value="<?=array_key_exists('A1',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A1']):""?>" autocomplete="off"></td>
+    <td class="DataTD" rowspan="5">&nbsp;</td>
   </tr>
+
   <tr>
     <td class="DataTD">2)&nbsp;<input type="text" name="Q2" size="15" value="<?=array_key_exists('Q2',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q2']):""?>"></td>
     <td class="DataTD"><input type="text" name="A2" value="<?=array_key_exists('A2',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A2']):""?>" autocomplete="off"></td>
   </tr>
+
   <tr>
     <td class="DataTD">3)&nbsp;<input type="text" name="Q3" size="15" value="<?=array_key_exists('Q3',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q3']):""?>"></td>
     <td class="DataTD"><input type="text" name="A3" value="<?=array_key_exists('A3',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A3']):""?>" autocomplete="off"></td>
   </tr>
+
   <tr>
     <td class="DataTD">4)&nbsp;<input type="text" name="Q4" size="15" value="<?=array_key_exists('Q4',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q4']):""?>"></td>
     <td class="DataTD"><input type="text" name="A4" value="<?=array_key_exists('A4',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A4']):""?>" autcomplete="off"></td>
   </tr>
+
   <tr>
   <td class="DataTD">5)&nbsp;<input type="text" name="Q5" size="15" value="<?=array_key_exists('Q5',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q5']):""?>"></td>
     <td class="DataTD"><input type="text" name="A5" value="<?=array_key_exists('A5',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A5']):""?>" autocomplete="off"></td>
   </tr>
+
   <tr>
-    <td class="DataTD" colspan="2"><?=_("It's possible to get notifications of up and coming events and even just general announcements, untick any notifications you don't wish to receive. For country, regional and radius notifications to work you must choose your location once you've verified your account and logged in.")?></td>
+    <td class="DataTD" colspan="3"><?=_("It's possible to get notifications of up and coming events and even just general announcements, untick any notifications you don't wish to receive. For country, regional and radius notifications to work you must choose your location once you've verified your account and logged in.")?></td>
   </tr>
+
   <tr>
     <td class="DataTD" valign="top"><?=_("Alert me if")?>: </td>
     <td class="DataTD" align="left">
@@ -123,16 +143,18 @@
 	<input type="checkbox" name="country" value="1" <?=array_key_exists('country',$_SESSION['signup'])? ($_SESSION['signup']['country'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Country Announcements")?><br>
 	<input type="checkbox" name="regional" value="1" <?=array_key_exists('regional',$_SESSION['signup'])? ($_SESSION['signup']['regional'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Regional Announcements")?><br>
 	<input type="checkbox" name="radius" value="1" <?=array_key_exists('radius',$_SESSION['signup'])? ($_SESSION['signup']['radius'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Within 200km Announcements")?></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><?=_("When you click on next, we will send a confirmation email to the email address you have entered above.")?></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><input type="checkbox" name="cca_agree" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php">http://www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
+    <td class="DataTD">&nbsp;</td>
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+    <td class="DataTD" colspan="3"><?=_("When you click on next, we will send a confirmation email to the email address you have entered above.")?></td>
+  </tr>
+  <tr>
+    <td class="DataTD" colspan="3"><input type="checkbox" name="cca_agree" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php">http://www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
+  </tr>
+
+  <tr>
+    <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=_("Next")?>"></td>
   </tr>
 
 </table>
