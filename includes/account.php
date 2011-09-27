@@ -136,6 +136,46 @@
 
 	if($process != "" && $oldid == 2)
 	{
+	
+/*  sample code from id=29	
+	if($oldid == 29 && $process != "")
+	{
+		$domain = mysql_real_escape_string(stripslashes(trim($domainname)));
+
+		$res1 = mysql_query("select * from `orgdomains` where `domain` like '$domain' and `id`!='".intval($_SESSION['_config']['domid'])."'");
+		$res2 = mysql_query("select * from `domains` where `domain` like '$domain' and `deleted`=0");
+		if(mysql_num_rows($res1) > 0 || mysql_num_rows($res2) > 0)
+		{
+			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
+			$id = $oldid;
+			$oldid=0;
+			// reset domid into its original state
+			$domid = $_SESSION['_config']['domid'];
+			$_REQUEST['domid'] = $domid;
+		}
+	}
+ */	
+      // $_REQUEST['delid']  exist
+		$id = 2;
+		csrf_check("chgdef");
+    $id = 60;
+		if(array_key_exists('delid',$_REQUEST) && is_array($_REQUEST['delid']))
+		{
+      //           $_SESSION['profile']['id']
+      //           $_SESSION['profile']['email']
+			$oldid=0;
+		}
+		else
+		{
+  		showheader(_("My CAcert.org Account!"));
+	  	$delcount = 0;
+			echo _("You did not select any email accounts for removal.");
+			echo _("You failed to select any email addresses to be removed, or you attempted to remove the default email address. No action was taken.");
+  		showfooter();
+	  	exit;
+		}
+      
+/*	
 		$id = 2;
 		csrf_check("chgdef");
 		showheader(_("My CAcert.org Account!"));
@@ -180,6 +220,8 @@
 
 		showfooter();
 		exit;
+ */
+ 		
 	}
 
 	if($process != "" && $oldid == 3)
@@ -2147,6 +2189,9 @@
 			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
 			$id = $oldid;
 			$oldid=0;
+			// reset domid into its original state
+			$domid = $_SESSION['_config']['domid'];
+			$_REQUEST['domid'] = $domid;
 		}
 	}
 
@@ -2950,6 +2995,58 @@
 
 		showheader(_("My CAcert.org Account!"));
 		echo _("Your vote has been accepted.");
+		showfooter();
+		exit;
+	}
+
+	if($process != "" && $oldid == 60)
+	{
+	  // delete user account email confirmed
+		$id = 60;
+		csrf_check("chgdefcnfd");
+		showheader(_("My CAcert.org Account!"));
+		$delcount = 0;
+		if(array_key_exists('delid',$_REQUEST) && is_array($_REQUEST['delid']))
+		{
+			echo _("The following email addresses and associated client certificates have been removed:")."<br><br>\n";
+			foreach($_REQUEST['delid'] as $id)
+			{
+				$id = intval($id);
+				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
+						`email`!='".$_SESSION['profile']['email']."'";
+				$res = mysql_query($query);
+				if(mysql_num_rows($res) > 0)
+				{
+					$row = mysql_fetch_assoc($res);
+					echo $row['email']."<br>\n";
+					$query = "select `emailcerts`.`id` 
+							from `emaillink`,`emailcerts` where
+							`emailid`='$id' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
+							`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
+							group by `emailcerts`.`id`";
+					$dres = mysql_query($query);
+					while($drow = mysql_fetch_assoc($dres))
+						mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['id']."'");
+	
+					$query = "update `email` set `deleted`=NOW() where `id`='$id'";
+					mysql_query($query);
+					$delcount++;
+				}
+			}
+		}
+		else
+		{
+			echo _("You did not select any email address for removal.");
+		}
+		if($delcount > 0)
+		{
+      echo "<br>\n";
+		  printf(_("%s email address(es) and associated client certificates have been removed."), intval($delcount));
+      echo "<br>\n";
+		} else {
+			echo _("You failed to select any email addresses to be removed, or you attempted to remove the default email address. No action was taken.");
+		}
+
 		showfooter();
 		exit;
 	}
