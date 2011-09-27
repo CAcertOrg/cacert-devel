@@ -1,5 +1,6 @@
 # Language files are imported from translingo
 # => Ignore them
-# Use make.php if you need new ones
+# Use make if you need new ones
 *.po
+*.pot
 *.mo
