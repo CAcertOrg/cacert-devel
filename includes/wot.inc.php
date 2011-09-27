@@ -147,7 +147,12 @@
 	{
 		$name = trim($name);
 		if($name == "")
-			$name = _("Deleted before Verification");
+		{
+			if ($userid == 0)
+				$name = _("System");
+			else
+				$name = _("Deleted account");
+		}
 		else
 			$name = "<a href='wot.php?id=9&amp;userid=".intval($userid)."'>$name</a>";
 		return $name;
@@ -223,17 +228,30 @@
 <?
 	}
 
-	function output_assurances_row($assuranceid,$date,$name,$points,$location,$method,$experience)
+	function output_assurances_row($assuranceid,$date,$name,$awarded,$points,$location,$method,$experience)
 	{
+
+	$emopen="";
+	$emclose="";
+
+	if ($awarded == $points)
+	{
+		if ($awarded == "0")
+		{
+			$emopen="<em>";
+			$emclose="</em>";
+		}
+	}
+
 ?>
     <tr>
-	<td class="DataTD"><?=$assuranceid?></td>
-    	<td class="DataTD"><?=$date?></td>
-    	<td class="DataTD"><?=$name?></td>
-    	<td class="DataTD"><?=$points?></td>
-    	<td class="DataTD"><?=$location?></td>
-    	<td class="DataTD"><?=$method?></td>
-    	<td class="DataTD"><?=$experience?></td>
+	<td class="DataTD"><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$date?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$name?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$awarded?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$location?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$method?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$experience?><?=$emclose?></td>
     </tr>
 <?
 	}
@@ -287,7 +305,7 @@
 			$fromuser = get_user (intval($row['to'])); 
 			calc_experience ($row,$points,$experience,$sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$name,intval($row['awarded']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
+			output_assurances_row (intval($row['id']),$row['date'],$name,intval($row['awarded']),intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
 		}
 	}
 
@@ -303,7 +321,7 @@
 			$fromuser = get_user (intval($row['from']));
 			calc_assurances ($row,$points,$experience,$sum_experience,$awarded);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$name,$awarded,$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
+			output_assurances_row (intval($row['id']),$row['date'],$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
 		}
 	}
 
@@ -318,8 +336,11 @@
 
 	function calc_points($row)
 	{
-		if (intval($row['points']) < intval($row['awarded']))
-			$points = intval($row['awarded']);      // if 'sum of added points' > 100, awarded shows correct value
+		$awarded = intval($row['awarded']);
+		if ($awarded == "")
+			$awarded = 0;
+		if (intval($row['points']) < $awarded)
+			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
 		else
 			$points = intval($row['points']);       // on very old assurances, awarded is '0' instead of correct value
 		switch ($row['method'])
@@ -333,8 +354,8 @@
 				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
 					$points = 0;
 				break;
-			case 'unknown':			 // to be revoked in the future? limit to max 50 pts?
-			case 'Trusted 3rd Parties':	     // to be revoked in the future? limit to max 35 pts?
+			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
+			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
 			case '':				// to be revoked in the future? limit to max 50 pts?
 			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
 				break;
