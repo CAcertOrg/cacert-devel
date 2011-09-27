@@ -236,8 +236,11 @@
 
 	if ($awarded == $points)
 	{
-		$emopen="<em>";
-		$emclose="</em>";
+		if ($awarded == "0")
+		{
+			$emopen="<em>";
+			$emclose="</em>";
+		}
 	}
 
 ?>
