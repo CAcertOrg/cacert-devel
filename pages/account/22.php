@@ -19,12 +19,13 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=22&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
+    <td colspan="6" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=22&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("CommonName")?></td>
+	<td class="DataTD"><?=_("SerialNumber")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
 
@@ -33,7 +34,9 @@
 			UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) as `expired`,
 			`orgdomaincerts`.`expire` as `expires`, `revoked` as `revoke`,
-			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `orgdomaincerts`.`id` as `id`
+			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`,
+			`orgdomaincerts`.`serial`,
+			 `orgdomaincerts`.`id` as `id`
 			from `orgdomaincerts`,`org`
 			where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orgdomaincerts`.`orgid`=`org`.`orgid` ";
 	if($viewall != 1)
@@ -48,7 +51,7 @@
 	{
 ?>
   <tr>
-    <td colspan="5" class="DataTD"><?=_("No domains are currently listed.")?></td>
+    <td colspan="6" class="DataTD"><?=_("No domains are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -74,12 +77,13 @@
 <? } ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=23&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
+	<td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="5"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
+    <td class="DataTD" colspan="6"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
 	    <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
   </tr>
 <? } ?>
