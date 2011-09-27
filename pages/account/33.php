@@ -18,6 +18,13 @@
 <?
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
 	$row = mysql_fetch_assoc(mysql_query($query));
+	
+	// Reset session variables regarding OrgAdmin's, present empty form
+  if (array_key_exists('email',$_SESSION['_config']))     $_SESSION['_config']['email']=""; 
+  if (array_key_exists('OU',$_SESSION['_config']))        $_SESSION['_config']['OU'] = "";
+  if (array_key_exists('masteracc',$_SESSION['_config'])) $_SESSION['_config']['masteracc'] = 0;
+  if (array_key_exists('comments',$_SESSION['_config']))  $_SESSION['_config']['comments'] = "";	
+	
 ?>
 <form method="post" action="account.php">
 <input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
@@ -27,24 +34,24 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><input type="text" name="email" value="<?=array_key_exists('email',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['email']):""?>"></td>
+    <td class="DataTD"><input type="text" name="email" value=""></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Department")?>:</td>
-    <td class="DataTD"><input type="text" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?$_SESSION['_config']['OU']:""?>"></td>
+    <td class="DataTD"><input type="text" name="OU" value=""></td>
   </tr>
 <? if($_SESSION['profile']['orgadmin'] == 1) { ?>
   <tr>
     <td class="DataTD"><?=_("Master Account")?>:</td>
     <td class="DataTD"><select name="masteracc">
-		<option value="0">No</option>
-		<option value="1"<? if(array_key_exists('masteracc',$_SESSION['_config']) && $_SESSION['_config']['masteracc'] == 1) echo " selected='selected'"; ?>>Yes</option>
+		<option value="0">No</option>     // make default option as of SA telco 2011-08-02 on bug 966
+		<option value="1">Yes</option>
 	</select></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><input type="text" name="comments" value="<?=array_key_exists('comments',$_SESSION['_config'])?$_SESSION['_config']['comments']:""?>"></td>
+    <td class="DataTD"><input type="text" name="comments" size=27 maxlength=20 value=""></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>
