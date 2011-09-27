@@ -228,17 +228,27 @@
 <?
 	}
 
-	function output_assurances_row($assuranceid,$date,$name,$points,$location,$method,$experience)
+	function output_assurances_row($assuranceid,$date,$name,$awarded,$points,$location,$method,$experience)
 	{
+
+	$emopen="";
+	$emclose="";
+
+	if ($awarded == $points)
+	{
+		$emopen="<em>";
+		$emclose="</em>";
+	}
+
 ?>
     <tr>
-	<td class="DataTD"><?=$assuranceid?></td>
-    	<td class="DataTD"><?=$date?></td>
-    	<td class="DataTD"><?=$name?></td>
-    	<td class="DataTD"><?=$points?></td>
-    	<td class="DataTD"><?=$location?></td>
-    	<td class="DataTD"><?=$method?></td>
-    	<td class="DataTD"><?=$experience?></td>
+	<td class="DataTD"><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$date?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$name?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$awarded?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$location?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$method?><?=$emclose?></td>
+    	<td class="DataTD"><?=$emopen?><?=$experience?><?=$emclose?></td>
     </tr>
 <?
 	}
@@ -292,7 +302,7 @@
 			$fromuser = get_user (intval($row['to'])); 
 			calc_experience ($row,$points,$experience,$sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$name,intval($row['awarded']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
+			output_assurances_row (intval($row['id']),$row['date'],$name,intval($row['awarded']),intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
 		}
 	}
 
@@ -308,7 +318,7 @@
 			$fromuser = get_user (intval($row['from']));
 			calc_assurances ($row,$points,$experience,$sum_experience,$awarded);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$name,$awarded,$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
+			output_assurances_row (intval($row['id']),$row['date'],$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
 		}
 	}
 
