@@ -35,6 +35,12 @@
 		exit;
 	}
 
+	if ($process == _("Cancel"))
+	{
+		// General reset CANCEL process requests
+		$process = "";
+	}
+
 
 	if($id == 45 || $id == 46 || $oldid == 45 || $oldid == 46)
 	{
@@ -2244,7 +2250,7 @@
 		$orgid = 0;
 	}
 
-	if($oldid == 31 && $process != _("Cancel"))
+	if($oldid == 31 && $process != "")
 	{
 		$query = "select * from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'";
 		$dres = mysql_query($query);
