@@ -70,50 +70,44 @@
 		}
 	}
 
-	$lang = "";
-	if(array_key_exists("lang",$_REQUEST))
-	  $lang=mysql_escape_string(substr(trim($_REQUEST['lang']), 0, 5));
-	if($lang != "")
-		$_SESSION['_config']['language'] = $lang;
-
-	//if($_SESSION['profile']['id'] == 1 && 1 == 2)
-	//	echo $_SESSION['_config']['language'];
-
+	
+	///////////////////////
+	// Language Handling //
+	///////////////////////
+	
 	$_SESSION['_config']['translations'] = array(
-				"ar_JO" => "&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;",
-				"bg_BG" => "&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;",
-				"cs_CZ" => "&#268;e&scaron;tina",
-				"da_DK" => "Dansk",
-				"de_DE" => "Deutsch",
-				"el_GR" => "&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940;",
-				"en_AU" => "English",
-				"eo_EO" => "Esperanto",
-				"es_ES" => "Espa&#xf1;ol",
-				"fa_IR" => "Farsi",
-				"fi_FI" => "Suomi",
-				"fr_FR" => "Fran&#xe7;ais",
-				"he_IL" => "&#1506;&#1489;&#1512;&#1497;&#1514;",
-				"hr_HR" => "Hrvatski",
-				"hu_HU" => "Magyar",
-				"is_IS" => "&Iacute;slenska",
-				"it_IT" => "Italiano",
-				"ja_JP" => "&#26085;&#26412;&#35486;",
-				"ka_GE" => "Georgian",
-				"nl_NL" => "Nederlands",
-				"pl_PL" => "Polski",
-				"pt_PT" => "Portugu&#xea;s",
-				"pt_BR" => "Portugu&#xea;s Brasileiro",
-				"ru_RU" => "&#x420;&#x443;&#x441;&#x441;&#x43a;&#x438;&#x439;",
-				"ro_RO" => "Rom&acirc;n&#259;",
-				"sv_SE" => "Svenska",
-				"tr_TR" => "T&#xfc;rk&#xe7;e",
-				"zh_CN" => "&#x4e2d;&#x6587;(&#x7b80;&#x4f53;)");
+				"ar" => "&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;",
+				"bg" => "&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;",
+				"cs" => "&#268;e&scaron;tina",
+				"da" => "Dansk",
+				"de" => "Deutsch",
+				"el" => "&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940;",
+				"en" => "English",
+				"es" => "Espa&#xf1;ol",
+				"fi" => "Suomi",
+				"fr" => "Fran&#xe7;ais",
+				"hu" => "Magyar",
+				"it" => "Italiano",
+				"ja" => "&#26085;&#26412;&#35486;",
+				"lv" => "Latvie&scaron;u",
+				"nl" => "Nederlands",
+				"pl" => "Polski",
+				"pt" => "Portugu&#xea;s",
+				"pt-br" => "Portugu&#xea;s Brasileiro",
+				"ru" => "&#x420;&#x443;&#x441;&#x441;&#x43a;&#x438;&#x439;",
+				"sv" => "Svenska",
+				"tr" => "T&#xfc;rk&#xe7;e",
+				"zh-cn" => "&#x4e2d;&#x6587;(&#x7b80;&#x4f53;)",
+				"zh-tw" => "&#x4e2d;&#x6587;(&#33274;&#28771;)");
 
-        $value=array();
+	
 
 	if(!(array_key_exists('language',$_SESSION['_config']) && $_SESSION['_config']['language'] != ""))
 	{
-		$bits = explode(",", strtolower(str_replace(" ", "", mysql_real_escape_string(array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)?$_SERVER['HTTP_ACCEPT_LANGUAGE']:""))));
+		$languages=array();
+		
+		// parse Accept-Language header
+		$bits = explode(",", strtolower(str_replace(" ", "", array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)?$_SERVER['HTTP_ACCEPT_LANGUAGE']:"")));
 		foreach($bits as $lang)
 		{
 			$b = explode(";", $lang);
@@ -121,59 +115,79 @@
 				$c = floatval(substr($b[1], 2));
 			else
 				$c = 1;
-			$value["$c"] = trim($b[0]);
+			
+			if ($c != 0)
+			{
+				$languages["$c"] = trim($b[0]);
+			}
 		}
-
-		krsort($value);
-
-		reset($value);
-
-		foreach($value as $key => $val)
+		
+		// check if there is an explicit language given as parameter
+		if(array_key_exists("lang",$_REQUEST) && trim($_REQUEST["lang"]) != "")
 		{
-			$val = substr(escapeshellarg($val), 1, -1);
-			$short = substr($val, 0, 2);
-			if($val == "en" || $short == "en")
+			// higher priority as those values in the header
+			$languages["2.0"] = strtolower(trim($_REQUEST["lang"]));
+		}
+		
+		// fallback, qvalues may only have three digits after the .
+		$languages["0.0005"] = "en";
+		
+		// remove any non-conforming values (that's why we don't need to
+		// mysql_real_escape() or escapeshellarg() but take care of the *)
+		// spec: ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )
+		$languages = preg_filter('/^(?:[a-zA-Z]{1,8}(?:-[a-zA-Z]{1,8})*|\*)$/',
+				'$0', $languages);
+
+		krsort($languages, SORT_NUMERIC);
+
+		$all_translations = scandir($_SESSION['_config']['filepath']."/locale/");
+		foreach($languages as $qvalue => $lang)
+		{
+			$lang = strtr($lang, '-', '_');
+			$lang_length = strlen($lang);
+			$chosen_translation = "";
+			foreach ($all_translations as $translation)
 			{
-				$_SESSION['_config']['language'] = "en";
-				break;
+				$translation_lower = strtolower($translation);
+				if ($translation_lower === $lang ||
+						substr($translation, 0, $lang_length + 1) === $lang.'_')
+				{
+					$chosen_translation = $translation;
+					break;
+				}
 			}
-			if(file_exists($_SESSION['_config']['filepath']."/locale/$val/LC_MESSAGES/messages.mo"))
+			if ($chosen_translation !== "")
 			{
-				$_SESSION['_config']['language'] = $val;
-				break;
-			}
-			if(file_exists($_SESSION['_config']['filepath']."/locale/$short/LC_MESSAGES/messages.mo"))
-			{
-				$_SESSION['_config']['language'] = $short;
-				break;
+				if(file_exists($_SESSION['_config']['filepath']."/locale/$chosen_translation/LC_MESSAGES/messages.mo"))
+				{
+					$_SESSION['_config']['language'] = $lang;
+					break;
+				}
 			}
 		}
 	}
-	if(!array_key_exists('_config',$_SESSION) || !array_key_exists('language',$_SESSION['_config']) || strlen($_SESSION['_config']['language']) != 5)
+	if(!array_key_exists('_config',$_SESSION) ||
+			!array_key_exists('language',$_SESSION['_config']) ||
+			$_SESSION['_config']['language'] == "" )
 	{
-		$lang = array_key_exists('language',$_SESSION['_config'])?$_SESSION['_config']['language']:"";
-		$_SESSION['_config']['language'] = "en_AU";
-		foreach($_SESSION['_config']['translations'] as $key => $val)
-		{
-			if(substr($lang, 0, 2) == substr($key, 0, 2))
-			{
-				$_SESSION['_config']['language'] = $val;
-				break;
-			}
-		}
+		$_SESSION['_config']['language'] = "en";
+		trigger_error('$_SESSION[\'_config\'][\'language\'] was not set after '.
+				'the translation search', E_USER_WARNING);
 	}
 
 	$_SESSION['_config']['recode'] = "html..latin-1";
-	if($_SESSION['_config']['language'] == "zh_CN")
+	if($_SESSION['_config']['language'] === "zh_CN" ||
+			$_SESSION['_config']['language'] === "zh_TW")
 	{
 		$_SESSION['_config']['recode'] = "html..gb2312";
-	} else if($_SESSION['_config']['language'] == "pl_PL" || $_SESSION['_config']['language'] == "hu_HU") {
+	} else if($_SESSION['_config']['language'] == "pl" ||
+			$_SESSION['_config']['language'] == "hu") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-2";
-	} else if($_SESSION['_config']['language'] == "ja_JP") {
+	} else if($_SESSION['_config']['language'] == "ja") {
 		$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
-	} else if($_SESSION['_config']['language'] == "ru_RU") {
+	} else if($_SESSION['_config']['language'] == "ru") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-5";
-	} else if($_SESSION['_config']['language'] == "lt_LT") {
+	} else if($_SESSION['_config']['language'] == "lt") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-13";
 	}
 
@@ -182,10 +196,6 @@
 	$domain = 'messages';
 	bindtextdomain($domain, $_SESSION['_config']['filepath']."/locale");
 	textdomain($domain);
-
-	//if($_SESSION['profile']['id'] == -1)
-	//	echo $_SESSION['_config']['language']." - ".$_SESSION['_config']['filepath']."/locale";
-
 
         if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{

@@ -887,7 +887,7 @@ sub HandleCerts($$)
       my $body = _("Hi")." $user{fname},\n\n";
       $body .= sprintf(_("You can collect your certificate for %s by going to the following location:")."\n\n", $row{'email'}.$row{'CN'});
       $body .= "https://www.cacert.org/account.php?id=".($server?"15":"6")."&cert=$row{id}\n\n";
-      $body .= _("If you have not imported CAcert´s root certificate, please go to:")."\n";
+      $body .= _("If you have not imported CAcert's root certificate, please go to:")."\n";
       $body .= "https://www.cacert.org/index.php?id=3\n";
       $body .= "Root cert fingerprint = A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B\n";
       $body .= "Root cert fingerprint = 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33\n\n";
