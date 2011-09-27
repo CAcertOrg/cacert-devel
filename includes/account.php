@@ -2180,7 +2180,8 @@
 
 	if($oldid == 29 && $process != "")
 	{
-		$domain = mysql_real_escape_string(stripslashes(trim($domainname)));
+		// $domain = mysql_real_escape_string(stripslashes(trim($domainname)));
+		$domain = $_SESSION['_config']['domain'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['domainname'])));
 
 		$res1 = mysql_query("select * from `orgdomains` where `domain` like '$domain' and `id`!='".intval($_SESSION['_config']['domid'])."'");
 		$res2 = mysql_query("select * from `domains` where `domain` like '$domain' and `deleted`=0");
@@ -2195,7 +2196,7 @@
 		}
 	}
 
-	if(($oldid == 29 || $oldid == 30) && $process != _("Cancel"))
+	if(($oldid == 29 || $oldid == 30) && $process != "")      // _("Cancel") is handled in front of account.php
 	{
 		$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where 
 				`orgdomlink`.`orgdomid`=`orgdomains`.`id` and
