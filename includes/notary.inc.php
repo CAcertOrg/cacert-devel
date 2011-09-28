@@ -273,35 +273,49 @@
 <?
 	}
 
-	function output_assurances_row($assuranceid,$date,$when,$email,$name,$points,$location,$method,$experience,$userid,$support,$revoked)
+	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
 	{
+
+	$tdstyle="";
+	$emopen="";
+	$emclose="";
+
+	if ($awarded == $points)
+	{
+		if ($awarded == "0")
+		{
+			$tdstyle="style='background-color: #ffff80'";
+			$emopen="<em>";
+			$emclose="</em>";
+		}
+	}
 ?>
     <tr>
-	<td class="DataTD"><?=$assuranceid?></td>
-    	<td class="DataTD"><?=$date?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
 <?
 	if ($support == "1")
 	{
 ?>
-    	<td class="DataTD"><?=$when?></td>
-    	<td class="DataTD"><?=$email?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
 <?	} 
 ?>
-    	<td class="DataTD"><?=$name?></td>
-    	<td class="DataTD"><?=$points?></td>
-    	<td class="DataTD"><?=$location?></td>
-    	<td class="DataTD"><?=$method?></td>
-    	<td class="DataTD"><?=$experience?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
 <?
 	if ($support == "1")
 	{
 		if ($revoked == true)
 		{
 ?>
-			<td class="DataTD">&nbsp;</td>
+			<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
 <?		} else {
 ?>
-			<td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a></td>
+			<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
 		}
 	}
@@ -360,7 +374,7 @@
 			calc_experience ($row,$points,$experience,$sum_experience,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
 			$email = show_email_link ($fromuser['email'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,intval($row['awarded']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,intval($row['awarded']),intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
 
@@ -377,7 +391,7 @@
 			calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
 			$email = show_email_link ($fromuser['email'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
 
