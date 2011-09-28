@@ -102,7 +102,9 @@
 
 	
 
-	if(!(array_key_exists('language',$_SESSION['_config']) && $_SESSION['_config']['language'] != ""))
+	if((array_key_exists("lang",$_REQUEST) && trim($_REQUEST["lang"]) != "") ||
+			!(array_key_exists('language',$_SESSION['_config']) &&
+				$_SESSION['_config']['language'] != "") )
 	{
 		$languages=array();
 		
@@ -135,32 +137,75 @@
 		// remove any non-conforming values (that's why we don't need to
 		// mysql_real_escape() or escapeshellarg() but take care of the *)
 		// spec: ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )
-		$languages = preg_filter('/^(?:[a-zA-Z]{1,8}(?:-[a-zA-Z]{1,8})*|\*)$/',
-				'$0', $languages);
+		function is_language_range($candidate)
+		{
+			return preg_match('/^(?:[a-zA-Z]{1,8}(?:-[a-zA-Z]{1,8})*|\*)$/',
+					$candidate) === 1;
+		}
+		$languages = array_filter($languages, "is_language_range");
 
 		krsort($languages, SORT_NUMERIC);
 
-		$all_translations = scandir($_SESSION['_config']['filepath']."/locale/");
+		$all_translations = array(
+				"ar" => "ar_JO",
+				"bg" => "bg_BG",
+				"cs" => "cs_CZ",
+				"da" => "da_DK",
+				"de" => "de_DE",
+				"el" => "el_GR",
+				"en" => "en_US",
+				"es" => "es_ES",
+				"fa" => "fa_IR",
+				"fi" => "fi_FI",
+				"fr" => "fr_FR",
+				"he" => "he_IL",
+				"hr" => "hr_HR",
+				"hu" => "hu_HU",
+				"id" => "id_ID",
+				"is" => "is_IS",
+				"it" => "it_IT",
+				"ja" => "ja_JP",
+				"ka" => "ka_GE",
+				"ko" => "ko_KR",
+				"lv" => "lv_LV",
+				"nb" => "nb_NO",
+				"nl" => "nl_NL",
+				"pl" => "pl_PL",
+				"pt" => "pt_PT",
+				"pt_BR" => "pt_BR",
+				"ro" => "ro_RO",
+				"ru" => "ru_RU",
+				"sl" => "sl_SI",
+				"sv" => "sv_SE",
+				"th" => "th_TH",
+				"tr" => "tr_TR",
+				"uk" => "uk_UA",
+				"zh_CN" => "zh_CN",
+				"zh_TW" => "zh_TW",
+				);
+		
 		foreach($languages as $qvalue => $lang)
 		{
 			$lang = strtr($lang, '-', '_');
 			$lang_length = strlen($lang);
+			$chosen_locale = "";
 			$chosen_translation = "";
-			foreach ($all_translations as $translation)
+			foreach ($all_translations as $translation => $locale)
 			{
 				$translation_lower = strtolower($translation);
 				if ($translation_lower === $lang ||
-						substr($translation, 0, $lang_length + 1) === $lang.'_')
+						substr($translation_lower, 0, $lang_length + 1) === $lang.'_')
 				{
 					$chosen_translation = $translation;
+					$chosen_locale = $locale;
 					break;
 				}
 			}
-			if ($chosen_translation !== "")
+			if ($chosen_locale !== "")
 			{
 				if(file_exists($_SESSION['_config']['filepath']."/locale/$chosen_translation/LC_MESSAGES/messages.mo"))
 				{
-					$_SESSION['_config']['language'] = $lang;
+					$_SESSION['_config']['language'] = $chosen_locale;
 					break;
 				}
 			}
@@ -170,7 +215,7 @@
 			!array_key_exists('language',$_SESSION['_config']) ||
 			$_SESSION['_config']['language'] == "" )
 	{
-		$_SESSION['_config']['language'] = "en";
+		$_SESSION['_config']['language'] = "en_US";
 		trigger_error('$_SESSION[\'_config\'][\'language\'] was not set after '.
 				'the translation search', E_USER_WARNING);
 	}
@@ -180,14 +225,14 @@
 			$_SESSION['_config']['language'] === "zh_TW")
 	{
 		$_SESSION['_config']['recode'] = "html..gb2312";
-	} else if($_SESSION['_config']['language'] == "pl" ||
-			$_SESSION['_config']['language'] == "hu") {
+	} else if($_SESSION['_config']['language'] == "pl_PL" ||
+			$_SESSION['_config']['language'] == "hu_HU") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-2";
-	} else if($_SESSION['_config']['language'] == "ja") {
+	} else if($_SESSION['_config']['language'] == "ja_JP") {
 		$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
-	} else if($_SESSION['_config']['language'] == "ru") {
+	} else if($_SESSION['_config']['language'] == "ru_RU") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-5";
-	} else if($_SESSION['_config']['language'] == "lt") {
+	} else if($_SESSION['_config']['language'] == "lt_LT") {
 		$_SESSION['_config']['recode'] = "html..ISO-8859-13";
 	}
 
