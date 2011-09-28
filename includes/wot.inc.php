@@ -231,6 +231,7 @@
 	function output_assurances_row($assuranceid,$date,$name,$awarded,$points,$location,$method,$experience)
 	{
 
+	$tdstyle="";
 	$emopen="";
 	$emclose="";
 
@@ -238,6 +239,7 @@
 	{
 		if ($awarded == "0")
 		{
+			$tdstyle="style='background-color: #ffff80'";
 			$emopen="<em>";
 			$emclose="</em>";
 		}
@@ -245,13 +247,13 @@
 
 ?>
     <tr>
-	<td class="DataTD"><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-    	<td class="DataTD"><?=$emopen?><?=$date?><?=$emclose?></td>
-    	<td class="DataTD"><?=$emopen?><?=$name?><?=$emclose?></td>
-    	<td class="DataTD"><?=$emopen?><?=$awarded?><?=$emclose?></td>
-    	<td class="DataTD"><?=$emopen?><?=$location?><?=$emclose?></td>
-    	<td class="DataTD"><?=$emopen?><?=$method?><?=$emclose?></td>
-    	<td class="DataTD"><?=$emopen?><?=$experience?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
     </tr>
 <?
 	}
