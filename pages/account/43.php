@@ -181,7 +181,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>"><?=$row['codesign']?></a></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Org Admin")?>:</td>
+    <td class="DataTD"><?=_("Org Assurer")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>"><?=$row['orgadmin']?></a></td>
   </tr>
   <tr>
