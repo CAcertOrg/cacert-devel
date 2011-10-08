@@ -432,10 +432,10 @@
 			$id = 1;
 			$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>\n";
 		}
-		if($_SESSION['signup']['fname'] == "" || $_SESSION['signup']['lname'] == "")
+		if($_SESSION['signup']['lname'] == "")
 		{
 			$id = 1;
-			$_SESSION['_config']['errmsg'] .= _("First and/or last names were blank.")."<br>\n";
+			$_SESSION['_config']['errmsg'] .= _("Last name is blank. If your name consists only of a single part please use the last name field.")."<br>\n";
 		}
 		if($_SESSION['signup']['year'] < 1900 || $_SESSION['signup']['month'] < 1 || $_SESSION['signup']['month'] > 12 ||
 			$_SESSION['signup']['day'] < 1 || $_SESSION['signup']['day'] > 31 ||
