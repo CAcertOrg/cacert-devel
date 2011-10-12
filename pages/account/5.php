@@ -19,12 +19,13 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="6" class="title"><?=_("Client Certificates")?> - <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
+    <td colspan="7" class="title"><?=_("Client Certificates")?> - <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("Email Address")?></td>
+	<td class="DataTD"><?=_("SerialNumber")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
     <td class="DataTD"><?=_("Login")?></td>
@@ -38,6 +39,7 @@
 			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`, 
 			`emailcerts`.`id`,
 			`emailcerts`.`CN`,
+			`emailcerts`.`serial`,
 			emailcerts.disablelogin as `disablelogin`
 			from `emailcerts`
 			where `emailcerts`.`memid`='".$_SESSION['profile']['id']."'
@@ -54,7 +56,7 @@
 	{
 ?>
   <tr>
-    <td colspan="5" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
+    <td colspan="7" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -84,6 +86,7 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
 <? } ?>
+	<td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
     <td class="DataTD">
