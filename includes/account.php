@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	require_once("../includes/loggedin.php");
+	require_once("../includes/lib/l10n.php");
 
 	loadem("account");
 
@@ -2345,7 +2346,7 @@
 	{
 		csrf_check("mainlang");
 		$lang = mysql_real_escape_string($_REQUEST['lang']);
-		foreach($_SESSION['_config']['translations'] as $key => $val)
+		foreach(L10n::$translations as $key => $val)
 		{
 			if($key == $lang)
 			{
