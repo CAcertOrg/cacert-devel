@@ -327,5 +327,7 @@ class L10n {
 			$_SESSION['_config']['recode'] = "html..ISO-8859-13";
 			
 		}
+		
+		return true;
 	}
 }
