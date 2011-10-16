@@ -318,13 +318,9 @@ $query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION[
 			$_SESSION['profile']['points'] += $addpoints;
 		}
 
-		if($_SESSION['_config']['notarise']['language'] != "")
-		{
-			$userlang = $_SESSION['_config']['notarise']['language'];
-			putenv("LANG=".$userlang);
-			setlocale(LC_ALL, $userlang);
-		}
-
+		$my_translation = L10n::get_translation();
+		L10n::set_translation($_SESSION['_config']['notarise']['language']);
+		
 		$body  = sprintf(_("You are receiving this email because you have been assured by %s %s (%s)."), $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)
 			$body .= sprintf(_("You were issued %s points however the system has rounded this down to %s and you now have %s points in total."), $_POST['points'], $newpoints, ($newpoints + $drow['total']))."\n\n";
@@ -355,8 +351,7 @@ $query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION[
 
 		sendmail($_SESSION['_config']['notarise']['email'], "[CAcert.org] "._("You've been Assured."), $body, "support@cacert.org", "", "", "CAcert Website");
 
-		putenv("LANG=".$_SESSION['profile']['language']);
-		setlocale(LC_ALL, $_SESSION['profile']['language']);
+		L10n::set_translation($my_translation);
 
 		$body  = sprintf(_("You are receiving this email because you have assured %s %s (%s)."), $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)

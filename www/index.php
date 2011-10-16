@@ -14,8 +14,9 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
+*/
+
+require_once('../includes/lib/l10n.php');
 
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
@@ -310,18 +311,12 @@
 
 			if($_SESSION['profile']['language'] == "")
 			{
-				$query = "update `users` set `language`='".$_SESSION['_config']['language']."'
+				$query = "update `users` set `language`='".L10n::get_translation()."'
 						where `id`='".$_SESSION['profile']['id']."'";
 				mysql_query($query);
 			} else {
-				$_SESSION['_config']['language'] = $_SESSION['profile']['language'];
-
-				putenv("LANG=".$_SESSION['_config']['language']);
-				setlocale(LC_ALL, $_SESSION['_config']['language']);
-
-				$domain = 'messages';
-				bindtextdomain("$domain", $_SESSION['_config']['filepath']."/locale");
-				textdomain("$domain");
+				L10n::set_translation($_SESSION['profile']['language']);
+				L10n::init_gettext();
 			}
 			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
 			$res = mysql_query($query);
@@ -551,7 +546,7 @@
 			mysql_query($query);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
-			$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n"; //."&"."lang=".$_SESSION['_config']['language']."\n\n";
+			$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n";
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
 			sendmail($_SESSION['signup']['email'], "[CAcert.org] "._("Mail Probe"), $body, "support@cacert.org", "", "", "CAcert Support");

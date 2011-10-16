@@ -228,7 +228,8 @@ class L10n {
 	/**
 	 * Get the set translation
 	 * 
-	 * @return string a translation code or the empty string if not set
+	 * @return string
+	 * 		a translation code or the empty string if not set
 	 */
 	public static function get_translation() {
 		if (array_key_exists('language', $_SESSION['_config'])) {
@@ -241,8 +242,8 @@ class L10n {
 	/**
 	 * Set the translation to use.
 	 * 
-	 * @param string $translation_code    the translation code as specified in
-	 * 		the keys of {@link translations}
+	 * @param string $translation_code
+	 * 		the translation code as specified in the keys of {@link $translations}
 	 * 
 	 * @return bool
 	 * 		<ul>
@@ -297,37 +298,46 @@ class L10n {
 			return false;
 		}
 		
-		// configure gettext
-		$domain = 'messages';
-		bindtextdomain($domain, $_SESSION['_config']['filepath']."/locale");
-		textdomain($domain);
 		
-		
-		// save the setting
-		$_SESSION['_config']['language'] = $translation_code;
-		
-		
-		// Set up the recode settings needed e.g. in PDF creation
-		$_SESSION['_config']['recode'] = "html..latin-1";
-		
-		if($translation_code === "zh-cn" || $translation_code === "zh-tw")
-		{
-			$_SESSION['_config']['recode'] = "html..gb2312";
+		// only set if we're running in a server not in a script
+		if (isset($_SESSION)) {
+			// save the setting
+			$_SESSION['_config']['language'] = $translation_code;
 			
-		} else if($translation_code === "pl" || $translation_code === "hu") {
-			$_SESSION['_config']['recode'] = "html..ISO-8859-2";
 			
-		} else if($translation_code === "ja") {
-			$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
+			// Set up the recode settings needed e.g. in PDF creation
+			$_SESSION['_config']['recode'] = "html..latin-1";
 			
-		} else if($translation_code === "ru") {
-			$_SESSION['_config']['recode'] = "html..ISO-8859-5";
-			
-		} else if($translation_code == "lt") { // legacy, keep for reference
-			$_SESSION['_config']['recode'] = "html..ISO-8859-13";
-			
+			if($translation_code === "zh-cn" || $translation_code === "zh-tw")
+			{
+				$_SESSION['_config']['recode'] = "html..gb2312";
+				
+			} else if($translation_code === "pl" || $translation_code === "hu") {
+				$_SESSION['_config']['recode'] = "html..ISO-8859-2";
+				
+			} else if($translation_code === "ja") {
+				$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
+				
+			} else if($translation_code === "ru") {
+				$_SESSION['_config']['recode'] = "html..ISO-8859-5";
+				
+			} else if($translation_code == "lt") { // legacy, keep for reference
+				$_SESSION['_config']['recode'] = "html..ISO-8859-13";
+				
+			}
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Sets up the text domain used by gettext
+	 * 
+	 * @param string $domain
+	 * 		the gettext domain that should be used, defaults to "messages"
+	 */
+	public static function init_gettext($domain = 'messages') {
+		bindtextdomain($domain, $_SESSION['_config']['filepath'].'/locale');
+		textdomain($domain);
 	}
 }
