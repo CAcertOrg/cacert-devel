@@ -72,6 +72,7 @@
 	}
 
 	L10n::detect_language();
+	L10n::init_gettext();
 
         if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
@@ -516,14 +517,6 @@
 			$data = $before.$char.$after;
 		}
 		return(utf8_decode($data));
-	}
-
-	function screenshot($img)
-	{
-		if(file_exists("../screenshots/".$_SESSION['_config']['language']."/$img"))
-			return("/screenshots/".$_SESSION['_config']['language']."/$img");
-		else
-			return("/screenshots/en/$img");
 	}
 
 	function signmail($to, $subject, $message, $from, $replyto = "")

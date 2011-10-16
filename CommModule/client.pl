@@ -595,7 +595,7 @@ sub OpenPGPextractExpiryDate ($)
 # Sets the locale according to the users preferred language
 sub setUsersLanguage($)
 {
-  my $lang="de_DE"; 
+  my $lang="en_US";
   print "Searching for the language of the user $_[0]\n";
   my @a=$dbh->selectrow_array("select language from users where id='".int($_[0])."'");
   $lang = $1 if($a[0]=~m/(\w+_[\w.@]+)/);

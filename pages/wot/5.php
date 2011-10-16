@@ -39,7 +39,7 @@
 <select name="reminder-lang">
 <?
 	if($_SESSION['_config']['reminder-lang'] == "")
-		$_SESSION['_config']['reminder-lang'] = $_SESSION['profile']['language'];
+		$_SESSION['_config']['reminder-lang'] = L10n::get_translation();
         foreach(L10n::$translations as $key => $val)
         {
                 echo "<option value='$key'";
