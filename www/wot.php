@@ -17,6 +17,9 @@
 */ ?>
 <?
 
+require_once("../includes/loggedin.php");
+require_once("../includes/lib/l10n.php");
+
 function show_page($target,$message,$error)
 {
 	showheader(_("My CAcert.org Account!"));
@@ -82,34 +85,30 @@ function show_page($target,$message,$error)
 function send_reminder()
 {
 	$body = "";
-	if($_POST['reminder-lang'] != "" && $_POST['reminder-lang'] != "en_AU")
-        {
-		$userlang = $_POST['reminder-lang'];
-		$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
-		putenv("LANG=".$userlang);
-		setlocale(LC_ALL, $userlang);
-
-		$body .= $_SESSION['_config']['translations'][$userlang].":\n\n";
+	
+	$my_translation = L10n::get_translation();
+	
+	$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
+	
+	$reminder_translations[] = $_POST['reminder-lang'];
+	if ( !in_array("en", $reminder_translations, $strict=true) ) {
+		$reminder_translations[] = "en";
+	}
+	
+	foreach ($reminder_translations as $translation) {
+		L10n::set_translation($translation);
+		
+		$body .= L10n::$translations[$translation].":\n\n";
 		$body .= sprintf(_("This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."), $_SESSION['profile']['fname']." (".$_SESSION['profile']['email'].")", "http://www.cacert.org", $_SESSION['profile']['fname'])."\n\n";
 		$body .= _("Best regards")."\n";
-		$body .= _("CAcert Support Team");
-
-		$body .= "\n\nEnglish:\n\n";
+		$body .= _("CAcert Support Team")."\n\n";
 	}
-
-	$body .= sprintf("This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued.", $_SESSION['profile']['fname']." (".$_SESSION['profile']['email'].")", "http://www.cacert.org", $_SESSION['profile']['fname'])."\n\n";
-	$body .= "Best regards"."\n";
-	$body .= "CAcert Support Team";
-
+	
+	L10n::set_translation($reminder_translations[0]); // for the subject
 	sendmail($_POST['email'], "[CAcert.org] "._("Reminder Notice"), $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
-
-	if($_POST['reminder-lang'] != "" && $_POST['reminder-lang'] != "en_AU")
-	{
-        	$userlang = $_SESSION['profile']['language'];
-		putenv("LANG=".$userlang);
-		setlocale(LC_ALL, $userlang);
-	}
-
+	
+	L10n::set_translation($my_translation);
+	
 	$_SESSION['_config']['remindersent'] = 1;
 	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
@@ -117,8 +116,6 @@ function send_reminder()
 
 
 
-
-	require_once("../includes/loggedin.php");
 
 	loadem("account");
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
