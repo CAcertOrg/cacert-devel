@@ -24,54 +24,55 @@ function show_page($target,$message,$error)
 		$message=_("ERROR").": ".$error;
 	if ($message != "")
 		echo "<p><font color='orange' size='+1'>".$message."</font></p>";
+
 	switch ($target)
 	{
-		case 0:
+		case '0':
 		case 'InfoPage':	includeit(0, "wot");
 					break;
-		case 1:
+		case '1':
 		case 'ListByCity':	includeit(1, "wot");
 					break;
-		case 2:
+		case '2':
 		case 'BecomeAssurer':	includeit(2, "wot");
 					break;
-		case 3:
+		case '3':
 		case 'TrustRules':	includeit(3, "wot");
 					break;
-		case 4:
+		case '4':
 		case 'ShowTTPInfo':	includeit(4, "wot");
 					break;
-		case 5:
+		case '5';
 		case 'EnterEmail':	includeit(5, "wot");
 					break;
-		case 6:
+		case '6':
 		case 'VerifyData':	includeit(6, "wot");
 					break;
-//		case 7:
+//		case '7':
 //		case '???':		includeit(7, "wot");
 //					break;
-		case 8:
+		case '8':
 		case 'EnterMyInfo':	includeit(8, "wot");
 					break;
-		case 9:
+		case '9':
 		case 'ContactAssurer':	includeit(9, "wot");
 					break;
-		case 10:
+		case '10':
 		case 'MyPointsOld':	includeit(10, "wot");
 					break;
-//		case 11:
+//		case '11':
 //		case 'OAInfo':		includeit(11, "wot");
 //					break;
-		case 12:
+		case '12':
 		case 'SearchAssurer':	includeit(12, "wot");
 					break;
-		case 13:
+		case '13':
 		case 'EnterMyCity':	includeit(13, "wot");
 					break;
-//		case 14:
+//		case '14':
 //		case 'EnterEmail':	includeit(14, "wot");
 //					break;
-		case 15:
+		case '15':
 		case 'MyPointsNew':	includeit(15, "wot");
 					break;
 	}
@@ -471,7 +472,7 @@ $query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION[
 	}
 
 //	showheader(_("My CAcert.org Account!"));
-// echo "ID now = ".$id."/".$oldid.">>".$iecho;
+//	echo "ID now = ".$id."/".$oldid.">>".$iecho;
 //	includeit($id, "wot");
 //	showfooter();
 show_page ($id,"","");
