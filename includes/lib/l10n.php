@@ -214,7 +214,7 @@ class L10n {
 		// No translation found yet => try the prefixes
 		arsort($fallbacks, SORT_NUMERIC);
 		foreach ($fallbacks as $lang => $qvalue) {
-			if (self::set_translation($chosen_translation)) {
+			if (self::set_translation($lang)) {
 				return;
 			}
 		}
