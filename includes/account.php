@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	require_once("../includes/loggedin.php");
+	require_once('lib/check_weak_key.php');
 
 	loadem("account");
 

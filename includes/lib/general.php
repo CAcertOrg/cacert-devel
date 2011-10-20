@@ -47,4 +47,24 @@ function get_user_id_from_cert($serial, $issuer_cn)
 	return -1;
 }
 
-?>
+/**
+* Produces a log entry with the error message with log level E_USER_WARN
+* and a random ID an returns a message that can be displayed to the user
+* including the generated ID
+*
+* @param $errormessage string
+* 		The error message that should be logged
+* @return string containing the generated ID that can be displayed to the
+* 		user
+*/
+function failWithId($errormessage) {
+	$errorId = rand();
+	trigger_error("$errormessage. ID: $errorId", E_USER_WARNING);
+	return sprintf(_("Something went wrong when processing your request. ".
+				"Please contact %s for help and provide them with the ".
+				"following ID: %d"),
+			"<a href='mailto:support@cacert.org?subject=System%20Error%20-%20".
+				"ID%3A%20$errorId'>support@cacert.org</a>",
+	$errorId);
+}
+
