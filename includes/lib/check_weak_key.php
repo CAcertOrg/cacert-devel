@@ -120,7 +120,7 @@ function checkWeakKeyText($text)
 	$algorithm))
 	{
 		return failWithId("checkWeakKeyText(): Couldn't extract the ".
-					"public key algorithm used");
+					"public key algorithm used.\nData:\n$text");
 	} else {
 		$algorithm = $algorithm[1];
 	}
@@ -132,7 +132,7 @@ function checkWeakKeyText($text)
 		$keysize))
 		{
 			return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
-						"key size");
+						"key size.\nData:\n$text");
 		} else {
 			$keysize = intval($keysize[1]);
 		}
@@ -167,14 +167,15 @@ function checkWeakKeyText($text)
 			// not vulnerable => do nothing
 		} else {
 			return failWithId("checkWeakKeyText(): Something went wrong in".
-					"checkDebianVulnerability()");
+					"checkDebianVulnerability().\nKeysize: $keysize\n".
+					"Data:\n$text");
 		}
 			
 		if (!preg_match('/^\s*Exponent: (\d+) \(0x[0-9a-fA-F]+\)$/m', $text,
 		$exponent))
 		{
 			return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
-						"exponent");
+						"exponent.\nData:\n$text");
 		} else {
 			$exponent = $exponent[1]; // exponent might be very big =>
 			//handle as string using bc*()
@@ -231,7 +232,8 @@ function checkDebianVulnerability($text, $keysize = 0)
 		$algorithm))
 		{
 			trigger_error("checkDebianVulnerability(): Couldn't extract ".
-					"the public key algorithm used", E_USER_WARNING);
+					"the public key algorithm used.\nData:\n$text",
+					E_USER_WARNING);
 			return null;
 		} else {
 			$algorithm = $algorithm[1];
@@ -244,7 +246,7 @@ function checkDebianVulnerability($text, $keysize = 0)
 		$keysize))
 		{
 			trigger_error("checkDebianVulnerability(): Couldn't parse the ".
-					"RSA key size", E_USER_WARNING);
+					"RSA key size.\nData:\n$text", E_USER_WARNING);
 			return null;
 		} else {
 			$keysize = intval($keysize[1]);
@@ -275,7 +277,7 @@ function checkDebianVulnerability($text, $keysize = 0)
 	$text, $modulus))
 	{
 		trigger_error("checkDebianVulnerability(): Couldn't extract the ".
-				"RSA modulus", E_USER_WARNING);
+				"RSA modulus.\nData:\n$text", E_USER_WARNING);
 		return null;
 	} else {
 		$modulus = $modulus[1];
