@@ -65,7 +65,7 @@ function checkWeakKeyX509($cert, $encoding = "PEM")
 	$status = runCommand("openssl x509 -inform $encoding -text -noout",
 	                     $cert, $certText);
 	if ($status === true) {
-		return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
+		return failWithId("checkWeakKeyX509(): Failed to start OpenSSL");
 	}
 	
 	if ($status !== 0 || $certText === "") {
@@ -92,7 +92,7 @@ function checkWeakKeySPKAC($spkac, $spkacname = "SPKAC")
 	$spkacname = escapeshellarg($spkacname);
 	$status = runCommand("openssl spkac -spkac $spkacname", $spkac, $spkacText);
 	if ($status === true) {
-		return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
+		return failWithId("checkWeakKeySPKAC(): Failed to start OpenSSL");
 	}
 	
 	if ($status !== 0 || $spkacText === "") {
