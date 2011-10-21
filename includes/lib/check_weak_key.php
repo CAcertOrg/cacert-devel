@@ -33,37 +33,18 @@ require_once 'general.php';
 */
 function checkWeakKeyCSR($csr, $encoding = "PEM")
 {
-	// non-PEM-encodings may be binary so don't use echo
-	$descriptorspec = array(
-	0 => array("pipe", "r"), // STDIN for child
-	1 => array("pipe", "w"), // STDOUT for child
-	);
 	$encoding = escapeshellarg($encoding);
-	$proc = proc_open("openssl req -inform $encoding -text -noout",
-	$descriptorspec, $pipes);
-
-	if (is_resource($proc))
-	{
-		fwrite($pipes[0], $csr);
-		fclose($pipes[0]);
-			
-		$csrText = "";
-		while (!feof($pipes[1]))
-		{
-			$csrText .= fread($pipes[1], 8192);
-		}
-		fclose($pipes[1]);
-			
-		if (($status = proc_close($proc)) !== 0 || $csrText === "")
-		{
-			return _("I didn't receive a valid Certificate Request, hit ".
-				"the back button and try again.");
-		}
-	} else {
+	$status = runCommand("openssl req -inform $encoding -text -noout",
+	                     $csr, $csrText);
+	if ($status === true) {
 		return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
 	}
-
-
+	
+	if ($status !== 0 || $csrText === "") {
+		return _("I didn't receive a valid Certificate Request. Hit ".
+			"the back button and try again.");
+	}
+	
 	return checkWeakKeyText($csrText);
 }
 
@@ -80,37 +61,18 @@ function checkWeakKeyCSR($csr, $encoding = "PEM")
  */
 function checkWeakKeyX509($cert, $encoding = "PEM")
 {
-	// non-PEM-encodings may be binary so don't use echo
-	$descriptorspec = array(
-	0 => array("pipe", "r"), // STDIN for child
-	1 => array("pipe", "w"), // STDOUT for child
-	);
 	$encoding = escapeshellarg($encoding);
-	$proc = proc_open("openssl x509 -inform $encoding -text -noout",
-	$descriptorspec, $pipes);
-
-	if (is_resource($proc))
-	{
-		fwrite($pipes[0], $cert);
-		fclose($pipes[0]);
-			
-		$certText = "";
-		while (!feof($pipes[1]))
-		{
-			$certText .= fread($pipes[1], 8192);
-		}
-		fclose($pipes[1]);
-			
-		if (($status = proc_close($proc)) !== 0 || $certText === "")
-		{
-			return _("I didn't receive a valid Certificate Request, hit ".
-				"the back button and try again.");
-		}
-	} else {
+	$status = runCommand("openssl x509 -inform $encoding -text -noout",
+	                     $cert, $certText);
+	if ($status === true) {
 		return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
 	}
-
-
+	
+	if ($status !== 0 || $certText === "") {
+		return _("I didn't receive a valid Certificate Request. Hit ".
+			"the back button and try again.");
+	}
+	
 	return checkWeakKeyText($certText);
 }
 
@@ -127,16 +89,17 @@ function checkWeakKeyX509($cert, $encoding = "PEM")
  */
 function checkWeakKeySPKAC($spkac, $spkacname = "SPKAC")
 {
-	/* Check for the debian OpenSSL vulnerability */
-
-	$spkac = escapeshellarg($spkac);
 	$spkacname = escapeshellarg($spkacname);
-	$spkacText = `echo $spkac | openssl spkac -spkac $spkacname`;
-	if ($spkacText === null) {
-		return _("I didn't receive a valid Certificate Request, hit the ".
-				"back button and try again.");
+	$status = runCommand("openssl spkac -spkac $spkacname", $spkac, $spkacText);
+	if ($status === true) {
+		return failWithId("checkWeakKeyCSR(): Failed to start OpenSSL");
 	}
-
+	
+	if ($status !== 0 || $spkacText === "") {
+		return _("I didn't receive a valid Certificate Request. Hit the ".
+			"back button and try again.");
+	}
+	
 	return checkWeakKeyText($spkacText);
 }
 
@@ -339,7 +302,7 @@ function checkDebianVulnerability($text, $keysize = 0)
 	// $checksum and $blacklist should be safe, but just to make sure
 	$checksum = escapeshellarg($checksum);
 	$blacklist = escapeshellarg($blacklist);
-	exec("grep $checksum $blacklist", $dummy, $debianVuln);
+	$debianVuln = runCommand("grep $checksum $blacklist");
 	if ($debianVuln === 0) // grep returned something => it is on the list
 	{
 		return true;
