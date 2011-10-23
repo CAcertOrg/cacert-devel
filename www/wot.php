@@ -252,14 +252,13 @@ $iecho= "c";
 
 		$_POST['expire'] = 0;
 
-/* should not be necessary when 15.php is being used
 		if(($drow['total'] + $newpoints) > 100 && $max < 100)
 			$newpoints = 100 - $drow['total'];
 		if(($drow['total'] + $newpoints) > $max && $max >= 100)
 			$newpoints = $max - $drow['total'];
 		if($newpoints < 0)
 			$newpoints = 0;
-*/	
+		
 		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
