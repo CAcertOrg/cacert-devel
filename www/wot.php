@@ -111,7 +111,6 @@ function send_reminder()
 	L10n::set_translation($my_translation);
 	
 	$_SESSION['_config']['remindersent'] = 1;
-	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
 
 
@@ -139,13 +138,13 @@ function send_reminder()
 
 	if($oldid == 6 && intval($_SESSION['_config']['notarise']['id']) <= 0)
 	{
-		show_page ("EnterEmail","","You are not an Assurer");
+		show_page ("EnterEmail","",_("Something went wrong. Please enter the email address again"));
 		exit;
 	}
 	if($oldid == 5 && array_key_exists('reminder',$_POST) && $_POST['reminder'] != "")
 	{
 		send_reminder();
-		show_page ("EnterEmail","Reminder sent","");
+		show_page ("EnterEmail",_("A reminder notice has been sent."),"");
 		exit;
 	}
 
@@ -160,19 +159,14 @@ function send_reminder()
 			exit;
 		} else 
 		{
-			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
 			$_SESSION['_config']['noemailfound'] = 0;
+			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
+			if ($_SESSION['_config']['notarise']['verified'] == 0)
+			{
+				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
+				exit;
+			}
 		}
-
-		$query = "select `verified` from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
-		$res = mysql_query($query);
-		$drow = mysql_fetch_assoc($res);
-		if ($drow['verified'] = 0)
-		{
-			show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
-			exit;
-		}
-	
 	}
 
 	if($oldid == 5 || $oldid == 6)
@@ -249,20 +243,19 @@ $iecho= "c";
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
 		
-$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
 
 		$_POST['expire'] = 0;
 
-/* should not be necessary when 15.php is being used
 		if(($drow['total'] + $newpoints) > 100 && $max < 100)
 			$newpoints = 100 - $drow['total'];
 		if(($drow['total'] + $newpoints) > $max && $max >= 100)
 			$newpoints = $max - $drow['total'];
 		if($newpoints < 0)
 			$newpoints = 0;
-*/	
+		
 		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
@@ -446,7 +439,7 @@ $query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION[
 			{
 				sendmail($user['email'], "[CAcert.org] ".$_REQUEST['subject'], $_REQUEST['message'],
 					$_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']);
-				show_page("ContactAssurer",_("Your email has been sent to")." ".$user['fname'].".<br />[ <a href='javascript:history.go(-2)'>Go Back</a> ]","");
+				show_page("ContactAssurer",_("Your email has been sent to")." ".$user['fname'].".<br />[ <a href='javascript:history.go(-2)'>"._("Go Back")."</a> ]","");
 				exit;
 			} else {
 				show_page(0,"",_("Sorry, I was unable to locate that user."));
