@@ -106,10 +106,7 @@
 
 	function calc_experience ($row,&$points,&$experience,&$sum_experience)
 	{
-		if ($row['awarded'] < $row['points'])		
-			$apoints += $row['points'];
-		else
-			$apoints += $row['awarded'];
+		$apoints = max($row['points'], $row['awarded']);
 
 		$points += $apoints;
 
