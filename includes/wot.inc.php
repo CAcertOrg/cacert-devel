@@ -106,14 +106,20 @@
 
 	function calc_experience ($row,&$points,&$experience,&$sum_experience)
 	{
-		$points += $row['awarded'];
+		if ($row['awarded'] < $row['points'])		
+			$apoints += $row['points'];
+		else
+			$apoints += $row['awarded'];
+
+		$points += $apoints;
+
 		$experience = "&nbsp;";
 		if ($row['method'] == "Face to Face Meeting")
 		{
 			$sum_experience = $sum_experience +2;
 			$experience = "2";
 		}
-		return $row['awarded'];
+		return $apoints;
 	}
 
 	function calc_assurances ($row,&$points,&$experience,&$sumexperience,&$awarded)
@@ -308,9 +314,9 @@
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['to'])); 
-			calc_experience ($row,$points,$experience,$sum_experience);
+			$apoints = calc_experience ($row,$points,$experience,$sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$name,intval($row['awarded']),intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
 		}
 	}
 
