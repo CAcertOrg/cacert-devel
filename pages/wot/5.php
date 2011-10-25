@@ -20,16 +20,10 @@
 <? 
   if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") 
   {
-    if(array_key_exists('reminderset',$_SESSION['_config']) && $_SESSION['_config']['remindersent'] == 1) 
-    {
-      ?><font color="orange" size="+1"><?
-    }
-    else 
-    { 
-      ?><font color="orange" size="+1"><?=_("ERROR")?>: <?
-    }
-    echo $_SESSION['_config']['error']."</font>";
-    unset($_SESSION['_config']['error']);
+    ?><font color="orange" size="+1">
+      <? echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
+    </font>
+    <?unset($_SESSION['_config']['error']);
   } 
 ?>
 <? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
