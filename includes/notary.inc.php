@@ -285,9 +285,12 @@
 	{
 		if ($awarded == "0")
 		{
-			$tdstyle="style='background-color: #ffff80'";
-			$emopen="<em>";
-			$emclose="</em>";
+			if ($when < "2006-09-01")
+			{
+				$tdstyle="style='background-color: #ffff80'";
+				$emopen="<em>";
+				$emclose="</em>";
+			}
 		}
 	}
 ?>
