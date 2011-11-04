@@ -21,8 +21,7 @@
 
 # This particular version migrates from the preversioned state to version 1
 # If you want to reuse it for further migrations you probably should pay special 
-# attention because you have to adjust it quite a bit (e.g. check the "version"
-# column in the "schema_version" table instead of whether it has any entries)
+# attention because you have to adjust it a bit
 
 set -e # script fails if any command fails
 
@@ -46,19 +45,18 @@ fi
 
 mysql_opt=" --batch --skip-column-names $@"
 
-schema_version_count=$( mysql $mysql_opt << 'SQL'
+schema_version=$( mysql $mysql_opt <<- 'SQL'
 	CREATE TABLE IF NOT EXISTS `schema_version` (
-		`id` int(11) NOT NULL, -- that is intended, there should only be one row
-		`version` int(11) NOT NULL,
-		`when` datetime NOT NULL,
-		PRIMARY KEY (`id`)
+		`id` int(11) PRIMARY KEY auto_increment,
+		`version` int(11) NOT NULL UNIQUE,
+		`when` datetime NOT NULL
 	) DEFAULT CHARSET=latin1;
 	
-	SELECT COUNT(*) FROM `schema_version`;
+	SELECT MAX(`version`) FROM `schema_version`;
 SQL
 )
 
-if [ $schema_version_count -ne 0 ]; then
+if [ $schema_version != "NULL" ]; then
 	cat >&$STDERR <<- ERROR
 		Error: database schema is not in the right version to do the migration!
 		Expected version: 0 (i.e. the version before there was versioning)
@@ -67,10 +65,10 @@ if [ $schema_version_count -ne 0 ]; then
 fi
 
 
-mysql $mysql_opt << 'SQL'
+mysql $mysql_opt <<- 'SQL'
 	-- CCA agreements and such
 	CREATE TABLE `user_agreements` (
-		`id` int(11) NOT NULL auto_increment,
+		`id` int(11) PRIMARY KEY auto_increment,
 		
 		-- the user that agrees
 		`memid` int(11) NOT NULL,
@@ -93,9 +91,7 @@ mysql $mysql_opt << 'SQL'
 		`method` varchar(100) NOT NULL,
 		
 		-- user comment
-		`comment` varchar(100) DEFAULT NULL,
-		
-		PRIMARY KEY (`id`)
+		`comment` varchar(100) DEFAULT NULL
 	) DEFAULT CHARSET=latin1;
 	
 	
@@ -158,8 +154,8 @@ mysql $mysql_opt << 'SQL'
 	
 	-- Update schema version number
 	INSERT INTO `schema_version`
-		(`id`, `version`, `when`) VALUES
-		('0' , '1'      , NOW() );
+		(`version`, `when`) VALUES
+		('1'      , NOW() );
 SQL
 
 
