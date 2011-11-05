@@ -30,20 +30,21 @@
     <td class="DataTD"><?=_("Expires")?></td>
 
 <?
-	$query = "select UNIX_TIMESTAMP(`created`) as `created`,
-			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
-			UNIX_TIMESTAMP(`expire`) as `expired`,
-			`expire` as `expires`, `revoked` as `revoke`,
-			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `serial`, `id`
-			from `orgemailcerts`, `org`
-			where `memid`='".intval($_SESSION['profile']['id'])."' and
+	$query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
+			UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+			UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
+			`oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
+			UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
+			`oemail`.`CN`, `oemail`.`serial`, `oeamil`.`id`
+			from `orgemailcerts` as `oemail`, `org`
+			where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 				`org`.`orgid`=`orgemailcerts`.`orgid` ";
 	if($viewall != 1)
 	{
-		$query .= "AND `revoked`=0 AND `renewed`=0 ";
+		$query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
 		$query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
 	}
-	$query .= "ORDER BY `modified` desc";
+	$query .= "ORDER BY `oemail`.`modified` desc";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
 	{
