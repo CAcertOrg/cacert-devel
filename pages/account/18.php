@@ -35,10 +35,10 @@
 			UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
 			`oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
-			`oemail`.`CN`, `oemail`.`serial`, `oeamil`.`id`
+			`oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`
 			from `orgemailcerts` as `oemail`, `org`
 			where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
-				`org`.`orgid`=`orgemailcerts`.`orgid` ";
+				`org`.`orgid`=`oemail`.`orgid` ";
 	if($viewall != 1)
 	{
 		$query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
