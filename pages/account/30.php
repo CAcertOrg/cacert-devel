@@ -41,5 +41,6 @@
 <input type="hidden" name="oldid" value="<?=intval($id)?>">
 <input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
 <input type="hidden" name="domain" value="<?=sanitizeHTML($row['domain'])?>">
+<input type="hidden" name="domid" value="<?=intval($_REQUEST['domid'])?>">
 
 </form>
