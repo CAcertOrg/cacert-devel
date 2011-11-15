@@ -35,11 +35,12 @@
     <td class="DataTD"><input type="text" name="domainname" value="<?=sanitizeHTML($_SESSION['_config']['domain'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><input type="submit" name="process" value="<?=_("Cancel")?>"></td>
+    <td class="DataTD"><input type="submit" name="cancel" value="<?=_("Cancel")?>"></td>
     <td class="DataTD"><input type="submit" name="process" value="<?=_("Update")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="oldid" value="<?=intval($id)?>">
 <input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
+<input type="hidden" name="domid" value="<?=intval($_REQUEST['domid'])?>">
 
 </form>
