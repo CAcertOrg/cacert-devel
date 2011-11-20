@@ -62,7 +62,7 @@
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
 			WHERE `method` = 'Face to Face Meeting'
-			GROUP BY .`to` HAVING count(*) > '".intval($no_of_assurees)."'");
+			GROUP BY `to` HAVING count(*) > '".intval($no_of_assurees)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
@@ -106,7 +106,8 @@
 
 	function calc_experience ($row,&$points,&$experience,&$sum_experience,&$revoked)
 	{
-		$points += $row['awarded'];
+                $apoints = max($row['points'],$row['awarded']);
+		$points += $apoints;
 		$experience = "&nbsp;";
 		$revoked = false;				# to be coded later (after DB-upgrade)
 		if ($row['method'] == "Face to Face Meeting")
@@ -114,7 +115,7 @@
 			$sum_experience = $sum_experience +2;
 			$experience = "2";
 		}
-		return $row['awarded'];
+		return $apoints;
 	}
 
 	function calc_assurances ($row,&$points,&$experience,&$sumexperience,&$awarded,&$revoked)
@@ -284,9 +285,12 @@
 	{
 		if ($awarded == "0")
 		{
-			$tdstyle="style='background-color: #ffff80'";
-			$emopen="<em>";
-			$emclose="</em>";
+			if ($when < "2006-09-01")
+			{
+				$tdstyle="style='background-color: #ffff80'";
+				$emopen="<em>";
+				$emclose="</em>";
+			}
 		}
 	}
 ?>
@@ -371,10 +375,10 @@
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['to'])); 
-			calc_experience ($row,$points,$experience,$sum_experience,$revoked);
+			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
 			$email = show_email_link ($fromuser['email'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,intval($row['awarded']),intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
 

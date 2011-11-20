@@ -57,7 +57,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Another Email")?>">
+    <td class="DataTD" colspan="2"><input type="submit" name="add_email" value="<?=_("Another Email")?>">
 			<input type="submit" name="process" value="<?=_("Next")?>"></td>
   </tr>
 </table>
