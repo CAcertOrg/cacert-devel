@@ -34,7 +34,7 @@
     <td class="DataTD" colspan="2"><? printf(_("Are you really sure you want to remove %s and all certificates issued under this domain?"), sanitizeHTML($row['domain'])); ?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Cancel")?>">
+    <td class="DataTD" colspan="2"><input type="submit" name="cancel" value="<?=_("Cancel")?>">
     		<input type="submit" name="process" value="<?=_("Delete")?>"></td>
   </tr>
 </table>
