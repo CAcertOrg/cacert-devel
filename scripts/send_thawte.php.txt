@@ -51,7 +51,7 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+			$lines_NL .= wordwrap($line, 75, "\n")."\n";
 		}
 		fclose($fp);
 	}
@@ -63,7 +63,7 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+			$lines_FR .= wordwrap($line, 75, "\n")."\n";
 		}
 		fclose($fp);
 	}
@@ -75,7 +75,7 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+			$lines_ES .= wordwrap($line, 75, "\n")."\n";
 		}
 		fclose($fp);
 	}
@@ -87,7 +87,7 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+			$lines_RU .= wordwrap($line, 75, "\n")."\n";
 		}
 		fclose($fp);
 	}
@@ -106,7 +106,7 @@
 
 	echo "ID now: $lastid\n";
 
-	$query = "select `id`,`fname`,`lname`,`email`,`language` from `users` where `deleted` = '0' and `id` > '$lastid' order by `id`";
+	$query = "select `id`,`fname`,`lname`,`email`,`language` from `users` where `deleted` = 0 and `id` > '$lastid' order by `id`";
 
 	$res = mysql_query($query);
 
@@ -141,7 +141,7 @@
 				break;
 		}
 		
-		sendmail($row['email'], "[CAcert.org] $subject", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", 1);
+		sendmail($row['email'], "[CAcert.org] $subject", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", "");
 		
 		$fp = fopen("send_thawte_lastid.txt", "w");
 		fputs($fp, $row["id"]."\n");
