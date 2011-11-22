@@ -1,0 +1,68 @@
+Hallo liebe CAcert Community Mitglieder,
+
+wir freuen uns, euch aktuelle Veraenderungen bei CAcert zeigen zu können.
+
+Obwohl auch bisher schon viel getan wurde, geschah dies jedoch zumeist
+"unter der Haube". Heute jedoch möchten wir eine sichtbare Aenderung
+ankündigen:
+
+
+ 1. Aenderung der "Meine Punkte Seite".
+
+Die Punkte Liste im Menue unter "Meine Details" -> "Meine Punkte" wird aufgebohrt.
+Wesentlicher Punkt ist: Die erhaltenen und vergebenen Assurance-Punkte werden neu 
+ermittelt.
+
+War für die Darstellung bisher ausschlaggebend, wie viele Punkte der Empfaenger 
+bereits hatte und wurde ggf. entsprechend bis auf 0 Punkte abgerundet, so werden 
+zukuenftig genau die Punkte angezeigt, die auch vergeben wurden. Dabei kann ein 
+Assuree auch in Zukunft nur maximal 100 Punkte durch Assurances angerechnetbekommen, 
+indem er seine Identitaet ueberpruefen laesst (Assurance Points), als Assurer kann er 
+bis zu 50 Erfahrungspunkte sammeln indem er die Identitaet anderer Mitglieder 
+ueberprueft (Experience Points).
+
+Natuerlich gehen durch diesen Schritt keine Punkte "verloren", sondern die Punkte 
+werden nur verstaendlicher dargestellt.
+
+Durch die neue Darstellung wird der Berechnungsvorgang deutlich transparenter und 
+nachvollziehbarer. Bitte schaut euch doch demnaechst einmal die neue Punkteliste an. 
+Diese findet ihr unter https://www.cacert.org/wot.php?id=15
+
+
+ 2. Tverify Punkte Streichung
+
+Damit einher geht auch der kuenftige Wegfall der bei einigen Mitgliedern
+eventuell noch von frueher vorhandene Thawte-Punkten. Diese von der
+CA Thawte vergebenen Punkte können schon seit geraumer Zeit nicht mehr
+an CAcert-Mitglieder übertragen werden. Die bereits vergebenen Punkte
+koennen allerdings nicht nach vergebender Person unterschieden werden und
+sind deshalb durch CAcert nicht ueberpruefbar. Deshalb werden diese Punkte
+in naher Zukunft nicht mehr beruecksichtigt. Es lohnt sich also im Zweifelsfall 
+durch weitere CAcert Assurances zusaetzliche Assurance Punkte zu erhalten.
+
+Mit diesen Maßnahmen wird ein weiterer Schritt umgesetzt, der fuer ein
+erfolgreiches Audit notwendig ist. Ein bestandenes Audit stellt einen
+wichtigen Baustein dar, um spaeter als CA in die Browser aufgenommen zu
+werden.
+
+
+ 3. Ueberpruefung der Newsletter Einstellungen
+
+Einen weiteren, wichtigen Punkt moechten wir hier darueber hinaus an alle
+Empfaenger dieses Newsletters richten: In Zukunft moechten wir gerne
+alle paar Monate einen Newsletter mit unseren wichtigsten Neuerungen
+versenden. Dieser Newsletter wurde an alle CAcert-Teilnehmer versendet.
+Bitte prueft eure Einstellungen im Menue von www.cacert.org unter "Meine
+Details" -> "Meine Benachrichtigungen" oder unter 
+https://www.cacert.org/account.php?id=36 und klickt an, welche Newsletter
+ihr zukuenftig wirklich bekommen moechtet. In Zukunft werden wir uns auf
+diese Angaben verlassen und nur an diejenigen die Newsletter
+verschicken, die zum entsprechenden Punkt eine Information wünschen.
+
+Viele Gruesse,
+Alexander Bahlo
+Officer for public relations
+CAcert.org
+
+Weitere Infos zur neuen Zaehlweise im CAcert Wiki:
+https://wiki.cacert.org/FAQ/NewPointsCount
