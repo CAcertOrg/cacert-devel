@@ -43,43 +43,112 @@
 		}
 		fclose($fp);
 	}
+	
+	$lines_NL = "";
+	if (file_exists("thawte_NL.txt"))
+	{
+		$fp = fopen("thawte_NL.txt", "r");
+		while(!feof($fp))
+		{
+			$line = trim(fgets($fp, 4096));
+			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+		}
+		fclose($fp);
+	}
+	
+	$lines_FR = "";
+	if (file_exists("thawte_FR.txt"))
+	{
+		$fp = fopen("thawte_FR.txt", "r");
+		while(!feof($fp))
+		{
+			$line = trim(fgets($fp, 4096));
+			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+		}
+		fclose($fp);
+	}
+	
+	$lines_ES = "";
+	if (file_exists("thawte_ES.txt"))
+	{
+		$fp = fopen("thawte_ES.txt", "r");
+		while(!feof($fp))
+		{
+			$line = trim(fgets($fp, 4096));
+			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+		}
+		fclose($fp);
+	}
+	
+	$lines_RU = "";
+	if (file_exists("thawte_RU.txt"))
+	{
+		$fp = fopen("thawte_RU.txt", "r");
+		while(!feof($fp))
+		{
+			$line = trim(fgets($fp, 4096));
+			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+		}
+		fclose($fp);
+	}
 
 // read last used id
 	$lastid = 0;
-	if (file_exists("lastid.txt"))
+	if (file_exists("send_thawte_lastid.txt"))
 	{
-		$fp = fopen("lastid.txt", "r");
+		$fp = fopen("send_thawte_lastid.txt", "r");
 		$line = fgets($fp, 4096);
 		$lastid = wordwrap($line, 75, "\n")."\n";
 		fclose($fp);
 	}
-        $subject = "Change in points calculation";
+	
+	$subject = "Change in points calculation";
 
-	echo "ID now: $lastid";
+	echo "ID now: $lastid\n";
 
-    	$query = "select id,fromname,lastname,email* from users where deleted = 0 and id > $lastid order by id";
+	$query = "select `id`,`fname`,`lname`,`email`,`language` from `users` where `deleted` = '0' and `id` > '$lastid' order by `id`";
 
 	$res = mysql_query($query);
-	$xrows = mysql_num_rows($res);
 
 	while($row = mysql_fetch_assoc($res))
 	{
-		$mailtxt = "Hello ".$row["fromname"]." ".$row["lastname"]."\n".$lines_EN."\n\n";
-	        switch ($row[$language])
-        	{
-			case "de_DE":	$mailtxt .= $lines_DE; break;
-			case "ade_DE":	$mailtxt .= $lines_DE; break;
-			case "bde_DE":	$mailtxt .= $lines_DE; break;
-			case "cde_DE":	$mailtxt .= $lines_DE; break;
-			case "dde_DE":	$mailtxt .= $lines_DE; break;
-			case "ede_DE":	$mailtxt .= $lines_DE; break;
+		$mailtxt = "Hello ".$row["fname"]." ".$row["lname"]."\n".$lines_EN."\n\n";
+		switch ($row["language"])
+		{
+			case "de_DE":
+			case "de":
+				$mailtxt .= $lines_DE;
+				break;
+			
+			case "nl_NL":
+			case "nl":
+				$mailtxt .= $lines_NL;
+				break;
+			
+			case "fr_FR":
+			case "fr":
+				$mailtxt .= $lines_FR;
+				break;
+			
+			case "es_ES":
+			case "es":
+				$mailtxt .= $lines_ES;
+				break;
+			
+			case "ru_RU":
+			case "ru":
+				$mailtxt .= $lines_RU;
+				break;
 		}
-    //    uncomment next line to send mails ...
-//		sendmail($row['email'], "[CAcert.org] $subject", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", 1);
-		$fp = fopen("lastid.txt", "w");
-                fputs($fp, $row["id"]."\n");
-                fclose($fp);
+		
+		sendmail($row['email'], "[CAcert.org] $subject", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", 1);
+		
+		$fp = fopen("send_thawte_lastid.txt", "w");
+		fputs($fp, $row["id"]."\n");
+		fclose($fp);
+		
+		echo "Sent mail to: ".$row["id"]."\n";
+		
 		sleep (1);
-		echo "Sent mail to: ".$row["id"];
 	}
 ?>

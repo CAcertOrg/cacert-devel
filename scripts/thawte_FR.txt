@@ -1,0 +1,60 @@
+Cher membre de la communauté CAcert,
+
+Nous sommes heureux d'annoncer les changements récents dans le site Web de CAcert. 
+
+Il y a eu quelques changements par le passé, principalement des modifications 
+non visibles pour l'utilisateur. Aujourd'hui, nous pouvons annoncer des 
+changements plus importants :
+
+
+ 1. Changement sur la page "mes Points".
+
+La liste de points dans le menu « Mes Détails » -> « Mes Points » sera améliorée.
+Principalement, les accréditations "Points reçus" et "donnés" seront allouées 
+d'une nouvelle manière. Le point crucial a été le travail sur le total des 
+points d'accréditation alloués. Auparavant, seuls les points d'accréditation 
+étaient affichés, maintenant ces points d'accréditations ont été arrondis si le total est supérieur à 100.
+
+Le membre qui a reçu des points d'accréditation ne peut bénéficier que d'un 
+maximum de 100 Points. 
+En tant qu'accréditeur, le membre peut bénéficier jusqu'à un maximum de 50 Points d'expérience 
+en accréditant d'autres membres.
+La nouvelle liste affichera ce calcul en détail. Veuillez, s'il vous plait, regarder
+votre nouveau décompte de points à la page https://www.cacert.org/wot.php?id=15
+
+
+ 2. Les points "Tverify" révoquées.
+
+Avec ce changement, tous les points attribués à la faveur de l'ancien programme "Tverify" seront
+révoqués prochainement. Le programme "Tverify" pour transférer des points attribués
+par des accréditeurs Thawte aux membres de CAcert a été arrêté il y a quelques mois. 
+les points "Tverify" ne peuvent être vérifiées valablement par CAcert 
+(par exemple, on ne peut distinguer les différents accréditeurs les ayant attribués), 
+par conséquent, ces points seront abrogées bientôt. 
+Si vous n'êtes pas certain de votre niveau d'accréditation, nous vous recommandons de vous renseigner
+auprès de la Communauté CAcert et de son support.
+
+En mettant en place ces mesures, nous franchisons une nouvelle étape vers la réalisation d'un audit
+de processus de l'Association.
+Cet audit est une étape importante pour être accepté comme une Autorité de Certification dans les
+navigateurs Internet.
+
+
+ 3. Vérifiez vos paramètres d'alerte.
+
+Nous tenons à vous informer d'autres faits importants : à l'avenir, nous comptons
+vous envoyer d'autres bulletins d'informations importantes, périodiquement, au fil des mois.
+Ce présent bulletin est envoyé ponctuellement à tous les membres de la communauté CAcert. 
+Veuillez vérifier en ligne vos paramètres de réception d'information sur www.cacert.org 
+dans "Mes Details" -> "Mes paramètres d'alerte" ou à
+https://www.cacert.org/account.php?id=36 et choisissez les bulletins vous voulez
+recevoir. À l'avenir, nous avons l'intention de nous appuyer sur vos paramètres afin d'envoyer nos
+bulletins d'information à ceux qui désirent les recevoir.
+
+Cordialement,
+Alexander Bahlo
+Responsable des Relations Publiques
+CAcert.org
+
+Plus d'informations sur le nouveau décompte des Points :
+https://wiki.cacert.org/FAQ/NewPointsCount
