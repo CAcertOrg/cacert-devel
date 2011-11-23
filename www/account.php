@@ -64,6 +64,10 @@
 			die("No such file.");
 		}
 		exit;
+	} else if ($id == 37) {
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved    	
 	} else {
 		showheader(_("My CAcert.org Account!"));
 		includeit($id, "account");
