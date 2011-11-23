@@ -43,7 +43,7 @@
 			$line = trim(fgets($fp, 4096));
 			$line = wordwrap($line, 75, "\n")."\n";
 			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-			$lines_DE .= $line
+			$lines_DE .= $line;
 		}
 		fclose($fp);
 	}
@@ -57,7 +57,7 @@
 			$line = trim(fgets($fp, 4096));
 			$line = wordwrap($line, 75, "\n")."\n";
 			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-			$lines_NL .= $line
+			$lines_NL .= $line;
 		}
 		fclose($fp);
 	}
@@ -71,7 +71,7 @@
 			$line = trim(fgets($fp, 4096));
 			$line = wordwrap($line, 75, "\n")."\n";
 			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-			$lines_FR .= $line
+			$lines_FR .= $line;
 		}
 		fclose($fp);
 	}
@@ -85,7 +85,7 @@
 			$line = trim(fgets($fp, 4096));
 			$line = wordwrap($line, 75, "\n")."\n";
 			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-			$lines_ES .= $line
+			$lines_ES .= $line;
 		}
 		fclose($fp);
 	}
@@ -99,7 +99,7 @@
 			$line = trim(fgets($fp, 4096));
 			$line = wordwrap($line, 75, "\n")."\n";
 			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-			$lines_RU .= $line
+			$lines_RU .= $line;
 		}
 		fclose($fp);
 	}
@@ -109,8 +109,7 @@
 	if (file_exists("send_thawte_lastid.txt"))
 	{
 		$fp = fopen("send_thawte_lastid.txt", "r");
-		$line = fgets($fp, 4096);
-		$lastid = wordwrap($line, 75, "\n")."\n";
+		$lastid = trim(fgets($fp, 4096));
 		fclose($fp);
 	}
 	
