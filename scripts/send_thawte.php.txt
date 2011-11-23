@@ -112,10 +112,11 @@
 		$lastid = trim(fgets($fp, 4096));
 		fclose($fp);
 	}
-	
-	$subject = "Change in points calculation";
 
 	echo "ID now: $lastid\n";
+
+
+	$count = 0;
 
 	$query = "select `id`,`fname`,`lname`,`email`,`language` from `users` where `deleted` = 0 and `id` > '$lastid' order by `id`";
 
@@ -123,7 +124,7 @@
 
 	while($row = mysql_fetch_assoc($res))
 	{
-		$mailtxt = "Hello ".$row["fname"]." ".$row["lname"]."\n".$lines_EN."\n\n";
+		$mailtxt = "Hello ${row["fname"]} ${row["lname"]},\n".$lines_EN."\n\n";
 		switch ($row["language"])
 		{
 			case "de_DE":
@@ -152,13 +153,14 @@
 				break;
 		}
 		
-		sendmail($row['email'], "[CAcert.org] $subject", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", "");
+		sendmail($row['email'], "[CAcert.org] Changes at CAcert", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", "");
 		
 		$fp = fopen("send_thawte_lastid.txt", "w");
 		fputs($fp, $row["id"]."\n");
 		fclose($fp);
 		
-		echo "Sent mail to: ".$row["id"]."\n";
+		$count++;
+		echo "Sent ${count}th mail. User ID: ${row["id"]}\n";
 		
 		sleep (1);
 	}

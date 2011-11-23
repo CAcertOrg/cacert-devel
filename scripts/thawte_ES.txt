@@ -4,35 +4,24 @@ Anunciamos con orgullo los recientes cambios en el sitio web de Cacert
 
 Aunque ha habido algunos cambios en el pasado, muchos de ellos han tenido lugar “tras bambalinas”. Hoy, podemos anunciar cambios más visibles:
 
-1. Cambios en la página “Mis Puntos”.
 
-La lista de puntos en la opción del menú “Mis Datos” → “Mis puntos” ha sido mejorada.
-El cambio principal es que los Puntos de Seguridad recibidos y emitidos serán mostrados bajo un nuevo esquema. Lo más destacado se encuentra en 
-los Puntos de Seguridad asignados al Asegurado. Anteriormente, sólo los puntos obtenidos eran mostrados, y los puntos asignados en Certificaciones 
-eran redondeadas a la baja si superaban los 100 puntos.
+1. Cambios en la página “Mis Puntos”
 
-A partir de ahora, se mostrarán todos los puntos asignados. El Asegurado aún puede beneficiarse solamente de un máximo de 100 Puntos de Seguridad. 
-Como Asegurador, el miembro puede beneficiarse hasta un máximo de 50 puntos de experiencia al asegurar a otros miembros. 
-El nuevo formato mostrará la disposición de una forma mucho más transparente. 
-Por favor, dele un vistazo a la nueva lista de puntos en https://www.cacert.org/wot.php?id=15
+La lista de puntos en la opción del menú “Mis Datos” → “Mis puntos” ha sido mejorada. El cambio principal es que los Puntos de Seguridad recibidos y emitidos serán mostrados bajo un nuevo esquema. Lo más destacado se encuentra en los Puntos de Seguridad asignados al Asegurado. Anteriormente, sólo los puntos obtenidos eran mostrados, y los puntos asignados en Certificaciones eran redondeadas a la baja si superaban los 100 puntos.
+
+A partir de ahora, se mostrarán todos los puntos asignados. El Asegurado aún puede beneficiarse solamente de un máximo de 100 Puntos de Seguridad. Como Asegurador, el miembro puede beneficiarse hasta un máximo de 50 puntos de experiencia al asegurar a otros miembros. El nuevo formato mostrará la disposición de una forma mucho más transparente. Por favor, dele un vistazo a la nueva lista de puntos en https://www.cacert.org/wot.php?id=15
+
 
 2. Revocación de los puntos Tverify
 
-En el conjunto de cambios, todos los puntos asignados mediante el viejo programa Tverify serán revocados en un futuro cercano. El programa Tverify 
-para transferir los puntos asignados por Notarios de Thawte a miembros de Cacert fue detenido hace algún tiempo. Los puntos Tverify no pueden ser 
-verificados por Cacert (por ejemplo, no se pueden distinguir los puntos emitidos por diferente notarios), y por lo tanto, dichos puntos serán revocados 
-en breve.  Si no está seguro acerca de su nivel de seguridad, recomendamos que aumente su nivel de seguridad a través de los Aseguradores de Cacert.
+En el conjunto de cambios, todos los puntos asignados mediante el viejo programa Tverify serán revocados en un futuro cercano. El programa Tverify para transferir los puntos asignados por Notarios de Thawte a miembros de Cacert fue detenido hace algún tiempo. Los puntos Tverify no pueden ser verificados por Cacert (por ejemplo, no se pueden distinguir los puntos emitidos por diferente notarios), y por lo tanto, dichos puntos serán revocados en breve.  Si no está seguro acerca de su nivel de seguridad, recomendamos que aumente su nivel de seguridad a través de los Aseguradores de Cacert.
 
-Aplicando éstas medidas, damos otro paso hacia una auditoría exitosa. 
-Superar la auditoría es un elemento importante para ser aceptado como un CA (Autoridad de Certificación) en los navegadores de internet.
+Aplicando éstas medidas, damos otro paso hacia una auditoría exitosa. Superar la auditoría es un elemento importante para ser aceptado como un CA (Autoridad de Certificación) en los navegadores de internet.
+
 
 3. Actualice su configuración en la página “Mi Configuración de Alertas”
 
-Nos gustaría avisarle de otro hecho importante: En el futuro, tenemos la intención de enviar más boletines informativos con nuestras novedades y/o 
-noticias más importantes cada pocos meses. Este boletín está siendo enviado en un único correo a todos los miembros de la comunidad CAcert. 
-Para futuros envíos, le rogamos que revise su configuración en www.cacert.org en la opción de menú "Mis Datos" → "Mi Configuración de Alertas" o 
-en  https://www.cacert.org/account.php?id=36 y seleccione la listas que desea recibir. 
-Tenemos la intención de utilizar su configuración para enviar solo la información que desee recibir.
+Nos gustaría avisarle de otro hecho importante: En el futuro, tenemos la intención de enviar más boletines informativos con nuestras novedades y/o noticias más importantes cada pocos meses. Este boletín está siendo enviado en un único correo a todos los miembros de la comunidad CAcert. Para futuros envíos, le rogamos que revise su configuración en www.cacert.org en la opción de menú "Mis Datos" → "Mi Configuración de Alertas" o en  https://www.cacert.org/account.php?id=36 y seleccione la listas que desea recibir. Tenemos la intención de utilizar su configuración para enviar solo la información que desee recibir.
 
 
 Saludos,
