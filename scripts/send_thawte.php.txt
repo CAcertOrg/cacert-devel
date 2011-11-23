@@ -27,7 +27,9 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_EN .= wordwrap($line, 75, "\n")."\n";
+			$line = wordwrap($line, 75, "\n")."\n";
+			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
+			$lines_EN .= $line;
 		}
 		fclose($fp);
 	}
@@ -39,7 +41,9 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_DE .= wordwrap($line, 75, "\n")."\n";
+			$line = wordwrap($line, 75, "\n")."\n";
+			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
+			$lines_DE .= $line
 		}
 		fclose($fp);
 	}
@@ -51,7 +55,9 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_NL .= wordwrap($line, 75, "\n")."\n";
+			$line = wordwrap($line, 75, "\n")."\n";
+			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
+			$lines_NL .= $line
 		}
 		fclose($fp);
 	}
@@ -63,7 +69,9 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_FR .= wordwrap($line, 75, "\n")."\n";
+			$line = wordwrap($line, 75, "\n")."\n";
+			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
+			$lines_FR .= $line
 		}
 		fclose($fp);
 	}
@@ -75,7 +83,9 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_ES .= wordwrap($line, 75, "\n")."\n";
+			$line = wordwrap($line, 75, "\n")."\n";
+			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
+			$lines_ES .= $line
 		}
 		fclose($fp);
 	}
@@ -87,7 +97,9 @@
 		while(!feof($fp))
 		{
 			$line = trim(fgets($fp, 4096));
-			$lines_RU .= wordwrap($line, 75, "\n")."\n";
+			$line = wordwrap($line, 75, "\n")."\n";
+			$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
+			$lines_RU .= $line
 		}
 		fclose($fp);
 	}
