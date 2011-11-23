@@ -1,13 +1,11 @@
-Hallo liebe CAcert Community Mitglieder,
-
-wir freuen uns, euch aktuelle Veränderungen bei CAcert zeigen zu können.
+Wir freuen uns, euch aktuelle Veränderungen bei CAcert zeigen zu können.
 
 Obwohl auch bisher schon viel getan wurde, geschah dies jedoch zumeist "unter der Haube". Heute jedoch möchten wir eine sichtbare Änderung ankündigen:
 
 
  1. Änderung der "Meine Punkte Seite"
 
-Die Punkte Liste im Menü unter "Meine Details" -> "Meine Punkte" wird aufgebohrt. Wesentlicher Punkt ist: Die erhaltenen und vergebenen Assurance-Punkte werden neu ermittelt.
+Die Punkte Liste im Menü unter "Meine Details" -> "Meine Punkte" wird erweitert. Wesentlicher Punkt ist: Die erhaltenen und vergebenen Assurance-Punkte werden neu ermittelt.
 
 War für die Darstellung bisher ausschlaggebend, wie viele Punkte der Empfänger bereits hatte und wurde ggf. entsprechend bis auf 0 Punkte abgerundet, so werden zukünftig genau die Punkte angezeigt, die auch vergeben wurden. Dabei kann ein Assuree auch in Zukunft nur maximal 100 Punkte durch Assurances angerechnet bekommen, indem er seine Identität überprüfen lässt (Assurance Points). Als Assurer kann er bis zu 50 Erfahrungspunkte sammeln, indem er die Identität anderer Mitglieder überprüft (Experience Points).
 
@@ -18,7 +16,7 @@ Durch die neue Darstellung wird der Berechnungsvorgang deutlich transparenter un
 
  2. Tverify Punkte Streichung
 
-Damit einher geht auch der künftige Wegfall der bei einigen Mitgliedern eventuell noch von früher vorhandene Thawte-Punkten. Diese von der CA Thawte vergebenen Punkte können schon seit geraumer Zeit nicht mehr an CAcert-Mitglieder übertragen werden. Die bereits vergebenen Punkte können allerdings nicht nach vergebender Person unterschieden werden und sind deshalb durch CAcert nicht überprüfbar. Deshalb werden diese Punkte in naher Zukunft nicht mehr berücksichtigt. Es lohnt sich also im Zweifelsfall durch weitere CAcert Assurances zusätzliche Assurance Punkte zu erhalten.
+Damit einher geht auch der künftige Wegfall der bei einigen Mitgliedern eventuell noch von früher vorhandene Tverify-Punkten. Diese von der CA Thawte vergebenen Punkte können schon seit geraumer Zeit nicht mehr an CAcert-Mitglieder übertragen werden. Die bereits vergebenen Punkte können allerdings nicht nach vergebender Person unterschieden werden und sind deshalb durch CAcert nicht überprüfbar. Deshalb werden diese Punkte in naher Zukunft nicht mehr berücksichtigt. Es lohnt sich also im Zweifelsfall durch weitere CAcert Assurances zusätzliche Assurance Punkte zu erhalten.
 
 Mit diesen Maßnahmen wird ein weiterer Schritt umgesetzt, der für ein erfolgreiches Audit notwendig ist. Ein bestandenes Audit stellt einen wichtigen Baustein dar, um später als CA in die Browser aufgenommen zu werden.
 

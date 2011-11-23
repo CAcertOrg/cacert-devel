@@ -1,4 +1,5 @@
-We are proud to announce recent changes in the CAcert website. 
+
+we are proud to announce recent changes in the CAcert website. 
 
 Although there have been quite a few changes in the past, mostly they have happened "behind the scenes". Today we can announce more visible changes:
 
