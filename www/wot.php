@@ -197,11 +197,18 @@ function send_reminder()
 	if($oldid == 6)
 	{
 $iecho= "c";
-		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1 || !array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
+
+/*		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+*/
 
 		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_SESSION['profile']['ttpadmin'] != 1)
 		{
