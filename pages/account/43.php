@@ -485,273 +485,305 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
  //  End - Debug infos
 ?>
 
-<? //  Begin - Debug infos
 
-  // ---  bug-794 begin ---
-
-  // list total, expired, deleted, latest_expire_date  ?
-
- $query = "select COUNT(`domaincerts`.`id`) as `countdomaincerts`  from `domains` inner join `domaincerts` on `domaincerts`.`domid` = `domains`.`id` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $rctotal = $drow['countdomaincerts'];
-  if($rctotal > 0) {
-    // select domid's
-    $query = "select `id` as `domids` from `domains` where `memid`='".intval($row['id'])."' ";
-    $dres = mysql_query($query);
-    $rcexpired = 0;
-    $rcrevoked = 0;
-    $rcexpiremax = "0000-00-00 00:00:00";
-    while ($drow = mysql_fetch_assoc($dres)) {
-      $ndomid = intval($drow['domids']);
-
-      $query2 = "select COUNT(`id`) as `dexpired`  from `domaincerts` where `domid`='".$ndomid."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcexpired += intval($drow2['dexpired']);
-
-      $query2 = "select COUNT(`id`) as `drevoked`  from `domaincerts` where `domid`='".$ndomid."' and `revoked` != '0000-00-00 00:00:00' ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcrevoked += intval($drow2['drevoked']);
-
-      // For Arbitration purpose expiry dates of revoked certs are also relevant!
-      $query2 = "select `expire` as `mexpire`  from `domaincerts` where `domid`='".$ndomid."' order by `expire` desc ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcexpiremax = max($rcexpiremax,$drow2['mexpire']);
-
-      $rcactive = intval($rctotal)-intval($rcexpired)-intval($rcrevoked);
-    }
-  }
-?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="6" class="title"><?=_("Total Certificates Status")?></td>
-  </tr>
+	<tr>
+		<td colspan="6" class="title"><?=_("Certificates")?></td>
+	</tr>
 
-  <tr>
-    <td class="DataTD"><?=_("Certificates")?>:</td>
-    <td class="DataTD"><?=_("Total")?></td>
-    <td class="DataTD"><?=_("Active")?></td>
-    <td class="DataTD"><?=_("Expired")?></td>
-    <td class="DataTD"><?=_("Revoked")?></td>
-    <td class="DataTD"><?=_("Latest Expire")?></td>
-  </tr>
+	<tr>
+		<td class="DataTD"><?=_("Cert Type")?>:</td>
+		<td class="DataTD"><?=_("Total")?></td>
+		<td class="DataTD"><?=_("Valid")?></td>
+		<td class="DataTD"><?=_("Expired")?></td>
+		<td class="DataTD"><?=_("Revoked")?></td>
+		<td class="DataTD"><?=_("Latest Expire")?></td>
+	</tr>
 
-  <tr>
-    <td class="DataTD"><?=_("Total domain-certificates")?>:</td>
-<?
-  if($rctotal > 0) {
-?>
-    <td class="DataTD"><?=intval($rctotal)?></td>
-    <td class="DataTD"><?=intval($rcactive)?></td>
-    <td class="DataTD"><?=intval($rcexpired)?></td>
-    <td class="DataTD"><?=intval($rcrevoked)?></td>
-    <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-  </tr>
-<? } else { ?>
-    <td colspan="5" class="DataTD"><?=_("None")?></td>
-  </tr>
-<? }
+	<tr>
+		<td class="DataTD"><?=_("Server")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`,
+	                 MAX(`domaincerts`.`expire`) as `maxexpire`
+	          from `domains` inner join `domaincerts`
+	               on `domains`.`id` = `domaincerts`.`domid`
+	          where `domains`.`memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `domains` inner join `domaincerts`
+		               on `domains`.`id` = `domaincerts`.`domid`
+		          where `domains`.`memid` = '".intval($row['id'])."'
+		                and `revoked` = '0000-00-00 00:00:00'
+		                and `expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `domains` inner join `domaincerts`
+		               on `domains`.`id` = `domaincerts`.`domid`
+		          where `domains`.`memid` = '".intval($row['id'])."'
+		                and `expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `domains` inner join `domaincerts`
+		               on `domains`.`id` = `domaincerts`.`domid`
+		          where `domains`.`memid` = '".intval($row['id'])."'
+		                and `revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
 
-  $query = "select COUNT(`id`) as `countemailcerts` from `emailcerts` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $rctotal = $drow['countemailcerts'];
-  if($rctotal > 0) {
-    $rcexpired = 0;
-    $rcrevoked = 0;
-    $rcexpiremax = "0000-00-00 00:00:00";
+	<tr>
+		<td class="DataTD"><?=_("Client")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
+	          from `emailcerts`
+	          where `memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `revoked` = '0000-00-00 00:00:00'
+		                and `expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
 
-    $query2 = "select COUNT(`id`) as `eexpired`  from `emailcerts` where `memid`='".intval($row['id'])."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpired = intval($drow2['eexpired']);
+	<tr>
+		<td class="DataTD"><?=_("GPG")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
+	          from `gpg`
+	          where `memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `gpg`
+		          where `memid` = '".intval($row['id'])."'
+		                and `expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
 
-    $query2 = "select COUNT(`id`) as `erevoked`  from `emailcerts` where `memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcrevoked = intval($drow2['erevoked']);
+	<tr>
+		<td class="DataTD"><?=_("Org Server")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`,
+	                 MAX(`orgcerts`.`expire`) as `maxexpire`
+	          from `orgdomaincerts` as `orgcerts` inner join `org`
+	                   on `orgcerts`.`orgid` = `org`.`orgid`
+	          where `org`.`memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `orgdomaincerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
+		                and `orgcerts`.`expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `orgdomaincerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `orgdomaincerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
 
-    $query2 = "select `expire` as `eexpire`  from `emailcerts` where `memid`='".intval($row['id'])."' order by `expire` desc ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpiremax = $drow2['eexpire'];
-
-    $rcactive = intval($rctotal)-intval($rcexpired)-intval($rcrevoked);
-
-?>
-  <tr>
-    <td class="DataTD"><?=_("Total email-certificates")?>:</td>
-    <td class="DataTD"><?=intval($rctotal)?></td>
-    <td class="DataTD"><?=intval($rcactive)?></td>
-    <td class="DataTD"><?=intval($rcexpired)?></td>
-    <td class="DataTD"><?=intval($rcrevoked)?></td>
-    <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-  </tr>
-<? } else { ?>
-  <tr>
-    <td class="DataTD"><?=_("Total email-certificates")?>:</td>
-    <td colspan="5" class="DataTD"><?=_("None")?></td>
-  </tr>
-<? }
-  $query = "select COUNT(`id`) as `countgpgcerts` from `gpg` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $rctotal = $drow['countgpgcerts'];
-  if($rctotal > 0) {
-    $rcexpired = 0;
-    $rcexpiremax = "0000-00-00 00:00:00";
-
-    $query2 = "select COUNT(`id`) as `gexpired`  from `gpg` where `memid`='".intval($row['id'])."' and `expire` < now() ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpired = intval($drow2['gexpired']);
-
-/*
-    $query2 = "select COUNT(`id`) as `erevoked`  from `gpg` where `memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcrevoked = intval($drow2['erevoked']);
- */
-
-    $query2 = "select `expire` as `gexpire`  from `gpg` where `memid`='".intval($row['id'])."' order by `expire` desc ";
-    $dres2  = mysql_query($query2);
-    $drow2  = mysql_fetch_assoc($dres2);
-    $rcexpiremax = $drow2['gexpire'];
-
-    $rcactive = intval($rctotal)-intval($rcexpired);
-?>
- <tr>
-    <td class="DataTD"><?=_("Total GPG keys")?>:</td>
-    <td class="DataTD"><?=intval($rctotal)?></td>
-    <td class="DataTD"><?=intval($rcactive)?></td>
-    <td class="DataTD"><?=intval($rcexpired)?></td>
-    <td class="DataTD">&nbsp;</td>
-    <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-  </tr>
-<? } else { ?>
- <tr>
-    <td class="DataTD"><?=_("Total GPG keys")?>:</td>
-    <td colspan="5" class="DataTD"><?=_("None")?></td>
-  </tr>
-<? }
-
-  $query = "SELECT count(`org`.`orgid`) as `countorgs` FROM `org` where `memid`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
-  $rctotal = $drow['countorgs'];
-  if($rctotal > 0) {
-    // user account is linked into orgs
-
-    // $query = "select COUNT(`orgdomaincerts`.`id`) as `orgcountdomaincerts`  from `orgdomains` inner join `orgdomaincerts` on `orgdomaincerts`.`orgid` = `orgdomains`.`id` where `memid`='".intval($row['id'])."' ";
-    $query = "SELECT count(`orgdomaincerts`.`id`) as `countorgdomcerts` FROM `orgdomaincerts` inner join `orgdomains` on `orgdomaincerts`.`orgid`=`orgdomains`.`orgid` inner join `org` on `orgdomains`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' ";
-
-    $dres = mysql_query($query);
-    $drow = mysql_fetch_assoc($dres);
-    $rctotal = $drow['countorgdomcerts'];
-    if($rctotal > 0) {
-      // select domid's
-      $query = "select `orgdomains`.`orgid` as `orgdomorgids` from `orgdomains` inner join `org` on `orgdomains`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' ";
-      $dres = mysql_query($query);
-      $rcexpired = 0;
-      $rcrevoked = 0;
-      $rcexpiremax = "0000-00-00 00:00:00";
-      while ($drow = mysql_fetch_assoc($dres)) {
-        $ndomid = intval($drow['orgdomorgids']);
-
-        $query2 = "select COUNT(`orgdomaincerts`.`id`) as `dexpired`  from `orgdomaincerts` where `orgid`='".$ndomid."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
-        $dres2  = mysql_query($query2);
-        $drow2  = mysql_fetch_assoc($dres2);
-        $rcexpired += intval($drow2['dexpired']); // active, but expired
-
-        $query2 = "select COUNT(`orgdomaincerts`.`id`) as `drevoked`  from `orgdomaincerts` where `orgid`='".$ndomid."' and `revoked` != '0000-00-00 00:00:00' ";
-        $dres2  = mysql_query($query2);
-        $drow2  = mysql_fetch_assoc($dres2);
-        $rcrevoked += intval($drow2['drevoked']); // revoked
-
-        // For Arbitration purpose expiry dates of revoked certs are also relevant!
-        $query2 = "select `expire` as `mexpire`  from `orgdomaincerts` where `orgid`='".$ndomid."' order by `expire` desc ";
-        $dres2  = mysql_query($query2);
-        $drow2  = mysql_fetch_assoc($dres2);
-        $rcexpiremax = max($rcexpiremax,$drow2['mexpire']);
-
-      }
-      $rcactive = intval($rctotal)-intval($rcexpired)-intval($rcrevoked);
-    }
-    if($rctotal > 0) {
-?>
-      <tr>
-       <td class="DataTD"><?=_("Total org-domain-certificates")?>:</td>
-       <td class="DataTD"><?=intval($rctotal)?></td>
-       <td class="DataTD"><?=intval($rcactive)?></td>
-       <td class="DataTD"><?=intval($rcexpired)?></td>
-       <td class="DataTD"><?=intval($rcrevoked)?></td>
-       <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-      </tr>
-<?  } else { ?>
-      <tr>
-       <td class="DataTD"><?=_("Total org-domain-certificates")?>:</td>
-       <td colspan="5" class="DataTD"><?=_("None")?></td>
-      </tr>
-<?  }
-
-    // $query = "select COUNT(`id`) as `countorgemailcerts` from `orgemailcerts`
-    $query = "SELECT count(`orgemailcerts`.`id`) as `countorgemailcerts` FROM `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' ";
-    $dres = mysql_query($query);
-    $drow = mysql_fetch_assoc($dres);
-    $rctotal = $drow['countorgemailcerts'];
-    if($rctotal > 0) {
-      $rcexpired = 0;
-      $rcrevoked = 0;
-      $rcexpiremax = "0000-00-00 00:00:00";
-      $query2 = "select COUNT(`orgemailcerts`.`id`) as `eexpired`  from `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `org`.`memid`='".intval($row['id'])."' and `revoked` = '0000-00-00 00:00:00' and `expire` < now() ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcexpired = intval($drow2['eexpired']);
-
-      $query2 = "select COUNT(`orgemailcerts`.`id`) as `erevoked`  from `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `org`.`memid`='".intval($row['id'])."' and `revoked` != '0000-00-00 00:00:00' ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcrevoked = intval($drow2['erevoked']);
-
-      $query2 = "select `expire` as `eexpire`  from `orgemailcerts` inner join `org` on `orgemailcerts`.`orgid`=`org`.`orgid` where `memid`='".intval($row['id'])."' order by `expire` desc ";
-      $dres2  = mysql_query($query2);
-      $drow2  = mysql_fetch_assoc($dres2);
-      $rcexpiremax = $drow2['eexpire'];
-
-      $rcactive = intval($rctotal)-intval($rcexpired)-intval($rcrevoked);
-
-?>
-      <tr>
-       <td class="DataTD"><?=_("Total org-email-certificates")?>:</td>
-       <td class="DataTD"><?=intval($rctotal)?></td>
-       <td class="DataTD"><?=intval($rcactive)?></td>
-       <td class="DataTD"><?=intval($rcexpired)?></td>
-       <td class="DataTD"><?=intval($rcrevoked)?></td>
-       <td class="DataTD"><?=($rcexpiremax!="0000-00-00 00:00:00")?substr($rcexpiremax,0,10):(($rcactive>0)?"Pending":"&nbsp;") ?></td>
-      </tr>
-<?  } else { ?>
-      <tr>
-       <td class="DataTD"><?=_("Total org-email-certificates")?>:</td>
-       <td colspan="5" class="DataTD"><?=_("None")?></td>
-      </tr>
-<?  }
-  } else { ?>
-    <tr>
-     <td class="DataTD"><?=_("Org certificates")?>:</td>
-     <td colspan="5" class="DataTD"><?=_("None")?></td>
-    </tr>
-<? } ?>
+	<tr>
+		<td class="DataTD"><?=_("Org Client")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`,
+	                 MAX(`orgcerts`.`expire`) as `maxexpire`
+	          from `orgemailcerts` as `orgcerts` inner join `org`
+	                   on `orgcerts`.`orgid` = `org`.`orgid`
+	          where `org`.`memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `orgemailcerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
+		                and `orgcerts`.`expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `orgemailcerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `orgemailcerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
 </table>
 <br>
-<?
-  // ---  bug-794 end ---
-?>
-<?
- //  End - Debug infos
-?>
+
 
 <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
  (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
