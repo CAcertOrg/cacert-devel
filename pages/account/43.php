@@ -485,6 +485,304 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
  //  End - Debug infos
 ?>
 
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+	<tr>
+		<td colspan="6" class="title"><?=_("Certificates")?></td>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Cert Type")?>:</td>
+		<td class="DataTD"><?=_("Total")?></td>
+		<td class="DataTD"><?=_("Valid")?></td>
+		<td class="DataTD"><?=_("Expired")?></td>
+		<td class="DataTD"><?=_("Revoked")?></td>
+		<td class="DataTD"><?=_("Latest Expire")?></td>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Server")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`,
+	                 MAX(`domaincerts`.`expire`) as `maxexpire`
+	          from `domains` inner join `domaincerts`
+	               on `domains`.`id` = `domaincerts`.`domid`
+	          where `domains`.`memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `domains` inner join `domaincerts`
+		               on `domains`.`id` = `domaincerts`.`domid`
+		          where `domains`.`memid` = '".intval($row['id'])."'
+		                and `revoked` = '0000-00-00 00:00:00'
+		                and `expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `domains` inner join `domaincerts`
+		               on `domains`.`id` = `domaincerts`.`domid`
+		          where `domains`.`memid` = '".intval($row['id'])."'
+		                and `expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `domains` inner join `domaincerts`
+		               on `domains`.`id` = `domaincerts`.`domid`
+		          where `domains`.`memid` = '".intval($row['id'])."'
+		                and `revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Client")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
+	          from `emailcerts`
+	          where `memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `revoked` = '0000-00-00 00:00:00'
+		                and `expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("GPG")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
+	          from `gpg`
+	          where `memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `gpg`
+		          where `memid` = '".intval($row['id'])."'
+		                and `expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `emailcerts`
+		          where `memid` = '".intval($row['id'])."'
+		                and `expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Org Server")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`,
+	                 MAX(`orgcerts`.`expire`) as `maxexpire`
+	          from `orgdomaincerts` as `orgcerts` inner join `org`
+	                   on `orgcerts`.`orgid` = `org`.`orgid`
+	          where `org`.`memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `orgdomaincerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
+		                and `orgcerts`.`expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `orgdomaincerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `orgdomaincerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Org Client")?>:</td>
+	<?
+	$query = "select COUNT(*) as `total`,
+	                 MAX(`orgcerts`.`expire`) as `maxexpire`
+	          from `orgemailcerts` as `orgcerts` inner join `org`
+	                   on `orgcerts`.`orgid` = `org`.`orgid`
+	          where `org`.`memid` = '".intval($row['id'])."' ";
+	$dres = mysql_query($query);
+	$drow = mysql_fetch_assoc($dres);
+	$total = $drow['total'];
+	
+	$maxexpire = "0000-00-00 00:00:00";
+	if ($drow['maxexpire']) {
+		$maxexpire = $drow['maxexpire'];
+	}
+	
+	if($total > 0) {
+		$query = "select COUNT(*) as `valid`
+		          from `orgemailcerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
+		                and `orgcerts`.`expire` > NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$valid = $drow['valid'];
+		
+		$query = "select COUNT(*) as `expired`
+		          from `orgemailcerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`expire` <= NOW()";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$expired = $drow['expired'];
+		
+		$query = "select COUNT(*) as `revoked`
+		          from `orgemailcerts` as `orgcerts` inner join `org`
+		                   on `orgcerts`.`orgid` = `org`.`orgid`
+		          where `org`.`memid` = '".intval($row['id'])."'
+		                and `orgcerts`.`revoked` != '0000-00-00 00:00:00'";
+		$dres = mysql_query($query);
+		$drow = mysql_fetch_assoc($dres);
+		$revoked = $drow['revoked'];
+		?>
+		<td class="DataTD"><?=intval($total)?></td>
+		<td class="DataTD"><?=intval($valid)?></td>
+		<td class="DataTD"><?=intval($expired)?></td>
+		<td class="DataTD"><?=intval($revoked)?></td>
+		<td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?
+			substr($maxexpire, 0, 10) : _("Pending")?></td>
+		<?
+	} else { // $total > 0
+		?>
+		<td colspan="5" class="DataTD"><?=_("None")?></td>
+		<?
+	} ?>
+	</tr>
+</table>
+<br>
+
 <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
  (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
 <br />
