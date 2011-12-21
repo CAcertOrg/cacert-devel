@@ -16,4 +16,4 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-require_once "../../includes/keygen.php";
+require_once($_SESSION['_config']['filepath'].'/includes/keygen.php');
