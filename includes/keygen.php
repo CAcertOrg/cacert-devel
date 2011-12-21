@@ -27,15 +27,21 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
         <?=_("Go to Extras->Internet Options->Security->Trusted Websites, click on Custom Level, check ActiveX control elements that are not marked as safe initialized on start in scripts")?>
     </object>
     
-    <form method="post" action="account.php" name="CertReqForm"><p>
-        <input type="hidden" name="session" value="UsedXenroll">
-        <?=_("Key Strength:")?> <select name="CspProvider"></select>
+    <form method="post" action="account.php" name="CertReqForm">
+        <p><input type="hidden" name="session" value="UsedXenroll">
+        <?=_("Key Strength:")?> <select name="CspProvider"></select></p>
+        
+        <p>Select Keysize: <select name="keySize" id="keySize">
+            <option value="2048" selected="selected">2048</option>
+            <option value="3072">3072</option>
+            <option value="4096">4096</option>
+        </select></p>
         
         <input type="hidden" name="oldid" value="<?=$id?>">
         <INPUT TYPE=HIDDEN NAME="CSR">
         <input type="hidden" name="keytype" value="MS">
-        <input type="submit" name="GenReq" value="Create Certificate"><br>
-    </p></form>
+        <p><input type="submit" name="GenReq" value="Create Certificate"></p>
+    </form>
     
     <script type="text/vbscript" language="vbscript">
 <!--
@@ -209,12 +215,6 @@ GetProviderList()
 <? } else { ?>
     <p>
     <form method="post" action="account.php">
-        Select Keysize: <select name="keySize" id="keySize">
-            <option value="2048" selected="selected">2048</option>
-            <option value="3072">3072</option>
-            <option value="4096">4096</option>
-        </select>
-        
         <input type="hidden" name="keytype" value="NS">
         <?=_("Keysize:")?> <keygen name="SPKAC" challenge="<? $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
         
