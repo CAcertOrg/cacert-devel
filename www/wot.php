@@ -446,7 +446,14 @@ $iecho= "c";
 			{
 				sendmail($user['email'], "[CAcert.org] ".$_REQUEST['subject'], $_REQUEST['message'],
 					$_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']);
-				show_page("ContactAssurer",_("Your email has been sent to")." ".$user['fname'].".<br />[ <a href='javascript:history.go(-2)'>"._("Go Back")."</a> ]","");
+				
+				showheader(_("My CAcert.org Account!"));?>
+				<p>
+					<? printf(_("Your email has been sent to %s."), $user['fname']); ?>
+				</p>
+				<p>[ <a href='javascript:history.go(-2)'><?= _("Go Back") ?></a> ]</p>
+				<?
+				showfooter();
 				exit;
 			} else {
 				show_page(0,"",_("Sorry, I was unable to locate that user."));
