@@ -16,6 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
+	$thawte = false;
+
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -43,6 +45,11 @@
     <td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($rc), intval($rank))?></td>
   </tr>
 </table>
+<center>
+<br>
+<?=sprintf(_("The calculation of points will be changed in the near future. Please check the %s new calculation %s"), "<a href='/wot.php?id=15'>", "</a>")?>
+<br>
+</center>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -71,13 +78,27 @@
     <td class="DataTD"><?=$row['location']?></td>
     <td class="DataTD"><?=_(sprintf("%s", $row['method']))?></td>
   </tr>
-<? } ?>
+<?
+  $thawte = ($row['method'] == "Thawte Points Transfer") || $thawte;
+} ?>
   <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=intval($_SESSION['profile']['points'])?></td>
     <td class="DataTD" colspan="2">&nbsp;</td>
   </tr>
 </table>
+<?
+if ($thawte)
+{
+?>
+<br>
+<center>
+<strong style='color: red'>
+<?=_("Your Thawte-Points will be revoked in the near future. Please check new calculation!");?>
+<br>
+</strong>
+</center>
+<?}?>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

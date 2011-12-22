@@ -1,0 +1,35 @@
+We zijn blij u te laten weten dat recent onze CAcert website een aantal veranderingen heeft ondergaan.
+
+Ook al zijn er al vele wijzigingen geweest in het verleden, de meeste hiervan waren alleen achter de schermen zichtbaar. Vandaag kunnen we een aantal meer zichtbare veranderingen aankondigen:
+
+
+ 1. Veranderingen aan de 'Mijn Punten' pagina.
+
+De punten lijst, te vinden onder "Mijn Details" -> "Mijn Punten" in het menu, zal verbeteren.
+Belangrijkste wijziging: De Waarmerk punten die u ontvangt en geeft zullen op een nieuwe manier toegekend worden. De cruciale verandering is de aanpassing hoe het totaal aantal toegewezen Waarmerk Punten aan de gewaarmerkte wordt getoond. In het verleden werden alleen de punten getoond welke strict noodzakelijk waren, waarbij afgerond werd naar beneden als het totaal boven de 100 punten kwam.
+
+Vanaf nu zullen alle toegewezen punten worden getoond. De Gewaarmerkte kan nog steeds maar profiteren van maximaal 100 Waarmerk Punten. Als waarmerker kan een deelnemer maximaal profiteren van 50 Ervarings-Punten door andere deelnemers te waarmerken. De nieuwe lijst zal de berekening transparanter maken. Neem a.u.b. een kijkje op https://www.cacert.org/wot.php?id=15 om te zien hoe de nieuwe punten weergave er uit ziet.
+
+
+ 2. Tverify punten ingetrokken.
+
+Samen met deze verandering zullen ook alle punten die in het verleden zijn toegewezen onder het oude 'Tverify programma' over afzienbare tijd worden ingetrokken. Het Tverify programma (om punten toegekend door Thawte Waarmerkers over te zetten naar CAcert Deelnemers) is al enige tijd geleden stil gezet. Tverify punten vallen buiten de controle van CAcert (er kan bijvoorbeeld geen onderscheid worden gemaakt tussen verschillende waarmerkers), daarom worden deze punten binnen afzienbare tijd ingetrokken. 
+Als u niet zeker bent over uw waarmerk niveau, raden wij u aan meer waarmerkingen te zoeken bij CAcert Waarmerkers.
+
+Door deze stappen te nemen komt een succesvolle audit een stap dichterbij. De audit rond krijgen is belangrijk om geaccepteerd te worden als CA in de internetbrowsers.
+
+
+ 3. Controleer uw Waarschuwing instellingen.
+
+Wij willen u graag wijzen op een ander belangrijk feit: In de toekomst willen wij u graag, eens in de zoveel maanden, een nieuwsbrief sturen met belangrijk nieuws. 
+Deze eenmalige nieuwsbrief hebben we naar alle CAcert deelnemers toe gestuurd. Controleer s.v.p. uw instellingen, te vinden op www.cacert.org onder "Mijn Gegevens" -> "Mijn Waarschuwingen" of op https://www.cacert.org/account.php?id=36, en geef aan welke nieuwsbrieven u wilt ontvangen. In de toekomst zullen wij u alleen de door u aangegeven nieuwsbrieven toesturen.
+
+
+Met vriendelijke groet,
+
+Alexander Bahlo
+Officer for Public Relations
+CAcert.org
+
+Meer informatie over het Nieuwe Punten tel systeem is te vinden op:
+https://wiki.cacert.org/FAQ/NewPointsCount

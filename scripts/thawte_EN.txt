@@ -1,0 +1,35 @@
+
+we are proud to announce recent changes in the CAcert website. 
+
+Although there have been quite a few changes in the past, mostly they have happened "behind the scenes". Today we can announce more visible changes:
+
+
+ 1. Change to My Points page
+
+The Point list in the menu under "My Details" -> "My Points" will be enhanced. Main Point is: The Assurance Points received and given will be allocated in a new way. The crucial point was the working total of Assurance Points allocated to the Assuree.  Previously, only the beneficial points were displayed, and points allocated in Assurances were rounded down if in excess of 100.
+
+From now on, all allocated points are displayed. The Assuree can still only benefit up to a maximum of 100 Assurance Points.  As an Assurer, the member may benefit up to a maximum of 50 Experience Points by assuring other members. The new list will display the calculation much more transparently. Please have a look at the new points listing at https://www.cacert.org/wot.php?id=15
+
+
+ 2. Tverify points revoked
+
+Along with this change, all points allocated under the old Tverify program will be revoked in the near future. The Tverify program to transfer points allocated by Thawte Notaries across to CAcert members was stopped sometime ago. Tverify points cannot be verified by CAcert (for example, they cannot be distinguished between the different Notaries), and therefore, these points will be revoked soon. If you are unsure about your level of assurance, we recommend that you seek further assurance from CAcert Assurers.
+
+By performing these measures, we take another step towards a successful audit. Passing the audit is an important building block to be accepted as a CA in the internet browsers.
+
+
+ 3. Check your Alert Settings
+
+We would like to advise you of another important fact: In the future, we intend to send you further newsletters with our most important news, every few months. This present newsletter is being sent to all CAcert Community Member in a one-off mailing. For the future, please check your settings online at www.cacert.org under "My Details" -> "My Alert Settings" or at https://www.cacert.org/account.php?id=36 and choose which newsletters you want to receive. In the future, we intend to rely on your settings so as to send our newsletter only to those who wish to receive the specified information.
+
+
+Best regards,
+Alexander Bahlo
+Officer for Public Relations
+CAcert.org
+
+Further information on the New Points counting:
+https://wiki.cacert.org/FAQ/NewPointsCount
+
+
+
