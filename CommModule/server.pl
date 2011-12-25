@@ -502,9 +502,28 @@ sub SignX509($$$$$$$$)
   {
     open OUT,">$wid/extfile";
     print OUT "basicConstraints = critical, CA:FALSE\n";
+    print OUT "keyUsage = critical, digitalSignature, keyEncipherment, keyAgreement\n";
     print OUT "extendedKeyUsage = clientAuth, serverAuth, nsSGC, msSGC\n";
-    print OUT "keyUsage = digitalSignature, keyEncipherment\n";
     print OUT "authorityInfoAccess = OCSP;URI:$OCSPUrl\n";
+    
+    my $CRLUrl="";
+    if($root==0)
+    {
+        $CRLUrl="http://crl.cacert.org/revoke.crl";
+    }
+    elsif($root==1)
+    {
+        $CRLUrl="http://crl.cacert.org/class3-revoke.crl";
+    }
+    elsif($root==2)
+    {
+        $CRLUrl="http://crl.cacert.org/class3s-revoke.crl";
+    }
+    else
+    {
+        $CRLUrl="http://crl.cacert.org/root${root}.crl";
+    }
+    print OUT "crlDistributionPoints = URI:${CRLUrl}\n";
     print OUT "subjectAltName = $san\n" if(length($san));
     close OUT;
     $extfile=" -extfile $wid/extfile ";
