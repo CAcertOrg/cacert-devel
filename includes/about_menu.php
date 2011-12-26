@@ -4,7 +4,7 @@
         <li><a href="http://blog.cacert.org/"><?=_("CAcert News")?></a></li>
 	<li><a href="http://wiki.CAcert.org/"><?=_("Wiki Documentation")?></a></li>
 	<li><a href="/policy/"><?=_("Policies")?></a></li>
-	<li><a href="/index.php?id=19"><?=_("Point System")?></a></li>
+	<li><a href="//wiki.cacert.org/FAQ/Privileges"><?=_("Point System")?></a></li>
 	<li><a href="http://bugs.CAcert.org/"><?=_("Bug Database")?></a></li>
 <? //	<li><a href="/index.php?id=47"><  = _ ("PR Materials" )  > </a></li> ?>
 <? //	<li><a href="/logos.php">< ? = _ ( " CAcert Logos " ) ? > </a></li> ?>

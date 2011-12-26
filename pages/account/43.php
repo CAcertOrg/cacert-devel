@@ -16,6 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
+include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
+
+
   if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
   {
     $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
@@ -38,14 +41,26 @@
     //if(!strstr($email, "%"))
     //  $emailsearch = "%$email%";
 
-    if(intval($email) > 0)
-      $emailsearch = "";
-
-    $query = "select `users`.`id` as `id`, `email`.`email` as `email` from `users`,`email`
-        where `users`.`id`=`email`.`memid` and
-        (`email`.`email` like '$emailsearch' or `email`.`id`='$email' or `users`.`id`='$email') and
-        `email`.`hash`='' and `email`.`deleted`=0 and `users`.`deleted`=0
-        group by `users`.`id` limit 100";
+    // bug-975 ted+uli changes --- begin
+    if(preg_match("/^[0-9]+$/", $email)) {
+      // $email consists of digits only ==> search for IDs
+      // Be defensive here (outer join) if primary mail is not listed in email table
+      $query = "select `users`.`id` as `id`, `email`.`email` as `email`
+          from `users` left outer join `email` on (`users`.`id`=`email`.`memid`)
+          where (`email`.`id`='$email' or `users`.`id`='$email')
+            and `users`.`deleted`=0
+          group by `users`.`id` limit 100";
+    } else {
+      // $email contains non-digits ==> search for mail addresses
+      // Be defensive here (outer join) if primary mail is not listed in email table
+      $query = "select `users`.`id` as `id`, `email`.`email` as `email` 
+          from `users` left outer join `email` on (`users`.`id`=`email`.`memid`)
+          where (`email`.`email` like '$emailsearch' 
+                 or `users`.`email` like '$emailsearch')
+            and `users`.`deleted`=0
+          group by `users`.`id` limit 100";
+    }
+    // bug-975 ted+uli changes --- end 
     $res = mysql_query($query);
     if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -138,7 +153,7 @@
         {
                 echo "<option";
                 if($day == $i)
-			echo " selected='selected'";
+                    echo " selected='selected'";
                 echo ">$i</option>";
         }
 ?>
@@ -178,7 +193,7 @@
     <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>"><?=$row['codesign']?></a></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Org Admin")?>:</td>
+    <td class="DataTD"><?=_("Org Assurer")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>"><?=$row['orgadmin']?></a></td>
   </tr>
   <tr>
@@ -317,16 +332,178 @@
 </table>
 <br>
 <? } ?>
-
-<?
-  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
-?>
-
+<? //  Begin - Debug infos ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="7" class="title"><?=_("Assurance Points")?></td>
+    <td colspan="2" class="title"><?=_("Account State")?></td>
+  </tr>
+
+<?  
+  // ---  bug-975 begin ---
+  //  potential db inconsistency like in a20110804.1
+  //    Admin console -> don't list user account
+  //    User login -> impossible
+  //    Assurer, assure someone -> user displayed
+  /*  regular user account search with regular settings
+
+    --- Admin Console find user query
+    $query = "select `users`.`id` as `id`, `email`.`email` as `email` from `users`,`email`
+        where `users`.`id`=`email`.`memid` and
+        (`email`.`email` like '$emailsearch' or `email`.`id`='$email' or `users`.`id`='$email') and
+        `email`.`hash`='' and `email`.`deleted`=0 and `users`.`deleted`=0
+        group by `users`.`id` limit 100";
+     => requirements
+       1.  email.hash = ''
+       2.  email.deleted = 0
+       3.  users.deleted = 0
+       4.  email.email = primary-email       (???) or'd
+      not covered by admin console find user routine, but may block users login
+       5.  users.verified = 0|1
+      further "special settings"   
+       6.  users.locked  (setting displayed in display form)
+       7.  users.assurer_blocked   (setting displayed in display form)
+
+    --- User login user query
+    select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
+						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0
+		=> requirements
+       1. users.verified = 1
+       2. users.deleted = 0
+       3. users.locked = 0
+       4. users.email = primary-email 				
+
+    --- Assurer, assure someone find user query
+    select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."'
+           and `deleted`=0
+		=> requirements
+       1. users.deleted = 0
+       2. users.email = primary-email
+                                     Admin      User        Assurer
+      bit                            Console    Login       assure someone
+
+       1.  email.hash = ''            Yes        No           No
+       2.  email.deleted = 0          Yes        No           No
+       3.  users.deleted = 0          Yes        Yes          Yes
+       4.  users.verified = 1         No         Yes          No       
+       5.  users.locked = 0           No         Yes          No
+       6.  users.email = prim-email   No         Yes          Yes
+       7.  email.email = prim-email   Yes        No           No
+                 
+    full usable account needs all 7 requirements fulfilled
+    so if one setting isn't set/cleared there is an inconsistency either way
+    if eg email.email is not avail, admin console cannot open user info
+    but user can login and assurer can display user info
+    if user verified is not set to 1, admin console displays user record
+    but user cannot login, but assurer can search for the user and the data displays
+
+    consistency check:
+    1. search primary-email in users.email
+    2. search primary-email in email.email
+    3. userid = email.memid
+    4. check settings from table 1. - 5.
+
+   */
+
+  $inconsistency = 0;
+  $inconsistencydisp = "";
+  $inccause = "";
+   // current userid  intval($row['id'])
+  $query = "select `email` as `uemail`, `deleted` as `udeleted`, `verified`, `locked`
+      from `users` where `id`='".intval($row['id'])."' ";
+  $dres = mysql_query($query);
+  $drow = mysql_fetch_assoc($dres);
+  $uemail    = $drow['uemail'];
+  $udeleted  = $drow['udeleted'];
+  $uverified = $drow['verified'];
+  $ulocked   = $drow['locked'];
+
+  $query = "select `hash`, `email` as `eemail` from `email`
+      where `memid`='".intval($row['id'])."' and
+      `email` ='".$uemail."' and
+      `deleted` = 0";
+  $dres = mysql_query($query);
+  if ($drow = mysql_fetch_assoc($dres)) {
+    $drow['edeleted'] = 0;
+  } else {
+  	// try if there are deleted entries
+    $query = "select `hash`, `deleted` as `edeleted`, `email` as `eemail` from `email`
+        where `memid`='".intval($row['id'])."' and
+        `email` ='".$uemail."'";
+    $dres = mysql_query($query);
+    $drow = mysql_fetch_assoc($dres);
+  }
+  
+  if ($drow) {
+    $eemail    = $drow['eemail'];
+    $edeleted  = $drow['edeleted'];
+    $ehash     = $drow['hash'];
+    if ($udeleted!=0) {
+      $inconsistency += 1;
+      $inccause .= (empty($inccause)?"":"<br>")._("Users record set to deleted");
+    }
+    if ($uverified!=1) {
+      $inconsistency += 2;
+      $inccause .= (empty($inccause)?"":"<br>")._("Users record verified not set");
+    }
+    if ($ulocked!=0) {
+      $inconsistency += 4;
+      $inccause .= (empty($inccause)?"":"<br>")._("Users record locked set");
+    }
+    if ($edeleted!=0) {
+      $inconsistency += 8;
+      $inccause .= (empty($inccause)?"":"<br>")._("Email record set deleted");    
+    }
+    if ($ehash!='') {
+      $inconsistency += 16;
+      $inccause .= (empty($inccause)?"":"<br>")._("Email record hash not unset");        
+    }
+  } else {
+    $inconsistency = 32;
+    $inccause = _("Prim. email, Email record doesn't exist");
+  }
+  if ($inconsistency>0) {
+     // $inconsistencydisp = _("Yes");
+?>
+  <tr>
+    <td class="DataTD"><?=_("Account inconsistency")?>:</td>
+    <td class="DataTD"><?=$inccause?><br>code: <?=$inconsistency?></td>
   </tr>
   <tr>
+    <td colspan="2" class="DataTD" style="max-width: 75ex">
+      <?=_("Account inconsistency can cause problems in daily account ".
+      "operations and needs to be fixed manually through arbitration/critical ".
+      "team.")?>
+     </td>
+  </tr>  
+<? }
+
+  // ---  bug-975 end ---
+?>
+</table>
+<br>
+<?    
+ //  End - Debug infos
+?>
+
+<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
+ (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
+<br />
+<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
+ (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)
+<br />
+
+<?
+//  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
+
+function showassuredto()
+{
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td colspan="8" class="title"><?=_("Assurance Points")?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><b><?=_("ID")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -336,7 +513,7 @@
     <td class="DataTD"><b><?=_("Revoke")?></b></td>
   </tr>
 <?
-  $query = "select * from `notary` where `to`='".intval($row['id'])."'";
+  $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'";
   $dres = mysql_query($query);
   $points = 0;
   while($drow = mysql_fetch_assoc($dres))
@@ -345,9 +522,10 @@
     $points += $drow['points'];
 ?>
   <tr>
+    <td class="DataTD"><?=$drow['id']?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['date'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
-    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
     <td class="DataTD"><?=intval($drow['points'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
@@ -360,20 +538,18 @@
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
 </table>
-<? } else { ?>
-  <tr>
-    <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;assuredto=yes"><?=_("Show Assurances the user got")?></a></td>
-  </tr>
 <? } ?>
-<br>
+
 <?
-  if(array_key_exists('assuredby',$_GET) && $_GET['assuredby'] == "yes") {
+function showassuredby()
+{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="7" class="title"><?=_("Assurance Points The User Issued")?></td>
+    <td colspan="8" class="title"><?=_("Assurance Points The User Issued")?></td>
   </tr>
   <tr>
+    <td class="DataTD"><b><?=_("ID")?></b></td>
     <td class="DataTD"><b><?=_("Date")?></b></td>
     <td class="DataTD"><b><?=_("Who")?></b></td>
     <td class="DataTD"><b><?=_("Email")?></b></td>
@@ -383,7 +559,7 @@
     <td class="DataTD"><b><?=_("Revoke")?></b></td>
   </tr>
 <?
-  $query = "select * from `notary` where `from`='".$row['id']."' and `to`!='".$row['id']."'";
+  $query = "select * from `notary` where `from`='".intval($_GET['userid'])."'";
   $dres = mysql_query($query);
   $points = 0;
   while($drow = mysql_fetch_assoc($dres))
@@ -392,6 +568,7 @@
     $points += $drow['points'];
 ?>
   <tr>
+    <td class="DataTD"><?=$drow['id']?></td>
     <td class="DataTD"><?=$drow['date']?></td>
     <td class="DataTD"><a href="wot.php?id=9&userid=<?=$drow['to']?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
@@ -407,11 +584,21 @@
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
 </table>
-<? } else { ?>
-  <tr>
-    <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;assuredby=yes"><?=_("Show Assurances the user gave")?></a></td>
-  </tr>
 <? } ?>
 <br><br>
-<? } } ?>
+<? } } 
 
+switch ($_GET['shownotary'])
+        {
+	case 'assuredto': 	showassuredto();
+				break;
+	case 'assuredby':	showassuredby();
+				break;
+	case 'assuredto15':	output_received_assurances(intval($_GET['userid']),1);
+				break;
+	case 'assuredby15': 	output_given_assurances(intval($_GET['userid']),1);
+				break;
+	}
+
+
+?>

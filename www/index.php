@@ -148,13 +148,16 @@
 
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
-		$query = "select * from `emailcerts` where `serial`='$_SERVER[SSL_CLIENT_M_SERIAL]' and `revoked`=0 and disablelogin=0 and
-				UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		include_once("../includes/lib/general.php");
+		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
+				$_SERVER['SSL_CLIENT_I_DN_CN']);
+		
+		if($user_id >= 0)
 		{
-			$row = mysql_fetch_assoc($res);
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$row[memid]' and `deleted`=0 and `locked`=0"));
+			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
+				"select * from `users` where 
+				`id`='$user_id' and `deleted`=0 and `locked`=0"));
+			
 			if($_SESSION['profile']['id'] != 0)
 			{
 				$_SESSION['profile']['loggedin'] = 1;
@@ -332,6 +335,8 @@
 				$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>";
 				$_SESSION['_config']['oldlocation'] = "account.php?id=13";
 			}
+			if (checkpwlight($pword) < 3)
+				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
 			if($_SESSION['_config']['oldlocation'] != "")
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
 			else
@@ -628,6 +633,27 @@
 	if(!array_key_exists('signup',$_SESSION) || $_SESSION['signup']['year'] < 1900)
 		$_SESSION['signup']['year'] = "19XX";
 
+	if ($id == 12)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+	
+	if ($id == 19)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/FAQ/Privileges';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+
+	if ($id == 8)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/Board';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+	
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();

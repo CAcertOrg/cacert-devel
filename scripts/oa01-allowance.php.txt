@@ -1,0 +1,93 @@
+#!/usr/bin/php -q
+<? /*
+    LibreSSL - CAcert web application
+    Copyright (C) 2004-2011  CAcert Inc.
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; version 2 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+	include_once("../includes/mysql.php");
+
+	$lines = "";
+	$fp = fopen("oa01-allowance.txt", "r");
+	while(!feof($fp))
+	{
+		$line = trim(fgets($fp, 4096));
+		$lines .= wordwrap($line, 75, "\n")."\n";
+	}
+	fclose($fp);
+
+// ---  Variable parameters --- begin
+
+// $country
+//     ""    (empty)  email to _all_ countries
+//     "DE"   2-digit country code, eg. email to Germany Org's only
+
+// $status
+//    Status:  1 mails to org contacts only
+//             2 mails to org admins only
+//             3 mails to org contacts + org admins
+
+// $subject
+//   sample:
+//     with
+//     mailing subject results in
+//     a) $country = ""
+//        "[CAcert.org] Allowance to publish Organisation Assurance on CAcert website"
+//     b) $country = "DE"
+//        "[CAcert.org] Allowance to publish Organisation Assurance on CAcert website (DE)"
+
+
+//OA Allowance
+$country = "";   //   "DE" or ""
+$status  = 3;      //   1, 2 or 3   3 = 1+2
+$subject = "Allowance to publish Organisation Assurance on CAcert website";
+
+
+// --- Variable parameters --- end
+
+$query = "SELECT orginfo.contact as email, orginfo.O, 1 as status
+			FROM orginfo
+			WHERE (orginfo.C like '$country%' and (1=$status or 3=$status))
+      UNION
+			Select users.email, orginfo.O, 2 as status
+			FROM users
+				inner join org on users.id = org.memid
+				inner join orginfo on org.orgid=orginfo.id
+      WHERE (orginfo.C like '$country%' and (2=$status or 3=$status))
+      ORDER BY O";
+
+
+	 echo $query;
+
+    // comment next line when starting to send mail not only to me 
+    //	$query = "select * from `users` where `email` like 'cacerttest%'";
+
+	$res = mysql_query($query);
+	$xrows = mysql_num_rows($res);
+
+	while($row = mysql_fetch_assoc($res))
+	{
+    //    uncomment next line to send mails ...
+		sendmail($row['email'], "[CAcert.org] ".$subject.(empty($country)?"":" (".$country.")") , $lines, "support@cacert.org", "", "", "CAcert OA Support", "returns@cacert.org", 1);
+	}
+  // 1x cc to oao.cacert.org
+	sendmail("oao@cacert.org", "[CAcert.org] ".$subject.(empty($country)?"":" (".$country.")"), $lines, "oao@cacert.org", "", "", "CAcert OA Support", "returns@cacert.org", 1);
+	// 1x mailing report to oao.cacert.org
+  sendmail("oao@cacert.org", "[CAcert.org] ".$subject.(empty($country)?"":" (".$country.")")." - Report", "oa-mailing sent to $xrows recipients.", "support@cacert.org", "", "", "CAcert OA Support", "returns@cacert.org", 1);	
+
+	// 1x mailing report to Arbitrator of case http://wiki.cacert.org/wiki/Arbitrations/a20110608.1
+  sendmail("bernhard@cacert.org", "[CAcert.org] ".$subject.(empty($country)?"":" (".$country.")")." - Report", "oa-mailing sent to $xrows recipients.", "support@cacert.org", "", "", "CAcert OA Support", "returns@cacert.org", 1);	
+
+	echo "oa-mailing sent to $xrows recipients.\n";
+?>
