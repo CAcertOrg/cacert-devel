@@ -24,10 +24,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
     $row = 0;
     $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
-    if ($res) { 
+    if ($res) {
       $row = mysql_fetch_assoc($res);
     }
-    mysql_query("delete from `notary` where `id`='$assurance'");    
+    mysql_query("delete from `notary` where `id`='$assurance'");
     if ($row) {
       fix_assurer_flag($row['to']);
     }
