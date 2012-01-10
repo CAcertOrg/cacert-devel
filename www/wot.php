@@ -16,9 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
-
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
+
 
 function show_page($target,$message,$error)
 {
@@ -86,7 +86,6 @@ function show_page($target,$message,$error)
 function send_reminder()
 {
 	$body = "";
-	
 	$my_translation = L10n::get_translation();
 	
 	$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
@@ -111,9 +110,8 @@ function send_reminder()
 	L10n::set_translation($my_translation);
 	
 	$_SESSION['_config']['remindersent'] = 1;
+	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
-
-
 
 
 
