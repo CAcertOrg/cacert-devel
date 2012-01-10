@@ -798,10 +798,13 @@
 		if($newlayout)
 		{
 			$name="../$type/$kind/".intval($id/1000)."/$kind-".intval($id).".$type";
-			mkdir("../csr/$kind",0777);
-			mkdir("../crt/$kind",0777);
-			mkdir("../csr/$kind/".intval($id/1000));
-			mkdir("../crt/$kind/".intval($id/1000));
+			if (!is_dir("../csr")) { mkdir("../csr",0777); }
+			if (!is_dir("../crt")) { mkdir("../crt",0777); }
+			
+			if (!is_dir("../csr/$kind")) { mkdir("../csr/$kind",0777); }
+			if (!is_dir("../crt/$kind")) { mkdir("../crt/$kind",0777); }
+			if (!is_dir("../csr/$kind/".intval($id/1000))) { mkdir("../csr/$kind/".intval($id/1000)); }
+			if (!is_dir("../crt/$kind/".intval($id/1000))) { mkdir("../crt/$kind/".intval($id/1000)); }
 		}
 		return $name;
 	}

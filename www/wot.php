@@ -16,11 +16,106 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
-	require_once("../includes/loggedin.php");
-	require_once("../includes/lib/l10n.php");
+require_once("../includes/loggedin.php");
+require_once("../includes/lib/l10n.php");
+
+
+function show_page($target,$message,$error)
+{
+	showheader(_("My CAcert.org Account!"));
+	if ($error != "")
+		$message=_("ERROR").": ".$error;
+	if ($message != "")
+		echo "<p><font color='orange' size='+1'>".$message."</font></p>";
+
+	switch ($target)
+	{
+		case '0':
+		case 'InfoPage':	includeit(0, "wot");
+					break;
+		case '1':
+		case 'ListByCity':	includeit(1, "wot");
+					break;
+		case '2':
+		case 'BecomeAssurer':	includeit(2, "wot");
+					break;
+		case '3':
+		case 'TrustRules':	includeit(3, "wot");
+					break;
+		case '4':
+		case 'ShowTTPInfo':	includeit(4, "wot");
+					break;
+		case '5';
+		case 'EnterEmail':	includeit(5, "wot");
+					break;
+		case '6':
+		case 'VerifyData':	includeit(6, "wot");
+					break;
+//		case '7':
+//		case '???':		includeit(7, "wot");
+//					break;
+		case '8':
+		case 'EnterMyInfo':	includeit(8, "wot");
+					break;
+		case '9':
+		case 'ContactAssurer':	includeit(9, "wot");
+					break;
+		case '10':
+		case 'MyPointsOld':	includeit(10, "wot");
+					break;
+//		case '11':
+//		case 'OAInfo':		includeit(11, "wot");
+//					break;
+		case '12':
+		case 'SearchAssurer':	includeit(12, "wot");
+					break;
+		case '13':
+		case 'EnterMyCity':	includeit(13, "wot");
+					break;
+//		case '14':
+//		case 'EnterEmail':	includeit(14, "wot");
+//					break;
+		case '15':
+		case 'MyPointsNew':	includeit(15, "wot");
+					break;
+	}
+
+	showfooter();
+}
+
+function send_reminder()
+{
+	$body = "";
+	$my_translation = L10n::get_translation();
+	
+	$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
+	
+	$reminder_translations[] = $_POST['reminder-lang'];
+	if ( !in_array("en", $reminder_translations, $strict=true) ) {
+		$reminder_translations[] = "en";
+	}
+	
+	foreach ($reminder_translations as $translation) {
+		L10n::set_translation($translation);
+		
+		$body .= L10n::$translations[$translation].":\n\n";
+		$body .= sprintf(_("This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."), $_SESSION['profile']['fname']." (".$_SESSION['profile']['email'].")", "http://www.cacert.org", $_SESSION['profile']['fname'])."\n\n";
+		$body .= _("Best regards")."\n";
+		$body .= _("CAcert Support Team")."\n\n";
+	}
+	
+	L10n::set_translation($reminder_translations[0]); // for the subject
+	sendmail($_POST['email'], "[CAcert.org] "._("Reminder Notice"), $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
+	
+	L10n::set_translation($my_translation);
+	
+	$_SESSION['_config']['remindersent'] = 1;
+	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
+}
+
+
 
 	loadem("account");
-
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
 		$_SESSION['_config']['date'] = $_POST['date'];
 
@@ -30,240 +125,142 @@
 	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;	
 
 	if($oldid == 12)
-	{
 		$id = $oldid;
-	}
 
 	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
-	{
-		if (!is_assurer($_SESSION['profile']['id'])) {
-			showheader(_("My CAcert.org Account!"));
-			echo "<p>".get_assurer_reason($_SESSION['profile']['id'])."</p>";
-			showfooter();
-			exit;
-		}
-	}
+		if (!is_assurer($_SESSION['profile']['id'])) 
+			{
+				show_page ("Exit","",get_assurer_reason($_SESSION['profile']['id']));
+				exit;
+			}
 
 	if($oldid == 6 && intval($_SESSION['_config']['notarise']['id']) <= 0)
 	{
-		$oldid=0;
-		$id = 5;
+		show_page ("EnterEmail","",_("Something went wrong. Please enter the email address again"));
+		exit;
 	}
-
 	if($oldid == 5 && array_key_exists('reminder',$_POST) && $_POST['reminder'] != "")
 	{
-		$body = "";
-		
-		$my_translation = L10n::get_translation();
-		
-		$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
-		
-		$reminder_translations[] = $_POST['reminder-lang'];
-		if ( !in_array("en", $reminder_translations, $strict=true) ) {
-			$reminder_translations[] = "en";
-		}
-		
-		foreach ($reminder_translations as $translation) {
-			L10n::set_translation($translation);
-			
-			$body .= L10n::$translations[$translation].":\n\n";
-			$body .= sprintf(_("This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."), $_SESSION['profile']['fname']." (".$_SESSION['profile']['email'].")", "http://www.cacert.org", $_SESSION['profile']['fname'])."\n\n";
-			$body .= _("Best regards")."\n";
-			$body .= _("CAcert Support Team")."\n\n";
-		}
-		
-		L10n::set_translation($reminder_translations[0]); // for the subject
-		sendmail($_POST['email'], "[CAcert.org] "._("Reminder Notice"), $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
-		
-		L10n::set_translation($my_translation);
-		
-		$_SESSION['_config']['remindersent'] = 1;
-		$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
-
-		$id = $oldid;
-		$oldid=0;
+		send_reminder();
+		show_page ("EnterEmail",_("A reminder notice has been sent."),"");
+		exit;
 	}
 
 	if($oldid == 5)
 	{
-		$_SESSION['_config']['noemailfound'] = 0;
 		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) != 1)
 		{
-			$id = $oldid;
-			$oldid=0;
-			$_SESSION['_config']['error'] = _("I'm sorry, there was no email matching what you entered in the system. Please double check your information.");
 			$_SESSION['_config']['noemailfound'] = 1;
-		} else {
+			show_page("EnterEmail","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
+			exit;
+		} else 
+		{
+			$_SESSION['_config']['noemailfound'] = 0;
 			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
+			if ($_SESSION['_config']['notarise']['verified'] == 0)
+			{
+				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
+				exit;
+			}
 		}
 	}
 
 	if($oldid == 5 || $oldid == 6)
 	{
+		$id=6;
+//		$oldid=0;
 		if(array_key_exists('cancel',$_REQUEST) && $_REQUEST['cancel'] != "")
 		{
-			header("location: wot.php");
+			show_page("EnterEmail","","");
+			exit;
+		}
+		if($_SESSION['_config']['notarise']['id'] == $_SESSION['profile']['id'])
+		{
+			show_page("EnterEmail","",_("You are never allowed to Assure yourself!"));
 			exit;
 		}
 
-		if($_SESSION['_config']['notarise']['id'] == $_SESSION['profile']['id'])
-		{
-			$id = 5;
-			$oldid=0;
-			$_SESSION['_config']['error'] = _("You are never allowed to Assure yourself!");
-		}
-	}
-
-	if($oldid == 5 || $oldid == 6)
-	{
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' and
 							`to`='".$_SESSION['_config']['notarise']['id']."'";
-		$_SESSION['_config']['alreadydone'] = 0;
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0 && $_SESSION['profile']['points'] < 200)
+		if(mysql_num_rows($res) > 0)
 		{
-			$id = 5;
-			$oldid=0;
-			$_SESSION['_config']['error'] = _("You are only allowed to Assure someone once!");
-		} elseif($oldid == 5) {
-			$id = 6;
-		}
-		if($id == 6 && mysql_num_rows($res) > 0)
-		{
-			$_SESSION['_config']['alreadydone'] = 1;
-		}
-		unset($_SESSION['_config']['pointsalready']);
-		if($id == 6 && $_SESSION['profile']['points'] >= 100)
-		{
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
-			$res = mysql_query($query);
-			$drow = mysql_fetch_assoc($res);
-			$_SESSION['_config']['pointsalready'] = $drow['total'];
-		}
-		unset($_SESSION['_config']['verified']);
-		if($id == 6 && $_SESSION['profile']['points'] >= 100)
-		{
-			$query = "select `verified` from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
-			$res = mysql_query($query);
-			$drow = mysql_fetch_assoc($res);
-			$_SESSION['_config']['verified'] = $drow['verified'];
+			show_page("EnterEmail","",_("You are only allowed to Assure someone once!"));
+			exit;
 		}
 	}
 
 	if($oldid == 6)
 	{
-		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1 || !array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+$iecho= "c";
+		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
 		{
-			$id = $oldid;
-			$oldid=6;
-			$_SESSION['_config']['error'] = _("You failed to check all boxes to validate your adherence to the rules and policies of CAcert");
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
 		}
+
+/*		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+*/
 
 		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_SESSION['profile']['ttpadmin'] != 1)
 		{
-			$id = $oldid;
-			$oldid=6;
-			$_SESSION['_config']['error'] = _("You failed to check all boxes to validate your adherence to the rules and policies of CAcert");
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
 		}
-	}
 
-	if($oldid == 6 && $_SESSION['profile']['ttpadmin'] != 1)
-	{
-		if($_POST['location'] == "")
+		if($_SESSION['profile']['ttpadmin'] != 1 && $_POST['location'] == "")
 		{
-			$id = $oldid;
-			$oldid=0;
-			$_SESSION['_config']['error'] = _("You failed to enter a location of your meeting.");
+			show_page("VerifyData","",_("You failed to enter a location of your meeting."));
+			exit;
 		}
-	}
 
-	if($oldid == 6)
-	{
+		if($_REQUEST['points'] == "")
+		{
+			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
+			exit;
+		}
+
 		$query = "select * from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
 		$name = $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];
 		if($_SESSION['_config']['wothash'] != md5($name."-".$row['dob']) || $_SESSION['_config']['wothash'] != $_REQUEST['pagehash'])
 		{
-			$id = $oldid;
-			$oldid=0;
-			$_SESSION['_config']['error'] = _("Race condition discovered, user altered details during assurance procedure. PLEASE MAKE SURE THE NEW DETAILS BELOW MATCH THE ID DOCUMENTS.");
+			show_page("VerifyData","",_("Race condition discovered, user altered details during assurance procedure. PLEASE MAKE SURE THE NEW DETAILS BELOW MATCH THE ID DOCUMENTS."));
+			exit;
 		}
 	}
 
-	if($oldid == 6 && $_REQUEST['points'] == "")
-	{
-		$id = $oldid;
-		$oldid=0;
-		$_SESSION['_config']['error'] = _("You must enter the number of points you wish to allocate to this person.");
-	}
 
 	if($oldid == 6)
 	{
 		$max =  maxpoints();
-		
-		if (intval($_POST['points']) > $max) {
-			$awarded = $newpoints = $max;
-		} elseif (intval($_POST['points']) < 0) {
-			$awarded = $newpoints = 0;
-		} else {
-			$awarded = $newpoints = intval($_POST['points']);
-		}
+
+		$awarded = $newpoints = intval($_POST['points']);
+		if($newpoints > $max)
+			$newpoints = $awarded = $max;
+		if($newpoints < 0)
+			$newpoints = $awarded = 0;
 		
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0 && $drow['total'] > 150)
-		{
-			showheader(_("My CAcert.org Account!"));
-			echo "<p>"._("You tried to give a temporary points increase to someone that already has more then 150 points. Can't continue.")."</p>";
-			showfooter();
-			exit;
-		}
+		$_POST['expire'] = 0;
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0 && intval($_POST['sponsor']) <= 0)
-		{
-			showheader(_("My CAcert.org Account!"));
-			echo "<p>"._("You didn't list a valid sponsor for this action.")."</p>";
-			showfooter();
-			exit;
-		}
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0 && intval($_POST['sponsor']) > 0)
-		{
-			$resc = mysql_query("select * from `users` where `id`='".intval($_POST['sponsor'])."' and `board`='1'");
-			$rc = mysql_num_rows($resc);
-			$sponsor = mysql_fetch_assoc($resc);
-			if($rc <= 0)
-			{
-				showheader(_("My CAcert.org Account!"));
-				echo "<p>"._("You listed an invalid sponsor for this action.")."</p>";
-				showfooter();
-				exit;
-			}
-		}
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$_POST['method'] = "Administrative Increase";
-			$newpoints = 200 - $drow['total'];
-			if(intval($_POST['expire']) > 45)
-				$_POST['expire'] = 45;
-			if(intval($_POST['expire']) <= 7)
-				$_POST['expire'] = 7;
-		} else {
-			$_POST['expire'] = 0;
-			if(($drow['total'] + $newpoints) > 100 && $max < 100)
-				$newpoints = 100 - $drow['total'];
-			if(($drow['total'] + $newpoints) > $max && $max >= 100)
-				$newpoints = $max - $drow['total'];
-			if($newpoints < 0)
-				$newpoints = 0;
-		}
-
+		if(($drow['total'] + $newpoints) > 100 && $max < 100)
+			$newpoints = 100 - $drow['total'];
+		if(($drow['total'] + $newpoints) > $max && $max >= 100)
+			$newpoints = $max - $drow['total'];
+		if($newpoints < 0)
+			$newpoints = 0;
+		
 		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
@@ -275,9 +272,8 @@
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
-                        $id = $oldid;
-                        $oldid=0;
-                        $_SESSION['_config']['error'] = _("Identical Assurance attempted, will not continue.");
+                        show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
+			exit;
 		}
 	}
 
@@ -435,7 +431,8 @@
 		{
 			$oldid=0;
 			$id = 9;
-			$error = _("It looks like you were trying to contact multiple people, this isn't allowed due to data security reasons.");
+			show_page("ContactAssurer","",_("It looks like you were trying to contact multiple people, this isn't allowed due to data security reasons."));
+			exit;
 		} else {
 			$body = $_REQUEST['message'];
 			$subject = $_REQUEST['subject'];
@@ -447,25 +444,26 @@
 			{
 				sendmail($user['email'], "[CAcert.org] ".$_REQUEST['subject'], $_REQUEST['message'],
 					$_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']);
-				showheader(_("My CAcert.org Account!"));
-				echo "<p>"._("Your email has been sent to")." ".$user['fname'].".</p>";
-				echo "<p>[ <a href='javascript:history.go(-2)'>Go Back</a> ]</p>\n";
-				showfooter();
+				show_page("ContactAssurer",_("Your email has been sent to")." ".$user['fname'].".<br />[ <a href='javascript:history.go(-2)'>"._("Go Back")."</a> ]","");
 				exit;
 			} else {
-				showheader(_("My CAcert.org Account!"));
-				echo _("Sorry, I was unable to locate that user.");
-				showfooter();
+				show_page(0,"",_("Sorry, I was unable to locate that user."));
 				exit;
 			}
+		
 		}
-	} elseif($oldid == 9) {
+	} 
+	if($oldid == 9) 
+	{
 		$oldid=0;
-		$error = _("There was an error and I couldn't proceed");
 		$id = 9;
+		show_page("ContactAssurer","",_("There was an error and I couldn't proceed"));
+		exit;
 	}
 
-	showheader(_("My CAcert.org Account!"));
-	includeit($id, "wot");
-	showfooter();
+//	showheader(_("My CAcert.org Account!"));
+//	echo "ID now = ".$id."/".$oldid.">>".$iecho;
+//	includeit($id, "wot");
+//	showfooter();
+show_page ($id,"","");
 ?>
