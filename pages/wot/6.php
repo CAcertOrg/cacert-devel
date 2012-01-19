@@ -29,9 +29,9 @@
 
 	if($_SESSION['profile']['ttpadmin'] == 1 && $_SESSION['profile']['board'] == 1)
 	{
-		$methods = array("Face to Face Meeting", "Trusted 3rd Parties", "Thawte Points Transfer", "Administrative Increase", "CT Magazine - Germany");
+		$methods = array("Face to Face Meeting", "Trusted Third Parties", "Thawte Points Transfer", "Administrative Increase", "CT Magazine - Germany");
 	} else if($_SESSION['profile']['ttpadmin'] == 1) {
-		$methods = array("Face to Face Meeting", "Trusted 3rd Parties");
+		$methods = array("Face to Face Meeting", "Trusted Third Parties");
 	}
 
 	$cap = "/cap.php?";
