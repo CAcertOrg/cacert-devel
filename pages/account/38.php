@@ -19,7 +19,11 @@
 
 <h4><?=_("If I'd like to donate to CAcert Inc., how can I do it?")?></h4>
 
-<p><?=_("CAcert Inc. is a non-profit association which is legally able to accept donations. CAcert adheres to strict guidelines about how this money can to be used. If you'd like to make a donation, you can do so via")?> 
+<p>
+<?
+printf(_("CAcert Inc. is a non-profit association which is legally able to accept donations. CAcert adheres to %sstrict guidelines%s about how this money can to be used. If you'd like to make a donation, you can do so via"),
+	'<a href="//wiki.cacert.org/FAQ/DonationsGuideline">', '</a>');
+?> 
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
