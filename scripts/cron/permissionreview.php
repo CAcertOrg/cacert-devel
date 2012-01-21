@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require_once('../../includes/mysql.php');
 
-define(BOARD_PRIVATE, 'cacert-board-private@lists.cacert.org');
+$BOARD_PRIVATE = 'cacert-board-private@lists.cacert.org';
 
 $flags = array(
 	'admin' => 'Support Engineer',
@@ -60,7 +60,7 @@ Hello $admin[fname],
 you get this message, because you are listed as $description on
 CAcert.org. Please review the following list of persons with the same privilege
 and report to the responsible team leader or board
-({BOARD_PRIVATE}) if you spot any errors.
+($BOARD_PRIVATE) if you spot any errors.
 
 $adminlist[$flag]
 
@@ -98,4 +98,4 @@ Best Regards,
 CAcert Support
 EOF;
 
-sendmail(BOARD_PRIVATE, "Permissions Review", $message, 'support@cacert.org');
+sendmail($BOARD_PRIVATE, "Permissions Review", $message, 'support@cacert.org');
