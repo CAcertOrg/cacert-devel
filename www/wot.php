@@ -297,7 +297,7 @@ $iecho= "c";
 			$query .= ",\n`sponsor`='".intval($_POST['sponsor'])."'";
 		} else if($_SESSION['profile']['board'] == 1) {
 			$query .= ",\n`method`='".mysql_escape_string(stripslashes($_POST['method']))."'";
-		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted third Parties')) {
+		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='Trusted Third Parties'";
 		}
 		mysql_query($query);
