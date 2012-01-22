@@ -24,7 +24,7 @@
      * @return array
      */
 	function getData() {
-		$sql = 'select * from statscache order by timestamp desc limit 1';
+		$sql = 'select * from `statscache` order by `timestamp` desc limit 1';
 		$res = mysql_query($sql);
 		if ($res && mysql_numrows($res) > 0) {
 			$ar = mysql_fetch_assoc($res);
