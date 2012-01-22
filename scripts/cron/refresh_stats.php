@@ -215,7 +215,7 @@ function getDataFromLive() {
 		$first = date("Y-m-d", $first_ts);
 		$next_year = date("Y-m-d", $next_year_ts);
 		
-		echo "Calculating statistics for year $i";
+		echo "Calculating statistics for year $i\n";
 		
 		$totalusers += $users = tc(
 			"select count(*) as `count` from `users` 
