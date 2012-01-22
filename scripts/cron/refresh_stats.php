@@ -29,7 +29,7 @@ require_once('../../includes/mysql.php');
  * @return resource|boolean
  * 		the MySQL result set
  */
-function sql_query(string $sql) {
+function sql_query($sql) {
 	$res = mysql_query($sql);
 	if (!$res) {
 		fwrite(STDERR, "MySQL query failed:\n\"$sql\"\n".mysql_error());
