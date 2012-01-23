@@ -348,7 +348,7 @@ $today = date("Y-m-d");
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-		<td colspan="2" class="title"><?=_("Account State")?></td>
+		<td colspan="2" class="title"><?=_("Account Activity")?></td>
 	</tr>
 
 	<tr>
