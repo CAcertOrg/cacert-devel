@@ -331,7 +331,63 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 <? } ?>
 </table>
 <br>
-<? } ?>
+<? }
+
+//
+// Display account creation/activity information
+//
+
+$query = "select `created`, `modified` from `users`
+	where `id` = '".intval($row['id'])."' ";
+$dres = mysql_query($query);
+$drow = mysql_fetch_assoc($dres);
+$created = $drow['created'];
+$modified = $drow['modified'];
+
+$today = date("Y-m-d");
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+	<tr>
+		<td colspan="2" class="title"><?=_("Account State")?></td>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Account created")?>:</td>
+		<td class="DataTD"><?
+		if (substr($created,0,7) == substr($today,0,7)) {
+			echo _("this month");
+		} elseif (substr($created,0,4) == substr($today,0,4)) {
+			echo _("this year");
+		} elseif (substr($created,0,7) > "2009-06") {
+			echo _("between June 2009 and this year");
+		} elseif (substr($created,0,7) >= "2009-01") {
+			echo _("between January and June 2009");
+		} else {
+			echo _("before January 2009");
+		} ?></td>
+	</tr>
+
+	<tr>
+		<td class="DataTD"><?=_("Last activity")?>:</td>
+		<td class="DataTD"><?
+		if (substr($modified,0,7) == substr($today,0,7)) {
+			echo _("this month");
+		} elseif (substr($modified,0,4) == substr($today,0,4)) {
+			echo _("this year");
+		} elseif (substr($modified,0,7) <
+				(intval(substr($today,0,4))-2)."-".substr($today,5,2) ) {
+			echo _("before 2 years");
+		} elseif (substr($modified,0,7) <
+				(intval(substr($today,0,4))-1)."-".substr($today,5,2)) {
+			echo _("before 1 year");
+		} else {
+			echo _("within last 12 months");
+		} ?></td>
+	</tr>
+</table>
+<br>
+
+
 <? //  Begin - Debug infos ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
