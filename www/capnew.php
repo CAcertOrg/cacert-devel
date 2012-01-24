@@ -168,7 +168,7 @@ define('REV', '$Revision: 1.3 $');
 **     $_GET['format'] paper format required A0-A6,Letter, Folio, B0-B6 (dflt A4)
 **     $_GET['watermark'] watermark on the page
 **     $_GET['orientation'] paper orientation default 'portrait'
-**     $_SESSION['_config']['language'] for 'ja_JP' japanese default != ja_JP
+**     $_SESSION['_config']['language'] for 'ja' japanese default != ja
 **     $_SESSION['_config']['recode'] = 'format' recode() uses it: needed ?
 **     recode() is aliased to php lib function recode_string()
 **     $_REQUEST['bw'] if exists use black/white, default use colour
@@ -336,7 +336,7 @@ define('DFL_FORMAT', 'html..utf-8');
 // Japanese is not supported?
 if( array_key_exists('_config', $_SESSION) ) {
     if( isset($_SESSION['_config']['language']) ) {
-        if($_SESSION['_config']['language'] == 'ja_JP')
+        if($_SESSION['_config']['language'] == 'ja')
             define('FONT','SJIS');
         else define( 'FONT', 'freesans');
     }
