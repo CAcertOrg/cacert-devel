@@ -1828,20 +1828,7 @@ function buildSubject() {
 		//if($org['contact'])
 		//	$csrsubject .= "/emailAddress=".trim($org['contact']);
 
-		if(is_array($_SESSION['_config']['rows']))
-			foreach($_SESSION['_config']['rows'] as $row)
-				$csrsubject .= "/commonName=$row";
-		$SAN="";		
-		if(is_array($_SESSION['_config']['altrows']))
-			foreach($_SESSION['_config']['altrows'] as $subalt)
-			{
-				if($SAN != "")
-					$SAN .= ",";
-				$SAN .= "$subalt";
-			}
-
-		if($SAN != "")
-			$csrsubject .= "/subjectAltName=".$SAN;
+		$csrsubject .= buildSubject();
 
 		$type="";
 		if($_REQUEST["ocspcert"]!="" && $_SESSION['profile']['admin'] == 1) $type="8";
