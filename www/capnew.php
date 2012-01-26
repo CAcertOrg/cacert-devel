@@ -17,8 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//   $Id: capnew.php,v 1.3 2011-06-10 18:30:41 wytze Exp $
-define('REV', '$Revision: 1.3 $');
+//   $Id: capnew.php,v 1.4 2012-01-24 14:26:05 root Exp $
+define('REV', '$Revision: 1.4 $');
 
 /*
 **  Created from old cap.php 2003, which used the now obsoleted ftpdf package
@@ -387,7 +387,7 @@ function utf8_is_ascii_ctrl($str) {
 // extend TCPF with custom functions
 class CAPPDF extends TCPDF {
 
-    // do cap form version numbering automatically '$Revision: 1.3 $'
+    // do cap form version numbering automatically '$Revision: 1.4 $'
     /*public*/ function Version() {
 	strtok(REV, ' ');
         return(strtok(' '));
