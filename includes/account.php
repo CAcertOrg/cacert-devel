@@ -28,19 +28,16 @@ function appendUnique($str, $suffix) {
 	return $str;
 }
 
-function appendSubjectAltName($subject, $name, $supress) {
-	if (!$supress) {
-		$subject = appendUnique($subject, "/subjectAltName=DNS:$name");
-		$subject = appendUnique($subject, "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$name");
-	}
+function appendSubjectAltName($subject, $name) {
+	$subject = appendUnique($subject, "/subjectAltName=DNS:$name");
+	$subject = appendUnique($subject, "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$name");
+	
 	return $subject;
 }
 
 function buildSubject() {
 	$subject = "";
 	$count = 0;
-	$supressSAN=0;
-	if($_SESSION["profile"]["id"] == 104074) $supressSAN=1;
 
 	if(is_array($_SESSION['_config']['rows']))
 		foreach($_SESSION['_config']['rows'] as $row)
@@ -48,7 +45,7 @@ function buildSubject() {
 			$count++;
 			if($count <= 1)
 				$subject .= "/CN=$row";
-			$subject = appendSubjectAltName($subject, $row, $supressSAN);
+			$subject = appendSubjectAltName($subject, $row);
 		}
 	if(is_array($_SESSION['_config']['altrows']))
 		foreach($_SESSION['_config']['altrows'] as $row)
@@ -56,7 +53,7 @@ function buildSubject() {
 			if(substr($row, 0, 4) == "DNS:")
 			{
 				$row = substr($row, 4);
-				$subject = appendSubjectAltName($subject, $row, $supressSAN);
+				$subject = appendSubjectAltName($subject, $row);
 			}
 		}
 	return $subject;
