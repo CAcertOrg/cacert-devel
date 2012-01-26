@@ -17,6 +17,7 @@
 */
 
 	include_once("../includes/lib/general.php");
+	require_once("../includes/lib/l10n.php");
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] != 0)
 	{
@@ -110,18 +111,12 @@
 
 		if($_SESSION['profile']['language'] == "")
 		{
-			$query = "update `users` set `language`='".$_SESSION['_config']['language']."'
+			$query = "update `users` set `language`='".L10n::get_translation()."'
 							where `id`='".$_SESSION['profile']['id']."'";
 			mysql_query($query);
 		} else {
-			$_SESSION['_config']['language'] = $_SESSION['profile']['language'];
-
-			putenv("LANG=".$_SESSION['_config']['language']);
-			setlocale(LC_ALL, $_SESSION['_config']['language']);
-
-			$domain = 'messages';
-			bindtextdomain("$domain", $_SESSION['_config']['filepath']."/locale");
-			textdomain("$domain");
+			L10n::set_translation($_SESSION['profile']['language']);
+			L10n::init_gettext();
 		}
 	}
 
