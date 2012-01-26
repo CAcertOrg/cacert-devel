@@ -20,6 +20,48 @@
 
 	loadem("account");
 
+function appendUnique($str, $suffix) {
+	if (!strstr($str, "$suffix/") &&
+			substr($str, -strlen($suffix)) != $suffix) {
+		$str .= $suffix;
+	}
+	return $str;
+}
+
+function appendSubjectAltName($subject, $name, $supress) {
+	if (!$supress) {
+		$subject = appendUnique($subject, "/subjectAltName=DNS:$name");
+		$subject = appendUnique($subject, "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$name");
+	}
+	return $subject;
+}
+
+function buildSubject() {
+	$subject = "";
+	$count = 0;
+	$supressSAN=0;
+	if($_SESSION["profile"]["id"] == 104074) $supressSAN=1;
+
+	if(is_array($_SESSION['_config']['rows']))
+		foreach($_SESSION['_config']['rows'] as $row)
+		{
+			$count++;
+			if($count <= 1)
+				$subject .= "/CN=$row";
+			$subject = appendSubjectAltName($subject, $row, $supressSAN);
+		}
+	if(is_array($_SESSION['_config']['altrows']))
+		foreach($_SESSION['_config']['altrows'] as $row)
+		{
+			if(substr($row, 0, 4) == "DNS:")
+			{
+				$row = substr($row, 4);
+				$subject = appendSubjectAltName($subject, $row, $supressSAN);
+			}
+		}
+	return $subject;
+}
+
 	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
 	$process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
@@ -716,35 +758,8 @@
 			exit;
 		}
 
-		$subject = "";
-		$count = 0;
-		$supressSAN=0;
-                if($_SESSION["profile"]["id"] == 104074) $supressSAN=1;
-
-		if(is_array($_SESSION['_config']['rows']))
-			foreach($_SESSION['_config']['rows'] as $row)
-			{
-				$count++;
-				if($count <= 1)
-				{
-					$subject .= "/CN=$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=DNS:$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
-				} else {
-					if(!$supressSAN) $subject .= "/subjectAltName=DNS:$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
-				}
-			}
-		if(is_array($_SESSION['_config']['altrows']))
-			foreach($_SESSION['_config']['altrows'] as $row)
-			{
-				if(substr($row, 0, 4) == "DNS:")
-				{
-					$row = substr($row, 4);
-					if(!$supressSAN) $subject .= "/subjectAltName=DNS:$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
-				}
-			}
+		$subject = buildSubject();
+		
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
@@ -864,29 +879,7 @@
 					continue;
 				}
 
-				$subject = "";
-				$count = 0;
-				if(is_array($_SESSION['_config']['rows']))
-					foreach($_SESSION['_config']['rows'] as $row)
-					{
-						$count++;
-						if($count <= 1)
-						{
-							$subject .= "/CN=$row";
-							if(!strstr($subject, "=$row/") &&
-								substr($subject, -strlen("=$row")) != "=$row")
-								$subject .= "/subjectAltName=$row";
-						} else {
-							if(!strstr($subject, "=$row/") &&
-								substr($subject, -strlen("=$row")) != "=$row")
-								$subject .= "/subjectAltName=$row";
-						}
-					}
-				if(is_array($_SESSION['_config']['altrows']))
-					foreach($_SESSION['_config']['altrows'] as $row)
-						if(!strstr($subject, "=$row/") &&
-							substr($subject, -strlen("=$row")) != "=$row")
-							$subject .= "/subjectAltName=$row";
+				$subject = buildSubject();
 				$subject = mysql_real_escape_string($subject);
 				mysql_query("update `domaincerts` set `subject`='$subject',`csr_name`='$newfile' where `id`='$newid'");
 
