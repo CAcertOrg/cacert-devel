@@ -17,7 +17,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	include_once("/home/cacert/www/includes/mysql.php");
+	require_once(dirname(__FILE__).'/../../includes/mysql.php');
 
 	$days = array("1" => "3", "15" => "2", "30" => "1", "45" => "0");
 
