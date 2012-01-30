@@ -17,8 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	include_once("/home/cacert/www/includes/mysql.php");
-	require_once('/home/cacert/www/includes/lib/l10n.php');
+	require_once(dirname(__FILE__).'/../../includes/mysql.php.sample');
+	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
 
 	$query = "select * from `users`	where `users`.`verified`=0 and
 			(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`users`.`created`)) >= 172800";
