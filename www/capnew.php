@@ -17,8 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//   $Id: capnew.php,v 1.3 2011-06-10 18:30:41 wytze Exp $
-define('REV', '$Revision: 1.3 $');
+//   $Id: capnew.php,v 1.4 2012-01-24 14:26:05 root Exp $
+define('REV', '$Revision: 1.4 $');
 
 /*
 **  Created from old cap.php 2003, which used the now obsoleted ftpdf package
@@ -168,7 +168,7 @@ define('REV', '$Revision: 1.3 $');
 **     $_GET['format'] paper format required A0-A6,Letter, Folio, B0-B6 (dflt A4)
 **     $_GET['watermark'] watermark on the page
 **     $_GET['orientation'] paper orientation default 'portrait'
-**     $_SESSION['_config']['language'] for 'ja_JP' japanese default != ja_JP
+**     $_SESSION['_config']['language'] for 'ja' japanese default != ja
 **     $_SESSION['_config']['recode'] = 'format' recode() uses it: needed ?
 **     recode() is aliased to php lib function recode_string()
 **     $_REQUEST['bw'] if exists use black/white, default use colour
@@ -336,7 +336,7 @@ define('DFL_FORMAT', 'html..utf-8');
 // Japanese is not supported?
 if( array_key_exists('_config', $_SESSION) ) {
     if( isset($_SESSION['_config']['language']) ) {
-        if($_SESSION['_config']['language'] == 'ja_JP')
+        if($_SESSION['_config']['language'] == 'ja')
             define('FONT','SJIS');
         else define( 'FONT', 'freesans');
     }
@@ -387,7 +387,7 @@ function utf8_is_ascii_ctrl($str) {
 // extend TCPF with custom functions
 class CAPPDF extends TCPDF {
 
-    // do cap form version numbering automatically '$Revision: 1.3 $'
+    // do cap form version numbering automatically '$Revision: 1.4 $'
     /*public*/ function Version() {
 	strtok(REV, ' ');
         return(strtok(' '));
