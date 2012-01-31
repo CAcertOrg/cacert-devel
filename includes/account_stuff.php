@@ -277,8 +277,8 @@ function hideall() {
 ?>
       </div>
     </div>
-  <div id="siteInfo"><a href="account.php?id=37"><?=_("About Us")?></a> | <a href="account.php?id=38"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-	<a href="account.php?id=39"><?=_("Privacy Policy")?></a> | <a href="account.php?id=40"><?=_("Contact Us")?></a>
+  <div id="siteInfo"><a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="account.php?id=38"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
+	<a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> | <a href="account.php?id=40"><?=_("Contact Us")?></a>
 		| &copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
 </div>  
 </body>             

@@ -38,10 +38,10 @@
 		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['memid'])."'"));
 ?>
   <tr>
-    <td class="DataTD"><a href='mailto:<?=$user['email']?>'><?=($user['fname'])?> <?=($user['lname'])?></a></td>
+    <td class="DataTD"><a href='mailto:<?=sanitizeHTML($user['email'])?>'><?=sanitizeHTML($user['fname'])?> <?=sanitizeHTML($user['lname'])?></a></td>
     <td class="DataTD"><?=($row['masteracc'])?></a></td>
-    <td class="DataTD"><?=($row['OU'])?></a></td>
-    <td class="DataTD"><?=($row['comments'])?></a></td>
+    <td class="DataTD"><?=sanitizeHTML($row['OU'])?></a></td>
+    <td class="DataTD"><?=sanitizeHTML($row['comments'])?></a></td>
 <? if($row['masteracc'] == 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <td class="DataTD"><a href="account.php?id=34&amp;orgid=<?=$row['orgid']?>&amp;memid=<?=$row['memid']?>"><?=_("Delete")?></a></td>
 <? } else { ?>

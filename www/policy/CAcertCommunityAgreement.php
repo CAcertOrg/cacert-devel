@@ -457,7 +457,7 @@ You are also bound by
     <a href="http://www.cacert.org/policy/DisputeResolutionPolicy.php">
     Dispute Resolution Policy</a> (DRP => COD7).
   </li><li>
-    <a href="http://www.cacert.org/index.php?id=10">
+    <a href="PrivacyPolicy.html">
     Privacy Policy</a> (PP => COD5).
   </li><li>
     <a href="http://svn.cacert.org/CAcert/principles.html">

@@ -16,6 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
+
 if(!function_exists("showheader"))
 {
 	function showbodycontent($title = "CAcert.org", $title2 = "")
@@ -60,7 +62,7 @@ google_color_border = "FFFFFF";
     <? include("about_menu.php"); ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('trans')">+ <?=_("Translations")?></h3>
-      <ul class="menu" id="trans"><? foreach($_SESSION['_config']['translations'] as $key => $val) { ?><li><a href="<?=$_SERVER['SCRIPT_NAME']?>?id=<?=intval(array_key_exists('id',$_REQUEST)?$_REQUEST['id']:0)?>&amp;lang=<?=$key?>"><?=$val?></a></li><? } ?></ul>
+      <ul class="menu" id="trans"><? foreach(L10n::$translations as $key => $val) { ?><li><a href="<?=$_SERVER['SCRIPT_NAME']?>?id=<?=intval(array_key_exists('id',$_REQUEST)?$_REQUEST['id']:0)?>&amp;lang=<?=$key?>"><?=$val?></a></li><? } ?></ul>
     </div>
     <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
@@ -131,8 +133,8 @@ if(!function_exists("showfooter"))
     </div>
   <? include("sponsorinfo.php") ?>
   <div id="siteInfo">
-	<a href="/index.php?id=12"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-        <a href="/index.php?id=10"><?=_("Privacy Policy")?></a> |
+	<a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
+        <a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> |
         <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
 	&copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
 </div>  

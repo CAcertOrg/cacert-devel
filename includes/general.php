@@ -38,6 +38,8 @@
 	$_SESSION['_config']['filepath'] = "/www";
 
 	require_once($_SESSION['_config']['filepath']."/includes/mysql.php");
+	require_once($_SESSION['_config']['filepath'].'/includes/lib/account.php');
+	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
@@ -69,122 +71,8 @@
 		}
 	}
 
-	$lang = "";
-	if(array_key_exists("lang",$_REQUEST))
-	  $lang=mysql_escape_string(substr(trim($_REQUEST['lang']), 0, 5));
-	if($lang != "")
-		$_SESSION['_config']['language'] = $lang;
-
-	//if($_SESSION['profile']['id'] == 1 && 1 == 2)
-	//	echo $_SESSION['_config']['language'];
-
-	$_SESSION['_config']['translations'] = array(
-				"ar_JO" => "&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;",
-				"bg_BG" => "&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;",
-				"cs_CZ" => "&#268;e&scaron;tina",
-				"da_DK" => "Dansk",
-				"de_DE" => "Deutsch",
-				"el_GR" => "&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940;",
-				"en_AU" => "English",
-				"eo_EO" => "Esperanto",
-				"es_ES" => "Espa&#xf1;ol",
-				"fa_IR" => "Farsi",
-				"fi_FI" => "Suomi",
-				"fr_FR" => "Fran&#xe7;ais",
-				"he_IL" => "&#1506;&#1489;&#1512;&#1497;&#1514;",
-				"hr_HR" => "Hrvatski",
-				"hu_HU" => "Magyar",
-				"is_IS" => "&Iacute;slenska",
-				"it_IT" => "Italiano",
-				"ja_JP" => "&#26085;&#26412;&#35486;",
-				"ka_GE" => "Georgian",
-				"nl_NL" => "Nederlands",
-				"pl_PL" => "Polski",
-				"pt_PT" => "Portugu&#xea;s",
-				"pt_BR" => "Portugu&#xea;s Brasileiro",
-				"ru_RU" => "&#x420;&#x443;&#x441;&#x441;&#x43a;&#x438;&#x439;",
-				"ro_RO" => "Rom&acirc;n&#259;",
-				"sv_SE" => "Svenska",
-				"tr_TR" => "T&#xfc;rk&#xe7;e",
-				"zh_CN" => "&#x4e2d;&#x6587;(&#x7b80;&#x4f53;)");
-
-        $value=array();
-
-	if(!(array_key_exists('language',$_SESSION['_config']) && $_SESSION['_config']['language'] != ""))
-	{
-		$bits = explode(",", strtolower(str_replace(" ", "", mysql_real_escape_string(array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)?$_SERVER['HTTP_ACCEPT_LANGUAGE']:""))));
-		foreach($bits as $lang)
-		{
-			$b = explode(";", $lang);
-			if(count($b)>1 && substr($b[1], 0, 2) == "q=")
-				$c = floatval(substr($b[1], 2));
-			else
-				$c = 1;
-			$value["$c"] = trim($b[0]);
-		}
-
-		krsort($value);
-
-		reset($value);
-
-		foreach($value as $key => $val)
-		{
-			$val = substr(escapeshellarg($val), 1, -1);
-			$short = substr($val, 0, 2);
-			if($val == "en" || $short == "en")
-			{
-				$_SESSION['_config']['language'] = "en";
-				break;
-			}
-			if(file_exists($_SESSION['_config']['filepath']."/locale/$val/LC_MESSAGES/messages.mo"))
-			{
-				$_SESSION['_config']['language'] = $val;
-				break;
-			}
-			if(file_exists($_SESSION['_config']['filepath']."/locale/$short/LC_MESSAGES/messages.mo"))
-			{
-				$_SESSION['_config']['language'] = $short;
-				break;
-			}
-		}
-	}
-	if(!array_key_exists('_config',$_SESSION) || !array_key_exists('language',$_SESSION['_config']) || strlen($_SESSION['_config']['language']) != 5)
-	{
-		$lang = array_key_exists('language',$_SESSION['_config'])?$_SESSION['_config']['language']:"";
-		$_SESSION['_config']['language'] = "en_AU";
-		foreach($_SESSION['_config']['translations'] as $key => $val)
-		{
-			if(substr($lang, 0, 2) == substr($key, 0, 2))
-			{
-				$_SESSION['_config']['language'] = $val;
-				break;
-			}
-		}
-	}
-
-	$_SESSION['_config']['recode'] = "html..latin-1";
-	if($_SESSION['_config']['language'] == "zh_CN")
-	{
-		$_SESSION['_config']['recode'] = "html..gb2312";
-	} else if($_SESSION['_config']['language'] == "pl_PL" || $_SESSION['_config']['language'] == "hu_HU") {
-		$_SESSION['_config']['recode'] = "html..ISO-8859-2";
-	} else if($_SESSION['_config']['language'] == "ja_JP") {
-		$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
-	} else if($_SESSION['_config']['language'] == "ru_RU") {
-		$_SESSION['_config']['recode'] = "html..ISO-8859-5";
-	} else if($_SESSION['_config']['language'] == "lt_LT") {
-		$_SESSION['_config']['recode'] = "html..ISO-8859-13";
-	}
-
-	putenv("LANG=".$_SESSION['_config']['language']);
-	setlocale(LC_ALL, $_SESSION['_config']['language']);
-	$domain = 'messages';
-	bindtextdomain($domain, $_SESSION['_config']['filepath']."/locale");
-	textdomain($domain);
-
-	//if($_SESSION['profile']['id'] == -1)
-	//	echo $_SESSION['_config']['language']." - ".$_SESSION['_config']['filepath']."/locale";
-
+	L10n::detect_language();
+	L10n::init_gettext();
 
         if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
@@ -248,8 +136,7 @@
 		}
 	}
 
-	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
-	{
+	function checkpwlight($pwd) {
 		$points = 0;
 
 		if(strlen($pwd) > 15)
@@ -279,7 +166,19 @@
 			$points++;
 
 		//echo "Points due to length and charset: $points<br/>";
+		
+		// check for historical password proposal
+		if ($pwd === "Fr3d Sm|7h") {
+			return 0;
+		}
+		
+		return $points;
+	}
 
+	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
+	{
+		$points = checkpwlight($pwd);
+		
 		if(@strstr(strtolower($pwd), strtolower($email)))
 			$points--;
 
@@ -620,14 +519,6 @@
 		return(utf8_decode($data));
 	}
 
-	function screenshot($img)
-	{
-		if(file_exists("../screenshots/".$_SESSION['_config']['language']."/$img"))
-			return("/screenshots/".$_SESSION['_config']['language']."/$img");
-		else
-			return("/screenshots/en/$img");
-	}
-
 	function signmail($to, $subject, $message, $from, $replyto = "")
 	{
 		if($replyto == "")
@@ -673,12 +564,12 @@
 						$line = fgets($fp, 4096);
 					if(substr($line, 0, 3) != "250")
 						continue;
-					fputs($fp, "MAIL FROM: <returns@cacert.org>\r\n");
+					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
 					$line = fgets($fp, 4096);
 
 					if(substr($line, 0, 3) != "250")
 						continue;
-					fputs($fp, "RCPT TO: <$email>\r\n");
+					fputs($fp, "RCPT TO:<$email>\r\n");
 					$line = trim(fgets($fp, 4096));
 					fputs($fp, "QUIT\r\n");
 					fclose($fp);
@@ -836,19 +727,6 @@
 		$text=preg_replace("/[^\w-.@]/","",$text);
 		return($text);
 	}
-
-	function fix_assurer_flag($userID)
-	{
-		// Update Assurer-Flag on users table if 100 points. Should the number of points be SUM(points) or SUM(awarded)?
-		$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 1 WHERE `u`.`id` = \''.(int)intval($userID).
-			 '\' AND EXISTS(SELECT 1 FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = `u`.`id`)'.
-			 ' AND (SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` AND `expire` < now()) >= 100'); // Challenge has been passed and non-expired points >= 100
-	 
-		// Reset flag if requirements are not met
-		$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 0 WHERE `u`.`id` = \''.(int)intval($userID).
-			'\' AND (NOT EXISTS(SELECT 1 FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = `u`.`id`)'.
-			 ' OR (SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` AND `n`.`expire` < now()) < 100)');
-	}
 	
 	// returns 0 if $userID is an Assurer
 	// Otherwise :
@@ -920,10 +798,13 @@
 		if($newlayout)
 		{
 			$name="../$type/$kind/".intval($id/1000)."/$kind-".intval($id).".$type";
-			mkdir("../csr/$kind",0777);
-			mkdir("../crt/$kind",0777);
-			mkdir("../csr/$kind/".intval($id/1000));
-			mkdir("../crt/$kind/".intval($id/1000));
+			if (!is_dir("../csr")) { mkdir("../csr",0777); }
+			if (!is_dir("../crt")) { mkdir("../crt",0777); }
+			
+			if (!is_dir("../csr/$kind")) { mkdir("../csr/$kind",0777); }
+			if (!is_dir("../crt/$kind")) { mkdir("../crt/$kind",0777); }
+			if (!is_dir("../csr/$kind/".intval($id/1000))) { mkdir("../csr/$kind/".intval($id/1000)); }
+			if (!is_dir("../crt/$kind/".intval($id/1000))) { mkdir("../crt/$kind/".intval($id/1000)); }
 		}
 		return $name;
 	}

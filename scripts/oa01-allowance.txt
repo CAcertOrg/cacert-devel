@@ -1,0 +1,159 @@
+(Dutch, German and French version see below)
+
+Dear sir or madam,
+
+CAcert plans to add a new section to its homepage. This section will contain 
+a listing of companies and organisations assured by 
+CAcert's Organisation Assurance.
+
+You, as a representative or an Organisation Administrator of such an 
+organisation, are asked for your approval to give us the name, the logo and 
+the location of your company. The reference will be listed on  
+http://wiki.cacert.org/OrganisationAssurance/OrganisationList. This listing 
+is a resource for other companies planning to use CAcert Certificates.
+
+We kindly ask you to tell us for what purpose you use your CAcert certificate. 
+Please check the specific items:
+
+  [ ] - Client Certs
+  [ ] - E-mail Certs
+  [ ] - Server Certs
+  [ ] - Document Signing
+  [ ] - Code Signing
+
+"If you are satisfied with our services, tell others. If not, come back to us."
+
+Additionally, we plan a testimonial page in the future where you are able to 
+tell about your experience with CAcert.
+
+If you have any questions, suggestions or criticisms please do not hesitate to 
+contact us on mailto:support@cacert.org, 
+mailto:cacert-orga-assurer@lists.cacert.org or contact the Organisation Assurer 
+who originaly assured you organisation. You can revoke your assent any time.
+
+Thank you for your support.
+
+For the Organisation Assurance Team
+       
+---------------------------------------------------
+
+[German Version]
+
+Sehr geehrte Damen und Herren,
+
+CAcert plant eine Umgestaltung des Internetauftritts. Dazu gehoert auch die 
+Auflistung von Unternehmen und Organisationen, die durch CAcert im Rahmen der 
+Organisation Assurance geprueft wurden.
+
+Wir wuerden gerne Ihre Organisation (Name, Sitz und Logo) als Referenz auf der 
+Seite http://wiki.cacert.org/OrganisationAssurance/OrganisationList nennen. 
+Als Ansprechpartner oder Organisationsadministrator einer solchen Organisation 
+benoetigen wir dazu Ihr Einverstaendnis.
+
+Ueber Informationen, wie in welcher Weise Ihre Organisation CAcert-Zertifikate 
+einsetzt, wuerden wir und sehr freuen. Wählen Sie einfach die verwendeten 
+Einsatzgebiete aus dieser Liste aus:
+
+  [ ] - Client Certs
+  [ ] - E-Mail Certs
+  [ ] - Server Certs
+  [ ] - Document Signing
+  [ ] - Code Signing
+
+"Wenn Sie zufrieden sind mit unserem Service, sagen Sie es weiter. Wenn Sie 
+nicht zufrieden sind, sagen Sie es uns."
+
+In diesem Zusammenhang planen wir auch eine Testimonal Seite, auf der Sie 
+selbst ueber ihre Erfahrungen berichten koennen.
+
+Bei Fragen, Anregungen oder Kritik erreichen Sie uns jederzeit unter
+mailto:support@cacert.org und mailto:cacert-orga-assurer@lists.cacertg.org oder 
+kontaktieren Sie den Organisations Assurer, der Ihre Organisation ueberprueft 
+hat. Sie haben jederzeit das Recht, Ihr Einverstaendnis zu widerrufen.
+
+Im Name von CAcert bedanke sich das Organisation Assurance Team herzlich 
+fuer Ihre Unterstuetzung.
+       
+---------------------------------------------------
+
+[French Version]
+
+Madame, Monsieur,
+
+CAcert a decide d'ajouter une nouvelle section a son site internet. Cette 
+section contient une liste des entreprises et organisations accreditees 
+par CAcert.
+
+Vous, en tant que representant ou administrateur d'une telle organisation, 
+il vous est demande votre approbation pour nous donner le nom, le logo et le 
+lieu de votre entreprise. La reference sera ajoutee sur 
+http://wiki.cacert.org/OrganisationAssurance/OrganisationList. Cette 
+inscription serait utile pour encourager d'autres organisations a utiliser 
+des certificats CAcert.
+
+Nous vous prions de nous dire a quelles fins vous utilisez vos certificats 
+CAcert. S'il vous plaît, precisez les elements suivants :
+
+   [ ] - Certificats client (SSL)
+   [ ] - Certificats pour courriel (email)
+   [ ] - Certificats Serveur (SSL)
+   [ ] - Signature de document
+   [ ] - Signature du code de logiciels informatique
+
+"Si vous êtes satisfaits de nos services, faite le nous savoir. Dans le cas 
+contraire, nous sommes a votre ecoute."
+
+De plus, nous prevoyons de realiser a l'avenir une page avec des temoignages ou 
+vous pourrez parler de votre experience avec CAcert.
+
+Si vous avez des questions, des suggestions ou des critiques, n'hesitez pas 
+s'il vous plaît a nous contacter sur mailto:support@cacert.org, 
+mailto:cacert-orga-assurer@lists.cacert.org, ou contacter 
+l'Accrediteur d'Organisation qui a realise votre inscription initialement. 
+Vous pouvez retirer votre referencement a tout moment de notre site internet 
+sur simple demande.
+
+Merci pour votre soutien.
+
+L'equipe des Accrediteurs d'Organisations.
+
+---------------------------------------------------
+
+[Dutch Version]
+
+Geachte dames/heren,
+
+Uw organisatie (of bedrijf) is reeds gewaarmerkt door CAcert.
+
+Gedurende dat proces bent u aangewezen als contactpersoon of als organisatie 
+adminstrator, en daarom ontvangt u deze email.
+
+In het kader van een reorganisatie van CAcert websites willen wij uw organisatie 
+graag als referentie toevoegen op de pagina: 
+http://wiki.cacert.org/OrganisationAssurance/OrganisationList.
+Daarom verzoeken wij u bij deze om toestemming om de naam van uw organisatie 
+toe te voegen aan deze referentiepagina.
+
+Zodat ook andere organisaties zichzelf kunnen informeren over de verschillende 
+toepassingen van onze certificaten, of kunnen profiteren van uw ervaring, 
+verzoeken wij tevens om het gebruik van certificaten binnen uw organisatie 
+te benoemen:
+
+  [ ] - Client Certificaten
+  [ ] - Email Certificaten
+  [ ] - Server Certificaten
+  [ ] - Document Signing
+  [ ] - Code Signing
+
+
+"Wanneer u tevreden bent over onze service, vertel het verder. Wanneer u niet 
+tevreden bent, vertel het ons."
+Binnen deze context plannen wij ook een Testimonal pagina, waar u zelf over uw 
+ervaringen kunt berichten.
+
+Voor vragen, opmerkingen of kritiek kunt u ons ten alle tijden bereiken onder 
+mailto:support@cacert.org of mailto:cacert-orga-assurer@lists.cacertg.org. 
+U kunt ook contact opnemen met de Organisation Assurer die uw organisatie 
+gewaarmerkt heeft.
+
+Uw Organisation Assurance Team.

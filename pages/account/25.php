@@ -19,6 +19,15 @@
   <tr>
     <td colspan="5" class="title"><?=_("Organisations")?></td>
   </tr>
+
+<tr>
+  <td colspan="5" class="title"><?=_("Order by:")?>
+    <a href="account.php?id=25"><?=_("Id")?></a> -
+    <a href="account.php?id=25&amp;ord=1"><?=_("Country")?></a> -
+    <a href="account.php?id=25&amp;ord=2"><?=_("Name")?></a>
+  </td>
+</tr>
+
   <tr>
     <td class="DataTD" width="350"><?=_("Organisation")?></td>
     <td class="DataTD"><?=_("Domains")?></td>
@@ -27,7 +36,24 @@
     <td class="DataTD"><?=_("Delete")?></td>
   </tr>
 <?
-	$query = "select * from `orginfo` ORDER BY `id`";
+	$order = 0;
+	if (array_key_exists('ord',$_REQUEST)) {
+		$order = intval($_REQUEST['ord']);
+	}
+	
+	$order_by = "`id`";
+	switch ($order) {
+		case 1:
+			$order_by = "`C`,`O`";
+			break;
+		case 2:
+			$order_by = "`O`";
+			break;
+		// the 0 and default case are handled by the preset
+	}
+	
+	// Safe because $order_by only contains fixed strings
+	$query = sprintf("select * from `orginfo` ORDER BY %s", $order_by);
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{

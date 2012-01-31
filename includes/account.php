@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	require_once("../includes/loggedin.php");
+	require_once("../includes/lib/l10n.php");
 
 	loadem("account");
 
@@ -33,6 +34,12 @@
 	{
 		echo _("Several CAcert Services are currently unavailable. Please try again later.");
 		exit;
+	}
+
+	if ($process == _("Cancel"))
+	{
+		// General reset CANCEL process requests
+		$process = "";
 	}
 
 
@@ -1290,6 +1297,8 @@
 		showheader(_("My CAcert.org Account!"));
 		if($_SESSION['_config']['user']['pword1'] == "" || $_SESSION['_config']['user']['pword1'] != $_SESSION['_config']['user']['pword2'])
 		{
+			echo '<h3 style="color:red">', _("Failure: Pass Phrase not Changed"),
+				'</h3>', "\n";
 			echo _("New Pass Phrases specified don't match or were blank.");
 		} else {
 			$score = checkpw($_SESSION['_config']['user']['pword1'], $_SESSION['profile']['email'], $_SESSION['profile']['fname'],
@@ -1306,14 +1315,21 @@
 			}
 
 			if(strlen($_SESSION['_config']['user']['pword1']) < 6) {
+				echo '<h3 style="color:red">',
+					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				echo _("The Pass Phrase you submitted was too short.");
 			} else if($score < 3) {
+				echo '<h3 style="color:red">',
+					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				printf(_("The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored %s points out of 6."), $score);
 			} else if($rc <= 0) {
+				echo '<h3 style="color:red">',
+					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				echo _("You failed to correctly enter your current Pass Phrase.");
 			} else {
 				mysql_query("update `users` set `password`=sha1('".$_SESSION['_config']['user']['pword1']."')
 						where `id`='".$_SESSION['profile']['id']."'");
+				echo '<h3>', _("Pass Phrase Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
 				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
 				$body .= _("You are receiving this email because you or someone else")."\n";
@@ -2189,7 +2205,7 @@
 		$orgid = 0;
 	}
 
-	if($oldid == 31 && $process != _("Cancel"))
+	if($oldid == 31 && $process != "")
 	{
 		$query = "select * from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'";
 		$dres = mysql_query($query);
@@ -2336,7 +2352,7 @@
 	{
 		csrf_check("mainlang");
 		$lang = mysql_real_escape_string($_REQUEST['lang']);
-		foreach($_SESSION['_config']['translations'] as $key => $val)
+		foreach(L10n::$translations as $key => $val)
 		{
 			if($key == $lang)
 			{

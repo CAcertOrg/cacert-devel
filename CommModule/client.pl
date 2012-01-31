@@ -540,7 +540,7 @@ sub OpenPGPextractExpiryDate ($)
     print OUT $_;
     unless ($r) 
     {
-      if ( /^\s*version \d+, created (\d+), md5len 0, sigclass \d+\s*$/ ) 
+      if ( /^\s*version \d+, created (\d+), md5len 0, sigclass (?:0x[0-9a-fA-F]+|\d+)\s*$/ )
       {
         SysLog "Detected CTS: $1\n";
         $cts = int($1);
@@ -595,7 +595,7 @@ sub OpenPGPextractExpiryDate ($)
 # Sets the locale according to the users preferred language
 sub setUsersLanguage($)
 {
-  my $lang="de_DE"; 
+  my $lang="en_US";
   print "Searching for the language of the user $_[0]\n";
   my @a=$dbh->selectrow_array("select language from users where id='".int($_[0])."'");
   $lang = $1 if($a[0]=~m/(\w+_[\w.@]+)/);
@@ -670,13 +670,13 @@ sub sendmail($$$$$$$)
   SysLog "SMTP: ".<$smtp>;
   print $smtp "HELO hlin.cacert.org\r\n";
   SysLog "SMTP: ".<$smtp>;
-  print $smtp "MAIL FROM: <returns\@cacert.org>\r\n";
+  print $smtp "MAIL FROM:<returns\@cacert.org>\r\n";
   SysLog "MAIL FROM: ".<$smtp>;
  
   @bits = split(",", $to);
   foreach my $user (@bits)
   {
-    print $smtp "RCPT TO: <".trim($user).">\r\n";
+    print $smtp "RCPT TO:<".trim($user).">\r\n";
     SysLog "RCPT TO: ".<$smtp>;
   }
   print $smtp "DATA\r\n";
@@ -887,7 +887,7 @@ sub HandleCerts($$)
       my $body = _("Hi")." $user{fname},\n\n";
       $body .= sprintf(_("You can collect your certificate for %s by going to the following location:")."\n\n", $row{'email'}.$row{'CN'});
       $body .= "https://www.cacert.org/account.php?id=".($server?"15":"6")."&cert=$row{id}\n\n";
-      $body .= _("If you have not imported CAcert´s root certificate, please go to:")."\n";
+      $body .= _("If you have not imported CAcert's root certificate, please go to:")."\n";
       $body .= "https://www.cacert.org/index.php?id=3\n";
       $body .= "Root cert fingerprint = A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B\n";
       $body .= "Root cert fingerprint = 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33\n\n";

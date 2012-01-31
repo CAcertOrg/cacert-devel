@@ -14,8 +14,9 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
+*/
+
+require_once('../includes/lib/l10n.php');
 
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
@@ -148,13 +149,16 @@
 
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
-		$query = "select * from `emailcerts` where `serial`='$_SERVER[SSL_CLIENT_M_SERIAL]' and `revoked`=0 and disablelogin=0 and
-				UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		include_once("../includes/lib/general.php");
+		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
+				$_SERVER['SSL_CLIENT_I_DN_CN']);
+		
+		if($user_id >= 0)
 		{
-			$row = mysql_fetch_assoc($res);
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$row[memid]' and `deleted`=0 and `locked`=0"));
+			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
+				"select * from `users` where 
+				`id`='$user_id' and `deleted`=0 and `locked`=0"));
+			
 			if($_SESSION['profile']['id'] != 0)
 			{
 				$_SESSION['profile']['loggedin'] = 1;
@@ -307,18 +311,12 @@
 
 			if($_SESSION['profile']['language'] == "")
 			{
-				$query = "update `users` set `language`='".$_SESSION['_config']['language']."'
+				$query = "update `users` set `language`='".L10n::get_translation()."'
 						where `id`='".$_SESSION['profile']['id']."'";
 				mysql_query($query);
 			} else {
-				$_SESSION['_config']['language'] = $_SESSION['profile']['language'];
-
-				putenv("LANG=".$_SESSION['_config']['language']);
-				setlocale(LC_ALL, $_SESSION['_config']['language']);
-
-				$domain = 'messages';
-				bindtextdomain("$domain", $_SESSION['_config']['filepath']."/locale");
-				textdomain("$domain");
+				L10n::set_translation($_SESSION['profile']['language']);
+				L10n::init_gettext();
 			}
 			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
 			$res = mysql_query($query);
@@ -332,6 +330,8 @@
 				$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>";
 				$_SESSION['_config']['oldlocation'] = "account.php?id=13";
 			}
+			if (checkpwlight($pword) < 3)
+				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
 			if($_SESSION['_config']['oldlocation'] != "")
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
 			else
@@ -546,7 +546,7 @@
 			mysql_query($query);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
-			$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n"; //."&"."lang=".$_SESSION['_config']['language']."\n\n";
+			$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n";
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
 			sendmail($_SESSION['signup']['email'], "[CAcert.org] "._("Mail Probe"), $body, "support@cacert.org", "", "", "CAcert Support");
@@ -628,6 +628,27 @@
 	if(!array_key_exists('signup',$_SESSION) || $_SESSION['signup']['year'] < 1900)
 		$_SESSION['signup']['year'] = "19XX";
 
+	if ($id == 12)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+	
+	if ($id == 19)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/FAQ/Privileges';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+
+	if ($id == 8)
+	{
+		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+		$newUrl = $protocol . '://wiki.cacert.org/Board';
+		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
+	}
+	
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
