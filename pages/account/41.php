@@ -14,7 +14,11 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
+*/
+
+require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
+?>
+
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
   <tr>
@@ -24,11 +28,10 @@
     <td class="DataTD"><?=_("My prefered language")?>:</td>
     <td class="DataTD"><select name="lang">
 <?
-echo $_SESSION['_config']['language'];
-	foreach($_SESSION['_config']['translations'] as $key => $val)
+	foreach(L10n::$translations as $key => $val)
 	{
 		echo "<option value='$key'";
-		if($key == $_SESSION['_config']['language'])
+		if($key == L10n::get_translation())
 			echo " selected";
 		echo ">$val</option>\n";
 	}
