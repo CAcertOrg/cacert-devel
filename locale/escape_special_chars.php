@@ -20,21 +20,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 /* Convert special characters in UTF-8 encoded PO files to HTML entities */
 
+define('MSGSTR', 'msgstr');
+define('MSGSTR_LEN', strlen(MSGSTR));
+define('MSGID', 'msgid');
+define('MSGID_LEN', strlen(MSGID));
 
 function is_msgstr($line) {
-	return substr_compare($line, 'msgstr', 0, strlen('msgstr')) === 0;
+	if (strlen($line) < MSGSTR_LEN) {
+		return false;
+	}
+	
+	return substr_compare($line, MSGSTR, 0, MSGSTR_LEN) === 0;
 }
 
 function is_msgid($line) {
-	return substr_compare($line, 'msgid', 0, strlen('msgid')) === 0;
+	if (strlen($line) < MSGID_LEN) {
+		return false;
+	}
+	
+	return substr_compare($line, MSGID, 0, MSGID_LEN) === 0;
 }
 
 // Skip the metadata (first msgid/msgstr pair)
 while (!feof(STDIN)) {
 	$line = fgets(STDIN);
-	if ($line === false) {
-		exit(0); //EOF after newline mostly
-	}
 	
 	echo $line;
 	
@@ -48,9 +57,6 @@ $msgstr = false;
 
 while (!feof(STDIN)) {
 	$line = fgets(STDIN);
-	if ($line === false) {
-		exit(0); //EOF after newline mostly
-	}
 	
 	if (is_msgstr($line)) {
 		$msgstr = true;
