@@ -358,9 +358,12 @@ if ($showactivity) {
 	$drow = mysql_fetch_assoc($dres);
 	$created = $drow['created'];
 	
-	$modified = new DateTime($drow['modified']);
-	$now = new DateTime();
-	$interval = $modified->diff($now, $absolute = true);
+	$modified = getdate(strtotime($drow['modified']));
+	$now = getdate();
+	// only a rough approximation
+	$days = ($now['year'] - $modified['year']) * 360;
+	$days += ($now['mon'] - $modified['mon']) * 30;
+	$days += $now['mday'] - $modified['mday'];
 	?>
 	<tr>
 		<td class="DataTD"><?=_("Account created")?>:</td>
@@ -370,13 +373,13 @@ if ($showactivity) {
 	<tr>
 		<td class="DataTD"><?=_("Last activity")?>:</td>
 		<td class="DataTD"><?
-		if ($interval->y >= 2) {
+		if ($days >= 2 * 360) {
 			echo _("before 2 years");
-		} elseif ($interval->y >= 1) {
+		} elseif ($days >= 360) {
 			echo _("before 1 year");
-		} elseif ($interval->m >= 6) {
+		} elseif ($days >= 6 * 30) {
 			echo _("within last 12 months");
-		} elseif ($interval->m >= 1) {
+		} elseif ($days >= 30) {
 			echo _("within last 6 months");
 		} else {
 			echo _("within the last month");
