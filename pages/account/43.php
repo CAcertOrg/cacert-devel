@@ -357,9 +357,10 @@ if ($showactivity) {
 	$dres = mysql_query($query);
 	$drow = mysql_fetch_assoc($dres);
 	$created = $drow['created'];
-	$modified = $drow['modified'];
 	
-	$today = date("Y-m-d");
+	$modified = new DateTime($drow['modified']);
+	$now = new DateTime();
+	$interval = $modified->diff($now, $absolute = true);
 	?>
 	<tr>
 		<td class="DataTD"><?=_("Account created")?>:</td>
@@ -369,18 +370,16 @@ if ($showactivity) {
 	<tr>
 		<td class="DataTD"><?=_("Last activity")?>:</td>
 		<td class="DataTD"><?
-		if (substr($modified,0,7) == substr($today,0,7)) {
-			echo _("this month");
-		} elseif (substr($modified,0,4) == substr($today,0,4)) {
-			echo _("this year");
-		} elseif (substr($modified,0,7) <
-				(intval(substr($today,0,4))-2)."-".substr($today,5,2) ) {
+		if ($interval->y >= 2) {
 			echo _("before 2 years");
-		} elseif (substr($modified,0,7) <
-				(intval(substr($today,0,4))-1)."-".substr($today,5,2)) {
+		} elseif ($interval->y >= 1) {
 			echo _("before 1 year");
-		} else {
+		} elseif ($interval->m >= 6) {
 			echo _("within last 12 months");
+		} elseif ($interval->m >= 1) {
+			echo _("within last 6 months");
+		} else {
+			echo _("within the last month");
 		} ?></td>
 	</tr> <?php
 } ?>
