@@ -19,9 +19,9 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 ?>
 <H3><?=_("Contact Us")?></H3>
 
-<p><? sprintf("To contact us please log out and then use the contact form ".
+<p><? printf(_("To contact us please log out and then use the contact form ".
 		"there or send us an email to %s. We are working to fix this ".
-		"situation so you may contact us while staying logged in again.",
+		"situation so you may contact us while staying logged in again."),
 		
 		"<a href='mailto:support@cacert.org'>support@cacert.org</a>"
 	) ?>
