@@ -39,6 +39,8 @@ function makecap()
 	$lname = $row['lname'];
 	$suffix = $row['suffix'];
 	$dob = $row['dob'];
+	$name = $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];
+	$_SESSION['_config']['wothash'] = md5($name."-".$dob);
 
 	$cap=makecap($fname,$mname,$lname,$suffix,$dob,$row['email'],$_SESSION['profile']['fname'].$_SESSION['profile']['mname'].$_SESSION['profile']['lname'].$_SESSION['profile']['suffix']);
 
