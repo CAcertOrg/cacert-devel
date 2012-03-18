@@ -19,6 +19,8 @@
 
 function fix_assurer_flag($userID)
 {
+	// If requirements for assurers are modified see also scripts/cron/updatesort.php
+
 	// Update Assurer-Flag on users table if 100 points.
 	// Should the number of points be SUM(points) or SUM(awarded)?
 	$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 1 WHERE '.
@@ -29,11 +31,11 @@ function fix_assurer_flag($userID)
 		'(SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` '.
 			'AND (`n`.`expire` > now() OR `n`.`expire` IS NULL)) >= 100');
 	// Challenge has been passed and non-expired points >= 100
-	
+
 	if (!$query) {
 		return false;
 	}
- 
+
 	// Reset flag if requirements are not met
 	$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 0 WHERE '.
 		'`u`.`id` = \''.(int)intval($userID).'\' AND '.
@@ -42,10 +44,10 @@ function fix_assurer_flag($userID)
 			'AND `cp`.`user_id` = `u`.`id`) OR '.
 		'(SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` '.
 			'AND (`n`.`expire` > now() OR `n`.`expire` IS NULL)) < 100)');
-	
+
 	if (!$query) {
 		return false;
 	}
-	
+
 	return true;
 }
