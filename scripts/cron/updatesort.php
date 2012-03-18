@@ -20,8 +20,20 @@
 
 
 
-	//mysql_query("update users set assurer=0");
-	$query = "select notary.`to` as uid from notary group by notary.`to` having sum(points)>=100";
+	/* Set assurer flag for accounts who miss it
+
+	   See also includes/lib/account.php, function fix_assurer_flag($userID)
+
+	   We may have some performance problems here, there are 150k assurances and 220k users
+	   in the production database. The exists-clause on cats_passed should be a good filter... */
+
+	$query = "select `n`.`to` as `uid` from `notary` as `n`, `users` as `u` ".
+	         "  where `n`.`to`=`u`.`id` and `u`.`assurer`<>'1' ".
+	         "    and (`n`.`expire` > now() OR `n`.`expire` IS NULL) ".
+	         "    and exists(select 1 from `cats_passed` as `cp`, `cats_variant` as `cv` ".
+	         "                 where `cp`.`variant_id`=`cv`.`id` and `cv`.`type_id` = 1 and `cp`.`user_id`=`n`.`to`)".
+	         "  group by `n`.`to` having sum(`n`.`points`)>=100";
+
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
@@ -30,6 +42,23 @@
 		mysql_query($query);
 	}
 
+	/* Remove assurer flag from accounts not eligible.
+
+	   Also a bit performance critical, but assurer flag is only set at 5k accounts
+
+	*/
+    $query = "select `u`.id as `uid` from `users` as `u` " .
+	         "  where `u`.`assurer` = '1' ".
+	         "    and (not exists(select 1 from `cats_passed` as `cp`, `cats_variant` as `cv` ".
+	         "                     where `cp`.`variant_id`=`cv`.`id` and `cv`.`type_id` = 1 and `cp`.`user_id`=`u`.`id`) ".
+	         "         or (select sum(`n`.`points`) from `notary` as `n` where `n`.`to`=`u`.`id` and (`n`.`expire` > now() OR `n`.`expire` IS NULL)) < 100) ";
+	$res = mysql_query($query);
+	while($row = mysql_fetch_assoc($res))
+	{
+		$query = "update users set `assurer`='0' where `id`='${row['uid']}'";
+		//echo $query."\n";
+		mysql_query($query);
+	}
 
 	mysql_query("update `locations` set `acount`=0");
 	$query = "SELECT `users`.`locid` AS `locid`, count(*) AS `total` FROM `users`
@@ -70,8 +99,6 @@
 		echo $query."\n";
 		mysql_query($query);
 	}
-
-
 
 
 ?>
