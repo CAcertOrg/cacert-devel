@@ -49,7 +49,7 @@ function makecap()
 	AssureTextLine(_("Date of Birth"),$dob." ("._("YYYY-MM-DD").")");
 	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s has appeared in person"), $fname, $mname, $lname));
 	AssureInboxLine("location",_("Location"),array_key_exists('location',$_SESSION['_config'])?$_SESSION['_config']['location']:"","");
-	AssureInboxLine("date",_("Date"),array_key_exists('location',$_SESSION['_config'])?$_SESSION['_config']['location']:"","<br/>"._("Only fill this in if you assured the person on a different day"));
+	AssureInboxLine("date",_("Date"),array_key_exists('date',$_SESSION['_config'])?$_SESSION['_config']['date']:"","<br/>"._("Only fill this in if you assured the person on a different day"));
   	if($_SESSION['profile']['ttpadmin'] == 1)
 		AssureMethodLine(_("Method"),$methods,_("Only tick the next box if the Assurance was face to face."));
 	AssureBoxLine("assertion",_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."));
