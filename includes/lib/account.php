@@ -21,13 +21,13 @@ function fix_assurer_flag($userID)
 {
 	// Update Assurer-Flag on users table if 100 points.
 	// Should the number of points be SUM(points) or SUM(awarded)?
-	$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 1 WHERE '.
-		'`u`.`id` = \''.(int)intval($userID).'\' AND '.
-		'EXISTS(SELECT 1 FROM `cats_passed` AS `cp`, `cats_variant` AS `cv` '.
-			'WHERE `cp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND '.
-			'`cp`.`user_id` = `u`.`id`) AND '.
-		'(SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` '.
-			'AND (`n`.`expire` > now() OR `n`.`expire` IS NULL)) >= 100');
+	$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 1 WHERE
+		`u`.`id` = \''.(int)intval($userID).'\' AND
+		EXISTS(SELECT 1 FROM `cats_passed` AS `cp`, `cats_variant` AS `cv`
+			WHERE `cp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND
+			`cp`.`user_id` = `u`.`id`) AND
+		(SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id`
+			AND (`n`.`expire` > now() OR `n`.`expire` IS NULL)) >= 100');
 	// Challenge has been passed and non-expired points >= 100
 	
 	if (!$query) {
@@ -35,13 +35,13 @@ function fix_assurer_flag($userID)
 	}
  
 	// Reset flag if requirements are not met
-	$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 0 WHERE '.
-		'`u`.`id` = \''.(int)intval($userID).'\' AND '.
-		'(NOT EXISTS(SELECT 1 FROM `cats_passed` AS `cp`, `cats_variant` AS '.
-			'`cv` WHERE `cp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 '.
-			'AND `cp`.`user_id` = `u`.`id`) OR '.
-		'(SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id` '.
-			'AND (`n`.`expire` > now() OR `n`.`expire` IS NULL)) < 100)');
+	$query = mysql_query('UPDATE `users` AS `u` SET `assurer` = 0 WHERE
+		`u`.`id` = \''.(int)intval($userID).'\' AND
+		(NOT EXISTS(SELECT 1 FROM `cats_passed` AS `cp`, `cats_variant` AS
+			`cv` WHERE `cp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1
+			AND `cp`.`user_id` = `u`.`id`) OR
+		(SELECT SUM(`points`) FROM `notary` AS `n` WHERE `n`.`to` = `u`.`id`
+			AND (`n`.`expire` > now() OR `n`.`expire` IS NULL)) < 100)');
 	
 	if (!$query) {
 		return false;
