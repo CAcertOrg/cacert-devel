@@ -26,7 +26,10 @@
 
 	   We may have some performance problems here, there are 150k assurances and 220k users
 	   in the production database. The exists-clause on cats_passed should be a good filter... */
-
+	   
+  /* Synchronisation of assurer flag currently deactivated, see https://bugs.cacert.org/view.php?id=1003
+     and https://bugs.cacert.org/view.php?id=1024 */
+/*
 	$query = "select `n`.`to` as `uid` from `notary` as `n`, `users` as `u` ".
 	         "  where `n`.`to`=`u`.`id` and `u`.`assurer`<>'1' ".
 	         "    and (`n`.`expire` > now() OR `n`.`expire` IS NULL) ".
@@ -41,12 +44,15 @@
 		//echo $query."\n";
 		mysql_query($query);
 	}
-
+*/
 	/* Remove assurer flag from accounts not eligible.
 
 	   Also a bit performance critical, but assurer flag is only set at 5k accounts
 
 	*/
+  /* Synchronisation of assurer flag currently deactivated, see https://bugs.cacert.org/view.php?id=1003
+     and https://bugs.cacert.org/view.php?id=1024 */
+/*
     $query = "select `u`.id as `uid` from `users` as `u` " .
 	         "  where `u`.`assurer` = '1' ".
 	         "    and (not exists(select 1 from `cats_passed` as `cp`, `cats_variant` as `cv` ".
@@ -59,6 +65,7 @@
 		//echo $query."\n";
 		mysql_query($query);
 	}
+*/
 
 	mysql_query("update `locations` set `acount`=0");
 	$query = "SELECT `users`.`locid` AS `locid`, count(*) AS `total` FROM `users`
