@@ -34,7 +34,7 @@ function fix_assurer_flag($userID)
 	if (!$query) {
 		return false;
 	}
- 
+	
 	// Reset flag if requirements are not met
 	$sql = 'UPDATE `users` AS `u` SET `assurer` = 0 WHERE
 		`u`.`id` = \''.(int)intval($userID).'\' AND
