@@ -579,8 +579,10 @@ function AssureBoxLine($type,$text)
 <?
 }
 
-function AssureMethodLine($text,$methods,$remark)
+function AssureMethodLine($text,$methods,$remark,$flag)
 {
+	if ($flag = 1)
+	{
 ?>
 	<tr>
 		<td class="DataTD"><?=$text?></td>
@@ -596,6 +598,11 @@ function AssureMethodLine($text,$methods,$remark)
 		</td>
 	</tr>
 <?
+	} else {
+?>
+	<input type="hidden" name="<?=$val?>" value="<?=$_POST['method']?>">
+<?
+	}
 }
 
 function AssureInboxLine($type,$field,$value,$description)
