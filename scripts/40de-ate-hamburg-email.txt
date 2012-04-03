@@ -1,0 +1,66 @@
+CAcert Assurer Training Event Hamburg [Deutsch]
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher eher "muendlich ueberlieferten" Regeln wurden in Policies gegossen. Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B. in dem CAcert Community Agreement) wurden beschlossen. Die Assurer Training Events wollen versuchen, die ganzen Informationen unter’s Volk zu bringen:
+
+- Was hast du auf dem CAP Formular hinzuzufuegen, wenn du Minderjaehrige ueberpruefst ?
+- Was sind die 2 wesentlichen Punkte der CCA die du einem Assuree vermitteln koennen sollst ?
+- Unter welchen Umstaenden koennen z.Bsp. niederlaendische Rufnamen akzeptiert werden? 
+
+Antworten auf diese und weitere Fragen erhaelst du bei den Assurer Training Events (ATEs).
+
+Die kommende Veranstaltung in deiner Naehe findet statt am:
+
+Dienstag den 14. Februar 2012, 19:00 - 22:00
+
+Attraktor e.V.
+Mexikoring 21
+22297 Hamburg
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Details zum Veranstaltungsort und Anfahrthinweise findet Ihr im
+Wiki [https://wiki.cacert.org/events/20120214-ATE-Hamburg-3]
+Blog [http://blog.cacert.org/2012/02/547.html]
+
+
+
+Unverbindliche Anmeldung und Registrierung:
+Rueckantwort mit 'Ich moechte teilnehmen: ATE-Hamburg'
+
+Kontakt: events@cacert.org
+
+
+CAcert Assurer Training Event Hamburg [English]
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Much has happened during the past 3 years. The old way of 
+orally-transmitted procedures has now gone, and our rules have been cast 
+into formal policies. New procedures (e.g. the Assurer Challenge) and 
+obligations (e.g. in the CAcert Community Agreement) have been approved. 
+The Assurer Training Events bring all this to you, the Community:
+
+- What you have to add onto the CAP form if you assure U18 people ?
+- What are the 2 essential topics regarding CCA you have to present an Assuree ?
+- When you can accept i.e. a Dutch "roepnaam" ?
+
+Answers to these and many other questions are given at the Assurer 
+Training Events (ATEs).
+
+ATE-Hamburg takes place on:
+Tuesday, Feb 14, 2012, 19:00 - 22:00
+
+Attraktor e.V.
+Mexikoring 21
+22297 Hamburg
+
+The Event-Team is looking forward to hearing from you.
+
+Details on Location and Transportation you will find under
+Wiki [https://wiki.cacert.org/events/20120214-ATE-Hamburg-3]
+Blog [http://blog.cacert.org/2012/02/547.html]
+
+Registration for ATE-Hamburg: please reply
+'I will attend: ATE-Hamburg'
+
+Contact: events@cacert.org
