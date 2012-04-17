@@ -581,7 +581,7 @@ function AssureBoxLine($type,$text)
 
 function AssureMethodLine($text,$methods,$remark,$flag)
 {
-	if ($flag = 1)
+	if ($flag === 1)
 	{
 ?>
 	<tr>
@@ -589,11 +589,11 @@ function AssureMethodLine($text,$methods,$remark,$flag)
 		<td class="DataTD">
 			<select name="method">
 <?
-		 	foreach($methods as $val) { ?>
+			foreach($methods as $val) { ?>
 				<option value="<?=$val?>"<? if(array_key_exists('method',$_POST) && $val == $_POST['method']) echo " selected"; ?>><?=$val?></option>
 
 <? } ?>
-		  	</select>
+			</select>
 			</br><?=$remark?>
 		</td>
 	</tr>
