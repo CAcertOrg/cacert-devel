@@ -242,7 +242,7 @@
 	{
 		if ($awarded == "0")
 		{
-			if ($when < "2009-09-01")
+			if ($when < "2006-09-01")
 			{
 				$tdstyle="style='background-color: #ffff80'";
 				$emopen="<em>";
