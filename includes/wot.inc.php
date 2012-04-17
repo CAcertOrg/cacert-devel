@@ -581,7 +581,7 @@ function AssureBoxLine($type,$text)
 
 function AssureMethodLine($text,$methods,$remark,$flag)
 {
-	if ($flag === 1)
+	if (intval($flag) === 1)
 	{
 ?>
 	<tr>
