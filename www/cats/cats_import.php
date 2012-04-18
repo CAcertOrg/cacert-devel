@@ -31,7 +31,9 @@ function sanitize_string($buffer) {
 }
 
 define ('UNDEFINED', 'nd');
-define ('ALLOWED_IP', '213.154.225.228');
+// Specific for testserver: Accept Test-CATS-Server
+define ('ALLOWED_IP', '10.38.6.88');
+//define ('ALLOWED_IP', '213.154.225.228');
 define ('ALLOWED_IP2', '193.238.157.112');
 define ('CONFIG_FILEPATH', '/www/');
 
