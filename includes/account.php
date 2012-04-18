@@ -2329,8 +2329,21 @@ function buildSubject() {
 			$_SESSION['_config']['errmsg'] = sprintf(_("Wasn't able to match '%s' against any user in the system"), sanitizeHTML($_REQUEST['email']));
 		} else {
 			$row = mysql_fetch_assoc($res);
-			mysql_query("insert into `org` set `memid`='".intval($row['id'])."', `orgid`='".intval($_SESSION['_config']['orgid'])."',
-					`masteracc`='$masteracc', `OU`='$OU', `comments`='$comments'");
+			if ( !is_assurer(intval($row['id'])) )
+			{
+				$id = $oldid;
+				$oldid=0;
+				$_SESSION['_config']['errmsg'] =
+						_("The user is not an Assurer yet");
+			} else {
+				mysql_query(
+					"insert into `org`
+						set `memid`='".intval($row['id'])."',
+							`orgid`='".intval($_SESSION['_config']['orgid'])."',
+							`masteracc`='$masteracc',
+							`OU`='$OU',
+							`comments`='$comments'");
+			}
 		}
 	}
 
