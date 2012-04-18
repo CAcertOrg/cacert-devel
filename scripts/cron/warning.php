@@ -89,7 +89,7 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 					`domaincerts`.`domid` = `domains`.`id`
 					OR (
 						`domaincerts`.`id` = `domlink`.`certid`
-						AND `domlink`.`domid` = `domains`.id`
+						AND `domlink`.`domid` = `domains`.`id`
 						)
 					)
 				AND `domains`.`memid` = `users`.`id`";
