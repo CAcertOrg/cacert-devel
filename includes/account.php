@@ -620,10 +620,30 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-					mysql_query("update `domains` set `deleted`=NOW() where `id`='$id'");
-					$dres = mysql_query("select * from `domlink` where `domid`='$id'");
+					
+					$dres = mysql_query(
+						"select `domaincerts`.`id`
+							from `domaincerts`, `domlink`
+							where `domaincerts`.`domid` = '$id'
+							or (
+								`domaincerts`.`id` = `domlink`.`certid`
+								and `domlink`.`domid` = '$id'
+								)");
 					while($drow = mysql_fetch_assoc($dres))
-						mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['certid']."' and `revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0");
+					{
+						mysql_query(
+							"update `domaincerts`
+								set `revoked`='1970-01-01 10:00:01'
+								where `id` = '".$drow['id']."'
+								and `revoked` = 0
+								and UNIX_TIMESTAMP(`expire`) -
+										UNIX_TIMESTAMP() > 0");
+					}
+					
+					mysql_query(
+						"update `domains`
+							set `deleted`=NOW()
+							where `id` = '$id'");
 				}
 			}
 		}
