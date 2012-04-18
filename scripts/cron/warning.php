@@ -68,16 +68,31 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 
 	foreach($days as $day => $warning)
 	{
-		$query = "SELECT `domaincerts`.`id`, `users`.`fname`, `users`.`lname`, `users`.`email`,
-				`domains`.`memid`, `domaincerts`.`subject`, `domaincerts`.`crt_name`,
-				`domaincerts`.`CN`,
-				(UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP(NOW())) / 86400 AS `daysleft`
+		$query = 
+			"SELECT `domaincerts`.`id`,
+					`users`.`fname`, `users`.`lname`, `users`.`email`,
+					`domains`.`memid`,
+					`domaincerts`.`subject`, `domaincerts`.`crt_name`,
+					`domaincerts`.`CN`,
+					(UNIX_TIMESTAMP(`domaincerts`.`expire`) - 
+						UNIX_TIMESTAMP(NOW())) / 86400 AS `daysleft`
+					
 				FROM `users`, `domaincerts`, `domlink`, `domains`
-				WHERE UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP(NOW()) > -7 * 86400 AND
-				UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP(NOW()) < $day * 86400 AND
-				`domaincerts`.`renewed`=0 AND `domaincerts`.`warning` <= '$warning' AND
-				`domaincerts`.`revoked`=0 AND `users`.`id` = `domains`.`memid` AND
-				`domlink`.`certid` = `domaincerts`.`id` AND `domains`.`id` = `domlink`.`domid`";
+				WHERE UNIX_TIMESTAMP(`domaincerts`.`expire`) -
+						UNIX_TIMESTAMP(NOW()) > -7 * 86400
+				AND UNIX_TIMESTAMP(`domaincerts`.`expire`) -
+						UNIX_TIMESTAMP(NOW()) < $day * 86400
+				AND `domaincerts`.`renewed` = 0
+				AND `domaincerts`.`warning` <= '$warning'
+				AND `domaincerts`.`revoked` = 0
+				AND (
+					`domaincerts`.`domid` = `domains`.`id`
+					OR (
+						`domaincerts`.`id` = `domlink`.`certid`
+						AND `domlink`.`domid` = `domains`.id`
+						)
+					)
+				AND `domains`.`memid` = `users`.`id`";
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 		{
