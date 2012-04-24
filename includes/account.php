@@ -2286,12 +2286,24 @@ function buildSubject() {
 		$orgid = 0;
 	}
 
-	if($id == 32 || $oldid == 32 || $id == 33 || $oldid == 33 || $id == 34 || $oldid == 34 ||
-		$id == 35 || $oldid == 35)
+	if($id == 32 || $oldid == 32 || $id == 33 || $oldid == 33 || $id == 34 || $oldid == 34)
 	{
 		$query = "select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."' and `masteracc`='1'";
 		$_macc = mysql_num_rows(mysql_query($query));
 		if($_SESSION['profile']['orgadmin'] != 1 && $_macc <= 0)
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You don't have access to this area.");
+			showfooter();
+			exit;
+		}
+	}
+
+	if($id == 35 || $oldid == 35)
+	{
+		$query = "select 1 from `org` where `memid`='".intval($_SESSION['profile']['id'])."'";
+		$is_orguser = mysql_num_rows(mysql_query($query));
+		if($_SESSION['profile']['orgadmin'] != 1 && $is_orguser <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
 			echo _("You don't have access to this area.");
