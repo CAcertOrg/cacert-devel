@@ -487,10 +487,6 @@
 				return(0);
 		}
 
-		if($points >= 300)
-			return(200);
-		if($points >= 200)
-			return(150);
 		if($points >= 150)
 			return(35);
 		if($points >= 140)
