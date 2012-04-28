@@ -112,8 +112,7 @@ $(LANGS:%=$(MO_FILE_TEMPLATE)): $(MO_FILE_TEMPLATE): $(PO_FILE_TEMPLATE)
 $(LANGS:%=$(PO_FILE_TEMPLATE)):
 	mkdir -p $(@D)
 	wget --output-document - '$(@:$(PO_FILE_TEMPLATE)=$(PO_URL_TEMPLATE))' | \
-		# convert UTF-8 characters to HTML entities \
-		php -r 'while (!feof(STDIN)) echo mb_convert_encoding(fgets(STDIN), "HTML-ENTITIES", "UTF-8");' \
+		php -f escape_special_chars.php \
 		> $@
 
 
