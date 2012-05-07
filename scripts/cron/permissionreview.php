@@ -110,10 +110,11 @@ foreach ($flags as $flag => $flag_properties) {
 			$message = <<<EOF
 Hello $admin[fname],
 
-you get this message, because you are listed as $description on
+you get this message, because you are listed as $flag_properties[name] on
 CAcert.org. Please review the following list of persons with the same privilege
 and report to the responsible team leader or board
 ($BOARD_PRIVATE) if you spot any errors.
+
 
 EOF;
 			
@@ -190,11 +191,12 @@ responsible for an up-to-date copy of access lists not directly recorded in the
 web application (critical admins, software assessors etc.) 
 
 
+
 EOF;
 	
 	foreach ($flags as $flag => $flag_properties) {
 		if ($flag_properties[$key]) {
-			$message .= "List of $flag_properties[name]s:\n";
+			$message .= "List of $flag_properties[name]s:\n\n";
 			foreach ($adminlist[$flag] as $colleague) {
 				$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 			}
@@ -203,9 +205,10 @@ EOF;
 	
 	$message .= <<<EOF
 
+
 Best Regards,
 CAcert Support
 EOF;
-
+	
 	sendmail($values['email'], "Permissions Review", $message, 'support@cacert.org');
 }
