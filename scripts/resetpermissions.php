@@ -40,11 +40,11 @@ foreach ($flags as $flag) {
 		echo "$row[fname] $row[lname] $row[email]";
 		
 		$update = "update `users` set `$flag` = 0 where `id` = $row[id]";
-		if(! $res = mysql_query($query) ) {
+		if(! $res2 = mysql_query($update) ) {
 			echo " NOT RESET!!!\n";
 			fwrite(STDERR,
-					"MySQL query for flag $flag failed:\n".
-					"\"$query\"\n".
+					"MySQL query for $flag flag reset on user $row[id] failed:\n".
+					"\"$update\"\n".
 					mysql_error()
 			);
 			
