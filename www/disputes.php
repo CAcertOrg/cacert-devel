@@ -72,11 +72,11 @@
 				mysql_query($query);
 			}
 			mysql_query("update `disputeemail` set hash='',action='accept' where `id`='$emailid'");
-	                $rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
-        	        $rc = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
-        	        $res = mysql_query("select * from `users` where `id`='$oldmemid'");
-	                $user = mysql_fetch_assoc($res);
-			if($rc == 0 && $rc2 == 0 && $_SESSION['_config']['email'] == $user['email'])
+			$domaincount = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
+			$emailcount = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
+			$res = mysql_query("select * from `users` where `id`='$oldmemid'");
+			$user = mysql_fetch_assoc($res);
+			if($domaincount === 0 && $emailcount === 0 && $_SESSION['_config']['email'] === $user['email'])
 			{
 				mysql_query("update `users` set `deleted`=NOW() where `id`='$oldmemid'");
 				echo _("This was the primary email on the account, and no emails or domains were left linked so the account has also been removed from the system.");
