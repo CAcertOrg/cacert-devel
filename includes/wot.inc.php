@@ -573,7 +573,7 @@ function AssureBoxLine($type,$text,$checked)
 {
 ?>
 	<tr>
-		<td class="DataTD"><input type="checkbox" name="<?=$type?>" <?=$checked?"checked":""?></td>
+		<td class="DataTD"><input type="checkbox" name="<?=$type?>" <?=$checked?"checked":""?>></td>
 		<td class="DataTD"><?=$text?></td>
 	</tr>
 <?
@@ -590,7 +590,7 @@ function AssureMethodLine($text,$methods,$remark)
 			<select name="method">
 <?
 			foreach($methods as $val) { ?>
-				<option value="<?=$val?>" <?=$val?></option>
+				<option value="<?=$val?>"> <?=$val?></option>
 
 <? } ?>
 			</select>
