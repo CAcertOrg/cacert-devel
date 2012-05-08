@@ -566,22 +566,22 @@ function AssureTextLine($field1,$field2)
 function AssureCCABoxLine($type,$text)
 {
 	return;
-	AssureBoxLIne($type,$text);
+	AssureBoxLine($type,$text);
 }
 
-function AssureBoxLine($type,$text)
+function AssureBoxLine($type,$text,$checked)
 {
 ?>
 	<tr>
-		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1"></td>
+		<td class="DataTD"><input type="checkbox" name="<?=$type?>" <?=$checked?"checked":""?></td>
 		<td class="DataTD"><?=$text?></td>
 	</tr>
 <?
 }
 
-function AssureMethodLine($text,$methods,$remark,$flag)
+function AssureMethodLine($text,$methods,$remark)
 {
-	if (intval($flag) === 1)
+	if (count($method) != 1)
 	{
 ?>
 	<tr>
@@ -590,7 +590,7 @@ function AssureMethodLine($text,$methods,$remark,$flag)
 			<select name="method">
 <?
 			foreach($methods as $val) { ?>
-				<option value="<?=$val?>"<? if(array_key_exists('method',$_POST) && $val == $_POST['method']) echo " selected"; ?>><?=$val?></option>
+				<option value="<?=$val?>" <?=$val?></option>
 
 <? } ?>
 			</select>
@@ -600,7 +600,7 @@ function AssureMethodLine($text,$methods,$remark,$flag)
 <?
 	} else {
 ?>
-	<input type="hidden" name="<?=$val?>" value="<?=$_POST['method']?>">
+	<input type="hidden" name="<?=$val?>" value="<?=$method[0]?>">
 <?
 	}
 }
