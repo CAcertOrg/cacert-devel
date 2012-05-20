@@ -573,7 +573,7 @@ function AssureBoxLine($type,$text,$checked)
 {
 ?>
 	<tr>
-		<td class="DataTD"><input type="checkbox" name="<?=$type?>" <?=$checked?"checked":""?>></td>
+		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1" <?=$checked?"checked":""?>></td>
 		<td class="DataTD"><?=$text?></td>
 	</tr>
 <?
