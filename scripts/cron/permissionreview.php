@@ -148,10 +148,12 @@ EOF;
 
 foreach ($flags as $flag => $flag_properties) {
 	if ($flag_properties['support']) {
-		$message .= "List of $flag_properties[name]s:\n";
+		$message .= "List of $flag_properties[name]s:\n\n";
 		foreach ($adminlist[$flag] as $colleague) {
 			$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 		}
+		
+		$message .= "\n\n";
 	}
 }
 
@@ -200,6 +202,7 @@ EOF;
 			foreach ($adminlist[$flag] as $colleague) {
 				$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 			}
+			$message .= "\n\n";
 		}
 	}
 	
