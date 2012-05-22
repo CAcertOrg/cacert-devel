@@ -52,7 +52,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 
 <p><b><?=_("Sensitive Information")?></b></p>
 <p><?=_("If you have questions, comments or otherwise and information you're sending to us contains sensitive details, you should use the contact form below. Due to the large amounts of support emails we receive, sending general questions via this contact form will generally take longer then using the support mailing list. Also sending queries in anything but english could cause delays in supporting you as we'd need to find a translator to help.")?></p>
-<form method="post" action="https://www.cacert.org/index.php" name="form2">
+<form method="post" name="form2">
   <input type="hidden" name="secrethash2" value="">
   <input type="hidden" name="oldid" value="<?=$id?>">
   <table border="0">
