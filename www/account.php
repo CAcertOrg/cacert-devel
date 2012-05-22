@@ -47,7 +47,7 @@
 
                 $message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
 
-                sendmail("cacert-support@lists.cacert.org, $email", "[website form email]: ".$subject, $message, "website-form@cacert.org", "cacert-support@lists.cacert.org, $email", "", "CAcert Website");
+                sendmail("cacert-support@lists.cacert.org", "[website form email]: ".$subject, $message, "website-form@cacert.org", "cacert-support@lists.cacert.org, $email", "", "CAcert Website");
 		
                 showheader(_("Welcome to CAcert.org"));
                 echo _("Your message has been sent to the general support list.");
