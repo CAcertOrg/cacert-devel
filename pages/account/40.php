@@ -27,7 +27,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
 <p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><?=_("You can alternatively use the form below, however joining the list is the prefered option to support your queries")?></p>
-<form method="post" name="form1">
+<form method="post" action="account.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
   <input type="hidden" name="support" value="yes">
   <input type="hidden" name="secrethash2" value="">
@@ -52,7 +52,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 
 <p><b><?=_("Sensitive Information")?></b></p>
 <p><?=_("If you have questions, comments or otherwise and information you're sending to us contains sensitive details, you should use the contact form below. Due to the large amounts of support emails we receive, sending general questions via this contact form will generally take longer then using the support mailing list. Also sending queries in anything but english could cause delays in supporting you as we'd need to find a translator to help.")?></p>
-<form method="post" name="form2">
+<form method="post" action="account.php" name="form2">
   <input type="hidden" name="secrethash2" value="">
   <input type="hidden" name="oldid" value="<?=$id?>">
   <table border="0">
