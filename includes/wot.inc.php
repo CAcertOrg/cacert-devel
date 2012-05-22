@@ -581,7 +581,7 @@ function AssureBoxLine($type,$text,$checked)
 
 function AssureMethodLine($text,$methods,$remark)
 {
-	if (count($method) != 1)
+	if (count($methods) != 1)
 	{
 ?>
 	<tr>
@@ -600,7 +600,7 @@ function AssureMethodLine($text,$methods,$remark)
 <?
 	} else {
 ?>
-	<input type="hidden" name="<?=$val?>" value="<?=$method[0]?>">
+	<input type="hidden" name="<?=$val?>" value="<?=$methods[0]?>">
 <?
 	}
 }
