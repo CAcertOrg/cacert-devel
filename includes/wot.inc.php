@@ -536,4 +536,94 @@
 	<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
 <?
 	}
+
+// functions for 6.php (assure somebody)
+
+function AssureHead($confirmation,$checkname)
+{
 ?>
+<form method="post" action="wot.php">
+	<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="600">
+	<tr>
+		<td colspan="2" class="title"><?=$confirmation?></td>
+	</tr>
+	<tr>
+		<td class="DataTD" colspan="2" align="left"><?=$checkname?></td>
+	</tr>
+<?
+ } 
+
+function AssureTextLine($field1,$field2)
+{
+?>
+	<tr>
+		<td class="DataTD"><?=$field1?>:</td>
+		<td class="DataTD"><?=$field2?></td>
+	</tr>
+<?
+}
+
+function AssureCCABoxLine($type,$text)
+{
+	return;
+	AssureBoxLine($type,$text);
+}
+
+function AssureBoxLine($type,$text,$checked)
+{
+?>
+	<tr>
+		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1" <?=$checked?"checked":""?>></td>
+		<td class="DataTD"><?=$text?></td>
+	</tr>
+<?
+}
+
+function AssureMethodLine($text,$methods,$remark)
+{
+	if (count($methods) != 1)
+	{
+?>
+	<tr>
+		<td class="DataTD"><?=$text?></td>
+		<td class="DataTD">
+			<select name="method">
+<?
+			foreach($methods as $val) { ?>
+				<option value="<?=$val?>"> <?=$val?></option>
+
+<? } ?>
+			</select>
+			</br><?=$remark?>
+		</td>
+	</tr>
+<?
+	} else {
+?>
+	<input type="hidden" name="<?=$val?>" value="<?=$methods[0]?>">
+<?
+	}
+}
+
+function AssureInboxLine($type,$field,$value,$description)
+{
+?>
+	<tr>
+		<td class="DataTD"><?=$field?>:</td>
+		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
+	</tr>
+<?
+}
+
+function AssureFoot($oldid,$confirm)
+{?>
+	<tr>
+		<td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=$confirm?>"> <input type="submit" name="cancel" value="<?=_("Cancel")?>"></td>
+  	</tr>
+	</table>
+	<input type="hidden" name="pagehash" value="<?=$_SESSION['_config']['wothash']?>">
+	<input type="hidden" name="oldid" value="<?=$oldid?>">
+</form>
+<?
+}
+
