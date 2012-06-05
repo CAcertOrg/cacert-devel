@@ -49,6 +49,20 @@ foreach ($flags as $flag) {
 			);
 			
 		} else {
+			
+			$message = <<<EOF
+Hi $row[fname],
+
+As per Arbitration a20110118.1 [1] the $flag permission has been removed
+from your account.
+
+[1] https://wiki.cacert.org/Arbitrations/a20110118.1
+
+Best Regards,
+CAcert Support
+EOF;
+			sendmail($row['email'], "Permissions have been reset", $message, 'support@cacert.org');
+			
 			echo " reset.\n";
 		}
 	}
