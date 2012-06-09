@@ -33,8 +33,8 @@ function sanitize_string($buffer) {
 define ('UNDEFINED', 'nd');
 // Specific for testserver: Accept Test-CATS-Server
 define ('ALLOWED_IP', '10.38.6.88');
-//define ('ALLOWED_IP', '213.154.225.228');
-define ('ALLOWED_IP2', '193.238.157.112');
+//define ('ALLOWED_IP', '213.154.225.243');
+define ('ALLOWED_IP2', '172.16.2.27');
 define ('CONFIG_FILEPATH', '/www/');
 
 $remote_addr = (isset($_SERVER['REMOTE_ADDR']))?$_SERVER['REMOTE_ADDR']:UNDEFINED;
