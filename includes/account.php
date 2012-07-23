@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	require_once("../includes/loggedin.php");
+	require_once("../includes/lib/l10n.php");
 
 	loadem("account");
 
@@ -2288,8 +2289,21 @@
 			$_SESSION['_config']['errmsg'] = sprintf(_("Wasn't able to match '%s' against any user in the system"), sanitizeHTML($_REQUEST['email']));
 		} else {
 			$row = mysql_fetch_assoc($res);
-			mysql_query("insert into `org` set `memid`='".intval($row['id'])."', `orgid`='".intval($_SESSION['_config']['orgid'])."',
-					`masteracc`='$masteracc', `OU`='$OU', `comments`='$comments'");
+			if ( !is_assurer(intval($row['id'])) )
+			{
+				$id = $oldid;
+				$oldid=0;
+				$_SESSION['_config']['errmsg'] =
+						_("The user is not an Assurer yet");
+			} else {
+				mysql_query(
+					"insert into `org`
+						set `memid`='".intval($row['id'])."',
+							`orgid`='".intval($_SESSION['_config']['orgid'])."',
+							`masteracc`='$masteracc',
+							`OU`='$OU',
+							`comments`='$comments'");
+			}
 		}
 	}
 
@@ -2351,7 +2365,7 @@
 	{
 		csrf_check("mainlang");
 		$lang = mysql_real_escape_string($_REQUEST['lang']);
-		foreach($_SESSION['_config']['translations'] as $key => $val)
+		foreach(L10n::$translations as $key => $val)
 		{
 			if($key == $lang)
 			{

@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	if($_SESSION['_config']['language'] != "ja_JP")
+	if($_SESSION['_config']['language'] != "ja")
 	{
 		define('FPDF_FONTPATH','/usr/share/fpdf/font/');
 		require_once('/usr/share/ufpdf/fpdf.php');
@@ -40,7 +40,7 @@
 		{
 			$this->Image($_REQUEST['bw']?'images/CAcert-logo-mono-1000.png':'images/CAcert-logo-colour-1000.png',8,8,100);
 			$this->SetFont('Arial','B',14);
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',14);
 			$this->Cell(100);
 			$this->Cell(40,20,recode($_SESSION['_config']['recode'], _("Trusted Third Party")));
@@ -54,12 +54,12 @@
 		{
 			$this->SetY(-10);
 			$this->SetFont('Arial','I',8);
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','I',8);
 			$this->Cell(0,0,'CAcert Inc. - P.O. Box 4107 - Denistone East NSW 2112 - Australia - http://www.CAcert.org',0,0,'C');
 			$this->SetY(-7);
 			$this->SetFont('Arial','',6);
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','',6);
 			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints")).": A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B "._("and")." 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33",0,0,'C');
 		}
@@ -72,7 +72,7 @@
 			// Show text blurb at top of page
 			$this->SetY(40);
 			$this->SetFont('Arial','',10);
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','',10);
 			$this->Write(4, recode($_SESSION['_config']['recode'], _("The CAcert Trusted Third Party (TTP) Programme is designed to assure Internet user identities through personal verification of government issued identity documents.")));
 			$this->Ln(7);
@@ -100,18 +100,18 @@
 			$this->Line(120, $top + 6, 120, $top + 36);
 			$this->SetXY(11, $top + 3);
 			$this->SetFont("Arial", "BUI", "12");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','BUI',12);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Person Verifying Applicant's Identity")));
 			$this->SetXY(11, $top + 9);
 			$this->SetFont("Arial", "B", "8");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',8);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Names").":"));
 			$this->SetXY(120, $top + 9);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Office Street Address").":"));
 			$this->SetFont("Arial", "B", "6");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',6);
 			$this->SetXY(11, $top + 14);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Profession (Please circle one)")).":");
@@ -122,7 +122,7 @@
 			$this->SetXY(11, $top + 22);
 			$this->Write(0, recode($_SESSION['_config']['recode'], "("._("as applicable")."):"));
 			$this->SetFont("Arial", "B", "8");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',8);
 			$this->SetXY(11, $top + 27);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Office Phone")).":");
@@ -147,12 +147,12 @@
 			$this->Line(120, $top + 6, 120, $top + 36);
 			$this->SetXY(11, $top + 3);
 			$this->SetFont("Arial", "BUI", "12");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','BUI',12);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Applicant Information")));
 			$this->SetXY(11, $top + 9);
 			$this->SetFont("Arial", "B", "8");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',8);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Full Name (as shown on ID)").":"));
 			if($name)
@@ -170,11 +170,11 @@
 			$this->SetXY(11, $top + 21);
 			$this->Write(0, recode($_SESSION['_config']['recode'],_("Date of Birth")).": ");
 			$this->SetFont("Arial", "B", "6");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',6);
 			$this->Write(0, "(".recode($_SESSION['_config']['recode'], _("YYYY-MM-DD")).")");
 			$this->SetFont("Arial", "B", "8");
-			if($_SESSION['_config']['language'] == "ja_JP")
+			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','B',8);
 			if($dob)
 			{
@@ -199,7 +199,7 @@
 		$format = "A4";
 
 	$pdf = new PDF('P', 'mm', $format);
-	if($_SESSION['_config']['language'] == "ja_JP")
+	if($_SESSION['_config']['language'] == "ja")
 		$pdf->AddSJISFont();
 	$pdf->Open();
 	$pdf->AddPage();

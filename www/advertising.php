@@ -47,7 +47,7 @@
 		if($months < 1 || $months > 12)
 		{
 			$id = 1;
-			$errmsg .= _("You can only place an advertisement for up to 12 months.<br />");
+			$errmsg .= _("You can only place an advertisement for up to 12 months.")."<br />";
 			$process="";
 			$oldid=0;
 		}
@@ -55,7 +55,7 @@
 		if(strlen($title) <= 5)
 		{
 			$id = 1;
-			$errmsg .= _("Link title was too short.<br />");
+			$errmsg .= _("Link title was too short.")."<br />";
 			$process="";
 			$oldid=0;
 		}
@@ -63,7 +63,7 @@
 		if(strlen($link) <= 10)
 		{
 			$id = 1;
-			$errmsg .= _("Link URI was too short.<br />");
+			$errmsg .= _("Link URI was too short.")."<br />";
 			$process="";
 			$oldid=0;
 		}

@@ -16,20 +16,15 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	include_once("../includes/shutdown.php");
+	require_once("../includes/lib/l10n.php");
 ?>
 <? 
   if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") 
   {
-    if(array_key_exists('reminderset',$_SESSION['_config']) && $_SESSION['_config']['remindersent'] == 1) 
-    {
-      ?><font color="orange" size="+1"><?
-    }
-    else 
-    { 
-      ?><font color="orange" size="+1"><?=_("ERROR")?>: <?
-    }
-    echo $_SESSION['_config']['error']."</font>";
-    unset($_SESSION['_config']['error']);
+    ?><font color="orange" size="+1">
+      <? echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
+    </font>
+    <?unset($_SESSION['_config']['error']);
   } 
 ?>
 <? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
@@ -38,8 +33,8 @@
 <select name="reminder-lang">
 <?
 	if($_SESSION['_config']['reminder-lang'] == "")
-		$_SESSION['_config']['reminder-lang'] = $_SESSION['profile']['language'];
-        foreach($_SESSION['_config']['translations'] as $key => $val)
+		$_SESSION['_config']['reminder-lang'] = L10n::get_translation();
+        foreach(L10n::$translations as $key => $val)
         {
                 echo "<option value='$key'";
                 if($key == $_SESSION['_config']['reminder-lang'])

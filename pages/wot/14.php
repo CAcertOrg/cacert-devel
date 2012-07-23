@@ -20,7 +20,11 @@
 
 <p><?=sprintf(_("If you have a %sSignaturecard%s (also called 'Buergerkarte'), you can digitally sign your assurance request here, and get 50 CAcert points:"),"<a href='http://www.buergerkarte.at/'>","</a>")?><br /></p>
 
-<p><?=sprintf(_("To get assured with your Signaturecard, you need the Software from <a href='http://www.buergerkarte.at/bku/'>http://www.buergerkarte.at/bku/</a>. To activate your E-Card, please go to <a href='https://www.sozialversicherung.at/signon2-Registrierung/'>https://www.sozialversicherung.at/signon2-Registrierung/</a>."))?></p>
+<p><?=sprintf(_("To get assured with your Signaturecard, you need the ".
+	"Software from %s. To activate your E-Card, please go to %s."),
+	"<a href='http://www.buergerkarte.at/bku/'>http://www.buergerkarte.at/bku/</a>",
+	"<a href='https://www.sozialversicherung.at/signon2-Registrierung/'>https://www.sozialversicherung.at/signon2-Registrierung/</a>"
+	)?></p>
 
 
 <pre><?=sanitizeHTML($_REQUEST['XMLResponse'])?></pre>

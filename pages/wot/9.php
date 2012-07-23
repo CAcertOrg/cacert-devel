@@ -14,8 +14,11 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
+*/
+	
+	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
+	
+
 	$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
 	if(mysql_num_rows($res) <= 0)
 	{
@@ -47,7 +50,7 @@
 <? if($userlang != "") { ?>
   <tr>
     <td class="DataTD"><?=_("Language")?>:</td>
-    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), $user['fname'], $_SESSION['_config']['translations'][$userlang]) ?></td>
+    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), $user['fname'], L10n::$translations[$userlang]) ?></td>
   </tr>
 <? } ?>
 <?

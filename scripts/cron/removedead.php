@@ -17,7 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	include_once("/home/cacert/www/includes/mysql.php");
+	require_once(dirname(__FILE__).'/../../includes/mysql.php');
+	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
 
 	$query = "select * from `users`	where `users`.`verified`=0 and
 			(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`users`.`created`)) >= 172800";
@@ -67,9 +68,7 @@
 
                 if($data['language'] != "")
                 {
-                        $userlang = $data['language'];
-                        putenv("LANG=".$userlang);
-                        setlocale(LC_ALL, $userlang);
+                        L10n::set_translation($data['language']);
                 }
 
                 $body  = _("You are receiving this email because you had a temporary increase to 200 points. This has since expired and you have been reduced to 150 points.")."\n\n";

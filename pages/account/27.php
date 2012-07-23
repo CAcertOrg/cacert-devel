@@ -25,27 +25,27 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Organisation Name")?>:</td>
-    <td class="DataTD"><input type="text" name="O" value="<?=$row['O']?>"></td>
+    <td class="DataTD"><input type="text" name="O" value="<?=$row['O']?>" size="90"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Contact Email")?>:</td>
-    <td class="DataTD"><input type="text" name="contact" value="<?=($row['contact'])?>"></td>
+    <td class="DataTD"><input type="text" name="contact" value="<?=($row['contact'])?>" size="90"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Town/Suburb")?>:</td>
-    <td class="DataTD"><input type="text" name="L" value="<?=($row['L'])?>"></td>
+    <td class="DataTD"><input type="text" name="L" value="<?=($row['L'])?>" size="90"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("State/Province")?>:</td>
-    <td class="DataTD"><input type="text" name="ST" value="<?=($row['ST'])?>"></td>
+    <td class="DataTD"><input type="text" name="ST" value="<?=($row['ST'])?>" size="90"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Country")?>:</td>
-    <td class="DataTD"><input type="text" name="C" value="<?=($row['C'])?>"></td>
+    <td class="DataTD"><input type="text" name="C" value="<?=($row['C'])?>" size="5"> (2 letter <a href="http://www.iso.org/iso/english_country_names_and_code_elements">ISO code</a>)</td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><textarea name="comments" cols=15 rows=5><?=($row['comments'])?></textarea></td>
+    <td class="DataTD"><textarea name="comments" cols=60 rows=10><?=($row['comments'])?></textarea></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>

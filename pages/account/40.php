@@ -19,6 +19,15 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 ?>
 <H3><?=_("Contact Us")?></H3>
 
+<p><? printf(_("To contact us please log out and then use the contact form ".
+		"there or send us an email to %s. We are working to fix this ".
+		"situation so you may contact us while staying logged in again."),
+		
+		"<a href='mailto:support@cacert.org'>support@cacert.org</a>"
+	) ?>
+</p>
+
+<?/*
 <p><b><?=_("General Questions")?></b></p>
 <p><b><?=_("PLEASE NOTE: Due to the large amounts of support questions, incorrectly directed emails may be over looked, this is a volunteer effort and directing general questions to the right place will help everyone, including yourself as you will get a reply quicker.")?></b></p>
 <p><b><?=_("If you are contacting us about advertising, please use the form at the bottom of the website, the first contact form is not the correct place.")?></b></p>
@@ -65,7 +74,12 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 </form>
 
 <p><b><?=_("Security Issues")?></b></p>
-<p><?=_("Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on <a href='https://bugs.cacert.org/'>bugs.cacert.org</a> and mark it as private.")?></p>
+<p><? sprintf(_("Please use any of the following ways to report security ".
+	"issues: You can use the above contact form for sensitive information. ".
+	"You can email us to %s. You can file a bugreport on %s and mark it as ".
+	"private."),
+	"<a href='mailto:support@cacert.org'>support@cacert.org</a>",
+	"<a href='https://bugs.cacert.org/'>bugs.cacert.org</a>")?></p>
 
 <p><b><?=_("Snail Mail")?></b></p>
 <p><?=_("Alternatively you can get in contact with us via the following methods:")?></p>
@@ -84,3 +98,4 @@ Australia</p>
 	document.form2.secrethash2.value = pagehash;
 -->
 </script>
+*/
