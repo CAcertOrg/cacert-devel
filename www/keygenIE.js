@@ -43,7 +43,7 @@
 	var showError = function (message, exception) {
 		window.alert(message +
 				"\n\nError: " + exception.message +
-				" (0x" + (-exception.number).toString(16) + " / " +
+				" (0x" + (1 << 32 + exception.number).toString(16) + " / " +
 				exception.number + ")");
 	}
 	
