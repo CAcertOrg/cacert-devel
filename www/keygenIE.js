@@ -39,6 +39,16 @@
 	}
 	
 	
+	/// Show error message to user from exception
+	var showError = function (message, exception) {
+		window.alert(message +
+				"\n\nError: " + exception.message +
+				" (" + exception.number.toString(16) + " / " +
+				exception.number + ")");
+	}
+	
+	
+	
 	// Get important elements from the DOM
 	var form = document.getElementById("CertReqForm");
 	var securityLevel = document.getElementById("SecurityLevel");
@@ -253,7 +263,7 @@
 					csr.value = enroll.CreateRequest(0x1); //XCN_CRYPT_STRING_BASE64
 					form.submit();
 				} catch (e) {
-					window.alert(createRequestErrorChooseAlgorithm.innerHTML + "\n\nError: " + e.message);
+					showError(createRequestErrorChooseAlgorithm.innerHTML, e);
 				}
 				
 				generatingKeyNotice.style.display = "none";
@@ -555,7 +565,7 @@
 					csr.value = cenroll.createPKCS10("", "1.3.6.1.5.5.7.3.2");
 					form.submit();
 				} catch (e) {
-					window.alert(createRequestError.innerHTML + "\n\nError: " + e.message + " (" + e.number + ")");
+					showError(createRequestError.innerHTML, e);
 				}
 				
 				generatingKeyNotice.style.display = "none";
