@@ -480,6 +480,10 @@
 			keySizeMax.innerHTML = getMaxSigKeyLength();
 			keySizeStep.innerHTML = getStepSigKeyLength();
 			
+			if (getMinSigKeyLength() === getMaxSigKeyLength()) {
+				keySize.value = getMaxSigKeyLength();
+			}
+			
 			return true;
 		}
 		
