@@ -503,6 +503,7 @@ function buildSubject() {
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".$_SESSION['_config']['codesign']."',
+						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
