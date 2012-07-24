@@ -75,7 +75,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 				// sizes. E.g. if the step is 512 and the minimum is 1024 and
 				// the maximum is 2048, then only 1024, 1536 and 2048 bits may
 				// be specified as key size.
-				_('Step')?>: <span id="keySizeStep"></span></p>
+				echo _('Step')?>: <span id="keySizeStep"></span></p>
 			<p style="color:red"><?php
 				printf(_('Please note that RSA key sizes smaller than %d bit '.
 						'will not be accepted by CAcert.'),

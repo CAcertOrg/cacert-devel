@@ -43,7 +43,7 @@
 	var showError = function (message, exception) {
 		window.alert(message +
 				"\n\nError: " + exception.message +
-				" (" + exception.number.toString(16) + " / " +
+				" (0x" + (-exception.number).toString(16) + " / " +
 				exception.number + ")");
 	}
 	
@@ -452,7 +452,15 @@
 		/// Get the selected key size
 		var getKeySize = function () {
 			var bits = parseInt(keySize.value, 10);
-			//TODO: check if the bits are sane
+			if ( bits < getMinSigKeyLength() || bits > getMaxSigKeyLength() ||
+					(getStepSigKeyLength() &&
+						(bits - getMinSigKeyLength()) %
+							getStepSigKeyLength() !== 0)
+				)
+			{
+				return false;
+			}
+			
 			return bits;
 		}
 		
