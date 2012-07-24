@@ -65,6 +65,7 @@
 	var noActiveX = document.getElementById("noActiveX");
 	var generatingKeyNotice = document.getElementById("generatingKeyNotice");
 	var createRequestErrorChooseAlgorithm = document.getElementById("createRequestErrorChooseAlgorithm");
+	var createRequestErrorConfirmDialogue = document.getElementById("createRequestErrorConfirmDialogue");
 	var createRequestError = document.getElementById("createRequestError");
 	var invalidKeySizeError = document.getElementById("invalidKeySizeError");
 	var unsupportedPlatformError = document.getElementById("unsupportedPlatformError");
@@ -342,7 +343,6 @@
 			}
 			
 			form.style.display = "";
-			//algorithmParagraph.style.display = "none";
 			algorithm.disabled = true;
 			noActiveX.style.display = "none";
 		} catch (e) {
@@ -472,13 +472,15 @@
 			if (getStepSigKeyLength()) {
 				keySize.setAttribute("step", getStepSigKeyLength());
 			}
-			//keySize.setAttribute("value", alg.DefaultLength);
-			//keySize.value = ""+alg.DefaultLength;
 			
 			// ugly, but buggy otherwise if done with text nodes
 			keySizeMin.innerHTML = getMinSigKeyLength();
 			keySizeMax.innerHTML = getMaxSigKeyLength();
 			keySizeStep.innerHTML = getStepSigKeyLength();
+			
+			if (getMinSigKeyLength() === getMaxSigKeyLength()) {
+				keySize.value = getMaxSigKeyLength();
+			}
 			
 			return true;
 		}
@@ -530,7 +532,6 @@
 			}
 			
 			return getAlgorithmList();
-			//return getKeySizeLimits();
 		}
 		
 		
@@ -573,7 +574,11 @@
 					csr.value = cenroll.createPKCS10("", "1.3.6.1.5.5.7.3.2");
 					form.submit();
 				} catch (e) {
-					showError(createRequestError.innerHTML, e);
+					if (e.number === -2147023673) {
+						showError(createRequestErrorConfirmDialogue.innerHTML, e);
+					} else {
+						showError(createRequestError.innerHTML, e);
+					}
 				}
 				
 				generatingKeyNotice.style.display = "none";
@@ -600,7 +605,6 @@
 		
 		securityLevel.onchange = refreshSecurityLevel;
 		provider.onchange = getAlgorithmList;
-		//provider.onchange = getKeySizeLimits;
 		algorithm.onchange = getKeySizeLimits;
 		genReq.onclick = createCSR;
 		

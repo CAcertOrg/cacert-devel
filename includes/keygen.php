@@ -96,6 +96,10 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 		<?=_('Could not generate certificate request. Probably you need to '.
 				'choose a different algorithm.')?>
 	</p>
+	<p id="createRequestErrorConfirmDialogue" style="display:none">
+		<?=_('Could not generate certificate request. Please confirm the '.
+				'dialogue if you are asked if you want to generate the key.')?>
+	</p>
 	<p id="createRequestError" style="display:none">
 		<?=_('Could not generate certificate request.')?>
 	</p>
