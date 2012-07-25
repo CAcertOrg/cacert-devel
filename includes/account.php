@@ -2145,9 +2145,9 @@
 
 	if($oldid == 29 && $process != "")
 	{
-		$domain = mysql_real_escape_string(stripslashes(trim($domainname)));
+		$domain = mysql_real_escape_string(stripslashes(trim($_REQUEST['domainname'])));
 
-		$res1 = mysql_query("select * from `orgdomains` where `domain` like '$domain' and `id`!='".intval($_SESSION['_config']['domid'])."'");
+		$res1 = mysql_query("select * from `orgdomains` where `domain` like '$domain' and `id`!='".intval($domid)."'");
 		$res2 = mysql_query("select * from `domains` where `domain` like '$domain' and `deleted`=0");
 		if(mysql_num_rows($res1) > 0 || mysql_num_rows($res2) > 0)
 		{
@@ -2157,12 +2157,12 @@
 		}
 	}
 
-	if(($oldid == 29 || $oldid == 30) && $process != _("Cancel"))
+	if(($oldid == 29 || $oldid == 30) && $process != "")      // _("Cancel") is handled in front of account.php
 	{
 		$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where 
 				`orgdomlink`.`orgdomid`=`orgdomains`.`id` and
 				`orgdomaincerts`.`id`=`orgdomlink`.`orgcertid` and
-				`orgdomains`.`id`='".intval($_SESSION['_config']['domid'])."'";
+				`orgdomains`.`id`='".intval($domid)."'";
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 			mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['id']."'");
@@ -2170,7 +2170,7 @@
 		$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where 
 				`orgemaillink`.`domid`=`orgdomains`.`id` and
 				`orgemailcerts`.`id`=`orgemaillink`.`emailcertsid` and
-				`orgdomains`.`id`='".intval($_SESSION['_config']['domid'])."'";
+				`orgdomains`.`id`='".intval($domid)."'";
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 			mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
@@ -2178,23 +2178,23 @@
 
 	if($oldid == 29 && $process != "")
 	{
-		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($_SESSION['_config']['domid'])."'"));
-		mysql_query("update `orgdomains` set `domain`='$domain' where `id`='".intval($_SESSION['_config']['domid'])."'");
+		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($domid)."'"));
+		mysql_query("update `orgdomains` set `domain`='$domain' where `id`='".intval($domid)."'");
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully updated in the database."), sanitizeHTML($domain));
-		echo "<br><br><a href='account.php?id=26&orgid=".intval($_SESSION['_config']['orgid'])."'>"._("Click here")."</a> "._("to continue.");
+		echo "<br><br><a href='account.php?id=26&orgid=".intval($orgid)."'>"._("Click here")."</a> "._("to continue.");
 		showfooter();
 		exit;
 	}
 
 	if($oldid == 30 && $process != "")
 	{
-		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($_SESSION['_config']['domid'])."'"));
+		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($domid)."'"));
 		$domain = $row['domain'];
-		mysql_query("delete from `orgdomains` where `id`='".intval($_SESSION['_config']['domid'])."'");
+		mysql_query("delete from `orgdomains` where `id`='".intval($domid)."'");
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully deleted from the database."), sanitizeHTML($domain));
-		echo "<br><br><a href='account.php?id=26&orgid=".intval($_SESSION['_config']['orgid'])."'>"._("Click here")."</a> "._("to continue.");
+		echo "<br><br><a href='account.php?id=26&orgid=".intval($orgid)."'>"._("Click here")."</a> "._("to continue.");
 		showfooter();
 		exit;
 	}
@@ -2980,6 +2980,4 @@
 		$_SESSION['_config']['orgid'] = intval($orgid);
 	if(intval($memid) > 0)
 		$_SESSION['_config']['memid'] = intval($memid);
-	if(intval($domid) > 0)
-		$_SESSION['_config']['domid'] = intval($domid);
 ?>
