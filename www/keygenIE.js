@@ -61,8 +61,8 @@ var CAcert_keygen_IE = function () {
 	var showError = function (message, exception) {
 		window.alert(message +
 				"\n\nError: " + exception.message +
-				" (0x" + (1 << 32 + exception.number).toString(16) + " / " +
-				exception.number + ")");
+				" (0x" + (0xFFFFFFFF + exception.number +1).toString(16) +
+				" / " + exception.number + ")");
 	}
 	
 	
