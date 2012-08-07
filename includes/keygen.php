@@ -100,6 +100,10 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 		<?=_('Could not generate certificate request. Please confirm the '.
 				'dialogue if you are asked if you want to generate the key.')?>
 	</p>
+	<p id="createRequestErrorConnectDevice" style="display:none">
+		<?=_('Could not generate certificate request. Please make sure the '.
+				'cryptography device (e.g. the smartcard) is connected.')?>
+	</p>
 	<p id="createRequestError" style="display:none">
 		<?=_('Could not generate certificate request.')?>
 	</p>

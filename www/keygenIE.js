@@ -84,6 +84,7 @@ var CAcert_keygen_IE = function () {
 	var generatingKeyNotice = document.getElementById("generatingKeyNotice");
 	var createRequestErrorChooseAlgorithm = document.getElementById("createRequestErrorChooseAlgorithm");
 	var createRequestErrorConfirmDialogue = document.getElementById("createRequestErrorConfirmDialogue");
+	var createRequestErrorConnectDevice = document.getElementById("createRequestErrorConnectDevice"));
 	var createRequestError = document.getElementById("createRequestError");
 	var invalidKeySizeError = document.getElementById("invalidKeySizeError");
 	var unsupportedPlatformError = document.getElementById("unsupportedPlatformError");
@@ -593,7 +594,11 @@ var CAcert_keygen_IE = function () {
 					form.submit();
 				} catch (e) {
 					if (e.number === -2147023673) {
+						// 0x800704c7 => dialogue declined
 						showError(createRequestErrorConfirmDialogue.innerHTML, e);
+					} else if (e.number === -2146435043) {
+						// 0x8010001d => crypto-device not connected
+						showError(createRequestErrorConnectDevice.innerHTML, e);
 					} else {
 						showError(createRequestError.innerHTML, e);
 					}
