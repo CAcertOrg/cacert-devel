@@ -69,7 +69,7 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 	foreach($days as $day => $warning)
 	{
 		$query = 
-			"SELECT `domaincerts`.`id`,
+			"SELECT DISTINCT `domaincerts`.`id`,
 					`users`.`fname`, `users`.`lname`, `users`.`email`,
 					`domains`.`memid`,
 					`domaincerts`.`subject`, `domaincerts`.`crt_name`,

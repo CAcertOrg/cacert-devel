@@ -622,7 +622,7 @@
 					echo $row['domain']."<br>\n";
 					
 					$dres = mysql_query(
-						"select `domaincerts`.`id`
+						"select distinct `domaincerts`.`id`
 							from `domaincerts`, `domlink`
 							where `domaincerts`.`domid` = '$id'
 							or (
