@@ -69,7 +69,7 @@ a:hover {
 <a href="PolicyOnPolicy.html"><img src="cacert-draft.png" alt="CAcert Policy Status" height="31" width="88" style="border-style: none;" /></a><br />
 Creation date: 20060726<br />
 Status: DRAFT p20091108<br />
-<!-- $Id: CertificationPracticeStatement.php,v 1.2 2011-07-27 10:41:01 wytze Exp $ -->
+<!-- $Id: CertificationPracticeStatement.php,v 1.3 2012-07-27 16:00:29 wytze Exp $ -->
 
 
 <font size="-1">
