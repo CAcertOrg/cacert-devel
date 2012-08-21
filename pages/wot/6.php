@@ -17,10 +17,6 @@
 */ ?>
 <?
 
-function makecap()
-{
-}
-
         if(!array_key_exists('notarise',$_SESSION['_config']))
 	{
           echo "Error: No user data found.";
@@ -44,8 +40,6 @@ function makecap()
 	$name = $fname." ".$mname." ".$lname." ".$suffix;
 	$_SESSION['_config']['wothash'] = md5($name."-".$dob);
 
-	$cap=makecap($fname,$mname,$lname,$suffix,$dob,$row['email'],$_SESSION['profile']['fname'],$_SESSION['profile']['mname'],$_SESSION['profile']['lname'],$_SESSION['profile']['suffix']);
-
 	include_once($_SESSION['_config']['filepath']."/includes/wot.inc.php");
 
 	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname));
@@ -61,6 +55,5 @@ function makecap()
 	AssureInboxLine("points",_("Points"),"","<br />(Max. ".maxpoints().")");
 	AssureCCABoxLine("CCAAgreed",sprintf(_("Check this box only if %s agreed to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"),$fname));
 	AssureCCABoxLine("CCAAgree",_("Check this box only if YOU agree to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"));
-	AssureTextLine(_("WoT Form"),"<a href=\"".$cap."\" target=\"_blank\">A4 - "._("WoT Form")."</a> <a href=\"".$cap."&amp;format=letter\" target=\"_blank\">US - "._("WoT Form")."</a>");
 	AssureFoot($id,_("I confirm this Assurance"));
 ?>
