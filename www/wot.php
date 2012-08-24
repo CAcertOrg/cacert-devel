@@ -333,12 +333,16 @@ $iecho= "c";
 
 		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)
 		{
-//			$body .= _("You now have over 100 points and can start assuring others.")."\n\n";
-			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the")." ";
-			$body .= _("Assurer Challenge")." ( https://cats.cacert.org )\n\n";
-			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n\n";
+			$body .= _("You have at least 100 Assurance Points. If you want ".
+					"to become an assurer try the Assurer Challenge").
+					" ( https://cats.cacert.org )\n\n";
+			$body .= _("To make it easier for others in your area to find ".
+					"you, it's helpful to list yourself as an assurer (this ".
+					"is voluntary), as well as a physical location where you ".
+					"live or work the most. You can flag your account to be ".
+					"listed, and add a comment to the display by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=8\n\n";
-			$body .= _("You can list your location by going to:")."\n\n";
+			$body .= _("You can list your location by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
 
