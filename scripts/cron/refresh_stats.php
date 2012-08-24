@@ -149,7 +149,9 @@ function getDataFromLive() {
 		));
 	
 	$stats['points_issued'] = number_format(tc(
-		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`"));
+		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`
+			where `deleted` = 0
+			and `method` = 'Face to Face Meeting'"));
 
 	$totalusers=0;
 	$totassurers=0;
