@@ -149,7 +149,7 @@ function getDataFromLive() {
 		));
 	
 	$stats['points_issued'] = number_format(tc(
-		"select sum(`points`) as `count` from `notary`"));
+		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`"));
 
 	$totalusers=0;
 	$totassurers=0;
