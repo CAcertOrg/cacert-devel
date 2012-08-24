@@ -163,9 +163,9 @@ function buildSubject() {
 			exit;
 		}
 		$row = mysql_fetch_assoc($res);
-		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
-		$body .= _("You are receiving this email because you or someone else")."\n";
-		$body .= _("has changed the default email on your account.")."\n\n";
+		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
+		$body .= _("You are receiving this email because you or someone else ".
+				"has changed the default email on your account.")."\n\n";
 
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -1385,9 +1385,10 @@ function buildSubject() {
 						where `id`='".$_SESSION['profile']['id']."'");
 				echo '<h3>', _("Pass Phrase Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
-				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
-				$body .= _("You are receiving this email because you or someone else")."\n";
-				$body .= _("has changed the password on your account.")."\n";
+				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
+				$body .= _("You are receiving this email because you or ".
+						"someone else has changed the password on your ".
+						"account.")."\n\n";
 
 				$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -2633,9 +2634,10 @@ function buildSubject() {
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
 
-			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n";
-			$body .= _("You are receiving this email because a CAcert administrator")."\n";
-			$body .= _("has changed the password on your account.")."\n";
+			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
+			$body .= _("You are receiving this email because a CAcert ".
+					"administrator has changed the password on your ".
+					"account.")."\n\n";
 
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
