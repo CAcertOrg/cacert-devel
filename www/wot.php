@@ -442,8 +442,34 @@ $iecho= "c";
 						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{
-				sendmail($user['email'], "[CAcert.org] ".$_REQUEST['subject'], $_REQUEST['message'],
-					$_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']);
+				$my_translation = L10n::get_translation();
+				L10n::set_translation($user['language']);
+				
+				$subject = "[CAcert.org] ".sprintf(_("Message from %s"),
+						$_SESSION['profile']['fname']);
+				
+				$body  = sprintf(_("Hi %s,"), $user['fname'])."\n\n";
+				$body .= sprintf(_("%s %s has sent you a message via the ".
+						"contact an Assurer form on CAcert.org."),
+						$_SESSION['profile']['fname'],
+						$_SESSION['profile']['lname'])."\n\n";
+				$body .= sprintf(_("Subject: %s"), $_REQUEST['subject'])."\n";
+				$body .= _("Message:")."\n";
+				$body .= $_REQUEST['message']."\n\n";
+				$body .= "------------------------------------------------\n\n";
+				$body .= _("Please note, that this is NOT a message on behalf ".
+						"of CAcert but another user.")."\n\n";
+				$body .= _("Best regards")."\n";
+				$body .= _("CAcert Support Team");
+				
+				sendmail($user['email'], $subject, $body,
+						$_SESSION['profile']['email'], //from
+						"", //replyto
+						"", //toname
+						$_SESSION['profile']['fname']." ".
+							$_SESSION['profile']['lname']); //fromname
+				
+				L10n::set_translation($my_translation);
 				
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
