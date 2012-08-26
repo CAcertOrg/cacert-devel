@@ -228,7 +228,7 @@ function hideall() {
 	$extra .= "&amp;dob=".urlencode($_SESSION['profile']['dob']);
         $extra .= "&amp;email=".urlencode($_SESSION['profile']['email']);
 
-	$extra2 = "?assurer=".urlencode($name)."&amp;date=now&amp;maxpoints=".maxpoints();
+	$extra2 = "?assurer=".urlencode($name)."&amp;date=now&amp;maxpoints=".max_points();
 ?>
       <ul class="menu" id="WoTForms">
          <li><a href="/cap.php<?=$extra?>">A4 - <?=_("WoT Form")?></a></li>

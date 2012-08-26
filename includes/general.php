@@ -471,40 +471,6 @@
 		return(false);
 	}
 
-	function maxpoints($id = 0)
-	{
-		if($id <= 0)
-			$id = $_SESSION['profile']['id'];
-
-		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' group by `to`";
-		$row = mysql_fetch_assoc(mysql_query($query));
-		$points = $row['points'];
-
-		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-18));
-		$query = "select * from `users` where `id`='".$_SESSION['profile']['id']."' and `dob` < '$dob'";
-		if(mysql_num_rows(mysql_query($query)) < 1)
-		{
-			if($points >= 100)
-				return(10);
-			else
-				return(0);
-		}
-
-		if($points >= 150)
-			return(35);
-		if($points >= 140)
-			return(30);
-		if($points >= 130)
-			return(25);
-		if($points >= 120)
-			return(20);
-		if($points >= 110)
-			return(15);
-		if($points >= 100)
-			return(10);
-		return(0);
-	}
-
 	function hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
@@ -742,7 +708,7 @@
 			$Result |= 5;
 		}
 		
-		$maxpoints = output_summary_content($userID,0);
+		$maxpoints = max_points($userID,0);
 		if ($maxpoints == 0 )
 		{
 			$Result |= 3;

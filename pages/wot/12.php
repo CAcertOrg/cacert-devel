@@ -119,9 +119,7 @@ document.f.location.focus();
   </tr>
 <?	while($row = mysql_fetch_assoc($res))
 	{
-		$points = maxpoints($row['uid']);
-		if($points > 35)
-			$points = 35;
+		$points = max_points($row['uid']);
 ?>
   <tr>
     <td class="DataTD" width="100"><nobr><?=$row['name']?></nobr></td>
