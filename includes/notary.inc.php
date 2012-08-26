@@ -327,7 +327,7 @@
 		if ($revoked == true)
 		{
 ?>
-			<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
+			<td class="DataTD" <?=$tdstyle?>><?=_("Revoked")?></td>
 <?		} else {
 ?>
 			<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a><?=$emclose?></td>
@@ -385,10 +385,10 @@
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['to'])); 
+			$touser = get_user (intval($row['to'])); 
 			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
-			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			$email = show_email_link ($fromuser['email'],intval($row['to']));
+			$name = show_user_link ($touser['fname']." ".$touser['lname'],intval($row['to']));
+			$email = show_email_link ($touser['email'],intval($row['to']));
 			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
@@ -643,14 +643,15 @@ function AssureTextLine($field1,$field2)
 function AssureCCABoxLine($type,$text)
 {
 	return;
-	AssureBoxLIne($type,$text);
+	AssureBoxLine($type,$text);
 }
 
-function AssureBoxLine($type,$text)
+function AssureBoxLine($type, $text, $checked = false)
 {
 ?>
 	<tr>
-		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1"></td>
+		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1"
+			<?=$checked?'checked="checked"':''?>></td>
 		<td class="DataTD"><?=$text?></td>
 	</tr>
 <?
@@ -658,21 +659,28 @@ function AssureBoxLine($type,$text)
 
 function AssureMethodLine($text,$methods,$remark)
 {
-?>
+	if (count($methods) != 1)
+	{ ?>
 	<tr>
 		<td class="DataTD"><?=$text?></td>
 		<td class="DataTD">
-			<select name="method">
-<?
-		 	foreach($methods as $val) { ?>
-				<option value="<?=$val?>"<? if(array_key_exists('method',$_POST) && $val == $_POST['method']) echo " selected"; ?>><?=$val?></option>
-
-<? } ?>
-		  	</select>
-			</br><?=$remark?>
+			<select name="method"> <?
+			foreach($methods as $val) { ?>
+				<option value="<?=$val?>" <?
+				if(array_key_exists('method',$_POST) &&
+						$val == $_POST['method']) {
+					echo 'selected="selected"';
+				}
+				?>><?=$val?></option> <?
+			} ?>
+			</select>
+			<br/>
+			<?=$remark?>
 		</td>
-	</tr>
-<?
+	</tr> <?
+	} else { ?>
+		<input type="hidden" name="<?=$val?>" value="<?=$methods[0]?>"> <?
+	}
 }
 
 function AssureInboxLine($type,$field,$value,$description)
