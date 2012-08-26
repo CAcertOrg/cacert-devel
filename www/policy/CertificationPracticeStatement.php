@@ -69,7 +69,7 @@ a:hover {
 <a href="PolicyOnPolicy.html"><img src="cacert-draft.png" alt="CAcert Policy Status" height="31" width="88" style="border-style: none;" /></a><br />
 Creation date: 20060726<br />
 Status: DRAFT p20091108<br />
-<!-- $Id: CertificationPracticeStatement.php,v 1.2 2011-07-27 10:41:01 wytze Exp $ -->
+<!-- $Id: CertificationPracticeStatement.php,v 1.3 2012-07-27 16:00:29 wytze Exp $ -->
 
 
 <font size="-1">
@@ -3203,54 +3203,50 @@ The form of the PGP signatures depends on several factors, therefore no stipulat
 <h4><a name="p7.1.2" id="p7.1.2">7.1.2. Certificate extensions</a></h4>
 
 <p>
-Client certificates include the following extensions:.
+  Client certificates include the following extensions:
 </p>
-<ul><li>
-    basicConstraints=CA:FALSE (critical)
-  </li><li>
-    keyUsage=digitalSignature,keyEncipherment,cRLSign
-  </li><li>
-  </li><li>
-    extendedKeyUsage=emailProtection,clientAuth,serverAuth,msEFS,msSGC,nsSGC
-  </li><li>
-    authorityInfoAccess = OCSP;URI:http://ocsp.cacert.org
-  </li><li>
-    subjectAltName=(as per <a href="#p3.1.1">&sect;3.1.1.</a>).
-</li></ul>
+<ul>
+  <li>basicConstraints=CA:FALSE (critical)</li>
+  <li>keyUsage=digitalSignature,keyEncipherment,keyAgreement (critical)</li>
+  <li>extendedKeyUsage=emailProtection,clientAuth,msEFS,msSGC,nsSGC</li>
+  <li>authorityInfoAccess = OCSP;URI:http://ocsp.cacert.org</li>
+  <li>crlDistributionPoints=URI:&lt;crlUri&gt; where &lt;crlUri&gt; is replaced 
+    with the URI where the certificate revocation list relating to the 
+    certificate is found</li>
+  <li>subjectAltName=(as per <a href="#p3.1.1">&sect;3.1.1.</a>).</li>
+</ul>
   <ul class="q">
     <li> what about Client Certificates Adobe Signing extensions ?</li>
     <li> SubjectAltName should become critical if DN is removed http://tools.ietf.org/html/rfc5280#section-4.2.1.6</li>
   </ul>
 
+<p>
+  Server certificates include the following extensions:
+</p>
+<ul>
+  <li>basicConstraints=CA:FALSE (critical)</li>
+  <li>keyUsage=digitalSignature,keyEncipherment,keyAgreement (critical)</li>
+  <li>extendedKeyUsage=clientAuth,serverAuth,nsSGC,msSGC</li>
+  <li>authorityInfoAccess = OCSP;URI:http://ocsp.cacert.org</li>
+  <li>crlDistributionPoints=URI:&lt;crlUri&gt; where &lt;crlUri&gt; is replaced 
+    with the URI where the certificate revocation list relating to the 
+    certificate is found</li>
+  <li>subjectAltName=(as per <a href="#p3.1.1">&sect;3.1.1.</a>).</li>
+</ul>
 
 <p>
-Server certificates include the following extensions:
+  Code-Signing certificates include the following extensions:
 </p>
-<ul><li>
-    basicConstraints=CA:FALSE (critical)
-  </li><li>
-    keyUsage=digitalSignature,keyEncipherment
-  </li><li>
-    extendedKeyUsage=clientAuth,serverAuth,nsSGC,msSGC
-  </li><li>
-    authorityInfoAccess = OCSP;URI:http://ocsp.cacert.org
-  </li><li>
-    subjectAltName=(as per <a href="#p3.1.1">&sect;3.1.1.</a>).
-</li></ul>
-
-<p>
-Code-Signing certificates include the following extensions:
-</p>
-
-<ul><li>
-    basicConstraints=CA:FALSE (critical)
-  </li><li>
-    keyUsage=digitalSignature,keyEncipherment
-  </li><li>
-    extendedKeyUsage=emailProtection,clientAuth,codeSigning,msCodeInd,msCodeCom,msEFS,msSGC,nsSGC
-  </li><li>
-    authorityInfoAccess = OCSP;URI:http://ocsp.cacert.org
-</li></ul>
+<ul>
+  <li>basicConstraints=CA:FALSE (critical)</li>
+  <li>keyUsage=digitalSignature,keyEncipherment,keyAgreement (critical)</li>
+  <li>extendedKeyUsage=emailProtection,clientAuth,codeSigning,msCodeInd,msCodeCom,msEFS,msSGC,nsSGC</li>
+  <li>authorityInfoAccess = OCSP;URI:http://ocsp.cacert.org</li>
+  <li>crlDistributionPoints=URI:&lt;crlUri&gt; where &lt;crlUri&gt; is replaced 
+    with the URI where the certificate revocation list relating to the 
+    certificate is found</li>
+  <li>subjectAltName=(as per <a href="#p3.1.1">&sect;3.1.1.</a>).</li>
+</ul>
   <ul class="q">
     <li> what about subjectAltName for Code-signing</li>
   </ul>
