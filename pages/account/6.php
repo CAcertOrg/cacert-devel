@@ -14,46 +14,71 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
-	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
+*/
 
-	$query = "select * from `emailcerts` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
-	{
-		showheader(_("My CAcert.org Account!"));
-		echo _("No such certificate attached to your account.");
-		showfooter();
-		exit;
-	}
-	$row = mysql_fetch_assoc($res);
+// Get certificate information
+$certid = 0;
+if(array_key_exists('cert',$_REQUEST)) {
+	$certid = intval($_REQUEST['cert']);
+}
 
-	$crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname`;
+$query = "select * from `emailcerts`
+			where `id`='$certid'
+			and `memid`='".intval($_SESSION['profile']['id'])."'";
+$res = mysql_query($query);
+if(mysql_num_rows($res) <= 0) {
+	showheader(_("My CAcert.org Account!"));
+	echo _("No such certificate attached to your account.");
+	showfooter();
+	exit;
+}
+$row = mysql_fetch_assoc($res);
 
-	if($row['keytype'] == "NS")
-	{
-		if(array_key_exists('install',$_REQUEST) && $_REQUEST['install'] == 1)
-		{
-			header("Content-Type: application/x-x509-user-cert");
-			header("Content-Length: ".strlen($cert));
-			$fname=sanitizeFilename($row['CN']);
-			if($fname=="") $fname="certificate";
-			header('Content-Disposition: inline; filename="'.$fname.'.crt"');
-			echo $cert;
-			exit;
-		} else {
-			showheader(_("My CAcert.org Account!"));
-			echo "<h3>"._("Installing your certificate")."</h3>\n";
-			echo "<p>"._("You are about to install a certificate, if you are using mozilla/netscape based browsers you will not be informed that the certificate was installed successfully, you can go into the options dialog box, security and manage certificates to view if it was installed correctly however.")."</p>\n";
-			echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;install=1'>"._("Click here")."</a> "._("to install your certificate.")."</p>\n";
-			showfooter();
-			exit;
-		}
+
+if (array_key_exists('format', $_REQUEST)) {
+	// Which output format?
+	if ($_REQUEST['format'] === 'der') {
+		$outform = '-outform DER';
+		$content_type = 'application/pkix-cert';
+		$extension = 'cer';
 	} else {
-		showheader(_("My CAcert.org Account!"));
+		$outform = '-outform PEM';
+		$content_type = 'application/x-x509-user-cert';
+		$extension = 'crt';
+	}
+	
+	$crtname=escapeshellarg($row['crt_name']);
+	$cert = `/usr/bin/openssl x509 -in $crtname $outform`;
+	
+	header("Content-Type: $content_type");
+	header("Content-Length: ".strlen($cert));
+	
+	$fname = sanitizeFilename($row['CN']);
+	if ($fname=="") $fname="certificate";
+	header("Content-Disposition: inline; filename=\"${fname}.${extension}\"");
+	
+	echo $cert;
+	exit;
+	
+} else {
+	
+	showheader(_("My CAcert.org Account!"));
+	echo "<h3>"._("Install your certificate")."</h3>\n";
+	
+	// TODO: highlight the cert type suitable for the browser
+	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=pem'>".
+		_("Certificate in PEM format")."</a> "._("(suitable for Firefox)")."</p>\n";
+	
+	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=der'>".
+		_("Certificate in DER format")."</a> "._("(suitable for Chrome)")."</p>\n";
+	
+	showfooter();
+	exit;
+}
+
+
 ?>
+<!-- to be converted to JavaScript -->
 <h3><?=_("Installing your certificate")?></h3>
 
 <p><?=_("Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above.")?>
@@ -124,13 +149,4 @@
      End If
    End Sub
 </SCRIPT>
-
-<p><?=_("Your certificate:")?></p>
-<pre><?=$cert?></pre>
-<?
- 
-		showfooter();
-		exit;
-	}
-?>
 
