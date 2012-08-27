@@ -15,6 +15,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
+	include_once($_SESSION['_config']['filepath']."notary.inc.php");
+	
 	session_name("cacert");
 	session_start();
 
@@ -734,16 +736,15 @@
 	function get_assurer_status($userID)
 	{
 		$Result = 0;
-		$query = mysql_query('SELECT * FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` '.
-			'  WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = \''.(int)intval($userID).'\'');
-		if(mysql_num_rows($query) < 1)
+		$cats_test_passed = get_cats_state ($userID);
+		if ($cats_test_passed == 0)
 		{
 			$Result |= 5;
 		}
 		
-		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now()');
-		$row = mysql_fetch_assoc($query);
-		if ($row['points'] < 100) {
+		$maxpoints = output_summary_content($userID,0);
+		if ($maxpoints == 0 )
+		{
 			$Result |= 3;
 		}
 		
