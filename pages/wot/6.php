@@ -46,7 +46,7 @@
 	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s has appeared in person"), $fname, $mname, $lname),array_key_exists('certify',$_POST) && $_POST['certify'] == 1);
 	AssureInboxLine("location",_("Location"),array_key_exists('location',$_SESSION['_config'])?$_SESSION['_config']['location']:"","");
 	AssureInboxLine("date",_("Date"),array_key_exists('date',$_SESSION['_config'])?$_SESSION['_config']['date']:date("Y-m-d"),"<br/>"._("Please adjust the date if you assured the person on a different day"));
-	AssureMethodLine(_("Method"),$methods,_("Only tick the next box if the Assurance was face to face."));
+	AssureMethodLine(_("Method"),$methods,"");
 	AssureBoxLine("assertion",_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."),array_key_exists('assertion',$_POST) && $_POST['assertion'] == 1);
 	AssureBoxLine("rules",_("I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."),array_key_exists('rules',$_POST) && $_POST['rules'] == 1);
 	AssureTextLine(_("Policy"),"<a href=\"/policy/AssurancePolicy.php\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
