@@ -663,7 +663,7 @@ function AssureMethodLine($text,$methods,$remark)
 				?>><?=$val?></option> <?
 			} ?>
 			</select>
-			</br>
+			<br/>
 			<?=$remark?>
 		</td>
 	</tr> <?
