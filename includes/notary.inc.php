@@ -254,7 +254,18 @@
 	{
 ?>
     <tr>
-    	<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
+<?
+	if ($support == "1")
+	{
+?>
+    	<td class="DataTD" colspan="5">
+<?
+	} else {
+?>
+    	<td class="DataTD" colspan="3">
+<?	}
+?>
+		<strong><?=$points_txt?>:</strong></td>
     	<td class="DataTD"><?=$points?></td>
     	<td class="DataTD">&nbsp;</td>
     	<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
