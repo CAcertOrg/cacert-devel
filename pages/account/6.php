@@ -39,38 +39,62 @@ if (array_key_exists('format', $_REQUEST)) {
 	// Which output format?
 	if ($_REQUEST['format'] === 'der') {
 		$outform = '-outform DER';
-		$content_type = 'application/pkix-cert';
 		$extension = 'cer';
 	} else {
 		$outform = '-outform PEM';
-		$content_type = 'application/x-x509-user-cert';
 		$extension = 'crt';
 	}
 	
 	$crtname=escapeshellarg($row['crt_name']);
 	$cert = `/usr/bin/openssl x509 -in $crtname $outform`;
 	
-	header("Content-Type: $content_type");
+	header("Content-Type: application/pkix-cert");
 	header("Content-Length: ".strlen($cert));
 	
 	$fname = sanitizeFilename($row['CN']);
 	if ($fname=="") $fname="certificate";
-	header("Content-Disposition: inline; filename=\"${fname}.${extension}\"");
+	header("Content-Disposition: attachment; filename=\"${fname}.${extension}\"");
 	
 	echo $cert;
 	exit;
 	
+} elseif (array_key_exists('install', $_REQUEST)) {
+	if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
+			strstr($_SERVER['HTTP_USER_AGENT'], "MSIE")) {
+		
+		// Handle IE
+		
+		//TODO
+		
+	} else {
+		// All other browsers
+		$crtname=escapeshellarg($row['crt_name']);
+		$cert = `/usr/bin/openssl x509 -in $crtname -outform DER`;
+		
+		header("Content-Type: application/x-x509-user-cert");
+		header("Content-Length: ".strlen($cert));
+		
+		$fname = sanitizeFilename($row['CN']);
+		if ($fname=="") $fname="certificate";
+		header("Content-Disposition: inline; filename=\"${fname}.cer\"");
+		
+		echo $cert;
+		exit;
+	}
 } else {
 	
 	showheader(_("My CAcert.org Account!"));
 	echo "<h3>"._("Install your certificate")."</h3>\n";
 	
-	// TODO: highlight the cert type suitable for the browser
+	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;install'>".
+		_("Install the certificate into your browser").
+		"</a></p>\n";
+	
 	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=pem'>".
-		_("Certificate in PEM format")."</a> "._("(suitable for Firefox)")."</p>\n";
+		_("Download the certificate in PEM format")."</a></p>\n";
 	
 	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=der'>".
-		_("Certificate in DER format")."</a> "._("(suitable for Chrome)")."</p>\n";
+		_("Download the certificate in DER format")."</a></p>\n";
 	
 	showfooter();
 	exit;
