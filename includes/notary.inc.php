@@ -452,16 +452,6 @@
 		return $points;
 	}
 
-	function received_points($userid)
-	{
-		$res = get_received_assurances_summary($userid);
-		while($row = mysql_fetch_assoc($res))
-		{
-			$awarded = calc_points($row);
-		}
-		received_points = $awarded;
-	}
-
 
 	function max_points($userid)
 	{

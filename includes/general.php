@@ -708,7 +708,7 @@
 			$Result |= 5;
 		}
 		
-		$maxpoints = max_points($userID,0);
+		$maxpoints = max_points($userID);
 		if ($maxpoints == 0 )
 		{
 			$Result |= 3;
