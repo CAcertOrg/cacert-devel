@@ -1,5 +1,0 @@
-php_value auto_prepend_file /www/includes/general.php
-php_value output_buffering 1
-errordocument 404 /error404.php
-errordocument 403 /error403.php
-errordocument 401 /error401.php

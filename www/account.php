@@ -53,17 +53,6 @@
                 echo _("Your message has been sent to the general support list.");
                 showfooter();
                 exit;
-	} else if($id == 51 && $_GET['img'] == "show") {
-		$query = "select * from `tverify` where `id`='".intval($_GET['photoid'])."' and `modified`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res))
-		{
-			$row = mysql_fetch_assoc($res);
-			readfile($row['photoid']);
-		} else {
-			die("No such file.");
-		}
-		exit;
 	} else if ($id == 37) {
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
 		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';

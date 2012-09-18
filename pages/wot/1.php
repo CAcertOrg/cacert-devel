@@ -109,7 +109,7 @@
 <? while($row = mysql_fetch_assoc($list)) { ?>
   <tr>
     <td class="DataTD" width="100"><nobr><?=$row['fname']?> <?=substr($row['lname'], 0, 1)?></nobr></td>
-    <td class="DataTD"><?=maxpoints($row['id'])?></td>
+    <td class="DataTD"><?=max_points($row['id'])?></td>
     <td class="DataTD"><?=$row['contactinfo']?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['id'])?>"><?=_("Email Me")?></a></td>
     <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
