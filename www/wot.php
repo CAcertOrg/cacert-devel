@@ -240,7 +240,7 @@ $iecho= "c";
 
 	if($oldid == 6)
 	{
-		$max =  max_points();
+		$max =  max_points($_SESSION['profile']['id']);
 
 		$awarded = $newpoints = intval($_POST['points']);
 		if($newpoints > $max)
