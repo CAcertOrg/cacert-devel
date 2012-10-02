@@ -84,7 +84,9 @@
 			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
-			$_SESSION['profile']['points'] = $row['total'];
+			$_SESSION['profile']['xpoints'] = $row['total'];
+			$_SESSION['profile']['points'] = received_points($_SESSION['profile']['id']);
+echo "points3 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['points'].")";
 		} else {
 			$_SESSION['profile'] = "";
 			unset($_SESSION['profile']);
