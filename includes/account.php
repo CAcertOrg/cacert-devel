@@ -1259,7 +1259,9 @@ function buildSubject() {
 		$ddquery = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
 		$ddres = mysql_query($ddquery);
 		$ddrow = mysql_fetch_assoc($ddres);
-		$_SESSION['profile']['points'] = $ddrow['total'];
+		$_SESSION['profile']['xpoints'] = $ddrow['total'];
+		$_SESSION['profile']['points'] = received_points($_SESSION['profile']['id']);
+echo "points1 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['points'].")";
 		
 		if($_SESSION['profile']['points'] == 0)
 		{
@@ -1329,7 +1331,9 @@ function buildSubject() {
 		$ddquery = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
 		$ddres = mysql_query($ddquery);
 		$ddrow = mysql_fetch_assoc($ddres);
-		$_SESSION['profile']['points'] = $ddrow['total'];
+		$_SESSION['profile']['xpoints'] = $ddrow['total'];
+		$_SESSION['profile']['points'] = received_points($_SESSION['profile']['id']);
+echo "points2 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['points'].")";
 
 
 		$id = 13;
