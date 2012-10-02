@@ -462,9 +462,11 @@ $iecho= "c";
 				$body .= $_REQUEST['message']."\n\n";
 				$body .= "------------------------------------------------\n\n";
 				$body .= _("Please note, that this is NOT a message on behalf ".
-						"of CAcert but another user.")."\n\n";
+						"of CAcert but another CAcert community member. If ".
+						"you suspect that the contact form might have been ".
+						"abused, please write to support@cacert.org")."\n\n";
 				$body .= _("Best regards")."\n";
-				$body .= _("CAcert Support Team");
+				$body .= _("Your CAcert Community");
 				
 				sendmail($user['email'], $subject, $body,
 						$_SESSION['profile']['email'], //from
