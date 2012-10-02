@@ -24,7 +24,7 @@
 	foreach($days as $day => $warning)
 	{
 		$query = "SELECT `emailcerts`.`id`,`users`.`fname`,`users`.`lname`,`users`.`email`,`emailcerts`.`memid`,
-				`emailcerts`.`subject`, `emailcerts`.`crt_name`,`emailcerts`.`CN`,
+				`emailcerts`.`subject`, `emailcerts`.`crt_name`,`emailcerts`.`CN`, `emailcerts`.`serial`,
 				(UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP(NOW())) / 86400 as `daysleft`
 				FROM `users`,`emailcerts`
 				WHERE UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP(NOW()) > -7 * 86400 and
@@ -56,7 +56,11 @@
 			$body = sprintf(_("Hi %s"), $row['fname']).",\n\n";
 			$body .= _("You are receiving this email as you are the listed contact for:")."\n\n";
 			$body .= $row['subject']."\n\n";
-			$body .= sprintf(_("Your certificate is set to expire in approximately %s days time, you can renew this by going to the following URL:"), $row['daysleft'])."\n\n";
+			$body .= sprintf(_("Your certificate with the serial number %s is ".
+						"set to expire in approximately %s days time. You can ".
+						"renew it by going to the following URL:"),
+					$row['serial'],
+					$row['daysleft'])."\n\n";
 			$body .= "https://www.cacert.org/account.php?id=5\n\n";
 			$body .= _("Best Regards")."\n"._("CAcert Support");
 			sendmail($row['email'], "[CAcert.org] "._("Your Certificate is about to expire"), $body, "support@cacert.org", "", "", "CAcert Support");
@@ -74,6 +78,7 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 					`domains`.`memid`,
 					`domaincerts`.`subject`, `domaincerts`.`crt_name`,
 					`domaincerts`.`CN`,
+					`domaincerts`.`serial`,
 					(UNIX_TIMESTAMP(`domaincerts`.`expire`) - 
 						UNIX_TIMESTAMP(NOW())) / 86400 AS `daysleft`
 					
@@ -103,7 +108,11 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 			$body = sprintf(_("Hi %s"), $row['fname']).",\n\n";
 			$body .= _("You are receiving this email as you are the listed contact for:")."\n\n";
 			$body .= $row['subject']."\n\n";
-			$body .= sprintf(_("Your certificate is set to expire in approximately %s days time, you can renew this by going to the following URL:"), $row['daysleft'])."\n\n";
+			$body .= sprintf(_("Your certificate with the serial number %s is ".
+						"set to expire in approximately %s days time. You can ".
+						"renew it by going to the following URL:"),
+					$row['serial'],
+					$row['daysleft'])."\n\n";
 			$body .= "https://www.cacert.org/account.php?id=12\n\n";
 			$body .= _("Best Regards")."\n"._("CAcert Support");
 			sendmail($row['email'], "[CAcert.org] "._("Your Certificate is about to expire"), $body, "support@cacert.org", "", "", "CAcert Support");
