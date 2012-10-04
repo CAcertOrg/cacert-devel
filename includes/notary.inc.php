@@ -454,13 +454,20 @@
 
 	function received_points($userid)
 	{
-		$awarded = 0;
+		$max_points = 100;
+		$sum_points = 0;
+		$points = 0;
 		$res = get_received_assurances_summary($userid);
 		while($row = mysql_fetch_assoc($res))
 		{
-			$awarded += calc_points($row);
+			$points = calc_points($row);
+			if ($points > $max_points)			// limit to 100 points, above is experience (needs to be fixed)
+			{
+				$points = $max_points;
+			}
+			$sum_points += $points*intval($row['number']);
 		}
-		return $awarded;
+		return $sum_points;
 	}
 
 	function max_points($userid)
