@@ -35,27 +35,31 @@ function appendSubjectAltName($subject, $name) {
 	return $subject;
 }
 
-function buildSubject() {
-	$subject = "";
-	$count = 0;
-
-	if(is_array($_SESSION['_config']['rows']))
-		foreach($_SESSION['_config']['rows'] as $row)
-		{
-			$count++;
-			if($count <= 1)
-				$subject .= "/CN=$row";
-			$subject = appendSubjectAltName($subject, $row);
+/**
+ * Build a subject string as needed by the signer
+ *
+ * @param array(string) $domains
+ *     First domain is used as CN and repeated in subjectAltName. Duplicates
+ *     should already been removed
+ *
+ * @param bool $include_xmpp_addr
+ *     [default: true] Whether to include the XmppAddr in the subjectAltName.
+ *     This is needed if the Jabber server is jabber.example.com but a Jabber ID
+ *     on that server would be alice@example.com
+ *
+ * @return string
+ */
+function buildSubject(array $domains, $include_xmpp_addr = true) {
+	$subject = "/CN=${domains[0]}";
+	
+	foreach ($domains as $domain) {
+		$subject .= "/subjectAltName=DNS:$domain";
+		
+		if ($include_xmpp_addr) {
+			$subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$domain";
 		}
-	if(is_array($_SESSION['_config']['altrows']))
-		foreach($_SESSION['_config']['altrows'] as $row)
-		{
-			if(substr($row, 0, 4) == "DNS:")
-			{
-				$row = substr($row, 4);
-				$subject = appendSubjectAltName($subject, $row);
-			}
-		}
+	}
+	
 	return $subject;
 }
 
