@@ -28,7 +28,7 @@
 
 	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $extra="")
 	{
-		$lines = explode('\n', $message);
+		$lines = explode("\n", $message);
 		$message = "";
 		foreach($lines as $line)
 		{
