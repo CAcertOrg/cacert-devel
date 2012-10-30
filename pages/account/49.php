@@ -34,7 +34,7 @@
 		if(mysql_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Select Specific Account Details")?></td>
+    <td colspan="5" class="title"><?=_("Select Specific User Account Details")?></td>
   </tr>
 <?
 	while($row = mysql_fetch_assoc($res))
@@ -66,7 +66,7 @@
 		if(mysql_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Select Specific Account Details")?></td>
+    <td colspan="5" class="title"><?=_("Select Specific Organisation Account Details")?></td>
   </tr>
 <?
 	while($row = mysql_fetch_assoc($res))
