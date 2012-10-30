@@ -1332,9 +1332,8 @@
 				echo '<h3>', _("Pass Phrase Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
 				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
-				$body .= _("You are receiving this email because you or ".
-						"someone else has changed the password on your ".
-						"account.")."\n\n";
+				$body .= _("You are receiving this email because you or someone else ".
+						"has changed the password on your account.")."\n\n";
 
 				$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -2594,9 +2593,8 @@
 
 
 			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
-			$body .= _("You are receiving this email because a CAcert ".
-					"administrator has changed the password on your ".
-					"account.")."\n\n";
+			$body .= _("You are receiving this email because a CAcert administrator ".
+					"has changed the password on your account.")."\n\n";
 
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 

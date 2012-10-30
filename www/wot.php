@@ -335,7 +335,7 @@ $iecho= "c";
 		{
 			$body .= _("You have at least 100 Assurance Points. If you want ".
 					"to become an assurer try the Assurer Challenge").
-					" ( https://cats.cacert.org )\n\n";
+					" ( https://cats.cacert.org ).\n\n";
 			$body .= _("To make it easier for others in your area to find ".
 					"you, it's helpful to list yourself as an assurer (this ".
 					"is voluntary), as well as a physical location where you ".
