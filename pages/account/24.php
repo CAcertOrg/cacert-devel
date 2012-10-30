@@ -49,9 +49,9 @@
   <tr>
     <td class="DataTD"><?=_("Country")?>:</td>
     <td class="DataTD"><input type="text" name="C" value="" size="5">
-        <?php printf("(2 letter %s ISO code %s )",
-            "<a href='http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm'>",
-            "</a>")?>
+        <?php printf(_('(2 letter %s ISO code %s )'),
+            '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">',
+            '</a>')?>
     </td>
   </tr>
   <tr>
