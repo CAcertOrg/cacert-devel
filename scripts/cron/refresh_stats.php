@@ -120,23 +120,26 @@ function getDataFromLive() {
 	
 	$stats['users_1to49'] = number_format(tc(
 		"select count(*) as `count` from (
-			select 1 from `notary` group by `to`
+			select 1 from `notary`
 				where `deleted` = 0
+				group by `to`
 				having sum(`points`) > 0 and sum(`points`) < 50
 			) as `low_points`"));
 	
 	$stats['users_50to99'] = number_format(tc(
 		"select count(*) as `count` from (
-			select 1 from `notary` group by `to`
+			select 1 from `notary`
 				where `deleted` = 0
+				group by `to`
 				having sum(`points`) >= 50 and sum(`points`) < 100
 			) as `high_points`"));
 	
 	$stats['assurer_candidates'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where (
-				select sum(`points`) from `notary` where `to`=`users`.`id`
-					where `deleted` = 0
+				select sum(`points`) from `notary`
+					where `to`=`users`.`id`
+					and `deleted` = 0
 				) >= 100
 			and not exists(
 				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
@@ -149,8 +152,9 @@ function getDataFromLive() {
 	$stats['aussurers_with_test'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where (
-				select sum(`points`) from `notary` where `to`=`users`.`id`
-					where `deleted` = 0
+				select sum(`points`) from `notary`
+					where `to`=`users`.`id`
+					and `deleted` = 0
 				) >= 100
 			and exists(
 				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
