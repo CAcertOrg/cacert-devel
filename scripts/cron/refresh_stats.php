@@ -77,7 +77,10 @@ function getDataFromLive() {
 	
 	$stats = array();
 	$stats['verified_users'] = number_format(tc(
-		"select count(*) as `count` from `users` where `verified` = 1"));
+		"select count(*) as `count` from `users`
+			where `verified` = 1
+			and `deleted` = 0
+			and `locked` = 0"));
 	
 	$stats['verified_emails'] = number_format(tc(
 		"select count(*) as `count` from `email`
@@ -87,11 +90,16 @@ function getDataFromLive() {
 		"select count(*) as `count` from `domains`
 			where `hash` = '' and `deleted` = 0"));
 	
-	$certs = tc("select count(*) as `count` from `domaincerts`");
-	$certs += tc("select count(*) as `count` from `emailcerts`");
-	$certs += tc("select count(*) as `count` from `gpg`");
-	$certs += tc("select count(*) as `count` from `orgdomaincerts`");
-	$certs += tc("select count(*) as `count` from `orgemailcerts`");
+	$certs = tc("select count(*) as `count` from `domaincerts`
+			where `expire` != 0");
+	$certs += tc("select count(*) as `count` from `emailcerts`
+			where `expire` != 0");
+	$certs += tc("select count(*) as `count` from `gpg`
+			where `expire` != 0");
+	$certs += tc("select count(*) as `count` from `orgdomaincerts`
+			where `expire` != 0");
+	$certs += tc("select count(*) as `count` from `orgemailcerts`
+			where `expire` != 0");
 	$stats['verified_certificates'] = number_format($certs);
 	
 	$certs = tc("select count(*) as `count` from `domaincerts`
@@ -113,12 +121,14 @@ function getDataFromLive() {
 	$stats['users_1to49'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary` group by `to`
+				where `deleted` = 0
 				having sum(`points`) > 0 and sum(`points`) < 50
 			) as `low_points`"));
 	
 	$stats['users_50to99'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary` group by `to`
+				where `deleted` = 0
 				having sum(`points`) >= 50 and sum(`points`) < 100
 			) as `high_points`"));
 	
@@ -126,6 +136,7 @@ function getDataFromLive() {
 		"select count(*) as `count` from `users`
 			where (
 				select sum(`points`) from `notary` where `to`=`users`.`id`
+					where `deleted` = 0
 				) >= 100
 			and not exists(
 				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
@@ -139,6 +150,7 @@ function getDataFromLive() {
 		"select count(*) as `count` from `users`
 			where (
 				select sum(`points`) from `notary` where `to`=`users`.`id`
+					where `deleted` = 0
 				) >= 100
 			and exists(
 				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
@@ -167,31 +179,39 @@ function getDataFromLive() {
 		$totalusers += $users = tc(
 			"select count(*) as `count` from `users` 
 				where `created` >= '$first' and `created` < '$next_month'
-				and `verified`=1");
+				and `verified` = 1
+				and `deleted` = 0
+				and `locked` = 0");
 		
 		$totassurers += $assurers = tc(
 			"select count(*) as `count` from (
 				select 1 from `notary`
 					where `when` >= '$first' and `when` < '$next_month'
 					and `method`!='Administrative Increase'
+					and `deleted` = 0
 					group by `to` having sum(`points`) >= 100
 				) as `assurer_candidates`");
 		
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
-				where `created` >= '$first' and `created` < '$next_month'");
+				where `created` >= '$first' and `created` < '$next_month'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `emailcerts`
-				where `created` >= '$first' and `created` < '$next_month'");
+				where `created` >= '$first' and `created` < '$next_month'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `gpg`
-				where `issued` >= '$first' and `issued` < '$next_month'");
+				where `issued` >= '$first' and `issued` < '$next_month'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `orgdomaincerts`
-				where `created` >= '$first' and `created` < '$next_month'");
+				where `created` >= '$first' and `created` < '$next_month'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `orgemailcerts`
-				where `created` >= '$first' and `created` < '$next_month'");
+				where `created` >= '$first' and `created` < '$next_month'
+				and `expire` != 0");
 		$totalcerts += $certs;
 
 		$tmp_arr = array();
@@ -222,31 +242,39 @@ function getDataFromLive() {
 		$totalusers += $users = tc(
 			"select count(*) as `count` from `users` 
 				where `created` >= '$first' and `created` < '$next_year'
-				and `verified`=1");
+				and `verified` = 1
+				and `deleted` = 0
+				and `locked` = 0");
 		
 		$totassurers += $assurers = tc(
 			"select count(*) as `count` from (
 				select 1 from `notary`
 					where `when` >= '$first' and `when` < '$next_year'
 					and `method`!='Administrative Increase'
+					and `deleted` = 0
 					group by `to` having sum(`points`) >= 100
 				) as `assurer_candidates`");
 		
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
-				where `created` >= '$first' and `created` < '$next_year'");
+				where `created` >= '$first' and `created` < '$next_year'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `emailcerts`
-				where `created` >= '$first' and `created` < '$next_year'");
+				where `created` >= '$first' and `created` < '$next_year'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `gpg`
-				where `issued` >= '$first' and `issued` < '$next_year'");
+				where `issued` >= '$first' and `issued` < '$next_year'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `orgdomaincerts`
-				where `created` >= '$first' and `created` < '$next_year'");
+				where `created` >= '$first' and `created` < '$next_year'
+				and `expire` != 0");
 		$certs += tc(
 			"select count(*) as `count` from `orgemailcerts`
-				where `created` >= '$first' and `created` < '$next_year'");
+				where `created` >= '$first' and `created` < '$next_year'
+				and `expire` != 0");
 		$totalcerts += $certs;
 
 		$tmp_arr = array();
