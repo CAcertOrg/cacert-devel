@@ -70,7 +70,7 @@ table#TAB1 td { border: 0 }
 </table>
 <p>
 <?php
-	echo _("The CAcert Organisation Programme (COAP) aims to verify the identity of the organisation."), "<br>\n";
+	echo _("The CAcert Organisation Assurance Programme (COAP) aims to verify the identity of the organisation."), "<br>\n";
 	echo _("The Applicant asks the Organisation Assurer to verify to CAcert Community that the information provided by the Applicant is correct, and according to the official trade office registration bodies."), "<br>\n";
 	echo _("For more information about the CAcert Organisation Assurance Programme, including detailed guides to CAcert Organisation Assurers, please visit:"), ' ';
 	echo ' <a href="http://www.cacert.org/">http://www.cacert.org</a><br>';

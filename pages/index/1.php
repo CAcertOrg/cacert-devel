@@ -103,7 +103,7 @@
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="3"><?=_("Lost Pass Phrase Questions - Please enter five questions and your responses to be used for security verification.")?></td>
+    <td class="DataTD" colspan="3"><?=_("Lost Pass Phrase Questions - Please enter five questions and your responses to be used for security verification. The questions and answers must be unambiguous and easy to remember forever, that means permanent issues that never change, not current issues, even more no random strings.")?></td>
   </tr>
 
   <tr>

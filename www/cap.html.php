@@ -23,7 +23,7 @@
 
 	echo '<head>', "\n";
     	echo '<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">', "\n";
-    	echo '<title>'._("Identity Verification Form (CAP) form").'</title>', "\n";
+    	echo '<title>'._("CAcert Assurance Program (CAP) form").'</title>', "\n";
 	echo '</head>', "\n";
 
 	echo '<body>', "\n";
@@ -36,7 +36,7 @@
 	echo '<big><big><span style="font-weight: bold;">'._("CAcert Assurance Programme").'</span></big></big><br>', "\n";
 	echo '</div>', "\n";
 	echo '<div style="text-align: right;">', "\n";
-	echo '<big><big><span style="font-weight: bold;">'._("Identity Verification Form (CAP) form").'</span></big></big><br>', "\n";
+	echo '<big><big><span style="font-weight: bold;">'._("CAcert Assurance Program (CAP) form").'</span></big></big><br>', "\n";
 	echo '</div>', "\n";
 	echo '<div style="text-align: right;">'.'CAcert Inc. - P.O. Box 4107 - Denistone East NSW 2112 - Australia - <a href="http://www.cacert.org/"> http://www.cacert.org/</a><br></div>', "\n";
 
@@ -60,7 +60,7 @@
 	echo _("The CAcert Assurance Programme (CAP) aims to verify the identities of Internet users through face to face witnessing of government-issued photo identity documents.");
 	echo _("The Applicant asks the Assurer to verify to the CAcert Community that the Assurer has met and verified the Applicant's identity against original documents.");
 	echo _("Assurer may leave a copy of the details with the Applicant, and may complete and sign her final form after the meeting.");
-	echo _("If there are any doubts or concerns about the Applicant's identity, do not allocate points.  You are encouraged to perform a mutual Assurance.");
+	echo _("If there are any doubts or concerns about the Applicant's identity, do not allocate points. You are encouraged to perform a mutual Assurance.");
 	echo '<br>', "\n";
 	echo _("For more information about the CAcert Assurance Programme, including detailed guides for CAcert Assurers, please visit:");
 	echo ' <a href="http://www.cacert.org/">http://www.cacert.org/</a><br>', "\n";

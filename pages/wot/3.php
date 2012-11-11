@@ -22,8 +22,8 @@
 <p><?=_("Contact")?><br>
 <br>
 * <?=_("You must meet the applicant in person;")?><br>
-* <?=_("You must sight at least one form of government issued photo identification.  It's preferable if 2 forms of Government issued photo ID are presented, as less points may be issued if there is any doubt on the person by the person issuing points;")?><br>
-* <?=_("Complete the assurance form if the applicant has not already done so.  Ensure that all information matches.")?><br>
+* <?=_("You must sight at least one form of government issued photo identification. It's preferable if 2 forms of Government issued photo ID are presented, as less points may be issued if there is any doubt on the person by the person issuing points;")?><br>
+* <?=_("Complete the assurance form if the applicant has not already done so. Ensure that all information matches.")?><br>
 </p>
 
 <p><?=_("Processing")?><br>
@@ -31,7 +31,7 @@
 <br>
 * <?=_("Enter the applicant's email address;")?><br>
 * <?=_("Compare the online information to the information recorded on the paper form;")?><br>
-* <?=_("If, and only if, the two match completely - you may award trust points up to the maximum points you are able to allocate;")?><br>
+* <?=_("If, and only if, the two match completely, you may award assurance points up to the maximum points you are able to allocate;")?><br>
 </p>
 
 <p><?=_("Privacy")?><br>
@@ -44,4 +44,4 @@
 <?=_("A CAcert Assurer who knowingly, or reasonably ought to have known, assures an applicant contrary to this policy may be held liable.")?></p>
 
 <p><?=_("Assurance Points")?><br>
-<?=_("CAcert may, from time to time, alter the amount of Assurance Points that a class of assurer may assign as is necessary to effect a policy or rule change.  We may also alter the amount of Assurance Points available to an individual, or new class of assurer, should another policy of CAcert require this.")?></p>
+<?=_("CAcert may, from time to time, alter the amount of Assurance Points that a class of assurer may assign as is necessary to effect a policy or rule change. We may also alter the amount of Assurance Points available to an individual, or new class of assurer, should another policy of CAcert require this.")?></p>

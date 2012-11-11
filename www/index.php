@@ -417,7 +417,7 @@ require_once('../includes/lib/l10n.php');
 			$_SESSION['signup']['A4'] == $_SESSION['signup']['A5'])
 		{
 			$id = 1;
-			$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer.")."<br>\n";
+			$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 different secret questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer. The questions and answers must be unambiguous and easy to remember forever, that means permanent issues that never change, not current issues, even more no random strings.")."<br>\n";
 		}
 
 		if($_SESSION['signup']['Q1'] == "" || $_SESSION['signup']['Q2'] == "" ||

@@ -17,10 +17,10 @@
 */ ?>
 <h3><?=_("Are you new to CAcert?")?></h3>
 
-<p><?=sprintf(_("If you want to have free certificates issued to you, join the %s CAcert Community %s."),"<a href=\"https://www.cacert.org/index.php?id=1\">","</a>")?></p>
+<p><?=sprintf(_("If you want to have free certificates issued to you, join the %sCAcert Community%s."),"<a href=\"https://www.cacert.org/index.php?id=1\">","</a>")?></p>
 
-<p><?=sprintf(_("If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."),'<a href="/policy/RootDistributionLicense.php">',"</a>")?>
-<?=sprintf(_("This license applies to using the CAcert %s root keys %s."),'<a href="/index.php?id=3">','</a>')?></p>
+<p><?=sprintf(_("If you want to use certificates issued by CAcert, read the CAcert %sRoot Distribution License%s."),'<a href="/policy/RootDistributionLicense.php">',"</a>")?>
+<?=sprintf(_("This license applies to using the CAcert %sroot keys%s."),'<a href="/index.php?id=3">','</a>')?></p>
 
 
 <? if(!array_key_exists('mconn',$_SESSION) || !$_SESSION['mconn']) echo "<font size='+1'>"._("Most CAcert functions are currently unavailable. Please come back later.")."</font>";?>
@@ -141,7 +141,7 @@
 </form>
 <p><?=_("If you are located in Australia, you can use bank transfer instead and pay the equivalent of US$10 in AU$.")?></p>
 
-<p><?=_("Please also include Your name in the transaction so we know who it came from or send an email to robert at cacert dot org with the details:")?></p>
+<p><?=_("Please also include Your name in the transaction so we know who it came from or send an email to treasurer at cacert dot org with the details:")?></p>
 
 <ul>
 <li>Account Name: CAcert Inc</li>

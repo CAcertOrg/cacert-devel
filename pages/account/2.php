@@ -18,7 +18,7 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="4" class="title"><?=_("Email Accounts")?></td>
+    <td colspan="4" class="title"><?=_("Email Addresses")?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Default")?></td>

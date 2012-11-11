@@ -307,7 +307,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   while($drow = mysql_fetch_assoc($dres))
   { ?>
   <tr>
-    <td class="DataTD"><?=_("Secondary Emails")?>:</td>
+    <td class="DataTD"><?=_("Secondary Email Address")?>:</td>
     <td class="DataTD"><?=sanitizeHTML($drow['email'])?></td>
   </tr>
 <? } ?>

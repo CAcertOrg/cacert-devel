@@ -833,7 +833,7 @@ class CAPPDF extends TCPDF {
 
     /*private*/ function PrintCAP($assuree = NULL, $assurer = NULL, $assurance = NULL, $page = NULL ) {
         $this->SetCol();
-        $this->PrintHeader($this->unhtmlentities( _('CAcert Assurance Programme') ), $this->unhtmlentities( _('Identity Verification Form (CAP) form') ), defined('ASSCAP')?ASSCAP:'',defined('WEB')? WEB.substr(__FILE__, strrpos(__FILE__,'/')) : '');
+        $this->PrintHeader($this->unhtmlentities( _('CAcert Assurance Programme') ), $this->unhtmlentities( _('CAcert Assurance Program (CAP) form') ), defined('ASSCAP')?ASSCAP:'',defined('WEB')? WEB.substr(__FILE__, strrpos(__FILE__,'/')) : '');
 	// define slightly different footer message
         $this->myFooter('V'. substr($this->Version(), 0, strpos($this->Version(), '.')).', '. $this->unhtmlentities( _('generated') ).' '.date('Y-n-j'), NULL);
         $this->AssuranceInfo($assurance);

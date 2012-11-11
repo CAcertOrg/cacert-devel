@@ -177,7 +177,7 @@
 		}
 		else
 		{
-			echo _("You did not select any email accounts for removal.");
+			echo _("You did not select any email addresses for removal.");
 		}
 		if($delcount > 0)
 		{
@@ -339,7 +339,7 @@
                         {
                                 $id = $oldid;
                                 showheader(_("My CAcert.org Account!"));
-                                echo _("The challenge-response code of your certificate request did not match. Can't continue with certificaterequest.");
+                                echo _("The challenge-response code of your certificate request did not match. Can't continue with certificate request.");
                                 showfooter();
                                 exit;
                         }
@@ -1206,7 +1206,7 @@
                         $_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['A5'] ||
                         $_SESSION['_config']['user']['A4'] == $_SESSION['_config']['user']['A5'])
                 {
-                        $_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer.")."<br>\n";
+                        $_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 different secret questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer. The questions and answers must be unambiguous and easy to remember forever, that means permanent issues that never change, not current issues, even more no random strings.")."<br>\n";
                         $id = $oldid;
 			$oldid=0;
                 }
@@ -1500,7 +1500,7 @@
                         {
                                 $id = $oldid;
                                 showheader(_("My CAcert.org Account!"));
-                                echo _("The challenge-response code of your certificate request did not match. Can't continue with certificaterequest.");
+                                echo _("The challenge-response code of your certificate request did not match. Can't continue with certificate request.");
                                 showfooter();
                                 exit;
                         }

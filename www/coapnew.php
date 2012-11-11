@@ -973,7 +973,7 @@ class COAPPDF extends TCPDF {
             $this->Bookmark($this->unhtmlentities( _('CAcert COAP form') ),0,$this->S($this->GetY()));
 
             // Show text blurb at top of page
-            $strg = $this->unhtmlentities( _('The CAcert Organisation Programme (COAP) aims to verify the identity of the organisation.') );
+            $strg = $this->unhtmlentities( _('The CAcert Organisation Assurance Programme (COAP) aims to verify the identity of the organisation.') );
             $strg .= "\r\n". $this->unhtmlentities( _('The Applicant asks the Organisation Assurer to verify to CAcert Community that the information provided by the Applicant is correct, and according to the official trade office registration bodies.') );
             $cellcnt += $this->PrintInfo( $strg, defined('ASSINTRO')? ASSINTRO:"");
             $cellcnt += $this->PrintInfo( $this->unhtmlentities( _('For more information about the CAcert Organisation Assurance Programme, including detailed guides to CAcert Organisation Assurers, please visit:')." ".WEB, defined('ASSCOAP')?ASSCOAP:"") );

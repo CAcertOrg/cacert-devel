@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 
-<p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.php'>","</a>")?></p>
+<p><?=sprintf(_("You are bound by the %sRoot Distribution Licence%s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.php'>","</a>")?></p>
 
 <p>
 Class 1 <?=_("PKI Key")?><br>

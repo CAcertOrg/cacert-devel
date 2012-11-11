@@ -178,7 +178,7 @@ function hideall() {
 	?></ul>
     </div>
     <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('emailacc')">+ <?=_("Email Accounts")?></h3>
+      <h3 class="pointer" onclick="explode('emailacc')">+ <?=_("Email Addresses")?></h3>
       <ul class="menu" id="emailacc"><li><a href="account.php?id=1"><?=_("Add")?></a></li><li><a href="account.php?id=2"><?=_("View")?></a></li></ul>
     </div>
     <div class="relatedLinks">

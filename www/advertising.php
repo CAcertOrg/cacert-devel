@@ -78,7 +78,7 @@
 		unset($title);
 		unset($months);
 		$id = 1;
-		$errmsg = _("Your advertisement request has been lodge in the system and administrators notified. Once the information has been reviewed, you will be notified if the link was acceptable or declined and the reason for the decline. If the request is successful the system will generate an invoice.");
+		$errmsg = _("Your advertisement request has been lodged in the system and administrators notified. Once the information has been reviewed, you will be notified if the link was acceptable or declined and the reason for the decline. If the request is successful, the system will generate an invoice.");
 	}
 
 	showheader(_("CAcert.org Advertising Section"));

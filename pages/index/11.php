@@ -24,7 +24,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><b><?=_("If you are contacting us about advertising, please use the form at the bottom of the website, the first contact form is not the correct place.")?></b></p>
 <p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
 <p><?=_("Before contacting us, be sure to read the information on our official and unofficial HowTo and FAQ pages.")?> - <a href="//wiki.cacert.org/HELP/"><?=_("Go here for more details.")?></a></p>
-<p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
+<p><?=_("General questions about CAcert should be sent to the support mailing list. This list has many more volunteers then those directly involved with the running of the website. Please send all mails preferably in English or German, since we have rather few people speaking other languages. Nearly everyone on the mailing list understands English and many German. This will increase your chance for a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
 <p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><?=_("You can alternatively use the form below, however joining the list is the prefered option to support your queries")?></p>
 <form method="post" action="index.php" name="form1">
@@ -65,7 +65,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 </form>
 
 <p><b><?=_("Security Issues")?></b></p>
-<p><?=_("Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on <a href='https://bugs.cacert.org/'>bugs.cacert.org</a> and mark it as private.")?></p>
+<p><?=sprintf(_("Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on %s and mark it as private."),"<a href='https://bugs.cacert.org/'>bugs.cacert.org</a>")?></p>
 
 <p><b><?=_("Snail Mail")?></b></p>
 <p><?=_("Alternatively you can get in contact with us via the following methods:")?></p>

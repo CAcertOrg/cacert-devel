@@ -230,7 +230,7 @@
 	if ($support == "1")
 	{
 ?>
-    	<td class="DataTD"><strong><?=_("When")?></strong></td>
+    	<td class="DataTD"><strong><?=_("When entered")?></strong></td>
     	<td class="DataTD"><strong><?=_("Email")?></strong></td>
 <?	} ?>
     	<td class="DataTD"><strong><?=_("Who")?></strong></td>

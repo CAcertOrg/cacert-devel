@@ -328,7 +328,7 @@ $iecho= "c";
 
 		if(($drow['total'] + $newpoints) < 100 && ($drow['total'] + $newpoints) >= 50)
 		{
-			$body .= _("You now have over 50 points, and can now have your name added to client certificates, and issue server certificates for up to 2 years.")."\n\n";
+			$body .= _("You now have over 50 points, and can now have your name added to client certificates and can issue certificates for up to 2 years.")."\n\n";
 		}
 
 		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)

@@ -53,7 +53,7 @@
 	AssureBoxLine("rules",_("I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."),array_key_exists('rules',$_POST) && $_POST['rules'] == 1);
 	AssureTextLine(_("Policy"),"<a href=\"/policy/AssurancePolicy.php\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
 	AssureInboxLine("points",_("Points"),"","<br />(Max. ".maxpoints().")");
-	AssureCCABoxLine("CCAAgreed",sprintf(_("Check this box only if %s agreed to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"),$fname));
-	AssureCCABoxLine("CCAAgree",_("Check this box only if YOU agree to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"));
+	AssureCCABoxLine("CCAAgreed",sprintf(_("Check this box only if %s agreed to the %s"),$fname,"<a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"));
+	AssureCCABoxLine("CCAAgree",sprintf(_("Check this box only if YOU agree to the %s"),"<a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"));
 	AssureFoot($id,_("I confirm this Assurance"));
 ?>
