@@ -53,6 +53,12 @@ if($_SESSION['profile']['points'] >= 50)
 	$suffix = $_SESSION['profile']['suffix'];
 ?>
   <tr>
+   <td class="DataTD" colspan="2" align="left">
+      <?=_("Optional comment, only used in the certifictate overview")?><br>
+       <input type="text" name="description" maxlength="80" size=80>
+   </td>
+  </tr>
+  <tr>
     <td class="DataTD" colspan="2" align="left">
 	<input type="radio" name="rootcert" value="1" checked> <?=_("Sign by class 1 root certificate")?><br>
 	<input type="radio" name="rootcert" value="2"> <?=_("Sign by class 3 root certificate")?><br>

@@ -25,7 +25,8 @@
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("Email Address")?></td>
-	<td class="DataTD"><?=_("SerialNumber")?></td>
+	  <td class="DataTD"><?=_("SerialNumber")?></td>
+	  <td class="DataTD"><?=_("Comment")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
     <td class="DataTD"><?=_("Login")?></td>
@@ -40,8 +41,9 @@
 			`emailcerts`.`id`,
 			`emailcerts`.`CN`,
 			`emailcerts`.`serial`,
-			emailcerts.disablelogin as `disablelogin`
-			from `emailcerts`
+			emailcerts.disablelogin as `disablelogin`,
+			`emailcerts`.`description`
+      			from `emailcerts`
 			where `emailcerts`.`memid`='".$_SESSION['profile']['id']."'
 			";
 	if($viewall != 1)
@@ -86,7 +88,8 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
 <? } ?>
-	<td class="DataTD"><?=$row['serial']?></td>
+	  <td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=$row['description']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
     <td class="DataTD">

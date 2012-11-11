@@ -56,6 +56,12 @@
     <td class="DataTD" colspan="2" align="left"><input type="checkbox" name="codesign" value="1" /><?=_("Code Signing")?></td>
   </tr>
 <? } ?>
+   <tr>
+   <td class="DataTD" colspan="2" align="left">
+      <?=_("Optional comment, only used in the certifictate overview")?><br>
+       <input type="text" name="description" maxlength="80" size=80>
+   </td>
+  </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="add_email" value="<?=_("Another Email")?>">
 			<input type="submit" name="process" value="<?=_("Next")?>"></td>

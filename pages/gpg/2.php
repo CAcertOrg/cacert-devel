@@ -24,13 +24,13 @@
     <td class="DataTD"><?=_("Email Address")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
     <td class="DataTD"><?=_("Key ID")?></td>
-
+    <td class="DataTD"><?=_("Comment")?></td>
 <?
 	$query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`expire`) as `expired`,
 			`expire` as `expires`, `id`, `level`, 
-			`email`,`keyid` from `gpg` where `memid`='".intval($_SESSION['profile']['id'])."'
+			`email`,`keyid`,`description` from `gpg` where `memid`='".intval($_SESSION['profile']['id'])."'
 			ORDER BY `issued` desc";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
@@ -62,7 +62,7 @@
 <? } ?>
     <td class="DataTD"><?=$row['expires']?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
-
+    <td class="DataTD"><?=$row['description']?></td>
   </tr>
 <? } ?>
 <? } ?>

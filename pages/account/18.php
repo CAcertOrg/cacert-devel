@@ -25,7 +25,8 @@
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("CommonName")?></td>
-	<td class="DataTD"><?=_("SerialNumber")?></td>
+	  <td class="DataTD"><?=_("SerialNumber")?></td>
+		<td class="DataTD"><?=_("Comment")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
 
@@ -35,7 +36,8 @@
 			UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
 			`oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
-			`oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`
+			`oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
+			`oemail`.`description`
 			from `orgemailcerts` as `oemail`, `org`
 			where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 				`org`.`orgid`=`oemail`.`orgid` ";
@@ -80,7 +82,8 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
 <? } ?>
-	<td class="DataTD"><?=$row['serial']?></td>
+	  <td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=$row['description']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
   </tr>

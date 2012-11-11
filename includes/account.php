@@ -17,7 +17,6 @@
 */
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
-	require_once('lib/check_weak_key.php');
 
 	loadem("account");
 
@@ -124,9 +123,9 @@
 			exit;
 		}
 		$row = mysql_fetch_assoc($res);
-		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
-		$body .= _("You are receiving this email because you or someone else ".
-				"has changed the default email on your account.")."\n\n";
+		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
+		$body .= _("You are receiving this email because you or someone else")."\n";
+		$body .= _("has changed the default email on your account.")."\n\n";
 
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -240,6 +239,11 @@
 			$_REQUEST['keytype'] = "MS";
 			$csr = clean_csr($_REQUEST['optionalCSR']);
 		}
+		if(trim($_REQUEST['description']) == ""){
+       $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+    }else{
+       $_SESSION['_config']['description']= "";
+    }
 	}
 
 	if($oldid == 4)
@@ -323,7 +327,8 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
-						`rootcert`='".intval($_SESSION['_config']['rootcert'])."'";
+						`rootcert`='".intval($_SESSION['_config']['rootcert'])."', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 			if(is_array($addys))
@@ -422,7 +427,8 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".$_SESSION['_config']['codesign']."',
-						`rootcert`='".$_SESSION['_config']['rootcert']."'";
+						`rootcert`='".$_SESSION['_config']['rootcert']."', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 			if(is_array($addys))
@@ -621,30 +627,10 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-					
-					$dres = mysql_query(
-						"select distinct `domaincerts`.`id`
-							from `domaincerts`, `domlink`
-							where `domaincerts`.`domid` = '$id'
-							or (
-								`domaincerts`.`id` = `domlink`.`certid`
-								and `domlink`.`domid` = '$id'
-								)");
+					mysql_query("update `domains` set `deleted`=NOW() where `id`='$id'");
+					$dres = mysql_query("select * from `domlink` where `domid`='$id'");
 					while($drow = mysql_fetch_assoc($dres))
-					{
-						mysql_query(
-							"update `domaincerts`
-								set `revoked`='1970-01-01 10:00:01'
-								where `id` = '".$drow['id']."'
-								and `revoked` = 0
-								and UNIX_TIMESTAMP(`expire`) -
-										UNIX_TIMESTAMP() > 0");
-					}
-					
-					mysql_query(
-						"update `domains`
-							set `deleted`=NOW()
-							where `id` = '$id'");
+						mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['certid']."' and `revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0");
 				}
 			}
 		}
@@ -674,6 +660,12 @@
 			exit;
 		}
 		
+		if(trim($_REQUEST['description']) == ""){
+       $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+    }else{
+       $_SESSION['_config']['description']= "";
+    }
+    
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -775,13 +767,15 @@
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['rows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['rowid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
-						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."'";
+						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
 		} elseif(array_key_exists('0',$_SESSION['_config']['altid']) && $_SESSION['_config']['altid']['0'] > 0) {
 			$query = "insert into `domaincerts` set 
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['altrows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['altid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
-						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."'";
+						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
 		} else {
 			showheader(_("My CAcert.org Account!"));
 			echo _("Domain not verified.");
@@ -863,7 +857,8 @@
 						`modified`=NOW(), 
 						`rootcert`='".$row['rootcert']."',
 						`type`='".$row['type']."',
-						`pkhash`='".$row['pkhash']."'";
+						`pkhash`='".$row['pkhash']."', 
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
@@ -1039,7 +1034,8 @@
 						`modified`=NOW(),
 						`disablelogin`='".$row['disablelogin']."',
 						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."'";
+						`rootcert`='".$row['rootcert']."', 
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1352,9 +1348,9 @@
 						where `id`='".$_SESSION['profile']['id']."'");
 				echo '<h3>', _("Pass Phrase Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
-				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
-				$body .= _("You are receiving this email because you or someone else ".
-						"has changed the password on your account.")."\n\n";
+				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
+				$body .= _("You are receiving this email because you or someone else")."\n";
+				$body .= _("has changed the password on your account.")."\n";
 
 				$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -1392,6 +1388,13 @@
 		}
 		$_SESSION['_config']['name'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['name'])));
 		$_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
+		
+      
+    if(trim($_REQUEST['description']) == ""){
+        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+    }else{
+        $_SESSION['_config']['description']= "";
+    }
 	}
 
 	if($oldid == 16 && (intval(count($_SESSION['_config']['emails'])) + 0) <= 0)
@@ -1421,6 +1424,12 @@
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
+    if(trim($_REQUEST['description']) == ""){
+        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+    }else{
+        $_SESSION['_config']['description']= "";
+    }
+      
 		if(@count($_SESSION['_config']['emails']) > 0)
 			$id = 17;
 	}
@@ -1466,7 +1475,8 @@
 				$emails .= "countryName = ".$org['C']."\n";
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
-
+      
+      
 			$emails .= "SPKAC = $spkac";
 			if (($weakKey = checkWeakKeySPKAC($emails)) !== "")
 			{
@@ -1483,7 +1493,8 @@
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
-						`rootcert`='".$_SESSION['_config']['rootcert']."'";
+						`rootcert`='".$_SESSION['_config']['rootcert']."', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1573,7 +1584,8 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='$csrsubject',
 						`codesign`='".$_SESSION['_config']['codesign']."',
-						`rootcert`='".$_SESSION['_config']['rootcert']."'";
+						`rootcert`='".$_SESSION['_config']['rootcert'].."', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1648,7 +1660,8 @@
 						`created`='".$row['created']."', 
 						`modified`=NOW(),
 						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."'";
+						`rootcert`='".$row['rootcert']."', 
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -1753,6 +1766,12 @@
 			exit;
 		}
 		
+		if(trim($_REQUEST['description']) == ""){
+       $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+    }else{
+       $_SESSION['_config']['description']= "";
+    }
+    
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -1892,7 +1911,8 @@
                                                 `created`=NOW(),
 						`subject`='$csrsubject',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
-						`type`='$type'";
+						`type`='$type', 
+						`description`='".intval($_SESSION['_config']['description'])."'";
                 }
                 mysql_query($query);
 		$CSRid = mysql_insert_id();
@@ -1968,7 +1988,8 @@
 						`modified`=NOW(), 
 						`subject`='".$row['subject']."', 
 						`type`='".$row['type']."',
-						`rootcert`='".$row['rootcert']."'";
+						`rootcert`='".$row['rootcert']."', 
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
@@ -2613,9 +2634,9 @@
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
 
-			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
-			$body .= _("You are receiving this email because a CAcert administrator ".
-					"has changed the password on your account.")."\n\n";
+			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n";
+			$body .= _("You are receiving this email because a CAcert administrator")."\n";
+			$body .= _("has changed the password on your account.")."\n";
 
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
