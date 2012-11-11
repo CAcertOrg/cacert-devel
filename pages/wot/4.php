@@ -65,7 +65,7 @@ if ($_SESSION['profile']['points']<100){
    </form>
   }else{
   /* As soon as the TPP TOPUP Programme is established this routine should be used
-    <p><?=_("As you got already 2 TTP assurances you only can take part in the TTP TOPUP programme.\n\n If you want you ask for the TTP TOPUP programme use the submit button to send the request to support@cacert.org to start the process. CAcert will inform you then about the next steps.")?></p>
+    <p><?=_("As you got already 2 TTP assurances you only can take part in the TTP TOPUP programme.\n\n If you want to ask for the TTP TOPUP programme use the submit button to send the request to support@cacert.org to start the process. CAcert will inform you then about the next steps.")?></p>
     <form method="post" action="wot.php">
           <input type="hidden" name="oldid" value="<?=$id?>">
           <input type="submit" name="ttptopup" value="<?=_("I need a TTP TOPUP")?>">
@@ -75,6 +75,6 @@ if ($_SESSION['profile']['points']<100){
   }
 
 }
-Else{
+else{
 <p><?=_("You reached the maximum points that can be granted by the TTP programme and therefore you cannot takte part in the TTP programme any more.")?></p>
 }
