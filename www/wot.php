@@ -115,6 +115,7 @@ function send_reminder()
 
 
 
+
 	loadem("account");
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
 		$_SESSION['_config']['date'] = $_POST['date'];
@@ -126,6 +127,59 @@ function send_reminder()
 
 	if($oldid == 12)
 		$id = $oldid;
+		
+	if($oldid == 4)
+	{
+	   $my_translation = L10n::get_translation();
+		 L10n::set_translation($_SESSION['_config']['notarise']['language']);	 
+	  if ($_POST['ttp']!='') {
+ 		 //This mail does not need to be transalted
+		 $body = "Hi TTP adminstrators \n\n ";
+     $body .= $_SESSION['profile']['fname']." ". $_SESSION['profile']['lname'].", ".$_SESSION['profile']['email']." is requesting a TTP assurances for ".mysql_escape_string(stripslashes($_POST['country'])).".";
+		 if ($_POST['ttptopup']=='1') {
+		  $body .= "The user is requesting also the TTP TOPUP.\n\n";
+  	 }else{
+      $body .= "The user is NOT requesting the TTP TOPUP.\n\n";
+     }
+     $body .= "The user received ".$_SESSION['profile']['points']." assurance points up today.\n\n";
+		 $body .= "Please start the TTP assurance process.";
+	   sendmail("support@cacert.org", "[CAcert.org] "._("TTP request."), $body, "support@cacert.org", "", "", "CAcert Website");
+
+     //This mail needs to be translated
+		L10n::set_translation($my_translation);
+
+		$body  =_("You are receiving this email because you asked for TTP assurance.")."\n\n";
+		if ($_POST['ttptopup']=='1') {
+		  $body .=_("You are requesting the TTP TOPUP.")."\n\n";
+  	 }else{
+      $body .=_("You are NOT requesting the TTP TOPUP.")."\n\n";
+     }
+		$body .= _("Best regards")."\n";
+		$body .= _("CAcert Support Team");
+
+		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You requested TTP assurances"), $body, "support@cacert.org", "", "", "CAcert Support");
+
+    }
+     
+    if ($_POST['ttptopup']!='') {
+ 		 //This mail does not need to be transalted
+		 $body = "Hi TTP adminstrators \n\n ";
+     $body .= $_SESSION['profile']['fname']." ". $_SESSION['profile']['lname'].", ".$_SESSION['profile']['email']." is requesting a TTP TOPUP assurance.";
+     $body .="The user received ".$_SESSION['profile']['points']." assurance points up today.\n\n";
+		 $body .="Please start the TTP TOPUP assurance process.";
+	   sendmail("support@cacert.org", "[CAcert.org] "._("TTP TOPUP request."), $body, "support@cacert.org", "", "", "CAcert Website");
+
+     //This mail needs to be translated
+		L10n::set_translation($my_translation);
+
+		$body  = _("You are receiving this email because you asked for TTP TOPUP assurance")."\n\n";
+		$body .= _("Best regards")."\n";
+		$body .= _("CAcert Support Team");
+
+		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You requested a TTP TOPUP assurance"), $body, "support@cacert.org", "", "", "CAcert Support");
+     
+    }
+	}
 
 	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
 		if (!is_assurer($_SESSION['profile']['id'])) 
@@ -333,16 +387,12 @@ $iecho= "c";
 
 		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)
 		{
-			$body .= _("You have at least 100 Assurance Points. If you want ".
-					"to become an assurer try the Assurer Challenge").
-					" ( https://cats.cacert.org ).\n\n";
-			$body .= _("To make it easier for others in your area to find ".
-					"you, it's helpful to list yourself as an assurer (this ".
-					"is voluntary), as well as a physical location where you ".
-					"live or work the most. You can flag your account to be ".
-					"listed, and add a comment to the display by going to:")."\n";
+//			$body .= _("You now have over 100 points and can start assuring others.")."\n\n";
+			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the")." ";
+			$body .= _("Assurer Challenge")." ( https://cats.cacert.org )\n\n";
+			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n\n";
 			$body .= "https://www.cacert.org/wot.php?id=8\n\n";
-			$body .= _("You can list your location by going to:")."\n";
+			$body .= _("You can list your location by going to:")."\n\n";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
 

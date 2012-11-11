@@ -40,6 +40,15 @@
 
 		return intval($row['list']);
 	}
+	
+	function get_number_of_ttpassurances ($userid)
+	{
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
+		     	WHERE `method`='Trusted Third Parties' AND `from`='".intval($userid)."' ");
+		$row = query_getnextrow($res);
+                                                   
+		return intval($row['list']);
+	}
 
 	function get_number_of_assurees ($userid)
 	{
