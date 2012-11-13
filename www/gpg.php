@@ -248,6 +248,12 @@ function verifyEmail($email)
 			$resulttable.="</tr>\n";
 
 			if($emailok) $multiple++;
+			
+			if(trim($_REQUEST['description']) == ""){
+       $description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+      }else{
+       $description= "";
+      }
 		}
 		$resulttable.="</table>";
 
@@ -280,7 +286,8 @@ function verifyEmail($email)
 						`level`='1',
 						`expires`='".mysql_real_escape_string($expires)."',
 						`multiple`='".mysql_real_escape_string($multiple)."',
-						`keyid`='".mysql_real_escape_string($keyid)."'";
+						`keyid`='".mysql_real_escape_string($keyid)."', 
+						`description`='".mysql_real_escape_string($description)."'";
 		mysql_query($query);
 		$id = mysql_insert_id();
 

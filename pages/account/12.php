@@ -25,7 +25,8 @@
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("CommonName")?></td>
-	<td class="DataTD"><?=_("SerialNumber")?></td>
+	  <td class="DataTD"><?=_("SerialNumber")?></td>
+	  <td class="DataTD"><?=_("Comment")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
   </tr>
@@ -34,7 +35,8 @@
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
 			`domaincerts`.`expire` as `expires`, `revoked` as `revoke`,
-			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`
+			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
+			`domaincerts`.`description`
 			from `domaincerts`,`domains`
 			where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `domaincerts`.`domid`=`domains`.`id` ";
 	if($viewall != 1)
@@ -75,7 +77,8 @@
 <? } ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=15&amp;cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
-	<td class="DataTD"><?=$row['serial']?></td>
+	  <td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=$row['description']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
   </tr>
