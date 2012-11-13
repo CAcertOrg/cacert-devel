@@ -32,4 +32,4 @@
 
 <?= sprintf(_("If you are interested in the TTP programme, read the pages %s for the basic way how the TTP programme works for you, and %s whether the TTP programme affects the country where you are located."),"<a href='http://wiki.cacert.org/TTP/TTPuser'>http://wiki.cacert.org/TTP/TTPuser</a>","<a href='http://wiki.cacert.org/TTP/TTPAL'>http://wiki.cacert.org/TTP/TTPAL</a>")."\n\n" ?>
 
-<?= sprintf(_("If you want to take part in the TTP programme, send an email to %s with your name, the main email address of your CAcert account and the country that you want to see the TTP. CAcert will then send you the needed forms and guide you through the process.","<a href='mailto:support@cacert.org'>support@cacert.org</a>")?>
+<?= sprintf(_("If you want to take part in the TTP programme, send an email to %s with your name, the main email address of your CAcert account and the country that you want to see the TTP. CAcert will then send you the needed forms and guide you through the process."),"<a href='mailto:support@cacert.org'>support@cacert.org</a>")?>
