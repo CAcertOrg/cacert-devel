@@ -239,7 +239,7 @@
 			$_REQUEST['keytype'] = "MS";
 			$csr = clean_csr($_REQUEST['optionalCSR']);
 		}
-		if(trim($_REQUEST['description']) == ""){
+		if(trim($_REQUEST['description']) != ""){
        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
        $_SESSION['_config']['description']= "";
@@ -660,7 +660,7 @@
 			exit;
 		}
 		
-		if(trim($_REQUEST['description']) == ""){
+		if(trim($_REQUEST['description']) != ""){
        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
        $_SESSION['_config']['description']= "";
@@ -1390,7 +1390,7 @@
 		$_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
 		
       
-    if(trim($_REQUEST['description']) == ""){
+    if(trim($_REQUEST['description']) != ""){
         $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
         $_SESSION['_config']['description']= "";
@@ -1424,7 +1424,7 @@
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-    if(trim($_REQUEST['description']) == ""){
+    if(trim($_REQUEST['description']) != ""){
         $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
         $_SESSION['_config']['description']= "";
@@ -1766,7 +1766,7 @@
 			exit;
 		}
 		
-		if(trim($_REQUEST['description']) == ""){
+		if(trim($_REQUEST['description']) != ""){
        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
        $_SESSION['_config']['description']= "";

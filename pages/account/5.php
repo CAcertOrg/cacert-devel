@@ -19,18 +19,17 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="7" class="title"><?=_("Client Certificates")?> - <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
+    <td colspan="9" class="title"><?=_("Client Certificates")?> - <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("Email Address")?></td>
-	  <td class="DataTD"><?=_("SerialNumber")?></td>
-	  <td class="DataTD"><?=_("Comment")?></td>
+    <td class="DataTD"><?=_("SerialNumber")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
     <td class="DataTD"><?=_("Login")?></td>
-
+    <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
 <?
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
@@ -58,7 +57,7 @@
 	{
 ?>
   <tr>
-    <td colspan="7" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
+    <td colspan="9" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -88,22 +87,31 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
 <? } ?>
-	  <td class="DataTD"><?=$row['serial']?></td>
-		<td class="DataTD"><?=$row['description']?></td>
+    <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
     <td class="DataTD">
       <input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
       <input type="hidden" name="cert_<?=$row['id']?>" value="1"/>
     </td>
+    <td class="DataTD"><textarea name="description[]" cols="80" rows="5"></textarea><?=$row['description']?></textarea></td>
+    <td class="DataTD">
+      <input type="submit" name="descriptionsave_<?=$row['id']?>" value="<?=_("Save comment")?>">
+    </td>
   </tr>
-<? } ?>
+    <? } ?>
   <tr>
-    <td class="DataTD" colspan="8">
+    <td class="DataTD" colspan="9">
       <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
     </td>
   </tr>
 
+  <tr>
+    <td class="DataTD" colspan="9">
+      <?=_("* Comment optional with max length of 100 characters. The comment is NOT included in the certificate as it is inteded for your personal reference only.. Save each comment seperately.")?>
+    </td>
+  </tr>
+  
   <tr>
     <td class="DataTD" colspan="5"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
     			<input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>

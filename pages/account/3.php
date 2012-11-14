@@ -52,35 +52,28 @@ if($_SESSION['profile']['points'] >= 50)
 	$lname = $_SESSION['profile']['lname'];
 	$suffix = $_SESSION['profile']['suffix'];
 ?>
-  <tr>
-   <td class="DataTD" colspan="2" align="left">
-      <?=_("Optional comment, only used in the certifictate overview")?><br>
-       <input type="text" name="description" maxlength="80" size=80>
-   </td>
-  </tr>
-  <tr>
     <td class="DataTD" colspan="2" align="left">
-	<input type="radio" name="rootcert" value="1" checked> <?=_("Sign by class 1 root certificate")?><br>
-	<input type="radio" name="rootcert" value="2"> <?=_("Sign by class 3 root certificate")?><br>
-	<?=str_replace("\n", "<br>\n", wordwrap(_("Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"), 125))?>
+      <input type="radio" name="rootcert" value="1" checked> <?=_("Sign by class 1 root certificate")?><br>
+      <input type="radio" name="rootcert" value="2"> <?=_("Sign by class 3 root certificate")?><br>
+      <?=str_replace("\n", "<br>\n", wordwrap(_("Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"), 125))?>
     </td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2" align="left">
-	<input type="radio" name="incname" value="0" checked> <?=_("No Name")?><br>
-<? if($fname && $lname) { ?><input type="radio" name="incname" value="1"> <?=_("Include")?> '<?=$fname." ".$lname?>'<br><? } ?>
-<? if($fname && $mname && $lname) { ?><input type="radio" name="incname" value="2"> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname?>'<br><? } ?>
-<? if($fname && $lname && $suffix) { ?><input type="radio" name="incname" value="3"> <?=_("Include")?> '<?=$fname." ".$lname." ".$suffix?>'<br><? } ?>
-<? if($fname && $mname && $lname && $suffix) { ?><input type="radio" name="incname" value="4"> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname." ".$suffix?>'<br><? } ?>
+      <input type="radio" name="incname" value="0" checked> <?=_("No Name")?><br>
+      <? if($fname && $lname) { ?><input type="radio" name="incname" value="1"> <?=_("Include")?> '<?=$fname." ".$lname?>'<br><? } ?>
+      <? if($fname && $mname && $lname) { ?><input type="radio" name="incname" value="2"> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname?>'<br><? } ?>
+      <? if($fname && $lname && $suffix) { ?><input type="radio" name="incname" value="3"> <?=_("Include")?> '<?=$fname." ".$lname." ".$suffix?>'<br><? } ?>
+      <? if($fname && $mname && $lname && $suffix) { ?><input type="radio" name="incname" value="4"> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname." ".$suffix?>'<br><? } ?>
     </td>
   </tr>
 <? } ?> 
 <? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
   <tr>
     <td class="DataTD" align="left">
-	<input type="checkbox" name="codesign" value="1"> <?=_("Code Signing")?></td>
+      <input type="checkbox" name="codesign" value="1"> <?=_("Code Signing")?></td>
     <td class="DataTD" align="left">
-	<?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
+      <?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
     </td>
   </tr>
 <? } ?>
@@ -91,7 +84,12 @@ if($_SESSION['profile']['points'] >= 50)
       <?=_("By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ .")?><br/>
     </td>
   </tr>
-
+  <tr>
+   <td class="DataTD" colspan="2" align="left">
+      <?=_("Optional comment, only used in the certifictate overview")?><br>
+       <input type="text" name="description" maxlength="100" size=100>
+   </td>
+  </tr>
 
   <tr name="expertoff" style="display:none">
     <td class="DataTD" colspan="2" align="left">
@@ -107,6 +105,8 @@ if($_SESSION['profile']['points'] >= 50)
 	<a href="http://wiki.cacert.org/wiki/SSO"><?=_("SSO WIKI Entry")?></a>
     </td>
   </tr>
+
+
  <tr name="expert">
     <td class="DataTD" colspan="2"><?=_("Optional Client CSR, no information on the certificate will be used")?></td>
  </tr>
