@@ -94,7 +94,7 @@
       <input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
       <input type="hidden" name="cert_<?=$row['id']?>" value="1"/>
     </td>
-    <td class="DataTD"><textarea name="description[]" cols="50" rows="2"><?=$row['description']?></textarea></td>
+    <td class="DataTD"><textarea name="description_<?=$row['id']?>" cols="50" rows="2"><?=htmspecialchars($row['description'])?></textarea></td>
     <td class="DataTD">
       <input type="submit" name="descriptionsave_<?=$row['id']?>" value="<?=_("Save comment")?>">
     </td>
