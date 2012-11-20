@@ -41,6 +41,7 @@
 <ul>
 <li>Account Name: CAcert Inc</li>
 <li>BSB: 032073</li>
+<li>SWIFT: WPACAU2S<li>
 <li>Account No.: 180264</li>
 </ul>
 <br/><br/>
