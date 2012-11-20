@@ -94,7 +94,7 @@
       <input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
       <input type="hidden" name="cert_<?=$row['id']?>" value="1"/>
     </td>
-    <td class="DataTD"><textarea name="description[]" cols="80" rows="5"></textarea><?=$row['description']?></textarea></td>
+    <td class="DataTD"><textarea name="description_<?=$row['id']?>" cols="50" rows="2"><?=htmspecialchars($row['description'])?></textarea></td>
     <td class="DataTD">
       <input type="submit" name="descriptionsave_<?=$row['id']?>" value="<?=_("Save comment")?>">
     </td>
@@ -116,7 +116,7 @@
     <td class="DataTD" colspan="5"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
     			<input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
 
-    <td class="DataTD" colspan="3"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
+    <td class="DataTD" colspan="4"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
 
   </tr>
 <? } ?>
