@@ -15,7 +15,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-
+<? /*
+a. https://wiki.cacert.org/Price [^]
+ b. https://wiki.cacert.org/CacertMembership/DE [^]
+ c. https://wiki.cacert.org/CacertMembership [^]
+ d. https://wiki.cacert.org/CAcertInc [^]
+ e. https://wiki.cacert.org/Brain/CAcertInc [^] 
+ */ ?>
 <h3><?=_("For CAcert Association Members")?></h3>
 
 <b><?=_("Have you paid your CAcert Association membership fees for the year?")?></b>
