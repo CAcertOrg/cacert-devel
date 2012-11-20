@@ -329,7 +329,7 @@
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 			if(is_array($addys))
@@ -429,7 +429,7 @@
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 			if(is_array($addys))
@@ -769,14 +769,14 @@
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['rowid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
 		} elseif(array_key_exists('0',$_SESSION['_config']['altid']) && $_SESSION['_config']['altid']['0'] > 0) {
 			$query = "insert into `domaincerts` set 
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['altrows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['altid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
 		} else {
 			showheader(_("My CAcert.org Account!"));
 			echo _("Domain not verified.");
@@ -1495,7 +1495,7 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1586,7 +1586,7 @@
 						`subject`='$csrsubject',
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1913,7 +1913,7 @@
 						`subject`='$csrsubject',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
 						`type`='$type', 
-						`description`='".intval($_SESSION['_config']['description'])."'";
+						`description`='".$_SESSION['_config']['description']."'";
                 }
                 mysql_query($query);
 		$CSRid = mysql_insert_id();
