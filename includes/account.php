@@ -17,7 +17,8 @@
 */
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
-
+	require_once("../includes/lib/check_weak_key.php");
+	
 	loadem("account");
 
 	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
