@@ -17,7 +17,8 @@
 */
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
-
+	require_once("../includes/lib/check_weak_key.php");
+	
 	loadem("account");
 
 function appendUnique($str, $suffix) {
@@ -320,7 +321,7 @@ function buildSubject() {
 			$_REQUEST['keytype'] = "MS";
 			$csr = clean_csr($_REQUEST['optionalCSR']);
 		}
-		if(trim($_REQUEST['description']) == ""){
+		if(trim($_REQUEST['description']) != ""){
        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
        $_SESSION['_config']['description']= "";
@@ -742,7 +743,7 @@ function buildSubject() {
 			exit;
 		}
 		
-		if(trim($_REQUEST['description']) == ""){
+		if(trim($_REQUEST['description']) != ""){
        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
        $_SESSION['_config']['description']= "";
@@ -1427,7 +1428,7 @@ echo "points2 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['point
 		$_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
 		
       
-    if(trim($_REQUEST['description']) == ""){
+    if(trim($_REQUEST['description']) != ""){
         $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
         $_SESSION['_config']['description']= "";
@@ -1461,7 +1462,7 @@ echo "points2 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['point
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-    if(trim($_REQUEST['description']) == ""){
+    if(trim($_REQUEST['description']) != ""){
         $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
         $_SESSION['_config']['description']= "";
@@ -1803,7 +1804,7 @@ echo "points2 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['point
 			exit;
 		}
 		
-		if(trim($_REQUEST['description']) == ""){
+		if(trim($_REQUEST['description']) != ""){
        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
     }else{
        $_SESSION['_config']['description']= "";
