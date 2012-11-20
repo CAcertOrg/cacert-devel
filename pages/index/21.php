@@ -16,7 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <? /*
-a. https://wiki.cacert.org/Price [^]
+page called from the following pages 
+ a. https://wiki.cacert.org/Price [^]
  b. https://wiki.cacert.org/CacertMembership/DE [^]
  c. https://wiki.cacert.org/CacertMembership [^]
  d. https://wiki.cacert.org/CAcertInc [^]
