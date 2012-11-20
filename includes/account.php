@@ -1584,7 +1584,7 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='$csrsubject',
 						`codesign`='".$_SESSION['_config']['codesign']."',
-						`rootcert`='".$_SESSION['_config']['rootcert'].."', 
+						`rootcert`='".$_SESSION['_config']['rootcert']."', 
 						`description`='".intval($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
