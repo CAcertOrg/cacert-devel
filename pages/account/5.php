@@ -29,7 +29,7 @@
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
     <td class="DataTD"><?=_("Login")?></td>
-    <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+    <td class="DataTD"><?=_("Comment *")?></td>
 <?
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
@@ -57,7 +57,7 @@
 	{
 ?>
   <tr>
-    <td colspan="9" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
+    <td colspan="8" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -94,21 +94,18 @@
       <input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
       <input type="hidden" name="cert_<?=$row['id']?>" value="1"/>
     </td>
-    <td class="DataTD"><textarea name="description_<?=$row['id']?>" cols="50" rows="2"><?=htmlspecialchars($row['description'])?></textarea></td>
-    <td class="DataTD">
-      <input type="submit" name="descriptionsave_<?=$row['id']?>" value="<?=_("Save comment")?>">
-    </td>
+    <td class="DataTD"><?=htmlspecialchars($row['description'])?></td>
   </tr>
     <? } ?>
   <tr>
-    <td class="DataTD" colspan="9">
+    <td class="DataTD" colspan="8">
       <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
     </td>
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="9">
-      <?=_("* Comment optional with max length of 100 characters. The comment is NOT included in the certificate as it is inteded for your personal reference only.. Save each comment seperately.")?>
+    <td class="DataTD" colspan="8">
+      <?=_("* Comment is NOT included in the certificate as it is inteded for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
     </td>
   </tr>
   
@@ -116,7 +113,7 @@
     <td class="DataTD" colspan="5"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
     			<input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
 
-    <td class="DataTD" colspan="4"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
+    <td class="DataTD" colspan="3"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
 
   </tr>
 <? } ?>
