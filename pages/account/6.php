@@ -18,7 +18,7 @@
 <?
 	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
 
-	$query = "select * from `emailcerts` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
+//	$query = "select * from `emailcerts` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
@@ -28,7 +28,7 @@
 			`emailcerts`.`id`,
 			`emailcerts`.`CN`,
 			`emailcerts`.`serial`,
-			emailcerts.disablelogin as `disablelogin`,
+			`emailcerts`.`disablelogin` as `disablelogin`,
 			`emailcerts`.`crt_name`,
 			`emailcerts`.`keytype`,
 			`emailcerts`.`description`
