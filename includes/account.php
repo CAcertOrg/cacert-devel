@@ -1162,13 +1162,13 @@
     }else{
        $description= "";
     }
-	}
+
 		if(trim($_REQUEST['disablelogin']) == "1"){
        $disablelogin = 1;
     }else{
        $disablelogin = 0;
     }
-	}
+
       mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
 
  }
