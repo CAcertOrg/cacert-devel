@@ -82,10 +82,7 @@ mysql $mysql_opt <<- 'SQL'
 			) NOT NULL DEFAULT 'Face to Face Meeting';
 	
 	
-	-- User table bug #1118
-	ALTER TABLE `users`
-		MODIFY `ttpadmin` tinyint(2) NOT NULL DEFAULT '0';
-		
+
 	
 	-- Update schema version number
 	INSERT INTO `schema_version`
