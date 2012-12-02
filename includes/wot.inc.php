@@ -364,10 +364,10 @@
 				break;
 			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
 			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
-			case '':				// to be revoked in the future? limit to max 50 pts?
-			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
 			case 'TTP-Assisted':	     // TTP assurances, limit to 35
 			case 'TOPUP':	     // TOPUP to be delevoped in the future, limit to 30
+			case '':				// to be revoked in the future? limit to max 50 pts?
+			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
 				break;
 			default:				// should never happen ... ;-)
 				$points = 0;
