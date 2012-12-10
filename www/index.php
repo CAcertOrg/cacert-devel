@@ -563,10 +563,9 @@ require_once('../includes/lib/l10n.php');
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
+		
 		//check for spam via honeypot
-		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])) 
-		//check for spam via honeypot
-		if ($robotest!=""){
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
 			echo _("Form could not be send.");
 			showfooter();
 			exit;
