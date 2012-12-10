@@ -15,8 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+	require_once("../includes/lib/general.php");
+
 	include_once($_SESSION['_config']['filepath']."notary.inc.php");
-	
+
 	session_name("cacert");
 	session_start();
 
@@ -695,6 +698,7 @@ echo "points3 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['point
 		return($text);
 	}
 	
+<<<<<<< HEAD
 	// returns 0 if $userID is an Assurer
 	// Otherwise :
 	//	 Bit 0 is always set
@@ -725,6 +729,9 @@ echo "points3 (".$_SESSION['profile']['xpoints']."/".$_SESSION['profile']['point
 		return $Result;
 	}
 	
+=======
+
+>>>>>>> bug-512
 	// returns text message to be shown to the user given the result of is_no_assurer
 	function no_assurer_text($Status)
 	{
