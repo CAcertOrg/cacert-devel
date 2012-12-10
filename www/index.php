@@ -563,14 +563,15 @@ require_once('../includes/lib/l10n.php');
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
-		$robotest = $_REQUEST['robotest'];
-		
+		//check for spam via honeypot
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])) 
 		//check for spam via honeypot
 		if ($robotest!=""){
-			
-			
+			echo _("Form could not be send.");
+			showfooter();
+			exit;
 		}
-		
+
 		if($_SESSION['_config']['secrethash'] != $secrethash || $secrethash == "" || $_SESSION['_config']['secrethash'] == "")
 		{
 			$id = $oldid;
