@@ -29,15 +29,26 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=_("You can alternatively use the form below, however joining the list is the prefered option to support your queries")?></p>
 <form method="post" action="index.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
-  <input type="hidden" name="support" value="yes">
+<!--   <input type="hidden" name="support" value="yes"> --> 
   <input type="hidden" name="secrethash2" value="">
+  <p class="robotic" id="pot">
+    <label>If you're human leave this blank:</label>
+    <input name="robotest" type="text" id="robotest" class="robotest" />
+  </p>
   <table border="0">
     <tr><td width="90"><?=_("Your Name")?>:</td><td><input type="text" name="who"></td><td>&#160;</td></tr>
     <tr><td><?=_("Your Email")?>:</td><td><input type="text" name="email"></td></tr>
     <tr><td><?=_("Subject")?>:</td><td><input type="text" name="subject"></td></tr>
     <tr><td colspan="2"><textarea name="message" cols="40" rows="10"></textarea></td></tr>
-    <tr><td colspan="3"><font color="#ff0000"><?=_("Warning: Please do not enter confidential data into this form, it is being sent to a public mailinglist. Use the form further below instead.")?></font></td></tr>
-    <tr><td colspan="2"><input type="submit" name="process" value="<?=_("Send")?>"></td></tr>
+
+    <tr>
+      <td ><font color="#ff0000"><?=_("Warning: Please do not use send to mailing list when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
+      <td ><?=_("For confidential data use send to support.")?></font></td>
+    </tr>
+    <tr>
+      <td><input type="submit" name="process[0]" value="<?=_("Send to mailing list")?>"></td>
+      <td><input type="submit" name="process[1]" value="<?=_("Send to support")?>"></td>
+    </tr>
   </table>
 </form>
 
@@ -50,7 +61,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=_("There are a number of other mailing lists CAcert runs, some are general discussion, others are technical (such as the development list) or platform specific help (such as the list for Apple Mac users)")?></p>
 <p><a href="http://lists.cacert.org/"><?=_("Click here to view all lists available")?></a></p>
 
-<p><b><?=_("Sensitive Information")?></b></p>
+<!-- <p><b><?=_("Sensitive Information")?></b></p>
 <p><?=_("If you have questions, comments or otherwise and information you're sending to us contains sensitive details, you should use the contact form below. Due to the large amounts of support emails we receive, sending general questions via this contact form will generally take longer then using the support mailing list. Also sending queries in anything but english could cause delays in supporting you as we'd need to find a translator to help.")?></p>
 <form method="post" action="index.php" name="form2">
   <input type="hidden" name="secrethash2" value="">
@@ -62,7 +73,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <tr><td colspan="2"><textarea name="message" cols="40" rows="10"></textarea></td></tr>
     <tr><td colspan="2"><input type="submit" name="process" value="<?=_("Send")?>"></td></tr>
   </table>
-</form>
+</form>--> 
 
 <p><b><?=_("Security Issues")?></b></p>
 <p><?=sprintf(_("Please use any of the following ways to report security issues: You can use the above contact form for sensitive information. You can email us to support@cacert.org. You can file a bugreport on %s and mark it as private."),"<a href='https://bugs.cacert.org/'>bugs.cacert.org</a>")?></p>
