@@ -27,7 +27,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
 <p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><?=_("You can alternatively use the form below, however joining the list is the prefered option to support your queries")?></p>
-<form method="post" action="index.php" name="form1">
+<form method="post" action="account.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
 <!--   <input type="hidden" name="support" value="yes"> --> 
   <input type="hidden" name="secrethash2" value="">
@@ -42,8 +42,8 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <tr><td width="100" valign="top"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
 
     <tr>
-      <td colspan="2" width="200"><font color="#ff0000"><?=_("Warning: Please do not use send to mailing list when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
-      <td colspan="2" width="200"><?=_("For confidential data use send to support.")?></font></td>
+      <td colspan="2"><font color="#ff0000"><?=_("Warning: Please do not use send to mailing list when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
+      <td colspan="2"><?=_("For confidential data use send to support.")?></font></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" name="process[0]" value="<?=_("Send to mailing list")?>"></td>
