@@ -35,15 +35,15 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <label>If you're human leave this blank:</label>
     <input name="robotest" type="text" id="robotest" class="robotest" />
   </p>
-  <table border="0">
-    <tr><td width="100"><?=_("Your Name")?>:</td><td width="100"><input type="text" name="who"></td><td width="100">&#160;</td><td width="100"></td></tr>
-    <tr><td width="100"><?=_("Your Email")?>:</td><td colspan="2"><input type="text" name="email"></td><td width="100"></td></tr>
-    <tr><td width="100"><?=_("Subject")?>:</td><td><input type="text" name="subject"></td></tr>
-    <tr><td width="100"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
+<table border="0">
+    <tr><td width="100"><?=_("Your Name")?>:</td><td colspan="3 width="300"><input type="text" name="who"></td>
+    <tr><td width="100"><?=_("Your Email")?>:</td><td colspan="3"><input type="text" name="email"></td>
+    <tr><td width="100"><?=_("Subject")?>:</td><td colspan="3"><input type="text" name="subject"></td></tr>
+    <tr><td width="100" valign="top"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
 
     <tr>
-      <td colspan="2"><font color="#ff0000"><?=_("Warning: Please do not use send to mailing list when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
-      <td colspan="2"><?=_("For confidential data use send to support.")?></font></td>
+      <td colspan="2" width="200"><font color="#ff0000"><?=_("Warning: Please do not use send to mailing list when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
+      <td colspan="2" width="200"><?=_("For confidential data use send to support.")?></font></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" name="process[0]" value="<?=_("Send to mailing list")?>"></td>
