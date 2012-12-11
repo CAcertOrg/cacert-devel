@@ -36,7 +36,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <input name="robotest" type="text" id="robotest" class="robotest" />
   </p>
 <table border="0">
-    <tr><td width="100"><?=_("Your Name")?>:</td><td colspan="3 width="300"><input type="text" name="who"></td>
+    <tr><td width="100"><?=_("Your Name")?>:</td><td colspan="3" width="300"><input type="text" name="who"></td>
     <tr><td width="100"><?=_("Your Email")?>:</td><td colspan="3"><input type="text" name="email"></td>
     <tr><td width="100"><?=_("Subject")?>:</td><td colspan="3"><input type="text" name="subject"></td></tr>
     <tr><td width="100" valign="top"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
