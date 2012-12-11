@@ -27,17 +27,28 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
 <p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><?=_("You can alternatively use the form below, however joining the list is the prefered option to support your queries")?></p>
-<form method="post" action="account.php" name="form1">
+<form method="post" action="index.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
-  <input type="hidden" name="support" value="yes">
+<!--   <input type="hidden" name="support" value="yes"> --> 
   <input type="hidden" name="secrethash2" value="">
+  <p class="robotic" id="pot">
+    <label>If you're human leave this blank:</label>
+    <input name="robotest" type="text" id="robotest" class="robotest" />
+  </p>
   <table border="0">
-    <tr><td width="90"><?=_("Your Name")?>:</td><td><input type="text" name="who"></td><td>&#160;</td></tr>
-    <tr><td><?=_("Your Email")?>:</td><td><input type="text" name="email"></td></tr>
-    <tr><td><?=_("Subject")?>:</td><td><input type="text" name="subject"></td></tr>
-    <tr><td colspan="2"><textarea name="message" cols="40" rows="10"></textarea></td></tr>
-    <tr><td colspan="3"><font color="#ff0000"><?=_("Warning: Please do not enter confidential data into this form, it is being sent to a public mailinglist. Use the form further below instead.")?></font></td></tr>
-    <tr><td colspan="2"><input type="submit" name="process" value="<?=_("Send")?>"></td></tr>
+    <tr><td width="100"><?=_("Your Name")?>:</td><td width="100"><input type="text" name="who"></td><td width="100">&#160;</td><td width="100"></td></tr>
+    <tr><td width="100"><?=_("Your Email")?>:</td><td colspan="2"><input type="text" name="email"></td><td width="100"></td></tr>
+    <tr><td width="100"><?=_("Subject")?>:</td><td><input type="text" name="subject"></td></tr>
+    <tr><td width="100"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
+
+    <tr>
+      <td colspan="2"><font color="#ff0000"><?=_("Warning: Please do not use send to mailing list when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
+      <td colspan="2"><?=_("For confidential data use send to support.")?></font></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="process[0]" value="<?=_("Send to mailing list")?>"></td>
+      <td colspan="2"><input type="submit" name="process[1]" value="<?=_("Send to support")?>"></td>
+    </tr>
   </table>
 </form>
 
@@ -49,20 +60,6 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><b><?=_("Other Mailing Lists")?></b></p>
 <p><?=_("There are a number of other mailing lists CAcert runs, some are general discussion, others are technical (such as the development list) or platform specific help (such as the list for Apple Mac users)")?></p>
 <p><a href="http://lists.cacert.org/"><?=_("Click here to view all lists available")?></a></p>
-
-<p><b><?=_("Sensitive Information")?></b></p>
-<p><?=_("If you have questions, comments or otherwise and information you're sending to us contains sensitive details, you should use the contact form below. Due to the large amounts of support emails we receive, sending general questions via this contact form will generally take longer then using the support mailing list. Also sending queries in anything but english could cause delays in supporting you as we'd need to find a translator to help.")?></p>
-<form method="post" action="account.php" name="form2">
-  <input type="hidden" name="secrethash2" value="">
-  <input type="hidden" name="oldid" value="<?=$id?>">
-  <table border="0">
-    <tr><td><?=_("Your Name")?>:</td><td><input type="text" name="who"></td></tr>
-    <tr><td><?=_("Your Email")?>:</td><td><input type="text" name="email"></td></tr>
-    <tr><td><?=_("Subject")?>:</td><td><input type="text" name="subject"></td></tr>
-    <tr><td colspan="2"><textarea name="message" cols="40" rows="10"></textarea></td></tr>
-    <tr><td colspan="2"><input type="submit" name="process" value="<?=_("Send")?>"></td></tr>
-  </table>
-</form>
 
 <p><b><?=_("Security Issues")?></b></p>
 <p><?=sprintf(_("Please use any of the following ways to report security ".
