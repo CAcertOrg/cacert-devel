@@ -16,18 +16,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	include_once("../includes/mysql.php");
+	require_once(dirname(__FILE__).'/../../includes/mysql.php');
+	require_once(dirname(__FILE__).'/../../includes/lib/account.php');
 
 
-
-	//mysql_query("update users set assurer=0");
-	$query = "select notary.`to` as uid from notary group by notary.`to` having sum(points)>=100;";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
-	{
-		$query = "update users set `assurer`='1' where `id`='${row['uid']}'";
-		//echo $query."\n";
-		mysql_query($query);
+	// Recalculate assurer flag for all accounts
+	if (!fix_assurer_flag()) {
+		fwrite(STDERR, "ERROR on fixing the assurer flag. Continuing anyway");
 	}
 
 
@@ -70,8 +65,6 @@
 		echo $query."\n";
 		mysql_query($query);
 	}
-
-
 
 
 ?>

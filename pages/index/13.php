@@ -35,10 +35,24 @@ printf(_("CAcert Inc. is a non-profit association which is legally able to accep
 
 <pre>
 Account Name: CAcert Inc
-BSB: 032073
-Account No.: 180264
+SWIFT:        WPACAU2S
+BSB:          032073
+Account No.:  180264
 </pre>
 
 <p><?=_("ANY amount will be appreciated - the more funding CAcert receives, the sooner it can achieve the goals of the community.")?></p>
 
 <p><?=_("Thank you very much for your support, your donations help CAcert to continue to operate.")?></p>
+
+
+<h3><?=_("Using Our Affiliate Partners")?></h3>
+
+<h4>Booking.com</h4>
+
+<p><?=_("If you do any trips where you need accommodation why not book via booking.com?")?></p>
+
+<p><?php
+	printf(_("For any booking done over %s started from this page CAcert gets a share of the provision. You do not pay more but you will support CAcert."),
+		'<a href="//www.booking.com/index.html?aid=346253">booking.com</a>');
+	?></p>
+

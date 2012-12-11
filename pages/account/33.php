@@ -51,7 +51,7 @@
 <? } ?>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><input type="text" name="comments" size=27 maxlength=20 value=""></td>
+    <td class="DataTD"><textarea name="comments" cols="30" rows="5"></textarea></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>

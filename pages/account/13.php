@@ -25,18 +25,18 @@
 	$day = intval(substr($user['dob'], 8, 2));
 
 	$body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
-	$body .= _("You receive this automatic mail since you yourself or")."\n";
-	$body .= _("someone else looked up your secret questions and answers")."\n";
-	$body .= _("for a forgotten password.")."\n\n";
-	$body .= _("If it was you who looked up or changed that data, or clicked")."\n";
-	$body .= _("through the menu in your account, everything is in best order and")."\n";
-	$body .= _("you can ignore this mail.")."\n\n";
-	$body .= _("But if you received this mail without a recognisable reason,")."\n";
-	$body .= _("there is a danger that an unauthorised person accessed your")."\n";
-	$body .= _("account, and you should promptly change your password and your")."\n";
-	$body .= _("secret questions and answers.")."\n\n";
+	$body .= _("You receive this automatic mail since you yourself or someone ".
+			"else looked up your secret questions and answers for a forgotten ".
+			"password.\n\n".
+			"If it was you who looked up or changed that data, or clicked ".
+			"through the menu in your account, everything is in best order ".
+			"and you can ignore this mail.\n\n".
+			"But if you received this mail without a recognisable reason, ".
+			"there is a danger that an unauthorised person accessed your ".
+			"account, and you should promptly change your password and your ".
+			"secret questions and answers.")."\n\n";
 
-	$body .= _("With kind regards,")."\n\n"._("CAcert Support");
+	$body .= _("Best regards")."\n"._("CAcert Support");
 
 	sendmail($user['email'], "[CAcert.org] "._("Email Notification"), $body, "support@cacert.org", "", "", "CAcert Support");
 ?>

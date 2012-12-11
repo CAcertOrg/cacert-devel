@@ -1,0 +1,33 @@
+CAcert Assurer Training Event Jena [Deutsch]
+::::::::::::::::::::::::::::::::::::::::::::
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher eher "muendlich ueberlieferten" Regeln wurden in Policies gegossen. Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B. in dem CAcert Community Agreement) wurden beschlossen. Die Assurer Training Events wollen versuchen, die ganzen Informationen unter’s Volk zu bringen:
+
+- Was hast du auf dem CAP Formular hinzuzufuegen, wenn du Minderjaehrige ueberpruefst ?
+- Warum solltest du dir R/L/O einpraegen ?
+- Wie verhaelst du dich, wenn du ein fremdes Ausweis Dokument das erste mal pruefst ?
+
+Antworten auf diese und weitere Fragen erhaelst du bei den Assurer Training Events (ATEs).
+
+Die kommende Veranstaltung in deiner Naehe findet statt am:
+
+Donnerstag den 29. Maerz 2012, 19:00 - 22:00
+
+Adresse: Am Johannisfriedhof 2, Jena
+Gebaeude: Universitaetsrechenzentrum der Friedrich-Schiller-Universitaet Jena
+OSM: [http://osm.org/go/0MAe9XhNp-]
+Webseite: [http://www.uni-jena.de/URZ.html]
+
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Details zum Veranstaltungsort und Anfahrthinweise findet Ihr im
+Wiki [https://wiki.cacert.org/Events/2012-03-29ATE-Jena]
+Blog [http://blog.cacert.org/2012/03/550.html]
+
+
+
+Unverbindliche Anmeldung und Registrierung:
+Rueckantwort mit 'Ich moechte teilnehmen: ATE-Jena'
+
+Kontakt: events@cacert.org

@@ -333,12 +333,16 @@ $iecho= "c";
 
 		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)
 		{
-//			$body .= _("You now have over 100 points and can start assuring others.")."\n\n";
-			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the")." ";
-			$body .= _("Assurer Challenge")." ( https://cats.cacert.org )\n\n";
-			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n\n";
+			$body .= _("You have at least 100 Assurance Points. If you want ".
+					"to become an assurer try the Assurer Challenge").
+					" ( https://cats.cacert.org ).\n\n";
+			$body .= _("To make it easier for others in your area to find ".
+					"you, it's helpful to list yourself as an assurer (this ".
+					"is voluntary), as well as a physical location where you ".
+					"live or work the most. You can flag your account to be ".
+					"listed, and add a comment to the display by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=8\n\n";
-			$body .= _("You can list your location by going to:")."\n\n";
+			$body .= _("You can list your location by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
 
@@ -442,9 +446,44 @@ $iecho= "c";
 						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{
-				sendmail($user['email'], "[CAcert.org] ".$_REQUEST['subject'], $_REQUEST['message'],
-					$_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']);
-				show_page("ContactAssurer",_("Your email has been sent to")." ".$user['fname'].".<br />[ <a href='javascript:history.go(-2)'>"._("Go Back")."</a> ]","");
+				$my_translation = L10n::get_translation();
+				L10n::set_translation($user['language']);
+				
+				$subject = "[CAcert.org] ".sprintf(_("Message from %s"),
+						$_SESSION['profile']['fname']);
+				
+				$body  = sprintf(_("Hi %s,"), $user['fname'])."\n\n";
+				$body .= sprintf(_("%s %s has sent you a message via the ".
+						"contact an Assurer form on CAcert.org."),
+						$_SESSION['profile']['fname'],
+						$_SESSION['profile']['lname'])."\n\n";
+				$body .= sprintf(_("Subject: %s"), $_REQUEST['subject'])."\n";
+				$body .= _("Message:")."\n";
+				$body .= $_REQUEST['message']."\n\n";
+				$body .= "------------------------------------------------\n\n";
+				$body .= _("Please note, that this is NOT a message on behalf ".
+						"of CAcert but another CAcert community member. If ".
+						"you suspect that the contact form might have been ".
+						"abused, please write to support@cacert.org")."\n\n";
+				$body .= _("Best regards")."\n";
+				$body .= _("Your CAcert Community");
+				
+				sendmail($user['email'], $subject, $body,
+						$_SESSION['profile']['email'], //from
+						"", //replyto
+						"", //toname
+						$_SESSION['profile']['fname']." ".
+							$_SESSION['profile']['lname']); //fromname
+				
+				L10n::set_translation($my_translation);
+				
+				showheader(_("My CAcert.org Account!"));?>
+				<p>
+					<? printf(_("Your email has been sent to %s."), $user['fname']); ?>
+				</p>
+				<p>[ <a href='javascript:history.go(-2)'><?= _("Go Back") ?></a> ]</p>
+				<?
+				showfooter();
 				exit;
 			} else {
 				show_page(0,"",_("Sorry, I was unable to locate that user."));
