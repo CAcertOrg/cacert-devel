@@ -1,0 +1,82 @@
+(German see below)
+
+Hello <name>,
+
+In preparation for an internal test prior to the audit, we checked if the data 
+entries in the Organisation Accounts are valid. As you are listed as an 
+Organisation Administrator for at least one organisation account, I found out 
+that you currently do not match the requirements to be an Organisation 
+Administrator - in that you need to be an CAcert Assurer. 
+
+The premise to be a CAcert Assurer are that you have:
+ - got at least 100 Assurance Points
+ - passed the CATS test
+        
+It is possible that you may have missed some changes within the CAcert 
+assurance system.
+
+In 2009 the CATS challenge [1] was introduced. You have to pass it before you 
+get the CAcert Assurer status.
+
+In addition, CAcert will be changing the points calculation in the near future. 
+This was announced in 2011 [2].
+
+As you are missing the 100 Assurance Points requirement (which might be due to 
+the new points calculation) and the CATS challenge, I ask you to get assured 
+during the next 3 months to reach the 100 Assurance Points and do the CATS test. 
+If you have problems in getting assured, please let me know, so I can see what 
+can be done to help you. If you have not passed the CATS test and reached the 
+100 points by then (or after an additional grace period in cases of hardship), 
+I will have to delete you as Organisation Administrator from the appropriate 
+accounts. 
+
+[1] https://wiki.cacert.org/AssurerChallenge
+[2] https://wiki.cacert.org/PR/News/NewPointsCalculation
+
+Thank you for your support.
+
+Marcus Maengel
+CAcert Organisation Assurance Officer
+ 
+---------------------------------------------------
+
+[German Version]
+
+Hallo <name>,
+
+bei der Vorbereitung eines internen Tests vor dem Audit haben wir ueberprueft, 
+ob die Datensaetze in den Organisationskonten gueltig sind. Da Sie als 
+Organisations Administrator fuer mindestens ein Organisationskonto eingetragen 
+sind, habe ich festgestellt, dass Sie zurzeit kein CAcert Assurer sind, was die 
+Voraussetzung fuer die Taetigkeit als Organisations Administrator ist.
+
+Als CAcert Assurer muessen Sie die folgenden Vorausetzungen erfuellen:
+ - Mindestens 100 Assurance-Punkte
+ - Bestandene Assurer-Pruefung (CATS-Test)
+
+Moeglicherweise haben Sie einige aenderungen bei CAcert verpasst.
+
+Im Jahre 2009 wurde die Assurer-Pruefung (Assurer Challenge, CATS Test) [1] 
+eingefuehrt. Die muessen Sie bestehen, um den Assurer-Status zu erhalten.
+
+CAcert wird die Punkte-Berechnung in naher Zukunft aendern. Dies wurde bereits 
+2011 angekuendigt [2].
+
+Da Sie die 100 Assurance-Punkte nicht erreicht haben, was auch an der neuen 
+Punkteberechnung liegen kann, und auch die Assurer-Pruefung nicht abgelegt 
+haben, fordere ich Sie auf, sich innerhalb der naechsten 3 Monate assuren zu 
+lassen, um die 100 Punkte zu erreichen, und die Assurer-Pruefung abzulegen. 
+Wenn Sie Probleme haben, sich assuren zu lassen, teilen Sie mir das bitte mit 
+und wir werden sehen, wie wir Ihnen dabei helfen koennen. Wenn Sie bis dahin 
+(oder nach einer zusaetzlichen Gnadenfrist in schwierigen Faellen) die 
+100 Punkte nicht erreicht haben oder die Assurer-Pruefung nicht abgelegt haben, 
+werde ich Sie als Organisations-Administrator aus den betreffenden Konten 
+austragen.
+
+[1] https://wiki.cacert.org/AssurerChallenge
+[2] https://wiki.cacert.org/PR/News/NewPointsCalculation
+
+Vielen Dank fuer Ihre Unterstuetzung.
+
+Marcus Maengel
+CAcert Organisation Assurance Officer
