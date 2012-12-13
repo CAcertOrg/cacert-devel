@@ -177,6 +177,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><a href="account.php?id=55&amp;userid=<?=intval($row['id'])?>">show</a></td>
   </tr>
   <tr>
+    <td class="DataTD"><?=_("CCA accepted")?>:</td>
+    <td class="DataTD"><?=intval(get_user_agreement_status($row['id']))?>  <a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>">show</a></td>
+  </tr>
+  <tr>
     <td class="DataTD"><?=_("Is Assurer")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;assurer=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admsetassuret')?>"><?=$row['assurer']?></a></td>
   </tr>
