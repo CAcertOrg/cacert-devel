@@ -602,4 +602,70 @@
 	<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
 <?
 	}
+	
+	//functions to do with recording user agreements
+	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
+	// write a new record to the table user_agreement
+		$query="insert into user_agreements set memid=".$memid.", secmemid=".$secmemid.
+			",document='".$document."',date=NOW(), active=".$active.",method='".$method."',`comment`='".$comment."'" ;
+		$res = mysql_query($query);
+	}
+	
+	function get_user_agreement_status($memid, $type="CCA"){
+	//returns 0 - no user agreement, 1- at least one entry
+		$query="SELECT u.`document` FROM user_agreements u 
+			WHERE u.`document` = '".$type."'' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")" ;
+		$res = mysql_query($query);
+		if(mysql_num_rows($res) <=0){
+			return 0;
+		}else{
+			return 1;
+		}
+	}
+
+	function get_first_user_agreement($memid, $active=1, $type="CCA"){
+	//returns an array (`document`,`date`,`method`, `comment`,`active`)
+		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM user_agreements u
+			WHERE u.`document` = '".$type."'' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")
+			AND u.`active`=".$active."
+			ORDER BY u.`date` Limit 1;" ;
+		$res = mysql_query($query);
+		if(mysql_num_rows($res) <=0){
+			$row = mysql_fetch_assoc($res);
+			$rec['document']= $row['document'];
+			$rec['date']= $row['date'];
+			$rec['method']= $row['method'];
+			$rec['comment']= $row['comment'];
+			$rec['active']= $row['active'];
+		}else{
+			$rec=array();
+		}
+		return $rec;
+	}
+
+	function get_last_user_agreement($memid){
+	//returns an array (`document`,`date`,`method`, `comment`,`active`)
+		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active`  FROM user_agreements u
+			WHERE u.`document` = '".$type."'' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")
+			ORDER BY u.`date` desc Limit 1;" ;
+		$res = mysql_query($query);
+		if(mysql_num_rows($res) <=0){
+			$row = mysql_fetch_assoc($res);
+			$rec['document']= $row['document'];
+			$rec['date']= $row['date'];
+			$rec['method']= $row['method'];
+			$rec['comment']= $row['comment'];
+			$rec['active']= $row['active'];
+		}else{
+			$rec=array();
+		}
+		return $rec;
+}
+
+	function delete_user_agreement($memid, $type="CCA"){
+	//deletes all entries to an user for the given type of user agreements
+		mysql_query("delete from `user_agreements` where `memid`='".$memid."'");
+		mysql_query("delete from `user_agreements` where `secmemid`='".$memid."'");
+	}
+
 ?>

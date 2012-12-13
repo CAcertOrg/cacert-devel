@@ -297,6 +297,10 @@ $iecho= "c";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
+		include_once("../includes/notary.inc.php");
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);
+/* to be activates after the CCA recording is announced
+		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']); */
 		
 		if($_SESSION['profile']['points'] < 150)
 		{
@@ -313,6 +317,7 @@ $iecho= "c";
 							`method`='Administrative Increase',
 							`when`=NOW()";
 			mysql_query($query);
+
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
 		}
