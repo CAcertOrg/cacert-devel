@@ -614,7 +614,7 @@
 	function get_user_agreement_status($memid, $type="CCA"){
 	//returns 0 - no user agreement, 1- at least one entry
 		$query="SELECT u.`document` FROM user_agreements u 
-			WHERE u.`document` = '".$type."'' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")" ;
+			WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")" ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <=0){
 			return 0;
@@ -625,12 +625,16 @@
 
 	function get_first_user_agreement($memid, $active=1, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
+		if($active==1){
+			$filter="u.`memid`=".$memid;
+		}else{
+			$filter="u.`secmemid`=".$memid;
+		}
 		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM user_agreements u
-			WHERE u.`document` = '".$type."'' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")
-			AND u.`active`=".$active."
-			ORDER BY u.`date` Limit 1;" ;
+			WHERE u.`document` = '".$type."' AND ".$filter."
+			ORDER BY u.`date` Limit 1;";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) <=0){
+		if(mysql_num_rows($res) >0){
 			$row = mysql_fetch_assoc($res);
 			$rec['document']= $row['document'];
 			$rec['date']= $row['date'];
@@ -643,13 +647,13 @@
 		return $rec;
 	}
 
-	function get_last_user_agreement($memid){
+	function get_last_user_agreement($memid, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
-		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active`  FROM user_agreements u
-			WHERE u.`document` = '".$type."'' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")
-			ORDER BY u.`date` desc Limit 1;" ;
+		$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." ) order by date desc limit 1)
+ union
+ (SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND ( u.`secmemid`=".$memid.")) order by date desc limit 1" ;
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) <=0){
+		if(mysql_num_rows($res) >0){
 			$row = mysql_fetch_assoc($res);
 			$rec['document']= $row['document'];
 			$rec['date']= $row['date'];
@@ -669,3 +673,5 @@
 	}
 
 ?>
+
+
