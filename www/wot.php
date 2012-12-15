@@ -18,7 +18,7 @@
 <?
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
-
+	require_once("../includes/temp-function1.php");
 
 function show_page($target,$message,$error)
 {
@@ -371,9 +371,11 @@ $iecho= "c";
 
 		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
 		{
+			$my_translation = L10n::get_translation();
+			L10n::set_translation('en_AU');
 			$body  = sprintf("%s %s (%s) has issued a temporary increase to 200 points for %s %s (%s) for %s days. This action was sponsored by %s %s (%s).", $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'], $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'], intval($_POST['expire']), $sponsor['fname'], $sponsor['lname'], $sponsor['email'])."\n\n";
-
 			sendmail("cacert-board@lists.cacert.org", "[CAcert.org] Temporary Increase Issued.", $body, "website@cacert.org", "", "", "CAcert Website");
+			L10n::set_translation($my_translation);
 		}
 
 		showheader(_("My CAcert.org Account!"));
