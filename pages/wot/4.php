@@ -72,18 +72,21 @@ if ($_SESSION['profile']['points']<100){
 			</tr>
 		</table>
 	</form>
-<?}else{?>
-  /* As soon as the TPP TOPUP Programme is established this routine should be used
+<? //"
+	} else {
+	/* As soon as the TPP TOPUP Programme is established this routine should be used
 	<p><?=_("As you got already 2 TTP assurances you only can take part in the TTP TOPUP programme.\n\n If you want to ask for the TTP TOPUP programme use the submit button to send the request to support@cacert.org to start the process. CAcert will inform you then about the next steps.")?></p>
 		<form method="post" action="wot.php">
 			<input type="hidden" name="oldid" value="<?=$id?>">
 			<input type="submit" name="ttptopup" value="<?=_("I need a TTP TOPUP")?>">
 	 </form>
 */
+?>
 	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. In the meanwhile you have to close this gap with face to face assurances with CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>  
-<?}?>
-
-}
-else{
-<p><?=_("You reached the maximum points that can be granted by the TTP programme and therefore you cannot takte part in the TTP programme any more.")?></p>
+<?
+	}
+} else {
+?>
+	<p><?=_("You reached the maximum points that can be granted by the TTP programme and therefore you cannot takte part in the TTP programme any more.")?></p>
+<?
 }
