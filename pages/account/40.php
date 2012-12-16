@@ -65,21 +65,14 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 </form>
 
 <p><b><?=_("Security Issues")?></b></p>
-<p><? sprintf(_("Please use any of the following ways to report security ".
+<p><?=sprintf(_("Please use any of the following ways to report security ".
 	"issues: You can use the above contact form for sensitive information. ".
 	"You can email us to %s. You can file a bugreport on %s and mark it as ".
 	"private."),
 	"<a href='mailto:support@cacert.org'>support@cacert.org</a>",
 	"<a href='https://bugs.cacert.org/'>bugs.cacert.org</a>")?></p>
 
-<p><b><?=_("Snail Mail")?></b></p>
-<p><?=_("Alternatively you can get in contact with us via the following methods:")?></p>
 
-<p><?=_("Postal Address:")?><br>
-CAcert Inc.<br>
-P.O. Box 4107<br>
-Denistone East NSW 2112<br>
-Australia</p>
 
 <script type="text/javascript">
 <!--
