@@ -18,7 +18,6 @@
 <?
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
-	require_once("../includes/temp-function1.php");
 
 function show_page($target,$message,$error)
 {

@@ -18,7 +18,6 @@
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
 	require_once('lib/check_weak_key.php');
-	require_once("../includes/temp-function1.php");
 
 	loadem("account");
 

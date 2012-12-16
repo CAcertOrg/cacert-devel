@@ -17,7 +17,7 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
-	require_once("../includes/temp-function1.php");
+	require_once("../includes/lib/l10n.php");
 
 	loadem("account");
 
