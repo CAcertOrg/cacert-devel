@@ -48,7 +48,7 @@
 // test for points <100
 if ($_SESSION['profile']['points']<100){
 	// test for TTP assurances
-	if (get_number_of_ttpassurances($userid)<2){?>
+	if (get_number_of_ttpassurances(intval($_SESSION['profile']['id']))<2){?>
 		<p><?=_("If you want to ask for TTP assurances fill out the missing data and send the request to support@cacert.org to start the process. CAcert will inform you then about the next steps.")?></p>
 		<form method="post" action="wot.php">
 		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
