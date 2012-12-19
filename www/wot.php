@@ -134,8 +134,8 @@ function send_reminder()
 		 L10n::set_translation($_SESSION['_config']['notarise']['language']);	 
 	  if ($_POST['ttp']!='') {
  		 //This mail does not need to be transalted
-		 $body = "Hi TTP adminstrators \n\n ";
-     $body .= $_SESSION['profile']['fname']." ". $_SESSION['profile']['lname'].", ".$_SESSION['profile']['email']." is requesting a TTP assurances for ".mysql_escape_string(stripslashes($_POST['country'])).".";
+		 $body = "Hi TTP adminstrators, \n\n ";
+     $body .= "User ".$_SESSION['profile']['fname']." ". $_SESSION['profile']['lname']." with email address: ".$_SESSION['profile']['email']." is requesting a TTP assurances for ".mysql_escape_string(stripslashes($_POST['country'])).".\n\n"";
 		 if ($_POST['ttptopup']=='1') {
 		  $body .= "The user is requesting also the TTP TOPUP.\n\n";
   	 }else{

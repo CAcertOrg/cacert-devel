@@ -43,7 +43,7 @@ if ($_SESSION['profile']['points']<100){
 		<form method="post" action="wot.php">
 		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 			<tr>
-				<td class="DataTD"><?=_("Country you whant to visit the TTP")?></td>
+				<td class="DataTD"><?=_("Country you want to visit the TTP")?></td>
 				<td class="DataTD"><select size="1" name="country">
 						<option>Australia</option>
 						<option>Puerto Rico</option>
@@ -77,6 +77,6 @@ if ($_SESSION['profile']['points']<100){
 	}
 } else {
 ?>
-	<p><?=_("You reached the maximum points that can be granted by the TTP programme and therefore you cannot takte part in the TTP programme any more.")?></p>
+	<p><?=_("You reached the maximum points that can be granted by the TTP programme and therefore you cannot take part in the TTP programme any more.")?></p>
 <?
 }
