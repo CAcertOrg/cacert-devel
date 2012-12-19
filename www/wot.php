@@ -141,7 +141,7 @@ function send_reminder()
   	 }else{
       $body .= "The user is NOT requesting the TTP TOPUP.\n\n";
      }
-     $body .= "The user received ".$_SESSION['profile']['points']." assurance points up today.\n\n";
+     $body .= "The user received ".(int)$_SESSION['profile']['points']." assurance points up today.\n\n";
 		 $body .= "Please start the TTP assurance process.";
 	   sendmail("support@cacert.org", "[CAcert.org] "._("TTP request."), $body, "support@cacert.org", "", "", "CAcert Website");
 
@@ -160,25 +160,7 @@ function send_reminder()
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You requested TTP assurances"), $body, "support@cacert.org", "", "", "CAcert Support");
 
     }
-     
-    if ($_POST['ttptopup']!='') {
- 		 //This mail does not need to be transalted
-		 $body = "Hi TTP adminstrators \n\n ";
-     $body .= $_SESSION['profile']['fname']." ". $_SESSION['profile']['lname'].", ".$_SESSION['profile']['email']." is requesting a TTP TOPUP assurance.";
-     $body .="The user received ".$_SESSION['profile']['points']." assurance points up today.\n\n";
-		 $body .="Please start the TTP TOPUP assurance process.";
-	   sendmail("support@cacert.org", "[CAcert.org] "._("TTP TOPUP request."), $body, "support@cacert.org", "", "", "CAcert Website");
 
-     //This mail needs to be translated
-		L10n::set_translation($my_translation);
-
-		$body  = _("You are receiving this email because you asked for TTP TOPUP assurance")."\n\n";
-		$body .= _("Best regards")."\n";
-		$body .= _("CAcert Support Team");
-
-		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You requested a TTP TOPUP assurance"), $body, "support@cacert.org", "", "", "CAcert Support");
-     
-    }
 	}
 
 	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
