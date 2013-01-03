@@ -566,7 +566,7 @@ require_once('../includes/lib/l10n.php');
 		
 		//check for spam via honeypot
 		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
-			echo _("Form could not be send.");
+			echo _("Form could not be sent.");
 			showfooter();
 			exit;
 		}
