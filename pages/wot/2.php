@@ -16,12 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 
-<h3><?=_("To become an Assurer")?></h3>
+<h3><?=_('To become an Assurer')?></h3>
 
 <p><?=_("There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show at least one better two government issued photo ID where possible otherwise you won't be allocated as many points!).")?></p>
 
-<p><?=sprintf(_("You can also become a CAcert Assurer taking part in the TTP (Trusted Third Party) programme. For more information see %s."),"<a href='".$_SERVER['HTTP_HOST']."/wot.php?id=4'>TTP</a>" )?></p>
+<p><?=sprintf(_('You can also become a CAcert Assurer taking part in the TTP (Trusted Third Party) programme. For more information see %s.'),'<a href="/wot.php?id=4">TTP</a>')?></p>
 
-<p><?=sprintf(_("If you are interested in the TTP programme, read the pages %s for the basic way how the TTP programme works for you, and %s whether the TTP programme affects the country where you are located."),"<a href='//wiki.cacert.org/TTP/TTPuser'>https://wiki.cacert.org/TTP/TTPuser</a>","<a href='//wiki.cacert.org/TTP/TTPAL'>https://wiki.cacert.org/TTP/TTPAL</a>")?> </p>
+<p><?=sprintf(_('If you are interested in the TTP programme, read the pages %s for the basic way how the TTP programme works for you, and %s whether the TTP programme affects the country where you are located.'),'<a href="//wiki.cacert.org/TTP/TTPuser">https://wiki.cacert.org/TTP/TTPuser</a>','<a href="//wiki.cacert.org/TTP/TTPAL">https://wiki.cacert.org/TTP/TTPAL</a>')?> </p>
 
-<p><?=sprintf(_("Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at %s. For more information explore the wiki regarding the %s."),"<a href='https://cats.cacert.org/'>https://cats.cacert.org/</a>","<a href='https://wiki.cacert.org/AssurerChallenge/'>https://wiki.cacert.org/AssurerChallenge/</a>")?></p>
+<p><?=sprintf(_('Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at %s. For more information explore the wiki regarding the %s.'),'<a href="https://cats.cacert.org/">https://cats.cacert.org/</a>','<a href="https://wiki.cacert.org/AssurerChallenge/">https://wiki.cacert.org/AssurerChallenge/</a>')?></p>
