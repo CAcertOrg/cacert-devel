@@ -54,9 +54,9 @@ function account_delete($id, $arbno, $adminid){
 //deletes an account following the deleted account routnie V3 
 // called from www/account.php if($oldid == 50 && $process != "")
 //change password
-	$pool = "abcdefghijklmnopqrstuvwxyz";
-	$pool .= "0123456789!()§";
-	$pool .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$pool = 'abcdefghijklmnopqrstuvwxyz';
+	$pool .= '0123456789!()§';
+	$pool .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	srand ((double)microtime()*1000000);
 	$password="";
 	for($index = 0; $index < 30; $index++)
@@ -94,9 +94,9 @@ function account_delete($id, $arbno, $adminid){
 	mysql_query("update `alerts` set `radius`='1' where `memid`='$id'");
 	
 //set default location
-		$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
-		mysql_query($query);
-		
+	$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
+	mysql_query($query);
+	
 //clear listings
 	$query = "update `users` set `listme`=' ',`contactinfo`=' ' where `id`='".$id."'";
 	mysql_query($query);
