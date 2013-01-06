@@ -17,7 +17,8 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
-
+	require_once("../includes/temp_functions.php");
+	
 	loadem("account");
 
         $type=""; if(array_key_exists('type',$_REQUEST)) $type=$_REQUEST['type'];
@@ -58,24 +59,13 @@
 			{
 				$row = mysql_fetch_assoc($res);
 				echo $row['email']."<br>\n";
-				$query = "select `emailcerts`.`id`
-						from `emaillink`,`emailcerts` where
-						`emailid`='$emailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
-						`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
-						group by `emailcerts`.`id`";
-				$dres = mysql_query($query);
-				while($drow = mysql_fetch_assoc($dres))
-					mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($drow['id'])."'");
-
-				$do = `../scripts/runclient`;
-				$query = "update `email` set `deleted`=NOW() where `id`='".intval($emailid)."'";
-				mysql_query($query);
+				account_email_delete($row['id']);
 			}
 			mysql_query("update `disputeemail` set hash='',action='accept' where `id`='$emailid'");
-	                $rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
-        	        $rc = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
-        	        $res = mysql_query("select * from `users` where `id`='$oldmemid'");
-	                $user = mysql_fetch_assoc($res);
+			$rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
+			$rc = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
+			$res = mysql_query("select * from `users` where `id`='$oldmemid'");
+			$user = mysql_fetch_assoc($res);
 			if($rc == 0 && $rc2 == 0 && $_SESSION['_config']['email'] == $user['email'])
 			{
 				mysql_query("update `users` set `deleted`=NOW() where `id`='$oldmemid'");
@@ -160,18 +150,13 @@
 			showheader(_("Domain Dispute"));
 			echo "<p>"._("You have opted to accept this dispute and the request will now remove this domain from the existing account, and revoke any current certificates.")."</p>";
 			echo "<p>"._("The following accounts have been removed:")."<br>\n";
+			//new account_domain_delete($domainid, $memberID)
 			$query = "select * from `domains` where `id`='$domainid' and deleted=0";
 			$res = mysql_query($query);
 			if(mysql_num_rows($res) > 0)
 			{
-                                echo $_SESSION['_config']['domain']."<br>\n";
-                                mysql_query("update `domains` set `deleted`=NOW() where `id`='$domainid'");
-				$query = "select * from `domlink` where `domid`='$domainid'";
-				$res = mysql_query($query);
-				while($row = mysql_fetch_assoc($res))
-	                                mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['certid']."' and `revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0");
-				$do = `../scripts/runserver`;
-			}
+			echo $_SESSION['_config']['domain']."<br>\n";
+			account_domain_delete($domainid);
 			mysql_query("update `disputedomain` set hash='',action='accept' where `id`='$domainid'");
 			showfooter();
 			exit;

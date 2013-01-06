@@ -19,11 +19,15 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Change Password")?></td>
+    <td colspan="2" class="title"><?=_("Delete Account")?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Email")?>:</td>
     <td class="DataTD"><b><?=sanitizeHTML($_REQUEST['email'])?></b></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("Username from arbitration number.")?>:</td>
+    <td class="DataTD"><input type="text" name="arbitrationno"></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><?=_("Are you sure you want to delete this user, while not actually deleting the account it will completely disable it and revoke any/all certificates currently issued.")?></td>

@@ -18,7 +18,8 @@
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
 	require_once('lib/check_weak_key.php');
-
+	require_once("../includes/temp_functions.php");
+	
 	loadem("account");
 
 	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
@@ -160,17 +161,7 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['email']."<br>\n";
-					$query = "select `emailcerts`.`id` 
-							from `emaillink`,`emailcerts` where
-							`emailid`='$id' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
-							`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
-							group by `emailcerts`.`id`";
-					$dres = mysql_query($query);
-					while($drow = mysql_fetch_assoc($dres))
-						mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['id']."'");
-	
-					$query = "update `email` set `deleted`=NOW() where `id`='$id'";
-					mysql_query($query);
+					account_email_delete($row['id']);
 					$delcount++;
 				}
 			}
@@ -622,31 +613,9 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-					
-					$dres = mysql_query(
-						"select distinct `domaincerts`.`id`
-							from `domaincerts`, `domlink`
-							where `domaincerts`.`domid` = '$id'
-							or (
-								`domaincerts`.`id` = `domlink`.`certid`
-								and `domlink`.`domid` = '$id'
-								)");
-					while($drow = mysql_fetch_assoc($dres))
-					{
-						mysql_query(
-							"update `domaincerts`
-								set `revoked`='1970-01-01 10:00:01'
-								where `id` = '".$drow['id']."'
-								and `revoked` = 0
-								and UNIX_TIMESTAMP(`expire`) -
-										UNIX_TIMESTAMP() > 0");
-					}
-					
-					mysql_query(
-						"update `domains`
-							set `deleted`=NOW()
-							where `id` = '$id'");
+					account_domain_delete($row['id']);
 				}
+
 			}
 		}
 		else
@@ -2875,23 +2844,11 @@
 	if($oldid == 50 && $process != "")
 	{
 		$_REQUEST['userid'] = intval($_REQUEST['userid']);
-		$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'");
-		if(mysql_num_rows($res) > 0)
-		{
-			$query = "update `domaincerts`,`domains` SET `domaincerts`.`revoked`='1970-01-01 10:00:01'
-					WHERE `domaincerts`.`domid` = `domains`.`id` AND `domains`.`memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `domains` SET `deleted`=NOW() WHERE `domains`.`memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `emailcerts` SET `revoked`='1970-01-01 10:00:01' WHERE `memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `email` SET `deleted`=NOW() WHERE `memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "delete from `org` WHERE `memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `users` SET `deleted`=NOW() WHERE `id`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
+		if (!isset($_REQUEST['arbitrationno'])){
+			echo _("You did not enter an arbitration number.");
+			exit;
 		}
+		account_delete($_REQUEST['userid'], $_REQUEST['arbitrationno'], $_SESSION['profile']['id']);
 	}
 
 	if(($id == 51 || $id == 52 || $oldid == 52) && $_SESSION['profile']['tverify'] <= 0)
