@@ -176,9 +176,9 @@
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
 <? if($verified != _("Pending") && $verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"></td>
+    <td class="DataTD"><input type="checkbox" name="revokeid[<?=$row['id']?>]" ></td>
 <? } else if($verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
+    <td class="DataTD"><input type="checkbox" name="delid[<?=$row['id']?>]"></td>
 <? } else { ?>
     <td class="DataTD">&nbsp;</td>
 <? } ?>    
