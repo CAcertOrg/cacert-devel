@@ -15,22 +15,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<span style="background-color: #FF8080; font-size: 150%">
-Note that the <strong>TTP</strong> programme is effectively <strong>Frozen</strong><br>
-Until a subsidiary policy under AP is written, it is against AP rules.<br>
-</span>
-&nbsp;<br>
-<h3><?=_("To become an Assurer")?></h3>
 
-<p><?=_("There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show 2 government issued photo ID where possible otherwise you won't be allocated as many points!).")?></p>
+<h3><?=_('To become an Assurer')?></h3>
 
-<p><?=_("You can also become a CAcert Assurer by seeking out a public notary, justice of the peace, accountant, lawyer or bank manager. You will need to download and print out a copy of the TTP.pdf and fill in your sections. You will need to produce a photo copy of your ID, which the person assuring you will inspect against the originals. Once they are satisfied the documents appear to be genuine they need to sign the back of the photo copies, and fill in their sections of the TTP document. Once you have had your ID verified by 2 different people, pop the copies + forms in an envelope and post them to:")?></p>
+<p><?=_("There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show at least one better two government issued photo ID where possible otherwise you won't be allocated as many points!).")?></p>
 
-<p>CAcert Inc.<br>
-P.O. Box 4107<br>
-Denistone East NSW 2112<br>
-Australia</p>
+<p><?=sprintf(_('You can also become a CAcert Assurer taking part in the TTP (Trusted Third Party) programme. For more information see %s.'),'<a href="/wot.php?id=4">TTP</a>')?></p>
 
-<p><?=_("Upon receiving your documents you will be notified, and points will be added to your account.")?></p>
+<p><?=sprintf(_('If you are interested in the TTP programme, read the pages %s for the basic way how the TTP programme works for you, and %s whether the TTP programme affects the country where you are located.'),'<a href="//wiki.cacert.org/TTP/TTPuser">https://wiki.cacert.org/TTP/TTPuser</a>','<a href="//wiki.cacert.org/TTP/TTPAL">https://wiki.cacert.org/TTP/TTPAL</a>')?> </p>
 
-<p><?=_("Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at").' <a href="https://cats.cacert.org/">https://cats.cacert.org/</a>!'?></p>
+<p><?=sprintf(_('Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at %s. For more information explore the wiki regarding the %s.'),'<a href="https://cats.cacert.org/">https://cats.cacert.org/</a>','<a href="https://wiki.cacert.org/AssurerChallenge/">https://wiki.cacert.org/AssurerChallenge/</a>')?></p>
