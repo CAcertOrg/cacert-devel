@@ -31,7 +31,7 @@ function account_domain_delete($domainid){
 		where `domaincerts`.`domid` = '$domainid'
 		or (
 		`domaincerts`.`id` = `domlink`.`certid`
-		and `domlink`.`domid` = '$domainid'";
+		and `domlink`.`domid` = '$domainid')";
 	$dres = mysql_query($query);
 	while($drow = mysql_fetch_assoc($dres))
 	{
