@@ -75,7 +75,7 @@ function account_delete($id, $arbno, $adminid){
 	mysql_query($query);
 
 //delete all other email address
-	$query = "select * from `email` where `memid`='".$id."' and `memid`='".$emailid."'" ;
+	$query = "select * from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
 	$res=mysql_query($query);
 	while($row = mysql_fetch_assoc($res)){
 		account_email_delete($row['id']);
