@@ -14,7 +14,7 @@ function account_email_delete($mailid){
 			group by `emailcerts`.`id`";
 	$dres = mysql_query($query);
 	while($drow = mysql_fetch_assoc($dres)){
-		mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['id']."'");
+		mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01', `disablelogin`=0 where `id`='".$drow['id']."'");
 	}
 	$query = "update `email` set `deleted`=NOW() where `id`='$mailid'";
 	mysql_query($query);
