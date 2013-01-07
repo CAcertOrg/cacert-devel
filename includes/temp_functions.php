@@ -77,14 +77,14 @@ function account_delete($id, $arbno, $adminid){
 //delete all other email address
 	$query = "select * from `email` where `memid`='".$id."' and `memid`='".$emailid."'" ;
 	$res=mysql_query($query);
-	while($row = mysql_fetch_assoc(dres)){}
+	while($row = mysql_fetch_assoc(dres)){
 		account_email_delete($row['id']);
 	}
 
 //delete all domains
 	$query = "select * from `domains` where `memid`='".$id."'";
 	$res=mysql_query($query);
-	while($row = mysql_fetch_assoc($res)){}
+	while($row = mysql_fetch_assoc($res)){
 		account_email_delete($row['id']);
 	}
 
@@ -109,9 +109,9 @@ function account_delete($id, $arbno, $adminid){
 	mysql_query("delete from `addlang` where `userid`='".$id."'");
 
 //change secret questions 
-	for($i=1;$i<=5;$i++){}
+	for($i=1;$i<=5;$i++){
 		$q="";
-		$a=""
+		$a="";
 		for($index = 0; $index < 30; $index++)
 		{
 			$q .= substr($pool,(rand()%(strlen ($pool))), 1);
