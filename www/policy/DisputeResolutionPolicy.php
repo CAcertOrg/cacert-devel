@@ -60,8 +60,8 @@
 </a><br />
    Licence: <a style="color: steelblue" href="//wiki.cacert.org/Policy#Licence" title="this document is Copyright &copy; CAcert Inc., licensed openly under CC-by-sa with all disputes resolved under DRP.  More at wiki.cacert.org/Policy" > CC-by-sa+DRP </a><br /></td>
 <td valign="top" align="right">
-  <a href="//www.cacert.org/policy/PolicyOnPolicy.php"><img src="images/cacert-policy.png" alt="TTP-Assist Status - POLICY" height="31" width="88" style="border-style: none;" /></a><br />
-  <a href="//www.cacert.org/policy/PolicyOnPolicy.php"><img src="images/cacert-draft.png" alt="TTP-Assist Status - DRAFT" height="31" width="88" style="border-style: none;" /></a>
+  <a href="//www.cacert.org/policy/PolicyOnPolicy.php"><img src="/images/cacert-policy.png" alt="TTP-Assist Status - POLICY" height="31" width="88" style="border-style: none;" /></a><br />
+  <a href="//www.cacert.org/policy/PolicyOnPolicy.php"><img src="/images/cacert-draft.png" alt="TTP-Assist Status - DRAFT" height="31" width="88" style="border-style: none;" /></a>
 
 </td>
 </tr>
