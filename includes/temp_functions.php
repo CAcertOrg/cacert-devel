@@ -9,7 +9,7 @@ function account_email_delete($mailid){
 
 	$query = "select `emailcerts`.`id` 
 		from `emaillink`,`emailcerts` where
-		emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
+		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
 		`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
 			group by `emailcerts`.`id`";
 	$dres = mysql_query($query);
