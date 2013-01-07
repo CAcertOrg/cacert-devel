@@ -85,14 +85,14 @@ function account_delete($id, $arbno, $adminid){
 	$query = "select * from `domains` where `memid`='".$id."'";
 	$res=mysql_query($query);
 	while($row = mysql_fetch_assoc($res)){
-		account_email_delete($row['id']);
+		account_domain_delete($row['id']);
 	}
 
 //clear alert settings
-	mysql_query("update `alerts` set `general`='1' where `memid`='$id'");
-	mysql_query("update `alerts` set `country`='1' where `memid`='$id'");
-	mysql_query("update `alerts` set `regional`='1' where `memid`='$id'");
-	mysql_query("update `alerts` set `radius`='1' where `memid`='$id'");
+	mysql_query("update `alerts` set `general`='0' where `memid`='$id'");
+	mysql_query("update `alerts` set `country`='0' where `memid`='$id'");
+	mysql_query("update `alerts` set `regional`='0' where `memid`='$id'");
+	mysql_query("update `alerts` set `radius`='0' where `memid`='$id'");
 
 //set default location
 	$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
@@ -117,9 +117,7 @@ function account_delete($id, $arbno, $adminid){
 			$q .= substr($pool,(rand()%(strlen ($pool))), 1);
 			$a .= substr($pool,(rand()%(strlen ($pool))), 1);
 		}
-		$query = "update `users` set `Q".$i."`='".$q."',
-						`A".$i."`='".$a."',
-						where `id`='".$id."'";
+		$query = "update `users` set `Q$i`='$q', `A$i`='$a' where `id`='".$id."'";
 		mysql_query($query);
 	}
 
