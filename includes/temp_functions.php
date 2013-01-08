@@ -6,8 +6,9 @@ function account_email_delete($mailid){
 //revolkes all certifcates for that email address
 //called from www/account.php if($process != "" && $oldid == 2)
 //called from www/diputes.php if($type == "reallyemail") / if($action == "accept")
+//called from account_delete
 
-	$query = "select `emailcerts`.`id` 
+	$query = "select `emailcerts`.`id`
 		from `emaillink`,`emailcerts` where
 		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
 		`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
@@ -25,6 +26,7 @@ function account_domain_delete($domainid){
 //revolkes all certifcates for that domain address
 //called from www/account.php if($process != "" && $oldid == 9)
 //called from www/diputes.php if($type == "reallydomain") / if($action == "accept")
+//called from account_delete
 
 	$query = "select distinct `domaincerts`.`id`
 		from `domaincerts`, `domlink`
@@ -50,7 +52,7 @@ function account_domain_delete($domainid){
 }
 
 function account_delete($id, $arbno, $adminid){
-//deletes an account following the deleted account routnie V3 
+//deletes an account following the deleted account routnie V3
 // called from www/account.php if($oldid == 50 && $process != "")
 //change password
 
@@ -108,7 +110,7 @@ function account_delete($id, $arbno, $adminid){
 	//delete secondary langugaes
 	mysql_query("delete from `addlang` where `userid`='".$id."'");
 
-//change secret questions 
+//change secret questions
 	for($i=1;$i<=5;$i++){
 		$q="";
 		$a="";
@@ -135,7 +137,7 @@ function account_delete($id, $arbno, $adminid){
 		where `id`='".$id."'";
 	mysql_query($query);
 
-//clear all admin flags
+//clear all admin and board flags
 	mysql_query("update `users` set `assurer`='0' where `id`='$id'");
 	mysql_query("update `users` set `assurer_blocked`='0' where `id`='$id'");
 	mysql_query("update `users` set `codesign`='0' where `id`='$id'");
@@ -145,9 +147,25 @@ function account_delete($id, $arbno, $adminid){
 	mysql_query("update `users` set `admin`='0' where `id`='$id'");
 	mysql_query("update `users` set `adadmin`='0' where `id`='$id'");
 	mysql_query("update `users` set `tverify`='0' where `id`='$id'");
+	mysql_query("update `users` set `board`='0' where `id`='$id'");
 
 //block account
 	mysql_query("update `users` set `locked`='1' where `id`='$id'");
 }
 
+
+function check_email_exists($email){
+// called from includes/account.php if($process != "" && $oldid == 1)
+// called from includes/account.php	if($oldid == 50 && $process != "")
+
+	$query = "select * from `email` where `email`='$email' and `deleted`=0";
+	$res = mysql_query($query);
+	if(mysql_num_rows($res) > 0)
+	{
+		return true;
+	}else{
+		return false;
+	}
+
+}
 ?>
