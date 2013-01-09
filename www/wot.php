@@ -18,6 +18,7 @@
 <?
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
+require_once("../includes/wot.inc.php");
 
 
 function show_page($target,$message,$error)
@@ -87,28 +88,28 @@ function send_reminder()
 {
 	$body = "";
 	$my_translation = L10n::get_translation();
-	
+
 	$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
-	
+
 	$reminder_translations[] = $_POST['reminder-lang'];
 	if ( !in_array("en", $reminder_translations, $strict=true) ) {
 		$reminder_translations[] = "en";
 	}
-	
+
 	foreach ($reminder_translations as $translation) {
 		L10n::set_translation($translation);
-		
+
 		$body .= L10n::$translations[$translation].":\n\n";
 		$body .= sprintf(_("This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."), $_SESSION['profile']['fname']." (".$_SESSION['profile']['email'].")", "http://www.cacert.org", $_SESSION['profile']['fname'])."\n\n";
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team")."\n\n";
 	}
-	
+
 	L10n::set_translation($reminder_translations[0]); // for the subject
 	sendmail($_POST['email'], "[CAcert.org] "._("Reminder Notice"), $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
-	
+
 	L10n::set_translation($my_translation);
-	
+
 	$_SESSION['_config']['remindersent'] = 1;
 	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
@@ -122,13 +123,13 @@ function send_reminder()
 	if(array_key_exists('location',$_POST) && $_POST['location'] != "")
 		$_SESSION['_config']['location'] = $_POST['location'];
 
-	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;	
+	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;
 
 	if($oldid == 12)
 		$id = $oldid;
 
 	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
-		if (!is_assurer($_SESSION['profile']['id'])) 
+		if (!is_assurer($_SESSION['profile']['id']))
 			{
 				show_page ("Exit","",get_assurer_reason($_SESSION['profile']['id']));
 				exit;
@@ -155,7 +156,7 @@ function send_reminder()
 			$_SESSION['_config']['noemailfound'] = 1;
 			show_page("EnterEmail","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
 			exit;
-		} else 
+		} else
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
 			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
@@ -196,6 +197,12 @@ function send_reminder()
 	{
 $iecho= "c";
 		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+
+		if(!array_key_exists('CCAAgreed',$_POST) || $_POST['CCAAgreed'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
@@ -247,7 +254,7 @@ $iecho= "c";
 			$newpoints = $awarded = $max;
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
-		
+
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
@@ -260,13 +267,13 @@ $iecho= "c";
 			$newpoints = $max - $drow['total'];
 		if($newpoints < 0)
 			$newpoints = 0;
-		
+
 		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' AND
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
-						`awarded`='$awarded' AND 
+						`awarded`='$awarded' AND
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
 						`date`='".mysql_escape_string(stripslashes($_POST['date']))."'";
 		$res = mysql_query($query);
@@ -285,6 +292,10 @@ $iecho= "c";
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
 						`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
+		//record active acceptance by Assurer
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
+		//record passive acceptance by Assuree
+		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "Assurance", "Assuree", 0, $_SESSION['profile']['id']);
 		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
 		{
 			$query .= ",\n`method`='Temporary Increase'";
@@ -297,7 +308,7 @@ $iecho= "c";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
-		
+
 		if($_SESSION['profile']['points'] < 150)
 		{
 			$addpoints = 0;
@@ -319,7 +330,7 @@ $iecho= "c";
 
 		$my_translation = L10n::get_translation();
 		L10n::set_translation($_SESSION['_config']['notarise']['language']);
-		
+
 		$body  = sprintf(_("You are receiving this email because you have been assured by %s %s (%s)."), $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)
 			$body .= sprintf(_("You were issued %s points however the system has rounded this down to %s and you now have %s points in total."), $_POST['points'], $newpoints, ($newpoints + $drow['total']))."\n\n";
@@ -448,10 +459,10 @@ $iecho= "c";
 			{
 				$my_translation = L10n::get_translation();
 				L10n::set_translation($user['language']);
-				
+
 				$subject = "[CAcert.org] ".sprintf(_("Message from %s"),
 						$_SESSION['profile']['fname']);
-				
+
 				$body  = sprintf(_("Hi %s,"), $user['fname'])."\n\n";
 				$body .= sprintf(_("%s %s has sent you a message via the ".
 						"contact an Assurer form on CAcert.org."),
@@ -467,16 +478,16 @@ $iecho= "c";
 						"abused, please write to support@cacert.org")."\n\n";
 				$body .= _("Best regards")."\n";
 				$body .= _("Your CAcert Community");
-				
+
 				sendmail($user['email'], $subject, $body,
 						$_SESSION['profile']['email'], //from
 						"", //replyto
 						"", //toname
 						$_SESSION['profile']['fname']." ".
 							$_SESSION['profile']['lname']); //fromname
-				
+
 				L10n::set_translation($my_translation);
-				
+
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
 					<? printf(_("Your email has been sent to %s."), $user['fname']); ?>
@@ -489,10 +500,10 @@ $iecho= "c";
 				show_page(0,"",_("Sorry, I was unable to locate that user."));
 				exit;
 			}
-		
+
 		}
-	} 
-	if($oldid == 9) 
+	}
+	if($oldid == 9)
 	{
 		$oldid=0;
 		$id = 9;
