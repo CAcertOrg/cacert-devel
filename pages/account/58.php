@@ -30,16 +30,16 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 		$query = "select `users`.`fname`, `users`.`mname`, `users`.`lname`, `orginfo`.`o`, `org`.`masteracc`
 			FROM `users`, `orginfo`, `org`
 			WHERE `users`.`id` = `org`.`memid` AND `orginfo`.`id` = `org`.`orgid`
-			AND `users`.`id`='$user_id' ";
+			AND `users`.`id`='$user_id' order by `orginfo`.`o`";
 		$res = mysql_query($query);?>
 		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper"><?
 		if (mysql_num_rows($res) <= 0) {?>
 			<tr>
-				<td colspan="2" class="title"><?=sprintf(_('%s %s %s is not listed as Organisation Adminstrator'),sanitizeHTML($row['fname']),sanitizeHTML($row['mname']),sanitizeHTML($row['lname']))?></td>
+				<td colspan="2" class="title"><?=sprintf(_('%s %s %s is not listed as Organisation Administrator'),sanitizeHTML($row['fname']),sanitizeHTML($row['mname']),sanitizeHTML($row['lname']))?></td>
 			</tr>
 		<?}else{?>
 			<tr>
-				<td colspan="2" class="title"><?=sprintf(_('%s %s %s is listed as Organisation Adminstrator for:'),sanitizeHTML($row['fname']),sanitizeHTML($row['mname']),sanitizeHTML($row['lname']))?></td>
+				<td colspan="2" class="title"><?=sprintf(_('%s %s %s is listed as Organisation Administrator for:'),sanitizeHTML($row['fname']),sanitizeHTML($row['mname']),sanitizeHTML($row['lname']))?></td>
 			</tr>
 			<tr>
 				<td class="DataTD"><b><?=_('Organisation')?></b></td>
