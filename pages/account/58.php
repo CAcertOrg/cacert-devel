@@ -51,6 +51,7 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 					<td class="DataTD"><?=$drow['masteracc'] ? _("Yes") : _("No") ?></td>
 				</tr>
 			<?}
+		}
 		?></table>
 <?	}
 }
