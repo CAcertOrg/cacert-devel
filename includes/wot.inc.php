@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ 
+*/
 
 	function query_init ($query)
 	{
@@ -61,8 +61,8 @@
 
 	function get_top_assurer_position ($no_of_assurances)
 	{
-		$res = query_init ("SELECT count(*) AS `list` FROM `notary` 
-			WHERE `method` = 'Face to Face Meeting' 
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
+			WHERE `method` = 'Face to Face Meeting'
 			GROUP BY `from` HAVING count(*) > '".intval($no_of_assurances)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
@@ -92,7 +92,7 @@
 		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' group by points,awarded,method");
 		return $res;
 	}
-	
+
 	function get_received_assurances_summary ($userid)
 	{
 		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' group by points,awarded,method");
@@ -138,7 +138,7 @@
 			$awarded = 100;
 		}
 		else
-			$experience = 0;	
+			$experience = 0;
 
 		switch ($row['method'])
 		{
@@ -319,7 +319,7 @@
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['to'])); 
+			$fromuser = get_user (intval($row['to']));
 			$apoints = calc_experience ($row,$points,$experience,$sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
 			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience);
@@ -562,7 +562,7 @@ function AssureHead($confirmation,$checkname)
 		<td class="DataTD" colspan="2" align="left"><?=$checkname?></td>
 	</tr>
 <?
- } 
+ }
 
 function AssureTextLine($field1,$field2)
 {
@@ -636,5 +636,13 @@ function AssureFoot($oldid,$confirm)
 	<input type="hidden" name="oldid" value="<?=$oldid?>">
 </form>
 <?
+}
+
+// double with notray.inc
+function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
+	// write a new record to the table user_agreement
+	$query="insert into `user_agreements` set `memid`=".$memid.", `secmemid`=".$secmemid.
+			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
+	$res = mysql_query($query);
 }
 
