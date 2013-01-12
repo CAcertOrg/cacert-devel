@@ -19,7 +19,7 @@
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
 require_once("../includes/wot.inc.php");
-require_once("../includes/notary.inc.php");
+
 
 
 function show_page($target,$message,$error)
