@@ -150,7 +150,7 @@ function account_delete($id, $arbno, $adminid){
 	mysql_query("update `users` set `board`='0' where `id`='$id'");
 
 //block account
-	mysql_query("update `users` set `locked`='1'where `id`='$id'");  //, `deleted`=Now()
+	mysql_query("update `users` set `locked`='1' where `id`='$id'");  //, `deleted`=Now()
 }
 
 
