@@ -67,9 +67,13 @@ SELECT *
   OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY "\n"
   FROM `adminlog`
+SQL
 
-  echo "Dump table create in ???"
 
+echo "Dump table create in ???"
+
+
+mysql $mysql_opt <<- 'SQL'
 -- update table admin log
 
 UPDATE `adminlog` SET `type` = 'old name or dob change',
