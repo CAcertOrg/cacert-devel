@@ -50,41 +50,47 @@ schema_version=$( mysql $mysql_opt <<- 'SQL'
 	SELECT MAX(`version`) FROM `schema_version`;
 SQL
 )
-if [ $schema_version != 2 ]; then
+if [ $schema_version != 3 ]; then
 	cat >&$STDERR <<- ERROR
 		Error: database schema is not in the right version to do the migration!
-		Expected version: 2 (i.e. the version before there was versioning)
+		Expected version: 3 (i.e. the version before there was versioning)
 	ERROR
 	exit 2
 fi
 
 mysql $mysql_opt <<- 'SQL'
 
+-- dump table AdminLog
+SELECT *
+  INTO OUTFILE "???"
+  FIELDS TERMINATED BY ','
+  OPTIONALLY ENCLOSED BY '"'
+  LINES TERMINATED BY "\n"
+  FROM `adminlog`
 
--- alter table Admin log
+  echo "Dump table create in ???"
 
-ALTER TABLE `adminlog` ADD `type` VARCHAR( 50 ) NOT NULL ,
-  ADD `information` VARCHAR( 50 ) NOT NULL
+-- update table admin log
 
--- create new table OrgAdminLog
+UPDATE `adminlog` SET `type` = 'old name or dob change',
+`information` = 'see dump ???'
 
-CREATE TABLE IF NOT EXISTS `orgadminlog` (
-  `when` datetime NOT NULL,
-  `oid` int(11) NOT NULL,
-  `adminid` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `information` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- alter table admin log
 
+ALTER TABLE `adminlog`
+  DROP `old-lname`,
+  DROP `old-dob`,
+  DROP `new-lname`,
+  DROP `new-dob`;
 
 
 	-- Update schema version number
 	INSERT INTO `schema_version`
 		(`version`, `when`) VALUES
-		('3'      , NOW() );
+		('4'      , NOW() );
 SQL
 
 
-echo "Database successfully migrated to version 3"
+echo "Database successfully migrated to version 4"
 exit 0
 
