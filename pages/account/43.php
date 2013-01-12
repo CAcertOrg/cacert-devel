@@ -662,7 +662,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	</tr>
 
 	<tr>
-		<td class="DataTD"<a href="account.php?id=58&amp;userid=<?=intval($row['id'])?>"><?=_("Org Server")?></a>:</td>
+		<td class="DataTD"><a href="account.php?id=58&amp;userid=<?=intval($row['id'])?>"><?=_("Org Server")?></a>:</td>
 	<?
 	$query = "select COUNT(*) as `total`,
 	                 MAX(`orgcerts`.`expire`) as `maxexpire`
