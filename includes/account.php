@@ -2843,11 +2843,15 @@
 	{
 		$_REQUEST['userid'] = intval($_REQUEST['userid']);
 		if (trim($_REQUEST['arbitrationno'])==""){
+			showheader(_("My CAcert.org Account!"));
 			echo _("You did not enter an arbitration number.");
+			showfooter();
 			exit;
 		}
 		if (check_email_exists($_REQUEST['arbitrationno'].'@cacert.org')==true) {
+			showheader(_("My CAcert.org Account!"));
 			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['arbitrationno'].'@cacert.org'));
+			showfooter();
 			exit;
 		 }
 		account_delete($_REQUEST['userid'], $_REQUEST['arbitrationno'], $_SESSION['profile']['id']);
