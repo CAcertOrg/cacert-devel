@@ -150,7 +150,7 @@ function send_reminder()
 	{
 		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) != 1)
+		if(mysql_num_rows($res) >= 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
 			show_page("EnterEmail","",_("This account is locked and can not be assured. For more information ask support@cacert.org."));
