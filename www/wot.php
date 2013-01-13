@@ -342,8 +342,6 @@ $iecho= "c";
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
-		//record passive acceptance by Assuree
-		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "Assurance", "Assuree", 0, $_SESSION['profile']['id']);
 		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
 		{
 			$query .= ",\n`method`='Temporary Increase'";
