@@ -651,3 +651,7 @@ div.footerbar {
   padding: 10px 10px 10px 10px;
 }
 
+/************ Honeypot  ***********/
+
+.robotic { display: none; }
+
