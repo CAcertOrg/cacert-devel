@@ -168,4 +168,100 @@ function check_email_exists($email){
 	}
 
 }
+
+function check_gpg_cert_running($uid,$cca=0){
+	//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
+	// called from includes/account.php	if($oldid == 50 && $process != "")
+	if (0==$cca) {
+		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()";
+	}else{
+		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()";
+	}
+	$res = mysql_query($query);
+	if(mysql_num_rows($res) > 0)
+	{
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
+function check_client_cert_running($uid,$cca=0){
+	//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
+	// called from includes/account.php	if($oldid == 50 && $process != "")
+	if (0==$cca) {
+		$query = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
+		$query1 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+	}else{
+		$query = "select from `emailcerts` where `memid`='$uid' and `expire`>NOW()";
+		$query1 = "select from `emailcerts` where `memid`='$uid' and `revoked`>NOW()";
+	}
+	$res = mysql_query($query);
+	if(mysql_num_rows($res) > 0)
+	{
+		$r1=true;
+	}else{
+		$r1=false;
+	}
+	$res = mysql_query($query1);
+	if(mysql_num_rows($res) > 0)
+	{
+		$r2=true;
+	}else{
+		$r2=false;
+	}
+	if(true==$r1 || true==$r2)
+	{
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
+function check_server_cert_running($uid,$cca=0){
+	//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
+	// called from includes/account.php	if($oldid == 50 && $process != "")
+	if (0==$cca) {
+		$query = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
+		$query1 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+	}else{
+		$query = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
+		$query1 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+	}
+	$res = mysql_query($query);
+	if(mysql_num_rows($res) > 0)
+	{
+		$r1=true;
+	}else{
+		$r1=true;
+	}
+	$res = mysql_query($query1);
+	if(mysql_num_rows($res) > 0)
+	{
+		$r2=true;
+	}else{
+		$r2=false;
+	}
+	if(true==$r1 || true==$r2)
+	{
+		return true;
+	}else{
+		return false;
+	}
+}
+function check_is_orgadmin($uid){
+	// called from includes/account.php	if($oldid == 50 && $process != "")
+	$query = "select * from `org` where `memid`='$uid' and `deleted`=0";
+	$res = mysql_query($query);
+	if(mysql_num_rows($res) > 0)
+	{
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
 ?>

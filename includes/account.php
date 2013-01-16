@@ -2853,6 +2853,20 @@
 			showfooter();
 			exit;
 		 }
+		if (check_client_cert_running($_REQUEST['userid'],1)==true ||
+			check_server_cert_running($_REQUEST['userid'],1)==true ||
+			check_gpg_cert_running($_REQUEST['userid'],1)==true) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The CCA retention time for at least one certificate is not over. Can't continue."));
+			showfooter();
+			exit;
+		}
+		if (check_is_orgadmin($_REQUEST['userid'],1)==true) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The user is listed as Organisation Administrator. Can't continue."));
+			showfooter();
+			exit;
+		}
 		account_delete($_REQUEST['userid'], $_REQUEST['arbitrationno'], $_SESSION['profile']['id']);
 	}
 
