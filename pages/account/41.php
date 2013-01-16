@@ -25,7 +25,7 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td colspan="2" class="title"><?=_("My Language Settings")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("My prefered language")?>:</td>
+    <td class="DataTD"><?=_("My preferred language")?>:</td>
     <td class="DataTD"><select name="lang">
 <?
 	foreach(L10n::$translations as $key => $val)
