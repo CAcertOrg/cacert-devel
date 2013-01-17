@@ -29,7 +29,7 @@
 
 <body>
 
-<style type="text/css"> 
+<style type="text/css">
 table#TAB1 {border-color: rgb(173,197,215); border-top: solid 5px rgb(173,197,215); border-left: solid 5px rgb(173,197,215);}
 table#TAB1 td { border: 0 }
 </style>
@@ -121,7 +121,7 @@ table#TAB1 td { border: 0 }
 <?php
 	for ( $i = 0; $i < 2; $i++ ) {
 	    echo '<tr>', "\n", '    <td>';
-	    if ( $i < 1 ) { echo _("Registered Trade Names");} 
+	    if ( $i < 1 ) { echo _("Registered Trade Names");}
 	    echo '</td>', "\n";
 	    for ( $j = 1; $j <= 3; $j++ ) {
 		printf("    <td align=\"%s\"><input size=\"25\" maxlength=\"80\" name=\"dba%d\"></td>\n", $j > 2 ? "right" : ($j > 2 ? "center" : "left") , $i * 3 + $j);
@@ -189,7 +189,7 @@ table#TAB1 td { border: 0 }
 <?php
 	echo _("Make sure you have read and agreed with the CAcert Community Agreement");
 ?>
- (<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">CCA</a>)</i><br></td>
+ (<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.html">CCA</a>)</i><br></td>
 </tr>
 <tr><td colspan=2><p></td></tr>
 <tr>
@@ -210,7 +210,7 @@ table#TAB1 td { border: 0 }
 <?php
 	echo ' '. _("I agree to the CAcert Community Agreement.").' (';
 ?>
-<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">CCA</a>)</dd></td>
+<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.html">CCA</a>)</dd></td>
 </tr>
 <tr>
     <td colspan="2"><input type="checkbox" checked name="checked" value="2">
@@ -281,7 +281,7 @@ table#TAB1 td { border: 0 }
 <tr><td colspan="2"></td><tr>
 </tbody>
 </table>
-<div style="text-align: right;"><small><small><span>&copy; 
+<div style="text-align: right;"><small><small><span>&copy;
 <?php
 	echo date('Y').' CAcert Inc., V2, '.date('Y-n-j');
 ?>
@@ -327,7 +327,7 @@ table#TAB1 td { border: 0 }
 	        'http://svn.cacert.org/CAcert/Policies/OrganisationAssurancePolicy/OrganisationAssuranceSubPolicyEurope.html',
 	    'Organisation Assurance Subpolicy for the United States' =>
 	        'http://svn.cacert.org/CAcert/Policies/OrganisationAssurancePolicy/OrganizationAssuranceSubPolicyUnitedStates.html',
-	); 
+	);
 	$cnt = 0;
 	while( list($key, $ref) = each($policies) ) {
 	    $cnt++;
@@ -338,7 +338,7 @@ table#TAB1 td { border: 0 }
         }
 	if( $cnt > 0 ) {
 	    echo "</dd>\n";
-	} 
+	}
 	echo "</dl>\n";
 	echo _("Submit the form").': <button type="submit" style="background-color: rgb(112, 154, 186); color: white;"> '._("generate PDF file");
 	echo "</button>\n";

@@ -4,4 +4,4 @@ errordocument 404 /error404.php
 errordocument 403 /error403.php
 errordocument 401 /error401.php
 
-RedirectPermanent /cps.php http://www.cacert.org/policy/CertificationPracticeStatement.php
+RedirectPermanent /cps.php http://www.cacert.org/policy/CertificationPracticeStatement.html
