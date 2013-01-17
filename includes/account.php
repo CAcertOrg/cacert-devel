@@ -2848,12 +2848,26 @@
 			showfooter();
 			exit;
 		}
-		if (check_email_exists($_REQUEST['arbitrationno'].'@cacert.org')==true) {
+		if (check_email_exists($_REQUEST['arbitrationno'].'@cacert.org')) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['arbitrationno'].'@cacert.org'));
 			showfooter();
 			exit;
 		 }
+		if (check_client_cert_running($_REQUEST['userid'],1) ||
+			check_server_cert_running($_REQUEST['userid'],1) ||
+			check_gpg_cert_running($_REQUEST['userid'],1)) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The CCA retention time for at least one certificate is not over. Can't continue."));
+			showfooter();
+			exit;
+		}
+		if (check_is_orgadmin($_REQUEST['userid'],1)) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The user is listed as Organisation Administrator. Can't continue."));
+			showfooter();
+			exit;
+		}
 		account_delete($_REQUEST['userid'], $_REQUEST['arbitrationno'], $_SESSION['profile']['id']);
 	}
 
