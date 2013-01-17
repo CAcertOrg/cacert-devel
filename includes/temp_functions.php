@@ -7,7 +7,7 @@ function account_email_delete($mailid){
 //called from www/account.php if($process != "" && $oldid == 2)
 //called from www/diputes.php if($type == "reallyemail") / if($action == "accept")
 //called from account_delete
-
+	$mailid = intval($mailid);
 	$query = "select `emailcerts`.`id`
 		from `emaillink`,`emailcerts` where
 		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
@@ -27,7 +27,7 @@ function account_domain_delete($domainid){
 //called from www/account.php if($process != "" && $oldid == 9)
 //called from www/diputes.php if($type == "reallydomain") / if($action == "accept")
 //called from account_delete
-
+	$domainid = intval($domainid);
 	$query = "select distinct `domaincerts`.`id`
 		from `domaincerts`, `domlink`
 		where `domaincerts`.`domid` = '$domainid'
@@ -55,7 +55,9 @@ function account_delete($id, $arbno, $adminid){
 //deletes an account following the deleted account routnie V3
 // called from www/account.php if($oldid == 50 && $process != "")
 //change password
-
+	$id = intval($id);
+	$arbno = mysql_real_escape_string($arbno)
+	$adminid = intval($adminid);
 	$pool = 'abcdefghijklmnopqrstuvwxyz';
 	$pool .= '0123456789!()§';
 	$pool .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -157,7 +159,7 @@ function account_delete($id, $arbno, $adminid){
 function check_email_exists($email){
 // called from includes/account.php if($process != "" && $oldid == 1)
 // called from includes/account.php	if($oldid == 50 && $process != "")
-
+	$email = mysql_real_escape_string($email);
 	$query = "select * from `email` where `email`='$email' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
@@ -166,6 +168,7 @@ function check_email_exists($email){
 function check_gpg_cert_running($uid,$cca=0){
 	//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
 	// called from includes/account.php	if($oldid == 50 && $process != "")
+	$uid = intval($uid);
 	if (0==$cca) {
 		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()";
 	}else{
@@ -178,6 +181,7 @@ function check_gpg_cert_running($uid,$cca=0){
 function check_client_cert_running($uid,$cca=0){
 	//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
 	// called from includes/account.php	if($oldid == 50 && $process != "")
+	$uid = intval($uid);
 	if (0==$cca) {
 		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
 		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
@@ -195,6 +199,7 @@ function check_client_cert_running($uid,$cca=0){
 function check_server_cert_running($uid,$cca=0){
 	//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
 	// called from includes/account.php	if($oldid == 50 && $process != "")
+	$uid = intval($uid);
 	if (0==$cca) {
 		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
 		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
@@ -210,10 +215,10 @@ function check_server_cert_running($uid,$cca=0){
 }
 function check_is_orgadmin($uid){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
+	$uid = intval($uid);
 	$query = "select * from `org` where `memid`='$uid' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
-
 }
 
 ?>
