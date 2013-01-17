@@ -51,9 +51,9 @@
 	AssureMethodLine(_("Method"),$methods,_("Only tick the next box if the Assurance was face to face."));
 	AssureBoxLine("assertion",_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."),array_key_exists('assertion',$_POST) && $_POST['assertion'] == 1);
 	AssureBoxLine("rules",_("I have read and understood the Assurance Policy and the Assurance Handbook and am making this Assurance subject to and in compliance with the policy and handbook."),array_key_exists('rules',$_POST) && $_POST['rules'] == 1);
-	AssureTextLine(_("Policy"),"<a href=\"/policy/AssurancePolicy.php\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
+	AssureTextLine(_("Policy"),"<a href=\"/policy/AssurancePolicy.html\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
 	AssureInboxLine("points",_("Points"),"","<br />(Max. ".maxpoints().")");
-	AssureCCABoxLine("CCAAgreed",sprintf(_("Check this box only if %s agreed to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"),$fname));
-	AssureCCABoxLine("CCAAgree",_("Check this box only if YOU agree to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"));
+	AssureCCABoxLine("CCAAgreed",sprintf(_("Check this box only if %s agreed to the <a href=\"/policy/CAcertCommunityAgreement.html\">CAcert Community Agreement</a>"),$fname));
+	AssureCCABoxLine("CCAAgree",_("Check this box only if YOU agree to the <a href=\"/policy/CAcertCommunityAgreement.html\">CAcert Community Agreement</a>"));
 	AssureFoot($id,_("I confirm this Assurance"));
 ?>

@@ -19,7 +19,7 @@
 
 <p><?=sprintf(_("If you want to have free certificates issued to you, join the %s CAcert Community %s."),"<a href=\"https://www.cacert.org/index.php?id=1\">","</a>")?></p>
 
-<p><?=sprintf(_("If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."),'<a href="/policy/RootDistributionLicense.php">',"</a>")?>
+<p><?=sprintf(_("If you want to use certificates issued by CAcert, read the CAcert %s Root Distribution License %s."),'<a href="/policy/RootDistributionLicense.html">',"</a>")?>
 <?=sprintf(_("This license applies to using the CAcert %s root keys %s."),'<a href="/index.php?id=3">','</a>')?></p>
 
 
@@ -92,7 +92,7 @@
 
 <p><?=sprintf(_("Have you passed the CAcert %s Assurer Challenge %s yet?"),'<a href="http://wiki.cacert.org/wiki/AssurerChallenge">','</a>')?></p>
 
-<p><?=sprintf(_("Have you read the CAcert %sCommunity Agreement%s yet?"),'<a href="/policy/CAcertCommunityAgreement.php">','</a>')?></p>
+<p><?=sprintf(_("Have you read the CAcert %sCommunity Agreement%s yet?"),'<a href="/policy/CAcertCommunityAgreement.html">','</a>')?></p>
 
 <p><?=sprintf(_("For general documentation and help, please visit the CAcert %sWiki Documentation site %s."),'<a href="http://wiki.CAcert.org">','</a>')?>
 <?=sprintf(_("For specific policies, see the CAcert %sApproved Policies page%s."),'<a href="/policy/">',"</a>")?></p>
