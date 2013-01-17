@@ -262,8 +262,8 @@ function hideall() {
       <ul class="menu" id="advertising"><li><a href="advertising.php?id=1"><?=_("New Ad")?></a></li><li><a href="advertising.php?id=0"><?=_("View Ads")?></a></li></ul>
     </div>
 <? } ?>
-  </div>
     <? include("about_menu.php"); ?>
+  </div>
   <div id="content">
     <div class="story">
       <h3><?=$title2?></h3>
