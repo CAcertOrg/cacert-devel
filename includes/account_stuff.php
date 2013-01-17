@@ -263,6 +263,7 @@ function hideall() {
     </div>
 <? } ?>
   </div>
+    <? include("about_menu.php"); ?>
   <div id="content">
     <div class="story">
       <h3><?=$title2?></h3>
