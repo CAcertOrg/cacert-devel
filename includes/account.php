@@ -182,7 +182,7 @@
 		{
 			echo _("You did not select any email accounts for removal.");
 		}
-		if($delcount = 0)
+		if(0 == $delcount)
 		{
 			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
