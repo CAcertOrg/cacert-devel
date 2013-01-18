@@ -56,7 +56,7 @@ function account_delete($id, $arbno, $adminid){
 // called from www/account.php if($oldid == 50 && $process != "")
 //change password
 	$id = intval($id);
-	$arbno = mysql_real_escape_string($arbno)
+	$arbno = mysql_real_escape_string($arbno);
 	$adminid = intval($adminid);
 	$pool = 'abcdefghijklmnopqrstuvwxyz';
 	$pool .= '0123456789!()§';
