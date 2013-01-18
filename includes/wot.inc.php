@@ -596,7 +596,7 @@ function AssureMethodLine($text,$methods,$remark)
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$text?></td>
+		<td class="DataTD"><?=$text.(empty($text)?'':':')?></td>
 		<td class="DataTD">
 			<select name="method">
 <?
@@ -620,7 +620,7 @@ function AssureInboxLine($type,$field,$value,$description)
 {
 ?>
 	<tr>
-		<td class="DataTD"><?=$field?>:</td>
+		<td class="DataTD"><?=$field.(empty($field)?'':':')?>:</td>
 		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
 	</tr>
 <?
