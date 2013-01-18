@@ -557,7 +557,7 @@ function AssureTextLine($field1,$field2)
 {
 ?>
 	<tr>
-		<td class="DataTD"><?=$field1?>:</td>
+		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?></td>
 		<td class="DataTD"><?=$field2?></td>
 	</tr>
 <?
