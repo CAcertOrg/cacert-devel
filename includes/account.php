@@ -2545,6 +2545,11 @@
 		mysql_query($query);
 	}
 
+	if($oldid == 43 && $_REQUEST['action'] == 'revokecert')
+	{
+		revoke_all_private_cert($userid);
+	}
+
 	if($oldid == 48 && $_REQUEST['domain'] == "")
 	{
 		$id = $oldid;

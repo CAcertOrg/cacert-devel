@@ -8,15 +8,7 @@ function account_email_delete($mailid){
 //called from www/diputes.php if($type == "reallyemail") / if($action == "accept")
 //called from account_delete
 	$mailid = intval($mailid);
-	$query = "select `emailcerts`.`id`
-		from `emaillink`,`emailcerts` where
-		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
-		`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
-			group by `emailcerts`.`id`";
-	$dres = mysql_query($query);
-	while($drow = mysql_fetch_assoc($dres)){
-		mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01', `disablelogin`=1 where `id`='".$drow['id']."'");
-	}
+	revoke_client_cert($mailid);
 	$query = "update `email` set `deleted`=NOW() where `id`='$mailid'";
 	mysql_query($query);
 }
@@ -28,23 +20,7 @@ function account_domain_delete($domainid){
 //called from www/diputes.php if($type == "reallydomain") / if($action == "accept")
 //called from account_delete
 	$domainid = intval($domainid);
-	$query = "select distinct `domaincerts`.`id`
-		from `domaincerts`, `domlink`
-		where `domaincerts`.`domid` = '$domainid'
-		or (
-		`domaincerts`.`id` = `domlink`.`certid`
-		and `domlink`.`domid` = '$domainid')";
-	$dres = mysql_query($query);
-	while($drow = mysql_fetch_assoc($dres))
-	{
-		mysql_query(
-			"update `domaincerts`
-			set `revoked`='1970-01-01 10:00:01'
-			where `id` = '".$drow['id']."'
-			and `revoked` = 0
-			and UNIX_TIMESTAMP(`expire`) -
-			UNIX_TIMESTAMP() > 0");
-	}
+	revoke_server_cert($domainid);
 	mysql_query(
 		"update `domains`
 		set `deleted`=NOW()
@@ -219,6 +195,63 @@ function check_is_orgadmin($uid){
 	$query = "select * from `org` where `memid`='$uid' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
+}
+
+
+// revokation of certificates
+function revoke_all_client_cert($mailid){
+	//revokes all client certificates for an email address
+	$mailid = intval($mailid);
+	$query = "select `emailcerts`.`id`
+		from `emaillink`,`emailcerts` where
+		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
+		`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
+			group by `emailcerts`.`id`";
+	$dres = mysql_query($query);
+	while($drow = mysql_fetch_assoc($dres)){
+		mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01', `disablelogin`=1 where `id`='".$drow['id']."'");
+	}
+}
+
+function revoke_all_server_cert($domainid){
+	//revokes all server certs for an domain
+	$domainid = intval($domainid);
+	$query = "select distinct `domaincerts`.`id`
+		from `domaincerts`, `domlink`
+		where `domaincerts`.`domid` = '$domainid'
+		or (
+		`domaincerts`.`id` = `domlink`.`certid`
+		and `domlink`.`domid` = '$domainid')";
+	$dres = mysql_query($query);
+	while($drow = mysql_fetch_assoc($dres))
+	{
+		mysql_query(
+		"update `domaincerts`
+			set `revoked`='1970-01-01 10:00:01'
+			where `id` = '".$drow['id']."'
+			and `revoked` = 0
+			and UNIX_TIMESTAMP(`expire`) -
+			UNIX_TIMESTAMP() > 0");
+	}
+}
+
+function revoke_all_private_cert($uid){
+	//revokes all certificates linked to a personal accounts
+	//gpg revokation needs to be added to a later point
+	$uid=intval($uid);
+	$query = "select * from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
+	$res=mysql_query($query);
+	while($row = mysql_fetch_assoc($res)){
+		revoke_all_client_cert($row['id']);
+	}
+
+
+	$query = "select * from `domains` where `memid`='".$id."'";
+	$res=mysql_query($query);
+	while($row = mysql_fetch_assoc($res)){
+		revoke_all_server_cert($row['id']);
+	}
+
 }
 
 ?>
