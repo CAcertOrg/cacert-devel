@@ -215,11 +215,6 @@ $iecho= "c";
 			exit;
 		}
 
-		if(strlen(trim($_REQUEST['location']))<=3)
-		{
-			show_page("VerifyData","",_("You must enter a location with at least 3 characters eg town and country."));
-			exit;
-		}
 		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
@@ -251,7 +246,13 @@ $iecho= "c";
 			exit;
 		}
 
-		if($_REQUEST['points'] == "")
+		if(strlen(trim($_REQUEST['location']))<=3)
+		{
+			show_page("VerifyData","",_("You must enter a location with at least 3 characters eg town and country."));
+			exit;
+		}
+
+		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
 			exit;
