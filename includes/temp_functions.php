@@ -73,6 +73,7 @@ function account_delete($id, $arbno, $adminid){
 	$query = "insert into `email` set `email`='".$arbno."@cacert.org',`memid`='".$id."',`created`=NOW(),`modified`=NOW(), `attempts`=-1";
 	mysql_query($query);
 	$emailid = mysql_insert_id();
+	write_se_log($uid, $adminid, 'AD create anonymous account', $arbno);
 
 //set new mail as default
 	$query = "update `users` set `email`='".$arbno."@cacert.org' where `id`='".$id."'";
@@ -84,6 +85,7 @@ function account_delete($id, $arbno, $adminid){
 	while($row = mysql_fetch_assoc($res)){
 		account_email_delete($row['id']);
 	}
+	write_se_log($uid, $adminid, 'AD delete emails', $arbno);
 
 //delete all domains
 	$query = "select * from `domains` where `memid`='".$id."'";
@@ -91,26 +93,31 @@ function account_delete($id, $arbno, $adminid){
 	while($row = mysql_fetch_assoc($res)){
 		account_domain_delete($row['id']);
 	}
+	write_se_log($uid, $adminid, 'AD delete domains', $arbno);
 
 //clear alert settings
 	mysql_query("update `alerts` set `general`='0' where `memid`='$id'");
 	mysql_query("update `alerts` set `country`='0' where `memid`='$id'");
 	mysql_query("update `alerts` set `regional`='0' where `memid`='$id'");
 	mysql_query("update `alerts` set `radius`='0' where `memid`='$id'");
+	write_se_log($uid, $adminid, 'AD update settings', $arbno);
 
 //set default location
 	$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
 	mysql_query($query);
+	write_se_log($uid, $adminid, 'AD update location', $arbno);
 
 //clear listings
 	$query = "update `users` set `listme`=' ',`contactinfo`=' ' where `id`='".$id."'";
 	mysql_query($query);
+	write_se_log($uid, $adminid, 'AD udpate listings', $arbno);
 
 //set lanuage to default
 	//set default language
 	mysql_query("update `users` set `language`='en_AU' where `id`='".$id."'");
 	//delete secondary langugaes
 	mysql_query("delete from `addlang` where `userid`='".$id."'");
+	write_se_log($uid, $adminid, 'AD udpate language', $arbno);
 
 //change secret questions
 	for($i=1;$i<=5;$i++){
@@ -124,6 +131,7 @@ function account_delete($id, $arbno, $adminid){
 		$query = "update `users` set `Q$i`='$q', `A$i`='$a' where `id`='".$id."'";
 		mysql_query($query);
 	}
+	write_se_log($uid, $adminid, 'AD udpate Q+A', $arbno);
 
 //change personal information to arbitration number and DOB=1900-01-01
 	$query = "select `fname`,`mname`,`lname`,`suffix`,`dob` from `users` where `id`='$userid'";
@@ -138,6 +146,7 @@ function account_delete($id, $arbno, $adminid){
 		`dob`='1900-01-01'
 		where `id`='".$id."'";
 	mysql_query($query);
+	write_se_log($uid, $adminid, 'AD udpate personal data', $arbno);
 
 //clear all admin and board flags
 	mysql_query("update `users` set `assurer`='0' where `id`='$id'");
@@ -150,9 +159,11 @@ function account_delete($id, $arbno, $adminid){
 	mysql_query("update `users` set `adadmin`='0' where `id`='$id'");
 	mysql_query("update `users` set `tverify`='0' where `id`='$id'");
 	mysql_query("update `users` set `board`='0' where `id`='$id'");
+	write_se_log($uid, $adminid, 'AD udpate flags', $arbno);
 
 //block account
 	mysql_query("update `users` set `locked`='1' where `id`='$id'");  //, `deleted`=Now()
+	write_se_log($uid, $adminid, 'AD block account', $arbno);
 }
 
 
@@ -219,6 +230,18 @@ function check_is_orgadmin($uid){
 	$query = "select * from `org` where `memid`='$uid' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
+}
+
+
+function write_se_log($uid, $adminid, $type, $info){
+	//records all support engineer actions changing a user account
+	$uid = intval($uid);
+	$adminid = intval($adminid);
+	$type = mysql_real_escape_string($type);
+	$info = mysql_real_escape_string($info);
+	$query="insert into `adminlog` (`when`, `uid`, `admind`,`type`,`information`) values
+		(Now(), $uid, $adminid, '$type', '$info'";
+	mysql_query($query);
 }
 
 ?>
