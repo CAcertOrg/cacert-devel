@@ -622,13 +622,14 @@
 					echo $row['domain']."<br>\n";
 					
 					$dres = mysql_query(
-						"select distinct `domaincerts`.`id`
-							from `domaincerts`, `domlink`
+						"select `domaincerts`.`id`
+							from `domaincerts`
 							where `domaincerts`.`domid` = '$id'
-							or (
-								`domaincerts`.`id` = `domlink`.`certid`
-								and `domlink`.`domid` = '$id'
-								)");
+						union distinct
+						select `domaincerts`.`id`
+							from `domaincerts`, `domlink`
+							where `domaincerts`.`id` = `domlink`.`certid`
+							and `domlink`.`domid` = '$id'");
 					while($drow = mysql_fetch_assoc($dres))
 					{
 						mysql_query(
