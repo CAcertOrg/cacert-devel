@@ -784,8 +784,17 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
+	<tr>
+		<td colspan="6" class="title">
+			<form method="post" action="account.php" onSubmit="if(!confirm('<?=_("Are you sure you want to revoke all private certificates?")?>')) return false;">
+				<input type="hidden" name="action" value="revokecert">
+				<input type="submit" value="?>=_(revoke certificates)/>?">
+			</form>
+		</td>
+	</tr>
 </table>
 <br>
+
 
 <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
  (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
