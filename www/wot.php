@@ -244,21 +244,19 @@ function send_reminder()
 	if($oldid == 6)
 	{
 $iecho= "c";
-		if(trim($_REQUEST['date']) == "")
+		if(trim($_REQUEST['date']) == '')
 		{
 			show_page("VerifyData","",_("You must enter the date when you met the assuree."));
 			exit;
 		}
 
-		$arrdate=strptime($_REQUEST['date'],'Y-m-d');
-		if(!empty($arr['unparsed']))
+		if(!check_date_format(trim($_REQUEST['date'])))
 		{
 			show_page("VerifyData","",_("You must enter the date in this format: YYYY-MM-DD."));
 			exit;
 		}
-		$assuredate = mktime($arrdate['tm_mon'] , $arrdate['tm_mday']-1, $arrdate['tm_year'] + 1900);
 
-		if($assuredate>=time())
+		if(!check_date_differnce(trim($_REQUEST['date'])))
 		{
 			show_page("VerifyData","",_("You must not enter a date in the future."));
 			exit;
@@ -295,7 +293,13 @@ $iecho= "c";
 			exit;
 		}
 
-		if($_REQUEST['points'] == "")
+		if(strlen(trim($_REQUEST['location']))<=3)
+		{
+			show_page("VerifyData","",_("You must enter a location with at least 3 characters eg town and country."));
+			exit;
+		}
+
+		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
 			exit;

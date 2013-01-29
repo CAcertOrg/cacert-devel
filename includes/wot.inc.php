@@ -646,3 +646,20 @@ function write_user_agreement($memid, $document, $method, $comment, $active=1, $
 	$res = mysql_query($query);
 }
 
+function check_date_format($date, $year=2000){
+	//checks if the date is entered in the right date format YYYY-MM-DD and if
+	if (!strpos($date,'-')) {
+		return FALSE;
+	}
+	$arr=explode('-',$date);
+	if (intval($arr[0])<=$year) {
+		return FALSE;
+	}
+	return checkdate(intval($arr[1]), intval($arr[2]), intval($arr[0]));
+
+}
+
+function check_date_differnce($date, $diff=1){
+	//returns false if the date is larger then today + time diffrence
+	return (strtotime($date)>=time+$diff*86400);
+}
