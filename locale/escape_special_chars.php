@@ -41,6 +41,9 @@ function is_msgid($line) {
 	return substr_compare($line, MSGID, 0, MSGID_LEN) === 0;
 }
 
+
+////////////// Main //////////////
+
 // Skip the metadata (first msgid/msgstr pair)
 while (!feof(STDIN)) {
 	$line = fgets(STDIN);
@@ -65,7 +68,13 @@ while (!feof(STDIN)) {
 	}
 	
 	if ($msgstr) {
+		// Escape everything that has a special HTML entity such as
+		// &gt; or &auml; except quote characters
 		$line = htmlentities($line, ENT_NOQUOTES, "UTF-8");
+		
+		// Escape everything else -> all characters that don't have a special
+		// HTML entity but are outside the ASCII range
+		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
 	}
 	echo $line;
 }
