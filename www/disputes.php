@@ -18,7 +18,7 @@
 <?
 	require_once("../includes/loggedin.php");
 	require_once("../includes/temp_functions.php");
-	
+
 	loadem("account");
 
         $type=""; if(array_key_exists('type',$_REQUEST)) $type=$_REQUEST['type'];
@@ -63,7 +63,7 @@
 			}
 			mysql_query("update `disputeemail` set hash='',action='accept' where `id`='$emailid'");
 			$rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
-			$rc = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
+			$rc2 = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
 			$res = mysql_query("select * from `users` where `id`='$oldmemid'");
 			$user = mysql_fetch_assoc($res);
 			if($rc == 0 && $rc2 == 0 && $_SESSION['_config']['email'] == $user['email'])
@@ -249,7 +249,7 @@
 			echo _("You aren't allowed to dispute your own email addresses. Can't continue.");
 			showfooter();
 			exit;
-		}	
+		}
 
 		$res = mysql_query("select * from `users` where `id`='$oldmemid'");
 		$user = mysql_fetch_assoc($res);
@@ -321,7 +321,7 @@
 			echo _("You aren't allowed to dispute your own domains. Can't continue.");
 			showfooter();
 			exit;
-		}	
+		}
 
 		$domainid = $row['id'];
 		$_SESSION['_config']['domainid'] = $domainid;
