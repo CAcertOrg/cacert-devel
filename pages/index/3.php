@@ -20,7 +20,7 @@
 
 <p>
 Class 1 <?=_("PKI Key")?><br>
-<a href="index.php?id=17"><?=_("Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x")?></a><br>
+<a href="certs/CAcert_Root_Certificates.msi"><?=_("Windows installer package for browsers that use the Windows certificate store (for example Internet Explorer, Chrome on Windows and Safari on Windows)")?></a><br>
 <a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a><br>
 <a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a><br>
 <a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a><br>
