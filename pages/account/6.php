@@ -79,9 +79,6 @@ if (array_key_exists('format', $_REQUEST)) {
 		header("Content-Disposition: inline; filename=\"${fname}.cer\"");
 		
 		echo $cert;
-		if ($row['rootcert'] === 2) {
-			readfile(dirname(__FILE__).'/../../www/certs/class3.der');
-		}
 		exit;
 	}
 } else {
