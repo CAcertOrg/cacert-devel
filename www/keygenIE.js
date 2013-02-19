@@ -128,11 +128,14 @@ var CAcert_keygen_IE = function () {
 			var alg = getAlgorithm();
 
 			var bits = parseInt(keySize.value, 10);
-			if ( bits < alg.MinLength || bits > alg.MaxLength ||
-					(alg.IncrementLength &&
-						(bits - alg.MinLength) % alg.IncrementLength !== 0)
+			if (
+				(bits < alg.MinLength) ||
+				(bits > alg.MaxLength) ||
+				(
+					alg.IncrementLength &&
+					((bits - alg.MinLength) % alg.IncrementLength !== 0)
 				)
-			{
+			) {
 				return false;
 			}
 
@@ -434,12 +437,14 @@ var CAcert_keygen_IE = function () {
 		/// Get the selected key size
 		var getKeySize = function () {
 			var bits = parseInt(keySize.value, 10);
-			if ( bits < getMinSigKeyLength() || bits > getMaxSigKeyLength() ||
-					(getStepSigKeyLength() &&
-						(bits - getMinSigKeyLength()) %
-							getStepSigKeyLength() !== 0)
+			if (
+				(bits < getMinSigKeyLength()) ||
+				(bits > getMaxSigKeyLength()) ||
+				(
+					getStepSigKeyLength() &&
+					((bits - getMinSigKeyLength()) % getStepSigKeyLength() !== 0)
 				)
-			{
+			) {
 				return false;
 			}
 
