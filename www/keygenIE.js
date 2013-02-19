@@ -54,10 +54,12 @@ var CAcert_keygen_IE = function () {
 
 	/// Show error message to user from exception
 	var showError = function (message, exception) {
-		window.alert(message +
-				"\n\nError: " + exception.message +
-				" (0x" + (0xFFFFFFFF + exception.number +1).toString(16) +
-				" / " + exception.number + ")");
+		window.alert(
+			message +
+			"\n\nError: " + exception.message +
+			" (0x" + (0xFFFFFFFF + exception.number + 1).toString(16) +
+			" / " + exception.number + ")"
+			);
 	}
 
 	// Get important elements from the DOM
@@ -91,13 +93,12 @@ var CAcert_keygen_IE = function () {
 
 		// Try to initialise the ActiveX element. Requires permissions by the user
 		try {
-			factory = new ActiveXObject(
-				"X509Enrollment.CX509EnrollmentWebClassFactory");
+			factory = new ActiveXObject("X509Enrollment.CX509EnrollmentWebClassFactory");
 			if (!factory) {
 				throw {
 					name: "NoObjectError",
 					message: "Got null at object creation"
-				};
+					};
 			}
 
 			// also try to create a useless object here so the library gets
@@ -172,11 +173,11 @@ var CAcert_keygen_IE = function () {
 			var csp = getProvider();
 
 			cspStats = providerList.GetCspStatusesFromOperations(
-					0x1c, //XCN_NCRYPT_ANY_ASYMMETRIC_OPERATION
-					//0x10, //XCN_NCRYPT_SIGNATURE_OPERATION
-					//0x8, //XCN_NCRYPT_SECRET_AGREEMENT_OPERATION
-					//0x4, //XCN_NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION
-					csp
+				0x1c, //XCN_NCRYPT_ANY_ASYMMETRIC_OPERATION
+				//0x10, //XCN_NCRYPT_SIGNATURE_OPERATION
+				//0x8, //XCN_NCRYPT_SECRET_AGREEMENT_OPERATION
+				//0x4, //XCN_NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION
+				csp
 				);
 
 			removeChildren(algorithm);
@@ -228,8 +229,8 @@ var CAcert_keygen_IE = function () {
 
 				algorithmOid = factory.CreateObject("X509Enrollment.CObjectId");
 				algorithmOid.InitializeFromValue("1.2.840.113549.1.1.1"); // RSA
-				//"1.2.840.10040.4.1" == DSA
-				//"1.2.840.10046.2.1" == DH
+				// "1.2.840.10040.4.1" == DSA
+				// "1.2.840.10046.2.1" == DH
 
 				if (level.value === "high") {
 					bits = 4096;
@@ -244,12 +245,11 @@ var CAcert_keygen_IE = function () {
 			privateKey.Length = bits;
 			privateKey.KeyUsage = 0xffffff; // XCN_NCRYPT_ALLOW_ALL_USAGES
 
-			var request = factory.CreateObject(
-				"X509Enrollment.CX509CertificateRequestPkcs10");
+			var request = factory.CreateObject("X509Enrollment.CX509CertificateRequestPkcs10");
 			request.InitializeFromPrivateKey(
-					1, // ContextUser
-					privateKey,
-					"" // don't use a template
+				1, // ContextUser
+				privateKey,
+				"" // don't use a template
 				);
 
 			var enroll = factory.CreateObject("X509Enrollment.CX509Enrollment");
@@ -266,7 +266,7 @@ var CAcert_keygen_IE = function () {
 				} catch (e) {
 					showError(createRequestErrorChooseAlgorithm.innerHTML, e);
 				}
-				
+
 				generatingKeyNotice.style.display = "none";
 			}
 
@@ -322,11 +322,11 @@ var CAcert_keygen_IE = function () {
 			);
 
 		algClasses = Array(
-				1 << 13, //ALG_CLASS_SIGNATURE
-				//2 << 13, //ALG_CLASS_MSG_ENCRYPT
-				//3 << 13, //ALG_CLASS_DATA_ENCRYPT
-				//4 << 13, //ALG_CLASS_HASH
-				5 << 13  //ALG_CLASS_KEY_EXCHANGE
+			1 << 13, //ALG_CLASS_SIGNATURE
+			//2 << 13, //ALG_CLASS_MSG_ENCRYPT
+			//3 << 13, //ALG_CLASS_DATA_ENCRYPT
+			//4 << 13, //ALG_CLASS_HASH
+			5 << 13  //ALG_CLASS_KEY_EXCHANGE
 			);
 
 		// Try to initialise the ActiveX element.
@@ -364,8 +364,7 @@ var CAcert_keygen_IE = function () {
 
 		/// Get the ID of the selected algorithm
 		var getAlgorithmId = function () {
-			return parseInt(
-					algorithm.options[algorithm.selectedIndex].value, 10);
+			return parseInt(algorithm.options[algorithm.selectedIndex].value, 10);
 		}
 
 		/// Minimum bit length for exchange keys
@@ -507,8 +506,7 @@ var CAcert_keygen_IE = function () {
 				for (j = 0; true; ++j) {
 					try {
 						providerName = cenroll.enumProviders(j, 0);
-						provider.appendChild(
-								option(providerName, providerTypes[i]));
+						provider.appendChild(option(providerName, providerTypes[i]));
 					} catch (e) {
 						break;
 					}
