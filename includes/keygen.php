@@ -14,18 +14,18 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ 
+*/
 
 if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 		strstr($_SERVER['HTTP_USER_AGENT'], "MSIE")) { ?>
-	
+
 	<noscript>
 		<p><?=_('You have to enable JavaScript to generate certificates in '.
 				'the browser.')?></p>
 		<p><?=_('If you don\'t want to do that for any reason, you can use '.
 				'manually created certificate requests instead.')?></p>
 	</noscript>
-	
+
 	<div id="noActiveX" style="color:red">
 		<p><?=_('Could not initialize ActiveX object required for certificate '.
 				'generation.')?></p>
@@ -44,7 +44,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 				'https://'.$_SESSION['_config']['securehostname'])?>
 		</p>
 	</div>
-	
+
 	<form method="post" style="display:none" action="account.php"
 			id="CertReqForm">
 		<input type="hidden" name="oldid" value="<?=$id?>" />
@@ -58,10 +58,10 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 				<option value="custom"><?=_('Custom')?>&hellip;</option>
 			</select>
 		</p>
-		
+
 		<fieldset id="customSettings" style="display:none">
 			<legend><?=_('Custom Parameters')?></legend>
-			
+
 			<p><?=_('Cryptography Provider')?>:
 				<select id="CspProvider"></select>
 			</p>
@@ -82,14 +82,13 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 						1024)?>
 			</p>
 		</fieldset>
-		
+
 		<p><input type="submit" id="GenReq" name="GenReq"
 				value="<?=_('Create Certificate')?>" /></p>
 		<p id="generatingKeyNotice" style="display:none">
 			<?=_('Generating your key. Please wait')?>&hellip;</p>
 	</form>
-	
-		
+
 	<!-- Error messages used in the JavaScript. Defined here so they can be
 	translated without passing the JavaScript code through PHP -->
 	<p id="createRequestErrorChooseAlgorithm" style="display:none">
@@ -118,15 +117,15 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 				'described in the red explanation text and accept loading of '.
 				'the module.')?>
 	</p>
-	
+
 	<script type="text/javascript" src="keygenIE.js"></script>
-	
+
 <? } else { ?>
     <p>
     <form method="post" action="account.php">
         <input type="hidden" name="keytype" value="NS">
         <?=_("Keysize:")?> <keygen name="SPKAC" challenge="<? $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
-        
+
         <input type="submit" name="submit" value="<?=_("Create Certificate Request")?>">
         <input type="hidden" name="oldid" value="<?=$id?>">
     </form>
