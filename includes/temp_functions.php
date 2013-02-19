@@ -190,9 +190,9 @@ function check_client_cert_running($uid,$cca=0){
 		$query2 = "select from `emailcerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
 	}
 	$res = mysql_query($query1);
-	return $r1 = mysql_num_rows($res)>0;
+	$r1 = mysql_num_rows($res)>0;
 	$res = mysql_query($query2);
-	return $r2 = mysql_num_rows($res)>0;
+	$r2 = mysql_num_rows($res)>0;
 	return !!($r1 || $r2);
 }
 
@@ -208,9 +208,9 @@ function check_server_cert_running($uid,$cca=0){
 		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
 	}
 	$res = mysql_query($query1);
-	return $r1 = mysql_num_rows($res)>0;
+	$r1 = mysql_num_rows($res)>0;
 	$res = mysql_query($query2);
-	return $r2 = mysql_num_rows($res)>0;
+	$r2 = mysql_num_rows($res)>0;
 	return !!($r1 || $r2);
 }
 function check_is_orgadmin($uid){
