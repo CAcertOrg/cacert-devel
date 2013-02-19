@@ -43,7 +43,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 
 	<form method="post" style="display:none" action="account.php"
 			id="CertReqForm">
-		<input type="hidden" name="oldid" value="<?=$id?>" />
+		<input type="hidden" name="oldid" value="<?=intval($id)?>" />
 		<input type="hidden" id="CSR" name="CSR" />
 		<input type="hidden" name="keytype" value="MS" />
 
@@ -122,7 +122,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 			<?=_("Keysize:")?> <keygen name="SPKAC" challenge="<? $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
 
 			<input type="submit" name="submit" value="<?=_("Create Certificate Request")?>">
-			<input type="hidden" name="oldid" value="<?=$id?>">
+			<input type="hidden" name="oldid" value="<?=intval($id)?>">
 		</form>
 	</p>
 <? }
