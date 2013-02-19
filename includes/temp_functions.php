@@ -8,7 +8,7 @@ function account_email_delete($mailid){
 //called from www/diputes.php if($type == "reallyemail") / if($action == "accept")
 //called from account_delete
 	$mailid = intval($mailid);
-	revoke_client_cert($mailid);
+	revoke_all_client_cert($mailid);
 	$query = "update `email` set `deleted`=NOW() where `id`='$mailid'";
 	mysql_query($query);
 }
@@ -20,7 +20,7 @@ function account_domain_delete($domainid){
 //called from www/diputes.php if($type == "reallydomain") / if($action == "accept")
 //called from account_delete
 	$domainid = intval($domainid);
-	revoke_server_cert($domainid);
+	revoke_all_server_cert($domainid);
 	mysql_query(
 		"update `domains`
 		set `deleted`=NOW()
@@ -166,9 +166,9 @@ function check_client_cert_running($uid,$cca=0){
 		$query2 = "select from `emailcerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
 	}
 	$res = mysql_query($query1);
-	return $r1 = mysql_num_rows($res)>0;
+	$r1 = mysql_num_rows($res)>0;
 	$res = mysql_query($query2);
-	return $r2 = mysql_num_rows($res)>0;
+	$r2 = mysql_num_rows($res)>0;
 	return !!($r1 || $r2);
 }
 
@@ -184,9 +184,9 @@ function check_server_cert_running($uid,$cca=0){
 		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
 	}
 	$res = mysql_query($query1);
-	return $r1 = mysql_num_rows($res)>0;
+	$r1 = mysql_num_rows($res)>0;
 	$res = mysql_query($query2);
-	return $r2 = mysql_num_rows($res)>0;
+	$r2 = mysql_num_rows($res)>0;
 	return !!($r1 || $r2);
 }
 function check_is_orgadmin($uid){
