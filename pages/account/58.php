@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
- require_once(dirname(__FILE__).'/../../includes/notary.inc.php');
+require_once(dirname(__FILE__).'/../../includes/notary.inc.php');
 
 if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) || intval($_REQUEST['userid']) < 1) {
 	echo _('You do not have access to this page');
