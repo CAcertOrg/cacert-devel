@@ -8,7 +8,7 @@ function account_email_delete($mailid){
 //called from www/diputes.php if($type == "reallyemail") / if($action == "accept")
 //called from account_delete
 	$mailid = intval($mailid);
-	revoke_client_cert($mailid);
+	revoke_all_client_cert($mailid);
 	$query = "update `email` set `deleted`=NOW() where `id`='$mailid'";
 	mysql_query($query);
 }
@@ -20,7 +20,7 @@ function account_domain_delete($domainid){
 //called from www/diputes.php if($type == "reallydomain") / if($action == "accept")
 //called from account_delete
 	$domainid = intval($domainid);
-	revoke_server_cert($domainid);
+	revoke_all_server_cert($domainid);
 	mysql_query(
 		"update `domains`
 		set `deleted`=NOW()
