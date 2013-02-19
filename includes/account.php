@@ -151,6 +151,9 @@
 		{
 			foreach($_REQUEST['delid'] as $id)
 			{
+				if (0==$delcount) {
+					echo _('The following accounts have been removed:').'<br>\n';
+				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
 						`email`!='".$_SESSION['profile']['email']."'";
@@ -168,10 +171,8 @@
 		{
 			echo _("You did not select any email accounts for removal.");
 		}
-		if($delcount > 0)
+		if(0 == $delcount)
 		{
-			echo _("The following accounts have been removed:")."<br>\n";
-		} else {
 			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
 
@@ -611,7 +612,7 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-					
+
 					$dres = mysql_query(
 						"select `domaincerts`.`id`
 							from `domaincerts`
@@ -631,7 +632,7 @@
 								and UNIX_TIMESTAMP(`expire`) -
 										UNIX_TIMESTAMP() > 0");
 					}
-					
+
 					mysql_query(
 						"update `domains`
 							set `deleted`=NOW()
