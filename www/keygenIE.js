@@ -164,8 +164,6 @@ var CAcert_keygen_IE = function () {
 
 		/// Fill the algorithm list
 		var getAlgorithmList = function () {
-			var i;
-			
 			if (!providerList) {
 				return false;
 			}
@@ -181,7 +179,7 @@ var CAcert_keygen_IE = function () {
 				);
 
 			removeChildren(algorithm);
-			for (i = 0; i < cspStats.Count; i++) {
+			for (var i = 0; i < cspStats.Count; i++) {
 				var alg = cspStats.ItemByIndex(i).CspAlgorithm;
 				algorithm.appendChild(option(alg.Name, i));
 			}
@@ -191,8 +189,6 @@ var CAcert_keygen_IE = function () {
 
 		/// Fill the crypto provider list
 		var getProviderList = function () {
-			var i;
-			
 			var csps = factory.CreateObject("X509Enrollment.CCspInformations");
 
 			// Get provider information
@@ -200,7 +196,7 @@ var CAcert_keygen_IE = function () {
 
 			removeChildren(provider);
 
-			for (i = 0; i < csps.Count; i++) {
+			for (var i = 0; i < csps.Count; i++) {
 				var csp = csps.ItemByIndex(i);
 				provider.appendChild(option(csp.Name, i));
 			}
@@ -472,14 +468,12 @@ var CAcert_keygen_IE = function () {
 
 		/// Fill the algorithm selection box
 		var getAlgorithmList = function () {
-			var i, j;
-			
 			refreshProvider();
 
 			removeChildren(algorithm);
 
-			for (i = 0; i < algClasses.length; ++i) {
-				for (j = 0; true; ++j) {
+			for (var i = 0; i < algClasses.length; ++i) {
+				for (var j = 0; true; ++j) {
 					try {
 						var algId = cenroll.EnumAlgs(j, algClasses[i]);
 						var algName = cenroll.GetAlgName(algId);
@@ -495,15 +489,13 @@ var CAcert_keygen_IE = function () {
 
 		/// Fill the provider selection box
 		var getProviderList = function () {
-			var i, j;
-			
 			removeChildren(provider);
 
-			for (i = 0; i < providerTypes.length; ++i) {
+			for (var i = 0; i < providerTypes.length; ++i) {
 				cenroll.providerType = providerTypes[i];
 
 				var providerName = "invalid";
-				for (j = 0; true; ++j) {
+				for (var j = 0; true; ++j) {
 					try {
 						providerName = cenroll.enumProviders(j, 0);
 						provider.appendChild(option(providerName, providerTypes[i]));
