@@ -153,7 +153,7 @@
 			foreach($_REQUEST['delid'] as $id)
 			{
 				if (0==$delcount) {
-					echo _('The following accounts have been removed:')."<br>\n";
+					echo _('The following email addresses have been removed:')."<br>\n";
 				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
