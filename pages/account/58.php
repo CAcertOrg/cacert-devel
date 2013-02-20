@@ -20,7 +20,7 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 	echo _('You do not have access to this page');
 } else {
 	$user_id = intval($_REQUEST['userid']);
-	$query = "select `users`.`fname`, `users`.`mname`, `users`.`lname`, from `users` where `id`='$user_id' and `users`.`deleted`=0";
+	$query = "select `users`.`fname`, `users`.`mname`, `users`.`lname` from `users` where `id`='$user_id' and `users`.`deleted`=0";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) != 1){
 		echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
