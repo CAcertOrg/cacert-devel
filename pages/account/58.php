@@ -27,35 +27,35 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 	} else {
 		if ($row = mysql_fetch_assoc($res)){
 			$username=sanitizeHTML($row['fname']).' '.sanitizeHTML($row['mname']).' '.sanitizeHTML($row['lname']);
-		$query = "select `orginfo`.`o`, `org`.`masteracc`
-			FROM `orginfo`, `org`
-			WHERE `orginfo`.`id` = `org`.`orgid`
-			AND `users`.`id`='$user_id' order by `orginfo`.`o`";
-		$res1 = mysql_query($query);?>
-		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper"><?
-		if (mysql_num_rows($res1) <= 0) {?>
-			<tr>
-				<td colspan="2" class="title"><?=sprintf(_('%s is not listed as Organisation Administrator'), $username)?></td>
-			</tr>
-		<?}else{?>
-			<tr>
-				<td colspan="2" class="title"><?=sprintf(_('%s is listed as Organisation Administrator for:'), $username)?></td>
-			</tr>
-			<tr>
-				<td class="DataTD"><b><?=_('Organisation')?></b></td>
-				<td class="DataTD"><b><?=_('Masteraccount')?></b></td>
-			</tr><?
-			while($drow = mysql_fetch_assoc($res)){?>
+			$query = "select `orginfo`.`o`, `org`.`masteracc`
+				FROM `orginfo`, `org`
+				WHERE `orginfo`.`id` = `org`.`orgid`
+				AND `users`.`id`='$user_id' order by `orginfo`.`o`";
+			$res1 = mysql_query($query);?>
+			<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper"><?
+			if (mysql_num_rows($res1) <= 0) {?>
 				<tr>
-					<td class="DataTD"><?=$drow['o']?></td>
-					<td class="DataTD"><?=$drow['masteracc'] ? _("Yes") : _("No") ?></td>
+					<td colspan="2" class="title"><?=sprintf(_('%s is not listed as Organisation Administrator'), $username)?></td>
 				</tr>
-			<?}
-		}
-		?></table>
-<?			}else{
-				echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+			<?}else{?>
+				<tr>
+					<td colspan="2" class="title"><?=sprintf(_('%s is listed as Organisation Administrator for:'), $username)?></td>
+				</tr>
+				<tr>
+					<td class="DataTD"><b><?=_('Organisation')?></b></td>
+					<td class="DataTD"><b><?=_('Masteraccount')?></b></td>
+				</tr><?
+				while($drow = mysql_fetch_assoc($res)){?>
+					<tr>
+						<td class="DataTD"><?=$drow['o']?></td>
+						<td class="DataTD"><?=$drow['masteracc'] ? _("Yes") : _("No") ?></td>
+					</tr>
+				<?}
 			}
+			?></table>
+<?		}else{
+				echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
 		}
+	}
 }
 ?>
