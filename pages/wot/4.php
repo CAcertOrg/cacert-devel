@@ -14,8 +14,8 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ 
-include_once("../includes/wot.inc.php");
+*/
+require_once(dirname(__FILE__).'/../../includes/wot.inc.php');
 ?>
 
 <h3><?=_("Trusted Third Parties")?></h3>
@@ -39,11 +39,11 @@ include_once("../includes/wot.inc.php");
 if ($_SESSION['profile']['points']<100){
 	// test for TTP assurances
 	if (get_number_of_ttpassurances(intval($_SESSION['profile']['id']))<2){?>
-		<p><?=_("If you want to ask for TTP assurances fill out the missing data and send the request to support@cacert.org to start the process. CAcert will inform you then about the next steps.")?></p>
+		<p><?=_("If you want to ask for TTP assurances fill out the missing data and send the request to support@cacert.org to start the process. CAcert will then inform you about the next steps.")?></p>
 		<form method="post" action="wot.php">
 		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 			<tr>
-				<td class="DataTD"><?=_("Country you want to visit the TTP")?></td>
+				<td class="DataTD"><?=_("Country where you want to visit the TTP")?></td>
 				<td class="DataTD"><select size="1" name="country">
 						<option>Australia</option>
 						<option>Puerto Rico</option>
@@ -51,12 +51,12 @@ if ($_SESSION['profile']['points']<100){
 					</select></td>
 			</tr>
 			<tr>
-				<td class="DataTD"><?=_("I want to take part in the TTP Topup Programme")?></td>
+				<td class="DataTD"><?=_("I want to take part in the TTP Topup programme")?></td>
 				<td class="DataTD"><input type="checkbox" name="ttptopup" value="1"></td>
 			</tr>
 			<tr>
 				<td colspan="2" >
-					<input type="hidden" name="oldid" value="4">
+					<input type="hidden" name="oldid" value="<?=intval($id)?>">
 					<input type="submit" name="ttp" value="<?=_("I need a TTP assurance")?>">
 				</td>
 			</tr>
@@ -65,14 +65,14 @@ if ($_SESSION['profile']['points']<100){
 <? //"
 	} else {
 	/* As soon as the TPP TOPUP Programme is established this routine should be used
-	<p><?=_("As you got already 2 TTP assurances you only can take part in the TTP TOPUP programme.\n\n If you want to ask for the TTP TOPUP programme use the submit button to send the request to support@cacert.org to start the process. CAcert will inform you then about the next steps.")?></p>
+	<p><?=_("As you have already got 2 TTP assurances you can only take part in the TTP TOPUP programme. If you want to ask for the TTP TOPUP programme use the submit button to send the request to support@cacert.org to start the process. CAcert will then inform you about the next steps.")?></p>
 		<form method="post" action="wot.php">
-			<input type="hidden" name="oldid" value="<?=$id?>">
+			<input type="hidden" name="oldid" value="<?=intval($id)?>">
 			<input type="submit" name="ttptopup" value="<?=_("I need a TTP TOPUP")?>">
-	 </form>
+		</form>
 */
 ?>
-	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. In the meanwhile you have to close this gap with face to face assurances with CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>  
+	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. Meanwhile you have to close this gap with face to face assurances from CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>  
 <?
 	}
 } else {
