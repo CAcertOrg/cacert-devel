@@ -22,12 +22,11 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 	$user_id = intval($_REQUEST['userid']);
 	$query = "select `users`.`fname`, `users`.`mname`, `users`.`lname`, from `users` where `id`='$user_id' and `users`.`deleted`=0";
 	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0){
+	if(mysql_num_rows($res) != 1){
 		echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
 	} else {
-		while($row = mysql_fetch_assoc($res)){
+		if ($row = mysql_fetch_assoc($res)){
 			$username=sanitizeHTML($row['fname']).' '.sanitizeHTML($row['mname']).' '.sanitizeHTML($row['lname']);
-		}
 		$query = "select `orginfo`.`o`, `org`.`masteracc`
 			FROM `orginfo`, `org`
 			WHERE `orginfo`.`id` = `org`.`orgid`
@@ -54,6 +53,9 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 			<?}
 		}
 		?></table>
-<?	}
+<?			}else{
+				echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+			}
+		}
 }
 ?>
