@@ -44,9 +44,9 @@
 	function get_number_of_ttpassurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-		     	WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `from`='".intval($userid)."' ");
+			WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `from`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
-                                                   
+
 		return intval($row['list']);
 	}
 
