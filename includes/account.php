@@ -2547,6 +2547,7 @@
 
 	if($oldid == 43 && $_REQUEST['action'] == 'revokecert')
 	{
+		$userid = intval($_REQUEST['userid']);
 		revoke_all_private_cert($userid);
 	}
 
