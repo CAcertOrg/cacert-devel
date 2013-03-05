@@ -24,4 +24,4 @@
 
 <p><?=sprintf(_('If you are interested in the TTP programme, read the pages %s for the basic way how the TTP programme works for you, and %s whether the TTP programme affects the country where you are located.'),'<a href="//wiki.cacert.org/TTP/TTPuser">https://wiki.cacert.org/TTP/TTPuser</a>','<a href="//wiki.cacert.org/TTP/TTPAL">https://wiki.cacert.org/TTP/TTPAL</a>')?> </p>
 
-<p><?=sprintf(_('Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at %s. For more information explore the wiki regarding the %s.'),'<a href="https://cats.cacert.org/">https://cats.cacert.org/</a>','<a href="https://wiki.cacert.org/AssurerChallenge/">https://wiki.cacert.org/AssurerChallenge/</a>')?></p>
+<p><?=sprintf(_('Once you have received at least 100 Assurance Points you will have to pass a test called Assurer Challenge, which can be started at %s. For more information explore the wiki regarding the %s.'),'<a href="https://cats.cacert.org">https://cats.cacert.org</a>','<a href="//wiki.cacert.org/AssurerChallenge">https://wiki.cacert.org/AssurerChallenge</a>')?></p>
