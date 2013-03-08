@@ -44,58 +44,57 @@ if (array_key_exists('format', $_REQUEST)) {
 		$outform = '-outform PEM';
 		$extension = 'crt';
 	}
-	
+
 	$crtname=escapeshellarg($row['crt_name']);
 	$cert = `/usr/bin/openssl x509 -in $crtname $outform`;
-	
+
 	header("Content-Type: application/pkix-cert");
 	header("Content-Length: ".strlen($cert));
-	
+
 	$fname = sanitizeFilename($row['CN']);
 	if ($fname=="") $fname="certificate";
 	header("Content-Disposition: attachment; filename=\"${fname}.${extension}\"");
-	
+
 	echo $cert;
 	exit;
-	
+
 } elseif (array_key_exists('install', $_REQUEST)) {
 	if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
 			strstr($_SERVER['HTTP_USER_AGENT'], "MSIE")) {
-		
+
 		// Handle IE
-		
 		//TODO
-		
+
 	} else {
 		// All other browsers
 		$crtname=escapeshellarg($row['crt_name']);
 		$cert = `/usr/bin/openssl x509 -in $crtname -outform DER`;
-		
+
 		header("Content-Type: application/x-x509-user-cert");
 		header("Content-Length: ".strlen($cert));
-		
+
 		$fname = sanitizeFilename($row['CN']);
 		if ($fname=="") $fname="certificate";
 		header("Content-Disposition: inline; filename=\"${fname}.cer\"");
-		
+
 		echo $cert;
 		exit;
 	}
+
 } else {
-	
 	showheader(_("My CAcert.org Account!"));
 	echo "<h3>"._("Install your certificate")."</h3>\n";
-	
+
 	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;install'>".
 		_("Install the certificate into your browser").
 		"</a></p>\n";
-	
+
 	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=pem'>".
 		_("Download the certificate in PEM format")."</a></p>\n";
-	
+
 	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=der'>".
 		_("Download the certificate in DER format")."</a></p>\n";
-	
+
 	showfooter();
 	exit;
 }
@@ -106,14 +105,12 @@ if (array_key_exists('format', $_REQUEST)) {
 <h3><?=_("Installing your certificate")?></h3>
 
 <p><?=_("Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above.")?>
-
 <OBJECT classid="clsid:127698e4-e730-4e5c-a2b1-21490a70c8a1" codebase="/xenroll.cab#Version=5,131,3659,0" id="cec">
 <?=_("You must enable ActiveX for this to work.")?>
 </OBJECT>
-<FORM >
+<FORM>
 <INPUT TYPE=BUTTON NAME="CertInst" VALUE="<?=_("Install Your Certificate")?>">
 </FORM>
-
 </P>
 
 <SCRIPT LANGUAGE=VBS>
@@ -143,13 +140,10 @@ if (array_key_exists('format', $_REQUEST)) {
         obj.InstallResponse 0,certchain,0,""
         if err.number<>0 then
           msgbox err.Description
-	else
-	  msgbox "<?=_("Certificate installed successfully. Please don't forget to backup now")?>"
-	end if
+        else
+          msgbox "<?=_("Certificate installed successfully. Please don't forget to backup now")?>"
+        end if
       else
-
-
-
 
       cec.DeleteRequestCert = FALSE
       err.clear
@@ -173,4 +167,3 @@ if (array_key_exists('format', $_REQUEST)) {
      End If
    End Sub
 </SCRIPT>
-
