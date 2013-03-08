@@ -85,14 +85,14 @@ if (array_key_exists('format', $_REQUEST)) {
 	showheader(_("My CAcert.org Account!"));
 	echo "<h3>"._("Install your certificate")."</h3>\n";
 
-	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;install'>".
+	echo "<p><a href='account.php?id=$id&amp;cert=$certid&amp;install'>".
 		_("Install the certificate into your browser").
 		"</a></p>\n";
 
-	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=pem'>".
+	echo "<p><a href='account.php?id=$id&amp;cert=$certid&amp;format=pem'>".
 		_("Download the certificate in PEM format")."</a></p>\n";
 
-	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=der'>".
+	echo "<p><a href='account.php?id=$id&amp;cert=$certid&amp;format=der'>".
 		_("Download the certificate in DER format")."</a></p>\n";
 
 	echo "<br /><br /><br />";
