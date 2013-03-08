@@ -95,6 +95,9 @@ if (array_key_exists('format', $_REQUEST)) {
 	echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;format=der'>".
 		_("Download the certificate in DER format")."</a></p>\n";
 
+	echo "<br /><br /><br />";
+	echo "<pre>$cert</pre>";
+
 	showfooter();
 	exit;
 }
