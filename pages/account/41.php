@@ -69,15 +69,15 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td class="DataTD"><?=_("Secondary languages")?>:</td>
     <td class="DataTD"><select name="addlang">
 <?
-	$query = "select * from `languages` order by `lang`,`country`";
+	$query = "select * from `languages` order by `locale`";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
 		printf("<option value=\"%s\">[%s] %s (%s)</option>\n",
 			sanitizeHTML($row['locale']),
 			sanitizeHTML($row['locale']),
-			sanitizeHTML($row['lang']),
-			sanitizeHTML($row['country'])
+			$row['lang'],
+			$row['country']
 			);
 	}
 ?>
