@@ -73,8 +73,12 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		echo "<option value='".sanitizeHTML($row['locale'])."'";
-		echo ">[".$row['locale']."] ".$row['lang']." - (".$row['country'].")</option>\n";
+		printf("<option value=\"%s\">[%s] %s (%s)</option>\n",
+			sanitizeHTML($row['locale']),
+			sanitizeHTML($row['locale']),
+			sanitizeHTML($row['lang']),
+			sanitizeHTML($row['country'])
+			);
 	}
 ?>
 	</select>
