@@ -18,38 +18,45 @@
 
 <p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.html'>","</a>")?></p>
 
-<p>
-Class 1 <?=_("PKI Key")?><br>
-<a href="certs/CAcert_Root_Certificates.msi"><?=_("Windows installer package for browsers that use the Windows certificate store (for example Internet Explorer, Chrome on Windows and Safari on Windows)")?></a><br>
-<a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a><br>
-<a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a><br>
-<a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a><br>
-<a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a><br>
-<?=_("Fingerprint")?> SHA1: 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33<br/>
-<?=_("Fingerprint")?> MD5: A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B<br/>
-</p>
+<h3><?=_("Windows Installer") ?></h3>
+<ul class="no_indent">
+	<li><? printf(_("%s Windows installer package %s for browsers that use the Windows certificate store %s (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates.msi">', '</a>', '<br/>')?></li>
+	<li><?=_("SHA1 Hash:") ?> 2db1957db31aa0d778d1a65ea146760ee1e67611</li>
+	<li><?=_("SHA256 Hash:") ?> 88883f2e3117bae6f43922fbaef8501b94efe4143c12116244ca5d0c23bcbb16</li>
+</ul>
 
-<p>
-Class 3 <?=_("PKI Key")?><br>
-<a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a><br/>
-<a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a><br/>
-<a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a><br/>
-<a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a><br/>
+<h3><?=_("Class 1 PKI Key")?></h3>
+<ul class="no_indent">
+	<li><a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a></li>
+	<li><a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a></li>
+	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a></li>
+	<li><?=_("SHA1 Fingerprint:")?> 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33</li>
+	<li><?=_("MD5 Fingerprint:")?> A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B</li>
+</ul>
+
+<h3><?=_("Class 3 PKI Key")?></h3>
+<ul class="no_indent">
+	<li><a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
+	<li><a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
+	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
 <?php /*
   class3 subroot fingerprint updated: 2011-05-23  class3 Re-sign project
   https://wiki.cacert.org/Roots/Class3ResignProcedure/Migration
 */ ?>
-<?=_("Fingerprint")?> SHA1: AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE<br/>
-<?=_("Fingerprint")?> MD5: F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42<br/>
-</p>
+	<li><?=_("SHA1 Fingerprint:")?> AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE</li>
+	<li><?=_("MD5 Fingerprint:")?> F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42</li>
+</ul>
 
-<p>
-<?=_("GPG Key")?><br>
-<a href="certs/cacert.asc"><?=_("CAcert's GPG Key")?></a><br>
-</p>
+<h3><?=_("GPG Key")?></h3>
+<ul class="no_indent">
+	<li><a href="certs/cacert.asc"><?=_("CAcert's GPG Key")?></a></li>
+	<li><?=_("GPG Key ID:")?> 0x65D0FD58</li>
+	<li><?=_("Fingerprint:")?> A31D 4F81 EF4E BD07 B456 FA04 D2BB 0D01 65D0 FD58</li>
+</ul>
 
-<p>
-<?=_("PKI finger/thumb print signed by the CAcert GPG Key")?><br>
+<h4><?=_("PKI fingerprint signed by the CAcert GPG Key")?></h4>
 <pre>
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
@@ -82,8 +89,8 @@ TG1yj+lkktROGGyn0hJ5SbM=
 =tXoj
 -----END PGP SIGNATURE-----
 </pre>
-</p>
 
+<h3><?=_("History")?></h3>
 <p>
 <? printf(_('An overview over all CA certificates ever issued can be found in '.
         '%sthe wiki%s.'),
