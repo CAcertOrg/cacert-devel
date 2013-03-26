@@ -19,14 +19,14 @@
 <p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.php'>","</a>")?></p>
 
 <h3><?=_("Windows Installer") ?></h3>
-<ul style="list-style-type: none">
+<ul class="no_indent">
 	<li><? printf(_("%s Windows installer package %s for browsers that use the Windows certificate store (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates.msi">', '</a>')?></li>
-	<li><?=_("SHA1 hash:") ?> 2db1957db31aa0d778d1a65ea146760ee1e67611</li>
-	<li><?=_("SHA256 hash:") ?> 88883f2e3117bae6f43922fbaef8501b94efe4143c12116244ca5d0c23bcbb16</li>
+	<li><?=_("SHA1 Hash:") ?> 2db1957db31aa0d778d1a65ea146760ee1e67611</li>
+	<li><?=_("SHA256 Hash:") ?> 88883f2e3117bae6f43922fbaef8501b94efe4143c12116244ca5d0c23bcbb16</li>
 </ul>
 
 <h3><?=_("Class 1 PKI Key")?></h3>
-<ul style="list-style-type: none">
+<ul class="no_indent">
 	<li><a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
 	<li><a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a></li>
 	<li><a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a></li>
@@ -36,7 +36,7 @@
 </ul>
 
 <h3><?=_("Class 3 PKI Key")?></h3>
-<ul style="list-style-type: none">
+<ul class="no_indent">
 	<li><a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
 	<li><a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
 	<li><a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
@@ -50,7 +50,7 @@
 </ul>
 
 <h3><?=_("GPG Key")?></h3>
-<ul style="list-style-type: none">
+<ul class="no_indent">
 	<li><a href="certs/cacert.asc"><?=_("CAcert's GPG Key")?></a></li>
 	<li><?=_("GPG Key ID:")?> 0x65D0FD58</li>
 	<li><?=_("Fingerprint:")?> A31D 4F81 EF4E BD07 B456 FA04 D2BB 0D01 65D0 FD58</li>
