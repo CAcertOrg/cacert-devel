@@ -20,7 +20,7 @@
 
 <p><?=_('There are several ways to become a CAcert Assurer, the most common of which is face to face meetings with existing assurers, who check your ID documents (you need to show at least one better two government issued photo ID where possible otherwise you won\'t be allocated as many points!).')?></p>
 
-<p><?=sprintf(_('You can also become a CAcert Assurer taking part in the TTP (Trusted Third Party) programme. For more information see the %s.'),'<a href="/wot.php?id=4">TTP page</a>')?></p>
+<p><?=sprintf(_('You can also become a CAcert Assurer taking part in the TTP (Trusted Third Party) programme. For more information see the %s TTP page %s.'),'<a href="/wot.php?id=4">', '</a>')?></p>
 
 <p><?=sprintf(_('If you are interested in the TTP programme, read the pages %s for the basic way how the TTP programme works for you, and %s whether the TTP programme affects the country where you are located.'),'<a href="//wiki.cacert.org/TTP/TTPuser">TTPuser</a>','<a href="//wiki.cacert.org/TTP/TTPAL">TTPAL</a>')?> </p>
 
