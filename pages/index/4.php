@@ -25,7 +25,7 @@
 ?>
 
 <? if($_SESSION['_config']['hostname'] == $_SESSION['_config']['securehostname']) { ?>
-<p><?=sprintf(_("Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your email/pass phrase to get a new certificate, by clicking on %'Password Login'% to the right of your screen."),"<a href='https://cacert1.it-sls.de/index.php?id=4'>", "</a>")?></p>
+<p><?=sprintf(_("Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your email/pass phrase to get a new certificate, by clicking on %s'Password Login'%s to the right of your screen."),"<a href='".$_SESSION['_config']['normalhostname']."/index.php?id=4'>", "</a>")?></p>
 <? } else { ?>
 <style>
 .box2 {width:100%;text-align:center;}
