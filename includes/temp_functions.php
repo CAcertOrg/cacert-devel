@@ -244,4 +244,15 @@ function write_se_log($uid, $adminid, $type, $info){
 	mysql_query($query);
 }
 
+function valid_ticket_number($ticketno){
+	//return if a given ticket number is valid
+	//a arbitration case
+	//d dispute action
+	//s support case
+	$pattern='/[adsADS]\d{8}\./';
+	if (preg_match($pattern, $ticketno)) {
+		return true;
+	}
+	return false;
+}
 ?>
