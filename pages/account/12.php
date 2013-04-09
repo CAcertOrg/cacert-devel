@@ -36,7 +36,7 @@
 			`domaincerts`.`expire` as `expires`, `revoked` as `revoke`,
 			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`
 			from `domaincerts`,`domains`
-			where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `domaincerts`.`domid`=`domains`.`id` ";
+			where `memid`='".intval($_SESSION['profile']['id'])."' and `domaincerts`.`domid`=`domains`.`id` ";
 	if($viewall != 1)
 	{
 		$query .= "AND `revoked`=0 AND `renewed`=0 ";
@@ -49,7 +49,7 @@
 	{
 ?>
   <tr>
-    <td colspan="6" class="DataTD"><?=_("No domains are currently listed.")?></td>
+    <td colspan="6" class="DataTD"><?=_("No certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -85,8 +85,10 @@
 	    <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
   </tr>
 <? } ?>
+  <tr>
+    <td class="DataTD" colspan="6"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
+  </tr>
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>">
 <input type="hidden" name="csrf" value="<?=make_csrf('srvcerchange')?>" />
 </form>
-<p><?=_("From here you can delete pending requests, or revoke valid certificates.")?></p>

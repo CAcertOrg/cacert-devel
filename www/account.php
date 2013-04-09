@@ -25,34 +25,35 @@
 	} else if($id == 19) {
 		include_once("../pages/account/19.php");
 		exit;
-	} else if($oldid == 40 && $_REQUEST['process'] != "" && $_POST['support'] != "yes") {
+	} else if($oldid == 40 && $_REQUEST['process'] != "") {
 		$who = stripslashes($_REQUEST['who']);
 		$email = stripslashes($_REQUEST['email']);
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 
-                $message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
+		//check for spam via honeypot
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
+			echo _("Form could not be sent.");
+			showfooter();
+			exit;
+		}
 
-		sendmail("support@cacert.org", "[CAcert.org] ".$subject, $message, $email, $email, "", "CAcert Website");
-                showheader(_("Welcome to CAcert.org"));
-                echo _("Your message has been sent.");
-                showfooter();
-                exit;
-	} else if($oldid == 40 && $_REQUEST['process'] != "" && $_POST['support'] == "yes") {
-		$who = stripslashes($_REQUEST['who']);
-		$email = stripslashes($_REQUEST['email']);
-		$subject = stripslashes($_REQUEST['subject']);
-		$message = stripslashes($_REQUEST['message']);
+		$message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
+		if (isset($process[0])){
+			sendmail("cacert-support@lists.cacert.org", "[website form email]: ".$subject, $message, "website-form@cacert.org", "cacert-support@lists.cacert.org, $email", "", "CAcert-Website");
+			showheader(_("Welcome to CAcert.org"));
+			echo _("Your message has been sent to the general support list.");
+			showfooter();
+			exit;
+		}
+		if (isset($process[1])){
+			sendmail("support@cacert.org", "[CAcert.org] ".$subject, $message, $email, "", "", "CAcert Support");
+			showheader(_("Welcome to CAcert.org"));
+			echo _("Your message has been sent.");
+			showfooter();
+			exit;
+		}
 
-
-                $message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
-
-                sendmail("cacert-support@lists.cacert.org, $email", "[website form email]: ".$subject, $message, "website-form@cacert.org", "cacert-support@lists.cacert.org, $email", "", "CAcert Website");
-		
-                showheader(_("Welcome to CAcert.org"));
-                echo _("Your message has been sent to the general support list.");
-                showfooter();
-                exit;
 	} else if($id == 51 && $_GET['img'] == "show") {
 		$query = "select * from `tverify` where `id`='".intval($_GET['photoid'])."' and `modified`=0";
 		$res = mysql_query($query);
