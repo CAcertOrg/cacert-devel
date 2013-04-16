@@ -96,6 +96,10 @@ if (array_key_exists('format', $_REQUEST)) {
 		_("Download the certificate in DER format")."</a></p>\n";
 
 	echo "<br /><br /><br />";
+	
+	// Allow to directly copy and paste the cert in PEM format 
+	$crtname=escapeshellarg($row['crt_name']);
+	$cert = `/usr/bin/openssl x509 -in $crtname -outform PEM`;
 	echo "<pre>$cert</pre>";
 
 	showfooter();
