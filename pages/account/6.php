@@ -82,22 +82,20 @@ if (array_key_exists('format', $_REQUEST)) {
 	}
 
 } else {
-	showheader(_("My CAcert.org Account!"));
-	echo "<h3>"._("Install your certificate")."</h3>\n";
-
-	echo "<p><a href='account.php?id=$id&amp;cert=$certid&amp;install'>".
+	showheader(_("My CAcert.org Account!"), _("Install your certificate"));
+	echo '<ul class="no_indent">';
+	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;install'>".
 		_("Install the certificate into your browser").
-		"</a></p>\n";
+		"</a></li>\n";
 
-	echo "<p><a href='account.php?id=$id&amp;cert=$certid&amp;format=pem'>".
-		_("Download the certificate in PEM format")."</a></p>\n";
+	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;format=pem'>".
+		_("Download the certificate in PEM format")."</a></li>\n";
 
-	echo "<p><a href='account.php?id=$id&amp;cert=$certid&amp;format=der'>".
-		_("Download the certificate in DER format")."</a></p>\n";
+	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;format=der'>".
+		_("Download the certificate in DER format")."</a></li>\n";
+	echo '</ul>';
 
-	echo "<br /><br /><br />";
-	
-	// Allow to directly copy and paste the cert in PEM format 
+	// Allow to directly copy and paste the cert in PEM format
 	$crtname=escapeshellarg($row['crt_name']);
 	$cert = `/usr/bin/openssl x509 -in $crtname -outform PEM`;
 	echo "<pre>$cert</pre>";
