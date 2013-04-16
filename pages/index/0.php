@@ -118,8 +118,7 @@
 <p><?=_("If you are located in Australia, use bank transfer instead.")?></p>
 
 <p><?=_("CAcert bank account details:")?></p>
-
-<ul>
+<ul class="no_indent">
 <li>Account Name: CAcert Inc</li>
 <li>SWIFT: WPACAU2S</li>
 <li>BSB: 032073</li>
