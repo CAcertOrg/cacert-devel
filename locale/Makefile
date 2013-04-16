@@ -176,7 +176,8 @@ upload.clean: template.clean
 messages.pot: $(GETTEXT_FILES)
 	xgettext --output - --sort-by-file --copyright-holder "CAcert Inc." \
 		--package-name "CAcert" --package-version "$(VERSION)" \
-		--msgid-bugs-address "translations-admin@cacert.org" $^ | \
+		--msgid-bugs-address "translations-admin@cacert.org" \
+		--add-comments=TRANSLATORS $^ | \
 		# replace place holders in the lines before the first msgid\
 		sed '1,/^msgid/ { s/SOME DESCRIPTIVE TITLE/$(DESCRITPION)/; s/YEAR/$(COPYRIGHT_YEAR)/; s/PACKAGE/$(PACKAGE)/ }' \
 		> $@

@@ -29,7 +29,7 @@
 <? } else { ?>
 <style>
 .box2 {width:100%;text-align:center;}
-.box {background:#F5F7F7;border:2px solid #cccccc;margin:0px auto;height:250px;width:300px;padding:1em;}
+.box {background:#F5F7F7;border:2px solid #cccccc;margin:0px auto;height:auto;width:300px;padding:1em;}
 .smalltext {font-size:10px;}
 label {width:100px;display:block;float:left;}
 text {width:166px;display:block;float:left;}
@@ -45,15 +45,15 @@ h1 {font-size:1.9em;text-align:center;}
 <label for="email"><?=_("Email Address")?>:</label><input type='text' name="email" value="<?=sanitizeHTML(array_key_exists("email",$_REQUEST)?$_REQUEST['email']:"")?>" <? if(array_key_exists('notauto',$_REQUEST) && $_REQUEST['noauto'] == 1) echo " autocomplete='off'"; ?>/><br />
 <label for="pword"><?=_("Pass Phrase")?>:</label><input type='password' name='pword' autocomplete="off"/><br />
 <input type='submit' name="process" value="<?=_("Login")?>" /><br /><br />
-<a href='https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4'><?=_("Password Login")?></a> - 
-<a href='https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=5'><?=_("Lost Password")?></a> - 
+<a href='https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4'><?=_("Password Login")?></a> -
+<a href='https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=5'><?=_("Lost Password")?></a> -
 <a href='https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4&amp;noauto=1'><?=_("Net Cafe Login")?></a><br />
 <p class='smalltext'><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form>
 </div>
 </div>
-<? } 
+<? }
 if(array_key_exists("oldlocation",$_SESSION['_config']) && $_SESSION['_config']['oldlocation']!="")
 {
   echo "<br/><center>"._("If you want to use certificate login instead of username+password, please")." <a href='https://secure.cacert.org/".sanitizeHTML($_SESSION['_config']['oldlocation'])."'>"._("click here")."</a></center>";

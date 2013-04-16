@@ -35,8 +35,9 @@ printf(_("CAcert Inc. is a non-profit association which is legally able to accep
 
 <pre>
 Account Name: CAcert Inc
-BSB: 032073
-Account No.: 180264
+SWIFT:        WPACAU2S
+BSB:          032073
+Account No.:  180264
 </pre>
 
 <p><?=_("ANY amount will be appreciated - the more funding CAcert receives, the sooner it can achieve the goals of the community.")?></p>
