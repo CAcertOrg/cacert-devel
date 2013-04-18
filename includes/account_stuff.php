@@ -16,12 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
-	$expand="";
+$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
+$expand="";
 
-	function showheader($title = "CAcert.org", $title2 = "")
-	{
-		global $id, $PHP_SELF;
+function showheader($title = "CAcert.org", $title2 = "")
+{
+	global $id, $PHP_SELF;
 	$expand="";
 	$tmpid = $id;
 	if($PHP_SELF == "/wot.php")
@@ -131,156 +131,197 @@
 		case 2009: $expand = " explode('advertising');"; break;
 	}
 
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title><?=$title?></title>
-<? if(array_key_exists('header',$_SESSION) && $_SESSION['_config']['header'] != "") { ?><?=$_SESSION['_config']['header']?><? } ?>
-<link rel="stylesheet" href="/styles/default.css" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script language="JavaScript" type="text/javascript">
-function explode(e) {
-    if (document.getElementById(e).style.display == 'none') {
-        document.getElementById(e).style.display = 'block';
-    } else {
-        document.getElementById(e).style.display = 'none';
-    }
-}
-
-function hideall() {
-        var Nodes = document.getElementsByTagName('ul')
-        var max = Nodes.length
-        for(var i = 0;i < max;i++) {
-                var nodeObj = Nodes.item(i)
-		if (nodeObj.className == "menu") {
-	                nodeObj.style.display = 'none';
+	<title><?=$title?></title>
+	<?
+	if(array_key_exists('header',$_SESSION) && $_SESSION['_config']['header'] != "") {
+		echo $_SESSION['_config']['header'];
+	}
+	?>
+	<link rel="stylesheet" href="/styles/default.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script language="JavaScript" type="text/javascript">
+	function explode(e) {
+		if (document.getElementById(e).style.display == 'none') {
+			document.getElementById(e).style.display = 'block';
+		} else {
+			document.getElementById(e).style.display = 'none';
 		}
-        }
-}
-</script>
+	}
+
+	function hideall() {
+		var Nodes = document.getElementsByTagName('ul')
+		var max = Nodes.length
+		for(var i = 0;i < max;i++) {
+			var nodeObj = Nodes.item(i)
+			if (nodeObj.className == "menu") {
+				nodeObj.style.display = 'none';
+			}
+		}
+	}
+	</script>
 </head>
 <body onload="hideall(); explode('home');<?=$expand?>">
- <div id="pagecell1">
-  <div id="pageName"><br>
-    <div id="pageLogo"><a href="http://<?=$_SESSION['_config']['normalhostname']?>"><img src="/images/cacert4.png" border="0" alt="CAcert.org logo"></a></div>
-    <div id="googlead"><h2><?=_("Free digital certificates!")?></h2></div>
-  </div>
-  <div id="pageNav">
-    <div class="relatedLinks">
-      <h3>CAcert.org</h3>
-      <ul class="menu" id="home"><li><a href="/index.php"><?=_("Go Home")?></a></li><li><a href="account.php?id=logout"><?=_("Logout")?></a></li></ul>
-    </div>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('mydetails')">+ <?=_("My Details")?></h3>
-      <ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li><?
-	if($_SESSION['profile']['id'] == 1 || $_SESSION['profile']['id'] == 5897)
-		echo "<li><a href='sqldump.php'>SQL Dump</a></li>";
-	?></ul>
-    </div>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('emailacc')">+ <?=_("Email Accounts")?></h3>
-      <ul class="menu" id="emailacc"><li><a href="account.php?id=1"><?=_("Add")?></a></li><li><a href="account.php?id=2"><?=_("View")?></a></li></ul>
-    </div>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('clicerts')">+ <?=_("Client Certificates")?></h3>
-      <ul class="menu" id="clicerts"><li><a href="account.php?id=3"><?=_("New")?></a></li><li><a href="account.php?id=5"><?=_("View")?></a></li></ul>
-    </div>
-<? if($_SESSION['profile']['points'] >= 50) { ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('gpg')">+ <?=_("GPG/PGP Keys")?></h3>
-      <ul class="menu" id="gpg"><li><a href="gpg.php?id=0"><?=_("New")?></a></li><li><a href="gpg.php?id=2"><?=_("View")?></a></li></ul>
-    </div>
-<? } ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('domains')">+ <?=_("Domains")?></h3>
-      <ul class="menu" id="domains"><li><a href="account.php?id=7"><?=_("Add")?></a></li><li><a href="account.php?id=9"><?=_("View")?></a></li></ul>
-    </div>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('servercert')">+ <?=_("Server Certificates")?></h3>
-      <ul class="menu" id="servercert"><li><a href="account.php?id=10"><?=_("New")?></a></li><li><a href="account.php?id=12"><?=_("View")?></a></li></ul>
-    </div>
-<? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('clientorg')">+ <?=_("Org Client Certs")?></h3>
-      <ul class="menu" id="clientorg"><li><a href="account.php?id=16"><?=_("New")?></a></li><li><a href="account.php?id=18"><?=_("View")?></a></li></ul>
-    </div>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('serverorg')">+ <?=_("Org Server Certs")?></h3>
-      <ul class="menu" id="serverorg"><li><a href="account.php?id=20"><?=_("New")?></a></li><li><a href="account.php?id=22"><?=_("View")?></a></li></ul>
-    </div>
-<? } ?>
-<? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('orgadmin')">+ <?=_("Org Admin")?></h3>
-      <ul class="menu" id="orgadmin"><? if($_SESSION['profile']['orgadmin'] == 1) { ?><li><a href="account.php?id=24"><?=_("New Organisation")?></a></li><li><a href="account.php?id=25"><?=_("View Organisations")?></a></li><? } ?><li><a href="account.php?id=35"><?=_("View")?></a></li></ul>
-    </div>
-<? } ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('WoT')">+ <?=_("CAcert Web of Trust")?></h3>
-      <ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?><li><a href="account.php?id=55"><?=_("Training")?></a></li></ul>
-    </div>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('WoTForms')">+ <?=_("CAP Forms")?></h3><?
-        $name = $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'];
-        while(strstr($name, "  "))
-                $name = str_replace("  ", " ", $name);
-        $extra = "?name=".urlencode($name);
-	$extra .= "&amp;dob=".urlencode($_SESSION['profile']['dob']);
-        $extra .= "&amp;email=".urlencode($_SESSION['profile']['email']);
+	<div id="pagecell1">
+		<div id="pageName"><br>
+			<div id="pageLogo"><a href="http://<?=$_SESSION['_config']['normalhostname']?>"><img src="/images/cacert4.png" border="0" alt="CAcert.org logo"></a></div>
+			<div id="googlead"><h2><?=_("Free digital certificates!")?></h2></div>
+		</div>
+		<div id="pageNav">
+			<div class="relatedLinks">
+				<h3>CAcert.org</h3>
+				<ul class="menu" id="home"><li><a href="/index.php"><?=_("Go Home")?></a></li><li><a href="account.php?id=logout"><?=_("Logout")?></a></li></ul>
+			</div>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('mydetails')">+ <?=_("My Details")?></h3>
+				<ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li>
+					<?
+					if($_SESSION['profile']['id'] == 1 || $_SESSION['profile']['id'] == 5897) {
+						echo "<li><a href='sqldump.php'>SQL Dump</a></li>";
+					} ?>
+				</ul>
+			</div>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('emailacc')">+ <?=_("Email Accounts")?></h3>
+				<ul class="menu" id="emailacc"><li><a href="account.php?id=1"><?=_("Add")?></a></li><li><a href="account.php?id=2"><?=_("View")?></a></li></ul>
+			</div>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('clicerts')">+ <?=_("Client Certificates")?></h3>
+				<ul class="menu" id="clicerts"><li><a href="account.php?id=3"><?=_("New")?></a></li><li><a href="account.php?id=5"><?=_("View")?></a></li></ul>
+			</div>
+			<?
+			if($_SESSION['profile']['points'] >= 50) {
+				?>
+				<div class="relatedLinks">
+					<h3 class="pointer" onclick="explode('gpg')">+ <?=_("GPG/PGP Keys")?></h3>
+					<ul class="menu" id="gpg"><li><a href="gpg.php?id=0"><?=_("New")?></a></li><li><a href="gpg.php?id=2"><?=_("View")?></a></li></ul>
+				</div>
+				<?
+			}
+			?>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('domains')">+ <?=_("Domains")?></h3>
+				<ul class="menu" id="domains"><li><a href="account.php?id=7"><?=_("Add")?></a></li><li><a href="account.php?id=9"><?=_("View")?></a></li></ul>
+			</div>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('servercert')">+ <?=_("Server Certificates")?></h3>
+				<ul class="menu" id="servercert"><li><a href="account.php?id=10"><?=_("New")?></a></li><li><a href="account.php?id=12"><?=_("View")?></a></li></ul>
+			</div>
+			<?
+			if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) {
+				?>
+				<div class="relatedLinks">
+					<h3 class="pointer" onclick="explode('clientorg')">+ <?=_("Org Client Certs")?></h3>
+					<ul class="menu" id="clientorg"><li><a href="account.php?id=16"><?=_("New")?></a></li><li><a href="account.php?id=18"><?=_("View")?></a></li></ul>
+				</div>
+				<div class="relatedLinks">
+					<h3 class="pointer" onclick="explode('serverorg')">+ <?=_("Org Server Certs")?></h3>
+					<ul class="menu" id="serverorg"><li><a href="account.php?id=20"><?=_("New")?></a></li><li><a href="account.php?id=22"><?=_("View")?></a></li></ul>
+				</div>
+				<?
+			}
 
-	$extra2 = "?assurer=".urlencode($name)."&amp;date=now&amp;maxpoints=".maxpoints();
+			if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) {
+				?>
+				<div class="relatedLinks">
+					<h3 class="pointer" onclick="explode('orgadmin')">+ <?=_("Org Admin")?></h3>
+					<ul class="menu" id="orgadmin"><? if($_SESSION['profile']['orgadmin'] == 1) { ?><li><a href="account.php?id=24"><?=_("New Organisation")?></a></li><li><a href="account.php?id=25"><?=_("View Organisations")?></a></li><? } ?><li><a href="account.php?id=35"><?=_("View")?></a></li></ul>
+				</div>
+				<?
+			}
+			?>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('WoT')">+ <?=_("CAcert Web of Trust")?></h3>
+				<ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?><li><a href="account.php?id=55"><?=_("Training")?></a></li></ul>
+			</div>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('WoTForms')">+ <?=_("CAP Forms")?></h3>
+				<?
+				$name = $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'];
+				while(strstr($name, "  ")) {
+					$name = str_replace("  ", " ", $name);
+				}
+				$extra = "?name=".urlencode($name);
+				$extra .= "&amp;dob=".urlencode($_SESSION['profile']['dob']);
+				$extra .= "&amp;email=".urlencode($_SESSION['profile']['email']);
+
+				$extra2 = "?assurer=".urlencode($name)."&amp;date=now&amp;maxpoints=".maxpoints();
+				?>
+				<ul class="menu" id="WoTForms">
+					<li><a href="/cap.php<?=$extra?>">A4 - <?=_("WoT Form")?></a></li>
+					<li><a href="/cap.php<?=$extra?>&amp;format=letter">US - <?=_("WoT Form")?></a></li>
+					<?
+					/*
+					<li><div style="white-space:nowrap"><a href="/ttp.php<?=$extra?>">A4 - <?=_("TTP Form")?></a></div></li>
+					<li><div style="white-space:nowrap"><a href="/ttp.php<?=$extra?>&amp;format=letter">US - <?=_("TTP Form")?></a></div></li>
+					*/
+
+					if($_SESSION['profile']['points'] > 100) {
+						?>
+						<li><div style="white-space:nowrap"><a href="/cap.php<?=$extra2?>">A4 - <?=_("Assurance Form")?></a></div></li>
+						<li><div style="white-space:nowrap"><a href="/cap.php<?=$extra2?>&amp;format=letter">US - <?=_("Assurance Form")?></a></div></li>
+						<?
+					}
+					/*
+					<li><div style="white-space:nowrap"><a href="/ttp.php">A4 - <?=_("Blank TTP Form")?></a></div></li>
+					<li><div style="white-space:nowrap"><a href="/ttp.php?&amp;format=letter">US - <?=_("Blank TTP Form")?></a></div></li>
+					*/
+					?>
+					<li><div style="white-space:nowrap"><a href="/cap.php">A4 - <?=_("Blank CAP Form")?></a></div></li>
+					<li><div style="white-space:nowrap"><a href="/cap.php?&amp;format=letter">US - <?=_("Blank CAP Form")?></a></div></li>
+				</ul>
+			</div>
+			<?
+			if($_SESSION['profile']['admin'] == 1 || $_SESSION['profile']['locadmin'] == 1) {
+				?>
+				<div class="relatedLinks">
+					<h3 class="pointer" onclick="explode('sysadmin')">+ <?=_("System Admin")?></h3>
+					<ul class="menu" id="sysadmin"><? if($_SESSION['profile']['admin'] == 1) { ?><li><a href="account.php?id=42"><?=_("Find User")?></a></li><li><a href="account.php?id=48"><?=_("Find Domain")?></a></li><? } if($_SESSION['profile']['locadmin'] == 1) { ?><li><a href="account.php?id=53"><?=_("Location DB")?></a></li><? } ?></ul>
+				</div>
+				<?
+			}
+			?>
+			<div class="relatedLinks">
+				<h3 class="pointer" onclick="explode('disputes')">+ <?=_("Disputes/Abuses")?></h3>
+				<ul class="menu" id="disputes"><li><a href="disputes.php?id=0"><?=_("More Information")?></a></li><li><a href="disputes.php?id=1"><?=_("Email Dispute")?></a></li><li><a href="disputes.php?id=2"><?=_("Domain Dispute")?></a></li><? if($_SESSION['profile']['admin'] == 1) { ?><li><a href="disputes.php?id=3"><?=_("Abuses")?></a></li><? } ?></ul>
+			</div>
+			<?
+			if($_SESSION['profile']['adadmin'] >= 1) {
+				?>
+				<div class="relatedLinks">
+					<h3 class="pointer" onclick="explode('advertising')">+ <?=_("Advertising")?></h3>
+					<ul class="menu" id="advertising"><li><a href="advertising.php?id=1"><?=_("New Ad")?></a></li><li><a href="advertising.php?id=0"><?=_("View Ads")?></a></li></ul>
+				</div>
+				<?
+			}
+			?>
+		</div>
+		<div id="content">
+			<div class="story">
+				<h3><?=$title2?></h3>
+				<?
+				if($_SESSION['_config']['errmsg'] != "") {
+					?>
+					<p><font color="#ff0000" size="+2"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
+					<?
+				}
+
+} // end showheader()
+
+function showfooter()
+{
 ?>
-      <ul class="menu" id="WoTForms">
-         <li><a href="/cap.php<?=$extra?>">A4 - <?=_("WoT Form")?></a></li>
-	 <li><a href="/cap.php<?=$extra?>&amp;format=letter">US - <?=_("WoT Form")?></a></li>
-	<? /* <li><div style="white-space:nowrap"><a href="/ttp.php<?=$extra?>">A4 - <?=_("TTP Form")?></a></div></li>
-	 <li><div style="white-space:nowrap"><a href="/ttp.php<?=$extra?>&amp;format=letter">US - <?=_("TTP Form")?></a></div></li> */
-	?>
-	 <? if($_SESSION['profile']['points'] > 100) { ?><li><div style="white-space:nowrap"><a href="/cap.php<?=$extra2?>">A4 - <?=_("Assurance Form")?></a></div></li>
-	 <li><div style="white-space:nowrap"><a href="/cap.php<?=$extra2?>&amp;format=letter">US - <?=_("Assurance Form")?></a></div></li>
-	 <? } ?>
-	 <? /*
-	  <li><div style="white-space:nowrap"><a href="/ttp.php">A4 - <?=_("Blank TTP Form")?></a></div></li>
-	  <li><div style="white-space:nowrap"><a href="/ttp.php?&amp;format=letter">US - <?=_("Blank TTP Form")?></a></div></li>
-	 */ ?>
-	 <li><div style="white-space:nowrap"><a href="/cap.php">A4 - <?=_("Blank CAP Form")?></a></div></li>
-	 <li><div style="white-space:nowrap"><a href="/cap.php?&amp;format=letter">US - <?=_("Blank CAP Form")?></a></div></li></ul>
-    </div>
-<? if($_SESSION['profile']['admin'] == 1 || $_SESSION['profile']['locadmin'] == 1) { ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('sysadmin')">+ <?=_("System Admin")?></h3>
-      <ul class="menu" id="sysadmin"><? if($_SESSION['profile']['admin'] == 1) { ?><li><a href="account.php?id=42"><?=_("Find User")?></a></li><li><a href="account.php?id=48"><?=_("Find Domain")?></a></li><? } if($_SESSION['profile']['locadmin'] == 1) { ?><li><a href="account.php?id=53"><?=_("Location DB")?></a></li><? } ?></ul>
-    </div>
-<? } ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('disputes')">+ <?=_("Disputes/Abuses")?></h3>
-      <ul class="menu" id="disputes"><li><a href="disputes.php?id=0"><?=_("More Information")?></a></li><li><a href="disputes.php?id=1"><?=_("Email Dispute")?></a></li><li><a href="disputes.php?id=2"><?=_("Domain Dispute")?></a></li><? if($_SESSION['profile']['admin'] == 1) { ?><li><a href="disputes.php?id=3"><?=_("Abuses")?></a></li><? } ?></ul>
-    </div>
-<? if($_SESSION['profile']['adadmin'] >= 1) { ?>
-    <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('advertising')">+ <?=_("Advertising")?></h3>
-      <ul class="menu" id="advertising"><li><a href="advertising.php?id=1"><?=_("New Ad")?></a></li><li><a href="advertising.php?id=0"><?=_("View Ads")?></a></li></ul>
-    </div>
-<? } ?>
-  </div>
-  <div id="content">
-    <div class="story">
-      <h3><?=$title2?></h3>
-<? if($_SESSION['_config']['errmsg'] != "") { ?>
-<p><font color="#ff0000" size="+2"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
-<? } ?>
+			</div>
+		</div>
+		<div id="siteInfo"><a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="account.php?id=38"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
+			<a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> | <a href="account.php?id=40"><?=_("Contact Us")?></a>
+			| &copy;2002-<?=date("Y")?> <?=_("by CAcert")?>
+		</div>
+	</div>
+</body>
+</html>
 <?
-	}
-
-	function showfooter()
-	{
-?>
-      </div>
-    </div>
-  <div id="siteInfo"><a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="account.php?id=38"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-	<a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> | <a href="account.php?id=40"><?=_("Contact Us")?></a>
-		| &copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
-</div>  
-</body>             
-</html><?
-	}
+}
