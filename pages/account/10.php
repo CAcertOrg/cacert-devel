@@ -27,7 +27,7 @@
 <p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
 
 <p><b>*** <?=_("Please Note. All information on your certificate will be removed except the CommonName and SubjectAltName field, this is because it's an automated service and cannot automatically verify other details on your certificates are valid or not.")?> ***</b></p>
-<p><?=sprintf(_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via %s for more information."),'support@cacert.org')?> </p>
+<p><?=_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via support@cacert.org for more information.")?> </p>
 
 <form method="post" action="account.php">
 <? if($_SESSION['profile']['points'] >= 50) { ?>
