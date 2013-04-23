@@ -20,8 +20,8 @@
 
 <p><?=_('To become a CAcert Assurer you need to fulfill the following requirements:')?></p>
 <ol>
-	<li><?=_('1. you have to reach 100 Assurance points')?></li>
-	<li><?=_('2. you have to pass the CATS test')?></li>
+	<li><?=_('You have to reach 100 Assurance points')?></li>
+	<li><?=_('You have to pass the CATS test')?></li>
 </ol>
 
 <p><?=_('To reach 100 Assurance Points you have to meet with assurers who assure you under the CAcert Assurance Programme according to Assurance Policy. During the face to face meeting you need to show at least one governmental issued photo ID.')?></p>
