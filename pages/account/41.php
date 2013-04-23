@@ -57,7 +57,7 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_escape_string($row['lang'])."'"));
+		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_real_escape_string($row['lang'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>

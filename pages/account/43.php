@@ -21,7 +21,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
   {
-    $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
+    $assurance = mysql_real_escape_string(intval($_REQUEST['assurance']));
     $row = 0;
     $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
     if ($res) {
@@ -35,7 +35,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
   {
-    $emailsearch = $email = mysql_escape_string(stripslashes($_REQUEST['email']));
+    $emailsearch = $email = mysql_real_escape_string(stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
     //if(!strstr($email, "%"))
@@ -296,7 +296,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 </table>
 <br><?
   $query = "select * from `email` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''
-      and `email`!='".mysql_escape_string($row['email'])."'";
+      and `email`!='".mysql_real_escape_string($row['email'])."'";
   $dres = mysql_query($query);
   if(mysql_num_rows($dres) > 0) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -373,7 +373,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
        4. users.email = primary-email 				
 
     --- Assurer, assure someone find user query
-    select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."'
+    select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."'
            and `deleted`=0
 		=> requirements
        1. users.deleted = 0
