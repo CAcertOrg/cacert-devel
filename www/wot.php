@@ -127,7 +127,7 @@ function send_reminder()
 	if($oldid == 12)
 		$id = $oldid;
 
-	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
+	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6 || $id == 16 ))
 		if (!is_assurer($_SESSION['profile']['id']))
 			{
 				show_page ("Exit","",get_assurer_reason($_SESSION['profile']['id']));

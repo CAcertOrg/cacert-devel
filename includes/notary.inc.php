@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ 
+*/
 
 	function query_init ($query)
 	{
@@ -52,8 +52,8 @@
 
 	function get_top_assurer_position ($no_of_assurances)
 	{
-		$res = query_init ("SELECT count(*) AS `list` FROM `notary` 
-			WHERE `method` = 'Face to Face Meeting' 
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
+			WHERE `method` = 'Face to Face Meeting'
 			GROUP BY `from` HAVING count(*) > '".intval($no_of_assurances)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
@@ -72,9 +72,13 @@
 		return $res;
 	}
 
-	function get_received_assurances ($userid)
+	function get_received_assurances ($userid, $support)
 	{
-		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` order by `id` asc ");
+		$where="";
+		if ($support==2) {
+			$where=" and (`method`='Trusted 3rd Parties' or `method`='TopUP')";
+		}
+		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` ".$where." order by `id` asc ");
 		return $res;
 	}
 
@@ -83,7 +87,7 @@
 		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' group by points,awarded,method");
 		return $res;
 	}
-	
+
 	function get_received_assurances_summary ($userid)
 	{
 		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' group by points,awarded,method");
@@ -129,7 +133,7 @@
 			$awarded = 100;
 		}
 		else
-			$experience = 0;	
+			$experience = 0;
 
 		switch ($row['method'])
 		{
@@ -303,7 +307,7 @@
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-<?	} 
+<?	}
 ?>
 	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
 	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
@@ -374,7 +378,7 @@
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['to'])); 
+			$fromuser = get_user (intval($row['to']));
 			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
 			$email = show_email_link ($fromuser['email'],intval($row['to']));

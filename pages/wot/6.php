@@ -40,6 +40,7 @@
 	$name = $fname." ".$mname." ".$lname." ".$suffix;
 	$_SESSION['_config']['wothash'] = md5($name."-".$dob);
 
+
 	include_once($_SESSION['_config']['filepath']."/includes/wot.inc.php");
 
 	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname));
@@ -56,4 +57,9 @@
 	AssureCCABoxLine("CCAAgreed",sprintf(_("Check this box only if %s agreed to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"),$fname));
 	AssureCCABoxLine("CCAAgree",_("Check this box only if YOU agree to the <a href=\"/policy/CAcertCommunityAgreement.php\">CAcert Community Agreement</a>"));
 	AssureFoot($id,_("I confirm this Assurance"));
+
+	if($_SESSION['profile']['ttpadmin'] == 1) {
+		?><a href="wot.php?id=16><?=_("Show TTP details")?></a><?;
+	}
+
 ?>
