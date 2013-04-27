@@ -392,7 +392,7 @@
 	{
 		$points = 0;
 		$sumexperience = 0;
-		$res = get_received_assurances(intval($userid));
+		$res = get_received_assurances(intval($userid), $support);
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['from']));

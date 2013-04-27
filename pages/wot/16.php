@@ -53,6 +53,9 @@ $drow = mysql_fetch_assoc($dres);
 
 $points=$drow['points'];
 
+$res = get_received_assurances(intval($userid), $support);
+$ttp_assurances_count=$num_rows = mysql_num_rows($res);
+
 //Form
 ?>
 
@@ -111,7 +114,7 @@ $points=$drow['points'];
 			<tr>
 			<td colspan="2" class="title">
 			<?
-			if ($points<=100) {
+			if ($points>=100 || $ttp_assurances_count>=2) {
 				_('No TTP assurance allowed');
 			}else{
 				?><input type="submit" value="<?=_('Create TTP CAP pdf file')?>"/><?
