@@ -39,7 +39,7 @@ $dob = date_format($row['dob'], 'Y-m-d');
 $userid = $row['id'];
 
 //List TTP Assurances and TotalPoints
-//geändert get_received_assurances ($userid, $support)
+//changed get_received_assurances ($userid, $support)
 
 //include_once($_SESSION['_config']['filepath']."/includes/wot.inc.php");
 include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");

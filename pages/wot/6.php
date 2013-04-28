@@ -17,10 +17,10 @@
 */ ?>
 <?
 
-        if(!array_key_exists('notarise',$_SESSION['_config']))
+if(!array_key_exists('notarise',$_SESSION['_config']))
 	{
-          echo "Error: No user data found.";
-	  exit;
+		echo "Error: No user data found.";
+		exit;
 	}
 
 	$row = $_SESSION['_config']['notarise'];
