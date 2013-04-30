@@ -2875,7 +2875,13 @@
 		$_REQUEST['userid'] = intval($_REQUEST['userid']);
 		if (trim($_REQUEST['arbitrationno'])==""){
 			showheader(_("My CAcert.org Account!"));
-			echo _("You did not enter an arbitration number.");
+			echo _("You did not enter an arbitration number entry.");
+			showfooter();
+			exit;
+		}
+		if ( 1 === preg_match_all('/^[a-z]\d{8}\.\d+\.\d+$/',trim($_REQUEST['arbitrationno'])) ) {
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not enter an arbitration number entry.");
 			showfooter();
 			exit;
 		}
