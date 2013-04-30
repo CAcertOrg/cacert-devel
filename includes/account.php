@@ -2847,7 +2847,7 @@
 			showfooter();
 			exit;
 		}
-		if (preg_match('/^\w\d{8}\.\d+\.\d+$/',trim($_REQUEST['arbitrationno']))==false){
+		if ( 1 === preg_match_all('/^[a-z]\d{8}\.\d+\.\d+$/',trim($_REQUEST['arbitrationno'])) ) {
 			showheader(_("My CAcert.org Account!"));
 			echo _("You did not enter an arbitration number entry.");
 			showfooter();
