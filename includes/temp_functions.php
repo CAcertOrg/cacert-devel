@@ -136,7 +136,7 @@ function check_email_exists($email){
 // called from includes/account.php if($process != "" && $oldid == 1)
 // called from includes/account.php	if($oldid == 50 && $process != "")
 	$email = mysql_real_escape_string($email);
-	$query = "select * from `email` where `email`='$email' and `deleted`=0";
+	$query = "select 1 from `email` where `email`='$email' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
 }
@@ -146,9 +146,9 @@ function check_gpg_cert_running($uid,$cca=0){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
 	$uid = intval($uid);
 	if (0==$cca) {
-		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()";
+		$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>NOW()";
 	}else{
-		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()-90*86400";
+		$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
@@ -159,11 +159,11 @@ function check_client_cert_running($uid,$cca=0){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
 	$uid = intval($uid);
 	if (0==$cca) {
-		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
-		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+		$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>NOW()";
+		$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select from `emailcerts` where `memid`='$uid' and `expire`>NOW()-90*86400";
-		$query2 = "select from `emailcerts` where `memid`='$uid' and `revoked`>NOW()-90*86400";
+		$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
+		$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query1);
 	$r1 = mysql_num_rows($res)>0;
@@ -177,11 +177,11 @@ function check_server_cert_running($uid,$cca=0){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
 	$uid = intval($uid);
 	if (0==$cca) {
-		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
-		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
+		$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()-90*86400";
-		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()-90*86400";
+		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
+		$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query1);
 	$r1 = mysql_num_rows($res)>0;
@@ -192,7 +192,7 @@ function check_server_cert_running($uid,$cca=0){
 function check_is_orgadmin($uid){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
 	$uid = intval($uid);
-	$query = "select * from `org` where `memid`='$uid' and `deleted`=0";
+	$query = "select 1 from `org` where `memid`='$uid' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
 }
