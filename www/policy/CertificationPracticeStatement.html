@@ -112,6 +112,10 @@ a:hover {
      padding: 5px;
  }
 
+.u{
+    text-decoration:underline;
+    }
+
 .vTop{
 vertical-align:top;
 }
@@ -172,7 +176,7 @@ Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licenc
 <!-- $Id: CertificationPracticeStatement.html,v 1.3 2012-07-27 16:00:29 wytze Exp $ -->
 
 
-<div style="font size:-1;">
+<div style="font-size: 12pt;">
 
 <ol>
   <li> <a href="#p1">INTRODUCTION</a>
@@ -623,7 +627,7 @@ for these applications:
 <ul><li>
     <strong>Signing within Protocols.</strong>
     Digital signatures made by CAcert certificates carry
-    <u>NO default legal or human meaning</u>.
+    <span class="u">NO default legal or human meaning</span>.
     See <a href="#p9.15.1">&sect;9.15.1</a>.
     Especially, protocols such as S/MIME commonly will automatically
     apply digital signatures as part of their protocol needs.
@@ -1029,6 +1033,8 @@ As per above.
     (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>),
     to describe a name of a Member
     that is verified by the Assurance process.
+</p>
+
 <p>
 <strong><a id="d_oadmin">Organisation Administrator</a></strong>.
   ("O-Admin")
@@ -1284,6 +1290,7 @@ Each Member's Name &#x28;<span class="pre">CN&#x3d;</span> field&#x29;
 is assured under the Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>)
 or subsidiary policies (such as Organisation Assurance Policy).
 Refer to those documents for meanings and variations.
+
 </p>
 
 <p>
@@ -2942,10 +2949,10 @@ party for the sole purpose of issuing revocations.
 Member information will be securely destroyed.
 </p>
 
-<p><span class="change">
+<p class="change">
 
 The CA cannot be transferrred to another organisation.
-</span></p>
+</p>
 
 
 <p>
@@ -2976,9 +2983,9 @@ See &sect;9.13.
 
 
 
-<p><span class="strike">
+<p class="strike">
 New root keys and certificates will be made available
-by the new organisation as soon as reasonably practical.</span>
+by the new organisation as soon as reasonably practical.
 </p>
 
 
