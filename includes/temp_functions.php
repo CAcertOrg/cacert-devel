@@ -148,7 +148,7 @@ function check_gpg_cert_running($uid,$cca=0){
 	if (0==$cca) {
 		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()";
 	}else{
-		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()+90*86400";
+		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()-90*86400";
 	}
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
@@ -162,8 +162,8 @@ function check_client_cert_running($uid,$cca=0){
 		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
 		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select from `emailcerts` where `memid`='$uid' and `expire`>NOW()+90*86400";
-		$query2 = "select from `emailcerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
+		$query1 = "select from `emailcerts` where `memid`='$uid' and `expire`>NOW()-90*86400";
+		$query2 = "select from `emailcerts` where `memid`='$uid' and `revoked`>NOW()-90*86400";
 	}
 	$res = mysql_query($query1);
 	$r1 = mysql_num_rows($res)>0;
@@ -180,8 +180,8 @@ function check_server_cert_running($uid,$cca=0){
 		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
 		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()+90*86400";
-		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
+		$query1 = "select from `domiancerts` where `memid`='$uid' and `expire`>NOW()-90*86400";
+		$query2 = "select from `domiancerts` where `memid`='$uid' and `revoked`>NOW()-90*86400";
 	}
 	$res = mysql_query($query1);
 	$r1 = mysql_num_rows($res)>0;
