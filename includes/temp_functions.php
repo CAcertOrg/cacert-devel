@@ -160,7 +160,7 @@ function check_email_exists($email){
 // called from includes/account.php if($process != "" && $oldid == 1)
 // called from includes/account.php	if($oldid == 50 && $process != "")
 	$email = mysql_real_escape_string($email);
-	$query = "select * from `email` where `email`='$email' and `deleted`=0";
+	$query = "select 1 from `email` where `email`='$email' and `deleted`=0";
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
 }
@@ -170,9 +170,9 @@ function check_gpg_cert_running($uid,$cca=0){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
 	$uid = intval($uid);
 	if (0==$cca) {
-		$query = "select * from `gpg` where `memid`='$uid' and `expire`>NOW()";
+		$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>NOW()";
 	}else{
-		$query = "select * from `gpg` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
+		$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query);
 	return mysql_num_rows($res) > 0;
