@@ -155,8 +155,9 @@
 			$res = mysql_query($query);
 			if(mysql_num_rows($res) > 0)
 			{
-			echo $_SESSION['_config']['domain']."<br>\n";
-			account_domain_delete($domainid);
+				echo $_SESSION['_config']['domain']."<br>\n";
+				account_domain_delete($domainid);
+			}
 			mysql_query("update `disputedomain` set hash='',action='accept' where `id`='$domainid'");
 			showfooter();
 			exit;
