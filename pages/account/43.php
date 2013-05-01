@@ -842,7 +842,7 @@ function showassuredto()
     <td class="DataTD"><?=intval($drow['points'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
-    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID '%s'?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
   </tr>
 <? } ?>
   <tr>
@@ -888,7 +888,7 @@ function showassuredby()
     <td class="DataTD"><?=$drow['points']?></td>
     <td class="DataTD"><?=$drow['location']?></td>
     <td class="DataTD"><?=$drow['method']?></td>
-    <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID '%s'?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
   </tr>
 <? } ?>
   <tr>
