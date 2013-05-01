@@ -30,7 +30,7 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 			$query = "select `orginfo`.`o`, `org`.`masteracc`
 				FROM `orginfo`, `org`
 				WHERE `orginfo`.`id` = `org`.`orgid`
-				AND `users`.`id`='$user_id' order by `orginfo`.`o`";
+				AND `org`.`memid`='$user_id' order by `orginfo`.`o`";
 			$res1 = mysql_query($query);?>
 			<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper"><?
 			if (mysql_num_rows($res1) <= 0) {?>
