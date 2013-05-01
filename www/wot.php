@@ -361,14 +361,7 @@ $iecho= "c";
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$query .= ",\n`method`='Temporary Increase'";
-			$query .= ",\n`expire`=DATE_ADD(NOW(), INTERVAL '".intval($_POST['expire'])."' DAY)";
-			$query .= ",\n`sponsor`='".intval($_POST['sponsor'])."'";
-		} else if($_SESSION['profile']['board'] == 1) {
-			$query .= ",\n`method`='".mysql_escape_string(stripslashes($_POST['method']))."'";
-		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
@@ -418,9 +411,6 @@ $iecho= "c";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time your points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
-
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
 
@@ -435,21 +425,10 @@ $iecho= "c";
 		else
 			$body .= sprintf(_("You issued %s points and %s now has %s points in total."), $newpoints, $assuree, ($newpoints + $drow['total']))."\n\n";
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$my_translation = L10n::get_translation();
-			L10n::set_translation('en_AU');
-			$body  = sprintf("%s %s (%s) has issued a temporary increase to 200 points for %s %s (%s) for %s days. This action was sponsored by %s %s (%s).", $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'], $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'], intval($_POST['expire']), $sponsor['fname'], $sponsor['lname'], $sponsor['email'])."\n\n";
-			sendmail("cacert-board@lists.cacert.org", "[CAcert.org] Temporary Increase Issued.", $body, "website@cacert.org", "", "", "CAcert Website");
-			L10n::set_translation($my_translation);
-		}
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
