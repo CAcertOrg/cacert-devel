@@ -309,6 +309,15 @@
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
+			$query = "select 1 from `orgdomains` where `domain`='$domain'";
+			$res = mysql_query($query);
+			if(mysql_num_rows($res) > 0)
+			{
+				showheader(_("Domain Dispute"));
+				printf(_("The domain '%s' is included in an organisation account. Please send a mail to support@cacert.org to dispute this domain."), sanitizeHTML($domain));
+				showfooter();
+				exit;
+			}
 			showheader(_("Domain Dispute"));
 			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($email));
 			showfooter();
