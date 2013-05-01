@@ -18,6 +18,7 @@
 <?
 	require_once("../includes/loggedin.php");
 	require_once("../includes/temp_functions.php");
+	require_once("../includes/lib/l10n.php");
 
 	loadem("account");
 
@@ -270,11 +271,15 @@
 				`IP`='".$_SERVER['REMOTE_ADDR']."'";
 		mysql_query($query);
 
+		$my_translation = L10n::get_translation();
+		L10n::set_translation(get_recipient_language($oldmemid));
+
 		$body = sprintf(_("You have been sent this email as the email address '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"), $email)."\n\n";
 		$body .= "https://".$_SESSION['_config']['normalhostname']."/disputes.php?type=email&emailid=$emailid&hash=$hash\n\n";
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
 		sendmail($email, "[CAcert.org] "._("Dispute Probe"), $body, "support@cacert.org", "", "", "CAcert Support");
+		L10n::set_translation($my_translation);
 
 		showheader(_("Email Dispute"));
 		printf(_("The email address '%s' has been entered into the dispute system, the email address will now be sent an email which will give the recipent the option of accepting or rejecting the request, if after 2 days we haven't received a valid response for or against we will discard the request."), sanitizeHTML($email));
@@ -414,10 +419,13 @@
 		$query = "insert into `disputedomain` set `domain`='$domain',`memid`='".$_SESSION['profile']['id']."',
 				`oldmemid`='$oldmemid',`created`=NOW(),`hash`='$hash',`id`='$domainid'";
 		mysql_query($query);
+		$my_translation = L10n::get_translation();
+		L10n::set_translation(get_recipient_language($oldmemid));
 
 		$body = sprintf(_("You have been sent this email as the domain '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"), $domain)."\n\n";
 		$body .= "https://".$_SESSION['_config']['normalhostname']."/disputes.php?type=domain&domainid=$domainid&hash=$hash\n\n";
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
+		L10n::set_translation(get_recipient_language($my_translation));
 
 		sendmail($authaddy, "[CAcert.org] "._("Dispute Probe"), $body, "support@cacert.org", "", "", "CAcert Support");
 

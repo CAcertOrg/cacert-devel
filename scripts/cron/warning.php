@@ -18,6 +18,7 @@
 */
 
 	require_once(dirname(__FILE__).'/../../includes/mysql.php');
+	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
 
 	$days = array("1" => "3", "15" => "2", "30" => "1", "45" => "0");
 
@@ -34,6 +35,7 @@
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 		{
+			L10n::set_translation(get_recipient_language(intval(.$row['id')));
 			if($row['subject'] == "")
 			{
 				$row['crt_name'] = str_replace("../", "www/", $row['crt_name']);
@@ -106,6 +108,7 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 		{
+			L10n::set_translation(get_recipient_language(intval(.$row['memid')));
 			if($row['subject'] == "")
 				$row['subject'] = $row['CN'];
 
