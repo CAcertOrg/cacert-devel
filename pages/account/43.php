@@ -784,7 +784,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<td colspan="6" class="title">
 			<form method="post" action="account.php" onSubmit="if(!confirm('<?=_("Are you sure you want to revoke all private certificates?")?>')) return false;">
 				<input type="hidden" name="action" value="revokecert">
-				<input type="hidden" name="oldid" value="<?=intval($id)?>">
+				<input type="hidden" name="oldid" value="43">
 				<input type="hidden" name="userid" value="<?=intval($userid)?>">
 				<input type="submit" value="<?=_('revoke certificates')?>">
 			</form>
