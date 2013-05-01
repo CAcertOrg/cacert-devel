@@ -186,7 +186,7 @@ function check_client_cert_running($uid,$cca=0){
 		$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>NOW()";
 		$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
+		$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
 		$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query1);
@@ -204,7 +204,7 @@ function check_server_cert_running($uid,$cca=0){
 		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
 		$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
+		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
 		$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query1);
