@@ -2575,6 +2575,7 @@
 	{
 		$userid = intval($_REQUEST['userid']);
 		revoke_all_private_cert($userid);
+		$id=43;
 	}
 
 	if($oldid == 48 && $_REQUEST['domain'] == "")
