@@ -340,11 +340,12 @@ class L10n {
 		bindtextdomain($domain, $_SESSION['_config']['filepath'].'/locale');
 		textdomain($domain);
 	}
+}
 
-	function get_recipient_language($accoundid){
+function get_recipient_language($accoundid){
 //returns the language of a recipient to make sure that the language is correct
 //use together with
-	$query = "select * from `users` where `id`='".$id:"'";
+	$query = "select * from `users` where `id`='".$id."'";
 	$res = mysql_query($query);
 	$row = mysql_fetch_assoc($res);
 	return $row['language'];
