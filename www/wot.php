@@ -368,7 +368,7 @@ $iecho= "c";
 		$assuree = $_SESSION['_config']['notarise']['fname'].' '.$_SESSION['_config']['notarise']['lname'];
 		$body  = sprintf(_("You are receiving this email because you have assured %s (%s)."), $assuree, $_SESSION['_config']['notarise']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)
-			$body .= sprintf(_("You issued %s points however the system only counts up to 100 assurance points. $ has now 100 countable assurance points and %s countable expierence points."), $_POST['points'], ($newpoints + $drow['total']-100))."\n\n";
+			$body .= sprintf(_("You issued %s points however the system only counts up to 100 assurance points. %s has now 100 countable assurance points and %s countable expierence points."), $_POST['points'], $assuree, ($newpoints + $drow['total']-100))."\n\n";
 		else
 			$body .= sprintf(_("You issued %s points and %s now has %s points in total."), $newpoints, $assuree, ($newpoints + $drow['total']))."\n\n";
 
