@@ -328,7 +328,7 @@
 			if(mysql_num_rows($res) > 0)
 			{
 				showheader(_("Domain Dispute"));
-				printf(_("The domain '%s' is included in an organisation account. Please send a mail to support@cacert.org to dispute this domain."), sanitizeHTML($domain));
+				printf(_("The domain '%s' is included in an organisation account. Please send a mail to %s to dispute this domain."), sanitizeHTML($domain),'<a href="mailto:support@cacert.org">support@cacert.org</a>');
 				showfooter();
 				exit;
 			}
