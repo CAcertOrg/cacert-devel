@@ -177,11 +177,11 @@ function check_server_cert_running($uid,$cca=0){
 	// called from includes/account.php	if($oldid == 50 && $process != "")
 	$uid = intval($uid);
 	if (0==$cca) {
-		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
-		$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+		$query1 = "select 1 from `domaincerts` where `memid`='$uid' and `expire`>NOW()";
+		$query2 = "select 1 from `domaincerts` where `memid`='$uid' and `revoked`>NOW()";
 	}else{
-		$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
-		$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
+		$query1 = "select 1 from `domaincerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
+		$query2 = "select 1 from `domaincerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 	}
 	$res = mysql_query($query1);
 	$r1 = mysql_num_rows($res)>0;
