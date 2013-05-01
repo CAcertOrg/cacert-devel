@@ -328,9 +328,10 @@ $iecho= "c";
 		$my_translation = L10n::get_translation();
 		L10n::set_translation($_SESSION['_config']['notarise']['language']);
 
-		$body  = sprintf(_("You are receiving this email because you have been assured by %s %s (%s)."), $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'])."\n\n";
+		$assurer =  $_SESSION['profile']['fname'].' '.$_SESSION['profile']['lname'];
+		$body  = sprintf(_("You are receiving this email because you have been assured by %s (%s)."), $assurer, $_SESSION['profile']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)
-			$body .= sprintf(_("You were issued %s points however the system has rounded this down to %s and you now have %s points in total."), $_POST['points'], $newpoints, ($newpoints + $drow['total']))."\n\n";
+			$body .= sprintf(_("You were issued %s points however the system only counts up to 100 assurance points. You now have 100 countable assurance points and %s countable expierence points."), $_POST['points'], ($newpoints + $drow['total']-100))."\n\n";
 		else
 			$body .= sprintf(_("You were issued %s points and you now have %s points in total."), $newpoints, ($newpoints + $drow['total']))."\n\n";
 
@@ -364,11 +365,12 @@ $iecho= "c";
 
 		L10n::set_translation($my_translation);
 
-		$body  = sprintf(_("You are receiving this email because you have assured %s %s (%s)."), $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'])."\n\n";
+		$assuree = $_SESSION['_config']['notarise']['fname'].' '.$_SESSION['_config']['notarise']['lname'];
+		$body  = sprintf(_("You are receiving this email because you have assured %s (%s)."), $assuree, $_SESSION['_config']['notarise']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)
-			$body .= sprintf(_("You issued %s points however the system has rounded this down to %s and they now have %s points in total."), $_POST['points'], $newpoints, ($newpoints + $drow['total']))."\n\n";
+			$body .= sprintf(_("You issued %s points however the system only counts up to 100 assurance points. $ has now 100 countable assurance points and %s countable expierence points."), $_POST['points'], ($newpoints + $drow['total']-100))."\n\n";
 		else
-			$body .= sprintf(_("You issued %s points and they now have %s points in total."), $newpoints, ($newpoints + $drow['total']))."\n\n";
+			$body .= sprintf(_("You issued %s points and %s now has %s points in total."), $newpoints, $assuree, ($newpoints + $drow['total']))."\n\n";
 
 		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
 			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
