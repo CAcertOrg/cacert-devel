@@ -1135,30 +1135,27 @@
 
 	if($oldid == 5 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
-	  showheader(_("My CAcert.org Account!"));
-	  //echo _("Now changing the settings for the following certificates:")."<br>\n";
-	  foreach($_REQUEST as $id => $val)
-	  {
-	    //echo $id."<br/>";
-	    if(substr($id,0,5)=="cert_")
-	    {
-	      $id = intval(substr($id,5));
-	      $dis=(array_key_exists('disablelogin_'.$id,$_REQUEST) && $_REQUEST['disablelogin_'.$id]=="1")?"0":"1";
-	      //echo "$id -> ".$_REQUEST['disablelogin_'.$id]."<br/>\n";
-	      mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
-	      //$row = mysql_fetch_assoc($res);
-	    }
-	  	if(substr($id,0,14)=="check_comment_")
-	  	{
-	  		$id = intval(substr($id,14));
-	  		$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$id])));
-	  		mysql_query("update `emailcerts` set `description`='$comment' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
-	  		//$row = mysql_fetch_assoc($res);
-	  	}
-	  }
-	  echo(_("Certificate settings have been changed.")."<br/>\n");
-	  showfooter();
-	  exit;
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,5)=="cert_")
+			{
+				$id = intval(substr($id,5));
+				$dis=(array_key_exists('disablelogin_'.$id,$_REQUEST) && $_REQUEST['disablelogin_'.$id]=="1")?"0":"1";
+				mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
+			}
+			if(substr($id,0,14)=="check_comment_")
+			{
+				if (!empty($_REQUEST['check_comment'.$id])) {
+					$id = intval(substr($id,14));
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$id])));
+					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
+				}
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
 	}
 
 

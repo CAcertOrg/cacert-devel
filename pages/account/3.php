@@ -44,7 +44,7 @@
     <td class="DataTD"><input type="checkbox" name="addid[]" value="<?=intval($row['id'])?>"></td>
     <td class="DataTD"><?=sanitizeHTML($row['email'])?></td>
   </tr>
-<? } 
+<? }
 if($_SESSION['profile']['points'] >= 50)
 {
 	$fname = $_SESSION['profile']['fname'];
@@ -67,7 +67,7 @@ if($_SESSION['profile']['points'] >= 50)
       <? if($fname && $mname && $lname && $suffix) { ?><input type="radio" name="incname" value="4"> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname." ".$suffix?>'<br><? } ?>
     </td>
   </tr>
-<? } ?> 
+<? } ?>
 <? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
   <tr>
     <td class="DataTD" align="left">
@@ -86,8 +86,8 @@ if($_SESSION['profile']['points'] >= 50)
   </tr>
   <tr>
    <td class="DataTD" colspan="2" align="left">
-      <?=_("Optional comment, only used in the certifictate overview")?><br>
-       <input type="text" name="description" maxlength="100" size=100>
+      <?=_("Optional comment, only used in the certifictate overview max. 100 characters")?><br>
+       <input type="text" name="description" maxlength="100" size="100">
    </td>
   </tr>
 
