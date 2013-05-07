@@ -35,7 +35,7 @@
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 		{
-			L10n::set__recipient_language(intval($row['id']));
+			L10n::set_recipient_language(intval($row['id']));
 			if($row['subject'] == "")
 			{
 				$row['crt_name'] = str_replace("../", "www/", $row['crt_name']);
@@ -108,7 +108,7 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
 		{
-			L10n::set__recipient_language(intval($row['memid']));
+			L10n::set_recipient_language(intval($row['memid']));
 			if($row['subject'] == "")
 				$row['subject'] = $row['CN'];
 
