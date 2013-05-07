@@ -354,7 +354,7 @@ class L10n {
 				self::set_translation($row['language']);
 			}
 		} else {
-			$this->set_translation('en');
+			self::set_translation('en');
 		}
 	}
 }
