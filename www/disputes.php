@@ -286,7 +286,7 @@
 		mysql_query($query);
 
 		$my_translation = L10n::get_translation();
-		L10n::set_translation(get_recipient_language($oldmemid));
+		L10n::set__recipient_language($oldmemid);
 
 		$body = sprintf(_("You have been sent this email as the email address '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"), $email)."\n\n";
 		$body .= "https://".$_SESSION['_config']['normalhostname']."/disputes.php?type=email&emailid=$emailid&hash=$hash\n\n";
@@ -425,12 +425,12 @@
 				`oldmemid`='$oldmemid',`created`=NOW(),`hash`='$hash',`id`='$domainid'";
 		mysql_query($query);
 		$my_translation = L10n::get_translation();
-		L10n::set_translation(get_recipient_language($oldmemid));
+		L10n::set__recipient_language($oldmemid);
 
 		$body = sprintf(_("You have been sent this email as the domain '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"), $domain)."\n\n";
 		$body .= "https://".$_SESSION['_config']['normalhostname']."/disputes.php?type=domain&domainid=$domainid&hash=$hash\n\n";
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
-		L10n::set_translation(get_recipient_language($my_translation));
+		L10n::set__recipient_language($my_translation);
 
 		sendmail($authaddy, "[CAcert.org] "._("Dispute Probe"), $body, "support@cacert.org", "", "", "CAcert Support");
 
