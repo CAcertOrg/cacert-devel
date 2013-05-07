@@ -2613,7 +2613,7 @@
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
 		$my_translation = L10n::get_translation();
-		L10n::set_translation(get_recipient_language(intval($_REQUEST['userid'])));
+		L10n::set__recipient_language(intval($_REQUEST['userid']));
 			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
 			$body .= _("You are receiving this email because a CAcert administrator ".
 					"has changed the password on your account.")."\n\n";
