@@ -319,7 +319,6 @@
 		}
 		unset($oldid);
 		$query = "select * from `domains` where `domain`='$domain' and `deleted`=0";
-		$email = ""; if(array_key_exists('email',$_REQUEST)) $email=trim(mysql_real_escape_string($_REQUEST['email']));
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
@@ -333,7 +332,7 @@
 				exit;
 			}
 			showheader(_("Domain Dispute"));
-			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($email));
+			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($domain));
 			showfooter();
 			exit;
 		}
