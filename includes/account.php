@@ -1146,7 +1146,7 @@
 			}
 			if(substr($id,0,14)=="check_comment_")
 			{
-				if (!empty($_REQUEST['check_comment'.$id])) {
+				if (!empty($_REQUEST['check_comment_'.$id])) {
 					$id = intval(substr($id,14));
 					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$id])));
 					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
