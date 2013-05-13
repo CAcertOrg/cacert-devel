@@ -24,14 +24,14 @@
 		$uid = $_SESSION['profile']['id'];
 		$_SESSION['profile']['loggedin'] = 0;
 		$_SESSION['profile'] = "";
-		foreach($_SESSION as $key)
+		foreach($_SESSION as $key => $value)
 		{
 			if($key == '_config')
 				continue;
 			if(is_int($key) || is_string($key))
 		                unset($_SESSION[$key]);
-	                unset($$key);
-        	        session_unregister($key);
+		        unset($$key);
+		        //session_unregister($key);
 		}
 
 		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$uid'"));
@@ -50,14 +50,14 @@
 		{
 			$_SESSION['profile']['loggedin'] = 0;
 			$_SESSION['profile'] = "";
-			foreach($_SESSION as $key)
+			foreach($_SESSION as $key => $value)
 			{
 				if($key == '_config')
 					continue;
 				if(is_int($key) || is_string($key))
 			                unset($_SESSION[$key]);
-                		unset($$key);
-       			        session_unregister($key);
+			        unset($$key);
+			        //session_unregister($key);
 			}
 
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
@@ -69,13 +69,13 @@
 		} else {
 			$_SESSION['profile']['loggedin'] = 0;
 			$_SESSION['profile'] = "";
-			foreach($_SESSION as $key)
+			foreach($_SESSION as $key => $value)
 			{
 				if($key == '_config')
 					continue;
-		                unset($_SESSION[$key]);
-	                	unset($$key);
-        		        session_unregister($key);
+			        unset($_SESSION[$key]);
+			        unset($$key);
+			        //session_unregister($key);
 			}
 
 			unset($_SESSION['_config']['oldlocation']);
@@ -127,9 +127,9 @@
 		$_SESSION['profile'] = "";
 		foreach($_SESSION as $key => $value)
 		{
-	                unset($_SESSION[$key]);
-	                unset($$key);
-        	        session_unregister($key);
+		        unset($_SESSION[$key]);
+		        unset($$key);
+		        //session_unregister($key);
 		}
 
 		header("location: https://".$normalhost."/index.php");
