@@ -21,10 +21,10 @@
 	session_name("cacert");
 	session_start();
 
-	session_register("_config");
-	session_register("profile");
-	session_register("signup");
-	session_register("lostpw");
+//	session_register("_config");
+//	session_register("profile");
+//	session_register("signup");
+//	session_register("lostpw");
 //	if($_SESSION['profile']['id'] > 0)
 //		session_regenerate_id();
 
