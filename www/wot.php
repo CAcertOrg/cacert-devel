@@ -263,7 +263,7 @@ $iecho= "c";
 			exit;
 		}
 
-		if($_REQUEST['points'] == "")
+		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
 			exit;
