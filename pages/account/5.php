@@ -99,13 +99,13 @@
   </tr>
     <? } ?>
   <tr>
-    <td class="DataTD" colspan="8">
+    <td class="DataTD" colspan="9">
       <a href="account.php?id=5&amp;viewall=<?=!$viewall?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
     </td>
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="8">
+    <td class="DataTD" colspan="9">
       <?=_("* Comment is NOT included in the certificate as it is inteded for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
     </td>
   </tr>

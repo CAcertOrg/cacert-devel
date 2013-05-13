@@ -1140,16 +1140,16 @@
 		{
 			if(substr($id,0,5)=="cert_")
 			{
-				$id = intval(substr($id,5));
-				$dis=(array_key_exists('disablelogin_'.$id,$_REQUEST) && $_REQUEST['disablelogin_'.$id]=="1")?"0":"1";
-				mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
+				$cid = intval(substr($id,5));
+				$dis=(array_key_exists('disablelogin_'.$cid,$_REQUEST) && $_REQUEST['disablelogin_'.$cid]=="1")?"0":"1";
+				mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 			if(substr($id,0,14)=="check_comment_")
 			{
 				if (!empty($_REQUEST['check_comment_'.$id])) {
-					$id = intval(substr($id,14));
-					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$id])));
-					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
+					$cid = intval(substr($id,14));
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 				}
 			}
 		}
