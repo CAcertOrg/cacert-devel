@@ -1,54 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?='<?xml version="1.0" encoding="utf-8"?>'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> Organisation Assurance Policy </title>
+<style type="text/css">
+<!--
+.comment {
+        color : steelblue;
+}
+-->
+</style>
 
-<html>
-<head><title>Organisation Assurance Policy</title></head>
+</head>
 <body>
 
+<div class="comment">
 <table width="100%">
 
 <tr>
-<td> OAP </td>
-<td> </td>
-<td width="20%"> Jens  </td>
-</tr>
-
-<tr>
-<td> POLICY&nbsp;<a href="http://wiki.cacert.org/wiki/TopMinutes-20070917">m20070918.x</a> </td>
-<td>  </td>
 <td>
-  $Date: 2008-01-18 22:56:31 $
-  <!--
-     to get this to work, we have to do this:
-       svn propset svn:keywords "Date" file.html
-     except it does not work through the website.
-   -->
+  Name: OAP <a style="color: steelblue" href="//svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">COD11</a><br />
+
+  Status: POLICY/DRAFT <a style="color: steelblue" href="//wiki.cacert.org/wiki/TopMinutes-20070917">m20070918.x </a><br />
+
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           <span class="draftadd">DRAFT p20080401.1   </span> <br />
+  Editor: Jens Paul <br />
+   Licence: <a style="color: steelblue" href="//wiki.cacert.org/Policy#Licence" title="this document is Copyright &copy; CAcert Inc., licensed openly under CC-by-sa with all disputes resolved under DRP.  More at wiki.cacert.org/Policy" > CC-by-sa+DRP </a><br /></td>
+<td valign="top" align="right">
+  <a href="//www.cacert.org/policy/PolicyOnPolicy.html"><img src="/images/cacert-policy.png" alt="OAP Status - POLICY" height="31" width="88" style="border-style: none;" /></a><br />
+  <a href="//www.cacert.org/policy/PolicyOnPolicy.html"><img src="/images/cacert-draft.png" alt="OAP Status - DRAFT" height="31" width="88" style="border-style: none;" /></a>
+
 </td>
 </tr>
-
-<tr>
-<td> COD11 </td>
-<td> </td>
-<td> </td>
-</tr>
-
-
-<tr>
-<td> </td>
-<td > <b>Organisation&nbsp;Assurance&nbsp;Policy</b> </td>
-<td> </td>
-</tr>
-
 </table>
+</div>
 
 
+<h1> Organisation&nbsp;Assurance&nbsp;Policy </h1>
 
-<h2> <a name="0"> 0. </a>  Preliminaries </h2>
+<h2 id="s0">0.   Preliminaries </h2>
 
 <p>
 This policy describes how Organisation Assurers ("OAs")
 conduct Assurances on Organisations.
 It fits within the overall web-of-trust
-or Assurance process of Cacert.
+or Assurance process of CAcert.
 </p>
 
 <p>
@@ -56,7 +53,7 @@ This policy is not a Controlled document, for purposes of
 Configuration Control Specification ("CCS").
 </p>
 
-<h2> <a name="1"> 1. </a> Purpose </h2>
+<h2 id="s1"> 1. Purpose </h2>
 
 <p>
 Organisations with assured status can issue certificates
@@ -76,27 +73,31 @@ and as described in the CPS.
     to this policy.
   </li><li>
     The organisation is within the jurisdiction
-    and can be taken to Arbitration.
+    and can be taken to CAcert Arbitration.
 </li></ul>
 
 
-<h2> <a name="2"> 2. </a> Roles and Structure </h2> 
+<h2 id="s2"> 2. Roles and Structure </h2> 
 
-<h3> <a name="2.1"> 2.1 </a> Assurance Officer </h3> 
+<h3 id="s2.1"> 2.1 Assurance Officer </h3> 
 
 <p>
 The Assurance Officer ("AO")
-manages this policy and reports to the board.
+manages this policy and reports to the CAcert Inc. Committee ("Board").
 </p>
 
 <p>
 The AO manages all OAs and is responsible for process,
-the CAcert Organisation Assurance Programme form ("COAP"),
+the CAcert Organisation Assurance Programme ("COAP") form,
 OA training and testing, manuals, quality control.
 In these responsibilities, other Officers will assist.
 </p>
+<p>
+The OA is appointed by the Board. 
+Where the OA is failing the Board decides.
+</p>
 
-<h3> <a name="2.2"> 2.2 </a> Organisation Assurers </h3> 
+<h3 id="s2.2"> 2.2 Organisation Assurers </h3> 
 
 <p>
 </p>
@@ -141,11 +142,30 @@ In these responsibilities, other Officers will assist.
            as supervised, trained and tested.
            </li>
     </ol>
+    </li>
+	<li>The OA can decide when a CAcert
+	(individual) Assurer
+	has done several OA Application Advises to appoint this
+	person to OA Assurer.
+	</li>
+
 </ol>
 
+<h3 id="s2.3"> 2.3 Organisation Assurance Advisor ("OAA") </h3>
+	<p>In countries/states/provinces where no OA Assurers are
+	operating for an OA Application (COAP) the OA
+	can be advised by an experienced local CAcert
+	(individual) Assurer to take the decision
+	to accept the OA Application (COAP) of the organisation.
+	</p>
+	<p>
+	The local Assurer must have at least 150 Points,
+	should know the language, and know
+	the organisation trade office registry culture and quality.
+	</p>
 
 
-<h3> <a name="2.3"> 2.3 </a> Organisation Administrator </h3> 
+<h3 id="s2.4"> 2.4 Organisation Administrator </h3> 
 
 <p>
 The Administrator within each Organisation ("O-Admin")
@@ -175,9 +195,9 @@ and the issuing of certificates.
 </ol>
 
 
-<h2> <a name="3"> 3. </a> Policies </h2> 
+<h2 id="s3"> 3. Policies </h2> 
 
-<h3> <a name="3.1"> 3.1 </a> Policy </h3> 
+<h3 id="s3.1"> 3.1 Policy </h3> 
 
 <p>
 There is one policy being this present document,
@@ -191,7 +211,7 @@ and several subsidiary policies.
   <li>  Organisations are assured under an appropriate subsidiary policy. </li>
 </ol>
 
-<h3> <a name="3.2"> 3.2 </a> Subsidiary Policies </h3>
+<h3 id="s3.2"> 3.2 Subsidiary Policies </h3>
 
 <p>
 The nature of the Subsidiary Policies ("SubPols"):
@@ -210,7 +230,7 @@ The nature of the Subsidiary Policies ("SubPols"):
   </li><li>
     For OAs,
     SubPol specifies the <i>tests of local knowledge</i>
-    including the local organisational forms.
+    including the local organisation assurance COAP forms.
   </li><li>
     For assurances,
     SubPol specifies the <i>local documentation forms</i>
@@ -221,7 +241,7 @@ The nature of the Subsidiary Policies ("SubPols"):
    policy approval process.
 </li></ol>
 
-<h3> <a name="">  </a> 3.3  Freedom to Assemble </h3>
+<h3 id="s3.3"> 3.3  Freedom to Assemble </h3>
 
 <p>
 Subsidiary Policies are open, accessible and free to enter. 
@@ -254,9 +274,9 @@ Subsidiary Policies are open, accessible and free to enter.
 </li></ol>
 
 
-<h2> <a name="4"> 4. </a>  Process </h2>
+<h2 id="s4"> 4.  Process </h2>
 
-<h3> <a name="4.1"> 4.1 </a>  Standard of Organisation Assurance </h3>
+<h3 id="s4.1"> 4.1  Standard of Organisation Assurance </h3>
 <p>
 The essential standard of Organisation Assurance is:
 </p>
@@ -276,7 +296,7 @@ The essential standard of Organisation Assurance is:
     requestor can sign on behalf of the organisation.
   </li><li>
     the organisation has agreed to the terms of the
-    Registered User Agreement,
+    CAcert Community Agreement
     and is therefore subject to Arbitration.
 </li></ol>
 
@@ -285,7 +305,7 @@ The essential standard of Organisation Assurance is:
     are stated in the SubPol.
 </p>
 
-<h3> <a name="4.2"> 4.2 </a>  COAP </h3>
+<h3 id="s4.2"> 4.2  COAP </h3>
 <p>
 The COAP form documents the checks and the resultant
 assurance results to meet the standard.
@@ -302,12 +322,13 @@ Additional information to be provided on form:
       <li>additional contact information (as required by SubPol).</li>
     </ol>
   </li><li>
-    administrator account names (1 or more)
+    administrator account name(s) (1 or more)
   </li><li>
     domain name(s)
   </li><li>
-    Agreement with registered user agreement.
-    Statement and initials box for organsation
+    Agreement with
+    CAcert Community Agreement.
+    Statement and initials box for organisation
     and also for OA.
   </li><li>
     Date of completion of Assurance.
@@ -322,17 +343,17 @@ and indication provided that the English is the
 ruling language (due to Arbitration requirements).
 </p>
 
-<h3> <a name="4.3"> 4.3 </a> Jurisdiction </h3>
+<h3 id="s4.3"> 4.3 Jurisdiction </h3>
 
 <p>
 Organisation Assurances are carried out by
-CAcert Inc under its Arbitration jurisdiction.
+CAcert Inc. under its Arbitration jurisdiction.
 Actions carried out by OAs are under this regime.
 </p>
 
 <ol type="a"><li>
     The organisation has agreed to the terms of the
-    Registered User Agreement,
+    CAcert Community Agreement.
   </li><li>
     The organisation, the Organisation Assurers, CAcert and
     other related parties are bound into CAcert's jurisdiction
@@ -340,12 +361,13 @@ Actions carried out by OAs are under this regime.
   </li><li>
     The OA is responsible for ensuring that the
     organisation reads, understands, intends and
-    agrees to the registered user agreement.
+    agrees to the
+    CAcert Community Agreement.
     This OA responsibility should be recorded on COAP
     (statement and initials box).
 </li></ol>
 
-<h2> <a name="5"> 5. </a> Exceptions </h2>
+<h2 id="s5"> 5. Exceptions </h2>
 
 
 <ol type="a"><li>
@@ -375,5 +397,6 @@ Actions carried out by OAs are under this regime.
     E.g., registration as DBA or holding of registered trade mark.
     This means that the anglo law tradition of unregistered DBAs
     is not accepted without further proof.
-</li></ol>
-
+  </li></ol>
+</body>
+</html>

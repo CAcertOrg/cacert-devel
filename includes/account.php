@@ -10,7 +10,7 @@
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-  
+
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -83,7 +83,7 @@
 		if($checkemail != "OK")
 		{
 			showheader(_("My CAcert.org Account!"));
-			if (substr($checkemail, 0, 1) == "4") 
+			if (substr($checkemail, 0, 1) == "4")
 			{
 				echo "<p>"._("The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes.")."</p>\n";
 			} else {
@@ -152,6 +152,9 @@
 		{
 			foreach($_REQUEST['delid'] as $id)
 			{
+				if (0==$delcount) {
+					echo _('The following email addresses have been removed:')."<br>\n";
+				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
 						`email`!='".$_SESSION['profile']['email']."'";
@@ -160,7 +163,7 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['email']."<br>\n";
-					$query = "select `emailcerts`.`id` 
+					$query = "select `emailcerts`.`id`
 							from `emaillink`,`emailcerts` where
 							`emailid`='$id' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
 							`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
@@ -168,7 +171,7 @@
 					$dres = mysql_query($query);
 					while($drow = mysql_fetch_assoc($dres))
 						mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['id']."'");
-	
+
 					$query = "update `email` set `deleted`=NOW() where `id`='$id'";
 					mysql_query($query);
 					$delcount++;
@@ -179,10 +182,8 @@
 		{
 			echo _("You did not select any email accounts for removal.");
 		}
-		if($delcount > 0)
+		if(0 == $delcount)
 		{
-			echo _("The following accounts have been removed:")."<br>\n";
-		} else {
 			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
 
@@ -315,9 +316,9 @@
 				showfooter();
 				exit;
 			}
-			
+
 			$query = "insert into emailcerts set
-						`CN`='$defaultemail', 
+						`CN`='$defaultemail',
 						`keytype`='NS',
 						`memid`='".intval($_SESSION['profile']['id'])."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -347,7 +348,7 @@
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype'] == "VI") {
 			if($csr == "")
 				$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."\n-----END CERTIFICATE REQUEST-----\n";
-			
+
 			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
 			{
 				$id = 4;
@@ -356,7 +357,7 @@
 				showfooter();
 				exit;
 			}
-			
+
 			$tmpfname = tempnam("/tmp", "id4CSR");
 			$fp = fopen($tmpfname, "w");
 			fputs($fp, $csr);
@@ -415,13 +416,14 @@
 				showfooter();
 				exit;
 			}
-			$query = "insert into emailcerts set 
-						`CN`='$defaultemail', 
+			$query = "insert into emailcerts set
+						`CN`='$defaultemail',
 						`keytype`='".sanitizeHTML($_REQUEST['keytype'])."',
 						`memid`='".$_SESSION['profile']['id']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".$_SESSION['_config']['codesign']."',
+						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -574,7 +576,7 @@
 		{
 			showheader(_("My CAcert.org Account!"));
 			//echo "<p>"._("Email Address given was invalid, or a test connection couldn't be made to your server, or the server rejected the email address as invalid")."</p>\n";
-			if (substr($checkemail, 0, 1) == "4") 
+			if (substr($checkemail, 0, 1) == "4")
 			{
 				echo "<p>"._("The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes.")."</p>\n";
 			} else {
@@ -621,7 +623,7 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-					
+
 					$dres = mysql_query(
 						"select distinct `domaincerts`.`id`
 							from `domaincerts`, `domlink`
@@ -640,7 +642,7 @@
 								and UNIX_TIMESTAMP(`expire`) -
 										UNIX_TIMESTAMP() > 0");
 					}
-					
+
 					mysql_query(
 						"update `domains`
 							set `deleted`=NOW()
@@ -665,7 +667,7 @@
 		  // In case the CSR is missing the ---BEGIN lines, add them automatically:
 		  $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n".$CSR."\n-----END CERTIFICATE REQUEST-----\n";
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -673,7 +675,7 @@
 			showfooter();
 			exit;
 		}
-		
+
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -718,7 +720,7 @@
 			showfooter();
 			exit;
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR(file_get_contents(
 				$_SESSION['_config']['tmpfname']))) !== "")
 		{
@@ -727,7 +729,7 @@
 			showfooter();
 			exit;
 		}
-		
+
 		$id = 11;
 		if($_SESSION['_config']['0.CN'] == "" && $_SESSION['_config']['0.subjectAltName'] == "")
 		{
@@ -771,13 +773,13 @@
 
 		if(array_key_exists('0',$_SESSION['_config']['rowid']) && $_SESSION['_config']['rowid']['0'] > 0)
 		{
-			$query = "insert into `domaincerts` set 
+			$query = "insert into `domaincerts` set
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['rows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['rowid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."'";
 		} elseif(array_key_exists('0',$_SESSION['_config']['altid']) && $_SESSION['_config']['altid']['0'] > 0) {
-			$query = "insert into `domaincerts` set 
+			$query = "insert into `domaincerts` set
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['altrows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['altid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
@@ -843,24 +845,24 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br/>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
-				$query = "insert into `domaincerts` set 
-						`domid`='".$row['domid']."', 
+				$query = "insert into `domaincerts` set
+						`domid`='".$row['domid']."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
 						`subject`='".mysql_real_escape_string($row['subject'])."',".
 						//`csr_name`='".$row['csr_name']."', // RACE CONDITION
 						"`created`='".$row['created']."',
-						`modified`=NOW(), 
+						`modified`=NOW(),
 						`rootcert`='".$row['rootcert']."',
 						`type`='".$row['type']."',
 						`pkhash`='".$row['pkhash']."'";
@@ -944,7 +946,7 @@
 			foreach($_REQUEST['revokeid'] as $id)
 			{
 				$id = intval($id);
-				$query = "select *,UNIX_TIMESTAMP(`domaincerts`.`revoked`) as `revoke` from `domaincerts`,`domains` 
+				$query = "select *,UNIX_TIMESTAMP(`domaincerts`.`revoked`) as `revoke` from `domaincerts`,`domains`
 						where `domaincerts`.`id`='$id' and
 						`domaincerts`.`domid`=`domains`.`id` and
 						`domains`.`memid`='".$_SESSION['profile']['id']."'";
@@ -975,7 +977,7 @@
 			foreach($_REQUEST['delid'] as $id)
 			{
 				$id = intval($id);
-				$query = "select *,UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired` from `domaincerts`,`domains` 
+				$query = "select *,UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired` from `domaincerts`,`domains`
 						where `domaincerts`.`id`='$id' and
 						`domaincerts`.`domid`=`domains`.`id` and
 						`domains`.`memid`='".$_SESSION['profile']['id']."'";
@@ -1010,7 +1012,7 @@
 			foreach($_REQUEST['revokeid'] as $id)
 			{
 				$id = intval($id);
-				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `emailcerts` 
+				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `emailcerts`
 						where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) <= 0)
@@ -1018,24 +1020,24 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
-				$query = "insert into emailcerts set 
-						`memid`='".$row['memid']."', 
+				$query = "insert into emailcerts set
+						`memid`='".$row['memid']."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
 						`subject`='".mysql_real_escape_string($row['subject'])."',
-						`keytype`='".$row['keytype']."', 
-						`csr_name`='".$row['csr_name']."', 
-						`created`='".$row['created']."', 
+						`keytype`='".$row['keytype']."',
+						`csr_name`='".$row['csr_name']."',
+						`created`='".$row['created']."',
 						`modified`=NOW(),
 						`disablelogin`='".$row['disablelogin']."',
 						`codesign`='".$row['codesign']."',
@@ -1083,7 +1085,7 @@
 			foreach($_REQUEST['revokeid'] as $id)
 			{
 				$id = intval($id);
-				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `emailcerts` 
+				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `emailcerts`
 						where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) <= 0)
@@ -1112,7 +1114,7 @@
 			foreach($_REQUEST['delid'] as $id)
 			{
 				$id = intval($id);
-				$query = "select *,UNIX_TIMESTAMP(`expire`) as `expired` from `emailcerts` 
+				$query = "select *,UNIX_TIMESTAMP(`expire`) as `expired` from `emailcerts`
 						where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) <= 0)
@@ -1227,7 +1229,7 @@
 		$ddres = mysql_query($ddquery);
 		$ddrow = mysql_fetch_assoc($ddres);
 		$_SESSION['profile']['points'] = $ddrow['total'];
-		
+
 		if($_SESSION['profile']['points'] == 0)
 		{
 			$_SESSION['_config']['user']['fname'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['fname']))));
@@ -1279,7 +1281,7 @@
 						where `id`='".$_SESSION['profile']['id']."'";
 		mysql_query($query);
 
-		//!!!Should be rewritten 
+		//!!!Should be rewritten
 		$_SESSION['_config']['user']['otphash'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otphash']))));
 		$_SESSION['_config']['user']['otppin'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otppin']))));
 		if($_SESSION['_config']['user']['otphash'] != "" && $_SESSION['_config']['user']['otppin'] != "")
@@ -1476,9 +1478,9 @@
 				showfooter();
 				exit;
 			}
-			
-			$query = "insert into `orgemailcerts` set 
-						`CN`='$defaultemail', 
+
+			$query = "insert into `orgemailcerts` set
+						`CN`='$defaultemail',
 						`keytype`='NS',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1507,7 +1509,7 @@
 			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype']=="VI") {
 			$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."-----END CERTIFICATE REQUEST-----\n";
-			
+
 			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
 			{
 				$id = 17;
@@ -1516,7 +1518,7 @@
 				showfooter();
 				exit;
 			}
-			
+
 			$tmpfname = tempnam("/tmp", "id17CSR");
 			$fp = fopen($tmpfname, "w");
 			fputs($fp, $csr);
@@ -1566,8 +1568,8 @@
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
 
-			$query = "insert into `orgemailcerts` set 
-						`CN`='$defaultemail', 
+			$query = "insert into `orgemailcerts` set
+						`CN`='$defaultemail',
 						`keytype`='" . sanitizeHTML($_REQUEST['keytype']) . "',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1623,29 +1625,29 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `orgemailcerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				$query = "insert into `orgemailcerts` set 
-						`orgid`='".$row['orgid']."', 
+				$query = "insert into `orgemailcerts` set
+						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
 						`subject`='".$row['subject']."',
-						`keytype`='".$row['keytype']."', 
-						`csr_name`='".$row['csr_name']."', 
-						`created`='".$row['created']."', 
+						`keytype`='".$row['keytype']."',
+						`csr_name`='".$row['csr_name']."',
+						`created`='".$row['created']."',
 						`modified`=NOW(),
 						`codesign`='".$row['codesign']."',
 						`rootcert`='".$row['rootcert']."'";
@@ -1743,7 +1745,7 @@
 	if($process != "" && $oldid == 20)
 	{
 		$CSR = clean_csr($_REQUEST['CSR']);
-		
+
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
 			$id = 20;
@@ -1752,7 +1754,7 @@
 			showfooter();
 			exit;
 		}
-		
+
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -1802,7 +1804,7 @@
 	if($process != "" && $oldid == 21)
 	{
 		$id = 21;
-		
+
 		if(!file_exists($_SESSION['_config']['tmpfname']))
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -1810,7 +1812,7 @@
 			showfooter();
 			exit;
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR(file_get_contents(
 				$_SESSION['_config']['tmpfname']))) !== "")
 		{
@@ -1859,7 +1861,7 @@
 		if(is_array($_SESSION['_config']['rows']))
 			foreach($_SESSION['_config']['rows'] as $row)
 				$csrsubject .= "/commonName=$row";
-		$SAN="";		
+		$SAN="";
 		if(is_array($_SESSION['_config']['altrows']))
 			foreach($_SESSION['_config']['altrows'] as $subalt)
 			{
@@ -1878,7 +1880,7 @@
 
                 if($_SESSION['_config']['rowid']['0'] > 0)
                 {
-                        $query = "insert into `orgdomaincerts` set 
+                        $query = "insert into `orgdomaincerts` set
 						`CN`='".$_SESSION['_config']['rows']['0']."',
 						`orgid`='".$org['id']."',
                                                 `created`=NOW(),
@@ -1886,7 +1888,7 @@
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
 						`type`='$type'";
                 } else {
-                        $query = "insert into `orgdomaincerts` set 
+                        $query = "insert into `orgdomaincerts` set
 						`CN`='".$_SESSION['_config']['altrows']['0']."',
 						`orgid`='".$org['id']."',
                                                 `created`=NOW(),
@@ -1944,29 +1946,29 @@
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `orgdomaincerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				$query = "insert into `orgdomaincerts` set 
-						`orgid`='".$row['orgid']."', 
+				$query = "insert into `orgdomaincerts` set
+						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
-						`csr_name`='".$row['csr_name']."', 
+						`csr_name`='".$row['csr_name']."',
 						`created`='".$row['created']."',
-						`modified`=NOW(), 
-						`subject`='".$row['subject']."', 
+						`modified`=NOW(),
+						`subject`='".$row['subject']."',
 						`type`='".$row['type']."',
 						`rootcert`='".$row['rootcert']."'";
 				mysql_query($query);
@@ -2180,7 +2182,7 @@
 
 	if(($oldid == 29 || $oldid == 30) && $process != "")      // _("Cancel") is handled in front of account.php
 	{
-		$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where 
+		$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where
 				`orgdomlink`.`orgdomid`=`orgdomains`.`id` and
 				`orgdomaincerts`.`id`=`orgdomlink`.`orgcertid` and
 				`orgdomains`.`id`='".intval($domid)."'";
@@ -2188,7 +2190,7 @@
 		while($row = mysql_fetch_assoc($res))
 			mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['id']."'");
 
-		$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where 
+		$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where
 				`orgemaillink`.`domid`=`orgdomains`.`id` and
 				`orgemailcerts`.`id`=`orgemaillink`.`emailcertsid` and
 				`orgdomains`.`id`='".intval($domid)."'";
@@ -2232,7 +2234,7 @@
 		$dres = mysql_query($query);
 		while($drow = mysql_fetch_assoc($dres))
 		{
-			$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where 
+			$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where
 					`orgdomlink`.`orgdomid`=`orgdomains`.`id` and
 					`orgdomaincerts`.`id`=`orgdomlink`.`orgcertid` and
 					`orgdomains`.`id`='".intval($drow['id'])."'";
@@ -2244,7 +2246,7 @@
 				mysql_query("delete from `orgdomlink` where `domid`='".intval($row['id'])."'");
 			}
 
-			$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where 
+			$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where
 					`orgemaillink`.`domid`=`orgdomains`.`id` and
 					`orgemailcerts`.`id`=`orgemaillink`.`emailcertsid` and
 					`orgdomains`.`id`='".intval($drow['id'])."'";
@@ -2459,7 +2461,7 @@
 		exit;
 	}
 
-	if($oldid == 54 || ($id == 53 && array_key_exists('action',$_REQUEST) && $_REQUEST['action'] != "") || 
+	if($oldid == 54 || ($id == 53 && array_key_exists('action',$_REQUEST) && $_REQUEST['action'] != "") ||
 	             ($id == 54 && array_key_exists('action',$_REQUEST) && $_REQUEST['action'] != "" &&
 			$_REQUEST['action'] != "aliases" && $_REQUEST['action'] != "edit" && $_REQUEST['action'] != "add"))
 	{
@@ -2676,7 +2678,7 @@
 			showfooter();
 			exit;
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -2685,7 +2687,7 @@
 			exit;
 		}
 
-		$query = "insert into `domaincerts` set 
+		$query = "insert into `domaincerts` set
 						`CN`='".$_SESSION['_config']['0.CN']."',
 						`domid`='".$_SESSION['_config']['row']['id']."',
 						`created`=NOW()";
@@ -2749,7 +2751,7 @@
 
 	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0)
 	{
-		csrf_check('admactlock');	
+		csrf_check('admactlock');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locked']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
@@ -2974,7 +2976,7 @@
 			while($row = mysql_fetch_assoc($res))
 				$body .= $row['comment']."\n";
 			$body .= "\n";
-			
+
 			$body .= _("Best regards")."\n";
 			$body .= _("CAcert Support Team");
 			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");
@@ -2995,7 +2997,7 @@
 			$body .= "\n";
 
 			$body .= _("You are welcome to try submitting another request at any time in the future, please make sure you take the reviewer comments into consideration or you risk having your application rejected again.")."\n\n";
-			
+
 			$body .= _("Best regards")."\n";
 			$body .= _("CAcert Support Team");
 			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");

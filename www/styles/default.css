@@ -86,11 +86,9 @@ padding-left: 5px;
 border-left: 0px;
 }
 
-ul {
+ul.no_indent {
 list-style: none;
-margin: 0px 0px 0px 15px;
-padding-left: 5px;
-border-left: 1px dotted #000;
+padding: 0px;
 }
 
 /***********************************************/
@@ -650,4 +648,8 @@ div.footerbar {
   color: black;
   padding: 10px 10px 10px 10px;
 }
+
+/************ Honeypot  ***********/
+
+.robotic { display: none; }
 
