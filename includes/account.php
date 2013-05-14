@@ -1136,6 +1136,7 @@
 	if($oldid == 5 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
+echo var_dump($_REQUEST).'<br>';
 		foreach($_REQUEST as $id => $val)
 		{
 			if(substr($id,0,5)=="cert_")
@@ -1147,6 +1148,7 @@
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
+echo 'cid:'.$cid.'<br>';
 				if (!empty($_REQUEST['check_comment_'.$id])) {
 					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
 					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
