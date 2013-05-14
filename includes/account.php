@@ -997,6 +997,26 @@
 		exit;
 	}
 
+	if($oldid == 12 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+	showheader(_("My CAcert.org Account!"));
+	foreach($_REQUEST as $id => $val)
+	{
+		if(substr($id,0,14)=="check_comment_")
+		{
+			$cid = intval(substr($id,14));
+			if(!empty($_REQUEST['check_comment_'.$cid])) {
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			}
+		}
+	}
+	echo(_("Certificate settings have been changed.")."<br/>\n");
+	showfooter();
+	exit;
+	}
+
+
 	if($oldid == 5 && array_key_exists('renew',$_REQUEST) && $_REQUEST['renew'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
@@ -1775,6 +1795,26 @@
 		exit;
 	}
 
+	if($oldid == 18 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+	showheader(_("My CAcert.org Account!"));
+	foreach($_REQUEST as $id => $val)
+	{
+		if(substr($id,0,14)=="check_comment_")
+		{
+			$cid = intval(substr($id,14));
+			if(!empty($_REQUEST['check_comment_'.$cid])) {
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			}
+		}
+	}
+	echo(_("Certificate settings have been changed.")."<br/>\n");
+	showfooter();
+	exit;
+	}
+
+
 	if($process != "" && $oldid == 20)
 	{
 		$CSR = clean_csr($_REQUEST['CSR']);
@@ -2111,6 +2151,26 @@
 		showfooter();
 		exit;
 	}
+
+	if($oldid == 22 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+	showheader(_("My CAcert.org Account!"));
+	foreach($_REQUEST as $id => $val)
+	{
+		if(substr($id,0,14)=="check_comment_")
+		{
+			$cid = intval(substr($id,14));
+			if(!empty($_REQUEST['check_comment_'.$cid])) {
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			}
+		}
+	}
+	echo(_("Certificate settings have been changed.")."<br/>\n");
+	showfooter();
+	exit;
+	}
+
 
 	if(($id == 24 || $oldid == 24 || $id == 25 || $oldid == 25 || $id == 26 || $oldid == 26 ||
 		$id == 27 || $oldid == 27 || $id == 28 || $oldid == 28 || $id == 29 || $oldid == 29 ||

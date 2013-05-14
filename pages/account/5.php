@@ -57,7 +57,7 @@
 	{
 ?>
   <tr>
-    <td colspan="8" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
+    <td colspan="10" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))

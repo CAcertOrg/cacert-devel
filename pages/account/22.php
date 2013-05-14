@@ -19,17 +19,16 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="6" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=22&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
+    <td colspan="8" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=22&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("CommonName")?></td>
-	  <td class="DataTD"><?=_("SerialNumber")?></td>
-		<td class="DataTD"><?=_("Comment")?></td>
+    <td class="DataTD"><?=_("SerialNumber")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
-
+    <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
 <?
 	$query = "select UNIX_TIMESTAMP(`orgdomaincerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
@@ -53,7 +52,7 @@
 	{
 ?>
   <tr>
-    <td colspan="6" class="DataTD"><?=_("No domains are currently listed.")?></td>
+    <td colspan="8" class="DataTD"><?=_("No domains are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -79,15 +78,22 @@
 <? } ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=23&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
-	  <td class="DataTD"><?=$row['serial']?></td>
-		<td class="DataTD"><?=$row['description']?></td>
+    <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
+    <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+    <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
 <? } ?>
   <tr>
+    <td class="DataTD" colspan="8">
+      <?=_("* Comment is NOT included in the certificate as it is inteded for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
+    </td>
+  </tr>
+  <tr>
     <td class="DataTD" colspan="6"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
 	    <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
   </tr>
 <? } ?>
 </table>
