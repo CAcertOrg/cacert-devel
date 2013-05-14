@@ -628,6 +628,17 @@ function AssureFoot($oldid,$confirm)
 }
 
 // double with notray.inc
+/**
+ * write_user_agreement()
+ *
+ * @param mixed $memid
+ * @param mixed $document
+ * @param mixed $method
+ * @param mixed $comment
+ * @param integer $active
+ * @param integer $secmemid
+ * @return
+ */
 function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
 	$query="insert into `user_agreements` set `memid`=".$memid.", `secmemid`=".$secmemid.
@@ -635,6 +646,13 @@ function write_user_agreement($memid, $document, $method, $comment, $active=1, $
 	$res = mysql_query($query);
 }
 
+/**
+ * check_date_format()
+ *
+ * @param mixed $date
+ * @param integer $year
+ * @return
+ */
 function check_date_format($date, $year=2000){
 	//checks if the date is entered in the right date format YYYY-MM-DD and if
 	if (!strpos($date,'-')) {
@@ -648,7 +666,14 @@ function check_date_format($date, $year=2000){
 
 }
 
+/**
+ * check_date_differnce()
+ *
+ * @param mixed $date
+ * @param integer $diff
+ * @return
+ */
 function check_date_differnce($date, $diff=1){
 	//returns false if the date is larger then today + time diffrence
-	return (strtotime($date)>=time+$diff*86400);
+	return (strtotime($date)>=time()+$diff*86400);
 }
