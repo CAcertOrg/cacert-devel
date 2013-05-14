@@ -1202,11 +1202,11 @@ The Subscriber Naming consists of:
 </p>
 
 <ul>
-  <li><pre>subjectAltName=</pre>
+  <li><code>subjectAltName=</code>
       One, or more, of the Subscriber's verified email addresses,
       in rfc822Name format.
 
-  <li><pre>EmailAddress=</pre>
+  <li><code>EmailAddress=</code>
       One, or more, of the Subscriber's verified email addresses.
       This is deprecated under
       RFC5280 <a href="http://tools.ietf.org/html/rfc5280#section-4.2.1.6">4
@@ -1214,10 +1214,10 @@ The Subscriber Naming consists of:
       and is to be phased out. Also includes a SHA1 hash of a random number if
       the member selects SSO (Single Sign On ID) during submission of CSR.
   </li>
-  <li><pre>CN=</pre> The common name takes its value from one of:
+  <li><code>CN=</code> The common name takes its value from one of:
     <ul><li>
       For all Members,
-      the string "<pre>CAcert WoT Member</pre>" may be used for
+      the string "<code>CAcert WoT Member</code>" may be used for
       anonymous certificates.
     </li><li>
       For individual Members,
@@ -1237,11 +1237,11 @@ The Subscriber Naming consists of:
 </p>
 
 <ul>
- <li><pre>CN=</pre>
+ <li><code>CN=</code>
     The common name is the host name out of a domain
     for which the Member is a domain master.
   </li> <li>
-  <pre>subjectAltName=</pre>
+  <code>subjectAltName=</code>
     Additional host names for which the Member
     is a domain master may be added to permit the
     certificate to serve multiple domains on one IP number.
@@ -1256,17 +1256,15 @@ In addition to the above, the following applies:
 </p>
 
 <ul>
-  <li><pre>OU=</pre>
-      organizationalUnitName (set by O-Admin, must be verified by O-Admin).</li>
-  <li><pre>O=</pre>
-      organizationName is the fixed name of the Organisation.</li>
-  <li><pre>L=</pre>
+  <li><code>OU=</code>organizationalUnitName (set by O-Admin, must be verified by O-Admin).</li>
+  <li><code>O=</code>organizationName is the fixed name of the Organisation.</li>
+  <li><code>L=</code>
       localityName</li>
-  <li><pre>ST=</pre>
+  <li><code>ST=</code>
       stateOrProvinceName</li>
-  <li><pre>C=</pre>
+  <li><code>C=</code>
       countryName</li>
-  <li><pre>contact=</pre>
+  <li><code>contact=</code>
       EMail Address of Contact.
       <!--  not included in RFC5280 4.1.2.4 list, but list is not restricted -->
   </li>
@@ -1287,7 +1285,7 @@ does not go into the certificate.
 
 <p>
 
-Each Member's Name &#x28;<span class="pre">CN&#x3d;</span> field&#x29;
+Each Member's Name &#x28;<code>CN&#x3d;</code> field&#x29;
 is assured under the Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>)
 or subsidiary policies (such as Organisation Assurance Policy).
 Refer to those documents for meanings and variations.
@@ -1295,7 +1293,7 @@ Refer to those documents for meanings and variations.
 </p>
 
 <p>
-Anonymous certificates have the same <span class="pre">subject</span>
+Anonymous certificates have the same <code>subject</code>
 field common name.
 See <a href="#p1.4.5">&sect;1.4.5.</a>.
 </p>
