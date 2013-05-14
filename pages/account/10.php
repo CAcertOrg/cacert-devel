@@ -30,14 +30,14 @@
 
 <form method="post" action="account.php">
 <? if($_SESSION['profile']['points'] >= 50) { ?>
-<input type="radio" name="rootcert" value="1"> <?=_("Sign by class 1 root certificate")?><br>
-<input type="radio" name="rootcert" value="2" checked> <?=_("Sign by class 3 root certificate")?><br>
+<input type="radio" name="rootcert" value="1"/> <?=_("Sign by class 1 root certificate")?><br />
+<input type="radio" name="rootcert" value="2" checked/> <?=_("Sign by class 3 root certificate")?><br />
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <? } ?>
-<p> <?=_("Optional comment, only used in the certifictate overview")?><br>
-       <input type="text" name="description" maxlength="80" size=80></p>
+<p><?=_("Optional comment, only used in the certifictate overview")?><br>
+       <input type="text" name="description" maxlength="80" size=80/></p>
 <p><?=_("Paste your CSR(Certificate Signing Request) below...")?></p>
 <textarea name="CSR" cols="80" rows="15"></textarea><br>
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="submit" name="process" value="<?=_("Submit")?>"/>
+<input type="hidden" name="oldid" value="<?=$id?>"/>
 </form>

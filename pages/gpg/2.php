@@ -69,12 +69,12 @@
 <? } ?>
   <tr>
     <td class="DataTD" colspan="6">
-      <?=_("* Comment is NOT included in the certificate as it is inteded for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
+      <?=_("* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
     </td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="6"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
+    <td class="DataTD" colspan="6"><input type="submit" name="change" value="<?=_("Change settings")?>" /> </td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?=$id?>" />
 </form>

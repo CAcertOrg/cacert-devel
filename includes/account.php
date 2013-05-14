@@ -241,10 +241,10 @@
 			$csr = clean_csr($_REQUEST['optionalCSR']);
 		}
 		if(trim($_REQUEST['description']) != ""){
-       $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-    }else{
-       $_SESSION['_config']['description']= "";
-    }
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
+		}
 	}
 
 	if($oldid == 4)
@@ -999,21 +999,21 @@
 
 	if($oldid == 12 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
-	showheader(_("My CAcert.org Account!"));
-	foreach($_REQUEST as $id => $val)
-	{
-		if(substr($id,0,14)=="check_comment_")
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
 		{
-			$cid = intval(substr($id,14));
-			if(!empty($_REQUEST['check_comment_'.$cid])) {
-				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				if(!empty($_REQUEST['check_comment_'.$cid])) {
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+					mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				}
 			}
 		}
-	}
-	echo(_("Certificate settings have been changed.")."<br/>\n");
-	showfooter();
-	exit;
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
 	}
 
 
@@ -1182,18 +1182,18 @@
 	if($oldid == 6  && $_REQUEST['certid'] != "")
 	{
 		if(trim($_REQUEST['description']) != ""){
-       $description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-    }else{
-       $description= "";
-    }
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$description= "";
+	}
 
-		if(trim($_REQUEST['disablelogin']) == "1"){
-       $disablelogin = 1;
-    }else{
-       $disablelogin = 0;
-    }
+	if(trim($_REQUEST['disablelogin']) == "1"){
+		$disablelogin = 1;
+	}else{
+		$disablelogin = 0;
+	}
 
-      mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
+	mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
 
  }
 	if($oldid == 13 && $process != "")
@@ -1466,11 +1466,11 @@
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-    if(trim($_REQUEST['description']) != ""){
-        $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-    }else{
-        $_SESSION['_config']['description']= "";
-    }
+		if(trim($_REQUEST['description']) != ""){
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
+		}
 
 		if(@count($_SESSION['_config']['emails']) > 0)
 			$id = 17;
@@ -1797,21 +1797,21 @@
 
 	if($oldid == 18 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
-	showheader(_("My CAcert.org Account!"));
-	foreach($_REQUEST as $id => $val)
-	{
-		if(substr($id,0,14)=="check_comment_")
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
 		{
-			$cid = intval(substr($id,14));
-			if(!empty($_REQUEST['check_comment_'.$cid])) {
-				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				if(!empty($_REQUEST['check_comment_'.$cid])) {
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+					mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				}
 			}
 		}
-	}
-	echo(_("Certificate settings have been changed.")."<br/>\n");
-	showfooter();
-	exit;
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
 	}
 
 
@@ -1829,10 +1829,10 @@
 		}
 
 		if(trim($_REQUEST['description']) != ""){
-       $_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-    }else{
-       $_SESSION['_config']['description']= "";
-    }
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
+		}
 
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
@@ -2154,21 +2154,21 @@
 
 	if($oldid == 22 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
-	showheader(_("My CAcert.org Account!"));
-	foreach($_REQUEST as $id => $val)
-	{
-		if(substr($id,0,14)=="check_comment_")
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
 		{
-			$cid = intval(substr($id,14));
-			if(!empty($_REQUEST['check_comment_'.$cid])) {
-				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				if(!empty($_REQUEST['check_comment_'.$cid])) {
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+					mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				}
 			}
 		}
-	}
-	echo(_("Certificate settings have been changed.")."<br/>\n");
-	showfooter();
-	exit;
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
 	}
 
 
