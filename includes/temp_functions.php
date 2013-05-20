@@ -239,14 +239,14 @@ function revoke_all_private_cert($uid){
 	//revokes all certificates linked to a personal accounts
 	//gpg revokation needs to be added to a later point
 	$uid=intval($uid);
-	$query = "select * from `email` where `memid`='".$id."'";
+	$query = "select `id` from `email` where `memid`='".$uid."'";
 	$res=mysql_query($query);
 	while($row = mysql_fetch_assoc($res)){
 		revoke_all_client_cert($row['id']);
 	}
 
 
-	$query = "select * from `domains` where `memid`='".$id."'";
+	$query = "select `id` from `domains` where `memid`='".$uid."'";
 	$res=mysql_query($query);
 	while($row = mysql_fetch_assoc($res)){
 		revoke_all_server_cert($row['id']);
