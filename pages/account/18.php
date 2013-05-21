@@ -91,7 +91,7 @@
 <? } ?>
   <tr>
     <td class="DataTD" colspan="8">
-      <?=_("* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
+      <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
     </td>
   </tr>
   <tr>

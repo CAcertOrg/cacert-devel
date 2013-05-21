@@ -106,13 +106,13 @@
 
   <tr>
     <td class="DataTD" colspan="9">
-      <?=_("* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment go to the certificate view with hitting email address.")?>
+      <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
     </td>
   </tr>
 
   <tr>
     <td class="DataTD" colspan="5"><input type="submit" name="renew" value="<?=_("Renew")?>" />&#160;&#160;&#160;&#160;
-    			<input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>" /></td>
+       <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>" /></td>
 
     <td class="DataTD" colspan="4"><input type="submit" name="change" value="<?=_("Change settings")?>" /> </td>
 
