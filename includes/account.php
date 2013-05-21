@@ -150,12 +150,12 @@
 		$delcount = 0;
 		if(array_key_exists('delid',$_REQUEST) && is_array($_REQUEST['delid']))
 		{
-			$deltitle=0;
+			$deltitle=false;
 			foreach($_REQUEST['delid'] as $id)
 			{
-				if (0==$deltitle) {
+				if (!$deltitle) {
 					echo _('The following email addresses have been removed:')."<br>\n";
-					$deltitle=1;
+					$deltitle=true;
 				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
