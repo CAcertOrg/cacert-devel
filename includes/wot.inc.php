@@ -675,5 +675,5 @@ function check_date_format($date, $year=2000){
  */
 function check_date_differnce($date, $diff=1){
 	//returns false if the date is larger then today + time diffrence
-	return (strtotime($date)>=time()+$diff*86400);
+	return (strtotime($date)<=time()+$diff*86400);
 }
