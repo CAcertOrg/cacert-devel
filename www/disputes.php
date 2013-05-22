@@ -242,12 +242,12 @@
 		{
 			showheader(_("Email Dispute"));
 			printf(_("Sorry, the email address '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($email),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
-
-			$body = "Someone has just attempted to dispute this email '".$email."', which belongs to a locked account:\n".
-				"Username(ID): ".$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']."(".$_SESSION['profile']['id'].")\n".
-				"email: ".$_SESSION['profile']['email']."\n".
-				"IP/Hostname: ".$_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:"")."\n".
-			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = printf("Someone has just attempted to dispute this email '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $email, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
 
 			showfooter();
 			exit;
@@ -331,12 +331,12 @@
 		{
 			showheader(_("Domain Dispute"));
 			printf(_("Sorry, the domain '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($domain),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
-
-			$body = "Someone has just attempted to dispute this domain '".$domain."', which belongs to a locked account:\n".
-				"Username(ID): ".$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']."(".$_SESSION['profile']['id'].")\n".
-				"email: ".$_SESSION['profile']['email']."\n".
-				"IP/Hostname: ".$_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:"")."\n".
-			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = printf("Someone has just attempted to dispute this domain '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $domain, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
 
 			showfooter();
 			exit;
