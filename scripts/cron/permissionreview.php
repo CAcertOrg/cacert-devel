@@ -33,77 +33,115 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => false,
-			'oao'     => false
+			'oao'     => false,
+			'level'  =>1
 			),
-	
+
 	'orgadmin' => array(
 			'name'    => 'Organisation Assurer',
 			'own'     => true,
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => true
+			'oao'     => true,
+			'level'  =>1
 			),
-	
+
 	'board' => array(
 			'name'    => 'Board Member',
 			'own'     => false,
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => false
+			'oao'     => false,
+			'level'  =>1
 			),
-	
+
 	'ttpadmin' => array(
 			'name'    => 'Trusted Third Party Admin',
 			'own'     => true,
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => true
+			'oao'     => true,
+			'level'  =>1
 			),
-	
+
+	'ttpadmin' => array(
+			'name'    => 'Trusted Third Party TOPUP Admin',
+			'own'     => true,
+			'board'   => true,
+			'support' => true,
+			'ao'      => true,
+			'oao'     => true,
+			'level'  =>2
+			),
+
 	'tverify' => array(
 			'name'    => 'Tverify Admin',
 			'own'     => false,
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => false
+			'oao'     => false,
+			'level'  =>1
 			),
-	
+
 	'locadmin' => array(
 			'name'    => 'Location Admin',
 			'own'     => false,
 			'board'   => true,
 			'support' => true,
 			'ao'      => false,
-			'oao'     => false
+			'oao'     => false,
+			'level'  =>1
 			),
+
+	'adadmin' => array(
+			'name'    => 'Advertising Admin submit status',
+			'own'     => false,
+			'board'   => true,
+			'support' => true,
+			'ao'      => false,
+			'oao'     => false,
+			'level'  =>1
+			),
+
+	'adadmin' => array(
+			'name'    => 'Advertising Admin approve status',
+			'own'     => false,
+			'board'   => true,
+			'support' => true,
+			'ao'      => false,
+			'oao'     => false,
+			'level'  =>2
+			),
+
+
 	);
 
 
 // Build up list of various admins
 $adminlist = array();
 foreach ($flags as $flag => $flag_properties) {
-	$query = "select `fname`, `lname`, `email` from `users` where `$flag` = 1";
+	$query = "select `fname`, `lname`, `email` from `users` where `$flag` = $flag_properties[level]";
 	if(! $res = mysql_query($query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
 				"\"$query\"\n".
 				mysql_error()
 			);
-		
+
 		continue;
 	}
-	
+
 	$adminlist[$flag] = array();
-	
+
 	while ($row = mysql_fetch_assoc($res)) {
 		$adminlist[$flag][] = $row;
 	}
-	
-	
+
+
 	// Send mail to admins of this group if 'own' is set
 	if ($flag_properties['own']) {
 		foreach ($adminlist[$flag] as $admin) {
@@ -117,18 +155,18 @@ and report to the responsible team leader or board
 
 
 EOF;
-			
+
 			foreach ($adminlist[$flag] as $colleague) {
 				$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 			}
-			
+
 			$message .= <<<EOF
 
 
 Best Regards,
 CAcert Support
 EOF;
-			
+
 			sendmail($admin['email'], "Permissions Review", $message, 'support@cacert.org');
 		}
 	}
@@ -152,7 +190,7 @@ foreach ($flags as $flag => $flag_properties) {
 		foreach ($adminlist[$flag] as $colleague) {
 			$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 		}
-		
+
 		$message .= "\n\n";
 	}
 }
@@ -188,14 +226,14 @@ foreach (array(
 Dear $values[description],
 
 it's time for the permission review again. Here is the list of privileged users
-in the CAcert web application. Please review them and also ask the persons 
+in the CAcert web application. Please review them and also ask the persons
 responsible for an up-to-date copy of access lists not directly recorded in the
-web application (critical admins, software assessors etc.) 
+web application (critical admins, software assessors etc.)
 
 
 
 EOF;
-	
+
 	foreach ($flags as $flag => $flag_properties) {
 		if ($flag_properties[$key]) {
 			$message .= "List of $flag_properties[name]s:\n\n";
@@ -205,13 +243,13 @@ EOF;
 			$message .= "\n\n";
 		}
 	}
-	
+
 	$message .= <<<EOF
 
 
 Best Regards,
 CAcert Support
 EOF;
-	
+
 	sendmail($values['email'], "Permissions Review", $message, 'support@cacert.org');
 }
