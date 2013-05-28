@@ -27,7 +27,7 @@ $ORGANISATION_ASSURANCE_OFFICER = 'oao@cacert.org';
 
 //defines to whom to send the lists
 $flags = array(
-	'admin' => array(
+	'admin=1' => array(
 			'name'    => 'Support Engineer',
 			'own'     => false, //Don't send twice
 			'board'   => true,
@@ -37,7 +37,7 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'orgadmin' => array(
+	'orgadmin=1' => array(
 			'name'    => 'Organisation Assurer',
 			'own'     => true,
 			'board'   => true,
@@ -47,7 +47,7 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'board' => array(
+	'board=1' => array(
 			'name'    => 'Board Member',
 			'own'     => false,
 			'board'   => true,
@@ -57,7 +57,7 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'ttpadmin' => array(
+	'ttpadmin=1' => array(
 			'name'    => 'Trusted Third Party Admin',
 			'own'     => true,
 			'board'   => true,
@@ -67,7 +67,7 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'ttpadmin' => array(
+	'ttpadmin=1' => array(
 			'name'    => 'Trusted Third Party TOPUP Admin',
 			'own'     => true,
 			'board'   => true,
@@ -77,7 +77,7 @@ $flags = array(
 			'level'  =>2
 			),
 
-	'tverify' => array(
+	'tverify=1' => array(
 			'name'    => 'Tverify Admin',
 			'own'     => false,
 			'board'   => true,
@@ -87,7 +87,7 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'locadmin' => array(
+	'locadmin=1' => array(
 			'name'    => 'Location Admin',
 			'own'     => false,
 			'board'   => true,
@@ -97,8 +97,8 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'adadmin' => array(
-			'name'    => 'Advertising Admin submit status',
+	'adadmin=1' => array(
+			'name'    => 'submit status for Advertising Admin',
 			'own'     => false,
 			'board'   => true,
 			'support' => true,
@@ -107,8 +107,8 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'adadmin' => array(
-			'name'    => 'Advertising Admin approve status',
+	'adadmin=2' => array(
+			'name'    => 'approve status for Advertising Admin',
 			'own'     => false,
 			'board'   => true,
 			'support' => true,
@@ -124,7 +124,8 @@ $flags = array(
 // Build up list of various admins
 $adminlist = array();
 foreach ($flags as $flag => $flag_properties) {
-	$query = "select `fname`, `lname`, `email` from `users` where `$flag` = $flag_properties[level]";
+	$flagname=explode('=', $flag, 2 );
+	$query = "select `fname`, `lname`, `email` from `users` where `$flagname[0]` = $flag_properties[level]";
 	if(! $res = mysql_query($query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
@@ -135,16 +136,16 @@ foreach ($flags as $flag => $flag_properties) {
 		continue;
 	}
 
-	$adminlist[$flag] = array();
+	$adminlist[$flagname[0]] = array();
 
 	while ($row = mysql_fetch_assoc($res)) {
-		$adminlist[$flag][] = $row;
+		$adminlist[$flagname[0]][] = $row;
 	}
 
 
 	// Send mail to admins of this group if 'own' is set
 	if ($flag_properties['own']) {
-		foreach ($adminlist[$flag] as $admin) {
+		foreach ($adminlist[$flagname[0]] as $admin) {
 			$message = <<<EOF
 Hello $admin[fname],
 
@@ -201,7 +202,7 @@ Best Regards,
 CAcert Support
 EOF;
 
-foreach ($adminlist['admin'] as $support_engineer) {
+foreach ($adminlist['$flagname[0]'] as $support_engineer) {
 	sendmail(
 			$support_engineer['email'],
 			"Permissions Review",
