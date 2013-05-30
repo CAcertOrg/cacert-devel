@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__).'/../../includes/mysql.php');
 	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
 	require_once(dirname(__FILE__).'/../../includes/notary.inc.php');
-	
+
 	$query = "select * from `users`	where `users`.`verified`=0 and
 			(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`users`.`created`)) >= 172800";
 	$res = mysql_query($query);
@@ -47,6 +47,9 @@
 			(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`created`)) >= 21600";
 	mysql_query($query);
 
+// the folloing part is presently not used as there is no running programme that uses temporary increase
+// in case that there is a new one the procedure needs a rework regarding the point claculation
+/*
 	$query = "select * from `notary` where `expire`!=0 and `expire`<NOW()";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
@@ -84,4 +87,5 @@
 		mysql_query($query);
 		fix_assurer_flag($row[to]);
 	}
+*/
 ?>
