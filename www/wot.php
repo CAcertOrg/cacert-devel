@@ -300,6 +300,12 @@ $iecho= "c";
 			exit;
 		}
 
+		if($_REQUEST['points'] <0 || ($_REQUEST['points']>35))
+		{
+			show_page("VerifyData","",_("The number of points you entered are out of the range given by policy."));
+			exit;
+		}
+
 		$query = "select * from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
