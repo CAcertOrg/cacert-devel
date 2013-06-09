@@ -630,6 +630,7 @@ function AssureFoot($oldid,$confirm)
 // double with notray.inc
 /**
  * write_user_agreement()
+ * writes a new record to the table user_agreement
  *
  * @param mixed $memid
  * @param mixed $document
@@ -640,40 +641,52 @@ function AssureFoot($oldid,$confirm)
  * @return
  */
 function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
-	// write a new record to the table user_agreement
-	$query="insert into `user_agreements` set `memid`=".$memid.", `secmemid`=".$secmemid.
-			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
+	//
+	$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
+			",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
 	$res = mysql_query($query);
 }
 
 /**
  * check_date_format()
+ * checks if the date is entered in the right date format YYYY-MM-DD and
+ * if the date is after the 1st January of the given year
  *
  * @param mixed $date
  * @param integer $year
  * @return
  */
 function check_date_format($date, $year=2000){
-	//checks if the date is entered in the right date format YYYY-MM-DD and if
 	if (!strpos($date,'-')) {
 		return FALSE;
 	}
 	$arr=explode('-',$date);
-	if (intval($arr[0])<=$year) {
+
+	if ((count($arr)!=3)) {
 		return FALSE;
 	}
-	return checkdate(intval($arr[1]), intval($arr[2]), intval($arr[0]));
+	if (intval($arr[0])<=$year) {
+
+	}
+	if (intval($arr[1])>12 or intval($arr[1])<=0) {
+		return FALSE;
+	}
+	if (intval($arr[2])>31 or intval($arr[2])<=0) {
+		return FALSE;
+	}
+
+	return checkdate( intval($arr[1]), intval($arr[2]), intval($arr[0]));
 
 }
 
 /**
  * check_date_differnce()
+ * returns false if the date is larger then today + time diffrence
  *
  * @param mixed $date
  * @param integer $diff
  * @return
  */
 function check_date_differnce($date, $diff=1){
-	//returns false if the date is larger then today + time diffrence
 	return (strtotime($date)<=time()+$diff*86400);
 }
