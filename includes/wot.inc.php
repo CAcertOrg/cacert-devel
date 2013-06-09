@@ -666,7 +666,7 @@ function check_date_format($date, $year=2000){
 		return FALSE;
 	}
 	if (intval($arr[0])<=$year) {
-
+		return FALSE;
 	}
 	if (intval($arr[1])>12 or intval($arr[1])<=0) {
 		return FALSE;
