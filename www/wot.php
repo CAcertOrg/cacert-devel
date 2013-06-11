@@ -115,8 +115,6 @@ function send_reminder()
 }
 
 
-
-
 	loadem("account");
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
 		$_SESSION['_config']['date'] = $_POST['date'];
@@ -239,6 +237,7 @@ function send_reminder()
 	if($oldid == 6)
 	{
 $iecho= "c";
+		//date checks
 		if(trim($_REQUEST['date']) == '')
 		{
 			show_page("VerifyData","",_("You must enter the date when you met the assuree."));
@@ -257,43 +256,48 @@ $iecho= "c";
 			exit;
 		}
 
+		//proof of identity check and accept arbitration, implements CCA
 		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-		if(!array_key_exists('CCAAgreed',$_POST) || $_POST['CCAAgreed'] != 1)
+		//proof of CCA agreement by assuree after 2010-01-01
+		if((!array_key_exists('CCAAgreed',$_POST) || $_POST['CCAAgreed'] != 1) and (check_date_format(trim($_REQUEST['date']),2010)))
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-/*		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+		//assurance done according to rules
+		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
-*/
 
+		//met assuree in person, not appliciable fot TTP / TTP Topup assurances
 		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_SESSION['profile']['ttpadmin'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-		if($_SESSION['profile']['ttpadmin'] != 1 && $_POST['location'] == "")
+		//check location, min 3 characters
+		if(!array_key_exists('location',$_POST) || trim($_POST['location']) == "")
 		{
 			show_page("VerifyData","",_("You failed to enter a location of your meeting."));
 			exit;
 		}
 
-		if(strlen(trim($_REQUEST['location']))<=3)
+		if(strlen(trim($_REQUEST['location']))<=2)
 		{
 			show_page("VerifyData","",_("You must enter a location with at least 3 characters eg town and country."));
 			exit;
 		}
 
+		//check for points in range 0-35, for nucleus 35 + 15 temporary
 		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
@@ -352,7 +356,7 @@ $iecho= "c";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
-                        show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
+			show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
 			exit;
 		}
 	}
@@ -440,16 +444,16 @@ $iecho= "c";
 		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
 ?><form method="post" action="wot.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="2" class="title"><?=_("Assure Someone")?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
-  </tr>
+	<tr>
+		<td colspan="2" class="title"><?=_("Assure Someone")?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Email")?>:</td>
+		<td class="DataTD"><input type="text" name="email" id="email" value=""></td>
+	</tr>
+	<tr>
+		<td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+	</tr>
 </table>
 <input type="hidden" name="oldid" value="5">
 </form>
@@ -502,7 +506,7 @@ $iecho= "c";
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$userid' and `listme`=1"));
-	                $points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
+			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
 						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{
