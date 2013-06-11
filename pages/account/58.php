@@ -45,7 +45,7 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 					<td class="DataTD"><b><?=_('Organisation')?></b></td>
 					<td class="DataTD"><b><?=_('Masteraccount')?></b></td>
 				</tr><?
-				while($drow = mysql_fetch_assoc($res)){?>
+				while($drow = mysql_fetch_assoc($res1)){?>
 					<tr>
 						<td class="DataTD"><?=$drow['o']?></td>
 						<td class="DataTD"><?=$drow['masteracc'] ? _("Yes") : _("No") ?></td>
