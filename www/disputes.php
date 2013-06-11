@@ -28,7 +28,7 @@
 	if($type == "reallyemail")
 	{
 		$emailid = intval($_SESSION['_config']['emailid']);
-		$hash = mysql_escape_string(trim($_SESSION['_config']['hash']));
+		$hash = mysql_real_escape_string(trim($_SESSION['_config']['hash']));
 
 		$res = mysql_query("select * from `disputeemail` where `id`='$emailid' and `hash`='$hash'");
 		if(mysql_num_rows($res) <= 0)
@@ -81,7 +81,7 @@
 	if($type == "email")
 	{
 		$emailid = intval($_REQUEST['emailid']);
-		$hash = trim(mysql_escape_string(stripslashes($_REQUEST['hash'])));
+		$hash = trim(mysql_real_escape_string(stripslashes($_REQUEST['hash'])));
 		if($emailid <= 0 || $hash == "")
 		{
 			showheader(_("Email Dispute"));
@@ -127,7 +127,7 @@
 	if($type == "reallydomain")
 	{
 		$domainid = intval($_SESSION['_config']['domainid']);
-		$hash = mysql_escape_string(trim($_SESSION['_config']['hash']));
+		$hash = mysql_real_escape_string(trim($_SESSION['_config']['hash']));
 
 		$res = mysql_query("select * from `disputedomain` where `id`='$domainid' and `hash`='$hash'");
 		if(mysql_num_rows($res) <= 0)
@@ -168,7 +168,7 @@
 	if($type == "domain")
 	{
 		$domainid = intval($_REQUEST['domainid']);
-		$hash = trim(mysql_escape_string(stripslashes($_REQUEST['hash'])));
+		$hash = trim(mysql_real_escape_string(stripslashes($_REQUEST['hash'])));
 		if($domainid <= 0 || $hash == "")
 		{
 			showheader(_("Domain Dispute"));
@@ -214,11 +214,28 @@
 	if($oldid == "1")
 	{
 		csrf_check('emaildispute');
-		$email = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
+		$email = trim(mysql_real_escape_string(stripslashes($_REQUEST['dispute'])));
 		if($email == "")
 		{
 			showheader(_("Email Dispute"));
 			echo _("Not a valid email address. Can't continue.");
+			showfooter();
+			exit;
+		}
+
+		//check if email belongs to locked account
+		$res = mysql_query("select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysql_num_rows($res) > 0)
+		{
+			showheader(_("Email Dispute"));
+			printf(_("Sorry, the email address '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($email),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = sprintf("Someone has just attempted to dispute this email '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $email, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
+
 			showfooter();
 			exit;
 		}
@@ -290,11 +307,28 @@
 	if($oldid == "2")
 	{
 		csrf_check('domaindispute');
-		$domain = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
+		$domain = trim(mysql_real_escape_string(stripslashes($_REQUEST['dispute'])));
 		if($domain == "")
 		{
 			showheader(_("Domain Dispute"));
 			echo _("Not a valid Domain. Can't continue.");
+			showfooter();
+			exit;
+		}
+
+		//check if domain belongs to locked account
+		$res = mysql_query("select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysql_num_rows($res) > 0)
+		{
+			showheader(_("Domain Dispute"));
+			printf(_("Sorry, the domain '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($domain),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = sprintf("Someone has just attempted to dispute this domain '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $domain, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
+
 			showfooter();
 			exit;
 		}
@@ -355,7 +389,7 @@
                                 $bits = explode(":", $line, 2);
                                 $line = trim($bits[1]);
                                 if(!in_array($line, $addy) && $line != "")
-                                        $addy[] = trim(mysql_escape_string(stripslashes($line)));
+                                        $addy[] = trim(mysql_real_escape_string(stripslashes($line)));
                         }
                 } else {
                         if(is_array($adds))
@@ -372,7 +406,7 @@
                                                 $line = $bit;
                                 }
                                 if(!in_array($line, $addy) && $line != "")
-                                        $addy[] = trim(mysql_escape_string(stripslashes($line)));
+                                        $addy[] = trim(mysql_real_escape_string(stripslashes($line)));
                         }
                 }
 
@@ -389,7 +423,7 @@
 
 	if($oldid == "5")
 	{
-                $authaddy = trim(mysql_escape_string(stripslashes($_REQUEST['authaddy'])));
+                $authaddy = trim(mysql_real_escape_string(stripslashes($_REQUEST['authaddy'])));
 
                 if(!in_array($authaddy, $_SESSION['_config']['addy']) || $authaddy == "")
                 {
@@ -412,7 +446,7 @@
 		$domainid = intval($_SESSION['_config']['domainid']);
 		$memid = intval($_SESSION['_config']['memid']);
 		$oldmemid = intval($_SESSION['_config']['oldmemid']);
-		$domain = mysql_escape_string($_SESSION['_config']['domain']);
+		$domain = mysql_real_escape_string($_SESSION['_config']['domain']);
 
 		$hash = make_hash();
 		$query = "insert into `disputedomain` set `domain`='$domain',`memid`='".$_SESSION['profile']['id']."',

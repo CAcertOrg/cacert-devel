@@ -182,7 +182,7 @@ function send_reminder()
 
 	if($oldid == 5)
 	{
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
+		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) != 1)
 		{
@@ -199,7 +199,7 @@ function send_reminder()
 				exit;
 			}
 		}
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
+		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >= 1)
 		{
@@ -345,14 +345,14 @@ $iecho= "c";
 		if($newpoints < 0)
 			$newpoints = 0;
 
-		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
+		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' AND
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
 						`awarded`='$awarded' AND
-						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."'";
+						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."'";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
@@ -366,8 +366,8 @@ $iecho= "c";
 		$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
 						`to`='".$_SESSION['_config']['notarise']['id']."',
 						`points`='$newpoints', `awarded`='$awarded',
-						`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
+						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
@@ -387,8 +387,8 @@ $iecho= "c";
 			$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
 							`to`='".$_SESSION['profile']['id']."',
 							`points`='$addpoints', `awarded`='$addpoints',
-							`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
-							`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
+							`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
+							`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 							`method`='Administrative Increase',
 							`when`=NOW()";
 			mysql_query($query);
@@ -476,7 +476,7 @@ $iecho= "c";
 	{
 		csrf_check("chgcontact");
 
-		$info = mysql_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
+		$info = mysql_real_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
 		$listme = intval($_POST['listme']);
 		if($listme < 0 || $listme > 1)
 			$listme = 0;

@@ -20,7 +20,7 @@
    
   if ($ipadress=='72.36.220.19' && $_SERVER['HTTPS']=="on")
   {
-    $serial=mysql_escape_string($_REQUEST["serial"]);
+    $serial=mysql_real_escape_string($_REQUEST["serial"]);
     $root=intval($_REQUEST["root"]);
        
     $sql="select memid from emailcerts where serial='$serial' and rootcert='$root'";
