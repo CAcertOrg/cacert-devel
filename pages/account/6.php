@@ -144,12 +144,6 @@
 
 <p><?=_("Your certificate:")?></p>
 <pre><?=$cert?></pre>
-<?
- 
-		showfooter();
-		exit;
-	}
-?>
 
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -157,21 +151,16 @@
     <td colspan="2" class="title"><?=_("Information about the certificte")?></td>
   </tr>
 <?
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0)
-	{
-	while($row = mysql_fetch_assoc($res))
-	{
-		if($row['timeleft'] > 0)
-			$verified = _("Valid");
-		if($row['timeleft'] < 0)
-			$verified = _("Expired");
-		if($row['expired'] == 0)
-			$verified = _("Pending");
-		if($row['revoked'] > 0)
-			$verified = _("Revoked");
-		if($row['revoked'] == 0)
-			$row['revoke'] = _("Not Revoked");
+	if($row['timeleft'] > 0)
+		$verified = _("Valid");
+	if($row['timeleft'] < 0)
+		$verified = _("Expired");
+	if($row['expired'] == 0)
+		$verified = _("Pending");
+	if($row['revoked'] > 0)
+		$verified = _("Revoked");
+	if($row['revoked'] == 0)
+		$row['revoke'] = _("Not Revoked");
 ?>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
@@ -213,13 +202,16 @@
     <td class="DataTD"><?=_("Comment")?></td>
     <td class="DataTD"><input type="text" name="description" maxlength="100" size=100 value="<?=htmlspecialchars($row['description'])?>"></td>
   </tr>
-    <? } ?>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
 
   </tr>
-<? } ?>
 </table>
 <input type="hidden" name="oldid" value="6">
 <input type="hidden" name="certid" value="<?=$certid?>">
 </form>
+
+<?
+	showfooter();
+	exit;
+}
