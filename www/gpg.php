@@ -52,7 +52,7 @@ if(0)
   {
     showheader(_("Welcome to CAcert.org"));
     echo "The OpenPGP signing system is currently shutdown due to a maintenance. We hope to get it fixed within the next few hours. We are very sorry for the inconvenience.";
-  
+
     exit(0);
   }
 }
@@ -143,7 +143,7 @@ function verifyEmail($email)
 			$uidformatwrong=0;
 
 			if(sizeof($bits)<10) $uidformatwrong=1;
-			
+
 			if(preg_match("/\@.*\@/",$bits[9]))
 			{
 				showheader(_("Welcome to CAcert.org"));
@@ -248,6 +248,12 @@ function verifyEmail($email)
 			$resulttable.="</tr>\n";
 
 			if($emailok) $multiple++;
+
+			if(trim($_REQUEST['description']) == ""){
+				$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+			}else{
+				$description= "";
+			}
 		}
 		$resulttable.="</table>";
 
@@ -280,7 +286,8 @@ function verifyEmail($email)
 						`level`='1',
 						`expires`='".mysql_real_escape_string($expires)."',
 						`multiple`='".mysql_real_escape_string($multiple)."',
-						`keyid`='".mysql_real_escape_string($keyid)."'";
+						`keyid`='".mysql_real_escape_string($keyid)."',
+						`description`='".mysql_real_escape_string($description)."'";
 		mysql_query($query);
 		$id = mysql_insert_id();
 
@@ -334,7 +341,7 @@ function verifyEmail($email)
 				}
 
 				$mail="";
-	                        if (preg_match("/<([\w.-]*\@[\w.-]*)>/", $bits[9],$match)) {
+				if (preg_match("/<([\w.-]*\@[\w.-]*)>/", $bits[9],$match)) {
 					//echo "Found: ".$match[1];
 					$mail = trim(hex2bin($match[1]));
 				}
@@ -342,7 +349,7 @@ function verifyEmail($email)
 				{
 					//echo "Not found!\n";
 				}
-	
+
 				$emailok=verifyEmail($mail);
 
 				$uidid=$bits[7];
@@ -384,95 +391,89 @@ function verifyEmail($email)
 			}
 		}
 
+		if(count($ToBeDeleted)>0)
+		{
+			$descriptorspec = array(
+				0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+				1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+				2 => array("pipe", "w") // stderr is a file to write to
+			);
 
+			$stderr = fopen('php://stderr', 'w');
 
+			//echo "Keyid: $keyid\n";
 
-        if(count($ToBeDeleted)>0)
-	{
+			$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $keyid", $descriptorspec, $pipes);
 
+			//echo "Process: $process\n";
+			//fputs($stderr,"Process: $process\n");
 
-		$descriptorspec = array(
-			0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-			1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-			2 => array("pipe", "w") // stderr is a file to write to
-		);
- 
-		$stderr = fopen('php://stderr', 'w'); 
+			if (is_resource($process)) {
+			//echo("it is a resource\n");
+			// $pipes now looks like this:
+			// 0 => writeable handle connected to child stdin
+			// 1 => readable handle connected to child stdout
+			// Any error output will be appended to /tmp/error-output.txt
+				while (!feof($pipes[1]))
+				{
+					$buffer = fgets($pipes[1], 4096);
+					//echo $buffer;
 
-
-		//echo "Keyid: $keyid\n";
-
-		$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $keyid", $descriptorspec, $pipes);
- 
-		//echo "Process: $process\n";
-		//fputs($stderr,"Process: $process\n");
-
-		if (is_resource($process)) {
-		//echo("it is a resource\n");
-		// $pipes now looks like this:
-		// 0 => writeable handle connected to child stdin
-		// 1 => readable handle connected to child stdout
-		// Any error output will be appended to /tmp/error-output.txt
-			while (!feof($pipes[1])) 
+			if($buffer == "[GNUPG:] GET_BOOL keyedit.sign_all.okay\n")
 			{
-				$buffer = fgets($pipes[1], 4096);
-				//echo $buffer;
-
-      if($buffer == "[GNUPG:] GET_BOOL keyedit.sign_all.okay\n")
-      {
-        fputs($pipes[0],"yes\n");
-      }
-      elseif($buffer == "[GNUPG:] GOT_IT\n")
-      {
-      }
-      elseif(ereg("^\[GNUPG:\] GET_BOOL keyedit\.remove\.uid\.okay\s*",$buffer))
-      {
-        fputs($pipes[0],"yes\n");
-      }
-      elseif(ereg("^\[GNUPG:\] GET_LINE keyedit\.prompt\s*",$buffer))
-      {
-        if(count($ToBeDeleted)>0)
-        {
-	  $delthisuid=array_pop($ToBeDeleted);
-	  //echo "Deleting an UID $delthisuid\n";
-          fputs($pipes[0],"uid ".$delthisuid."\n");
-        }
-        else
-        {
-	  //echo "Saving\n";
-          fputs($pipes[0],$state?"save\n":"deluid\n");
-          $state++;
-        }
-      }
-      elseif($buffer == "[GNUPG:] GOOD_PASSPHRASE\n")
-      {
-      }
-      elseif(ereg("^\[GNUPG:\] KEYEXPIRED ",$buffer))
-      {
-        echo "Key expired!\n";
-	exit;
-      }
-      elseif($buffer == "")
-      {
-        //echo "Empty!\n";
-      }
-      else
-      {
-        echo "ERROR: UNKNOWN $buffer\n";
-      }
+				fputs($pipes[0],"yes\n");
+			}
+			elseif($buffer == "[GNUPG:] GOT_IT\n")
+			{
+			}
+			elseif(ereg("^\[GNUPG:\] GET_BOOL keyedit\.remove\.uid\.okay\s*",$buffer))
+			{
+				fputs($pipes[0],"yes\n");
+			}
+			elseif(ereg("^\[GNUPG:\] GET_LINE keyedit\.prompt\s*",$buffer))
+			{
+				if(count($ToBeDeleted)>0)
+				{
+					$delthisuid=array_pop($ToBeDeleted);
+					//echo "Deleting an UID $delthisuid\n";
+					fputs($pipes[0],"uid ".$delthisuid."\n");
+				}
+				else
+				{
+					//echo "Saving\n";
+					fputs($pipes[0],$state?"save\n":"deluid\n");
+					$state++;
+				}
+			}
+			elseif($buffer == "[GNUPG:] GOOD_PASSPHRASE\n")
+			{
+			}
+			elseif(ereg("^\[GNUPG:\] KEYEXPIRED ",$buffer))
+			{
+				echo "Key expired!\n";
+				exit;
+			}
+			elseif($buffer == "")
+			{
+				//echo "Empty!\n";
+			}
+			else
+			{
+				echo "ERROR: UNKNOWN $buffer\n";
+			}
 
 
 			}
 			//echo "Fertig\n";
 			fclose($pipes[0]);
- 
+
 			//echo stream_get_contents($pipes[1]);
 			fclose($pipes[1]);
- 
+
 			// It is important that you close any pipes before calling
 			// proc_close in order to avoid a deadlock
 			$return_value = proc_close($process);
- 
+
 			//echo "command returned $return_value\n";
 		}
 		else
@@ -504,6 +505,25 @@ function verifyEmail($email)
 			echo "</pre>";
 		}
 
+		showfooter();
+		exit;
+	}
+
+	if($oldid == 2 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				if(!empty($_REQUEST['check_comment_'.$cid])) {
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+					mysql_query("update `gpg` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				}
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
 		showfooter();
 		exit;
 	}

@@ -25,7 +25,7 @@
   if(is_array($_SESSION['_config']['addy']))
 	foreach($_SESSION['_config']['addy'] as $add) { ?>
   <tr>
-    <td class="DataTD" width="75"><input type="radio" name="authaddy" value="<?=$add?>"<? if($tagged == 0) { echo " checked=\"checked\""; $tagged = 1; } ?>></td>
+    <td class="DataTD" width="75"><input type="radio" name="authaddy" value="<?=$add?>"<? if($tagged == 0) { echo " checked=\"checked\""; $tagged = 1; } ?> /></td>
     <td class="DataTD" width="175"><?=$add?></td>
   </tr>
 <? } ?>
@@ -34,5 +34,5 @@
   </tr>
 </table>
 <input type="hidden" name="csrf" value="<?=make_csrf('ctcinfo')?>" />
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?=$id?>" />
 </form>
