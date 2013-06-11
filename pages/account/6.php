@@ -22,9 +22,9 @@
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
-			`emailcerts`.`expire` as `expires`, 
+			`emailcerts`.`expire` as `expires`,
 			`emailcerts`.`revoked` as `revoke`,
-			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`, 
+			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
 			`emailcerts`.`id`,
 			`emailcerts`.`CN`,
 			`emailcerts`.`serial`,
@@ -147,9 +147,9 @@
 
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="2" class="title"><?=_("Information about the certificte")?></td>
-  </tr>
+	<tr>
+		<td colspan="2" class="title"><?=_("Information about the certificte")?></td>
+	</tr>
 <?
 	if($row['timeleft'] > 0)
 		$verified = _("Valid");
@@ -162,50 +162,49 @@
 	if($row['revoked'] == 0)
 		$row['revoke'] = _("Not Revoked");
 ?>
-  <tr>
-    <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
+	<tr>
+		<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
 <? if($verified != _("Pending") && $verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="revokeid[<?=$row['id']?>]" ></td>
+		<td class="DataTD"><input type="checkbox" name="revokeid[<?=$row['id']?>]" ></td>
 <? } else if($verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="delid[<?=$row['id']?>]"></td>
+		<td class="DataTD"><input type="checkbox" name="delid[<?=$row['id']?>]"></td>
 <? } else { ?>
-    <td class="DataTD">&nbsp;</td>
-<? } ?>    
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Status")?></td>
-    <td class="DataTD"><?=$verified?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Email Address")?></td>
-    <td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("SerialNumber")?></td>
-    <td class="DataTD"><?=$row['serial']?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Revoked")?></td>
-    <td class="DataTD"><?=$row['revoke']?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Expires")?></td>
-    <td class="DataTD"><?=$row['revoke']?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Login")?></td>
-    <td class="DataTD">
-      <input type="checkbox" name="disablelogin" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
-    </td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Comment")?></td>
-    <td class="DataTD"><input type="text" name="description" maxlength="100" size=100 value="<?=htmlspecialchars($row['description'])?>"></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
-
-  </tr>
+		<td class="DataTD">&nbsp;</td>
+<? } ?>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Status")?></td>
+		<td class="DataTD"><?=$verified?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Email Address")?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("SerialNumber")?></td>
+		<td class="DataTD"><?=$row['serial']?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Revoked")?></td>
+		<td class="DataTD"><?=$row['revoke']?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Expires")?></td>
+		<td class="DataTD"><?=$row['revoke']?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Login")?></td>
+		<td class="DataTD">
+			<input type="checkbox" name="disablelogin" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
+		</td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=_("Comment")?></td>
+		<td class="DataTD"><input type="text" name="description" maxlength="100" size=100 value="<?=htmlspecialchars($row['description'])?>"></td>
+	</tr>
+	<tr>
+		<td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
+	</tr>
 </table>
 <input type="hidden" name="oldid" value="6">
 <input type="hidden" name="certid" value="<?=$certid?>">
