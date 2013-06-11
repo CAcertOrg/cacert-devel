@@ -28,7 +28,7 @@
 	if($type == "reallyemail")
 	{
 		$emailid = intval($_SESSION['_config']['emailid']);
-		$hash = mysql_escape_string(trim($_SESSION['_config']['hash']));
+		$hash = mysql_real_escape_string(trim($_SESSION['_config']['hash']));
 
 		$res = mysql_query("select * from `disputeemail` where `id`='$emailid' and `hash`='$hash'");
 		if(mysql_num_rows($res) <= 0)
@@ -81,7 +81,7 @@
 	if($type == "email")
 	{
 		$emailid = intval($_REQUEST['emailid']);
-		$hash = trim(mysql_escape_string(stripslashes($_REQUEST['hash'])));
+		$hash = trim(mysql_real_escape_string(stripslashes($_REQUEST['hash'])));
 		if($emailid <= 0 || $hash == "")
 		{
 			showheader(_("Email Dispute"));
@@ -127,7 +127,7 @@
 	if($type == "reallydomain")
 	{
 		$domainid = intval($_SESSION['_config']['domainid']);
-		$hash = mysql_escape_string(trim($_SESSION['_config']['hash']));
+		$hash = mysql_real_escape_string(trim($_SESSION['_config']['hash']));
 
 		$res = mysql_query("select * from `disputedomain` where `id`='$domainid' and `hash`='$hash'");
 		if(mysql_num_rows($res) <= 0)
@@ -168,7 +168,7 @@
 	if($type == "domain")
 	{
 		$domainid = intval($_REQUEST['domainid']);
-		$hash = trim(mysql_escape_string(stripslashes($_REQUEST['hash'])));
+		$hash = trim(mysql_real_escape_string(stripslashes($_REQUEST['hash'])));
 		if($domainid <= 0 || $hash == "")
 		{
 			showheader(_("Domain Dispute"));
@@ -214,7 +214,7 @@
 	if($oldid == "1")
 	{
 		csrf_check('emaildispute');
-		$email = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
+		$email = trim(mysql_real_escape_string(stripslashes($_REQUEST['dispute'])));
 		if($email == "")
 		{
 			showheader(_("Email Dispute"));
@@ -290,7 +290,7 @@
 	if($oldid == "2")
 	{
 		csrf_check('domaindispute');
-		$domain = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
+		$domain = trim(mysql_real_escape_string(stripslashes($_REQUEST['dispute'])));
 		if($domain == "")
 		{
 			showheader(_("Domain Dispute"));
@@ -355,7 +355,7 @@
                                 $bits = explode(":", $line, 2);
                                 $line = trim($bits[1]);
                                 if(!in_array($line, $addy) && $line != "")
-                                        $addy[] = trim(mysql_escape_string(stripslashes($line)));
+                                        $addy[] = trim(mysql_real_escape_string(stripslashes($line)));
                         }
                 } else {
                         if(is_array($adds))
@@ -372,7 +372,7 @@
                                                 $line = $bit;
                                 }
                                 if(!in_array($line, $addy) && $line != "")
-                                        $addy[] = trim(mysql_escape_string(stripslashes($line)));
+                                        $addy[] = trim(mysql_real_escape_string(stripslashes($line)));
                         }
                 }
 
@@ -389,7 +389,7 @@
 
 	if($oldid == "5")
 	{
-                $authaddy = trim(mysql_escape_string(stripslashes($_REQUEST['authaddy'])));
+                $authaddy = trim(mysql_real_escape_string(stripslashes($_REQUEST['authaddy'])));
 
                 if(!in_array($authaddy, $_SESSION['_config']['addy']) || $authaddy == "")
                 {
@@ -412,7 +412,7 @@
 		$domainid = intval($_SESSION['_config']['domainid']);
 		$memid = intval($_SESSION['_config']['memid']);
 		$oldmemid = intval($_SESSION['_config']['oldmemid']);
-		$domain = mysql_escape_string($_SESSION['_config']['domain']);
+		$domain = mysql_real_escape_string($_SESSION['_config']['domain']);
 
 		$hash = make_hash();
 		$query = "insert into `disputedomain` set `domain`='$domain',`memid`='".$_SESSION['profile']['id']."',
