@@ -136,16 +136,16 @@ foreach ($flags as $flag => $flag_properties) {
 		continue;
 	}
 
-	$adminlist[$flagname[0]] = array();
+	$adminlist[$flag] = array();
 
 	while ($row = mysql_fetch_assoc($res)) {
-		$adminlist[$flagname[0]][] = $row;
+		$adminlist[$flag][] = $row;
 	}
 
 
 	// Send mail to admins of this group if 'own' is set
 	if ($flag_properties['own']) {
-		foreach ($adminlist[$flagname[0]] as $admin) {
+		foreach ($adminlist[$flag] as $admin) {
 			$message = <<<EOF
 Hello $admin[fname],
 
@@ -202,7 +202,7 @@ Best Regards,
 CAcert Support
 EOF;
 
-foreach ($adminlist['$flagname[0]'] as $support_engineer) {
+foreach ($adminlist['$flag'] as $support_engineer) {
 	sendmail(
 			$support_engineer['email'],
 			"Permissions Review",
