@@ -124,9 +124,9 @@
 			exit;
 		}
 		$row = mysql_fetch_assoc($res);
-		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
-		$body .= _("You are receiving this email because you or someone else")."\n";
-		$body .= _("has changed the default email on your account.")."\n\n";
+		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
+		$body .= _("You are receiving this email because you or someone else ".
+				"has changed the default email on your account.")."\n\n";
 
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -628,10 +628,30 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-					mysql_query("update `domains` set `deleted`=NOW() where `id`='$id'");
-					$dres = mysql_query("select * from `domlink` where `domid`='$id'");
+
+					$dres = mysql_query(
+						"select distinct `domaincerts`.`id`
+							from `domaincerts`, `domlink`
+							where `domaincerts`.`domid` = '$id'
+							or (
+								`domaincerts`.`id` = `domlink`.`certid`
+								and `domlink`.`domid` = '$id'
+								)");
 					while($drow = mysql_fetch_assoc($dres))
-						mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['certid']."' and `revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0");
+					{
+						mysql_query(
+							"update `domaincerts`
+								set `revoked`='1970-01-01 10:00:01'
+								where `id` = '".$drow['id']."'
+								and `revoked` = 0
+								and UNIX_TIMESTAMP(`expire`) -
+										UNIX_TIMESTAMP() > 0");
+					}
+
+					mysql_query(
+						"update `domains`
+							set `deleted`=NOW()
+							where `id` = '$id'");
 				}
 			}
 		}
@@ -1390,9 +1410,9 @@
 						where `id`='".$_SESSION['profile']['id']."'");
 				echo '<h3>', _("Pass Phrase Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
-				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n";
-				$body .= _("You are receiving this email because you or someone else")."\n";
-				$body .= _("has changed the password on your account.")."\n";
+				$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
+				$body .= _("You are receiving this email because you or someone else ".
+						"has changed the password on your account.")."\n\n";
 
 				$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
@@ -2716,9 +2736,9 @@
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
 
-			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n";
-			$body .= _("You are receiving this email because a CAcert administrator")."\n";
-			$body .= _("has changed the password on your account.")."\n";
+			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
+			$body .= _("You are receiving this email because a CAcert administrator ".
+					"has changed the password on your account.")."\n\n";
 
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
