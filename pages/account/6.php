@@ -190,7 +190,7 @@
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Expires")?></td>
-		<td class="DataTD"><?=$row['revoke']?></td>
+		<td class="DataTD"><?=$row['expires']?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Login")?></td>
