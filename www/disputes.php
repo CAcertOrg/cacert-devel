@@ -264,7 +264,7 @@
 			echo _("You aren't allowed to dispute your own email addresses. Can't continue.");
 			showfooter();
 			exit;
-		}	
+		}
 
 		$res = mysql_query("select * from `users` where `id`='$oldmemid'");
 		$user = mysql_fetch_assoc($res);
@@ -319,12 +319,20 @@
 		}
 		unset($oldid);
 		$query = "select * from `domains` where `domain`='$domain' and `deleted`=0";
-		$email = ""; if(array_key_exists('email',$_REQUEST)) $email=trim(mysql_real_escape_string($_REQUEST['email']));
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
+			$query = "select 1 from `orgdomains` where `domain`='$domain'";
+			$res = mysql_query($query);
+			if(mysql_num_rows($res) > 0)
+			{
+				showheader(_("Domain Dispute"));
+				printf(_("The domain '%s' is included in an organisation account. Please send a mail to %s to dispute this domain."), sanitizeHTML($domain),'<a href="mailto:support@cacert.org">support@cacert.org</a>');
+				showfooter();
+				exit;
+			}
 			showheader(_("Domain Dispute"));
-			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($email));
+			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($domain));
 			showfooter();
 			exit;
 		}
@@ -336,7 +344,7 @@
 			echo _("You aren't allowed to dispute your own domains. Can't continue.");
 			showfooter();
 			exit;
-		}	
+		}
 
 		$domainid = $row['id'];
 		$_SESSION['_config']['domainid'] = $domainid;

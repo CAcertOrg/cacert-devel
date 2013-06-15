@@ -152,6 +152,9 @@
 		{
 			foreach($_REQUEST['delid'] as $id)
 			{
+				if (0==$delcount) {
+					echo _('The following email addresses have been removed:')."<br>\n";
+				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
 						`email`!='".$_SESSION['profile']['email']."'";
@@ -179,10 +182,8 @@
 		{
 			echo _("You did not select any email accounts for removal.");
 		}
-		if($delcount > 0)
+		if(0 == $delcount)
 		{
-			echo _("The following accounts have been removed:")."<br>\n";
-		} else {
 			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
 
@@ -428,6 +429,7 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".$_SESSION['_config']['codesign']."',
+						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
@@ -630,13 +632,14 @@
 					echo $row['domain']."<br>\n";
 
 					$dres = mysql_query(
-						"select distinct `domaincerts`.`id`
-							from `domaincerts`, `domlink`
+						"select `domaincerts`.`id`
+							from `domaincerts`
 							where `domaincerts`.`domid` = '$id'
-							or (
-								`domaincerts`.`id` = `domlink`.`certid`
-								and `domlink`.`domid` = '$id'
-								)");
+						union distinct
+						select `domaincerts`.`id`
+							from `domaincerts`, `domlink`
+							where `domaincerts`.`id` = `domlink`.`certid`
+							and `domlink`.`domid` = '$id'");
 					while($drow = mysql_fetch_assoc($dres))
 					{
 						mysql_query(
