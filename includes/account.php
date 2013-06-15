@@ -1980,7 +1980,8 @@
 					`created`=NOW(),
 					`subject`='$csrsubject',
 					`rootcert`='".$_SESSION['_config']['rootcert']."',
-					`type`='$type'";
+					`type`='$type',
+					`description`='".$_SESSION['_config']['description']."'";
 		} else {
 			$query = "insert into `orgdomaincerts` set
 					`CN`='".$_SESSION['_config']['altrows']['0']."',
