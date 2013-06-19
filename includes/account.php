@@ -1023,7 +1023,7 @@
 	if($oldid == 12 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
-		vardump $_REQUEST;
+		vardump($_REQUEST);
 		foreach($_REQUEST as $id => $val)
 		{
 			if(substr($id,0,14)=="check_comment_")
@@ -1822,7 +1822,7 @@
 	if($oldid == 18 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
-		vardump $_REQUEST;
+		vardump($_REQUEST);
 		foreach($_REQUEST as $id => $val)
 		{
 			if(substr($id,0,14)=="check_comment_")
@@ -2181,7 +2181,7 @@
 	if($oldid == 22 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
-		vardump $_REQUEST;
+		vardump($_REQUEST);
 		foreach($_REQUEST as $id => $val)
 		{
 			if(substr($id,0,14)=="check_comment_")
