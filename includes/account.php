@@ -1025,15 +1025,11 @@
 		showheader(_("My CAcert.org Account!"));
 		foreach($_REQUEST as $id => $val)
 		{
-			echo "id:".$id."</br>";
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
-				echo "cid".$cid."</br>";
-				if(!empty($_REQUEST['check_comment_'.$cid])) {
-					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-					mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
-				}
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
