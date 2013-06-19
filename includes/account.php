@@ -1023,12 +1023,13 @@
 	if($oldid == 12 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
-		vardump($_REQUEST);
 		foreach($_REQUEST as $id => $val)
 		{
+			echo "id:".$id."</br>";
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
+				echo "cid".$cid."</br>";
 				if(!empty($_REQUEST['check_comment_'.$cid])) {
 					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
 					mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
@@ -1822,7 +1823,6 @@
 	if($oldid == 18 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
-		vardump($_REQUEST);
 		foreach($_REQUEST as $id => $val)
 		{
 			if(substr($id,0,14)=="check_comment_")
@@ -2181,7 +2181,6 @@
 	if($oldid == 22 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
-		vardump($_REQUEST);
 		foreach($_REQUEST as $id => $val)
 		{
 			if(substr($id,0,14)=="check_comment_")
