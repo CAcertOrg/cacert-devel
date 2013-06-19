@@ -1020,10 +1020,8 @@
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
-				if(!empty($_REQUEST['check_comment_'.$cid])) {
-					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-					mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
-				}
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
@@ -1208,7 +1206,7 @@
 		$disablelogin = 0;
 	}
 
-	mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
+	mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
 
  }
 	if($oldid == 13 && $process != "")

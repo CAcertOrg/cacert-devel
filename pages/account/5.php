@@ -40,7 +40,7 @@
 			`emailcerts`.`id`,
 			`emailcerts`.`CN`,
 			`emailcerts`.`serial`,
-			emailcerts.disablelogin as `disablelogin`,
+			`emailcerts`.`disablelogin` as `disablelogin`,
 			`emailcerts`.`description`
 			from `emailcerts`
 			where `emailcerts`.`memid`='".$_SESSION['profile']['id']."'

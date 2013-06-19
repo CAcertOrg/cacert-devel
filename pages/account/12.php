@@ -51,7 +51,7 @@
 	{
 ?>
   <tr>
-    <td colspan="6" class="DataTD"><?=_("No certificates are currently listed.")?></td>
+    <td colspan="8" class="DataTD"><?=_("No certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -96,7 +96,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="6"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
+    <td class="DataTD" colspan="8"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>"/>
