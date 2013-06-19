@@ -18,6 +18,7 @@
 
 	include_once("../includes/lib/general.php");
 	require_once("../includes/lib/l10n.php");
+	include_once("../includes/mysql.php");
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] != 0)
 	{
