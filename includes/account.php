@@ -1029,6 +1029,8 @@
 			{
 				$cid = intval(substr($id,14));
 				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+echo "cid:".$cid." comment:".$comment."++</br>";
+echo "update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'</br>";
 				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 		}
@@ -1824,10 +1826,8 @@
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
-				if(!empty($_REQUEST['check_comment_'.$cid])) {
-					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-					mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
-				}
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
@@ -2182,10 +2182,8 @@
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
-				if(!empty($_REQUEST['check_comment_'.$cid])) {
-					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-					mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
-				}
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
