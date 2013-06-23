@@ -15,6 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+<form method="post" action="gpg.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="6" class="title"><?=_("OpenPGP Keys")?></td>
