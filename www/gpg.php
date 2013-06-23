@@ -248,15 +248,15 @@ function verifyEmail($email)
 			$resulttable.="</tr>\n";
 
 			if($emailok) $multiple++;
-
-			if(trim($_REQUEST['description']) == ""){
-				$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-			}else{
-				$description= "";
-			}
 		}
 		$resulttable.="</table>";
 
+		//set variable for comment
+		if(trim($_REQUEST['description']) == ""){
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$description= "";
+		}
 
 		if($nok==0)
 		{
