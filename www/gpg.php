@@ -276,9 +276,9 @@ function verifyEmail($email)
 	{
 		//set variable for comment
 		if(trim($_REQUEST['description']) == ""){
-			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
 			$description= "";
+		}else{
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
 		}
 
 		$query = "insert into `gpg` set `memid`='".intval($_SESSION['profile']['id'])."',
