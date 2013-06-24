@@ -251,13 +251,6 @@ function verifyEmail($email)
 		}
 		$resulttable.="</table>";
 
-		//set variable for comment
-		if(trim($_REQUEST['description']) == ""){
-			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$description= "";
-		}
-
 		if($nok==0)
 		{
 			showheader(_("Welcome to CAcert.org"));
@@ -281,6 +274,13 @@ function verifyEmail($email)
 
 	if($oldid == "0" && $CSR != "")
 	{
+		//set variable for comment
+		if(trim($_REQUEST['description']) == ""){
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$description= "";
+		}
+
 		$query = "insert into `gpg` set `memid`='".intval($_SESSION['profile']['id'])."',
 						`email`='".mysql_real_escape_string($lastvalidemail)."',
 						`level`='1',
