@@ -35,6 +35,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
   {
+    $_REQUEST['userid'] = 0;
+
     $emailsearch = $email = mysql_real_escape_string(stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
@@ -901,17 +903,19 @@ function showassuredby()
 <br><br>
 <? } }
 
-switch ($_GET['shownotary'])
-        {
-	case 'assuredto': 	showassuredto();
-				break;
-	case 'assuredby':	showassuredby();
-				break;
-	case 'assuredto15':	output_received_assurances(intval($_GET['userid']),1);
-				break;
-	case 'assuredby15': 	output_given_assurances(intval($_GET['userid']),1);
-				break;
-	}
-
-
-?>
+if(isset($_GET['shownotary'])) {
+    switch($_GET['shownotary']) {
+        case 'assuredto':
+            showassuredto();
+            break;
+        case 'assuredby':
+            showassuredby();
+            break;
+        case 'assuredto15':
+            output_received_assurances(intval($_GET['userid']),1);
+            break;
+        case 'assuredby15':
+            output_given_assurances(intval($_GET['userid']),1);
+            break;
+    }
+}
