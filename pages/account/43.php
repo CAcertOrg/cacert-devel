@@ -35,6 +35,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
   {
+    $_REQUEST['userid'] = 0;
+
     $emailsearch = $email = mysql_escape_string(stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
