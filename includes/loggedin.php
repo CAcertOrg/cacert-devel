@@ -27,7 +27,7 @@
 		$_SESSION['profile'] = "";
 		foreach($_SESSION as $key => $value)
 		{
-			if($key == '_config' || $key == 'mconn' || 'csrf_' = substr($key, 0, 5))
+			if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 				continue;
 			if(is_int($key) || is_string($key))
 		                unset($_SESSION[$key]);
@@ -53,7 +53,7 @@
 			$_SESSION['profile'] = "";
 			foreach($_SESSION as $key => $value)
 			{
-				if($key == '_config' || $key == 'mconn' || 'csrf_' = substr($key, 0, 5))
+				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
 				if(is_int($key) || is_string($key))
 			                unset($_SESSION[$key]);
@@ -72,7 +72,7 @@
 			$_SESSION['profile'] = "";
 			foreach($_SESSION as $key => $value)
 			{
-				if($key == '_config' || $key == 'mconn' || 'csrf_' = substr($key, 0, 5))
+				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
 			        unset($_SESSION[$key]);
 			        unset($$key);
