@@ -888,17 +888,19 @@ function showassuredby()
 <br><br>
 <? } } 
 
-switch ($_GET['shownotary'])
-        {
-	case 'assuredto': 	showassuredto();
-				break;
-	case 'assuredby':	showassuredby();
-				break;
-	case 'assuredto15':	output_received_assurances(intval($_GET['userid']),1);
-				break;
-	case 'assuredby15': 	output_given_assurances(intval($_GET['userid']),1);
-				break;
-	}
-
-
-?>
+if(isset($_GET['shownotary'])) {
+    switch($_GET['shownotary']) {
+        case 'assuredto':
+            showassuredto();
+            break;
+        case 'assuredby':
+            showassuredby();
+            break;
+        case 'assuredto15':
+            output_received_assurances(intval($_GET['userid']),1);
+            break;
+        case 'assuredby15':
+            output_given_assurances(intval($_GET['userid']),1);
+            break;
+    }
+}
