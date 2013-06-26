@@ -18,6 +18,7 @@
 
 require_once('../includes/lib/l10n.php');
 
+
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
         $process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
@@ -544,6 +545,8 @@ require_once('../includes/lib/l10n.php');
 						`regional`='".$_SESSION['signup']['regional']."',
 						`radius`='".$_SESSION['signup']['radius']."'";
 			mysql_query($query);
+			include_once("../includes/notary.inc.php");
+			write_user_agreement($memid, "CCA", "account creation", "", 1);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
 			$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n";
