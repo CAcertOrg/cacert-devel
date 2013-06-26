@@ -87,7 +87,7 @@
 			        //session_unregister($key);
 			}
 
-			unset($_SESSION['_config']['oldlocation']);
+			$_SESSION['_config']['oldlocation'] = '';
 
 			foreach($_GET as $key => $val)
 			{
