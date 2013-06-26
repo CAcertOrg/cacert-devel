@@ -20,7 +20,7 @@
 	require_once("../includes/lib/l10n.php");
 	include_once("../includes/mysql.php");
 
-	if(!is_array($_SESSION['profile'])) {
+	if(!isset($_SESSION['profile']) || !is_array($_SESSION['profile'])) {
 		$_SESSION['profile'] = array( 'id' => 0, 'loggedin' => 0 );
 	}
 	if(!isset($_SESSION['profile']['id']) || !isset($_SESSION['profile']['loggedin'])) {
