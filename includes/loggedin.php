@@ -20,6 +20,14 @@
 	require_once("../includes/lib/l10n.php");
 	include_once("../includes/mysql.php");
 
+	if(!is_array($_SESSION['profile']) {
+		$_SESSION['profile'] = array( 'id' => 0, 'loggedin' => 0 );
+	}
+	if(!isset($_SESSION['profile']['id'] || !isset($_SESSION['profile']['loggedin']) {
+		$_SESSION['profile']['id'] = 0;
+		$_SESSION['profile']['loggedin'] = 0;
+	}
+
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] != 0)
 	{
 		$uid = $_SESSION['profile']['id'];
