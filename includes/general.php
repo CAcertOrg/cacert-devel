@@ -550,7 +550,7 @@
 				list($pri, $mxhosts[]) = explode(" ", trim($row), 2);
 			}
 			$mxhosts[] = $domain;
-			array_walk($mxhosts, function(&$mx) { $mx = trim($mx); } );
+			array_walk($mxhosts, function(&$mx) { $mx = trim($mx, '.'); } );
 
 			foreach($mxhosts as $key => $domain)
 			{
