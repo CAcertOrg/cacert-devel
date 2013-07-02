@@ -147,11 +147,11 @@
 
 	if($_SESSION['profile']['loggedin'] < 1)
 	{
-		unset($_SESSION['_config']['oldlocation']);
+		$_SESSION['_config']['oldlocation'] = '';
 
 		foreach($_REQUEST as $key => $val)
 		{
-			if($_SESSION['_config']['oldlocation'])
+			if('' != $_SESSION['_config']['oldlocation'])
 				$_SESSION['_config']['oldlocation'] .= "&";
 
 			$key = str_replace(array("\n", "\r"), '', $key);
