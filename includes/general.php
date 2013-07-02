@@ -543,10 +543,15 @@
 #echo `dig +short mx heise.de 2>&1`."-<br>\n";
 
 			$list = explode("\n", $line);
-			foreach($list as $row)
-				list($pri, $mxhosts[]) = explode(" ", substr(trim($row), 0, -1));
+			foreach($list as $row) {
+				if(!strstr(" ", $row)) {
+					continue;
+				}
+				list($pri, $mxhosts[]) = explode(" ", trim($row), 2);
+			}
 			$mxhosts[] = $domain;
-#print_r($mxhosts); die;
+			array_walk($mxhosts, function(&$mx) { $mx = trim($mx); } );
+
 			foreach($mxhosts as $key => $domain)
 			{
 				$fp = @fsockopen($domain,25,$errno,$errstr,5);
