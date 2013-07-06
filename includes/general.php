@@ -544,7 +544,7 @@
 
 			$list = explode("\n", $line);
 			foreach($list as $row) {
-				if(!strstr(" ", $row)) {
+				if(!strstr($row, " ")) {
 					continue;
 				}
 				list($pri, $mxhosts[]) = explode(" ", trim($row), 2);
