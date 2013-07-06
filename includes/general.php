@@ -581,7 +581,7 @@
 
 					$line = mysql_real_escape_string(trim(strip_tags($line)));
 					$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
-					if(is_array($_SESSION['profile'])) $query.=", `uid`='".$_SESSION['profile']['id']."'";
+					if(is_array($_SESSION['profile']) && isset($_SESSION['profile']['id'])) $query.=", `uid`='".$_SESSION['profile']['id']."'";
 					mysql_query($query);
 
 					if(substr($line, 0, 3) != "250")
