@@ -204,9 +204,8 @@ function revoke_all_client_cert($mailid){
 	$mailid = intval($mailid);
 	$query = "select `emailcerts`.`id`
 		from `emaillink`,`emailcerts` where
-		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
-		`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
-			group by `emailcerts`.`id`";
+		`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and `revoked`=0
+		group by `emailcerts`.`id`";
 	$dres = mysql_query($query);
 	while($drow = mysql_fetch_assoc($dres)){
 		mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01', `disablelogin`=1 where `id`='".$drow['id']."'");
@@ -229,9 +228,7 @@ function revoke_all_server_cert($domainid){
 		"update `domaincerts`
 			set `revoked`='1970-01-01 10:00:01'
 			where `id` = '".$drow['id']."'
-			and `revoked` = 0
-			and UNIX_TIMESTAMP(`expire`) -
-			UNIX_TIMESTAMP() > 0");
+			and `revoked` = 0");
 	}
 }
 
