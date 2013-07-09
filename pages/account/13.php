@@ -24,7 +24,7 @@
   $month = intval(substr($user['dob'], 5, 2));
   $day = intval(substr($user['dob'], 8, 2));
   $showdetails = array_key_exists('showdetails', $_REQUEST) && !!intval($_REQUEST['showdetails']);
-  if($showdetails == 1){
+  if($showdetails){
     $body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
     $body .= _("You receive this automatic mail since you yourself or someone ".
       "else looked up your secret questions and answers for a forgotten ".
@@ -125,7 +125,7 @@
   <tr>
     <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=!$showdetails?>"><?=_("View secret question & answers and OTP phrases")?></a></td>
   </tr>
-  <? if($showdetails == 1){ ?>
+  <? if($showdetails){ ?>
   <tr>
    <td class="DataTD"><?=_("OTP Hash")?><br>
     (<?=_("Not displayed")?>)</td>
@@ -160,7 +160,7 @@
     <td class="DataTD"><input type="text" name="A5" value="<?=sanitizeHTML($user['A5'])?>"></td>
   </tr>
   <tr>
-  < ?} ?>
+  <? } ?>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
   </tr>
 </table>
