@@ -23,7 +23,7 @@
   $year = intval(substr($user['dob'], 0, 4));
   $month = intval(substr($user['dob'], 5, 2));
   $day = intval(substr($user['dob'], 8, 2));
-  $showdetails=0; if(array_key_exists('showdetails',$_REQUEST)) $showdetails=intval($_REQUEST['showdetails']);
+  $showdetails = array_key_exists('showdetails', $_REQUEST) && !!intval($_REQUEST['showdetails']);
   if($showdetails == 1){
     $body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
     $body .= _("You receive this automatic mail since you yourself or someone ".
@@ -118,12 +118,12 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?><br>
-	    (<?=_("dd/mm/yyyy")?>)</td>
+      (<?=_("dd/mm/yyyy")?>)</td>
     <td class="DataTD"><?=$day?> <?=ucwords(recode("utf-8..html", strftime("%B", mktime(0,0,0,$month,1,1))))?> <?=$year?></td>
   </tr>
 <? } ?>
   <tr>
-    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=!$showdetails?>"><?=_("View secret question and answers and OTP phrases")?></a></td>
+    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=!$showdetails?>"><?=_("View secret question & answers and OTP phrases")?></a></td>
   </tr>
   <? if($showdetails == 1){ ?>
   <tr>
