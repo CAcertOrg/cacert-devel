@@ -17,7 +17,7 @@
 */
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
-	require_once('lib/check_weak_key.php');
+	require_once("../includes/lib/check_weak_key.php");
 
 	loadem("account");
 
@@ -241,6 +241,11 @@
 			$_REQUEST['keytype'] = "MS";
 			$csr = clean_csr($_REQUEST['optionalCSR']);
 		}
+		if(trim($_REQUEST['description']) != ""){
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
+		}
 	}
 
 	if($oldid == 4)
@@ -324,7 +329,8 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
-						`rootcert`='".intval($_SESSION['_config']['rootcert'])."'";
+						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 			if(is_array($addys))
@@ -335,15 +341,15 @@
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-                        $res=`openssl spkac -verify -in $CSRname`;
-                        if(!strstr($res,"Challenge String: ".$challenge))
-                        {
-                                $id = $oldid;
-                                showheader(_("My CAcert.org Account!"));
-                                echo _("The challenge-response code of your certificate request did not match. Can't continue with certificaterequest.");
-                                showfooter();
-                                exit;
-                        }
+			$res=`openssl spkac -verify -in $CSRname`;
+			if(!strstr($res,"Challenge String: ".$challenge))
+			{
+				$id = $oldid;
+				showheader(_("My CAcert.org Account!"));
+				echo _("The challenge-response code of your certificate request did not match. Can't continue with certificaterequest.");
+				showfooter();
+				exit;
+			}
 			mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='".intval($emailid)."'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype'] == "VI") {
 			if($csr == "")
@@ -368,8 +374,8 @@
 			$csrsubject="";
 
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
-                        if(strlen($user['mname']) == 1)
-                                $user['mname'] .= '.';
+			if(strlen($user['mname']) == 1)
+				$user['mname'] .= '.';
 			if($_SESSION['_config']['incname'] <= 0 || $_SESSION['_config']['incname'] > 4)
 				$csrsubject = "/CN=CAcert WoT User";
 			if($_SESSION['_config']['incname'] == 1)
@@ -424,7 +430,8 @@
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
-						`rootcert`='".$_SESSION['_config']['rootcert']."'";
+						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 			if(is_array($addys))
@@ -458,10 +465,10 @@
 		csrf_check("adddomain");
 		if(strstr($_REQUEST['newdomain'],"\x00"))
 		{
-                        showheader(_("My CAcert.org Account!"));
-                        echo _("Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes.");
-                        showfooter();
-                        exit;
+			showheader(_("My CAcert.org Account!"));
+			echo _("Due to the possibility for nullbyte domain exploits we currently do not allow any domain names with nullbytes.");
+			showfooter();
+			exit;
 		}
 
 		list($newdomain) = explode(" ", $_REQUEST['newdomain'], 2); // Ignore the rest
@@ -665,8 +672,8 @@
 		$CSR = clean_csr($_REQUEST['CSR']);
 		if(strpos($CSR,"---BEGIN")===FALSE)
 		{
-		  // In case the CSR is missing the ---BEGIN lines, add them automatically:
-		  $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n".$CSR."\n-----END CERTIFICATE REQUEST-----\n";
+			// In case the CSR is missing the ---BEGIN lines, add them automatically:
+			$CSR = "-----BEGIN CERTIFICATE REQUEST-----\n".$CSR."\n-----END CERTIFICATE REQUEST-----\n";
 		}
 
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
@@ -675,6 +682,12 @@
 			echo $weakKey;
 			showfooter();
 			exit;
+		}
+
+		if(trim($_REQUEST['description']) != ""){
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
 		}
 
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
@@ -743,7 +756,7 @@
 		$subject = "";
 		$count = 0;
 		$supressSAN=0;
-                if($_SESSION["profile"]["id"] == 104074) $supressSAN=1;
+		if($_SESSION["profile"]["id"] == 104074) $supressSAN=1;
 
 		if(is_array($_SESSION['_config']['rows']))
 			foreach($_SESSION['_config']['rows'] as $row)
@@ -778,13 +791,15 @@
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['rows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['rowid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
-						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."'";
+						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."',
+						`description`='".$_SESSION['_config']['description']."'";
 		} elseif(array_key_exists('0',$_SESSION['_config']['altid']) && $_SESSION['_config']['altid']['0'] > 0) {
 			$query = "insert into `domaincerts` set
 						`CN`='".mysql_real_escape_string($_SESSION['_config']['altrows']['0'])."',
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['altid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
-						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."'";
+						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."',
+						`description`='".$_SESSION['_config']['description']."'";
 		} else {
 			showheader(_("My CAcert.org Account!"));
 			echo _("Domain not verified.");
@@ -866,7 +881,8 @@
 						`modified`=NOW(),
 						`rootcert`='".$row['rootcert']."',
 						`type`='".$row['type']."',
-						`pkhash`='".$row['pkhash']."'";
+						`pkhash`='".$row['pkhash']."',
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
@@ -1004,6 +1020,24 @@
 		exit;
 	}
 
+	if($oldid == 12 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid'");
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
+	}
+
+
 	if($oldid == 5 && array_key_exists('renew',$_REQUEST) && $_REQUEST['renew'] != "")
 	{
 		showheader(_("My CAcert.org Account!"));
@@ -1042,7 +1076,8 @@
 						`modified`=NOW(),
 						`disablelogin`='".$row['disablelogin']."',
 						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."'";
+						`rootcert`='".$row['rootcert']."',
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1141,26 +1176,47 @@
 
 	if($oldid == 5 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
 	{
-	  showheader(_("My CAcert.org Account!"));
-	  //echo _("Now changing the settings for the following certificates:")."<br>\n";
-	  foreach($_REQUEST as $id => $val)
-	  {
-	    //echo $id."<br/>";
-	    if(substr($id,0,5)=="cert_")
-	    {
-	      $id = intval(substr($id,5));
-	      $dis=(array_key_exists('disablelogin_'.$id,$_REQUEST) && $_REQUEST['disablelogin_'.$id]=="1")?"0":"1";
-	      //echo "$id -> ".$_REQUEST['disablelogin_'.$id]."<br/>\n";
-	      mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'");
-	      //$row = mysql_fetch_assoc($res);
-	    }
-	  }
-	  echo(_("Certificate settings have been changed.")."<br/>\n");
-	  showfooter();
-	  exit;
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,5)=="cert_")
+			{
+				$cid = intval(substr($id,5));
+				$dis=(array_key_exists('disablelogin_'.$cid,$_REQUEST) && $_REQUEST['disablelogin_'.$cid]=="1")?"0":"1";
+				mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			}
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				if(!empty($_REQUEST['check_comment_'.$cid])) {
+					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				}
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
 	}
 
 
+	if($oldid == 6 && $_REQUEST['certid'] != "")
+	{
+		if(trim($_REQUEST['description']) != ""){
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$description= "";
+	}
+
+	if(trim($_REQUEST['disablelogin']) == "1"){
+		$disablelogin = 1;
+	}else{
+		$disablelogin = 0;
+	}
+
+	mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
+
+ }
 	if($oldid == 13 && $process != "")
 	{
 		csrf_check("perschange");
@@ -1177,42 +1233,42 @@
 		$_SESSION['_config']['user']['A4'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
 		$_SESSION['_config']['user']['A5'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
 
-                if($_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q2'] ||
-                        $_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q3'] ||
-                        $_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q4'] ||
-                        $_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['Q2'] == $_SESSION['_config']['user']['Q3'] ||
-                        $_SESSION['_config']['user']['Q2'] == $_SESSION['_config']['user']['Q4'] ||
-                        $_SESSION['_config']['user']['Q2'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['Q3'] == $_SESSION['_config']['user']['Q4'] ||
-                        $_SESSION['_config']['user']['Q3'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['Q4'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q1'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q2'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q3'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q4'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['Q3'] ||
-                        $_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['Q4'] ||
-                        $_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['Q4'] ||
-                        $_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['A4'] == $_SESSION['_config']['user']['Q5'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A2'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A3'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A4'] ||
-                        $_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A5'] ||
-                        $_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['A3'] ||
-                        $_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['A4'] ||
-                        $_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['A5'] ||
-                        $_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['A4'] ||
-                        $_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['A5'] ||
-                        $_SESSION['_config']['user']['A4'] == $_SESSION['_config']['user']['A5'])
-                {
-                        $_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer.")."<br>\n";
-                        $id = $oldid;
+		if($_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q2'] ||
+				$_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q3'] ||
+				$_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q4'] ||
+				$_SESSION['_config']['user']['Q1'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['Q2'] == $_SESSION['_config']['user']['Q3'] ||
+				$_SESSION['_config']['user']['Q2'] == $_SESSION['_config']['user']['Q4'] ||
+				$_SESSION['_config']['user']['Q2'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['Q3'] == $_SESSION['_config']['user']['Q4'] ||
+				$_SESSION['_config']['user']['Q3'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['Q4'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q1'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q2'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q3'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q4'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['Q3'] ||
+				$_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['Q4'] ||
+				$_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['Q4'] ||
+				$_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['A4'] == $_SESSION['_config']['user']['Q5'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A2'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A3'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A4'] ||
+				$_SESSION['_config']['user']['A1'] == $_SESSION['_config']['user']['A5'] ||
+				$_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['A3'] ||
+				$_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['A4'] ||
+				$_SESSION['_config']['user']['A2'] == $_SESSION['_config']['user']['A5'] ||
+				$_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['A4'] ||
+				$_SESSION['_config']['user']['A3'] == $_SESSION['_config']['user']['A5'] ||
+				$_SESSION['_config']['user']['A4'] == $_SESSION['_config']['user']['A5'])
+		{
+			$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 different password questions and answers. You aren't allowed to duplicate questions, set questions as answers or use the question as the answer.")."<br>\n";
+			$id = $oldid;
 			$oldid=0;
-                }
+		}
 
 		if($_SESSION['_config']['user']['Q1'] == "" || $_SESSION['_config']['user']['Q2'] == "" ||
 			$_SESSION['_config']['user']['Q3'] == "" || $_SESSION['_config']['user']['Q4'] == "" ||
@@ -1395,6 +1451,13 @@
 		}
 		$_SESSION['_config']['name'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['name'])));
 		$_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
+
+
+		if(trim($_REQUEST['description']) != ""){
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
+		}
 	}
 
 	if($oldid == 16 && (intval(count($_SESSION['_config']['emails'])) + 0) <= 0)
@@ -1423,6 +1486,12 @@
 		$_SESSION['_config']['rootcert'] = intval($_REQUEST['rootcert']);
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
+
+		if(trim($_REQUEST['description']) != ""){
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
+		}
 
 		if(@count($_SESSION['_config']['emails']) > 0)
 			$id = 17;
@@ -1470,6 +1539,7 @@
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
 
+
 			$emails .= "SPKAC = $spkac";
 			if (($weakKey = checkWeakKeySPKAC($emails)) !== "")
 			{
@@ -1486,7 +1556,8 @@
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
-						`rootcert`='".$_SESSION['_config']['rootcert']."'";
+						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1498,15 +1569,15 @@
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-                        $res=`openssl spkac -verify -in $CSRname`;
-                        if(!strstr($res,"Challenge String: ".$challenge))
-                        {
-                                $id = $oldid;
-                                showheader(_("My CAcert.org Account!"));
-                                echo _("The challenge-response code of your certificate request did not match. Can't continue with certificaterequest.");
-                                showfooter();
-                                exit;
-                        }
+			$res=`openssl spkac -verify -in $CSRname`;
+			if(!strstr($res,"Challenge String: ".$challenge))
+			{
+				$id = $oldid;
+				showheader(_("My CAcert.org Account!"));
+				echo _("The challenge-response code of your certificate request did not match. Can't continue with certificaterequest.");
+				showfooter();
+				exit;
+			}
 			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype']=="VI") {
 			$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."-----END CERTIFICATE REQUEST-----\n";
@@ -1576,7 +1647,8 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`subject`='$csrsubject',
 						`codesign`='".$_SESSION['_config']['codesign']."',
-						`rootcert`='".$_SESSION['_config']['rootcert']."'";
+						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1651,7 +1723,8 @@
 						`created`='".$row['created']."',
 						`modified`=NOW(),
 						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."'";
+						`rootcert`='".$row['rootcert']."',
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -1743,6 +1816,24 @@
 		exit;
 	}
 
+	if($oldid == 18 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid'");
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
+	}
+
+
 	if($process != "" && $oldid == 20)
 	{
 		$CSR = clean_csr($_REQUEST['CSR']);
@@ -1754,6 +1845,12 @@
 			echo $weakKey;
 			showfooter();
 			exit;
+		}
+
+		if(trim($_REQUEST['description']) != ""){
+			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}else{
+			$_SESSION['_config']['description']= "";
 		}
 
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
@@ -1831,8 +1928,8 @@
 			exit;
 		}
 
-                if($_SESSION['_config']['rowid']['0'] > 0)
-                {
+		if($_SESSION['_config']['rowid']['0'] > 0)
+		{
 			$query = "select * from `org`,`orginfo` where
 					`orginfo`.`id`='".$_SESSION['_config']['rowid']['0']."' and
 					`orginfo`.`id`=`org`.`orgid` and
@@ -1879,25 +1976,27 @@
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-                if($_SESSION['_config']['rowid']['0'] > 0)
-                {
-                        $query = "insert into `orgdomaincerts` set
-						`CN`='".$_SESSION['_config']['rows']['0']."',
-						`orgid`='".$org['id']."',
-                                                `created`=NOW(),
-						`subject`='$csrsubject',
-						`rootcert`='".$_SESSION['_config']['rootcert']."',
-						`type`='$type'";
-                } else {
-                        $query = "insert into `orgdomaincerts` set
-						`CN`='".$_SESSION['_config']['altrows']['0']."',
-						`orgid`='".$org['id']."',
-                                                `created`=NOW(),
-						`subject`='$csrsubject',
-						`rootcert`='".$_SESSION['_config']['rootcert']."',
-						`type`='$type'";
-                }
-                mysql_query($query);
+		if($_SESSION['_config']['rowid']['0'] > 0)
+		{
+			$query = "insert into `orgdomaincerts` set
+					`CN`='".$_SESSION['_config']['rows']['0']."',
+					`orgid`='".$org['id']."',
+					`created`=NOW(),
+					`subject`='$csrsubject',
+					`rootcert`='".$_SESSION['_config']['rootcert']."',
+					`type`='$type',
+					`description`='".$_SESSION['_config']['description']."'";
+		} else {
+			$query = "insert into `orgdomaincerts` set
+					`CN`='".$_SESSION['_config']['altrows']['0']."',
+					`orgid`='".$org['id']."',
+					`created`=NOW(),
+					`subject`='$csrsubject',
+					`rootcert`='".$_SESSION['_config']['rootcert']."',
+					`type`='$type',
+					`description`='".$_SESSION['_config']['description']."'";
+		}
+		mysql_query($query);
 		$CSRid = mysql_insert_id();
 
 		$CSRname=generatecertpath("csr","orgserver",$CSRid);
@@ -1971,7 +2070,8 @@
 						`modified`=NOW(),
 						`subject`='".$row['subject']."',
 						`type`='".$row['type']."',
-						`rootcert`='".$row['rootcert']."'";
+						`rootcert`='".$row['rootcert']."',
+						`description`='".$row['description']."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
@@ -2071,6 +2171,24 @@
 		showfooter();
 		exit;
 	}
+
+	if($oldid == 22 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid'");
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
+		showfooter();
+		exit;
+	}
+
 
 	if(($id == 24 || $oldid == 24 || $id == 25 || $oldid == 25 || $id == 26 || $oldid == 26 ||
 		$id == 27 || $oldid == 27 || $id == 28 || $oldid == 28 || $id == 29 || $oldid == 29 ||
@@ -2463,7 +2581,7 @@
 	}
 
 	if($oldid == 54 || ($id == 53 && array_key_exists('action',$_REQUEST) && $_REQUEST['action'] != "") ||
-	             ($id == 54 && array_key_exists('action',$_REQUEST) && $_REQUEST['action'] != "" &&
+			($id == 54 && array_key_exists('action',$_REQUEST) && $_REQUEST['action'] != "" &&
 			$_REQUEST['action'] != "aliases" && $_REQUEST['action'] != "edit" && $_REQUEST['action'] != "add"))
 	{
 		$id = 53;
@@ -2473,7 +2591,7 @@
 		$locid = intval(array_key_exists('locid',$_REQUEST)?$_REQUEST['locid']:0);
 		$name = array_key_exists('name',$_REQUEST)?mysql_real_escape_string(strip_tags($_REQUEST['name'])):"";
 		$long = array_key_exists('longitude',$_REQUEST)?ereg_replace("[^-0-9\.]","",$_REQUEST['longitude']):"";
-		$lat =  array_key_exists('latitude', $_REQUEST)?ereg_replace("[^-0-9\.]","",$_REQUEST['latitude']):"";
+		$lat = array_key_exists('latitude', $_REQUEST)?ereg_replace("[^-0-9\.]","",$_REQUEST['latitude']):"";
 		$action = array_key_exists('action',$_REQUEST)?$_REQUEST['action']:"";
 
 		if($locid > 0 && $action == "edit")
@@ -2731,24 +2849,24 @@
 		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
 	}
 
-  if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0)
-  {
-    csrf_check('admsetassuret');
-    $memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
-    $query = "select * from `users` where `id`='$memid'";
-    $row = mysql_fetch_assoc(mysql_query($query));
-    $ver = !$row['assurer'];
-    mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
-  }
+	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0)
+	{
+		csrf_check('admsetassuret');
+		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
+		$query = "select * from `users` where `id`='$memid'";
+		$row = mysql_fetch_assoc(mysql_query($query));
+		$ver = !$row['assurer'];
+		mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
+	}
 
-  if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0)
-  {
-    $memid = $_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
-    $query = "select * from `users` where `id`='$memid'";
-    $row = mysql_fetch_assoc(mysql_query($query));
-    $ver = !$row['assurer_blocked'];
-    mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
-  }
+	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0)
+	{
+		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
+		$query = "select * from `users` where `id`='$memid'";
+		$row = mysql_fetch_assoc(mysql_query($query));
+		$ver = !$row['assurer_blocked'];
+		mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
+	}
 
 	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0)
 	{
