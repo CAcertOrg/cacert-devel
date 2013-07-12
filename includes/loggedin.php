@@ -18,20 +18,29 @@
 
 	include_once("../includes/lib/general.php");
 	require_once("../includes/lib/l10n.php");
+	include_once("../includes/mysql.php");
+
+	if(!isset($_SESSION['profile']) || !is_array($_SESSION['profile'])) {
+		$_SESSION['profile'] = array( 'id' => 0, 'loggedin' => 0 );
+	}
+	if(!isset($_SESSION['profile']['id']) || !isset($_SESSION['profile']['loggedin'])) {
+		$_SESSION['profile']['id'] = 0;
+		$_SESSION['profile']['loggedin'] = 0;
+	}
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] != 0)
 	{
 		$uid = $_SESSION['profile']['id'];
 		$_SESSION['profile']['loggedin'] = 0;
 		$_SESSION['profile'] = "";
-		foreach($_SESSION as $key)
+		foreach($_SESSION as $key => $value)
 		{
-			if($key == '_config')
+			if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 				continue;
 			if(is_int($key) || is_string($key))
 		                unset($_SESSION[$key]);
-	                unset($$key);
-        	        session_unregister($key);
+		        unset($$key);
+		        //session_unregister($key);
 		}
 
 		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$uid'"));
@@ -50,14 +59,14 @@
 		{
 			$_SESSION['profile']['loggedin'] = 0;
 			$_SESSION['profile'] = "";
-			foreach($_SESSION as $key)
+			foreach($_SESSION as $key => $value)
 			{
-				if($key == '_config')
+				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
 				if(is_int($key) || is_string($key))
 			                unset($_SESSION[$key]);
-                		unset($$key);
-       			        session_unregister($key);
+			        unset($$key);
+			        //session_unregister($key);
 			}
 
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
@@ -69,16 +78,16 @@
 		} else {
 			$_SESSION['profile']['loggedin'] = 0;
 			$_SESSION['profile'] = "";
-			foreach($_SESSION as $key)
+			foreach($_SESSION as $key => $value)
 			{
-				if($key == '_config')
+				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
-		                unset($_SESSION[$key]);
-	                	unset($$key);
-        		        session_unregister($key);
+			        unset($_SESSION[$key]);
+			        unset($$key);
+			        //session_unregister($key);
 			}
 
-			unset($_SESSION['_config']['oldlocation']);
+			$_SESSION['_config']['oldlocation'] = '';
 
 			foreach($_GET as $key => $val)
 			{
@@ -127,9 +136,9 @@
 		$_SESSION['profile'] = "";
 		foreach($_SESSION as $key => $value)
 		{
-	                unset($_SESSION[$key]);
-	                unset($$key);
-        	        session_unregister($key);
+		        unset($_SESSION[$key]);
+		        unset($$key);
+		        //session_unregister($key);
 		}
 
 		header("location: https://".$normalhost."/index.php");
@@ -138,11 +147,11 @@
 
 	if($_SESSION['profile']['loggedin'] < 1)
 	{
-		unset($_SESSION['_config']['oldlocation']);
+		$_SESSION['_config']['oldlocation'] = '';
 
 		foreach($_REQUEST as $key => $val)
 		{
-			if($_SESSION['_config']['oldlocation'])
+			if('' != $_SESSION['_config']['oldlocation'])
 				$_SESSION['_config']['oldlocation'] .= "&";
 
 			$key = str_replace(array("\n", "\r"), '', $key);

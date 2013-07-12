@@ -21,10 +21,10 @@
 	session_name("cacert");
 	session_start();
 
-	session_register("_config");
-	session_register("profile");
-	session_register("signup");
-	session_register("lostpw");
+//	session_register("_config");
+//	session_register("profile");
+//	session_register("signup");
+//	session_register("lostpw");
 //	if($_SESSION['profile']['id'] > 0)
 //		session_regenerate_id();
 
@@ -536,7 +536,7 @@
 		$myemail = mysql_real_escape_string($email);
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
-			list($username,$domain)=split('@',$email);
+			list($username,$domain)=explode('@',$email,2);
 			$dom = escapeshellarg($domain);
 			$line = trim(`dig +short MX $dom 2>&1`);
 #echo $email."-$dom-$line-\n";
