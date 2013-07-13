@@ -91,7 +91,6 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
     <td colspan="9" class="DataTD"> </td>
   </tr>
 
-//rebuild query
 <?
 	$query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
 			UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
