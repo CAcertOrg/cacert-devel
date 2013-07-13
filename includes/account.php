@@ -2205,6 +2205,22 @@
 		exit;
 	}
 
+if($oldid == 22 && array_key_exists('filter',$_REQUEST) &&  $_REQUEST['filter']!= "")
+{
+	$id=22;
+	$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
+	$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
+	$_SESSION['_config']['status']=$_REQUEST['status'];
+}
+
+if($oldid == 22 && array_key_exists('reset',$_REQUEST) &&  $_REQUEST['reset']!= "")
+{
+	$id=22;
+	$_SESSION['_config']['orgfilterid']=0;
+	$_SESSION['_config']['sorting']=0;
+	$_SESSION['_config']['status']=0;
+}
+
 
 	if(($id == 24 || $oldid == 24 || $id == 25 || $oldid == 25 || $id == 26 || $oldid == 26 ||
 		$id == 27 || $oldid == 27 || $id == 28 || $oldid == 28 || $id == 29 || $oldid == 29 ||
