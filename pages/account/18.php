@@ -17,11 +17,11 @@
 */
 
 $orgfilterid=0;
-if(array_key_exists('orgfilterid',$_REQUEST)) $orgfilterid=intval($_REQUEST['orgfilterid']);
+if(array_key_exists('orgfilterid',$_SESSION['_config'])) $orgfilterid=intval($_SESSION['_config']['orgfilterid']);
 $sorting=0;
-if(array_key_exists('sorting',$_REQUEST)) $sorting=intval($_REQUEST['sorting']);
+if(array_key_exists('sorting',$_SESSION['_config'])) $sorting=intval($_SESSION['_config']['sorting']);
 $status=0;
-if(array_key_exists('status',$_REQUEST)) $status=intval($_REQUEST['status']);
+if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_config']['status']);
 ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
