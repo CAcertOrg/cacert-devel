@@ -16,12 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-$orgfilterid=0;
-if(array_key_exists('orgfilterid',$_SESSION['_config'])) $orgfilterid=intval($_SESSION['_config']['orgfilterid']);
-$sorting=0;
-if(array_key_exists('sorting',$_SESSION['_config'])) $sorting=intval($_SESSION['_config']['sorting']);
-$status=0;
-if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_config']['status']);
+$orgfilterd = array_key_exists('orgfilterid',$_SESSION['_config']) ? intval($_SESSION['_config']['orgfilterid']) : 0;
+$sorting = array_key_exists('sorting',$_SESSION['_config']) ? intval($_SESSION['_config']['sorting']) : 0;
+$status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_config']['status']) : 0;
 ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -36,22 +33,22 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
       <td colspan="8" class="DataTD" >
         <select name="orgfilterid">
           <option value="0"<?
-	if (0==$orgfilterid) {
-		?> selected <?
-	}
-	?>><?=_("All")?></option> <?
-	$query = "select `orginfo`.`O`, `orginfo`.`id`
-		from `org`, `orginfo`
-		where `org`.`memid`='".intval($_SESSION['profile']['id'])."' `orginfo`.`id` = `org`.`orgid`
-		ORDER BY `oemail`.`modified` desc";
-	$reso = mysql_query($query);
-	if(mysql_num_rows($reso) >= 1){
-		while($row = mysql_fetch_assoc($res)){
-		?><option <?if ($row['id']==$orgfilterid) {
-			?> selected <?
-			}?> value="><?=$row['id']?>"><?=$row['O']?></option>
-		<?}
-	}?>
+  if (0==$orgfilterid) {
+    ?> selected <?
+  }
+  ?>><?=_("All")?></option> <?
+  $query = "select `orginfo`.`O`, `orginfo`.`id`
+    from `org`, `orginfo`
+    where `org`.`memid`='".intval($_SESSION['profile']['id'])."' `orginfo`.`id` = `org`.`orgid`
+    ORDER BY `oemail`.`modified` desc";
+  $reso = mysql_query($query);
+  if(mysql_num_rows($reso) >= 1){
+    while($row = mysql_fetch_assoc($res)){
+    ?><option <?if ($row['id']==$orgfilterid) {
+      ?> selected <?
+      }?> value="><?=$row['id']?>"><?=$row['O']?></option>
+    <?}
+  }?>
         </select>
     </td>
   </tr>
@@ -60,13 +57,13 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
     <td colspan="8" class="DataTD" >
       <select name="sorting">
         <option <?if (0==$sorting) {
-        	?> selected <?
+          ?> selected <?
         }?>value="0"><?=_("expire date (desc)")?></option>
         <option <?if (1==$sorting) {
-        	?> selected <?
+          ?> selected <?
         }?>value="1"><?=_("OU, expire date (desc)")?></option>
         <option <?if (2==$sorting) {
-        	?> selected <?
+          ?> selected <?
         }?>value="2"><?=_("Common name, expire date (desc)")?></option>
       </select>
     </td>
@@ -76,10 +73,10 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
     <td colspan="8" class="DataTD" >
       <select name="status">
         <option <?if (0==$status) {
-        	?> selected <?
+          ?> selected <?
         }?>value="0"><?=_("Actual")?></option>
         <option <?if (0==$status) {
-        	?> selected <?
+          ?> selected <?
         }?>value="1"><?=_("All")?></option>
       </select>
     </td>
@@ -92,51 +89,51 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
   </tr>
 
 <?
-	$query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
-			UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
-			UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
-			`oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
-			UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
-			`oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
-			`oemail`.`description`, `oemail`.`ou`, `orginfo`.`O`
-			from `orgemailcerts` as `oemail`, `org`, `orginfo`
-			where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
-				`org`.`orgid`=`oemail`.`orgid` and `orginfo`.`id` = `org`.`orgid`";
-	if($orgfilterid>0)
-	{
-		$query .= "AND `org`.`orgid`=$orgfilterid ";
-	}
+  $query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
+      UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+      UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
+      `oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
+      UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
+      `oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
+      `oemail`.`description`, `oemail`.`ou`, `orginfo`.`O`
+      from `orgemailcerts` as `oemail`, `org`, `orginfo`
+      where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
+        `org`.`orgid`=`oemail`.`orgid` and `orginfo`.`id` = `org`.`orgid`";
+  if($orgfilterid>0)
+  {
+    $query .= "AND `org`.`orgid`=$orgfilterid ";
+  }
 
-	if(1==$status)
-	{
-		$query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
-		$query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
-	}
-	switch ($sorting){
-		case 0:
-			$query .= "ORDER BY `oemail`.`expire` desc";
-			break;
-		case 1:
-			$query .= "ORDER BY  `oemail`.`ou`, `oemail`.`expire` desc";
-			break;
-		case 2:
-			$query .= "ORDER BY `oemail`.`CN`, `oemail`.`expire` desc";
-			break;
-	}
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
-	{
+  if(1==$status)
+  {
+    $query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
+    $query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
+  }
+  switch ($sorting){
+    case 0:
+      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`expire` desc";
+      break;
+    case 1:
+      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`ou`, `oemail`.`expire` desc";
+      break;
+    case 2:
+      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `oemail`.`expire` desc";
+      break;
+  }
+  $res = mysql_query($query);
+  if(mysql_num_rows($res) <= 0)
+  {
 ?>
 
   <tr>
     <td colspan="9" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
 <? } else {
-	$orgname='';
-	while($row = mysql_fetch_assoc($res))
-	{
-		if ($row['O']<>$orgname) {
-			$orgname=$row['O'];?>
+  $orgname='';
+  while($row = mysql_fetch_assoc($res))
+  {
+    if ($row['O']<>$orgname) {
+      $orgname=$row['O'];?>
   <tr>
     <td colspan="9" class="title"></td>
   </tr>
@@ -153,18 +150,18 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
     <td class="DataTD"><?=_("Expires")?></td>
     <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
   </tr>
-			<?
-		}
-		if($row['timeleft'] > 0)
-			$verified = _("Valid");
-		if($row['timeleft'] < 0)
-			$verified = _("Expired");
-		if($row['expired'] == 0)
-			$verified = _("Pending");
-		if($row['revoked'] > 0)
-			$verified = _("Revoked");
-		if($row['revoked'] == 0)
-			$row['revoke'] = _("Not Revoked");
+      <?
+    }
+    if($row['timeleft'] > 0)
+      $verified = _("Valid");
+    if($row['timeleft'] < 0)
+      $verified = _("Expired");
+    if($row['expired'] == 0)
+      $verified = _("Pending");
+    if($row['revoked'] > 0)
+      $verified = _("Revoked");
+    if($row['revoked'] == 0)
+      $row['revoke'] = _("Not Revoked");
 ?>
   <tr>
     <td class="DataTD"><?=$row['ou']?></td>
@@ -181,7 +178,7 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
 <? } ?>
-	  <td class="DataTD"><?=$row['serial']?></td>
+    <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
     <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
@@ -195,7 +192,7 @@ if(array_key_exists('status',$_SESSION['_config'])) $status=intval($_SESSION['_c
   </tr>
   <tr>
     <td class="DataTD" colspan="6"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
-    			<input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
+          <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
     <td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
   </tr>
   <tr>
