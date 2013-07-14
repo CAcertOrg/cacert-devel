@@ -44,7 +44,7 @@
     <td class="DataTD"><input type="checkbox" name="addid[]" value="<?=intval($row['id'])?>"></td>
     <td class="DataTD"><?=sanitizeHTML($row['email'])?></td>
   </tr>
-<? } 
+<? }
 if($_SESSION['profile']['points'] >= 50)
 {
 	$fname = $_SESSION['profile']['fname'];
@@ -68,28 +68,35 @@ if($_SESSION['profile']['points'] >= 50)
 <? if($fname && $mname && $lname && $suffix) { ?><input type="radio" name="incname" value="4"> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname." ".$suffix?>'<br><? } ?>
     </td>
   </tr>
-<? } ?> 
+<? } ?>
 <? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
   <tr>
+    <td class="DataTD">
+      <input type="checkbox" name="codesign" value="1" />
+    </td>
     <td class="DataTD" align="left">
-	<input type="checkbox" name="codesign" value="1"> <?=_("Code Signing")?></td>
-    <td class="DataTD" align="left">
-	<?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
+      <?=_("Code Signing")?><br />
+      <?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
     </td>
   </tr>
 <? } ?>
 
   <tr>
-    <td class="DataTD" colspan="2" align="left">
-      <input type="checkbox" name="login" value="1" checked="checked"> <?=_("Enable certificate login with this certificate")?><br>
+    <td class="DataTD">
+      <input type="checkbox" name="login" value="1" checked="checked">
+    </td>
+    <td class="DataTD"> <?=_("Enable certificate login with this certificate")?><br />
       <?=_("By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ .")?><br/>
     </td>
   </tr>
 
 
   <tr name="expertoff" style="display:none">
-    <td class="DataTD" colspan="2" align="left">
-      <input type="checkbox" name="expertbox" onchange="showExpert(this.checked)"/><?=_("Show advanced options")?>
+    <td class="DataTD">
+      <input type="checkbox" name="expertbox" onchange="showExpert(this.checked)" />
+    </td>
+    <td class="DataTD">
+      <?=_("Show advanced options")?>
     </td>
   </tr>
 
