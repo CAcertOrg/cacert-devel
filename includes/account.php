@@ -2221,17 +2221,17 @@
 	if($oldid == 22 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
 	{
 		$id=22;
-		$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
-		$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
-		$_SESSION['_config']['status']=$_REQUEST['status'];
+		$_SESSION['_config']['dorgfilterid']=$_REQUEST['orgfilterid'];
+		$_SESSION['_config']['dsorting']=$_REQUEST['sorting'];
+		$_SESSION['_config']['dstatus']=$_REQUEST['status'];
 	}
 
 	if($oldid == 22 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
 	{
 		$id=22;
-		$_SESSION['_config']['orgfilterid']=0;
-		$_SESSION['_config']['sorting']=0;
-		$_SESSION['_config']['status']=0;
+		$_SESSION['_config']['dorgfilterid']=0;
+		$_SESSION['_config']['dsorting']=0;
+		$_SESSION['_config']['dstatus']=0;
 	}
 
 
