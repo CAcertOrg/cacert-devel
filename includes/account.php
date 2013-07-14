@@ -672,6 +672,14 @@
 
 	if($process != "" && $oldid == 10)
 	{
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
+
 		$CSR = clean_csr($_REQUEST['CSR']);
 		if(strpos($CSR,"---BEGIN")===FALSE)
 		{
@@ -781,6 +789,8 @@
 			}
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
+
+		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
 
 		if(array_key_exists('0',$_SESSION['_config']['rowid']) && $_SESSION['_config']['rowid']['0'] > 0)
 		{

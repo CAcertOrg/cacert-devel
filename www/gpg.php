@@ -17,6 +17,7 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
+	require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists('id',$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = $_REQUEST['oldid'] = array_key_exists('oldid',$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
@@ -82,6 +83,14 @@ function verifyEmail($email)
 	$state=0;
 	if($oldid == "0" && $CSR != "")
 	{
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
+
 		$debugkey = $gpgkey = clean_gpgcsr($CSR);
 
 		$tnam = tempnam('/tmp/', '__gpg');
@@ -275,6 +284,8 @@ function verifyEmail($email)
 
 	if($oldid == "0" && $CSR != "")
 	{
+		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
+
 		$query = "insert into `gpg` set `memid`='".intval($_SESSION['profile']['id'])."',
 						`email`='".mysql_real_escape_string($lastvalidemail)."',
 						`level`='1',
