@@ -1549,6 +1549,7 @@
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -1825,6 +1826,21 @@
 		exit;
 	}
 
+	if($oldid == 18 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
+		$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
+		$_SESSION['_config']['status']=$_REQUEST['status'];
+	}
+
+	if($oldid == 18 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=0;
+		$_SESSION['_config']['sorting']=0;
+		$_SESSION['_config']['status']=0;
+	}
 
 	if($process != "" && $oldid == 20)
 	{
@@ -2179,6 +2195,22 @@
 		echo(_("Certificate settings have been changed.")."<br/>\n");
 		showfooter();
 		exit;
+	}
+
+	if($oldid == 22 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
+		$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
+		$_SESSION['_config']['status']=$_REQUEST['status'];
+	}
+
+	if($oldid == 22 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['orgfilterid']=0;
+		$_SESSION['_config']['sorting']=0;
+		$_SESSION['_config']['status']=0;
 	}
 
 
