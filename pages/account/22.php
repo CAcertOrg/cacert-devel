@@ -34,7 +34,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
           <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $orgfilterid? " selected" : "" ,_("All")) ?>
 <?  $query = "select `orginfo`.`O`, `orginfo`.`id`
       from `org`, `orginfo`
-      where `org`.`memid`='".intval($_SESSION['profile']['id'])."' `orginfo`.`id` = `org`.`orgid`
+      where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
       ORDER BY `oemail`.`modified` desc";
     $reso = mysql_query($query);
     if(mysql_num_rows($reso) >= 1){
@@ -89,7 +89,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       $query .= "AND `org`.`orgid`=$dorgfilterid ";
     }
 
-    if(1==$dstatus)
+    if(0==$dstatus)
     {
       $query .= "AND `revoked`=0 AND `renewed`=0 ";
       $query .= "HAVING `timeleft` > 0 ";
