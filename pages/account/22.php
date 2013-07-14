@@ -35,7 +35,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
 <?  $query = "select `orginfo`.`O`, `orginfo`.`id`
       from `org`, `orginfo`
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
-      ORDER BY `oemail`.`modified` desc";
+      ORDER BY `orginfo`.`O` ";
     $reso = mysql_query($query);
     if(mysql_num_rows($reso) >= 1){
       while($row = mysql_fetch_assoc($res)){
