@@ -31,23 +31,17 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       <td class="DataTD"><?=_("Organisation")?></td>
       <td colspan="7" class="DataTD" >
         <select name="dorgfilterid">
-          <option value="0"<?
-      if (0==$orgfilterid) {
-        ?> selected <?
+          <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $orgfilterid? " selected" : "" ,_("All")) ?>
+<?  $query = "select `orginfo`.`O`, `orginfo`.`id`
+      from `org`, `orginfo`
+      where `org`.`memid`='".intval($_SESSION['profile']['id'])."' `orginfo`.`id` = `org`.`orgid`
+      ORDER BY `oemail`.`modified` desc";
+    $reso = mysql_query($query);
+    if(mysql_num_rows($reso) >= 1){
+      while($row = mysql_fetch_assoc($res)){
+        sprintf("<option value='%d' %s>%s</option>",$row['id'], $row['id'] == $orgfilterid? " selected" : "" , $row['O']);
       }
-      ?>><?=_("All")?></option> <?
-      $query = "select `orginfo`.`O`, `orginfo`.`id`
-    from `org`, `orginfo`
-    where `org`.`memid`='".intval($_SESSION['profile']['id'])."' `orginfo`.`id` = `org`.`orgid`
-        ORDER BY `oemail`.`modified` desc";
-$reso = mysql_query($query);
-if(mysql_num_rows($reso) >= 1){
-  while($row = mysql_fetch_assoc($res)){
-    ?><option <?if ($row['id']==$orgfilterid) {
-      ?> selected <?
-    }?> value="><?=$row['id']?>"><?=$row['O']?></option>
-    <?}
-}?>
+    }?>
         </select>
     </td>
   </tr>
@@ -55,12 +49,8 @@ if(mysql_num_rows($reso) >= 1){
     <td class="DataTD"><?=_("Sorting")?></td>
     <td colspan="7" class="DataTD" >
       <select name="dsorting">
-        <option <?if (0==$sorting) {
-          ?> selected <?
-        }?>value="0"><?=_("expire date (desc)")?></option>
-        <option <?if (1==$sorting) {
-          ?> selected <?
-        }?>value="1"><?=_("Common name, expire date (desc)")?></option>
+        <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $sorting? " selected" : "" ,_("expire date (desc)")) ?>
+        <?=sprintf("<option value='%d' %s>%s</option>",1, 1 == $sorting ? " selected" : "" ,_("Common name, expire date (desc)")) ?>
       </select>
     </td>
   </tr>
@@ -68,12 +58,8 @@ if(mysql_num_rows($reso) >= 1){
     <td class="DataTD"><?=_("Certificate status")?></td>
     <td colspan="7" class="DataTD" >
       <select name="dstatus">
-        <option <?if (0==$status) {
-          ?> selected <?
-        }?>value="0"><?=_("Actual")?></option>
-        <option <?if (0==$status) {
-          ?> selected <?
-        }?>value="1"><?=_("All")?></option>
+        <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $status? " selected" : "" ,_("Currrent/Active")) ?>
+        <?=sprintf("<option value='%d' %s>%s</option>",1, 1 == $status ? " selected" : "" ,_("All")) ?>
       </select>
     </td>
   </tr>
