@@ -36,7 +36,9 @@
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <? } ?>
 <p><?=_("Paste your CSR(Certificate Signing Request) below...")?></p>
-<textarea name="CSR" cols="80" rows="15"></textarea><br>
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
+<textarea name="CSR" cols="80" rows="15"></textarea><br />
+<p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
+<input type="submit" name="process" value="<?=_("Submit")?>" />
+<input type="hidden" name="oldid" value="<?=$id?>" />
 </form>
