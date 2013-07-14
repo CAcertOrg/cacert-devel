@@ -286,6 +286,13 @@ function verifyEmail($email)
 	{
 		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
 
+		//set variable for comment
+		if(trim($_REQUEST['description']) == ""){
+			$description= "";
+		}else{
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}
+
 		$query = "insert into `gpg` set `memid`='".intval($_SESSION['profile']['id'])."',
 						`email`='".mysql_real_escape_string($lastvalidemail)."',
 						`level`='1',
