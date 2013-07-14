@@ -28,39 +28,39 @@
 
 
 <div class="newsbox">
-	<?
-	printf("<p id='lnews'>%s</p>\n\n",_('Latest News'));
+    <?
+    printf("<p id='lnews'>%s</p>\n\n",_('Latest News'));
 
-	$xml = "/www/pages/index/feed.rss"; // FIXME: use relative path to allow operation with different document root
-	$dom = new DOMDocument();
-	$dom->preserveWhiteSpace = false;
-	$dom->Load($xml);
+    $xml = "/www/pages/index/feed.rss"; // FIXME: use relative path to allow operation with different document root
+    $dom = new DOMDocument();
+    $dom->preserveWhiteSpace = false;
+    $dom->Load($xml);
 
-	$xpath = new DOMXPath($dom);    //Create an XPath query
+    $xpath = new DOMXPath($dom);    //Create an XPath query
 
-	$query = "//channel/item";
-	$items = $xpath->query($query);
+    $query = "//channel/item";
+    $items = $xpath->query($query);
 
-	foreach($items as $id => $item) {
-					$query = "./title";
-					$nodeList = $xpath->query($query, $item);
-					$title = str_replace("&amp;#", "&#", recode_string("UTF8..html" , $nodeList->item(0)->nodeValue));
+    foreach($items as $id => $item) {
+                    $query = "./title";
+                    $nodeList = $xpath->query($query, $item);
+                    $title = str_replace("&amp;#", "&#", recode_string("UTF8..html" , $nodeList->item(0)->nodeValue));
 
-					$query = "./link";
-					$nodeList = $xpath->query($query, $item);
-					$link = $nodeList->item(0)->nodeValue;
+                    $query = "./link";
+                    $nodeList = $xpath->query($query, $item);
+                    $link = $nodeList->item(0)->nodeValue;
 
-					$query = "./description";
-					$nodeList = $xpath->query($query, $item);
-					$description = str_replace("&amp;#", "&#", recode_string("UTF8..html" , $nodeList->item(0)->nodeValue));
+                    $query = "./description";
+                    $nodeList = $xpath->query($query, $item);
+                    $description = str_replace("&amp;#", "&#", recode_string("UTF8..html" , $nodeList->item(0)->nodeValue));
 
-					printf("<h3> %s </h3>\n", $title);
-					printf("<p> %s </p>\n", $description);
-					printf("<p>[<a href='%s'> %s </a> ] </p>\n\n", $link,_("Full Story"));
+                    printf("<h3> %s </h3>\n", $title);
+                    printf("<p> %s </p>\n", $description);
+                    printf("<p>[<a href='%s'> %s </a> ] </p>\n\n", $link,_("Full Story"));
 
-					$title = '';
-					$description = '';
-					$link = '';
+                    $title = '';
+                    $description = '';
+                    $link = '';
 }
 ?>
 
@@ -107,4 +107,3 @@
 <br /><br />
 
 <?=_("If you want to participate in CAcert.org, have a look")?> <a href="http://wiki.cacert.org/wiki/HelpingCAcert"><?=_("here")?></a> <?=_("and")?> <a href="http://wiki.cacert.org/wiki/SystemTasks"><?=_("here")?></a>.
-
