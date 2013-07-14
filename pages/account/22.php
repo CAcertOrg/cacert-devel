@@ -35,7 +35,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
 <?  $query = "select `orginfo`.`O`, `orginfo`.`id`
       from `org`, `orginfo`
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
-      ORDER BY `oemail`.`modified` desc";
+      ORDER BY `orginfo`.`O` ";
     $reso = mysql_query($query);
     if(mysql_num_rows($reso) >= 1){
       while($row = mysql_fetch_assoc($res)){
@@ -84,17 +84,17 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."'
       and `orgdomaincerts`.`orgid`=`org`.`orgid` and `orginfo`.`id` = `org`.`orgid`";
 
-    if($dorgfilterid>0)
+    if($orgfilterid>0)
     {
       $query .= "AND `org`.`orgid`=$dorgfilterid ";
     }
 
-    if(0==$dstatus)
+    if(0==$status)
     {
       $query .= "AND `revoked`=0 AND `renewed`=0 ";
       $query .= "HAVING `timeleft` > 0 ";
     }
-    switch ($dsorting){
+    switch ($sorting){
       case 0:
         $query .= "ORDER BY `orginfo`.`O`, `orgdomaincerts`.`expire` desc";
         break;
