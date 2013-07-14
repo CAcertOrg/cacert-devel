@@ -40,7 +40,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
     $reso = mysql_query($query);
     if(mysql_num_rows($reso) >= 1){
       while($row = mysql_fetch_assoc($res)){
-        sprintf("<option value='%d' %s>%s</option>",$row['id'], $row['id'] == $orgfilterid? " selected" : "" , $row['O']);
+        printf("<option value='%d' %s>%s</option>",$row['id'], $row['id'] == $orgfilterid? " selected" : "" , $row['O']);
       }
     }?>
         </select>
