@@ -41,6 +41,7 @@
 	$query = "//channel/item";
 	$items = $xpath->query($query);
 
+	$count = 0;
 	foreach($items as $id => $item) {
 		$query = "./title";
 		$nodeList = $xpath->query($query, $item);
@@ -61,6 +62,11 @@
 		$title = '';
 		$description = '';
 		$link = '';
+
+		count++;
+		if ($count >= 3) {
+			break;
+		}
 	}
 ?>
 
