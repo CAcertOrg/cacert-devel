@@ -55,9 +55,9 @@
 		$nodeList = $xpath->query($query, $item);
 		$description = recode_string("UTF8..html" , $nodeList->item(0)->nodeValue);
 
-		printf('<h3> %s </h3>\n', $title);
-		printf('<p> %s </p>\n', $description);
-		printf('<p>[<a href="%s"> %s </a> ] </p>\n\n', $link,_("Full Story"));
+		printf("<h3> %s </h3>\n", $title);
+		printf("<p> %s </p>\n", $description);
+		printf("<p>[<a href=\"%s\"> %s </a> ] </p>\n\n", $link,_("Full Story"));
 
 		$title = '';
 		$description = '';
