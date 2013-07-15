@@ -63,7 +63,7 @@
 		$description = '';
 		$link = '';
 
-		count++;
+		$count++;
 		if ($count >= 3) {
 			break;
 		}
