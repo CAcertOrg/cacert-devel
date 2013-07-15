@@ -44,19 +44,19 @@
 	foreach($items as $id => $item) {
 		$query = "./title";
 		$nodeList = $xpath->query($query, $item);
-		$title = str_replace("&amp;#", "&#", recode_string("UTF8..html" , $nodeList->item(0)->nodeValue));
+		$title = recode_string("UTF8..html" , $nodeList->item(0)->nodeValue);
 
 		$query = "./link";
 		$nodeList = $xpath->query($query, $item);
-		$link = $nodeList->item(0)->nodeValue;
+		$link = htmlspecialchars($nodeList->item(0)->nodeValue);
 
 		$query = "./description";
 		$nodeList = $xpath->query($query, $item);
-		$description = str_replace("&amp;#", "&#", recode_string("UTF8..html" , $nodeList->item(0)->nodeValue));
+		$description = recode_string("UTF8..html" , $nodeList->item(0)->nodeValue);
 
-		printf("<h3> %s </h3>\n", $title);
-		printf("<p> %s </p>\n", $description);
-		printf("<p>[<a href='%s'> %s </a> ] </p>\n\n", $link,_("Full Story"));
+		printf('<h3> %s </h3>\n', $title);
+		printf('<p> %s </p>\n', $description);
+		printf('<p>[<a href="%s"> %s </a> ] </p>\n\n', $link,_("Full Story"));
 
 		$title = '';
 		$description = '';
