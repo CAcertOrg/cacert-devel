@@ -29,61 +29,47 @@
 
 <div class="newsbox">
 <?
-/*
-	$query = "select *, UNIX_TIMESTAMP(`when`) as `TS` from news order by `when` desc limit 5";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
-	{
-		echo "<p><b>".date("Y-m-d", $row['TS'])."</b> - ".$row['short']."</p>\n";
-		if($row['story'] != "")
-			echo "<p>[ <a href='news.php?id=".$row['id']."'>"._("Full Story")."</a> ]</p>\n";
-	}
-	if(mysql_num_rows(mysql_query("select * from `news`")) > 2)
-		echo "<p>[ <a href='news.php'>"._("More News Items")."</a> ]</p>";
-*/
-	$rss = "";
-	$open = $items = 0;
-	$fp = @fopen("/www/pages/index/feed.rss", "r");
-	if($fp)
-	{
-		echo '<p id="lnews">'._('Latest News').'</p>';
+	printf("<p id='lnews'>%s</p>\n\n",_('Latest News'));
 
+	$xml = "/www/pages/index/feed.rss"; // FIXME: use relative path to allow operation with different document root
+	$dom = new DOMDocument();
+	$dom->preserveWhiteSpace = false;
+	$dom->Load($xml);
 
-		while(!feof($fp))
-			$rss .= trim(fgets($fp, 4096));
-		fclose($fp);
-		$rss = str_replace("><", ">\n<", $rss);
-		$lines = explode("\n", $rss);
-		foreach($lines as $line)
-		{
-			$line = trim($line);
+	$xpath = new DOMXPath($dom);    //Create an XPath query
 
-			if($line != "<item>" && $open == 0)
-				continue;
+	$query = "//channel/item";
+	$items = $xpath->query($query);
 
-			if($line == "<item>" && $open == 0)
-			{
-				$open = 1;
-				continue;
-			}
+	$count = 0;
+	foreach($items as $id => $item) {
+		$query = "./title";
+		$nodeList = $xpath->query($query, $item);
+		$title = recode_string("UTF8..html" , $nodeList->item(0)->nodeValue);
 
-			if($line == "</item>" && $open == 1)
-			{
-				$items++;
-				if($items >= 3)
-					break;
-				$open == 0;
-				continue;
-			}
-			if(substr($line, 0, 7) == "<title>")
-				echo "<h3>".str_replace("&amp;#", "&#", recode_string("UTF8..html", str_replace("&amp;", "", trim(substr($line, 7, -8)))))."</h3>\n";
-			if(substr($line, 0, 13) == "<description>")
-				echo "<p>".str_replace("&amp;#", "&#", recode_string("UTF8..html", str_replace("&amp;", "", trim(substr($line, 13, -14)))))."</p>\n";
-			if(substr($line, 0, 6) == "<link>")
-				echo "<p>[ <a href='".trim(substr($line, 6, -7))."'>"._("Full Story")."</a> ]</p>\n";
+		$query = "./link";
+		$nodeList = $xpath->query($query, $item);
+		$link = htmlspecialchars($nodeList->item(0)->nodeValue);
+
+		$query = "./description";
+		$nodeList = $xpath->query($query, $item);
+		$description = recode_string("UTF8..html" , $nodeList->item(0)->nodeValue);
+
+		printf("<h3> %s </h3>\n", $title);
+		printf("<p> %s </p>\n", $description);
+		printf("<p>[<a href=\"%s\"> %s </a> ] </p>\n\n", $link,_("Full Story"));
+
+		$title = '';
+		$description = '';
+		$link = '';
+
+		$count++;
+		if ($count >= 3) {
+			break;
 		}
 	}
 ?>
+
 [ <a href="http://blog.CAcert.org/"><?=_('More News Items')?></a> ]
 </div>
 <hr/>
@@ -127,4 +113,3 @@
 <br /><br />
 
 <?=_("If you want to participate in CAcert.org, have a look")?> <a href="http://wiki.cacert.org/wiki/HelpingCAcert"><?=_("here")?></a> <?=_("and")?> <a href="http://wiki.cacert.org/wiki/SystemTasks"><?=_("here")?></a>.
-
