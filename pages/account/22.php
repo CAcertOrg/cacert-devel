@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-$orgfilterd = array_key_exists('dorgfilterid',$_SESSION['_config']) ? intval($_SESSION['_config']['dorgfilterid']) : 0;
+$orgfilterid = array_key_exists('dorgfilterid',$_SESSION['_config']) ? intval($_SESSION['_config']['dorgfilterid']) : 0;
 $sorting = array_key_exists('dsorting',$_SESSION['_config']) ? intval($_SESSION['_config']['dsorting']) : 0;
 $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_config']['dstatus']) : 0;
 ?>
