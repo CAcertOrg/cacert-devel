@@ -25,7 +25,7 @@
 ?>
 
 <? if($_SESSION['_config']['hostname'] == $_SESSION['_config']['securehostname']) { ?>
-<p><?=_("Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your Email/Pass Phrase to get a new certificate, by clicking on 'Normal Login' to the right of your screen.")?></p>
+<p><?=sprintf(_("Warning! You've attempted to log into the system with a client certificate, but the login failed due to the certificate being expired, revoked, disabled for certificate login, or simply not valid for this site. You can login using your email/pass phrase to get a new certificate, by clicking on %sPassword Login%s on the right side of this page."),"<a href='https://".$_SESSION['_config']['normalhostname']."/index.php?id=4'>", "</a>")?></p>
 <? } else { ?>
 <style>
 .box2 {width:100%;text-align:center;}
