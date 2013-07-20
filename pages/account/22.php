@@ -31,7 +31,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       <td class="DataTD"><?=_("Organisation")?></td>
       <td colspan="7" class="DataTD" >
         <select name="dorgfilterid">
-          <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $orgfilterid? " selected" : "" ,_("All")) ?>
+          <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $orgfilterid ? "selected" : "" ,_("All")) ?>
 <?  $query = "select `orginfo`.`O`, `orginfo`.`id`
       from `org`, `orginfo`
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
@@ -39,7 +39,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
     $reso = mysql_query($query);
     if(mysql_num_rows($reso) >= 1){
       while($row = mysql_fetch_assoc($reso)){
-        printf("<option value='%d' %s>%s</option>",$row['id'], $row['id'] == $orgfilterid? " selected" : "" , $row['O']);
+        printf("<option value='%d' %s>%s</option>",$row['id'], $row['id'] == $orgfilterid ? "selected" : "" , $row['O']);
       }
     }?>
         </select>
@@ -49,8 +49,8 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
     <td class="DataTD"><?=_("Sorting")?></td>
     <td colspan="7" class="DataTD" >
       <select name="dsorting">
-        <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $sorting? " selected" : "" ,_("expire date (desc)")) ?>
-        <?=sprintf("<option value='%d' %s>%s</option>",1, 1 == $sorting ? " selected" : "" ,_("Common name, expire date (desc)")) ?>
+        <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $sorting ? "selected" : "" ,_("expire date (desc)")) ?>
+        <?=sprintf("<option value='%d' %s>%s</option>",1, 1 == $sorting ? "selected" : "" ,_("Common name, expire date (desc)")) ?>
       </select>
     </td>
   </tr>
@@ -58,8 +58,8 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
     <td class="DataTD"><?=_("Certificate status")?></td>
     <td colspan="7" class="DataTD" >
       <select name="dstatus">
-        <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $status? " selected" : "" ,_("Currrent/Active")) ?>
-        <?=sprintf("<option value='%d' %s>%s</option>",1, 1 == $status ? " selected" : "" ,_("All")) ?>
+        <?=sprintf("<option value='%d' %s>%s</option>",0, 0 == $status ? "selected" : "" ,_("Currrent/Active")) ?>
+        <?=sprintf("<option value='%d' %s>%s</option>",1, 1 == $status ? "selected" : "" ,_("All")) ?>
       </select>
     </td>
   </tr>
