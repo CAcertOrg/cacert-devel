@@ -632,31 +632,7 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-
-					$dres = mysql_query(
-						"select `domaincerts`.`id`
-							from `domaincerts`
-							where `domaincerts`.`domid` = '$id'
-						union distinct
-						select `domaincerts`.`id`
-							from `domaincerts`, `domlink`
-							where `domaincerts`.`id` = `domlink`.`certid`
-							and `domlink`.`domid` = '$id'");
-					while($drow = mysql_fetch_assoc($dres))
-					{
-						mysql_query(
-							"update `domaincerts`
-								set `revoked`='1970-01-01 10:00:01'
-								where `id` = '".$drow['id']."'
-								and `revoked` = 0
-								and UNIX_TIMESTAMP(`expire`) -
-										UNIX_TIMESTAMP() > 0");
-					}
-
-					mysql_query(
-						"update `domains`
-							set `deleted`=NOW()
-							where `id` = '$id'");
+					account_domain_delete($row['id']);
 				}
 
 			}
@@ -1219,17 +1195,17 @@
 			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
 		}else{
 			$description= "";
+		}
+
+		if(trim($_REQUEST['disablelogin']) == "1"){
+			$disablelogin = 1;
+		}else{
+			$disablelogin = 0;
+		}
+
+		mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
 	}
 
-	if(trim($_REQUEST['disablelogin']) == "1"){
-		$disablelogin = 1;
-	}else{
-		$disablelogin = 0;
-	}
-
-	mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
-
- }
 	if($oldid == 13 && $process != "")
 	{
 		csrf_check("perschange");
