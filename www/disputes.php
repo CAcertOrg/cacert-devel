@@ -222,6 +222,23 @@
 			exit;
 		}
 
+		//check if email belongs to locked account
+		$res = mysql_query("select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysql_num_rows($res) > 0)
+		{
+			showheader(_("Email Dispute"));
+			printf(_("Sorry, the email address '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($email),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = sprintf("Someone has just attempted to dispute this email '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $email, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
+
+			showfooter();
+			exit;
+		}
+
 		$res = mysql_query("select * from `disputeemail` where `email`='$email' and hash!=''");
 		if(mysql_num_rows($res) > 0)
 		{
@@ -294,6 +311,23 @@
 			exit;
 		}
 
+		//check if domain belongs to locked account
+		$res = mysql_query("select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysql_num_rows($res) > 0)
+		{
+			showheader(_("Domain Dispute"));
+			printf(_("Sorry, the domain '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($domain),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = sprintf("Someone has just attempted to dispute this domain '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $domain, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
+
+			showfooter();
+			exit;
+		}
+
 		$query = "select * from `disputedomain` where `domain`='$domain' and hash!=''";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
@@ -305,12 +339,20 @@
 		}
 		unset($oldid);
 		$query = "select * from `domains` where `domain`='$domain' and `deleted`=0";
-		$email = ""; if(array_key_exists('email',$_REQUEST)) $email=trim(mysql_real_escape_string($_REQUEST['email']));
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
+			$query = "select 1 from `orgdomains` where `domain`='$domain'";
+			$res = mysql_query($query);
+			if(mysql_num_rows($res) > 0)
+			{
+				showheader(_("Domain Dispute"));
+				printf(_("The domain '%s' is included in an organisation account. Please send a mail to %s to dispute this domain."), sanitizeHTML($domain),'<a href="mailto:support@cacert.org">support@cacert.org</a>');
+				showfooter();
+				exit;
+			}
 			showheader(_("Domain Dispute"));
-			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($email));
+			printf(_("The domain '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($domain));
 			showfooter();
 			exit;
 		}

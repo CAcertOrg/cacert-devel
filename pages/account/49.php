@@ -58,7 +58,11 @@
 			$row = mysql_fetch_assoc($res);
 			$_GET['userid'] = intval($row['id']);
 		} else {
-			printf(_("No personal domains found matching %s"), sanitizeHTML($domain));
+			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+				<tr>
+				<td colspan="5" class="title"><?printf(_("No personal domains found matching %s"), sanitizeHTML($domain));?></td>
+			</tr>
+		</table><br><br><?
 		}
 
 		$query = "select `orgid`,`domain`,`id` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domain' limit 100";
@@ -90,7 +94,11 @@
 			$row = mysql_fetch_assoc($res);
 			$_GET['userid'] = intval($row['id']);
 		} else {
-			printf(_("No organisational domains found matching %s"), sanitizeHTML($domain));
+			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+				<tr>
+				<td colspan="5" class="title"><?printf(_("No organisational domains found matching %s"), sanitizeHTML($domain));?></td>
+			</tr>
+		</table><br><br><?
 		}
 	}
 

@@ -25,7 +25,7 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td colspan="2" class="title"><?=_("My Language Settings")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("My prefered language")?>:</td>
+    <td class="DataTD"><?=_("My preferred language")?>:</td>
     <td class="DataTD"><select name="lang">
 <?
 	foreach(L10n::$translations as $key => $val)
@@ -73,8 +73,12 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		echo "<option value='".sanitizeHTML($row['locale'])."'";
-		echo ">".$row['country']." - ".$row['lang']."</option>\n";
+		printf("<option value=\"%s\">[%s] %s (%s)</option>\n",
+			sanitizeHTML($row['locale']),
+			sanitizeHTML($row['locale']),
+			$row['lang'],
+			$row['country']
+			);
 	}
 ?>
 	</select>

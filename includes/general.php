@@ -15,13 +15,16 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+	require_once(dirname(__FILE__)."/lib/general.php");
+
 	session_name("cacert");
 	session_start();
 
-	session_register("_config");
-	session_register("profile");
-	session_register("signup");
-	session_register("lostpw");
+//	session_register("_config");
+//	session_register("profile");
+//	session_register("signup");
+//	session_register("lostpw");
 //	if($_SESSION['profile']['id'] > 0)
 //		session_regenerate_id();
 
@@ -533,17 +536,22 @@
 		$myemail = mysql_real_escape_string($email);
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
-			list($username,$domain)=split('@',$email);
+			list($username,$domain)=explode('@',$email,2);
 			$dom = escapeshellarg($domain);
 			$line = trim(`dig +short MX $dom 2>&1`);
 #echo $email."-$dom-$line-\n";
 #echo `dig +short mx heise.de 2>&1`."-<br>\n";
 
 			$list = explode("\n", $line);
-			foreach($list as $row)
-				list($pri, $mxhosts[]) = explode(" ", substr(trim($row), 0, -1));
+			foreach($list as $row) {
+				if(!strstr($row, " ")) {
+					continue;
+				}
+				list($pri, $mxhosts[]) = explode(" ", trim($row), 2);
+			}
 			$mxhosts[] = $domain;
-#print_r($mxhosts); die;
+			array_walk($mxhosts, function(&$mx) { $mx = trim($mx, '.'); } );
+
 			foreach($mxhosts as $key => $domain)
 			{
 				$fp = @fsockopen($domain,25,$errno,$errstr,5);
@@ -725,37 +733,7 @@
 		return($text);
 	}
 	
-	// returns 0 if $userID is an Assurer
-	// Otherwise :
-	//	 Bit 0 is always set
-	//	 Bit 1 is set if 100 Assurance Points are not reached
-	//	 Bit 2 is set if Assurer Test is missing
-	//	 Bit 3 is set if the user is not allowed to be an Assurer (assurer_blocked > 0)
-	function get_assurer_status($userID)
-	{
-		$Result = 0;
-		$query = mysql_query('SELECT * FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` '.
-			'  WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = \''.(int)intval($userID).'\'');
-		if(mysql_num_rows($query) < 1)
-		{
-			$Result |= 5;
-		}
-		
-		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now()');
-		$row = mysql_fetch_assoc($query);
-		if ($row['points'] < 100) {
-			$Result |= 3;
-		}
-		
-		$query = mysql_query('SELECT `assurer_blocked` FROM `users` WHERE `id` = \''.(int)intval($userID).'\'');
-		$row = mysql_fetch_assoc($query);
-		if ($row['assurer_blocked'] > 0) {
-			$Result |= 9;
-		}
-		
-		return $Result;
-	}
-	
+
 	// returns text message to be shown to the user given the result of is_no_assurer
 	function no_assurer_text($Status)
 	{
@@ -823,5 +801,6 @@
 		$sql_data_log[] = array("sql" => $sql, "duration" => $query_end - $query_start);
 		return $res;
 	}
+
 
 ?>

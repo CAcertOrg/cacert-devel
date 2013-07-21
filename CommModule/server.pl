@@ -955,10 +955,10 @@ sub analyze($)
   if($bytes[1] == 0) # NUL Request
   {
     SysLog "NUL Request detected.\n";
-    if($fields[1])
+    if($fields[1] =~ /^\d+\.\d+$/)
     {
       open OUT,">timesync.sh";
-      print OUT "date -u $fields[1]\n";
+      print OUT "date -u '$fields[1]'\n";
       print OUT "hwclock --systohc\n";
       close OUT;
     }

@@ -1,0 +1,17 @@
+Hallo CAcert-Mitglieder und Assurer,
+
+Der diesjaehrige LinuxTag auf der Messe Berlin findet von Mittwoch, 22. Mai bis Samstag, 25. Mai statt und steht unter dem Motto "Open minds create effective solutions!"
+
+Effektive Loesungen finden bei CAcert besonders gut dann statt, wenn ein reger Informationsaustausch stattfindet. Dafuer steht CAcert mit einem Stand auf der Messe am Stand 140 in Halle 7.1a. Wir freuen uns dabei nicht nur auf Besucher, sondern wir sind auch in hohem Masse auf die Mithilfe der Community angewiesen. Wir freuen uns deshalb besonders, auch Dich am Stand als Standbetreuer, Assurer und Netzwerker begruessen zu koennen. Bei dieser Gelegenheit koennen wir uns auch gerne ueber die aktuellen Entwicklungen bei CAcert unterhalten.
+
+Weitere Details stehen in unserem Wiki unter
+[https://wiki.cacert.org/Events/LinuxTag2013]
+
+Fuer Assurer, die als Standbetreuer mithelfen moechten bitte
+Rueckantwort bitte an events@cacert.org
+ 'Ich moechte beim Linuxtag mithelfen'
+Dafuer koennen wir auch kostenlose Eintrittskarten zur Verfuegung stellen, rechtzeitige Absprache ist dafuer natuerlich Voraussetzung.
+
+Vielen Dank fuer eure Unterstuetzung!
+
+Kontakt: events@cacert.org
