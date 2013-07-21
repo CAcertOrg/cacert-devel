@@ -115,7 +115,7 @@
 
 	function calc_experience ($row,&$points,&$experience,&$sum_experience,&$revoked)
 	{
-                $apoints = max($row['points'],$row['awarded']);
+		$apoints = max($row['points'], $row['awarded']);
 		$points += $apoints;
 		$experience = "&nbsp;";
 		$revoked = false;				# to be coded later (after DB-upgrade)
@@ -201,15 +201,15 @@
 
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-    <tr>
-    	<td class="title"><?=_("Assurer Ranking")?></td>
-    </tr>
-    <tr>
-	<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
-    </tr>
-    <tr>
-	<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
-    </tr>
+	<tr>
+		<td class="title"><?=_("Assurer Ranking")?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
+	</tr>
 </table>
 <br/>
 <?
@@ -219,65 +219,68 @@
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-    <tr>
+	<tr>
 <?
 	if ($support == "1")
 	{
 ?>
-    	<td colspan="10" class="title"><?=$title?></td>
+		<td colspan="10" class="title"><?=$title?></td>
 <?
 	} else {
 ?>
-    	<td colspan="7" class="title"><?=$title?></td>
-<?	}
-?>
-    </tr>
-    <tr>
-    	<td class="DataTD"><strong><?=_("ID")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Date")?></strong></td>
-<?
-	if ($support == "1")
-	{
-?>
-    	<td class="DataTD"><strong><?=_("When")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Email")?></strong></td>
-<?	} ?>
-    	<td class="DataTD"><strong><?=_("Who")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Points")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Location")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Method")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
-<?
-	if ($support == "1")
-	{
-?>
-	<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
+		<td colspan="7" class="title"><?=$title?></td>
 <?
 	}
 ?>
-    </tr>
+	</tr>
+	<tr>
+		<td class="DataTD"><strong><?=_("ID")?></strong></td>
+		<td class="DataTD"><strong><?=_("Date")?></strong></td>
+<?
+	if ($support == "1")
+	{
+?>
+		<td class="DataTD"><strong><?=_("When")?></strong></td>
+		<td class="DataTD"><strong><?=_("Email")?></strong></td>
+<?
+	}
+?>
+		<td class="DataTD"><strong><?=_("Who")?></strong></td>
+		<td class="DataTD"><strong><?=_("Points")?></strong></td>
+		<td class="DataTD"><strong><?=_("Location")?></strong></td>
+		<td class="DataTD"><strong><?=_("Method")?></strong></td>
+		<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
+<?
+	if ($support == "1")
+	{
+?>
+		<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
+<?
+	}
+?>
+	</tr>
 <?
 	}
 
 	function output_assurances_footer($points_txt,$points,$experience_txt,$sumexperience,$support)
 	{
 ?>
-    <tr>
-    	<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
-    	<td class="DataTD"><?=$points?></td>
-    	<td class="DataTD">&nbsp;</td>
-    	<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
-    	<td class="DataTD"><?=$sumexperience?></td>
+	<tr>
+		<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
+		<td class="DataTD"><?=$points?></td>
+		<td class="DataTD">&nbsp;</td>
+		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
+		<td class="DataTD"><?=$sumexperience?></td>
 <?
 	if ($support == "1")
 	{
 ?>
-    	<td class="DataTD">&nbsp;</td>
+		<td class="DataTD">&nbsp;</td>
 <?
 	}
 ?>
 
-    </tr>
+	</tr>
 </table>
 <br/>
 <?
@@ -286,52 +289,54 @@
 	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
 	{
 
-	$tdstyle="";
-	$emopen="";
-	$emclose="";
+		$tdstyle="";
+		$emopen="";
+		$emclose="";
 
-	if ($awarded == $points)
-	{
-		if ($awarded == "0")
+		if ($awarded == $points)
 		{
-			if ($when < "2006-09-01")
+			if ($awarded == "0")
 			{
-				$tdstyle="style='background-color: #ffff80'";
-				$emopen="<em>";
-				$emclose="</em>";
+				if ($when < "2006-09-01")
+				{
+					$tdstyle="style='background-color: #ffff80'";
+					$emopen="<em>";
+					$emclose="</em>";
+				}
 			}
 		}
-	}
 ?>
-    <tr>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
+	<tr>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
 <?
-	if ($support == "1")
-	{
+		if ($support == "1")
+		{
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-<?	}
-?>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
-<?
-	if ($support == "1")
-	{
-		if ($revoked == true)
-		{
-?>
-			<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
-<?		} else {
-?>
-			<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
 		}
-	}
+?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+<?
+		if ($support == "1")
+		{
+			if ($revoked == true)
+			{
+?>
+		<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
+<?
+			} else {
+?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
+<?
+			}
+		}
 ?>
     </tr>
 <?
@@ -341,14 +346,14 @@
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-    <tr>
-	<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
-    </tr>
-    <tr>
-	<td class="DataTD"><strong><?=_("Description")?></strong></td>
-	<td class="DataTD"><strong><?=_("Points")?></strong></td>
-	<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
-	<td class="DataTD"><strong><?=_("Remark")?></strong></td>
+	<tr>
+		<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><strong><?=_("Description")?></strong></td>
+		<td class="DataTD"><strong><?=_("Points")?></strong></td>
+		<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
+		<td class="DataTD"><strong><?=_("Remark")?></strong></td>
     </tr>
 <?
 	}
@@ -364,12 +369,12 @@
 	function output_summary_row($title,$points,$points_countable,$remark)
 	{
 ?>
-    <tr>
-	<td class="DataTD"><strong><?=$title?></strong></td>
-	<td class="DataTD"><?=$points?></td>
-	<td class="DataTD"><?=$points_countable?></td>
-	<td class="DataTD"><?=$remark?></td>
-    </tr>
+	<tr>
+		<td class="DataTD"><strong><?=$title?></strong></td>
+		<td class="DataTD"><?=$points?></td>
+		<td class="DataTD"><?=$points_countable?></td>
+		<td class="DataTD"><?=$remark?></td>
+	</tr>
 <?
 	}
 
@@ -613,7 +618,7 @@
 	<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
 <?
 	}
-	
+
 	//functions to do with recording user agreements
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
@@ -621,10 +626,10 @@
 			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
 		$res = mysql_query($query);
 	}
-	
+
 	function get_user_agreement_status($memid, $type="CCA"){
 	//returns 0 - no user agreement, 1- at least one entry
-		$query="SELECT u.`document` FROM `user_agreements` u 
+		$query="SELECT u.`document` FROM `user_agreements` u
 			WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")" ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <=0){
@@ -675,7 +680,7 @@
 			$rec=array();
 		}
 		return $rec;
-}
+	}
 
 	function delete_user_agreement($memid, $type="CCA"){
 	//deletes all entries to an user for the given type of user agreements
