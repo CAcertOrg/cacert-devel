@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ 
 
-	include_once($_SESSION['_config']['filepath']."/includes/wot.inc.php");
+	require_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 	$userid = intval($_SESSION['profile']['id']);
 

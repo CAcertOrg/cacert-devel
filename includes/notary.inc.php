@@ -41,6 +41,15 @@
 		return intval($row['list']);
 	}
 
+	function get_number_of_ttpassurances ($userid)
+	{
+		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
+			WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `to`='".intval($userid)."' ");
+		$row = query_getnextrow($res);
+
+		return intval($row['list']);
+	}
+
 	function get_number_of_assurees ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
@@ -106,7 +115,7 @@
 
 	function calc_experience ($row,&$points,&$experience,&$sum_experience,&$revoked)
 	{
-                $apoints = max($row['points'],$row['awarded']);
+		$apoints = max($row['points'], $row['awarded']);
 		$points += $apoints;
 		$experience = "&nbsp;";
 		$revoked = false;				# to be coded later (after DB-upgrade)
@@ -192,15 +201,15 @@
 
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-    <tr>
-    	<td class="title"><?=_("Assurer Ranking")?></td>
-    </tr>
-    <tr>
-	<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
-    </tr>
-    <tr>
-	<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
-    </tr>
+	<tr>
+		<td class="title"><?=_("Assurer Ranking")?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
+	</tr>
 </table>
 <br/>
 <?
@@ -210,65 +219,68 @@
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-    <tr>
+	<tr>
 <?
 	if ($support == "1")
 	{
 ?>
-    	<td colspan="10" class="title"><?=$title?></td>
+		<td colspan="10" class="title"><?=$title?></td>
 <?
 	} else {
 ?>
-    	<td colspan="7" class="title"><?=$title?></td>
-<?	}
-?>
-    </tr>
-    <tr>
-    	<td class="DataTD"><strong><?=_("ID")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Date")?></strong></td>
-<?
-	if ($support == "1")
-	{
-?>
-    	<td class="DataTD"><strong><?=_("When")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Email")?></strong></td>
-<?	} ?>
-    	<td class="DataTD"><strong><?=_("Who")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Points")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Location")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Method")?></strong></td>
-    	<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
-<?
-	if ($support == "1")
-	{
-?>
-	<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
+		<td colspan="7" class="title"><?=$title?></td>
 <?
 	}
 ?>
-    </tr>
+	</tr>
+	<tr>
+		<td class="DataTD"><strong><?=_("ID")?></strong></td>
+		<td class="DataTD"><strong><?=_("Date")?></strong></td>
+<?
+	if ($support == "1")
+	{
+?>
+		<td class="DataTD"><strong><?=_("When")?></strong></td>
+		<td class="DataTD"><strong><?=_("Email")?></strong></td>
+<?
+	}
+?>
+		<td class="DataTD"><strong><?=_("Who")?></strong></td>
+		<td class="DataTD"><strong><?=_("Points")?></strong></td>
+		<td class="DataTD"><strong><?=_("Location")?></strong></td>
+		<td class="DataTD"><strong><?=_("Method")?></strong></td>
+		<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
+<?
+	if ($support == "1")
+	{
+?>
+		<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
+<?
+	}
+?>
+	</tr>
 <?
 	}
 
 	function output_assurances_footer($points_txt,$points,$experience_txt,$sumexperience,$support)
 	{
 ?>
-    <tr>
-    	<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
-    	<td class="DataTD"><?=$points?></td>
-    	<td class="DataTD">&nbsp;</td>
-    	<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
-    	<td class="DataTD"><?=$sumexperience?></td>
+	<tr>
+		<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
+		<td class="DataTD"><?=$points?></td>
+		<td class="DataTD">&nbsp;</td>
+		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
+		<td class="DataTD"><?=$sumexperience?></td>
 <?
 	if ($support == "1")
 	{
 ?>
-    	<td class="DataTD">&nbsp;</td>
+		<td class="DataTD">&nbsp;</td>
 <?
 	}
 ?>
 
-    </tr>
+	</tr>
 </table>
 <br/>
 <?
@@ -277,52 +289,54 @@
 	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
 	{
 
-	$tdstyle="";
-	$emopen="";
-	$emclose="";
+		$tdstyle="";
+		$emopen="";
+		$emclose="";
 
-	if ($awarded == $points)
-	{
-		if ($awarded == "0")
+		if ($awarded == $points)
 		{
-			if ($when < "2006-09-01")
+			if ($awarded == "0")
 			{
-				$tdstyle="style='background-color: #ffff80'";
-				$emopen="<em>";
-				$emclose="</em>";
+				if ($when < "2006-09-01")
+				{
+					$tdstyle="style='background-color: #ffff80'";
+					$emopen="<em>";
+					$emclose="</em>";
+				}
 			}
 		}
-	}
 ?>
-    <tr>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
+	<tr>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
 <?
-	if ($support == "1")
-	{
+		if ($support == "1")
+		{
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-<?	}
-?>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
-<?
-	if ($support == "1")
-	{
-		if ($revoked == true)
-		{
-?>
-			<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
-<?		} else {
-?>
-			<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
 		}
-	}
+?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+<?
+		if ($support == "1")
+		{
+			if ($revoked == true)
+			{
+?>
+		<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
+<?
+			} else {
+?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
+<?
+			}
+		}
 ?>
     </tr>
 <?
@@ -332,14 +346,14 @@
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-    <tr>
-	<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
-    </tr>
-    <tr>
-	<td class="DataTD"><strong><?=_("Description")?></strong></td>
-	<td class="DataTD"><strong><?=_("Points")?></strong></td>
-	<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
-	<td class="DataTD"><strong><?=_("Remark")?></strong></td>
+	<tr>
+		<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
+	</tr>
+	<tr>
+		<td class="DataTD"><strong><?=_("Description")?></strong></td>
+		<td class="DataTD"><strong><?=_("Points")?></strong></td>
+		<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
+		<td class="DataTD"><strong><?=_("Remark")?></strong></td>
     </tr>
 <?
 	}
@@ -355,12 +369,12 @@
 	function output_summary_row($title,$points,$points_countable,$remark)
 	{
 ?>
-    <tr>
-	<td class="DataTD"><strong><?=$title?></strong></td>
-	<td class="DataTD"><?=$points?></td>
-	<td class="DataTD"><?=$points_countable?></td>
-	<td class="DataTD"><?=$remark?></td>
-    </tr>
+	<tr>
+		<td class="DataTD"><strong><?=$title?></strong></td>
+		<td class="DataTD"><?=$points?></td>
+		<td class="DataTD"><?=$points_countable?></td>
+		<td class="DataTD"><?=$remark?></td>
+	</tr>
 <?
 	}
 
@@ -430,6 +444,8 @@
 				break;
 			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
 			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
+			case 'TTP-Assisted':	     // TTP assurances, limit to 35
+			case 'TOPUP':	     // TOPUP to be delevoped in the future, limit to 30
 			case '':				// to be revoked in the future? limit to max 50 pts?
 			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
 				break;
@@ -602,7 +618,7 @@
 	<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
 <?
 	}
-	
+
 	//functions to do with recording user agreements
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
@@ -610,10 +626,10 @@
 			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
 		$res = mysql_query($query);
 	}
-	
+
 	function get_user_agreement_status($memid, $type="CCA"){
 	//returns 0 - no user agreement, 1- at least one entry
-		$query="SELECT u.`document` FROM `user_agreements` u 
+		$query="SELECT u.`document` FROM `user_agreements` u
 			WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")" ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <=0){
@@ -650,8 +666,8 @@
 	function get_last_user_agreement($memid, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
 		$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." ) order by `date` desc limit 1)
- union
- (SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND ( u.`secmemid`=".$memid.")) order by `date` desc limit 1" ;
+			union
+			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND ( u.`secmemid`=".$memid.")) order by `date` desc limit 1" ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
 			$row = mysql_fetch_assoc($res);
@@ -664,7 +680,7 @@
 			$rec=array();
 		}
 		return $rec;
-}
+	}
 
 	function delete_user_agreement($memid, $type="CCA"){
 	//deletes all entries to an user for the given type of user agreements
@@ -672,4 +688,162 @@
 		mysql_query("delete from `user_agreements` where `secmemid`='".$memid."'");
 	}
 
+	// functions for 6.php (assure somebody)
+
+	function AssureHead($confirmation,$checkname)
+	{
 ?>
+<form method="post" action="wot.php">
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="600">
+	<tr>
+		<td colspan="2" class="title"><?=$confirmation?></td>
+	</tr>
+	<tr>
+		<td class="DataTD" colspan="2" align="left"><?=$checkname?></td>
+	</tr>
+<?
+	}
+
+	function AssureTextLine($field1,$field2)
+	{
+?>
+	<tr>
+		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?>:</td>
+		<td class="DataTD"><?=$field2?></td>
+	</tr>
+<?
+	}
+
+	function AssureCCABoxLine($type,$text)
+	{
+		return;
+		AssureBoxLine($type,$text);
+	}
+
+	function AssureBoxLine($type,$text,$checked)
+	{
+?>
+	<tr>
+		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1" <?=$checked?"checked":""?>></td>
+		<td class="DataTD"><?=$text?></td>
+	</tr>
+<?
+	}
+
+	function AssureMethodLine($text,$methods,$remark)
+	{
+		if (count($methods) != 1) {
+?>
+	<tr>
+		<td class="DataTD"><?=$text.(empty($text)?'':':')?></td>
+		<td class="DataTD">
+			<select name="method">
+<?
+			foreach($methods as $val) {
+?>
+				<option value="<?=$val?>"><?=$val?></option>
+<?
+			}
+?>
+			</select>
+			<br />
+			<?=$remark?>
+		</td>
+	</tr>
+<?
+		} else {
+?>
+	<input type="hidden" name="<?=$val?>" value="<?=$methods[0]?>" />
+<?
+		}
+	}
+
+	function AssureInboxLine($type,$field,$value,$description)
+	{
+?>
+	<tr>
+		<td class="DataTD"><?=$field.(empty($field)?'':':')?>:</td>
+		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
+	</tr>
+<?
+	}
+
+	function AssureFoot($oldid,$confirm)
+	{
+?>
+	<tr>
+		<td class="DataTD" colspan="2">
+			<input type="submit" name="process" value="<?=$confirm?>" />
+			<input type="submit" name="cancel" value="<?=_("Cancel")?>" />
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="pagehash" value="<?=$_SESSION['_config']['wothash']?>" />
+<input type="hidden" name="oldid" value="<?=$oldid?>" />
+</form>
+<?
+	}
+
+	// double with notray.inc
+	/**
+	 * write_user_agreement()
+	 * writes a new record to the table user_agreement
+	 *
+	 * @param mixed $memid
+	 * @param mixed $document
+	 * @param mixed $method
+	 * @param mixed $comment
+	 * @param integer $active
+	 * @param integer $secmemid
+	 * @return
+	 */
+	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
+		//
+		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
+				",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
+		$res = mysql_query($query);
+	}
+
+	/**
+	 * check_date_format()
+	 * checks if the date is entered in the right date format YYYY-MM-DD and
+	 * if the date is after the 1st January of the given year
+	 *
+	 * @param mixed $date
+	 * @param integer $year
+	 * @return
+	 */
+	function check_date_format($date, $year=2000){
+		if (!strpos($date,'-')) {
+			return FALSE;
+		}
+		$arr=explode('-',$date);
+
+		if ((count($arr)!=3)) {
+			return FALSE;
+		}
+		if (intval($arr[0])<=$year) {
+			return FALSE;
+		}
+		if (intval($arr[1])>12 or intval($arr[1])<=0) {
+			return FALSE;
+		}
+		if (intval($arr[2])>31 or intval($arr[2])<=0) {
+			return FALSE;
+		}
+
+		return checkdate( intval($arr[1]), intval($arr[2]), intval($arr[0]));
+
+	}
+
+	/**
+	 * check_date_differnce()
+	 * returns false if the date is larger then today + time diffrence
+	 *
+	 * @param mixed $date
+	 * @param integer $diff
+	 * @return
+	 */
+	function check_date_differnce($date, $diff=1){
+		return (strtotime($date)<=time()+$diff*86400);
+	}

@@ -18,7 +18,7 @@
 <?
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
-require_once("../includes/wot.inc.php");
+require_once("../includes/notary.inc.php");
 
 
 function show_page($target,$message,$error)
@@ -113,7 +113,6 @@ function send_reminder()
 	$_SESSION['_config']['remindersent'] = 1;
 	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
-
 
 	loadem("account");
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
@@ -370,7 +369,9 @@ $iecho= "c";
 						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
 		//record active acceptance by Assurer
-		write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
+		if (check_date_format(trim($_REQUEST['date']),2010)) {
+			write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
+		}
 		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
