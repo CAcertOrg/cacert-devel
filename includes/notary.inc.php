@@ -602,4 +602,67 @@
 	<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
 <?
 	}
-?>
+
+	// double with notray.inc
+	/**
+	 * write_user_agreement()
+	 * writes a new record to the table user_agreement
+	 *
+	 * @param mixed $memid
+	 * @param mixed $document
+	 * @param mixed $method
+	 * @param mixed $comment
+	 * @param integer $active
+	 * @param integer $secmemid
+	 * @return
+	 */
+	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
+		//
+		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
+				",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
+		$res = mysql_query($query);
+	}
+
+	/**
+	 * check_date_format()
+	 * checks if the date is entered in the right date format YYYY-MM-DD and
+	 * if the date is after the 1st January of the given year
+	 *
+	 * @param mixed $date
+	 * @param integer $year
+	 * @return
+	 */
+	function check_date_format($date, $year=2000){
+		if (!strpos($date,'-')) {
+			return FALSE;
+		}
+		$arr=explode('-',$date);
+
+		if ((count($arr)!=3)) {
+			return FALSE;
+		}
+		if (intval($arr[0])<=$year) {
+			return FALSE;
+		}
+		if (intval($arr[1])>12 or intval($arr[1])<=0) {
+			return FALSE;
+		}
+		if (intval($arr[2])>31 or intval($arr[2])<=0) {
+			return FALSE;
+		}
+
+		return checkdate( intval($arr[1]), intval($arr[2]), intval($arr[0]));
+
+	}
+
+	/**
+	 * check_date_differnce()
+	 * returns false if the date is larger then today + time diffrence
+	 *
+	 * @param mixed $date
+	 * @param integer $diff
+	 * @return
+	 */
+	function check_date_differnce($date, $diff=1){
+		return (strtotime($date)<=time()+$diff*86400);
+	}
