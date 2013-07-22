@@ -35,6 +35,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
   {
+    $_REQUEST['userid'] = 0;
+
     $emailsearch = $email = mysql_escape_string(stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
@@ -171,6 +173,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     </select>
     <input type="text" name="year" value="<?=$year?>" size="4">
     <input type="submit" value="Go"></form></nobr></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("CCA accepted")?>:</td>
+    <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'])) ? _("Yes") : _("No") ?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Trainings")?>:</td>
@@ -662,7 +668,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	</tr>
 
 	<tr>
-		<td class="DataTD"><?=_("Org Server")?>:</td>
+		<td class="DataTD"><a href="account.php?id=58&amp;userid=<?=intval($row['id'])?>"><?=_("Org Server")?></a>:</td>
 	<?
 	$query = "select COUNT(*) as `total`,
 	                 MAX(`orgcerts`.`expire`) as `maxexpire`
@@ -838,7 +844,7 @@ function showassuredto()
     <td class="DataTD"><?=intval($drow['points'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
-    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
   </tr>
 <? } ?>
   <tr>
@@ -884,7 +890,7 @@ function showassuredby()
     <td class="DataTD"><?=$drow['points']?></td>
     <td class="DataTD"><?=$drow['location']?></td>
     <td class="DataTD"><?=$drow['method']?></td>
-    <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
   </tr>
 <? } ?>
   <tr>
@@ -897,17 +903,19 @@ function showassuredby()
 <br><br>
 <? } }
 
-switch ($_GET['shownotary'])
-        {
-	case 'assuredto': 	showassuredto();
-				break;
-	case 'assuredby':	showassuredby();
-				break;
-	case 'assuredto15':	output_received_assurances(intval($_GET['userid']),1);
-				break;
-	case 'assuredby15': 	output_given_assurances(intval($_GET['userid']),1);
-				break;
-	}
-
-
-?>
+if(isset($_GET['shownotary'])) {
+    switch($_GET['shownotary']) {
+        case 'assuredto':
+            showassuredto();
+            break;
+        case 'assuredby':
+            showassuredby();
+            break;
+        case 'assuredto15':
+            output_received_assurances(intval($_GET['userid']),1);
+            break;
+        case 'assuredby15':
+            output_given_assurances(intval($_GET['userid']),1);
+            break;
+    }
+}

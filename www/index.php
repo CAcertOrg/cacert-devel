@@ -18,6 +18,7 @@
 
 require_once('../includes/lib/l10n.php');
 
+
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
         $process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
@@ -544,6 +545,8 @@ require_once('../includes/lib/l10n.php');
 						`regional`='".$_SESSION['signup']['regional']."',
 						`radius`='".$_SESSION['signup']['radius']."'";
 			mysql_query($query);
+			include_once("../includes/notary.inc.php");
+			write_user_agreement($memid, "CCA", "account creation", "", 1);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
 			$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n";
@@ -563,6 +566,13 @@ require_once('../includes/lib/l10n.php');
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
+		
+		//check for spam via honeypot
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
+			echo _("Form could not be sent.");
+			showfooter();
+			exit;
+		}
 
 		if($_SESSION['_config']['secrethash'] != $secrethash || $secrethash == "" || $_SESSION['_config']['secrethash'] == "")
 		{
@@ -603,26 +613,23 @@ require_once('../includes/lib/l10n.php');
 		}
 	}
 
-	if($oldid == 11 && $process != "" && $_REQUEST['support'] != "yes")
+	if($oldid == 11 && $process != "")
 	{
 		$message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
-
-		sendmail("support@cacert.org", "[CAcert.org] ".$subject, $message, $email, "", "", "CAcert Support");
-		showheader(_("Welcome to CAcert.org"));
-		echo _("Your message has been sent.");
-		showfooter();
-		exit;
-	}
-
-	if($oldid == 11 && $process != "" && $_REQUEST['support'] == "yes")
-	{
-		$message = "From: $who\nEmail: $email\nSubject: $subject\n\nMessage:\n".$message;
-
-		sendmail("cacert-support@lists.cacert.org", "[website form email]: ".$subject, $message, "website-form@cacert.org", "cacert-support@lists.cacert.org, $email", "", "CAcert-Website");
-		showheader(_("Welcome to CAcert.org"));
-		echo _("Your message has been sent to the general support list.");
-		showfooter();
-		exit;
+		if (isset($process[0])){
+			sendmail("cacert-support@lists.cacert.org", "[website form email]: ".$subject, $message, "website-form@cacert.org", "cacert-support@lists.cacert.org, $email", "", "CAcert-Website");
+			showheader(_("Welcome to CAcert.org"));
+			echo _("Your message has been sent to the general support list.");
+			showfooter();
+			exit;
+		}
+		if (isset($process[1])){
+			sendmail("support@cacert.org", "[CAcert.org] ".$subject, $message, $email, "", "", "CAcert Support");
+			showheader(_("Welcome to CAcert.org"));
+			echo _("Your message has been sent.");
+			showfooter();
+			exit;
+		}
 	}
 
 	if(!array_key_exists('signup',$_SESSION) || $_SESSION['signup']['year'] < 1900)

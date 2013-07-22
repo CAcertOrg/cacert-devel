@@ -26,7 +26,7 @@
     <td class="DataTD"><b><?=sanitizeHTML($_REQUEST['email'])?></b></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Username from arbitration number.")?>:</td>
+    <td class="DataTD"><?=_("New Username from arbitration number + sequence number a20xxyyzz.a.b")?>:</td>
     <td class="DataTD"><input type="text" name="arbitrationno"></td>
   </tr>
   <tr>

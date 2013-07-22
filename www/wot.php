@@ -87,31 +87,32 @@ function send_reminder()
 {
 	$body = "";
 	$my_translation = L10n::get_translation();
-	
+
 	$_SESSION['_config']['reminder-lang'] = $_POST['reminder-lang'];
-	
+
 	$reminder_translations[] = $_POST['reminder-lang'];
 	if ( !in_array("en", $reminder_translations, $strict=true) ) {
 		$reminder_translations[] = "en";
 	}
-	
+
 	foreach ($reminder_translations as $translation) {
 		L10n::set_translation($translation);
-		
+
 		$body .= L10n::$translations[$translation].":\n\n";
 		$body .= sprintf(_("This is a short reminder that you filled out forms to become trusted with CAcert.org, and %s has attempted to issue you points. Please create your account at %s as soon as possible and then notify %s so that the points can be issued."), $_SESSION['profile']['fname']." (".$_SESSION['profile']['email'].")", "http://www.cacert.org", $_SESSION['profile']['fname'])."\n\n";
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team")."\n\n";
 	}
-	
+
 	L10n::set_translation($reminder_translations[0]); // for the subject
 	sendmail($_POST['email'], "[CAcert.org] "._("Reminder Notice"), $body, $_SESSION['profile']['email'], "", "", $_SESSION['profile']['fname']);
-	
+
 	L10n::set_translation($my_translation);
-	
+
 	$_SESSION['_config']['remindersent'] = 1;
 	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
+
 
 
 
@@ -122,13 +123,47 @@ function send_reminder()
 	if(array_key_exists('location',$_POST) && $_POST['location'] != "")
 		$_SESSION['_config']['location'] = $_POST['location'];
 
-	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;	
+	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;
 
 	if($oldid == 12)
 		$id = $oldid;
+		
+	if($oldid == 4)
+	{
+		if ($_POST['ttp']!='') {
+			//This mail does not need to be translated
+			$body = "Hi TTP adminstrators,\n\n";
+			$body .= "User ".$_SESSION['profile']['fname']." ".
+			$_SESSION['profile']['lname']." with email address '".
+			$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
+			mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+			if ($_POST['ttptopup']=='1') {
+				$body .= "The user is also requesting TTP TOPUP.\n\n";
+			}else{
+				$body .= "The user is NOT requesting TTP TOPUP.\n\n";
+			}
+			$body .= "The user received ".intval($_SESSION['profile']['points'])." assurance points up to today.\n\n";
+			$body .= "Please start the TTP assurance process.";
+			sendmail("support@cacert.org", "[CAcert.org] TTP request.", $body, "support@cacert.org", "", "", "CAcert Website");
+
+			//This mail needs to be translated
+			$body  =_("You are receiving this email because you asked for TTP assurance.")."\n\n";
+			if ($_POST['ttptopup']=='1') {
+				$body .=_("You are requesting TTP TOPUP.")."\n\n";
+			}else{
+				$body .=_("You are NOT requesting TTP TOPUP.")."\n\n";
+			}
+			$body .= _("Best regards")."\n";
+			$body .= _("CAcert Support Team");
+
+			sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You requested TTP assurances"), $body, "support@cacert.org", "", "", "CAcert Support");
+
+		}
+
+	}
 
 	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
-		if (!is_assurer($_SESSION['profile']['id'])) 
+		if (!is_assurer($_SESSION['profile']['id']))
 			{
 				show_page ("Exit","",get_assurer_reason($_SESSION['profile']['id']));
 				exit;
@@ -155,7 +190,7 @@ function send_reminder()
 			$_SESSION['_config']['noemailfound'] = 1;
 			show_page("EnterEmail","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
 			exit;
-		} else 
+		} else
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
 			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
@@ -164,6 +199,14 @@ function send_reminder()
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
 				exit;
 			}
+		}
+		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
+		$res = mysql_query($query);
+		if(mysql_num_rows($res) >= 1)
+		{
+			$_SESSION['_config']['noemailfound'] = 0;
+			show_page("EnterEmail","",_("This account is locked and can not be assured. For more information ask support@cacert.org."));
+			exit;
 		}
 	}
 
@@ -220,7 +263,7 @@ $iecho= "c";
 			exit;
 		}
 
-		if($_REQUEST['points'] == "")
+		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
 			exit;
@@ -247,7 +290,7 @@ $iecho= "c";
 			$newpoints = $awarded = $max;
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
-		
+
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
@@ -260,13 +303,13 @@ $iecho= "c";
 			$newpoints = $max - $drow['total'];
 		if($newpoints < 0)
 			$newpoints = 0;
-		
+
 		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' AND
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
-						`awarded`='$awarded' AND 
+						`awarded`='$awarded' AND
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
 						`date`='".mysql_escape_string(stripslashes($_POST['date']))."'";
 		$res = mysql_query($query);
@@ -285,19 +328,17 @@ $iecho= "c";
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
 						`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$query .= ",\n`method`='Temporary Increase'";
-			$query .= ",\n`expire`=DATE_ADD(NOW(), INTERVAL '".intval($_POST['expire'])."' DAY)";
-			$query .= ",\n`sponsor`='".intval($_POST['sponsor'])."'";
-		} else if($_SESSION['profile']['board'] == 1) {
-			$query .= ",\n`method`='".mysql_escape_string(stripslashes($_POST['method']))."'";
-		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
-			$query .= ",\n`method`='Trusted Third Parties'";
+		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
-		
+		include_once("../includes/notary.inc.php");
+/*to be activated after CCA accept option is implemented in form
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);}*/
+/* to be activated after the CCA recording is announced
+		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']); */
+
 		if($_SESSION['profile']['points'] < 150)
 		{
 			$addpoints = 0;
@@ -313,13 +354,14 @@ $iecho= "c";
 							`method`='Administrative Increase',
 							`when`=NOW()";
 			mysql_query($query);
+
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
 		}
 
 		$my_translation = L10n::get_translation();
 		L10n::set_translation($_SESSION['_config']['notarise']['language']);
-		
+
 		$body  = sprintf(_("You are receiving this email because you have been assured by %s %s (%s)."), $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'])."\n\n";
 		if($_POST['points'] != $newpoints)
 			$body .= sprintf(_("You were issued %s points however the system has rounded this down to %s and you now have %s points in total."), $_POST['points'], $newpoints, ($newpoints + $drow['total']))."\n\n";
@@ -333,21 +375,12 @@ $iecho= "c";
 
 		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)
 		{
-			$body .= _("You have at least 100 Assurance Points. If you want ".
-					"to become an assurer try the Assurer Challenge").
-					" ( https://cats.cacert.org ).\n\n";
-			$body .= _("To make it easier for others in your area to find ".
-					"you, it's helpful to list yourself as an assurer (this ".
-					"is voluntary), as well as a physical location where you ".
-					"live or work the most. You can flag your account to be ".
-					"listed, and add a comment to the display by going to:")."\n";
+			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the Assurer Challenge")." ( https://cats.cacert.org )\n\n";
+			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=8\n\n";
 			$body .= _("You can list your location by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time your points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
 
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
@@ -362,19 +395,10 @@ $iecho= "c";
 		else
 			$body .= sprintf(_("You issued %s points and they now have %s points in total."), $newpoints, ($newpoints + $drow['total']))."\n\n";
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$body  = sprintf("%s %s (%s) has issued a temporary increase to 200 points for %s %s (%s) for %s days. This action was sponsored by %s %s (%s).", $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'], $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'], intval($_POST['expire']), $sponsor['fname'], $sponsor['lname'], $sponsor['email'])."\n\n";
-
-			sendmail("cacert-board@lists.cacert.org", "[CAcert.org] Temporary Increase Issued.", $body, "website@cacert.org", "", "", "CAcert Website");
-		}
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
@@ -448,10 +472,10 @@ $iecho= "c";
 			{
 				$my_translation = L10n::get_translation();
 				L10n::set_translation($user['language']);
-				
+
 				$subject = "[CAcert.org] ".sprintf(_("Message from %s"),
 						$_SESSION['profile']['fname']);
-				
+
 				$body  = sprintf(_("Hi %s,"), $user['fname'])."\n\n";
 				$body .= sprintf(_("%s %s has sent you a message via the ".
 						"contact an Assurer form on CAcert.org."),
@@ -467,16 +491,16 @@ $iecho= "c";
 						"abused, please write to support@cacert.org")."\n\n";
 				$body .= _("Best regards")."\n";
 				$body .= _("Your CAcert Community");
-				
+
 				sendmail($user['email'], $subject, $body,
 						$_SESSION['profile']['email'], //from
 						"", //replyto
 						"", //toname
 						$_SESSION['profile']['fname']." ".
 							$_SESSION['profile']['lname']); //fromname
-				
+
 				L10n::set_translation($my_translation);
-				
+
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
 					<? printf(_("Your email has been sent to %s."), $user['fname']); ?>
@@ -489,10 +513,10 @@ $iecho= "c";
 				show_page(0,"",_("Sorry, I was unable to locate that user."));
 				exit;
 			}
-		
+
 		}
-	} 
-	if($oldid == 9) 
+	}
+	if($oldid == 9)
 	{
 		$oldid=0;
 		$id = 9;
