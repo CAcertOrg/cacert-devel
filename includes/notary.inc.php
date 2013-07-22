@@ -829,13 +829,13 @@
 	}
 
 	/**
-	 * check_date_differnce()
+	 * check_date_difference()
 	 * returns false if the date is larger then today + time diffrence
 	 *
 	 * @param mixed $date
 	 * @param integer $diff
 	 * @return
 	 */
-	function check_date_differnce($date, $diff=1){
+	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
 	}

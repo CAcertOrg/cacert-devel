@@ -250,7 +250,7 @@ $iecho= "c";
 			exit;
 		}
 
-		if(!check_date_differnce(trim($_REQUEST['date'])))
+		if(!check_date_difference(trim($_REQUEST['date'])))
 		{
 			show_page("VerifyData","",_("You must not enter a date in the future."));
 			exit;
