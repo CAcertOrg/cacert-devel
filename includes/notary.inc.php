@@ -620,10 +620,22 @@
 	}
 
 	//functions to do with recording user agreements
+	/**
+	 * write_user_agreement()
+	 * writes a new record to the table user_agreement
+	 *
+	 * @param mixed $memid
+	 * @param mixed $document
+	 * @param mixed $method
+	 * @param mixed $comment
+	 * @param integer $active
+	 * @param integer $secmemid
+	 * @return
+	 */
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
-		$query="insert into `user_agreements` set `memid`=".$memid.", `secmemid`=".$secmemid.
-			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
+		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
+			",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
 		$res = mysql_query($query);
 	}
 
@@ -784,26 +796,6 @@
 <?
 	}
 
-	// double with notray.inc
-	/**
-	 * write_user_agreement()
-	 * writes a new record to the table user_agreement
-	 *
-	 * @param mixed $memid
-	 * @param mixed $document
-	 * @param mixed $method
-	 * @param mixed $comment
-	 * @param integer $active
-	 * @param integer $secmemid
-	 * @return
-	 */
-	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
-		//
-		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
-				",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
-		$res = mysql_query($query);
-	}
-
 	/**
 	 * check_date_format()
 	 * checks if the date is entered in the right date format YYYY-MM-DD and
@@ -837,13 +829,13 @@
 	}
 
 	/**
-	 * check_date_differnce()
+	 * check_date_difference()
 	 * returns false if the date is larger then today + time diffrence
 	 *
 	 * @param mixed $date
 	 * @param integer $diff
 	 * @return
 	 */
-	function check_date_differnce($date, $diff=1){
+	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
 	}
