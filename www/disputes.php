@@ -17,7 +17,7 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
-	require_once("../includes/temp_functions.php");
+	require_once("../includes/notary.inc.php");
 
 	loadem("account");
 
