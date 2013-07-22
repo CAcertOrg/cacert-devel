@@ -620,10 +620,22 @@
 	}
 
 	//functions to do with recording user agreements
+	/**
+	 * write_user_agreement()
+	 * writes a new record to the table user_agreement
+	 *
+	 * @param mixed $memid
+	 * @param mixed $document
+	 * @param mixed $method
+	 * @param mixed $comment
+	 * @param integer $active
+	 * @param integer $secmemid
+	 * @return
+	 */
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
-		$query="insert into `user_agreements` set `memid`=".$memid.", `secmemid`=".$secmemid.
-			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
+		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
+			",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
 		$res = mysql_query($query);
 	}
 
@@ -782,26 +794,6 @@
 <input type="hidden" name="oldid" value="<?=$oldid?>" />
 </form>
 <?
-	}
-
-	// double with notray.inc
-	/**
-	 * write_user_agreement()
-	 * writes a new record to the table user_agreement
-	 *
-	 * @param mixed $memid
-	 * @param mixed $document
-	 * @param mixed $method
-	 * @param mixed $comment
-	 * @param integer $active
-	 * @param integer $secmemid
-	 * @return
-	 */
-	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
-		//
-		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
-				",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
-		$res = mysql_query($query);
 	}
 
 	/**
