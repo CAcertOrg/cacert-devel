@@ -266,7 +266,7 @@
 	{
 ?>
 	<tr>
-		<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
+		<td<?=($support == "1")?' colspan="5"':' colspan="3"'?> class="DataTD"><strong><?=$points_txt?>:</strong></td>
 		<td class="DataTD"><?=$points?></td>
 		<td class="DataTD">&nbsp;</td>
 		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
@@ -591,14 +591,14 @@
 		return $issue_points;
 	}
 
-	function output_given_assurances($userid,$support)
+	function output_given_assurances($userid,$support=0)
 	{
 		output_assurances_header(_("Assurance Points You Issued"),$support);
 		output_given_assurances_content($userid,$points,$sum_experience,$support);
 		output_assurances_footer(_("Total Points Issued"),$points,_("Total Experience Points"),$sum_experience,$support);
 	}
 
-	function output_received_assurances($userid,$support)
+	function output_received_assurances($userid,$support=0)
 	{
 		output_assurances_header(_("Your Assurance Points"),$support);
 		output_received_assurances_content($userid,$points,$sum_experience,$support);
