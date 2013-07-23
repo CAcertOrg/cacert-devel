@@ -848,7 +848,7 @@ function showassuredto()
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -894,7 +894,7 @@ function showassuredby()
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
