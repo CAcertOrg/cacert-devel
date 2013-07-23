@@ -266,9 +266,9 @@
 	{
 ?>
 	<tr>
-		<td class="DataTD" colspan="5"><strong><?=$points_txt?>:</strong></td>
+		<td<?=($support == "1")?' colspan="5"':' colspan="3"'?> class="DataTD"><strong><?=$points_txt?>:</strong></td>
 		<td class="DataTD"><?=$points?></td>
-		<td<?=($support == "1")?' colspan="3"':''?> class="DataTD">&nbsp;</td>
+		<td<?=($support == "1")?' colspan="2"':''?> class="DataTD">&nbsp;</td>
 		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
 		<td class="DataTD"><?=$sumexperience?></td>
 <?
