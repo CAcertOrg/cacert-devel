@@ -26,21 +26,21 @@ page called from the following pages
 <h3><?=_("For CAcert Association Members")?></h3>
 
 <b><?=_("Have you paid your CAcert Association membership fees for the year?")?></b>
-<p><?=_("If not then select this PayPal button to establish annual payment of your 10 € membership fee.")?></p>
+<p><?=_("If not then select this PayPal button to establish annual payment of your 10 EUR membership fee.")?></p>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="AMCDNMBBDXGA2">
 <input type="image" src="/images/btn_subscribeCC_LG.gif" border="0" name="submit" alt="Subscription payment for membership fee">
 </form>
 
-<p><?=_("To do a single 10 € Membership-Fee Payment, please use this button:")?></p>
+<p><?=_("To do a single 10 EUR Membership-Fee Payment, please use this button:")?></p>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="8F4WL72WX857J">
 <input type="image" src="/images/btn_paynowCC_LG.gif" border="0" name="submit" alt="Single payment for membership fee">
 </form>
 
-<p><?=_("If you are located in Australia, you can use bank transfer instead and pay the equivalent of US$10 in AU$.")?></p>
+<p><?=_("If you are located in Australia, you can use bank transfer instead and pay the equivalent of 10 EUR in AUD.")?></p>
 
 <p><?=_("Please also include your name in the transaction so we know who it came from and send an email to secretary at cacert dot org with the details:")?></p>
 
