@@ -814,7 +814,7 @@
 		$query =
 			"select `domaincerts`.`id`
 				from `domaincerts`
-				where `domaincerts`.`domid` = '$id'
+				where `domaincerts`.`domid` = '$domainid'
 			union distinct
 			select `domaincerts`.`id`
 				from `domaincerts`, `domlink`
