@@ -3031,11 +3031,11 @@
 		}
 		if ( 1 !== preg_match('/^[a-z]\d{8}\.\d+\.\d+$/i',trim($_REQUEST['arbitrationno'])) ) {
 			showheader(_("My CAcert.org Account!"));
-			echo _("You did not enter an arbitration number entry.");
+			printf(_("'%s' is not a valid arbitration number entry."), sanitizeHTML(trim($_REQUEST['arbitrationno'])));
 			showfooter();
 			exit;
 		}
-		if (check_email_exists($_REQUEST['arbitrationno'].'@cacert.org')) {
+		if (check_email_exists(trim($_REQUEST['arbitrationno']).'@cacert.org')) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['arbitrationno'].'@cacert.org'));
 			showfooter();
@@ -3055,7 +3055,7 @@
 			showfooter();
 			exit;
 		}
-		account_delete($_REQUEST['userid'], $_REQUEST['arbitrationno'], $_SESSION['profile']['id']);
+		account_delete($_REQUEST['userid'], trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
 	}
 
 	if(($id == 51 || $id == 52 || $oldid == 52) && $_SESSION['profile']['tverify'] <= 0)

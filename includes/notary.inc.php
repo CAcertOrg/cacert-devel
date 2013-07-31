@@ -894,24 +894,27 @@
 		mysql_query($query);
 
 	//delete all other email address
-		$query = "select * from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
+		$query = "select `id` from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
 		$res=mysql_query($query);
 		while($row = mysql_fetch_assoc($res)){
 			account_email_delete($row['id']);
 		}
 
 	//delete all domains
-		$query = "select * from `domains` where `memid`='".$id."'";
+		$query = "select `id` from `domains` where `memid`='".$id."'";
 		$res=mysql_query($query);
 		while($row = mysql_fetch_assoc($res)){
 			account_domain_delete($row['id']);
 		}
 
 	//clear alert settings
-		mysql_query("update `alerts` set `general`='0' where `memid`='$id'");
-		mysql_query("update `alerts` set `country`='0' where `memid`='$id'");
-		mysql_query("update `alerts` set `regional`='0' where `memid`='$id'");
-		mysql_query("update `alerts` set `radius`='0' where `memid`='$id'");
+		mysql_query(
+			"update `alerts` set
+				`general`='0',
+				`country`='0',
+				`regional`='0',
+				`radius`='0'
+			where `memid`='$id'");
 
 	//set default location
 		$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
@@ -955,16 +958,19 @@
 		mysql_query($query);
 
 	//clear all admin and board flags
-		mysql_query("update `users` set `assurer`='0' where `id`='$id'");
-		mysql_query("update `users` set `assurer_blocked`='0' where `id`='$id'");
-		mysql_query("update `users` set `codesign`='0' where `id`='$id'");
-		mysql_query("update `users` set `orgadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `ttpadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `locadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `admin`='0' where `id`='$id'");
-		mysql_query("update `users` set `adadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `tverify`='0' where `id`='$id'");
-		mysql_query("update `users` set `board`='0' where `id`='$id'");
+		mysql_query(
+			"update `users` set
+				`assurer`='0',
+				`assurer_blocked`='0',
+				`codesign`='0',
+				`orgadmin`='0',
+				`ttpadmin`='0',
+				`locadmin`='0',
+				`admin`='0',
+				`adadmin`='0',
+				`tverify`='0',
+				`board`='0'
+			where `id`='$id'");
 
 	//block account
 		mysql_query("update `users` set `locked`='1' where `id`='$id'");  //, `deleted`=Now()
@@ -998,11 +1004,11 @@
 		// called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
 		if (0==$cca) {
-			$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
-			$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>NOW() and `revoked`<`created`";
+			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>NOW()";
 		}else{
-			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>NOW()+90*86400";
-			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
+			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
+			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 		}
 		$res = mysql_query($query1);
 		$r1 = mysql_num_rows($res)>0;
@@ -1016,11 +1022,11 @@
 		// called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
 		if (0==$cca) {
-			$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>NOW()";
-			$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>NOW()";
+			$query1 = "select 1 from `domaincerts` where `memid`='$uid' and `expire`>NOW() and `revoked`<`created`";
+			$query2 = "select 1 from `domaincerts` where `memid`='$uid' and `revoked`>NOW()";
 		}else{
-			$query1 = "select 1 from `domiancerts` where `memid`='$uid' and `expire`>NOW()+90*86400";
-			$query2 = "select 1 from `domiancerts` where `memid`='$uid' and `revoked`>NOW()+90*86400";
+			$query1 = "select 1 from `domaincerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
+			$query2 = "select 1 from `domaincerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 		}
 		$res = mysql_query($query1);
 		$r1 = mysql_num_rows($res)>0;
@@ -1032,7 +1038,7 @@
 	function check_is_orgadmin($uid){
 		// called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
-		$query = "select * from `org` where `memid`='$uid' and `deleted`=0";
+		$query = "select 1 from `org` where `memid`='$uid' and `deleted`=0";
 		$res = mysql_query($query);
 		return mysql_num_rows($res) > 0;
 	}
@@ -1055,12 +1061,15 @@
 	function revoke_all_server_cert($domainid){
 		//revokes all server certs for an domain
 		$domainid = intval($domainid);
-		$query = "select distinct `domaincerts`.`id`
-			from `domaincerts`, `domlink`
-			where `domaincerts`.`domid` = '$domainid'
-			or (
-			`domaincerts`.`id` = `domlink`.`certid`
-			and `domlink`.`domid` = '$domainid')";
+		$query =
+			"select `domaincerts`.`id`
+				from `domaincerts`
+				where `domaincerts`.`domid` = '$domainid'
+			union distinct
+			select `domaincerts`.`id`
+				from `domaincerts`, `domlink`
+				where `domaincerts`.`id` = `domlink`.`certid`
+				and `domlink`.`domid` = '$domainid'";
 		$dres = mysql_query($query);
 		while($drow = mysql_fetch_assoc($dres))
 		{
