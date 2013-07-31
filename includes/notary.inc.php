@@ -811,12 +811,15 @@
 	//called from www/diputes.php if($type == "reallydomain") / if($action == "accept")
 	//called from account_delete
 		$domainid = intval($domainid);
-		$query = "select distinct `domaincerts`.`id`
-			from `domaincerts`, `domlink`
-			where `domaincerts`.`domid` = '$domainid'
-			or (
-			`domaincerts`.`id` = `domlink`.`certid`
-			and `domlink`.`domid` = '$domainid')";
+		$query =
+			"select `domaincerts`.`id`
+				from `domaincerts`
+				where `domaincerts`.`domid` = '$id'
+			union distinct
+			select `domaincerts`.`id`
+				from `domaincerts`, `domlink`
+				where `domaincerts`.`id` = `domlink`.`certid`
+				and `domlink`.`domid` = '$domainid'";
 		$dres = mysql_query($query);
 		while($drow = mysql_fetch_assoc($dres))
 		{
