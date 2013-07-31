@@ -865,24 +865,27 @@
 		mysql_query($query);
 
 	//delete all other email address
-		$query = "select * from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
+		$query = "select `id` from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
 		$res=mysql_query($query);
 		while($row = mysql_fetch_assoc($res)){
 			account_email_delete($row['id']);
 		}
 
 	//delete all domains
-		$query = "select * from `domains` where `memid`='".$id."'";
+		$query = "select `id` from `domains` where `memid`='".$id."'";
 		$res=mysql_query($query);
 		while($row = mysql_fetch_assoc($res)){
 			account_domain_delete($row['id']);
 		}
 
 	//clear alert settings
-		mysql_query("update `alerts` set `general`='0' where `memid`='$id'");
-		mysql_query("update `alerts` set `country`='0' where `memid`='$id'");
-		mysql_query("update `alerts` set `regional`='0' where `memid`='$id'");
-		mysql_query("update `alerts` set `radius`='0' where `memid`='$id'");
+		mysql_query(
+			"update `alerts` set
+				`general`='0',
+				`country`='0',
+				`regional`='0',
+				`radius`='0'
+			where `memid`='$id'");
 
 	//set default location
 		$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
@@ -926,16 +929,19 @@
 		mysql_query($query);
 
 	//clear all admin and board flags
-		mysql_query("update `users` set `assurer`='0' where `id`='$id'");
-		mysql_query("update `users` set `assurer_blocked`='0' where `id`='$id'");
-		mysql_query("update `users` set `codesign`='0' where `id`='$id'");
-		mysql_query("update `users` set `orgadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `ttpadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `locadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `admin`='0' where `id`='$id'");
-		mysql_query("update `users` set `adadmin`='0' where `id`='$id'");
-		mysql_query("update `users` set `tverify`='0' where `id`='$id'");
-		mysql_query("update `users` set `board`='0' where `id`='$id'");
+		mysql_query(
+			"update `users` set
+				`assurer`='0',
+				`assurer_blocked`='0',
+				`codesign`='0',
+				`orgadmin`='0',
+				`ttpadmin`='0',
+				`locadmin`='0',
+				`admin`='0',
+				`adadmin`='0',
+				`tverify`='0',
+				`board`='0'
+			where `id`='$id'");
 
 	//block account
 		mysql_query("update `users` set `locked`='1' where `id`='$id'");  //, `deleted`=Now()
