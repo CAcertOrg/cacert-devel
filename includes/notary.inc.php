@@ -1005,12 +1005,15 @@
 	function revoke_all_server_cert($domainid){
 		//revokes all server certs for an domain
 		$domainid = intval($domainid);
-		$query = "select distinct `domaincerts`.`id`
-			from `domaincerts`, `domlink`
-			where `domaincerts`.`domid` = '$domainid'
-			or (
-			`domaincerts`.`id` = `domlink`.`certid`
-			and `domlink`.`domid` = '$domainid')";
+		$query =
+			"select `domaincerts`.`id`
+				from `domaincerts`
+				where `domaincerts`.`domid` = '$domainid'
+			union distinct
+			select `domaincerts`.`id`
+				from `domaincerts`, `domlink`
+				where `domaincerts`.`id` = `domlink`.`certid`
+				and `domlink`.`domid` = '$domainid'";
 		$dres = mysql_query($query);
 		while($drow = mysql_fetch_assoc($dres))
 		{
