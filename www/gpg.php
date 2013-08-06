@@ -91,13 +91,13 @@ function verifyEmail($email)
 			exit;
 		}
 
-		$debugkey = $gpgkey = clean_gpgcsr($CSR);
+		$gpgkey = clean_gpgcsr($CSR);
 
 		$tnam = tempnam('/tmp/', '__gpg');
 		$fp = fopen($tnam, 'w');
 		fwrite($fp, $gpgkey);
 		fclose($fp);
-		$debugpg = $gpg = trim(`gpg --with-colons --homedir /tmp 2>&1 < $tnam`);
+		$gpg = trim(`gpg --with-colons --homedir /tmp 2>&1 < $tnam`);
 		unlink($tnam);
 
 		$lines = "";
@@ -269,7 +269,6 @@ function verifyEmail($email)
 			unset($_REQUEST['process']);
 			$id = $oldid;
 			unset($oldid);
-			$do = `echo "$debugkey\n--\n$debugpg\n--" >> /www/tmp/gpg.debug`;
 			exit();
 		}
 		elseif($nerr)
@@ -314,7 +313,7 @@ function verifyEmail($email)
 		system("gpg --homedir $cwd --import $cwd/gpg.csr");
 
 
-		$debugpg = $gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $keyid 2>&1`);
+		$gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $keyid 2>&1`);
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
