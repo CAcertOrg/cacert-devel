@@ -92,9 +92,17 @@ function verifyEmail($email)
 			exit;
 		}
 
-		if (runCommand('gpg --with-colons --homedir /tmp 2>&1',
-				clean_gpgcsr($CSR),
-				$gpg))
+		$err = runCommand('mktemp --directory /tmp/cacert_gpg.XXXXXXXXXX', $tmpdir);
+		if (!err && $tmpdir)
+		{
+			$err = runCommand("gpg --with-colons --homedir $tmpdir 2>&1",
+					clean_gpgcsr($CSR),
+					$gpg);
+
+			`rm -r $tmpdir`;
+		}
+
+		if ($err)
 		{
 			showheader(_("Welcome to CAcert.org"));
 
