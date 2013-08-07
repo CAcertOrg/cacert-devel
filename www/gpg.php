@@ -83,8 +83,15 @@ function verifyEmail($email)
 	$state=0;
 	if($oldid == "0" && $CSR != "")
 	{
-		$err = runCommand('mktemp --directory /tmp/cacert_gpg.XXXXXXXXXX', $tmpdir);
-		if (!err && $tmpdir)
+		$err = runCommand('mktemp --directory /tmp/cacert_gpg.XXXXXXXXXX',
+				"",
+				$tmpdir);
+		if (!$tmpdir)
+		{
+			$err = true;
+		}
+
+		if (!err)
 		{
 			$err = runCommand("gpg --with-colons --homedir $tmpdir 2>&1",
 					clean_gpgcsr($CSR),
