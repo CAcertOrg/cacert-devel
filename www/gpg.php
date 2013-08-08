@@ -91,7 +91,7 @@ function verifyEmail($email)
 			$err = true;
 		}
 
-		if (!err)
+		if (!$err)
 		{
 			$err = runCommand("gpg --with-colons --homedir $tmpdir 2>&1",
 					clean_gpgcsr($CSR),
