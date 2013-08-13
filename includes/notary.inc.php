@@ -620,10 +620,22 @@
 	}
 
 	//functions to do with recording user agreements
+	/**
+	 * write_user_agreement()
+	 * writes a new record to the table user_agreement
+	 *
+	 * @param mixed $memid
+	 * @param mixed $document
+	 * @param mixed $method
+	 * @param mixed $comment
+	 * @param integer $active
+	 * @param integer $secmemid
+	 * @return
+	 */
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
-		$query="insert into `user_agreements` set `memid`=".$memid.", `secmemid`=".$secmemid.
-			",`document`='".$document."',`date`=NOW(), `active`=".$active.",`method`='".$method."',`comment`='".$comment."'" ;
+		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
+			",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
 		$res = mysql_query($query);
 	}
 
@@ -666,8 +678,8 @@
 	function get_last_user_agreement($memid, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
 		$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." ) order by `date` desc limit 1)
- union
- (SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND ( u.`secmemid`=".$memid.")) order by `date` desc limit 1" ;
+			union
+			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND ( u.`secmemid`=".$memid.")) order by `date` desc limit 1" ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
 			$row = mysql_fetch_assoc($res);
@@ -708,7 +720,7 @@
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field1?>:</td>
+		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?>:</td>
 		<td class="DataTD"><?=$field2?></td>
 	</tr>
 <?
@@ -735,7 +747,7 @@
 		if (count($methods) != 1) {
 ?>
 	<tr>
-		<td class="DataTD"><?=$text?></td>
+		<td class="DataTD"><?=$text.(empty($text)?'':':')?></td>
 		<td class="DataTD">
 			<select name="method">
 <?
@@ -762,7 +774,7 @@
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field?>:</td>
+		<td class="DataTD"><?=$field.(empty($field)?'':':')?>:</td>
 		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
 	</tr>
 <?
@@ -1041,5 +1053,48 @@
 		while($row = mysql_fetch_assoc($res)){
 			revoke_all_server_cert($row['id']);
 		}
+	}
 
+	/**
+	 * check_date_format()
+	 * checks if the date is entered in the right date format YYYY-MM-DD and
+	 * if the date is after the 1st January of the given year
+	 *
+	 * @param mixed $date
+	 * @param integer $year
+	 * @return
+	 */
+	function check_date_format($date, $year=2000){
+		if (!strpos($date,'-')) {
+			return FALSE;
+		}
+		$arr=explode('-',$date);
+
+		if ((count($arr)!=3)) {
+			return FALSE;
+		}
+		if (intval($arr[0])<=$year) {
+			return FALSE;
+		}
+		if (intval($arr[1])>12 or intval($arr[1])<=0) {
+			return FALSE;
+		}
+		if (intval($arr[2])>31 or intval($arr[2])<=0) {
+			return FALSE;
+		}
+
+		return checkdate( intval($arr[1]), intval($arr[2]), intval($arr[0]));
+
+	}
+
+	/**
+	 * check_date_difference()
+	 * returns false if the date is larger then today + time diffrence
+	 *
+	 * @param mixed $date
+	 * @param integer $diff
+	 * @return
+	 */
+	function check_date_difference($date, $diff=1){
+		return (strtotime($date)<=time()+$diff*86400);
 	}
