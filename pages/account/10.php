@@ -38,7 +38,9 @@
 <p><?=_("Optional comment, only used in the certifictate overview")?><br>
        <input type="text" name="description" maxlength="80" size=80/></p>
 <p><?=_("Paste your CSR(Certificate Signing Request) below...")?></p>
-<textarea name="CSR" cols="80" rows="15"></textarea><br>
+<textarea name="CSR" cols="80" rows="15"></textarea><br />
+<p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
 <input type="submit" name="process" value="<?=_("Submit")?>"/>
 <input type="hidden" name="oldid" value="<?=$id?>"/>
 </form>
