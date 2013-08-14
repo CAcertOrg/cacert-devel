@@ -53,7 +53,13 @@
 
 		$query = "./description";
 		$nodeList = $xpath->query($query, $item);
-		$description = recode_string("UTF8..html" , $nodeList->item(0)->nodeValue);
+		$description = $nodeList->item(0)->nodeValue;
+		// The description may contain HTML entities => convert them
+		$description = html_entity_decode($description, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+		// Description may contain HTML markup and unicode characters => encode them
+		// If we didn't decode and then encode again, (i.e. take the content
+		// as it is in the RSS feed) we might inject harmful markup
+		$description = recode_string("UTF8..html", $description);
 
 		printf("<h3> %s </h3>\n", $title);
 		printf("<p> %s </p>\n", $description);
