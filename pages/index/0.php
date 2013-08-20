@@ -62,7 +62,7 @@
 		$description = recode_string("UTF8..html", $description);
 
 		printf("<h3><a href=\"%s\">%s</a></h3>\n", $link, $title);
-		printf("<p>%s</p>\n", $description);
+		printf("<p>%s</p>\n", nl2br($description));
 
 		$title = '';
 		$description = '';
