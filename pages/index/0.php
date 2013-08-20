@@ -61,9 +61,8 @@
 		// as it is in the RSS feed) we might inject harmful markup
 		$description = recode_string("UTF8..html", $description);
 
-		printf("<h3> %s </h3>\n", $title);
-		printf("<p> %s </p>\n", $description);
-		printf("<p>[<a href=\"%s\"> %s </a> ] </p>\n\n", $link,_("Full Story"));
+		printf("<h3><a href=\"%s\">%s</a></h3>\n", $link, $title);
+		printf("<p>%s</p>\n", $description);
 
 		$title = '';
 		$description = '';
