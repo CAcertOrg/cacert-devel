@@ -19,13 +19,14 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="6" class="title"><?=_("Client Certificates")?> - <a href="account.php?id=18&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
+    <td colspan="8" class="title"><?=_("Client Certificates")?> - <a href="account.php?id=18&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
     <td class="DataTD"><?=_("Status")?></td>
     <td class="DataTD"><?=_("CommonName")?></td>
-	<td class="DataTD"><?=_("SerialNumber")?></td>
+	  <td class="DataTD"><?=_("SerialNumber")?></td>
+		<td class="DataTD"><?=_("Comment")?></td>
     <td class="DataTD"><?=_("Revoked")?></td>
     <td class="DataTD"><?=_("Expires")?></td>
 
@@ -35,7 +36,8 @@
 			UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
 			`oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
-			`oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`
+			`oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
+			`oemail`.`description`
 			from `orgemailcerts` as `oemail`, `org`
 			where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 				`org`.`orgid`=`oemail`.`orgid` ";
@@ -50,7 +52,7 @@
 	{
 ?>
   <tr>
-    <td colspan="6" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
+    <td colspan="8" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
 <? } else {
 	while($row = mysql_fetch_assoc($res))
@@ -80,14 +82,22 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
 <? } ?>
-	<td class="DataTD"><?=$row['serial']?></td>
+	  <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
+    <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+    <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
 <? } ?>
   <tr>
+    <td class="DataTD" colspan="8">
+      <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
+    </td>
+  </tr>
+  <tr>
     <td class="DataTD" colspan="6"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
     			<input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
   </tr>
 <? } ?>
 </table>
