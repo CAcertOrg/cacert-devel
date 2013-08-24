@@ -126,7 +126,7 @@ function send_reminder()
 
 	if($oldid == 12)
 		$id = $oldid;
-		
+
 	if($oldid == 4)
 	{
 		if ($_POST['ttp']!='') {
@@ -278,7 +278,7 @@ $iecho= "c";
 		}
 
 		//met assuree in person, not appliciable fot TTP / TTP Topup assurances
-		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_SESSION['profile']['ttpadmin'] != 1)
+		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_REQUEST['method'] != "Trusted 3rd Parties")
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
@@ -373,15 +373,8 @@ $iecho= "c";
 		if (check_date_format(trim($_REQUEST['date']),2010)) {
 			write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
 		}
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$query .= ",\n`method`='Temporary Increase'";
-			$query .= ",\n`expire`=DATE_ADD(NOW(), INTERVAL '".intval($_POST['expire'])."' DAY)";
-			$query .= ",\n`sponsor`='".intval($_POST['sponsor'])."'";
-		} else if($_SESSION['profile']['board'] == 1) {
-			$query .= ",\n`method`='".mysql_escape_string(stripslashes($_POST['method']))."'";
-		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
-			$query .= ",\n`method`='Trusted Third Parties'";
+		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);

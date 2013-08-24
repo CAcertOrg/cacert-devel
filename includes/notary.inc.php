@@ -635,7 +635,7 @@
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
 	// write a new record to the table user_agreement
 		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
-			",`document`='".$document."',`date`=NOW(), `active`=".intval($active).",`method`='".$method."',`comment`='".$comment."'" ;
+			",`document`='".mysql_real_escape_string($document)."',`date`=NOW(), `active`=".intval($active).",`method`='".mysql_real_escape_string($method)."',`comment`='".mysql_real_escape_string($comment)."'" ;
 		$res = mysql_query($query);
 	}
 
