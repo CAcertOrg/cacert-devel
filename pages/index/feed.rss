@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- generator="WordPress/2.5.1" -->
+<rss version="0.92">
+	<channel>
+		<title>CAcert NEWS Blog</title>
+		<link>http://blog.cacert.org</link>
+		<description>CAcert NEWS and up coming events.</description>
+		<lastBuildDate>Fri, 20 Aug 2010 11:54:30 +0000</lastBuildDate>
+		<docs>http://backend.userland.com/rss092</docs>
+		<language>en</language>
+
+		<item>
+			<title>Looking for confirmation email on creating account?</title>
+			<description>Please go to https://ca-mgr1.it-sls.de/login login with your just created account and password. Under MAIL you'll find your individual confirmation email.
+			</description>
+			<link>https://ca-mgr1.it-sls.de/testsystemdoc.html</link>
+		</item>
+		<item>
+			<title>You are interested in helping Testing ?</title>
+			<description>Create your test account on the Testserver. Beware of the confirmation email (see above) Entry page for Testers: https://wiki.cacert.org/Software/CurrentTest. Please contact Ulrich becoming a Testteam member.</description>
+			<link>https://wiki.cacert.org/Software/CurrentTest</link>
+		</item>
+		<item>
+			<title>Dear Testers</title>
+			<description>We had one work with no activity on the testserver caused by inactivity by the Software-Assessment team, caused by router problems at the hosting site of the testserver. Probably latter has been fixed.
+
+				The reported bugs can be categorized into
+				1. Testserver-Mgmt-System related
+				2. Production Server recovery process to Testserver
+				3. general software errors
+
+				Group 1+2 are essential for our current test phase, as they covers the problems in building the base testserver environment that is needed for testing.
+
+				So language and country selection support is an essential feature we've worked on the last week.
+
+				One problem couldn't be solved till today: secondary language selection all other country and language related bugs should be fixed in the meantime.
+
+				Also the Show my Points details now has the correct script (after some confusion in the Software-Assessment team and one developer), comparable to the script on the production website.
+
+				On the main entry page for testers https://wiki.cacert.org/Software/CurrentTest the updates on the bugs are marked with (i) so here comes the 2nd test round ...
+
+				Please report your found bugs and also success reports to the listed bug numbers
+
+				Thanks for your assistance .... ;)</description>
+			<link>https://cacert1.it-sls.de/</link>
+		</item>
+	</channel>
+</rss>
