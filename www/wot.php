@@ -263,7 +263,7 @@ $iecho= "c";
 			exit;
 		}
 
-		if($_REQUEST['points'] == "")
+		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
 			exit;
@@ -328,18 +328,16 @@ $iecho= "c";
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
 						`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$query .= ",\n`method`='Temporary Increase'";
-			$query .= ",\n`expire`=DATE_ADD(NOW(), INTERVAL '".intval($_POST['expire'])."' DAY)";
-			$query .= ",\n`sponsor`='".intval($_POST['sponsor'])."'";
-		} else if($_SESSION['profile']['board'] == 1) {
-			$query .= ",\n`method`='".mysql_escape_string(stripslashes($_POST['method']))."'";
-		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
+		include_once("../includes/notary.inc.php");
+/*to be activated after CCA accept option is implemented in form
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);}*/
+/* to be activated after the CCA recording is announced
+		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']); */
 
 		if($_SESSION['profile']['points'] < 150)
 		{
@@ -356,6 +354,7 @@ $iecho= "c";
 							`method`='Administrative Increase',
 							`when`=NOW()";
 			mysql_query($query);
+
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
 		}
@@ -383,9 +382,6 @@ $iecho= "c";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time your points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
-
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
 
@@ -399,19 +395,10 @@ $iecho= "c";
 		else
 			$body .= sprintf(_("You issued %s points and they now have %s points in total."), $newpoints, ($newpoints + $drow['total']))."\n\n";
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$body  = sprintf("%s %s (%s) has issued a temporary increase to 200 points for %s %s (%s) for %s days. This action was sponsored by %s %s (%s).", $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'], $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'], intval($_POST['expire']), $sponsor['fname'], $sponsor['lname'], $sponsor['email'])."\n\n";
-
-			sendmail("cacert-board@lists.cacert.org", "[CAcert.org] Temporary Increase Issued.", $body, "website@cacert.org", "", "", "CAcert Website");
-		}
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
