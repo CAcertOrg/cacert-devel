@@ -186,7 +186,7 @@
 		}
 		if(0 == $delcount)
 		{
-			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
+			echo _("You did not select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
 
 		showfooter();
