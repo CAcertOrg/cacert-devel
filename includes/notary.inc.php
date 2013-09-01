@@ -1024,7 +1024,7 @@
 		$mailid = intval($mailid);
 		$query = "select `emailcerts`.`id`
 			from `emaillink`,`emailcerts` where
-			`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and `revoked`=0
+			`emaillink`.`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and `emailcerts`.`revoked`=0
 			group by `emailcerts`.`id`";
 		$dres = mysql_query($query);
 		while($drow = mysql_fetch_assoc($dres)){
