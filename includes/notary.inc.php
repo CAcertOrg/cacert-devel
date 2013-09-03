@@ -726,12 +726,6 @@
 <?
 	}
 
-	function AssureCCABoxLine($type,$text)
-	{
-		return;
-		AssureBoxLine($type,$text);
-	}
-
 	function AssureBoxLine($type,$text,$checked)
 	{
 ?>
