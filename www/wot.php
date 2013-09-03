@@ -277,8 +277,8 @@ $iecho= "c";
 			exit;
 		}
 
-		//met assuree in person, not appliciable fot TTP / TTP Topup assurances
-		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_REQUEST['method'] != "Trusted Third Parties")
+		//met assuree in person, not appliciable for TTP / TTP Topup assurances
+		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_REQUEST['method'] != "Trusted 3rd Parties")
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
