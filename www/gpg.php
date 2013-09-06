@@ -17,7 +17,11 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
+<<<<<<< HEAD
 	require_once("../includes/lib/general.php");
+=======
+	require_once('../includes/notary.inc.php');
+>>>>>>> merge-bug-1177-893-1136-1123-1137
 
         $id = 0; if(array_key_exists('id',$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = $_REQUEST['oldid'] = array_key_exists('oldid',$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
@@ -83,6 +87,14 @@ function verifyEmail($email)
 	$state=0;
 	if($oldid == "0" && $CSR != "")
 	{
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
+
 		$err = runCommand('mktemp --directory /tmp/cacert_gpg.XXXXXXXXXX',
 				"",
 				$tmpdir);
@@ -293,6 +305,8 @@ function verifyEmail($email)
 
 	if($oldid == "0" && $CSR != "")
 	{
+		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
+
 		//set variable for comment
 		if(trim($_REQUEST['description']) == ""){
 			$description= "";

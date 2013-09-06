@@ -100,8 +100,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval($_REQUEST['userid']) > 0)
   {
-    $id = intval($_REQUEST['userid']);
-    $query = "select * from `users` where `id`='$id' and `users`.`deleted`=0";
+    $userid = intval($_REQUEST['userid']);
+    $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
     $res = mysql_query($query);
     if(mysql_num_rows($res) <= 0)
     {
@@ -135,7 +135,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Last Name")?>:</td>
     <td class="DataTD">  <input type="hidden" name="oldid" value="43">
   <input type="hidden" name="action" value="updatedob">
-  <input type="hidden" name="userid" value="<?=intval($id)?>">
+  <input type="hidden" name="userid" value="<?=intval($userid)?>">
   <input type="text" name="lname" value="<?=sanitizeHTML($row['lname'])?>"></td>
   </tr>
   <tr>
@@ -786,8 +786,19 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
+	<tr>
+		<td colspan="6" class="title">
+			<form method="post" action="account.php" onSubmit="if(!confirm('<?=_("Are you sure you want to revoke all private certificates?")?>')) return false;">
+				<input type="hidden" name="action" value="revokecert">
+				<input type="hidden" name="oldid" value="43">
+				<input type="hidden" name="userid" value="<?=intval($userid)?>">
+				<input type="submit" value="<?=_('revoke certificates')?>">
+			</form>
+		</td>
+	</tr>
 </table>
 <br>
+
 
 <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
  (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
@@ -837,7 +848,7 @@ function showassuredto()
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -883,7 +894,7 @@ function showassuredby()
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
