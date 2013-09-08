@@ -17,11 +17,8 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
-<<<<<<< HEAD
 	require_once("../includes/lib/general.php");
-=======
 	require_once('../includes/notary.inc.php');
->>>>>>> merge-bug-1177-893-1136-1123-1137
 
         $id = 0; if(array_key_exists('id',$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = $_REQUEST['oldid'] = array_key_exists('oldid',$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
