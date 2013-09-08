@@ -82,7 +82,7 @@ if($_SESSION['profile']['points'] >= 50)
 
   <tr>
     <td class="DataTD">
-      <input type="checkbox" name="login" value="1" checked="checked">
+      <input type="checkbox" name="login" value="1" checked="checked" />
     </td>
     <td class="DataTD"> <?=_("Enable certificate login with this certificate")?><br />
       <?=_("By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ .")?><br/>
@@ -120,7 +120,7 @@ if($_SESSION['profile']['points'] >= 50)
  <tr name="expert">
     <td class="DataTD" colspan="2"><textarea name="optionalCSR" cols="80" rows="5"></textarea></td>
  </tr>
-   <tr>
+ <tr>
     <td class="DataTD">
       <input type="checkbox" name="CCA" />
     </td>
@@ -129,7 +129,7 @@ if($_SESSION['profile']['points'] >= 50)
         <?=_("Please Note: You need to accept the CCA to proceed.")?>
     </td>
   </tr>
- <tr>
+  <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>" /></td>
   </tr>
 </table>
