@@ -69,7 +69,7 @@
 	AssureTextLine(_("Name"), sprintf(
 		"<span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"suffix\">%s</span></span>",
 		$fname, $mname, $lname, $suffix
-		);
+		));
 	AssureTextLine(_("Date of Birth"),$dob_print);
 	AssureMethodLine(_("Method"),$methods,'');
 	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s has appeared in person."), $fname, $mname, $lname),array_key_exists('certify',$_POST) && $_POST['certify'] == 1);
