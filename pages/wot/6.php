@@ -52,7 +52,6 @@
 	$lname = $row['lname'];
 	$suffix = $row['suffix'];
 	$dob = $row['dob'];
-	$name = $fname." ".$mname." ".$lname." ".$suffix; //needed?
 
 	$dob_date = explode( '-', $dob);
 	$dob_print = sprintf(
@@ -60,6 +59,8 @@
 		$dob_date[0], $dob_date[1], $dob_date[2],
 		intval($dob_date[2], 10), $mnames[$dob_date[1]], intval($dob_date[0], 10)
 		);
+
+	$name = $fname." ".$mname." ".$lname." ".$suffix;
 	$_SESSION['_config']['wothash'] = md5($name."-".$dob);
 
 	require_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
