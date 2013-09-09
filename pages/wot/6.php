@@ -55,13 +55,20 @@
 	$name = $fname." ".$mname." ".$lname." ".$suffix; //needed?
 
 	$dob_date = explode( '-', $dob);
-       $dob_print = sprintf("<tt>%s-%s-%s</tt> (%d %s %d)", $dob_date[0], $dob_date[1], $dob_date[2], intval($dob_date[2], 10), $mnames[$dob_date[1]], intval($dob_date[0], 10));
+	$dob_print = sprintf(
+		'<tt clsss="accountdetail">%s-%s-%s</tt> (%d %s %d)',
+		$dob_date[0], $dob_date[1], $dob_date[2],
+		intval($dob_date[2], 10), $mnames[$dob_date[1]], intval($dob_date[0], 10)
+		);
 	$_SESSION['_config']['wothash'] = md5($name."-".$dob);
 
 	require_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname));
-	AssureTextLine(_("Name"),sprintf("<span class=\"name\"><span class=\"fname\">%s</span> <span class=\"mname\">%s</span> <span class=\"lname\">%s</span>  <span class=\"lname\">%s</span> <span class=\"suffix\">%s</span></span>", $fname, $mname, $lname, $suffix);
+	AssureTextLine(_("Name"), sprintf(
+		"<span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"suffix\">%s</span></span>",
+		$fname, $mname, $lname, $suffix
+		);
 	AssureTextLine(_("Date of Birth"),$dob_print);
 	AssureMethodLine(_("Method"),$methods,'');
 	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s has appeared in person."), $fname, $mname, $lname),array_key_exists('certify',$_POST) && $_POST['certify'] == 1);
