@@ -32,13 +32,28 @@
 	else
 		$methods = array("Face to Face Meeting");
 
+	$mnames = array(
+		'01' => _('January'),
+		'02' => _('February'),
+		'03' => _('March'),
+		'04' => _('April'),
+		'05' => _('May'),
+		'06' => _('June'),
+		'07' => _('July'),
+		'08' => _('August'),
+		'09' => _('September'),
+		'10' => _('October'),
+		'11' => _('November'),
+		'12' => _('December')
+		);
+
 	$fname = $row['fname'];
 	$mname = $row['mname'];
 	$lname = $row['lname'];
 	$suffix = $row['suffix'];
 	$dob = $row['dob'];
 	$name = $fname." ".$mname." ".$lname." ".$suffix; //needed?
-	$mnames = array('01' => _('January'), '02' => _('February'), '03' => _('March'), '04' => _('April'), '05' => _('May'), '06' => _('June'), '07' => _('July'), '08' => _('August'), '09' => _('September'), '10' => _('October'), '11' => _('November'), '12' => _('December'));
+
 	$dob_date = explode( '-', $dob);
        $dob_print = sprintf("<tt>%s-%s-%s</tt> (%d %s %d)", $dob_date[0], $dob_date[1], $dob_date[2], intval($dob_date[2], 10), $mnames[$dob_date[1]], intval($dob_date[0], 10));
 	$_SESSION['_config']['wothash'] = md5($name."-".$dob);
