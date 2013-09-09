@@ -53,7 +53,7 @@
 	$suffix = $row['suffix'];
 	$dob = $row['dob'];
 
-	$dob_date = explode( '-', $dob);
+	$dob_date = explode('-', $dob, 3);
 	$dob_print = sprintf(
 		'<tt clsss="accountdetail">%s-%s-%s</tt> (%d %s %d)',
 		$dob_date[0], $dob_date[1], $dob_date[2],
