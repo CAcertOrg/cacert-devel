@@ -17,8 +17,8 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
-	require_once('../includes/notary.inc.php');
 	require_once("../includes/lib/general.php");
+	require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists('id',$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = $_REQUEST['oldid'] = array_key_exists('oldid',$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
