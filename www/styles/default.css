@@ -673,25 +673,29 @@ div.footerbar {
 }
 
 .accountdetail.fname {
-  color:#600; font-style: italic; font-weight: bold;
+  color:#600;
   background-color: #ffeeee;
   background-color: rgba(102, 0, 0, 0.05);
 }
 
 .accountdetail.mname {
-  color:#060; font-style:italic;
+  color:#060;
+  font-style:italic;
   background-color: #f0fff0;
   background-color: rgba(0, 102, 0, 0.05);
 }
 
 .accountdetail.lname {
-  color:#006; font-weight:bold;
+  color:#006;
+  font-weight:bold;
   background-color: #f0fef0;
   background-color: rgba(0, 0, 102, 0.05);
 }
 
 .accountdetail.suffix {
   color:#660;
+  font-style: italic;
+  font-weight: bold;
   background-color: #ffffdd;
   background-color: rgba(102, 102, 0, 0.05);
 }
