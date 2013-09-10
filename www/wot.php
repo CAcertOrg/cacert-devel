@@ -332,9 +332,9 @@ $iecho= "c";
 		$assurer =  $_SESSION['profile']['fname'].' '.$_SESSION['profile']['lname'];
 		$body  = sprintf(_("You are receiving this email because you have been assured by %s (%s)."), $assurer, $_SESSION['profile']['email'])."\n\n";
 		if(($oldpoints + $newpoints) >= 100)
-			$body .= sprintf(_("You were issued %s points however the system only counts up to 100 assurance points. You now have 100 countable assurance points and %s countable expierence points."), $_POST['points'], ($newpoints + $oldpoints-100))."\n\n";
+			$body .= sprintf(_("You were issued %s points. However the system only counts up to 100 assurance points."), $awarded)."\n\n";
 		else
-			$body .= sprintf(_("You were issued %s points and you now have %s points in total."), $newpoints, ($newpoints + $oldpoints))."\n\n";
+			$body .= sprintf(_("You were issued %s points and you now have %s points in total."), $awarded, ($newpoints + $oldpoints))."\n\n";
 
 		if(($oldpoints + $newpoints) < 100 && ($oldpoints + $newpoints) >= 50)
 		{
@@ -368,7 +368,7 @@ $iecho= "c";
 
 		$assuree = $_SESSION['_config']['notarise']['fname'].' '.$_SESSION['_config']['notarise']['lname'];
 		$body  = sprintf(_("You are receiving this email because you have assured %s (%s)."), $assuree, $_SESSION['_config']['notarise']['email'])."\n\n";
-		$body .= sprintf(_("You issued %s points."), $newpoints)."\n\n";
+		$body .= sprintf(_("You issued %s points."), $awarded)."\n\n";
 
 		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
 			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
