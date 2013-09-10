@@ -683,9 +683,9 @@ div.footerbar {
   color:#006; font-weight:bold;
   background-color: #f0fef0;
   background-color: rgba(0, 0, 102, 0.05);
-  }
+}
 
-.accountdetail.suffix, .suffix{
+.accountdetail.suffix{
   color:#660;
   background-color: #ffffdd;
   background-color: rgba(102, 102, 0, 0.05);
