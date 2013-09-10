@@ -371,7 +371,8 @@ $iecho= "c";
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		if (check_date_format(trim($_REQUEST['date']),2010)) {
-			write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
+			write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);
+			write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']);
 		}
 		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
@@ -379,10 +380,6 @@ $iecho= "c";
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
 		include_once("../includes/notary.inc.php");
-/*to be activated after CCA accept option is implemented in form
-		write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);}*/
-/* to be activated after the CCA recording is announced
-		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']); */
 
 		if($_SESSION['profile']['points'] < 150)
 		{
