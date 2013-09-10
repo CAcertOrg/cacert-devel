@@ -659,8 +659,12 @@ div.footerbar {
 @font-face {
   font-family: 'Source Code Pro';
   src: local('Source Code Pro');
-  src: url(/res/fonts/SourceCodePro-Medium.ttf);
+/*  src: url(/res/fonts/SourceCodePro-Medium.ttf); */
 }
+@font-face {
+  font-family: 'Last Resort';
+  src: local('Last Resort');
+/*  src: url(/res/fonts/LastResort.ttf); */
 
 .accountdetail {
   font-family: 'Source Code Pro','Lucida Console','Arial Unicode MS',monospace,'Last Resort';
