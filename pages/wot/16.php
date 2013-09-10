@@ -68,7 +68,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 	</tr>
 </table>
 
-<form action="http://pdfcap.cacert.nodegard.net/cacertpdf.php" method="get">
+<form action="https://pdf.cacert.eu/cacertpdf.php" method="get">
 	<table>
 		<tr>
 			<td colspan="2" class="title">_('TTP CAP form creation')</td>
