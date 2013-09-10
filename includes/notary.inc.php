@@ -720,7 +720,7 @@
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?>:</td>
+		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?></td>
 		<td class="DataTD"><?=$field2?></td>
 	</tr>
 <?
@@ -768,7 +768,7 @@
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field.(empty($field)?'':':')?>:</td>
+		<td class="DataTD"><?=$field.(empty($field)?'':':')?></td>
 		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
 	</tr>
 <?
