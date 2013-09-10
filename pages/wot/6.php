@@ -65,15 +65,15 @@
 
 	require_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
-	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname));
+	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s %s %s %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname, $mname, $lname, $suffix));
 	AssureTextLine(_("Name"), sprintf(
 		"<span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"accountdetail suffix\">%s</span></span>",
 		$fname, $mname, $lname, $suffix
 		));
 	AssureTextLine(_("Date of Birth"),$dob_print);
 	AssureMethodLine(_("Method"),$methods,'');
-	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s has appeared in person."), $fname, $mname, $lname),array_key_exists('certify',$_POST) && $_POST['certify'] == 1);
-	AssureBoxLine("CCAAgreed",sprintf(_("I verify that %s %s %s has accepted the CAcert Community Agreement."), $fname, $mname, $lname),array_key_exists('CCAAgreed',$_POST) && $_POST['CCAAgreed'] == 1);
+	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s %s has appeared in person."), $fname, $mname, $lname, $suffix),array_key_exists('certify',$_POST) && $_POST['certify'] == 1);
+	AssureBoxLine("CCAAgreed",sprintf(_("I verify that %s %s %s %s has accepted the CAcert Community Agreement."), $fname, $mname, $lname, $suffix),array_key_exists('CCAAgreed',$_POST) && $_POST['CCAAgreed'] == 1);
 	AssureInboxLine("location",_("Location"),array_key_exists('location',$_SESSION['_config'])?$_SESSION['_config']['location']:"","");
 	AssureInboxLine("date",_("Date"),array_key_exists('date',$_SESSION['_config'])?$_SESSION['_config']['date']:date("Y-m-d"),"<br/>"._("The date when the assurance took place. Please adjust the date if you assured the person on a different day (YYYY-MM-DD)."));
 	AssureTextLine("",_("Only tick the next box if the Assurance was face to face."));
