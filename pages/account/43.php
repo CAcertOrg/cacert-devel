@@ -35,7 +35,9 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
   {
-    $emailsearch = $email = mysql_real_escape_string(stripslashes($_REQUEST['email']));
+    $_REQUEST['userid'] = 0;
+
+    $emailsearch = $email = mysql_escape_string(stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
     //if(!strstr($email, "%"))
@@ -53,14 +55,14 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     } else {
       // $email contains non-digits ==> search for mail addresses
       // Be defensive here (outer join) if primary mail is not listed in email table
-      $query = "select `users`.`id` as `id`, `email`.`email` as `email` 
+      $query = "select `users`.`id` as `id`, `email`.`email` as `email`
           from `users` left outer join `email` on (`users`.`id`=`email`.`memid`)
-          where (`email`.`email` like '$emailsearch' 
+          where (`email`.`email` like '$emailsearch'
                  or `users`.`email` like '$emailsearch')
             and `users`.`deleted`=0
           group by `users`.`id` limit 100";
     }
-    // bug-975 ted+uli changes --- end 
+    // bug-975 ted+uli changes --- end
     $res = mysql_query($query);
     if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -98,8 +100,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(intval($_REQUEST['userid']) > 0)
   {
-    $id = intval($_REQUEST['userid']);
-    $query = "select * from `users` where `id`='$id' and `users`.`deleted`=0";
+    $userid = intval($_REQUEST['userid']);
+    $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
     $res = mysql_query($query);
     if(mysql_num_rows($res) <= 0)
     {
@@ -133,7 +135,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Last Name")?>:</td>
     <td class="DataTD">  <input type="hidden" name="oldid" value="43">
   <input type="hidden" name="action" value="updatedob">
-  <input type="hidden" name="userid" value="<?=intval($id)?>">
+  <input type="hidden" name="userid" value="<?=intval($userid)?>">
   <input type="text" name="lname" value="<?=sanitizeHTML($row['lname'])?>"></td>
   </tr>
   <tr>
@@ -171,6 +173,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     </select>
     <input type="text" name="year" value="<?=$year?>" size="4">
     <input type="submit" value="Go"></form></nobr></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("CCA accepted")?>:</td>
+    <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'])) ? _("Yes") : _("No") ?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Trainings")?>:</td>
@@ -338,7 +344,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td colspan="2" class="title"><?=_("Account State")?></td>
   </tr>
 
-<?  
+<?
   // ---  bug-975 begin ---
   //  potential db inconsistency like in a20110804.1
   //    Admin console -> don't list user account
@@ -359,7 +365,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
        4.  email.email = primary-email       (???) or'd
       not covered by admin console find user routine, but may block users login
        5.  users.verified = 0|1
-      further "special settings"   
+      further "special settings"
        6.  users.locked  (setting displayed in display form)
        7.  users.assurer_blocked   (setting displayed in display form)
 
@@ -370,7 +376,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
        1. users.verified = 1
        2. users.deleted = 0
        3. users.locked = 0
-       4. users.email = primary-email 				
+       4. users.email = primary-email
 
     --- Assurer, assure someone find user query
     select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."'
@@ -384,11 +390,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
        1.  email.hash = ''            Yes        No           No
        2.  email.deleted = 0          Yes        No           No
        3.  users.deleted = 0          Yes        Yes          Yes
-       4.  users.verified = 1         No         Yes          No       
+       4.  users.verified = 1         No         Yes          No
        5.  users.locked = 0           No         Yes          No
        6.  users.email = prim-email   No         Yes          Yes
        7.  email.email = prim-email   Yes        No           No
-                 
+
     full usable account needs all 7 requirements fulfilled
     so if one setting isn't set/cleared there is an inconsistency either way
     if eg email.email is not avail, admin console cannot open user info
@@ -432,7 +438,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     $dres = mysql_query($query);
     $drow = mysql_fetch_assoc($dres);
   }
-  
+
   if ($drow) {
     $eemail    = $drow['eemail'];
     $edeleted  = $drow['edeleted'];
@@ -451,11 +457,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     }
     if ($edeleted!=0) {
       $inconsistency += 8;
-      $inccause .= (empty($inccause)?"":"<br>")._("Email record set deleted");    
+      $inccause .= (empty($inccause)?"":"<br>")._("Email record set deleted");
     }
     if ($ehash!='') {
       $inconsistency += 16;
-      $inccause .= (empty($inccause)?"":"<br>")._("Email record hash not unset");        
+      $inccause .= (empty($inccause)?"":"<br>")._("Email record hash not unset");
     }
   } else {
     $inconsistency = 32;
@@ -474,14 +480,14 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
       "operations and needs to be fixed manually through arbitration/critical ".
       "team.")?>
      </td>
-  </tr>  
+  </tr>
 <? }
 
   // ---  bug-975 end ---
 ?>
 </table>
 <br>
-<?    
+<?
  //  End - Debug infos
 ?>
 
@@ -510,12 +516,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$dres = mysql_query($query);
 	$drow = mysql_fetch_assoc($dres);
 	$total = $drow['total'];
-	
+
 	$maxexpire = "0000-00-00 00:00:00";
 	if ($drow['maxexpire']) {
 		$maxexpire = $drow['maxexpire'];
 	}
-	
+
 	if($total > 0) {
 		$query = "select COUNT(*) as `valid`
 		          from `domains` inner join `domaincerts`
@@ -526,7 +532,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$valid = $drow['valid'];
-		
+
 		$query = "select COUNT(*) as `expired`
 		          from `domains` inner join `domaincerts`
 		               on `domains`.`id` = `domaincerts`.`domid`
@@ -535,7 +541,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$expired = $drow['expired'];
-		
+
 		$query = "select COUNT(*) as `revoked`
 		          from `domains` inner join `domaincerts`
 		               on `domains`.`id` = `domaincerts`.`domid`
@@ -568,12 +574,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$dres = mysql_query($query);
 	$drow = mysql_fetch_assoc($dres);
 	$total = $drow['total'];
-	
+
 	$maxexpire = "0000-00-00 00:00:00";
 	if ($drow['maxexpire']) {
 		$maxexpire = $drow['maxexpire'];
 	}
-	
+
 	if($total > 0) {
 		$query = "select COUNT(*) as `valid`
 		          from `emailcerts`
@@ -583,7 +589,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$valid = $drow['valid'];
-		
+
 		$query = "select COUNT(*) as `expired`
 		          from `emailcerts`
 		          where `memid` = '".intval($row['id'])."'
@@ -591,7 +597,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$expired = $drow['expired'];
-		
+
 		$query = "select COUNT(*) as `revoked`
 		          from `emailcerts`
 		          where `memid` = '".intval($row['id'])."'
@@ -623,12 +629,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$dres = mysql_query($query);
 	$drow = mysql_fetch_assoc($dres);
 	$total = $drow['total'];
-	
+
 	$maxexpire = "0000-00-00 00:00:00";
 	if ($drow['maxexpire']) {
 		$maxexpire = $drow['maxexpire'];
 	}
-	
+
 	if($total > 0) {
 		$query = "select COUNT(*) as `valid`
 		          from `gpg`
@@ -637,7 +643,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$valid = $drow['valid'];
-		
+
 		$query = "select COUNT(*) as `expired`
 		          from `emailcerts`
 		          where `memid` = '".intval($row['id'])."'
@@ -645,7 +651,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$expired = $drow['expired'];
-		
+
 		?>
 		<td class="DataTD"><?=intval($total)?></td>
 		<td class="DataTD"><?=intval($valid)?></td>
@@ -662,7 +668,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	</tr>
 
 	<tr>
-		<td class="DataTD"><?=_("Org Server")?>:</td>
+		<td class="DataTD"><a href="account.php?id=58&amp;userid=<?=intval($row['id'])?>"><?=_("Org Server")?></a>:</td>
 	<?
 	$query = "select COUNT(*) as `total`,
 	                 MAX(`orgcerts`.`expire`) as `maxexpire`
@@ -672,12 +678,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$dres = mysql_query($query);
 	$drow = mysql_fetch_assoc($dres);
 	$total = $drow['total'];
-	
+
 	$maxexpire = "0000-00-00 00:00:00";
 	if ($drow['maxexpire']) {
 		$maxexpire = $drow['maxexpire'];
 	}
-	
+
 	if($total > 0) {
 		$query = "select COUNT(*) as `valid`
 		          from `orgdomaincerts` as `orgcerts` inner join `org`
@@ -688,7 +694,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$valid = $drow['valid'];
-		
+
 		$query = "select COUNT(*) as `expired`
 		          from `orgdomaincerts` as `orgcerts` inner join `org`
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
@@ -697,7 +703,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$expired = $drow['expired'];
-		
+
 		$query = "select COUNT(*) as `revoked`
 		          from `orgdomaincerts` as `orgcerts` inner join `org`
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
@@ -732,12 +738,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$dres = mysql_query($query);
 	$drow = mysql_fetch_assoc($dres);
 	$total = $drow['total'];
-	
+
 	$maxexpire = "0000-00-00 00:00:00";
 	if ($drow['maxexpire']) {
 		$maxexpire = $drow['maxexpire'];
 	}
-	
+
 	if($total > 0) {
 		$query = "select COUNT(*) as `valid`
 		          from `orgemailcerts` as `orgcerts` inner join `org`
@@ -748,7 +754,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$valid = $drow['valid'];
-		
+
 		$query = "select COUNT(*) as `expired`
 		          from `orgemailcerts` as `orgcerts` inner join `org`
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
@@ -757,7 +763,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$expired = $drow['expired'];
-		
+
 		$query = "select COUNT(*) as `revoked`
 		          from `orgemailcerts` as `orgcerts` inner join `org`
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
@@ -780,8 +786,19 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
+	<tr>
+		<td colspan="6" class="title">
+			<form method="post" action="account.php" onSubmit="if(!confirm('<?=_("Are you sure you want to revoke all private certificates?")?>')) return false;">
+				<input type="hidden" name="action" value="revokecert">
+				<input type="hidden" name="oldid" value="43">
+				<input type="hidden" name="userid" value="<?=intval($userid)?>">
+				<input type="submit" value="<?=_('revoke certificates')?>">
+			</form>
+		</td>
+	</tr>
 </table>
 <br>
+
 
 <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
  (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
@@ -827,11 +844,11 @@ function showassuredto()
     <td class="DataTD"><?=intval($drow['points'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
     <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
-    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
@@ -873,30 +890,32 @@ function showassuredby()
     <td class="DataTD"><?=$drow['points']?></td>
     <td class="DataTD"><?=$drow['location']?></td>
     <td class="DataTD"><?=$drow['method']?></td>
-    <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=_("Are you sure you want to revoke this assurance?")?>');"><?=_("Revoke")?></a></td>
+    <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD" colspan="2"><b><?=_("Total Points")?>:</b></td>
+    <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
     <td class="DataTD"><?=$points?></td>
     <td class="DataTD" colspan="3">&nbsp;</td>
   </tr>
 </table>
 <? } ?>
 <br><br>
-<? } } 
+<? } }
 
-switch ($_GET['shownotary'])
-        {
-	case 'assuredto': 	showassuredto();
+if(isset($_GET['shownotary'])) {
+    switch($_GET['shownotary']) {
+        case 'assuredto':
+            showassuredto();
 				break;
-	case 'assuredby':	showassuredby();
+        case 'assuredby':
+            showassuredby();
 				break;
-	case 'assuredto15':	output_received_assurances(intval($_GET['userid']),1);
+        case 'assuredto15':
+            output_received_assurances(intval($_GET['userid']),1);
 				break;
-	case 'assuredby15': 	output_given_assurances(intval($_GET['userid']),1);
+        case 'assuredby15':
+            output_given_assurances(intval($_GET['userid']),1);
 				break;
 	}
-
-
-?>
+}

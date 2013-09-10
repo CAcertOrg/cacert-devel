@@ -18,6 +18,8 @@
 <?
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
+require_once("../includes/notary.inc.php");
+
 
 
 function show_page($target,$message,$error)
@@ -113,8 +115,6 @@ function send_reminder()
 	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
 
-
-
 	loadem("account");
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
 		$_SESSION['_config']['date'] = $_POST['date'];
@@ -127,7 +127,41 @@ function send_reminder()
 	if($oldid == 12)
 		$id = $oldid;
 
-	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6 || $id == 16 ))
+	if($oldid == 4)
+	{
+		if ($_POST['ttp']!='') {
+			//This mail does not need to be translated
+			$body = "Hi TTP adminstrators,\n\n";
+			$body .= "User ".$_SESSION['profile']['fname']." ".
+			$_SESSION['profile']['lname']." with email address '".
+			$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
+			mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+			if ($_POST['ttptopup']=='1') {
+				$body .= "The user is also requesting TTP TOPUP.\n\n";
+			}else{
+				$body .= "The user is NOT requesting TTP TOPUP.\n\n";
+			}
+			$body .= "The user received ".intval($_SESSION['profile']['points'])." assurance points up to today.\n\n";
+			$body .= "Please start the TTP assurance process.";
+			sendmail("support@cacert.org", "[CAcert.org] TTP request.", $body, "support@cacert.org", "", "", "CAcert Website");
+
+			//This mail needs to be translated
+			$body  =_("You are receiving this email because you asked for TTP assurance.")."\n\n";
+			if ($_POST['ttptopup']=='1') {
+				$body .=_("You are requesting TTP TOPUP.")."\n\n";
+			}else{
+				$body .=_("You are NOT requesting TTP TOPUP.")."\n\n";
+			}
+			$body .= _("Best regards")."\n";
+			$body .= _("CAcert Support Team");
+
+			sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You requested TTP assurances"), $body, "support@cacert.org", "", "", "CAcert Support");
+
+		}
+
+	}
+
+	if(($id == 5 || $oldid == 5 || $id == 6 || $oldid == 6))
 		if (!is_assurer($_SESSION['profile']['id']))
 			{
 				show_page ("Exit","",get_assurer_reason($_SESSION['profile']['id']));
@@ -203,34 +237,76 @@ function send_reminder()
 	if($oldid == 6)
 	{
 $iecho= "c";
+		//date checks
+		if(trim($_REQUEST['date']) == '')
+		{
+			show_page("VerifyData","",_("You must enter the date when you met the assuree."));
+			exit;
+		}
+
+		if(!check_date_format(trim($_REQUEST['date'])))
+		{
+			show_page("VerifyData","",_("You must enter the date in this format: YYYY-MM-DD."));
+			exit;
+		}
+
+		if(!check_date_difference(trim($_REQUEST['date'])))
+		{
+			show_page("VerifyData","",_("You must not enter a date in the future."));
+			exit;
+		}
+
+		//proof of identity check and accept arbitration, implements CCA
 		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-/*		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
-		{
-			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
-			exit;
-		}
-*/
-
-		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_SESSION['profile']['ttpadmin'] != 1)
+		//proof of CCA agreement by assuree after 2010-01-01
+		if((!array_key_exists('CCAAgreed',$_POST) || $_POST['CCAAgreed'] != 1) and (check_date_format(trim($_REQUEST['date']),2010)))
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-		if($_SESSION['profile']['ttpadmin'] != 1 && $_POST['location'] == "")
+		//assurance done according to rules
+		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+
+		//met assuree in person, not appliciable for TTP / TTP Topup assurances
+		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_REQUEST['method'] != "Trusted 3rd Parties")
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+
+		//check location, min 3 characters
+		if(!array_key_exists('location',$_POST) || trim($_POST['location']) == "")
 		{
 			show_page("VerifyData","",_("You failed to enter a location of your meeting."));
 			exit;
 		}
 
-		if($_REQUEST['points'] == "")
+		if(strlen(trim($_REQUEST['location']))<=2)
+		{
+			show_page("VerifyData","",_("You must enter a location with at least 3 characters eg town and country."));
+			exit;
+		}
+
+		//check for points in range 0-35, for nucleus 35 + 15 temporary
+		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
+			exit;
+		}
+
+		if($_REQUEST['points'] <0 || ($_REQUEST['points']>35))
+		{
+			show_page("VerifyData","",_("The number of points you entered are out of the range given by policy."));
 			exit;
 		}
 
@@ -293,18 +369,20 @@ $iecho= "c";
 						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
 						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$query .= ",\n`method`='Temporary Increase'";
-			$query .= ",\n`expire`=DATE_ADD(NOW(), INTERVAL '".intval($_POST['expire'])."' DAY)";
-			$query .= ",\n`sponsor`='".intval($_POST['sponsor'])."'";
-		} else if($_SESSION['profile']['board'] == 1) {
-			$query .= ",\n`method`='".mysql_real_escape_string(stripslashes($_POST['method']))."'";
-		} else if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+		//record active acceptance by Assurer
+		if (check_date_format(trim($_REQUEST['date']),2010)) {
+			write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
+		}
+		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
+		include_once("../includes/notary.inc.php");
+/*to be activated after CCA accept option is implemented in form
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);}*/
+/* to be activated after the CCA recording is announced
+		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']); */
 
 		if($_SESSION['profile']['points'] < 150)
 		{
@@ -321,6 +399,7 @@ $iecho= "c";
 							`method`='Administrative Increase',
 							`when`=NOW()";
 			mysql_query($query);
+
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
 		}
@@ -341,21 +420,12 @@ $iecho= "c";
 
 		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)
 		{
-			$body .= _("You have at least 100 Assurance Points. If you want ".
-					"to become an assurer try the Assurer Challenge").
-					" ( https://cats.cacert.org ).\n\n";
-			$body .= _("To make it easier for others in your area to find ".
-					"you, it's helpful to list yourself as an assurer (this ".
-					"is voluntary), as well as a physical location where you ".
-					"live or work the most. You can flag your account to be ".
-					"listed, and add a comment to the display by going to:")."\n";
+			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the Assurer Challenge")." ( https://cats.cacert.org )\n\n";
+			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=8\n\n";
 			$body .= _("You can list your location by going to:")."\n";
 			$body .= "https://www.cacert.org/wot.php?id=13\n\n";
 		}
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time your points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
 
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
@@ -370,19 +440,10 @@ $iecho= "c";
 		else
 			$body .= sprintf(_("You issued %s points and they now have %s points in total."), $newpoints, ($newpoints + $drow['total']))."\n\n";
 
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-			$body .= sprintf(_("Please Note: this is a temporary increase for %s days only. After that time their points will be reduced to 150 points."), intval($_POST['expire']))."\n\n";
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
-
-		if($_SESSION['profile']['board'] == 1 && intval($_POST['expire']) > 0)
-		{
-			$body  = sprintf("%s %s (%s) has issued a temporary increase to 200 points for %s %s (%s) for %s days. This action was sponsored by %s %s (%s).", $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'], $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'], intval($_POST['expire']), $sponsor['fname'], $sponsor['lname'], $sponsor['email'])."\n\n";
-
-			sendmail("cacert-board@lists.cacert.org", "[CAcert.org] Temporary Increase Issued.", $body, "website@cacert.org", "", "", "CAcert Website");
-		}
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";

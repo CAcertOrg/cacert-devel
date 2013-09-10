@@ -19,7 +19,11 @@
 ?>
 <p><?=_("Paste your own public OpenPGP key below. It should not contain a picture. CAcert will sign your key after submission.")?></p>
 <form method="post" action="gpg.php">
-<textarea name="CSR" cols="80" rows="15"><?=array_key_exists('CSR',$_POST)?strip_tags($_POST['CSR']):""?></textarea><br>
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
+<p><?=_("Optional comment, only used in the certifictate overview")?><br />
+       <input type="text" name="description" maxlength="80" size=80 /></p>
+<textarea name="CSR" cols="80" rows="15"><?=array_key_exists('CSR',$_POST)?strip_tags($_POST['CSR']):""?></textarea><br />
+<p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
+<input type="submit" name="process" value="<?=_("Submit")?>" />
+<input type="hidden" name="oldid" value="<?=$id?>" />
 </form>

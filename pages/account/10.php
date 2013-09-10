@@ -26,16 +26,21 @@
 
 <p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
 
-<p><b>*** <?=_("Please Note. All information on your certificate will be removed except the CommonName and SubjectAltName field, this is because it's an automated service and cannot automatically verify other details on your certificates are valid or not. If you are a valid organisation and would like more details to appear on certificates, you will need to have at least 50 assurance points and you need to send us a copy of your document of incorporation. Then we can add those details to your certificates. Contact us for more information on our organisational services.")?> ***</b></p>
+<p><b>*** <?=_("Please note: All information on your certificate will be removed except the CommonName and SubjectAltName field, this is because it's an automated service and cannot automatically verify other details on your certificates are valid or not.")?> ***</b></p>
+<p><?=_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via support@cacert.org for more information.")?></p>
 
 <form method="post" action="account.php">
 <? if($_SESSION['profile']['points'] >= 50) { ?>
-<input type="radio" name="rootcert" value="1"> <?=_("Sign by class 1 root certificate")?><br>
-<input type="radio" name="rootcert" value="2" checked> <?=_("Sign by class 3 root certificate")?><br>
+<input type="radio" name="rootcert" value="1"/> <?=_("Sign by class 1 root certificate")?><br />
+<input type="radio" name="rootcert" value="2" checked/> <?=_("Sign by class 3 root certificate")?><br />
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <? } ?>
+<p><?=_("Optional comment, only used in the certifictate overview")?><br>
+       <input type="text" name="description" maxlength="80" size=80/></p>
 <p><?=_("Paste your CSR(Certificate Signing Request) below...")?></p>
-<textarea name="CSR" cols="80" rows="15"></textarea><br>
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
+<textarea name="CSR" cols="80" rows="15"></textarea><br />
+<p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
+<input type="submit" name="process" value="<?=_("Submit")?>" />
+<input type="hidden" name="oldid" value="<?=$id?>" />
 </form>

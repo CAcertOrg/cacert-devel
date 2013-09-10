@@ -172,7 +172,7 @@ function hideall() {
     </div>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('mydetails')">+ <?=_("My Details")?></h3>
-      <ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li><?
+      <ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("View/Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li><?
 	if($_SESSION['profile']['id'] == 1 || $_SESSION['profile']['id'] == 5897)
 		echo "<li><a href='sqldump.php'>SQL Dump</a></li>";
 	?></ul>
@@ -262,6 +262,7 @@ function hideall() {
       <ul class="menu" id="advertising"><li><a href="advertising.php?id=1"><?=_("New Ad")?></a></li><li><a href="advertising.php?id=0"><?=_("View Ads")?></a></li></ul>
     </div>
 <? } ?>
+    <? include("about_menu.php"); ?>
   </div>
   <div id="content">
     <div class="story">
@@ -280,7 +281,7 @@ function hideall() {
   <div id="siteInfo"><a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="account.php?id=38"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
 	<a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> | <a href="account.php?id=40"><?=_("Contact Us")?></a>
 		| &copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
-</div>  
-</body>             
+</div>
+</body>
 </html><?
 	}
