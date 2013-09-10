@@ -334,13 +334,14 @@ $iecho= "c";
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
+		$oldpoints = intval($drow['total']);
 
 		$_POST['expire'] = 0;
 
-		if(($drow['total'] + $newpoints) > 100 && $max < 100)
-			$newpoints = 100 - $drow['total'];
-		if(($drow['total'] + $newpoints) > $max && $max >= 100)
-			$newpoints = $max - $drow['total'];
+		if(($oldpoints + $newpoints) > 100 && $max < 100)
+			$newpoints = 100 - $oldpoints;
+		if(($oldpoints + $newpoints) > $max && $max >= 100)
+			$newpoints = $max - $oldpoints;
 		if($newpoints < 0)
 			$newpoints = 0;
 
@@ -408,17 +409,17 @@ $iecho= "c";
 
 		$assurer =  $_SESSION['profile']['fname'].' '.$_SESSION['profile']['lname'];
 		$body  = sprintf(_("You are receiving this email because you have been assured by %s (%s)."), $assurer, $_SESSION['profile']['email'])."\n\n";
-		if($_POST['points'] != $newpoints)
-			$body .= sprintf(_("You were issued %s points however the system only counts up to 100 assurance points. You now have 100 countable assurance points and %s countable expierence points."), $_POST['points'], ($newpoints + $drow['total']-100))."\n\n";
+		if(($oldpoints + $newpoints) >= 100)
+			$body .= sprintf(_("You were issued %s points however the system only counts up to 100 assurance points. You now have 100 countable assurance points and %s countable expierence points."), $_POST['points'], ($newpoints + $oldpoints-100))."\n\n";
 		else
-			$body .= sprintf(_("You were issued %s points and you now have %s points in total."), $newpoints, ($newpoints + $drow['total']))."\n\n";
+			$body .= sprintf(_("You were issued %s points and you now have %s points in total."), $newpoints, ($newpoints + $oldpoints))."\n\n";
 
-		if(($drow['total'] + $newpoints) < 100 && ($drow['total'] + $newpoints) >= 50)
+		if(($oldpoints + $newpoints) < 100 && ($oldpoints + $newpoints) >= 50)
 		{
 			$body .= _("You now have over 50 points, and can now have your name added to client certificates, and issue server certificates for up to 2 years.")."\n\n";
 		}
 
-		if(($drow['total'] + $newpoints) >= 100 && $newpoints > 0)
+		if(($oldpoints + $newpoints) >= 100 && $newpoints > 0)
 		{
 			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the Assurer Challenge")." ( https://cats.cacert.org )\n\n";
 			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n";
@@ -436,10 +437,7 @@ $iecho= "c";
 
 		$assuree = $_SESSION['_config']['notarise']['fname'].' '.$_SESSION['_config']['notarise']['lname'];
 		$body  = sprintf(_("You are receiving this email because you have assured %s (%s)."), $assuree, $_SESSION['_config']['notarise']['email'])."\n\n";
-		if($_POST['points'] != $newpoints)
-			$body .= sprintf(_("You issued %s points however the system only counts up to 100 assurance points. %s has now 100 countable assurance points and %s countable expierence points."), $_POST['points'], $assuree, ($newpoints + $drow['total']-100))."\n\n";
-		else
-			$body .= sprintf(_("You issued %s points and %s now has %s points in total."), $newpoints, $assuree, ($newpoints + $drow['total']))."\n\n";
+		$body .= sprintf(_("You issued %s points."), $newpoints)."\n\n";
 
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
