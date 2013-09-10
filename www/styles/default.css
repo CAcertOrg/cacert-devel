@@ -665,31 +665,32 @@ div.footerbar {
   font-family: 'Last Resort';
   src: local('Last Resort');
 /*  src: url(/res/fonts/LastResort.ttf); */
+}
 
 .accountdetail {
   font-family: 'Source Code Pro','Lucida Console','Arial Unicode MS',monospace,'Last Resort';
   font-size: 1.1em;
 }
 
-.accountdetail.fname{
+.accountdetail.fname {
   color:#600; font-style: italic; font-weight: bold;
   background-color: #ffeeee;
   background-color: rgba(102, 0, 0, 0.05);
 }
 
-.accountdetail.mname{
+.accountdetail.mname {
   color:#060; font-style:italic;
   background-color: #f0fff0;
   background-color: rgba(0, 102, 0, 0.05);
 }
 
-.accountdetail.lname{
+.accountdetail.lname {
   color:#006; font-weight:bold;
   background-color: #f0fef0;
   background-color: rgba(0, 0, 102, 0.05);
 }
 
-.accountdetail.suffix{
+.accountdetail.suffix {
   color:#660;
   background-color: #ffffdd;
   background-color: rgba(102, 102, 0, 0.05);
