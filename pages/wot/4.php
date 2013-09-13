@@ -45,9 +45,8 @@ if ($_SESSION['profile']['points']<100){
 			<tr>
 				<td class="DataTD"><?=_("Country where you want to visit the TTP")?></td>
 				<td class="DataTD"><select size="1" name="country">
-						<option>Australia</option>
-						<option>Puerto Rico</option>
-						<option>USA</option>
+						<option><?=_('Choose country')?></option>
+						<?echo ttp_select(TRUE)?>
 					</select></td>
 			</tr>
 			<tr>
@@ -72,7 +71,7 @@ if ($_SESSION['profile']['points']<100){
 		</form>
 */
 ?>
-	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. Meanwhile you have to close this gap with face to face assurances from CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>  
+	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. Meanwhile you have to close this gap with face to face assurances from CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>
 <?
 	}
 } else {

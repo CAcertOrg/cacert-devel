@@ -1113,3 +1113,29 @@
 	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
 	}
+
+	/**
+	 * ttp_select()
+	 * fills dropdown option for TTP countrues
+	 * @param string $value, TRUE if the TTP CAP form is to be selected
+	 * @param string $selection, if selection matches option key the
+	 *         entry is preselected in the dropdownbox
+	 * @return
+	 */
+	function ttp_select($value='', $selection=''){
+		$ttpcountrys = parse_ini_file('../config/ttp.ini');
+		ksort($ttpcountrys);
+		$return_str='';
+		foreach ($ttpcountrys as $ttpcountry => $form) {
+			$return_str.='<option ';
+			if (true==$value) {
+				$return_str.='value="'.$form.'" ';
+			}
+			if ($ttpcountry==$selection){
+				$return_str.='selected="selected"';
+			}
+			$return_str.=' >'.$ttpcountry.'</option>';
+		}
+
+		return	$return_str;
+	}
