@@ -161,7 +161,6 @@
 	if($row['revoked'] == 0)
 		$row['revoke'] = _("Not Revoked");
 ?>
-	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Status")?></td>
 		<td class="DataTD"><?=$verified?></td>
