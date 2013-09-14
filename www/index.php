@@ -125,7 +125,7 @@ require_once('../includes/lib/l10n.php');
 				showfooter();
 				exit;
 			}
-		}		
+		}
 	}
 
 	if($oldid == 5 && $process != "")
@@ -153,23 +153,43 @@ require_once('../includes/lib/l10n.php');
 		include_once("../includes/lib/general.php");
 		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
 				$_SERVER['SSL_CLIENT_I_DN_CN']);
-		
+
 		if($user_id >= 0)
 		{
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-				"select * from `users` where 
+				"select * from `users` where
 				`id`='$user_id' and `deleted`=0 and `locked`=0"));
-			
+
 			if($_SESSION['profile']['id'] != 0)
 			{
+				$cca=get_last_user_agreement($user_id);
+				if (!isset($cca['active'])){
+					header('location: https://'.$_SERVER['HTTP_HOST'].'/index.php?id=52');
+					exit;
+				}
 				$_SESSION['profile']['loggedin'] = 1;
-				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+				header('location: https://'.$_SERVER['HTTP_HOST'].'/account.php');
 				exit;
 			} else {
 				$_SESSION['profile']['loggedin'] = 0;
 			}
 		}
 	}
+// check for CCA acceptance prior to login
+	if ($id == 52)
+	{
+		$agree = ""; if(array_key_exists('agree',$_REQUEST)) $agree=$_REQUEST['agree'];
+		if (!$agree) {
+			$_SESSION['profile']['loggedin'] = 0;
+		}else{
+			include_once("../includes/notary.inc.php");
+			write_user_agreement($memid, "CCA", "Login acception", "", 1);
+			$_SESSION['profile']['loggedin'] = 1;
+			header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+			exit;
+		}
+	}
+
 
 	if($id == 4 && array_key_exists('profile',$_SESSION) && array_key_exists('loggedin',array($_SESSION['profile'])) && $_SESSION['profile']['loggedin'] == 1)
 	{
@@ -499,7 +519,7 @@ require_once('../includes/lib/l10n.php');
 			if($checkemail != "OK")
 			{
 				$id = 1;
-				if (substr($checkemail, 0, 1) == "4") 
+				if (substr($checkemail, 0, 1) == "4")
 				{
 					$_SESSION['_config']['errmsg'] .= _("The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes.");
 				} else {
@@ -566,9 +586,9 @@ require_once('../includes/lib/l10n.php');
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
-		
+
 		//check for spam via honeypot
-		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){
 			echo _("Form could not be sent.");
 			showfooter();
 			exit;
@@ -641,7 +661,7 @@ require_once('../includes/lib/l10n.php');
 		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
-	
+
 	if ($id == 19)
 	{
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
@@ -655,7 +675,8 @@ require_once('../includes/lib/l10n.php');
 		$newUrl = $protocol . '://wiki.cacert.org/Board';
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
-	
+
+
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
