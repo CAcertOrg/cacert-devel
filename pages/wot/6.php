@@ -57,7 +57,7 @@ if(!array_key_exists('notarise',$_SESSION['_config']))
 	AssureInboxLine("points",_("Points"),"","<br />(Max. ".maxpoints().")");
 	AssureFoot($id,_("I confirm this Assurance"));
 
-	if($_SESSION['profile']['ttpadmin'] == 1) {
+	if($_SESSION['profile']['ttpadmin'] >= 1) {
 		?><a href="wot.php?id=16><?=_("Show TTP details")?></a><?;
 	}
 

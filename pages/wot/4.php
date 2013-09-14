@@ -43,11 +43,13 @@ if ($_SESSION['profile']['points']<100){
 		<form method="post" action="wot.php">
 		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 			<tr>
-				<td class="DataTD"><?=_("Country where you want to visit the TTP")?></td>
-				<td class="DataTD"><select size="1" name="country">
+				<td class="DataTD"><?=_('Country where you want to visit the TTP')?></td>
+				<td class="DataTD">
+					<select size="1" name="country">
 						<option><?=_('Choose country')?></option>
-						<?echo ttp_select(TRUE)?>
-					</select></td>
+						<?echo ttp_select()?>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td class="DataTD"><?=_("I want to take part in the TTP Topup programme")?></td>

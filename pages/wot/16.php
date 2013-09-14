@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 //*******************  TTP Console ************
 
-if ($_SESSION['profile']['ttpadmin'] !== 1) {
+if ($_SESSION['profile']['ttpadmin'] < 1) {
 	echo _("You are not allowed to view this page.");
 	exit;
 }
@@ -111,7 +111,15 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td><?=_('Line').' 5'?></td>
 			<td><input type="text" name="adress4" /></td>
 		</tr>
-			<tr>
+		<tr>
+			<td><?=_('Country where the TTP will be visted')?></td>
+			<td>
+					<select size="1" name="country">
+						<?echo ttp_select(TRUE)?>
+					</select>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2" class="title">
 			<?
 			if ($points>=100 || $ttp_assurances_count>=2) {
