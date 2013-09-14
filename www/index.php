@@ -17,7 +17,7 @@
 */
 
 require_once('../includes/lib/l10n.php');
-
+require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
@@ -27,7 +27,7 @@ require_once('../includes/lib/l10n.php');
                 $id = 0;
 
         $_SESSION['_config']['errmsg'] = "";
-        $ccatest='';
+        $ccatest=FALSE;
 
 	if($id == 17 || $id == 20)
 	{
@@ -166,7 +166,7 @@ require_once('../includes/lib/l10n.php');
 				$cca=get_last_user_agreement($user_id);
 				if (!isset($cca['active'])){
 					$id=52;
-					$ccatest=1;
+					$ccatest=TRUE;
 				}else{
 					$_SESSION['profile']['loggedin'] = 1;
 					header('location: https://'.$_SERVER['HTTP_HOST'].'/account.php');
@@ -361,18 +361,17 @@ require_once('../includes/lib/l10n.php');
 		$cca=get_last_user_agreement($user_id);
 		if (!isset($cca['active'])){
 			$id=52;
-			$ccatest=1;
+			$ccatest=TRUE;
 		}
 	}
 
 // check for CCA acceptance prior to login
-if ($id == 52 && $ccatest=='')
+if ($id == 52 && $ccatest==FALSE)
 {
 	$agree = ""; if(array_key_exists('agree',$_REQUEST)) $agree=$_REQUEST['agree'];
 	if (!$agree) {
 		$_SESSION['profile']['loggedin'] = 0;
 	}else{
-		include_once("../includes/notary.inc.php");
 		write_user_agreement($memid, "CCA", "Login acception", "", 1);
 		$_SESSION['profile']['loggedin'] = 1;
 		header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
@@ -575,7 +574,6 @@ if ($id == 52 && $ccatest=='')
 						`regional`='".$_SESSION['signup']['regional']."',
 						`radius`='".$_SESSION['signup']['radius']."'";
 			mysql_query($query);
-			include_once("../includes/notary.inc.php");
 			write_user_agreement($memid, "CCA", "account creation", "", 1);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
