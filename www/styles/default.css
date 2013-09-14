@@ -7,7 +7,7 @@
 /* HTML tag styles                             */
 /***********************************************/
 
-body{
+body {
     font-family: Arial,sans-serif;
     color: #333333;
     line-height: 1.166;
@@ -32,41 +32,41 @@ a:hover {
 
 /************** header tag styles **************/
 
-h1{
-    font: bold 120% Arial,sans-serif;
+h1 {
+    font: bold 120% Arial ,sans-serif;
     color: #334d55;
     margin: 0px;
     padding: 0px;
 }
 
-h2{
-    font: bold 114% Arial,sans-serif;
+h2 {
+    font: bold 114% Arial ,sans-serif;
     color: #006699;
     margin: 0px;
     padding: 0px;
 }
 
-h3{
-    font: bold 100% Arial,sans-serif;
+h3 {
+    font: bold 100% Arial ,sans-serif;
     color: #334d55;
     margin: 0px;
     padding: 0px;
 }
 
-h3.pointer{
+h3.pointer {
     cursor: pointer;
      /* cursor: hand; */
 }
 
-h4{
-    font: bold 100% Arial,sans-serif;
+h4 {
+    font: bold 100% Arial ,sans-serif;
     color: #333333;
     margin: 0px;
     padding: 0px;
 }
 
-h5{
-    font: 100% Arial,sans-serif;
+h5 {
+    font: 100% Arial ,sans-serif;
     color: #334d55;
     margin: 0px;
     padding: 0px;
@@ -99,7 +99,7 @@ ul.no_indent {
 /* Layout Divs                                 */
 /***********************************************/
 
-#pagecell1{
+#pagecell1 {
     position: absolute;
     top: 2%;
     left: 2%;
@@ -109,7 +109,7 @@ ul.no_indent {
 }
 
 #tl {
-    position:absolute;
+    position: absolute;
     top: -1px;
     left: -1px;
     margin: 0px;
@@ -118,7 +118,7 @@ ul.no_indent {
 }
 
 #tr {
-    position:absolute;
+    position: absolute;
     top: -1px;
     right: -1px;
     margin: 0px;
@@ -126,7 +126,7 @@ ul.no_indent {
     z-index: 100;
 }
 
-#masthead{
+#masthead {
     position: absolute;
     top: 0px;
     left: 2%;
@@ -134,7 +134,7 @@ ul.no_indent {
     width: 95.6%;
 }
 
-#pageNav{
+#pageNav {
     float: right;
     width: 178px;
     padding: 0px;
@@ -143,7 +143,7 @@ ul.no_indent {
     font: small Verdana,sans-serif;
 }
 
-#content{
+#content {
     padding: 0px 10px 0px 0px;
     margin: 0px 178px 0px 0px;
 }
@@ -152,7 +152,7 @@ ul.no_indent {
 /***********************************************/
 /* Component Divs                              */
 /***********************************************/
-#siteName{
+#siteName {
     margin: 0px;
     padding: 16px 0px 8px 0px;
     color: #ffffff;
@@ -162,7 +162,7 @@ ul.no_indent {
 
 /************** utility styles *****************/
 
-#utility{
+#utility {
     font: 75% Verdana,sans-serif;
     position: absolute;
     top: 16px;
@@ -170,7 +170,7 @@ ul.no_indent {
     color: #919999;
 }
 
-#utility a{
+#utility a {
     color: #ffffff;
 }
 
@@ -181,17 +181,17 @@ ul.no_indent {
 
 /************** pageName styles ****************/
 
-#pageName{
+#pageName {
     padding: 0px 0px 14px 10px;
     margin: 0px;
-    border-bottom:1px solid #ccd2d2;
+    border-bottom: 1px solid #ccd2d2;
     z-index: 2;
 }
 
-#pageName h2{
+#pageName h2 {
     font: bold 175% Arial,sans-serif;
     color: #000000;
-    margin:0px;
+    margin: 0px;
     padding: 0px;
 }
 
@@ -207,7 +207,7 @@ ul.no_indent {
 
 /************* globalNav styles ****************/
 
-#globalNav{
+#globalNav {
   position: relative;
   width: 100%;
   min-width: 640px;
@@ -218,9 +218,8 @@ ul.no_indent {
   background-image: url("siteimages/glbnav_background.gif");
 }
 
-#globalNav img{
+#globalNav img {
     margin-bottom: -4px;
-
 }
 
 #gnl {
@@ -235,7 +234,7 @@ ul.no_indent {
     right:0px;
 }
 
-#globalLink{
+#globalLink {
     position: absolute;
     top: 6px;
     height: 22px;
@@ -261,12 +260,14 @@ a.glink:hover {
     text-decoration: none;
 }
 
-.skipLinks {display: none;}
+.skipLinks {
+    display: none;
+}
 
 
 /************ subglobalNav styles **************/
 
-.subglobalNav{
+.subglobalNav {
     position: absolute;
     top: 84px;
     left: 0px;
@@ -295,7 +296,7 @@ a.glink:hover {
 }
 */
 
-#search{
+#search {
     position: absolute;
     top: 125px;
     right: 0px;
@@ -310,40 +311,40 @@ a.glink:hover {
     font-size: 11px;
 }
 
-#search1{
+#search1 {
     position: absolute;
     top: 85px;
     right: 300px;
 }
 
-#search2{
+#search2 {
     position: absolute;
     top: 100px;
     right: 300px;
 }
 
-#search3{
+#search3 {
     position: absolute;
     top: 85px;
     right: 240px;
 }
 
-#search4{
+#search4 {
     position: absolute;
     top: 100px;
     right: 226px;
 }
 
-#googlead{
+#googlead {
     position: absolute;
     top: 5px;
     right: 0px;
     z-index: -10;
 }
 
-#search input{
+#search input {
     font-size: 70%;
-    margin: 0px  0px 0px 10px;
+    margin: 0px 0px 0px 10px;
 }
 
 #search a:link, #search a:visited {
@@ -359,13 +360,13 @@ a.glink:hover {
 
 /************* breadCrumb styles ***************/
 
-#breadCrumb{
+#breadCrumb {
     padding: 5px 0px 5px 10px;
     font: small Verdana,sans-serif;
     color: #AAAAAA;
 }
 
-#breadCrumb a{
+#breadCrumb a {
     color: #AAAAAA;
 }
 
@@ -377,7 +378,7 @@ a.glink:hover {
 
 /************** feature styles *****************/
 
-.feature{
+.feature {
     padding: 0px 0px 10px 10px;
     font-size: 80%;
     min-height: 200px;
@@ -388,13 +389,13 @@ a.glink:hover {
     height: auto;
 }
 
-.feature h3{
+.feature h3 {
     font: bold 175% Arial,sans-serif;
     color: #000000;
     padding: 30px 0px 5px 0px;
 }
 
-.feature img{
+.feature img {
     float: left;
     padding: 0px 10px 0px 0px;
 }
@@ -408,7 +409,7 @@ a.glink:hover {
     min-height: 450px;
 }
 
-.story h3{
+.story h3 {
     font: bold 125% Arial,sans-serif;
     color: #000000;
 }
@@ -417,10 +418,10 @@ a.glink:hover {
     padding: 0px 0px 10px 0px;
 }
 
-.story a.capsule{
+.story a.capsule {
     font: bold 1em Arial,sans-serif;
     color: #005FA9;
-    display:block;
+    display: block;
     padding-bottom: 5px;
 }
 
@@ -428,14 +429,14 @@ a.glink:hover {
     text-decoration: underline;
 }
 
-td.storyLeft{
+td.storyLeft {
     padding-right: 12px;
 }
 
 
 /************** siteInfo styles ****************/
 
-#siteInfo{
+#siteInfo {
     clear: both;
     border-top: 1px solid #cccccc;
     font-size: small;
@@ -446,13 +447,13 @@ td.storyLeft{
 
 /************ sectionLinks styles **************/
 
-#sectionLinks{
+#sectionLinks {
     margin: 0px;
     padding: 0px;
 
 }
 
-#sectionLinks h3{
+#sectionLinks h3 {
     padding: 10px 0px 2px 10px;
     border-bottom: 1px solid #cccccc;
 }
@@ -461,7 +462,7 @@ td.storyLeft{
     display: block;
     border-top: 1px solid #ffffff;
     border-bottom: 1px solid #cccccc;
-    background-image:  url("siteimages/bg_nav.jpg");
+    background-image: url("siteimages/bg_nav.jpg");
     font-weight: bold;
     padding: 3px 0px 3px 10px;
     color: #21536A;
@@ -478,28 +479,28 @@ td.storyLeft{
 
 /************* relatedLinks styles **************/
 
-.relatedLinks{
+.relatedLinks {
     margin: 0px;
     padding: 0px 0px 10px 10px;
     border-bottom: 1px solid #cccccc;
 }
 
-.relatedLinks h3{
+.relatedLinks h3 {
     padding: 10px 0px 2px 0px;
 }
 
-.relatedLinks a{
+.relatedLinks a {
     display: block;
 }
 
 
 /**************** advert styles *****************/
 
-#advert{
+#advert {
     padding: 10px;
 }
 
-#advert img{
+#advert img {
     display: block;
 }
 
@@ -574,7 +575,7 @@ td.greytxt {
 
 .title {
     background: #E2E2E2;
-    font-weight:BOLD;
+    font-weight: BOLD;
     padding: 1px 5px 1px 5px;
     border: 1px solid #CFCFCF;
     border-bottom: 3px double #CFCFCF;
@@ -587,46 +588,39 @@ td.greytxt {
     color: #FF0000;
 }
 
-.ac_menu
-{
-    border:1px solid black
+.ac_menu {
+    border: 1px solid black
 }
 
-.ac_normal
-{
-    background-color:#ffffff;
-    cursor:pointer;
+.ac_normal {
+    background-color: #ffffff;
+    cursor: pointer;
 }
 
-.ac_highlight
-{
-    background-color:#3366cc;
-    color:white;
-    cursor:pointer;
+.ac_highlight {
+    background-color: #3366cc;
+    color: white;
+    cursor: pointer;
 }
 
-.ac_normal .a
-{
-    font-size:13px;
-    color:black;
+.ac_normal .a {
+    font-size: 13px;
+    color: black;
 }
 
-.ac_highlight .a
-{
-    font-size:13px;
+.ac_highlight .a {
+    font-size: 13px;
 }
 
-.ac_normal .d
-{
-    float:right;
-    font-size:10px;
-    color:green;
+.ac_normal .d {
+    float: right;
+    font-size: 10px;
+    color: green;
 }
 
-.ac_highlight .d
-{
-    float:right;
-    font-size:10px;
+.ac_highlight .d {
+    float: right;
+    font-size: 10px;
 }
 
 
@@ -675,7 +669,9 @@ div.footerbar {
 
 /************ Honeypot  ***********/
 
-.robotic { display: none; }
+.robotic {
+    display: none;
+}
 
 
 /************  unicode fallbacks ***********/
