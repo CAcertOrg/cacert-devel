@@ -668,10 +668,19 @@ div.footerbar {
 }
 
 .accountdetail {
-  font-family: 'Source Code Pro','Lucida Console','Arial Unicode MS',monospace,'Last Resort';
+  font-family: 'Source Code Pro', 'Lucida Console', 'Arial Unicode MS', monospace, 'Last Resort';
   font-size: 1.1em;
+}
+
+.accountdetail.fname {
+}
+
+.accountdetail.mname {
 }
 
 .accountdetail.lname {
   font-weight:bold;
+}
+
+.accountdetail.suffix {
 }
