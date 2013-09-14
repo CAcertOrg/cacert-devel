@@ -114,7 +114,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 		<tr>
 			<td><?=_('Country where the TTP will be visted')?></td>
 			<td>
-					<select size="1" name="country">
+					<select size="1" name="type">
 						<?echo ttp_select(TRUE)?>
 					</select>
 			</td>
@@ -130,7 +130,6 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			</td>
 		</tr>
 	</table>
-	<input type="hidden" name="type" value="ttp"/>
 	<input type="hidden" name="lang" value="en"/>
 </form>
 
