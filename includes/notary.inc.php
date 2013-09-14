@@ -1114,28 +1114,50 @@
 		return (strtotime($date)<=time()+$diff*86400);
 	}
 
+
 	/**
-	 * ttp_select()
-	 * fills dropdown option for TTP countrues
-	 * @param string $value, TRUE if the TTP CAP form is to be selected
-	 * @param string $selection, if selection matches option key the
+	 * get_array_from_ini()
+	 *  gets an array from an ini file and trims all entries
+	 * @param mixed $inifile, path and filename of the ini file
+	 * @return
+	 */
+	function get_array_from_ini($inifile){
+		$array = parse_ini_file('../config/ttp.ini');
+		ksort($array);
+		foreach($array as $key => $value)
+		{
+			unset($array[$key]);
+			$array[trim($key)] = trim($value);
+		}
+		return	$array;
+	}
+
+	/**
+	*  create_selectbox_HTML()
+	 *
+	 * @param mixed $name, name for the select element
+	 * @param mixed $options, array with the data for the dropdown
+	 * @param string $value, TRUE if the value for the option should be added
+	 * @param string $firstline, if the should be a first line like´Choose country
+	 * @param string $selected, if selection matches option key the
 	 *         entry is preselected in the dropdownbox
 	 * @return
 	 */
-	function ttp_select($value='', $selection=''){
-		$ttpcountrys = parse_ini_file('../config/ttp.ini');
-		ksort($ttpcountrys);
-		$return_str='';
-		foreach ($ttpcountrys as $ttpcountry => $form) {
+	function create_selectbox_HTML($name, array $options, $firstline = "", $value='', $selected = ""){
+		$return_str='<select name="' . $name . '">';
+		if (!$firstline) {
+			$return_str .= '<option>' . $firstline .'</option>';
+		}
+		foreach ($options as $key => $avalue) {
 			$return_str.='<option ';
 			if (true==$value) {
-				$return_str.='value="'.$form.'" ';
+				$return_str.='value="'.$avalue.'" ';
 			}
 			if ($ttpcountry==$selection){
 				$return_str.='selected="selected"';
 			}
-			$return_str.=' >'.$ttpcountry.'</option>';
+			$return_str.=' >'.$key.'</option>';
 		}
-
+		$return_str.='</select>';
 		return	$return_str;
 	}

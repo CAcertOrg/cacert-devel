@@ -45,10 +45,10 @@ if ($_SESSION['profile']['points']<100){
 			<tr>
 				<td class="DataTD"><?=_('Country where you want to visit the TTP')?></td>
 				<td class="DataTD">
-					<select size="1" name="country">
-						<option><?=_('Choose country')?></option>
-						<?echo ttp_select()?>
-					</select>
+					<?
+						$ttpcountries=get_array_from_ini('../config/ttp.ini');
+						echo create_selectbox_HTML('country',$ttpcountries, _('Choose country'));
+					?>
 				</td>
 			</tr>
 			<tr>

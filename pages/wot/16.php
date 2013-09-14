@@ -112,11 +112,12 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td><input type="text" name="adress4" /></td>
 		</tr>
 		<tr>
-			<td><?=_('Country where the TTP will be visted')?></td>
+			<td><?=_('Country where the TTP will be visited')?></td>
 			<td>
-					<select size="1" name="type">
-						<?echo ttp_select(TRUE)?>
-					</select>
+			<?
+				$ttpcountries=get_array_from_ini('../config/ttp.ini');
+				echo create_selectbox_HTML('country',$ttpcountries, '',TRUE);
+			?>
 			</td>
 		</tr>
 		<tr>
