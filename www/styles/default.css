@@ -507,20 +507,20 @@ td.storyLeft{
 /********************* end **********************/
 
 .DataTD input, .DataTD textarea {
-    FONT-SIZE: 92%;
+    font-size: 92%;
 }
 
 .DataTD select, .DataTD option {
-    FONT-SIZE: 92%;
+    font-size: 92%;
 }
 
 .DataTD {
     background-color: #E2E2E2;
     border-style: inset;
     border-width: 1px;
-    FONT-SIZE: 8pt;
-    COLOR: #000000;
-    FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #000000;
+    font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
 
     background: #ffffff;
     padding: 1px 5px 1px 5px;
@@ -533,9 +533,9 @@ td.storyLeft{
     background-color: #EFEDED;
     border-style: inset;
     border-width: 1px;
-    FONT-SIZE: 8pt;
-    COLOR: #000000;
-    FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #000000;
+    font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
 
     padding: 1px 5px 1px 5px;
     border: 1px #CFCFCF solid;
@@ -547,9 +547,9 @@ td.storyLeft{
     background-color: #E2E2E2;
     border-style: inset;
     border-width: 1px;
-    FONT-SIZE: 8pt;
-    COLOR: #000000;
-    FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+    font-size: 8pt;
+    color: #000000;
+    font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
 
     background: #ffffff;
     padding: 1px 5px 1px 5px;
