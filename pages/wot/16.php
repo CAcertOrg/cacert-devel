@@ -127,7 +127,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 				_('No TTP assurance allowed');
 			}else{
 				?><input type="submit" value="<?=_('Create TTP CAP pdf file')?>"/><?
-			}
+			}?>
 			</td>
 		</tr>
 	</table>
