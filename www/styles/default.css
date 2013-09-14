@@ -661,6 +661,7 @@ div.footerbar {
   src: local('Source Code Pro');
 /*  src: url(/res/fonts/SourceCodePro-Medium.ttf); */
 }
+
 @font-face {
   font-family: 'Last Resort';
   src: local('LastResort');
