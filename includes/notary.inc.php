@@ -85,7 +85,7 @@
 	{
 		$where="";
 		if ($support==2) {
-			$where=" and (`method`='Trusted 3rd Parties' or `method`='TopUP')";
+			$where=" and (`method`='TTP-Assisted' or `method`='TTP TOPUP')";
 		}
 		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` ".$where." order by `id` asc ");
 		return $res;

@@ -373,8 +373,11 @@ $iecho= "c";
 		if (check_date_format(trim($_REQUEST['date']),2010)) {
 			write_user_agreement($_SESSION['profile']['id'], "CCA", "Assurance", "Assurer", 1, $_SESSION['_config']['notarise']['id']);
 		}
-		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+		if($_SESSION['profile']['ttpadmin'] >= 1 && $_POST['method'] == 'TTP-Assisted') {
 			$query .= ",\n`method`='TTP-Assisted'";
+		}
+		if($_SESSION['profile']['ttpadmin'] == 2 && $_POST['method'] == 'TTP-TOPUP') {
+			$query .= ",\n`method`='TTP-TOPUP'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);

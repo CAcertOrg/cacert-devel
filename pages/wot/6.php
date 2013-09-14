@@ -25,12 +25,12 @@ if(!array_key_exists('notarise',$_SESSION['_config']))
 
 	$row = $_SESSION['_config']['notarise'];
 
-	if($_SESSION['profile']['ttpadmin'] == 1)
-//		$methods = array("Face to Face Meeting", "Trusted 3rd Parties", "TopUP");
-//	else
-		$methods = array("Face to Face Meeting", "Trusted 3rd Parties");
+	if($_SESSION['profile']['ttpadmin'] == 2)
+		$methods = array('Face to Face Meeting', 'TTP-Assisted', 'TTP-TOPUP');
+	elseif($_SESSION['profile']['ttpadmin'] == 1)
+		$methods = array('Face to Face Meeting', 'TTP-Assisted');
 	else
-		$methods = array("Face to Face Meeting");
+		$methods = array('Face to Face Meeting');
 
 	$fname = $row['fname'];
 	$mname = $row['mname'];
