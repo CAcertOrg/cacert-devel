@@ -356,7 +356,7 @@ $iecho= "c";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
-			show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
+                        show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
 			exit;
 		}
 	}
@@ -374,8 +374,11 @@ $iecho= "c";
 			write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);
 			write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']);
 		}
-		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
+		if($_SESSION['profile']['ttpadmin'] >= 1 && $_POST['method'] == 'TTP-Assisted') {
 			$query .= ",\n`method`='TTP-Assisted'";
+		}
+		if($_SESSION['profile']['ttpadmin'] == 2 && $_POST['method'] == 'TTP-TOPUP') {
+			$query .= ",\n`method`='TTP-TOPUP'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
@@ -445,16 +448,16 @@ $iecho= "c";
 		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
 ?><form method="post" action="wot.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-	<tr>
-		<td colspan="2" class="title"><?=_("Assure Someone")?></td>
-	</tr>
-	<tr>
-		<td class="DataTD"><?=_("Email")?>:</td>
-		<td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-	</tr>
-	<tr>
-		<td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
-	</tr>
+  <tr>
+    <td colspan="2" class="title"><?=_("Assure Someone")?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("Email")?>:</td>
+    <td class="DataTD"><input type="text" name="email" id="email" value=""></td>
+  </tr>
+  <tr>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+  </tr>
 </table>
 <input type="hidden" name="oldid" value="5">
 </form>
@@ -507,7 +510,7 @@ $iecho= "c";
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$userid' and `listme`=1"));
-			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
+	                $points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
 						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{

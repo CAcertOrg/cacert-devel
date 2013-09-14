@@ -43,12 +43,13 @@ if ($_SESSION['profile']['points']<100){
 		<form method="post" action="wot.php">
 		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 			<tr>
-				<td class="DataTD"><?=_("Country where you want to visit the TTP")?></td>
-				<td class="DataTD"><select size="1" name="country">
-						<option>Australia</option>
-						<option>Puerto Rico</option>
-						<option>USA</option>
-					</select></td>
+				<td class="DataTD"><?=_('Country where you want to visit the TTP')?></td>
+				<td class="DataTD">
+					<?
+						$ttpcountries=get_array_from_ini('../config/ttp.ini');
+						echo create_selectbox_HTML('country',$ttpcountries, _('Choose country'));
+					?>
+				</td>
 			</tr>
 			<tr>
 				<td class="DataTD"><?=_("I want to take part in the TTP Topup programme")?></td>
@@ -72,7 +73,7 @@ if ($_SESSION['profile']['points']<100){
 		</form>
 */
 ?>
-	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. Meanwhile you have to close this gap with face to face assurances from CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>  
+	<p><?=_("We are working to develop the TTP TOPUP process to be able to fill the gap of the missing 30 assurance points to 100 assurance points. Meanwhile you have to close this gap with face to face assurances from CAcert Assurers. Think not only travelling to populated countries, but as well to assurers visiting your country or area.")?></p>
 <?
 	}
 } else {

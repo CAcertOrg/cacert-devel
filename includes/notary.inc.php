@@ -81,9 +81,13 @@
 		return $res;
 	}
 
-	function get_received_assurances ($userid)
+	function get_received_assurances ($userid, $support)
 	{
-		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` order by `id` asc ");
+		$where="";
+		if ($support==2) {
+			$where=" and (`method`='TTP-Assisted' or `method`='TTP TOPUP')";
+		}
+		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` ".$where." order by `id` asc ");
 		return $res;
 	}
 
@@ -201,15 +205,15 @@
 
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-	<tr>
-		<td class="title"><?=_("Assurer Ranking")?></td>
-	</tr>
-	<tr>
-		<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
-	</tr>
-	<tr>
-		<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
-	</tr>
+    <tr>
+    	<td class="title"><?=_("Assurer Ranking")?></td>
+    </tr>
+    <tr>
+	<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
+    </tr>
+    <tr>
+	<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
+    </tr>
 </table>
 <br/>
 <?
@@ -219,68 +223,68 @@
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-	<tr>
+    <tr>
 <?
 	if ($support == "1")
 	{
 ?>
-		<td colspan="10" class="title"><?=$title?></td>
+    	<td colspan="10" class="title"><?=$title?></td>
 <?
 	} else {
 ?>
-		<td colspan="7" class="title"><?=$title?></td>
+    	<td colspan="7" class="title"><?=$title?></td>
 <?
 	}
 ?>
-	</tr>
-	<tr>
-		<td class="DataTD"><strong><?=_("ID")?></strong></td>
-		<td class="DataTD"><strong><?=_("Date")?></strong></td>
+    </tr>
+    <tr>
+    	<td class="DataTD"><strong><?=_("ID")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Date")?></strong></td>
 <?
 	if ($support == "1")
 	{
 ?>
-		<td class="DataTD"><strong><?=_("When")?></strong></td>
-		<td class="DataTD"><strong><?=_("Email")?></strong></td>
+    	<td class="DataTD"><strong><?=_("When")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Email")?></strong></td>
 <?
 	}
 ?>
-		<td class="DataTD"><strong><?=_("Who")?></strong></td>
-		<td class="DataTD"><strong><?=_("Points")?></strong></td>
-		<td class="DataTD"><strong><?=_("Location")?></strong></td>
-		<td class="DataTD"><strong><?=_("Method")?></strong></td>
-		<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Who")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Points")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Location")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Method")?></strong></td>
+    	<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
 <?
 	if ($support == "1")
 	{
 ?>
-		<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
+	<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
 <?
 	}
 ?>
-	</tr>
+    </tr>
 <?
 	}
 
 	function output_assurances_footer($points_txt,$points,$experience_txt,$sumexperience,$support)
 	{
 ?>
-	<tr>
+    <tr>
 		<td<?=($support == "1")?' colspan="5"':' colspan="3"'?> class="DataTD"><strong><?=$points_txt?>:</strong></td>
-		<td class="DataTD"><?=$points?></td>
-		<td class="DataTD">&nbsp;</td>
-		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
-		<td class="DataTD"><?=$sumexperience?></td>
+    	<td class="DataTD"><?=$points?></td>
+    	<td class="DataTD">&nbsp;</td>
+    	<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
+    	<td class="DataTD"><?=$sumexperience?></td>
 <?
 	if ($support == "1")
 	{
 ?>
-		<td class="DataTD">&nbsp;</td>
+    	<td class="DataTD">&nbsp;</td>
 <?
 	}
 ?>
 
-	</tr>
+    </tr>
 </table>
 <br/>
 <?
@@ -289,54 +293,53 @@
 	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
 	{
 
-		$tdstyle="";
-		$emopen="";
-		$emclose="";
+	$tdstyle="";
+	$emopen="";
+	$emclose="";
 
-		if ($awarded == $points)
+	if ($awarded == $points)
+	{
+		if ($awarded == "0")
 		{
-			if ($awarded == "0")
+			if ($when < "2006-09-01")
 			{
-				if ($when < "2006-09-01")
-				{
-					$tdstyle="style='background-color: #ffff80'";
-					$emopen="<em>";
-					$emclose="</em>";
-				}
+				$tdstyle="style='background-color: #ffff80'";
+				$emopen="<em>";
+				$emclose="</em>";
 			}
 		}
+	}
 ?>
-	<tr>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
+    <tr>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
 <?
-		if ($support == "1")
-		{
+	if ($support == "1")
+	{
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-<?
-		}
+<?	}
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
 <?
-		if ($support == "1")
+	if ($support == "1")
+	{
+		if ($revoked == true)
 		{
-			if ($revoked == true)
-			{
 ?>
-		<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
+			<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
 <?
 			} else {
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
-			}
 		}
+	}
 ?>
     </tr>
 <?
@@ -346,14 +349,14 @@
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-	<tr>
-		<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
-	</tr>
-	<tr>
-		<td class="DataTD"><strong><?=_("Description")?></strong></td>
-		<td class="DataTD"><strong><?=_("Points")?></strong></td>
-		<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
-		<td class="DataTD"><strong><?=_("Remark")?></strong></td>
+    <tr>
+	<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
+    </tr>
+    <tr>
+	<td class="DataTD"><strong><?=_("Description")?></strong></td>
+	<td class="DataTD"><strong><?=_("Points")?></strong></td>
+	<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
+	<td class="DataTD"><strong><?=_("Remark")?></strong></td>
     </tr>
 <?
 	}
@@ -369,12 +372,12 @@
 	function output_summary_row($title,$points,$points_countable,$remark)
 	{
 ?>
-	<tr>
-		<td class="DataTD"><strong><?=$title?></strong></td>
-		<td class="DataTD"><?=$points?></td>
-		<td class="DataTD"><?=$points_countable?></td>
-		<td class="DataTD"><?=$remark?></td>
-	</tr>
+    <tr>
+	<td class="DataTD"><strong><?=$title?></strong></td>
+	<td class="DataTD"><?=$points?></td>
+	<td class="DataTD"><?=$points_countable?></td>
+	<td class="DataTD"><?=$remark?></td>
+    </tr>
 <?
 	}
 
@@ -402,7 +405,7 @@
 	{
 		$points = 0;
 		$sumexperience = 0;
-		$res = get_received_assurances(intval($userid));
+		$res = get_received_assurances(intval($userid), $support);
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['from']));
@@ -1109,4 +1112,52 @@
 	 */
 	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
+	}
+
+
+	/**
+	 * get_array_from_ini()
+	 *  gets an array from an ini file and trims all entries
+	 * @param mixed $inifile, path and filename of the ini file
+	 * @return
+	 */
+	function get_array_from_ini($inifile){
+		$array = parse_ini_file('../config/ttp.ini');
+		ksort($array);
+		foreach($array as $key => $value)
+		{
+			unset($array[$key]);
+			$array[trim($key)] = trim($value);
+		}
+		return	$array;
+	}
+
+	/**
+	*  create_selectbox_HTML()
+	 *
+	 * @param mixed $name, name for the select element
+	 * @param mixed $options, array with the data for the dropdown
+	 * @param string $value, TRUE if the value for the option should be added
+	 * @param string $firstline, if the should be a first line like´Choose country
+	 * @param string $selected, if selection matches option key the
+	 *         entry is preselected in the dropdownbox
+	 * @return
+	 */
+	function create_selectbox_HTML($name, array $options, $firstline = "", $value='', $selected = ""){
+		$return_str='<select name="' . $name . '">';
+		if (!$firstline) {
+			$return_str .= '<option>' . $firstline .'</option>';
+		}
+		foreach ($options as $key => $avalue) {
+			$return_str.='<option ';
+			if (true==$value) {
+				$return_str.='value="'.$avalue.'" ';
+			}
+			if ($ttpcountry==$selection){
+				$return_str.='selected="selected"';
+			}
+			$return_str.=' >'.$key.'</option>';
+		}
+		$return_str.='</select>';
+		return	$return_str;
 	}

@@ -17,20 +17,20 @@
 */ ?>
 <?
 
-        if(!array_key_exists('notarise',$_SESSION['_config']))
+if(!array_key_exists('notarise',$_SESSION['_config']))
 	{
-          echo "Error: No user data found.";
-	  exit;
+		echo "Error: No user data found.";
+		exit;
 	}
 
 	$row = $_SESSION['_config']['notarise'];
 
-	if($_SESSION['profile']['ttpadmin'] == 1)
-//		$methods = array("Face to Face Meeting", "Trusted 3rd Parties", "TopUP");
-//	else
-		$methods = array("Face to Face Meeting", "Trusted 3rd Parties");
+	if($_SESSION['profile']['ttpadmin'] == 2)
+		$methods = array('Face to Face Meeting', 'TTP-Assisted', 'TTP-TOPUP');
+	elseif($_SESSION['profile']['ttpadmin'] == 1)
+		$methods = array('Face to Face Meeting', 'TTP-Assisted');
 	else
-		$methods = array("Face to Face Meeting");
+		$methods = array('Face to Face Meeting');
 
 	$mnames = array(
 		'01' => _('January'),
@@ -82,4 +82,9 @@
 	AssureTextLine(_("Policy"),"<a href=\"/policy/AssurancePolicy.html\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
 	AssureInboxLine("points",_("Points"),"","<br />(Max. ".maxpoints().")");
 	AssureFoot($id,_("I confirm this Assurance"));
+
+	if($_SESSION['profile']['ttpadmin'] >= 1) {
+		?><a href="wot.php?id=16"><?=_('Show TTP details')?></a><?;
+	}
+
 ?>

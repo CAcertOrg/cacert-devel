@@ -907,15 +907,15 @@ if(isset($_GET['shownotary'])) {
     switch($_GET['shownotary']) {
         case 'assuredto':
             showassuredto();
-            break;
+				break;
         case 'assuredby':
             showassuredby();
-            break;
+				break;
         case 'assuredto15':
             output_received_assurances(intval($_GET['userid']),1);
-            break;
+				break;
         case 'assuredby15':
             output_given_assurances(intval($_GET['userid']),1);
-            break;
-    }
+				break;
+	}
 }
