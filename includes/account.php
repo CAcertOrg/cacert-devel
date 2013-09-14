@@ -1187,24 +1187,6 @@
 		exit;
 	}
 
-
-	if($oldid == 6 && $_REQUEST['certid'] != "")
-	{
-		if(trim($_REQUEST['description']) != ""){
-			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$description= "";
-		}
-
-		if(trim($_REQUEST['disablelogin']) == "1"){
-			$disablelogin = 1;
-		}else{
-			$disablelogin = 0;
-		}
-
-		mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
-	}
-
 	if($oldid == 13 && $process != "")
 	{
 		csrf_check("perschange");
