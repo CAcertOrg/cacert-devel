@@ -9,10 +9,10 @@
 body{
 	font-family: Arial,sans-serif;
 	color: #333333;
-	line-height: 1.166;	
+	line-height: 1.166;
 	margin: 0px;
 	padding: 0px;
-	background: #cccccc; 
+	background: #cccccc;
 /*      url("/siteimages/bg_grad.jpg") fixed;   */
 }
 
@@ -101,7 +101,7 @@ padding: 0px;
 	right: 2%;
 	width: 96%;
 	background-color: #ffffff;
-	
+
 }
 
 #tl {
@@ -128,7 +128,7 @@ padding: 0px;
 	left: 2%;
 	right: 2%;
 	width:95.6%;
-	
+
 }
 
 #pageNav{
@@ -213,7 +213,7 @@ background-image:  url("siteimages/glbnav_background.gif");
 
 #globalNav img{
 	margin-bottom: -4px;
- 
+
 }
 
 #gnl {
@@ -335,11 +335,11 @@ a.glink:hover {
   font-size: 70%;
   margin: 0px  0px 0px 10px;
 }
- 
+
 #search a:link, #search a:visited {
 	font-size: 80%;
 	font-weight: bold;
-	
+
 }
 
 #search a:hover {
@@ -476,7 +476,7 @@ td.storyLeft{
 }
 
 .relatedLinks a{
-	display: block; 
+	display: block;
 }
 
 
@@ -661,6 +661,7 @@ div.footerbar {
   src: local('Source Code Pro');
 /*  src: url(/res/fonts/SourceCodePro-Medium.ttf); */
 }
+
 @font-face {
   font-family: 'Last Resort';
   src: local('LastResort');
@@ -668,14 +669,19 @@ div.footerbar {
 }
 
 .accountdetail {
-  font-family: 'Source Code Pro','Lucida Console','Arial Unicode MS',monospace,'Last Resort';
+  font-family: 'Source Code Pro', 'Lucida Console', 'Arial Unicode MS', monospace, 'Last Resort';
   font-size: 1.1em;
 }
 
+.accountdetail.fname {
+}
+
 .accountdetail.mname {
-  font-style:italic;
 }
 
 .accountdetail.lname {
   font-weight:bold;
+}
+
+.accountdetail.suffix {
 }
