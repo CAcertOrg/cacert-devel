@@ -71,10 +71,10 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 <form action="https://pdf.cacert.eu/cacertpdf.php" method="get">
 	<table>
 		<tr>
-			<td colspan="2" class="title">_('TTP CAP form creation')</td>
+			<td colspan="2" class="title"><?=_('TTP CAP form creation')?></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="title">_('User information')</td>
+			<td colspan="2" class="title"><?=_('User information')?></td>
 		</tr>
 		<tr>
 			<td><?=_('Fullname')?><input type="hidden" name="fullname" value="<?=$fullname.$testserver?>"/></td>
@@ -89,7 +89,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td><?=$email?></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="title">_('TTP Admin postal address')</td>
+			<td colspan="2" class="title"><?=_('TTP Admin postal address')?></td>
 		</tr>
 		<tr>
 			<td><?=_('Line').' 1'?></td>
