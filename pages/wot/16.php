@@ -116,7 +116,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td>
 			<?
 				$ttpcountries=get_array_from_ini('../config/ttp.ini');
-				echo create_selectbox_HTML('country',$ttpcountries, '',TRUE);
+				echo create_selectbox_HTML('type', $ttpcountries, '', TRUE);
 			?>
 			</td>
 		</tr>
