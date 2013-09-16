@@ -54,7 +54,7 @@ $drow = mysql_fetch_assoc($dres);
 
 $points=$drow['points'];
 
-$res = get_received_assurances(intval($userid), $support);
+$res = get_received_assurances(intval($userid), 2);
 $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 
 //Form
