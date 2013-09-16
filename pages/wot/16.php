@@ -59,8 +59,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 
 //Form
 ?>
-
-<table>
+<table align="center" class="wrapper">
 	<tr>
 		<td class="title"><?=sprintf(_('Total assurance points for %s'),$fullname)?></td>
 	</tr>
@@ -70,7 +69,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 </table>
 
 <form action="https://pdf.cacert.eu/cacertpdf.php" method="get">
-	<table>
+	<table align="center" class="wrapper">
 		<tr>
 			<td colspan="2" class="title"><?= _('TTP CAP form creation')?></td>
 		</tr>
@@ -135,6 +134,6 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 	<input type="hidden" name="lang" value="en"/>
 </form>
 
-
+<div class="blockcenter">
 <a href="wot.php?id=6><?=_("Back")?></a>
-
+</div>
