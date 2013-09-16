@@ -685,3 +685,21 @@ div.footerbar {
 
 .accountdetail.suffix {
 }
+
+/********* div align ********/
+.blockcenter {
+	text-align:center;
+	margin: 0 auto;
+}
+
+.blockleft {
+	text-align:left;
+	margin: 0;
+	margin-right:auto;
+}
+
+.blockright {
+	text-align:right;
+	margin: 0;
+	margin-left:auto;
+}
