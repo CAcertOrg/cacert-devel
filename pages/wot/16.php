@@ -35,7 +35,8 @@ $mname = $row['mname'];
 $lname = $row['lname'];
 $suffix = $row['suffix'];
 $fullname = $fname." ".$mname." ".$lname." ".$suffix;
-$dob = date_format($row['dob'], 'Y-m-d');
+$email = $row['email'];
+$dob = date_format(new DateTime($row['dob']), 'Y-m-d');
 $userid = $row['id'];
 
 //List TTP Assurances and TotalPoints
@@ -71,10 +72,10 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 <form action="https://pdf.cacert.eu/cacertpdf.php" method="get">
 	<table>
 		<tr>
-			<td colspan="2" class="title"><?=_('TTP CAP form creation')?></td>
+			<td colspan="2" class="title"><?= _('TTP CAP form creation')?></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="title"><?=_('User information')?></td>
+			<td colspan="2" class="title"><?= _('User information')?></td>
 		</tr>
 		<tr>
 			<td><?=_('Fullname')?><input type="hidden" name="fullname" value="<?=$fullname.$testserver?>"/></td>
