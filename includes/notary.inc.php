@@ -1143,20 +1143,20 @@
 	 *         entry is preselected in the dropdownbox
 	 * @return
 	 */
-	function create_selectbox_HTML($name, array $options, $firstline = "", $value='', $selected = ""){
+	function create_selectbox_HTML($name, array $options, $firstline = '', $value='', $selected = ''){
 		$return_str='<select name="' . $name . '">';
-		if (!$firstline) {
+		if (''!= $firstline) {
 			$return_str .= '<option>' . $firstline .'</option>';
 		}
 		foreach ($options as $key => $avalue) {
-			$return_str.='<option ';
-			if (true==$value) {
-				$return_str.='value="'.$avalue.'" ';
+			$return_str.='<option';
+			if ($value) {
+				$return_str.=' value="'.$avalue.'"';
 			}
-			if ($ttpcountry==$selection){
-				$return_str.='selected="selected"';
+			if ($key==$selected){
+				$return_str.=' selected="selected"';
 			}
-			$return_str.=' >'.$key.'</option>';
+			$return_str.='>'.$key.'</option>';
 		}
 		$return_str.='</select>';
 		return	$return_str;
