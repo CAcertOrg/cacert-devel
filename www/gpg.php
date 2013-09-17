@@ -319,10 +319,10 @@ function verifyEmail($email)
 						`keyid`='".mysql_real_escape_string($keyid)."',
 						`description`='".mysql_real_escape_string($description)."'";
 		mysql_query($query);
-		$id = mysql_insert_id();
+		$insert_id = mysql_insert_id();
 
 
-		$cwd = '/tmp/gpgspace'.$id;
+		$cwd = '/tmp/gpgspace'.$insert_id;
 		mkdir($cwd,0755);
 
 		$fp = fopen("$cwd/gpg.csr", "w");
@@ -333,7 +333,8 @@ function verifyEmail($email)
 		system("gpg --homedir $cwd --import $cwd/gpg.csr");
 
 
-		$gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $keyid 2>&1`);
+		$cmd_keyid = escapeshellarg($keyid);
+		$gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1`);
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
@@ -433,7 +434,8 @@ function verifyEmail($email)
 
 			//echo "Keyid: $keyid\n";
 
-			$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $keyid", $descriptorspec, $pipes);
+			$cmd_keyid = escapeshellarg($keyid);
+			$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $cmd_keyid", $descriptorspec, $pipes);
 
 			//echo "Process: $process\n";
 			//fputs($stderr,"Process: $process\n");
@@ -515,15 +517,16 @@ function verifyEmail($email)
 		}
 
 
-		$csrname=generatecertpath("csr","gpg",$id);
-		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $keyid >$csrname`;
+		$csrname=generatecertpath("csr","gpg",$insert_id);
+		$cmd_keyid = escapeshellarg($keyid);
+		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname`;
 
-		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$id'");
-		waitForResult('gpg', $id);
+		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
+		waitForResult('gpg', $insert_id);
 
 		showheader(_("Welcome to CAcert.org"));
 		echo $resulttable;
-		$query = "select * from `gpg` where `id`='$id' and `crt`!=''";
+		$query = "select * from `gpg` where `id`='$insert_id' and `crt`!=''";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
@@ -531,7 +534,7 @@ function verifyEmail($email)
 			echo _("If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you.");
 		} else {
 			echo "<pre>";
-			readfile(generatecertpath("crt","gpg",$id));
+			readfile(generatecertpath("crt","gpg",$insert_id));
 			echo "</pre>";
 		}
 
