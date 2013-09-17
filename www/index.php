@@ -149,6 +149,7 @@ require_once('../includes/notary.inc.php');
 		}
 	}
 
+	//client login
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
 		include_once("../includes/lib/general.php");
@@ -359,6 +360,7 @@ require_once('../includes/notary.inc.php');
 		}
 
 		$cca=get_last_user_agreement($user_id);
+		echo '###'.$cca['active'];
 		if (!isset($cca['active'])){
 			$id=52;
 			$ccatest=TRUE;
