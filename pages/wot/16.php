@@ -85,7 +85,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td><?=$dob?></td>
 		</tr>
 		<tr>
-			<td><?=_('Email')?><input type="hidden" name="email" value="<?=$fullname.$testserver?>"/></td>
+			<td><?=_('Email')?><input type="hidden" name="email" value="<?=$email.$testserver?>"/></td>
 			<td><?=$email?></td>
 		</tr>
 		<tr>
