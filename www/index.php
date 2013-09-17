@@ -359,7 +359,7 @@ require_once('../includes/notary.inc.php');
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
 		}
 
-		$cca=get_last_user_agreement($user_id);
+		$cca=get_last_user_agreement($_SESSION['profile']['id']);
 		echo '###'.$cca['active'];
 		if (!isset($cca['active'])){
 			$id=52;
