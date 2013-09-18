@@ -88,8 +88,18 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td><?=_('Email')?><input type="hidden" name="email" value="<?=$email.$testserver?>"/></td>
 			<td><?=$email?></td>
 		</tr>
+		<tr></tr>
 		<tr>
-			<td colspan="2" class="title"><?=_('TTP Admin postal address')?></td>
+			<td><?=_('Country where the TTP will be visited')?></td>
+			<td>
+				<?
+				$ttpcountries=get_array_from_ini('../config/ttp.ini');
+				echo create_selectbox_HTML('type',$ttpcountries, '',TRUE);
+				?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="title"><?=_('TTP Admin postal address, including name, street, country etc.')?></td>
 		</tr>
 		<tr>
 			<td><?=_('Line').' 1'?></td>
@@ -112,15 +122,6 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td><input type="text" name="adress4" /></td>
 		</tr>
 		<tr>
-			<td><?=_('Country where the TTP will be visited')?></td>
-			<td>
-			<?
-				$ttpcountries=get_array_from_ini('../config/ttp.ini');
-				echo create_selectbox_HTML('type', $ttpcountries, '', TRUE);
-			?>
-			</td>
-		</tr>
-		<tr>
 			<td colspan="2" class="title">
 			<?
 			if ($points>=100 || $ttp_assurances_count>=2) {
@@ -135,5 +136,5 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 </form>
 
 <div class="blockcenter">
-<a href="wot.php?id=6><?=_("Back")?></a>
+	<a href="wot.php?id=6&amp;userid=<?=$userid ?>"><?=_("Back")?></a>
 </div>
