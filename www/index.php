@@ -165,12 +165,14 @@ require_once('../includes/notary.inc.php');
 			if($_SESSION['profile']['id'] != 0)
 			{
 				$cca=get_last_user_agreement($user_id);
+						echo '###0###'.$cca['active'];
 				if (!isset($cca['active'])){
 					$id=52;
 					$ccatest=TRUE;
 				}else{
 					$_SESSION['profile']['loggedin'] = 1;
 					header('location: https://'.$_SERVER['HTTP_HOST'].'/account.php');
+						echo '###1###'.$cca['active'];
 					exit;
 				}
 			} else {
