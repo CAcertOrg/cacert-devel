@@ -67,7 +67,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 		<td class="title"><?=sprintf(_('Total assurance points for %s'),$fullname)?></td>
 	</tr>
 	<tr>
-		<td><?=$points?></td>
+		<td><?=sprintf(_('%s points'), $points)?></td>
 	</tr>
 </table>
 <br/>
@@ -128,7 +128,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 			<td colspan="2" class="title">
 			<?
 			if ($points>=100 || $ttp_assurances_count>=2) {
-				_('No TTP assurance allowed');
+				echo _('No TTP assurance allowed');
 			}else{
 				?><input type="submit" value="<?=_('Create TTP CAP pdf file')?>"/><?
 			}?>
