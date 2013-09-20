@@ -378,8 +378,9 @@ if ($id == 52 )
 	$agree = ""; if(array_key_exists('agree',$_REQUEST)) $agree=$_REQUEST['agree'];
 	if (!$agree) {
 		$_SESSION['profile']['loggedin'] = 0;
+		$id=4;
 	}else{
-		write_user_agreement($memid, "CCA", "Login acception", "", 1);
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "Login acception", "", 1);
 		$_SESSION['profile']['loggedin'] = 1;
 		header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 		exit;
