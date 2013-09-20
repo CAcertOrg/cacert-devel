@@ -53,6 +53,9 @@ $dres = mysql_query($query);
 $drow = mysql_fetch_assoc($dres);
 
 $points=$drow['points'];
+if ($points<1) {
+	$points=0;
+}
 
 $res = get_received_assurances(intval($userid), 2);
 $ttp_assurances_count=$num_rows = mysql_num_rows($res);
@@ -67,7 +70,7 @@ $ttp_assurances_count=$num_rows = mysql_num_rows($res);
 		<td><?=$points?></td>
 	</tr>
 </table>
-
+<br/>
 <form action="https://pdf.cacert.eu/cacertpdf.php" method="get">
 	<table align="center" class="wrapper">
 		<tr>
