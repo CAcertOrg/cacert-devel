@@ -165,17 +165,15 @@ require_once('../includes/notary.inc.php');
 
 			if($_SESSION['profile']['id'] != 0)
 			{
-				$cca=get_last_user_agreement($user_id);
-						echo '###0###'.$cca['active'];
-				if (!isset($cca['active'])){
+				$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+				if (0==$ccatest) {
 					$id=52;
-					$ccatest=TRUE;
+					header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
 				}else{
 					$_SESSION['profile']['loggedin'] = 1;
-					header('location: https://'.$_SERVER['HTTP_HOST'].'/account.php');
-						echo '###1###'.$cca['active'];
-					exit;
+					header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 				}
+				exit;
 			} else {
 				$_SESSION['profile']['loggedin'] = 0;
 			}
@@ -186,7 +184,6 @@ require_once('../includes/notary.inc.php');
 	if($id == 4 && array_key_exists('profile',$_SESSION) && array_key_exists('loggedin',array($_SESSION['profile'])) && $_SESSION['profile']['loggedin'] == 1)
 	{
 		header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
-					echo '###2###'.$cca['active'];
 		exit;
 	}
 
