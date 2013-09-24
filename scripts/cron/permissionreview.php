@@ -67,7 +67,7 @@ $flags = array(
 			'level'  =>1
 			),
 
-	'ttpadmin=1' => array(
+	'ttpadmin=2' => array(
 			'name'    => 'Trusted Third Party TOPUP Admin',
 			'own'     => true,
 			'board'   => true,
