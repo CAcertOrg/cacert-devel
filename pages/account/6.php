@@ -14,12 +14,15 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
-	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
+*/
 
-//	$query = "select * from `emailcerts` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
-	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
+// Get certificate information
+$certid = 0;
+if(array_key_exists('cert',$_REQUEST)) {
+	$certid = intval($_REQUEST['cert']);
+}
+
+$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
 			`emailcerts`.`expire` as `expires`,
@@ -32,123 +35,90 @@
 			`emailcerts`.`crt_name`,
 			`emailcerts`.`keytype`,
 			`emailcerts`.`description`
-			from `emailcerts`
-			where `emailcerts`.`id`='$certid' and `emailcerts`.`memid`='".intval($_SESSION['profile']['id'])."'";
+		from `emailcerts`
+		where `emailcerts`.`id`='$certid' and
+			`emailcerts`.`memid`='".intval($_SESSION['profile']['id'])."'";
+
+$res = mysql_query($query);
+if(mysql_num_rows($res) <= 0) {
+	showheader(_("My CAcert.org Account!"));
+	echo _("No such certificate attached to your account.");
+	showfooter();
+	exit;
+}
+$row = mysql_fetch_assoc($res);
 
 
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
-	{
-		showheader(_("My CAcert.org Account!"));
-		echo _("No such certificate attached to your account.");
-		showfooter();
-		exit;
+if (array_key_exists('format', $_REQUEST)) {
+	// Which output format?
+	if ($_REQUEST['format'] === 'der') {
+		$outform = '-outform DER';
+		$extension = 'cer';
+	} else {
+		$outform = '-outform PEM';
+		$extension = 'crt';
 	}
-	$row = mysql_fetch_assoc($res);
 
 	$crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname`;
+	$cert = `/usr/bin/openssl x509 -in $crtname $outform`;
 
-	if($row['keytype'] == "NS")
-	{
-		if(array_key_exists('install',$_REQUEST) && $_REQUEST['install'] == 1)
-		{
-			header("Content-Type: application/x-x509-user-cert");
-			header("Content-Length: ".strlen($cert));
-			$fname=sanitizeFilename($row['CN']);
-			if($fname=="") $fname="certificate";
-			header('Content-Disposition: inline; filename="'.$fname.'.crt"');
-			echo $cert;
-			exit;
-		} else {
-			showheader(_("My CAcert.org Account!"));
-			echo "<h3>"._("Installing your certificate")."</h3>\n";
-			echo "<p>"._("You are about to install a certificate, if you are using mozilla/netscape based browsers you will not be informed that the certificate was installed successfully, you can go into the options dialog box, security and manage certificates to view if it was installed correctly however.")."</p>\n";
-			echo "<p><a href='account.php?id=6&amp;cert=$certid&amp;install=1'>"._("Click here")."</a> "._("to install your certificate.")."</p>\n";
-			showfooter();
-			exit;
-		}
+	header("Content-Type: application/pkix-cert");
+	header("Content-Length: ".strlen($cert));
+
+	$fname = sanitizeFilename($row['CN']);
+	if ($fname=="") $fname="certificate";
+	header("Content-Disposition: attachment; filename=\"${fname}.${extension}\"");
+
+	echo $cert;
+	exit;
+
+} elseif (array_key_exists('install', $_REQUEST)) {
+	if (array_key_exists('HTTP_USER_AGENT',$_SERVER) &&
+			strstr($_SERVER['HTTP_USER_AGENT'], "MSIE")) {
+
+		// Handle IE
+		//TODO
+
 	} else {
-		showheader(_("My CAcert.org Account!"));
-?>
-<h3><?=_("Installing your certificate")?></h3>
+		// All other browsers
+		$crtname=escapeshellarg($row['crt_name']);
+		$cert = `/usr/bin/openssl x509 -in $crtname -outform DER`;
 
-<p><?=_("Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above.")?>
+		header("Content-Type: application/x-x509-user-cert");
+		header("Content-Length: ".strlen($cert));
 
-<OBJECT classid="clsid:127698e4-e730-4e5c-a2b1-21490a70c8a1" codebase="/xenroll.cab#Version=5,131,3659,0" id="cec">
-<?=_("You must enable ActiveX for this to work.")?>
-</OBJECT>
-<FORM >
-<INPUT TYPE=BUTTON NAME="CertInst" VALUE="<?=_("Install Your Certificate")?>">
-</FORM>
+		$fname = sanitizeFilename($row['CN']);
+		if ($fname=="") $fname="certificate";
+		header("Content-Disposition: inline; filename=\"${fname}.cer\"");
 
-</P>
-
-<SCRIPT LANGUAGE=VBS>
-   Sub CertInst_OnClick
-      certchain  = _
-<?
-	$lines = explode("\n", $cert);
-	if(is_array($lines))
-	foreach($lines as $line)
-	{
-		$line = trim($line);
-		if($line != "-----END CERTIFICATE-----")
-			echo "\"$line\" & _\n";
-		else {
-			echo "\"$line\"\n";
-			break;
-		}
+		echo $cert;
+		exit;
 	}
-?>
 
-      On Error Resume Next
+} else {
+	showheader(_("My CAcert.org Account!"), _("Install your certificate"));
+	echo '<ul class="no_indent">';
+	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;install'>".
+		_("Install the certificate into your browser").
+		"</a></li>\n";
 
-      Dim obj
-      Set obj=CreateObject("X509Enrollment.CX509Enrollment")
-      If IsObject(obj) Then
-        obj.Initialize(1)
-        obj.InstallResponse 0,certchain,0,""
-        if err.number<>0 then
-          msgbox err.Description
-	else
-	  msgbox "<?=_("Certificate installed successfully. Please don't forget to backup now")?>"
-	end if
-      else
+	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;format=pem'>".
+		_("Download the certificate in PEM format")."</a></li>\n";
 
+	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;format=der'>".
+		_("Download the certificate in DER format")."</a></li>\n";
+	echo '</ul>';
 
+	// Allow to directly copy and paste the cert in PEM format
+	$crtname=escapeshellarg($row['crt_name']);
+	$cert = `/usr/bin/openssl x509 -in $crtname -outform PEM`;
+	echo "<pre>$cert</pre>";
 
-
-      cec.DeleteRequestCert = FALSE
-      err.clear
-
-      cec.WriteCertToCSP = TRUE
-      cec.acceptPKCS7(certchain)
-      if err.number <> 0 Then
-         cec.WriteCertToCSP = FALSE
-      end if
-      err.clear
-      cec.acceptPKCS7(certchain)
-      if err.number <> 0 then
-         errorMsg = "<?=_("Certificate installation failed!")?>" & chr(13) & chr(10) & _
-                        "(Error code " & err.number & ")"
-         msgRes   = MsgBox(errorMsg, 0, "<?=_("Certificate Installation Error")?>")
-      else
-         okMsg    = "<?=_("Personal Certificate Installed.")?>" & chr(13) & chr(10) & _
-                        "See Tools->Internet Options->Content->Certificates"
-         msgRes   = MsgBox(okMsg, 0, "<?=_("Certificate Installation Complete!")?>")
-      end if
-     End If
-   End Sub
-</SCRIPT>
-
-<p><?=_("Your certificate:")?></p>
-<pre><?=$cert?></pre>
-
+	?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-		<td colspan="2" class="title"><?=_("Information about the certificte")?></td>
+		<td colspan="2" class="title"><?=_("Information about the certificate")?></td>
 	</tr>
 <?
 	if($row['timeleft'] > 0)
