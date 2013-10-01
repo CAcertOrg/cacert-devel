@@ -27,7 +27,7 @@ require_once('../includes/notary.inc.php');
                 $id = 0;
 
         $_SESSION['_config']['errmsg'] = "";
-        $ccatest=FALSE;
+        $ccatest=0;
 
 	if($id == 17 || $id == 20)
 	{
@@ -149,6 +149,7 @@ require_once('../includes/notary.inc.php');
 		}
 	}
 
+	//client login
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
 		include_once("../includes/lib/general.php");
@@ -160,18 +161,19 @@ require_once('../includes/notary.inc.php');
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
 				"select * from `users` where
 				`id`='$user_id' and `deleted`=0 and `locked`=0"));
+			$ccatest=get_user_agreement_status($user_id,'CCA');
 
 			if($_SESSION['profile']['id'] != 0)
 			{
-				$cca=get_last_user_agreement($user_id);
-				if (!isset($cca['active'])){
+				$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+				if (0==$ccatest) {
 					$id=52;
-					$ccatest=TRUE;
+					header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
 				}else{
 					$_SESSION['profile']['loggedin'] = 1;
-					header('location: https://'.$_SERVER['HTTP_HOST'].'/account.php');
-					exit;
+					header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 				}
+				exit;
 			} else {
 				$_SESSION['profile']['loggedin'] = 0;
 			}
@@ -341,10 +343,17 @@ require_once('../includes/notary.inc.php');
 			}
 			if (checkpwlight($pword) < 3)
 				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
-			if($_SESSION['_config']['oldlocation'] != "")
+			$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+			if($_SESSION['_config']['oldlocation'] != ""){
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
-			else
-				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+			}else{
+				if (0==$ccatest) {
+					$id=52;
+					header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
+				}else{
+					header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+				}
+			}
 			exit;
 		}
 
@@ -357,24 +366,25 @@ require_once('../includes/notary.inc.php');
 		} else {
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
 		}
-
-		$cca=get_last_user_agreement($user_id);
-		if (!isset($cca['active'])){
-			$id=52;
-			$ccatest=TRUE;
-		}
 	}
 
 // check for CCA acceptance prior to login
-if ($id == 52 && $ccatest==FALSE)
+if ($id == 52 )
 {
+	$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
 	$agree = ""; if(array_key_exists('agree',$_REQUEST)) $agree=$_REQUEST['agree'];
 	if (!$agree) {
 		$_SESSION['profile']['loggedin'] = 0;
 	}else{
-		write_user_agreement($memid, "CCA", "Login acception", "", 1);
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "Login acception", "", 1);
 		$_SESSION['profile']['loggedin'] = 1;
 		header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+		exit;
+	}
+	$disagree = ""; if(array_key_exists('disagree',$_REQUEST)) $disagree=$_REQUEST['disagree'];
+	if ($disagree) {
+		$_SESSION['profile']['loggedin'] = 0;
+		header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=4");
 		exit;
 	}
 }
