@@ -667,8 +667,8 @@
 	 */
 	function get_first_user_agreement($memid, $active=1, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
-		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` u
-			WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND u.`memid`=" . intval($memid) . "AND u.`active`=" . intval($active) .
+		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` AS u
+			WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND u.`memid`=" . intval($memid) . " AND u.`active`=" . intval($active) .
 			" ORDER BY u.`date` Limit 1;";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
