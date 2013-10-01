@@ -90,7 +90,7 @@ if($_SESSION['profile']['points'] >= 50)
   </tr>
   <tr>
    <td class="DataTD" colspan="2" align="left">
-      <?=_("Optional comment, only used in the certifictate overview max. 100 characters")?><br />
+      <?=_("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="100" size="100" />
    </td>
   </tr>

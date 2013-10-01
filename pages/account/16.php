@@ -58,7 +58,7 @@
 <? } ?>
    <tr>
    <td class="DataTD" colspan="2" align="left">
-      <?=_("Optional comment, only used in the certifictate overview")?><br />
+      <?=_("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="80" size=80 />
    </td>
   </tr>
