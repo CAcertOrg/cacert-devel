@@ -55,7 +55,7 @@
 
 	$dob_date = explode('-', $dob, 3);
 	$dob_print = sprintf(
-		'<tt clsss="accountdetail">%s-%s-%s</tt> (%d %s %d)',
+		'<tt class="accountdetail">%s-%s-%s</tt> (%d %s %d)',
 		$dob_date[0], $dob_date[1], $dob_date[2],
 		intval($dob_date[2], 10), $mnames[$dob_date[1]], intval($dob_date[0], 10)
 		);
@@ -67,7 +67,7 @@
 
 	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s %s %s %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname, $mname, $lname, $suffix));
 	AssureTextLine(_("Name"), sprintf(
-		"<span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"accountdetail suffix\">%s</span></span>",
+		"<tt><span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"accountdetail suffix\">%s</span></span><tt>",
 		$fname, $mname, $lname, $suffix
 		));
 	AssureTextLine(_("Date of Birth"),$dob_print);
