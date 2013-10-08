@@ -202,7 +202,7 @@ Best Regards,
 CAcert Support
 EOF;
 
-foreach ($adminlist[$flag] as $support_engineer) {
+foreach ($adminlist['admin=1'] as $support_engineer) {
 	sendmail(
 			$support_engineer['email'],
 			"Permissions Review",
