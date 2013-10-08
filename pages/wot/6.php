@@ -67,7 +67,7 @@
 
 	AssureHead(_("Assurance Confirmation"),sprintf(_("Please check the following details match against what you witnessed when you met %s %s %s %s in person. You MUST NOT proceed unless you are sure the details are correct. You may be held responsible by the CAcert Arbitrator for any issues with this Assurance."), $fname, $mname, $lname, $suffix));
 	AssureTextLine(_("Name"), sprintf(
-		"<tt><span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"accountdetail suffix\">%s</span></span><tt>",
+		"<tt><span class=\"accountdetail name\"><span class=\"accountdetail fname\">%s</span> <span class=\"accountdetail mname\">%s</span> <span class=\"accountdetail lname\">%s</span> <span class=\"accountdetail suffix\">%s</span></span></tt>",
 		$fname, $mname, $lname, $suffix
 		));
 	AssureTextLine(_("Date of Birth"),$dob_print);
