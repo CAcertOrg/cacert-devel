@@ -33,8 +33,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => false,
-			'oao'     => false,
-			'level'  =>1
+			'oao'     => false
 			),
 
 	'orgadmin=1' => array(
@@ -43,8 +42,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => true,
-			'level'  =>1
+			'oao'     => true
 			),
 
 	'board=1' => array(
@@ -53,8 +51,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => false,
-			'level'  =>1
+			'oao'     => false
 			),
 
 	'ttpadmin=1' => array(
@@ -63,8 +60,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => true,
-			'level'  =>1
+			'oao'     => true
 			),
 
 	'ttpadmin=2' => array(
@@ -73,8 +69,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => true,
-			'level'  =>2
+			'oao'     => true
 			),
 
 	'tverify=1' => array(
@@ -83,8 +78,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => true,
-			'oao'     => false,
-			'level'  =>1
+			'oao'     => false
 			),
 
 	'locadmin=1' => array(
@@ -93,8 +87,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => false,
-			'oao'     => false,
-			'level'  =>1
+			'oao'     => false
 			),
 
 	'adadmin=1' => array(
@@ -103,8 +96,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => false,
-			'oao'     => false,
-			'level'  =>1
+			'oao'     => false
 			),
 
 	'adadmin=2' => array(
@@ -113,8 +105,7 @@ $flags = array(
 			'board'   => true,
 			'support' => true,
 			'ao'      => false,
-			'oao'     => false,
-			'level'  =>2
+			'oao'     => false
 			),
 
 
@@ -124,8 +115,8 @@ $flags = array(
 // Build up list of various admins
 $adminlist = array();
 foreach ($flags as $flag => $flag_properties) {
-	$flagname=explode('=', $flag, 2 );
-	$query = "select `fname`, `lname`, `email` from `users` where `$flagname[0]` = $flag_properties[level]";
+	$flagname = explode('=', $flag, 2 );
+	$query = "select `fname`, `lname`, `email` from `users` where `$flagname[0]` = '$flagname[1]'";
 	if(! $res = mysql_query($query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
