@@ -137,7 +137,7 @@ function checkWeakKeyText($text)
 			$keysize = intval($keysize[1]);
 		}
 			
-		if ($keysize < 1024)
+		if ($keysize < 2048)
 		{
 			return sprintf(_("The keys that you use are very small ".
 						"and therefore insecure. Please generate stronger ".
@@ -145,11 +145,6 @@ function checkWeakKeyText($text)
 						"found in %sthe wiki%s"),
 					"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
 					"</a>");
-		} elseif ($keysize < 2048) {
-			// not critical but log so we have some statistics about
-			// affected users
-			trigger_error("checkWeakKeyText(): Certificate for small ".
-						"key (< 2048 bit) requested", E_USER_NOTICE);
 		}
 			
 			
