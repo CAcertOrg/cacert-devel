@@ -160,6 +160,7 @@ CAcert Support
 EOF;
 
 			sendmail($admin['email'], "Permissions Review", $message, 'support@cacert.org');
+			echo "Sent $flag_properties[name] mail to $admin[email]\n";
 		}
 	}
 }
@@ -199,6 +200,7 @@ foreach ($adminlist['admin=1'] as $support_engineer) {
 			"Permissions Review",
 			$message,
 			'support@cacert.org');
+	echo "Sent Support Engineer mail to $support_engineer[email]\n";
 }
 
 
@@ -244,4 +246,5 @@ CAcert Support
 EOF;
 
 	sendmail($values['email'], "Permissions Review", $message, 'support@cacert.org');
+	echo "Sent $values[description] mail to $values[email]\n";
 }
