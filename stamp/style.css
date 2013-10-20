@@ -6,94 +6,95 @@
 /***********************************************/
 /* HTML tag styles                             */
 /***********************************************/
-body{
+body {
 	font-family: Arial,sans-serif;
 	color: #333333;
-	line-height: 1.166;	
+	line-height: 1.166;
 	margin: 0px;
 	padding: 0px;
-	background: #cccccc; 
+	background: #cccccc;
 /*      url("/siteimages/bg_grad.jpg") fixed;   */
 }
 
+
 /******* hyperlink and anchor tag styles *******/
 
-a:link, a:visited{
+a:link, a:visited {
 	color: #005FA9;
 	text-decoration: none;
 }
 
-a:hover{
+a:hover {
 	text-decoration: underline;
 }
 
 /************** header tag styles **************/
 
-h1{
- font: bold 120% Arial,sans-serif;
- color: #334d55;
- margin: 0px;
- padding: 0px;
+h1 {
+	font: bold 120% Arial,sans-serif;
+	color: #334d55;
+	margin: 0px;
+	padding: 0px;
 }
 
-h2{
- font: bold 114% Arial,sans-serif;
- color: #006699;
- margin: 0px;
- padding: 0px;
+h2 {
+	font: bold 114% Arial,sans-serif;
+	color: #006699;
+	margin: 0px;
+	padding: 0px;
 }
 
-h3{
- font: bold 100% Arial,sans-serif;
- color: #334d55;
- margin: 0px;
- padding: 0px;
- cursor: pointer;
-/* cursor: hand; */
+h3 {
+	font: bold 100% Arial,sans-serif;
+	color: #334d55;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+	/* cursor: hand; */
 }
 
-h4{
- font: bold 100% Arial,sans-serif;
- color: #333333;
- margin: 0px;
- padding: 0px;
+h4 {
+	font: bold 100% Arial,sans-serif;
+	color: #333333;
+	margin: 0px;
+	padding: 0px;
 }
 
-h5{
- font: 100% Arial,sans-serif;
- color: #334d55;
- margin: 0px;
- padding: 0px;
+h5 {
+	font: 100% Arial,sans-serif;
+	color: #334d55;
+	margin: 0px;
+	padding: 0px;
 }
 
 
 /*************** list tag styles ***************/
 
 ul.menu {
-list-style: none;
-margin :0px 0px 0px 15px;
-padding-left: 5px;
-border-left: 1px dotted #000;
+	list-style: none;
+	margin :0px 0px 0px 15px;
+	padding-left: 5px;
+	border-left: 1px dotted #000;
 }
 
 ul.top {
-list-style: none;
-margin: 0px 0px 0px 15px;
-padding-left: 5px;
-border-left: 0px;
+	list-style: none;
+	margin: 0px 0px 0px 15px;
+	padding-left: 5px;
+	border-left: 0px;
 }
 
 ul {
-list-style: none;
-margin: 0px 0px 0px 15px;
-padding-left: 5px;
-border-left: 1px dotted #000;
+	list-style: none;
+	margin: 0px 0px 0px 15px;
+	padding-left: 5px;
+	border-left: 1px dotted #000;
 }
 
 /***********************************************/
 /* Layout Divs                                 */
 /***********************************************/
-#pagecell1{
+#pagecell1 {
 	position:absolute;
 	top: 2%;
 	left: 2%;

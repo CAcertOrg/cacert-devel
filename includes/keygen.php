@@ -75,7 +75,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 			<p style="color:red"><?php
 				printf(_('Please note that RSA key sizes smaller than %d bit '.
 					'will not be accepted by CAcert.'),
-					1024)?>
+					2048)?>
 			</p>
 		</fieldset>
 
