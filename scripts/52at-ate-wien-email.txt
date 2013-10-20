@@ -1,0 +1,91 @@
+[Deutsch]
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher
+eher "muendlich ueberlieferten" Regeln wurden in Policies gegossen.
+Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B.
+in dem CAcert Community Agreement) wurden beschlossen. Die Assurer
+Training Events wollen versuchen, die ganzen Informationen unter's
+Volk zu bringen:
+
+- Welcher Satz fehlt auf alten CAP Formularen?
+- Warum soll ich mir R/L/O einpraegen?
+- Wie verhaelst du dich,
+    wenn du ein fremdes Ausweisdokument das erste Mal pruefst?
+
+Antworten auf diese und weitere Fragen erhaelst du bei den
+Assurer Training Events (ATEs).
+
+Darueberhinaus wird beim ATE der Vorgang der Identitaetsueberpruefung
+trainiert und auditiert, um die Qualitaet der Assurances in der
+taeglichen Praxis zu erfassen. Dabei gilt es moegliche Fehler und
+Fallstricke zu erkennen und aufzudecken. Die Assurer haben also die
+Moeglichkeit, sich mit den Fehlern auseinanderzusetzen und zu erfahren,
+wie diese vermieden werden koennen.
+
+Wie IanG sagte: The ATE or Assurer Training Event is exceptionally
+recommended for all Assurers, and include parts which contribute
+directly to our audit. Come and find out how you can also contribute.
+
+Die kommende Veranstaltung in deiner Naehe findet statt am:
+
+- Dienstag, den 15. Oktober 2013
+- in der Zeit von: 18:00 - ca. 22:00 Uhr
+- Wirtschaftskammer Oesterreich, Raum B3 1 Besprechungsraum
+- Wiedner Hauptstraße 63
+- 1045 Wien 
+
+
+Details zum Veranstaltungsort und Anfahrthinweise findet Ihr im
+Wiki [https://wiki.cacert.org/Events/2013-10-15ATE-Wien]
+Blog [http://blog.cacert.org/2013/09/ate-wien-at-2013-10-15/]
+
+Teilnehmer Registrierung mit Rueckantwort:
+ 'Ich moechte am ATE-Graz teilnehmen'
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Kontakt: events@cacert.org
+
+
+
+[English]
+
+During the last year many changes took place inside CAcert. Many "oral"
+rules have been put into Policies. New procedures
+(e.g. Assurer Challenge) and obligations
+(e.g. CAcert Community Agreement) have been put into live.
+The Assurer Training Events (ATE) try to spread this information:
+
+- What is missing on the "old" CAP forms?
+- Why should I remember R/L/O?
+- What can you do if an Assuree shows an ID document unknown to you?
+
+These and more questions will be answered during the
+Assurer Training Events (ATEs)
+
+Furthermore, the ATE trains how to do assurances and audits assurances,
+to measure the quality of assurances in the daily routine. Here are some
+possible errors and pitfalls which need to be found. Assurers have the
+opportunity to see those errors and how to avoid them.
+
+As IanG said: The ATE or Assurer Training Event is exceptionally
+recommended for all Assurers and includes parts which contribute
+directly to our audit. Come and find out how you can also contribute.
+
+The next event held in your area will be:
+
+- Friday, October 15th 2013
+- during: 18:00 - ca. 22:00
+- Austrian Chamber of Commerce, Meetingroom B3 1
+- Wiedner Hauptstraße 63
+- 1045 Vienna
+
+Details to the location can be found:
+Wiki [https://wiki.cacert.org/Events/2013-10-15ATE-Wien]
+Blog [http://blog.cacert.org/2013/09/ate-wien-at-2013-10-15/]
+
+User reply for registration: 'I will attend the ATE-Graz'
+
+The event team is looking forward for your attendance:
+
+Contact: events@cacert.org
