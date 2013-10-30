@@ -1719,6 +1719,7 @@
 				$query = "insert into `orgemailcerts` set
 						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
+						`ou`='".$row['ou']."',
 						`subject`='".$row['subject']."',
 						`keytype`='".$row['keytype']."',
 						`csr_name`='".$row['csr_name']."',
