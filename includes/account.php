@@ -1522,12 +1522,12 @@
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='NS',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
-						`ou`='".$_SESSION['_config']['OU']."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -1613,6 +1613,7 @@
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='" . sanitizeHTML($_REQUEST['keytype']) . "',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1688,6 +1689,7 @@
 				$query = "insert into `orgemailcerts` set
 						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
+						`ou`='".$row['ou']."',
 						`subject`='".$row['subject']."',
 						`keytype`='".$row['keytype']."',
 						`csr_name`='".$row['csr_name']."',

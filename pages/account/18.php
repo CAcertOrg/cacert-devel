@@ -60,15 +60,16 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
     <td class="DataTD"><?=_("Certificate status")?></td>
     <td colspan="8" class="DataTD" >
       <select name="status">
-        <?=sprintf('<option value="%d"%s>%s</option>',0, 0 == $status ? " selected" : "" ,_("Currrent/Active")) ?>
+        <?=sprintf('<option value="%d"%s>%s</option>',0, 0 == $status ? " selected" : "" ,_("Current/Active")) ?>
         <?=sprintf('<option value="%d"%s>%s</option>',1, 1 == $status ? " selected" : "" ,_("All")) ?>
       </select>
     </td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="9"><input type="submit" name="reset" value="<?=_("Reset")?>" />&#160;&#160;&#160;&#160;
+    <td class="DataTD" colspan="9"><input type="submit" name="reset" value="<?=_("Reset")?>" />&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="submit" name="filter" value="<?=_("Apply filter/sort")?>" /></td>
   </tr>
+  <tr>
     <td colspan="9" class="DataTD"> </td>
   </tr>
 
@@ -122,7 +123,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
     <td colspan="9" class="title"></td>
   </tr>
   <tr>
-    <td colspan="9" class="title"><?=_("Certificates for ").$orgname?> </td>
+    <td colspan="9" class="title"><? printf(_("Certificates for %s"), $orgname)?> </td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("OU/Department")?></td>
