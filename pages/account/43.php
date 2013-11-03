@@ -647,7 +647,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		$query = "select COUNT(*) as `expired`
 			from `gpg`
 			where `memid` = '".intval($row['id'])."'
-			and `expire` < NOW()";
+			and `expire` <= NOW()";
 		$dres = mysql_query($query);
 		$drow = mysql_fetch_assoc($dres);
 		$expired = $drow['expired'];
