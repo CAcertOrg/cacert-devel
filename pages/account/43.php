@@ -504,7 +504,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<td class="DataTD"><?=_("Revoked")?></td>
 		<td class="DataTD"><?=_("Latest Expire")?></td>
 	</tr>
-// server certificates
+<!-- server certificates -->
 	<tr>
 		<td class="DataTD"><?=_("Server")?>:</td>
 	<?
@@ -564,7 +564,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
-// client certificates
+<!-- client certificates -->
 	<tr>
 		<td class="DataTD"><?=_("Client")?>:</td>
 	<?
@@ -619,7 +619,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
-// gpg certificates
+<!-- gpg certificates -->
 	<tr>
 		<td class="DataTD"><?=_("GPG")?>:</td>
 	<?
@@ -666,7 +666,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
-// org server certificates
+<!-- org server certificates -->
 	<tr>
 		<td class="DataTD"><a href="account.php?id=58&amp;userid=<?=intval($row['id'])?>"><?=_("Org Server")?></a>:</td>
 	<?
@@ -726,7 +726,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		<?
 	} ?>
 	</tr>
-// org client certificates
+<!-- org client certificates -->
 	<tr>
 		<td class="DataTD"><?=_("Org Client")?>:</td>
 	<?
