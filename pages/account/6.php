@@ -154,7 +154,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	<tr>
 		<td class="DataTD"><?=_("Login")?></td>
 		<td class="DataTD">
-			<input type="checkbox" name="disablelogin" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
+			<input type="checkbox" name="disablelogin" disabled="disabled" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
 		</td>
 	</tr>
 	<tr>
