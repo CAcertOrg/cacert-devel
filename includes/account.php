@@ -31,7 +31,7 @@ function appendUnique($str, $suffix) {
 function appendSubjectAltName($subject, $name) {
 	$subject = appendUnique($subject, "/subjectAltName=DNS:$name");
 	$subject = appendUnique($subject, "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$name");
-	
+
 	return $subject;
 }
 
@@ -51,15 +51,15 @@ function appendSubjectAltName($subject, $name) {
  */
 function buildSubject(array $domains, $include_xmpp_addr = true) {
 	$subject = "/CN=${domains[0]}";
-	
+
 	foreach ($domains as $domain) {
 		$subject .= "/subjectAltName=DNS:$domain";
-		
+
 		if ($include_xmpp_addr) {
 			$subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$domain";
 		}
 	}
-	
+
 	return $subject;
 }
 
@@ -210,7 +210,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 					$dres = mysql_query($query);
 					while($drow = mysql_fetch_assoc($dres))
 						mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['id']."'");
-	
+
 					$query = "update `email` set `deleted`=NOW() where `id`='$id'";
 					mysql_query($query);
 					$delcount++;
@@ -357,7 +357,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 				showfooter();
 				exit;
 			}
-			
+
 			$query = "insert into emailcerts set
 						`CN`='$defaultemail', 
 						`keytype`='NS',
@@ -389,7 +389,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype'] == "VI") {
 			if($csr == "")
 				$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."\n-----END CERTIFICATE REQUEST-----\n";
-			
+
 			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
 			{
 				$id = 4;
@@ -398,7 +398,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 				showfooter();
 				exit;
 			}
-			
+
 			$tmpfname = tempnam("/tmp", "id4CSR");
 			$fp = fopen($tmpfname, "w");
 			fputs($fp, $csr);
@@ -687,7 +687,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 		  // In case the CSR is missing the ---BEGIN lines, add them automatically:
 		  $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n".$CSR."\n-----END CERTIFICATE REQUEST-----\n";
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -695,7 +695,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			showfooter();
 			exit;
 		}
-		
+
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -740,7 +740,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			showfooter();
 			exit;
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR(file_get_contents(
 				$_SESSION['_config']['tmpfname']))) !== "")
 		{
@@ -749,7 +749,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			showfooter();
 			exit;
 		}
-		
+
 		$id = 11;
 		if($_SESSION['_config']['0.CN'] == "" && $_SESSION['_config']['0.subjectAltName'] == "")
 		{
@@ -760,7 +760,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 		}
 
 		$subject = buildSubject();
-		
+
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
@@ -782,7 +782,6 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			echo _("Domain not verified.");
 			showfooter();
 			exit;
-
 		}
 
 		mysql_query($query);
@@ -838,16 +837,16 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br/>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into `domaincerts` set 
 						`domid`='".$row['domid']."', 
@@ -902,6 +901,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 		{
 			echo _("You did not select any certificates for renewal.");
 		}
+
 		showfooter();
 		exit;
 	}
@@ -991,16 +991,16 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into emailcerts set 
 						`memid`='".$row['memid']."', 
@@ -1200,7 +1200,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 		$ddres = mysql_query($ddquery);
 		$ddrow = mysql_fetch_assoc($ddres);
 		$_SESSION['profile']['points'] = $ddrow['total'];
-		
+
 		if($_SESSION['profile']['points'] == 0)
 		{
 			$_SESSION['_config']['user']['fname'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['fname']))));
@@ -1378,7 +1378,6 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 
 	if($oldid == 16 && $process != "")
 	{
-
 		if(array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] && $_SESSION['profile']['codesign'] && ($_SESSION['profile']['points'] >= 100))
 		{
 			$_REQUEST['codesign'] = 1;
@@ -1449,7 +1448,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 				showfooter();
 				exit;
 			}
-			
+
 			$query = "insert into `orgemailcerts` set 
 						`CN`='$defaultemail', 
 						`keytype`='NS',
@@ -1480,7 +1479,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype']=="VI") {
 			$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."-----END CERTIFICATE REQUEST-----\n";
-			
+
 			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
 			{
 				$id = 17;
@@ -1489,7 +1488,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 				showfooter();
 				exit;
 			}
-			
+
 			$tmpfname = tempnam("/tmp", "id17CSR");
 			$fp = fopen($tmpfname, "w");
 			fputs($fp, $csr);
@@ -1596,16 +1595,16 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `orgemailcerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
@@ -1716,7 +1715,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 	if($process != "" && $oldid == 20)
 	{
 		$CSR = clean_csr($_REQUEST['CSR']);
-		
+
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
 			$id = 20;
@@ -1725,7 +1724,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			showfooter();
 			exit;
 		}
-		
+
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
@@ -1775,7 +1774,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 	if($process != "" && $oldid == 21)
 	{
 		$id = 21;
-		
+
 		if(!file_exists($_SESSION['_config']['tmpfname']))
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -1783,7 +1782,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			showfooter();
 			exit;
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR(file_get_contents(
 				$_SESSION['_config']['tmpfname']))) !== "")
 		{
@@ -1904,16 +1903,16 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				
+
 				$row = mysql_fetch_assoc($res);
-				
+
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
 				{
 					echo $weakKey, "<br/>\n";
 					continue;
 				}
-				
+
 				mysql_query("update `orgdomaincerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
@@ -2547,7 +2546,6 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
-
 			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n";
 			$body .= _("You are receiving this email because a CAcert administrator")."\n";
 			$body .= _("has changed the password on your account.")."\n";
@@ -2556,8 +2554,8 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 
 			sendmail($row['email'], "[CAcert.org] "._("Password Update Notification"), $body,
 						"support@cacert.org", "", "", "CAcert Support");
-
 		}
+
 		showfooter();
 		exit;
 	}
@@ -2611,7 +2609,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			showfooter();
 			exit;
 		}
-		
+
 		if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -2909,7 +2907,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			while($row = mysql_fetch_assoc($res))
 				$body .= $row['comment']."\n";
 			$body .= "\n";
-			
+
 			$body .= _("Best regards")."\n";
 			$body .= _("CAcert Support Team");
 			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");
@@ -2930,7 +2928,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			$body .= "\n";
 
 			$body .= _("You are welcome to try submitting another request at any time in the future, please make sure you take the reviewer comments into consideration or you risk having your application rejected again.")."\n\n";
-			
+
 			$body .= _("Best regards")."\n";
 			$body .= _("CAcert Support Team");
 			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");
