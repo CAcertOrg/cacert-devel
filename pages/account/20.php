@@ -17,7 +17,7 @@
 */
 	include_once("../includes/shutdown.php");
 ?>
-<h3><?=_("CAcert Certficate Acceptable Use Policy")?></h3>
+<h3><?=_("CAcert Certificate Acceptable Use Policy")?></h3>
 <p><?=_("Once you decide to subscribe for an SSL Server Certificate you will need to complete this agreement. Please read it carefully. Your Certificate Request can only be processed with your acceptance and understanding of this agreement.")?></p>
 
 <p><?=_("I hereby represent that I am fully authorized by the owner of the information contained in the CSR sent to CAcert Inc. to apply for an Digital Certificate for secure and authenticated electronic transactions. I understand that a digital certificate serves to identify the Subscriber for the purposes of electronic communication and that the management of the private keys associated with such certificates is the responsibility of the subscriber's technical staff and/or contractors.")?></p>
@@ -29,7 +29,7 @@
 <form method="post" action="account.php">
 <input type="radio" name="rootcert" value="1" /> <?=_("Sign by class 1 root certificate")?><br />
 <input type="radio" name="rootcert" value="2" checked /> <?=_("Sign by class 3 root certificate")?><br />
-<p> <?=_("Optional comment, only used in the certifictate overview")?><br />
+<p> <?=_("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="80" size=80 /></p>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <p><?=_("Paste your CSR below...")?></p>
