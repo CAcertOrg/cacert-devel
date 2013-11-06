@@ -20,21 +20,6 @@
 
 	loadem("account");
 
-function appendUnique($str, $suffix) {
-	if (!strstr($str, "$suffix/") &&
-			substr($str, -strlen($suffix)) != $suffix) {
-		$str .= $suffix;
-	}
-	return $str;
-}
-
-function appendSubjectAltName($subject, $name) {
-	$subject = appendUnique($subject, "/subjectAltName=DNS:$name");
-	$subject = appendUnique($subject, "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$name");
-
-	return $subject;
-}
-
 /**
  * Build a subject string as needed by the signer
  *
@@ -61,6 +46,29 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 	}
 
 	return $subject;
+}
+
+/**
+ * Builds the subject string from the session variables
+ * $_SESSION['_config']['rows'] and $_SESSION['_config']['altrows']
+ *
+ * @return string
+ */
+function buildSubjectFromSession() {
+	$domains = array();
+
+	if (is_array($_SESSION['_config']['rows'])) {
+		$domains = array_merge($domains, $_SESSION['_config']['rows']);
+	}
+
+	if (is_array($_SESSION['_config']['altrows']))
+		foreach ($_SESSION['_config']['altrows'] as $row) {
+			if (substr($row, 0, 4) === "DNS:") {
+				$domains[] = substr($row, 4);
+			}
+		}
+
+	return buildSubject(array_unique($domains));
 }
 
 	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
@@ -759,7 +767,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 			exit;
 		}
 
-		$subject = buildSubject();
+		$subject = buildSubjectFromSession();
 
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
@@ -879,7 +887,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 					continue;
 				}
 
-				$subject = buildSubject();
+				$subject = buildSubjectFromSession();
 				$subject = mysql_real_escape_string($subject);
 				mysql_query("update `domaincerts` set `subject`='$subject',`csr_name`='$newfile' where `id`='$newid'");
 
@@ -1828,7 +1836,7 @@ function buildSubject(array $domains, $include_xmpp_addr = true) {
 		//if($org['contact'])
 		//	$csrsubject .= "/emailAddress=".trim($org['contact']);
 
-		$csrsubject .= buildSubject();
+		$csrsubject .= buildSubjectFromSession();
 
 		$type="";
 		if($_REQUEST["ocspcert"]!="" && $_SESSION['profile']['admin'] == 1) $type="8";
