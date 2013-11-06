@@ -28,7 +28,7 @@
 
 	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $extra="")
 	{
-		$lines = explode('\n', $message);
+		$lines = explode("\n", $message);
 		$message = "";
 		foreach($lines as $line)
 		{
@@ -64,7 +64,8 @@
 		fputs($smtp, "DATA\r\n");
 		$InputBuffer = fgets($smtp, 1024);
 		fputs($smtp, "X-Mailer: CAcert.org Website\r\n");
-		fputs($smtp, "X-OriginatingIP: ".$_SERVER["REMOTE_ADDR"]."\r\n");
+		if (array_key_exists("REMOTE_ADDR", $_SERVER))
+			fputs($smtp, "X-OriginatingIP: ".$_SERVER["REMOTE_ADDR"]."\r\n");
 		fputs($smtp, "Sender: $errorsto\r\n");
 		fputs($smtp, "Errors-To: $errorsto\r\n");
 		if($replyto != "")

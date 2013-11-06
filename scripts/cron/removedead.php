@@ -17,9 +17,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	include_once("/home/cacert/www/includes/mysql.php");
-	require_once('/home/cacert/www/includes/lib/l10n.php');
-
+	require_once(dirname(__FILE__).'/../../includes/mysql.php');
+	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
+	require_once(dirname(__FILE__).'/../../includes/notary.inc.php');
+	
 	$query = "select * from `users`	where `users`.`verified`=0 and
 			(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`users`.`created`)) >= 172800";
 	$res = mysql_query($query);
@@ -27,6 +28,7 @@
 	{
 		mysql_query("delete from `email` where `memid`='".$row['id']."'");
 		mysql_query("delete from `users` where `id`='".$row['id']."'");
+		delete_user_agreement($row['id']);
 	}
 
 	$query = "delete from `domains` where `hash`!='' and

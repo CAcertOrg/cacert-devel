@@ -112,8 +112,7 @@ $(LANGS:%=$(MO_FILE_TEMPLATE)): $(MO_FILE_TEMPLATE): $(PO_FILE_TEMPLATE)
 $(LANGS:%=$(PO_FILE_TEMPLATE)):
 	mkdir -p $(@D)
 	wget --output-document - '$(@:$(PO_FILE_TEMPLATE)=$(PO_URL_TEMPLATE))' | \
-		# convert UTF-8 characters to HTML entities \
-		php -r 'while (!feof(STDIN)) echo mb_convert_encoding(fgets(STDIN), "HTML-ENTITIES", "UTF-8");' \
+		php -f escape_special_chars.php \
 		> $@
 
 
@@ -177,7 +176,8 @@ upload.clean: template.clean
 messages.pot: $(GETTEXT_FILES)
 	xgettext --output - --sort-by-file --copyright-holder "CAcert Inc." \
 		--package-name "CAcert" --package-version "$(VERSION)" \
-		--msgid-bugs-address "translations-admin@cacert.org" $^ | \
+		--msgid-bugs-address "translations-admin@cacert.org" \
+		--add-comments=TRANSLATORS $^ | \
 		# replace place holders in the lines before the first msgid\
 		sed '1,/^msgid/ { s/SOME DESCRIPTIVE TITLE/$(DESCRITPION)/; s/YEAR/$(COPYRIGHT_YEAR)/; s/PACKAGE/$(PACKAGE)/ }' \
 		> $@

@@ -29,25 +29,25 @@
 	foreach($_SESSION['_config']['emails'] as $val) { ?>
   <tr>
     <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><input type="text" name="emails[]" value="<?=$val?>"></td>
+    <td class="DataTD"><input type="text" name="emails[]" value="<?=$val?>"/></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><input type="text" name="emails[]"></td>
+    <td class="DataTD"><input type="text" name="emails[]"/></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Name")?>:</td>
-    <td class="DataTD"><input type="text" name="name" value="<?=array_key_exists('name',$_SESSION['_config'])?($_SESSION['_config']['name']):''?>"></td>
+    <td class="DataTD"><input type="text" name="name" value="<?=array_key_exists('name',$_SESSION['_config'])?($_SESSION['_config']['name']):''?>"/></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Department")?>:</td>
-    <td class="DataTD"><input type="text" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?($_SESSION['_config']['OU']):''?>"></td>
+    <td class="DataTD"><input type="text" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?($_SESSION['_config']['OU']):''?>"/></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2" align="left">
-        <input type="radio" name="rootcert" value="1" checked> <?=_("Sign by class 1 root certificate")?><br>
-        <input type="radio" name="rootcert" value="2"> <?=_("Sign by class 3 root certificate")?><br>
+        <input type="radio" name="rootcert" value="1" checked /> <?=_("Sign by class 1 root certificate")?><br />
+        <input type="radio" name="rootcert" value="2" /> <?=_("Sign by class 3 root certificate")?><br />
         <?=str_replace("\n", "<br>\n", wordwrap(_("Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"), 60))?>
     </td>
   </tr>
@@ -56,9 +56,15 @@
     <td class="DataTD" colspan="2" align="left"><input type="checkbox" name="codesign" value="1" /><?=_("Code Signing")?></td>
   </tr>
 <? } ?>
+   <tr>
+   <td class="DataTD" colspan="2" align="left">
+      <?=_("Optional comment, only used in the certifictate overview")?><br />
+       <input type="text" name="description" maxlength="80" size=80 />
+   </td>
+  </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="add_email" value="<?=_("Another Email")?>">
-			<input type="submit" name="process" value="<?=_("Next")?>"></td>
+			<input type="submit" name="process" value="<?=_("Next")?>" /></td>
   </tr>
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>">
