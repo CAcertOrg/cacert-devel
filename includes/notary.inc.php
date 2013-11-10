@@ -1110,3 +1110,43 @@
 	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
 	}
+
+/**
+ * se_write_log()
+ *  writes an information to the adminlog
+ *
+ * @param mixed $uid - id of the user account
+ * @param mixed $adminid - id of the admin
+ * @param mixed $type - what was changed
+ * @param mixed $info - the ticket / arbitration no or other information
+ * @return
+ */
+function se_write_log($uid, $adminid, $type, $info){
+	//records all support engineer actions changing a user account
+	$uid = intval($uid);
+	$adminid = intval($adminid);
+	$type = mysql_real_escape_string($type);
+	$info = mysql_real_escape_string($info);
+	$query="insert into `adminlog` (`when`, `uid`, `admind`,`type`,`information`) values
+		(Now(), $uid, $adminid, '$type', '$info'";
+	mysql_query($query);
+}
+
+/**
+ * valid_ticket_number()
+ * checks if the entered information is a valid ticket or arbitration number
+ * @param mixed $ticketno
+ * @return
+ */
+function valid_ticket_number($ticketno){
+	//return if a given ticket number is valid
+	//a arbitration case
+	//d dispute action
+	//s support case
+	//m board motion
+	$pattern='/[adsmADSM]\d{8}\./';
+	if (preg_match($pattern, $ticketno)) {
+		return true;
+	}
+	return false;
+}
