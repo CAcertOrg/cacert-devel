@@ -225,7 +225,7 @@ function send_reminder()
 		}
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' and
-							`to`='".$_SESSION['_config']['notarise']['id']."'";
+			`to`='".$_SESSION['_config']['notarise']['id']."' and `deleted` = 0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
@@ -332,7 +332,7 @@ $iecho= "c";
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
 
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
 
@@ -352,7 +352,7 @@ $iecho= "c";
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
 						`awarded`='$awarded' AND
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."'";
+						`date`='".mysql_escape_string(stripslashes($_POST['date']))."' and `deleted` = 0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
@@ -512,7 +512,7 @@ $iecho= "c";
 			$userid = intval($_REQUEST['userid']);
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$userid' and `listme`=1"));
 			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
+						where `to`='".$user['id']."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{
 				$my_translation = L10n::get_translation();
