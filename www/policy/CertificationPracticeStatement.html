@@ -5,7 +5,22 @@
     <!--meta name="copyright" content="CAcert Inc http://www.cacert.org/" -->
     <title>Certification Practice Statement (CPS)</title>
 
+<!--[if lt IE 9]>
+<script>
+  var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+    "figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+    "progress,section,time,video").split(',');
+  for (var i = 0; i < e.length; i++) {
+    document.createElement(e[i]);
+  }
+</script>
+<![endif]-->
+
 <style type="text/css">
+
+/* mark HTML5 block elements as such for HTML5 unaware browsers */
+article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}
+
 body {
     font-family : verdana, helvetica, arial, sans-serif;
 }
@@ -16,7 +31,11 @@ pre, code, kbd, tt, samp, .pre {
 }
 
 th {
-    text-align : left;
+    font-weight: normal;
+}
+
+td, th{
+    padding: 5px;
 }
 
 .blockpar {
@@ -26,7 +45,7 @@ th {
     text-align : justify;
 }
 
-.figure {
+figcaption {
     text-align : center;
     color : gray;
     margin-top : 0.5em;
@@ -69,6 +88,10 @@ a:hover {
     text-align : center;
 }
 
+.l {
+    text-align: left;
+}
+
 .r {
     text-align : right;
 }
@@ -88,10 +111,12 @@ a:hover {
 
 .clrGreen {
     color: green;
+    border-color: inherit;
     }
 
 .clrRed {
     color: red;
+    border-color: inherit;
     }
 .bgClrOrange {
     background-color: #ffa500;
@@ -108,10 +133,6 @@ a:hover {
 .size3{
     font-size: 2em;
     }
-
-.padding5 td{
-     padding: 5px;
- }
 
 .u{
     text-decoration:underline;
@@ -151,7 +172,6 @@ vertical-align:top;
 
 
 <table style="width: 100%;">
-
 <tr>
 <td>Name: CAcert CPS and CP <a style="color: steelblue" href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">COD6</a><br />
 Status: DRAFT&nbsp;<a href="https://wiki.cacert.org/PolicyDecisions#p20091108">p20091108</a>, DRAFT&nbsp;<a href="https://wiki.cacert.org/PolicyDecisions#p20111113">p20111113</a><br />
@@ -164,8 +184,6 @@ Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licenc
   <a href="https://www.cacert.org/policy/PolicyOnPolicy.html"><img src="images/cacert-draft.png" alt="CPS Status - DRAFT" height="31" width="88" style="border-style: none;" /></a>
 </td>
 </tr>
-
-
 </table>
 
 
@@ -479,49 +497,54 @@ and risks, liabilities and obligations in
 <a href="#p9">&sect;9</a>.
 </p>
 
-
-<table border="1" class="parentC" style="margin-left:auto; margin-right:auto;">
+<figure id="t1.4">
+<table border="1" class="parentC">
+<thead>
  <tr>
-  <td colspan="2" class="c i">Type</td>
-  <td colspan="2" class="c i">Appropriate Certificate uses</td>
+  <th colspan="2" class="i">Type</th>
+  <th colspan="2" class="i">Appropriate Certificate uses</th>
  </tr>
  <tr>
-  <th>General</th>
-  <th>Protocol</th>
-  <th class="c">Description</th>
-  <th class="c">Comments</th>
+  <th class="b">General</th>
+  <th class="b">Protocol</th>
+  <th class="b">Description</th>
+  <th class="b">Comments</th>
  </tr>
+</thead>
+<tbody>
  <tr>
-  <td rowspan="2" class="c">Server</td>
-  <td> TLS </td>
+  <th scope="rowgroup" rowspan="2">Server</th>
+  <th scope="row" class="l"> TLS </th>
   <td> web server encryption </td>
   <td> enables encryption </td>
  </tr>
  <tr>
-  <td> embedded </td>
+  <th scope="row" class="l"> embedded </th>
   <td> embedded server authentication </td>
   <td> mail servers, IM-servers </td>
  </tr>
+</tbody>
+<tbody>
  <tr>
-  <td rowspan="4" class="c">Client</td>
-  <td> S/MIME </td>
+  <th scope="rowgroup" rowspan="4">Client</th>
+  <th scope="row" class="l"> S/MIME </th>
   <td> email encryption </td>
   <td> "digital signatures" employed in S/MIME
        are not legal / human signatures,
        but instead enable the encryption mode of S/MIME </td>
  </tr>
  <tr>
-  <td> TLS </td>
+  <th scope="row" class="l"> TLS </th>
   <td> client authentication </td>
   <td> the nodes must be secure </td>
  </tr>
  <tr>
-  <td> TLS </td>
+  <th scope="row" class="l"> TLS </th>
   <td> web based signature applications </td>
   <td> the certificate authenticates only.  See <a href="#p1.4.3">&sect;1.4.3</a>. </td>
  </tr>
  <tr>
-  <td> &quot;Digital Signing&quot; </td>
+  <th scope="row" class="l"> &quot;Digital Signing&quot; </th>
   <td> for human signing over documents </td>
   <td> Only within a wider application and rules
        such as by separate policy,
@@ -529,27 +552,35 @@ and risks, liabilities and obligations in
        See <a href="#p1.4.4">&sect;1.4.4</a>.
        </td>
  </tr>
+</tbody>
+<tbody>
  <tr>
-  <td class="c">Code</td>
-  <td> Authenticode, ElfSign, Java </td>
+  <th scope="rowgroup">Code</th>
+  <th scope="row" class="l"> Authenticode, ElfSign, Java </th>
   <td> Code Signing </td>
   <td> Signatures on packages are evidence of their Membership and indicative of Identity </td>
  </tr>
+</tbody>
+<tbody>
  <tr>
-  <td class="c">PGP</td>
-  <td> OpenPGP </td>
+  <th scope="rowgroup">PGP</th>
+  <th scope="row" class="l"> OpenPGP </th>
   <td> Key Signing </td>
   <td> Signatures on Member Keys are evidence of their Membership and indicative of Identity </td>
  </tr>
+</tbody>
+<tbody>
  <tr>
-  <td class="c">Special</td>
-  <td> X.509 </td>
+  <th scope="rowgroup">Special</th>
+  <th scope="row" class="l"> X.509 </th>
   <td> OCSP, Timestamping </td>
   <td> Only available to CAcert Systems Administrators, as controlled by Security Policy </td>
  </tr>
+</tbody>
 </table>
 
-<div class="c figure">Table 1.4.  Types of Certificate</div>
+<figcaption>Table 1.4.  Types of Certificate</figcaption>
+</figure>
 
 
 <h4 id="p1.4.1">1.4.1. Appropriate certificate uses</h4>
@@ -734,81 +765,87 @@ and will be submitted to vendors via the (Top-level) Root.
 </li></ul>
 
 
-
-<table border="1" class="parentC padding5">
+<figure id="t1.4.5.b">
+<table border="1" class="parentC">
+<thead>
  <tr>
-  <td></td>
-  <td colspan="5" class="c i">Level of Assurance</td>
-  <th> </th>
+  <th></th>
+  <th colspan="5" class="i">Level of Assurance</th>
+  <th></th>
  </tr>
  <tr>
   <th></th>
-  <th colspan="2" class="c">Members &dagger;</th>
-  <th colspan="2" class="c">Assured Members</th>
-  <th colspan="1" class="c">Assurers</th>
-  <th colspan="1" class="c">&nbsp;</th>
+  <th colspan="2" class="b">Members &dagger;</th>
+  <th colspan="2" class="b">Assured Members</th>
+  <th colspan="1" class="b">Assurers</th>
+  <th colspan="1" class="b"></th>
  </tr>
  <tr>
-  <td><em>Class of Root</em></td>
-  <th>Anon</th>
-  <td>Name</td>
-  <td>Anon</td>
+  <th class="i">Class of Root</th>
+  <th class="b">Anon</th>
   <th>Name</th>
-  <td>Name+Anon</td>
-  <td colspan="1"  class="c i">Remarks</td>
+  <th>Anon</th>
+  <th class="b">Name</th>
+  <th>Name+Anon</th>
+  <th class="i">Remarks</th>
  </tr>
+</thead>
+<tbody>
  <tr>
-  <td class="c"><span class="size1">Top level<br><strong>Root</strong></span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &bull;</span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &bull; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &bull; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &bull; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &bull; </span></td>
+  <th scope="row">Top level<br><strong>Root</strong></th>
+  <td title="pass" class="c clrGreen size3"> &bull;</td>
+  <td title="pass" class="c clrGreen size3"> &bull;</td>
+  <td title="pass" class="c clrGreen size3"> &bull;</td>
+  <td title="pass" class="c clrGreen size3"> &bull;</td>
+  <td title="pass" class="c clrGreen size3"> &bull;</td>
   <td> Signs other CAcert SubRoots only. </td>
  </tr>
  <tr>
-  <td class="c"><strong class="size1">Member</strong><br>SubRoot</td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-  <td class="c"><span title="pass." class="clrRed size3"> &#10008; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
+  <th scope="row"><strong>Member</strong><br>SubRoot</th>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="fail" class="c clrRed   size3"> &#10008;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
   <td> &dagger; For Members meeting basic checks in <a href="#p4.2.2">&sect;4.2.2</a><br>(Reliance is undefined.) </td>
  </tr>
  <tr>
-  <td class="c"><span class="size1"><strong>Assured</strong><br>SubRoot</span></td>
-  <td class="c"><span title="pass." class="clrRed size3"> &#10008; </span> </td>
-  <td class="c"><span title="pass." class="clrRed size3"> &#10008; </span> </td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span> </td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span> </td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span> </td>
+  <th scope="row"><strong>Assured</strong><br>SubRoot</th>
+  <td title="fail" class="c clrRed   size3"> &#10008;</td>
+  <td title="fail" class="c clrRed   size3"> &#10008;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
   <td> Assured Members only.<br>Fully intended for reliance. </td>
  </tr>
  <tr>
-  <td class="c"><span class="size1"><strong>Organisation</strong><br>SubRoot</span></td>
-  <td class="c"><span title="pass." class="clrRed size3"> &#10008; </span></td>
-  <td class="c"><span title="pass." class="clrRed size3"> &#10008; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-  <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
+  <th scope="row"><strong>Organisation</strong><br>SubRoot</th>
+  <td title="fail" class="c clrRed   size3"> &#10008;</td>
+  <td title="fail" class="c clrRed   size3"> &#10008;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
+  <td title="pass" class="c clrGreen size3"> &#10004;</td>
   <td> Assured Organisation Members only.<br>Fully intended for reliance. </td>
  </tr>
  <tr>
-  <th>Expiry of Certificates</th>
+  <th scope="row">Expiry of Certificates</th>
   <td colspan="2" class="c">6 months</td>
   <td colspan="3" class="c">24 months</td>
   <td></td>
  </tr>
  <tr>
-  <th>Types</th>
+  <th scope="row">Types</th>
   <td colspan="2" class="c">client, server</td>
   <td colspan="2" class="c">wildcard, subjectAltName</td>
   <td colspan="1" class="c">code-signing</td>
   <td> (Inclusive to the left.) </td>
  </tr>
+</tbody>
 </table>
 
-<div class="c figure">Table 1.4.5.b  Certificate under Audit Roots</div>
+<figcaption>Table 1.4.5.b  Certificate under Audit Roots</figcaption>
+</figure>
+
 
 
 <h3 id="p1.5">1.5. Policy administration</h3>
@@ -1550,44 +1587,47 @@ certificates that state their Assured Name(s).
 
 <br><br>
 
-
-<table border="1" class="parentC padding5">
+<figure id="t3.2.b">
+<table border="1" class="parentC">
+<thead>
  <tr>
-  <th>Assurance Points</th>
-  <th>Level</th>
-  <th>Service</th>
-  <th>Comments</th>
+  <th class="b">Assurance Points</th>
+  <th class="b">Level</th>
+  <th class="b">Service</th>
+  <th class="b">Comments</th>
  </tr>
+</thead>
+<tbody>
  <tr>
-  <td>0</td>
+  <th scope="row">0</th>
   <td>Unassured Member</td>
   <td>Anonymous</td>
   <td>Certificates with no Name, under Class 1 Root.  Limited to 6 months expiry.</td>
  </tr>
  <tr>
-  <td>1-49</td>
+  <th scope="row">1-49</th>
   <td>Unassured Member</td>
   <td>Anonymous</td>
   <td>Certificates with no Name under Member SubRoot.  Limited to 6 months expiry.</td>
  </tr>
  <tr>
-  <td>50-99</td>
+  <th scope="row">50-99</th>
   <td>Assured Member</td>
   <td>Verified</td>
   <td>Certificates with Verified Name for S/MIME, web servers, "digital signing."
       Expiry after 24 months is available.</td>
  </tr>
  <tr>
-  <td>100++</td>
+  <th scope="row">100++</th>
   <td>Assurer</td>
   <td>Code-signing</td>
   <td>Can create Code-signing certificates </td>
  </tr>
+</tbody>
 </table>
 
-<div class="c figure">Table 3.2.b - How Assurance Points are used in Certificates</div>
-
-<br>
+<figcaption>Table 3.2.b - How Assurance Points are used in Certificates</figcaption>
+</figure>
 
 
 
@@ -2017,34 +2057,41 @@ algorithm following the process:
    The signed key is stored as well as mailed.
 </li></ol>
 
-<table class="parentC"><tbody>
+<figure id="t4.3.1">
+<table class="parentC">
+<thead>
   <tr>
-    <td><br></td>
-    <td>Verified Name</td>
-    <td class="vTop">Unverified Name<br></td>
-    <td>Empty Name<br></td>
+    <th></th>
+    <th>Verified Name</th>
+    <th>Unverified Name</th>
+    <th>Empty Name</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <th scope="row" class="r">Verified email</th>
+    <td title="pass" class="c clrGreen size3">&#10004;</td>
+    <td title="fail" class="c clrRed   size3">&#10008;</td>
+    <td title="pass" class="c clrGreen size3">&#10004;</td>
   </tr>
   <tr>
-    <td>Verified email<br></td>
-    <td class="c"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-    <td class="c vTop"> <span title="pass." class="clrRed size3"> &#10008; </span></td>
-    <td class="c"><span title="pass." class="clrGreen size3" > &#10004; </span></td>
-  </tr>
-  <tr>
-    <td>Unverified email</td>
-    <td class="c"><span title="pass." class="clrRed size3" > &#10008; </span></td>
-    <td class="c vTop"><span title="pass." class="clrRed size3"> &#10008; </span></td>
-    <td class="c"><span title="pass." class="clrRed size3"> &#10008; </span></td>
+    <th scope="row" class="r">Unverified email</th>
+    <td title="fail" class="c clrRed size3">&#10008;</td>
+    <td title="fail" class="c clrRed size3">&#10008;</td>
+    <td title="fail" class="c clrRed size3">&#10008;</td>
    </tr>
    <tr>
-    <td class="vTop">Empty email<br></td>
-    <td class="c vTop"><span title="pass." class="clrGreen size3"> &#10004; </span></td>
-    <td class="c VTop"><span title="pass." class="clrRed size3"> &#10008; </span></td>
-    <td class="c vTop"><span title="pass." class="clrRed size3"> &#10008; </span></td>
+    <th scope="row" class="r">Empty email</th>
+    <td title="pass" class="c clrGreen size3">&#10004;</td>
+    <td title="fail" class="c clrRed   size3">&#10008;</td>
+    <td title="fail" class="c clrRed   size3">&#10008;</td>
   </tr>
-</tbody></table><br>
+</tbody>
+</table>
 
-<div class="c figure">Table 4.3.1.  Permitted Data in Signed OpenPgp Keys</div>
+<figcaption>Table 4.3.1. Permitted Data in Signed OpenPgp Keys</figcaption>
+</figure>
+
 
 
 <h4 id="p4.3.2">4.3.2. Notification to subscriber by the CA of issuance of certificate</h4>
@@ -2127,21 +2174,34 @@ and can be seen as limitations on it.
 <p>
 The term Verification as used in the Relying Party Statement means one of
 </p>
-<table border="1" class="parentC"><tr>
+<table border="1" class="parentC">
+<thead>
+ <tr>
   <th>Type</th><th>How</th><th>Authority</th><th>remarks</th>
-</tr><tr>
-  <th>Assurance</th><td>under CAcert Assurance Programme (CAP)</td>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th scope="row">Assurance</th>
+    <td>under CAcert Assurance Programme (CAP)</td>
     <td>Assurance Policy</td>
     <td>only information assured to 50 points under CAP is placed in the certificate </td>
-</tr><tr>
-  <th>Evaluation</th><td>under automated domain and email checks </td>
+ </tr>
+ <tr>
+  <th scope="row">Evaluation</th>
+    <td>under automated domain and email checks </td>
     <td>this CPS</td>
     <td>see <a href="#p4.2.2">&sect;4.2.2</a></td>
-</tr><tr>
-  <th>Controlled</th><td>programs or "profiles" that check the information within the CSR </td>
+ </tr>
+ <tr>
+  <th scope="row">Controlled</th>
+    <td>programs or "profiles" that check the information within the CSR </td>
     <td>this CPS</td>
     <td>see <a href="#p4.2.2">&sect;7.1</a></td>
-</tr></table>
+ </tr>
+</tbody>
+</table>
+
 
 <h5 id="p4.5.2.b">4.5.2.b Who may rely</h5>
 <p>
@@ -2279,18 +2339,19 @@ and Relying parties should take more care.
 See Table 4.5.2.
 </p>
 
-<table border="1" class="parentC padding5">
+<figure id="t4.5.2">
+<table border="1" class="parentC">
+ <caption class="i">Statements of Reliance for Members</caption>
+<thead>
  <tr>
-  <td></td>
-  <td colspan="2" class="c i">Statements of Reliance for Members</td>
+  <th class="i">Class of Root</th>
+  <th><strong>Anonymous</strong><br>(all Members)</th>
+  <th><strong>Named</strong><br>(Assured Members only)</th>
  </tr>
+</thead>
+<tbody>
  <tr>
-  <td class="i">Class of Root</td>
-  <td class="c"><strong>Anonymous</strong><br>(all Members)</td>
-  <td class="c"><strong>Named</strong><br>(Assured Members only)</td>
- </tr>
- <tr>
-  <td class="c">Class<br><span class="size1"><strong>1</strong></span></td>
+  <th scope="row">Class<br><strong>1</strong></th>
   <td rowspan="2" class="bgClrRed">
        <strong>Do not rely.</strong><br>
        Relying party must use other methods to check. </td>
@@ -2301,10 +2362,10 @@ See Table 4.5.2.
        (issued for compatibility only).</td>
  </tr>
  <tr>
-  <td class="c"><span class="size1"><strong>Member</strong></span><br>SubRoot</td>
+  <th scope="row"><strong>Member</strong><br>SubRoot</th>
  </tr>
  <tr>
-  <td class="c">Class<br><span class="size1"><strong>3</strong></span></td>
+  <th scope="row">Class<br><strong>3</strong></th	>
   <td rowspan="2" class="bgClrOrange">
        Do not rely on the Name (being available).
        The Member has been Assured by CAcert,
@@ -2313,11 +2374,13 @@ See Table 4.5.2.
        The Member named in the certificate has been Assured by CAcert.</td>
  </tr>
  <tr>
-  <td class="c"><span class="size1"><strong>Assured</strong></span><br>SubRoot</td>
+  <th scope="row"><strong>Assured</strong><br>SubRoot</th>
  </tr>
+</tbody>
 </table>
 
-<div class="c figure">Table 4.5.2.  Statements of Reliance</div>
+<figcaption>Table 4.5.2. Statements of Reliance</figcaption>
+</figure>
 
 <p>
 <strong>Software Agent.</strong>
@@ -2664,37 +2727,44 @@ Roles strive in general for separation of duties, either along the lines of
 
 <h4 id="p5.3.1">5.3.1. Qualifications, experience, and clearance requirements</h4>
 
-
-<table border="1" class="parentC padding5">
+<figure id="t5.3.1">
+<table border="1" class="parentC">
+<thead>
  <tr>
-  <td><strong>Role</strong></td> <td><strong>Policy</strong></td> <td><strong>Comments</strong></td>
- </tr><tr>
-  <td>Assurer</td>
+  <th class="b">Role</th><th class="b">Policy</th><th class="b">Comments</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+  <th scope="row" class="l">Assurer</th>
   <td><a href="https://www.cacert.org/policy/AssurancePolicy.html"> COD13</a></td>
   <td>
     Passes Challenge, Assured to 100 points.
   </td>
  </tr><tr>
-  <td>Organisation Assurer</td>
+  <th scope="row" class="l">Organisation Assurer</th>
   <td><a href="https://www.cacert.org/policy/OrganisationAssurancePolicy.html">COD11</a></td>
   <td>
     Trained and tested by two supervising OAs.
   </td>
  </tr><tr>
-  <td>Technical</td>
+  <th scope="row" class="l">Technical</th>
   <td>SM =&gt; <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a></td>
   <td>
     Teams responsible for testing.
   </td>
  </tr><tr>
-  <td>Arbitrator</td>
+  <th scope="row" class="l">Arbitrator</th>
   <td><a href="https://www.cacert.org/policy/DisputeResolutionPolicy.html">COD7</a></td>
   <td>
     Experienced Assurers.
   </td>
  </tr>
+</tbody>
 </table>
-<div class="c figure">Table 5.3.1. Controls on Roles</div>
+<figcaption>Table 5.3.1. Controls on Roles</figcaption>
+</figure>
+
 
 <h4 id="p5.3.2">5.3.2. Background check procedures</h4>
 
@@ -2741,46 +2811,51 @@ by means of a filed dispute.
 Following types of records are archived:
 </p>
 
-<table border="1" class="parentC padding5">
+<figure>
+<table border="1" class="parentC">
+<thead>
  <tr>
-  <td><strong>Record</strong></td>
-  <td><strong>Nature</strong></td>
-  <td><strong>Exceptions</strong></td>
-  <td><strong>Documentation</strong></td>
+  <th class="b">Record</th>
+  <th class="b">Nature</th>
+  <th class="b">Exceptions</th>
+  <th class="b">Documentation</th>
  </tr>
+</thead>
+<tbody>
  <tr>
-  <td>Member</td>
+  <th scope="row">Member</th>
   <td>username, primary and added addresses, security questions, Date of Birth</td>
   <td>resigned non-subscribers: 0 years.</td>
   <td>Security Policy and Privacy Policy</td>
  </tr>
  <tr>
-  <td>Assurance</td>
+  <th scope="row">Assurance</th>
   <td>CAP forms</td>
   <td>"at least 7 years."<br> as per subsidiary policies</td>
   <td>Assurance Policy 4.5</td>
  </tr>
  <tr>
-  <td>Organisation Assurance</td>
+  <th scope="row">Organisation Assurance</th>
   <td>COAP forms</td>
   <td>as per subsidiary policies</td>
   <td>Organisation Assurance Policy</td>
  </tr>
  <tr>
-  <td>certificates and revocations</td>
+  <th scope="row">certificates and revocations</th>
   <td>  for reliance </td>
   <td> 7 years after termination </td>
   <td>this CPS</td>
  </tr>
  <tr>
-  <td>critical roles</td>
+  <th scope="row">critical roles</th>
   <td>background check worksheets</td>
   <td>under direct Arbitrator control</td>
   <td>Security Policy 9.1.3</td>
  </tr>
+</tbody>
 </table>
-<div class="c figure">Table 5.5.  Documents and Retention </div>
-
+<figcaption>Table 5.5.  Documents and Retention</figcaption>
+</figure>
 
 <h3 id="p5.6">5.6. Key changeover</h3>
 
@@ -3124,24 +3199,25 @@ Refer to <a href="#p3.1.1">&sect;3.1.1</a>.
 The following OIDs are defined and should be incorporated
 into certificates:
 </p>
-
-
-<table border="1" class="padding5">
+<table border="1">
+<thead>
  <tr>
-  <td>
+  <th>
     OID
-  </td>
-  <td>
+  </th>
+  <th>
     Type/Meaning
-  </td>
-  <td>
+  </th>
+  <th>
     Comment
-  </td>
+  </th>
  </tr>
+</thead>
+<tbody>
  <tr>
-  <td>
+  <th scope="row" class="l">
     1.3.6.1.4.1.18506.4.4
-  </td>
+  </th>
   <td>
     Certification Practice Statement
   </td>
@@ -3149,6 +3225,7 @@ into certificates:
     (this present document)
   </td>
  </tr>
+</tbody>
 </table>
 
 <p>
