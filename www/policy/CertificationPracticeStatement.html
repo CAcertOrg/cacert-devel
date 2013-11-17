@@ -38,6 +38,10 @@ td, th{
     padding: 5px;
 }
 
+dt {
+    font-weight: bold;
+}
+
 .blockpar {
     text-indent : 2em;
     margin-top : 0em;
@@ -186,8 +190,7 @@ Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licenc
 </tr>
 </table>
 
-
-<p><br /></p>
+<br />
 
 
 <h1>CAcert CPS and CP</h1>
@@ -434,33 +437,31 @@ makes a decision on the basis of that certificate.
 
 <h4 id="p1.3.5">1.3.5. Other participants</h4>
 
-<p>
-<strong>Member.</strong>
-Membership of the Community is as defined in the
+<dl>
+
+<dt>Member</dt>
+<dd>Membership of the Community is as defined in the
 <a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>.
 Only Members may RELY or may become Subscribers.
 Membership is free.
-</p>
+</dd>
 
-<p>
-<strong>Arbitrator.</strong>
-A senior and experienced Member of the CAcert Community
+<dt>Arbitrator</dt>
+<dd>A senior and experienced Member of the CAcert Community
 who resolves disputes between Members, including ones
 of certificate reliance, under
 Dispute Resolution Policy
 (<a href="https://www.cacert.org/policy/DisputeResolutionPolicy.html">COD7</a>).
-</p>
+</dd>
 
-<p>
-<strong>Vendor.</strong>
-Software suppliers who integrate the root certificates of CAcert
+<dt>Vendor</dt>
+<dd>Software suppliers who integrate the root certificates of CAcert
 into their software also assume a proxy role of Relying Parties,
 and are subject to another licence.
-</p>
+</dd>
 
-<p>
-<strong>Non-Related Persons</strong> (NRPs).
-These are users of browsers and similar software who are
+<dt>Non-Related Persons (NRPs)</dt>
+<dd>These are users of browsers and similar software who are
 unaware of the CAcert certificates they may use, and
 are unaware of the ramifications of usage.
 Their relationship with CAcert
@@ -468,7 +469,9 @@ is described by the
 Root Distribution License
 (<a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD14</a>).
 No other rights nor relationship is implied or offered.
-</p>
+</dd>
+
+</dl>
 
 
 <h3 id="p1.4">1.4. Certificate usage</h3>
@@ -642,8 +645,9 @@ the following applications, and may not be reliable enough
 for these applications:
 </p>
 
-<ul><li>
-    <strong>Signing within Protocols.</strong>
+<dl>
+    <dt>Signing within Protocols</dt>
+    <dd>
     Digital signatures made by CAcert certificates carry
     <span class="u">NO default legal or human meaning</span>.
     See <a href="#p9.15.1">&sect;9.15.1</a>.
@@ -655,19 +659,27 @@ for these applications:
     to provide some confirmation that a familiar certificate
     is in use, to enable encryption, and to ensure the integrity
     of the email in transit.
-</li><li>
-    <strong>Non-repudiation applications.</strong>
+    </dd>
+
+    <dt>Non-repudiation applications</dt>
+    <dd>
     Non-repudiation is not to be implied from use of
     CAcert certificates.  Rather, certificates may
     provide support or evidence of actions, but that
     evidence is testable in any dispute.
-</li><li>
-    <strong>Ecommerce applications.</strong>
+    </dd>
+
+    <dt>Ecommerce applications</dt>
+    <dd>
     Financial transactions or payments or valuable e-commerce.
-</li><li>
+    </dd>
+
+	<dt>Identity verification</dt>
+    <dd>
     Use of anonymous (Class 1 or Member SubRoot) certificates
     in any application that requires or expects identity.
-</li></ul>
+    </dd>
+</dl>
 
 
 <h4 id="p1.4.4">1.4.4. Limited certificate uses</h4>
@@ -682,32 +694,33 @@ and these entities take on the whole responsible for
 any harm or liability caused by such usage.
 </p>
 
-<p>
-    <strong>Digital signing applications.</strong>
-    CAcert client certificates
+<dl>
+    <dt>Digital signing applications</dt>
+    <dd>CAcert client certificates
     may be used by Assured Members in
     applications that provide or support the human signing of documents
     (known here as "digital signing").
     This must be part of a wider framework and set of rules.
     Usage and reliance
     must be documented either under a separate CAcert digital signing
-    policy or other external regime agreed by the parties.
-</p>
+    policy or other external regime agreed by the parties.</dd>
+</dl>
 
 <h4 id="p1.4.5">1.4.5. Roots and Names</h4>
 
-<p>
-<strong>Named Certificates.</strong>
+<dl>
+<dt>Named Certificates</dt>
+<dd>
 Assured Members may be issued certificates
 with their verified names in the certificate.  In this role, CAcert
 operates and supports a network of Assurers who verify the
 identity of the Members.
 All Names are verified, either by Assurance or another defined
 method under policy (c.f. Organisations).
-</p>
+</dd>
 
-<p>
-<strong>Anonymous Certificates.</strong>
+<dt>Anonymous Certificates.</dt>
+<dd>
 Members can be issued certificates that are anonymous,
 which is defined as the certificate with no Name included,
 or a shared name such as "Community Member".
@@ -718,51 +731,58 @@ reliance is undefined.
 In this role, CAcert provides the
 infrastructure, saving the Members from managing a difficult
 and messy process in order to get manufactured certificates.
-</p>
+</dd>
 
-<p>
-<strong>Psuedonymous Certificates.</strong>
+<dt>Psuedonymous Certificates</dt>
+<dd>
 Note that CAcert does not currently issue pseudonymous certificates,
 being those with a name chosen by the Member and not verifiable
 according to documents.
-</p>
+</dd>
 
-<p>
-<strong>Advanced Certificates.</strong>
+<dt>Advanced Certificates</dt>
+<dd>
 Members who are as yet unassured are not permitted to create
 advanced forms such as wildcard or subjectAltName
 certificates.
-</p>
+</dd>
 
 
-<p>
-<strong> Roots.</strong>
+<dt>Roots</dt>
+<dd>
 The CAcert root layout is as below.
 These roots are pending Audit,
 and will be submitted to vendors via the (Top-level) Root.
-</p>
-<ul><li>
-    <strong>(Top-level) Root.</strong>
+<dl>
+    <dt>(Top-level) Root</dt>
+    <dd>
     Used to sign on-line CAcert SubRoots only.
     This Root is kept offline.
-  </li><li>
-    <strong>Member SubRoot.</strong>
+    </dd>
+
+    <dt>Member SubRoot</dt>
+    <dd>
     For Community Members who are new and unassured (some restrictions exist).
     Reliance is undefined.
     (Replacement for the Class 1 root, matches "Domain Validation" type.)
-  </li><li>
-    <strong>Assured SubRoot.</strong>
+    </dd>
+
+    <dt>Assured SubRoot</dt>
+    <dd>
     Only available for Assured individual Members,
     intended to sign certificates with Names.
     Suitable for Reliance under this and other policies.
     Approximates the type known as Individual Validation.
-  </li><li>
-    <strong>Organisation SubRoot.</strong>
+    </dd>
+
+    <dt>Organisation SubRoot</dt>
+    <dd>
     Only available for Assured Organisation Members.
     Suitable for Reliance under this and other policies.
     Approximates the type known as Organisational Validation.
-
-</li></ul>
+    </dd>
+</dl>
+</dl>
 
 
 <figure id="t1.4.5.b">
@@ -908,21 +928,23 @@ As per above.
 
 <h3 id="p1.6">1.6. Definitions and acronyms</h3>
 
-<p>
-<strong><a id="d_cert">Certificate</a></strong>.
+<dl>
+
+<dt id="d_cert">Certificate</dt>
+<dd>
   A certificate is a piece of cryptographic data used
   to validate certain statements, especially those of
   identity and membership.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_cacert">CAcert</a></strong>.
+<dt id="d_cacert">CAcert</dt>
+<dd>
   CAcert is a Community certificate authority as defined under
   <a href="#p1.2">&sect;1.2 Identification</a>.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_member">Member</a></strong>.
+<dt id="d_member">Member</dt>
+<dd>
   Everyone who agrees to the
   CAcert Community Agreement
   (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>).
@@ -930,64 +952,64 @@ As per above.
   at CAcert and making use of CAcert's data, programs or services.
   A Member may be an individual ("natural person")
   or an organisation (sometimes, "legal person").
-</p>
+</dd>
 
-<p>
-<strong><a id="d_community">Community</a></strong>.
+<dt id="d_community">Community</dt>
+<dd>
   The group of Members who agree to the
   CAcert Community Agreement
   (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>)
   or equivalent agreements.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_unassured">Unassured Member</a></strong>.
+<dt id="d_unassured">Unassured Member</dt>
+<dd>
   A Member who has not yet been Assured.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_subscriber">Subscriber</a></strong>.
+<dt id="d_subscriber">Subscriber</dt>
+<dd>
   A Member who requests and receives a certificate.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_assured">Assured Member</a></strong>.
+<dt id="d_assured">Assured Member</dt>
+<dd>
   A Member whose identity has been sufficiently
   verified by Assurers or other
   approved methods under Assurance Policy.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_assurer">Assurer</a></strong>.
+<dt id="d_assurer">Assurer</dt>
+<dd>
   An Assured Member who is authorised under Assurance Policy
   to verify the identity of other Members.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_name">Name</a></strong>.
+<dt id="d_name">Name</dt>
+<dd>
     As defined in the
     Assurance Policy
     (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>),
     to describe a name of a Member
     that is verified by the Assurance process.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_oadmin">Organisation Administrator</a></strong>.
+<dt id="d_oadmin">Organisation Administrator</dt>
+<dd>
   ("O-Admin")
   An Assurer who is authorised to act for an Organisation.
   The O-Admin is authorised by an organisation
   to vouch for the identity of other users of the organisation.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_org_ass">Organisation Assurer</a></strong>.
+<dt id="d_org_ass">Organisation Assurer</dt>
+<dd>
   An Assurer who is authorised to conduct assurances on
   organisations.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_user">Non-Related Persons</a></strong>.
+<dt id="d_user">Non-Related Persons</dt>
+<dd>
   ("NRPs")
   are general users of browsers and similar software.
   The NRPs are generally unaware of
@@ -995,48 +1017,48 @@ As per above.
   are unaware of the ramifications of usage.
   They are not permitted to RELY, but may USE, under the
   Root Distribution License (<a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD14</a>).
-</p>
+</dd>
 
-<p>
-<strong><a id="d_reliance">Reliance</a></strong>.
+<dt id="d_reliance">Reliance</dt>
+<dd>
   An industry term referring to
   the act of making a decision, including taking a risk,
   which decision is in part or in whole
   informed or on the basis of the contents of a certificate.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_relparty">Relying Party</a></strong>.
+<dt id="d_relparty">Relying Party</dt>
+<dd>
   An industry term refering to someone who relies
   (that is, makes decisions or takes risks)
   in part or in whole on a certificate.
-</p>
+</dd>
 
-<p>
-    <strong>Subscriber Naming.</strong>
+<dt>Subscriber Naming</dt>
+<dd>
     The term used in this CPS to
     describe all naming data within a certificate.
     Approximately similar terms from Industry such as
     "Subject naming" and "Distinguished Name"
     are not used here.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_verification">Verification</a></strong>.
+<dt id="d_verification">Verification</dt>
+<dd>
   An industry term referring to
   the act of checking and controlling
   the accuracy and utility of a single claim.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_validation">Validation</a></strong>.
+<dt id="d_validation">Validation</dt>
+<dd>
   An industry term referring to the process of
   inspecting and verifying the information and
   subsidiary claims behind a claim.
-</p>
+</dd>
 
-<p>
-<strong><a id="usage">Usage</a></strong>.
+<dt id="usage">Usage</dt>
+<dd>
   The event of allowing a certificate to participate in
   a protocol, as decided and facilitated by a user's software.
   Generally, Usage does not require significant input, if any,
@@ -1044,35 +1066,36 @@ As per above.
   This defers all decisions to the user software,
   thus elevating the software as user's only and complete
   Validation Authority or Agent.
-</p>
+</dd>
 
-<p>
-<strong><a id="drel">CAcert Relying Party</a></strong>.
+<dt id="drel">CAcert Relying Party</dt>
+<dd>
   CAcert Members who make decisions based in part or in whole
   on a certificate issued by CAcert.
   Only CAcert Members are permitted to Rely on CAcert certificates,
   subject to the CAcert Community Agreement.
-</p>
+</dd>
 
-<p>
-<strong><a id="ddst">Vendors</a></strong>.
+<dt id="ddst">Vendors</dt>
+<dd>
   Non-members who distribute CAcert's root or intermediate certificates
   in any way, including but not limited to delivering these
   certificates with their products, e.g. browsers, mailers or servers.
   Vendors are covered under a separate licence.
+</dd>
 
-</p>
-
-<p>
-<strong><a id="d_ccs">Configuration-Control Specification</a></strong> "CCS".
+<dt id="d_ccs">Configuration-Control Specification "CCS"</dt>
+<dd>
   The audit criteria that controls this CPS.
   The CCS is documented in COD2, itself a controlled document under CCS.
-</p>
+</dd>
 
-<p>
-<strong><a id="d_cod">CAcert Official Document</a></strong> (COD).
+<dt id="d_cod">CAcert Official Document (COD)</dt>
+<dd>
   Controlled Documents that are part of the CCS.
-</p>
+</dd>
+
+</dl>
 
 
 
@@ -1132,24 +1155,29 @@ made available on issuance.
 
 <h4 id="p3.1.1">3.1.1. Types of names</h4>
 
+<h5 id="p3.1.1.1">3.1.1.1. Client Certificates</h5>
 <p>
-<strong>Client Certificates.</strong>
 The Subscriber Naming consists of:
 </p>
-
-<ul>
-  <li><code>subjectAltName=</code>
+<dl>
+  <dt><code>subjectAltName=</code></dt>
+  <dd>
       One, or more, of the Subscriber's verified email addresses,
       in rfc822Name format.
+  </dd>
 
-  <li><code>EmailAddress=</code>
+  <dt><code>EmailAddress=</code></dt>
+  <dd>
       One, or more, of the Subscriber's verified email addresses.
       This is deprecated under
       <a href="http://tools.ietf.org/html/rfc5280#section-4.2.1.6">RFC5280 4.1.2.6</a>
       and is to be phased out. Also includes a SHA1 hash of a random number if
       the member selects SSO (Single Sign On ID) during submission of CSR.
-  </li>
-  <li><code>CN=</code> The common name takes its value from one of:
+  </dd>
+
+  <dt><code>CN=</code></dt>
+  <dd>
+    The common name takes its value from one of:
     <ul><li>
       For all Members,
       the string "<code>CAcert WoT Member</code>" may be used for
@@ -1163,47 +1191,51 @@ The Subscriber Naming consists of:
       an organisation-chosen name,
       as verified under OAP.
     </li></ul>
-</ul>
+  </dd>
+</dl>
 
-
+<h5 id="p3.1.1.2">3.1.1.2. Individual Server Certificates</h5>
 <p>
-<strong>Individual Server Certificates.</strong>
 The Subscriber Naming consists of:
 </p>
-
-<ul>
- <li><code>CN=</code>
+<dl>
+  <dt><code>CN=</code></dt>
+  <dd>
     The common name is the host name out of a domain
     for which the Member is a domain master.
-  </li> <li>
-  <code>subjectAltName=</code>
+  </dd>
+  <dt><code>subjectAltName=</code></dt>
+  <dd>
     Additional host names for which the Member
     is a domain master may be added to permit the
     certificate to serve multiple domains on one IP number.
-  </li> <li>
+  </dd>
+  <dt>Other</dt>
+  <dd>
     All other fields are optional and must either match
     the CN or they must be empty
-</li> </ul>
+  </dd>
+</dl>
 
+<h5 id="p3.1.1.3">3.1.1.3. Certificates for Organisations</h5>
 <p>
-<strong>Certificates for Organisations.</strong>
 In addition to the above, the following applies:
 </p>
-
-<ul>
-  <li><code>OU=</code>organizationalUnitName (set by O-Admin, must be verified by O-Admin).</li>
-  <li><code>O=</code>organizationName is the fixed name of the Organisation.</li>
-  <li><code>L=</code>
-      localityName</li>
-  <li><code>ST=</code>
-      stateOrProvinceName</li>
-  <li><code>C=</code>
-      countryName</li>
-  <li><code>contact=</code>
+<dl>
+  <dt><code>OU=</code></dt><dd>organizationalUnitName (set by O-Admin, must be verified by O-Admin).</dd>
+  <dt><code>O=</code></dt><dd>organizationName is the fixed name of the Organisation.</dd>
+  <dt><code>L=</code></dt>
+      <dd>localityName</dd>
+  <dt><code>ST=</code></dt>
+      <dd>stateOrProvinceName</dd>
+  <dt><code>C=</code></dt>
+      <dd>countryName</dd>
+  <dt><code>contact=</code></dt>
+  <dd>
       EMail Address of Contact.
       <!--  not included in RFC5280 4.1.2.4 list, but list is not restricted -->
-  </li>
-</ul>
+  </dd>
+</dl>
 
 <p>
 Except for the OU and CN, fields are taken from the Member's
@@ -1212,19 +1244,14 @@ Other Subscriber information that is collected and/or retained
 does not go into the certificate.
 </p>
 
-<h4>
-    <a id="p3.1.2">
-        3.1.2. Need for names to be meaningful
-        </a>
-</h4>
+
+<h4 id="p3.1.2">3.1.2. Need for names to be meaningful</h4>
 
 <p>
-
 Each Member's Name (<code>CN=</code> field);
 is assured under the Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>)
 or subsidiary policies (such as Organisation Assurance Policy).
 Refer to those documents for meanings and variations.
-
 </p>
 
 <p>
@@ -1543,15 +1570,16 @@ to check the private key dynamically.
 
 <h4 id="p3.2.2">3.2.2. Authentication of Individual Identity</h4>
 
-<p>
-<strong>Agreement.</strong>
+<dl>
+
+<dt>Agreement</dt>
+<dd>
 An Internet user becomes a Member by agreeing to the
 CAcert Community Agreement
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>)
 and registering an account on the online website.
 During the registration process Members are asked to
 supply information about themselves:
-</p>
   <ul>
     <li>A valid working email.
         </li>
@@ -1565,15 +1593,16 @@ supply information about themselves:
 The online account establishes the method of authentication
 for all service requests such as certificates.
 </p>
+</dd>
 
-<p>
-<strong>Assurance.</strong>
+<dt>Assurance</dt>
+<dd>
 Each Member is assured according to Assurance Policy
 (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>).
-</p>
+</dd>
 
-<p>
-<strong>Certificates.</strong>
+<dt>Certificates</dt>
+<dd>
 Based on the total number of Assurance Points
 that a Member (Name) has, the Member
 can get different levels of certificates.
@@ -1582,10 +1611,9 @@ See Table 3.2.b.
 When Members have 50 or more points, they
 become <em>Assured Members</em> and may then request
 certificates that state their Assured Name(s).
-</p>
+</dd>
 
-
-<br><br>
+</dl>
 
 <figure id="t3.2.b">
 <table border="1" class="parentC">
@@ -1633,7 +1661,6 @@ certificates that state their Assured Name(s).
 
 <h4 id="p3.2.3">3.2.3. Authentication of organization identity</h4>
 
-
 <p>
 Verification of organisations is delegated by
 the Assurance Policy to the
@@ -1656,7 +1683,6 @@ process described above.
 Organisation Assurance achieves the standard
 stated in the OAP, briefly presented here:
 </p>
-
 <ol style="list-style: lower-alpha;"><li>
    the organisation exists,
   </li><li>
@@ -1684,24 +1710,25 @@ see Relying Party Statement, <a href="#p4.5.2">&sect;4.5.2</a>.
 <p>
 The authorisation to obtain a certificate is established as follows:
 </p>
+<dl>
 
-<p>
-<strong>Addresses.</strong>
+<dt>Addresses</dt>
+<dd>
 The member claims authority over a domain or email address
 when adding the address,  <a href="#p4.1.2">&sect;4.1.2</a>.
 (Control is tested by means described in <a href="#p4.2.2">&sect;4.2.2</a>.)
-</p>
+</dd>
 
-<p>
-<strong>Individuals.</strong>
+<dt>Individuals</dt>
+<dd>
 The authority to participate as a Member is established
 by the CAcert Community Agreement
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>).
 Assurances are requested by means of the signed CAP form.
-</p>
+</dd>
 
-<p>
-<strong>Organisations.</strong>
+<dt>Organisations</dt>
+<dd>
 The authority for Organisation Assurance is established
 in the COAP form, as signed by an authorised representative
 of the organisation.
@@ -1710,7 +1737,9 @@ Organisation Administrator
 (O-Admin) is also established on the
 COAP form.
 See Organisation Assurance Policy.
-</p>
+</dd>
+
+</dl>
 
 
 <h4 id="p3.2.6">3.2.6. Criteria for interoperation</h4>
@@ -1745,7 +1774,6 @@ process or file a dispute.
 
 <p>
 The general life-cycle for a new certificate for an Individual Member is:</p>
-
 <ol><li>
     Member adds claim to an address (domain/email).
   </li><li>
@@ -1842,12 +1870,12 @@ fulfilled.
 In principle, at least two controls are placed on each address.
 </p>
 
-<p>
-<strong><a id="ping">Email-Ping</a>.</strong>
+<dl>
+
+<dt id="ping">Email-Ping</dt>
+<dd>
 Email addresses are verified by means of an
 <em><a id="pingtest">Email-Ping test</a></em>:
-</p>
-
 <ul><li>
       The system generates a cookie
       (a random, hard-to-guess code)
@@ -1862,12 +1890,12 @@ Email addresses are verified by means of an
       The entry of the code verifies
       control of that email account.
 </li></ul>
+</dd>
 
-<p>
-<strong><a id="email">Email Control</a>.</strong>
+<dt id="email">Email Control</dt>
+<dd>
 Email addresses for client certificates are verified by passing the
 following checks:
-</p>
 <ol>
   <li>An Email-ping test
       is done on the email address.
@@ -1876,12 +1904,12 @@ following checks:
       and been awarded at least one Assurance point.
       </li>
 </ol>
+</dd>
 
-<p>
-<strong><a id="domain">Domain Control</a>.</strong>
+<dt id="domain">Domain Control</dt>
+<dd>
 Domains addresses for server certificates are verified by passing two of the
 following checks:
-</p>
 <ol> <li>
       An Email-ping test
       is done on an email address chosen from <em>whois</em>
@@ -1902,6 +1930,9 @@ following checks:
       which is then placed in whois registry information
       by the Member.
 </li> </ol>
+</dd>
+
+</dl>
 
 <p>
 Notes.</p>
@@ -1916,8 +1947,6 @@ Notes.</p>
     Domain control checks may be extended to apply to email control
     in the future.
 </li></ul>
-
-
 
 <h4 id="p4.2.3">4.2.3. Options Available</h4>
 
@@ -1992,29 +2021,26 @@ and the Organisation Handbook.
 
 <h4 id="p4.3.1">4.3.1. CA actions during certificate issuance</h4>
 
+<h5 id="p4.3.1.1">4.3.1.1. Key Sizes</h5>
 <p>
-<strong>Key Sizes.</strong>
 Members may request keys of any size permitted by the key algorithm.
 Many older hardware devices require small keys.
 </p>
 
+<h5 id="p4.3.1.2">4.3.1.2. Algorithms</h5>
 <p>
-<strong>Algorithms.</strong>
 CAcert currently only supports the RSA algorithm for X.509 keys.
 X.509 signing uses the SHA-1 message digest algorithm.
 OpenPGP Signing uses RSA signing over RSA and DSA keys.
-
 </p>
 
+<h5 id="p4.3.1.3">4.3.1.3. Process for Certificates</h5>
 <p>
-<strong>Process for Certificates:</strong>
 All details in each certificate are verified
 by the website issuance system.
 Issuance is based on a 'template' system that selects
 profiles for certificate lifetime, size, algorithm.
 </p>
-
-
 <ol><li>
    The CSR is verified.
   </li><li>
@@ -2035,15 +2061,14 @@ profiles for certificate lifetime, size, algorithm.
 </li></ol>
 
 
+<h5 id="p4.3.1.4">4.3.1.4. Process for OpenPGP key signatures</h5>
 <p>
-<strong>Process for OpenPGP key signatures:</strong>
 All details in each Sub-ID are verified
 by the website issuance system.
 Issuance is based on the configuration that selects
 the profile for signature lifetime, size,
 algorithm following the process:
 </p>
-
 <ol><li>
    The public key is verified.
   </li><li>
@@ -2204,17 +2229,20 @@ The term Verification as used in the Relying Party Statement means one of
 
 
 <h5 id="p4.5.2.b">4.5.2.b Who may rely</h5>
-<p>
-<strong>Members may rely.</strong>
+
+<dl>
+
+<dt>Members may rely.</dt>
+<dd>
 Relying parties are Members,
 and as such are bound by this CPS and the
 CAcert Community Agreement
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>).
 The licence and permission to rely is not assignable.
-</p>
+</dd>
 
-<p>
-<strong>Suppliers of Software.</strong>
+<dt>Suppliers of Software</dt>
+<dd>
 CAcert roots may be distributed in software,
 and those providers may
 enter into agreement with CAcert by means of the
@@ -2224,24 +2252,26 @@ This licence brings the supplier in to the Community
 to the extent that
 they agree to dispute resolution
 within CAcert's forum.
-</p>
+</dd>
 
-
-
-<p>
-<strong>NRPs may not rely.</strong>
+<dt>NRPs may not rely.</dt>
+<dd>
 If not related to CAcert by means of an agreement
 that binds the parties to dispute resolution within CAcert's forum,
 a person is a Non-Related-Person (NRP).
 An NRP is not permitted to rely and is not a Relying Party.
 For more details, see the
 Root Distribution License (<a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD14</a>).
-</p>
+</dd>
+
+</dl>
 
 <h5 id="p4.5.2.c">4.5.2.c The Act of Reliance </h5>
 
-<p>
-<strong>Decision making.</strong>
+<dl>
+
+<dt>Decision making</dt>
+<dd>
 Reliance means taking a decision that is in part or in whole
 based on the information in the certificate.
 
@@ -2251,8 +2281,6 @@ and the implied information such as Membership,
 into her decision-making.
 In making a decision,
 a Relying Party should also:
-</p>
-
 <ul><li>
     include her own overall risk equation,
   </li><li>
@@ -2265,15 +2293,15 @@ a Relying Party should also:
   </li><li>
     use an appropriate protocol or custom of reliance (below).
 </li></ul>
+</dd>
 
-<p>
-<strong>Examining the Certificate.</strong>
+<dt>Examining the Certificate</dt>
+<dd>
 A Relying Party must make her own decision in using
 each certificate.  She must examine the certificate,
 a process called <em>validation</em>.
 Certificate-related information includes,
 but is not limited to:
-</p>
 <ul><li>
     Name,
   </li><li>
@@ -2290,9 +2318,10 @@ but is not limited to:
   </li><li>
     purpose of certificate.
 </li></ul>
+</dd>
 
-<p>
-<strong>Keeping Records.</strong>
+<dt>Keeping Records</dt>
+<dd>
 Records should be kept, appropriate to the import of the decision.
 The certificate should be preserved.
 This should include sufficient
@@ -2301,10 +2330,10 @@ evidence to establish who the parties are
 to establish the transaction in question,
 and to establish the wider agreement that
 defines the act.
-</p>
+</dd>
 
-<p>
-<strong>Wider Protocol.</strong>
+<dt>Wider Protocol</dt>
+<dd>
 In principle, reliance will be part of a wider protocol
 (customary method in reaching and preserving agreement)
 that presents and preserves sufficient of the evidence
@@ -2314,21 +2343,25 @@ and tuned to the needs.
 This CPS does not define any such protocol.
 In the absence of such a protocol, reliance will be weakened;
 a dispute without sufficient evidence may be dismissed by an Arbitrator.
-</p>
+</dd>
 
-<p>
-<strong>As Compared to Usage</strong>.
+<dt>As Compared to Usage</dt>
+<dd>
 Reliance goes beyond Usage.  The latter is limited to
 letting the software act as the total and only Validation
 Authority.  When relying, the Member also augments
 the algorithmic processing of the software with her own
 checks of the business, technical and certificate aspect.
-</p>
+</dd>
 
+</dl>
 <h5 id="p4.5.2.d">4.5.2.d Risks and Limitations of Reliance </h5>
-<p>
-<strong>Roots and Naming.</strong>
-Where the Class 1 root is used,
+
+<dl>
+
+<dt>Roots and Naming</dt>
+<dd>
+<p>Where the Class 1 root is used,
 this Subscriber may be a new Member
 including one with zero points.
 Where the Name is not provided,
@@ -2381,25 +2414,28 @@ See Table 4.5.2.
 
 <figcaption>Table 4.5.2. Statements of Reliance</figcaption>
 </figure>
+</dd>
 
-<p>
-<strong>Software Agent.</strong>
+<dt>Software Agent</dt>
+<dd>
 When relying on a certificate, relying parties should
 note that your software is responsible for the way it
 shows you the information in a certificate.
 If your software agent hides parts of the information,
 your sole remedy may be to choose another software agent.
-</p>
+</dd>
 
-<p>
-<strong>Malware.</strong>
+<dt>Malware</dt>
+<dd>
 When relying on a certificate, relying parties should
 note that platforms that are vulnerable to viruses or
 trojans or other weaknesses may not process any certificates
 properly and may give deceptive or fraudulent results.
 It is your responsibility to ensure you are using a platform
 that is secured according to the needs of the application.
-</p>
+</dd>
+
+</dl>
 
 <h5 id="p4.5.2.e">4.5.2.e When something goes wrong </h5>
 <p>
@@ -2409,9 +2445,10 @@ See <a href="#p9.13">&sect;9.13</a>.
 <!-- DRC_A&sect;A.4.d -->
 For this purpose, the certificate (and other evidence) should be preserved.
 </p>
+<dl>
 
-<p>
-<strong>Which person?</strong>
+<dt>Which person?</dt>
+<dd>
 Members may install certificates for other individuals or in servers,
 but the Member to whom the certificate is issued
 remains the responsible person.
@@ -2419,15 +2456,17 @@ E.g., under Organisation Assurance, an organisation is issued
 a certificate for the use by individuals
 or servers within that organisation,
 but the Organisation is the responsible person.
-</p>
+</dd>
 
-<p>
-<strong>Software Agent.</strong>
+<dt>Software Agent</dt>
+<dd>
 If a Member is relying on a CAcert root embedded in
 the software as supplied by a vendor,
 the risks, liabilities and obligations of the Member
 do not automatically transfer to the vendor.
-</p>
+</dd>
+
+</dl>
 
 <h3 id="p4.6">4.6. Certificate renewal</h3>
 
@@ -2458,7 +2497,6 @@ A new certificate has to be requested and issued instead.
 <p>
 Certificates may be revoked under the following circumstances:
 </p>
-
 <ol><li>
     As initiated by the Subscriber through her online account.
   </li><li>
@@ -2664,8 +2702,9 @@ Refer to Security Policy 4.3 (<a href="https://svn.cacert.org/CAcert/Policies/Se
 
 <h4 id="p5.2.1">5.2.1. Trusted roles</h4>
 
-<ul>
-   <li><strong> Technical teams:</strong>
+<dl>
+   <dt>Technical teams</dt>
+   <dd>
    <ul>
        <li>User support personnel</li>
        <li>Systems Administrators -- critical and non-critical</li>
@@ -2674,25 +2713,26 @@ Refer to Security Policy 4.3 (<a href="https://svn.cacert.org/CAcert/Policies/Se
    </ul>
    Refer to Security Policy 9.1 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s9.1">COD8</a>)
 
-   </li>
+   </dd>
 
-   <li><strong>Assurance:</strong>
+   <dt>Assurance</dt>
+   <dd>
    <ul>
        <li>Assurers</li>
        <li> Any others authorised under COD13  </li>
    </ul>
    Refer to Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>)
-   </li>
+   </dd>
 
-   <li><strong>Governance:</strong>
+   <dt>Governance</dt>
+   <dd>
    <ul>
        <li>Directors (members of the CAcert Inc. committee, or "Board") </li>
        <li>Internal Auditor</li>
        <li>Arbitrator</li>
    </ul>
-   </li>
-</ul>
-
+   </dd>
+</dl>
 
 <h4 id="p5.2.2">5.2.2. Number of persons required per task</h4>
 <p>
@@ -2711,8 +2751,8 @@ at least to the level of Assurer, as per AP.
 Refer to Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>).
 </p>
 
+<h5>Technical</h5>
 <p>
-<strong>Technical.</strong>
 Refer to Security Policy 9.1 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s9.1">COD8</a>).
 </p>
 
@@ -3279,19 +3319,22 @@ No stipulation.
 <p>
 There are two major threads of assessment:
 </p>
-
-<ul><li>
-  <strong>Systems Audit</strong>.
+<dl>
+  <dt>Systems Audit</dt>
+  <dd>
   Analyses the CA for business and operations security.
   This is conducted in two phases:  documents for compliance
   with criteria, and operations for compliance with documentation.
-  </li><li>
-  <strong>Code Audit</strong>.
+  </dd>
+  
+  <dt>Code Audit</dt>
+  <dd>
   Analyses the source code.
   This is conducted at two levels:
   Security concepts at the web applications level,
   and source code security and bugs review.
-</li></ul>
+  </dd>
+</dl>
 
 <p>
 See the Audit page at
@@ -3317,8 +3360,10 @@ be permanent features.
 
 <h3 id="p8.2">8.2. Identity/qualifications of assessor</h3>
 
-<p>
-<strong>Systems Auditors.</strong>
+<dl>
+
+<dt>Systems Auditors</dt>
+<dd>
 CAcert uses business systems auditors with broad experience
 across the full range of business, information systems
 and security fields.
@@ -3329,19 +3374,19 @@ compliance and regulatory environments,
 business strategy, software engineering,
 networks, law (including multijurisdictional issues),
 identity systems, fraud, IT management.
-</p>
+</dd>
 
-<p>
-<strong>Code Auditors.</strong>
+<dt>Code Auditors</dt>
+<dd>
 See Security Policy, sections <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s7">7</a>, <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s9.1">9.1</a>.
-</p>
+</dd>
 
+</dl>
 <h3 id="p8.3">8.3. Assessor's relationship to assessed entity</h3>
 
 <p>
 Specific internal restrictions on audit personnel:
 </p>
-
 <ul><li>
     Must be Assured by CAcert Assurers
     and must be background checked.
@@ -3362,7 +3407,6 @@ Specific internal restrictions on audit personnel:
 <p>
 Specific external restrictions on audit personnel:
 </p>
-
 <ul><li>
     Should have a verifiable and lengthy history in
     user privacy and user security.
@@ -3387,27 +3431,35 @@ by the CAcert Inc. Board.
 Systems Audits are generally conducted to criteria.
 CAcert requires that the criteria are open:
 </p>
-
-<ul><li>
-    Published.
+<dl>
+    <dt>Published</dt>
+    <dd>
     The criteria must be reviewable by all interested parties.
-  </li><li>
-    Understandable.
+    </dd>
+
+    <dt>Understandable</dt>
+    <dd>
     They should be understandable, in that they provide the
     sufficient information in a readable form for interested
     parties to follow the gist and importance.
     (Arcane security criteria may stretch this requirement.)
-  </li><li>
-    Complete.
+    </dd>
+
+    <dt>Complete</dt>
+    <dd>
     There must be sufficent background information that the
     whole story is there.  Especially, criteria that refer
     to undocumented practices or conventions deliberately
     kept secret must be avoided.
-  </li><li>
-    Applicable.  The criteria should relate directly
+    </dd>
+
+    <dt>Applicable</dt>
+    <dd>
+    The criteria should relate directly
     and unambiguously to a need of the identified interested parties
     (Members, Relying Parties, Subscribers, Assurers).
-</li></ul>
+    </dd>
+</dl>
 
 <p>
 See
@@ -3666,7 +3718,6 @@ by means of a free and open licence.
 See CCS.
 </p>
 
-
 <p>
 CAcert licenses its code under GPL.
 CAcert extends back to contributors a
@@ -3689,13 +3740,13 @@ and,
 by others under the licences offered,
 such as
 Root Distribution License (<a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD14</a>).
-
 </p>
 
 <h3 id="p9.6">9.6. Representations and warranties</h3>
 
+<h4 id="p9.6.1">9.6.1. Members</h4>
+
 <p>
-<strong>Members.</strong>
 All Members of the Community agree to the
 CAcert Community Agreement
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>),
@@ -3704,21 +3755,21 @@ representations and warranties.
 Members include Subscribers, Relying Parties,
 Registration Agents and the CA itself.
 </p>
+<h4 id="p9.6.2">9.6.2. RAs</h4>
 
 <p>
-<strong>RAs.</strong>
 Registration Agents are obliged additionally by Assurance Policy,
 especially <a href="https://www.cacert.org/policy/AssurancePolicy.html#s3.1">3.1</a>, <a href="https://www.cacert.org/policy/AssurancePolicy.html#s4.1">4.1</a>
 (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>).
 </p>
+<h4 id="p9.6.3">9.6.3. CA</h4>
 
 <p>
-<strong>CA.</strong>
 The CA is obliged additionally by the CCS (<a href="https://svn.cacert.org/CAcert/Policies/ConfigurationControlSpecification.html">COD2</a>).
 </p>
+<h4 id="p9.6.4">9.6.4. Third Party Vendors</h4>
 
 <p>
-<strong>Third Party Vendors.</strong>
 Distributors of the roots are offered the
 <span class="q">wip</span>
 3rd-Party Vendors - Disclaimer and Licence
@@ -3764,7 +3815,7 @@ for the needs and circumstances.
 
 <h3 id="p9.8">9.8. Limitations of liability</h3>
 
-<h3 id="p9.8.1">9.8.1 Non-Related Persons </h3>
+<h4 id="p9.8.1">9.8.1 Non-Related Persons </h4>
 
 <p>
 CAcert on behalf of related parties
@@ -3774,7 +3825,7 @@ in their usage of CA's certificates.
 See <a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD4</a>.
 </p>
 
-<h3 id="p9.8.2">9.8.2 Liabilities Between Members</h3>
+<h4 id="p9.8.2">9.8.2 Liabilities Between Members</h4>
 
 <p>
 Liabilities between Members
@@ -3877,7 +3928,7 @@ that are at odds with the Community.
 
 <h3 id="p9.15">9.15. Compliance with Applicable Law</h3>
 
-<h3 id="p9.15.1">9.15.1 Digital Signature Law</h3>
+<h4 id="p9.15.1">9.15.1 Digital Signature Law</h4>
 <p>
 The Commonwealth and States of Australia have passed
 various Electronic Transactions Acts that speak to
@@ -3898,14 +3949,14 @@ These applications may impose significant
 obligations, risks and liabilities on the parties.
 </p>
 
-<h3 id="p9.15.2">9.15.2 Privacy Law</h3>
+<h4 id="p9.15.2">9.15.2 Privacy Law</h4>
 
 <p>
 See the Privacy Policy
 (<a href="https://www.cacert.org/policy/PrivacyPolicy.html">COD5</a>).
 </p>
 
-<h3 id="p9.15.3">9.15.3 Legal Process from External Forums</h3>
+<h4 id="p9.15.3">9.15.3 Legal Process from External Forums</h4>
 
 <p>
 CAcert will provide information about
@@ -3961,7 +4012,6 @@ be found in other places on the website
 and on the wiki, the CCS documents that
 have reached DRAFT and POLICY status are
 the ruling documents.<br />
-
 </p>
 
 <h4 id="p9.16.2">9.16.2. Assignment</h4>
