@@ -174,6 +174,7 @@ vertical-align:top;
 <body>
 
 
+<header>
 
 <table style="width: 100%;">
 <tr>
@@ -198,7 +199,7 @@ Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licenc
 <!-- $Id: CertificationPracticeStatement.html,v 1.3 2012-07-27 16:00:29 wytze Exp $ -->
 
 
-<div style="font-size: 12pt;">
+<nav style="font-size: 12pt;">
 
 <ol>
   <li> <a href="#p1">INTRODUCTION</a>
@@ -306,14 +307,17 @@ Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licenc
   </li>
 </ol>
 
-</div>
+</nav>
 
+</header>
 
 
 <!-- *************************************************************** -->
-<h2 id="p1">1. INTRODUCTION</h2>
+<section id="p1">
+<h2>1. INTRODUCTION</h2>
 
-<h3 id="p1.1">1.1. Overview</h3>
+<section id="p1.1">
+<h3>1.1. Overview</h3>
 
 <p>
 This document is the Certification Practice Statement (CPS) of
@@ -323,9 +327,10 @@ operating its CA,
 and applies to all CAcert PKI Participants,
 including Assurers, Members, and CAcert itself.
 </p>
+</section>
 
-
-<h3 id="p1.2">1.2. Document name and identification</h3>
+<section id="p1.2">
+<h3>1.2. Document name and identification</h3>
 
 <p>
 This document is the Certification Practice Statement (CPS) of CAcert.
@@ -383,8 +388,11 @@ and rules other documents
 except where explicitly deferred to.
 See also <a href="#p1.5.1">1.5.1 Organisation Administering the Document</a>.
 </p>
+</section>
 
-<h3 id="p1.3">1.3. PKI participants</h3>
+<section id="p1.3">
+<h3>1.3. PKI participants</h3>
+
 <p>
 The CA is legally operated by CAcert Incorporated,
 an Association registered in 2002 in
@@ -404,27 +412,33 @@ with the <em>Association Members</em>, which latter are
 not referred to anywhere in this CPS.)
 </p>
 
-<h4 id="p1.3.1">1.3.1. Certification authorities</h4>
+<section id="p1.3.1">
+<h4>1.3.1. Certification authorities</h4>
 <p>
 CAcert does not issue certificates to external
 intermediate CAs under the present CPS.
 </p>
+</section>
 
-<h4 id="p1.3.2">1.3.2. Registration authorities</h4>
+<section id="p1.3.2">
+<h4>1.3.2. Registration authorities</h4>
 <p>
 Registration Authorities (RAs) are controlled under Assurance Policy
 (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>).
 </p>
+</section>
 
-<h4 id="p1.3.3">1.3.3. Subscribers</h4>
+<section id="p1.3.3">
+<h4>1.3.3. Subscribers</h4>
 
 <p>
 CAcert issues certificates to Members only.
 Such Members then become Subscribers.
 </p>
+</section>
 
-
-<h4 id="p1.3.4">1.3.4. Relying parties</h4>
+<section id="p1.3.4">
+<h4>1.3.4. Relying parties</h4>
 
 <p>
 A relying party is a Member,
@@ -434,8 +448,10 @@ CAcert Community Agreement
 who, in the act of using a CAcert certificate,
 makes a decision on the basis of that certificate.
 </p>
+</section>
 
-<h4 id="p1.3.5">1.3.5. Other participants</h4>
+<section id="p1.3.5">
+<h4>1.3.5. Other participants</h4>
 
 <dl>
 
@@ -472,9 +488,12 @@ No other rights nor relationship is implied or offered.
 </dd>
 
 </dl>
+</section>
 
+</section>
 
-<h3 id="p1.4">1.4. Certificate usage</h3>
+<section id="p1.4">
+<h3>1.4. Certificate usage</h3>
 
 <p>CAcert serves as issuer of certificates for
 individuals, businesses, governments, charities,
@@ -586,7 +605,8 @@ and risks, liabilities and obligations in
 </figure>
 
 
-<h4 id="p1.4.1">1.4.1. Appropriate certificate uses</h4>
+<section id="p1.4.1">
+<h4>1.4.1. Appropriate certificate uses</h4>
 
 <p>
 General uses.
@@ -621,9 +641,11 @@ General uses.
     Time stamping can be used to attach a time record
     to a digital document.
 </li></ul>
+</section>
 
 
-<h4 id="p1.4.2">1.4.2. Prohibited certificate uses</h4>
+<section id="p1.4.2">
+<h4>1.4.2. Prohibited certificate uses</h4>
 <p>
 CAcert certificates are not designed, intended, or authorised for
 the following applications:
@@ -636,8 +658,10 @@ the following applications:
     where failure could lead directly to death, personal injury,
     or severe environmental damage.
 </li></ul>
+</section>
 
-<h4 id="p1.4.3">1.4.3. Unreliable Applications</h4>
+<section id="p1.4.3">
+<h4>1.4.3. Unreliable Applications</h4>
 
 <p>
 CAcert certificates are not designed nor intended for use in
@@ -680,9 +704,11 @@ for these applications:
     in any application that requires or expects identity.
     </dd>
 </dl>
+</section>
 
 
-<h4 id="p1.4.4">1.4.4. Limited certificate uses</h4>
+<section id="p1.4.4">
+<h4>1.4.4. Limited certificate uses</h4>
 
 <p>
 By contract or within a specific environment
@@ -705,8 +731,10 @@ any harm or liability caused by such usage.
     must be documented either under a separate CAcert digital signing
     policy or other external regime agreed by the parties.</dd>
 </dl>
+</section>
 
-<h4 id="p1.4.5">1.4.5. Roots and Names</h4>
+<section id="p1.4.5">
+<h4>1.4.5. Roots and Names</h4>
 
 <dl>
 <dt>Named Certificates</dt>
@@ -866,25 +894,31 @@ and will be submitted to vendors via the (Top-level) Root.
 <figcaption>Table 1.4.5.b  Certificate under Audit Roots</figcaption>
 </figure>
 
+</section>
+
+</section>
 
 
-<h3 id="p1.5">1.5. Policy administration</h3>
+<section id="p1.5">
+<h3>1.5. Policy administration</h3>
 
 <p>See <a href="#p1.2">1.2 Document Name and Identification</a>
   for general scope of this document.</p>
 
-<h4 id="p1.5.1">1.5.1. Organization administering the document</h4>
+<section id="p1.5.1">
+<h4>1.5.1. Organization administering the document</h4>
 
 <p>
 This document is administered by the policy group of
 the CAcert Community under Policy on Policy (<a href="https://www.cacert.org/policy/PolicyOnPolicy.html">COD1</a>).
 </p>
+</section>
 
-<h4 id="p1.5.2">1.5.2. Contact person</h4>
+<section id="p1.5.2">
+<h4>1.5.2. Contact person</h4>
 <p>
 For questions including about this document:
 </p>
-
 <ul>
   <li>Join the policy group, by means of the discussion forum at
   <a href="https://lists.cacert.org/wws/lists">
@@ -892,15 +926,19 @@ For questions including about this document:
   <li>Send email to &lt; support AT cacert DOT org &gt; </li>
   <li>IRC: irc.cacert.org #CAcert (ssl port 7000, non-ssl port 6667)</li>
 </ul>
+</section>
 
-<h4 id="p1.5.3">1.5.3. Person determining CPS suitability for the policy</h4>
+<section id="p1.5.3">
+<h4>1.5.3. Person determining CPS suitability for the policy</h4>
 <p>
 This CPS and all other policy documents are managed by
 the policy group, which is a group of Members of the
 Community found at policy forum.  See discussion forums above.
 </p>
+</section>
 
-<h4 id="p1.5.4">1.5.4. CPS approval procedures</h4>
+<section id="p1.5.4">
+<h4>1.5.4. CPS approval procedures</h4>
 <p>
 CPS is controlled and updated according to the
 Policy on Policy
@@ -918,15 +956,21 @@ it moves to POLICY status.
 The process is modelled after some elements of
 the RFC process by the IETF.
 </p>
+</section>
 
-<h4 id="p1.5.5">1.5.5 CPS updates</h4>
+<section id="p1.5.5">
+<h4>1.5.5 CPS updates</h4>
 
 <p>
 As per above.
 </p>
+</section>
+
+</section>
 
 
-<h3 id="p1.6">1.6. Definitions and acronyms</h3>
+<section id="p1.6">
+<h3>1.6. Definitions and acronyms</h3>
 
 <dl>
 
@@ -1096,14 +1140,17 @@ As per above.
 </dd>
 
 </dl>
+</section>
 
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p2">2. PUBLICATION AND REPOSITORY RESPONSIBILITIES</h2>
+<section id="p2">
+<h2>2. PUBLICATION AND REPOSITORY RESPONSIBILITIES</h2>
 
-
-<h3 id="p2.1">2.1. Repositories</h3>
+<section id="p2.1">
+<h3>2.1. Repositories</h3>
 
 <p>
 CAcert operates no repositories in the sense
@@ -1116,13 +1163,14 @@ Under the Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePoli
 there are means for Members to search, retrieve
 and verify certain data about themselves and others.
 </p>
+</section>
 
-<h3 id="p2.2">2.2. Publication of certification information</h3>
+<section id="p2.2">
+<h3>2.2. Publication of certification information</h3>
 
 <p>
 CAcert publishes:
 </p>
-
 <ul>
   <li>A repository of CRLs.  An OCSP responder is in operation.</li>
   <li>The root certificate and intermediate certificates.</li>
@@ -1135,27 +1183,37 @@ public nature of Names and email addresses, all information within
 certificates is presumed to be public and published, once
 issued and delivered to the Member.
 </p>
+</section>
 
-<h3 id="p2.3">2.3. Time or frequency of publication</h3>
+<section id="p2.3">
+<h3>2.3. Time or frequency of publication</h3>
 
 <p>
 Root and Intermediate Certificates and CRLs are
 made available on issuance.
 </p>
+</section>
 
-<h3 id="p2.4">2.4. Access controls on repositories</h3>
+<section id="p2.4">
+<h3>2.4. Access controls on repositories</h3>
 <p> No stipulation.  </p>
+</section>
 
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p3">3. IDENTIFICATION AND AUTHENTICATION</h2>
+<section id="p3">
+<h2>3. IDENTIFICATION AND AUTHENTICATION</h2>
 
-<h3 id="p3.1">3.1. Naming</h3>
+<section id="p3.1">
+<h3>3.1. Naming</h3>
 
-<h4 id="p3.1.1">3.1.1. Types of names</h4>
+<section id="p3.1.1">
+<h4>3.1.1. Types of names</h4>
 
-<h5 id="p3.1.1.1">3.1.1.1. Client Certificates</h5>
+<section id="p3.1.1.1">
+<h5>3.1.1.1. Client Certificates</h5>
 <p>
 The Subscriber Naming consists of:
 </p>
@@ -1193,8 +1251,10 @@ The Subscriber Naming consists of:
     </li></ul>
   </dd>
 </dl>
+</section>
 
-<h5 id="p3.1.1.2">3.1.1.2. Individual Server Certificates</h5>
+<section id="p3.1.1.2">
+<h5>3.1.1.2. Individual Server Certificates</h5>
 <p>
 The Subscriber Naming consists of:
 </p>
@@ -1216,8 +1276,10 @@ The Subscriber Naming consists of:
     the CN or they must be empty
   </dd>
 </dl>
+</section>
 
-<h5 id="p3.1.1.3">3.1.1.3. Certificates for Organisations</h5>
+<section id="p3.1.1.3">
+<h5>3.1.1.3. Certificates for Organisations</h5>
 <p>
 In addition to the above, the following applies:
 </p>
@@ -1243,9 +1305,12 @@ account and are as verified by the Organisation Assurance process.
 Other Subscriber information that is collected and/or retained
 does not go into the certificate.
 </p>
+</section>
 
+</section>
 
-<h4 id="p3.1.2">3.1.2. Need for names to be meaningful</h4>
+<section id="p3.1.2">
+<h4>3.1.2. Need for names to be meaningful</h4>
 
 <p>
 Each Member's Name (<code>CN=</code> field);
@@ -1264,14 +1329,18 @@ See <a href="#p1.4.5">&sect;1.4.5.</a>.
 Email addresses are verified according to
 <a href="#p4.2.2">&sect;4.2.2.</a>
 </p>
+</section>
 
-<h4 id="p3.1.3">3.1.3. Anonymity or pseudonymity of subscribers</h4>
+<section id="p3.1.3">
+<h4>3.1.3. Anonymity or pseudonymity of subscribers</h4>
 
 <p>
 See <a href="#p1.4.5">&sect;1.4.5</a>.
 </p>
+</section>
 
-<h4 id="p3.1.4">3.1.4. Rules for interpreting various name forms</h4>
+<section id="p3.1.4">
+<h4>3.1.4. Rules for interpreting various name forms</h4>
 <p>
 Interpretation of Names is controlled by the Assurance Policy,
 is administered by means of the Member's account,
@@ -1280,8 +1349,10 @@ Changes to the interpretation by means of Arbitration
 should be expected as fraud (e.g., phishing)
 may move too quickly for policies to fully document rules.
 </p>
+</section>
 
-<h4 id="p3.1.5">3.1.5. Uniqueness of names</h4>
+<section id="p3.1.5">
+<h4>3.1.5. Uniqueness of names</h4>
 
 <p>
 Uniqueness of Names within certificates is not guaranteed.
@@ -1295,8 +1366,10 @@ See the Assurance Statement within Assurance Policy
 Domain names and email address
 can only be registered to one Member.
 </p>
+</section>
 
-<h4 id="p3.1.6">3.1.6. Recognition, authentication, and role of trademarks</h4>
+<section id="p3.1.6">
+<h4>3.1.6. Recognition, authentication, and role of trademarks</h4>
 
 <p>
 Organisation Assurance Policy
@@ -1306,8 +1379,10 @@ A trademark can be disputed by filing a dispute.
 See
 <a href="#p9.13">&sect;9.13</a>.
 </p>
+</section>
 
-<h4 id="p3.1.7">3.1.7. International Domain Names</h4>
+<section id="p3.1.7">
+<h4>3.1.7. International Domain Names</h4>
 
 <p>
 Certificates containing International Domain Names, being those containing a
@@ -1539,8 +1614,13 @@ This criteria will apply to the email address and server host name fields for al
 <p>
 The CAcert Inc. Board has the authority to decide to add or remove accepted TLD Registrars on this list.
 </p>
+</section>
 
-<h3 id="p3.2">3.2. Initial Identity Verification</h3>
+</section>
+
+
+<section id="p3.2">
+<h3>3.2. Initial Identity Verification</h3>
 
 <p>
 Identity verification is controlled by the 
@@ -1550,7 +1630,8 @@ the following is representative and brief only.
 </p>
 
 
-<h4 id="p3.2.1">3.2.1. Method to prove possession of private key</h4>
+<section id="p3.2.1">
+<h4>3.2.1. Method to prove possession of private key</h4>
 
 <p>
 CAcert uses industry-standard techniques to
@@ -1567,8 +1648,10 @@ For X.509 client certificates for "explorer" browsers,
 ActiveX uses a challenge-response protocol
 to check the private key dynamically.
 </p>
+</section>
 
-<h4 id="p3.2.2">3.2.2. Authentication of Individual Identity</h4>
+<section id="p3.2.2">
+<h4>3.2.2. Authentication of Individual Identity</h4>
 
 <dl>
 
@@ -1657,9 +1740,11 @@ certificates that state their Assured Name(s).
 <figcaption>Table 3.2.b - How Assurance Points are used in Certificates</figcaption>
 </figure>
 
+</section>
 
 
-<h4 id="p3.2.3">3.2.3. Authentication of organization identity</h4>
+<section id="p3.2.3">
+<h4>3.2.3. Authentication of organization identity</h4>
 
 <p>
 Verification of organisations is delegated by
@@ -1695,17 +1780,21 @@ stated in the OAP, briefly presented here:
    (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>),
    and is therefore subject to Arbitration.
 </li></ol>
+</section>
 
 
-<h4 id="p3.2.4">3.2.4. Non-verified subscriber information</h4>
+<section id="p3.2.4">
+<h4>3.2.4. Non-verified subscriber information</h4>
 
 <p>
 All information in the certificate is verified,
 see Relying Party Statement, <a href="#p4.5.2">&sect;4.5.2</a>.
 </p>
+</section>
 
 
-<h4 id="p3.2.5">3.2.5. Validation of authority</h4>
+<section id="p3.2.5">
+<h4>3.2.5. Validation of authority</h4>
 
 <p>
 The authorisation to obtain a certificate is established as follows:
@@ -1740,9 +1829,11 @@ See Organisation Assurance Policy.
 </dd>
 
 </dl>
+</section>
 
 
-<h4 id="p3.2.6">3.2.6. Criteria for interoperation</h4>
+<section id="p3.2.6">
+<h4>3.2.6. Criteria for interoperation</h4>
 
 <p>
 CAcert does not currently issue certificates to subordinate CAs
@@ -1750,14 +1841,21 @@ or other PKIs.
 Other CAs may become Members, and are then subject to the
 same reliance provisions as all Members.
 </p>
+</section>
 
-<h3 id="p3.3">3.3. Re-key Requests</h3>
+</section>
+
+
+<section id="p3.3">
+<h3>3.3. Re-key Requests</h3>
 
 <p>
 Via the Member's account.
 </p>
+</section>
 
-<h3 id="p3.4">3.4. Revocations Requests</h3>
+<section id="p3.4">
+<h3>3.4. Revocations Requests</h3>
 
 <p>
 Via the Member's account.
@@ -1766,11 +1864,14 @@ or similar, the Member emails the support team who
 either work through the lost-password questions
 process or file a dispute.
 </p>
+</section>
 
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p4">4. CERTIFICATE LIFE-CYCLE OPERATIONAL REQUIREMENTS</h2>
+<section id="p4">
+<h2>4. CERTIFICATE LIFE-CYCLE OPERATIONAL REQUIREMENTS</h2>
 
 <p>
 The general life-cycle for a new certificate for an Individual Member is:</p>
@@ -1800,16 +1901,20 @@ The general life-cycle for a new certificate for an Individual Member is:</p>
 </p>
 
 
-<h3 id="p4.1">4.1. Certificate Application</h3>
+<section id="p4.1">
+<h3>4.1. Certificate Application</h3>
 
-<h4 id="p4.1.1">4.1.1. Who can submit a certificate application</h4>
+<section id="p4.1.1">
+<h4>4.1.1. Who can submit a certificate application</h4>
 
 <p>
 Members may submit certificate applications.
 On issuance of certificates, Members become Subscribers.
 </p>
+</section>
 
-<h4 id="p4.1.2">4.1.2. Adding Addresses</h4>
+<section id="p4.1.2">
+<h4>4.1.2. Adding Addresses</h4>
 
 <p>
 The Member can claim ownership or authorised control of
@@ -1826,9 +1931,11 @@ There are these controls:</p>
     the certificate application system automatically initiates the
     check of control, as below.
 </li></ul>
+</section>
 
 
-<h4 id="p4.1.3">4.1.3. Preparing CSR </h4>
+<section id="p4.1.3">
+<h4>4.1.3. Preparing CSR </h4>
 
 <p>
 Members generate their own key-pairs.
@@ -1842,8 +1949,13 @@ See <a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html#s2.5">C
 The Certificate Signing Request (CSR) is prepared by the
 Member for presentation to the automated system.
 </p>
+</section>
 
-<h3 id="p4.2">4.2. Certificate application processing</h3>
+</section>
+
+
+<section id="p4.2">
+<h3>4.2. Certificate application processing</h3>
 
 <p>
 The CA's certificate application process is completely automated.
@@ -1856,15 +1968,18 @@ purpose, the requirements for each purpose must be
 fulfilled.
 </p>
 
-<h4 id="p4.2.1">4.2.1. Authentication </h4>
+<section id="p4.2.1">
+<h4>4.2.1. Authentication </h4>
 
 <p>
   The Member logs in to her account on the CAcert website
       and thereby authenticates herself with username
       and passphrase or with her CAcert client-side digital certificate.
 </p>
+</section>
 
-<h4 id="p4.2.2">4.2.2. Verifying Control</h4>
+<section id="p4.2.2">
+<h4>4.2.2. Verifying Control</h4>
 
 <p>
 In principle, at least two controls are placed on each address.
@@ -1947,13 +2062,14 @@ Notes.</p>
     Domain control checks may be extended to apply to email control
     in the future.
 </li></ul>
+</section>
 
-<h4 id="p4.2.3">4.2.3. Options Available</h4>
+<section id="p4.2.3">
+<h4>4.2.3. Options Available</h4>
 
 <p>
 The Member has options available:
 </p>
-
 <ul>
   <li>Each Email address that is verified
       is available for Client Certificates.
@@ -1970,8 +2086,10 @@ The Member has options available:
       put in a client certificate or an OpenPGP signature.
       </li>
 </ul>
+</section>
 
-<h4 id="p4.2.4">4.2.4. Client Certificate Procedures</h4>
+<section id="p4.2.4">
+<h4>4.2.4. Client Certificate Procedures</h4>
 
 <p>
 For an individual client certificate, the following is required.</p>
@@ -1985,9 +2103,10 @@ For an individual client certificate, the following is required.</p>
   <li>To include a Name, the Name must be assured to at least fifty points. </li>
 
 </ul>
+</section>
 
-
-<h4 id="p4.2.5">4.2.5. Server Certificate Procedures</h4>
+<section id="p4.2.5">
+<h4>4.2.5. Server Certificate Procedures</h4>
 
 <p>
 For a server certificate, the following is required:</p>
@@ -1999,42 +2118,54 @@ For a server certificate, the following is required:</p>
   <li>For the Assured SubRoot, the Member must have
       at least fifty points of Assurance. </li>
 </ul>
+</section>
 
-
-
-<h4 id="p4.2.6">4.2.6. Code-signing Certificate Procedures</h4>
+<section id="p4.2.6">
+<h4>4.2.6. Code-signing Certificate Procedures</h4>
 
 <p>
 Code-signing certificates are made available to Assurers only.
 They are processed in a similar manner to client certificates.
 </p>
+</section>
 
-<h4 id="p4.2.7">4.2.7. Organisation Domain Verification</h4>
+<section id="p4.2.7">
+<h4>4.2.7. Organisation Domain Verification</h4>
 
 <p>
 Organisation Domains are handled under the Organisation Assurance Policy
 and the Organisation Handbook.
 </p>
+</section>
+
+</section>
 
 
-<h3 id="p4.3">4.3. Certificate issuance</h3>
+<section id="p4.3">
+<h3>4.3. Certificate issuance</h3>
 
-<h4 id="p4.3.1">4.3.1. CA actions during certificate issuance</h4>
+<section id="p4.3.1">
+<h4>4.3.1. CA actions during certificate issuance</h4>
 
-<h5 id="p4.3.1.1">4.3.1.1. Key Sizes</h5>
+<section id="p4.3.1.1">
+<h5>4.3.1.1. Key Sizes</h5>
 <p>
 Members may request keys of any size permitted by the key algorithm.
 Many older hardware devices require small keys.
 </p>
+</section>
 
-<h5 id="p4.3.1.2">4.3.1.2. Algorithms</h5>
+<section id="p4.3.1.2">
+<h5>4.3.1.2. Algorithms</h5>
 <p>
 CAcert currently only supports the RSA algorithm for X.509 keys.
 X.509 signing uses the SHA-1 message digest algorithm.
 OpenPGP Signing uses RSA signing over RSA and DSA keys.
 </p>
+</section>
 
-<h5 id="p4.3.1.3">4.3.1.3. Process for Certificates</h5>
+<section id="p4.3.1.3">
+<h5>4.3.1.3. Process for Certificates</h5>
 <p>
 All details in each certificate are verified
 by the website issuance system.
@@ -2059,9 +2190,10 @@ profiles for certificate lifetime, size, algorithm.
   </li><li>
    Certificate is stored as well as mailed.
 </li></ol>
+</section>
 
-
-<h5 id="p4.3.1.4">4.3.1.4. Process for OpenPGP key signatures</h5>
+<section id="p4.3.1.4">
+<h5>4.3.1.4. Process for OpenPGP key signatures</h5>
 <p>
 All details in each Sub-ID are verified
 by the website issuance system.
@@ -2116,10 +2248,13 @@ algorithm following the process:
 
 <figcaption>Table 4.3.1. Permitted Data in Signed OpenPgp Keys</figcaption>
 </figure>
+</section>
+
+</section>
 
 
-
-<h4 id="p4.3.2">4.3.2. Notification to subscriber by the CA of issuance of certificate</h4>
+<section id="p4.3.2">
+<h4>4.3.2. Notification to subscriber by the CA of issuance of certificate</h4>
 
 <p>
 Once signed, the certificate is
@@ -2127,18 +2262,25 @@ made available via the Member's account,
 and emailed to the Member.
 It is also archived internally.
 </p>
+</section>
 
-<h3 id="p4.4">4.4. Certificate acceptance</h3>
+</section>
 
-<h4 id="p4.4.1">4.4.1. Conduct constituting certificate acceptance</h4>
+<section id="p4.4">
+<h3>4.4. Certificate acceptance</h3>
+
+<section id="p4.4.1">
+<h4>4.4.1. Conduct constituting certificate acceptance</h4>
 
 <p>
 There is no need for the Member to explicitly accept the certificate.
 In case the Member does not accept the certificate,
 the certificate has to be revoked and made again.
 </p>
+</section>
 
-<h4 id="p4.4.2">4.4.2. Publication of the certificate by the CA</h4>
+<section id="p4.4.2">
+<h4>4.4.2. Publication of the certificate by the CA</h4>
 
 <p>
 CAcert does not currently publish the issued certificates
@@ -2150,14 +2292,20 @@ However note that certificates that are issued
 and delivered to the Member are presumed to be
 published.  See <a href="#p2.2">&sect;2.2</a>.
 </p>
+</section>
 
-<h4 id="p4.4.3">4.4.3. Notification of certificate issuance by the CA to other entities</h4>
+<section id="p4.4.3">
+<h4>4.4.3. Notification of certificate issuance by the CA to other entities</h4>
 
 <p>
 There are no external entities that are notified about issued certificates.
 </p>
+</section>
 
-<h3 id="p4.5">4.5. Key pair and certificate usage</h3>
+</section>
+
+<section id="p4.5">
+<h3>4.5. Key pair and certificate usage</h3>
 
 <p>
 All Members (subscribers and relying parties)
@@ -2166,15 +2314,19 @@ CAcert Community Agreement
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>)
 See especially <a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html#s2.3">2.3</a> through <a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html#s2.5">2.5</a>.
 </p>
-<h4 id="p4.5.1">4.5.1. Subscriber Usage and Responsibilities</h4>
+
+<section id="p4.5.1">
+<h4>4.5.1. Subscriber Usage and Responsibilities</h4>
 
 <p>
 Subscribers should use keys only for their proper purpose,
 as indicated by the certificate, or by wider agreement with
 others.
 </p>
+</section>
 
-<h4 id="p4.5.2">4.5.2. Relying Party Usage and Responsibilities</h4>
+<section id="p4.5.2">
+<h4>4.5.2. Relying Party Usage and Responsibilities</h4>
 
 <p>
 Relying parties (Members) may rely on the following.
@@ -2195,7 +2347,8 @@ The following notes are in addition to the Relying Party Statement,
 and can be seen as limitations on it.
 </p>
 
-<h5 id="p4.5.2.a">4.5.2.a Methods of Verification </h5>
+<section id="p4.5.2.a">
+<h5>4.5.2.a Methods of Verification </h5>
 <p>
 The term Verification as used in the Relying Party Statement means one of
 </p>
@@ -2227,8 +2380,10 @@ The term Verification as used in the Relying Party Statement means one of
 </tbody>
 </table>
 
+</section>
 
-<h5 id="p4.5.2.b">4.5.2.b Who may rely</h5>
+<section id="p4.5.2.b">
+<h5>4.5.2.b Who may rely</h5>
 
 <dl>
 
@@ -2265,8 +2420,10 @@ Root Distribution License (<a href="https://www.cacert.org/policy/RootDistributi
 </dd>
 
 </dl>
+</section>
 
-<h5 id="p4.5.2.c">4.5.2.c The Act of Reliance </h5>
+<section id="p4.5.2.c">
+<h5>4.5.2.c The Act of Reliance </h5>
 
 <dl>
 
@@ -2355,7 +2512,10 @@ checks of the business, technical and certificate aspect.
 </dd>
 
 </dl>
-<h5 id="p4.5.2.d">4.5.2.d Risks and Limitations of Reliance </h5>
+</section>
+
+<section id="p4.5.2.d">
+<h5>4.5.2.d Risks and Limitations of Reliance </h5>
 
 <dl>
 
@@ -2436,8 +2596,10 @@ that is secured according to the needs of the application.
 </dd>
 
 </dl>
+</section>
 
-<h5 id="p4.5.2.e">4.5.2.e When something goes wrong </h5>
+<section id="p4.5.2.e">
+<h5>4.5.2.e When something goes wrong </h5>
 <p>
 In the event that an issue arises out of the Member's reliance,
 her sole avenue is <strong>to file dispute under DRP</strong>.
@@ -2467,33 +2629,46 @@ do not automatically transfer to the vendor.
 </dd>
 
 </dl>
+</section>
 
-<h3 id="p4.6">4.6. Certificate renewal</h3>
+</section>
+</section>
+
+
+<section id="p4.6">
+<h3>4.6. Certificate renewal</h3>
 
 <p>
 A certificate can be renewed at any time.
 The procedure of certificate renewal is the same
 as for the initial certificate issuance.
 </p>
+</section>
 
-<h3 id="p4.7">4.7. Certificate re-key</h3>
+<section id="p4.7">
+<h3>4.7. Certificate re-key</h3>
 
 <p>
 Certificate "re-keyings" are not offered nor supported.
 A new certificate with a new key has to be requested and issued instead,
 and the old one revoked.
 </p>
+</section>
 
-<h3 id="p4.8">4.8. Certificate modification</h3>
+<section id="p4.8">
+<h3>4.8. Certificate modification</h3>
 
 <p>
 Certificate "modifications" are not offered nor supported.
 A new certificate has to be requested and issued instead.
 </p>
+</section>
 
-<h3 id="p4.9">4.9. Certificate revocation and suspension</h3>
+<section id="p4.9">
+<h3>4.9. Certificate revocation and suspension</h3>
 
-<h4 id="p4.9.1">4.9.1. Circumstances for revocation</h4>
+<section id="p4.9.1">
+<h4>4.9.1. Circumstances for revocation</h4>
 <p>
 Certificates may be revoked under the following circumstances:
 </p>
@@ -2513,14 +2688,18 @@ Certificates may be revoked under the following circumstances:
 These are the only three circumstances under which a
 revocation occurs.
 </p>
+</section>
 
-<h4 id="p4.9.2">4.9.2. Who can request revocation</h4>
+<section id="p4.9.2">
+<h4>4.9.2. Who can request revocation</h4>
 
 <p>
 As above.
 </p>
+</section>
 
-<h4 id="p4.9.3">4.9.3. Procedure for revocation request</h4>
+<section id="p4.9.3">
+<h4>4.9.3. Procedure for revocation request</h4>
 <p>
 The Subscriber logs in to her online account through
 the website at http://www.cacert.org/ .
@@ -2532,12 +2711,16 @@ a dispute should be filed
 by email at
     &lt; support AT cacert DOT org &gt;
 </p>
+</section>
 
-<h4 id="p4.9.4">4.9.4. Revocation request grace period</h4>
+<section id="p4.9.4">
+<h4>4.9.4. Revocation request grace period</h4>
 
 <p>No stipulation.</p>
+</section>
 
-<h4 id="p4.9.5">4.9.5. Time within which CA must process the revocation request</h4>
+<section id="p4.9.5">
+<h4>4.9.5. Time within which CA must process the revocation request</h4>
 
 <p>
 The revocation automated in the Web Interface for subscribers,
@@ -2548,8 +2731,10 @@ and is handled generally in less than a minute.
 A filed dispute that requests a revocation should be handled
 within a five business days, however the Arbitrator has discretion.
 </p>
+</section>
 
-<h4 id="p4.9.6">4.9.6. Revocation checking requirement for relying parties</h4>
+<section id="p4.9.6">
+<h4>4.9.6. Revocation checking requirement for relying parties</h4>
 
 <p>
 Each revoked certificate is recorded in the
@@ -2558,110 +2743,153 @@ Relying Parties must check a certificate against
 the most recent CRL issued, in order to validate
 the certificate for the intended reliance.
 </p>
+</section>
 
-<h4 id="p4.9.7">4.9.7. CRL issuance frequency (if applicable)</h4>
+<section id="p4.9.7">
+<h4>4.9.7. CRL issuance frequency (if applicable)</h4>
 
 <p>
 A new CRL is issued after every certificate revocation.
 </p>
+</section>
 
-<h4 id="p4.9.8">4.9.8. Maximum latency for CRLs (if applicable)</h4>
+<section id="p4.9.8">
+<h4>4.9.8. Maximum latency for CRLs (if applicable)</h4>
 
 <p>
 The maximum latency between revocation and issuance of the CRL is 1 hour.
 </p>
+</section>
 
-<h4 id="p4.9.9">4.9.9. On-line revocation/status checking availability</h4>
+<section id="p4.9.9">
+<h4>4.9.9. On-line revocation/status checking availability</h4>
 
 <p>
 OCSP is available at
 http://ocsp.cacert.org/ .
 </p>
+</section>
 
-<h4 id="p4.9.10">4.9.10. On-line revocation checking requirements</h4>
+<section id="p4.9.10">
+<h4>4.9.10. On-line revocation checking requirements</h4>
 <p>
 Relying parties must check up-to-date status before relying.
 </p>
+</section>
 
-<h4 id="p4.9.11">4.9.11. Other forms of revocation advertisements available</h4>
+<section id="p4.9.11">
+<h4>4.9.11. Other forms of revocation advertisements available</h4>
 <p>
 None.
 </p>
+</section>
 
-<h4 id="p4.9.12">4.9.12. Special requirements re key compromise</h4>
+<section id="p4.9.12">
+<h4>4.9.12. Special requirements re key compromise</h4>
 <p>
 Subscribers are obliged to revoke certificates at the earliest opportunity.
 </p>
+</section>
 
-<h4 id="p4.9.13">4.9.13. Circumstances for suspension</h4>
+<section id="p4.9.13">
+<h4>4.9.13. Circumstances for suspension</h4>
 
 <p>
 Suspension of certificates is not available.
 </p>
+</section>
 
-<h4 id="p4.9.14">4.9.14. Who can request suspension</h4>
+<section id="p4.9.14">
+<h4>4.9.14. Who can request suspension</h4>
 <p>
 Not applicable.
 </p>
+</section>
 
-<h4 id="p4.9.15">4.9.15. Procedure for suspension request</h4>
+<section id="p4.9.15">
+<h4>4.9.15. Procedure for suspension request</h4>
 <p>
 Not applicable.
 </p>
+</section>
 
-<h4 id="p4.9.16">4.9.16. Limits on suspension period</h4>
+<section id="p4.9.16">
+<h4>4.9.16. Limits on suspension period</h4>
 <p>
 Not applicable.
 </p>
+</section>
+
+</section>
 
 
+<section id="p4.10">
+<h3>4.10. Certificate status services</h3>
 
-<h3 id="p4.10">4.10. Certificate status services</h3>
-
-<h4 id="p4.10.1">4.10.1. Operational characteristics</h4>
+<section id="p4.10.1">
+<h4>4.10.1. Operational characteristics</h4>
 <p>
 OCSP is available
 at http://ocsp.cacert.org/ .
 </p>
+</section>
 
-<h4 id="p4.10.2">4.10.2. Service availability</h4>
+<section id="p4.10.2">
+<h4>4.10.2. Service availability</h4>
 
 <p>
 OCSP is made available on an experimental basis.
 </p>
+</section>
 
-<h4 id="p4.10.3">4.10.3. Optional features</h4>
+<section id="p4.10.3">
+<h4>4.10.3. Optional features</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h3 id="p4.11">4.11. End of subscription</h3>
+</section>
+
+
+<section id="p4.11">
+<h3>4.11. End of subscription</h3>
 
 <p>
 Certificates include expiry dates.
 </p>
+</section>
 
-<h3 id="p4.12">4.12. Key escrow and recovery</h3>
+<section id="p4.12">
+<h3>4.12. Key escrow and recovery</h3>
 
-<h4 id="p4.12.1">4.12.1. Key escrow and recovery policy and practices</h4>
+<section id="p4.12.1">
+<h4>4.12.1. Key escrow and recovery policy and practices</h4>
 
 <p>
 CAcert does not generate nor escrow subscriber keys.
 </p>
+</section>
 
-<h4 id="p4.12.2">4.12.2. Session key encapsulation and recovery policy and practices</h4>
+<section id="p4.12.2">
+<h4>4.12.2. Session key encapsulation and recovery policy and practices</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
+</section>
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p5">5. FACILITY, MANAGEMENT, AND OPERATIONAL CONTROLS</h2>
+<section id="p5">
+<h2>5. FACILITY, MANAGEMENT, AND OPERATIONAL CONTROLS</h2>
 
-<h3 id="p5.1">5.1. Physical controls</h3>
+<section id="p5.1">
+<h3>5.1. Physical controls</h3>
 
 <p>
 Refer to Security Policy (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>)</p>
@@ -2672,35 +2900,51 @@ Refer to Security Policy (<a href="https://svn.cacert.org/CAcert/Policies/Securi
 </li></ul>
 
 
-
-<h4 id="p5.1.3">5.1.3. Power and air conditioning</h4>
+<section id="p5.1.3">
+<h4>5.1.3. Power and air conditioning</h4>
 <p>
 Refer to Security Policy 2.1.2 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>)
 </p>
-<h4 id="p5.1.4">5.1.4. Water exposures</h4>
+</section>
+<section id="p5.1.4">
+<h4>5.1.4. Water exposures</h4>
 <p>
 Refer to Security Policy 2.1.4 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>)
 </p>
-<h4 id="p5.1.5">5.1.5. Fire prevention and protection</h4>
+</section>
+<section id="p5.1.5">
+<h4>5.1.5. Fire prevention and protection</h4>
 <p>
 Refer to Security Policy 2.1.4 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>)
 </p>
-<h4 id="p5.1.6">5.1.6. Media storage</h4>
+</section>
+<section id="p5.1.6">
+<h4>5.1.6. Media storage</h4>
 <p>
 Refer to Security Policy 4.3 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>)
 </p>
-<h4 id="p5.1.7">5.1.7. Waste disposal</h4>
+</section>
+<section id="p5.1.7">
+<h4>5.1.7. Waste disposal</h4>
 <p>
 No stipulation.
 </p>
-<h4 id="p5.1.8">5.1.8. Off-site backup</h4>
+</section>
+<section id="p5.1.8">
+<h4>5.1.8. Off-site backup</h4>
 <p>
 Refer to Security Policy 4.3 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s4.3">COD8</a>)
 </p>
+</section>
 
-<h3 id="p5.2">5.2. Procedural controls</h3>
+</section>
 
-<h4 id="p5.2.1">5.2.1. Trusted roles</h4>
+
+<section id="p5.2">
+<h3>5.2. Procedural controls</h3>
+
+<section id="p5.2.1">
+<h4>5.2.1. Trusted roles</h4>
 
 <dl>
    <dt>Technical teams</dt>
@@ -2733,8 +2977,10 @@ Refer to Security Policy 4.3 (<a href="https://svn.cacert.org/CAcert/Policies/Se
    </ul>
    </dd>
 </dl>
+</section>
 
-<h4 id="p5.2.2">5.2.2. Number of persons required per task</h4>
+<section id="p5.2.2">
+<h4>5.2.2. Number of persons required per task</h4>
 <p>
 CAcert operates to the principles of <em>four eyes</em> and <em>dual control</em>.
 All important roles require a minimum of two persons.
@@ -2742,8 +2988,10 @@ The people may be tasked to operate
 with an additional person observing (<em>four eyes</em>),
 or with two persons controlling (<em>dual control</em>).
 </p>
+</section>
 
-<h4 id="p5.2.3">5.2.3. Identification and authentication for each role</h4>
+<section id="p5.2.3">
+<h4>5.2.3. Identification and authentication for each role</h4>
 
 <p>
 All important roles are generally required to be assured
@@ -2751,21 +2999,31 @@ at least to the level of Assurer, as per AP.
 Refer to Assurance Policy (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>).
 </p>
 
+<section>
 <h5>Technical</h5>
 <p>
 Refer to Security Policy 9.1 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s9.1">COD8</a>).
 </p>
+</section>
 
-<h4 id="p5.2.4">5.2.4. Roles requiring separation of duties</h4>
+</section>
+
+<section id="p5.2.4">
+<h4>5.2.4. Roles requiring separation of duties</h4>
 
 <p>
 Roles strive in general for separation of duties, either along the lines of
 <em>four eyes principle</em> or <em>dual control</em>.
 </p>
+</section>
 
-<h3 id="p5.3">5.3. Personnel controls</h3>
+</section>
 
-<h4 id="p5.3.1">5.3.1. Qualifications, experience, and clearance requirements</h4>
+<section id="p5.3">
+<h3>5.3. Personnel controls</h3>
+
+<section id="p5.3.1">
+<h4>5.3.1. Qualifications, experience, and clearance requirements</h4>
 
 <figure id="t5.3.1">
 <table border="1" class="parentC">
@@ -2805,22 +3063,33 @@ Roles strive in general for separation of duties, either along the lines of
 <figcaption>Table 5.3.1. Controls on Roles</figcaption>
 </figure>
 
+</section>
 
-<h4 id="p5.3.2">5.3.2. Background check procedures</h4>
+<section id="p5.3.2">
+<h4>5.3.2. Background check procedures</h4>
 
 <p>
 Refer to Security Policy 9.1.3 (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s9.1.3">COD8</a>).
 </p>
+</section>
 
-<h4 id="p5.3.3">5.3.3. Training requirements</h4>
+<section id="p5.3.3">
+<h4>5.3.3. Training requirements</h4>
 <p>No stipulation.</p>
-<h4 id="p5.3.4">5.3.4. Retraining frequency and requirements</h4>
-<p>No stipulation.</p>
+</section>
 
-<h4 id="p5.3.5">5.3.5. Job rotation frequency and sequence</h4>
+<section id="p5.3.4">
+<h4>5.3.4. Retraining frequency and requirements</h4>
 <p>No stipulation.</p>
+</section>
 
-<h4 id="p5.3.6">5.3.6. Sanctions for unauthorized actions</h4>
+<section id="p5.3.5">
+<h4>5.3.5. Job rotation frequency and sequence</h4>
+<p>No stipulation.</p>
+</section>
+
+<section id="p5.3.6">
+<h4>5.3.6. Sanctions for unauthorized actions</h4>
 <p>
 Any actions that are questionable
 - whether uncertain or grossly negligent -
@@ -2830,20 +3099,30 @@ ruling on loss of points, retraining,
 or termination of access or status.
 Refer to DRP (<a href="https://www.cacert.org/policy/DisputeResolutionPolicy.html">COD7</a>).
 </p>
+</section>
 
-<h4 id="p5.3.7">5.3.7. Independent contractor requirements</h4>
+<section id="p5.3.7">
+<h4>5.3.7. Independent contractor requirements</h4>
 <p>No stipulation.</p>
+</section>
 
-<h4 id="p5.3.8">5.3.8. Documentation supplied to personnel</h4>
+<section id="p5.3.8">
+<h4>5.3.8. Documentation supplied to personnel</h4>
 <p>No stipulation.</p>
+</section>
 
-<h3 id="p5.4">5.4. Audit logging procedures</h3>
+</section>
+
+<section id="p5.4">
+<h3>5.4. Audit logging procedures</h3>
 
 <p>
 Refer to Security Policy <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s4.2">4.2</a>, <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s5">5</a> (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>).
 </p>
+</section>
 
-<h3 id="p5.5">5.5. Records archival</h3>
+<section id="p5.5">
+<h3>5.5. Records archival</h3>
 <p>
 The standard retention period is 7 years.
 Once archived, records can only be obtained and verified
@@ -2896,23 +3175,30 @@ Following types of records are archived:
 </table>
 <figcaption>Table 5.5.  Documents and Retention</figcaption>
 </figure>
+</section>
 
-<h3 id="p5.6">5.6. Key changeover</h3>
+<section id="p5.6">
+<h3>5.6. Key changeover</h3>
 
 <p>
 Refer to Security Policy <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s9.2">9.2</a> (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>).
 </p>
+</section>
 
-<h3 id="p5.7">5.7. Compromise and disaster recovery</h3>
+<section id="p5.7">
+<h3>5.7. Compromise and disaster recovery</h3>
 
 <p>
 Refer to Security Policy <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s5">5</a>, <a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html#s6">6</a> (<a href="https://svn.cacert.org/CAcert/Policies/SecurityPolicy.html">COD8</a>).
 (Refer to <a href="#p1.4">&sect;1.4</a> for limitations to service.)
 </p>
+</section>
 
-<h3 id="p5.8">5.8. CA or RA termination</h3>
+<section id="p5.8">
+<h3>5.8. CA or RA termination</h3>
 
-<h4 id="p5.8.1">5.8.1 CA termination</h4>
+<section id="p5.8.1">
+<h4>5.8.1 CA termination</h4>
 
 <p>
 In the event of operational termination, the
@@ -2926,8 +3212,10 @@ Member information will be securely destroyed.
 <p>
 The CA cannot be transferrred to another organisation.
 </p>
+</section>
 
-<h4 id="p5.8.2">5.8.2 RA termination</h4>
+<section id="p5.8.2">
+<h4>5.8.2 RA termination</h4>
 
 <p>
 When an Assurer desires to voluntarily terminates
@@ -2939,24 +3227,30 @@ and following the instructions of the Arbitrator.
 In the case of involuntary termination, the process is
 the same, save for some other party filing the dispute.
 </p>
+</section>
 
-
-
+</section>
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p6">6. TECHNICAL SECURITY CONTROLS</h2>
+<section id="p6">
+<h2>6. TECHNICAL SECURITY CONTROLS</h2>
 
 
-<h3 id="p6.1">6.1. Key Pair Generation and Installation</h3>
+<section id="p6.1">
+<h3>6.1. Key Pair Generation and Installation</h3>
 
-<h4 id="p6.1.1">6.1.1. Key Pair Generation</h4>
+<section id="p6.1.1">
+<h4>6.1.1. Key Pair Generation</h4>
 
 <p>
 Subscribers generate their own Key Pairs.
 </p>
+</section>
 
-<h4 id="p6.1.2">6.1.2. Subscriber Private key security</h4>
+<section id="p6.1.2">
+<h4>6.1.2. Subscriber Private key security</h4>
 
 <p>
 There is no technical stipulation on how Subscribers generate
@@ -2964,8 +3258,10 @@ and keep safe their private keys,
 however, CCA 2.5 provides for general security obligations.
 See <a href="#p9.6">&sect;9.6</a>.
 </p>
+</section>
 
-<h4 id="p6.1.3">6.1.3. Public Key Delivery to Certificate Issuer</h4>
+<section id="p6.1.3">
+<h4>6.1.3. Public Key Delivery to Certificate Issuer</h4>
 
 <p>
 Members login to their online account.
@@ -2974,13 +3270,14 @@ them into the appropriate window.
 Public Keys are delivered in signed-CSR form
 for X.509 and in self-signed form for OpenPGP.
 </p>
+</section>
 
-<h4 id="p6.1.4">6.1.4. CA Public Key delivery to Relying Parties</h4>
+<section id="p6.1.4">
+<h4>6.1.4. CA Public Key delivery to Relying Parties</h4>
 
 <p>
 The CA root certificates are distributed by these means:
 </p>
-
 <ul><li>
     Published on the website of CAcert,
     in both HTTP and HTTPS.
@@ -2989,10 +3286,10 @@ The CA root certificates are distributed by these means:
     Browsers, Email-Clients.
     Such suppliers are subject to the Third Party Vendor Agreement.
 </li></ul>
+</section>
 
-
-
-<h4 id="p6.1.5">6.1.5. Key sizes</h4>
+<section id="p6.1.5">
+<h4>6.1.5. Key sizes</h4>
 
 <p>
 No limitation is placed on Subscriber key sizes.
@@ -3013,16 +3310,18 @@ CAcert adds larger keys and hashes
 in line with general cryptographic trends,
 and as supported by major software suppliers.
 </p>
+</section>
 
-
-
-<h4 id="p6.1.6">6.1.6. Public key parameters generation and quality checking</h4>
+<section id="p6.1.6">
+<h4>6.1.6. Public key parameters generation and quality checking</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p6.1.7">6.1.7. Key Usage Purposes</h4>
+<section id="p6.1.7">
+<h4>6.1.7. Key Usage Purposes</h4>
 
 <p>
 CAcert roots are general purpose.
@@ -3034,13 +3333,16 @@ Each root key may sign all of the general purposes
 The website controls the usage purposes that may be signed.
 This is effected by means of the 'template' system.
 </p>
+</section>
+
+</section>
 
 
+<section id="p6.2">
+<h3>6.2. Private Key Protection and Cryptographic Module Engineering Controls</h3>
 
-<h3 id="p6.2">6.2. Private Key Protection and Cryptographic Module Engineering Controls</h3>
-
-
-<h4 id="p6.2.1">6.2.1. Cryptographic module standards and controls</h4>
+<section id="p6.2.1">
+<h4>6.2.1. Cryptographic module standards and controls</h4>
 
 <p>
 SubRoot keys are stored on a single machine which acts
@@ -3048,7 +3350,6 @@ as a Cryptographic Module, or <em>signing server</em>.
 It operates a single daemon for signing only.
 The signing server has these security features:
 </p>
-
 <ul><li>
     It is connected only by one
     dedicated (serial USB) link
@@ -3085,11 +3386,16 @@ modules have been tried and tested, and similar have been tested,
 but have been found wanting, e.g., for short key lengths and
 power restrictions.)
 </p>
+</section>
+
+</section>
 
 
+<section id="p6.3">
+<h3>6.3. Other aspects of key pair management</h3>
 
-<h3 id="p6.3">6.3. Other aspects of key pair management</h3>
-<h4 id="p6.3.1">6.3.1. Public key archival</h4>
+<section id="p6.3.1">
+<h4>6.3.1. Public key archival</h4>
 
 <p>
 Subscriber certificates, including public keys,
@@ -3099,8 +3405,10 @@ archive, see <a href="#p2">&sect;2</a>.
 They are backed-up by CAcert's normal backup procedure,
 but their availability is a subscriber responsibility.
 </p>
+</section>
 
-<h4 id="p6.3.2">6.3.2. Certificate operational periods and key pair usage periods</h4>
+<section id="p6.3.2">
+<h4>6.3.2. Certificate operational periods and key pair usage periods</h4>
 
 <p>
 The operational period of a certificate and its key pair
@@ -3119,37 +3427,51 @@ Members based on current recommendations from the
 and maximum limits in generally available software.
 At time of writing this is 4096 bits.
 </p>
+</section>
 
-<h3 id="p6.4">6.4. Activation data</h3>
+</section>
+
+
+<section id="p6.4">
+<h3>6.4. Activation data</h3>
 <p> No stipulation.  </p>
+</section>
 
-<h3 id="p6.5">6.5. Computer security controls</h3>
+<section id="p6.5">
+<h3>6.5. Computer security controls</h3>
 <p>
 Refer to Security Policy.
 </p>
+</section>
 
-<h3 id="p6.6">6.6. Life cycle technical controls</h3>
+<section id="p6.6">
+<h3>6.6. Life cycle technical controls</h3>
 <p>
 Refer to <a href="https://wiki.cacert.org/SecurityManual#SOFTWARE_DEVELOPMENT">SM7 "Software Development"</a>.
 </p>
+</section>
 
-<h3 id="p6.7">6.7. Network security controls</h3>
+<section id="p6.7">
+<h3>6.7. Network security controls</h3>
 <p>
 Refer to <a href="https://wiki.cacert.org/SecurityManual#Network">SM3.1 "Logical Security - Network"</a>.
 </p>
+</section>
 
-<h3 id="p6.8">6.8. Time-stamping</h3>
+<section id="p6.8">
+<h3>6.8. Time-stamping</h3>
 <p>
 Each server synchronises with NTP.
 No "timestamping" service is currently offered.
 </p>
+</section>
 
-
-
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p7">7. CERTIFICATE, CRL, AND OCSP PROFILES</h2>
+<section id="p7">
+<h2>7. CERTIFICATE, CRL, AND OCSP PROFILES</h2>
 
 <p>
 CAcert defines all the meanings, semantics and profiles
@@ -3161,15 +3483,20 @@ incorporated, are not used by CAcert, and must not be implied
 by the Member or the Non-related Person.
 </p>
 
-<h3 id="p7.1">7.1. Certificate profile</h3>
-<h4 id="p7.1.1">7.1.1. Version number(s)</h4>
+<section id="p7.1">
+<h3>7.1. Certificate profile</h3>
+
+<section id="p7.1.1">
+<h4>7.1.1. Version number(s)</h4>
 
 <p>
 Issued X.509 certificates are of v3 form.
 The form of the PGP signatures depends on several factors, therefore no stipulation.
 </p>
+</section>
 
-<h4 id="p7.1.2">7.1.2. Certificate extensions</h4>
+<section id="p7.1.2">
+<h4>7.1.2. Certificate extensions</h4>
 
 <p>
   Client certificates include the following extensions:
@@ -3217,24 +3544,31 @@ The form of the PGP signatures depends on several factors, therefore no stipulat
 OpenPGP key signatures currently do not include extensions.
 In the future, a serial number might be included as an extension.
 </p>
+</section>
 
-
-<h4 id="p7.1.3">7.1.3. Algorithm object identifiers</h4>
+<section id="p7.1.3">
+<h4>7.1.3. Algorithm object identifiers</h4>
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p7.1.4">7.1.4. Name forms</h4>
+<section id="p7.1.4">
+<h4>7.1.4. Name forms</h4>
 <p>
 Refer to <a href="#p3.1.1">&sect;3.1.1</a>.
 </p>
+</section>
 
-<h4 id="p7.1.5">7.1.5. Name constraints</h4>
+<section id="p7.1.5">
+<h4>7.1.5. Name constraints</h4>
 <p>
 Refer to <a href="#p3.1.1">&sect;3.1.1</a>.
 </p>
+</section>
 
-<h4 id="p7.1.6">7.1.6. Certificate policy object identifier</h4>
+<section id="p7.1.6">
+<h4>7.1.6. Certificate policy object identifier</h4>
 <p>
 The following OIDs are defined and should be incorporated
 into certificates:
@@ -3271,50 +3605,77 @@ into certificates:
 <p>
 Versions are defined by additional numbers appended such as .1.
 </p>
+</section>
 
-<h4 id="p7.1.7">7.1.7. Usage of Policy Constraints extension</h4>
+<section id="p7.1.7">
+<h4>7.1.7. Usage of Policy Constraints extension</h4>
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p7.1.8">7.1.8. Policy qualifiers syntax and semantics</h4>
+<section id="p7.1.8">
+<h4>7.1.8. Policy qualifiers syntax and semantics</h4>
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p7.1.9">7.1.9. Processing semantics for the critical Certificate Policies extension</h4>
+<section id="p7.1.9">
+<h4>7.1.9. Processing semantics for the critical Certificate Policies extension</h4>
 <p>
 No stipulation.
 </p>
+</section>
+
+</section>
 
 
-<h3 id="p7.2">7.2. CRL profile</h3>
-<h4 id="p7.2.1">7.2.1. Version number(s)</h4>
+<section id="p7.2">
+<h3>7.2. CRL profile</h3>
+
+<section id="p7.2.1">
+<h4>7.2.1. Version number(s)</h4>
 <p>
 CRLs are created in X.509 v2 format.
 </p>
+</section>
 
-<h4 id="p7.2.2">7.2.2. CRL and CRL entry extensions</h4>
+<section id="p7.2.2">
+<h4>7.2.2. CRL and CRL entry extensions</h4>
 
 <p>
 No extensions.
 </p>
+</section>
 
-<h3 id="p7.3">7.3. OCSP profile</h3>
-<h4 id="p7.3.1">7.3.1. Version number(s)</h4>
+</section>
+
+
+<section id="p7.3">
+<h3>7.3. OCSP profile</h3>
+
+<section id="p7.3.1">
+<h4>7.3.1. Version number(s)</h4>
 <p>
 The OCSP responder operates in Version 1.
 </p>
+</section>
 
-<h4 id="p7.3.2">7.3.2. OCSP extensions</h4>
+<section id="p7.3.2">
+<h4>7.3.2. OCSP extensions</h4>
 <p>
 No stipulation.
 </p>
+</section>
 
+</section>
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p8">8. COMPLIANCE AUDIT AND OTHER ASSESSMENTS</h2>
+<section id="p8">
+<h2>8. COMPLIANCE AUDIT AND OTHER ASSESSMENTS</h2>
 
 <p>
 There are two major threads of assessment:
@@ -3343,7 +3704,8 @@ wiki.cacert.org/Audit/</a>
 for more information.
 </p>
 
-<h3 id="p8.1">8.1. Frequency or circumstances of assessment</h3>
+<section id="p8.1">
+<h3>8.1. Frequency or circumstances of assessment</h3>
 <p>
 The first audits started in late 2005,
 and since then, assessments have been an
@@ -3357,8 +3719,10 @@ be permanent features.
   </li><li>
   <strong>Code Audit</strong>.
 </li></ul>
+</section>
 
-<h3 id="p8.2">8.2. Identity/qualifications of assessor</h3>
+<section id="p8.2">
+<h3>8.2. Identity/qualifications of assessor</h3>
 
 <dl>
 
@@ -3382,7 +3746,10 @@ See Security Policy, sections <a href="https://svn.cacert.org/CAcert/Policies/Se
 </dd>
 
 </dl>
-<h3 id="p8.3">8.3. Assessor's relationship to assessed entity</h3>
+</section>
+
+<section id="p8.3">
+<h3>8.3. Assessor's relationship to assessed entity</h3>
 
 <p>
 Specific internal restrictions on audit personnel:
@@ -3424,8 +3791,10 @@ to all members of the team, but may be varied.
 Any deviations must be documented and approved
 by the CAcert Inc. Board.
 </p>
+</section>
 
-<h3 id="p8.4">8.4. Topics covered by assessment</h3>
+<section id="p8.4">
+<h3>8.4. Topics covered by assessment</h3>
 
 <p>
 Systems Audits are generally conducted to criteria.
@@ -3470,8 +3839,10 @@ follow the meet the above requirements, then the criteria
 should be reworked to conform, or should be dropped
 (both with explanatory notes).
 </p>
+</section>
 
-<h3 id="p8.5">8.5. Actions taken as a result of deficiency</h3>
+<section id="p8.5">
+<h3>8.5. Actions taken as a result of deficiency</h3>
 <p>
 See the current
 <a href="https://wiki.cacert.org/Audit/Done">Audit Done list</a>
@@ -3500,8 +3871,10 @@ The
 wiki.cacert.org/AuditDirectives</a>
 documents issued directives and actions.
 </p>
+</section>
 
-<h3 id="p8.6">8.6. Communication of results</h3>
+<section id="p8.6">
+<h3>8.6. Communication of results</h3>
 
 <p>
 Current and past Audit information is available at
@@ -3517,14 +3890,17 @@ Audits cover the overall processes more
 than any one document, and documents may vary
 even as Audit reports are delivered.
 </p>
+</section>
 
-
+</section>
 
 
 <!-- *************************************************************** -->
-<h2 id="p9">9. OTHER BUSINESS AND LEGAL MATTERS</h2>
-<h3 id="p9.1">9.1. Fees</h3>
+<section id="p9">
+<h2>9. OTHER BUSINESS AND LEGAL MATTERS</h2>
 
+<section id="p9.1">
+<h3>9.1. Fees</h3>
 
 <p>
 The current fees structure is posted at
@@ -3534,9 +3910,10 @@ from time to time on the <a href="https://blog.cacert.org/">blog</a>.
 CAcert retains the right to charge fees for services.
 All fees are non-refundable.
 </p>
+</section>
 
-
-<h3 id="p9.2">9.2. Financial responsibility</h3>
+<section id="p9.2">
+<h3>9.2. Financial responsibility</h3>
 
 <p>
 Financial risks are dealt with primarily by
@@ -3544,27 +3921,38 @@ the Dispute Resolution Policy
 (<a href="https://www.cacert.org/policy/DisputeResolutionPolicy.html">COD7</a>).
 </p>
 
-<h4 id="p9.2.1">9.2.1. Insurance coverage</h4>
+<section id="p9.2.1">
+<h4>9.2.1. Insurance coverage</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p9.2.2">9.2.2. Other assets</h4>
-
-<p>
-No stipulation.
-</p>
-
-<h4 id="p9.2.3">9.2.3. Insurance or warranty coverage for end-entities</h4>
+<section id="p9.2.2">
+<h4>9.2.2. Other assets</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h3 id="p9.3">9.3. Confidentiality of business information</h3>
+<section id="p9.2.3">
+<h4>9.2.3. Insurance or warranty coverage for end-entities</h4>
 
-<h4 id="p9.3.1">9.3.1. Scope of confidential information</h4>
+<p>
+No stipulation.
+</p>
+</section>
+
+</section>
+
+
+<section id="p9.3">
+<h3>9.3. Confidentiality of business information</h3>
+
+<section id="p9.3.1">
+<h4>9.3.1. Scope of confidential information</h4>
 
 <p>
 CAcert has a policy of transparency and openness.
@@ -3574,8 +3962,13 @@ unless covered by specific policy provisions
 (for example, passwords)
 or rulings by Arbitrator.
 </p>
+</section>
 
-<h3 id="p9.4">9.4. Privacy of personal information</h3>
+</section>
+
+
+<section id="p9.4">
+<h3>9.4. Privacy of personal information</h3>
 
 <p>
 Privacy is covered by the
@@ -3584,15 +3977,20 @@ and the Privacy Policy
 (<a href="https://www.cacert.org/policy/PrivacyPolicy.html">COD5</a>).
 </p>
 
-<h4 id="p9.4.1">9.4.1. Privacy plan</h4>
+<section id="p9.4.1">
+<h4>9.4.1. Privacy plan</h4>
 <p> No stipulation.  </p>
+</section>
 
-<h4 id="p9.4.2">9.4.2. Information treated as private</h4>
+<section id="p9.4.2">
+<h4>9.4.2. Information treated as private</h4>
 <p>
 Member's Date of Birth and "Lost Password" questions are treated as fully private.
 </p>
+</section>
 
-<h4 id="p9.4.3">9.4.3. Information not deemed private</h4>
+<section id="p9.4.3">
+<h4>9.4.3. Information not deemed private</h4>
 <p>
 To the extent that information is put into an issued certificate,
 that information is not deemed private,
@@ -3614,15 +4012,19 @@ generally deemed to be published as contributions by Members.
 See
 CCA1.3 (COD9).
 </p>
+</section>
 
-<h4 id="p9.4.4">9.4.4. Responsibility to protect private information</h4>
+<section id="p9.4.4">
+<h4>9.4.4. Responsibility to protect private information</h4>
 <p>
 CAcert is a privacy organisation
 and takes privacy more seriously.
 Any privacy issue may be referred to dispute resolution.
 </p>
+</section>
 
-<h4 id="p9.4.5">9.4.5. Notice and consent to use private information</h4>
+<section id="p9.4.5">
+<h4>9.4.5. Notice and consent to use private information</h4>
 <p>
 Members are permitted to rely on certificates of other Members.
 As a direct consequence of the general right to rely,
@@ -3631,20 +4033,29 @@ and/or the information within them, where duly presented in
 a relationship, and to the extent necessary for
 the agreed relationship.
 </p>
+</section>
 
-<h4 id="p9.4.6">9.4.6. Disclosure pursuant to judicial or administrative process</h4>
+<section id="p9.4.6">
+<h4>9.4.6. Disclosure pursuant to judicial or administrative process</h4>
 <p>
 Any disclosure pursuant to process from foreign courts
 (or similar)
 is controlled by the Arbitrator.
 </p>
+</section>
 
-<h4 id="p9.4.7">9.4.7. Other information disclosure circumstances</h4>
+<section id="p9.4.7">
+<h4>9.4.7. Other information disclosure circumstances</h4>
 <p>
 None.
 </p>
+</section>
 
-<h3 id="p9.5">9.5. Intellectual property rights</h3>
+</section>
+
+
+<section id="p9.5">
+<h3>9.5. Intellectual property rights</h3>
 
 <p>
 CAcert is committed to the philosophy of
@@ -3657,7 +4068,8 @@ and the commitment to security of Members,
 some deviations are necessary.
 </p>
 
-<h4 id="p9.5.1">9.5.1. Ownership and Licence</h4>
+<section id="p9.5.1">
+<h4>9.5.1. Ownership and Licence</h4>
 
 <p>
 Assets that fall under the control of CCS
@@ -3670,8 +4082,10 @@ That is, CAcert is free to use, modify,
 distribute, and otherwise conduct the business
 of the CA as CAcert sees fit with the asset.
 </p>
+</section>
 
-<h4 id="p9.5.2">9.5.2. Brand</h4>
+<section id="p9.5.2">
+<h4>9.5.2. Brand</h4>
 <p>
 The brand of CAcert
 is made up of its logo, name, trademark, service marks, etc.
@@ -3680,8 +4094,10 @@ and permission is required.
 See <a href="https://wiki.cacert.org/TopMinutes-20070917">
 m20070917.5</a>.
 </p>
+</section>
 
-<h4 id="p9.5.3">9.5.3. Documents</h4>
+<section id="p9.5.3">
+<h4>9.5.3. Documents</h4>
 
 <p>
 CAcert owns or requires full control over its documents,
@@ -3709,8 +4125,10 @@ See PoP 6.4
 CCA 1.3
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html#s1.3">COD9</a>).
 </p>
+</section>
 
-<h4 id="p9.5.4">9.5.4. Code</h4>
+<section id="p9.5.4">
+<h4>9.5.4. Code</h4>
 
 <p>
 CAcert owns its code or requires full control over code in use
@@ -3725,8 +4143,10 @@ non-exclusive, unrestricted perpetual
 licence, permitting them to to re-use
 their original work freely.
 </p>
+</section>
 
-<h4 id="p9.5.5">9.5.5. Certificates and Roots</h4>
+<section id="p9.5.5">
+<h4>9.5.5. Certificates and Roots</h4>
 
 <p>
 CAcert asserts its intellectual property rights over certificates
@@ -3741,10 +4161,16 @@ by others under the licences offered,
 such as
 Root Distribution License (<a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD14</a>).
 </p>
+</section>
 
-<h3 id="p9.6">9.6. Representations and warranties</h3>
+</section>
 
-<h4 id="p9.6.1">9.6.1. Members</h4>
+
+<section id="p9.6">
+<h3>9.6. Representations and warranties</h3>
+
+<section id="p9.6.1">
+<h4>9.6.1. Members</h4>
 
 <p>
 All Members of the Community agree to the
@@ -3755,19 +4181,28 @@ representations and warranties.
 Members include Subscribers, Relying Parties,
 Registration Agents and the CA itself.
 </p>
-<h4 id="p9.6.2">9.6.2. RAs</h4>
+</section>
+
+<section id="p9.6.2">
+<h4>9.6.2. RAs</h4>
 
 <p>
 Registration Agents are obliged additionally by Assurance Policy,
 especially <a href="https://www.cacert.org/policy/AssurancePolicy.html#s3.1">3.1</a>, <a href="https://www.cacert.org/policy/AssurancePolicy.html#s4.1">4.1</a>
 (<a href="https://www.cacert.org/policy/AssurancePolicy.html">COD13</a>).
 </p>
-<h4 id="p9.6.3">9.6.3. CA</h4>
+</section>
+
+<section id="p9.6.3">
+<h4>9.6.3. CA</h4>
 
 <p>
 The CA is obliged additionally by the CCS (<a href="https://svn.cacert.org/CAcert/Policies/ConfigurationControlSpecification.html">COD2</a>).
 </p>
-<h4 id="p9.6.4">9.6.4. Third Party Vendors</h4>
+</section>
+
+<section id="p9.6.4">
+<h4>9.6.4. Third Party Vendors</h4>
 
 <p>
 Distributors of the roots are offered the
@@ -3780,8 +4215,12 @@ the same deal as Members to the extent that they agree
 to be Members in the Community.
 <span class="q">wip</span>
 </p>
+</section>
 
-<h3 id="p9.7">9.7. Disclaimers of Warranties</h3>
+</section>
+
+<section id="p9.7">
+<h3>9.7. Disclaimers of Warranties</h3>
 
 <p>
 Persons who have not accepted the above Agreements are offered the
@@ -3812,10 +4251,13 @@ makes no Warranty nor Guarantee nor promise
 that the service or certificates are adequate
 for the needs and circumstances.
 </p>
+</section>
 
-<h3 id="p9.8">9.8. Limitations of liability</h3>
+<section id="p9.8">
+<h3>9.8. Limitations of liability</h3>
 
-<h4 id="p9.8.1">9.8.1 Non-Related Persons </h4>
+<section id="p9.8.1">
+<h4>9.8.1 Non-Related Persons </h4>
 
 <p>
 CAcert on behalf of related parties
@@ -3824,8 +4266,10 @@ disclaims all liability to NRPs
 in their usage of CA's certificates.
 See <a href="https://www.cacert.org/policy/RootDistributionLicense.html">COD4</a>.
 </p>
+</section>
 
-<h4 id="p9.8.2">9.8.2 Liabilities Between Members</h4>
+<section id="p9.8.2">
+<h4>9.8.2 Liabilities Between Members</h4>
 
 <p>
 Liabilities between Members
@@ -3834,22 +4278,32 @@ which rules on liability and any limits.
 See
 <a href="#9.13">&sect;9.13</a>.
 </p>
+</section>
+
+</section>
 
 
-<h3 id="p9.9">9.9. Indemnities</h3>
-
-<p>
-No stipulation.
-</p>
-
-<h3 id="p9.10">9.10. Term and termination</h3>
-<h4 id="p9.10.1">9.10.1. Term</h4>
+<section id="p9.9">
+<h3>9.9. Indemnities</h3>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p9.10.2">9.10.2. Termination</h4>
+<section id="p9.10">
+<h3>9.10. Term and termination</h3>
+
+<section id="p9.10.1">
+<h4>9.10.1. Term</h4>
+
+<p>
+No stipulation.
+</p>
+</section>
+
+<section id="p9.10.2">
+<h4>9.10.2. Termination</h4>
 
 <p>
 Members file a dispute to terminate their agreement.
@@ -3864,14 +4318,21 @@ Documents are varied (including terminated) under <a href="https://www.cacert.or
 <p>
 For termination of the CA, see <a href="#p5.8.1">&sect;5.8.1</a>.
 </p>
+</section>
 
-<h4 id="p9.10.3">9.10.3. Effect of termination and survival</h4>
+<section id="p9.10.3">
+<h4>9.10.3. Effect of termination and survival</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h3 id="p9.11">9.11. Individual notices and communications with participants</h3>
+</section>
+
+
+<section id="p9.11">
+<h3>9.11. Individual notices and communications with participants</h3>
 
 <p>
 All participants are obliged to keep their listed
@@ -3879,17 +4340,22 @@ primary email addresses in good working order.
 See CCA 3.5
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html#s3.5">COD9</a>).
 </p>
+</section>
 
 
-<h3 id="p9.12">9.12. Amendments</h3>
+<section id="p9.12">
+<h3>9.12. Amendments</h3>
 
 <p>
 Amendments to the CPS are controlled by <a href="https://www.cacert.org/policy/PolicyOnPolicy.html">COD1</a>.
 Any changes in Member's Agreements are notified under CCA 3.4
 (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html#s3.4">COD9</a>).
 </p>
+</section>
 
-<h3 id="p9.13">9.13. Dispute resolution provisions</h3>
+
+<section id="p9.13">
+<h3>9.13. Dispute resolution provisions</h3>
 
 <p>
 CAcert provides a forum and facility for any Member
@@ -3912,9 +4378,11 @@ forum for dispute resolution.
 The rules include specific provisions to assist
 non-Members, etc, to file dispute in this forum.
 </p>
+</section>
 
 
-<h3 id="p9.14">9.14. Governing law</h3>
+<section id="p9.14">
+<h3>9.14. Governing law</h3>
 
 <p>
 The governing law is that of New South Wales, Australia.
@@ -3925,10 +4393,14 @@ law of the parties and events, where in common,
 but this is unlikely because it may create results
 that are at odds with the Community.
 </p>
+</section>
 
-<h3 id="p9.15">9.15. Compliance with Applicable Law</h3>
 
-<h4 id="p9.15.1">9.15.1 Digital Signature Law</h4>
+<section id="p9.15">
+<h3>9.15. Compliance with Applicable Law</h3>
+
+<section id="p9.15.1">
+<h4>9.15.1 Digital Signature Law</h4>
 <p>
 The Commonwealth and States of Australia have passed
 various Electronic Transactions Acts that speak to
@@ -3948,15 +4420,19 @@ applications.  See <a href="#p1.4.1">&sect;1.4.1</a> for "digital signing" certi
 These applications may impose significant
 obligations, risks and liabilities on the parties.
 </p>
+</section>
 
-<h4 id="p9.15.2">9.15.2 Privacy Law</h4>
+<section id="p9.15.2">
+<h4>9.15.2 Privacy Law</h4>
 
 <p>
 See the Privacy Policy
 (<a href="https://www.cacert.org/policy/PrivacyPolicy.html">COD5</a>).
 </p>
+</section>
 
-<h4 id="p9.15.3">9.15.3 Legal Process from External Forums</h4>
+<section id="p9.15.3">
+<h4>9.15.3 Legal Process from External Forums</h4>
 
 <p>
 CAcert will provide information about
@@ -3985,9 +4461,16 @@ and an indication as to whether the claimants are
 Members or not
 (and are therefore subject to Dispute Resolution Policy).
 </p>
+</section>
 
-<h3 id="p9.16">9.16. Miscellaneous provisions</h3>
-<h4 id="p9.16.1">9.16.1. Entire agreement</h4>
+</section>
+
+
+<section id="p9.16">
+<h3>9.16. Miscellaneous provisions</h3>
+
+<section id="p9.16.1">
+<h4>9.16.1. Entire agreement</h4>
 
 <p>
 All Members of the Community agree to the
@@ -4013,33 +4496,48 @@ and on the wiki, the CCS documents that
 have reached DRAFT and POLICY status are
 the ruling documents.<br />
 </p>
+</section>
 
-<h4 id="p9.16.2">9.16.2. Assignment</h4>
+<section id="p9.16.2">
+<h4>9.16.2. Assignment</h4>
 
 <p>
 The rights within CCA (<a href="https://www.cacert.org/policy/CAcertCommunityAgreement.html">COD9</a>) may not be ordinarily assigned.
 </p>
+</section>
 
-<h4 id="p9.16.3">9.16.3. Severability</h4>
+<section id="p9.16.3">
+<h4>9.16.3. Severability</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
-<h4 id="p9.16.4">9.16.4. Enforcement (attorneys' fees and waiver of rights)</h4>
+<section id="p9.16.4">
+<h4>9.16.4. Enforcement (attorneys' fees and waiver of rights)</h4>
 
 <p>
 The Arbitrator will specify fees and remedies, if any.
 </p>
+</section>
 
-<h4 id="p9.16.5">9.16.5. Force Majeure</h4>
+<section id="p9.16.5">
+<h4>9.16.5. Force Majeure</h4>
 
 <p>
 No stipulation.
 </p>
+</section>
 
+</section>
+</section>
+
+
+<footer>
 <h2>---This is the end of the Policy---</h2>
 
 <p><a href="http://validator.w3.org/check?uri=referer"><img src="images/valid-html50-blue.png" alt="Valid HTML 5" height="31" width="88"></a></p>
+</footer>
 </body>
 </html>
