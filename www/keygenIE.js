@@ -247,6 +247,7 @@ var CAcert_keygen_IE = function () {
 			privateKey.Algorithm = algorithmOid;
 			privateKey.Length = bits;
 			privateKey.KeyUsage = 0xffffff; // XCN_NCRYPT_ALLOW_ALL_USAGES
+			privateKey.ExportPolicy = 0x1; // XCN_NCRYPT_ALLOW_EXPORT_FLAG
 
 			var request = factory.CreateObject("X509Enrollment.CX509CertificateRequestPkcs10");
 			request.InitializeFromPrivateKey(
@@ -544,8 +545,11 @@ var CAcert_keygen_IE = function () {
 				}
 			}
 
-			cenroll.GenKeyFlags = bits << 16; // keysize is encoded in the uper 16 bits
+			// This is actually the default
 			//cenroll.GenKeyFlags = cenroll.GenKeyFlags | 0x1; //CRYPT_EXPORTABLE
+
+			// keysize is encoded in the uper 16 bits
+			cenroll.GenKeyFlags = cenroll.GenKeyFlags | bits << 16;
 
 			generatingKeyNotice.style.display = "";
 
