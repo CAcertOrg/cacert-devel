@@ -82,7 +82,7 @@
 		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".$_SESSION['profile']['id']."'"));
 		if($locked['locked'] == 0)
 		{
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `deleted` = 0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
@@ -477,7 +477,7 @@
 		if($id <= 0)
 			$id = $_SESSION['profile']['id'];
 
-		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' group by `to`";
+		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' and `deleted` = 0 group by `to`";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$points = $row['points'];
 
