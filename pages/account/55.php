@@ -87,7 +87,7 @@
     <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=$user_id ?>">back</a></td></tr>
 <?    } else {
         $query = 'SELECT `u`.id, `u`.`assurer`, SUM(`points`) FROM `users` AS `u`, `notary` AS `n` '.
-                 '  WHERE `u`.`id` = \''.(int)intval($_SESSION['profile']['id']).'\' AND `n`.`to` = `u`.`id` AND `expire` < now() '.
+                 '  WHERE `u`.`id` = \''.(int)intval($_SESSION['profile']['id']).'\' AND `n`.`to` = `u`.`id` AND `expire` < now() and  and `n`.`deleted` = 0'.
                  '  GROUP BY `u`.id, `u`.`assurer`';
         $res = mysql_query($query);
         if (!$res) {

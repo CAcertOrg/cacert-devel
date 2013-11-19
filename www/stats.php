@@ -82,16 +82,16 @@
 		$certs += tc(mysql_query("select count(`id`) as `count` from `orgdomaincerts` where `revoked`=0 and `expire`>NOW()"));
 		$certs += tc(mysql_query("select count(`id`) as `count` from `orgemailcerts` where `revoked`=0 and `expire`>NOW()"));
 		$stats['valid_certificates'] = number_format($certs);
-		$stats['assurances_made'] = number_format(tc(mysql_query("select count(`id`) as `count` from `notary`")));
-		$stats['users_1to49'] = number_format(mysql_num_rows(mysql_query("select `to` from `notary` group by `to` having sum(`points`) > 0 and sum(`points`) < 50")));
-		$stats['users_50to99'] = number_format(mysql_num_rows(mysql_query("select `to` from `notary` group by `to` having sum(`points`) >= 50 and sum(`points`) < 100")));
+		$stats['assurances_made'] = number_format(tc(mysql_query("select count(`id`) as `count` from `notary` where `notary`.`deleted`=0")));
+		$stats['users_1to49'] = number_format(mysql_num_rows(mysql_query("select `to` from `notary`  where `notary`.`deleted`=0 group by `to` having sum(`points`) > 0 and sum(`points`) < 50")));
+		$stats['users_50to99'] = number_format(mysql_num_rows(mysql_query("select `to` from `notary`  where `notary`.`deleted`=0 group by `to` having sum(`points`) >= 50 and sum(`points`) < 100")));
 		$stats['assurer_candidates'] = number_format(tc(mysql_query("select count(*) as `count` from `users` where ".
                                     "not exists(select 1 from `cats_passed` as `cp`, `cats_variant` as `cv` where `cp`.`user_id`=`users`.`id` and `cp`.`variant_id`=`cv`.`id` and `cv`.`type_id`=1) and ".
-                                    "(select sum(`points`) from `notary` where `to`=`users`.`id`) >= 100")));
+                                    "(select sum(`points`) from `notary` where `to`=`users`.`id` and `notary`.`deleted`=0) >= 100 ")));
 		$stats['aussurers_with_test'] = number_format(tc(mysql_query("select count(*) as `count` from `users` where ".
                                     "exists(select 1 from `cats_passed` as `cp`, `cats_variant` as `cv` where `cp`.`user_id`=`users`.`id` and `cp`.`variant_id`=`cv`.`id` and `cv`.`type_id`=1) and ".
-                                    "(select sum(`points`) from `notary` where `to`=`users`.`id`) >= 100")));
-		$stats['points_issued'] = number_format(tc(mysql_query("select sum(`points`) as `count` from `notary`")));
+                                    "(select sum(`points`) from `notary` where `to`=`users`.`id` and where `notary`.`deleted`=0) >= 100")));
+		$stats['points_issued'] = number_format(tc(mysql_query("select sum(`points`) as `count` from `notary` where `notary`.`deleted`=0")));
 
 		$totalusers=0;
 		$totassurers=0;
@@ -101,7 +101,7 @@
 			$tmp_arr['date'] = date("Y-m", mktime(0,0,0,date("m") - $i,1,date("Y")));
 			$date = date("Y-m", mktime(0,0,0,date("m") - $i,1,date("Y")));
 			$totalusers += $users = tc(mysql_query("select count(`id`) as `count` from `users` where `created` like '$date%' and `verified`=1"));
-			$totassurers += $assurers = mysql_num_rows(mysql_query("select `to` from `notary` where `when` like '$date%' and `method`!='Administrative Increase' group by `to` having sum(`points`) >= 100"));
+			$totassurers += $assurers = mysql_num_rows(mysql_query("select `to` from `notary` where `when` like '$date%' and `method`!='Administrative Increase' and `notary`.`deleted`=0 group by `to` having sum(`points`) >= 100"));
 			$certs = tc(mysql_query("select count(`id`) as `count` from `domaincerts` where `created` like '$date%'"));
 			$certs += tc(mysql_query("select count(`id`) as `count` from `emailcerts` where `created` like '$date%'"));
 			$certs += tc(mysql_query("select count(`id`) as `count` from `gpg` where `issued` like '$date%'"));
@@ -126,7 +126,7 @@
 			$tmp_arr = array();
 			$tmp_arr['date'] = $i;
 			$totalusers += $users = tc(mysql_query("select count(`id`) as `count` from `users` where `created` like '$i%' and `verified`=1"));
-			$totassurers += $assurers = mysql_num_rows(mysql_query("select `to` from `notary` where `when` like '$i%' and `method`!='Administrative Increase' group by `to` having sum(`points`) >= 100"));
+			$totassurers += $assurers = mysql_num_rows(mysql_query("select `to` from `notary` where `when` like '$i%' and `method`!='Administrative Increase' and `notary`.`deleted`=0 group by `to` having sum(`points`) >= 100"));
 			$certs = tc(mysql_query("select count(`id`) as `count` from `domaincerts` where `created` like '$i%'"));
 			$certs += tc(mysql_query("select count(`id`) as `count` from `emailcerts` where `created` like '$i%'"));
 			$certs += tc(mysql_query("select count(`id`) as `count` from `gpg` where `issued` like '$i%'"));

@@ -28,7 +28,7 @@
 		$user = mysql_fetch_array($res);
 		$userlang = $user['language'];
 		$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-				where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
+				where `to`='".$user['id']."' and `deleted`=0 group by `to` HAVING SUM(`points`) > 0"));
 		if($points <= 0)
 		{
 			echo _("Sorry, I was unable to locate that user.");

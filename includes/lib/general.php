@@ -146,7 +146,7 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 			$Result |= 5;
 		}
 		
-		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now()');
+		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now() and `deleted` = 0');
 		$row = mysql_fetch_assoc($query);
 		if ($row['points'] < 100) {
 			$Result |= 3;

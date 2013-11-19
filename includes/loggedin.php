@@ -113,7 +113,7 @@
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] > 0)
 	{
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
 		$_SESSION['profile']['points'] = $row['total'];

@@ -42,7 +42,7 @@ require_once '../../includes/lib/check_weak_key.php';
 	}
 	if(count($emails) <= 0)
 		die("404,Wasn't able to match any emails sent against your account");
-	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' group by `to`";
+	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' and `notary`.`deleted`=0 group by `to`";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$points = $row['points'];
 

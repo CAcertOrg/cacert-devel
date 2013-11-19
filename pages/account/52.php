@@ -35,7 +35,7 @@
 			exit;
 		}
 
-		$query = "select sum(`points`) as `points` from `notary` where `to`='$memid'";
+		$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' and `deleted` = 0";
 		$notary = mysql_fetch_assoc(mysql_query($query));
 		$query = "select * from `users` where `id`='$memid'";
 		$user = mysql_fetch_assoc(mysql_query($query));
