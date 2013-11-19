@@ -15,9 +15,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	
+
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
-	
+
 
 	$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
 	if(mysql_num_rows($res) <= 0)

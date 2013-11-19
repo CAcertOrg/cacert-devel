@@ -18,10 +18,10 @@
 
 /**
  * Checks if the user may log in and retrieve the user id
- * 
+ *
  * Usually called with $_SERVER['SSL_CLIENT_M_SERIAL'] and
  * 	$_SERVER['SSL_CLIENT_I_DN_CN']
- * 
+ *
  * @param $serial string
  * 	usually $_SERVER['SSL_CLIENT_M_SERIAL']
  * @param $issuer_cn string
@@ -43,7 +43,7 @@ function get_user_id_from_cert($serial, $issuer_cn)
 		$row = mysql_fetch_assoc($res);
 		return intval($row['memid']);
 	}
-	
+
 	return -1;
 }
 
@@ -71,7 +71,7 @@ function failWithId($errormessage) {
 
 /**
  * Runs a command on the shell and return it's exit code and output
- * 
+ *
  * @param string $command
  * 		The command to run. Make sure that you escapeshellarg() any non-constant
  * 		parts as this is executed on a shell!
@@ -85,7 +85,7 @@ function failWithId($errormessage) {
  * @param string|bool $errors
  * 		The output the command wrote to STDERR (this is passed as reference),
  * 		if true (default) the output will be written to the real STDERR
- * 
+ *
  * @return int|bool
  * 		The exit code of the command, true if the execution of the command
  * 		failed (true because then
@@ -93,38 +93,38 @@ function failWithId($errormessage) {
  */
 function runCommand($command, $input = "", &$output = null, &$errors = true) {
 	$descriptorspec = array();
-	
+
 	if ($input !== true) {
 		$descriptorspec[0] = array("pipe", "r"); // STDIN for child
 	}
-	
+
 	if ($output !== true) {
 		$descriptorspec[1] = array("pipe", "w"); // STDOUT for child
 	}
-	
+
 	if ($errors !== true) {
 		$descriptorspec[2] = array("pipe", "w"); // STDERR for child
 	}
-	
+
 	$proc = proc_open($command, $descriptorspec, $pipes);
-	
+
 	if (is_resource($proc))
 	{
 		if ($input !== true) {
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 		}
-		
+
 		if ($output !== true) {
 			$output = stream_get_contents($pipes[1]);
 		}
-		
+
 		if ($errors !== true) {
 			$errors = stream_get_contents($pipes[2]);
 		}
-		
+
 		return proc_close($proc);
-		
+
 	} else {
 		return true;
 	}
@@ -145,19 +145,18 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 		{
 			$Result |= 5;
 		}
-		
+
 		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now() and `deleted` = 0');
 		$row = mysql_fetch_assoc($query);
 		if ($row['points'] < 100) {
 			$Result |= 3;
 		}
-		
+
 		$query = mysql_query('SELECT `assurer_blocked` FROM `users` WHERE `id` = \''.(int)intval($userID).'\'');
 		$row = mysql_fetch_assoc($query);
 		if ($row['assurer_blocked'] > 0) {
 			$Result |= 9;
 		}
-		
+
 		return $Result;
 	}
-	

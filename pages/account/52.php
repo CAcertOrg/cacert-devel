@@ -65,7 +65,7 @@
 <input type="hidden" name="oldid" value="<?=intval($_GET['id'])?>">
 <input type="hidden" name="uid" value="<?=$uid?>">
 </form>
-<? } else { 
+<? } else {
 	$query = "select * from `tverify` where `id`='$uid' and `modified`=1";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) > 0)
@@ -74,7 +74,7 @@
 	} else {
 		if($uid) echo _("Unable to locate a valid request for that UID.")."<br/>";
 	}
-	
+
 	// Search for open requests:
 	$query = "select * from `tverify` where `modified`=0";
 	$res = mysql_query($query);
@@ -83,14 +83,14 @@
 		echo "<br/>"._("The following requests are still open:")."<br/><ul>";
 		while($row = mysql_fetch_assoc($res))
 		{
-			$uid=intval($row['id']);	
+			$uid=intval($row['id']);
 			$query3 = "select * from `tverify-vote` where `tverify`='$uid' and `memid`='".intval($_SESSION['profile']['id'])."'";
                 	$rc3 = mysql_num_rows(mysql_query($query3));
 			if($rc3 <= 0)
 		        {
 				echo "<li><a href='account.php?id=52&amp;uid=".intval($row['id'])."'>".intval($row['id'])."</a></li>\n";
 			}
-		}	
+		}
 		echo "</ul>\n<br>\n";
 	}
 	else

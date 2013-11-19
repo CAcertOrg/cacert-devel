@@ -62,12 +62,12 @@ require_once '../../includes/lib/check_weak_key.php';
 		$codesign = 1;
 
 	$CSR = trim($_REQUEST['optionalCSR']);
-	
+
 	if (($weakKey = checkWeakKeyCSR($CSR)) !== "")
 	{
 		die("403, $weakKey");
 	}
-	
+
 	$incsr = tempnam("/tmp", "ccsrIn");
 	$checkedcsr = tempnam("/tmp", "ccsrOut");
 	$fp = fopen($incsr, "w");

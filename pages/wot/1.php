@@ -115,7 +115,7 @@
     <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
 
   </tr>
-<? } 
+<? }
         }
 ?>
 </table>
