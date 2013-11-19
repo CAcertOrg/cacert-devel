@@ -23,11 +23,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   {
     $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
     $row = 0;
-    $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
+    $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
     if ($res) {
       $row = mysql_fetch_assoc($res);
     }
-    mysql_query("delete from `notary` where `id`='$assurance'");
+    mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
     if ($row) {
       fix_assurer_flag($row['to']);
     }
@@ -108,7 +108,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
       echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
     } else {
       $row = mysql_fetch_assoc($res);
-      $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."'";
+      $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
       $dres = mysql_query($query);
       $drow = mysql_fetch_assoc($dres);
       $alerts = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($row['id'])."'"));
@@ -828,7 +828,7 @@ function showassuredto()
     <td class="DataTD"><b><?=_("Revoke")?></b></td>
   </tr>
 <?
-  $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'";
+  $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'  and `deleted` = 0";
   $dres = mysql_query($query);
   $points = 0;
   while($drow = mysql_fetch_assoc($dres))
@@ -874,7 +874,7 @@ function showassuredby()
     <td class="DataTD"><b><?=_("Revoke")?></b></td>
   </tr>
 <?
-  $query = "select * from `notary` where `from`='".intval($_GET['userid'])."'";
+  $query = "select * from `notary` where `from`='".intval($_GET['userid'])."' and `deleted` = 0";
   $dres = mysql_query($query);
   $points = 0;
   while($drow = mysql_fetch_assoc($dres))

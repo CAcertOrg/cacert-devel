@@ -24,7 +24,7 @@
     <td colspan="5" class="title"><?=_("Assurer Ranking")?></td>
   </tr>
   <tr>
-<?
+<?// the rank calculation is not adjusted to the new deletion method
 	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			AND `from`='".intval($_SESSION['profile']['id'])."' GROUP BY `notary`.`from`";
@@ -36,8 +36,8 @@
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc' ORDER BY `notary`.`when` DESC";
 */
-	$query = "SELECT count(*) AS `list` FROM `users` 
-			inner join `notary` on `users`.`id` = `notary`.`from` 
+	$query = "SELECT count(*) AS `list` FROM `users`
+			inner join `notary` on `users`.`id` = `notary`.`from`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc'";
 
 	$rank = mysql_num_rows(mysql_query($query)) + 1;
@@ -64,11 +64,11 @@
     <td class="DataTD"><b><?=_("Method")?></b></td>
   </tr>
 <?
-	$query = "select * from `notary` where `to`='".intval($_SESSION['profile']['id'])."'";
+	$query = "select `id`, `date`, `points`, `location`, `method` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['from'])."'"));
+		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['from'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?=$row['id']?></td>
@@ -114,11 +114,11 @@ if ($thawte)
   </tr>
 <?
 	$points = 0;
-	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'";
+	$query = "select `id`, `date`, `points`, `location`, `method` from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'  and `deleted`=0" ;
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['to'])."'"));
+		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['to'])."'"));
 		$points += $row['points'];
 		$name = trim($fromuser['fname']." ".$fromuser['lname']);
 		if($name == "")
