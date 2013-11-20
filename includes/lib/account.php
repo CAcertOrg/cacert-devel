@@ -19,10 +19,10 @@
 
 /**
  * Function to recalculate the cached Assurer status
- * 
+ *
  * @param int $userID
  * 	if the user ID is not given the flag will be recalculated for all users
- * 
+ *
  * @return bool
  * 	false if there was an error on fixing the flag. This does NOT return the
  * 	new value of the flag
@@ -30,7 +30,7 @@
 function fix_assurer_flag($userID = NULL)
 {
 	// Update Assurer-Flag on users table if 100 points and CATS passed.
-	// 
+	//
 	// We may have some performance issues here if no userID is given
 	// there are ~150k assurances and ~220k users currently
 	// but the exists-clause on cats_passed should be a good filter
@@ -46,20 +46,20 @@ function fix_assurer_flag($userID = NULL)
 				WHERE `cp`.`variant_id` = `cv`.`id`
 					AND `cv`.`type_id` = 1
 					AND `cp`.`user_id` = `u`.`id`
-			) 
+			)
 			AND (
 				SELECT SUM(`points`) FROM `notary` AS `n`
 				WHERE `n`.`to` = `u`.`id`
 					AND (`n`.`expire` > now()
-					OR `n`.`expire` IS NULL)
+					OR `n`.`expire` IS NULL) and `n`.`deleted` = 0
 			) >= 100';
-	
+
 	$query = mysql_query($sql);
 	if (!$query) {
 		return false;
 	}
 	// Challenge has been passed and non-expired points >= 100
-	
+
 	// Reset flag if requirements are not met
 	//
 	// Also a bit performance critical but assurer flag is only set on
@@ -85,14 +85,14 @@ function fix_assurer_flag($userID = NULL)
 						AND (
 							`n`.`expire` > now()
 							OR `n`.`expire` IS NULL
-						)
+						) and `n`.`deleted` = 0
 				) < 100
 			)';
-	
+
 	$query = mysql_query($sql);
 	if (!$query) {
 		return false;
 	}
-	
+
 	return true;
 }

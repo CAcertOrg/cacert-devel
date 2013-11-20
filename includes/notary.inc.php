@@ -35,7 +35,7 @@
 	function get_number_of_assurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-		     	WHERE `method` = 'Face to Face Meeting' AND `from`='".intval($userid)."' ");
+			WHERE `method` = 'Face to Face Meeting' AND `from`='".intval($userid)."' and `deleted` = 0");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -44,7 +44,7 @@
 	function get_number_of_ttpassurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `to`='".intval($userid)."' ");
+			WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `to`='".intval($userid)."' and `deleted` = 0");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -53,7 +53,7 @@
 	function get_number_of_assurees ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE `method` = 'Face to Face Meeting' AND `to`='".intval($userid)."' ");
+			WHERE `method` = 'Face to Face Meeting' AND `to`='".intval($userid)."' and `deleted` = 0");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -62,7 +62,7 @@
 	function get_top_assurer_position ($no_of_assurances)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE `method` = 'Face to Face Meeting'
+			WHERE `method` = 'Face to Face Meeting' and `deleted` = 0
 			GROUP BY `from` HAVING count(*) > '".intval($no_of_assurances)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
@@ -70,14 +70,14 @@
 	function get_top_assuree_position ($no_of_assurees)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE `method` = 'Face to Face Meeting'
+			WHERE `method` = 'Face to Face Meeting' and `deleted` = 0
 			GROUP BY `to` HAVING count(*) > '".intval($no_of_assurees)."'");
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
 	function get_given_assurances ($userid)
 	{
-		$res = query_init ("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` order by `id` asc");
+		$res = query_init ("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` and `deleted` = 0 order by `id` asc");
 		return $res;
 	}
 
@@ -87,19 +87,19 @@
 		if ($support==2) {
 			$where=" and (`method`='TTP-Assisted' or `method`='TTP TOPUP')";
 		}
-		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` ".$where." order by `id` asc ");
+		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` and `deleted` = 0 ".$where." order by `id` asc ");
 		return $res;
 	}
 
 	function get_given_assurances_summary ($userid)
 	{
-		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' group by points,awarded,method");
+		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' and `deleted` = 0 group by points,awarded,method");
 		return $res;
 	}
 
 	function get_received_assurances_summary ($userid)
 	{
-		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' group by points,awarded,method");
+		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' and `deleted` = 0 group by points,awarded,method");
 		return $res;
 	}
 

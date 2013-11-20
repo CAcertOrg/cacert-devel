@@ -329,7 +329,7 @@ require_once('../includes/notary.inc.php');
 				L10n::set_translation($_SESSION['profile']['language']);
 				L10n::init_gettext();
 			}
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `notary`.`deleted`=0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];

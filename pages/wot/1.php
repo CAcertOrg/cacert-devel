@@ -91,7 +91,7 @@
 	{
 	$query = "select *, `users`.`id` as `id` from `users`,`notary` where `listme`='1' and
 			`ccid`='".$ccid."' and `regid`='".$regid."' and
-			`locid`='".$locid."' and `users`.`id`=`notary`.`to`
+			`locid`='".$locid."' and `users`.`id`=`notary`.`to` and `notary`.`deleted`=0
 			group by `notary`.`to` HAVING SUM(`points`) >= 100 order by `points` desc";
 	$list = mysql_query($query);
 	if(mysql_num_rows($list) > 0)
@@ -115,7 +115,7 @@
     <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
 
   </tr>
-<? } 
+<? }
         }
 ?>
 </table>

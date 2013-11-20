@@ -25,7 +25,7 @@
 	echo "200,Authentication Ok\n";
 	$user = mysql_fetch_assoc($res);
 	$memid = $user['id'];
-	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' group by `to`";
+	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' and `notary`.`deleted`=0 group by `to`";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$points = $row['points'];
 	echo "CS=".intval($user['codesign'])."\n";
