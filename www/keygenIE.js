@@ -545,11 +545,9 @@ var CAcert_keygen_IE = function () {
 				}
 			}
 
-			// This is actually the default
-			//cenroll.GenKeyFlags = cenroll.GenKeyFlags | 0x1; //CRYPT_EXPORTABLE
-
-			// keysize is encoded in the uper 16 bits
-			cenroll.GenKeyFlags = cenroll.GenKeyFlags | bits << 16;
+			cenroll.GenKeyFlags = bits << 16; // keysize is encoded in the uper 16 bits
+			// Allow exporting the private key
+			cenroll.GenKeyFlags = cenroll.GenKeyFlags | 0x1; //CRYPT_EXPORTABLE
 
 			generatingKeyNotice.style.display = "";
 
