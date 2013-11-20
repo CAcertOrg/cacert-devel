@@ -24,7 +24,7 @@
 
 <p><?=_("CAcert Inc.'s public certification services are governed by a CPS as amended from time to time which is incorporated into this Agreement by reference. The Subscriber will use the SSL Server Certificate in accordance with CAcert Inc.'s CPS and supporting documentation published at")?> <a href="http://www.cacert.org/cps.php">http://www.cacert.org/cps.php</a></p>
 
-<p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed andwill not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
+<p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
 
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -90,7 +90,7 @@ if($_SESSION['profile']['points'] >= 50)
   </tr>
   <tr>
    <td class="DataTD" colspan="2" align="left">
-      <?=_("Optional comment, only used in the certifictate overview max. 100 characters")?><br />
+      <?=_("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="100" size="100" />
    </td>
   </tr>

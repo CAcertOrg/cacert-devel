@@ -27,7 +27,7 @@ $ORGANISATION_ASSURANCE_OFFICER = 'oao@cacert.org';
 
 //defines to whom to send the lists
 $flags = array(
-	'admin' => array(
+	'admin=1' => array(
 			'name'    => 'Support Engineer',
 			'own'     => false, //Don't send twice
 			'board'   => true,
@@ -35,8 +35,8 @@ $flags = array(
 			'ao'      => false,
 			'oao'     => false
 			),
-	
-	'orgadmin' => array(
+
+	'orgadmin=1' => array(
 			'name'    => 'Organisation Assurer',
 			'own'     => true,
 			'board'   => true,
@@ -44,8 +44,8 @@ $flags = array(
 			'ao'      => true,
 			'oao'     => true
 			),
-	
-	'board' => array(
+
+	'board=1' => array(
 			'name'    => 'Board Member',
 			'own'     => false,
 			'board'   => true,
@@ -53,8 +53,8 @@ $flags = array(
 			'ao'      => true,
 			'oao'     => false
 			),
-	
-	'ttpadmin' => array(
+
+	'ttpadmin=1' => array(
 			'name'    => 'Trusted Third Party Admin',
 			'own'     => true,
 			'board'   => true,
@@ -62,8 +62,17 @@ $flags = array(
 			'ao'      => true,
 			'oao'     => true
 			),
-	
-	'tverify' => array(
+
+	'ttpadmin=2' => array(
+			'name'    => 'Trusted Third Party TOPUP Admin',
+			'own'     => true,
+			'board'   => true,
+			'support' => true,
+			'ao'      => true,
+			'oao'     => true
+			),
+
+	'tverify=1' => array(
 			'name'    => 'Tverify Admin',
 			'own'     => false,
 			'board'   => true,
@@ -71,8 +80,8 @@ $flags = array(
 			'ao'      => true,
 			'oao'     => false
 			),
-	
-	'locadmin' => array(
+
+	'locadmin=1' => array(
 			'name'    => 'Location Admin',
 			'own'     => false,
 			'board'   => true,
@@ -80,30 +89,51 @@ $flags = array(
 			'ao'      => false,
 			'oao'     => false
 			),
+
+	'adadmin=1' => array(
+			'name'    => 'submit status for Advertising Admin',
+			'own'     => false,
+			'board'   => true,
+			'support' => true,
+			'ao'      => false,
+			'oao'     => false
+			),
+
+	'adadmin=2' => array(
+			'name'    => 'approve status for Advertising Admin',
+			'own'     => false,
+			'board'   => true,
+			'support' => true,
+			'ao'      => false,
+			'oao'     => false
+			),
+
+
 	);
 
 
 // Build up list of various admins
 $adminlist = array();
 foreach ($flags as $flag => $flag_properties) {
-	$query = "select `fname`, `lname`, `email` from `users` where `$flag` = 1";
+	$flagname = explode('=', $flag, 2 );
+	$query = "select `fname`, `lname`, `email` from `users` where `$flagname[0]` = '$flagname[1]'";
 	if(! $res = mysql_query($query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
 				"\"$query\"\n".
 				mysql_error()
 			);
-		
+
 		continue;
 	}
-	
+
 	$adminlist[$flag] = array();
-	
+
 	while ($row = mysql_fetch_assoc($res)) {
 		$adminlist[$flag][] = $row;
 	}
-	
-	
+
+
 	// Send mail to admins of this group if 'own' is set
 	if ($flag_properties['own']) {
 		foreach ($adminlist[$flag] as $admin) {
@@ -117,19 +147,20 @@ and report to the responsible team leader or board
 
 
 EOF;
-			
+
 			foreach ($adminlist[$flag] as $colleague) {
 				$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 			}
-			
+
 			$message .= <<<EOF
 
 
 Best Regards,
 CAcert Support
 EOF;
-			
+
 			sendmail($admin['email'], "Permissions Review", $message, 'support@cacert.org');
+			echo "Sent $flag_properties[name] mail to $admin[email]\n";
 		}
 	}
 }
@@ -152,7 +183,7 @@ foreach ($flags as $flag => $flag_properties) {
 		foreach ($adminlist[$flag] as $colleague) {
 			$message .= "$colleague[fname] $colleague[lname] $colleague[email]\n";
 		}
-		
+
 		$message .= "\n\n";
 	}
 }
@@ -163,12 +194,13 @@ Best Regards,
 CAcert Support
 EOF;
 
-foreach ($adminlist['admin'] as $support_engineer) {
+foreach ($adminlist['admin=1'] as $support_engineer) {
 	sendmail(
 			$support_engineer['email'],
 			"Permissions Review",
 			$message,
 			'support@cacert.org');
+	echo "Sent Support Engineer mail to $support_engineer[email]\n";
 }
 
 
@@ -188,14 +220,14 @@ foreach (array(
 Dear $values[description],
 
 it's time for the permission review again. Here is the list of privileged users
-in the CAcert web application. Please review them and also ask the persons 
+in the CAcert web application. Please review them and also ask the persons
 responsible for an up-to-date copy of access lists not directly recorded in the
-web application (critical admins, software assessors etc.) 
+web application (critical admins, software assessors etc.)
 
 
 
 EOF;
-	
+
 	foreach ($flags as $flag => $flag_properties) {
 		if ($flag_properties[$key]) {
 			$message .= "List of $flag_properties[name]s:\n\n";
@@ -205,13 +237,14 @@ EOF;
 			$message .= "\n\n";
 		}
 	}
-	
+
 	$message .= <<<EOF
 
 
 Best Regards,
 CAcert Support
 EOF;
-	
+
 	sendmail($values['email'], "Permissions Review", $message, 'support@cacert.org');
+	echo "Sent $values[description] mail to $values[email]\n";
 }
