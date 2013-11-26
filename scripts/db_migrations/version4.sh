@@ -62,22 +62,22 @@ mysql $mysql_opt <<- 'SQL'
 
 -- dump table AdminLog
 SELECT *
-  INTO OUTFILE "???"
+  INTO OUTFILE "adminlog_table_backup_1135"
   FIELDS TERMINATED BY ','
   OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY "\n"
-  FROM `adminlog`
+  FROM `adminlog`;
 SQL
 
 
-echo "Dump table create in ???"
+echo "Dump table create in adminlog_table_backup_1135"
 
 
 mysql $mysql_opt <<- 'SQL'
 -- update table admin log
 
 UPDATE `adminlog` SET `type` = 'old name or dob change',
-`information` = 'see dump ???'
+`information` = 'see adminlog_table_backup_1135';
 
 -- alter table admin log
 
