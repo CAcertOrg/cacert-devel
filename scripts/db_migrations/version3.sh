@@ -53,7 +53,7 @@ SQL
 if [ $schema_version != 2 ]; then
 	cat >&$STDERR <<- ERROR
 		Error: database schema is not in the right version to do the migration!
-		Expected version: 2 (i.e. the version before there was versioning)
+		Expected version: 2
 	ERROR
 	exit 2
 fi
@@ -64,7 +64,7 @@ mysql $mysql_opt <<- 'SQL'
 -- alter table Admin log
 
 ALTER TABLE `adminlog` ADD `type` VARCHAR( 50 ) NOT NULL ,
-  ADD `information` VARCHAR( 50 ) NOT NULL
+  ADD `information` VARCHAR( 50 ) NOT NULL;
 
 -- create new table OrgAdminLog
 
@@ -73,16 +73,16 @@ CREATE TABLE IF NOT EXISTS `orgadminlog` (
   `oid` int(11) NOT NULL,
   `adminid` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `information` varchar(100) NOT NULL
+  `information` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- alter table OrgDomainCerts
-ALTER TABLE `OrgDomainCerts` ADD orgadminid int(11) NULL,
-  ADD revokeorgadminid int(11) NULL
+ALTER TABLE `orgdomaincerts` ADD orgadminid int(11) NULL,
+  ADD revokeorgadminid int(11) NULL;
 
 -- alter table OrgEmailCerts
-ALTER TABLE `OrgEmailCerts` ADD orgadminid int(11) NULL,
-  ADD revokeorgadminid int(11) NULL
+ALTER TABLE `orgemailcerts` ADD orgadminid int(11) NULL,
+  ADD revokeorgadminid int(11) NULL;
 
 
 
