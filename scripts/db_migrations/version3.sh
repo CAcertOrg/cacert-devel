@@ -76,6 +76,14 @@ CREATE TABLE IF NOT EXISTS `orgadminlog` (
   `information` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- alter table OrgDomainCerts
+ALTER TABLE `OrgDomainCerts` ADD orgadminid int(11) NULL,
+  ADD revokeorgadminid int(11) NULL
+
+-- alter table OrgEmailCerts
+ALTER TABLE `OrgEmailCerts` ADD orgadminid int(11) NULL,
+  ADD revokeorgadminid int(11) NULL
+
 
 
 	-- Update schema version number
