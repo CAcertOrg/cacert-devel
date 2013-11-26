@@ -53,7 +53,7 @@ SQL
 if [ $schema_version != 3 ]; then
 	cat >&$STDERR <<- ERROR
 		Error: database schema is not in the right version to do the migration!
-		Expected version: 3 (i.e. the version before there was versioning)
+		Expected version: 3
 	ERROR
 	exit 2
 fi
