@@ -114,7 +114,7 @@ if ($thawte)
   </tr>
 <?
 	$points = 0;
-	$query = "select `id`, `date`, `points`, `location`, `method` from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'  and `deleted`=0" ;
+	$query = "select `id`, `date`, `points`, `to`, `location`, `method` from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'  and `deleted`=0" ;
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
