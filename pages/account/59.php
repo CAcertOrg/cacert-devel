@@ -117,18 +117,21 @@ while($drow = mysql_fetch_assoc($dres))
 <br/>
 <?
 $dres = get_domains($userid,'',1);
-if(mysql_num_rows($dres) > 0) {
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="3" class="title"><?=_('Domains')?></td>
   </tr>
 <?
-output_log_domain_header();
-while($drow = mysql_fetch_assoc($dres))
-{
-	output_log_domain($drow,$email);
-} ?>
+if(mysql_num_rows($dres) > 0) {
+  output_log_domain_header();
+  while($drow = mysql_fetch_assoc($dres))
+  {
+    output_log_domain($drow,$email);
+  }ELSE{?>
+    <td colspan="3" ><?=_('no entry avialable')?></td>
+  <?}
+}?>
 </table>
 <br/>
 
@@ -136,9 +139,28 @@ while($drow = mysql_fetch_assoc($dres))
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('CATS')?></td>
   </tr>
+
+<?
+$dres = get_user_agreement($userid,'',1);
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('CCA')?></td>
+    <td colspan="4" class="title"><?=_('User agreements')?></td>
   </tr>
+<?
+if(mysql_num_rows($dres) > 0) {
+  output_log_agreement_header();
+  while($drow = mysql_fetch_assoc($dres))
+  {
+    output_log_agreement($drow);
+  }ELSE{
+    ?><td colspan="4" ><?=_('no entry avialable')?></td><?
+  }
+}?>
+</table>
+<br/>
+
+<table>
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('Support Engineer actions')?></td>
   </tr>

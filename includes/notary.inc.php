@@ -694,6 +694,17 @@
 		return $rec;
 	}
 
+function get_user_agreement($memid){
+	$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = 'CCA' AND (u.`memid`=".$memid." ) order by u.`date` )
+			union
+			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = 'CCA' AND ( u.`secmemid`=".$memid.") order by u.`date`)
+			union
+			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` != 'CCA' AND ( u.`memid`=".$memid.") order by u.u.`document`, u.`date`) " ;
+	$res = mysql_query($query);
+
+	return mysql_query($query);
+}
+
 	function delete_user_agreement($memid, $type="CCA"){
 	//deletes all entries to an user for the given type of user agreements
 		mysql_query("delete from `user_agreements` where `memid`='".$memid."'");
@@ -1215,9 +1226,9 @@ function get_domains($userid, $deleted=0){
 function output_log_email_header(){
 	?>
 	<tr
-		<td>_("Email, primary bold")</td>
-		<td>_("Created")</td>
-		<td>_("Deleted")</td>
+		<td><?= _("Email, primary bold") ?></td>
+		<td><?= _("Created") ?></td>
+		<td><?= _("Deleted") ?></td>
 	</tr>
 
 	<?
@@ -1231,20 +1242,21 @@ function output_log_email($row,$primary){
 	if ($primary==$row['email']) {
 		$bold= 'bold ';
 	}
-
+	?>
 	<tr>
-	<td class="<? $bold . $italic ?>">$row['email']</td>
-	<td class="<? $bold . $italic ?>">$row['created']</td>
-	<td class="<? $bold . $italic ?>">$row['deleted']</td>
+		<td class="<? $bold . $italic ?>"><?=$row['email']?></td>
+		<td class="<? $bold . $italic ?>"><?=$row['created']?></td>
+		<td class="<? $bold . $italic ?>"><?=$row['deleted']?></td>
 	</tr>
+	<?
 }
 
 function output_log_domains_header(){
 	?>
 	<tr
-		<td>_("Domain")</td>
-		<td>_("Created")</td>
-		<td>_("Deleted")</td>
+		<td><?= _("Domain") ?></td>
+		<td><?= _("Created") ?></td>
+		<td><?= _("Deleted") ?></td>
 	</tr>
 
 	<?
@@ -1254,9 +1266,32 @@ function output_log_domains($row){
 	if (0==$row['deleted']) {
 		$italic='italic ';
 	}
+	?>
 	<tr>
-	<td class="<? $italic ?>">$row['domain']</td>
-	<td class="<? $italic ?>">$row['created']</td>
-	<td class="<? $italic ?>">$row['deleted']</td>
+		<td class="<? $italic ?>"><?=$row['domain']?></td>
+		<td class="<? $italic ?>"><?=$row['created']?></td>
+		<td class="<? $italic ?>"><?=$row['deleted']?></td>
 	</tr>
+	<?
+}
+
+function output_log_agreement_header(){
+	?>
+	<tr
+		<td><?= _("Agreement") ?></td>
+		<td><?= _("Date") ?></td>
+		<td><?= _("Method") ?></td>
+		<td><?= _("Comment") ?></td>
+	</tr>
+	<?
+}
+function output_log_agreement($row){
+	?>
+	<tr>
+		<td class="<? $italic ?>"><?=$row['document']?></td>
+		<td class="<? $italic ?>"><?=$row['date']?></td>
+		<td class="<? $italic ?>"><?=$row['method']?></td>
+		<td class="<? $italic ?>"><?= ($row['active']==0)? _('No'):_('Yes')?></td>
+	</tr>
+	<?
 }
