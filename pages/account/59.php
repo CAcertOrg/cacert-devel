@@ -29,7 +29,10 @@ $suffix = $row['suffix'];
 $dob = $row['dob'];
 $name = $fname." ".$mname." ".$lname." ".$suffix;
 $email = $row['email'];
-$alerts =get_alerts($userid)
+$alerts =get_alerts($userid);
+
+$support=0;
+
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -173,11 +176,31 @@ if(mysql_num_rows($dres) > 0) {
 }?>
 </table>
 <br/>
+<?
+$dres = get_se_log($userid);
+$colspan=2;
+if (1==$support) {
+	$colspan=4;
+}
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td colspan="<? $colspan?>" class="title"><?=_('Support activity')?></td>
+  </tr>
+<?
+if(mysql_num_rows($dres) > 0) {
+	output_log_se_header($support);
+	while($drow = mysql_fetch_assoc($dres))
+	{
+		output_log_se($drow,$support);
+	}ELSE{
+		?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
+	}
+}?>
+</table>
+<br/>
 
 <table>
-  <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('Support Engineer actions')?></td>
-  </tr>
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('Certificate actions')?></td>
   </tr>

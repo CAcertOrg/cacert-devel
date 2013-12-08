@@ -1233,6 +1233,14 @@ function get_training_result($userid){
 	return mysql_query($query);
 }
 
+function get_se_log($userid){
+	$userid = intval($userid);
+	$query = "SELECT `adminlog`.`when`, `adminlog`.`type`, `adminlog`.`information`, `users`.`fname`, `users`.`lname`
+		FROM `adminlog`, `users`
+		WHERE `adminlog`.`admind` = `users`.`memid` and `adminlog`.`uid`=".$userid."
+		ORDER BY `adminlog`.`when`";
+	return mysql_query($query);
+}
 
 function output_log_email_header(){
 	?>
@@ -1288,7 +1296,7 @@ function output_log_domains($row){
 
 function output_log_agreement_header(){
 	?>
-	<tr
+	<tr>
 		<td class="DataTD bold"><?= _("Agreement") ?></td>
 		<td class="DataTD bold"><?= _("Date") ?></td>
 		<td class="DataTD bold"><?= _("Method") ?></td>
@@ -1308,6 +1316,7 @@ function output_log_agreement($row){
 }
 
 function output_log_training_header(){
+	//should be entered in account/55.php
 	?>
 	<tr>
 		<td class="DataTD bold"><?= _("Agreement") ?></td>
@@ -1316,12 +1325,45 @@ function output_log_training_header(){
 	</tr>
 	<?
 }
+
 function output_log_training($row){
+	//should be entered in account/55.php
 	?>
 	<tr>
 		<td class="DataTD"><?=$row['pass_date']?></td>
 		<td class="DataTD"><?=$row['type_text']?></td>
 		<td class="DataTD"><?=$row['test_text']?></td>
+	</tr>
+	<?
+}
+
+function output_log_se_header($support=0){
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Date") ?></td>
+		<td class="DataTD bold"><?= _("Type") ?></td>
+		<?if (1==$support) {
+			?>
+				<td class="DataTD bold"><?= _("Information") ?></td>
+				<td class="DataTD bold"><?= _("Admin") ?></td>
+			<?
+		}?>
+	</tr>
+	<?
+}
+//SELECT `adminlog`.`when`, `adminlog`.`type`, `adminlog`.`information`, `users`.`fname`, `users`.`lname`
+function output_log_se($row, $support=0){
+	//should be entered in account/55.php
+	?>
+	<tr>
+		<td class="DataTD"><?=$row['when']?></td>
+		<td class="DataTD"><?=$row['type']?></td>
+		<?if (1==$support) {
+			?>
+			<td class="DataTD"><?=$row['information']?></td>
+			<td class="DataTD"><?=$row['fname'].' '.$row['lname']?></td>
+			<?
+		}?>
 	</tr>
 	<?
 }
