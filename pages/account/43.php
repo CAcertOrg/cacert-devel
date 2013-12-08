@@ -346,8 +346,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 </table>
 <br><? } ?>
 <?
-  $query = "select * from `domains` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''";
-  $dres = mysql_query($query);
+// comment to be deleted before release
+//    $query = "select * from `domains` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''";
+//  $dres = mysql_query($query);
+  $dres=get_domains(intval($row['id']));
   if(mysql_num_rows($dres) > 0) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

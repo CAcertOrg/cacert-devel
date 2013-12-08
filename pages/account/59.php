@@ -31,7 +31,7 @@ $name = $fname." ".$mname." ".$lname." ".$suffix;
 $email = $row['email'];
 $alerts =get_alerts($userid)
 ?>
-<table>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=sprintf(_('Account history of %s'),'username')?></td>
   </tr>
@@ -103,7 +103,7 @@ $alerts =get_alerts($userid)
 $dres = get_email_address($userid,'',1);
 if(mysql_num_rows($dres) > 0) {
 ?>
-<table>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="3" class="title"><?=_('Email addresses')?></td>
   </tr>
@@ -113,6 +113,22 @@ while($drow = mysql_fetch_assoc($dres))
 {
 	output_log_email($drow,$email);
  } ?>
+</table>
+<br/>
+<?
+$dres = get_domains($userid,'',1);
+if(mysql_num_rows($dres) > 0) {
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td colspan="3" class="title"><?=_('Domains')?></td>
+  </tr>
+<?
+output_log_domain_header();
+while($drow = mysql_fetch_assoc($dres))
+{
+	output_log_domain($drow,$email);
+} ?>
 </table>
 <br/>
 

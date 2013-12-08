@@ -1188,6 +1188,7 @@ function get_alerts($userid){
  * @return
  */
 function get_email_address($userid, $primary,$deleted=0){
+	//should be entered in account/2.php
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
@@ -1197,6 +1198,17 @@ function get_email_address($userid, $primary,$deleted=0){
 		$filter= $filter." and `email`!='".mysql_real_escape_string($primary)."'";
 	}
 	$query = "select * from `email` where `memid`='".$userid."'".$filter." order by `created`";
+	return mysql_query($query);
+}
+
+function get_domains($userid, $deleted=0){
+	//should be entered in account/9.php
+	$userid = intval($userid);
+	$filter='';
+	if (0==$deleted) {
+		$filter=' and `deleted`=0';
+	}
+	$query = "select * from `domains` where `memid`='".$userid."' and `hash`=''".$filter." order by `created`";
 	return mysql_query($query);
 }
 
@@ -1221,8 +1233,30 @@ function output_log_email($row,$primary){
 	}
 
 	<tr>
-	<td class="<?$bold . $italic ?>">$row['email']</td>
-	<td class="<?$bold . $italic ?>">$row['created']</td>
-	<td class="<?$bold . $italic ?>">$row['deleted']</td>
+	<td class="<? $bold . $italic ?>">$row['email']</td>
+	<td class="<? $bold . $italic ?>">$row['created']</td>
+	<td class="<? $bold . $italic ?>">$row['deleted']</td>
+	</tr>
+}
+
+function output_log_domains_header(){
+	?>
+	<tr
+		<td>_("Domain")</td>
+		<td>_("Created")</td>
+		<td>_("Deleted")</td>
+	</tr>
+
+	<?
+}
+function output_log_domains($row){
+	$italic='';
+	if (0==$row['deleted']) {
+		$italic='italic ';
+	}
+	<tr>
+	<td class="<? $italic ?>">$row['domain']</td>
+	<td class="<? $italic ?>">$row['created']</td>
+	<td class="<? $italic ?>">$row['deleted']</td>
 	</tr>
 }
