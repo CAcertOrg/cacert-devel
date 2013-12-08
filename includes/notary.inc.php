@@ -1287,6 +1287,18 @@ function get_server_certs($userid,$viewall=0){
 	return mysql_query($query);
 }
 
+function get_gpg_certs($userid,$viewall=0){
+	//add to gpg/2.php
+	$userid = intval($userid);
+	$query = $query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
+			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+			UNIX_TIMESTAMP(`expire`) as `expired`,
+			`expire` as `expires`, `id`, `level`,
+			`email`,`keyid`,`description` from `gpg` where `memid`='".$userid."'
+			ORDER BY `issued` desc";
+	return mysql_query($query);
+}
+
 
 
 function output_log_email_header(){
@@ -1327,6 +1339,7 @@ function output_log_domains_header(){
 
 	<?
 }
+
 function output_log_domains($row){
 	$italic='';
 	if (0==$row['deleted']) {
@@ -1351,6 +1364,7 @@ function output_log_agreement_header(){
 	</tr>
 	<?
 }
+
 function output_log_agreement($row){
 	?>
 	<tr>
@@ -1554,4 +1568,60 @@ function output_log_server_certs($row, $support=0){
 			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
 		<?}?>
 	</tr>
+}
+
+function output_gpg_certs_header($support=0){
+	?>
+	<tr>
+		<td class="DataTD"><?=_("Status")?></td>
+		<td class="DataTD"><?=_("Email Address")?></td>
+		<td class="DataTD"><?=_("Expires")?></td>
+		<td class="DataTD"><?=_("Key ID")?></td>
+		<?if (1==$support) { ?>
+			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+		<? }?>
+	</tr>
+	<?
+}
+
+function output_gpg_certs($row, $support=0){
+	//should be entered in account/55.php
+	if($row['timeleft'] > 0)
+		$verified = _("Valid");
+	if($row['timeleft'] < 0)
+		$verified = _("Expired");
+	if($row['expired'] == 0)
+		$verified = _("Pending");
+	?>
+	<tr>
+		<? if($verified == _("Valid")) { ?>
+			<td class="DataTD"><?=$verified?></td>
+			<?if (1==$support) { ?>
+				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
+			<? } else { ?>
+				<td class="DataTD"><?=$row['email']?></td>
+			<? } ?>
+		<? } else if($verified == _("Pending")) { ?>
+			<td class="DataTD"><?=$verified?></td>
+			<td class="DataTD"><?=$row['email']?></td>
+		<? } else { ?>
+			<td class="DataTD"><?=$verified?></td>
+			<?if (1==$support) { ?>
+				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
+			<? } else { ?>
+				<td class="DataTD"><?=$row['email']?></td>
+			<? } ?>
+		<? } ?>
+		<td class="DataTD"><?=$row['expires']?></td>
+		<?if (1==$support) { ?>
+			<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
+		<? } else { ?>
+			<td class="DataTD"><?=$row['keyid']?></td>
+		<? } ?>
+		<?if (1==$support) { ?>
+			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+		<? } ?>
+	</tr>
+	<?
 }

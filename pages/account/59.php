@@ -114,8 +114,8 @@ if(mysql_num_rows($dres) > 0) {
 output_log_email_header();
 while($drow = mysql_fetch_assoc($dres))
 {
-	output_log_email($drow,$email);
- } ?>
+  output_log_email($drow,$email);
+} ?>
 </table>
 <br/>
 <?
@@ -131,10 +131,10 @@ if(mysql_num_rows($dres) > 0) {
   while($drow = mysql_fetch_assoc($dres))
   {
     output_log_domain($drow,$email);
-  }ELSE{?>
+  }
+}ELSE{?>
     <td colspan="3" ><?=_('no entry avialable')?></td>
-  <?}
-}?>
+<?}?>
 </table>
 <br/>
 
@@ -147,16 +147,17 @@ $dres = get_training_result($userid);
   </tr>
 <?
 if(mysql_num_rows($dres) > 0) {
-	output_log_training_header();
-	while($drow = mysql_fetch_assoc($dres))
-	{
-		output_log_training($drow);
-	}ELSE{
-		?><td colspan="3" ><?=_('no entry avialable')?></td><?
-	}
+  output_log_training_header();
+  while($drow = mysql_fetch_assoc($dres))
+  {
+    output_log_training($drow);
+  }
+}ELSE{
+  ?><td colspan="3" ><?=_('no entry avialable')?></td><?
 }?>
 </table>
 <br/>
+
 <?
 $dres = get_user_agreement($userid,'',1);
 ?>
@@ -170,12 +171,13 @@ if(mysql_num_rows($dres) > 0) {
   while($drow = mysql_fetch_assoc($dres))
   {
     output_log_agreement($drow);
-  }ELSE{
-    ?><td colspan="4" ><?=_('no entry avialable')?></td><?
   }
+}ELSE{
+  ?><td colspan="4" ><?=_('no entry avialable')?></td><?
 }?>
 </table>
 <br/>
+
 <?
 $dres = get_client_certs($userid);
 $colspan=10;
@@ -189,18 +191,19 @@ if (1==$support) {
   </tr>
 <?
 if(mysql_num_rows($dres) > 0) {
-	output_client_cert_header($support);
-	while($drow = mysql_fetch_assoc($dres))
-	{
-		output_client_cert($drow,$support);
-	}ELSE{
-		?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
-	}
+  output_client_cert_header($support);
+  while($drow = mysql_fetch_assoc($dres))
+  {
+    output_client_cert($drow,$support);
+  }
+}ELSE{
+  ?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
 }?>
 </table>
 <br/>
-    	<?
-    	$dres = get_server_certs($userid);
+
+<?
+$dres = get_server_certs($userid);
 $colspan=8;
 if (1==$support) {
 	$colspan=5;
@@ -212,21 +215,37 @@ if (1==$support) {
   </tr>
 <?
 if(mysql_num_rows($dres) > 0) {
-	output_log_server_certs_header($support);
-	while($drow = mysql_fetch_assoc($dres))
-	{
-		output_log_server_certs($drow,$support);
-	}ELSE{
-		?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
-	}
+  output_log_server_certs_header($support);
+  while($drow = mysql_fetch_assoc($dres))
+  {
+    output_log_server_certs($drow,$support);
+  }
+}ELSE{
+  ?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
 }?>
 </table>
 <br/>
 
-<table>
-
-
+<?
+$dres = get_server_certs($userid);
+$colspan=6;
+if (1==$support) {
+	$colspan=4;
+}
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('GPG certificates')?></td>
+    <td colspan="<? $colspan?>" class="title"><?=_('Server certificates')?></td>
   </tr>
+<?
+if(mysql_num_rows($dres) > 0) {
+  output_log_server_certs_header($support);
+  while($drow = mysql_fetch_assoc($dres))
+  {
+    output_log_server_certs($drow,$support);
+  }
+}ELSE{
+  ?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
+}?>
 </table>
+}
