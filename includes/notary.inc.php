@@ -1167,7 +1167,7 @@ function valid_ticket_number($ticketno){
  * get_user_data()
  *  returns all data of to an account given by the id
  * @param mixed $userid - account id
- * @param mixed $deleted - states if the account is deleted, default = 0
+ * @param mixed $deleted - states if deleted data should be visible , default = 0 - not visible
  * @return
  */
 function get_user_data($userid, $deleted=0){
@@ -1195,7 +1195,7 @@ function get_alerts($userid){
  *  returns all email address linked to one account
  * @param mixed $userid
  * @param string $primary if given the primary email address is not retirned
- * @param integer $deleted - states if the account is deleted, default = 0
+ * @param integer $deleted - states if deleted data should be visible , default = 0 - not visible
  * @return
  */
 function get_email_address($userid, $primary,$deleted=0){
@@ -1212,6 +1212,13 @@ function get_email_address($userid, $primary,$deleted=0){
 	return mysql_query($query);
 }
 
+/**
+ * get_domains()
+ *  returns all domains to an account
+ * @param mixed $userid
+ * @param integer $deleted - states if deleted data should be visible , default = 0 - not visible
+ * @return
+ */
 function get_domains($userid, $deleted=0){
 	//should be entered in account/9.php
 	$userid = intval($userid);
@@ -1223,6 +1230,12 @@ function get_domains($userid, $deleted=0){
 	return mysql_query($query);
 }
 
+/**
+ * get_training_result()
+ *  returns all training results to an account
+ * @param mixed $userid
+ * @return
+ */
 function get_training_result($userid){
 	//should be entered in account/55.php
 	$userid = intval($userid);
@@ -1233,6 +1246,12 @@ function get_training_result($userid){
 	return mysql_query($query);
 }
 
+/**
+ * get_se_log()
+ *  returns all SE log entries to an account
+ * @param mixed $userid
+ * @return
+ */
 function get_se_log($userid){
 	$userid = intval($userid);
 	$query = "SELECT `adminlog`.`when`, `adminlog`.`type`, `adminlog`.`information`, `users`.`fname`, `users`.`lname`
@@ -1242,6 +1261,13 @@ function get_se_log($userid){
 	return mysql_query($query);
 }
 
+/**
+ * get_client_certs()
+ *  returns all client certificates to an account
+ * @param mixed $userid
+ * @param integer $viewall- states if expired certs should be visible , default = 0 - not visible
+ * @return
+ */
 function get_client_certs($userid,$viewall=0){
 	//add to account/5.php
 	$userid = intval($userid);
@@ -1267,6 +1293,13 @@ function get_client_certs($userid,$viewall=0){
 	return mysql_query($query);
 }
 
+/**
+ * get_server_certs()
+ *  returns all server certs to an account
+ * @param mixed $userid
+ * @param integer $viewall states if expired certs should be visible , default = 0 - not visible
+ * @return
+ */
 function get_server_certs($userid,$viewall=0){
 	//add to account/12.php
 	$userid = intval($userid);
@@ -1287,6 +1320,13 @@ function get_server_certs($userid,$viewall=0){
 	return mysql_query($query);
 }
 
+/**
+ * get_gpg_certs()
+ *  retruns all gpg certs to an account
+ * @param mixed $userid
+ * @param integer $viewall states if expired certs should be visible , default = 0 - not visible
+ * @return
+ */
 function get_gpg_certs($userid,$viewall=0){
 	//add to gpg/2.php
 	$userid = intval($userid);
@@ -1301,6 +1341,11 @@ function get_gpg_certs($userid,$viewall=0){
 
 
 
+/**
+ * output_log_email_header()
+ *  shows the table header to the email table
+ * @return
+ */
 function output_log_email_header(){
 	?>
 	<tr>
@@ -1311,6 +1356,13 @@ function output_log_email_header(){
 
 	<?
 }
+/**
+ * output_log_email()
+ *  shows all email data
+ * @param mixed $row - sql-query array
+ * @param mixed $primary - if given the primary address is highlighted
+ * @return
+ */
 function output_log_email($row,$primary){
 	$italic='';
 	$bold='';
@@ -1329,6 +1381,11 @@ function output_log_email($row,$primary){
 	<?
 }
 
+/**
+ * output_log_domains_header()
+ *  shows the table header to the domains table
+ * @return
+ */
 function output_log_domains_header(){
 	?>
 	<tr>
@@ -1340,6 +1397,12 @@ function output_log_domains_header(){
 	<?
 }
 
+/**
+ * output_log_domains()
+ *  shows the domain data
+ * @param mixed $row - sql-query array
+ * @return
+ */
 function output_log_domains($row){
 	$italic='';
 	if (0==$row['deleted']) {
@@ -1354,6 +1417,11 @@ function output_log_domains($row){
 	<?
 }
 
+/**
+ * output_log_agreement_header()
+ *  shows the table header to the user agreement table
+ * @return
+ */
 function output_log_agreement_header(){
 	?>
 	<tr>
@@ -1365,6 +1433,12 @@ function output_log_agreement_header(){
 	<?
 }
 
+/**
+ * output_log_agreement()
+ *  shows the agreement data
+ * @param mixed $row - sql-query array
+ * @return
+ */
 function output_log_agreement($row){
 	?>
 	<tr>
@@ -1376,6 +1450,11 @@ function output_log_agreement($row){
 	<?
 }
 
+/**
+ * output_log_training_header()
+ *  shows the table header to the training table
+ * @return
+ */
 function output_log_training_header(){
 	//should be entered in account/55.php
 	?>
@@ -1387,6 +1466,12 @@ function output_log_training_header(){
 	<?
 }
 
+/**
+ * output_log_training()
+ *  shows the training data
+ * @param mixed $row - sql-query array
+ * @return
+ */
 function output_log_training($row){
 	//should be entered in account/55.php
 	?>
@@ -1398,6 +1483,12 @@ function output_log_training($row){
 	<?
 }
 
+/**
+ * output_log_se_header()
+ *  shows the table header to the SE log table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
 function output_log_se_header($support=0){
 	?>
 	<tr>
@@ -1413,6 +1504,13 @@ function output_log_se_header($support=0){
 	<?
 }
 
+/**
+ * output_log_se()
+ *  show the SE log data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are added
+ * @return
+ */
 function output_log_se($row, $support=0){
 	//should be entered in account/55.php
 	?>
@@ -1429,6 +1527,12 @@ function output_log_se($row, $support=0){
 	<?
 }
 
+/**
+ * output_client_cert_header()
+ *  shows the table header to the cleint cert table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
 function output_client_cert_header($support=0){
 	?>
 	//should be added to account/5.php
@@ -1449,6 +1553,13 @@ function output_client_cert_header($support=0){
 	<?
 }
 
+/**
+ * output_client_cert()
+ *  show the client cert data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are not visible
+ * @return
+ */
 function output_client_cert($row, $support=0){
 	//should be entered in account/5.php
 	$verified="";
@@ -1512,6 +1623,12 @@ function output_client_cert($row, $support=0){
 	<?
 }
 
+/**
+ * output_log_server_certs_header()
+ *  shows the table header to the server cert table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
 function output_log_server_certs_header($support=0){
 	?>
 	//should be entered in account/12.php
@@ -1531,6 +1648,13 @@ function output_log_server_certs_header($support=0){
 	<?
 }
 
+/**
+ * output_log_server_certs()
+ *  show the server cert data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are not visible
+ * @return
+ */
 function output_log_server_certs($row, $support=0){
 	//should be entered in account/12.php
 	if($row['timeleft'] > 0)
@@ -1567,9 +1691,15 @@ function output_log_server_certs($row, $support=0){
 			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
 			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
 		<?}?>
-	</tr>
+	</tr> <?
 }
 
+/**
+ *  output_gpg_certs_header()
+ *  shows the table header to the gpg cert table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
 function output_gpg_certs_header($support=0){
 	?>
 	<tr>
@@ -1584,6 +1714,13 @@ function output_gpg_certs_header($support=0){
 	<?
 }
 
+/**
+ * output_gpg_certs()
+ *  show the gpg cert data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are not visible
+ * @return
+ */
 function output_gpg_certs($row, $support=0){
 	//should be entered in account/55.php
 	if($row['timeleft'] > 0)
