@@ -177,7 +177,7 @@ if(mysql_num_rows($dres) > 0) {
 </table>
 <br/>
 <?
-$dres = get_se_log($userid);
+$dres = get_client_certs($userid);
 $colspan=10;
 if (1==$support) {
 	$colspan=7;
@@ -189,10 +189,33 @@ if (1==$support) {
   </tr>
 <?
 if(mysql_num_rows($dres) > 0) {
-	output_log_se_header($support);
+	output_client_cert_header($support);
 	while($drow = mysql_fetch_assoc($dres))
 	{
-		output_log_se($drow,$support);
+		output_client_cert($drow,$support);
+	}ELSE{
+		?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
+	}
+}?>
+</table>
+<br/>
+    	<?
+    	$dres = get_server_certs($userid);
+$colspan=8;
+if (1==$support) {
+	$colspan=5;
+}
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td colspan="<? $colspan?>" class="title"><?=_('Server certificates')?></td>
+  </tr>
+<?
+if(mysql_num_rows($dres) > 0) {
+	output_log_server_certs_header($support);
+	while($drow = mysql_fetch_assoc($dres))
+	{
+		output_log_server_certs($drow,$support);
 	}ELSE{
 		?><td colspan="<? $colspan?>" ><?=_('no entry avialable')?></td><?
 	}
@@ -202,9 +225,7 @@ if(mysql_num_rows($dres) > 0) {
 
 <table>
 
-  <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('Server certificates')?></td>
-  </tr>
+
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('GPG certificates')?></td>
   </tr>

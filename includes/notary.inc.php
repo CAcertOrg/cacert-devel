@@ -1267,6 +1267,26 @@ function get_client_certs($userid,$viewall=0){
 	return mysql_query($query);
 }
 
+function get_server_certs($userid,$viewall=0){
+	//add to account/12.php
+	$userid = intval($userid);
+	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
+			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
+			`domaincerts`.`expire` as `expires`, `revoked` as `revoke`,
+			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
+			`domaincerts`.`description`
+			from `domaincerts`,`domains`
+			where `memid`='".$userid."' and `domaincerts`.`domid`=`domains`.`id` ";
+	if($viewall != 1)
+	{
+		$query .= "AND `revoked`=0 AND `renewed`=0 ";
+		$query .= "HAVING `timeleft` > 0 ";
+	}
+	$query .= "ORDER BY `domaincerts`.`modified` desc";
+	return mysql_query($query);
+}
+
 
 
 function output_log_email_header(){
@@ -1416,7 +1436,7 @@ function output_client_cert_header($support=0){
 }
 
 function output_client_cert($row, $support=0){
-	//should be entered in account/55.php
+	//should be entered in account/5.php
 	$verified="";
 	if($row['timeleft'] > 0)
 		$verified = _("Valid");
@@ -1428,7 +1448,7 @@ function output_client_cert($row, $support=0){
 		$verified = _("Revoked");
 	if($row['revoked'] == 0)
 		$row['revoke'] = _("Not Revoked");
-?>
+	?>
 	<tr>
 	<?
 	if($verified != _("Pending") && $verified != _("Revoked")) {
@@ -1476,4 +1496,62 @@ function output_client_cert($row, $support=0){
 	</tr>
 
 	<?
+}
+
+function output_log_server_certs_header($support=0){
+	?>
+	//should be entered in account/12.php
+	<tr>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
+		<? } ?>
+		<td class="DataTD"><?=_("Status")?></td>
+		<td class="DataTD"><?=_("CommonName")?></td>
+		<td class="DataTD"><?=_("SerialNumber")?></td>
+		<td class="DataTD"><?=_("Revoked")?></td>
+		<td class="DataTD"><?=_("Expires")?></td>
+		<?if ($support !=1) { ?>
+			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+		<? } ?>
+	</tr>
+	<?
+}
+
+function output_log_server_certs($row, $support=0){
+	//should be entered in account/12.php
+	if($row['timeleft'] > 0)
+		$verified = _("Valid");
+	if($row['timeleft'] < 0)
+		$verified = _("Expired");
+	if($row['expired'] == 0)
+		$verified = _("Pending");
+	if($row['revoked'] > 0)
+		$verified = _("Revoked");
+	if($row['revoked'] == 0)
+		$row['revoke'] = _("Not Revoked");
+	?>
+	<tr>
+		<? if ($support !=1) {
+			if($verified != _("Pending") && $verified != _("Revoked")) { ?>
+				<td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"/></td>
+			<? } else if($verified != _("Revoked")) { ?>
+				<td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"/></td>
+			<? } else { ?>
+				<td class="DataTD">&nbsp;</td>
+			<? }
+		}?>
+		<td class="DataTD"><?=$verified?></td>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><a href="account.php?id=15&amp;cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
+		<? }ELSE{ ?>
+			<td class="DataTD"><?=$row['CN']?></td>
+		<?}?>
+		<td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=$row['revoke']?></td>
+		<td class="DataTD"><?=$row['expires']?></td>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+		<?}?>
+	</tr>
 }
