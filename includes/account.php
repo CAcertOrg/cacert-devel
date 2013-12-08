@@ -3137,6 +3137,15 @@
 		exit;
 	}
 
+	if($id == 59){
+		$support=0;
+		if ($oldid==43) {
+			se_write_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'View account history', $_REQUEST['ticketno']);
+			$support=1;
+		}
+	}
+
+
 	if(intval($cert) > 0)
 		$_SESSION['_config']['cert'] = intval($cert);
 	if(intval($orgid) > 0)

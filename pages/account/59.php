@@ -18,7 +18,7 @@
 include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 $colspandefault=2;
-$userid = intval($_REQUEST['userid']);
+//$userid = intval($_REQUEST['userid']);
 $res =get_user_data($userid);
 
 if(mysql_num_rows($res) <= 0)
@@ -38,7 +38,7 @@ $name = $fname." ".$mname." ".$lname." ".$suffix;
 $email = $row['email'];
 $alerts =get_alerts($userid);
 
-$support=0;
+
 
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
