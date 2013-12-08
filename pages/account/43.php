@@ -822,14 +822,16 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 </table>
 <br>
 <? // list assurances ?>
-
-<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
- (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
-<br />
-<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
- (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)
-<br />
-
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
+      (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)</td>
+  </tr>
+  <tr>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
+      (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)</td>
+  </tr>
+</table>
 <?
 //  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
 
