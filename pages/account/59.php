@@ -178,14 +178,14 @@ if(mysql_num_rows($dres) > 0) {
 <br/>
 <?
 $dres = get_se_log($userid);
-$colspan=2;
+$colspan=10;
 if (1==$support) {
-	$colspan=4;
+	$colspan=7;
 }
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="<? $colspan?>" class="title"><?=_('Support activity')?></td>
+    <td colspan="<? $colspan?>" class="title"><?=_('Client certificates')?></td>
   </tr>
 <?
 if(mysql_num_rows($dres) > 0) {
@@ -201,12 +201,7 @@ if(mysql_num_rows($dres) > 0) {
 <br/>
 
 <table>
-  <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('Certificate actions')?></td>
-  </tr>
-  <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('Client certificates')?></td>
-  </tr>
+
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('Server certificates')?></td>
   </tr>
