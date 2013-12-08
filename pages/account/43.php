@@ -310,6 +310,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Assurance Points")?>:</td>
     <td class="DataTD"><?=intval($drow['points'])?></td>
   </tr>
+<? // show account history ?>
+  <tr>
+    <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;userid=<?=intval($row['id'])?>"><?=_('Show account history')?></a></td>
+  </tr>
 </table>
 <br/><?
 //ticket number to track SE log ?>

@@ -15,11 +15,18 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
+include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 $colspandefault=2;
 $userid = intval($_REQUEST['userid']);
 $res =get_user_data($userid);
+
+if(mysql_num_rows($res) <= 0)
+{
+	echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+	exit;
+}
+
 $row = mysql_fetch_assoc($res);
 
 $fname = $row['fname'];
