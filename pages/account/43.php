@@ -307,7 +307,19 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=intval($drow['points'])?></td>
   </tr>
 </table>
-<br><?
+<br/><?
+//ticket number to track SE log ?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td td colspan="5" class="title"><?=_("Ticket/Arbitration No, needs to be entered to apply any changes")?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_('Ticket/Arbitration No')?></td>
+    <td class="DataTD"><input name="ticketno" /></td>
+  </tr>
+</table>
+<br/>
+<?
 //list secondary email addresses
   $query = "select * from `email` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''
       and `email`!='".mysql_escape_string($row['email'])."'";
