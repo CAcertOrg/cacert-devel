@@ -135,11 +135,25 @@ if(mysql_num_rows($dres) > 0) {
 </table>
 <br/>
 
-<table>
+<?
+$dres = get_training_result($userid);
+?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('CATS')?></td>
+    <td colspan="3" class="title"><?=_('Trainings')?></td>
   </tr>
-
+<?
+if(mysql_num_rows($dres) > 0) {
+	output_log_training_header();
+	while($drow = mysql_fetch_assoc($dres))
+	{
+		output_log_training($drow);
+	}ELSE{
+		?><td colspan="3" ><?=_('no entry avialable')?></td><?
+	}
+}?>
+</table>
+<br/>
 <?
 $dres = get_user_agreement($userid,'',1);
 ?>

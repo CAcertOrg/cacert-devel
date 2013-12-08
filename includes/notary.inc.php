@@ -1223,12 +1223,23 @@ function get_domains($userid, $deleted=0){
 	return mysql_query($query);
 }
 
+function get_training_result($userid){
+	//should be entered in account/55.php
+	$userid = intval($userid);
+	$query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
+		" FROM `cats_passed` AS CP, `cats_variant` AS CV, `cats_type` AS CT ".
+		" WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".$userid."'".
+		" ORDER BY `CP`.`pass_date`";
+	return mysql_query($query);
+}
+
+
 function output_log_email_header(){
 	?>
-	<tr
-		<td><?= _("Email, primary bold") ?></td>
-		<td><?= _("Created") ?></td>
-		<td><?= _("Deleted") ?></td>
+	<tr>
+		<td class="DataTD bold"><?= _("Email, primary bold") ?></td>
+		<td class="DataTD bold"><?= _("Created") ?></td>
+		<td class="DataTD bold"><?= _("Deleted") ?></td>
 	</tr>
 
 	<?
@@ -1244,19 +1255,19 @@ function output_log_email($row,$primary){
 	}
 	?>
 	<tr>
-		<td class="<? $bold . $italic ?>"><?=$row['email']?></td>
-		<td class="<? $bold . $italic ?>"><?=$row['created']?></td>
-		<td class="<? $bold . $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD <? $bold . $italic ?>"><?=$row['email']?></td>
+		<td class="DataTD <? $bold . $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD <? $bold . $italic ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
 
 function output_log_domains_header(){
 	?>
-	<tr
-		<td><?= _("Domain") ?></td>
-		<td><?= _("Created") ?></td>
-		<td><?= _("Deleted") ?></td>
+	<tr>
+		<td class="DataTD bold"><?= _("Domain") ?></td>
+		<td class="DataTD bold"><?= _("Created") ?></td>
+		<td class="DataTD bold"><?= _("Deleted") ?></td>
 	</tr>
 
 	<?
@@ -1268,9 +1279,9 @@ function output_log_domains($row){
 	}
 	?>
 	<tr>
-		<td class="<? $italic ?>"><?=$row['domain']?></td>
-		<td class="<? $italic ?>"><?=$row['created']?></td>
-		<td class="<? $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD <? $italic ?>"><?=$row['domain']?></td>
+		<td class="DataTD <? $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD <? $italic ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
@@ -1278,20 +1289,39 @@ function output_log_domains($row){
 function output_log_agreement_header(){
 	?>
 	<tr
-		<td><?= _("Agreement") ?></td>
-		<td><?= _("Date") ?></td>
-		<td><?= _("Method") ?></td>
-		<td><?= _("Comment") ?></td>
+		<td class="DataTD bold"><?= _("Agreement") ?></td>
+		<td class="DataTD bold"><?= _("Date") ?></td>
+		<td class="DataTD bold"><?= _("Method") ?></td>
+		<td class="DataTD bold"><?= _("Comment") ?></td>
 	</tr>
 	<?
 }
 function output_log_agreement($row){
 	?>
 	<tr>
-		<td class="<? $italic ?>"><?=$row['document']?></td>
-		<td class="<? $italic ?>"><?=$row['date']?></td>
-		<td class="<? $italic ?>"><?=$row['method']?></td>
-		<td class="<? $italic ?>"><?= ($row['active']==0)? _('No'):_('Yes')?></td>
+		<td class="DataTD" ><?=$row['document']?></td>
+		<td class="DataTD" ><?=$row['date']?></td>
+		<td class="DataTD" ><?=$row['method']?></td>
+		<td class="DataTD"><?= ($row['active']==0)? _('No'):_('Yes')?></td>
+	</tr>
+	<?
+}
+
+function output_log_training_header(){
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Agreement") ?></td>
+		<td class="DataTD bold"><?= _("Test") ?></td>
+		<td class="DataTD bold"><?= _("Variant") ?></td>
+	</tr>
+	<?
+}
+function output_log_training($row){
+	?>
+	<tr>
+		<td class="DataTD"><?=$row['pass_date']?></td>
+		<td class="DataTD"><?=$row['type_text']?></td>
+		<td class="DataTD"><?=$row['test_text']?></td>
 	</tr>
 	<?
 }
