@@ -2664,6 +2664,13 @@
 		$oldid=0;
 	}
 
+	//check if ticket number was entered
+	if ( $oldid== 43) {
+		$ticketno=mysql_real_escape_string($_REQUEST['ticketno']);
+		$ticketvalidation=valid_ticket_number($ticketno);
+		$_SESSION['ticketno']=$ticketno;
+	}
+
 	if($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation==TRUE)
 	{
 		$id = 43;
