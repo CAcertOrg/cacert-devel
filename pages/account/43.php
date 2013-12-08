@@ -103,8 +103,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   if(intval($_REQUEST['userid']) > 0)
   {
     $userid = intval($_REQUEST['userid']);
-    $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
-    $res = mysql_query($query);
+// comment to be deleted before release
+//    $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
+//    $res = mysql_query($query);
+    $res =get_user_data($userid);
     if(mysql_num_rows($res) <= 0)
     {
       echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");

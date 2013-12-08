@@ -1150,3 +1150,20 @@ function valid_ticket_number($ticketno){
 	}
 	return false;
 }
+
+/**
+ * get_user_data()
+ *  returns all data of to an account given by the id
+ * @param mixed $userid - account id
+ * @param mixed $deleted - states is the account is deleted, default = 0
+ * @return
+ */
+function get_user_data($userid, $deleted=0){
+	$userid = intval($userid);
+	$filter='';
+	if (0==$deleted) {
+		$filter='and `users`.`deleted`=0';
+	}
+	$query = "select * from `users` where `users`.`id`='$userid' ".$filter;
+	return mysql_query($query);
+}
