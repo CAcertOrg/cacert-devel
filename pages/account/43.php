@@ -325,9 +325,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 <br/>
 <?
 //list secondary email addresses
-  $query = "select * from `email` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''
-      and `email`!='".mysql_escape_string($row['email'])."'";
-  $dres = mysql_query($query);
+// comment to be deleted before release
+//  $query = "select * from `email` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''
+//      and `email`!='".mysql_escape_string($row['email'])."'";
+//  $dres = mysql_query($query);
+  $dres = get_email_address(intval($row['id']),mysql_real_escape_string($row['email']));
   if(mysql_num_rows($dres) > 0) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

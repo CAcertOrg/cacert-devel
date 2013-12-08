@@ -1156,14 +1156,14 @@ function valid_ticket_number($ticketno){
  * get_user_data()
  *  returns all data of to an account given by the id
  * @param mixed $userid - account id
- * @param mixed $deleted - states is the account is deleted, default = 0
+ * @param mixed $deleted - states if the account is deleted, default = 0
  * @return
  */
 function get_user_data($userid, $deleted=0){
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
-		$filter='and `users`.`deleted`=0';
+		$filter=' and `users`.`deleted`=0';
 	}
 	$query = "select * from `users` where `users`.`id`='$userid' ".$filter;
 	return mysql_query($query);
@@ -1177,4 +1177,52 @@ function get_user_data($userid, $deleted=0){
  */
 function get_alerts($userid){
 	return mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($userid)."'"));
+}
+
+/**
+ * get_email_address()
+ *  returns all email address linked to one account
+ * @param mixed $userid
+ * @param string $primary if given the primary email address is not retirned
+ * @param integer $deleted - states if the account is deleted, default = 0
+ * @return
+ */
+function get_email_address($userid, $primary,$deleted=0){
+	$userid = intval($userid);
+	$filter='';
+	if (0==$deleted) {
+		$filter=' and `deleted`=0';
+	}
+	if ($primary) {
+		$filter= $filter." and `email`!='".mysql_real_escape_string($primary)."'";
+	}
+	$query = "select * from `email` where `memid`='".$userid."'".$filter." order by `created`";
+	return mysql_query($query);
+}
+
+function output_log_email_header(){
+	?>
+	<tr
+		<td>_("Email, primary bold")</td>
+		<td>_("Created")</td>
+		<td>_("Deleted")</td>
+	</tr>
+
+	<?
+}
+function output_log_email($row,$primary){
+	$italic='';
+	$bold='';
+	if (0==$row['deleted']) {
+		$italic='italic ';
+	}
+	if ($primary==$row['email']) {
+		$bold= 'bold ';
+	}
+
+	<tr>
+	<td class="<?$bold . $italic ?>">$row['email']</td>
+	<td class="<?$bold . $italic ?>">$row['created']</td>
+	<td class="<?$bold . $italic ?>">$row['deleted']</td>
+	</tr>
 }

@@ -97,10 +97,26 @@ $alerts =get_alerts($userid)
     <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
     <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
   </tr>
-
+</table>
+<br/>
+<?
+$dres = get_email_address($userid,'',1);
+if(mysql_num_rows($dres) > 0) {
+?>
+<table>
   <tr>
-    <td colspan="<? $colspandefault ?>" class="title"><?=_('Address')?></td>
+    <td colspan="3" class="title"><?=_('Email addresses')?></td>
   </tr>
+<?
+output_log_email_header();
+while($drow = mysql_fetch_assoc($dres))
+{
+	output_log_email($drow,$email);
+ } ?>
+</table>
+<br/>
+
+<table>
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('CATS')?></td>
   </tr>
