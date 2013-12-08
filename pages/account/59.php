@@ -29,6 +29,7 @@ $suffix = $row['suffix'];
 $dob = $row['dob'];
 $name = $fname." ".$mname." ".$lname." ".$suffix;
 $email = $row['email'];
+$alerts =get_alerts($userid)
 ?>
 <table>
   <tr>
@@ -81,7 +82,21 @@ $email = $row['email'];
     <td class="DataTD"><?=_("Ad Admin")?>:</td>
     <td class="DataTD"><?= $row['adadmin']._(' - 0 = none, 1 = submit, 2 = approve')?></td>
   </tr>
-
+    <td class="DataTD"><?=_("General Announcements")?>:</td>
+    <td class="DataTD"><?= ($alerts['general']==0)? _('No'):_('Yes')?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("Country Announcements")?>:</td>
+    <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("Regional Announcements")?>:</td>
+    <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
+    <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+  </tr>
 
   <tr>
     <td colspan="<? $colspandefault ?>" class="title"><?=_('Address')?></td>

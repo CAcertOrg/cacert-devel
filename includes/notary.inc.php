@@ -1168,3 +1168,13 @@ function get_user_data($userid, $deleted=0){
 	$query = "select * from `users` where `users`.`id`='$userid' ".$filter;
 	return mysql_query($query);
 }
+
+/**
+ * get_alerts()
+ *  retrns all alert settings for one user
+ * @param mixed $userid for the requested account
+ * @return
+ */
+function get_alerts($userid){
+	return mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($userid)."'"));
+}

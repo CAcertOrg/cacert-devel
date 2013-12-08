@@ -115,7 +115,9 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
       $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."'";
       $dres = mysql_query($query);
       $drow = mysql_fetch_assoc($dres);
-      $alerts = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($row['id'])."'"));
+// comment to be deleted before release
+//      $alerts = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($row['id'])."'"));
+      $alerts =get_alerts(intval($row['id']));
 //display account data
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
