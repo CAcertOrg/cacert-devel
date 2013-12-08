@@ -3138,10 +3138,16 @@
 	}
 
 	if($id == 59){
-		$support=0;
 		if ($oldid==43) {
 			se_write_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'View account history', $_REQUEST['ticketno']);
 			$support=1;
+		}ELSEIF ($oldid==13){
+			$support=0;
+		}ELSE{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You do not have access to this page.");
+			showfooter();
+			exit;
 		}
 	}
 
