@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<p><?=_("By joining CAcert and becoming a Member, you agree to the CAcert Community Agreement. Please take a moment now to read that and agree to it; this will be required to complete the process of joining.")?></p>
+<p><?=_("By joining CAcert and becoming a member, you agree to the CAcert Community Agreement. Please take a moment now to read that and agree to it; this will be required to complete the process of joining.")?></p>
 <p><?=_("Warning! This site requires cookies to be enabled to ensure your privacy and security. This site uses session cookies to store temporary values to prevent people from copying and pasting the session ID to someone else exposing their account, personal details and identity theft as a result.")?></p>
 <p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
 <b><?=_("Note: Please enter your date of birth and names as they are written in your official documents.")?></b><br /><br />
