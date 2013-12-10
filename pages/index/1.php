@@ -18,6 +18,11 @@
 <p><?=_("By joining CAcert and becoming a Member, you agree to the CAcert Community Agreement. Please take a moment now to read that and agree to it; this will be required to complete the process of joining.")?></p>
 <p><?=_("Warning! This site requires cookies to be enabled to ensure your privacy and security. This site uses session cookies to store temporary values to prevent people from copying and pasting the session ID to someone else exposing their account, personal details and identity theft as a result.")?></p>
 <p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
+<b><?=_("Note: Please enter your birthdate and names as they are written in your official documents.")?></b><br><br>
+<?=_("While CAcert is a CA people relay on us knowing about the identity of the users of our certificates. So even as we value privacy of high, we need to collect at least some informations about our members. This is especially the case for everybody who wants to partake an our web of trust.")?>
+<?=_("Your private informations will only be used for internal procedures and will not be shared with third parties.")?>
+</p>
+<p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
 <?=_("A proper password wouldn't match your name or email at all, it contains at least 1 lower case letter, 1 upper case letter, a number, white space and a misc symbol. You get additional security for being over 15 characters and a second additional point for having it over 30. The system starts reducing security if you include any section of your name, or password or email address or if it matches a word from the english dictionary...")?><br><br>
 <b><?=_("Note: White spaces at the beginning and end of a password will be removed.")?></b>
 </p>
