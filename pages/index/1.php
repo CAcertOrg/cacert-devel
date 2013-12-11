@@ -19,7 +19,7 @@
 <p><?=_("Warning! This site requires cookies to be enabled to ensure your privacy and security. This site uses session cookies to store temporary values to prevent people from copying and pasting the session ID to someone else exposing their account, personal details and identity theft as a result.")?></p>
 <p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
 <b><?=_("Note: Please enter your date of birth and names as they are written in your official documents.")?></b><br /><br />
-<?=_("Because CAcert is a CA people relay on us knowing about the identity of the users of our certificates. So even as we value privacy very much, we need to collect at least some basic informations about our members. This is especially the case for everybody who wants to take part in our web of trust.")?>
+<?=_("Because CAcert is a certificate authority (CA) people relay on us knowing about the identity of the users of our certificates. So even as we value privacy very much, we need to collect at least some basic informations about our members. This is especially the case for everybody who wants to take part in our web of trust.")?>
 <?=_("Your private informations will be used for internal procedures only and will not be shared with third parties.")?>
 </p>
 <p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
