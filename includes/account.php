@@ -22,16 +22,16 @@
 
 	loadem("account");
 
-	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
-	$oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
-	$process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
+	$id = array_key_exists("id",$_REQUEST) ? intval($_REQUEST['id']) : 0;
+	$oldid = array_key_exists("oldid",$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
+	$process = array_key_exists("process",$_REQUEST) ? $_REQUEST['process'] : "";
 //	$showdetalis refers to Secret Question and Answers from account/13.php
-	$showdetails = ""; if(array_key_exists("showdetails",$_REQUEST)) $showdetails=$_REQUEST['showdetails'];
+	$showdetails = array_key_exists("showdetails",$_REQUEST) ? $_REQUEST['showdetails'] : "";
 
-	$cert=0; if(array_key_exists('cert',$_REQUEST)) $cert=intval($_REQUEST['cert']);
-	$orgid=0; if(array_key_exists('orgid',$_REQUEST)) $orgid=intval($_REQUEST['orgid']);
-	$memid=0; if(array_key_exists('memid',$_REQUEST)) $memid=intval($_REQUEST['memid']);
-	$domid=0; if(array_key_exists('domid',$_REQUEST)) $domid=intval($_REQUEST['domid']);
+	$cert = array_key_exists('cert',$_REQUEST) ? intval($_REQUEST['cert']) : 0;
+	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
+	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
+	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
 
 
 	if(!$_SESSION['mconn'])
