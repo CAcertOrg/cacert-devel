@@ -23,7 +23,8 @@
   $year = intval(substr($user['dob'], 0, 4));
   $month = intval(substr($user['dob'], 5, 2));
   $day = intval(substr($user['dob'], 8, 2));
-  $showdetails = array_key_exists('showdetails', $_REQUEST) && !!intval($_REQUEST['showdetails']);
+  $showdetails = array_key_exists("showdetails",$_REQUEST) ? intval($_REQUEST['showdetails']) : 0;
+
   if($showdetails){
     $body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
     $body .= _("You receive this automatic mail since you yourself or someone ".
@@ -160,7 +161,8 @@
     <td class="DataTD"><input type="text" name="A5" value="<?=sanitizeHTML($user['A5'])?>"></td>
   </tr>
   <tr>
-  <? } ?>
+  <?<input type="hidden" name="showdetails" value="1" />
+ } ?>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
   </tr>
 </table>

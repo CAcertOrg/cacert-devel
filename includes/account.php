@@ -77,7 +77,7 @@ function buildSubjectFromSession() {
 	$oldid = array_key_exists("oldid",$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
 	$process = array_key_exists("process",$_REQUEST) ? $_REQUEST['process'] : "";
 //	$showdetalis refers to Secret Question and Answers from account/13.php
-	$showdetails = array_key_exists("showdetails",$_REQUEST) ? $_REQUEST['showdetails'] : "";
+	$showdetails = array_key_exists("showdetails",$_REQUEST) ? intval($_REQUEST['showdetails']) : 0;
 
 	$cert = array_key_exists('cert',$_REQUEST) ? intval($_REQUEST['cert']) : 0;
 	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
