@@ -161,8 +161,8 @@
     <td class="DataTD"><input type="text" name="A5" value="<?=sanitizeHTML($user['A5'])?>"></td>
   </tr>
   <tr>
-  <?<input type="hidden" name="showdetails" value="1" />
- } ?>
+  <input type="hidden" name="showdetails" value="1" />
+  <? } ?>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
   </tr>
 </table>
