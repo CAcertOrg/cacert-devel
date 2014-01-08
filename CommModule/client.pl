@@ -834,7 +834,7 @@ sub HandleCerts($$)
 
       my $days=$org?($server?(30):7):calculateDays($row{"memid"});
 
-      $md_id = 0;
+      my $md_id = 0;
       $md_id = 1 if( $raw{'md'} eq "md5");
       $md_id = 2 if( $raw{'md'} eq "sha1");
       $md_id = 3 if( $raw{'md'} eq "rmd160");
