@@ -149,10 +149,12 @@
 		$delcount = 0;
 		if(array_key_exists('delid',$_REQUEST) && is_array($_REQUEST['delid']))
 		{
+			$deltitle=false;
 			foreach($_REQUEST['delid'] as $id)
 			{
-				if (0==$delcount) {
+				if (!$deltitle) {
 					echo _('The following email addresses have been removed:')."<br>\n";
+					$deltitle=true;
 				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
@@ -173,7 +175,7 @@
 		}
 		if(0 == $delcount)
 		{
-			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
+			echo _("You did not select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
 
 		showfooter();
@@ -1538,6 +1540,7 @@
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='NS',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1628,6 +1631,7 @@
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='" . sanitizeHTML($_REQUEST['keytype']) . "',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1703,6 +1707,7 @@
 				$query = "insert into `orgemailcerts` set
 						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
+						`ou`='".$row['ou']."',
 						`subject`='".$row['subject']."',
 						`keytype`='".$row['keytype']."',
 						`csr_name`='".$row['csr_name']."',
@@ -1819,6 +1824,21 @@
 		exit;
 	}
 
+	if($oldid == 18 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
+		$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
+		$_SESSION['_config']['status']=$_REQUEST['status'];
+	}
+
+	if($oldid == 18 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=0;
+		$_SESSION['_config']['sorting']=0;
+		$_SESSION['_config']['status']=0;
+	}
 
 	if($process != "" && $oldid == 20)
 	{
@@ -2173,6 +2193,22 @@
 		echo(_("Certificate settings have been changed.")."<br/>\n");
 		showfooter();
 		exit;
+	}
+
+	if($oldid == 22 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['dorgfilterid']=$_REQUEST['dorgfilterid'];
+		$_SESSION['_config']['dsorting']=$_REQUEST['dsorting'];
+		$_SESSION['_config']['dstatus']=$_REQUEST['dstatus'];
+	}
+
+	if($oldid == 22 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['dorgfilterid']=0;
+		$_SESSION['_config']['dsorting']=0;
+		$_SESSION['_config']['dstatus']=0;
 	}
 
 

@@ -731,7 +731,7 @@ function get_user_agreement($memid){
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?>:</td>
+		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?></td>
 		<td class="DataTD"><?=$field2?></td>
 	</tr>
 <?
@@ -779,7 +779,7 @@ function get_user_agreement($memid){
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field.(empty($field)?'':':')?>:</td>
+		<td class="DataTD"><?=$field.(empty($field)?'':':')?></td>
 		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
 	</tr>
 <?

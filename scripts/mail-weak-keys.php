@@ -18,7 +18,7 @@ You received this email because a certificate issued to you is vulnerable:
 Server Certificate, Serial $cert_serial, expiring $cert_expire, CN $cert_CN
 
 To rectify the problem CAcert will revoke all vulnerable certificates (including yours) on $action_date.
-CAcert will no longer accept vulnerable certificate requests for signing. In future all Certficate
+CAcert will no longer accept vulnerable certificate requests for signing. In future all Certificate
 Signing Requests must be backed by private keys with a key length at least 2048 bits and no other known vulnerabilities.
 
 You should submit a new Certificate Signing Request of acceptable strength as soon as possible
@@ -51,13 +51,13 @@ Client Certificate, Serial $cert_serial, expiring $cert_expire, CN $cert_CN
 
 To rectify the problem CAcert will revoke all vulnerable certificates (including yours) on $action_date.
 CAcert will no longer accept vulnerable certificate requests for signing. In future all
-client certficates must be backed by private keys with a key length at least 1024 bits
+client certificates must be backed by private keys with a key length at least 1024 bits
 and no other known vulnerabilities.
 
 This means that you should replace your current certificate with a new one of acceptable strength.
 If you use Firefox or Chrome, select 'Keysize: High Grade' before 'Create Certificate Request'.
 If you use Internet Explorer, select 'Microsoft Strong Cryptographic Provider'. If you select an
-option that generates a weak key (eg 'Microsoft Base Cryptographic Provider v1.0') your certficate
+option that generates a weak key (eg 'Microsoft Base Cryptographic Provider v1.0') your certificate
 request will be rejected.
 
 Kind regards
@@ -83,7 +83,7 @@ You received this email because a certificate issued to you is vulnerable:
 Organisation Server Certificate, Serial $cert_serial, expiring $cert_expire, CN $cert_CN
 
 To rectify the problem CAcert will revoke all vulnerable certificates (including yours) on $action_date.
-CAcert will no longer accept vulnerable certificate requests for signing. In future all Certficate
+CAcert will no longer accept vulnerable certificate requests for signing. In future all Certificate
 Signing Requests must be backed by private keys with a key length at least 2048 bits and no other known vulnerabilities.
 
 You should submit a new Certificate Signing Request of acceptable strength as soon as possible
@@ -116,13 +116,13 @@ Organisation Client Certificate, Serial $cert_serial, expiring $cert_expire, CN 
 
 To rectify the problem CAcert will revoke all vulnerable certificates (including yours) on $action_date.
 CAcert will no longer accept vulnerable certificate requests for signing. In future all
-client certficates must be backed by private keys with a key length at least 1024 bits
+client certificates must be backed by private keys with a key length at least 1024 bits
 and no other known vulnerabilities.
 
 This means that you should replace your current certificate with a new one of acceptable strength.
 If you use Firefox or Chrome, select 'Keysize: High Grade' before 'Create Certificate Request'.
 If you use Internet Explorer, select 'Microsoft Strong Cryptographic Provider'. If you select an
-option that generates a weak key (eg 'Microsoft Base Cryptographic Provider v1.0') your certficate
+option that generates a weak key (eg 'Microsoft Base Cryptographic Provider v1.0') your certificate
 request will be rejected.
 
 Kind regards
