@@ -17,8 +17,10 @@
 */ ?>
 <?
 include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
+	$ticketno='';
+	$ticketvalidation=FALSE;
 
-
+//check if an assurance should be deleted
   if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
   {
     $assurance = mysql_real_escape_string(intval($_REQUEST['assurance']));
@@ -31,8 +33,17 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     if ($row) {
       fix_assurer_flag($row['to']);
     }
+	if (isset($_SESSION['ticketno'])) {
+		$ticketno=$_SESSION['ticketno'];
+		$ticketvalidation=TRUE;
   }
+	if (isset($_SESSION['ticketmsg'])) {
+		$ticketmsg=$_SESSION['ticketmsg'];
+	} else {
+		$ticketmsg='';
+	}
 
+// search for an account by email search, if more than one is found display list to choose
   if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
   {
     $_REQUEST['userid'] = 0;
@@ -98,11 +109,14 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     }
   }
 
+// display user information for given user id
   if(intval($_REQUEST['userid']) > 0)
   {
     $userid = intval($_REQUEST['userid']);
-    $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
-    $res = mysql_query($query);
+// comment to be deleted before release
+//    $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
+//    $res = mysql_query($query);
+    $res =get_user_data($userid);
     if(mysql_num_rows($res) <= 0)
     {
       echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
@@ -111,8 +125,52 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
       $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
       $dres = mysql_query($query);
       $drow = mysql_fetch_assoc($dres);
-      $alerts = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($row['id'])."'"));
+// comment to be deleted before release
+//      $alerts = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($row['id'])."'"));
+      $alerts =get_alerts(intval($row['id']));
+//display account data
+
+		//deletes an assurance
+			if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation==true)
+			{
+				$assurance = mysql_escape_string(intval($_REQUEST['assurance']));
+				$row = 0;
+				$res = mysql_query("select `to` from `notary` where `id`='$assurance'");
+				if ($res) {
+					$row = mysql_fetch_assoc($res);
+				}
+				mysql_query("delete from `notary` where `id`='$assurance'");
+				if ($row) {
+					fix_assurer_flag($row['to']);
+					write_se_log($uid, $adminid, 'AD block account', $ticketno);
+				}
+			} else {
+				$ticketmsg=_('No assurance revoked. Ticket number is missing!');
+			}
+		//Ticket number
 ?>
+<form method="post" action="account.php?id=43&userid=<?=$uid?>">
+	<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+		<tr>
+			<td colspan="2" class="title"><?=_('Ticket handling') ?></td>
+		</tr>
+		<tr>
+			<td class="DataTD"><?=_('Ticket no:')?>:</td>
+			<td class="DataTD"><input type="text" name="ticketno" value="<?=$ticketno?>"/></td>
+		</tr>
+		<tr>
+			<td colspan="2" ><?=$ticketmsg?></td>
+<? $_SESSION['ticketmsg']='' ?>'
+		</tr>
+		<tr>
+			<td colspan="2" ><input type="submit" value="<?=_('Set ticket number') ?>"></td>
+		</tr>
+	</table>
+</form>
+<br/>
+
+<!-- display data table -->
+
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><? printf(_("%s's Account Details"), sanitizeHTML($row['email'])); ?></td>
@@ -145,12 +203,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?>:</td>
     <td class="DataTD">
-<?
+		<?
   $year = intval(substr($row['dob'], 0, 4));
   $month = intval(substr($row['dob'], 5, 2));
   $day = intval(substr($row['dob'], 8, 2));
   ?><nobr><select name="day">
-<?
+			<?
         for($i = 1; $i <= 31; $i++)
         {
                 echo "<option";
@@ -158,10 +216,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
                     echo " selected='selected'";
                 echo ">$i</option>";
         }
-?>
+			?>
     </select>
     <select name="month">
-<?
+			<?
         for($i = 1; $i <= 12; $i++)
         {
                 echo "<option value='$i'";
@@ -169,10 +227,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
                         echo " selected='selected'";
                 echo ">".ucwords(strftime("%B", mktime(0,0,0,$i,1,date("Y"))))."</option>";
         }
-?>
+			?>
     </select>
     <input type="text" name="year" value="<?=$year?>" size="4">
     <input type="submit" value="Go"></form></nobr></td>
+<? // list of flags ?>
   </tr>
   <tr>
     <td class="DataTD"><?=_("CCA accepted")?>:</td>
@@ -218,10 +277,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Ad Admin")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;adadmin=<?=$row['id']?>"><?=$row['adadmin']?></a> (0 = none, 1 = submit, 2 = approve)</td>
   </tr>
+	<!---presently not needed
   <tr>
     <td class="DataTD"><?=_("Tverify Account")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;tverify=<?=$row['id']?>"><?=$row['tverify']?></a></td>
-  </tr>
+	</tr> -->
   <tr>
     <td class="DataTD"><?=_("General Announcements")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;general=<?=$row['id']?>"><?=$alerts['general']?></a></td>
@@ -238,6 +298,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
     <td class="DataTD"><a href="account.php?id=43&amp;radius=<?=$row['id']?>"><?=$alerts['radius']?></a></td>
   </tr>
+<? //change password, view secret questions and delete account section ?>
   <tr>
     <td class="DataTD"><?=_("Change Password")?>:</td>
     <td class="DataTD"><a href="account.php?id=44&amp;userid=<?=$row['id']?>"><?=_("Change Password")?></a></td>
@@ -246,10 +307,11 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Delete Account")?>:</td>
     <td class="DataTD"><a href="account.php?id=50&amp;userid=<?=$row['id']?>&amp;csrf=<?=make_csrf('admdelaccount')?>"><?=_("Delete Account")?></a></td>
   </tr>
-<?
+	<?
   // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
-  if(array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes") {
-?>
+	if(array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==true) {
+		write_se_log($uid, $adminid, 'AD view lost password information', $ticketno);
+		?>
   <tr>
     <td class="DataTD"><?=_("Lost Password")?> - Q1:</td>
     <td class="DataTD"><?=sanitizeHTML($row['Q1'])?></td>
@@ -290,14 +352,28 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Lost Password")?> - A5:</td>
     <td class="DataTD"><?=sanitizeHTML($row['A5'])?></td>
   </tr>
-<? } else { ?>
+	<? } elseif (array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==false) {
+		?>
   <tr>
+			<td class="DataTD" colspan="2"><?=_('No access granted. Ticket number is missing')?></td>
+		</tr>
+		<tr>
     <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;showlostpw=yes"><?=_("Show Lost Password Details")?></a></td>
   </tr>
-<? } ?>
+<? }
+// list assurance points
+?>
   <tr>
+			<td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;showlostpw=yes"><?=_("Show Lost Password Details")?></a></td>
+		</tr>
+	<? } ?>
+	<tr>
     <td class="DataTD"><?=_("Assurance Points")?>:</td>
     <td class="DataTD"><?=intval($drow['points'])?></td>
+  </tr>
+<? // show account history ?>
+  <tr>
+    <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;userid=<?=intval($row['id'])?>"><?=_('Show account history')?></a></td>
   </tr>
 </table>
 <br><?
@@ -306,6 +382,24 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   $dres = mysql_query($query);
   if(mysql_num_rows($dres) > 0) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td td colspan="5" class="title"><?=_("Ticket/Arbitration No, needs to be entered to apply any changes")?></td>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_('Ticket/Arbitration No')?></td>
+    <td class="DataTD"><input name="ticketno" /></td>
+  </tr>
+</table>
+<br/>
+<?
+//list secondary email addresses
+// comment to be deleted before release
+//  $query = "select * from `email` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''
+//      and `email`!='".mysql_escape_string($row['email'])."'";
+//  $dres = mysql_query($query);
+  $dres = get_email_address(intval($row['id']),mysql_real_escape_string($row['email']));
+  if(mysql_num_rows($dres) > 0) { ?>
+		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Alternate Verified Email Addresses")?></td>
   </tr><?
@@ -316,15 +410,19 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Secondary Emails")?>:</td>
     <td class="DataTD"><?=sanitizeHTML($drow['email'])?></td>
   </tr>
-<? } ?>
-</table>
-<br><? } ?>
-<?
-  $query = "select * from `domains` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''";
-  $dres = mysql_query($query);
+			<? } ?>
+		</table>
+	<br>
+	<? } ?>
+	<?
+// comment to be deleted before release
+//    $query = "select * from `domains` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''";
+//  $dres = mysql_query($query);
+  $dres=get_domains(intval($row['id']));
   if(mysql_num_rows($dres) > 0) { ?>
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
+<? // list of domains ?>
     <td colspan="5" class="title"><?=_("Verified Domains")?></td>
   </tr><?
   $rc = mysql_num_rows($dres);
@@ -334,12 +432,12 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Domain")?>:</td>
     <td class="DataTD"><?=sanitizeHTML($drow['domain'])?></td>
   </tr>
-<? } ?>
-</table>
-<br>
-<? } ?>
+			<? } ?>
+		</table>
+	<br>
+	<? } ?>
 <? //  Begin - Debug infos ?>
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+	<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="2" class="title"><?=_("Account State")?></td>
   </tr>
@@ -469,14 +567,14 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   }
   if ($inconsistency>0) {
      // $inconsistencydisp = _("Yes");
-?>
+		?>
   <tr>
     <td class="DataTD"><?=_("Account inconsistency")?>:</td>
     <td class="DataTD"><?=$inccause?><br>code: <?=$inconsistency?></td>
   </tr>
   <tr>
     <td colspan="2" class="DataTD" style="max-width: 75ex">
-      <?=_("Account inconsistency can cause problems in daily account ".
+<?=_("Account inconsistency can cause problems in daily account ".
       "operations and needs to be fixed manually through arbitration/critical ".
       "team.")?>
      </td>
@@ -484,11 +582,13 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 <? }
 
   // ---  bug-975 end ---
-?>
+	?>
 </table>
 <br>
 <?
  //  End - Debug infos
+
+// certificate overview
 ?>
 
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -798,15 +898,17 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	</tr>
 </table>
 <br>
-
-
-<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
- (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
-<br />
-<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
- (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)
-<br />
-
+<? // list assurances ?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+  <tr>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
+      (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)</td>
+  </tr>
+  <tr>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
+      (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)</td>
+  </tr>
+</table>
 <?
 //  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
 

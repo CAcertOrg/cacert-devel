@@ -701,6 +701,17 @@
 		return $rec;
 	}
 
+function get_user_agreement($memid){
+	$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = 'CCA' AND (u.`memid`=".$memid." ) order by u.`date` )
+			union
+			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = 'CCA' AND ( u.`secmemid`=".$memid.") order by u.`date`)
+			union
+			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` != 'CCA' AND ( u.`memid`=".$memid.") order by u.u.`document`, u.`date`) " ;
+	$res = mysql_query($query);
+
+	return mysql_query($query);
+}
+
 	/**
 	 * delete_user_agreement()
 	 *  deletes all entries for a given type from user_agreement of a given user, if type is not given all
@@ -708,7 +719,7 @@
 	 * @param string $type
 	 * @return
 	 */
-	function delete_user_agreement($memid, $type=false){
+	function delete_user_agreement($memid, $type="CCA"){
 	//deletes all entries to an user for the given type of user agreements
 		if ($type === false) {
 			$filter = '';
@@ -1176,3 +1187,644 @@
 		$return_str.='</select>';
 		return	$return_str;
 	}
+
+/**
+ * se_write_log()
+ *  writes an information to the adminlog
+ *
+ * @param mixed $uid - id of the user account
+ * @param mixed $adminid - id of the admin
+ * @param mixed $type - what was changed
+ * @param mixed $info - the ticket / arbitration no or other information
+ * @return
+ */
+function se_write_log($uid, $adminid, $type, $info){
+	//records all support engineer actions changing a user account
+	$uid = intval($uid);
+	$adminid = intval($adminid);
+	$type = mysql_real_escape_string($type);
+	$info = mysql_real_escape_string($info);
+	$query="insert into `adminlog` (`when`, `uid`, `admind`,`type`,`information`) values
+		(Now(), $uid, $adminid, '$type', '$info'";
+	mysql_query($query);
+}
+
+/**
+ * valid_ticket_number()
+ * checks if the entered information is a valid ticket or arbitration number
+ * @param mixed $ticketno
+ * @return
+ */
+function valid_ticket_number($ticketno){
+	//return if a given ticket number is valid
+	//a arbitration case
+	//d dispute action
+	//s support case
+	//m board motion
+	$pattern='/[adsmADSM]\d{8}\./';
+	if (preg_match($pattern, $ticketno)) {
+		return true;
+	}
+	return false;
+}
+
+// function for handling account/43.php
+/**
+ * get_user_data()
+ *  returns all data of to an account given by the id
+ * @param mixed $userid - account id
+ * @param mixed $deleted - states if deleted data should be visible , default = 0 - not visible
+ * @return
+ */
+function get_user_data($userid, $deleted=0){
+	$userid = intval($userid);
+	$filter='';
+	if (0==$deleted) {
+		$filter=' and `users`.`deleted`=0';
+	}
+	$query = "select * from `users` where `users`.`id`='$userid' ".$filter;
+	return mysql_query($query);
+}
+
+/**
+ * get_alerts()
+ *  retrns all alert settings for one user
+ * @param mixed $userid for the requested account
+ * @return
+ */
+function get_alerts($userid){
+	return mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($userid)."'"));
+}
+
+/**
+ * get_email_address()
+ *  returns all email address linked to one account
+ * @param mixed $userid
+ * @param string $primary if given the primary email address is not retirned
+ * @param integer $deleted - states if deleted data should be visible , default = 0 - not visible
+ * @return
+ */
+function get_email_address($userid, $primary,$deleted=0){
+	//should be entered in account/2.php
+	$userid = intval($userid);
+	$filter='';
+	if (0==$deleted) {
+		$filter=' and `deleted`=0';
+	}
+	if ($primary) {
+		$filter= $filter." and `email`!='".mysql_real_escape_string($primary)."'";
+	}
+	$query = "select * from `email` where `memid`='".$userid."'".$filter." order by `created`";
+	return mysql_query($query);
+}
+
+/**
+ * get_domains()
+ *  returns all domains to an account
+ * @param mixed $userid
+ * @param integer $deleted - states if deleted data should be visible , default = 0 - not visible
+ * @return
+ */
+function get_domains($userid, $deleted=0){
+	//should be entered in account/9.php
+	$userid = intval($userid);
+	$filter='';
+	if (0==$deleted) {
+		$filter=' and `deleted`=0';
+	}
+	$query = "select * from `domains` where `memid`='".$userid."' and `hash`=''".$filter." order by `created`";
+	return mysql_query($query);
+}
+
+/**
+ * get_training_result()
+ *  returns all training results to an account
+ * @param mixed $userid
+ * @return
+ */
+function get_training_result($userid){
+	//should be entered in account/55.php
+	$userid = intval($userid);
+	$query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
+		" FROM `cats_passed` AS CP, `cats_variant` AS CV, `cats_type` AS CT ".
+		" WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".$userid."'".
+		" ORDER BY `CP`.`pass_date`";
+	return mysql_query($query);
+}
+
+/**
+ * get_se_log()
+ *  returns all SE log entries to an account
+ * @param mixed $userid
+ * @return
+ */
+function get_se_log($userid){
+	$userid = intval($userid);
+	$query = "SELECT `adminlog`.`when`, `adminlog`.`type`, `adminlog`.`information`, `users`.`fname`, `users`.`lname`
+		FROM `adminlog`, `users`
+		WHERE `adminlog`.`adminid` = `users`.`id` and `adminlog`.`uid`=".$userid."
+		ORDER BY `adminlog`.`when`";
+	return mysql_query($query);
+}
+
+/**
+ * get_client_certs()
+ *  returns all client certificates to an account
+ * @param mixed $userid
+ * @param integer $viewall- states if expired certs should be visible , default = 0 - not visible
+ * @return
+ */
+function get_client_certs($userid,$viewall=0){
+	//add to account/5.php
+	$userid = intval($userid);
+	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
+		UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+		UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
+		`emailcerts`.`expire` as `expires`,
+		`emailcerts`.`revoked` as `revoke`,
+		UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
+		`emailcerts`.`id`,
+		`emailcerts`.`CN`,
+		`emailcerts`.`serial`,
+		`emailcerts`.`disablelogin` as `disablelogin`,
+		`emailcerts`.`description`
+		from `emailcerts`
+		where `emailcerts`.`memid`='".$userid."'";
+	if($viewall != 1)
+		$query .= " AND `revoked`=0 AND `renewed`=0 ";
+	$query .= " GROUP BY `emailcerts`.`id` ";
+	if($viewall != 1)
+		$query .= " HAVING `timeleft` > 0 ";
+	$query .= " ORDER BY `emailcerts`.`modified` desc";
+	return mysql_query($query);
+}
+
+/**
+ * get_server_certs()
+ *  returns all server certs to an account
+ * @param mixed $userid
+ * @param integer $viewall states if expired certs should be visible , default = 0 - not visible
+ * @return
+ */
+function get_server_certs($userid,$viewall=0){
+	//add to account/12.php
+	$userid = intval($userid);
+	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
+			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
+			`domaincerts`.`expire` as `expires`, `revoked` as `revoke`,
+			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
+			`domaincerts`.`description`
+			from `domaincerts`,`domains`
+			where `memid`='".$userid."' and `domaincerts`.`domid`=`domains`.`id` ";
+	if($viewall != 1)
+	{
+		$query .= "AND `revoked`=0 AND `renewed`=0 ";
+		$query .= "HAVING `timeleft` > 0 ";
+	}
+	$query .= "ORDER BY `domaincerts`.`modified` desc";
+	return mysql_query($query);
+}
+
+/**
+ * get_gpg_certs()
+ *  retruns all gpg certs to an account
+ * @param mixed $userid
+ * @param integer $viewall states if expired certs should be visible , default = 0 - not visible
+ * @return
+ */
+function get_gpg_certs($userid,$viewall=0){
+	//add to gpg/2.php
+	$userid = intval($userid);
+	$query = $query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
+			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+			UNIX_TIMESTAMP(`expire`) as `expired`,
+			`expire` as `expires`, `id`, `level`,
+			`email`,`keyid`,`description` from `gpg` where `memid`='".$userid."'
+			ORDER BY `issued` desc";
+	return mysql_query($query);
+}
+
+
+
+/**
+ * output_log_email_header()
+ *  shows the table header to the email table
+ * @return
+ */
+function output_log_email_header(){
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Email, primary bold") ?></td>
+		<td class="DataTD bold"><?= _("Created") ?></td>
+		<td class="DataTD bold"><?= _("Deleted") ?></td>
+	</tr>
+
+	<?
+}
+/**
+ * output_log_email()
+ *  shows all email data
+ * @param mixed $row - sql-query array
+ * @param mixed $primary - if given the primary address is highlighted
+ * @return
+ */
+function output_log_email($row,$primary){
+	$italic='';
+	$bold='';
+	if (0==$row['deleted']) {
+		$italic='italic ';
+	}
+	if ($primary==$row['email']) {
+		$bold= 'bold ';
+	}
+	?>
+	<tr>
+		<td class="DataTD <? $bold . $italic ?>"><?=$row['email']?></td>
+		<td class="DataTD <? $bold . $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD <? $bold . $italic ?>"><?=$row['deleted']?></td>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_domains_header()
+ *  shows the table header to the domains table
+ * @return
+ */
+function output_log_domains_header(){
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Domain") ?></td>
+		<td class="DataTD bold"><?= _("Created") ?></td>
+		<td class="DataTD bold"><?= _("Deleted") ?></td>
+	</tr>
+
+	<?
+}
+
+/**
+ * output_log_domains()
+ *  shows the domain data
+ * @param mixed $row - sql-query array
+ * @return
+ */
+function output_log_domains($row){
+	$italic='';
+	if (0==$row['deleted']) {
+		$italic='italic ';
+	}
+	?>
+	<tr>
+		<td class="DataTD <? $italic ?>"><?=$row['domain']?></td>
+		<td class="DataTD <? $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD <? $italic ?>"><?=$row['deleted']?></td>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_agreement_header()
+ *  shows the table header to the user agreement table
+ * @return
+ */
+function output_log_agreement_header(){
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Agreement") ?></td>
+		<td class="DataTD bold"><?= _("Date") ?></td>
+		<td class="DataTD bold"><?= _("Method") ?></td>
+		<td class="DataTD bold"><?= _("Comment") ?></td>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_agreement()
+ *  shows the agreement data
+ * @param mixed $row - sql-query array
+ * @return
+ */
+function output_log_agreement($row){
+	?>
+	<tr>
+		<td class="DataTD" ><?=$row['document']?></td>
+		<td class="DataTD" ><?=$row['date']?></td>
+		<td class="DataTD" ><?=$row['method']?></td>
+		<td class="DataTD"><?= ($row['active']==0)? _('No'):_('Yes')?></td>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_training_header()
+ *  shows the table header to the training table
+ * @return
+ */
+function output_log_training_header(){
+	//should be entered in account/55.php
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Agreement") ?></td>
+		<td class="DataTD bold"><?= _("Test") ?></td>
+		<td class="DataTD bold"><?= _("Variant") ?></td>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_training()
+ *  shows the training data
+ * @param mixed $row - sql-query array
+ * @return
+ */
+function output_log_training($row){
+	//should be entered in account/55.php
+	?>
+	<tr>
+		<td class="DataTD"><?=$row['pass_date']?></td>
+		<td class="DataTD"><?=$row['type_text']?></td>
+		<td class="DataTD"><?=$row['test_text']?></td>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_se_header()
+ *  shows the table header to the SE log table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
+function output_log_se_header($support=0){
+	?>
+	<tr>
+		<td class="DataTD bold"><?= _("Date") ?></td>
+		<td class="DataTD bold"><?= _("Type") ?></td>
+		<?if (1==$support) {
+			?>
+				<td class="DataTD bold"><?= _("Information") ?></td>
+				<td class="DataTD bold"><?= _("Admin") ?></td>
+			<?
+		}?>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_se()
+ *  show the SE log data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are added
+ * @return
+ */
+function output_log_se($row, $support=0){
+	//should be entered in account/55.php
+	?>
+	<tr>
+		<td class="DataTD"><?=$row['when']?></td>
+		<td class="DataTD"><?=$row['type']?></td>
+		<?if (1==$support) {
+			?>
+			<td class="DataTD"><?=$row['information']?></td>
+			<td class="DataTD"><?=$row['fname'].' '.$row['lname']?></td>
+			<?
+		}?>
+	</tr>
+	<?
+}
+
+/**
+ * output_client_cert_header()
+ *  shows the table header to the cleint cert table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
+function output_client_cert_header($support=0){
+	?>
+	//should be added to account/5.php
+	<tr>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
+		<? } ?>
+		<td class="DataTD"><?=_("Status")?></td>
+		<td class="DataTD"><?=_("Email Address")?></td>
+		<td class="DataTD"><?=_("SerialNumber")?></td>
+		<td class="DataTD"><?=_("Revoked")?></td>
+		<td class="DataTD"><?=_("Expires")?></td>
+		<td class="DataTD"><?=_("Login")?></td>
+		<?if ($support !=1) { ?>
+			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+		<? } ?>
+	</tr>
+	<?
+}
+
+/**
+ * output_client_cert()
+ *  show the client cert data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are not visible
+ * @return
+ */
+function output_client_cert($row, $support=0){
+	//should be entered in account/5.php
+	$verified="";
+	if($row['timeleft'] > 0)
+		$verified = _("Valid");
+	if($row['timeleft'] < 0)
+		$verified = _("Expired");
+	if($row['expired'] == 0)
+		$verified = _("Pending");
+	if($row['revoked'] > 0)
+		$verified = _("Revoked");
+	if($row['revoked'] == 0)
+		$row['revoke'] = _("Not Revoked");
+	?>
+	<tr>
+	<?
+	if($verified != _("Pending") && $verified != _("Revoked")) {
+		if ($support !=1) { ?>
+			<td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"></td>
+		<? } ?>
+		<td class="DataTD"><?=$verified?></td>
+		<? if ($support !=1) { ?>
+			<td class="DataTD"><a href="account.php?id=6&amp;cert=<?=$row['id']?>"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></a></td>
+		<? } ELSE {?>
+			<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+		<? } ?>
+	<? } else if($verified != _("Revoked")) {
+		if ($support !=1) { ?>
+			<td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
+		<? } ?>
+		<td class="DataTD"><?=$verified?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+	<? } else {
+		if ($support !=1) { ?>
+			<td class="DataTD">&nbsp;</td>
+		<? } ?>
+		<td class="DataTD"><?=$verified?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+	<? } ?>
+
+		<td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=$row['revoke']?></td>
+		<td class="DataTD"><?=$row['expires']?></td>
+
+	<? if ($support !=1) { ?>
+		<td class="DataTD">
+			<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
+			<input type="hidden" name="cert_<?=$row['id']?>" value="1" />
+		</td>
+	<? } ELSE { ?>
+		<td class="DataTD">
+			<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> DISABLED/>
+		</td>
+	<? }
+	if ($support !=1) { ?>
+		<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+		<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+	<? }?>
+	</tr>
+
+	<?
+}
+
+/**
+ * output_log_server_certs_header()
+ *  shows the table header to the server cert table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
+function output_log_server_certs_header($support=0){
+	?>
+	//should be entered in account/12.php
+	<tr>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
+		<? } ?>
+		<td class="DataTD"><?=_("Status")?></td>
+		<td class="DataTD"><?=_("CommonName")?></td>
+		<td class="DataTD"><?=_("SerialNumber")?></td>
+		<td class="DataTD"><?=_("Revoked")?></td>
+		<td class="DataTD"><?=_("Expires")?></td>
+		<?if ($support !=1) { ?>
+			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+		<? } ?>
+	</tr>
+	<?
+}
+
+/**
+ * output_log_server_certs()
+ *  show the server cert data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are not visible
+ * @return
+ */
+function output_log_server_certs($row, $support=0){
+	//should be entered in account/12.php
+	if($row['timeleft'] > 0)
+		$verified = _("Valid");
+	if($row['timeleft'] < 0)
+		$verified = _("Expired");
+	if($row['expired'] == 0)
+		$verified = _("Pending");
+	if($row['revoked'] > 0)
+		$verified = _("Revoked");
+	if($row['revoked'] == 0)
+		$row['revoke'] = _("Not Revoked");
+	?>
+	<tr>
+		<? if ($support !=1) {
+			if($verified != _("Pending") && $verified != _("Revoked")) { ?>
+				<td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"/></td>
+			<? } else if($verified != _("Revoked")) { ?>
+				<td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"/></td>
+			<? } else { ?>
+				<td class="DataTD">&nbsp;</td>
+			<? }
+		}?>
+		<td class="DataTD"><?=$verified?></td>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><a href="account.php?id=15&amp;cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
+		<? }ELSE{ ?>
+			<td class="DataTD"><?=$row['CN']?></td>
+		<?}?>
+		<td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=$row['revoke']?></td>
+		<td class="DataTD"><?=$row['expires']?></td>
+		<?if ($support !=1) { ?>
+			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+		<?}?>
+	</tr> <?
+}
+
+/**
+ *  output_gpg_certs_header()
+ *  shows the table header to the gpg cert table
+ * @param integer $support - if support = 1 some columns ar not visible
+ * @return
+ */
+function output_gpg_certs_header($support=0){
+	?>
+	<tr>
+		<td class="DataTD"><?=_("Status")?></td>
+		<td class="DataTD"><?=_("Email Address")?></td>
+		<td class="DataTD"><?=_("Expires")?></td>
+		<td class="DataTD"><?=_("Key ID")?></td>
+		<?if (1==$support) { ?>
+			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+		<? }?>
+	</tr>
+	<?
+}
+
+/**
+ * output_gpg_certs()
+ *  show the gpg cert data
+ * @param mixed $row - sql-query array
+ * @param integer $support - if support = 1 some columns are not visible
+ * @return
+ */
+function output_gpg_certs($row, $support=0){
+	//should be entered in account/55.php
+	if($row['timeleft'] > 0)
+		$verified = _("Valid");
+	if($row['timeleft'] < 0)
+		$verified = _("Expired");
+	if($row['expired'] == 0)
+		$verified = _("Pending");
+	?>
+	<tr>
+		<? if($verified == _("Valid")) { ?>
+			<td class="DataTD"><?=$verified?></td>
+			<?if (1==$support) { ?>
+				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
+			<? } else { ?>
+				<td class="DataTD"><?=$row['email']?></td>
+			<? } ?>
+		<? } else if($verified == _("Pending")) { ?>
+			<td class="DataTD"><?=$verified?></td>
+			<td class="DataTD"><?=$row['email']?></td>
+		<? } else { ?>
+			<td class="DataTD"><?=$verified?></td>
+			<?if (1==$support) { ?>
+				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
+			<? } else { ?>
+				<td class="DataTD"><?=$row['email']?></td>
+			<? } ?>
+		<? } ?>
+		<td class="DataTD"><?=$row['expires']?></td>
+		<?if (1==$support) { ?>
+			<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
+		<? } else { ?>
+			<td class="DataTD"><?=$row['keyid']?></td>
+		<? } ?>
+		<?if (1==$support) { ?>
+			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+		<? } ?>
+	</tr>
+	<?
+}

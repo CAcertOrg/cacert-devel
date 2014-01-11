@@ -2691,7 +2691,14 @@ function buildSubjectFromSession() {
 		$oldid=0;
 	}
 
-	if($oldid == 43 && $_REQUEST['action'] == "updatedob")
+	//check if ticket number was entered
+	if ( $oldid== 43) {
+		$ticketno=mysql_real_escape_string($_REQUEST['ticketno']);
+		$ticketvalidation=valid_ticket_number($ticketno);
+		$_SESSION['ticketno']=$ticketno;
+	}
+
+	if($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation==TRUE)
 	{
 		$id = 43;
 		$oldid=0;
@@ -2703,13 +2710,11 @@ function buildSubjectFromSession() {
 		$month = intval($_REQUEST['month']);
 		$year = intval($_REQUEST['year']);
 		$userid = intval($_REQUEST['userid']);
-		$query = "select `fname`,`mname`,`lname`,`suffix`,`dob` from `users` where `id`='$userid'";
-		$details = mysql_fetch_assoc(mysql_query($query));
-		$query = "insert into `adminlog` set `when`=NOW(),`old-lname`='${details['lname']}',`old-dob`='${details['dob']}',
-				`new-lname`='$lname',`new-dob`='$year-$month-$day',`uid`='$userid',`adminid`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
+		write_se_log($userid,$_SESSION[''], $_SESSION['profile']['id'],'AD Name/DOB Change',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
 	if($oldid == 43 && $_REQUEST['action'] == 'revokecert')
@@ -2742,7 +2747,7 @@ function buildSubjectFromSession() {
 			$_REQUEST['email'] = $row['email'];
 	}
 
-	if($oldid == 44)
+	if($oldid == 44 && $ticketvalidation==TRUE)
 	{
 		showheader(_("My CAcert.org Account!"));
 		if(intval($_REQUEST['userid']) <= 0)
@@ -2764,11 +2769,15 @@ function buildSubjectFromSession() {
 			sendmail($row['email'], "[CAcert.org] "._("Password Update Notification"), $body,
 						"support@cacert.org", "", "", "CAcert Support");
 		L10n::set_translation($my_translation);
+			write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'],'AD reset password',$ticketno);
 		}
 
 		showfooter();
 		exit;
+	}else{
+		$_SESSION['ticketmsg']='No password reset taken. Ticket number is missing!';
 	}
+
 
 	if($process != "" && $oldid == 45)
 	{
@@ -2862,16 +2871,20 @@ function buildSubjectFromSession() {
 		}
 	}
 
-	if($id == 43 && array_key_exists('tverify',$_REQUEST) && $_REQUEST['tverify'] > 0)
+	/* presently not needed
+	if($id == 43 && array_key_exists('tverify',$_REQUEST) && $_REQUEST['tverify'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['tverify']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['tverify'];
 		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change tverify status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
-
-	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0)
+ */
+	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation==TRUE)
 	{
 		csrf_check('admsetassuret');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
@@ -2879,18 +2892,24 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['assurer'];
 		mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change assurer staus',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0)
+	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['assurer_blocked'];
 		mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change assurer blocked status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0)
+	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0 && $ticketvalidation==TRUE)
 	{
 		csrf_check('admactlock');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locked']);
@@ -2898,9 +2917,12 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['locked'];
 		mysql_query("update `users` set `locked`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change locked status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0)
+	if($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0 && $ticketvalidation==TRUE)
 	{
 		csrf_check('admcodesign');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['codesign']);
@@ -2908,9 +2930,12 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['codesign'];
 		mysql_query("update `users` set `codesign`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change codesign status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0)
+	if($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0 && $ticketvalidation==TRUE)
 	{
 		csrf_check('admorgadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
@@ -2918,9 +2943,12 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['orgadmin'];
 		mysql_query("update `users` set `orgadmin`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change org assuer status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0)
+	if($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0 && $ticketvalidation==TRUE)
 	{
 		csrf_check('admttpadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
@@ -2928,9 +2956,12 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['ttpadmin'];
 		mysql_query("update `users` set `ttpadmin`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change ttp admin status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0)
+	if($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['adadmin']);
 		$query = "select * from `users` where `id`='$memid'";
@@ -2939,18 +2970,24 @@ function buildSubjectFromSession() {
 		if($ver > 2)
 			$ver = 0;
 		mysql_query("update `users` set `adadmin`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change advertising admin status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0)
+	if($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locadmin']);
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['locadmin'];
 		mysql_query("update `users` set `locadmin`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change location admin status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0)
+	if($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0 && $ticketvalidation==TRUE)
 	{
 		csrf_check('admsetadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['admin']);
@@ -2958,42 +2995,57 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['admin'];
 		mysql_query("update `users` set `admin`='$ver' where `id`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change SE status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0)
+	if($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['general']);
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['general'];
 		mysql_query("update `alerts` set `general`='$ver' where `memid`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change general status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0)
+	if($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['country']);
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['country'];
 		mysql_query("update `alerts` set `country`='$ver' where `memid`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change country status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0)
+	if($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['regional']);
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['regional'];
 		mysql_query("update `alerts` set `regional`='$ver' where `memid`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change regional status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0)
+	if($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['radius']);
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['radius'];
 		mysql_query("update `alerts` set `radius`='$ver' where `memid`='$memid'");
+		write_se_log($memid, $_SESSION['profile']['id'],'AD Change radius status',$ticketno);
+	}else{
+		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
 	if($id == 50)
@@ -3052,6 +3104,16 @@ function buildSubjectFromSession() {
 		account_delete($_REQUEST['userid'], trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
 	}
 
+	if(($id == 51 || $id == 52 || $oldid == 52))
+	{
+		showheader(_("My CAcert.org Account!"));
+		echo _("You don't have access to this area.\nThe Tverify programme is terminated as of 16th November 2010" );
+		showfooter();
+		exit;
+	}
+
+	/* this area not needed as the The Tverify programme is Terminated as of 16th November 2010
+
 	if(($id == 51 || $id == 52 || $oldid == 52) && $_SESSION['profile']['tverify'] <= 0)
 	{
 		showheader(_("My CAcert.org Account!"));
@@ -3059,7 +3121,6 @@ function buildSubjectFromSession() {
 		showfooter();
 		exit;
 	}
-
 	if($oldid == 52)
 	{
 		$uid = intval($_REQUEST['uid']);
@@ -3165,6 +3226,22 @@ function buildSubjectFromSession() {
 		showfooter();
 		exit;
 	}
+ */
+	if($id == 59){
+		$userid=intval($_REQUEST['userid']);
+		if ($oldid==43 && $ticketvalidation==TRUE) {
+			se_write_log($userid, $_SESSION['profile']['id'], 'View account history', $ticketno);
+			$support=1;
+		}ELSEIF ($oldid==13){
+			$support=0;
+		}ELSE{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You do not have access to this page.");
+			showfooter();
+			exit;
+		}
+	}
+
 
 	if(intval($cert) > 0)
 		$_SESSION['_config']['cert'] = intval($cert);
