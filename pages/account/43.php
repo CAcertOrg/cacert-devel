@@ -34,7 +34,7 @@ if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
     if ($row) {
         fix_assurer_flag($row['to']);
     }
-
+}
     if (isset($_SESSION['ticketno'])) {
         $ticketno=$_SESSION['ticketno'];
         $ticketvalidation=TRUE;
@@ -1064,9 +1064,10 @@ function showassuredby()
         <td class="DataTD" colspan="3">&nbsp;</td>
     </tr>
 </table>
+	<?} ?>
 <br/><br/>
 <?
-}
+} }
 
 if(isset($_GET['shownotary'])) {
     switch($_GET['shownotary']) {
