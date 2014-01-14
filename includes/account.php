@@ -22,14 +22,16 @@
 
 	loadem("account");
 
-	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
-	$oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
-	$process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
+	$id = array_key_exists("id",$_REQUEST) ? intval($_REQUEST['id']) : 0;
+	$oldid = array_key_exists("oldid",$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
+	$process = array_key_exists("process",$_REQUEST) ? $_REQUEST['process'] : "";
+//	$showdetalis refers to Secret Question and Answers from account/13.php
+	$showdetails = array_key_exists("showdetails",$_REQUEST) ? intval($_REQUEST['showdetails']) : 0;
 
-	$cert=0; if(array_key_exists('cert',$_REQUEST)) $cert=intval($_REQUEST['cert']);
-	$orgid=0; if(array_key_exists('orgid',$_REQUEST)) $orgid=intval($_REQUEST['orgid']);
-	$memid=0; if(array_key_exists('memid',$_REQUEST)) $memid=intval($_REQUEST['memid']);
-	$domid=0; if(array_key_exists('domid',$_REQUEST)) $domid=intval($_REQUEST['domid']);
+	$cert = array_key_exists('cert',$_REQUEST) ? intval($_REQUEST['cert']) : 0;
+	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
+	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
+	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
 
 
 	if(!$_SESSION['mconn'])
@@ -1205,7 +1207,7 @@
 		mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
 	}
 
-	if($oldid == 13 && $process != "")
+	if($oldid == 13 && $process != "" && $showdetails!="")
 	{
 		csrf_check("perschange");
 		$_SESSION['_config']['user'] = $_SESSION['profile'];
@@ -1313,18 +1315,20 @@
 						where `id`='".$_SESSION['profile']['id']."'";
 			mysql_query($query);
 		}
-		$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
-						`Q2`='".$_SESSION['_config']['user']['Q2']."',
-						`Q3`='".$_SESSION['_config']['user']['Q3']."',
-						`Q4`='".$_SESSION['_config']['user']['Q4']."',
-						`Q5`='".$_SESSION['_config']['user']['Q5']."',
-						`A1`='".$_SESSION['_config']['user']['A1']."',
-						`A2`='".$_SESSION['_config']['user']['A2']."',
-						`A3`='".$_SESSION['_config']['user']['A3']."',
-						`A4`='".$_SESSION['_config']['user']['A4']."',
-						`A5`='".$_SESSION['_config']['user']['A5']."'
-						where `id`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		if ($showdetails!="") {
+			$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
+							`Q2`='".$_SESSION['_config']['user']['Q2']."',
+							`Q3`='".$_SESSION['_config']['user']['Q3']."',
+							`Q4`='".$_SESSION['_config']['user']['Q4']."',
+							`Q5`='".$_SESSION['_config']['user']['Q5']."',
+							`A1`='".$_SESSION['_config']['user']['A1']."',
+							`A2`='".$_SESSION['_config']['user']['A2']."',
+							`A3`='".$_SESSION['_config']['user']['A3']."',
+							`A4`='".$_SESSION['_config']['user']['A4']."',
+							`A5`='".$_SESSION['_config']['user']['A5']."'
+							where `id`='".$_SESSION['profile']['id']."'";
+			mysql_query($query);
+		}
 
 		//!!!Should be rewritten
 		$_SESSION['_config']['user']['otphash'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otphash']))));
