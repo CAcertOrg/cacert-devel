@@ -24,7 +24,7 @@
 
 <p><?=_("CAcert Inc.'s public certification services are governed by a CPS as amended from time to time which is incorporated into this Agreement by reference. The Subscriber will use the SSL Server Certificate in accordance with CAcert Inc.'s CPS and supporting documentation published at")?> <a href="http://www.cacert.org/cps.php">http://www.cacert.org/cps.php</a></p>
 
-<p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed andwill not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
+<p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
 
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -70,30 +70,37 @@ if($_SESSION['profile']['points'] >= 50)
 <? } ?>
 <? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
   <tr>
+    <td class="DataTD">
+      <input type="checkbox" name="codesign" value="1" />
+    </td>
     <td class="DataTD" align="left">
-      <input type="checkbox" name="codesign" value="1" /> <?=_("Code Signing")?></td>
-    <td class="DataTD" align="left">
+      <?=_("Code Signing")?><br />
       <?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
     </td>
   </tr>
 <? } ?>
 
   <tr>
-    <td class="DataTD" colspan="2" align="left">
-      <input type="checkbox" name="login" value="1" checked="checked" /> <?=_("Enable certificate login with this certificate")?><br />
+    <td class="DataTD">
+      <input type="checkbox" name="login" value="1" checked="checked" />
+    </td>
+    <td class="DataTD"> <?=_("Enable certificate login with this certificate")?><br />
       <?=_("By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ .")?><br/>
     </td>
   </tr>
   <tr>
    <td class="DataTD" colspan="2" align="left">
-      <?=_("Optional comment, only used in the certifictate overview max. 100 characters")?><br />
+      <?=_("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="100" size="100" />
    </td>
   </tr>
 
   <tr name="expertoff" style="display:none">
-    <td class="DataTD" colspan="2" align="left">
-      <input type="checkbox" name="expertbox" onchange="showExpert(this.checked)"/><?=_("Show advanced options")?>
+    <td class="DataTD">
+      <input type="checkbox" name="expertbox" onchange="showExpert(this.checked)" />
+    </td>
+    <td class="DataTD">
+      <?=_("Show advanced options")?>
     </td>
   </tr>
 
@@ -114,6 +121,15 @@ if($_SESSION['profile']['points'] >= 50)
     <td class="DataTD" colspan="2"><textarea name="optionalCSR" cols="80" rows="5"></textarea></td>
  </tr>
  <tr>
+    <td class="DataTD">
+      <input type="checkbox" name="CCA" />
+    </td>
+    <td class="DataTD" align="left">
+      <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+        <?=_("Please Note: You need to accept the CCA to proceed.")?>
+    </td>
+  </tr>
+  <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>" /></td>
   </tr>
 </table>

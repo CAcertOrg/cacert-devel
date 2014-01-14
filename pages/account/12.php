@@ -19,7 +19,7 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="8" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=12&amp;viewall=<?=!$viewall?>"><?=_("View all certificates")?></a></td>
+    <td colspan="8" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=12&amp;viewall=<?=!$viewall?>"><?=$viewall?_("Hide old certificates"):_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
@@ -84,6 +84,11 @@
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
 <? } ?>
+  <tr>
+    <td class="DataTD" colspan="8">
+      <a href="account.php?id=12&amp;viewall=<?=!$viewall?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
+    </td>
+  </tr>
   <tr>
     <td class="DataTD" colspan="8">
       <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>

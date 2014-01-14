@@ -15,24 +15,24 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	header("content-type: text/plain");
+    header("content-type: text/plain");
 ?>
 # CAcert SQL Dump
-# version 0.0.2
+# version 0.0.3
 #
 # Generation Time: <?=date('r')?>
 #
 # Database: `cacert`
 #
 <?
-	$tables = mysql_list_tables('cacert');
-	while(list($table_name) = mysql_fetch_array($tables))
-	{
-		echo "# --------------------------------------------------------\n\n";
-		echo "#\n# Table structure for table `$table_name`\n#\n\n";
+    $tables = mysql_query("SHOW TABLES");
+    while(list($table_name) = mysql_fetch_array($tables))
+    {
+        echo "# --------------------------------------------------------\n\n";
+        echo "#\n# Table structure for table `$table_name`\n#\n\n";
 
-		echo "DROP TABLE IF EXISTS `$table_name`;\n";
-		$create = mysql_fetch_assoc(mysql_query("SHOW CREATE TABLE `cacert`.`$table_name`"));
-		echo $create['Create Table'].";\n\n";
-	}
+        echo "DROP TABLE IF EXISTS `$table_name`;\n";
+        $create = mysql_fetch_assoc(mysql_query("SHOW CREATE TABLE `$table_name`"));
+        echo $create['Create Table'].";\n\n";
+    }
 ?>

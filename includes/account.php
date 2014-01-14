@@ -18,17 +18,20 @@
 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/l10n.php");
 	require_once("../includes/lib/check_weak_key.php");
+	require_once("../includes/notary.inc.php");
 
 	loadem("account");
 
-	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
-	$oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
-	$process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
+	$id = array_key_exists("id",$_REQUEST) ? intval($_REQUEST['id']) : 0;
+	$oldid = array_key_exists("oldid",$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
+	$process = array_key_exists("process",$_REQUEST) ? $_REQUEST['process'] : "";
+//	$showdetalis refers to Secret Question and Answers from account/13.php
+	$showdetails = array_key_exists("showdetails",$_REQUEST) ? intval($_REQUEST['showdetails']) : 0;
 
-	$cert=0; if(array_key_exists('cert',$_REQUEST)) $cert=intval($_REQUEST['cert']);
-	$orgid=0; if(array_key_exists('orgid',$_REQUEST)) $orgid=intval($_REQUEST['orgid']);
-	$memid=0; if(array_key_exists('memid',$_REQUEST)) $memid=intval($_REQUEST['memid']);
-	$domid=0; if(array_key_exists('domid',$_REQUEST)) $domid=intval($_REQUEST['domid']);
+	$cert = array_key_exists('cert',$_REQUEST) ? intval($_REQUEST['cert']) : 0;
+	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
+	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
+	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
 
 
 	if(!$_SESSION['mconn'])
@@ -70,9 +73,7 @@
 		}
 		$oldid=0;
 		$_REQUEST['email'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['newemail'])));
-		$query = "select * from `email` where `email`='".$_REQUEST['email']."' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		if(check_email_exists($_REQUEST['email'])==true)
 		{
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['email']));
@@ -150,10 +151,12 @@
 		$delcount = 0;
 		if(array_key_exists('delid',$_REQUEST) && is_array($_REQUEST['delid']))
 		{
+			$deltitle=false;
 			foreach($_REQUEST['delid'] as $id)
 			{
-				if (0==$delcount) {
+				if (!$deltitle) {
 					echo _('The following email addresses have been removed:')."<br>\n";
+					$deltitle=true;
 				}
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
@@ -163,17 +166,7 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['email']."<br>\n";
-					$query = "select `emailcerts`.`id`
-							from `emaillink`,`emailcerts` where
-							`emailid`='$id' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
-							`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
-							group by `emailcerts`.`id`";
-					$dres = mysql_query($query);
-					while($drow = mysql_fetch_assoc($dres))
-						mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$drow['id']."'");
-
-					$query = "update `email` set `deleted`=NOW() where `id`='$id'";
-					mysql_query($query);
+					account_email_delete($row['id']);
 					$delcount++;
 				}
 			}
@@ -184,7 +177,7 @@
 		}
 		if(0 == $delcount)
 		{
-			echo _("You failed to select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
+			echo _("You did not select any accounts to be removed, or you attempted to remove the default account. No action was taken.");
 		}
 
 		showfooter();
@@ -193,6 +186,14 @@
 
 	if($process != "" && $oldid == 3)
 	{
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
+
 		if(!(array_key_exists('addid',$_REQUEST) && is_array($_REQUEST['addid'])) && $_REQUEST['SSO'] != '1')
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -321,6 +322,8 @@
 				showfooter();
 				exit;
 			}
+
+			write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
 
 			$query = "insert into emailcerts set
 						`CN`='$defaultemail',
@@ -630,32 +633,9 @@
 				{
 					$row = mysql_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
-
-					$dres = mysql_query(
-						"select `domaincerts`.`id`
-							from `domaincerts`
-							where `domaincerts`.`domid` = '$id'
-						union distinct
-						select `domaincerts`.`id`
-							from `domaincerts`, `domlink`
-							where `domaincerts`.`id` = `domlink`.`certid`
-							and `domlink`.`domid` = '$id'");
-					while($drow = mysql_fetch_assoc($dres))
-					{
-						mysql_query(
-							"update `domaincerts`
-								set `revoked`='1970-01-01 10:00:01'
-								where `id` = '".$drow['id']."'
-								and `revoked` = 0
-								and UNIX_TIMESTAMP(`expire`) -
-										UNIX_TIMESTAMP() > 0");
-					}
-
-					mysql_query(
-						"update `domains`
-							set `deleted`=NOW()
-							where `id` = '$id'");
+					account_domain_delete($row['id']);
 				}
+
 			}
 		}
 		else
@@ -669,6 +649,14 @@
 
 	if($process != "" && $oldid == 10)
 	{
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
+
 		$CSR = clean_csr($_REQUEST['CSR']);
 		if(strpos($CSR,"---BEGIN")===FALSE)
 		{
@@ -784,6 +772,8 @@
 			}
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
+
+		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
 
 		if(array_key_exists('0',$_SESSION['_config']['rowid']) && $_SESSION['_config']['rowid']['0'] > 0)
 		{
@@ -1199,7 +1189,7 @@
 		exit;
 	}
 
-	if($oldid == 13 && $process != "")
+	if($oldid == 13 && $process != "" && $showdetails!="")
 	{
 		csrf_check("perschange");
 		$_SESSION['_config']['user'] = $_SESSION['profile'];
@@ -1307,18 +1297,20 @@
 						where `id`='".$_SESSION['profile']['id']."'";
 			mysql_query($query);
 		}
-		$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
-						`Q2`='".$_SESSION['_config']['user']['Q2']."',
-						`Q3`='".$_SESSION['_config']['user']['Q3']."',
-						`Q4`='".$_SESSION['_config']['user']['Q4']."',
-						`Q5`='".$_SESSION['_config']['user']['Q5']."',
-						`A1`='".$_SESSION['_config']['user']['A1']."',
-						`A2`='".$_SESSION['_config']['user']['A2']."',
-						`A3`='".$_SESSION['_config']['user']['A3']."',
-						`A4`='".$_SESSION['_config']['user']['A4']."',
-						`A5`='".$_SESSION['_config']['user']['A5']."'
-						where `id`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		if ($showdetails!="") {
+			$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
+							`Q2`='".$_SESSION['_config']['user']['Q2']."',
+							`Q3`='".$_SESSION['_config']['user']['Q3']."',
+							`Q4`='".$_SESSION['_config']['user']['Q4']."',
+							`Q5`='".$_SESSION['_config']['user']['Q5']."',
+							`A1`='".$_SESSION['_config']['user']['A1']."',
+							`A2`='".$_SESSION['_config']['user']['A2']."',
+							`A3`='".$_SESSION['_config']['user']['A3']."',
+							`A4`='".$_SESSION['_config']['user']['A4']."',
+							`A5`='".$_SESSION['_config']['user']['A5']."'
+							where `id`='".$_SESSION['profile']['id']."'";
+			mysql_query($query);
+		}
 
 		//!!!Should be rewritten
 		$_SESSION['_config']['user']['otphash'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otphash']))));
@@ -1534,6 +1526,7 @@
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='NS',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1624,6 +1617,7 @@
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='" . sanitizeHTML($_REQUEST['keytype']) . "',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1699,6 +1693,7 @@
 				$query = "insert into `orgemailcerts` set
 						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
+						`ou`='".$row['ou']."',
 						`subject`='".$row['subject']."',
 						`keytype`='".$row['keytype']."',
 						`csr_name`='".$row['csr_name']."',
@@ -1815,6 +1810,21 @@
 		exit;
 	}
 
+	if($oldid == 18 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
+		$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
+		$_SESSION['_config']['status']=$_REQUEST['status'];
+	}
+
+	if($oldid == 18 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=0;
+		$_SESSION['_config']['sorting']=0;
+		$_SESSION['_config']['status']=0;
+	}
 
 	if($process != "" && $oldid == 20)
 	{
@@ -2169,6 +2179,22 @@
 		echo(_("Certificate settings have been changed.")."<br/>\n");
 		showfooter();
 		exit;
+	}
+
+	if($oldid == 22 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['dorgfilterid']=$_REQUEST['dorgfilterid'];
+		$_SESSION['_config']['dsorting']=$_REQUEST['dsorting'];
+		$_SESSION['_config']['dstatus']=$_REQUEST['dstatus'];
+	}
+
+	if($oldid == 22 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['dorgfilterid']=0;
+		$_SESSION['_config']['dsorting']=0;
+		$_SESSION['_config']['dstatus']=0;
 	}
 
 
@@ -2681,6 +2707,13 @@
 		mysql_query($query);
 	}
 
+	if($oldid == 43 && $_REQUEST['action'] == 'revokecert')
+	{
+		$userid = intval($_REQUEST['userid']);
+		revoke_all_private_cert($userid);
+		$id=43;
+	}
+
 	if($oldid == 48 && $_REQUEST['domain'] == "")
 	{
 		$id = $oldid;
@@ -2977,23 +3010,39 @@
 	if($oldid == 50 && $process != "")
 	{
 		$_REQUEST['userid'] = intval($_REQUEST['userid']);
-		$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'");
-		if(mysql_num_rows($res) > 0)
-		{
-			$query = "update `domaincerts`,`domains` SET `domaincerts`.`revoked`='1970-01-01 10:00:01'
-					WHERE `domaincerts`.`domid` = `domains`.`id` AND `domains`.`memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `domains` SET `deleted`=NOW() WHERE `domains`.`memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `emailcerts` SET `revoked`='1970-01-01 10:00:01' WHERE `memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `email` SET `deleted`=NOW() WHERE `memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "delete from `org` WHERE `memid`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
-			$query = "update `users` SET `deleted`=NOW() WHERE `id`='".intval($_REQUEST['userid'])."'";
-			mysql_query($query);
+		if (trim($_REQUEST['arbitrationno'])==""){
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not enter an arbitration number entry.");
+			showfooter();
+			exit;
 		}
+		if ( 1 !== preg_match('/^[a-z]\d{8}\.\d+\.\d+$/i',trim($_REQUEST['arbitrationno'])) ) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("'%s' is not a valid arbitration number entry."), sanitizeHTML(trim($_REQUEST['arbitrationno'])));
+			showfooter();
+			exit;
+		}
+		if (check_email_exists(trim($_REQUEST['arbitrationno']).'@cacert.org')) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['arbitrationno'].'@cacert.org'));
+			showfooter();
+			exit;
+		 }
+		if (check_client_cert_running($_REQUEST['userid'],1) ||
+			check_server_cert_running($_REQUEST['userid'],1) ||
+			check_gpg_cert_running($_REQUEST['userid'],1)) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The CCA retention time for at least one certificate is not over. Can't continue."));
+			showfooter();
+			exit;
+		}
+		if (check_is_orgadmin($_REQUEST['userid'],1)) {
+			showheader(_("My CAcert.org Account!"));
+			printf(_("The user is listed as Organisation Administrator. Can't continue."));
+			showfooter();
+			exit;
+		}
+		account_delete($_REQUEST['userid'], trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
 	}
 
 	if(($id == 51 || $id == 52 || $oldid == 52) && $_SESSION['profile']['tverify'] <= 0)

@@ -17,6 +17,8 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
+	require_once("../includes/lib/general.php");
+	require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists('id',$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = $_REQUEST['oldid'] = array_key_exists('oldid',$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
@@ -82,17 +84,44 @@ function verifyEmail($email)
 	$state=0;
 	if($oldid == "0" && $CSR != "")
 	{
-		$debugkey = $gpgkey = clean_gpgcsr($CSR);
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
 
-		$tnam = tempnam('/tmp/', '__gpg');
-		$fp = fopen($tnam, 'w');
-		fwrite($fp, $gpgkey);
-		fclose($fp);
-		$debugpg = $gpg = trim(`gpg --with-colons --homedir /tmp 2>&1 < $tnam`);
-		unlink($tnam);
+		$err = runCommand('mktemp --directory /tmp/cacert_gpg.XXXXXXXXXX',
+				"",
+				$tmpdir);
+		if (!$tmpdir)
+		{
+			$err = true;
+		}
+
+		if (!$err)
+		{
+			$err = runCommand("gpg --with-colons --homedir $tmpdir 2>&1",
+					clean_gpgcsr($CSR),
+					$gpg);
+
+			`rm -r $tmpdir`;
+		}
+
+		if ($err)
+		{
+			showheader(_("Welcome to CAcert.org"));
+
+			echo "<p style='color:#ff0000'>"._("There was an error parsing your key.")."</p>";
+			unset($_REQUEST['process']);
+			$id = $oldid;
+			unset($oldid);
+			exit();
+		}
 
 		$lines = "";
-		$gpgarr = explode("\n", $gpg);
+		$gpgarr = explode("\n", trim($gpg));
 		foreach($gpgarr as $line)
 		{
 			#echo "Line[]: $line <br/>\n";
@@ -260,7 +289,6 @@ function verifyEmail($email)
 			unset($_REQUEST['process']);
 			$id = $oldid;
 			unset($oldid);
-			$do = `echo "$debugkey\n--\n$debugpg\n--" >> /www/tmp/gpg.debug`;
 			exit();
 		}
 		elseif($nerr)
@@ -274,6 +302,8 @@ function verifyEmail($email)
 
 	if($oldid == "0" && $CSR != "")
 	{
+		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
+
 		//set variable for comment
 		if(trim($_REQUEST['description']) == ""){
 			$description= "";
@@ -289,10 +319,10 @@ function verifyEmail($email)
 						`keyid`='".mysql_real_escape_string($keyid)."',
 						`description`='".mysql_real_escape_string($description)."'";
 		mysql_query($query);
-		$id = mysql_insert_id();
+		$insert_id = mysql_insert_id();
 
 
-		$cwd = '/tmp/gpgspace'.$id;
+		$cwd = '/tmp/gpgspace'.$insert_id;
 		mkdir($cwd,0755);
 
 		$fp = fopen("$cwd/gpg.csr", "w");
@@ -303,7 +333,8 @@ function verifyEmail($email)
 		system("gpg --homedir $cwd --import $cwd/gpg.csr");
 
 
-		$debugpg = $gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $keyid 2>&1`);
+		$cmd_keyid = escapeshellarg($keyid);
+		$gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1`);
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
@@ -403,7 +434,8 @@ function verifyEmail($email)
 
 			//echo "Keyid: $keyid\n";
 
-			$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $keyid", $descriptorspec, $pipes);
+			$cmd_keyid = escapeshellarg($keyid);
+			$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $cmd_keyid", $descriptorspec, $pipes);
 
 			//echo "Process: $process\n";
 			//fputs($stderr,"Process: $process\n");
@@ -485,15 +517,16 @@ function verifyEmail($email)
 		}
 
 
-		$csrname=generatecertpath("csr","gpg",$id);
-		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $keyid >$csrname`;
+		$csrname=generatecertpath("csr","gpg",$insert_id);
+		$cmd_keyid = escapeshellarg($keyid);
+		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname`;
 
-		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$id'");
-		waitForResult('gpg', $id);
+		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
+		waitForResult('gpg', $insert_id);
 
 		showheader(_("Welcome to CAcert.org"));
 		echo $resulttable;
-		$query = "select * from `gpg` where `id`='$id' and `crt`!=''";
+		$query = "select * from `gpg` where `id`='$insert_id' and `crt`!=''";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
@@ -501,7 +534,7 @@ function verifyEmail($email)
 			echo _("If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you.");
 		} else {
 			echo "<pre>";
-			readfile(generatecertpath("crt","gpg",$id));
+			readfile(generatecertpath("crt","gpg",$insert_id));
 			echo "</pre>";
 		}
 
