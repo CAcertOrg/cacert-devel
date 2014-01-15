@@ -22,6 +22,57 @@
 
 	loadem("account");
 
+/**
+ * Build a subject string as needed by the signer
+ *
+ * @param array(string) $domains
+ *     First domain is used as CN and repeated in subjectAltName. Duplicates
+ *     should already been removed
+ *
+ * @param bool $include_xmpp_addr
+ *     [default: true] Whether to include the XmppAddr in the subjectAltName.
+ *     This is needed if the Jabber server is jabber.example.com but a Jabber ID
+ *     on that server would be alice@example.com
+ *
+ * @return string
+ */
+function buildSubject(array $domains, $include_xmpp_addr = true) {
+	$subject = "/CN=${domains[0]}";
+
+	foreach ($domains as $domain) {
+		$subject .= "/subjectAltName=DNS:$domain";
+
+		if ($include_xmpp_addr) {
+			$subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$domain";
+		}
+	}
+
+	return $subject;
+}
+
+/**
+ * Builds the subject string from the session variables
+ * $_SESSION['_config']['rows'] and $_SESSION['_config']['altrows']
+ *
+ * @return string
+ */
+function buildSubjectFromSession() {
+	$domains = array();
+
+	if (is_array($_SESSION['_config']['rows'])) {
+		$domains = array_merge($domains, $_SESSION['_config']['rows']);
+	}
+
+	if (is_array($_SESSION['_config']['altrows']))
+		foreach ($_SESSION['_config']['altrows'] as $row) {
+			if (substr($row, 0, 4) === "DNS:") {
+				$domains[] = substr($row, 4);
+			}
+		}
+
+	return buildSubject(array_unique($domains));
+}
+
 	$id = array_key_exists("id",$_REQUEST) ? intval($_REQUEST['id']) : 0;
 	$oldid = array_key_exists("oldid",$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
 	$process = array_key_exists("process",$_REQUEST) ? $_REQUEST['process'] : "";
@@ -741,35 +792,8 @@
 			exit;
 		}
 
-		$subject = "";
-		$count = 0;
-		$supressSAN=0;
-		if($_SESSION["profile"]["id"] == 104074) $supressSAN=1;
+		$subject = buildSubjectFromSession();
 
-		if(is_array($_SESSION['_config']['rows']))
-			foreach($_SESSION['_config']['rows'] as $row)
-			{
-				$count++;
-				if($count <= 1)
-				{
-					$subject .= "/CN=$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=DNS:$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
-				} else {
-					if(!$supressSAN) $subject .= "/subjectAltName=DNS:$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
-				}
-			}
-		if(is_array($_SESSION['_config']['altrows']))
-			foreach($_SESSION['_config']['altrows'] as $row)
-			{
-				if(substr($row, 0, 4) == "DNS:")
-				{
-					$row = substr($row, 4);
-					if(!$supressSAN) $subject .= "/subjectAltName=DNS:$row";
-					if(!$supressSAN) $subject .= "/subjectAltName=otherName:1.3.6.1.5.5.7.8.5;UTF8:$row";
-				}
-			}
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
@@ -795,7 +819,6 @@
 			echo _("Domain not verified.");
 			showfooter();
 			exit;
-
 		}
 
 		mysql_query($query);
@@ -894,29 +917,7 @@
 					continue;
 				}
 
-				$subject = "";
-				$count = 0;
-				if(is_array($_SESSION['_config']['rows']))
-					foreach($_SESSION['_config']['rows'] as $row)
-					{
-						$count++;
-						if($count <= 1)
-						{
-							$subject .= "/CN=$row";
-							if(!strstr($subject, "=$row/") &&
-								substr($subject, -strlen("=$row")) != "=$row")
-								$subject .= "/subjectAltName=$row";
-						} else {
-							if(!strstr($subject, "=$row/") &&
-								substr($subject, -strlen("=$row")) != "=$row")
-								$subject .= "/subjectAltName=$row";
-						}
-					}
-				if(is_array($_SESSION['_config']['altrows']))
-					foreach($_SESSION['_config']['altrows'] as $row)
-						if(!strstr($subject, "=$row/") &&
-							substr($subject, -strlen("=$row")) != "=$row")
-							$subject .= "/subjectAltName=$row";
+				$subject = buildSubjectFromSession();
 				$subject = mysql_real_escape_string($subject);
 				mysql_query("update `domaincerts` set `subject`='$subject',`csr_name`='$newfile' where `id`='$newid'");
 
@@ -938,6 +939,7 @@
 		{
 			echo _("You did not select any certificates for renewal.");
 		}
+
 		showfooter();
 		exit;
 	}
@@ -1445,7 +1447,6 @@
 
 	if($oldid == 16 && $process != "")
 	{
-
 		if(array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] && $_SESSION['profile']['codesign'] && ($_SESSION['profile']['points'] >= 100))
 		{
 			$_REQUEST['codesign'] = 1;
@@ -1948,20 +1949,7 @@
 		//if($org['contact'])
 		//	$csrsubject .= "/emailAddress=".trim($org['contact']);
 
-		if(is_array($_SESSION['_config']['rows']))
-			foreach($_SESSION['_config']['rows'] as $row)
-				$csrsubject .= "/commonName=$row";
-		$SAN="";
-		if(is_array($_SESSION['_config']['altrows']))
-			foreach($_SESSION['_config']['altrows'] as $subalt)
-			{
-				if($SAN != "")
-					$SAN .= ",";
-				$SAN .= "$subalt";
-			}
-
-		if($SAN != "")
-			$csrsubject .= "/subjectAltName=".$SAN;
+		$csrsubject .= buildSubjectFromSession();
 
 		$type="";
 		if($_REQUEST["ocspcert"]!="" && $_SESSION['profile']['admin'] == 1) $type="8";
@@ -2757,8 +2745,8 @@
 
 			sendmail($row['email'], "[CAcert.org] "._("Password Update Notification"), $body,
 						"support@cacert.org", "", "", "CAcert Support");
-
 		}
+
 		showfooter();
 		exit;
 	}
