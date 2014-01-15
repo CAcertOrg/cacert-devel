@@ -73,14 +73,16 @@ function buildSubjectFromSession() {
 	return buildSubject(array_unique($domains));
 }
 
-	$id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
-	$oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
-	$process = ""; if(array_key_exists("process",$_REQUEST)) $process=$_REQUEST['process'];
+	$id = array_key_exists("id",$_REQUEST) ? intval($_REQUEST['id']) : 0;
+	$oldid = array_key_exists("oldid",$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
+	$process = array_key_exists("process",$_REQUEST) ? $_REQUEST['process'] : "";
+//	$showdetalis refers to Secret Question and Answers from account/13.php
+	$showdetails = array_key_exists("showdetails",$_REQUEST) ? intval($_REQUEST['showdetails']) : 0;
 
-	$cert=0; if(array_key_exists('cert',$_REQUEST)) $cert=intval($_REQUEST['cert']);
-	$orgid=0; if(array_key_exists('orgid',$_REQUEST)) $orgid=intval($_REQUEST['orgid']);
-	$memid=0; if(array_key_exists('memid',$_REQUEST)) $memid=intval($_REQUEST['memid']);
-	$domid=0; if(array_key_exists('domid',$_REQUEST)) $domid=intval($_REQUEST['domid']);
+	$cert = array_key_exists('cert',$_REQUEST) ? intval($_REQUEST['cert']) : 0;
+	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
+	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
+	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
 
 
 	if(!$_SESSION['mconn'])
@@ -1189,25 +1191,7 @@ function buildSubjectFromSession() {
 		exit;
 	}
 
-
-	if($oldid == 6 && $_REQUEST['certid'] != "")
-	{
-		if(trim($_REQUEST['description']) != ""){
-			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$description= "";
-		}
-
-		if(trim($_REQUEST['disablelogin']) == "1"){
-			$disablelogin = 1;
-		}else{
-			$disablelogin = 0;
-		}
-
-		mysql_query("update `emailcerts` set `disablelogin`='$disablelogin', `description`='$description' where `id`='".$_REQUEST['certid']."' and `memid`='".$_SESSION['profile']['id']."'");
-	}
-
-	if($oldid == 13 && $process != "")
+	if($oldid == 13 && $process != "" && $showdetails!="")
 	{
 		csrf_check("perschange");
 		$_SESSION['_config']['user'] = $_SESSION['profile'];
@@ -1315,18 +1299,20 @@ function buildSubjectFromSession() {
 						where `id`='".$_SESSION['profile']['id']."'";
 			mysql_query($query);
 		}
-		$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
-						`Q2`='".$_SESSION['_config']['user']['Q2']."',
-						`Q3`='".$_SESSION['_config']['user']['Q3']."',
-						`Q4`='".$_SESSION['_config']['user']['Q4']."',
-						`Q5`='".$_SESSION['_config']['user']['Q5']."',
-						`A1`='".$_SESSION['_config']['user']['A1']."',
-						`A2`='".$_SESSION['_config']['user']['A2']."',
-						`A3`='".$_SESSION['_config']['user']['A3']."',
-						`A4`='".$_SESSION['_config']['user']['A4']."',
-						`A5`='".$_SESSION['_config']['user']['A5']."'
-						where `id`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		if ($showdetails!="") {
+			$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
+							`Q2`='".$_SESSION['_config']['user']['Q2']."',
+							`Q3`='".$_SESSION['_config']['user']['Q3']."',
+							`Q4`='".$_SESSION['_config']['user']['Q4']."',
+							`Q5`='".$_SESSION['_config']['user']['Q5']."',
+							`A1`='".$_SESSION['_config']['user']['A1']."',
+							`A2`='".$_SESSION['_config']['user']['A2']."',
+							`A3`='".$_SESSION['_config']['user']['A3']."',
+							`A4`='".$_SESSION['_config']['user']['A4']."',
+							`A5`='".$_SESSION['_config']['user']['A5']."'
+							where `id`='".$_SESSION['profile']['id']."'";
+			mysql_query($query);
+		}
 
 		//!!!Should be rewritten
 		$_SESSION['_config']['user']['otphash'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otphash']))));
@@ -1541,6 +1527,7 @@ function buildSubjectFromSession() {
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='NS',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1631,6 +1618,7 @@ function buildSubjectFromSession() {
 
 			$query = "insert into `orgemailcerts` set
 						`CN`='$defaultemail',
+						`ou`='".$_SESSION['_config']['OU']."',
 						`keytype`='" . sanitizeHTML($_REQUEST['keytype']) . "',
 						`orgid`='".$org['orgid']."',
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
@@ -1706,6 +1694,7 @@ function buildSubjectFromSession() {
 				$query = "insert into `orgemailcerts` set
 						`orgid`='".$row['orgid']."',
 						`CN`='".$row['CN']."',
+						`ou`='".$row['ou']."',
 						`subject`='".$row['subject']."',
 						`keytype`='".$row['keytype']."',
 						`csr_name`='".$row['csr_name']."',
@@ -1822,6 +1811,21 @@ function buildSubjectFromSession() {
 		exit;
 	}
 
+	if($oldid == 18 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=$_REQUEST['orgfilterid'];
+		$_SESSION['_config']['sorting']=$_REQUEST['sorting'];
+		$_SESSION['_config']['status']=$_REQUEST['status'];
+	}
+
+	if($oldid == 18 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=18;
+		$_SESSION['_config']['orgfilterid']=0;
+		$_SESSION['_config']['sorting']=0;
+		$_SESSION['_config']['status']=0;
+	}
 
 	if($process != "" && $oldid == 20)
 	{
@@ -2163,6 +2167,22 @@ function buildSubjectFromSession() {
 		echo(_("Certificate settings have been changed.")."<br/>\n");
 		showfooter();
 		exit;
+	}
+
+	if($oldid == 22 && array_key_exists('filter',$_REQUEST) && $_REQUEST['filter']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['dorgfilterid']=$_REQUEST['dorgfilterid'];
+		$_SESSION['_config']['dsorting']=$_REQUEST['dsorting'];
+		$_SESSION['_config']['dstatus']=$_REQUEST['dstatus'];
+	}
+
+	if($oldid == 22 && array_key_exists('reset',$_REQUEST) && $_REQUEST['reset']!= "")
+	{
+		$id=22;
+		$_SESSION['_config']['dorgfilterid']=0;
+		$_SESSION['_config']['dsorting']=0;
+		$_SESSION['_config']['dstatus']=0;
 	}
 
 
