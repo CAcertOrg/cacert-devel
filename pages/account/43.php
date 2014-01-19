@@ -243,6 +243,7 @@ if(intval($_REQUEST['userid']) > 0) {
                         </select>
                         <input type="text" name="year" value="<?=$year?>" size="4">
                         <input type="submit" value="Go">
+                        <input type="hidden" name="ticketno" value="<?=$ticketno?>"/>
                     </form>
                 </nobr>
             </td>

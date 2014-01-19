@@ -1123,7 +1123,7 @@ function get_user_agreement($memid){
 	}
 
 /**
- * se_write_log()
+ * write_se_log()
  *  writes an information to the adminlog
  *
  * @param mixed $uid - id of the user account
@@ -1132,7 +1132,7 @@ function get_user_agreement($memid){
  * @param mixed $info - the ticket / arbitration no or other information
  * @return
  */
-function se_write_log($uid, $adminid, $type, $info){
+function write_se_log($uid, $adminid, $type, $info){
 	//records all support engineer actions changing a user account
 	$uid = intval($uid);
 	$adminid = intval($adminid);

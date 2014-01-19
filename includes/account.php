@@ -2701,9 +2701,14 @@
 	}
 
 	//check if ticket number was entered
-	if ( $id== 43) {
-		$ticketno=mysql_real_escape_string($_REQUEST['ticketno']);
-		$ticketvalidation=valid_ticket_number($ticketno);
+	if ( $id== 43 or $oldid==43) {
+		$ticketno = 0;
+		$ticketvalidation = FALSE;
+		if ($_REQUEST['ticketno']) {
+			$ticketno = mysql_real_escape_string(trim($_REQUEST['ticketno']));
+			$ticketvalidation = valid_ticket_number($ticketno);
+		}
+
 		$_SESSION['ticketno']=$ticketno;
 	}
 
@@ -2721,7 +2726,7 @@
 		$userid = intval($_REQUEST['userid']);
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
-		write_se_log($userid,$_SESSION[''], $_SESSION['profile']['id'],'AD Name/DOB Change',$ticketno);
+		write_se_log($userid, $_SESSION['profile']['id'],'AD Name/DOB Change',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3235,7 +3240,7 @@
  */
 	if($id == 59){
 		if ($oldid==43) {
-			se_write_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'View account history', $_REQUEST['ticketno']);
+			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'View account history', $_REQUEST['ticketno']);
 			$support=1;
 		}ELSEIF ($oldid==13){
 			$support=0;
