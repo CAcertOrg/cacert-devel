@@ -37,13 +37,13 @@ if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
 }
 
 if (isset($_SESSION['ticketno'])) {
-    $ticketno=$_SESSION['ticketno'];
-    $ticketvalidation=TRUE;
+    $ticketno = $_SESSION['ticketno'];
+    $ticketvalidation = TRUE;
 }
 if (isset($_SESSION['ticketmsg'])) {
-    $ticketmsg=$_SESSION['ticketmsg'];
+    $ticketmsg = $_SESSION['ticketmsg'];
 } else {
-    $ticketmsg='';
+    $ticketmsg = '';
 }
 
 // search for an account by email search, if more than one is found display list to choose
@@ -260,70 +260,70 @@ if(intval($_REQUEST['userid']) > 0) {
         </tr>
         <tr>
             <td class="DataTD"><?=_("Is Assurer")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;assurer=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admsetassuret')?>"><?=$row['assurer']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;assurer=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admsetassuret')?>&amp;ticketno=<?=$ticketno?>"><?=$row['assurer']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Blocked Assurer")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;assurer_blocked=<?=intval($row['id'])?>"><?=$row['assurer_blocked']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;assurer_blocked=<?=intval($row['id'])?>&amp;ticketno=<?=$ticketno?>"><?=$row['assurer_blocked']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Account Locking")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;locked=<?=$row['id']?>&amp;csrf=<?=make_csrf('admactlock')?>"><?=$row['locked']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;locked=<?=$row['id']?>&amp;csrf=<?=make_csrf('admactlock')?>&amp;ticketno=<?=$ticketno?>"><?=$row['locked']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Code Signing")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>"><?=$row['codesign']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=$row['id']?>&amp;csrf=<?=make_csrf('admcodesign')?>&amp;ticketno=<?=$ticketno?>"><?=$row['codesign']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Org Assurer")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>"><?=$row['orgadmin']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admorgadmin')?>&amp;ticketno=<?=$ticketno?>"><?=$row['orgadmin']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("TTP Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;ttpadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admttpadmin')?>"><?=$row['ttpadmin']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;ttpadmin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admttpadmin')?>&amp;ticketno=<?=$ticketno?>"><?=$row['ttpadmin']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Location Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;locadmin=<?=$row['id']?>"><?=$row['locadmin']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;locadmin=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$row['locadmin']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;admin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admsetadmin')?>"><?=$row['admin']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;admin=<?=$row['id']?>&amp;csrf=<?=make_csrf('admsetadmin')?>&amp;ticketno=<?=$ticketno?>"><?=$row['admin']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Ad Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;adadmin=<?=$row['id']?>"><?=$row['adadmin']?></a> (0 = none, 1 = submit, 2 = approve)</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;adadmin=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$row['adadmin']?></a> (0 = none, 1 = submit, 2 = approve)</td>
         </tr>
     <!-- presently not needed
         <tr>
             <td class="DataTD"><?=_("Tverify Account")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;tverify=<?=$row['id']?>"><?=$row['tverify']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;tverify=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$row['tverify']?></a></td>
         </tr>
     -->
         <tr>
             <td class="DataTD"><?=_("General Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;general=<?=$row['id']?>"><?=$alerts['general']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;general=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$alerts['general']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Country Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;country=<?=$row['id']?>"><?=$alerts['country']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;country=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$alerts['country']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Regional Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;regional=<?=$row['id']?>"><?=$alerts['regional']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;regional=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$alerts['regional']?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;radius=<?=$row['id']?>"><?=$alerts['radius']?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;radius=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=$alerts['radius']?></a></td>
         </tr>
     <? //change password, view secret questions and delete account section ?>
         <tr>
             <td class="DataTD"><?=_("Change Password")?>:</td>
-            <td class="DataTD"><a href="account.php?id=44&amp;userid=<?=$row['id']?>"><?=_("Change Password")?></a></td>
+            <td class="DataTD"><a href="account.php?id=44&amp;userid=<?=$row['id']?>&amp;ticketno=<?=$ticketno?>"><?=_("Change Password")?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Delete Account")?>:</td>
-            <td class="DataTD"><a href="account.php?id=50&amp;userid=<?=$row['id']?>&amp;csrf=<?=make_csrf('admdelaccount')?>"><?=_("Delete Account")?></a></td>
+            <td class="DataTD"><a href="account.php?id=50&amp;userid=<?=$row['id']?>&amp;csrf=<?=make_csrf('admdelaccount')?>&amp;ticketno=<?=$ticketno?>"><?=_("Delete Account")?></a></td>
         </tr>
     <?
                 // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
@@ -392,7 +392,7 @@ if(intval($_REQUEST['userid']) > 0) {
     // show account history
     ?>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;userid=<?=intval($row['id'])?>"><?=_('Show account history')?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=$ticketno?>"><?=_('Show account history')?></a></td>
         </tr>
     </table>
     <br/>
@@ -961,14 +961,14 @@ if(intval($_REQUEST['userid']) > 0) {
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td class="DataTD">
-                <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto"><?=_("Show Assurances the user got")?></a>
-                (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15"><?=_("New calculation")?></a>)
+                <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto&amp;ticketno=<?=$ticketno?>"><?=_("Show Assurances the user got")?></a>
+                (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredto15&amp;ticketno=<?=$ticketno?>"><?=_("New calculation")?></a>)
             </td>
         </tr>
         <tr>
             <td class="DataTD">
-                <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby"><?=_("Show Assurances the user gave")?></a>
-                (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15"><?=_("New calculation")?></a>)
+                <a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby&amp;ticketno=<?=$ticketno?>"><?=_("Show Assurances the user gave")?></a>
+                (<a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;shownotary=assuredby15&amp;ticketno=<?=$ticketno?>"><?=_("New calculation")?></a>)
             </td>
         </tr>
     </table>

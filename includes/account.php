@@ -30,7 +30,7 @@
 	$orgid=0; if(array_key_exists('orgid',$_REQUEST)) $orgid=intval($_REQUEST['orgid']);
 	$memid=0; if(array_key_exists('memid',$_REQUEST)) $memid=intval($_REQUEST['memid']);
 	$domid=0; if(array_key_exists('domid',$_REQUEST)) $domid=intval($_REQUEST['domid']);
-
+	$ticketno=""; if(array_key_exists('ticketno',$_REQUEST)) $ticketno=$_REQUEST['ticketno'];
 
 	if(!$_SESSION['mconn'])
 	{
@@ -2702,14 +2702,13 @@
 
 	//check if ticket number was entered
 	if ( $id== 43 or $oldid==43) {
-		$ticketno = 0;
 		$ticketvalidation = FALSE;
-		if ($_REQUEST['ticketno']) {
+		if ($ticketno != "" ) {
 			$ticketno = mysql_real_escape_string(trim($_REQUEST['ticketno']));
 			$ticketvalidation = valid_ticket_number($ticketno);
 		}
 
-		$_SESSION['ticketno']=$ticketno;
+		$_SESSION['ticketno'] = $ticketno;
 	}
 
 	if($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation==TRUE)
