@@ -2701,7 +2701,7 @@
 	}
 
 	//check if ticket number was entered
-	if ( $id== 43 or $oldid==43) {
+	if ( $id == 43 or $oldid == 43 or $id == 44 or $oldid == 44) {
 		$ticketvalidation = FALSE;
 		if ($ticketno != "" ) {
 			$ticketno = mysql_real_escape_string(trim($_REQUEST['ticketno']));
