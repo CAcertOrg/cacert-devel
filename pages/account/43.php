@@ -159,7 +159,7 @@ if(intval($_REQUEST['userid']) > 0) {
 //Ticket number
 ?>
 <!--
-<form method="post" action="account.php?id=43&userid=<?=$uid?>">
+<form method="post" action="account.php?id=43&userid=<?=intval($_REQUEST['userid'])?>">
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td colspan="2" class="title"><?=_('Ticket handling') ?></td>
