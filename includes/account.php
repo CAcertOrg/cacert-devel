@@ -2701,7 +2701,7 @@
 	}
 
 	//check if ticket number was entered
-	if ( $oldid== 43) {
+	if ( $id== 43) {
 		$ticketno=mysql_real_escape_string($_REQUEST['ticketno']);
 		$ticketvalidation=valid_ticket_number($ticketno);
 		$_SESSION['ticketno']=$ticketno;
