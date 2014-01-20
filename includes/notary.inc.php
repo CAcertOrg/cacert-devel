@@ -1138,8 +1138,8 @@ function write_se_log($uid, $adminid, $type, $info){
 	$adminid = intval($adminid);
 	$type = mysql_real_escape_string($type);
 	$info = mysql_real_escape_string($info);
-	$query="insert into `adminlog` (`when`, `uid`, `admind`,`type`,`information`) values
-		(Now(), $uid, $adminid, '$type', '$info'";
+	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`) values
+		(Now(), $uid, $adminid, '$type', '$info')";
 	mysql_query($query);
 }
 
