@@ -3113,6 +3113,7 @@
 			exit;
 		}
 		account_delete($_REQUEST['userid'], trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
+		write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'SE Account delete', trim($_REQUEST['arbitrationno']));
 	}
 
 	if(($id == 51 || $id == 52 || $oldid == 52))
