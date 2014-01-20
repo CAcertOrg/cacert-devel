@@ -392,7 +392,7 @@ if(intval($_REQUEST['userid']) > 0) {
     // show account history
     ?>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=$ticketno?>"><?=_('Show account history')?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;oldid=43&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=$ticketno?>"><?=_('Show account history')?></a></td>
         </tr>
     </table>
     <br/>

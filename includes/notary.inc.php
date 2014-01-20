@@ -1268,8 +1268,8 @@ function get_se_log($userid){
  * @param integer $viewall- states if expired certs should be visible , default = 0 - not visible
  * @return
  */
+//add to account/5.php
 function get_client_certs($userid,$viewall=0){
-	//add to account/5.php
 	$userid = intval($userid);
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 		UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
@@ -1428,7 +1428,7 @@ function output_log_agreement_header(){
 		<td class="DataTD bold"><?= _("Agreement") ?></td>
 		<td class="DataTD bold"><?= _("Date") ?></td>
 		<td class="DataTD bold"><?= _("Method") ?></td>
-		<td class="DataTD bold"><?= _("Comment") ?></td>
+		<td class="DataTD bold"><?= _("Active ") ?></td>
 	</tr>
 	<?
 }
@@ -1445,7 +1445,7 @@ function output_log_agreement($row){
 		<td class="DataTD" ><?=$row['document']?></td>
 		<td class="DataTD" ><?=$row['date']?></td>
 		<td class="DataTD" ><?=$row['method']?></td>
-		<td class="DataTD"><?= ($row['active']==0)? _('No'):_('Yes')?></td>
+		<td class="DataTD"><?= ($row['active']==0)? _('passive'):_('active')?></td>
 	</tr>
 	<?
 }
@@ -1534,8 +1534,8 @@ function output_log_se($row, $support=0){
  * @return
  */
 function output_client_cert_header($support=0){
-	?>
 	//should be added to account/5.php
+	?>
 	<tr>
 		<?if ($support !=1) { ?>
 			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
@@ -1630,8 +1630,8 @@ function output_client_cert($row, $support=0){
  * @return
  */
 function output_log_server_certs_header($support=0){
-	?>
 	//should be entered in account/12.php
+	?>
 	<tr>
 		<?if ($support !=1) { ?>
 			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
@@ -1707,7 +1707,7 @@ function output_gpg_certs_header($support=0){
 		<td class="DataTD"><?=_("Email Address")?></td>
 		<td class="DataTD"><?=_("Expires")?></td>
 		<td class="DataTD"><?=_("Key ID")?></td>
-		<?if (1==$support) { ?>
+		<?if ($support !=1) { ?>
 			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
 		<? }?>
 	</tr>
@@ -1733,7 +1733,7 @@ function output_gpg_certs($row, $support=0){
 	<tr>
 		<? if($verified == _("Valid")) { ?>
 			<td class="DataTD"><?=$verified?></td>
-			<?if (1==$support) { ?>
+			<?if ($support !=1) { ?>
 				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
 			<? } else { ?>
 				<td class="DataTD"><?=$row['email']?></td>
@@ -1743,19 +1743,19 @@ function output_gpg_certs($row, $support=0){
 			<td class="DataTD"><?=$row['email']?></td>
 		<? } else { ?>
 			<td class="DataTD"><?=$verified?></td>
-			<?if (1==$support) { ?>
+			<?if ($support !=1) { ?>
 				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
 			<? } else { ?>
 				<td class="DataTD"><?=$row['email']?></td>
 			<? } ?>
 		<? } ?>
 		<td class="DataTD"><?=$row['expires']?></td>
-		<?if (1==$support) { ?>
+		<?if ($support != 1) { ?>
 			<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
 		<? } else { ?>
 			<td class="DataTD"><?=$row['keyid']?></td>
 		<? } ?>
-		<?if (1==$support) { ?>
+		<?if ($support !=1) { ?>
 			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
 			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
 		<? } ?>

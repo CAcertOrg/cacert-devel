@@ -2701,7 +2701,7 @@
 	}
 
 	//check if ticket number was entered
-	if ( $id == 43 or $oldid == 43 or $id == 44 or $oldid == 44) {
+	if ( $id == 43 || $oldid == 43 || $id == 44 || $oldid == 44) {
 		$ticketvalidation = FALSE;
 		if ($ticketno != "" ) {
 			$ticketno = mysql_real_escape_string(trim($_REQUEST['ticketno']));
@@ -3238,11 +3238,11 @@
 	}
  */
 	if($id == 59){
-		if ($oldid==43) {
+		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
 			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'View account history', $_REQUEST['ticketno']);
-			$support=1;
-		}ELSEIF ($oldid==13){
-			$support=0;
+			$_SESSION['support']=1;
+		}ELSEIF ($oldid == 13 && $_REQUEST['userid'] == $_SESSION['profile']['id']){
+			$_SESSION['support']=0;
 		}ELSE{
 			showheader(_("My CAcert.org Account!"));
 			echo _("You do not have access to this page.");
