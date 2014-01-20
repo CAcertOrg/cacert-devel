@@ -21,24 +21,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 $ticketno='';
 $ticketvalidation=FALSE;
 
-//check if an assurance should be deleted
-if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
-{
-    $assurance = mysql_real_escape_string(intval($_REQUEST['assurance']));
-    $row = 0;
-    $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
-    if ($res) {
-        $row = mysql_fetch_assoc($res);
-    }
-    mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
-    if ($row) {
-        fix_assurer_flag($row['to']);
-    }
-}
 
 if (isset($_SESSION['ticketno'])) {
     $ticketno = $_SESSION['ticketno'];
-    $ticketvalidation = TRUE;
+    $ticketvalidation = valid_ticket_number($ticketno);
 }
 if (isset($_SESSION['ticketmsg'])) {
     $ticketmsg = $_SESSION['ticketmsg'];
@@ -139,20 +125,20 @@ if(intval($_REQUEST['userid']) > 0) {
 //display account data
 
 //deletes an assurance
-        if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation==true)
+        if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == true)
         {
             $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
-            $row = 0;
+            $trow = 0;
             $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
             if ($res) {
-                $row = mysql_fetch_assoc($res);
+                $trow = mysql_fetch_assoc($res);
             }
             mysql_query("delete from `notary` where `id`='$assurance'");
-            if ($row) {
-                fix_assurer_flag($row['to']);
+            if ($trow) {
+                fix_assurer_flag($trow['to']);
                 write_se_log($userid, $_SESSION['profile']['id'], 'SE assurance revoke', $ticketno);
             }
-        } else {
+        } elseif(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == FALSE) {
             $ticketmsg=_('No assurance revoked. Ticket number is missing!');
         }
 
@@ -169,7 +155,7 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD"><input type="text" name="ticketno" value="<?=$ticketno?>"/></td>
         </tr>
         <tr>
-            <td colspan="2" ><?=$ticketmsg?></td><?php $_SESSION['ticketmsg']='' ?>
+            <td colspan="2" class="DataTDError"><?=$ticketmsg?></td><?php $_SESSION['ticketmsg']='' ?>
         </tr>
         <tr>
             <td colspan="2" ><input type="submit" value="<?=_('Set ticket number') ?>"></td>
@@ -398,19 +384,6 @@ if(intval($_REQUEST['userid']) > 0) {
     ?>
         <tr>
             <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;oldid=43&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=$ticketno?>"><?=_('Show account history')?></a></td>
-        </tr>
-    </table>
-    <br/>
-    <?
-    //ticket number to track SE log
-    ?>
-    <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-        <tr>
-            <td td colspan="5" class="title"><?=_("Ticket/Arbitration No, needs to be entered to apply any changes")?></td>
-        </tr>
-        <tr>
-            <td class="DataTD"><?=_('Ticket/Arbitration No')?></td>
-            <td class="DataTD"><input name="ticketno" /></td>
         </tr>
     </table>
     <br/>

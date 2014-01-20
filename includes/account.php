@@ -2711,7 +2711,7 @@
 		$_SESSION['ticketno'] = $ticketno;
 	}
 
-	if($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation==TRUE)
+	if($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation == TRUE)
 	{
 		$id = 43;
 		$oldid=0;
@@ -2726,8 +2726,10 @@
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
 		write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno);
-	}else{
-		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
+	}elseif($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation == FALSE){
+		$id = 43;
+		$oldid=0;
+		$_SESSION['ticketmsg']='No action (name/dob change) taken. Ticket number is missing!';
 	}
 
 	if($oldid == 43 && $_REQUEST['action'] == 'revokecert' && $ticketvalidation==TRUE)
@@ -2736,6 +2738,10 @@
 		revoke_all_private_cert($userid);
 		write_se_log($userid, $_SESSION['profile']['id'], 'SE Revoke all certificates',$ticketno);
 		$id=43;
+	}elseif($oldid == 43 && $_REQUEST['action'] == "revokecert" && $ticketvalidation == FALSE){
+	    $id = 43;
+	    $oldid=0;
+	    $_SESSION['ticketmsg']='No certificates revokes. Ticket number is missing!';
 	}
 
 	if($oldid == 48 && $_REQUEST['domain'] == "")
@@ -2761,7 +2767,7 @@
 			$_REQUEST['email'] = $row['email'];
 	}
 
-	if($oldid == 44 && $ticketvalidation==TRUE)
+	if($oldid == 44 && $ticketvalidation == TRUE)
 	{
 		showheader(_("My CAcert.org Account!"));
 		if(intval($_REQUEST['userid']) <= 0)
@@ -2785,7 +2791,7 @@
 		}
 		showfooter();
 		exit;
-	}else{
+	}elseif($oldid == 44 && $ticketvalidation == FALSE){
 		$_SESSION['ticketmsg']='No password reset taken. Ticket number is missing!';
 	}
 
@@ -2895,7 +2901,7 @@
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
  */
-	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admsetassuret');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
@@ -2904,11 +2910,12 @@
 		$ver = !$row['assurer'];
 		mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer status',$ticketno);
-	}else{
-		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
+	}elseif($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['assurer']);
+		$_SESSION['ticketmsg']='No action (Change assurer status) taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
 		$query = "select * from `users` where `id`='$memid'";
@@ -2916,11 +2923,12 @@
 		$ver = !$row['assurer_blocked'];
 		mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer blocked status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admactlock');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locked']);
@@ -2929,11 +2937,12 @@
 		$ver = !$row['locked'];
 		mysql_query("update `users` set `locked`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change locked status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['locked']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admcodesign');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['codesign']);
@@ -2942,11 +2951,12 @@
 		$ver = !$row['codesign'];
 		mysql_query("update `users` set `codesign`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change codesign status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['codesign']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admorgadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
@@ -2955,11 +2965,12 @@
 		$ver = !$row['orgadmin'];
 		mysql_query("update `users` set `orgadmin`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change org assuer status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admttpadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
@@ -2968,11 +2979,12 @@
 		$ver = !$row['ttpadmin'];
 		mysql_query("update `users` set `ttpadmin`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change ttp admin status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['adadmin']);
 		$query = "select * from `users` where `id`='$memid'";
@@ -2982,11 +2994,12 @@
 			$ver = 0;
 		mysql_query("update `users` set `adadmin`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change advertising admin status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['adadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locadmin']);
 		$query = "select * from `users` where `id`='$memid'";
@@ -2994,11 +3007,12 @@
 		$ver = !$row['locadmin'];
 		mysql_query("update `users` set `locadmin`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change location admin status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['locadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admsetadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['admin']);
@@ -3007,11 +3021,12 @@
 		$ver = !$row['admin'];
 		mysql_query("update `users` set `admin`='$ver' where `id`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change SE status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['admin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['general']);
 		$query = "select * from `alerts` where `memid`='$memid'";
@@ -3019,11 +3034,12 @@
 		$ver = !$row['general'];
 		mysql_query("update `alerts` set `general`='$ver' where `memid`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change general status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['general']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['country']);
 		$query = "select * from `alerts` where `memid`='$memid'";
@@ -3031,11 +3047,12 @@
 		$ver = !$row['country'];
 		mysql_query("update `alerts` set `country`='$ver' where `memid`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change country status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['country']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['regional']);
 		$query = "select * from `alerts` where `memid`='$memid'";
@@ -3043,11 +3060,12 @@
 		$ver = !$row['regional'];
 		mysql_query("update `alerts` set `regional`='$ver' where `memid`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change regional status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0 && $ticketvalidation == FALSE){
+		$_REQUEST['userid'] = intval($_REQUEST['regional']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0 && $ticketvalidation==TRUE)
+	if($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['radius']);
 		$query = "select * from `alerts` where `memid`='$memid'";
@@ -3055,7 +3073,8 @@
 		$ver = !$row['radius'];
 		mysql_query("update `alerts` set `radius`='$ver' where `memid`='$memid'");
 		write_se_log($memid, $_SESSION['profile']['id'],'SE Change radius status',$ticketno);
-	}else{
+	}elseif($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0 && $ticketvalidation == false){
+		$_REQUEST['userid'] = intval($_REQUEST['radius']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 

@@ -558,6 +558,19 @@ td.storyLeft {
 	border-right: 1px #cfcfcf solid;
 }
 
+.DataTDError {
+    border-style: inset;
+    border-width: 1px;
+    font-size: 8pt;
+    color: #ff0000;
+    font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+
+    background: #ffffff;
+    padding: 1px 5px 1px 5px;
+    border: 1px #cfcfcf solid;
+    border-left: 1px #cfcfcf dotted;
+    border-right: 1px #cfcfcf dotted;
+}
 .wrapper {
 	border-collapse: collapse;
 	font-family: verdana, sans-serif;
