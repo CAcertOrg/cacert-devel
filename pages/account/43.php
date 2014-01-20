@@ -150,7 +150,7 @@ if(intval($_REQUEST['userid']) > 0) {
             mysql_query("delete from `notary` where `id`='$assurance'");
             if ($row) {
                 fix_assurer_flag($row['to']);
-                write_se_log($uid, $adminid, 'AD assurance revoke', $ticketno);
+                write_se_log($userid, $_SESSION['profile']['id'], 'AD assurance revoke', $ticketno);
             }
         } else {
             $ticketmsg=_('No assurance revoked. Ticket number is missing!');
