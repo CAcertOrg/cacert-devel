@@ -150,7 +150,7 @@ if(intval($_REQUEST['userid']) > 0) {
             mysql_query("delete from `notary` where `id`='$assurance'");
             if ($row) {
                 fix_assurer_flag($row['to']);
-                write_se_log($userid, $_SESSION['profile']['id'], 'AD assurance revoke', $ticketno);
+                write_se_log($userid, $_SESSION['profile']['id'], 'SE assurance revoke', $ticketno);
             }
         } else {
             $ticketmsg=_('No assurance revoked. Ticket number is missing!');
@@ -328,7 +328,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
                 // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
                 if(array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==true) {
-                    write_se_log($userid, $_SESSION['profile']['id'], 'AD view lost password information', $ticketno);
+                    write_se_log($userid, $_SESSION['profile']['id'], 'SE view lost password information', $ticketno);
     ?>
         <tr>
             <td class="DataTD"><?=_("Lost Password")?> - Q1:</td>

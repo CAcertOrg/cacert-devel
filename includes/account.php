@@ -2725,7 +2725,7 @@
 		$userid = intval($_REQUEST['userid']);
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
-		write_se_log($userid, $_SESSION['profile']['id'],'AD Name/DOB Change',$ticketno);
+		write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2734,7 +2734,7 @@
 	{
 		$userid = intval($_REQUEST['userid']);
 		revoke_all_private_cert($userid);
-		write_se_log($userid, $_SESSION['profile']['id'], 'AD Revoke all certificates',$ticketno);
+		write_se_log($userid, $_SESSION['profile']['id'], 'SE Revoke all certificates',$ticketno);
 		$id=43;
 	}
 
@@ -2781,7 +2781,7 @@
 
 			sendmail($row['email'], "[CAcert.org] "._("Password Update Notification"), $body,
 						"support@cacert.org", "", "", "CAcert Support");
-			write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'],'AD reset password',$ticketno);
+			write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'],'SE reset password',$ticketno);
 		}
 		showfooter();
 		exit;
@@ -2890,7 +2890,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['tverify'];
 		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change tverify status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change tverify status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2903,7 +2903,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['assurer'];
 		mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change assurer staus',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2915,7 +2915,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['assurer_blocked'];
 		mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change assurer blocked status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer blocked status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2928,7 +2928,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['locked'];
 		mysql_query("update `users` set `locked`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change locked status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change locked status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2941,7 +2941,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['codesign'];
 		mysql_query("update `users` set `codesign`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change codesign status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change codesign status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2954,7 +2954,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['orgadmin'];
 		mysql_query("update `users` set `orgadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change org assuer status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change org assuer status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2967,7 +2967,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['ttpadmin'];
 		mysql_query("update `users` set `ttpadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change ttp admin status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change ttp admin status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2981,7 +2981,7 @@
 		if($ver > 2)
 			$ver = 0;
 		mysql_query("update `users` set `adadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change advertising admin status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change advertising admin status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2993,7 +2993,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['locadmin'];
 		mysql_query("update `users` set `locadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change location admin status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change location admin status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3006,7 +3006,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['admin'];
 		mysql_query("update `users` set `admin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change SE status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change SE status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3018,7 +3018,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['general'];
 		mysql_query("update `alerts` set `general`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change general status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change general status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3030,7 +3030,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['country'];
 		mysql_query("update `alerts` set `country`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change country status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change country status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3042,7 +3042,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['regional'];
 		mysql_query("update `alerts` set `regional`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change regional status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change regional status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3054,7 +3054,7 @@
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['radius'];
 		mysql_query("update `alerts` set `radius`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'AD Change radius status',$ticketno);
+		write_se_log($memid, $_SESSION['profile']['id'],'SE Change radius status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -3241,7 +3241,7 @@
  */
 	if($id == 59){
 		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
-			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'AD View account history', $_REQUEST['ticketno']);
+			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
 			$_SESSION['support']=1;
 		}ELSEIF ($oldid == 13 && $_REQUEST['userid'] == $_SESSION['profile']['id']){
 			$_SESSION['support']=0;
