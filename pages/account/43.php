@@ -328,7 +328,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
                 // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
                 if(array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==true) {
-                    write_se_log($uid, $adminid, 'AD view lost password information', $ticketno);
+                    write_se_log($userid, $_SESSION['profile']['id'], 'AD view lost password information', $ticketno);
     ?>
         <tr>
             <td class="DataTD"><?=_("Lost Password")?> - Q1:</td>
@@ -377,10 +377,15 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD" colspan="2"><?=_('No access granted. Ticket number is missing')?></td>
         </tr>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;showlostpw=yes"><?=_("Show Lost Password Details")?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;showlostpw=yes&amp;ticketno=<?=$ticketno?>"><?=_("Show Lost Password Details")?></a></td>
         </tr>
     <?
-                }
+                } else {
+                    ?>
+        <tr>
+            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;showlostpw=yes&amp;ticketno=<?=$ticketno?>"><?=_("Show Lost Password Details")?></a></td>
+        </tr>
+    <?                }
 
     // list assurance points
     ?>
