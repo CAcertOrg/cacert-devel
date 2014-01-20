@@ -2730,10 +2730,11 @@
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
 
-	if($oldid == 43 && $_REQUEST['action'] == 'revokecert')
+	if($oldid == 43 && $_REQUEST['action'] == 'revokecert' && $ticketvalidation==TRUE)
 	{
 		$userid = intval($_REQUEST['userid']);
 		revoke_all_private_cert($userid);
+		write_se_log($userid, $_SESSION['profile']['id'], 'AD Revoke all certificates',$ticketno);
 		$id=43;
 	}
 
@@ -3239,7 +3240,7 @@
  */
 	if($id == 59){
 		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
-			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'View account history', $_REQUEST['ticketno']);
+			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'AD View account history', $_REQUEST['ticketno']);
 			$_SESSION['support']=1;
 		}ELSEIF ($oldid == 13 && $_REQUEST['userid'] == $_SESSION['profile']['id']){
 			$_SESSION['support']=0;

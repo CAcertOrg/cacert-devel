@@ -286,7 +286,7 @@
 <?
 	}
 
-	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
+	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked, $ticketno)
 	{
 
 		$tdstyle="";
@@ -333,7 +333,7 @@
 <?
 			} else {
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=$ticketno?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
 			}
 		}
@@ -381,7 +381,7 @@
 
 // ************* output given assurances ******************
 
-	function output_given_assurances_content($userid,&$points,&$sum_experience,$support)
+	function output_given_assurances_content($userid,&$points,&$sum_experience,$support, $ticketno)
 	{
 		$points = 0;
 		$sumexperience = 0;
@@ -392,13 +392,13 @@
 			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
 			$email = show_email_link ($fromuser['email'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked, $ticketno);
 		}
 	}
 
 // ************* output received assurances ******************
 
-	function output_received_assurances_content($userid,&$points,&$sum_experience,$support)
+	function output_received_assurances_content($userid,&$points,&$sum_experience,$support, $ticketno)
 	{
 		$points = 0;
 		$sumexperience = 0;
@@ -409,7 +409,7 @@
 			calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
 			$email = show_email_link ($fromuser['email'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked, $ticketno);
 		}
 	}
 
@@ -591,17 +591,17 @@
 		return $issue_points;
 	}
 
-	function output_given_assurances($userid,$support=0)
+	function output_given_assurances($userid,$support=0, $ticketno)
 	{
 		output_assurances_header(_("Assurance Points You Issued"),$support);
-		output_given_assurances_content($userid,$points,$sum_experience,$support);
+		output_given_assurances_content($userid,$points,$sum_experience,$support, $ticketno);
 		output_assurances_footer(_("Total Points Issued"),$points,_("Total Experience Points"),$sum_experience,$support);
 	}
 
-	function output_received_assurances($userid,$support=0)
+	function output_received_assurances($userid,$support=0, $ticketno)
 	{
 		output_assurances_header(_("Your Assurance Points"),$support);
-		output_received_assurances_content($userid,$points,$sum_experience,$support);
+		output_received_assurances_content($userid,$points,$sum_experience,$support, $ticketno);
 		output_assurances_footer(_("Total Assurance Points"),$points,_("Total Experience Points"),$sum_experience,$support);
 	}
 

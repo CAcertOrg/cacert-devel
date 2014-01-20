@@ -952,6 +952,7 @@ if(intval($_REQUEST['userid']) > 0) {
                     <input type="hidden" name="oldid" value="43">
                     <input type="hidden" name="userid" value="<?=intval($userid)?>">
                     <input type="submit" value="<?=_('revoke certificates')?>">
+                    <input type="hidden" name="ticketno" value="<?=$ticketno?>"/>
                 </form>
             </td>
         </tr>
@@ -1008,7 +1009,7 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD"><?=intval($drow['points'])?></td>
             <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
             <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
-            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=$ticketno?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
         </tr>
     <?
         }
@@ -1055,7 +1056,7 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD"><?=$drow['points']?></td>
             <td class="DataTD"><?=$drow['location']?></td>
             <td class="DataTD"><?=$drow['method']?></td>
-            <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
+            <td class="DataTD"><a href="account.php?id=43&userid=<?=$drow['from']?>&assurance=<?=$drow['id']?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=$ticketno?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$drow['id'])?>');"><?=_("Revoke")?></a></td>
         </tr>
     <?
         }
@@ -1080,10 +1081,10 @@ if(isset($_GET['shownotary'])) {
             showassuredby();
             break;
         case 'assuredto15':
-            output_received_assurances(intval($_GET['userid']),1);
+            output_received_assurances(intval($_GET['userid']),1,$ticketno);
             break;
         case 'assuredby15':
-            output_given_assurances(intval($_GET['userid']),1);
+            output_given_assurances(intval($_GET['userid']),1, $ticketno);
             break;
     }
 }
