@@ -35,7 +35,7 @@
 	function get_number_of_assurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-		     	WHERE `method` = 'Face to Face Meeting' AND `from`='".intval($userid)."' ");
+		     	WHERE `method` = 'Face to Face Meeting' AND `deleted`=0 AND `from`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -44,7 +44,7 @@
 	function get_number_of_ttpassurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `to`='".intval($userid)."' ");
+			WHERE (`method`='Trusted Third Parties' or `method`='TTP-Assisted') AND `deleted`=0 AND `to`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -53,7 +53,7 @@
 	function get_number_of_assurees ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-			WHERE `method` = 'Face to Face Meeting' AND `to`='".intval($userid)."' ");
+			WHERE `method` = 'Face to Face Meeting' AND `deleted`=0 AND `to`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -75,27 +75,49 @@
 		return intval(query_get_number_of_rows($res)+1);
 	}
 
-	function get_given_assurances ($userid)
+	/**
+	 * get_given_assurances()
+	 *  returns the list of assurances given by the user
+	 * @param mixed $userid - user id for the account for report
+	 * @param integer $log - for log output = 1
+	 * @return
+	 */
+	function get_given_assurances ($userid, $log=0)
 	{
-		$res = query_init ("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` order by `id` asc");
+		$deleted='';
+		if ($log == 0) {
+			$deleted = ' and `deleted` = 0 ';
+		}
+		$res = query_init ("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` $deleted order by `id` asc");
 		return $res;
 	}
 
-	function get_received_assurances ($userid)
+	/**
+	 * get_received_assurances()
+	 *  returns the list of assurances received by the user
+	 * @param mixed $userid - user id for the account for report
+	 * @param integer $log - for log output = 1
+	 * @return
+	 */
+	function get_received_assurances ($userid, $log=0)
 	{
-		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` order by `id` asc ");
+		$deleted='';
+		if ($log == 0) {
+			$deleted = ' and `deleted` = 0 ';
+		}
+		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` $deleted order by `id` asc  ");
 		return $res;
 	}
 
 	function get_given_assurances_summary ($userid)
 	{
-		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' group by points,awarded,method");
+		$res = query_init ("select count(*) as number,points,awarded,method from notary where `from`='".intval($userid)."' AND `deleted`=0 group by points,awarded,method");
 		return $res;
 	}
 
 	function get_received_assurances_summary ($userid)
 	{
-		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' group by points,awarded,method");
+		$res = query_init ("select count(*) as number,points,awarded,method from notary where `to`='".intval($userid)."' AND `deleted`=0 group by points,awarded,method");
 		return $res;
 	}
 
@@ -591,14 +613,14 @@
 		return $issue_points;
 	}
 
-	function output_given_assurances($userid,$support=0, $ticketno)
+	function output_given_assurances($userid, $support=0, $ticketno='')
 	{
 		output_assurances_header(_("Assurance Points You Issued"),$support);
 		output_given_assurances_content($userid,$points,$sum_experience,$support, $ticketno);
 		output_assurances_footer(_("Total Points Issued"),$points,_("Total Experience Points"),$sum_experience,$support);
 	}
 
-	function output_received_assurances($userid,$support=0, $ticketno)
+	function output_received_assurances($userid,$support=0, $ticketno='')
 	{
 		output_assurances_header(_("Your Assurance Points"),$support);
 		output_received_assurances_content($userid,$points,$sum_experience,$support, $ticketno);
@@ -1762,3 +1784,141 @@ function output_gpg_certs($row, $support=0){
 	</tr>
 	<?
 }
+
+/**
+ * output_log_given_assurances()
+ *  returns the list of all given assurances
+ * @param mixed $userid - user id for the output
+ * @param integer $support - support view = 1
+ * @return
+ */
+function output_log_given_assurances($userid, $support=0)
+{
+    output_assurances_header(_("Assurance given"),$support);
+    output_log_given_assurances_content($userid, $support);
+}
+
+/**
+ * output_log_given_assurances_content()
+ *
+ * @param mixed $userid
+ * @param mixed $support
+ * @return
+ */
+function output_log_given_assurances_content($userid, $support)
+{
+    $res = get_given_assurances(intval($userid), 1);
+    while($row = mysql_fetch_assoc($res))
+    {
+        $fromuser = get_user (intval($row['to']));
+        $apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
+        $name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
+        $email = show_email_link ($fromuser['email'],intval($row['to']));
+        $revoked = '';
+        if ($row['date'] != 0) {
+            $revoked = $row['deleted'];
+        }
+        output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+    }
+}
+
+/**
+ * output_log_received_assurances()
+ *
+ * @param mixed $userid
+ * @param integer $support
+ * @return
+ */
+function output_log_received_assurances($userid, $support=0)
+{
+    output_assurances_header(_("Assurance received"), $support);
+    output_log_received_assurances_content($userid, $support);
+}
+
+/**
+ * output_log_received_assurances_content()
+ *
+ * @param mixed $userid
+ * @param mixed $support
+ * @param mixed $points
+ * @param mixed $sum_experience
+ * @param mixed $ticketno
+ * @return
+ */
+function output_log_received_assurances_content($userid, $support)
+{
+    $res = get_received_assurances(intval($userid), 1);
+    while($row = mysql_fetch_assoc($res))
+    {
+        $fromuser = get_user (intval($row['from']));
+        calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
+        $name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
+        $email = show_email_link ($fromuser['email'],intval($row['from']));
+        $revoked = '';
+        if ($row['date'] != 0) {
+            $revoked = $revoked = $row['deleted'];
+        }
+        output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+    }
+}
+
+/**
+ * output_log_assurances_row()
+ *
+ * @param mixed $assuranceid
+ * @param mixed $date
+ * @param mixed $when
+ * @param mixed $email
+ * @param mixed $name
+ * @param mixed $awarded
+ * @param mixed $points
+ * @param mixed $location
+ * @param mixed $method
+ * @param mixed $experience
+ * @param mixed $userid
+ * @param mixed $support
+ * @param mixed $revoked
+ * @return
+ */
+function output_log_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
+{
+
+    $tdstyle="";
+    $emopen="";
+    $emclose="";
+
+    if ($awarded == $points)
+    {
+        if ($awarded == "0")
+        {
+            if ($when < "2006-09-01")
+            {
+                $tdstyle="style='background-color: #ffff80'";
+                $emopen="<em>";
+                $emclose="</em>";
+            }
+        }
+    }
+    ?>
+    <tr>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
+    <?
+    if ($support == "1")
+    {
+        ?>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
+        <?
+    }
+    ?>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked?><?=$emclose?></td>
+    </tr>
+    <?
+}
+

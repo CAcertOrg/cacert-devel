@@ -225,7 +225,7 @@ function send_reminder()
 		}
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' and
-							`to`='".$_SESSION['_config']['notarise']['id']."'";
+							`deleted`=0 and `to`='".$_SESSION['_config']['notarise']['id']."'";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{

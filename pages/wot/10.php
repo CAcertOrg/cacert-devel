@@ -36,8 +36,8 @@
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc' ORDER BY `notary`.`when` DESC";
 */
-	$query = "SELECT count(*) AS `list` FROM `users` 
-			inner join `notary` on `users`.`id` = `notary`.`from` 
+	$query = "SELECT count(*) AS `list` FROM `users`
+			inner join `notary` on `users`.`id` = `notary`.`from`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc'";
 
 	$rank = mysql_num_rows(mysql_query($query)) + 1;
@@ -64,7 +64,7 @@
     <td class="DataTD"><b><?=_("Method")?></b></td>
   </tr>
 <?
-	$query = "select * from `notary` where `to`='".intval($_SESSION['profile']['id'])."'";
+	$query = "select * from `notary` where `deleted`=0 and `to`='".intval($_SESSION['profile']['id'])."'";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
@@ -114,7 +114,7 @@ if ($thawte)
   </tr>
 <?
 	$points = 0;
-	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'";
+	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `to`!='".intval($_SESSION['profile']['id'])."'";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{

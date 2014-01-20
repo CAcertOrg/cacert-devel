@@ -261,6 +261,13 @@ if (1 == $support) {
 <br/>
 
 <?
+
+output_log_given_assurances($userid, $support);
+?><br/><?
+
+output_log_received_assurances($userid, $support);
+?><br/><?
+
 $dres = get_se_log($userid);
 $colspan = 2;
 if (1 == $support) {

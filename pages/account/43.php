@@ -133,7 +133,7 @@ if(intval($_REQUEST['userid']) > 0) {
             if ($res) {
                 $trow = mysql_fetch_assoc($res);
             }
-            mysql_query("delete from `notary` where `id`='$assurance'");
+            mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
             if ($trow) {
                 fix_assurer_flag($trow['to']);
                 write_se_log($userid, $_SESSION['profile']['id'], 'SE assurance revoke', $ticketno);
