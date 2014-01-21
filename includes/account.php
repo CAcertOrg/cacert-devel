@@ -2384,9 +2384,11 @@ function buildSubjectFromSession() {
 				mysql_query("delete from `orgemaillink` where `domid`='".intval($row['id'])."'");
 			}
 		}
-		mysql_query("delete from `org` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
-		mysql_query("delete from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
-		mysql_query("delete from `orginfo` where `id`='".intval($_SESSION['_config']['orgid'])."'");
+//		mysql_query("delete from `org` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
+//		mysql_query("delete from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
+//		mysql_query("delete from `orginfo` where `id`='".intval($_SESSION['_config']['orgid'])."'");
+		org_delete(intval($_SESSION['_config']['orgid']));
+		write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org delete','');
 	}
 
 	if($oldid == 31)

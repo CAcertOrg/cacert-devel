@@ -1138,7 +1138,7 @@
             (Now(), $oid, $adminid, '$type', '$info')";
         mysql_query($query);
     }
-
+    //organisation account handling
     function org_create($org, $contact, $location, $state, $country, $comment){
         mysql_query("insert into `orginfo` set `O`='$org',
             `contact`='".$contact."',
@@ -1159,6 +1159,13 @@
             where `id`='".$orgid."'");
     }
 
+    function org_delete($orgid){
+        mysql_query("delete from `org` where `orgid`='$orgid'");
+        org_domain_delete($orgid);
+        mysql_query("delete from `orginfo` where `id`='$orgid'");
+    }
+
+    // orgnaisation domain handling
     function org_domain_add($orgid, $domain){
         mysql_query("insert into `orgdomains` set `orgid`='$orgid', `domain`='$domain'");
     }
@@ -1167,8 +1174,11 @@
         mysql_query("update `orgdomains` set `domain`='$domain' where `id`='$domid'");
     }
 
-    function org_domain_delete($domid){
+    function org_domain_delete($domid, $all=0){
+        if ($all != 1) {
+            $where = "`id`='$domid'";
+        } ELSE {
+            $where = "`orgid`='$domid'";
+        }
         mysql_query("delete from `orgdomains` where `id`='$domid'");
     }
-
-
