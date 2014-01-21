@@ -1182,3 +1182,13 @@
         }
         mysql_query("delete from `orgdomains` where `id`='$domid'");
     }
+
+    //organisation administrator handling
+    function org_admin_add($memid, $orgid, $masteracc, $OU, $comments){
+        mysql_query("insert into `org`
+            set `memid`='".intval($row['id'])."',
+            `orgid`='".intval($_SESSION['_config']['orgid'])."',
+            `masteracc`='$masteracc',
+            `OU`='$OU',
+            `comments`='$comments'");
+    }

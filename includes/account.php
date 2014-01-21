@@ -2459,13 +2459,15 @@ function buildSubjectFromSession() {
 				$_SESSION['_config']['errmsg'] =
 						_("The user is not an Assurer yet");
 			} else {
-				mysql_query(
-					"insert into `org`
-						set `memid`='".intval($row['id'])."',
-							`orgid`='".intval($_SESSION['_config']['orgid'])."',
-							`masteracc`='$masteracc',
-							`OU`='$OU',
-							`comments`='$comments'");
+//				mysql_query(
+//					"insert into `org`
+//						set `memid`='".intval($row['id'])."',
+//							`orgid`='".intval($_SESSION['_config']['orgid'])."',
+//							`masteracc`='$masteracc',
+//							`OU`='$OU',
+//							`comments`='$comments'");
+				org_admin_add(intval($row['id']), intval($_SESSION['_config']['orgid']), $masteracc, $OU, $comments);
+				write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org admin add', $row[fname] . ' ' . $row[lname]);
 			}
 		}
 	}
