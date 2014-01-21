@@ -2279,9 +2279,9 @@ function buildSubjectFromSession() {
 	if($oldid == 28 && $process != "" && array_key_exists("orgid",$_SESSION["_config"]))
 	{
 //		mysql_query("insert into `orgdomains` set `orgid`='".intval($_SESSION['_config']['orgid'])."', `domain`='$domain'");
-	    org_domain_add(intval($_SESSION['_config']['orgid']), $domain);
-	    write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org domain add',$domain);
-	    showheader(_("My CAcert.org Account!"));
+		org_domain_add(intval($_SESSION['_config']['orgid']), $domain);
+		write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org domain add', $domain);
+		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully added to the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($_SESSION['_config']['orgid'])."'>"._("Click here")."</a> "._("to continue.");
 		showfooter();
@@ -2324,7 +2324,9 @@ function buildSubjectFromSession() {
 	if($oldid == 29 && $process != "")
 	{
 		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($domid)."'"));
-		mysql_query("update `orgdomains` set `domain`='$domain' where `id`='".intval($domid)."'");
+//		mysql_query("update `orgdomains` set `domain`='$domain' where `id`='".intval($domid)."'");
+		org_domain_change(intval($domid), $domain);
+		write_org_log(intval($orgid), intval($_SESSION['profile']['id']), 'Org domain change', $row['domain'].' to '.$domain);
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully updated in the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($orgid)."'>"._("Click here")."</a> "._("to continue.");

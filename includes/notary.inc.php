@@ -1163,3 +1163,6 @@
         mysql_query("insert into `orgdomains` set `orgid`='$orgid', `domain`='$domain'");
     }
 
+    function org_domain_change($domid, $domain){
+        mysql_query("update `orgdomains` set `domain`='$domain' where `id`='$domid'");
+    }
