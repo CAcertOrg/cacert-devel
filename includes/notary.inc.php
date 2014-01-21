@@ -1159,3 +1159,7 @@
             where `id`='".$orgid."'");
     }
 
+    function org_domain_add($orgid, $domain){
+        mysql_query("insert into `orgdomains` set `orgid`='$orgid', `domain`='$domain'");
+    }
+

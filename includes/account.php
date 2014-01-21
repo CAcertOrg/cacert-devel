@@ -2250,7 +2250,7 @@ function buildSubjectFromSession() {
 //						`comments`='".$_SESSION['_config']['comments']."'
 //					where `id`='".$_SESSION['_config']['orgid']."'");
 			org_change(intval($_SESSION['_config']['orgid']), $_SESSION['_config']['O'], $_SESSION['_config']['contact'], $_SESSION['_config']['L'], $_SESSION['_config']['ST'], $_SESSION['_config']['C'], $_SESSION['_config']['comments']);
-			write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org creation',$_SESSION['_config']['comments']);
+			write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org change',$_SESSION['_config']['comments']);
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' has just been successfully updated in the database."), sanitizeHTML($_SESSION['_config']['O']));
 			showfooter();
@@ -2278,8 +2278,10 @@ function buildSubjectFromSession() {
 
 	if($oldid == 28 && $process != "" && array_key_exists("orgid",$_SESSION["_config"]))
 	{
-		mysql_query("insert into `orgdomains` set `orgid`='".intval($_SESSION['_config']['orgid'])."', `domain`='$domain'");
-		showheader(_("My CAcert.org Account!"));
+//		mysql_query("insert into `orgdomains` set `orgid`='".intval($_SESSION['_config']['orgid'])."', `domain`='$domain'");
+	    org_domain_add(intval($_SESSION['_config']['orgid']), $domain);
+	    write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org domain add',$domain);
+	    showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully added to the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($_SESSION['_config']['orgid'])."'>"._("Click here")."</a> "._("to continue.");
 		showfooter();
