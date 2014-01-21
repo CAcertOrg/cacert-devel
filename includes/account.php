@@ -2219,7 +2219,7 @@ function buildSubjectFromSession() {
 //						`comments`='".$_SESSION['_config']['comments']."'");
 			$orgid = org_create($_SESSION['_config']['O'], $_SESSION['_config']['contact'], $_SESSION['_config']['L'], $_SESSION['_config']['ST'], $_SESSION['_config']['C'], $_SESSION['_config']['comments']);
 			$_SESSION['_config']['orgid'] = $orgid;
-			write_org_log($orgid, intval($_SESSION['profile']['id']), 'Org creation',$_SESSION['_config']['comments']);
+			write_org_log($orgid, intval($_SESSION['profile']['id']), 'Org account creation',$_SESSION['_config']['comments']);
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' has just been successfully added as an organisation to the database."), sanitizeHTML($_SESSION['_config']['O']));
 			showfooter();
@@ -2250,7 +2250,7 @@ function buildSubjectFromSession() {
 //						`comments`='".$_SESSION['_config']['comments']."'
 //					where `id`='".$_SESSION['_config']['orgid']."'");
 			org_change(intval($_SESSION['_config']['orgid']), $_SESSION['_config']['O'], $_SESSION['_config']['contact'], $_SESSION['_config']['L'], $_SESSION['_config']['ST'], $_SESSION['_config']['C'], $_SESSION['_config']['comments']);
-			write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org change',$_SESSION['_config']['comments']);
+			write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org account change',$_SESSION['_config']['comments']);
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' has just been successfully updated in the database."), sanitizeHTML($_SESSION['_config']['O']));
 			showfooter();
@@ -2388,7 +2388,7 @@ function buildSubjectFromSession() {
 //		mysql_query("delete from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
 //		mysql_query("delete from `orginfo` where `id`='".intval($_SESSION['_config']['orgid'])."'");
 		org_delete(intval($_SESSION['_config']['orgid']));
-		write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org delete','');
+		write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org account delete','');
 	}
 
 	if($oldid == 31)
@@ -2487,7 +2487,7 @@ function buildSubjectFromSession() {
 //		$query = "delete from `org` where `orgid`='$orgid' and `memid`='$memid'";
 //		mysql_query($query);
 		org_admin_delete($orgid, $memid);
-		$query = "select * from `users` where `id`='".intval($_REQUEST['memid'])."'";
+		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org admin delete', $row[fname] . ' ' . $row[lname]);
 	}
@@ -3165,6 +3165,19 @@ function buildSubjectFromSession() {
 		showfooter();
 		exit;
 	}
+
+    if($id == 60 || $oldid == 60)
+    {
+        $query = "select 1 from `org` where `memid`='".intval($_SESSION['profile']['id'])."' and `orgid` = $orgid ";
+        $is_orguser = mysql_num_rows(mysql_query($query));
+        if($_SESSION['profile']['orgadmin'] != 1 && $is_orguser <= 0)
+        {
+            showheader(_("My CAcert.org Account!"));
+            echo _("You don't have access to this area.");
+            showfooter();
+            exit;
+        }
+    }
 
 	if(intval($cert) > 0)
 		$_SESSION['_config']['cert'] = intval($cert);

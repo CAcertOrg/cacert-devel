@@ -1126,78 +1126,151 @@
 		return (strtotime($date)<=time()+$diff*86400);
 	}
 
-    //Organisation Section
+//Organisation Section
 
-    function write_org_log($oid, $adminid, $type, $info){
-    //records all organisation assurer / administror actions changingan organisation account
-        $oid = intval($oid);
-        $adminid = intval($adminid);
-        $type = mysql_real_escape_string($type);
-        $info = mysql_real_escape_string($info);
-        $query="orgadminlog into `adminlog` (`when`, `oid`, `adminid`,`type`,`information`) values
-            (Now(), $oid, $adminid, '$type', '$info')";
-        mysql_query($query);
-    }
-    //organisation account handling
-    function org_create($org, $contact, $location, $state, $country, $comment){
-        mysql_query("insert into `orginfo` set `O`='$org',
-            `contact`='".$contact."',
-            `L`='".$location."',
-            `ST`='".$state."',
-            `C`='".$country."',
-            `comments`='".$comment."'");
-        return mysql_insert_id();
-    }
+function write_org_log($oid, $adminid, $type, $info){
+//records all organisation assurer / administror actions changingan organisation account
+    $oid = intval($oid);
+    $adminid = intval($adminid);
+    $type = mysql_real_escape_string($type);
+    $info = mysql_real_escape_string($info);
+    $query="Insert into `orgadminlog` (`when`, `oid`, `adminid`,`type`,`information`) values
+        (Now(), $oid, $adminid, '$type', '$info')";
+    mysql_query($query);
+}
+//organisation account handling
+function org_create($org, $contact, $location, $state, $country, $comment){
+    mysql_query("insert into `orginfo` set `O`='$org',
+        `contact`='".$contact."',
+        `L`='".$location."',
+        `ST`='".$state."',
+        `C`='".$country."',
+        `comments`='".$comment."'");
+    return mysql_insert_id();
+}
 
-    function org_change($orgid, $org, $contact, $location, $state, $country, $comment){
-        mysql_query("update `orginfo` set `O`='$org',
-            `contact`='".$contact."',
-            `L`='".$location."',
-            `ST`='".$state."',
-            `C`='".$country."',
-            `comments`='".$comment."'
-            where `id`='".$orgid."'");
-    }
+function org_change($orgid, $org, $contact, $location, $state, $country, $comment){
+    mysql_query("update `orginfo` set `O`='$org',
+        `contact`='".$contact."',
+        `L`='".$location."',
+        `ST`='".$state."',
+        `C`='".$country."',
+        `comments`='".$comment."'
+        where `id`='".$orgid."'");
+}
 
-    function org_delete($orgid){
-        org_admin_delete($orgid);
-        org_domain_delete($orgid);
-        mysql_query("delete from `orginfo` where `id`='$orgid'");
-    }
+function org_delete($orgid){
+    org_admin_delete($orgid);
+    org_domain_delete($orgid);
+    mysql_query("delete from `orginfo` where `id`='$orgid'");
+}
 
-    // orgnaisation domain handling
-    function org_domain_add($orgid, $domain){
-        mysql_query("insert into `orgdomains` set `orgid`='$orgid', `domain`='$domain'");
-    }
+// orgnaisation domain handling
+function org_domain_add($orgid, $domain){
+    mysql_query("insert into `orgdomains` set `orgid`='$orgid', `domain`='$domain'");
+}
 
-    function org_domain_change($domid, $domain){
-        mysql_query("update `orgdomains` set `domain`='$domain' where `id`='$domid'");
-    }
+function org_domain_change($domid, $domain){
+    mysql_query("update `orgdomains` set `domain`='$domain' where `id`='$domid'");
+}
 
-    function org_domain_delete($domid, $all=0){
-        if ($all != 1) {
-            $where = "`id`='$domid'";
-        } ELSE {
-            $where = "`orgid`='$domid'";
-        }
-        mysql_query("delete from `orgdomains` where `id`='$domid'");
+function org_domain_delete($domid, $all=0){
+    if ($all != 1) {
+        $where = "`id`='$domid'";
+    } ELSE {
+        $where = "`orgid`='$domid'";
     }
+    mysql_query("delete from `orgdomains` where `id`='$domid'");
+}
 
-    //organisation administrator handling
-    function org_admin_add($memid, $orgid, $masteracc, $OU, $comments){
-        mysql_query("insert into `org`
-            set `memid`='".intval($row['id'])."',
-            `orgid`='".intval($_SESSION['_config']['orgid'])."',
-            `masteracc`='$masteracc',
-            `OU`='$OU',
-            `comments`='$comments'");
-    }
+//organisation administrator handling
+function org_admin_add($memid, $orgid, $masteracc, $OU, $comments){
+    mysql_query("insert into `org`
+        set `memid`='".intval($row['id'])."',
+        `orgid`='".intval($_SESSION['_config']['orgid'])."',
+        `masteracc`='$masteracc',
+        `OU`='$OU',
+        `comments`='$comments'");
+}
 
-    function org_admin_delete($orgid, $memid=0){
-        if ($memid != 0) {
-            $where = " and `memid`='$memid'";
-        } ELSE {
-            $where = '';
-        }
-        mysql_query("delete from `org` where `orgid`='$orgid' $where");
+function org_admin_delete($orgid, $memid=0){
+    if ($memid != 0) {
+        $where = " and `memid`='$memid'";
+    } ELSE {
+        $where = '';
     }
+    mysql_query("delete from `org` where `orgid`='$orgid' $where");
+}
+
+// OA log
+/**
+ * output_log_oa_header()
+ *  shows the table header to the OA log table
+ * @return
+ */
+function output_log_oa_header($title){
+    ?>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+    <tr>
+		<td colspan="4" class="title"><?=$title?></td>
+	</tr>
+    <tr>
+        <td class="DataTD bold"><?= _("Date") ?></td>
+        <td class="DataTD bold"><?= _("Type") ?></td>
+        <td class="DataTD bold"><?= _("Information") ?></td>
+        <td class="DataTD bold"><?= _("OrgAdmin/OrgAssurer") ?></td>
+    </tr>
+    <?
+}
+
+/**
+ * output_log_oa()
+ *  show the OA log data
+ * @param mixed $row - sql-query array
+ * @return
+ */
+function output_log_oa($row){
+    ?>
+    <tr>
+        <td class="DataTD"><?=$row['when']?></td>
+        <td class="DataTD"><?=$row['type']?></td>
+        <td class="DataTD"><?=$row['information']?></td>
+        <td class="DataTD"><?=$row['fname'].' '.$row['lname']?></td>
+    </tr>
+    <?
+}
+
+
+function output_oa_account($orgid)
+{
+    output_log_oa_header(_('Account history'));
+    output_log_oa_summary_content($orgid,'Org account');
+    output_summary_footer();
+}
+
+function output_log_oa_summary_content($orgid, $type){
+    $query = "select `o`.`when`, `o`.`type`, `o`.`information`, `u`.`fname`, `u`.`lname`
+        from `orgadminlog` as `o`, `users` as `u`
+        where `o`.`adminid`=`u`.`id`
+        and `o`.`oid` = $orgid
+        and `o`.`type` like '$type%'
+        order by `o`.`when`";
+    $res = query_init($query) ;
+    while($row = mysql_fetch_assoc($res)){
+        output_log_oa($row);
+    }
+}
+
+function output_oa_admin($orgid)
+{
+    output_log_oa_header(_('Admin history'));
+    output_log_oa_summary_content($orgid,'Org admin');
+    output_summary_footer();
+}
+
+function output_oa_domain($orgid)
+{
+    output_log_oa_header(_('Domain history'));
+    output_log_oa_summary_content($orgid,'Org domain');
+    output_summary_footer();
+}

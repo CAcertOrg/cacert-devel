@@ -52,7 +52,7 @@ while($row = mysql_fetch_assoc($res))
 		<td colspan="2" class="DataTD"><?=($row['C'])?></td>
 	</tr>
 	<?
-	
+
 	//domain info
 	$query = "select `domain` from `orgdomains` where `orgid`='".intval($row['id'])."'";
 	$res1 = mysql_query($query);
@@ -65,7 +65,7 @@ while($row = mysql_fetch_assoc($res))
 		</tr>
 		<?
 	}
-	
+
 	?>
 	<tr>
 		<td class="DataTD"><?=_("Administrator")?></td>
@@ -73,24 +73,24 @@ while($row = mysql_fetch_assoc($res))
 		<td class="DataTD"><?=_("Department")?></td>
 	</tr>
 	<?
-	
+
 	//org admins
 	$query = "select * from `org` where `orgid`='".intval($row['id'])."'";
 	$res2 = mysql_query($query);
 	while($org = mysql_fetch_assoc($res2))
 	{
 		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($org['memid'])."'"));
-		?> 
+		?>
 		<tr>
 			<td class="DataTD"><a href='mailto:<?=$user['email']?>'><?=($user['fname'])?> <?=($user['lname'])?></a></td>
 			<td class="DataTD"><?=($org['masteracc'])?></td>
 			<td class="DataTD"><?=($org['OU'])?></td>
 		</tr>
 		<?
-		
+
 		if(intval($org['masteracc']) === 1 &&
 				 intval($org['memid']) === intval($_SESSION['profile']['id']))
-		{ 
+		{
 			$master="account.php?id=32&amp;orgid=".intval($row['id']);
 			?>
 			<tr>
@@ -98,6 +98,9 @@ while($row = mysql_fetch_assoc($res))
 			</tr>
 			<?
 		}
-	} 
+	}
 } ?>
+    <tr>
+        <td> colspan="3" class="DataTD"><a href="account.php?id=60&amp;orgid=<?=intval($row['id'])?>"><?=_("Show arganisation account history")?></a></td>
+    </tr>
 </table>
