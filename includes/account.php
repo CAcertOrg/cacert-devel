@@ -2484,8 +2484,12 @@ function buildSubjectFromSession() {
 	{
 		$orgid = intval($_SESSION['_config']['orgid']);
 		$memid = intval($_REQUEST['memid']);
-		$query = "delete from `org` where `orgid`='$orgid' and `memid`='$memid'";
-		mysql_query($query);
+//		$query = "delete from `org` where `orgid`='$orgid' and `memid`='$memid'";
+//		mysql_query($query);
+		org_admin_delete($orgid, $memid);
+		$query = "select * from `users` where `id`='".intval($_REQUEST['memid'])."'";
+		$row = mysql_fetch_assoc(mysql_query($query));
+		write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org admin delete', $row[fname] . ' ' . $row[lname]);
 	}
 
 	if($oldid == 34 || $oldid == 33)

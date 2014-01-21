@@ -1160,7 +1160,7 @@
     }
 
     function org_delete($orgid){
-        mysql_query("delete from `org` where `orgid`='$orgid'");
+        org_admin_delete($orgid);
         org_domain_delete($orgid);
         mysql_query("delete from `orginfo` where `id`='$orgid'");
     }
@@ -1191,4 +1191,13 @@
             `masteracc`='$masteracc',
             `OU`='$OU',
             `comments`='$comments'");
+    }
+
+    function org_admin_delete($orgid, $memid=0){
+        if ($memid != 0) {
+            $where = " and `memid`='$memid'";
+        } ELSE {
+            $where = '';
+        }
+        mysql_query("delete from `org` where `orgid`='$orgid' $where");
     }
