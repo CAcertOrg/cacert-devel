@@ -1757,7 +1757,7 @@ function buildSubjectFromSession() {
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
+				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01', `revokeorgadminid`='".intval($_SESSION['profile']['id'])."' where `id`='$id'");
 				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
 			}
 		}
@@ -2116,7 +2116,7 @@ function buildSubjectFromSession() {
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
+				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01', `revokeorgadminid`='".intval($_SESSION['profile']['id'])."' where `id`='$id'");
 				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
 			}
 		}
@@ -2316,7 +2316,7 @@ function buildSubjectFromSession() {
 				`orgdomains`.`id`='".intval($domid)."'";
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
-			mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['id']."'");
+			mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01', `revokeorgadminid`='".intval($_SESSION['profile']['id'])."' where `id`='".$row['id']."'");
 
 		$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where
 				`orgemaillink`.`domid`=`orgdomains`.`id` and
@@ -2324,7 +2324,7 @@ function buildSubjectFromSession() {
 				`orgdomains`.`id`='".intval($domid)."'";
 		$res = mysql_query($query);
 		while($row = mysql_fetch_assoc($res))
-			mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
+			mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01', `revokeorgadminid`='".intval($_SESSION['profile']['id'])."' where `id`='".intval($row['id'])."'");
 	}
 
 	if($oldid == 29 && $process != "")
@@ -2373,7 +2373,7 @@ function buildSubjectFromSession() {
 			$res = mysql_query($query);
 			while($row = mysql_fetch_assoc($res))
 			{
-				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
+				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01', `revokeorgadminid`='".intval($_SESSION['profile']['id'])."' where `id`='".intval($row['id'])."'");
 				mysql_query("delete from `orgdomaincerts` where `orgid`='".intval($row['id'])."'");
 				mysql_query("delete from `orgdomlink` where `domid`='".intval($row['id'])."'");
 			}
@@ -2385,7 +2385,7 @@ function buildSubjectFromSession() {
 			$res = mysql_query($query);
 			while($row = mysql_fetch_assoc($res))
 			{
-				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
+				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01', `revokeorgadminid`='".intval($_SESSION['profile']['id'])."' where `id`='".intval($row['id'])."'");
 				mysql_query("delete from `orgemailcerts` where `id`='".intval($row['id'])."'");
 				mysql_query("delete from `orgemaillink` where `domid`='".intval($row['id'])."'");
 			}
