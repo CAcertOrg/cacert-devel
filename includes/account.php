@@ -1533,7 +1533,8 @@ function buildSubjectFromSession() {
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
-						`description`='".$_SESSION['_config']['description']."'";
+						`description`='".$_SESSION['_config']['description']."',
+						`orgadminid`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1625,7 +1626,8 @@ function buildSubjectFromSession() {
 						`subject`='$csrsubject',
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
-						`description`='".$_SESSION['_config']['description']."'";
+						`description`='".$_SESSION['_config']['description']."',
+						`orgadminid`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
 
@@ -1702,7 +1704,8 @@ function buildSubjectFromSession() {
 						`modified`=NOW(),
 						`codesign`='".$row['codesign']."',
 						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`description`='".$row['description']."',
+						`orgadminid`='".intval($_SESSION['profile']['id'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -1965,7 +1968,8 @@ function buildSubjectFromSession() {
 					`subject`='$csrsubject',
 					`rootcert`='".$_SESSION['_config']['rootcert']."',
 					`type`='$type',
-					`description`='".$_SESSION['_config']['description']."'";
+					`description`='".$_SESSION['_config']['description']."',
+					`orgadminid`='".intval($_SESSION['profile']['id'])."'";
 		} else {
 			$query = "insert into `orgdomaincerts` set
 					`CN`='".$_SESSION['_config']['altrows']['0']."',
@@ -1974,7 +1978,8 @@ function buildSubjectFromSession() {
 					`subject`='$csrsubject',
 					`rootcert`='".$_SESSION['_config']['rootcert']."',
 					`type`='$type',
-					`description`='".$_SESSION['_config']['description']."'";
+					`description`='".$_SESSION['_config']['description']."',
+					`orgadminid`='".intval($_SESSION['profile']['id'])."'";
 		}
 		mysql_query($query);
 		$CSRid = mysql_insert_id();
@@ -2051,7 +2056,8 @@ function buildSubjectFromSession() {
 						`subject`='".$row['subject']."',
 						`type`='".$row['type']."',
 						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`description`='".$row['description']."',
+						`orgadminid`='".intval($_SESSION['profile']['id'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
