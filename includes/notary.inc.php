@@ -1166,3 +1166,9 @@
     function org_domain_change($domid, $domain){
         mysql_query("update `orgdomains` set `domain`='$domain' where `id`='$domid'");
     }
+
+    function org_domain_delete($domid){
+        mysql_query("delete from `orgdomains` where `id`='$domid'");
+    }
+
+

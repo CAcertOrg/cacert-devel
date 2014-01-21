@@ -2338,7 +2338,9 @@ function buildSubjectFromSession() {
 	{
 		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($domid)."'"));
 		$domain = $row['domain'];
-		mysql_query("delete from `orgdomains` where `id`='".intval($domid)."'");
+//		mysql_query("delete from `orgdomains` where `id`='".intval($domid)."'");
+		org_domain_delete(intval($domid));
+		write_org_log(intval($orgid), intval($_SESSION['profile']['id']), 'Org domain delete', $domain);
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully deleted from the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($orgid)."'>"._("Click here")."</a> "._("to continue.");
