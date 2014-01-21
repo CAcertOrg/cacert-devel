@@ -1148,3 +1148,14 @@
             `comments`='".$comment."'");
         return mysql_insert_id();
     }
+
+    function org_change($orgid, $org, $contact, $location, $state, $country, $comment){
+        mysql_query("update `orginfo` set `O`='$org',
+            `contact`='".$contact."',
+            `L`='".$location."',
+            `ST`='".$state."',
+            `C`='".$country."',
+            `comments`='".$comment."'
+            where `id`='".$orgid."'");
+    }
+

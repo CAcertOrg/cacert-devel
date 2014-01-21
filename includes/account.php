@@ -2219,7 +2219,7 @@ function buildSubjectFromSession() {
 //						`comments`='".$_SESSION['_config']['comments']."'");
 			$orgid = org_create($_SESSION['_config']['O'], $_SESSION['_config']['contact'], $_SESSION['_config']['L'], $_SESSION['_config']['ST'], $_SESSION['_config']['C'], $_SESSION['_config']['comments']);
 			$_SESSION['_config']['orgid'] = $orgid;
-			write_org_log($orgid, Profile, 'Org creation','');
+			write_org_log($orgid, intval($_SESSION['profile']['id']), 'Org creation',$_SESSION['_config']['comments']);
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' has just been successfully added as an organisation to the database."), sanitizeHTML($_SESSION['_config']['O']));
 			showfooter();
@@ -2242,13 +2242,15 @@ function buildSubjectFromSession() {
 		{
 			$_SESSION['_config']['errmsg'] = _("Organisation Name and Contact Email are required fields.");
 		} else {
-			mysql_query("update `orginfo` set `O`='".$_SESSION['_config']['O']."',
-						`contact`='".$_SESSION['_config']['contact']."',
-						`L`='".$_SESSION['_config']['L']."',
-						`ST`='".$_SESSION['_config']['ST']."',
-						`C`='".$_SESSION['_config']['C']."',
-						`comments`='".$_SESSION['_config']['comments']."'
-					where `id`='".$_SESSION['_config']['orgid']."'");
+//			mysql_query("update `orginfo` set `O`='".$_SESSION['_config']['O']."',
+//						`contact`='".$_SESSION['_config']['contact']."',
+//						`L`='".$_SESSION['_config']['L']."',
+//						`ST`='".$_SESSION['_config']['ST']."',
+//						`C`='".$_SESSION['_config']['C']."',
+//						`comments`='".$_SESSION['_config']['comments']."'
+//					where `id`='".$_SESSION['_config']['orgid']."'");
+			org_change(intval($_SESSION['_config']['orgid']), $_SESSION['_config']['O'], $_SESSION['_config']['contact'], $_SESSION['_config']['L'], $_SESSION['_config']['ST'], $_SESSION['_config']['C'], $_SESSION['_config']['comments']);
+			write_org_log(intval($_SESSION['_config']['orgid']), intval($_SESSION['profile']['id']), 'Org creation',$_SESSION['_config']['comments']);
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' has just been successfully updated in the database."), sanitizeHTML($_SESSION['_config']['O']));
 			showfooter();
