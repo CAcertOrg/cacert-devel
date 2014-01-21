@@ -1125,3 +1125,26 @@
 	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
 	}
+
+    //Organisation Section
+
+    function write_org_log($oid, $adminid, $type, $info){
+    //records all organisation assurer / administror actions changingan organisation account
+        $oid = intval($oid);
+        $adminid = intval($adminid);
+        $type = mysql_real_escape_string($type);
+        $info = mysql_real_escape_string($info);
+        $query="orgadminlog into `adminlog` (`when`, `oid`, `adminid`,`type`,`information`) values
+            (Now(), $oid, $adminid, '$type', '$info')";
+        mysql_query($query);
+    }
+
+    function org_create($org, $contact, $location, $state, $country, $comment){
+        mysql_query("insert into `orginfo` set `O`='$org',
+            `contact`='".$contact."',
+            `L`='".$location."',
+            `ST`='".$state."',
+            `C`='".$country."',
+            `comments`='".$comment."'");
+        return mysql_insert_id();
+    }
