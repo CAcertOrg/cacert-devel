@@ -1217,7 +1217,7 @@ function output_log_oa_header($title){
     <tr>
         <td class="DataTD bold"><?= _("Date") ?></td>
         <td class="DataTD bold"><?= _("Type") ?></td>
-        <td class="DataTD bold"><?= _("Information") ?></td>
+        <td class="DataTD bold"><?= _("Comment") ?></td>
         <td class="DataTD bold"><?= _("OrgAdmin/OrgAssurer") ?></td>
     </tr>
     <?
