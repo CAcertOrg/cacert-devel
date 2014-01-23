@@ -98,9 +98,10 @@ while($row = mysql_fetch_assoc($res))
 			</tr>
 			<?
 		}
-	}
-    <tr>
-        <td colspan="3" class="DataTD"><a href="account.php?id=60&amp;orgid=<?=intval($row['id'])?>"><?=_("Show organisation account history")?></a></td>
-    </tr>} ?>
+	}?>
+		<tr>
+			<td colspan="3" class="DataTD"><a href="account.php?id=60&amp;orgid=<?=intval($row['id'])?>"><?=_("Show organisation account history")?></a></td>
+		</tr>
+<?} ?>
 
 </table>
