@@ -18,14 +18,24 @@
 	include_once("../includes/shutdown.php");
 	require_once("../includes/lib/l10n.php");
 ?>
-<? 
-  if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") 
+<?
+  if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "")
   {
     ?><font color="orange" size="+1">
       <? echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
     </font>
     <?unset($_SESSION['_config']['error']);
-  } 
+  }
+
+  if (!isset($_SESSION['assuresomeone']['year'])) {
+      $_SESSION['assuresomeone']['year'] = '';
+  }
+  if (!isset($_SESSION['assuresomeone']['month'])) {
+      $_SESSION['assuresomeone']['month'] = '';
+  }
+  if (!isset($_SESSION['assuresomeone']['day'])) {
+      $_SESSION['assuresomeone']['day'] = '';
+  }
 ?>
 <? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
 <form method="post" action="wot.php">
@@ -60,6 +70,37 @@
     <td class="DataTD"><input type="text" name="email" id="email" value="<?=array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):""?>"></td>
 <? } ?>
   </tr>
+    <tr>
+    <td class="DataTD">
+        <?=_("Date of Birth")?><br/>
+        (<?=_("yyyy/mm/dd")?>)</td>
+    <td class="DataTD">
+        <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) ? sanitizeHTML($_SESSION['assuresomeone']['year']):""?>" size="4" autocomplete="off"></nobr>
+        <select name="month">
+<?
+for($i = 1; $i <= 12; $i++)
+{
+    echo "<option value='$i'";
+    if(array_key_exists('month',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['month'] == $i)
+        echo " selected=\"selected\"";
+    echo ">".ucwords(strftime("%B", mktime(0,0,0,$i,1,date("Y"))))." ($i)</option>\n";
+}
+?>
+        </select>
+        <select name="day">
+<?
+for($i = 1; $i <= 31; $i++)
+{
+    echo "<option";
+    if(array_key_exists('day',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['day'] == $i)
+        echo " selected=\"selected\"";
+    echo ">$i</option>";
+}
+?>
+        </select>
+    </td>
+  </tr>
+
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
   </tr>

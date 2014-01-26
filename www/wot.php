@@ -198,6 +198,17 @@ function send_reminder()
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
 				exit;
 			}
+			if ($_SESSION['profile']['ttpadmin'] != 1) {
+				$_SESSION['assuresomeone']['year'] = mysql_real_escape_string(stripslashes($_POST['year']));
+				$_SESSION['assuresomeone']['month'] = mysql_real_escape_string(stripslashes($_POST['month']));
+				$_SESSION['assuresomeone']['day'] = mysql_real_escape_string(stripslashes($_POST['day']));
+				$dob = $_SESSION['assuresomeone']['year'] . '-' . sprintf('%02d',$_SESSION['assuresomeone']['month']) . '-' . sprintf('%02d', $_SESSION['assuresomeone']['day']);
+
+				if (	$_SESSION['_config']['notarise']['dob'] != $dob) {
+					show_page("EnterEmail","",_("The data entered is not matching with an account."));
+					exit;
+				}
+			}
 		}
 		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
 		$res = mysql_query($query);
@@ -236,7 +247,7 @@ function send_reminder()
 
 	if($oldid == 6)
 	{
-$iecho= "c";
+		$iecho= "c";
 		//date checks
 		if(trim($_REQUEST['date']) == '')
 		{
