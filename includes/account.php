@@ -972,8 +972,10 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
+			printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
+
 		}
 		else
 		{
@@ -1128,8 +1130,9 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
+			printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
 		}
 		else
 		{
@@ -1755,8 +1758,9 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
+		    printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
 		}
 		else
 		{
@@ -2111,8 +2115,9 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
+			printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
 		}
 		else
 		{
