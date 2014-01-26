@@ -774,7 +774,7 @@
 <?
 		} else {
 ?>
-	<input type="hidden" name="<?=$val?>" value="<?=$methods[0]?>" />
+	<input type="hidden" name="method" value="<?=$methods[0]?>" />
 <?
 		}
 	}
