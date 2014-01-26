@@ -1333,9 +1333,9 @@ function output_orgclientcert_table_header($orgname){
         <td class="DataTD"><?=_("Status")?></td>
         <td class="DataTD"><?=_("CommonName")?></td>
         <td class="DataTD"><?=_("SerialNumber")?></td>
-        <td class="DataTD"><?=_("SerialNumber")?></td>
+        <td class="DataTD"><?=_("Created by")?></td>
         <td class="DataTD"><?=_("Revoked")?></td>
-        <td class="DataTD"><?=_("SerialNumber")?></td>
+        <td class="DataTD"><?=_("Revoked by")?></td>
         <td class="DataTD"><?=_("Expires")?></td>
         <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
     </tr>
@@ -1366,7 +1366,7 @@ function output_orgclient_table_row($verified, $row, $support = 0){
         <td class="DataTD"><?=$row['serial']?></td>
         <td class="DataTD"><?=$row['cfname'] . ' ' . $row['clname']?></td>
         <td class="DataTD"><?=$row['revoke']?></td>
-        <td class="DataTD"><?=$row['cfname'] . ' ' . $row['clname']?></td>
+        <td class="DataTD"><?=$row['rfname'] . ' ' . $row['rlname']?></td>
         <td class="DataTD"><?=$row['expires']?></td>
         <? if($support == 1) { ?>
             <td class="DataTD"><?=htmlspecialchars($row['description'])?></td>

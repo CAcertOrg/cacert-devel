@@ -155,12 +155,12 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
         if($row['revoked'] > 0)
             $verified = _("Revoked");
         if($row['revoked'] == 0)
-            $row['revoke'] = _("Not Revoked");
-        if(!$row['cfname'] && !!$row['clname'] ){
+            $row['revoke'] = _("Not revoked");
+        if(!$row['cfname'] && !$row['clname'] ){
             $row['cfname'] = _("Not recorded");
-            $row['clname'] = _("");
+            $row['clname'] = '';
             $row['rfname'] = _("Not recorded");
-            $row['rlname'] = _("");
+            $row['rlname'] = '';
         }
 
 /*?>
