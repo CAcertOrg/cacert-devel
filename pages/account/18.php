@@ -156,9 +156,11 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
             $verified = _("Revoked");
         if($row['revoked'] == 0)
             $row['revoke'] = _("Not revoked");
-        if(!$row['cfname'] || !$row['clname'] ){
+        if(!$row['cfname'] && !$row['clname']){
             $row['cfname'] = _("Not recorded");
             $row['clname'] = '';
+        }
+        if($row['revoked'] > 0 && (!$row['rfname'] && !$row['rlname'])){
             $row['rfname'] = _("Not recorded");
             $row['rlname'] = '';
         }
