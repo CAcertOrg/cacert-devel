@@ -1318,3 +1318,82 @@ function output_orgclientcerts_data($orgadminid = 0, $orgfilterid = 0, $sorting,
     }
     return mysql_query($query);
 }
+
+function output_orgclientcert_table_header($orgname){
+    ?>
+    <tr>
+        <td colspan="11" class="title"></td>
+    </tr>
+    <tr>
+        <td colspan="11" class="title"><? printf(_("Certificates for %s"), $orgname)?> </td>
+    </tr>
+    <tr>
+        <td class="DataTD"><?=_("OU/Department")?></td>
+        <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
+        <td class="DataTD"><?=_("Status")?></td>
+        <td class="DataTD"><?=_("CommonName")?></td>
+        <td class="DataTD"><?=_("SerialNumber")?></td>
+        <td class="DataTD"><?=_("SerialNumber")?></td>
+        <td class="DataTD"><?=_("Revoked")?></td>
+        <td class="DataTD"><?=_("SerialNumber")?></td>
+        <td class="DataTD"><?=_("Expires")?></td>
+        <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+    </tr>
+    <?
+}
+
+function output_orgclient_table_row($verified, $row, $support = 0){
+    ?>
+    <tr>
+        <td class="DataTD"><?=$row['ou']?></td>
+        <? if($verified == _("Valid") || $verified == _("Expired")) { ?>
+            <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"></td>
+            <td class="DataTD"><?=$verified?></td>
+            <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
+        <? } elseif($support == 1) { ?>
+            <td class="DataTD">&nbsp;</td>
+            <td class="DataTD"><?=$verified?></td>
+            <td class="DataTD"><?=$row['CN']?></td>
+        <? } else if($verified == _("Pending")) { ?>
+            <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
+            <td class="DataTD"><?=$verified?></td>
+            <td class="DataTD"><?=$row['CN']?></td>
+        <? } else { ?>
+            <td class="DataTD">&nbsp;</td>
+            <td class="DataTD"><?=$verified?></td>
+            <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
+        <? } ?>
+        <td class="DataTD"><?=$row['serial']?></td>
+        <td class="DataTD"><?=$row['cfname'] . ' ' . $row['clname']?></td>
+        <td class="DataTD"><?=$row['revoke']?></td>
+        <td class="DataTD"><?=$row['cfname'] . ' ' . $row['clname']?></td>
+        <td class="DataTD"><?=$row['expires']?></td>
+        <? if($support == 1) { ?>
+            <td class="DataTD"><?=htmlspecialchars($row['description'])?></td>
+            <td class="DataTD">&nbsp;</td>
+        <? } else { ?>
+            <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+            <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+        <? } ?>
+    </tr>
+    <?
+}
+
+function output_orgclient_table_footer($support = 0){
+    ?>
+    <tr>
+        <td class="DataTD" colspan="11">
+        <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
+        </td>
+    </tr>
+    <? if ($support == 0) { ?>
+        <tr>
+            <td class="DataTD" colspan="8"><input type="submit" name="renew" value="<?=_("Renew")?>">&#160;&#160;&#160;&#160;
+              <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
+            <td class="DataTD" colspan="3"><input type="submit" name="change" value="<?=_("Change settings")?>"> </td>
+        </tr>
+        <tr>
+            <td class="DataTD" colspan="11"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
+        </tr>
+    <? }
+}
