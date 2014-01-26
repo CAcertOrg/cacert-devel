@@ -74,38 +74,39 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
   </tr>
 
 <?
-  $query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
-      UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
-      UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
-      `oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
-      UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
-      `oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
-      `oemail`.`description`, `oemail`.`ou`, `orginfo`.`O`
-      from `orgemailcerts` as `oemail`, `org`, `orginfo`
-      where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
-        `org`.`orgid`=`oemail`.`orgid` and `orginfo`.`id` = `org`.`orgid`";
-  if($orgfilterid>0)
-  {
-    $query .= "AND `org`.`orgid`=$orgfilterid ";
-  }
-
-  if(0==$status)
-  {
-    $query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
-    $query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
-  }
-  switch ($sorting){
-    case 0:
-      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`expire` desc";
-      break;
-    case 1:
-      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`ou`, `oemail`.`expire` desc";
-      break;
-    case 2:
-      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `oemail`.`expire` desc";
-      break;
-  }
-  $res = mysql_query($query);
+//  $query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
+//      UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+//      UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
+//      `oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
+//      UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
+//      `oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
+//      `oemail`.`description`, `oemail`.`ou`, `orginfo`.`O`
+//      from `orgemailcerts` as `oemail`, `org`, `orginfo`
+//      where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and
+//        `org`.`orgid`=`oemail`.`orgid` and `orginfo`.`id` = `org`.`orgid`";
+//  if($orgfilterid>0)
+//  {
+//    $query .= "AND `org`.`orgid`=$orgfilterid ";
+//  }
+//
+//  if(0==$status)
+//  {
+//    $query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
+//    $query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
+//  }
+//  switch ($sorting){
+//    case 0:
+//      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`expire` desc";
+//      break;
+//    case 1:
+//      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`ou`, `oemail`.`expire` desc";
+//      break;
+//    case 2:
+//      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `oemail`.`expire` desc";
+//      break;
+//  }
+//  $res = mysql_query($query);
+    $res = output_orgclientcerts_data(intval($_SESSION['profile']['id']), $orgfilterid, $sorting, $status);
   if(mysql_num_rows($res) <= 0)
   {
 ?>

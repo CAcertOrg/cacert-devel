@@ -1274,3 +1274,47 @@ function output_oa_domain($orgid)
     output_log_oa_summary_content($orgid,'Org domain');
     output_summary_footer();
 }
+
+function output_orgclientcerts_data($orgadminid = 0, $orgfilterid = 0, $sorting, $status){
+    $query = "select UNIX_TIMESTAMP(`oemail`.`created`) as `created`,
+        UNIX_TIMESTAMP(`oemail`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
+        UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
+        `oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
+        UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
+        `oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
+        `oemail`.`description`, `oemail`.`ou`, `orginfo`.`O`,
+        `cu`.`fname` as cfname, `cu`.`lname` as clname ,
+        `ru`.`fname` as rfname, `ru`.`lname` as rlname
+        from  `org`, `orginfo`, `orgemailcerts` as `oemail`
+            left join users as `cu` on `oemail`.`orgadminid` = `cu`.`id`
+            left join users as `ru` on `oemail`.`revokeorgadminid` = `ru`.`id`
+        where `org`.`orgid`=`oemail`.`orgid` and `orginfo`.`id` = `org`.`orgid` ";
+
+    if($orgadminid > 0)
+    {
+        $query .= "AND `org`.`memid` = $orgadminid ";
+    }
+
+    if($orgfilterid > 0)
+    {
+        $query .= "AND `org`.`orgid` = $orgfilterid ";
+    }
+
+    if(0 == $status)
+    {
+        $query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
+        $query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
+    }
+    switch ($sorting){
+        case 0:
+            $query .= "ORDER BY `orginfo`.`O`, `oemail`.`expire` desc";
+            break;
+        case 1:
+            $query .= "ORDER BY `orginfo`.`O`, `oemail`.`ou`, `oemail`.`expire` desc";
+            break;
+        case 2:
+            $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `oemail`.`expire` desc";
+            break;
+    }
+    return mysql_query($query);
+}
