@@ -23,14 +23,14 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="8" class="title"><?=_("Organisation Server Certificates")?> </td>
+    <td colspan="10" class="title"><?=_("Organisation Server Certificates")?> </td>
   </tr>
   <tr>
-    <td colspan="8" class="title"><?=_("Filter/Sorting")?></td>
+    <td colspan="10" class="title"><?=_("Filter/Sorting")?></td>
   </tr>
     <tr>
       <td class="DataTD"><?=_("Organisation")?></td>
-      <td colspan="7" class="DataTD" >
+      <td colspan="9" class="DataTD" >
         <select name="dorgfilterid">
           <?=sprintf('<option value="%d"%s>%s</option>',0, 0 == $orgfilterid ? " selected" : "" ,_("All")) ?>
 <?  $query = "select `orginfo`.`O`, `orginfo`.`id`
@@ -48,7 +48,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
   </tr>
   <tr>
     <td class="DataTD"><?=_("Sorting")?></td>
-    <td colspan="7" class="DataTD" >
+    <td colspan="9" class="DataTD" >
       <select name="dsorting">
         <?=sprintf('<option value="%d"%s>%s</option>',0, 0 == $sorting ? " selected" : "" ,_("expire date (desc)")) ?>
         <?=sprintf('<option value="%d"%s>%s</option>',1, 1 == $sorting ? " selected" : "" ,_("Common name, expire date (desc)")) ?>
@@ -57,7 +57,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
   </tr>
   <tr>
     <td class="DataTD"><?=_("Certificate status")?></td>
-    <td colspan="7" class="DataTD" >
+    <td colspan="9" class="DataTD" >
       <select name="dstatus">
         <?=sprintf('<option value="%d"%s>%s</option>',0, 0 == $status ? " selected" : "" ,_("Current/Active")) ?>
         <?=sprintf('<option value="%d"%s>%s</option>',1, 1 == $status ? " selected" : "" ,_("All")) ?>
@@ -69,11 +69,12 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       <input type="submit" name="filter" value="<?=_("Apply filter/sort")?>" /></td>
   </tr>
   <tr>
-    <td colspan="9" class="DataTD"> </td>
+    <td colspan="10" class="DataTD"> </td>
   </tr>
 
 
 <?
+/*
   $query = "select UNIX_TIMESTAMP(`orgdomaincerts`.`created`) as `created`,
       UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
       UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) as `expired`,
@@ -108,6 +109,8 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
 
 //echo $query."<br>\n";
   $res = mysql_query($query);
+*/
+    $res = output_orgservercerts_data(intval($_SESSION['profile']['id']), $orgfilterid, $sorting, $status);
   if(mysql_num_rows($res) <= 0)
   {
 ?>
@@ -116,10 +119,12 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
   </tr>
 <? } else {
   $orgname='';
-  while($row = mysql_fetch_assoc($res))
-  {
-    if ($row['O']<>$orgname) {
-      $orgname=$row['O'];?>
+    while($row = mysql_fetch_assoc($res))
+    {
+        if ($row['O']<>$orgname) {
+            $orgname=$row['O'];
+/*
+        ?>
   <tr>
     <td colspan="9" class="title"></td>
   </tr>
@@ -136,17 +141,29 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
     <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
   </tr>
       <?
-    }
-    if($row['timeleft'] > 0)
-      $verified = _("Valid");
-    if($row['timeleft'] < 0)
-      $verified = _("Expired");
-    if($row['expired'] == 0)
-      $verified = _("Pending");
-    if($row['revoked'] > 0)
-      $verified = _("Revoked");
-                if($row['revoked'] == 0)
-                        $row['revoke'] = _("Not Revoked");
+*/
+            output_orgservercert_table_header($orgname);
+        }
+
+        if($row['timeleft'] > 0)
+            $verified = _("Valid");
+        if($row['timeleft'] < 0)
+            $verified = _("Expired");
+        if($row['expired'] == 0)
+            $verified = _("Pending");
+        if($row['revoked'] > 0)
+            $verified = _("Revoked");
+        if($row['revoked'] == 0)
+            $row['revoke'] = _("Not revoked");
+        if(!$row['cfname'] && !$row['clname']){
+            $row['cfname'] = _("Not recorded");
+            $row['clname'] = '';
+        }
+        if($row['revoked'] > 0 && (!$row['rfname'] && !$row['rlname'])){
+            $row['rfname'] = _("Not recorded");
+            $row['rlname'] = '';
+        }
+/*
 ?>
   <tr>
 <? if($verified == _("Valid") || $verified == _("Expired")) { ?>
@@ -164,7 +181,12 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
     <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
-<? } ?>
+<?
+*/
+        output_orgservercert_table_row($verified, $row, 0);
+    }
+/*
+?>
   <tr>
     <td class="DataTD" colspan="8">
       <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
@@ -178,7 +200,10 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
   <tr>
     <td class="DataTD" colspan="9"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>
-<? } ?>
+<?
+*/
+    output_orgservercert_table_footer(0);
+} ?>
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>" />
 <input type="hidden" name="csrf" value="<?=make_csrf('orgsrvcerchange')?>" />

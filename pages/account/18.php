@@ -188,7 +188,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
 <? } ?> */
-        output_orgclient_table_row($verified, $row, 0);
+        output_orgclientcert_table_row($verified, $row, 0);
     }
 /*?>
   <tr>
@@ -205,7 +205,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
     <td class="DataTD" colspan="9"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>
 <? } ?>*/
-    output_orgclient_table_footer(0);
+    output_orgclientcert_table_footer(0);
   }
 
 ?>
