@@ -177,9 +177,11 @@ function hideall() {
     </div>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('mydetails')">+ <?=_("My Details")?></h3>
-      <ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("View/Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li><?
+      <ul class="menu" id="mydetails"><li><a href="account.php?id=13"><?=_("View/Edit")?></a></li><li><a href="account.php?id=14"><?=_("Change Password")?></a></li><li><a href="account.php?id=41"><?=_("Default Language")?></a></li><li><a href="wot.php?id=8"><?=_("My Listing")?></a></li><li><a href="wot.php?id=13"><?=_("My Location")?></a></li><li><a href="account.php?id=36"><?=_("My Alert Settings")?></a></li><li><a href="account.php?id=55"><?=_("My Trainings")?></a></li><li><a href="wot.php?id=10"><?=_("My Points")?></a></li><?
+/* to delete
 	if($_SESSION['profile']['id'] == 1 || $_SESSION['profile']['id'] == 5897)
 		echo "<li><a href='sqldump.php'>SQL Dump</a></li>";
+*/
 	?></ul>
     </div>
     <div class="relatedLinks">
@@ -222,7 +224,7 @@ function hideall() {
 <? } ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('WoT')">+ <?=_("CAcert Web of Trust")?></h3>
-      <ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?><li><a href="account.php?id=55"><?=_("Training")?></a></li></ul>
+      <ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?></ul>
     </div>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('WoTForms')">+ <?=_("CAP Forms")?></h3><?
