@@ -22,6 +22,7 @@
 	function showheader($title = "CAcert.org", $title2 = "")
 	{
 		global $id, $PHP_SELF;
+	$PHP_SELF = &$_SERVER['PHP_SELF'];
 	$expand="";
 	$tmpid = $id;
 	if($PHP_SELF == "/wot.php")
@@ -35,46 +36,51 @@
 
 	switch($tmpid)
 	{
-		case 1:
-		case 2: $expand = " explode('emailacc');"; break;
-		case 3:
-		case 4:
-		case 5:
-		case 6: $expand = " explode('clicerts');"; break;
-		case 7:
-		case 8:
-		case 9: $expand = " explode('domains');"; break;
-		case 10:
-		case 11:
-		case 12:
-		case 15: $expand = " explode('servercert');"; break;
-		case 13:
-		case 14:
-		case 36:
-		case 41:
+		case 1:                                                 // Add email address
+		case 2: $expand = " explode('emailacc');"; break;       // View email addresses
+		case 3:                                                 // Add Client certificate
+		case 4:                                                 // Confirm Client Certificate Request
+		case 5:                                                 // View Client Certificates
+		case 6: $expand = " explode('clicerts');"; break;       // Client Certificate page
+		case 7:                                                 // Add new domain
+		case 8:                                                 // Confirm Domain page
+		case 9: $expand = " explode('domains');"; break;        // View Domains
+		case 10:                                                // Add Server Certifiacte
+		case 11:                                                // Confirm Server Certificate Rewust
+		case 12:                                                // View Server Cerificate
+		case 15: $expand = " explode('servercert');"; break;    // Server Certificate page
+		case 13:                                                // ViewEdit
+		case 14:                                                // Change password
+		case 36:                                                // My Alert settings
+		case 41:                                                // Language Settings
+		case 55:                                                // Trainings
+		case 59:                                                // Account History
 		case 507:
-		case 508:
-		case 513: $expand = " explode('mydetails');"; break;
-		case 16:
-		case 17:
-		case 18:
-		case 19: $expand = " explode('clientorg');"; break;
-		case 20:
-		case 21:
-		case 22:
-		case 23: $expand = " explode('serverorg');"; break;
-		case 24:
-		case 25:
-		case 26:
-		case 27:
-		case 28:
-		case 29:
-		case 30:
+		case 508:                                               // My Listing
+		case 510:                                               // Old points calculation
+		case 515:                                               // New points calculation
+		case 513: $expand = " explode('mydetails');"; break;    // My Location
+		case 16:                                                // Add Org Client Cert
+		case 17:                                                // Confirm Org Client Certificate Request
+		case 18:                                                // View Org Client Certificate
+		case 19: $expand = " explode('clientorg');"; break;     // Org Cleint Cert page
+		case 20:                                                // Add Org Server Cert
+		case 21:                                                // Conform Org Server Cert Request
+		case 22:                                                // View Org Server Certs
+		case 23: $expand = " explode('serverorg');"; break;     // Org Server Certificate page
+		case 24:                                                // Add new Organisation
+		case 25:                                                // View Organisation List
+		case 26:                                                // View Organisation Domains
+		case 27:                                                // Edit Org Account
+		case 28:                                                // View Add Org Domain
+		case 29:                                                // Edit Org Domain
+		case 30:                                                // Delete Org Domain
 		case 31:
-		case 32:
-		case 33:
-		case 34:
-		case 35: $expand = " explode('orgadmin');"; break;
+		case 32:                                                // View Org Admin
+		case 33:                                                // Add Org Admin
+		case 34:                                                // Delete Org Admin
+		case 60:                                                // View Organisation Account History
+		case 35: $expand = " explode('orgadmin');"; break;      // View Org Admin Organisation List
 		case 42:
 		case 43:
 		case 44:
@@ -86,20 +92,19 @@
 		case 50:
 		case 54:
 		case 53: $expand = " explode('sysadmin');"; break;
-		case 500:
+		case 500:                                               // CAcert Web of Trust
 		case 501:
-		case 502:
-		case 503:
-		case 504:
-		case 505:
+		case 502:                                               // Become an Assurer
+		case 503:                                               // CAcert Web of Trust Roles
+		case 504:                                               // TTP
+		case 505:                                               // Assurer Some one
 		case 506:
 		case 509:
-		case 510:
 		case 511:
-		case 512: $expand = " explode('WoT');"; break;
+		case 512: $expand = " explode('WoT');"; break;          // Find Assurer
 		case 1000:
 		case 1001:
-		case 1002:
+		case 1002:                                              // View GPG key
 		case 1003:
 		case 1004:
 		case 1005:
@@ -108,9 +113,9 @@
 		case 1008:
 		case 1009:
 		case 1010: $expand = " explode('gpg');"; break;
-		case 1500:
-		case 1501:
-		case 1502:
+		case 1500:                                              // Dipute
+		case 1501:                                              // Dispute Email Request
+		case 1502:                                              // ViewEdit
 		case 1503:
 		case 1504:
 		case 1505:
@@ -130,7 +135,7 @@
 		case 2008:
 		case 2009: $expand = " explode('advertising');"; break;
 	}
-
+echo 'id: '. $tmpid .' - ' . $id . ' expand ' . $expand . ' PHP Self ' .$PHP_SELF . '<br />';
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
