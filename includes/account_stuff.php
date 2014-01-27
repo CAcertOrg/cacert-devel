@@ -135,7 +135,7 @@
 		case 2008:
 		case 2009: $expand = " explode('advertising');"; break;
 	}
-echo 'id: '. $tmpid .' - ' . $id . ' expand ' . $expand . ' PHP Self ' .$PHP_SELF . '<br />';
+
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
