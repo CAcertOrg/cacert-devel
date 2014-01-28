@@ -108,8 +108,8 @@
 
   <tr>
     <td class="DataTD">&nbsp;</td>
-    <td class="DataTD"><=?_("Question")?></td>
-    <td class="DataTD"><=?_("Answer")?></td>
+    <td class="DataTD"><?=_("Question")?></td>
+    <td class="DataTD"><?=_("Answer")?></td>
   </tr>
 
   <tr>
