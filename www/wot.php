@@ -465,6 +465,37 @@ function send_reminder()
 		<td class="DataTD"><input type="text" name="email" id="email" value=""></td>
 	</tr>
 	<tr>
+	<td class="DataTD">
+		<?=_("Date of Birth")?><br/>
+		(<?=_("yyyy/mm/dd")?>)</td>
+	<td class="DataTD">
+		<input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) ? sanitizeHTML($_SESSION['assuresomeone']['year']):""?>" size="4" autocomplete="off"></nobr>
+		<select name="month">
+			<?
+for($i = 1; $i <= 12; $i++)
+{
+	echo "<option value='$i'";
+	if(array_key_exists('month',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['month'] == $i)
+		echo " selected=\"selected\"";
+	echo ">".ucwords(strftime("%B", mktime(0,0,0,$i,1,date("Y"))))." ($i)</option>\n";
+}
+			?>
+		</select>
+		<select name="day">
+			<?
+for($i = 1; $i <= 31; $i++)
+{
+	echo "<option";
+	if(array_key_exists('day',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['day'] == $i)
+		echo " selected=\"selected\"";
+	echo ">$i</option>";
+}
+			?>
+		</select>
+	</td>
+  </tr>
+
+	<tr>
 		<td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
 	</tr>
 </table>
