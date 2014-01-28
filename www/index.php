@@ -161,7 +161,6 @@ require_once('../includes/notary.inc.php');
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
 				"select * from `users` where
 				`id`='$user_id' and `deleted`=0 and `locked`=0"));
-			$ccatest=get_user_agreement_status($user_id,'CCA');
 
 			if($_SESSION['profile']['id'] != 0)
 			{
@@ -340,6 +339,9 @@ require_once('../includes/notary.inc.php');
 			{
 				$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>";
 				$_SESSION['_config']['oldlocation'] = "account.php?id=13";
+			}
+			if (!isset($_SESSION['_config']['oldlocation'])){
+				$_SESSION['_config']['oldlocation']='';
 			}
 			if (checkpwlight($pword) < 3)
 				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
