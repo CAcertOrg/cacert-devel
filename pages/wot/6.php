@@ -24,6 +24,9 @@ if(!array_key_exists('notarise',$_SESSION['_config']))
 	}
 
 	$row = $_SESSION['_config']['notarise'];
+	$_SESSION['assuresomeone']['year'] = '';
+	$_SESSION['assuresomeone']['month'] = '';
+	$_SESSION['assuresomeone']['day'] = '';
 
 	if($_SESSION['profile']['ttpadmin'] == 2)
 		$methods = array('Face to Face Meeting', 'TTP-Assisted', 'TTP-TOPUP');
