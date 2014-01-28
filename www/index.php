@@ -505,7 +505,7 @@ if ($id == 52 )
 		if($score < 3)
 		{
 			$id = 1;
-			$_SESSION['_config']['errmsg'] = _("The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored $score points out of 6.");
+			$_SESSION['_config']['errmsg'] = sprintf(_("The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored %s points out of 6."), $score);
 		}
 
 		if($id == 2)
