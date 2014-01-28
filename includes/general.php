@@ -28,6 +28,12 @@
 //	if($_SESSION['profile']['id'] > 0)
 //		session_regenerate_id();
 
+	//cf. http://stackoverflow.com/a/14532168
+	if(!defined('ENT_HTML401'))	define('ENT_HTML401', 0);
+	if(!defined('ENT_XML1'))	define('ENT_XML1', 16);
+	if(!defined('ENT_XHTML'))	define('ENT_XHTML', 32);
+	if(!defined('ENT_HTML5'))	define('ENT_HTML5', (32|16));
+
 	$pageLoadTime_Start = microtime(true);
 
 	$junk = array(_("Face to Face Meeting"), _("Trusted Third Parties"), _("Thawte Points Transfer"), _("Administrative Increase"),
