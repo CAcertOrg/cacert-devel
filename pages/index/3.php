@@ -29,6 +29,7 @@
 <ul class="no_indent">
 	<li><a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
 	<li><a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a></li>
+	<li><a href="certs/root.cer"><?=_("Root Certificate (CER Format base64 encoded)")?></a></li>
 	<li><a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a></li>
 	<li><?=_("SHA1 Fingerprint:")?> 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33</li>
@@ -39,6 +40,7 @@
 <ul class="no_indent">
 	<li><a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
 	<li><a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
+	<li><a href="certs/class3.der"><?=_("Intermediate Certificate (CER Format base64 encoded)")?></a></li>
 	<li><a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
 <?php /*
