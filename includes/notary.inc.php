@@ -661,10 +661,16 @@
 		$res = mysql_query($query);
 	}
 
+	/**
+	 * get_user_agreement_status()
+	 *  returns 1 if the user has an entry for the given type in user_agreement, 0 if no entry is recorded
+	 * @param mixed $memid
+	 * @param string $type
+	 * @return
+	 */
 	function get_user_agreement_status($memid, $type="CCA"){
-	//returns 0 - no user agreement, 1- at least one entry
 		$query="SELECT u.`document` FROM `user_agreements` u
-			WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." or u.`secmemid`=".$memid.")" ;
+			WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND u.`memid`=" . intval($memid) ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <=0){
 			return 0;
@@ -673,43 +679,41 @@
 		}
 	}
 
+	/**
+	 * get_first_user_agreement()
+	 *  returns the first user_agreement entry of the requested type depending on thes status of active of a given user
+	 * @param mixed $memid
+	 * @param integer $active, 0 - passive, 1 -active
+	 * @param string $type
+	 * @return
+	 */
 	function get_first_user_agreement($memid, $active=1, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
-		if($active==1){
-			$filter="u.`memid`=".$memid;
-		}else{
-			$filter="u.`secmemid`=".$memid;
-		}
-		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` u
-			WHERE u.`document` = '".$type."' AND ".$filter."
-			ORDER BY u.`date` Limit 1;";
+		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` AS u
+			WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND u.`memid`=" . intval($memid) . " AND u.`active`=" . intval($active) .
+			" ORDER BY u.`date` Limit 1;";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
-			$row = mysql_fetch_assoc($res);
-			$rec['document']= $row['document'];
-			$rec['date']= $row['date'];
-			$rec['method']= $row['method'];
-			$rec['comment']= $row['comment'];
-			$rec['active']= $row['active'];
+			$rec = mysql_fetch_assoc($res);
 		}else{
 			$rec=array();
 		}
 		return $rec;
 	}
 
+	/**
+	 * get_last_user_agreement()
+	 *  returns the last user_agreement entry of a given type and of a given user
+	 * @param mixed $memid
+	 * @param string $type
+	 * @return
+	 */
 	function get_last_user_agreement($memid, $type="CCA"){
 	//returns an array (`document`,`date`,`method`, `comment`,`active`)
-		$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND (u.`memid`=".$memid." ) order by `date` desc limit 1)
-			union
-			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = '".$type."' AND ( u.`secmemid`=".$memid.")) order by `date` desc limit 1" ;
+		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM user_agreements u WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND (u.`memid`=" . intval($memid) . " ) order by `date` desc limit 1 " ;
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
-			$row = mysql_fetch_assoc($res);
-			$rec['document']= $row['document'];
-			$rec['date']= $row['date'];
-			$rec['method']= $row['method'];
-			$rec['comment']= $row['comment'];
-			$rec['active']= $row['active'];
+			$rec = mysql_fetch_assoc($res);
 		}else{
 			$rec=array();
 		}
@@ -727,10 +731,20 @@ function get_user_agreement($memid){
 	return mysql_query($query);
 }
 
-	function delete_user_agreement($memid, $type="CCA"){
-	//deletes all entries to an user for the given type of user agreements
-		mysql_query("delete from `user_agreements` where `memid`='".$memid."'");
-		mysql_query("delete from `user_agreements` where `secmemid`='".$memid."'");
+	/**
+	 * delete_user_agreement()
+	 *  deletes all entries for a given type from user_agreement of a given user, if type is not given all
+	 * @param mixed $memid
+	 * @param string $type
+	 * @return
+	 */
+	function delete_user_agreement($memid, $type=false){
+		if ($type === false) {
+			$filter = '';
+		} else {
+			$filter = " and `document` = '" . mysql_real_escape_string($type) . "'";
+		}
+		mysql_query("delete from `user_agreements` where `memid`=" . intval($memid) . $filter );
 	}
 
 	// functions for 6.php (assure somebody)
