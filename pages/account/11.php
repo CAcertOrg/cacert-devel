@@ -15,39 +15,61 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
+
 <p>
-<?=_("Please make sure the following details are correct before proceeding any further.")?>
+<?=_("Please make sure the following details are correct before proceeding ".
+		"any further.")?>
 </p>
-<?// print_r($_SESSION['_config']['altrows']); ?>
+
+<p><?
+if (is_array($_SESSION['_config']['rows'])) {
+	foreach ($_SESSION['_config']['rows'] as $row) {
+		echo _("CommonName"), ": $row<br>\n";
+	}
+}
+
+if (is_array($_SESSION['_config']['altrows'])) {
+	foreach ($_SESSION['_config']['altrows'] as $row) {
+		echo _("subjectAltName"), ": $row<br>\n";
+	}
+}
+?></p>
+
 <p>
-<? if(is_array($_SESSION['_config']['rows']))
-	foreach($_SESSION['_config']['rows'] as $row) { ?>
-<?=_("CommonName")?>: <?=$row?><br>
-<? } ?>
-<? if(is_array($_SESSION['_config']['altrows']))
-	foreach($_SESSION['_config']['altrows'] as $row) { ?>
-<?=_("subjectAltName")?>: <?=$row?><br>
-<? } ?>
-<? if(1 == 0) { ?>
-<?=_("Organisation")?>: <?=$_SESSION['_config']['O']?><br>
-<?=_("Org. Unit")?>: <?=$_SESSION['_config']['OU']?><br>
-<?=_("Location")?>: <?=$_SESSION['_config']['L']?><br>
-<?=_("State/Province")?>: <?=$_SESSION['_config']['ST']?><br>
-<?=_("Country")?>: <?=$_SESSION['_config']['C']?><br>
-<?=_("Email Address")?>: <?=$_SESSION['_config']['emailAddress']?><br>
-<? } ?>
-<?=_("No additional information will be included on certificates because it can not be automatically checked by the system.")?>
-<? if(array_key_exists('rejected',$_SESSION['_config']) && is_array($_SESSION['_config']['rejected'])) { ?>
-<br><br><?=_("The following hostnames were rejected because the system couldn't link them to your account, if they are valid please verify the domains against your account.")?><br>
-<? foreach($_SESSION['_config']['rejected'] as $row) { ?>
-<?=_("Rejected")?>: <a href="account.php?id=7&amp;newdomain=<?=$row?>"><?=$row?></a><br>
-<? } } ?>
-<? if(is_array($_SESSION['_config']['rows']) || is_array($_SESSION['_config']['altrows'])) { ?>
-<form method="post" action="account.php">
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
-</form>
-<? } else { ?>
-<br><br><b><?=_("Unable to continue as no valid commonNames or subjectAltNames were present on your certificate request.")?></b>
-<? } ?>
+<?=_("No additional information will be included on certificates because it ".
+		"can not be automatically checked by the system.")?>
 </p>
+
+<p><?
+if (array_key_exists('rejected',$_SESSION['_config']) &&
+		is_array($_SESSION['_config']['rejected'])) {
+	echo _("The following hostnames were rejected because the system couldn't ".
+			"link them to your account, if they are valid please verify the ".
+			"domains against your account."), "<br>\n";
+	
+	foreach ($_SESSION['_config']['rejected'] as $row) {
+		echo _("Rejected");
+		echo ": <a href='account.php?id=7&amp;newdomain=$row'>$row</a><br>\n";
+	}
+}
+?></p>
+
+<?
+if (is_array($_SESSION['_config']['rows']) ||
+		is_array($_SESSION['_config']['altrows'])) {
+	?>
+	<form method="post" action="account.php">
+		<p>
+			<input type="submit" name="process" value="<?=_("Submit")?>">
+			<input type="hidden" name="oldid" value="<?=$id?>">
+		</p>
+	</form>
+	<?
+} else {
+	?>
+	<p>
+		<b><?=_("Unable to continue as no valid commonNames or ".
+				"subjectAltNames were present on your certificate request.")?></b>
+	</p>
+	<?
+}
