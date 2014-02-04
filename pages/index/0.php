@@ -19,7 +19,7 @@
 
 <p><?=_("CAcert.org is a community-driven Certificate Authority that issues certificates to the public at large for free.")?></p>
 
-<p><?=_("CAcert's goal is to promote awareness and education on computer security through the use of encryption, specifically by providing cryptographic certificates. These certificates can be used to digitally sign and encrypt email, authenticate and authorize users connecting to websites and secure data transmission over the internet. Any application that supports the Secure Socket Layer Protocol (SSL or TLS) can make use of certificates signed by CAcert, as can any application that uses X.509 certificates, e.g. for encryption or code signing and document signatures.")?></p>
+<p><?=_("CAcert's goal is to promote awareness and education on computer security through the use of encryption, specifically by providing cryptographic certificates. These certificates can be used to digitally sign and encrypt email, authenticate and authorize users connecting to websites and secure data transmission over the internet. Any application that supports the Secure Socket Layer protocol (SSL or TLS) can make use of certificates signed by CAcert, as can any application that uses X.509 certificates, e.g. for encryption or code signing and document signatures.")?></p>
 
 <p><?=sprintf(_("If you want to have free certificates issued to you, %s join the CAcert Community %s."),'<a href="https://www.cacert.org/index.php?id=1">', '</a>')?></p>
 
