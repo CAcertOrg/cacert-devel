@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 <div style="text-align: center;">
 	<h1><?=_('CAcert Community Agreement acceptance')?></h1>
-	<p><?=sprintf(_('To get access to your account you need to accept the %s (CCA). '),'<a href="/policy/CAcertCommunityAgreement.php">' . _('CAcert Community Agreement'). '</a>')?> </p>
+	<p><?=sprintf(_('To get access to your account you need to accept the %sCAcert Community Agreement%s (CCA). '),'<a href="/policy/CAcertCommunityAgreement.php">', '</a>')?> </p>
 	<p><?=_('Explanation why')?> </p>
 	<p><?=sprintf(_('If you do not want to accept the CCA you should think about closing your account. In this case please sent and email to support %s.'),'<a href="mailto:support@cacert.org">' . '(support@cacert.org)</a>')?> </p>
 	<form method="post" action="index.php" >
