@@ -124,7 +124,7 @@
   </tr>
 <? } ?>
   <tr>
-    <td colspan="2" class="title"><a href="account.php?id=59&amp;userid=<?=$_SESSION['profile']['id']?>"><?=_('Show account history')?></a></td>
+    <td colspan="2" class="title"><a href="account.php?id=59&amp;oldid=13&amp;userid=<?=$_SESSION['profile']['id']?>"><?=_('Show account history')?></a></td>
   </tr>
   <tr>
     <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=!$showdetails?>"><?=_("View secret question & answers and OTP phrases")?></a></td>
