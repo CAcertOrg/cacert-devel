@@ -160,7 +160,11 @@
     <td class="DataTD" colspan="3"><?=_("When you click on next, we will send a confirmation email to the email address you have entered above.")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="3"><input type="checkbox" name="cca_agree" tabindex="26" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php" tabindex="28" >http://www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
+    <td class="DataTD" colspan="3">
+      <input type="checkbox" name="cca_agree" tabindex="26" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> >
+      <br/>
+      <?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php" tabindex="28" >http://www.cacert.org/policy/CAcertCommunityAgreement.php</a>
+    </td>
   </tr>
 
   <tr>
