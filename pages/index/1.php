@@ -30,32 +30,32 @@
 
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
-    <td class="DataTD" width="125"><input type="text" name="fname" size="30" value="<?=array_key_exists('fname',$_REQUEST)?sanitizeHTML($_REQUEST['fname']):""?>" autocomplete="off"></td>
-    <td rowspan="4" class="DataTD" width="125"><? printf(_("Help on Names %sin the wiki%s"),'<a href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
+    <td class="DataTD" width="125"><input type="text" name="fname" size="30" value="<?=array_key_exists('fname',$_REQUEST)?sanitizeHTML($_REQUEST['fname']):""?>" tabindex="1" autocomplete="off"></td>
+    <td rowspan="4" class="DataTD" width="125"><? printf(_("Help on Names %sin the wiki%s"),'<a tabindex="1" href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
   </tr>
 
   <tr>
     <td class="DataTD" valign="top"><?=_("Middle Name(s)")?><br>
       (<?=_("optional")?>)
     </td>
-    <td class="DataTD"><input type="text" name="mname" size="30" value="<?=array_key_exists('mname',$_REQUEST)?sanitizeHTML($_REQUEST['mname']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="mname" size="30" value="<?=array_key_exists('mname',$_REQUEST)?sanitizeHTML($_REQUEST['mname']):""?>" tabindex="3" autocomplete="off"></td>
   </tr>
 
   <tr>
     <td class="DataTD"><?=_("Last Name")?>: </td>
-    <td class="DataTD"><input type="text" name="lname" size="30" value="<?=array_key_exists('lname',$_REQUEST)?sanitizeHTML($_REQUEST['lname']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="lname" size="30" value="<?=array_key_exists('lname',$_REQUEST)?sanitizeHTML($_REQUEST['lname']):""?>" tabindex="4" autocomplete="off"></td>
   </tr>
 
   <tr>
     <td class="DataTD"><?=_("Suffix")?><br>
       (<?=_("optional")?>)</td>
-    <td class="DataTD"><input type="text" name="suffix" size="30" value="<?=array_key_exists('suffix',$_REQUEST)?sanitizeHTML($_REQUEST['suffix']):""?>" autocomplete="off"><br><?=sprintf(_("Please only write Name Suffixes into this field."))?></td>
+    <td class="DataTD"><input type="text" name="suffix" size="30" value="<?=array_key_exists('suffix',$_REQUEST)?sanitizeHTML($_REQUEST['suffix']):""?>" tabindex="5" autocomplete="off"><br><?=sprintf(_("Please only write Name Suffixes into this field."))?></td>
   </tr>
 
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?><br>
 	    (<?=_("dd/mm/yyyy")?>)</td>
-    <td class="DataTD"><nobr><select name="day">
+    <td class="DataTD"><nobr><select name="day" tabindex="6">
 <?
 	for($i = 1; $i <= 31; $i++)
 	{
@@ -66,7 +66,7 @@
 	}
 ?>
     </select>
-    <select name="month">
+    <select name="month" tabindex="7">
 <?
 	for($i = 1; $i <= 12; $i++)
 	{
@@ -77,25 +77,25 @@
 	}
 ?>
     </select>
-    <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['signup']) ? sanitizeHTML($_SESSION['signup']['year']):""?>" size="4" autocomplete="off"></nobr>
+    <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['signup']) ? sanitizeHTML($_SESSION['signup']['year']):""?>" size="4" tabindex="8" autocomplete="off"></nobr>
     </td>
     <td class="DataTD">&nbsp;</td>
   </tr>
 
   <tr>
     <td class="DataTD"><?=_("Email Address")?>: </td>
-    <td class="DataTD"><input type="text" name="email" size="30" value="<?=array_key_exists('email',$_REQUEST)?sanitizeHTML($_REQUEST['email']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="email" size="30" value="<?=array_key_exists('email',$_REQUEST)?sanitizeHTML($_REQUEST['email']):""?>" tabindex="9" autocomplete="off"></td>
     <td class="DataTD"><?=_("I own or am authorised to control this email address")?></td>
   </tr>
 
   <tr>
     <td class="DataTD"><?=_("Pass Phrase")?><font color="red">*</font>: </td>
-    <td class="DataTD"><input type="password" name="pword1" size="30" autocomplete="off"></td>
+    <td class="DataTD"><input type="password" name="pword1" size="30" tabindex="10" autocomplete="off"></td>
     <td class="DataTD" rowspan="2">&nbsp;</td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Pass Phrase Again")?><font color="red">*</font>: </td>
-    <td class="DataTD"><input type="password" name="pword2" size="30" autocomplete="off"></td>
+    <td class="DataTD"><input type="password" name="pword2" size="30" tabindex="11" autocomplete="off"></td>
   </tr>
 
   <tr>
@@ -114,32 +114,32 @@
 
   <tr>
     <td class="DataTD">1)</td>
-    <td class="DataTD"><input type="text" name="Q1" size="30" value="<?=array_key_exists('Q1',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q1']):""?>"></td>
-    <td class="DataTD"><input type="text" name="A1" size="30" value="<?=array_key_exists('A1',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A1']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="Q1" size="30" value="<?=array_key_exists('Q1',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q1']):""?>" tabindex="12"></td>
+    <td class="DataTD"><input type="text" name="A1" size="30" value="<?=array_key_exists('A1',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A1']):""?>" tabindex="13" autocomplete="off"></td>
   </tr>
 
   <tr>
     <td class="DataTD">2)</td>
-    <td class="DataTD"><input type="text" name="Q2" size="30" value="<?=array_key_exists('Q2',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q2']):""?>"></td>
-    <td class="DataTD"><input type="text" name="A2" size="30" value="<?=array_key_exists('A2',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A2']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="Q2" size="30" value="<?=array_key_exists('Q2',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q2']):""?>" tabindex="14"></td>
+    <td class="DataTD"><input type="text" name="A2" size="30" value="<?=array_key_exists('A2',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A2']):""?>" tabindex="15" autocomplete="off"></td>
   </tr>
 
   <tr>
     <td class="DataTD">3)</td>
-    <td class="DataTD"><input type="text" name="Q3" size="30" value="<?=array_key_exists('Q3',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q3']):""?>"></td>
-    <td class="DataTD"><input type="text" name="A3" size="30"value="<?=array_key_exists('A3',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A3']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="Q3" size="30" value="<?=array_key_exists('Q3',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q3']):""?>" tabindex="16"></td>
+    <td class="DataTD"><input type="text" name="A3" size="30"value="<?=array_key_exists('A3',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A3']):""?>" tabindex="17" autocomplete="off"></td>
   </tr>
 
   <tr>
     <td class="DataTD">4)</td>
-    <td class="DataTD"><input type="text" name="Q4" size="30"" value="<?=array_key_exists('Q4',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q4']):""?>"></td>
-    <td class="DataTD"><input type="text" name="A4" size="30" value="<?=array_key_exists('A4',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A4']):""?>" autcomplete="off"></td>
+    <td class="DataTD"><input type="text" name="Q4" size="30"" value="<?=array_key_exists('Q4',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q4']):""?>" tabindex="18"></td>
+    <td class="DataTD"><input type="text" name="A4" size="30" value="<?=array_key_exists('A4',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A4']):""?>" tabindex="19" autcomplete="off"></td>
   </tr>
 
   <tr>
   <td class="DataTD">5)</td>
-    <td class="DataTD"><input type="text" name="Q5" size="30" value="<?=array_key_exists('Q5',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q5']):""?>"></td>
-    <td class="DataTD"><input type="text" name="A5" size="30" value="<?=array_key_exists('A5',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A5']):""?>" autocomplete="off"></td>
+    <td class="DataTD"><input type="text" name="Q5" size="30" value="<?=array_key_exists('Q5',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['Q5']):""?>" tabindex="20"></td>
+    <td class="DataTD"><input type="text" name="A5" size="30" value="<?=array_key_exists('A5',$_SESSION['signup'])?sanitizeHTML($_SESSION['signup']['A5']):""?>" tabindex="21" autocomplete="off"></td>
   </tr>
 
   <tr>
@@ -149,10 +149,10 @@
   <tr>
     <td class="DataTD" valign="top"><?=_("Alert me if")?>: </td>
     <td class="DataTD" align="left">
-        <input type="checkbox" name="general" value="1" <?=array_key_exists('general',$_SESSION['signup'])? ($_SESSION['signup']['general'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("General Announcements")?><br>
-	<input type="checkbox" name="country" value="1" <?=array_key_exists('country',$_SESSION['signup'])? ($_SESSION['signup']['country'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Country Announcements")?><br>
-	<input type="checkbox" name="regional" value="1" <?=array_key_exists('regional',$_SESSION['signup'])? ($_SESSION['signup']['regional'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Regional Announcements")?><br>
-	<input type="checkbox" name="radius" value="1" <?=array_key_exists('radius',$_SESSION['signup'])? ($_SESSION['signup']['radius'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Within 200km Announcements")?></td>
+        <input type="checkbox" name="general" value="1" tabindex="22" <?=array_key_exists('general',$_SESSION['signup'])? ($_SESSION['signup']['general'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("General Announcements")?><br>
+	<input type="checkbox" name="country" value="1" tabindex="23" <?=array_key_exists('country',$_SESSION['signup'])? ($_SESSION['signup']['country'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Country Announcements")?><br>
+	<input type="checkbox" name="regional" value="1" tabindex="24" <?=array_key_exists('regional',$_SESSION['signup'])? ($_SESSION['signup']['regional'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Regional Announcements")?><br>
+	<input type="checkbox" name="radius" value="1" tabindex="25" <?=array_key_exists('radius',$_SESSION['signup'])? ($_SESSION['signup']['radius'] == "0" ?"":"checked=\"checked\""):"checked=\"checked\"" ?>><?=_("Within 200km Announcements")?></td>
     <td class="DataTD">&nbsp;</td>
   </tr>
 
@@ -160,11 +160,11 @@
     <td class="DataTD" colspan="3"><?=_("When you click on next, we will send a confirmation email to the email address you have entered above.")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="3"><input type="checkbox" name="cca_agree" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php">http://www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
+    <td class="DataTD" colspan="3"><input type="checkbox" name="cca_agree" tabindex="26" value="1" <?=array_key_exists('cca_agree',$_SESSION['signup'])? ($_SESSION['signup']['cca_agree'] == "1" ?"checked=\"checked\"":""):"" ?> ><?=_("I agree to the terms and conditions of the CAcert Community Agreement")?>: <a href="/policy/CAcertCommunityAgreement.php" tabindex="28" >http://www.cacert.org/policy/CAcertCommunityAgreement.php</a></td>
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+    <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=_("Next")?>" tabindex="27"></td>
   </tr>
 
 </table>
