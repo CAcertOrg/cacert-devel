@@ -21,16 +21,31 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 $ticketno='';
 $ticketvalidation=FALSE;
 
-
 if (isset($_SESSION['ticketno'])) {
-    $ticketno = $_SESSION['ticketno'];
-    $ticketvalidation = valid_ticket_number($ticketno);
+	$ticketno = $_SESSION['ticketno'];
+	$ticketvalidation = valid_ticket_number($ticketno);
 }
 if (isset($_SESSION['ticketmsg'])) {
-    $ticketmsg = $_SESSION['ticketmsg'];
+	$ticketmsg = $_SESSION['ticketmsg'];
 } else {
-    $ticketmsg = '';
+	$ticketmsg = '';
 }
+
+
+  if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
+  {
+    $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
+    $row = 0;
+    $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
+    if ($res) {
+      $row = mysql_fetch_assoc($res);
+      mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
+      if ($row) {
+        fix_assurer_flag($row['to']);
+      }
+    }
+  }
+
 
 // search for an account by email search, if more than one is found display list to choose
 if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
