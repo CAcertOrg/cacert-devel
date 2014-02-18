@@ -26,10 +26,10 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
     if ($res) {
       $row = mysql_fetch_assoc($res);
-    }
-    mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
-    if ($row) {
-      fix_assurer_flag($row['to']);
+      mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
+      if ($row) {
+        fix_assurer_flag($row['to']);
+      }
     }
   }
 
