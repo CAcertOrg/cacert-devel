@@ -1403,16 +1403,16 @@ function output_log_email($row,$primary){
 	$italic='';
 	$bold='';
 	if ($row['deleted'] > 0) {
-		$italic='italic ';
+		$italic=' italic';
 	}
 	if ($primary==$row['email'] && $row['deleted'] == 0) {
-		$bold= 'bold ';
+		$bold= ' bold';
 	}
 	?>
 	<tr>
-		<td class="DataTD<? $bold . $italic ?>"><?=$row['email']?></td>
-		<td class="DataTD<? $bold . $italic ?>"><?=$row['created']?></td>
-		<td class="DataTD<? $bold . $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?= $bold . $italic ?>"><?=$row['email']?></td>
+		<td class="DataTD<?= $bold . $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD<?= $bold . $italic ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
