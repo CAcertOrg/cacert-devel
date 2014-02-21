@@ -1402,17 +1402,17 @@ function output_log_email_header(){
 function output_log_email($row,$primary){
 	$italic='';
 	$bold='';
-	if (0==$row['deleted']) {
+	if ($row['deleted'] > 0) {
 		$italic='italic ';
 	}
-	if ($primary==$row['email']) {
+	if ($primary==$row['email'] && $row['deleted'] == 0) {
 		$bold= 'bold ';
 	}
 	?>
 	<tr>
-		<td class="DataTD <? $bold . $italic ?>"><?=$row['email']?></td>
-		<td class="DataTD <? $bold . $italic ?>"><?=$row['created']?></td>
-		<td class="DataTD <? $bold . $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<? $bold . $italic ?>"><?=$row['email']?></td>
+		<td class="DataTD<? $bold . $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD<? $bold . $italic ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
