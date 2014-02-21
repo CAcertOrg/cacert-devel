@@ -941,11 +941,6 @@ function get_user_agreement($memid){
 		}
 
 	//change personal information to arbitration number and DOB=1900-01-01
-		$query = "select `fname`,`mname`,`lname`,`suffix`,`dob` from `users` where `id`='$userid'";
-		$details = mysql_fetch_assoc(mysql_query($query));
-		$query = "insert into `adminlog` set `when`=NOW(),`old-lname`='${details['lname']}',`old-dob`='${details['dob']}',
-			`new-lname`='$arbno',`new-dob`='1900-01-01',`uid`='$id',`adminid`='".$adminid."'";
-		mysql_query($query);
 		$query = "update `users` set `fname`='".$arbno."',
 			`mname`='".$arbno."',
 			`lname`='".$arbno."',
