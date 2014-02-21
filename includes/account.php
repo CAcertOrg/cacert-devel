@@ -3078,18 +3078,21 @@ function buildSubjectFromSession() {
 		if (trim($_REQUEST['arbitrationno'])==""){
 			showheader(_("My CAcert.org Account!"));
 			echo _("You did not enter an arbitration number entry.");
+			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
 		if ( 1 !== preg_match('/^[a-z]\d{8}\.\d+\.\d+$/i',trim($_REQUEST['arbitrationno'])) ) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' is not a valid arbitration number entry."), sanitizeHTML(trim($_REQUEST['arbitrationno'])));
+			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
 		if (check_email_exists(trim($_REQUEST['arbitrationno']).'@cacert.org')) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['arbitrationno'].'@cacert.org'));
+			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		 }
@@ -3098,12 +3101,14 @@ function buildSubjectFromSession() {
 			check_gpg_cert_running($_REQUEST['userid'],1)) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The CCA retention time for at least one certificate is not over. Can't continue."));
+			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
 		if (check_is_orgadmin($_REQUEST['userid'],1)) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The user is listed as Organisation Administrator. Can't continue."));
+			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
