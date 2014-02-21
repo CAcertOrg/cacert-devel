@@ -297,7 +297,7 @@ if (1 == $support) {
         ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
     }
     if ($support==1) {
-        ?><td colspan="<?=$colspan?>" ><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>'?></td><?
+        ?><td colspan="<?=$colspan?>" ><a href="account.php?id=43&amp;userid=<?= $userid ?>"><?= _('Back to previous page.')?></a></td><?
     }
 
     ?>
