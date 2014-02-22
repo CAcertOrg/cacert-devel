@@ -83,7 +83,9 @@ function buildSubjectFromSession() {
 	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
 	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
 	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
-	$ticketno=""; if(array_key_exists('ticketno',$_REQUEST)) $ticketno=$_REQUEST['ticketno'];
+	$ticketno = array_key_exists('ticketno',$_REQUEST) ? $_REQUEST['ticketno'] : "";
+    $ticketvalidation = FALSE;
+    $actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
 
 
 	if(!$_SESSION['mconn'])
@@ -2676,8 +2678,7 @@ function buildSubjectFromSession() {
 	}
 
 	//check if ticket number was entered
-	if ( $id == 43 || $oldid == 43 || $id == 44 || $oldid == 44) {
-		$ticketvalidation = FALSE;
+	if ( $id == 43 || $oldid == 43 || $id == 44 || $oldid == 44 ) {
 		if ($ticketno != "" ) {
 			$ticketno = mysql_real_escape_string(trim($_REQUEST['ticketno']));
 			$ticketvalidation = valid_ticket_number($ticketno);
@@ -2686,7 +2687,7 @@ function buildSubjectFromSession() {
 		$_SESSION['ticketno'] = $ticketno;
 	}
 
-	if($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation == TRUE)
+	if($oldid == 43 && $actionrequest == "updatedob" && $ticketvalidation == TRUE)
 	{
 		$id = 43;
 		$oldid=0;
@@ -2701,19 +2702,19 @@ function buildSubjectFromSession() {
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
 		write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno);
-	}elseif($oldid == 43 && $_REQUEST['action'] == "updatedob" && $ticketvalidation == FALSE){
+	}elseif($oldid == 43 && $actionrequest == "updatedob" && $ticketvalidation == FALSE){
 		$id = 43;
 		$oldid=0;
 		$_SESSION['ticketmsg']='No action (name/dob change) taken. Ticket number is missing!';
 	}
 
-	if($oldid == 43 && $_REQUEST['action'] == 'revokecert' && $ticketvalidation==TRUE)
+	if($oldid == 43 && $actionrequest == 'revokecert' && $ticketvalidation == TRUE)
 	{
 		$userid = intval($_REQUEST['userid']);
 		revoke_all_private_cert($userid);
 		write_se_log($userid, $_SESSION['profile']['id'], 'SE Revoke all certificates',$ticketno);
 		$id=43;
-	}elseif($oldid == 43 && $_REQUEST['action'] == "revokecert" && $ticketvalidation == FALSE){
+	}elseif($oldid == 43 && $actionrequest == "revokecert" && $ticketvalidation == FALSE){
 	    $id = 43;
 	    $oldid=0;
 	    $_SESSION['ticketmsg']='No certificates revokes. Ticket number is missing!';
