@@ -581,9 +581,9 @@ $iecho= "c";
             exit;
         }
         if (is_assurer($uid)) {
-            $status = _('is assurer');
+            $status = _('Is assurer');
         } else {
-             $status = _('is no assurer');
+             $status = _('Is no assurer');
         }
         $assurer = get_user($uid);
         //mail to assurer
@@ -610,16 +610,16 @@ $iecho= "c";
         //mail to requestor
         L10n::set_translation($my_translation);
 
-      //  $subject = "[CAcert.org] ".sprintf(_("Assurer status report that you requested"));
-//
-//        $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
-//        $body .= sprintf(_("you requested the assurer status of %s %s (%s)."),
-//            $assurer['fname'],
-//            $assurer['lname'],
-//            $assurer['email'])."\n\n";
-//        $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
-//        $body .= _("Best regards")."\n";
-//        $body .= _("CAcert Support Team");
+        $subject = "[CAcert.org] ".sprintf(_("Assurer status report that you requested"));
+
+        $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
+        $body .= sprintf(_("you requested the assurer status of %s %s (%s)."),
+            $assurer['fname'],
+            $assurer['lname'],
+            $assurer['email'])."\n\n";
+        $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
+        $body .= _("Best regards")."\n";
+        $body .= _("CAcert Support Team");
 
         sendmail($_SESSION['profile']['email'], "[CAcert.org] ". $subject, $body,
             "support@cacert.org", //from
@@ -628,7 +628,7 @@ $iecho= "c";
             "CAcert Support"); //fromname
         showheader(_("My CAcert.org Account!"));?>
 				<p>
-					<? printf(_('The mail with the status request has been sent to the assurer and you.'). '<br/>'.$subject. '<br/>'.$body); ?>
+					<? printf(_('The mail with the status request has been sent to the assurer and you.')); ?>
 				</p>
 				<?
         showfooter();
