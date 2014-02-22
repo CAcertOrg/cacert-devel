@@ -96,7 +96,8 @@
 		case 509:
 		case 510:
 		case 511:
-		case 512: $expand = " explode('WoT');"; break;
+		case 512:
+		case 516: $expand = " explode('WoT');"; break;  //Assurer check
 		case 1000:
 		case 1001:
 		case 1002:
@@ -217,7 +218,7 @@ function hideall() {
 <? } ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('WoT')">+ <?=_("CAcert Web of Trust")?></h3>
-      <ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?><li><a href="account.php?id=55"><?=_("Training")?></a></li></ul>
+      <ul class="menu" id="WoT"><li><a href="wot.php?id=0"><?=_("About")?></a></li><li><a href="wot.php?id=12"><?=_("Find an Assurer")?></a></li><li><a href="wot.php?id=3"><?=_("Rules")?></a></li><li><a href="wot.php?id=16"><?=_("Check Assurer Status")?></a></li><li><a href="wot.php?id=3"></li><li><? if($_SESSION['profile']['assurer'] != 1) { ?><a href="wot.php?id=2"><?=_("Becoming an Assurer")?></a><? } else { ?><a href="wot.php?id=5"><?=_("Assure Someone")?></a><? } ?></li><li><a href="wot.php?id=4"><?=_("Trusted ThirdParties")?></a></li><? if($_SESSION['profile']['points'] >= 500) { ?><li><a href="wot.php?id=11"><div style="white-space:nowrap"><?=_("Organisation Assurance")?></div></a></li><? } ?><li><a href="account.php?id=55"><?=_("Training")?></a></li></ul>
     </div>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('WoTForms')">+ <?=_("CAP Forms")?></h3><?
