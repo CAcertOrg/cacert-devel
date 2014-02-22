@@ -1125,3 +1125,12 @@
 	function check_date_difference($date, $diff=1){
 		return (strtotime($date)<=time()+$diff*86400);
 	}
+
+	//user function
+	function get_user_id_from_mail($email){
+	    $email = trim(mysql_real_escape_string($email));
+	    $res = query_init ("select `id` from `users` where `email` = '" . $email . "'");
+	    $row = query_getnextrow($res);
+
+	    return intval($row['id']);
+	}

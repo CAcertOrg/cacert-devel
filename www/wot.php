@@ -569,15 +569,69 @@ $iecho= "c";
 		show_page("ContactAssurer","",_("There was an error and I couldn't proceed"));
 		exit;
 	}
-
-        echo "passt 1";
-
+// Assurer Check
     if($oldid == 16 )
     {
         $oldid=0;
-        $id = 16;
+        $id = 0;
+        $email = trim(mysql_real_escape_string($_REQUEST['email']));
+        $uid = get_user_id_from_mail($email);
+        if ($uid == 0) {
+            show_page("AssurerCheck","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
+            exit;
+        }
+        if (is_assurer($uid)) {
+            $status = _('is assurer');
+        } else {
+             $status = _('is no assurer');
+        }
+        $assurer = get_user($uid);
+        //mail to assurer
+        $my_translation = L10n::get_translation();
+        L10n::set_translation($assurer['language']);
 
-        show_page("AssurerCheck","",_("There was an error and I couldn't proceed"));
+        $subject = "[CAcert.org] ".sprintf(_("Assurer status report for you"));
+
+        $body  = sprintf(_("Hi %s,"), $assurer['fname'])."\n\n";
+        $body .= sprintf(_("%s %s (%s) has requested your assurer status."),
+            $_SESSION['profile']['fname'],
+            $_SESSION['profile']['lname'],
+            $_SESSION['profile']['email'])."\n\n";
+        $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
+        $body .= _("Best regards")."\n";
+        $body .= _("CAcert Support Team");
+
+        //sendmail($assurer['email'], "[CAcert.org] " . $subject, $body, "support@cacert.org", "", "", "CAcert Support");
+        sendmail($assurer['email'], "[CAcert.org] ". $subject, $body,
+            "support@cacert.org", //from
+            "", //replyto
+            "", //toname
+            "CAcert Support"); //fromname
+        //mail to requestor
+        L10n::set_translation($my_translation);
+
+      //  $subject = "[CAcert.org] ".sprintf(_("Assurer status report that you requested"));
+//
+//        $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
+//        $body .= sprintf(_("you requested the assurer status of %s %s (%s)."),
+//            $assurer['fname'],
+//            $assurer['lname'],
+//            $assurer['email'])."\n\n";
+//        $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
+//        $body .= _("Best regards")."\n";
+//        $body .= _("CAcert Support Team");
+
+        sendmail($_SESSION['profile']['email'], "[CAcert.org] ". $subject, $body,
+            "support@cacert.org", //from
+            "", //replyto
+            "", //toname
+            "CAcert Support"); //fromname
+        showheader(_("My CAcert.org Account!"));?>
+				<p>
+					<? printf(_('The mail with the status request has been sent to the assurer and you.'). '<br/>'.$subject. '<br/>'.$body); ?>
+				</p>
+				<?
+        showfooter();
         exit;
     }
 //	showheader(_("My CAcert.org Account!"));
