@@ -575,9 +575,14 @@ $iecho= "c";
         $oldid=0;
         $id = 0;
         $email = trim(mysql_real_escape_string($_REQUEST['email']));
+        $reason = trim(mysql_real_escape_string($_REQUEST['reason']));
         $uid = get_user_id_from_mail($email);
         if ($uid == 0) {
             show_page("AssurerCheck","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
+            exit;
+        }
+        if ($reason == "--") {
+            show_page("AssurerCheck","",_("I'm sorry, there was no reason given why you need to check the assurer status."));
             exit;
         }
         if (is_assurer($uid)) {
@@ -593,10 +598,11 @@ $iecho= "c";
         $subject = "[CAcert.org] ".sprintf(_("Assurer status report for you"));
 
         $body  = sprintf(_("Hi %s,"), $assurer['fname'])."\n\n";
-        $body .= sprintf(_("%s %s (%s) has requested your assurer status."),
+        $body .= sprintf(_("%s %s (%s) has requested your assurer status for %s."),
             $_SESSION['profile']['fname'],
             $_SESSION['profile']['lname'],
-            $_SESSION['profile']['email'])."\n\n";
+            $_SESSION['profile']['email'],
+            $reason)."\n\n";
         $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
         $body .= _("Best regards")."\n";
         $body .= _("CAcert Support Team");
@@ -613,10 +619,11 @@ $iecho= "c";
         $subject = "[CAcert.org] ".sprintf(_("Assurer status report that you requested"));
 
         $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
-        $body .= sprintf(_("you requested the assurer status of %s %s (%s)."),
+        $body .= sprintf(_("you requested the assurer status of %s %s (%s) for %s."),
             $assurer['fname'],
             $assurer['lname'],
-            $assurer['email'])."\n\n";
+            $assurer['email'],
+            $reason)."\n\n";
         $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
         $body .= _("Best regards")."\n";
         $body .= _("CAcert Support Team");

@@ -28,24 +28,6 @@ if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error
 }
 ?>
 <? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
-<!--<form method="post" action="wot.php">
-<input type="hidden" name="email" value="<?=sanitizeHTML($_POST['email'])?>"><br>
-<select name="reminder-lang">
-    <?
-//if($_SESSION['_config']['reminder-lang'] == "")
-//    $_SESSION['_config']['reminder-lang'] = L10n::get_translation();
-//    foreach(L10n::$translations as $key => $val)
-//    {
-//        echo "<option value='$key'";
-//        if($key == $_SESSION['_config']['reminder-lang'])
-//            echo " selected";
-//        echo ">$val</option>\n";
-//    }
-    ?>
-        </select><br>
-<input type="hidden" name="oldid" value="<?=$id?>">
-<input type="submit" name="reminder" value="<?=_("Send reminder notice")?>">
-</form> -->
     <? unset($_SESSION['_config']['noemailfound']); } ?>
 <form method="post" action="wot.php" name="form1">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -59,6 +41,20 @@ if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error
     <? } else { ?>
     <td class="DataTD"><input type="text" name="email" id="email" value="<?=array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):""?>"></td>
         <? } ?>
+  </tr>
+  <tr>
+    <td class="DataTD"><?=_('Reason why the assurer status is needed')?>:</td>
+    <td class="DataTD"><select name="reason"><option>--</option>
+            <option><?=_('Assurance')?></option>
+            <option><?=_('Event Preparation')?></option>
+            <option><?=_('Arbitration')?></option>
+            <option><?=_('CARS check')?></option>
+            <option><?=_('CATS certificate creation')?></option>
+            <option><?=_('Organisation Assurance')?></option>
+        </select></td>
+  </tr>
+  <tr>
+    <td class="DataTD" colspan="2"><?=_('If you request the assurer status the result is send to yourself as well as to the person of whom you request the status of.')?></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
