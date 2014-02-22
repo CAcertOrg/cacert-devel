@@ -80,6 +80,9 @@ function show_page($target,$message,$error)
 		case '15':
 		case 'MyPointsNew':	includeit(15, "wot");
 					break;
+	    case '16':
+	    case 'AssurerCheck':	includeit(16, "wot");
+	        break;
 	}
 
 	showfooter();
@@ -122,6 +125,7 @@ function send_reminder()
 	if(array_key_exists('location',$_POST) && $_POST['location'] != "")
 		$_SESSION['_config']['location'] = $_POST['location'];
 
+	$id=array_key_exists('id',$_REQUEST)?intval($_REQUEST['id']):0;
 	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;
 
 	if($oldid == 12)
@@ -566,6 +570,16 @@ $iecho= "c";
 		exit;
 	}
 
+        echo "passt 1";
+
+    if($oldid == 16 )
+    {
+        $oldid=0;
+        $id = 16;
+
+        show_page("AssurerCheck","",_("There was an error and I couldn't proceed"));
+        exit;
+    }
 //	showheader(_("My CAcert.org Account!"));
 //	echo "ID now = ".$id."/".$oldid.">>".$iecho;
 //	includeit($id, "wot");
