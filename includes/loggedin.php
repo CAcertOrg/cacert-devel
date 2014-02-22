@@ -19,6 +19,7 @@
 	include_once("../includes/lib/general.php");
 	require_once("../includes/lib/l10n.php");
 	include_once("../includes/mysql.php");
+    require_once('../includes/notary.inc.php');
 
 	if(!isset($_SESSION['profile']) || !is_array($_SESSION['profile'])) {
 		$_SESSION['profile'] = array( 'id' => 0, 'loggedin' => 0 );
@@ -49,7 +50,7 @@
 		else
 			unset($_SESSION['profile']);
 	}
-  
+
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && ($_SESSION['profile']['id'] == 0 || $_SESSION['profile']['loggedin'] == 0))
 	{
 		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
@@ -163,5 +164,13 @@
 		$hostname = str_replace(array("\n", "\r"), '', $hostname);
 		header("location: https://".$hostname."/index.php?id=4");
 		exit;
+	}
+
+	if (!isset($_SESSION['profile']['ccaagreement']) || !$_SESSION['profile']['ccaagreement'] == True) {
+		$_SESSION['profile']['ccaagreement']=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+		if ($_SESSION['profile']['ccaagreement'] == FALSE) {
+			header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
+			exit;
+		}
 	}
 ?>
