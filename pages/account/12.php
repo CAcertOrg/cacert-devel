@@ -47,7 +47,7 @@
 		$query .= "HAVING `timeleft` > 0 or `expires` = 0 ";
 	}
 	$query .= "ORDER BY `modified` desc";
-echo $query."<br>\n";
+//echo $query."<br>\n";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
 	{
