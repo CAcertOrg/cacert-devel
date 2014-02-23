@@ -1030,7 +1030,7 @@ sub RevokeCerts($$)
         $dbh->do("update `$table` set `revoked`=now() where `id`='".$row{'id'}."'");
 
         my $body = _("Hi")." $user{fname},\n\n";
-        $body .= sprintf(_("Your certificate for %s with the serial number '%s' has been revoked, as per request.")."\n\n", $row{'CN'}, $row{'serial'});
+        $body .= sprintf(_("Your certificate for '%s' with the serial number '%s' has been revoked, as per request.")."\n\n", $row{'CN'}, $row{'serial'});
         $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
 	SysLog("Sending email to ".$user{"email"}."\n") if($debug);
         sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
