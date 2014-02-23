@@ -172,7 +172,7 @@ else
 $PortObj->baudrate(115200);
 $PortObj->parity("none");
 $PortObj->databits(8);
-$PortObj->stopbits(1);        
+$PortObj->stopbits(1);
 }
 }
 
@@ -286,8 +286,8 @@ sub SendIt($)
   #  {
   #    $PortObj->write(substr($_[0],$_,1));
   #  }
-  
-}  
+
+}
 
 
 my $modus=0;
@@ -313,17 +313,17 @@ sub SendHandshaked($)
       $xor ^= unpack("C",substr($_[0],$_,1));
     }
     #print "XOR: $xor\n";
-  
+
     my $tryagain=1;
     while($tryagain)
     {
       SendIt($_[0].pack("C",$xor)."rie4Ech7");
-  
+
       Error "Packet receipt was not confirmed in 5 seconds. Connection lost!\n" if(!scalar($sel->can_read(5)));
 
       $data="";
       $length=read SER,$data,1;
-    
+
       if($length && $data eq "\x10")
       {
         SysLog "Sent successfully!...\n";
@@ -335,14 +335,14 @@ sub SendHandshaked($)
       }
       else
       {
-        Error "I cannot send! $length ".unpack("C",$data)."\n"; 
+        Error "I cannot send! $length ".unpack("C",$data)."\n";
       }
     }
 
   }
   else
   {
-    print "!Cannot send! $length \n"; 
+    print "!Cannot send! $length \n";
     Error "!Stopped sending.\n";
   }
 }
@@ -423,7 +423,7 @@ sub Request($$$$$$$$$$$)
   my @fields=unpack3array(substr($data,3,-9));
 
   SysLog "Answer from Server: ".hexdump($data)."\n" if($debug);
- 
+
   #if(open OUT,">result.dat")
   #{
   #  print OUT $data;
@@ -461,8 +461,8 @@ sub X509extractSAN($)
     {
       $SAN.="," if($SAN ne "");
       $SAN.= trim($bit[1]);
-    } 
-    else 
+    }
+    else
     {
       $newsubject .= "/".$val;
     }
@@ -470,7 +470,7 @@ sub X509extractSAN($)
   $newsubject=~s{^//}{/};
   $newsubject=~s/[\n\r\t\x00"\\']//g;
   $SAN=~s/[ \n\r\t\x00"\\']//g;
-  return($SAN,$newsubject); 
+  return($SAN,$newsubject);
 }
 
 sub X509extractExpiryDate($)
@@ -526,25 +526,25 @@ sub X509extractSerialNumber($)
   return "";
 }
 
-sub OpenPGPextractExpiryDate ($) 
+sub OpenPGPextractExpiryDate ($)
 {
   my $r="";
   my $cts;
   my @date;
- 
+
   open(RGPG, $gpgbin.' -vv '.$_[0].' 2>&1 |') or Error('Can\'t start GnuPG($gpgbin): '.$!."\n");
   open(OUT,  '> infogpg.txt'           ) or Error('Can\'t open output file: infogpg.txt: '.$!);
   $/="\n";
-  while (<RGPG>) 
+  while (<RGPG>)
   {
     print OUT $_;
-    unless ($r) 
+    unless ($r)
     {
       if ( /^\s*version \d+, created (\d+), md5len 0, sigclass (?:0x[0-9a-fA-F]+|\d+)\s*$/ )
       {
         SysLog "Detected CTS: $1\n";
         $cts = int($1);
-      } elsif ( /^\s*critical hashed subpkt \d+ len \d+ \(sig expires after ((\d+)y)?((\d+)d)?((\d+)h)?(\d+)m\)\s*$/ ) 
+      } elsif ( /^\s*critical hashed subpkt \d+ len \d+ \(sig expires after ((\d+)y)?((\d+)d)?((\d+)h)?(\d+)m\)\s*$/ )
       {
         SysLog "Detected FRAME $2 $4 $6 $8\n";
         $cts += $2 * 31536000; # secs per year (60 * 60 * 24 * 365)
@@ -560,19 +560,19 @@ sub OpenPGPextractExpiryDate ($)
     }
   }
 
-  close(OUT );      
+  close(OUT );
   close(RGPG);
 
   SysLog "CTS: $cts  R: $r\n";
- 
-  if ( $r ) 
+
+  if ( $r )
   {
     @date = gmtime($r);
     $r = sprintf('%.4i-%.2i-%.2i %.2i:%.2i:%.2i',            # date format
     $date[5] + 1900, $date[4] + 1, $date[3], # day
     $date[2],        $date[1],     $date[0], # time
     );
-						        
+
   }
   SysLog "$r\n";
   return $r;
@@ -605,7 +605,7 @@ sub setUsersLanguage($)
   if($lang ne "")
   {
     $ENV{"LANG"}=$lang;
-    setlocale(LC_ALL, $lang);     
+    setlocale(LC_ALL, $lang);
   } else {
     $ENV{"LANG"}="en_AU";
     setlocale(LC_ALL, "en_AU");
@@ -642,7 +642,7 @@ sub sendmail($$$$$$$)
   my ($to, $subject, $message, $from, $replyto, $toname, $fromname)=@_;
   my $errorsto="returns\@cacert.org";
   my $extra="";
-  
+
 
   # sendmail($user{email}, "[CAcert.org] Your GPG/PGP Key", $body, "support\@cacert.org", "", "", "CAcert Support");
   my @lines=split("\n",$message);
@@ -653,14 +653,14 @@ sub sendmail($$$$$$$)
     if($line eq ".")
     {
       $message .= " .\n";
-    } else 
+    } else
     {
       $message .= $line."\n";
-    } 
+    }
   }
 
   $fromname = $from if($fromname eq "");
-		
+
   my @bits = split(",", $from);
   $from = addslashes($bits['0']);
   $fromname = addslashes($fromname);
@@ -672,7 +672,7 @@ sub sendmail($$$$$$$)
   SysLog "SMTP: ".<$smtp>;
   print $smtp "MAIL FROM:<returns\@cacert.org>\r\n";
   SysLog "MAIL FROM: ".<$smtp>;
- 
+
   @bits = split(",", $to);
   foreach my $user (@bits)
   {
@@ -707,7 +707,7 @@ sub sendmail($$$$$$$)
   	print $smtp "Content-Type: text/plain; charset=\"utf-8\"\r\n";
   	print $smtp "Content-Transfer-Encoding: 8bit\r\n";
   }
-  else 
+  else
   {
   	print $smtp "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n";
   	print $smtp "Content-Transfer-Encoding: quoted-printable\r\n";
@@ -756,7 +756,7 @@ sub HandleCerts($$)
     {
       #Weird SQL structure ...
       my @sqlres=$dbh->selectrow_array("select memid from domains where id='".int($row{'domid'})."'");
-      $row{'memid'}=$sqlres[0]; 
+      $row{'memid'}=$sqlres[0];
       SysLog("Fetched memid: $row{'memid'}\n") if($debug);
     }
 
@@ -857,7 +857,7 @@ sub HandleCerts($$)
           print OUT $crt;
           close OUT;
           system "$opensslbin x509 -in $crtname.der -inform der -out $crtname";
-        }	
+        }
       }
       else
       {
@@ -901,7 +901,7 @@ sub HandleCerts($$)
       $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
       sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
     }
-    else 
+    else
     {
       SysLog("Could not find the issued certificate. $crtname ".$row{"id"}."\n");
       $dbh->do("update `$table` set warning=warning+1 where `id`='".$row{'id'}."'");
@@ -914,7 +914,7 @@ sub DoCRL($$)
 {
   my $crl=$_[0];
   my $crlname=$_[1];
-  
+
   if(length($crl))
   {
     if($crl=~m/^-----BEGIN X509 CRL-----/)
@@ -929,7 +929,7 @@ sub DoCRL($$)
       open OUT,">$crlname.patch";
       print OUT $crl;
       close OUT;
-      my $res=system "xdelta patch $crlname.patch $crlname $crlname.tmp"; 
+      my $res=system "xdelta patch $crlname.patch $crlname $crlname.tmp";
       #print "xdelta res: $res\n";
       if($res==512)
       {
@@ -939,7 +939,7 @@ sub DoCRL($$)
       }
     }
 
-    my $res=`openssl crl -verify -in $crlname.tmp -inform der -noout 2>&1`;	
+    my $res=`openssl crl -verify -in $crlname.tmp -inform der -noout 2>&1`;
     SysLog "verify: $res\n";
     if($res=~m/verify OK/)
     {
@@ -1030,7 +1030,7 @@ sub RevokeCerts($$)
         $dbh->do("update `$table` set `revoked`=now() where `id`='".$row{'id'}."'");
 
         my $body = _("Hi")." $user{fname},\n\n";
-        $body .= sprintf(_("Your certificate for %s has been revoked, as per request.")."\n\n", $row{'CN'});
+        $body .= sprintf(_("Your certificate for %s with the serial number '%s' has been revoked, as per request.")."\n\n", $row{'CN'}, $row{'serial'});
         $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
 	SysLog("Sending email to ".$user{"email"}."\n") if($debug);
         sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
@@ -1057,7 +1057,7 @@ sub HandleGPG()
   while ( $rowdata = $sth->fetchrow_hashref() )
   {
     my %row=%{$rowdata};
-  
+
     my $prefix="gpg";
     my $short=int($row{'id'}/1000);
     my $csrname = "../csr/$prefix-".$row{'id'}.".csr";
@@ -1071,11 +1071,11 @@ sub HandleGPG()
 
     #my $csrname = "../csr/gpg-".$row{'id'}.".csr";
     #my $crtname = "../crt/gpg-".$row{'id'}.".crt";
-  
+
     SysLog "Opening $csrname\n";
-  
+
     my $crt="";
-  
+
     if(-s $csrname && open(IN,"<$csrname"))
     {
       undef $/;
@@ -1101,12 +1101,12 @@ sub HandleGPG()
     {
       SysLog "Opening $crtname\n";
       setUsersLanguage($row{memid});
-  
+
       my $date=OpenPGPextractExpiryDate($crtname);
       my %user=getUserData($row{memid});
-  
+
       $dbh->do("update `gpg` set `crt`='$crtname', issued=now(), `expire`='$date' where `id`='".$row{'id'}."'");
-  
+
       my $body = _("Hi")." $user{fname},\n\n";
       $body .= sprintf(_("Your CAcert signed key for %s is available online at:")."\n\n", $row{'email'});
       $body .= "https://www.cacert.org/gpg.php?id=3&cert=$row{id}\n\n";
@@ -1153,5 +1153,5 @@ while ( -f "./client.pl-active" )
   my $timestamp=strftime("%m%d%H%M%Y.%S",gmtime);
   Request($ver,0,0,0,0,0,0,0,$timestamp,"","");
   sleep(1);
-  usleep(1700000); 
+  usleep(1700000);
 }
