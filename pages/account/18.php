@@ -93,7 +93,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
   if(0==$status)
   {
     $query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
-    $query .= "HAVING `timeleft` > 0 AND `revoked`=0  or `expires` = 0 ";
+    $query .= "HAVING `timeleft` > 0 AND `revoked`=0 or `expires` = 0 ";
   }
   switch ($sorting){
     case 0:
