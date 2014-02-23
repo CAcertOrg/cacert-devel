@@ -50,7 +50,7 @@
 		$query .= " AND `revoked`=0 AND `renewed`=0 ";
 	$query .= " GROUP BY `emailcerts`.`id` ";
 	if($viewall != 1)
-                $query .= " HAVING `timeleft` > 0 or `expires` = 0";
+                $query .= " HAVING `timeleft` > 0 or `expires` = 0 ";
 	$query .= " ORDER BY `modified` desc";
 // echo $query."<br>\n";
 	$res = mysql_query($query);
