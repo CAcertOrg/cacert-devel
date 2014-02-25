@@ -974,7 +974,9 @@ function buildSubjectFromSession() {
 				mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
-			printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
+
+			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
+			echo '<br/>'._('All listed certificates will be added to the Certificate Revocation List (CRL) soon.').'<br/>';
 
 		}
 		else
@@ -1132,7 +1134,9 @@ function buildSubjectFromSession() {
 				mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
-			printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
+
+			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
+			echo '<br/>'._('All listed certificates will be added to the Certificate Revocation List (CRL) soon.').'<br/>';
 		}
 		else
 		{
@@ -1760,7 +1764,9 @@ function buildSubjectFromSession() {
 				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
-		    printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
+
+			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
+			echo '<br/>'._('All listed certificates will be added to the Certificate Revocation List (CRL) soon.').'<br/>';
 		}
 		else
 		{
@@ -2117,7 +2123,9 @@ function buildSubjectFromSession() {
 				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
 			}
-			printf('<br/>'._('All listed certificates will be added to the %s soon.').'<br/>','Certificate Revocation List (CRL)');
+
+			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
+			echo '<br/>'._('All listed certificates will be added to the Certificate Revocation List (CRL) soon.').'<br/>';
 		}
 		else
 		{
