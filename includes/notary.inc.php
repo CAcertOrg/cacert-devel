@@ -1395,19 +1395,19 @@ function output_log_email_header(){
  * @return
  */
 function output_log_email($row,$primary){
-	$italic='';
-	$bold='';
+	$primaryemailaddress='';
+	$deletedemailaddress='';
 	if ($row['deleted'] > 0) {
-		$italic=' italic';
+		$deletedemailaddress='deletedemailaddress ';
 	}
 	if ($primary==$row['email'] && $row['deleted'] == 0) {
-		$bold= ' bold';
+		$primaryemailaddress= 'primaryemailaddress ';
 	}
 	?>
 	<tr>
-		<td class="DataTD<?= $bold . $italic ?>"><?=$row['email']?></td>
-		<td class="DataTD<?= $bold . $italic ?>"><?=$row['created']?></td>
-		<td class="DataTD<?= $bold . $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['email']?></td>
+		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['created']?></td>
+		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
