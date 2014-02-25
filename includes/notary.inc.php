@@ -940,11 +940,6 @@ function get_user_agreement($memid){
 		}
 
 	//change personal information to arbitration number and DOB=1900-01-01
-		$query = "select `fname`,`mname`,`lname`,`suffix`,`dob` from `users` where `id`='$userid'";
-		$details = mysql_fetch_assoc(mysql_query($query));
-		$query = "insert into `adminlog` set `when`=NOW(),`old-lname`='${details['lname']}',`old-dob`='${details['dob']}',
-			`new-lname`='$arbno',`new-dob`='1900-01-01',`uid`='$id',`adminid`='".$adminid."'";
-		mysql_query($query);
 		$query = "update `users` set `fname`='".$arbno."',
 			`mname`='".$arbno."',
 			`lname`='".$arbno."',
@@ -1447,19 +1442,19 @@ function output_log_email_header(){
  * @return
  */
 function output_log_email($row,$primary){
-	$italic='';
-	$bold='';
-	if (0==$row['deleted']) {
-		$italic='italic ';
+	$primaryemailaddress='';
+	$deletedemailaddress='';
+	if ($row['deleted'] > 0) {
+		$deletedemailaddress=' deletedemailaddress';
 	}
-	if ($primary==$row['email']) {
-		$bold= 'bold ';
+	if ($primary==$row['email'] && $row['deleted'] == 0) {
+		$primaryemailaddress= ' primaryemailaddress';
 	}
 	?>
 	<tr>
-		<td class="DataTD <? $bold . $italic ?>"><?=$row['email']?></td>
-		<td class="DataTD <? $bold . $italic ?>"><?=$row['created']?></td>
-		<td class="DataTD <? $bold . $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['email']?></td>
+		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['created']?></td>
+		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }

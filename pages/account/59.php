@@ -17,9 +17,12 @@
 */
 include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
+
 $colspandefault=2;
 $userid = intval($_REQUEST['userid']);
 $res =get_user_data($userid);
+
+
 
 if(mysql_num_rows($res) <= 0)
 {
@@ -41,7 +44,12 @@ $support=0;
 if(intval($_REQUEST['oldid'])==43){
     $support=$_SESSION['profile']['admin'];
 }
-
+$ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
+if (!valid_ticket_number($ticketno) && $support == 1) {
+    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number.%s"), '<br/>', '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>');
+    showfooter();
+    exit;
+}
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
@@ -287,5 +295,11 @@ if (1 == $support) {
         }
     }ELSE{
         ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
-    }?>
+    }
+    if ($support==1) {
+        ?><td colspan="<?=$colspan?>" ><a href="account.php?id=43&amp;userid=<?= $userid ?>"><?= _('Back to previous page.')?></a></td><?
+    }
+
+    ?>
+
 </table>
