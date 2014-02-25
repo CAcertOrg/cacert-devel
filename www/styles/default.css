@@ -584,10 +584,10 @@ td.greytxt {
 	text-align: right;
 	vertical-align: bottom;
 }
-.bold {
+.bold, .primaryemailaddress {
 	font-weight:bold;
 }
-.italic {
+.italic, .deletedemailaddress {
 	font-style:italic;
 }
 .title {
