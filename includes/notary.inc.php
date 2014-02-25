@@ -1398,10 +1398,10 @@ function output_log_email($row,$primary){
 	$primaryemailaddress='';
 	$deletedemailaddress='';
 	if ($row['deleted'] > 0) {
-		$deletedemailaddress='deletedemailaddress ';
+		$deletedemailaddress=' deletedemailaddress';
 	}
 	if ($primary==$row['email'] && $row['deleted'] == 0) {
-		$primaryemailaddress= 'primaryemailaddress ';
+		$primaryemailaddress= ' primaryemailaddress';
 	}
 	?>
 	<tr>
