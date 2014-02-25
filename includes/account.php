@@ -2698,7 +2698,7 @@ function buildSubjectFromSession() {
 		$day = intval($_REQUEST['day']);
 		$month = intval($_REQUEST['month']);
 		$year = intval($_REQUEST['year']);
-		$userid = intval($_REQUEST['userid']);
+		$userid = intval(intval($_REQUEST['userid']));
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
 		write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno);
@@ -2734,7 +2734,7 @@ function buildSubjectFromSession() {
 
 	if($id == 44)
 	{
-		if($_REQUEST['userid'] != "")
+		if(intval($_REQUEST['userid']) != "")
 			$_REQUEST['userid'] = intval($_REQUEST['userid']);
 		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 		if($row['email'] == "")
@@ -3057,7 +3057,7 @@ function buildSubjectFromSession() {
 
 	if($id == 50)
 	{
-		if(array_key_exists('userid',$_REQUEST) && $_REQUEST['userid'] != "")
+		if(array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) != "")
 			$_REQUEST['userid'] = intval($_REQUEST['userid']);
 
 		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
@@ -3079,42 +3079,42 @@ function buildSubjectFromSession() {
 		if (trim($_REQUEST['arbitrationno'])==""){
 			showheader(_("My CAcert.org Account!"));
 			echo _("You did not enter an arbitration number entry.");
-			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
+			printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
 		if ( 1 !== preg_match('/^[a-z]\d{8}\.\d+\.\d+$/i',trim($_REQUEST['arbitrationno'])) ) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' is not a valid arbitration number entry."), sanitizeHTML(trim($_REQUEST['arbitrationno'])));
-			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
+			printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
 		if (check_email_exists(trim($_REQUEST['arbitrationno']).'@cacert.org')) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The email address '%s' is already in a different account. Can't continue."), sanitizeHTML($_REQUEST['arbitrationno'].'@cacert.org'));
-			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
+			printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		 }
-		if (check_client_cert_running($_REQUEST['userid'],1) ||
-			check_server_cert_running($_REQUEST['userid'],1) ||
-			check_gpg_cert_running($_REQUEST['userid'],1)) {
+		if (check_client_cert_running(intval($_REQUEST['userid']),1) ||
+			check_server_cert_running(intval($_REQUEST['userid']),1) ||
+			check_gpg_cert_running(intval($_REQUEST['userid']),1)) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The CCA retention time for at least one certificate is not over. Can't continue."));
-			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
+			printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
-		if (check_is_orgadmin($_REQUEST['userid'],1)) {
+		if (check_is_orgadmin(intval($_REQUEST['userid']),1)) {
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The user is listed as Organisation Administrator. Can't continue."));
-			printf('<br/><a href="account.php?id=43&amp;userid=' . $_REQUEST['userid'] . '">' . _('Back to previous page.') .'</a>');
+			printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
 			showfooter();
 			exit;
 		}
-		account_delete($_REQUEST['userid'], trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
-		write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'SE Account delete', trim($_REQUEST['arbitrationno']));
+		account_delete(intval($_REQUEST['userid']), trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
+		write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'], 'SE Account delete', trim($_REQUEST['arbitrationno']));
 	}
 
 	if(($id == 51 || $id == 52 || $oldid == 52))
@@ -3242,9 +3242,9 @@ function buildSubjectFromSession() {
  */
 	if($id == 59){
 		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
-			write_se_log($_REQUEST['userid'], $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
+			write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
 			$_SESSION['support']=1;
-		}ELSEIF ($oldid == 13 && $_REQUEST['userid'] == $_SESSION['profile']['id']){
+		}ELSEIF ($oldid == 13 && intval($_REQUEST['userid']) == $_SESSION['profile']['id']){
 			$_SESSION['support']=0;
 		}ELSE{
 			showheader(_("My CAcert.org Account!"));
