@@ -2698,7 +2698,7 @@ function buildSubjectFromSession() {
 		$day = intval($_REQUEST['day']);
 		$month = intval($_REQUEST['month']);
 		$year = intval($_REQUEST['year']);
-		$userid = intval(intval($_REQUEST['userid']));
+		$userid = intval($_REQUEST['userid']);
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
 		write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno);
