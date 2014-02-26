@@ -27,7 +27,6 @@
 		<input type="submit" name="agree" value="<?=_('I agree CCA')?>">
 		<input type="submit" name="disagree" value="<?=_('I do not want to accept the CCA')?>">
 
-		<input type="hidden" name="id" value="52">
 		<input type="hidden" name="oldid" value="<?=$id?>">
 	</form>
 </div>
