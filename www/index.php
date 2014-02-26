@@ -27,7 +27,6 @@ require_once('../includes/notary.inc.php');
                 $id = 0;
 
         $_SESSION['_config']['errmsg'] = "";
-        $ccatest=0;
 
 	if($id == 17 || $id == 20)
 	{
@@ -164,14 +163,8 @@ require_once('../includes/notary.inc.php');
 
 			if($_SESSION['profile']['id'] != 0)
 			{
-				$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
-				if (0==$ccatest) {
-					$id=52;
-					header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
-				}else{
-					$_SESSION['profile']['loggedin'] = 1;
-					header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
-				}
+				$_SESSION['profile']['loggedin'] = 1;
+				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 				exit;
 			} else {
 				$_SESSION['profile']['loggedin'] = 0;
@@ -345,16 +338,10 @@ require_once('../includes/notary.inc.php');
 			}
 			if (checkpwlight($pword) < 3)
 				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
-			$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
 			if($_SESSION['_config']['oldlocation'] != ""){
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
 			}else{
-				if (0==$ccatest) {
-					$id=52;
-					header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
-				}else{
-					header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
-				}
+				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 			}
 			exit;
 		}
@@ -371,24 +358,36 @@ require_once('../includes/notary.inc.php');
 	}
 
 // check for CCA acceptance prior to login
-if ($id == 52 )
+if ($oldid == 52 )
 {
-	$ccatest=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
-	$agree = ""; if(array_key_exists('agree',$_REQUEST)) $agree=$_REQUEST['agree'];
-	if (!$agree) {
-		$_SESSION['profile']['loggedin'] = 0;
-	}else{
+	// Check if the user is already authenticated
+	if (!array_key_exists('profile',$_SESSION)
+			|| !array_key_exists('loggedin',$_SESSION['profile'])
+			|| $_SESSION['profile']['loggedin'] != 1)
+	{
+		header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
+		exit;
+	}
+
+	if (array_key_exists('agree',$_REQUEST) && $_REQUEST['agree'] != "")
+	{
 		write_user_agreement($_SESSION['profile']['id'], "CCA", "Login acception", "", 1);
-		$_SESSION['profile']['loggedin'] = 1;
-		header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
-		exit;
+		$_SESSION['profile']['ccaagreement']=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+
+		if (array_key_exists("oldlocation",$_SESSION['_config'])
+				&& $_SESSION['_config']['oldlocation']!="")
+		{
+			header("Location: https://{$_SERVER['HTTP_HOST']}/{$_SESSION['_config']['oldlocation']}");
+			exit;
+		} else {
+			header("Location: https://{$_SERVER['HTTP_HOST']}/account.php");
+			exit;
+		}
 	}
-	$disagree = ""; if(array_key_exists('disagree',$_REQUEST)) $disagree=$_REQUEST['disagree'];
-	if ($disagree) {
-		$_SESSION['profile']['loggedin'] = 0;
-		header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=4");
-		exit;
-	}
+
+	// User didn't agree
+	header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
+	exit;
 }
 
 
