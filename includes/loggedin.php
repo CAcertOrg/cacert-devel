@@ -166,10 +166,11 @@
 		exit;
 	}
 
-	if (!isset($_SESSION['profile']['ccaagreement']) || !$_SESSION['profile']['ccaagreement'] == True) {
+	if (!isset($_SESSION['profile']['ccaagreement']) || !$_SESSION['profile']['ccaagreement']) {
 		$_SESSION['profile']['ccaagreement']=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
-		if ($_SESSION['profile']['ccaagreement'] == FALSE) {
-			header("location: https://".$_SERVER['HTTP_HOST']."/index.php?id=52");
+		if (!$_SESSION['profile']['ccaagreement']) {
+			$_SESSION['_config']['oldlocation'] = $_SERVER['REQUEST_URI'];
+			header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=52");
 			exit;
 		}
 	}
