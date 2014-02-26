@@ -19,12 +19,13 @@
 ?>
 
 <div style="text-align: center;">
-	<h1><?=_('CAcert Community Agreement acceptance')?></h1>
-	<p><?=sprintf(_('To get access to your account you need to accept the %sCAcert Community Agreement%s (CCA). '),'<a href="/policy/CAcertCommunityAgreement.php">', '</a>')?> </p>
-	<p><?=_('Explanation why')?> </p>
-	<p><?=sprintf(_('If you do not want to accept the CCA you should think about closing your account. In this case please sent and email to support %s.'),'<a href="mailto:support@cacert.org">' . '(support@cacert.org)</a>')?> </p>
-	<form method="post" action="index.php" >
-		<input type="submit" name="agree" value="<?=_('I agree CCA')?>">  <input type="submit" name="disagree" value="<?=_('I do not want to accept the CCA')?>">
+	<h1><?=_('CAcert Community Agreement Acceptance')?></h1>
+	<p><?=sprintf(_('To get access to your account you need to accept the %s CAcert Community Agreement %s (CCA).'),'<a href="/policy/CAcertCommunityAgreement.php">', '</a>')?></p>
+	<p><?=_('#### Explanation why #### Please replace me ####')?></p>
+	<p><?=sprintf(_('If you do not want to accept the CCA you should think about closing your account. In this case please send an email to support (%s).'),'<a href="mailto:support@cacert.org">support@cacert.org</a>')?></p>
+	<form method="post" action="index.php">
+		<input type="submit" name="agree" value="<?=_('I agree CCA')?>">
+		<input type="submit" name="disagree" value="<?=_('I do not want to accept the CCA')?>">
 
 		<input type="hidden" name="id" value="52">
 		<input type="hidden" name="oldid" value="<?=$id?>">
