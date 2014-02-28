@@ -574,15 +574,20 @@ $iecho= "c";
     {
         $oldid=0;
         $id = 0;
+        $number=5;
         $email = mysql_real_escape_string(trim($_REQUEST['email']));
         $reason = mysql_real_escape_string(trim($_REQUEST['reason']));
         $uid = get_user_id_from_email($email);
         if ($uid == 0) {
-            show_page("AssurerCheck","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
+            show_page("AssurerCheck", "", _("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
             exit;
         }
         if ($reason == "--") {
-            show_page("AssurerCheck","",_("I'm sorry, there was no reason given why you need to check the assurer status."));
+            show_page("AssurerCheck", "" ,_("I'm sorry, there was no reason given why you need to check the assurer status."));
+            exit;
+        }
+        if (get_number_of_adminlog_entries($_SESSION['profile']['id'],1000,1) > $number) {
+            show_page("AssurerCheck", "", sprintf(_("I'm sorry, you reached the maximum requests of %s per hour. Please wait until you try it again."),$number));
             exit;
         }
         if (is_assurer($uid)) {

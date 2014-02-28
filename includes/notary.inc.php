@@ -1140,10 +1140,10 @@
 		$typeid = intval($typeid);
 		$hours = intval($hours);
 		$res = query_init ("SELECT count(*) AS `no` FROM `adminlog`
-			WHERE `adminid` = " . $uid . " AND `admintypeid`=" . $typeid . " and `when` >  NOW() - INTERVAL " . $hours . " HOUR " );
+			WHERE `adminid` = " . $uid . " AND `actiontypeid`=" . $typeid . " and `when` >  NOW() - INTERVAL " . $hours . " HOUR " );
 		$row = query_getnextrow($res);
 
-		return intval($row['id']);
+		return intval($row['no']);
 	}
 
 /**
