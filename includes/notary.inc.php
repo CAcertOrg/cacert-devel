@@ -1134,3 +1134,14 @@
 
 	    return intval($row['id']);
 	}
+
+    function get_number_of_adminlog_entries($uid, $typeid, $hours=1){
+        $uid = intval($uid);
+        $typeid = intval($typeid);
+        $hours = intval($hours);
+        $res = query_init ("SELECT count(*) AS `no` FROM `adminlog`
+			WHERE `adminid` = " . $uid . " AND `admintypeid`=" . $typeid . " and `when` >  NOW() - INTERVAL " . $hours . " HOUR " );
+        $row = query_getnextrow($res);
+
+        return intval($row['id']);
+    }
