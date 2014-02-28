@@ -1127,8 +1127,8 @@
 	}
 
 	//user function
-	function get_user_id_from_mail($email){
-	    $email = trim(mysql_real_escape_string($email));
+	function get_user_id_from_email($email){
+	    $email = mysql_real_escape_string(trim($email));
 	    $res = query_init ("select `id` from `users` where `email` = '" . $email . "'");
 	    $row = query_getnextrow($res);
 

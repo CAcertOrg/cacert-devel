@@ -576,7 +576,7 @@ $iecho= "c";
         $id = 0;
         $email = trim(mysql_real_escape_string($_REQUEST['email']));
         $reason = trim(mysql_real_escape_string($_REQUEST['reason']));
-        $uid = get_user_id_from_mail($email);
+        $uid = get_user_id_from_email($email);
         if ($uid == 0) {
             show_page("AssurerCheck","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
             exit;
