@@ -1128,20 +1128,44 @@
 
 	//user function
 	function get_user_id_from_email($email){
-	    $email = mysql_real_escape_string(trim($email));
-	    $res = query_init ("select `id` from `users` where `email` = '" . $email . "'");
-	    $row = query_getnextrow($res);
+		$email = mysql_real_escape_string(trim($email));
+		$res = query_init ("select `id` from `users` where `email` = '" . $email . "'");
+		$row = query_getnextrow($res);
 
-	    return intval($row['id']);
+		return intval($row['id']);
 	}
 
-    function get_number_of_adminlog_entries($uid, $typeid, $hours=1){
-        $uid = intval($uid);
-        $typeid = intval($typeid);
-        $hours = intval($hours);
-        $res = query_init ("SELECT count(*) AS `no` FROM `adminlog`
+	function get_number_of_adminlog_entries($uid, $typeid, $hours=1){
+		$uid = intval($uid);
+		$typeid = intval($typeid);
+		$hours = intval($hours);
+		$res = query_init ("SELECT count(*) AS `no` FROM `adminlog`
 			WHERE `adminid` = " . $uid . " AND `admintypeid`=" . $typeid . " and `when` >  NOW() - INTERVAL " . $hours . " HOUR " );
-        $row = query_getnextrow($res);
+		$row = query_getnextrow($res);
 
-        return intval($row['id']);
-    }
+		return intval($row['id']);
+	}
+
+/**
+ * write_se_log()
+ *  writes an information to the adminlog
+ *
+ * @param mixed $uid - id of the user account
+ * @param mixed $adminid - id of the admin
+ * @param mixed $type - what was changed
+ * @param mixed $info - the ticket / arbitration no or other information
+ * @return
+ */
+// function write_se_log needs to be adjusted after merge with bug 1138
+function write_se_log($uid, $adminid, $type, $info, $typeid=1){
+	//records all support engineer actions changing a user account
+	$uid = intval($uid);
+	$adminid = intval($adminid);
+	$type = mysql_real_escape_string($type);
+	$info = mysql_real_escape_string($info);
+	$typeid = intval($typeid);
+	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`,`actiontypeid`) values
+		(Now(), $uid, $adminid, '$type', '$info', '$typeid')";
+	mysql_query($query);
+}
+

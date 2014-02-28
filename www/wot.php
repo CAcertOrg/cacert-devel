@@ -590,6 +590,7 @@ $iecho= "c";
         } else {
              $status = _('Is no assurer');
         }
+        write_se_log($uid, $_SESSION['profile']['id'], 'User Assurer status check', '', 1000);
         $assurer = get_user($uid);
         //mail to assurer
         $my_translation = L10n::get_translation();
@@ -614,28 +615,32 @@ $iecho= "c";
             "", //toname
             "CAcert Support"); //fromname
         //mail to requestor
-        L10n::set_translation($my_translation);
-
-        $subject = "[CAcert.org] " . _("Assurer status report that you requested");
-
-        $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
-        $body .= sprintf(_("you requested the assurer status of %s %s (%s) for %s."),
-            $assurer['fname'],
-            $assurer['lname'],
-            $assurer['email'],
-            $reason)."\n\n";
-        $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
-        $body .= _("Best regards")."\n";
-        $body .= _("CAcert Support Team");
-
-        sendmail($_SESSION['profile']['email'], "[CAcert.org] ". $subject, $body,
-            "support@cacert.org", //from
-            "", //replyto
-            "", //toname
-            "CAcert Support"); //fromname
+//        L10n::set_translation($my_translation);
+//
+//        $subject = "[CAcert.org] " . _("Assurer status report that you requested");
+//
+//        $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
+//        $body .= sprintf(_("you requested the assurer status of %s %s (%s) for %s."),
+//            $assurer['fname'],
+//            $assurer['lname'],
+//            $assurer['email'],
+//            $reason)."\n\n";
+//        $body .= sprintf(_("The transmitted result: %s"), $status)."\n";
+//        $body .= _("Best regards")."\n";
+//        $body .= _("CAcert Support Team");
+//
+//        sendmail($_SESSION['profile']['email'], "[CAcert.org] ". $subject, $body,
+//            "support@cacert.org", //from
+//            "", //replyto
+//            "", //toname
+//            "CAcert Support"); //fromname
         showheader(_("My CAcert.org Account!"));?>
 				<p>
-					<? printf(_('The mail with the status request has been sent to the assurer and you.')); ?>
+					<?=sprintf(_('The assurer status for %s %s (%s) is: %s'),
+					    $assurer['fname'],
+					    $assurer['lname'],
+                        $assurer['email'],
+                        $status) . '<br/>'. _('The mail with the status request has been sent to the assurer.'); ?>
 				</p>
 				<?
         showfooter();
