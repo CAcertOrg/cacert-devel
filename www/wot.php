@@ -574,8 +574,8 @@ $iecho= "c";
     {
         $oldid=0;
         $id = 0;
-        $email = trim(mysql_real_escape_string($_REQUEST['email']));
-        $reason = trim(mysql_real_escape_string($_REQUEST['reason']));
+        $email = mysql_real_escape_string(trim($_REQUEST['email']));
+        $reason = mysql_real_escape_string(trim($_REQUEST['reason']));
         $uid = get_user_id_from_email($email);
         if ($uid == 0) {
             show_page("AssurerCheck","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
@@ -595,7 +595,7 @@ $iecho= "c";
         $my_translation = L10n::get_translation();
         L10n::set_translation($assurer['language']);
 
-        $subject = "[CAcert.org] ".sprintf(_("Assurer status report for you"));
+        $subject = "[CAcert.org] ". _("Assurer status report for you");
 
         $body  = sprintf(_("Hi %s,"), $assurer['fname'])."\n\n";
         $body .= sprintf(_("%s %s (%s) has requested your assurer status for %s."),
@@ -616,7 +616,7 @@ $iecho= "c";
         //mail to requestor
         L10n::set_translation($my_translation);
 
-        $subject = "[CAcert.org] ".sprintf(_("Assurer status report that you requested"));
+        $subject = "[CAcert.org] " . _("Assurer status report that you requested");
 
         $body  = sprintf(_("Hi %s,"),  $_SESSION['profile']['fname'])."\n\n";
         $body .= sprintf(_("you requested the assurer status of %s %s (%s) for %s."),
