@@ -21,9 +21,9 @@
 <? 
   if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") 
   {
-    ?><font color="orange" size="+1">
+    ?><span class="error_warning">
       <? echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
-    </font>
+    </span>
     <?unset($_SESSION['_config']['error']);
   } 
 ?>

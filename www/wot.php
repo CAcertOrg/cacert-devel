@@ -28,7 +28,7 @@ function show_page($target,$message,$error)
 	if ($error != "")
 		$message=_("ERROR").": ".$error;
 	if ($message != "")
-		echo "<p><font color='orange' size='+1'>".$message."</font></p>";
+		echo "<p class=\"error_warning\">".$message."</p>";
 
 	switch ($target)
 	{
