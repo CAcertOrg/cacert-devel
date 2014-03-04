@@ -636,7 +636,7 @@ td.greytxt {
 	font-family: Arial,sans-serif;
 }
 
-.error_indicator {
+.error_indicator, .warning_indicator {
 	color: #ff0000;
 }
 
