@@ -42,7 +42,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <tr><td width="100" valign="top"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
 
     <tr>
-      <td colspan="2"><font color="#ff0000"><?=_("Warning: Please do not use \"send to mailing list\" when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
+      <td colspan="2"><span class="error_indicator"><?=_("Warning: Please do not use \"send to mailing list\" when you entered confidential data. The request is being sent to a public mailinglist.")?></span></td>
       <td colspan="2"><?=_("For confidential data use \"send to support\".")?></td>
     </tr>
     <tr>

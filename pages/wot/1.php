@@ -112,7 +112,7 @@
     <td class="DataTD"><?=maxpoints($row['id'])?></td>
     <td class="DataTD"><?=sanitizeHTML($row['contactinfo'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['id'])?>"><?=_("Email Me")?></a></td>
-    <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
+    <td class="DataTD"><?=$row['assurer']?_("Yes"):("<span class=\"error_indicator\">"._("Not yet!")."</span>")?></td>
   </tr>
 <?
 		}
