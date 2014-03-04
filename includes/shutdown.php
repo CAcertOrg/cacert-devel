@@ -21,8 +21,8 @@
 
 	if(0)
 	{ ?>
-		<font color="#ff0000"><? printf(_("This function is currently disabled. Please visit %s for more information."),
-			"<a target='_blank' href='http://wiki.cacert.org/wiki/ClientSecurity'>http://wiki.cacert.org/wiki/ClientSecurity</a>")?></font>
+		<span class="error_fatale"><? printf(_("This function is currently disabled. Please visit %s for more information."),
+			"<a target='_blank' href='http://wiki.cacert.org/wiki/ClientSecurity'>http://wiki.cacert.org/wiki/ClientSecurity</a>")?></span>
 <?
 		exit;
 	}
