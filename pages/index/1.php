@@ -94,17 +94,17 @@
   </tr>
 
   <tr>
-    <td class="DataTD"><?=_("Pass Phrase")?><font color="red">*</font>: </td>
+    <td class="DataTD"><?=_("Pass Phrase")?><span class="error_indicator">*</span>: </td>
     <td class="DataTD"><input type="password" name="pword1" autocomplete="off"></td>
     <td class="DataTD" rowspan="2">&nbsp;</td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Pass Phrase Again")?><font color="red">*</font>: </td>
+    <td class="DataTD"><?=_("Pass Phrase Again")?><span class="error_indicator">*</span>: </td>
     <td class="DataTD"><input type="password" name="pword2" autocomplete="off"></td>
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="3"><font color="red">*</font><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
+    <td class="DataTD" colspan="3"><span class="error_indicator">*</span><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
   </tr>
 
   <tr>
