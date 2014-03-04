@@ -50,6 +50,9 @@ if (!valid_ticket_number($ticketno) && $support == 1) {
     showfooter();
     exit;
 }
+if ( $support == 1) {
+    write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
+}
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
