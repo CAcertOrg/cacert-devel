@@ -3242,7 +3242,6 @@ function buildSubjectFromSession() {
  */
 	if($id == 59){
 		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
-			write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
 			$_SESSION['support']=1;
 		}ELSEIF ($oldid == 13 && intval($_REQUEST['userid']) == $_SESSION['profile']['id']){
 			$_SESSION['support']=0;
