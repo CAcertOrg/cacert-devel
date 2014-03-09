@@ -128,15 +128,14 @@ function checkWeakKeyText($text)
 
 	if ($algorithm === "rsaEncryption")
 	{
-		if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text,
-		$keysize))
+		if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text, $keysize))
 		{
 			return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
 						"key size.\nData:\n$text");
 		} else {
 			$keysize = intval($keysize[1]);
 		}
-			
+
 		if ($keysize < 2048)
 		{
 			return sprintf(_("The keys that you use are very small ".
@@ -146,8 +145,7 @@ function checkWeakKeyText($text)
 					"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
 					"</a>");
 		}
-			
-			
+
 		$debianVuln = checkDebianVulnerability($text, $keysize);
 		if ($debianVuln === true)
 		{
@@ -165,7 +163,7 @@ function checkWeakKeyText($text)
 					"checkDebianVulnerability().\nKeysize: $keysize\n".
 					"Data:\n$text");
 		}
-			
+
 		if (!preg_match('/^\s*Exponent: (\d+) \(0x[0-9a-fA-F]+\)$/m', $text,
 		$exponent))
 		{
@@ -187,9 +185,9 @@ function checkWeakKeyText($text)
 						"<a href='//wiki.cacert.org/WeakKeys#SmallExponent'>",
 						"</a>");
 			} elseif (!(bccomp($exponent, "65537") >= 0 &&
-			(bccomp($exponent, "100000") === -1 ||
-			// speed things up if way smaller than 2^256
-			bccomp($exponent, bcpow("2", "256")) === -1) )) {
+					(bccomp($exponent, "100000") === -1 ||
+					// speed things up if way smaller than 2^256
+					bccomp($exponent, bcpow("2", "256")) === -1) )) {
 				// 65537 <= exponent < 2^256 recommended by NIST
 				// not critical but log so we have some statistics about
 				// affected users
@@ -198,10 +196,83 @@ function checkWeakKeyText($text)
 				E_USER_NOTICE);
 			}
 		}
-	}
 
-	/* No weakness found */
-	return "";
+		// No weakness found
+		return "";
+	} // End RSA
+
+/*
+//Fails to work due to outdated OpenSSL 0.9.8o
+//For this to work OpenSSL 1.0.1f or newer is required
+//which is currently unavailable on the systems
+//If DSA2048 or longer is used the CSR hangs pending on the signer.
+	if ($algorithm ===  "dsaEncryption")
+	{
+		if (!preg_match('/^\s*Public Key Algorithm:\s+dsaEncryption\s+pub:\s+([0-9a-fA-F:\s]+)\s+P:\s+([0-9a-fA-F:\s]+)\s+Q:\s+([0-9a-fA-F:\s]+)\s+G:\s+([0-9a-fA-F:\s]+)\s+$/sm', $text, $keydetail))
+		{
+			return failWithId("checkWeakKeyText(): Couldn't parse the DSA ".
+					"key size.\nData:\n$text");
+		}
+
+		$key_pub = strtr(preg_replace("/[^0-9a-fA-F]/", "", $keydetail[1]), "ABCDEF", "abcdef");
+		$key_P = strtr(preg_replace("/[^0-9a-fA-F]/", "", $keydetail[2]), "ABCDEF", "abcdef");
+		$key_Q = strtr(preg_replace("/[^0-9a-fA-F]/", "", $keydetail[3]), "ABCDEF", "abcdef");
+		$key_G = strtr(preg_replace("/[^0-9a-fA-F]/", "", $keydetail[4]), "ABCDEF", "abcdef");
+
+		//Verify the numbers provided by the client
+		$num_pub = @gmp_init($key_pub, 16);
+		$num_P = @gmp_init($key_P, 16);
+		$num_Q = @gmp_init($key_Q, 16);
+		$num_G = @gmp_init($key_G, 16);
+
+		$bit_P = ltrim(gmp_strval($num_P, 2), "0");
+		$keysize = strlen($bit_P);
+
+		if ($keysize < 2048) {
+			return sprintf(_("The keys that you use are very small ".
+						"and therefore insecure. Please generate stronger ".
+						"keys. More information about this issue can be ".
+						"found in %sthe wiki%s"),
+					"<a href='//wiki.cacert.org/WeakKeys#SmallKey'>",
+					"</a>");
+		}
+
+		//Following checks based on description of key generation in Wikipedia
+		//These checks do not ensure a strong key, but at least check for enough sanity in the key material
+		// cf. https://en.wikipedia.org/wiki/Digital_Signature_Algorithm#Key_generation
+
+		//Check that P is prime
+		if(!gmp_testprime($num_P)) {
+			return failWithId("checkWeakKeyText(): The supplied DSA ".
+					"key does seem to have a non-prime public modulus.\nData:\n$text");
+		}
+
+		//Check that Q is prime
+		if(!gmp_testprime($num_Q)) {
+			return failWithId("checkWeakKeyText(): The supplied DSA ".
+					"key does seem to have a non-prime Q-value.\nData:\n$text");
+		}
+
+		//Check if P-1 is diviseable by Q
+		if(0 !== gmp_cmp("1", gmp_mod($num_P, $num_Q))) {
+			return failWithId("checkWeakKeyText(): The supplied DSA ".
+					"key does seem to have P mod Q === 1 (i.e. P-1 is not diviseable by Q).\nData:\n$text");
+		}
+
+		//Check the numbers are all less than the public modulus P
+		if(0 <= gmp_cmp($num_Q, $num_P) || 0 <= gmp_cmp($num_G, $num_P) || 0 <= gmp_cmp($num_pub, $num_P)) {
+			return failWithId("checkWeakKeyText(): The supplied DSA ".
+					"key does seem to be normalized to have Q < P, G < P and pub < P.\nData:\n$text");
+		}
+
+		// No weakness found
+		return "";
+	} // End DSA
+*/
+
+
+	return _("The keys you supplied use an unrecognized algorithm. ".
+			"For security reasons these keys can not be signed by CAcert.");
 }
 
 /**
