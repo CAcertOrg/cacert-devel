@@ -222,11 +222,7 @@ function checkWeakKeyText($text)
 		$num_Q = @gmp_init($key_Q, 16);
 		$num_G = @gmp_init($key_G, 16);
 
-		$bit_pub = ltrim(gmp_strval($num_pub, 2), "0");
 		$bit_P = ltrim(gmp_strval($num_P, 2), "0");
-		$bit_Q = ltrim(gmp_strval($num_Q, 2), "0");
-		$bit_G = ltrim(gmp_strval($num_G, 2), "0");
-
 		$keysize = strlen($bit_P);
 
 		if ($keysize < 2048) {
@@ -261,9 +257,9 @@ function checkWeakKeyText($text)
 		}
 
 		//Check the numbers are all less than the public modulus P
-		if(0 <= gmp_cmp($num_Q, $num_P) || 0 <= gmp_cmp($num_G, $num_P) || 0 <= gmp_cmp($num_Y, $num_P)) {
+		if(0 <= gmp_cmp($num_Q, $num_P) || 0 <= gmp_cmp($num_G, $num_P) || 0 <= gmp_cmp($num_pub, $num_P)) {
 			return failWithId("checkWeakKeyText(): The supplied DSA ".
-					"key does seem to be normalized to have Q < P, G < P and Y < P.\nData:\n$text");
+					"key does seem to be normalized to have Q < P, G < P and pub < P.\nData:\n$text");
 		}
 
 		break;
