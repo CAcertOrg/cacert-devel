@@ -126,8 +126,8 @@ function checkWeakKeyText($text)
 	}
 
 
-	switch ((string)$algorithm) {
-	case "rsaEncryption":
+	if ($algorithm === "rsaEncryption")
+	{
 		if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text, $keysize))
 		{
 			return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
@@ -197,14 +197,17 @@ function checkWeakKeyText($text)
 			}
 		}
 
-		break;
+		// No weakness found
+		return "";
+	} // End RSA
 
 /*
 //Fails to work due to outdated OpenSSL 0.9.8o
 //For this to work OpenSSL 1.0.1f or newer is required
 //which is currently unavailable on the systems
 //If DSA2048 or longer is used the CSR hangs pending on the signer.
-	case "dsaEncryption":
+	if ($algorithm ===  "dsaEncryption")
+	{
 		if (!preg_match('/^\s*Public Key Algorithm:\s+dsaEncryption\s+pub:\s+([0-9a-fA-F:\s]+)\s+P:\s+([0-9a-fA-F:\s]+)\s+Q:\s+([0-9a-fA-F:\s]+)\s+G:\s+([0-9a-fA-F:\s]+)\s+$/sm', $text, $keydetail))
 		{
 			return failWithId("checkWeakKeyText(): Couldn't parse the DSA ".
@@ -262,16 +265,14 @@ function checkWeakKeyText($text)
 					"key does seem to be normalized to have Q < P, G < P and pub < P.\nData:\n$text");
 		}
 
-		break;
+		// No weakness found
+		return "";
+	} // End DSA
 */
 
-	default:
-		return _("The keys you supplied use an unrecognized algorithm. ".
-			"For security reasons these keys can not be signed by CAcert.");
-	}
 
-	/* No weakness found */
-	return "";
+	return _("The keys you supplied use an unrecognized algorithm. ".
+			"For security reasons these keys can not be signed by CAcert.");
 }
 
 /**
