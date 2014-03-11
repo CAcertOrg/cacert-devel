@@ -142,7 +142,6 @@
 <title><?=$title?></title>
 <? if(array_key_exists('header',$_SESSION) && $_SESSION['_config']['header'] != "") { ?><?=$_SESSION['_config']['header']?><? } ?>
 <link rel="stylesheet" href="/styles/default.css" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script language="JavaScript" type="text/javascript">
 function explode(e) {
     if (document.getElementById(e).style.display == 'none') {
