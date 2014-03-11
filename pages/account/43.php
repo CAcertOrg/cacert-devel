@@ -969,7 +969,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
     //  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
 
-    function showassuredto()
+    function showassuredto($ticketno)
     {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -1016,7 +1016,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
     }
 
-    function showassuredby()
+    function showassuredby($ticketno)
     {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -1068,10 +1068,10 @@ if(intval($_REQUEST['userid']) > 0) {
 if(isset($_GET['shownotary'])) {
     switch($_GET['shownotary']) {
         case 'assuredto':
-            showassuredto();
+            showassuredto($ticketno);
             break;
         case 'assuredby':
-            showassuredby();
+            showassuredby($ticketno);
             break;
         case 'assuredto15':
             output_received_assurances(intval($_GET['userid']),1,$ticketno);
