@@ -972,7 +972,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', htmlspecialchars($row['CN']), htmlspecialchars($row['serial']));
 			}
 
 			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
@@ -1132,7 +1132,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', htmlspecialchars($row['CN']), htmlspecialchars($row['serial']));
 			}
 
 			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
@@ -1762,7 +1762,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', htmlspecialchars($row['CN']), htmlspecialchars($row['serial']));
 			}
 
 			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
@@ -2121,7 +2121,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
-				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', $row['CN'], $row['serial']);
+				printf(_("Certificate for '%s' with the serial no '%s' has been revoked.").'<br/>', htmlspecialchars($row['CN']), htmlspecialchars($row['serial']));
 			}
 
 			// TRANSLATORS: Please don't translate "Certificate Revocation List (CRL)", it's a technical term
