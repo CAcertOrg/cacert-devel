@@ -17,12 +17,12 @@
 */ ?>
 <?
   include_once($_SESSION['_config']['filepath'].'/includes/notary.inc.php');
-  
+
   if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) || intval($_REQUEST['userid']) < 1) {
 
   echo _('You do not have access to this page');
 
-  } else {  
+  } else {
     $user_id = intval($_REQUEST['userid']);
     $query = "select * from `users` where `id`='$user_id' and `users`.`deleted`=0";
     $res = mysql_query($query);
@@ -38,7 +38,7 @@
   </tr>
 </table>
 
-  
+
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -57,8 +57,8 @@
 ?>
   <tr>
     <td class="DataTD"><?=_('First active CCA')?></td>
-    <td class="DataTD"><?=$data['date']?></td>
-    <td class="DataTD"><?=$data['method']?></td>
+    <td class="DataTD"><?=isset($data['date'])?$data['date']:''?></td>
+    <td class="DataTD"><?=isset($data['method'])?$data['method']:''?></td>
     <td class="DataTD"><?=$type?></td>
   </tr>
 <?
@@ -71,8 +71,8 @@
 ?>
   <tr>
     <td class="DataTD"><?=_('First passive CCA')?></td>
-    <td class="DataTD"><?=$data['date']?></td>
-    <td class="DataTD"><?=$data['method']?></td>
+    <td class="DataTD"><?=isset($data['date'])?$data['date']:''?></td>
+    <td class="DataTD"><?=isset($data['method'])?$data['method']:''?></td>
     <td class="DataTD"><?=$type?></td>
   </tr>
 <?
@@ -87,19 +87,19 @@
 ?>
   <tr>
     <td class="DataTD"><?=_('Last CCA')?></td>
-    <td class="DataTD"><?=$data['date']?></td>
-    <td class="DataTD"><?=$data['method']?></td>
+    <td class="DataTD"><?=isset($data['date'])?$data['date']:''?></td>
+    <td class="DataTD"><?=isset($data['method'])?$data['method']:''?></td>
     <td class="DataTD"><?=$type?></td>
   </tr>
 </table>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr> 
+  <tr>
 <?
       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>
     <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=$user_id ?>">back</a></td></tr>
-<?    } 
+<?    }
 ?>  </table>
 <?
   }
