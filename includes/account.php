@@ -245,17 +245,15 @@ function buildSubjectFromSession() {
 			exit;
 		}
 
-		if(!(array_key_exists('addid',$_REQUEST) && is_array($_REQUEST['addid'])) && $_REQUEST['SSO'] != '1')
+		if( !(array_key_exists('addid',$_REQUEST) && is_array($_REQUEST['addid'])) )
 		{
 			showheader(_("My CAcert.org Account!"));
 			echo _("I didn't receive a valid Certificate Request, hit the back button and try again.");
 			showfooter();
 			exit;
 		}
-
-		$_SESSION['_config']['SSO'] = intval($_REQUEST['SSO']);
-
 		$_SESSION['_config']['addid'] = $_REQUEST['addid'];
+
 		if($_SESSION['profile']['points'] >= 50)
 			$_SESSION['_config']['incname'] = intval($_REQUEST['incname']);
 		if(array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] != 0 && ($_SESSION['profile']['codesign'] == 0 || $_SESSION['profile']['points'] < 100))
@@ -318,6 +316,7 @@ function buildSubjectFromSession() {
 			$emails = "";
 			$addys = array();
 			$defaultemail="";
+
 			if(is_array($_SESSION['_config']['addid']))
 			foreach($_SESSION['_config']['addid'] as $id)
 			{
@@ -332,7 +331,7 @@ function buildSubjectFromSession() {
 					$addys[] = intval($row['id']);
 				}
 			}
-			if($count <= 0 && $_SESSION['_config']['SSO'] != 1)
+			if($count <= 0)
 			{
 				$id = 4;
 				showheader(_("My CAcert.org Account!"));
@@ -340,10 +339,8 @@ function buildSubjectFromSession() {
 				showfooter();
 				exit;
 			}
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".$_SESSION['profile']['id']."'"));
-			if($_SESSION['_config']['SSO'] == 1)
-				$emails .= "$count.emailAddress = ".$user['uniqueID']."\n";
 
+			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".$_SESSION['profile']['id']."'"));
 			if(strlen($user['mname']) == 1)
 				$user['mname'] .= '.';
 			if(!array_key_exists('incname',$_SESSION['_config']) || $_SESSION['_config']['incname'] <= 0 || $_SESSION['_config']['incname'] > 4)
@@ -440,6 +437,7 @@ function buildSubjectFromSession() {
 				$csrsubject = "/CN=".$user['fname']." ".$user['lname']." ".$user['suffix'];
 			if($_SESSION['_config']['incname'] == 4)
 				$csrsubject = "/CN=".$user['fname']." ".$user['mname']." ".$user['lname']." ".$user['suffix'];
+
 			if(is_array($_SESSION['_config']['addid']))
 			foreach($_SESSION['_config']['addid'] as $id)
 			{
@@ -453,8 +451,6 @@ function buildSubjectFromSession() {
 					$addys[] = $row['id'];
 				}
 			}
-			if($_SESSION['_config']['SSO'] == 1)
-				$csrsubject .= "/emailAddress = ".$user['uniqueID'];
 
 			$tmpname = tempnam("/tmp", "id4csr");
 			$do = `/usr/bin/openssl req -in $tmpfname -out $tmpname`; // -subj "$csr"`;

@@ -103,23 +103,13 @@ if($_SESSION['profile']['points'] >= 50)
       <?=_("Show advanced options")?>
     </td>
   </tr>
-
-  <tr name="expert">
-    <td class="DataTD" colspan="2" align="left">
-	<input type="radio" name="SSO" value="0" checked /> <?=_("No Single Sign On ID")?><br />
-	<input type="radio" name="SSO" value="1" /> <?=_("Add Single Sign On ID Information")?><br />
-	<?=str_replace("\n", "<br>\n", wordwrap(_("By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."), 125))?>
-	<a href="http://wiki.cacert.org/wiki/SSO"><?=_("SSO WIKI Entry")?></a>
-    </td>
-  </tr>
-
-
  <tr name="expert">
     <td class="DataTD" colspan="2"><?=_("Optional Client CSR, no information on the certificate will be used")?></td>
  </tr>
  <tr name="expert">
     <td class="DataTD" colspan="2"><textarea name="optionalCSR" cols="80" rows="5"></textarea></td>
  </tr>
+
  <tr>
     <td class="DataTD">
       <input type="checkbox" name="CCA" />
