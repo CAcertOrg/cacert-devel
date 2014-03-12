@@ -34,6 +34,7 @@
   <tr>
     <td class="DataTD"><?=_("Add")?></td>
     <td class="DataTD"><?=_("Address")?></td>
+  </tr>
 
 <?
 	$query = "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `hash`=''";
@@ -52,6 +53,7 @@ if($_SESSION['profile']['points'] >= 50)
 	$lname = $_SESSION['profile']['lname'];
 	$suffix = $_SESSION['profile']['suffix'];
 ?>
+  <tr>
     <td class="DataTD" colspan="2" align="left">
       <input type="radio" name="rootcert" value="1" checked /> <?=_("Sign by class 1 root certificate")?><br />
       <input type="radio" name="rootcert" value="2" /> <?=_("Sign by class 3 root certificate")?><br />
