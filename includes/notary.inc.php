@@ -1140,7 +1140,7 @@
      * @return
      */
     function org_edit_org_table($orgname, $contactmail, $town, $state, $country, $comment, $type=0){
-        if ($type >1) {
+        if ($type > 0) {
             $title = _('Edit Organisation');
             $action = _('Update');
         } else {
