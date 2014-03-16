@@ -37,7 +37,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   {
     $_REQUEST['userid'] = 0;
 
-    $emailsearch = $email = mysql_escape_string(stripslashes($_REQUEST['email']));
+    $emailsearch = $email = mysql_escape_string(stripslashes(trim($_REQUEST['email'])));
 
     //Disabled to speed up the queries
     //if(!strstr($email, "%"))
