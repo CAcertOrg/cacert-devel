@@ -225,7 +225,7 @@
 		//echo "Points due to name matches: $points<br/>";
 
 		$shellpwd = escapeshellarg($pwd);
-		$do = `grep $shellpwd /usr/share/dict/american-english`;
+		$do = `grep -F -- $shellpwd /usr/share/dict/american-english`;
 		if($do)
 			$points--;
 
