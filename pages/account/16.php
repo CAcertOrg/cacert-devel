@@ -44,7 +44,16 @@
     <td class="DataTD"><?=_("Department")?>:</td>
     <td class="DataTD"><input type="text" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?($_SESSION['_config']['OU']):''?>"/></td>
   </tr>
-  <tr>
+
+  <tr name="expertoff" style="display:none">
+    <td class="DataTD">
+      <input type="checkbox" name="expertbox" onchange="showExpert(this.checked)" />
+    </td>
+    <td class="DataTD">
+      <?=_("Show advanced options")?>
+    </td>
+  </tr>
+  <tr name="expert">
     <td class="DataTD" colspan="2" align="left">
         <input type="radio" name="rootcert" value="1" checked /> <?=_("Sign by class 1 root certificate")?><br />
         <input type="radio" name="rootcert" value="2" /> <?=_("Sign by class 3 root certificate")?><br />
@@ -52,11 +61,11 @@
     </td>
   </tr>
 <? if($_SESSION['profile']['codesign'] && $_SESSION['profile']['points'] >= 100) { ?>
-  <tr>
+  <tr name="expert">
     <td class="DataTD" colspan="2" align="left"><input type="checkbox" name="codesign" value="1" /><?=_("Code Signing")?></td>
   </tr>
 <? } ?>
-   <tr>
+  <tr>
    <td class="DataTD" colspan="2" align="left">
       <?=_("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="80" size=80 />
@@ -69,3 +78,22 @@
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form>
+
+<script language="javascript">
+function showExpert(a)
+{
+  b=document.getElementsByName("expert");
+  for(i=0;b.length>i;i++)
+  {
+    if(!a) {b[i].setAttribute("style","display:none"); }
+    else {b[i].removeAttribute("style");}
+  }
+  b=document.getElementsByName("expertoff");
+  for(i=0;b.length>i;i++)
+  {
+    b[i].removeAttribute("style");
+  }
+
+}
+showExpert(false);
+</script>
