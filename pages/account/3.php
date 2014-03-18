@@ -34,6 +34,7 @@
   <tr>
     <td class="DataTD"><?=_("Add")?></td>
     <td class="DataTD"><?=_("Address")?></td>
+  </tr>
 
 <?
 	$query = "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `hash`=''";
@@ -52,12 +53,6 @@ if($_SESSION['profile']['points'] >= 50)
 	$lname = $_SESSION['profile']['lname'];
 	$suffix = $_SESSION['profile']['suffix'];
 ?>
-    <td class="DataTD" colspan="2" align="left">
-      <input type="radio" name="rootcert" value="1" checked /> <?=_("Sign by class 1 root certificate")?><br />
-      <input type="radio" name="rootcert" value="2" /> <?=_("Sign by class 3 root certificate")?><br />
-      <?=str_replace("\n", "<br />\n", wordwrap(_("Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"), 125))?>
-    </td>
-  </tr>
   <tr>
     <td class="DataTD" colspan="2" align="left">
       <input type="radio" name="incname" value="0" checked /> <?=_("No Name")?><br />
@@ -65,17 +60,6 @@ if($_SESSION['profile']['points'] >= 50)
       <? if($fname && $mname && $lname) { ?><input type="radio" name="incname" value="2" /> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname?>'<br /><? } ?>
       <? if($fname && $lname && $suffix) { ?><input type="radio" name="incname" value="3" /> <?=_("Include")?> '<?=$fname." ".$lname." ".$suffix?>'<br /><? } ?>
       <? if($fname && $mname && $lname && $suffix) { ?><input type="radio" name="incname" value="4" /> <?=_("Include")?> '<?=$fname." ".$mname." ".$lname." ".$suffix?>'<br /><? } ?>
-    </td>
-  </tr>
-<? } ?>
-<? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
-  <tr>
-    <td class="DataTD">
-      <input type="checkbox" name="codesign" value="1" />
-    </td>
-    <td class="DataTD" align="left">
-      <?=_("Code Signing")?><br />
-      <?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
     </td>
   </tr>
 <? } ?>
@@ -103,6 +87,31 @@ if($_SESSION['profile']['points'] >= 50)
       <?=_("Show advanced options")?>
     </td>
   </tr>
+
+<?
+if($_SESSION['profile']['points'] >= 50)
+{
+?>
+  <tr name="expert">
+    <td class="DataTD" colspan="2" align="left">
+      <input type="radio" name="rootcert" value="1" checked /> <?=_("Sign by class 1 root certificate")?><br />
+      <input type="radio" name="rootcert" value="2" /> <?=_("Sign by class 3 root certificate")?><br />
+      <?=str_replace("\n", "<br />\n", wordwrap(_("Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"), 125))?>
+    </td>
+  </tr>
+<? } ?>
+
+<? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
+  <tr name="expert">
+    <td class="DataTD">
+      <input type="checkbox" name="codesign" value="1" />
+    </td>
+    <td class="DataTD" align="left">
+      <?=_("Code Signing")?><br />
+      <?=_("Please Note: By ticking this box you will automatically have your name included in any certificates.")?>
+    </td>
+  </tr>
+<? } ?>
 
   <tr name="expert">
     <td class="DataTD" colspan="2" align="left">

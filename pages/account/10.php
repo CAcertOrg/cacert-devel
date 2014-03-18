@@ -30,17 +30,40 @@
 <p><?=_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via support@cacert.org for more information.")?></p>
 
 <form method="post" action="account.php">
+<p><?=_("Optional comment, only used in the certificate overview")?><br>
+	<input type="text" name="description" maxlength="80" size=80/></p>
+<p><?=_("Paste your CSR(Certificate Signing Request) below...")?><br />
+	<textarea name="CSR" cols="80" rows="15"></textarea>
+</p>
+
+<p id="expertoff" style="display:none"><input type="checkbox" id="expertbox" onchange="showExpert(this.checked)" /> <label for="expertbox"><?=_("Show advanced options")?></label></p>
+<div id="advanced_options" style="border: 1px solid">
+
 <? if($_SESSION['profile']['points'] >= 50) { ?>
-<input type="radio" name="rootcert" value="1"/> <?=_("Sign by class 1 root certificate")?><br />
-<input type="radio" name="rootcert" value="2" checked/> <?=_("Sign by class 3 root certificate")?><br />
+<p>
+	<input type="radio" id="root1" name="rootcert" value="1"/> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
+	<input type="radio" id="root2" name="rootcert" value="2" checked/> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
+</p>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <? } ?>
-<p><?=_("Optional comment, only used in the certificate overview")?><br>
-       <input type="text" name="description" maxlength="80" size=80/></p>
-<p><?=_("Paste your CSR(Certificate Signing Request) below...")?></p>
-<textarea name="CSR" cols="80" rows="15"></textarea><br />
+
+</div>
+
 <p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
   <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
 <input type="submit" name="process" value="<?=_("Submit")?>" />
 <input type="hidden" name="oldid" value="<?=$id?>" />
 </form>
+
+
+<script language="javascript">
+function showExpert(a)
+{
+	var options=document.getElementById("advanced_options");
+	options.style.display = (a) ? "" : "none";
+
+	var checkbox=document.getElementById("expertoff");
+	checkbox.style.display = "";
+}
+showExpert(false);
+</script>
