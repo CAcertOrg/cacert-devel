@@ -28,18 +28,25 @@
 
 <form method="post" action="account.php">
 <p> <?=_("Optional comment, only used in the certificate overview")?><br />
-       <input type="text" name="description" maxlength="80" size=80 /></p>
+	<input type="text" name="description" maxlength="80" size=80 />
+</p>
 <p><?=_("Paste your CSR below...")?><br />
-<textarea name="CSR" cols="80" rows="15"></textarea></p>
+	<textarea name="CSR" cols="80" rows="15" />
+</p>
 
-<p id="expertoff" style="display:none"><input type="checkbox" id="expertbox" onchange="showExpert(this.checked)" /> <label for="expertbox"><?=_("Show advanced options")?></label></p>
-<div id="advanced_options" style="border: 1px solid">
+<fieldset>
+<legend>
+	<input type="checkbox" id="expertbox" onchange="showExpert(this.checked)" style="display:none" />
+	<label for="expertbox"><?=_("Advanced Options")?></label>
+</legend>
+<div id="advanced_options">
 <p>
 	<input type="radio" id="root1" name="rootcert" value="1" /> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
-	<input type="radio" id="root2" name="rootcert" value="2" checked /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
+	<input type="radio" id="root2" name="rootcert" value="2" checked="checked" /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
 </p>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 </div>
+</fieldset>
 
 <input type="submit" name="process" value="<?=_("Submit")?>" />
 <input type="hidden" name="oldid" value="<?=$id?>" />
@@ -51,7 +58,7 @@ function showExpert(a)
 	var options=document.getElementById("advanced_options");
 	options.style.display = (a) ? "" : "none";
 
-	var checkbox=document.getElementById("expertoff");
+	var checkbox=document.getElementById("expertbox");
 	checkbox.style.display = "";
 }
 showExpert(false);
