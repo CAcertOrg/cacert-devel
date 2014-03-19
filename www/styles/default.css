@@ -94,6 +94,14 @@ ul.no_indent {
 	padding: 0px;
 }
 
+.attach_ul {
+	margin-bottom: 0px;
+}
+
+.attach_ul + ul {
+	margin-top: 0px;
+}
+
 
 /***********************************************/
 /* Layout Divs                                 */

@@ -45,12 +45,31 @@
 <div id="advanced_options">
 
 <? if($_SESSION['profile']['points'] >= 50) { ?>
-<p>
-	<input type="radio" id="root1" name="rootcert" value="1" /> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
-	<input type="radio" id="root2" name="rootcert" value="2" checked="checked" /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
-</p>
+<ul class="no_indent">
+	<li>
+		<input type="radio" id="root1" name="rootcert" value="1" />
+		<label for="root1"><?=_("Sign by class 1 root certificate")?></label>
+	</li>
+	<li>
+		<input type="radio" id="root2" name="rootcert" value="2" checked="checked" />
+		<label for="root2"><?=_("Sign by class 3 root certificate")?></label>
+	</li>
+</ul>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <? } ?>
+
+<p class="attach_ul"><?=_("Hash algorithm used when signing the certificate:")?></p>
+<ul class="no_indent">
+<?
+foreach (HASH_ALGORITHMS as $algorithm => $display_string) {
+?>
+	<li>
+		<input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(DEFAULT_HASH_ALGORITHM === $algorithm)?'checked="checked"':''?> />
+		<label for="hash_alg_<?=$algorithm?>"><?=$display_string?></label>
+	</li>
+<?
+} ?>
+</ul>
 
 </div>
 </fieldset>

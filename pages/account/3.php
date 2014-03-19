@@ -115,6 +115,19 @@ if($_SESSION['profile']['points'] >= 50)
   </tr>
 <? } ?>
 
+  <tr name="expert">
+    <td class="DataTD" colspan="2" align="left">
+      <?=_("Hash algorithm used when signing the certificate:")?><br />
+      <?
+      foreach (HASH_ALGORITHMS as $algorithm => $display_string) {
+      ?>
+        <input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(DEFAULT_HASH_ALGORITHM === $algorithm)?'checked="checked"':''?> />
+        <label for="hash_alg_<?=$algorithm?>"><?=$display_string?></label><br />
+      <?
+      } ?>
+    </td>
+  </tr>
+
 <? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
   <tr name="expert">
     <td class="DataTD">
