@@ -30,14 +30,19 @@
 <p><?=_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via support@cacert.org for more information.")?></p>
 
 <form method="post" action="account.php">
-<p><?=_("Optional comment, only used in the certificate overview")?><br>
-	<input type="text" name="description" maxlength="80" size=80/></p>
+<p><?=_("Optional comment, only used in the certificate overview")?><br />
+	<input type="text" name="description" maxlength="80" size=80 />
+</p>
 <p><?=_("Paste your CSR(Certificate Signing Request) below...")?><br />
 	<textarea name="CSR" cols="80" rows="15"></textarea>
 </p>
 
-<p id="expertoff" style="display:none"><input type="checkbox" id="expertbox" onchange="showExpert(this.checked)" /> <label for="expertbox"><?=_("Show advanced options")?></label></p>
-<div id="advanced_options" style="border: 1px solid">
+<fieldset>
+<legend>
+	<input type="checkbox" id="expertbox" onchange="showExpert(this.checked)" style="display:none" />
+	<label for="expertbox"><?=_("Advanced Options")?></label>
+</legend>
+<div id="advanced_options">
 
 <? if($_SESSION['profile']['points'] >= 50) { ?>
 <p>
@@ -48,8 +53,9 @@
 <? } ?>
 
 </div>
+</fieldset>
 
-<p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+<p><input type="checkbox" id="CCA" name="CCA" /> <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong></label><br />
   <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
 <input type="submit" name="process" value="<?=_("Submit")?>" />
 <input type="hidden" name="oldid" value="<?=$id?>" />
@@ -62,7 +68,7 @@ function showExpert(a)
 	var options=document.getElementById("advanced_options");
 	options.style.display = (a) ? "" : "none";
 
-	var checkbox=document.getElementById("expertoff");
+	var checkbox=document.getElementById("expertbox");
 	checkbox.style.display = "";
 }
 showExpert(false);
