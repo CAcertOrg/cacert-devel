@@ -96,3 +96,22 @@ function fix_assurer_flag($userID = NULL)
 
 	return true;
 }
+
+
+/**
+ * Contains a map of all hash algorithms currently supported for signing.
+ *
+ * @var array(string=>string) identifier => display_string
+ */
+define("HASH_ALGORITHMS", array(
+		"sha256" => "SHA256 "._("recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x)."),
+		"sha384" => "SHA384",
+		"sha512" => "SHA512",
+		));
+
+/**
+ * The identifier of the default hash algorithm used as found in HASH_ALGORITHMS
+ *
+ * @var string
+ */
+define("DEFAULT_HASH_ALGORITHM", "sha256");

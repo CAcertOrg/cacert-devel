@@ -287,6 +287,14 @@ function buildSubjectFromSession() {
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
 		}
+
+		// Check if we got a valid hash algorithm, otherwise use default
+		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
+			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
+		} else {
+			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
+		}
+
 		$csr = "";
 		if(trim($_REQUEST['optionalCSR']) == "")
 		{
@@ -387,6 +395,7 @@ function buildSubjectFromSession() {
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -488,6 +497,7 @@ function buildSubjectFromSession() {
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -765,6 +775,13 @@ function buildSubjectFromSession() {
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
 		}
+
+		// Check if we got a valid hash algorithm, otherwise use default
+		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
+			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
+		} else {
+			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
+		}
 	}
 
 	if($process != "" && $oldid == 11)
@@ -809,6 +826,7 @@ function buildSubjectFromSession() {
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['rowid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".$_SESSION['_config']['description']."'";
 		} elseif(array_key_exists('0',$_SESSION['_config']['altid']) && $_SESSION['_config']['altid']['0'] > 0) {
 			$query = "insert into `domaincerts` set
@@ -816,6 +834,7 @@ function buildSubjectFromSession() {
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['altid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".$_SESSION['_config']['description']."'";
 		} else {
 			showheader(_("My CAcert.org Account!"));
@@ -1489,6 +1508,13 @@ function buildSubjectFromSession() {
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
+		// Check if we got a valid hash algorithm, otherwise use default
+		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
+			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
+		} else {
+			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
+		}
+
 		if(trim($_REQUEST['description']) != ""){
 			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
 		}else{
@@ -1560,6 +1586,7 @@ function buildSubjectFromSession() {
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -1652,6 +1679,7 @@ function buildSubjectFromSession() {
 						`subject`='$csrsubject',
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".$_SESSION['_config']['description']."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -1920,6 +1948,13 @@ function buildSubjectFromSession() {
 		$_SESSION['_config']['rootcert'] = intval($_REQUEST['rootcert']);
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
+
+		// Check if we got a valid hash algorithm, otherwise use default
+		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
+			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
+		} else {
+			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
+		}
 	}
 
 	if($process != "" && $oldid == 21)
@@ -1994,6 +2029,7 @@ function buildSubjectFromSession() {
 					`created`=NOW(),
 					`subject`='$csrsubject',
 					`rootcert`='".$_SESSION['_config']['rootcert']."',
+					`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 					`type`='$type',
 					`description`='".$_SESSION['_config']['description']."'";
 		} else {
@@ -2003,6 +2039,7 @@ function buildSubjectFromSession() {
 					`created`=NOW(),
 					`subject`='$csrsubject',
 					`rootcert`='".$_SESSION['_config']['rootcert']."',
+					`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 					`type`='$type',
 					`description`='".$_SESSION['_config']['description']."'";
 		}

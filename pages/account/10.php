@@ -30,11 +30,11 @@
 <p><?=_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via support@cacert.org for more information.")?></p>
 
 <form method="post" action="account.php">
-<p><?=_("Optional comment, only used in the certificate overview")?><br />
-	<input type="text" name="description" maxlength="80" size=80 />
+<p><label for="description"><?=_("Optional comment, only used in the certificate overview")?></label><br />
+	<input type="text" id="description" name="description" maxlength="80" size="80" />
 </p>
-<p><?=_("Paste your CSR(Certificate Signing Request) below...")?><br />
-	<textarea name="CSR" cols="80" rows="15"></textarea>
+<p><label for="CSR"><?=_("Paste your CSR (Certificate Signing Request) below...")?></label><br />
+	<textarea id="CSR" name="CSR" cols="80" rows="15"></textarea>
 </p>
 
 <fieldset>
@@ -45,18 +45,37 @@
 <div id="advanced_options">
 
 <? if($_SESSION['profile']['points'] >= 50) { ?>
-<p>
-	<input type="radio" id="root1" name="rootcert" value="1" /> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
-	<input type="radio" id="root2" name="rootcert" value="2" checked="checked" /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
-</p>
+<ul class="no_indent">
+	<li>
+		<input type="radio" id="root1" name="rootcert" value="1" />
+		<label for="root1"><?=_("Sign by class 1 root certificate")?></label>
+	</li>
+	<li>
+		<input type="radio" id="root2" name="rootcert" value="2" checked="checked" />
+		<label for="root2"><?=_("Sign by class 3 root certificate")?></label>
+	</li>
+</ul>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 <? } ?>
+
+<p class="attach_ul"><?=_("Hash algorithm used when signing the certificate:")?></p>
+<ul class="no_indent">
+<?
+foreach (HASH_ALGORITHMS as $algorithm => $display_string) {
+?>
+	<li>
+		<input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(DEFAULT_HASH_ALGORITHM === $algorithm)?'checked="checked"':''?> />
+		<label for="hash_alg_<?=$algorithm?>"><?=$display_string?></label>
+	</li>
+<?
+} ?>
+</ul>
 
 </div>
 </fieldset>
 
 <p><input type="checkbox" id="CCA" name="CCA" /> <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong></label><br />
-  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
+  <?=_("Please note: You need to accept the CCA to proceed.")?></p>
 <input type="submit" name="process" value="<?=_("Submit")?>" />
 <input type="hidden" name="oldid" value="<?=$id?>" />
 </form>
