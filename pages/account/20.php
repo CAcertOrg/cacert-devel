@@ -42,7 +42,7 @@
 <div id="advanced_options">
 <p>
 	<input type="radio" id="root1" name="rootcert" value="1" /> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
-	<input type="radio" id="root2" name="rootcert" value="2" checked /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
+	<input type="radio" id="root2" name="rootcert" value="2" checked="checked" /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label>
 </p>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
 </div>
