@@ -46,15 +46,15 @@
 	}
 	$query .= "ORDER BY `domaincerts`.`modified` desc";
 //echo $query."<br>\n";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 	{
 ?>
   <tr>
     <td colspan="8" class="DataTD"><?=_("No certificates are currently listed.")?></td>
   </tr>
 <? } else {
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysqli_fetch_assoc($res))
 	{
 		if($row['timeleft'] > 0)
 			$verified = _("Valid");

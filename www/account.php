@@ -56,10 +56,10 @@
 
 	} else if($id == 51 && $_GET['img'] == "show") {
 		$query = "select * from `tverify` where `id`='".intval($_GET['photoid'])."' and `modified`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res))
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			readfile($row['photoid']);
 		} else {
 			die("No such file.");

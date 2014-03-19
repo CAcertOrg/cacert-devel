@@ -147,8 +147,8 @@ function buildSubjectFromSession() {
 		}
 		$hash = make_hash();
 		$query = "insert into `email` set `email`='".$_REQUEST['email']."',`memid`='".$_SESSION['profile']['id']."',`created`=NOW(),`hash`='$hash'";
-		mysql_query($query);
-		$emailid = mysql_insert_id();
+		mysqli_query($_SESSION['mconn'], $query);
+		$emailid = mysqli_insert_id();
 
 		$body = _("Below is the link you need to open to verify your email address. Once your address is verified you will be able to start issuing certificates to your heart's content!")."\n\n";
 		$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=email&emailid=$emailid&hash=$hash\n\n";
@@ -167,15 +167,15 @@ function buildSubjectFromSession() {
 		$id = 2;
 		$emailid = intval($_REQUEST['emailid']);
 		$query = "select * from `email` where `id`='$emailid' and `memid`='".$_SESSION['profile']['id']."' and `hash` = '' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("Error!"));
 			echo _("You currently don't have access to the email address you selected, or you haven't verified it yet.");
 			showfooter();
 			exit;
 		}
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		$body  = sprintf(_("Hi %s,"),$_SESSION['profile']['fname'])."\n\n";
 		$body .= _("You are receiving this email because you or someone else ".
 				"has changed the default email on your account.")."\n\n";
@@ -187,7 +187,7 @@ function buildSubjectFromSession() {
 
 		$_SESSION['profile']['email'] = $row['email'];
 		$query = "update `users` set `email`='".$row['email']."' where `id`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		showheader(_("My CAcert.org Account!"));
 		printf(_("Your default email address has been updated to '%s'."), sanitizeHTML($row['email']));
 		showfooter();
@@ -212,10 +212,10 @@ function buildSubjectFromSession() {
 				$id = intval($id);
 				$query = "select * from `email` where `id`='$id' and `memid`='".intval($_SESSION['profile']['id'])."' and
 						`email`!='".$_SESSION['profile']['email']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) > 0)
 				{
-					$row = mysql_fetch_assoc($res);
+					$row = mysqli_fetch_assoc($res);
 					echo $row['email']."<br>\n";
 					account_email_delete($row['id']);
 					$delcount++;
@@ -321,10 +321,10 @@ function buildSubjectFromSession() {
 			if(is_array($_SESSION['_config']['addid']))
 			foreach($_SESSION['_config']['addid'] as $id)
 			{
-				$res = mysql_query("select * from `email` where `memid`='".$_SESSION['profile']['id']."' and `id`='".intval($id)."'");
-				if(mysql_num_rows($res) > 0)
+				$res = mysqli_query($_SESSION['mconn'], "select * from `email` where `memid`='".$_SESSION['profile']['id']."' and `id`='".intval($id)."'");
+				if(mysqli_num_rows($res) > 0)
 				{
-					$row = mysql_fetch_assoc($res);
+					$row = mysqli_fetch_assoc($res);
 					if(!$emails)
 						$defaultemail = $row['email'];
 					$emails .= "$count.emailAddress = ".$row['email']."\n";
@@ -340,7 +340,7 @@ function buildSubjectFromSession() {
 				showfooter();
 				exit;
 			}
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".$_SESSION['profile']['id']."'"));
+			$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".$_SESSION['profile']['id']."'"));
 			if($_SESSION['_config']['SSO'] == 1)
 				$emails .= "$count.emailAddress = ".$user['uniqueID']."\n";
 
@@ -385,11 +385,11 @@ function buildSubjectFromSession() {
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
 						`description`='".$_SESSION['_config']['description']."'";
-			mysql_query($query);
-			$emailid = mysql_insert_id();
+			mysqli_query($_SESSION['mconn'], $query);
+			$emailid = mysqli_insert_id();
 			if(is_array($addys))
 			foreach($addys as $addy)
-				mysql_query("insert into `emaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
+				mysqli_query($_SESSION['mconn'], "insert into `emaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
 			$CSRname=generatecertpath("csr","client",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $emails);
@@ -404,7 +404,7 @@ function buildSubjectFromSession() {
 				showfooter();
 				exit;
 			}
-			mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='".intval($emailid)."'");
+			mysqli_query($_SESSION['mconn'], "update `emailcerts` set `csr_name`='$CSRname' where `id`='".intval($emailid)."'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype'] == "VI") {
 			if($csr == "")
 				$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."\n-----END CERTIFICATE REQUEST-----\n";
@@ -427,7 +427,7 @@ function buildSubjectFromSession() {
 			$defaultemail = "";
 			$csrsubject="";
 
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
+			$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 			if(strlen($user['mname']) == 1)
 				$user['mname'] .= '.';
 			if($_SESSION['_config']['incname'] <= 0 || $_SESSION['_config']['incname'] > 4)
@@ -443,10 +443,10 @@ function buildSubjectFromSession() {
 			if(is_array($_SESSION['_config']['addid']))
 			foreach($_SESSION['_config']['addid'] as $id)
 			{
-				$res = mysql_query("select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `id`='".intval($id)."'");
-				if(mysql_num_rows($res) > 0)
+				$res = mysqli_query($_SESSION['mconn'], "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `id`='".intval($id)."'");
+				if(mysqli_num_rows($res) > 0)
 				{
-					$row = mysql_fetch_assoc($res);
+					$row = mysqli_fetch_assoc($res);
 					if($defaultemail == "")
 						$defaultemail = $row['email'];
 					$csrsubject .= "/emailAddress=".$row['email'];
@@ -486,21 +486,21 @@ function buildSubjectFromSession() {
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
 						`description`='".$_SESSION['_config']['description']."'";
-			mysql_query($query);
-			$emailid = mysql_insert_id();
+			mysqli_query($_SESSION['mconn'], $query);
+			$emailid = mysqli_insert_id();
 			if(is_array($addys))
 			foreach($addys as $addy)
-				mysql_query("insert into `emaillink` set `emailcertsid`='$emailid', `emailid`='".mysql_real_escape_string($addy)."'");
+				mysqli_query($_SESSION['mconn'], "insert into `emaillink` set `emailcertsid`='$emailid', `emailid`='".mysql_real_escape_string($addy)."'");
 			$CSRname=generatecertpath("csr","client",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $csr);
 			fclose($fp);
-			mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
+			mysqli_query($_SESSION['mconn'], "update `emailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		}
 		waitForResult("emailcerts", $emailid, 4);
 		$query = "select * from `emailcerts` where `id`='$emailid' and `crt_name` != ''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			$id = 4;
 			showheader(_("My CAcert.org Account!"));
@@ -539,10 +539,10 @@ function buildSubjectFromSession() {
 		$newdom = trim(escapeshellarg($newdomain));
 		$newdomain = mysql_real_escape_string(trim($newdomain));
 
-		$res1 = mysql_query("select * from `orgdomains` where `domain`='$newdomain'");
+		$res1 = mysqli_query($_SESSION['mconn'], "select * from `orgdomains` where `domain`='$newdomain'");
 		$query = "select * from `domains` where `domain`='$newdomain' and `deleted`=0";
-		$res2 = mysql_query($query);
-		if(mysql_num_rows($res1) > 0 || mysql_num_rows($res2))
+		$res2 = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res1) > 0 || mysqli_num_rows($res2))
 		{
 			$oldid=0;
 			$id = 7;
@@ -624,8 +624,8 @@ function buildSubjectFromSession() {
 		}
 
 		$query = "select * from `domains` where `domain`='".mysql_real_escape_string($_SESSION['_config']['domain'])."' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
 			showheader(_("My CAcert.org Account!"));
 			printf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($_SESSION['_config']['domain']));
@@ -651,8 +651,8 @@ function buildSubjectFromSession() {
 		$hash = make_hash();
 		$query = "insert into `domains` set `domain`='".mysql_real_escape_string($_SESSION['_config']['domain'])."',
 					`memid`='".$_SESSION['profile']['id']."',`created`=NOW(),`hash`='$hash'";
-		mysql_query($query);
-		$domainid = mysql_insert_id();
+		mysqli_query($_SESSION['mconn'], $query);
+		$domainid = mysqli_insert_id();
 
 		$body = sprintf(_("Below is the link you need to open to verify your domain '%s'. Once your address is verified you will be able to start issuing certificates to your heart's content!"),$_SESSION['_config']['domain'])."\n\n";
 		$body .= "http://".$_SESSION['_config']['normalhostname']."/verify.php?type=domain&domainid=$domainid&hash=$hash\n\n";
@@ -679,10 +679,10 @@ function buildSubjectFromSession() {
 			{
 				$id = intval($id);
 				$query = "select * from `domains` where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) > 0)
 				{
-					$row = mysql_fetch_assoc($res);
+					$row = mysqli_fetch_assoc($res);
 					echo $row['domain']."<br>\n";
 					account_domain_delete($row['id']);
 				}
@@ -821,24 +821,24 @@ function buildSubjectFromSession() {
 			exit;
 		}
 
-		mysql_query($query);
-		$CSRid = mysql_insert_id();
+		mysqli_query($_SESSION['mconn'], $query);
+		$CSRid = mysqli_insert_id();
 
 		if(is_array($_SESSION['_config']['rowid']))
 			foreach($_SESSION['_config']['rowid'] as $dom)
-				mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
+				mysqli_query($_SESSION['mconn'], "insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 		if(is_array($_SESSION['_config']['altid']))
 		foreach($_SESSION['_config']['altid'] as $dom)
-			mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
+			mysqli_query($_SESSION['mconn'], "insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 
 		$CSRname=generatecertpath("csr","server",$CSRid);
 		rename($_SESSION['_config']['tmpfname'], $CSRname);
 		chmod($CSRname,0644);
-		mysql_query("update `domaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
+		mysqli_query($_SESSION['mconn'], "update `domaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
 		waitForResult("domaincerts", $CSRid, 11);
 		$query = "select * from `domaincerts` where `id`='$CSRid' and `crt_name` != ''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			$id = 11;
 			showheader(_("My CAcert.org Account!"));
@@ -868,14 +868,14 @@ function buildSubjectFromSession() {
 						where `domaincerts`.`id`='$id' and
 						`domaincerts`.`domid`=`domains`.`id` and
 						`domains`.`memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br/>\n", $id);
 					continue;
 				}
 
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
@@ -884,7 +884,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 
-				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `domaincerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into `domaincerts` set
 						`domid`='".$row['domid']."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
@@ -896,8 +896,8 @@ function buildSubjectFromSession() {
 						`type`='".$row['type']."',
 						`pkhash`='".$row['pkhash']."',
 						`description`='".$row['description']."'";
-				mysql_query($query);
-				$newid = mysql_insert_id();
+				mysqli_query($_SESSION['mconn'], $query);
+				$newid = mysqli_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
 				copy($row['csr_name'], $newfile);
 				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep "Subject:"`);
@@ -919,17 +919,17 @@ function buildSubjectFromSession() {
 
 				$subject = buildSubjectFromSession();
 				$subject = mysql_real_escape_string($subject);
-				mysql_query("update `domaincerts` set `subject`='$subject',`csr_name`='$newfile' where `id`='$newid'");
+				mysqli_query($_SESSION['mconn'], "update `domaincerts` set `subject`='$subject',`csr_name`='$newfile' where `id`='$newid'");
 
 				echo _("Renewing").": ".sanitizeHTML($_SESSION['_config']['0.CN'])."<br>\n";
 				waitForResult("domaincerts", $newid,$oldid,0);
 				$query = "select * from `domaincerts` where `id`='$newid' and `crt_name` != ''";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
-					$drow = mysql_fetch_assoc($res);
+					$drow = mysqli_fetch_assoc($res);
 					$cert = `/usr/bin/openssl x509 -in $drow[crt_name]`;
 					echo "<pre>\n$cert\n</pre>\n";
 				}
@@ -959,19 +959,19 @@ function buildSubjectFromSession() {
 						where `domaincerts`.`id`='$id' and
 						`domaincerts`.`domid`=`domains`.`id` and
 						`domains`.`memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
 			}
 		}
@@ -990,19 +990,19 @@ function buildSubjectFromSession() {
 						where `domaincerts`.`id`='$id' and
 						`domaincerts`.`domid`=`domains`.`id` and
 						`domains`.`memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['expired'] > 0)
 				{
 					printf(_("Couldn't remove the request for `%s`, request had already been processed.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("delete from `domaincerts` where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "delete from `domaincerts` where `id`='$id'");
 				@unlink($row['csr_name']);
 				@unlink($row['crt_name']);
 				printf(_("Removed a pending request for '%s'")."<br>\n", $row['CN']);
@@ -1021,7 +1021,7 @@ function buildSubjectFromSession() {
 			{
 				$cid = intval(substr($id,14));
 				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `domaincerts` set `description`='$comment' where `id`='$cid'");
+				mysqli_query($_SESSION['mconn'], "update `domaincerts` set `description`='$comment' where `id`='$cid'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
@@ -1041,14 +1041,14 @@ function buildSubjectFromSession() {
 				$id = intval($id);
 				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `emailcerts`
 						where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
 
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
@@ -1057,7 +1057,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 
-				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `emailcerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into emailcerts set
 						`memid`='".$row['memid']."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
@@ -1070,21 +1070,21 @@ function buildSubjectFromSession() {
 						`codesign`='".$row['codesign']."',
 						`rootcert`='".$row['rootcert']."',
 						`description`='".$row['description']."'";
-				mysql_query($query);
-				$newid = mysql_insert_id();
+				mysqli_query($_SESSION['mconn'], $query);
+				$newid = mysqli_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
 				copy($row['csr_name'], $newfile);
-				mysql_query("update `emailcerts` set `csr_name`='$newfile' where `id`='$newid'");
-				$res = mysql_query("select * from `emaillink` where `emailcertsid`='".$row['id']."'");
-				while($r2 = mysql_fetch_assoc($res))
+				mysqli_query($_SESSION['mconn'], "update `emailcerts` set `csr_name`='$newfile' where `id`='$newid'");
+				$res = mysqli_query($_SESSION['mconn'], "select * from `emaillink` where `emailcertsid`='".$row['id']."'");
+				while($r2 = mysqli_fetch_assoc($res))
 				{
-					mysql_query("insert into `emaillink` set `emailid`='".$r2['emailid']."',
+					mysqli_query($_SESSION['mconn'], "insert into `emaillink` set `emailid`='".$r2['emailid']."',
 							`emailcertsid`='$newid'");
 				}
 				waitForResult("emailcerts", $newid,$oldid,0);
 				$query = "select * from `emailcerts` where `id`='$newid' and `crt_name` != ''";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
@@ -1115,19 +1115,19 @@ function buildSubjectFromSession() {
 				$id = intval($id);
 				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `emailcerts`
 						where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
 			}
 		}
@@ -1144,19 +1144,19 @@ function buildSubjectFromSession() {
 				$id = intval($id);
 				$query = "select *,UNIX_TIMESTAMP(`expire`) as `expired` from `emailcerts`
 						where `id`='$id' and `memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['expired'] > 0)
 				{
 					printf(_("Couldn't remove the request for `%s`, request had already been processed.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("delete from `emailcerts` where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "delete from `emailcerts` where `id`='$id'");
 				@unlink($row['csr_name']);
 				@unlink($row['crt_name']);
 				printf(_("Removed a pending request for '%s'")."<br>\n", $row['CN']);
@@ -1175,14 +1175,14 @@ function buildSubjectFromSession() {
 			{
 				$cid = intval(substr($id,5));
 				$dis=(array_key_exists('disablelogin_'.$cid,$_REQUEST) && $_REQUEST['disablelogin_'.$cid]=="1")?"0":"1";
-				mysql_query("update `emailcerts` set `disablelogin`='$dis' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				mysqli_query($_SESSION['mconn'], "update `emailcerts` set `disablelogin`='$dis' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
 				if(!empty($_REQUEST['check_comment_'.$cid])) {
 					$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-					mysql_query("update `emailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+					mysqli_query($_SESSION['mconn'], "update `emailcerts` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 				}
 			}
 		}
@@ -1257,8 +1257,8 @@ function buildSubjectFromSession() {
 	if($oldid == 13 && $process != "")
 	{
 		$ddquery = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
-		$ddres = mysql_query($ddquery);
-		$ddrow = mysql_fetch_assoc($ddres);
+		$ddres = mysqli_query($_SESSION['mconn'], $ddquery);
+		$ddrow = mysqli_fetch_assoc($ddres);
 		$_SESSION['profile']['points'] = $ddrow['total'];
 
 		if($_SESSION['profile']['points'] == 0)
@@ -1297,7 +1297,7 @@ function buildSubjectFromSession() {
 						`suffix`='".$_SESSION['_config']['user']['suffix']."',
 						`dob`='".$_SESSION['_config']['user']['year']."-".$_SESSION['_config']['user']['month']."-".$_SESSION['_config']['user']['day']."'
 						where `id`='".$_SESSION['profile']['id']."'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 		if ($showdetails!="") {
 			$query = "update `users` set `Q1`='".$_SESSION['_config']['user']['Q1']."',
@@ -1311,7 +1311,7 @@ function buildSubjectFromSession() {
 							`A4`='".$_SESSION['_config']['user']['A4']."',
 							`A5`='".$_SESSION['_config']['user']['A5']."'
 							where `id`='".$_SESSION['profile']['id']."'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 
 		//!!!Should be rewritten
@@ -1321,16 +1321,16 @@ function buildSubjectFromSession() {
 		{
 			$query = "update `users` set `otphash`='".$_SESSION['_config']['user']['otphash']."',
 						`otppin`='".$_SESSION['_config']['user']['otppin']."' where `id`='".$_SESSION['profile']['id']."'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 
 		$_SESSION['_config']['user']['set'] = 0;
-		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".$_SESSION['profile']['id']."'"));
+		$_SESSION['profile'] = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".$_SESSION['profile']['id']."'"));
 		$_SESSION['profile']['loggedin'] = 1;
 
 		$ddquery = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
-		$ddres = mysql_query($ddquery);
-		$ddrow = mysql_fetch_assoc($ddres);
+		$ddres = mysqli_query($_SESSION['mconn'], $ddquery);
+		$ddrow = mysqli_fetch_assoc($ddres);
 		$_SESSION['profile']['points'] = $ddrow['total'];
 
 
@@ -1362,10 +1362,10 @@ function buildSubjectFromSession() {
 
 			if($_SESSION['_config']['hostname'] != $_SESSION['_config']['securehostname'])
 			{
-				$match = mysql_query("select * from `users` where `id`='".$_SESSION['profile']['id']."' and
+				$match = mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".$_SESSION['profile']['id']."' and
 						(`password`=old_password('".$_SESSION['_config']['user']['oldpass']."') or
 						`password`=sha1('".$_SESSION['_config']['user']['oldpass']."'))");
-				$rc = mysql_num_rows($match);
+				$rc = mysqli_num_rows($match);
 			} else {
 				$rc = 1;
 			}
@@ -1383,7 +1383,7 @@ function buildSubjectFromSession() {
 					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				echo _("You failed to correctly enter your current Pass Phrase.");
 			} else {
-				mysql_query("update `users` set `password`=sha1('".$_SESSION['_config']['user']['pword1']."')
+				mysqli_query($_SESSION['mconn'], "update `users` set `password`=sha1('".$_SESSION['_config']['user']['pword1']."')
 						where `id`='".$_SESSION['profile']['id']."'");
 				echo '<h3>', _("Pass Phrase Changed Successfully"), '</h3>', "\n";
 				echo _("Your Pass Phrase has been updated and your primary email account has been notified of the change.");
@@ -1534,11 +1534,11 @@ function buildSubjectFromSession() {
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
 						`description`='".$_SESSION['_config']['description']."'";
-			mysql_query($query);
-			$emailid = mysql_insert_id();
+			mysqli_query($_SESSION['mconn'], $query);
+			$emailid = mysqli_insert_id();
 
 			foreach($_SESSION['_config']['domids'] as $addy)
-				mysql_query("insert into `domemaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
+				mysqli_query($_SESSION['mconn'], "insert into `domemaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
 
 			$CSRname=generatecertpath("csr","orgclient",$emailid);
 			$fp = fopen($CSRname, "w");
@@ -1554,7 +1554,7 @@ function buildSubjectFromSession() {
 				showfooter();
 				exit;
 			}
-			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
+			mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype']=="VI") {
 			$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."-----END CERTIFICATE REQUEST-----\n";
 
@@ -1626,22 +1626,22 @@ function buildSubjectFromSession() {
 						`codesign`='".$_SESSION['_config']['codesign']."',
 						`rootcert`='".$_SESSION['_config']['rootcert']."',
 						`description`='".$_SESSION['_config']['description']."'";
-			mysql_query($query);
-			$emailid = mysql_insert_id();
+			mysqli_query($_SESSION['mconn'], $query);
+			$emailid = mysqli_insert_id();
 
 			foreach($_SESSION['_config']['domids'] as $addy)
-				mysql_query("insert into `domemaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
+				mysqli_query($_SESSION['mconn'], "insert into `domemaillink` set `emailcertsid`='$emailid', `emailid`='$addy'");
 
 			$CSRname=generatecertpath("csr","orgclient",$emailid);
 			$fp = fopen($CSRname, "w");
 			fputs($fp, $csr);
 			fclose($fp);
-			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
+			mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		}
 		waitForResult("orgemailcerts", $emailid,$oldid);
 		$query = "select * from `orgemailcerts` where `id`='$emailid' and `crt_name` != ''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
 			printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
@@ -1669,14 +1669,14 @@ function buildSubjectFromSession() {
 				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `orgemailcerts`, `org`
 						where `orgemailcerts`.`id`='$id' and `org`.`memid`='".$_SESSION['profile']['id']."' and
 						`org`.`orgid`=`orgemailcerts`.`orgid`";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
 
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
@@ -1685,7 +1685,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 
-				mysql_query("update `orgemailcerts` set `renewed`='1' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
@@ -1703,15 +1703,15 @@ function buildSubjectFromSession() {
 						`codesign`='".$row['codesign']."',
 						`rootcert`='".$row['rootcert']."',
 						`description`='".$row['description']."'";
-				mysql_query($query);
-				$newid = mysql_insert_id();
+				mysqli_query($_SESSION['mconn'], $query);
+				$newid = mysqli_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
 				copy($row['csr_name'], $newfile);
-				mysql_query("update `orgemailcerts` set `csr_name`='$newfile' where `id`='$newid'");
+				mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `csr_name`='$newfile' where `id`='$newid'");
 				waitForResult("orgemailcerts", $newid,$oldid,0);
 				$query = "select * from `orgemailcerts` where `id`='$newid' and `crt_name` != ''";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) > 0)
 				{
 					printf(_("Certificate for '%s' has been renewed."), $row['CN']);
 					echo "<a href='account.php?id=19&cert=$newid' target='_new'>".
@@ -1742,19 +1742,19 @@ function buildSubjectFromSession() {
 				$query = "select *,UNIX_TIMESTAMP(`revoked`) as `revoke` from `orgemailcerts`, `org`
 						where `orgemailcerts`.`id`='$id' and `org`.`memid`='".$_SESSION['profile']['id']."' and
 						`org`.`orgid`=`orgemailcerts`.`orgid`";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
 			}
 		}
@@ -1772,19 +1772,19 @@ function buildSubjectFromSession() {
 				$query = "select *,UNIX_TIMESTAMP(`expire`) as `expired` from `orgemailcerts`, `org`
 						where `orgemailcerts`.`id`='$id' and `org`.`memid`='".$_SESSION['profile']['id']."' and
 						`org`.`orgid`=`orgemailcerts`.`orgid`";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['expired'] > 0)
 				{
 					printf(_("Couldn't remove the request for `%s`, request had already been processed.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("delete from `orgemailcerts` where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "delete from `orgemailcerts` where `id`='$id'");
 				@unlink($row['csr_name']);
 				@unlink($row['crt_name']);
 				printf(_("Removed a pending request for '%s'")."<br>\n", $row['CN']);
@@ -1803,7 +1803,7 @@ function buildSubjectFromSession() {
 			{
 				$cid = intval(substr($id,14));
 				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `orgemailcerts` set `description`='$comment' where `id`='$cid'");
+				mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `description`='$comment' where `id`='$cid'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
@@ -1869,13 +1869,13 @@ function buildSubjectFromSession() {
 				`org`.`orgid`=`orginfo`.`id` and
 				`org`.`orgid`=`orgdomains`.`orgid` and
 				`orgdomains`.`domain`='".$_SESSION['_config']['0.CN']."'";
-		$_SESSION['_config']['CNorg'] = mysql_fetch_assoc(mysql_query($query));
+		$_SESSION['_config']['CNorg'] = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$query = "select * from `orginfo`,`org`,`orgdomains` where
 				`org`.`memid`='".$_SESSION['profile']['id']."' and
 				`org`.`orgid`=`orginfo`.`id` and
 				`org`.`orgid`=`orgdomains`.`orgid` and
 				`orgdomains`.`domain`='".$_SESSION['_config']['0.subjectAltName']."'";
-		$_SESSION['_config']['SANorg'] = mysql_fetch_assoc(mysql_query($query));
+		$_SESSION['_config']['SANorg'] = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 //echo "<pre>"; print_r($_SESSION['_config']); die;
 
 		if($_SESSION['_config']['0.CN'] == "" && $_SESSION['_config']['0.subjectAltName'] == "")
@@ -1933,7 +1933,7 @@ function buildSubjectFromSession() {
 					`orginfo`.`id`=`org`.`orgid` and
 					`org`.`memid`='".$_SESSION['profile']['id']."'";
 		}
-		$org = mysql_fetch_assoc(mysql_query($query));
+		$org = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$csrsubject = "";
 
 		if($_SESSION['_config']['OU'])
@@ -1976,23 +1976,23 @@ function buildSubjectFromSession() {
 					`type`='$type',
 					`description`='".$_SESSION['_config']['description']."'";
 		}
-		mysql_query($query);
-		$CSRid = mysql_insert_id();
+		mysqli_query($_SESSION['mconn'], $query);
+		$CSRid = mysqli_insert_id();
 
 		$CSRname=generatecertpath("csr","orgserver",$CSRid);
 		rename($_SESSION['_config']['tmpfname'], $CSRname);
 		chmod($CSRname,0644);
-		mysql_query("update `orgdomaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
+		mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
 		if(is_array($_SESSION['_config']['rowid']))
 			foreach($_SESSION['_config']['rowid'] as $id)
-				mysql_query("insert into `orgdomlink` set `orgdomid`='$id', `orgcertid`='$CSRid'");
+				mysqli_query($_SESSION['mconn'], "insert into `orgdomlink` set `orgdomid`='$id', `orgcertid`='$CSRid'");
 		if(is_array($_SESSION['_config']['altid']))
 			foreach($_SESSION['_config']['altid'] as $id)
-				mysql_query("insert into `orgdomlink` set `orgdomid`='$id', `orgcertid`='$CSRid'");
+				mysqli_query($_SESSION['mconn'], "insert into `orgdomlink` set `orgdomid`='$id', `orgcertid`='$CSRid'");
 		waitForResult("orgdomaincerts", $CSRid,$oldid);
 		$query = "select * from `orgdomaincerts` where `id`='$CSRid' and `crt_name` != ''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
 			printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions.")." CSRid: $CSRid", "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
@@ -2020,14 +2020,14 @@ function buildSubjectFromSession() {
 						where `orgdomaincerts`.`id`='$id' and
 						`orgdomaincerts`.`orgid`=`org`.`orgid` and
 						`org`.`memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
 
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 
 				if (($weakKey = checkWeakKeyX509(file_get_contents(
 						$row['crt_name']))) !== "")
@@ -2036,7 +2036,7 @@ function buildSubjectFromSession() {
 					continue;
 				}
 
-				mysql_query("update `orgdomaincerts` set `renewed`='1' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `renewed`='1' where `id`='$id'");
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
@@ -2052,24 +2052,24 @@ function buildSubjectFromSession() {
 						`type`='".$row['type']."',
 						`rootcert`='".$row['rootcert']."',
 						`description`='".$row['description']."'";
-				mysql_query($query);
-				$newid = mysql_insert_id();
+				mysqli_query($_SESSION['mconn'], $query);
+				$newid = mysqli_insert_id();
 				//echo "NewID: $newid<br/>\n";
 				$newfile=generatecertpath("csr","orgserver",$newid);
 				copy($row['csr_name'], $newfile);
-				mysql_query("update `orgdomaincerts` set `csr_name`='$newfile' where `id`='$newid'");
+				mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `csr_name`='$newfile' where `id`='$newid'");
 				echo _("Renewing").": ".$row['CN']."<br>\n";
-				$res = mysql_query("select * from `orgdomlink` where `orgcertid`='".$row['id']."'");
-				while($r2 = mysql_fetch_assoc($res))
-					mysql_query("insert into `orgdomlink` set `orgdomid`='".$r2['id']."', `orgcertid`='$newid'");
+				$res = mysqli_query($_SESSION['mconn'], "select * from `orgdomlink` where `orgcertid`='".$row['id']."'");
+				while($r2 = mysqli_fetch_assoc($res))
+					mysqli_query($_SESSION['mconn'], "insert into `orgdomlink` set `orgdomid`='".$r2['id']."', `orgcertid`='$newid'");
 				waitForResult("orgdomaincerts", $newid,$oldid,0);
 				$query = "select * from `orgdomaincerts` where `id`='$newid' and `crt_name` != ''";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions.")." newid: $newid", "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
-					$drow = mysql_fetch_assoc($res);
+					$drow = mysqli_fetch_assoc($res);
 					$cert = `/usr/bin/openssl x509 -in $drow[crt_name]`;
 					echo "<pre>\n$cert\n</pre>\n";
 				}
@@ -2098,19 +2098,19 @@ function buildSubjectFromSession() {
 						where `orgdomaincerts`.`id`='$id' and
 						`orgdomaincerts`.`orgid`=`org`.`orgid` and
 						`org`.`memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['revoke'] > 0)
 				{
 					printf(_("It would seem '%s' has already been revoked. I'll skip this for now.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='$id'");
 				printf(_("Certificate for '%s' has been revoked.")."<br>\n", $row['CN']);
 			}
 		}
@@ -2130,19 +2130,19 @@ function buildSubjectFromSession() {
 						where `orgdomaincerts`.`id`='$id' and
 						`orgdomaincerts`.`orgid`=`org`.`orgid` and
 						`org`.`memid`='".$_SESSION['profile']['id']."'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					printf(_("Invalid ID '%s' presented, can't do anything with it.")."<br>\n", $id);
 					continue;
 				}
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				if($row['expired'] > 0)
 				{
 					printf(_("Couldn't remove the request for `%s`, request had already been processed.")."<br>\n", $row['CN']);
 					continue;
 				}
-				mysql_query("delete from `orgdomaincerts` where `id`='$id'");
+				mysqli_query($_SESSION['mconn'], "delete from `orgdomaincerts` where `id`='$id'");
 				@unlink($row['csr_name']);
 				@unlink($row['crt_name']);
 				printf(_("Removed a pending request for '%s'")."<br>\n", $row['CN']);
@@ -2161,7 +2161,7 @@ function buildSubjectFromSession() {
 			{
 				$cid = intval(substr($id,14));
 				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `orgdomaincerts` set `description`='$comment' where `id`='$cid'");
+				mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `description`='$comment' where `id`='$cid'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");
@@ -2211,7 +2211,7 @@ function buildSubjectFromSession() {
 		{
 			$_SESSION['_config']['errmsg'] = _("Organisation Name and Contact Email are required fields.");
 		} else {
-			mysql_query("insert into `orginfo` set `O`='".$_SESSION['_config']['O']."',
+			mysqli_query($_SESSION['mconn'], "insert into `orginfo` set `O`='".$_SESSION['_config']['O']."',
 						`contact`='".$_SESSION['_config']['contact']."',
 						`L`='".$_SESSION['_config']['L']."',
 						`ST`='".$_SESSION['_config']['ST']."',
@@ -2239,7 +2239,7 @@ function buildSubjectFromSession() {
 		{
 			$_SESSION['_config']['errmsg'] = _("Organisation Name and Contact Email are required fields.");
 		} else {
-			mysql_query("update `orginfo` set `O`='".$_SESSION['_config']['O']."',
+			mysqli_query($_SESSION['mconn'], "update `orginfo` set `O`='".$_SESSION['_config']['O']."',
 						`contact`='".$_SESSION['_config']['contact']."',
 						`L`='".$_SESSION['_config']['L']."',
 						`ST`='".$_SESSION['_config']['ST']."',
@@ -2256,8 +2256,8 @@ function buildSubjectFromSession() {
 	if($oldid == 28 && $process != "" && array_key_exists("domainname",$_REQUEST))
 	{
 		$domain = $_SESSION['_config']['domain'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['domainname'])));
-		$res1 = mysql_query("select * from `orgdomains` where `domain`='$domain'");
-		if(mysql_num_rows($res1) > 0)
+		$res1 = mysqli_query($_SESSION['mconn'], "select * from `orgdomains` where `domain`='$domain'");
+		if(mysqli_num_rows($res1) > 0)
 		{
 			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
 			$id = $oldid;
@@ -2273,7 +2273,7 @@ function buildSubjectFromSession() {
 
 	if($oldid == 28 && $process != "" && array_key_exists("orgid",$_SESSION["_config"]))
 	{
-		mysql_query("insert into `orgdomains` set `orgid`='".intval($_SESSION['_config']['orgid'])."', `domain`='$domain'");
+		mysqli_query($_SESSION['mconn'], "insert into `orgdomains` set `orgid`='".intval($_SESSION['_config']['orgid'])."', `domain`='$domain'");
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully added to the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($_SESSION['_config']['orgid'])."'>"._("Click here")."</a> "._("to continue.");
@@ -2285,9 +2285,9 @@ function buildSubjectFromSession() {
 	{
 		$domain = mysql_real_escape_string(stripslashes(trim($_REQUEST['domainname'])));
 
-		$res1 = mysql_query("select * from `orgdomains` where `domain` like '$domain' and `id`!='".intval($domid)."'");
-		$res2 = mysql_query("select * from `domains` where `domain` like '$domain' and `deleted`=0");
-		if(mysql_num_rows($res1) > 0 || mysql_num_rows($res2) > 0)
+		$res1 = mysqli_query($_SESSION['mconn'], "select * from `orgdomains` where `domain` like '$domain' and `id`!='".intval($domid)."'");
+		$res2 = mysqli_query($_SESSION['mconn'], "select * from `domains` where `domain` like '$domain' and `deleted`=0");
+		if(mysqli_num_rows($res1) > 0 || mysqli_num_rows($res2) > 0)
 		{
 			$_SESSION['_config']['errmsg'] = sprintf(_("The domain '%s' is already in a different account and is listed as valid. Can't continue."), sanitizeHTML($domain));
 			$id = $oldid;
@@ -2301,23 +2301,23 @@ function buildSubjectFromSession() {
 				`orgdomlink`.`orgdomid`=`orgdomains`.`id` and
 				`orgdomaincerts`.`id`=`orgdomlink`.`orgcertid` and
 				`orgdomains`.`id`='".intval($domid)."'";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
-			mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['id']."'");
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
+			mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['id']."'");
 
 		$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where
 				`orgemaillink`.`domid`=`orgdomains`.`id` and
 				`orgemailcerts`.`id`=`orgemaillink`.`emailcertsid` and
 				`orgdomains`.`id`='".intval($domid)."'";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
-			mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
+			mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
 	}
 
 	if($oldid == 29 && $process != "")
 	{
-		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($domid)."'"));
-		mysql_query("update `orgdomains` set `domain`='$domain' where `id`='".intval($domid)."'");
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `orgdomains` where `id`='".intval($domid)."'"));
+		mysqli_query($_SESSION['mconn'], "update `orgdomains` set `domain`='$domain' where `id`='".intval($domid)."'");
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully updated in the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($orgid)."'>"._("Click here")."</a> "._("to continue.");
@@ -2327,9 +2327,9 @@ function buildSubjectFromSession() {
 
 	if($oldid == 30 && $process != "")
 	{
-		$row = mysql_fetch_assoc(mysql_query("select * from `orgdomains` where `id`='".intval($domid)."'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `orgdomains` where `id`='".intval($domid)."'"));
 		$domain = $row['domain'];
-		mysql_query("delete from `orgdomains` where `id`='".intval($domid)."'");
+		mysqli_query($_SESSION['mconn'], "delete from `orgdomains` where `id`='".intval($domid)."'");
 		showheader(_("My CAcert.org Account!"));
 		printf(_("'%s' has just been successfully deleted from the database."), sanitizeHTML($domain));
 		echo "<br><br><a href='account.php?id=26&orgid=".intval($orgid)."'>"._("Click here")."</a> "._("to continue.");
@@ -2346,36 +2346,36 @@ function buildSubjectFromSession() {
 	if($oldid == 31 && $process != "")
 	{
 		$query = "select * from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'";
-		$dres = mysql_query($query);
-		while($drow = mysql_fetch_assoc($dres))
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		while($drow = mysqli_fetch_assoc($dres))
 		{
 			$query = "select `orgdomaincerts`.`id` as `id` from `orgdomlink`, `orgdomaincerts`, `orgdomains` where
 					`orgdomlink`.`orgdomid`=`orgdomains`.`id` and
 					`orgdomaincerts`.`id`=`orgdomlink`.`orgcertid` and
 					`orgdomains`.`id`='".intval($drow['id'])."'";
-			$res = mysql_query($query);
-			while($row = mysql_fetch_assoc($res))
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			while($row = mysqli_fetch_assoc($res))
 			{
-				mysql_query("update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
-				mysql_query("delete from `orgdomaincerts` where `orgid`='".intval($row['id'])."'");
-				mysql_query("delete from `orgdomlink` where `domid`='".intval($row['id'])."'");
+				mysqli_query($_SESSION['mconn'], "update `orgdomaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
+				mysqli_query($_SESSION['mconn'], "delete from `orgdomaincerts` where `orgid`='".intval($row['id'])."'");
+				mysqli_query($_SESSION['mconn'], "delete from `orgdomlink` where `domid`='".intval($row['id'])."'");
 			}
 
 			$query = "select `orgemailcerts`.`id` as `id` from `orgemailcerts`, `orgemaillink`, `orgdomains` where
 					`orgemaillink`.`domid`=`orgdomains`.`id` and
 					`orgemailcerts`.`id`=`orgemaillink`.`emailcertsid` and
 					`orgdomains`.`id`='".intval($drow['id'])."'";
-			$res = mysql_query($query);
-			while($row = mysql_fetch_assoc($res))
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			while($row = mysqli_fetch_assoc($res))
 			{
-				mysql_query("update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
-				mysql_query("delete from `orgemailcerts` where `id`='".intval($row['id'])."'");
-				mysql_query("delete from `orgemaillink` where `domid`='".intval($row['id'])."'");
+				mysqli_query($_SESSION['mconn'], "update `orgemailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($row['id'])."'");
+				mysqli_query($_SESSION['mconn'], "delete from `orgemailcerts` where `id`='".intval($row['id'])."'");
+				mysqli_query($_SESSION['mconn'], "delete from `orgemaillink` where `domid`='".intval($row['id'])."'");
 			}
 		}
-		mysql_query("delete from `org` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
-		mysql_query("delete from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
-		mysql_query("delete from `orginfo` where `id`='".intval($_SESSION['_config']['orgid'])."'");
+		mysqli_query($_SESSION['mconn'], "delete from `org` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
+		mysqli_query($_SESSION['mconn'], "delete from `orgdomains` where `orgid`='".intval($_SESSION['_config']['orgid'])."'");
+		mysqli_query($_SESSION['mconn'], "delete from `orginfo` where `id`='".intval($_SESSION['_config']['orgid'])."'");
 	}
 
 	if($oldid == 31)
@@ -2387,7 +2387,7 @@ function buildSubjectFromSession() {
 	if($id == 32 || $oldid == 32 || $id == 33 || $oldid == 33 || $id == 34 || $oldid == 34)
 	{
 		$query = "select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."' and `masteracc`='1'";
-		$_macc = mysql_num_rows(mysql_query($query));
+		$_macc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query));
 		if($_SESSION['profile']['orgadmin'] != 1 && $_macc <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -2400,7 +2400,7 @@ function buildSubjectFromSession() {
 	if($id == 35 || $oldid == 35)
 	{
 		$query = "select 1 from `org` where `memid`='".intval($_SESSION['profile']['id'])."'";
-		$is_orguser = mysql_num_rows(mysql_query($query));
+		$is_orguser = mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query));
 		if($_SESSION['profile']['orgadmin'] != 1 && $is_orguser <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -2414,8 +2414,8 @@ function buildSubjectFromSession() {
 	{
 		$orgid = intval($_SESSION['_config']['orgid']);
 		$query = "select * from `org` where `orgid`='$orgid' and `memid`='".intval($_SESSION['profile']['id'])."' and `masteracc`='1'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			$id = 35;
 		}
@@ -2431,14 +2431,14 @@ function buildSubjectFromSession() {
 		$_REQUEST['email'] = $_SESSION['_config']['email'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['email'])));
 		$OU = $_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
 		$comments = $_SESSION['_config']['comments'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['comments'])));
-		$res = mysql_query("select * from `users` where `email`='".$_REQUEST['email']."' and `deleted`=0");
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `users` where `email`='".$_REQUEST['email']."' and `deleted`=0");
+		if(mysqli_num_rows($res) <= 0)
 		{
 			$id = $oldid;
 			$oldid=0;
 			$_SESSION['_config']['errmsg'] = sprintf(_("Wasn't able to match '%s' against any user in the system"), sanitizeHTML($_REQUEST['email']));
 		} else {
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			if ( !is_assurer(intval($row['id'])) )
 			{
 				$id = $oldid;
@@ -2446,7 +2446,7 @@ function buildSubjectFromSession() {
 				$_SESSION['_config']['errmsg'] =
 						_("The user is not an Assurer yet");
 			} else {
-				mysql_query(
+				mysqli_query($_SESSION['mconn'], 
 					"insert into `org`
 						set `memid`='".intval($row['id'])."',
 							`orgid`='".intval($_SESSION['_config']['orgid'])."',
@@ -2460,8 +2460,8 @@ function buildSubjectFromSession() {
 	if(($oldid == 34 || $id == 34) && $_SESSION['profile']['orgadmin'] != 1)
 	{
 		$orgid = intval($_SESSION['_config']['orgid']);
-		$res = mysql_query("select * from `org` where `orgid`='$orgid' and `memid`='".$_SESSION['profile']['id']."' and `masteracc`='1'");
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `org` where `orgid`='$orgid' and `memid`='".$_SESSION['profile']['id']."' and `masteracc`='1'");
+		if(mysqli_num_rows($res) <= 0)
 			$id = 32;
 	}
 
@@ -2470,7 +2470,7 @@ function buildSubjectFromSession() {
 		$orgid = intval($_SESSION['_config']['orgid']);
 		$memid = intval($_REQUEST['memid']);
 		$query = "delete from `org` where `orgid`='$orgid' and `memid`='$memid'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 	}
 
 	if($oldid == 34 || $oldid == 33)
@@ -2482,7 +2482,7 @@ function buildSubjectFromSession() {
 
 	if($id == 36)
 	{
-		$row = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($_SESSION['profile']['id'])."'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `alerts` where `memid`='".intval($_SESSION['profile']['id'])."'"));
 		$_REQUEST['general'] = $row['general'];
 		$_REQUEST['country'] = $row['country'];
 		$_REQUEST['regional'] = $row['regional'];
@@ -2491,7 +2491,7 @@ function buildSubjectFromSession() {
 
 	if($oldid == 36)
 	{
-		$rc = mysql_num_rows(mysql_query("select * from `alerts` where `memid`='".intval($_SESSION['profile']['id'])."'"));
+		$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `alerts` where `memid`='".intval($_SESSION['profile']['id'])."'"));
 		if($rc > 0)
 		{
 			$query = "update `alerts` set `general`='".intval(array_key_exists('general',$_REQUEST)?$_REQUEST['general']:0)."',
@@ -2506,7 +2506,7 @@ function buildSubjectFromSession() {
 							`radius`='".intval(array_key_exists('radius',$_REQUEST)?$_REQUEST['radius']:0)."',
 							`memid`='".intval($_SESSION['profile']['id'])."'";
 		}
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		$id = $oldid;
 		$oldid=0;
 	}
@@ -2519,7 +2519,7 @@ function buildSubjectFromSession() {
 		{
 			if($key == $lang)
 			{
-				mysql_query("update `users` set `language`='$lang' where `id`='".$_SESSION['profile']['id']."'");
+				mysqli_query($_SESSION['mconn'], "update `users` set `language`='$lang' where `id`='".$_SESSION['profile']['id']."'");
 				$_SESSION['profile']['language'] = $lang;
 				showheader(_("My CAcert.org Account!"));
 				echo _("Your language setting has been updated.");
@@ -2539,7 +2539,7 @@ function buildSubjectFromSession() {
 		csrf_check("seclang");
 		$addlang = mysql_real_escape_string($_REQUEST['addlang']);
 		// Does the language exist?
-		mysql_query("insert into `addlang` set `userid`='".intval($_SESSION['profile']['id'])."', `lang`='$addlang'");
+		mysqli_query($_SESSION['mconn'], "insert into `addlang` set `userid`='".intval($_SESSION['profile']['id'])."', `lang`='$addlang'");
 		showheader(_("My CAcert.org Account!"));
 		echo _("Your language setting has been updated.");
 		showfooter();
@@ -2550,7 +2550,7 @@ function buildSubjectFromSession() {
 	{
 		csrf_check("seclang");
 		$remove = mysql_real_escape_string($_REQUEST['remove']);
-		mysql_query("delete from `addlang` where `userid`='".intval($_SESSION['profile']['id'])."' and `lang`='$remove'");
+		mysqli_query($_SESSION['mconn'], "delete from `addlang` where `userid`='".intval($_SESSION['profile']['id'])."' and `lang`='$remove'");
 		showheader(_("My CAcert.org Account!"));
 		echo _("Your language setting has been updated.");
 		showfooter();
@@ -2593,58 +2593,58 @@ function buildSubjectFromSession() {
 		if($locid > 0 && $action == "edit")
 		{
 			$query = "update `locations` set `name`='$name', `lat`='$lat', `long`='$long' where `id`='$locid'";
-			mysql_query($query);
-			$row = mysql_fetch_assoc(mysql_query("select * from `locations` where `id`='$locid'"));
+			mysqli_query($_SESSION['mconn'], $query);
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `locations` where `id`='$locid'"));
 			$_REQUEST['regid'] = $row['regid'];
 			unset($_REQUEST['ccid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
 		} else if($regid > 0 && $action == "edit") {
 			$query = "update `regions` set `name`='$name' where `id`='$regid'";
-			mysql_query($query);
-			$row = mysql_fetch_assoc(mysql_query("select * from `regions` where `id`='$regid'"));
+			mysqli_query($_SESSION['mconn'], $query);
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `regions` where `id`='$regid'"));
 			$_REQUEST['ccid'] = $row['ccid'];
 			unset($_REQUEST['regid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
 		} else if($regid > 0 && $action == "add") {
-			$row = mysql_fetch_assoc(mysql_query("select `ccid` from `regions` where `id`='$regid'"));
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select `ccid` from `regions` where `id`='$regid'"));
 			$ccid = $row['ccid'];
 			$query = "insert into `locations` set `ccid`='$ccid', `regid`='$regid', `name`='$name', `lat`='$lat', `long`='$long'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 			unset($_REQUEST['ccid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
 		} else if($ccid > 0 && $action == "add" && $name != "") {
 			$query = "insert into `regions` set `ccid`='$ccid', `name`='$name'";
-			mysql_query($query);
-			$row = mysql_fetch_assoc(mysql_query("select * from `locations` where `id`='$locid'"));
+			mysqli_query($_SESSION['mconn'], $query);
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `locations` where `id`='$locid'"));
 			unset($_REQUEST['regid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
 		} else if($locid > 0 && $action == "delete") {
-			$row = mysql_fetch_assoc(mysql_query("select * from `locations` where `id`='$locid'"));
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `locations` where `id`='$locid'"));
 			$_REQUEST['regid'] = $row['regid'];
-			mysql_query("delete from `localias` where `locid`='$locid'");
-			mysql_query("delete from `locations` where `id`='$locid'");
+			mysqli_query($_SESSION['mconn'], "delete from `localias` where `locid`='$locid'");
+			mysqli_query($_SESSION['mconn'], "delete from `locations` where `id`='$locid'");
 			unset($_REQUEST['ccid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
 		} else if($locid > 0 && $action == "move") {
-			$row = mysql_fetch_assoc(mysql_query("select * from `locations` where `id`='$locid'"));
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `locations` where `id`='$locid'"));
 			$oldregid = $row['regid'];
-			mysql_query("update `locations` set `regid`='$newreg' where `id`='$locid'");
-			mysql_query("update `users` set `regid`='$newreg' where `regid`='$oldregid'");
-			$row = mysql_fetch_assoc(mysql_query("select * from `locations` where `id`='$locid'"));
+			mysqli_query($_SESSION['mconn'], "update `locations` set `regid`='$newreg' where `id`='$locid'");
+			mysqli_query($_SESSION['mconn'], "update `users` set `regid`='$newreg' where `regid`='$oldregid'");
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `locations` where `id`='$locid'"));
 			$_REQUEST['regid'] = $row['regid'];
 			unset($_REQUEST['ccid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
 		} else if($regid > 0 && $action == "delete") {
-			$row = mysql_fetch_assoc(mysql_query("select * from `regions` where `id`='$regid'"));
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `regions` where `id`='$regid'"));
 			$_REQUEST['ccid'] = $row['ccid'];
-			mysql_query("delete from `locations` where `regid`='$regid'");
-			mysql_query("delete from `regions` where `id`='$regid'");
+			mysqli_query($_SESSION['mconn'], "delete from `locations` where `regid`='$regid'");
+			mysqli_query($_SESSION['mconn'], "delete from `regions` where `id`='$regid'");
 			unset($_REQUEST['regid']);
 			unset($_REQUEST['locid']);
 			unset($_REQUEST['action']);
@@ -2653,12 +2653,12 @@ function buildSubjectFromSession() {
 			$_REQUEST['action'] = "aliases";
 			$_REQUEST['locid'] = $locid;
 			$name = htmlentities($name);
-			$row = mysql_query("insert into `localias` set `locid`='$locid',`name`='$name'");
+			$row = mysqli_query($_SESSION['mconn'], "insert into `localias` set `locid`='$locid',`name`='$name'");
 		} else if($locid > 0 && $action == "delalias") {
 			$id = 54;
 			$_REQUEST['action'] = "aliases";
 			$_REQUEST['locid'] = $locid;
-			$row = mysql_query("delete from `localias` where `locid`='$locid' and `name`='$name'");
+			$row = mysqli_query($_SESSION['mconn'], "delete from `localias` where `locid`='$locid' and `name`='$name'");
 		}
 	}
 
@@ -2687,12 +2687,12 @@ function buildSubjectFromSession() {
 		$year = intval($_REQUEST['year']);
 		$userid = intval($_REQUEST['userid']);
 		$query = "select `fname`,`mname`,`lname`,`suffix`,`dob` from `users` where `id`='$userid'";
-		$details = mysql_fetch_assoc(mysql_query($query));
+		$details = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$query = "insert into `adminlog` set `when`=NOW(),`old-lname`='${details['lname']}',`old-dob`='${details['dob']}',
 				`new-lname`='$lname',`new-dob`='$year-$month-$day',`uid`='$userid',`adminid`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 	}
 
 	if($oldid == 43 && $_REQUEST['action'] == 'revokecert')
@@ -2718,7 +2718,7 @@ function buildSubjectFromSession() {
 	{
 		if($_REQUEST['userid'] != "")
 			$_REQUEST['userid'] = intval($_REQUEST['userid']);
-		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 		if($row['email'] == "")
 			$id = 42;
 		else
@@ -2732,8 +2732,8 @@ function buildSubjectFromSession() {
 		{
 			echo _("No such user found.");
 		} else {
-			mysql_query("update `users` set `password`=sha1('".mysql_real_escape_string(stripslashes($_REQUEST['newpass']))."') where `id`='".intval($_REQUEST['userid'])."'");
-			$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
+			mysqli_query($_SESSION['mconn'], "update `users` set `password`=sha1('".mysql_real_escape_string(stripslashes($_REQUEST['newpass']))."') where `id`='".intval($_REQUEST['userid'])."'");
+			$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
 
@@ -2813,24 +2813,24 @@ function buildSubjectFromSession() {
 						`CN`='".$_SESSION['_config']['0.CN']."',
 						`domid`='".$_SESSION['_config']['row']['id']."',
 						`created`=NOW()";
-		mysql_query($query);
-		$CSRid = mysql_insert_id();
+		mysqli_query($_SESSION['mconn'], $query);
+		$CSRid = mysqli_insert_id();
 
 		foreach($_SESSION['_config']['rowid'] as $dom)
-			mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
+			mysqli_query($_SESSION['mconn'], "insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 		if(is_array($_SESSION['_config']['altid']))
 		foreach($_SESSION['_config']['altid'] as $dom)
-			mysql_query("insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
+			mysqli_query($_SESSION['mconn'], "insert into `domlink` set `certid`='$CSRid', `domid`='$dom'");
 
 		$CSRname=generatecertpath("csr","server",$CSRid);
 		$fp = fopen($CSRname, "w");
 		fputs($fp, $_SESSION['_config']['CSR']);
 		fclose($fp);
-		mysql_query("update `domaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
+		mysqli_query($_SESSION['mconn'], "update `domaincerts` set `CSR_name`='$CSRname' where `id`='$CSRid'");
 		waitForResult("domaincerts", $CSRid,$oldid);
 		$query = "select * from `domaincerts` where `id`='$CSRid' and `crt_name` != ''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
 			printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
@@ -2847,9 +2847,9 @@ function buildSubjectFromSession() {
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['tverify']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['tverify'];
-		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `tverify`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0)
@@ -2857,18 +2857,18 @@ function buildSubjectFromSession() {
 		csrf_check('admsetassuret');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['assurer'];
-		mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `assurer`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['assurer_blocked'];
-		mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0)
@@ -2876,9 +2876,9 @@ function buildSubjectFromSession() {
 		csrf_check('admactlock');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locked']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['locked'];
-		mysql_query("update `users` set `locked`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `locked`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0)
@@ -2886,9 +2886,9 @@ function buildSubjectFromSession() {
 		csrf_check('admcodesign');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['codesign']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['codesign'];
-		mysql_query("update `users` set `codesign`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `codesign`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0)
@@ -2896,9 +2896,9 @@ function buildSubjectFromSession() {
 		csrf_check('admorgadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['orgadmin'];
-		mysql_query("update `users` set `orgadmin`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `orgadmin`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0)
@@ -2906,29 +2906,29 @@ function buildSubjectFromSession() {
 		csrf_check('admttpadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['ttpadmin'];
-		mysql_query("update `users` set `ttpadmin`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `ttpadmin`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['adadmin']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = $row['adadmin'] + 1;
 		if($ver > 2)
 			$ver = 0;
-		mysql_query("update `users` set `adadmin`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `adadmin`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locadmin']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['locadmin'];
-		mysql_query("update `users` set `locadmin`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `locadmin`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0)
@@ -2936,45 +2936,45 @@ function buildSubjectFromSession() {
 		csrf_check('admsetadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['admin']);
 		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['admin'];
-		mysql_query("update `users` set `admin`='$ver' where `id`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `users` set `admin`='$ver' where `id`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['general']);
 		$query = "select * from `alerts` where `memid`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['general'];
-		mysql_query("update `alerts` set `general`='$ver' where `memid`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `alerts` set `general`='$ver' where `memid`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['country']);
 		$query = "select * from `alerts` where `memid`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['country'];
-		mysql_query("update `alerts` set `country`='$ver' where `memid`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `alerts` set `country`='$ver' where `memid`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['regional']);
 		$query = "select * from `alerts` where `memid`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['regional'];
-		mysql_query("update `alerts` set `regional`='$ver' where `memid`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `alerts` set `regional`='$ver' where `memid`='$memid'");
 	}
 
 	if($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['radius']);
 		$query = "select * from `alerts` where `memid`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		$ver = !$row['radius'];
-		mysql_query("update `alerts` set `radius`='$ver' where `memid`='$memid'");
+		mysqli_query($_SESSION['mconn'], "update `alerts` set `radius`='$ver' where `memid`='$memid'");
 	}
 
 	if($id == 50)
@@ -2982,7 +2982,7 @@ function buildSubjectFromSession() {
 		if(array_key_exists('userid',$_REQUEST) && $_REQUEST['userid'] != "")
 			$_REQUEST['userid'] = intval($_REQUEST['userid']);
 
-		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 		if($row['email'] == "")
 			$id = 42;
 		else
@@ -3045,7 +3045,7 @@ function buildSubjectFromSession() {
 	{
 		$uid = intval($_REQUEST['uid']);
 		$query = "select * from `tverify` where `id`='$uid' and `modified`=0";
-		$rc = mysql_num_rows(mysql_query($query));
+		$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query));
 		if($rc <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -3058,7 +3058,7 @@ function buildSubjectFromSession() {
 	if($oldid == 52)
 	{
 		$query = "select * from `tverify-vote` where `tverify`='$uid' and `memid`='".$_SESSION['profile']['id']."'";
-		$rc = mysql_num_rows(mysql_query($query));
+		$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query));
 		if($rc > 0)
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -3079,16 +3079,16 @@ function buildSubjectFromSession() {
 				`memid`='".$_SESSION['profile']['id']."',
 				`when`=NOW(), `vote`='$vote',
 				`comment`='".mysql_real_escape_string($_REQUEST['comment'])."'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 
-		$rc = mysql_num_rows(mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='1'"));
+		$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `tverify-vote` where `tverify`='$uid' and `vote`='1'"));
 		if($rc >= 8)
 		{
-			mysql_query("update `tverify` set `modified`=NOW() where `id`='$uid'");
-			$tverify = mysql_fetch_assoc(mysql_query("select * from `tverify` where `id`='$uid'"));
+			mysqli_query($_SESSION['mconn'], "update `tverify` set `modified`=NOW() where `id`='$uid'");
+			$tverify = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `tverify` where `id`='$uid'"));
 			$memid = $tverify['memid'];
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$memid'"));
-			$tmp = mysql_fetch_assoc(mysql_query("select sum(`points`) as `points` from `notary` where `to`='$memid'"));
+			$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='$memid'"));
+			$tmp = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select sum(`points`) as `points` from `notary` where `to`='$memid'"));
 
 			$points = 0;
 			if($tverify['URL'] != "" && $tverify['photoid'] != "")
@@ -3103,15 +3103,15 @@ function buildSubjectFromSession() {
 
 			if($points > 0)
 			{
-				mysql_query("insert into `notary` set `from`='0', `to`='$memid', `points`='$points',
+				mysqli_query($_SESSION['mconn'], "insert into `notary` set `from`='0', `to`='$memid', `points`='$points',
 						`method`='Thawte Points Transfer', `when`=NOW()");
 				fix_assurer_flag($memid);
 			}
 			$totalpoints = intval($tmp['points']) + $points;
 
 			$body  = _("Your request to have points transfered was successful. You were issued $points points as a result, and you now have $totalpoints in total")."\n\n"._("The following comments were made by reviewers")."\n\n";
-			$res = mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='1'");
-			while($row = mysql_fetch_assoc($res))
+			$res = mysqli_query($_SESSION['mconn'], "select * from `tverify-vote` where `tverify`='$uid' and `vote`='1'");
+			while($row = mysqli_fetch_assoc($res))
 				$body .= $row['comment']."\n";
 			$body .= "\n";
 
@@ -3120,17 +3120,17 @@ function buildSubjectFromSession() {
 			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");
 		}
 
-		$rc = mysql_num_rows(mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='-1'"));
+		$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `tverify-vote` where `tverify`='$uid' and `vote`='-1'"));
 		if($rc >= 4)
 		{
-			mysql_query("update `tverify` set `modified`=NOW() where `id`='$uid'");
-			$tverify = mysql_fetch_assoc(mysql_query("select * from `tverify` where `id`='$uid'"));
+			mysqli_query($_SESSION['mconn'], "update `tverify` set `modified`=NOW() where `id`='$uid'");
+			$tverify = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `tverify` where `id`='$uid'"));
 			$memid = $tverify['memid'];
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$memid'"));
+			$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='$memid'"));
 
 			$body  = _("Unfortunately your request for a points increase has been denied, below is the comments from people that reviewed your request as to why they rejected your application.")."\n\n";
-			$res = mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='-1'");
-			while($row = mysql_fetch_assoc($res))
+			$res = mysqli_query($_SESSION['mconn'], "select * from `tverify-vote` where `tverify`='$uid' and `vote`='-1'");
+			while($row = mysqli_fetch_assoc($res))
 				$body .= $row['comment']."\n";
 			$body .= "\n";
 

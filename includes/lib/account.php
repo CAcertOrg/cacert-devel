@@ -54,7 +54,7 @@ function fix_assurer_flag($userID = NULL)
 					OR `n`.`expire` IS NULL)
 			) >= 100';
 	
-	$query = mysql_query($sql);
+	$query = mysqli_query($_SESSION['mconn'], $sql);
 	if (!$query) {
 		return false;
 	}
@@ -89,7 +89,7 @@ function fix_assurer_flag($userID = NULL)
 				) < 100
 			)';
 	
-	$query = mysql_query($sql);
+	$query = mysqli_query($_SESSION['mconn'], $sql);
 	if (!$query) {
 		return false;
 	}

@@ -49,13 +49,13 @@
 
 	if($id == 1)
 	{
-		$email = mysql_escape_string(trim($_REQUEST["email"]));
-		$password = mysql_escape_string(stripslashes(trim($_REQUEST["pword"])));
-		$URL = mysql_escape_string(trim($_REQUEST["notaryURL"]));
-		$CN = mysql_escape_string($_SESSION['_config']['CN']);
+		$email = mysql_real_escape_string(trim($_REQUEST["email"]));
+		$password = mysql_real_escape_string(stripslashes(trim($_REQUEST["pword"])));
+		$URL = mysql_real_escape_string(trim($_REQUEST["notaryURL"]));
+		$CN = mysql_real_escape_string($_SESSION['_config']['CN']);
 		$memid = intval($_SESSION['_config']['uid']);
-		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$memid'"));
-		$tmp = mysql_fetch_assoc(mysql_query("select sum(`points`) as `points` from `notary` where `to`='$memid'"));
+		$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='$memid'"));
+		$tmp = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select sum(`points`) as `points` from `notary` where `to`='$memid'"));
 
 		if($URL != "" && $nofile == 0)
 			$max = 150;
@@ -88,21 +88,21 @@
 	{
 		$query = "select * from `users`,`email` where `email`.`memid`='$memid' and `email`.`email`='$email' and `users`.`id`=`email`.`memid` and
 				(`password`=old_password('$password') or `password`=sha1('$password') or `password`=password('$password'))";
-		if(mysql_num_rows(mysql_query($query)) <= 0)
+		if(mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query)) <= 0)
 		{
 			$_SESSION['_config']['errmsg'] = _("I'm sorry, I couldn't match your login details (password) to your certificate to an account on this system.");
 			$id = 0;
 		} else {
 			$query = "insert into `tverify` set `memid`='$memid', `URL`='$URL', `CN`='$CN', `created`=NOW()";
-			mysql_query($query);
-			$tverify = mysql_insert_id();
+			mysqli_query($_SESSION['mconn'], $query);
+			$tverify = mysqli_insert_id();
 			if($nofile == 0)
 			{
 				$filename = $photoid['tmp_name'];
-				$newfile = mysql_escape_string('/www/photoid/'.$tverify.".".$ext);
+				$newfile = mysql_real_escape_string('/www/photoid/'.$tverify.".".$ext);
 				move_uploaded_file($filename, $newfile);
 				$query = "update `tverify` set `photoid`='$newfile' where `id`='$tverify'";
-				mysql_query($query);
+				mysqli_query($_SESSION['mconn'], $query);
 			}
 		}
 	}
@@ -125,12 +125,12 @@
 	{
 		if($points > 0)
 		{
-			mysql_query("insert into `notary` set `from`='0', `to`='$memid', `points`='$points',
+			mysqli_query($_SESSION['mconn'], "insert into `notary` set `from`='0', `to`='$memid', `points`='$points',
 					`method`='Thawte Points Transfer', `when`=NOW()");
 			fix_assurer_flag($memid);
 		}
 		$totalpoints = intval($tmp['points']) + $points;
-		mysql_query("update `tverify` set `modified`=NOW() where `id`='$tverify'");
+		mysqli_query($_SESSION['mconn'], "update `tverify` set `modified`=NOW() where `id`='$tverify'");
 
 		$body  = _("Your request to have points transfered was sucessful. You were issued $points points as a result, and you now have $totalpoints in total")."\n\n";
 

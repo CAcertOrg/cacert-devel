@@ -27,15 +27,15 @@
 
 <?
 	$query = "select * from `domains` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 	{
 ?>
   <tr>
     <td colspan="3" class="DataTD"><?=_("No domains are currently listed.")?></td>
   </tr>
 <? } else {
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysqli_fetch_assoc($res))
 	{
 		if($row['hash'] == "")
 			$verified = _("Verified");

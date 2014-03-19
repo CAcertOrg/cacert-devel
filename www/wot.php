@@ -135,7 +135,7 @@ function send_reminder()
 			$body .= "User ".$_SESSION['profile']['fname']." ".
 			$_SESSION['profile']['lname']." with email address '".
 			$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-			mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+			mysql_real_escape_string(stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{
@@ -182,9 +182,9 @@ function send_reminder()
 
 	if($oldid == 5)
 	{
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) != 1)
+		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) != 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 1;
 			show_page("EnterEmail","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
@@ -192,16 +192,16 @@ function send_reminder()
 		} else
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
-			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
+			$_SESSION['_config']['notarise'] = mysqli_fetch_assoc($res);
 			if ($_SESSION['_config']['notarise']['verified'] == 0)
 			{
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
 				exit;
 			}
 		}
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1)
+		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) >= 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
 			show_page("EnterEmail","",_("This account is locked and can not be assured. For more information ask support@cacert.org."));
@@ -226,8 +226,8 @@ function send_reminder()
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' and
 							`to`='".$_SESSION['_config']['notarise']['id']."'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
 			show_page("EnterEmail","",_("You are only allowed to Assure someone once!"));
 			exit;
@@ -311,8 +311,8 @@ $iecho= "c";
 		}
 
 		$query = "select * from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
-		$res = mysql_query($query);
-		$row = mysql_fetch_assoc($res);
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		$row = mysqli_fetch_assoc($res);
 		$name = $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];
 		if($_SESSION['_config']['wothash'] != md5($name."-".$row['dob']) || $_SESSION['_config']['wothash'] != $_REQUEST['pagehash'])
 		{
@@ -333,8 +333,8 @@ $iecho= "c";
 			$newpoints = $awarded = 0;
 
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
-		$res = mysql_query($query);
-		$drow = mysql_fetch_assoc($res);
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($res);
 
 		$_POST['expire'] = 0;
 
@@ -345,16 +345,16 @@ $iecho= "c";
 		if($newpoints < 0)
 			$newpoints = 0;
 
-		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
+		if(trim($_POST['date']) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
 		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' AND
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
 						`awarded`='$awarded' AND
-						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."'";
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
 			show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
 			exit;
@@ -366,8 +366,8 @@ $iecho= "c";
 		$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
 						`to`='".$_SESSION['_config']['notarise']['id']."',
 						`points`='$newpoints', `awarded`='$awarded',
-						`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
+						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		if (check_date_format(trim($_REQUEST['date']),2010)) {
@@ -377,7 +377,7 @@ $iecho= "c";
 		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
 		include_once("../includes/notary.inc.php");
 
@@ -391,11 +391,11 @@ $iecho= "c";
 			$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
 							`to`='".$_SESSION['profile']['id']."',
 							`points`='$addpoints', `awarded`='$addpoints',
-							`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
-							`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
+							`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
+							`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 							`method`='Administrative Increase',
 							`when`=NOW()";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
@@ -478,7 +478,7 @@ $iecho= "c";
 	{
 		csrf_check("chgcontact");
 
-		$info = mysql_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
+		$info = mysql_real_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
 		$listme = intval($_POST['listme']);
 		if($listme < 0 || $listme > 1)
 			$listme = 0;
@@ -487,7 +487,7 @@ $iecho= "c";
 		$_SESSION['profile']['contactinfo'] = $info;
 
 		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Your account information has been updated.")."</p>";
@@ -507,8 +507,8 @@ $iecho= "c";
 			$body = $_REQUEST['message'];
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$userid' and `listme`=1"));
-			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
+			$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='$userid' and `listme`=1"));
+			$points = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select sum(`points`) as `total` from `notary`
 						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{

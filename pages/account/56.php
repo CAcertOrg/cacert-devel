@@ -25,8 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
   </tr>
   <?
     $query = "select users.fname,users.lname,users.email, countries.name from users left join countries on users.ccid=countries.id where orgadmin=1;";
-    $res = mysql_query($query);
-    while($row = mysql_fetch_assoc($res))
+    $res = mysqli_query($_SESSION['mconn'], $query);
+    while($row = mysqli_fetch_assoc($res))
     {
   ?>
     <tr>

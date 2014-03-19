@@ -73,7 +73,7 @@
 	{
 		$query = "insert into `advertising` set `link`='$link', `title`='$title', `months`='$months', `who`='".$_SESSION['profile']['id']."',
 				`when`=NOW()";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		unset($link);
 		unset($title);
 		unset($months);

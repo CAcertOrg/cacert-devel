@@ -21,15 +21,15 @@
 	$query = "select * from `orgemailcerts`,`org` where `orgemailcerts`.`id`='".intval($certid)."' and
 			`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 			`org`.`orgid`=`orgemailcerts`.`orgid`";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 	{
 		showheader(_("My CAcert.org Account!"));
 		echo _("No such certificate attached to your account.");
 		showfooter();
 		exit;
 	}
-	$row = mysql_fetch_assoc($res);
+	$row = mysqli_fetch_assoc($res);
         $crtname=escapeshellarg($row['crt_name']);
 	$cert = `/usr/bin/openssl x509 -in $crtname`;
 

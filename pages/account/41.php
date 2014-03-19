@@ -54,10 +54,10 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
   </tr>
 <?
 	$query = "select * from `addlang` where `userid`='".intval($_SESSION['profile']['id'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_escape_string($row['lang'])."'"));
+		$lang = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `languages` where `locale`='".mysql_real_escape_string($row['lang'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>
@@ -70,8 +70,8 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td class="DataTD"><select name="addlang">
 <?
 	$query = "select * from `languages` order by `locale`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		printf("<option value=\"%s\">[%s] %s (%s)</option>\n",
 			sanitizeHTML($row['locale']),

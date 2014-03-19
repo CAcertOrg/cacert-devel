@@ -22,20 +22,20 @@ require_once '../../includes/lib/check_weak_key.php';
 	$password = mysql_real_escape_string($_REQUEST['password']);
 
 	$query = "select * from `users` where `email`='$username' and (`password`=old_password('$password') or `password`=sha1('$password'))";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) != 1)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) != 1)
 		die("403,That username couldn't be found\n");
-	$user = mysql_fetch_assoc($res);
+	$user = mysqli_fetch_assoc($res);
 	$memid = $user['id'];
 	$emails = array();
 	foreach($_REQUEST['email'] as $email)
 	{
 		$email = mysql_real_escape_string(trim($email));
 		$query = "select * from `email` where `memid`='$memid' and `hash`='' and `deleted`=0 and `email`='$email'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$id = $row['id'];
 			$emails[$id] = $email;
 		}
@@ -43,7 +43,7 @@ require_once '../../includes/lib/check_weak_key.php';
 	if(count($emails) <= 0)
 		die("404,Wasn't able to match any emails sent against your account");
 	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' group by `to`";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$points = $row['points'];
 
 	$name = "CAcert WoT User\n";
@@ -85,23 +85,23 @@ require_once '../../includes/lib/check_weak_key.php';
 	$query = "insert into `emailcerts` set `CN`='".$user['email']."', `keytype`='MS',
 				`memid`='".$user['id']."', `created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 				`subject`='$csrsubject', `codesign`='$codesign'";
-	mysql_query($query);
-	$certid = mysql_insert_id();
+	mysqli_query($_SESSION['mconn'], $query);
+	$certid = mysqli_insert_id();
 	$CSRname = generatecertpath("csr","client",$certid);
 	rename($checkedcsr, $CSRname);
 
-	mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='$certid'");
+	mysqli_query($_SESSION['mconn'], "update `emailcerts` set `csr_name`='$CSRname' where `id`='$certid'");
 
 	foreach($emails as $emailid => $email)
-		mysql_query("insert into `emaillink` set `emailcertsid`='$certid', `emailid`='$emailid'");
+		mysqli_query($_SESSION['mconn'], "insert into `emaillink` set `emailcertsid`='$certid', `emailid`='$emailid'");
 
 	$do = `../../scripts/runclient`;
 	sleep(10); // THIS IS BROKEN AND SHOULD BE FIXED
 	$query = "select * from `emailcerts` where `id`='$certid' and `crt_name` != ''";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 		die("404,Your certificate request has failed. ID: $certid");
-	$cert = mysql_fetch_assoc($res);
+	$cert = mysqli_fetch_assoc($res);
 	echo "200,Authentication Ok\n";
 	readfile("../".$cert['crt_name']);
 ?>
