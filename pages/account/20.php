@@ -31,7 +31,7 @@
 	<input type="text" name="description" maxlength="80" size=80 />
 </p>
 <p><?=_("Paste your CSR below...")?><br />
-	<textarea name="CSR" cols="80" rows="15" />
+	<textarea name="CSR" cols="80" rows="15"></textarea>
 </p>
 
 <fieldset>
