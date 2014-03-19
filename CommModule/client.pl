@@ -40,8 +40,8 @@ my $paranoid=1;
 
 my $debug=0;
 
-#my $serialport="/dev/ttyS0";
-my $serialport="/dev/ttyUSB0";
+my $serialport="/dev/ttyS1";
+#my $serialport="/dev/ttyUSB0";
 
 my $gpgbin="/usr/bin/gpg";
 
@@ -444,9 +444,9 @@ sub calculateDays($)
     my @sum = $dbh->selectrow_array("select sum(`points`) as `total` from `notary` where `to`='".$_[0]."' group by `to`");
     SysLog("Summe: $sum[0]\n") if($debug);
 
-    return ($sum[0]>=50)?730:180;
+    return ($sum[0]>=50)?30:3;
   }
-  return 180;
+  return 3;
 }
 
 sub X509extractSAN($)
@@ -832,7 +832,7 @@ sub HandleCerts($$)
       SysLog "SAN: --$SAN--\n" if($debug);
       SysLog "memid: $row{'memid'}\n" if($debug);
 
-      my $days=$org?($server?(365*2):365):calculateDays($row{"memid"});
+      my $days=$org?($server?(30):7):calculateDays($row{"memid"});
 
       my $md_id = 0;
       $md_id = 1 if( $row{'md'} eq "md5");
