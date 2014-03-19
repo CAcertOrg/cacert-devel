@@ -35,8 +35,8 @@
 			`locations`.`name` like '$loc%' and `regions`.`name` like '$reg%' and `countries`.`name` like '$ccname%' and
 			`locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
 			order by `locations`.`acount` DESC, `locations`.`name` ASC limit 10";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$rc++;
 		if($rc > 1)

@@ -19,15 +19,15 @@
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 	
 
-	$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
+	if(mysqli_num_rows($res) <= 0)
 	{
 		echo _("Sorry, I was unable to locate that user, the person doesn't wish to be contacted, or isn't an assurer.");
 	} else {
 
-		$user = mysql_fetch_array($res);
+		$user = mysqli_fetch_array($res);
 		$userlang = $user['language'];
-		$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
+		$points = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select sum(`points`) as `total` from `notary`
 				where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
 		if($points <= 0)
 		{
@@ -55,10 +55,10 @@
 <? } ?>
 <?
 	$query = "select * from `addlang` where `userid`='".$user['id']."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='${row['lang']}'"));
+		$lang = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `languages` where `locale`='${row['lang']}'"));
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>

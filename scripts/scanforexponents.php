@@ -52,15 +52,15 @@
 					`emailcerts`.`created` as `created`,`emailcerts`.`revoked` as `revoked`,
 					`emailcerts`.`expire` as `expire`, `rootcert`, `md`, `fname`, `lname`, `language`
 					from `emailcerts`,`users` where `emailcerts`.`id`='$id' and `users`.`id`=`emailcerts`.`memid`";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) <= 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) <= 0)
 			{
 				echo $query."\n";
 				echo "$file: $do\n";
 				continue;
 			}
 
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$email = $row['email'];
 		} else if($type == "orgclient") {
 			$query = "select `memid`,`serial`,`CN`,`subject`,`keytype`,`orgemailcerts`.`codesign` as `codesign`,`crt_name`,
@@ -68,15 +68,15 @@
 					`orgemailcerts`.`expire` as `expire`, `rootcert`, `md`, `fname`, `lname`, `language`
 					from `orgemailcerts`,`org`,`users` where `orgemailcerts`.`id`='$id' and
 							`orgemailcerts`.`orgid`=`org`.`id` and `users`.`id`=`org`.`memid`";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) <= 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) <= 0)
 			{
 				echo $query."\n";
 				echo "$file: $do\n";
 				continue;
 			}
 
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$email = $row['email'];
 		} else if($type == "server") {
 			$query = "select `memid`,`serial`,`CN`,`subject`,`crt_name`,
@@ -84,15 +84,15 @@
 					`domaincerts`.`expire` as `expire`, `rootcert`, `md`, `fname`, `lname`, `language`
 					from `domaincerts`,`domains`,`users` where `domaincerts`.`id`='$id' and
 							`domains`.`id`=`domaincerts`.`domid` and `users`.`id`=`domains`.`memid`";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) <= 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) <= 0)
 			{
 				echo $query."\n";
 				echo "$file: $do\n";
 				continue;
 			}
 
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$email = $row['email'];
 		} else if($type == "orgserver") {
 			$query = "select `memid`,`serial`,`CN`,`subject`,`crt_name`,
@@ -100,15 +100,15 @@
 					`orgdomaincerts`.`expire` as `expire`, `rootcert`, `md`, `fname`, `lname`, `language`
 					from `orgdomaincerts`,`org`,`users` where `orgdomaincerts`.`id`='$id' and
 							`orgdomaincerts`.`orgid`=`org`.`id` and `users`.`id`=`org`.`memid`";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) <= 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) <= 0)
 			{
 				echo $query."\n";
 				echo "$file: $do\n";
 				continue;
 			}
 
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$email = $row['email'];
 		} else {
 			echo "$file: $do\n";

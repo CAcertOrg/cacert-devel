@@ -21,13 +21,13 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
   if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
   {
-    $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
+    $assurance = mysql_real_escape_string(intval($_REQUEST['assurance']));
     $row = 0;
-    $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
+    $res = mysqli_query($_SESSION['mconn'], "select `to` from `notary` where `id`='$assurance'");
     if ($res) {
-      $row = mysql_fetch_assoc($res);
+      $row = mysqli_fetch_assoc($res);
     }
-    mysql_query("delete from `notary` where `id`='$assurance'");
+    mysqli_query($_SESSION['mconn'], "delete from `notary` where `id`='$assurance'");
     if ($row) {
       fix_assurer_flag($row['to']);
     }
@@ -37,7 +37,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   {
     $_REQUEST['userid'] = 0;
 
-    $emailsearch = $email = mysql_escape_string(stripslashes($_REQUEST['email']));
+    $emailsearch = $email = mysql_real_escape_string(stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
     //if(!strstr($email, "%"))
@@ -63,8 +63,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
           group by `users`.`id` limit 100";
     }
     // bug-975 ted+uli changes --- end
-    $res = mysql_query($query);
-    if(mysql_num_rows($res) > 1) { ?>
+    $res = mysqli_query($_SESSION['mconn'], $query);
+    if(mysqli_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Select Specific Account Details")?></td>
@@ -74,24 +74,24 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
     <td class="DataTD"><?=_("Email")?></td>
   </tr>
 <?
-  while($row = mysql_fetch_assoc($res))
+  while($row = mysqli_fetch_assoc($res))
   { ?>
   <tr>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>"><?=intval($row['id'])?></a></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>"><?=sanitizeHTML($row['email'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<? } if(mysqli_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="2"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
 <? } else { ?>
   <tr>
-    <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysqli_num_rows($res)); ?></td>
   </tr>
 <? } ?>
 </table><br><br>
-<?    } elseif(mysql_num_rows($res) == 1) {
-      $row = mysql_fetch_assoc($res);
+<?    } elseif(mysqli_num_rows($res) == 1) {
+      $row = mysqli_fetch_assoc($res);
       $_REQUEST['userid'] = $row['id'];
     } else {
       printf(_("No users found matching %s"), sanitizeHTML($email));
@@ -102,16 +102,16 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
   {
     $userid = intval($_REQUEST['userid']);
     $query = "select * from `users` where `users`.`id`='$userid' and `users`.`deleted`=0";
-    $res = mysql_query($query);
-    if(mysql_num_rows($res) <= 0)
+    $res = mysqli_query($_SESSION['mconn'], $query);
+    if(mysqli_num_rows($res) <= 0)
     {
       echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
     } else {
-      $row = mysql_fetch_assoc($res);
+      $row = mysqli_fetch_assoc($res);
       $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."'";
-      $dres = mysql_query($query);
-      $drow = mysql_fetch_assoc($dres);
-      $alerts = mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($row['id'])."'"));
+      $dres = mysqli_query($_SESSION['mconn'], $query);
+      $drow = mysqli_fetch_assoc($dres);
+      $alerts = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `alerts` where `memid`='".intval($row['id'])."'"));
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -302,15 +302,15 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 </table>
 <br><?
   $query = "select * from `email` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''
-      and `email`!='".mysql_escape_string($row['email'])."'";
-  $dres = mysql_query($query);
-  if(mysql_num_rows($dres) > 0) { ?>
+      and `email`!='".mysql_real_escape_string($row['email'])."'";
+  $dres = mysqli_query($_SESSION['mconn'], $query);
+  if(mysqli_num_rows($dres) > 0) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Alternate Verified Email Addresses")?></td>
   </tr><?
-  $rc = mysql_num_rows($dres);
-  while($drow = mysql_fetch_assoc($dres))
+  $rc = mysqli_num_rows($dres);
+  while($drow = mysqli_fetch_assoc($dres))
   { ?>
   <tr>
     <td class="DataTD"><?=_("Secondary Emails")?>:</td>
@@ -321,14 +321,14 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 <br><? } ?>
 <?
   $query = "select * from `domains` where `memid`='".intval($row['id'])."' and `deleted`=0 and `hash`=''";
-  $dres = mysql_query($query);
-  if(mysql_num_rows($dres) > 0) { ?>
+  $dres = mysqli_query($_SESSION['mconn'], $query);
+  if(mysqli_num_rows($dres) > 0) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Verified Domains")?></td>
   </tr><?
-  $rc = mysql_num_rows($dres);
-  while($drow = mysql_fetch_assoc($dres))
+  $rc = mysqli_num_rows($dres);
+  while($drow = mysqli_fetch_assoc($dres))
   { ?>
   <tr>
     <td class="DataTD"><?=_("Domain")?>:</td>
@@ -379,7 +379,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
        4. users.email = primary-email
 
     --- Assurer, assure someone find user query
-    select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."'
+    select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."'
            and `deleted`=0
 		=> requirements
        1. users.deleted = 0
@@ -416,8 +416,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
    // current userid  intval($row['id'])
   $query = "select `email` as `uemail`, `deleted` as `udeleted`, `verified`, `locked`
       from `users` where `id`='".intval($row['id'])."' ";
-  $dres = mysql_query($query);
-  $drow = mysql_fetch_assoc($dres);
+  $dres = mysqli_query($_SESSION['mconn'], $query);
+  $drow = mysqli_fetch_assoc($dres);
   $uemail    = $drow['uemail'];
   $udeleted  = $drow['udeleted'];
   $uverified = $drow['verified'];
@@ -427,16 +427,16 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
       where `memid`='".intval($row['id'])."' and
       `email` ='".$uemail."' and
       `deleted` = 0";
-  $dres = mysql_query($query);
-  if ($drow = mysql_fetch_assoc($dres)) {
+  $dres = mysqli_query($_SESSION['mconn'], $query);
+  if ($drow = mysqli_fetch_assoc($dres)) {
     $drow['edeleted'] = 0;
   } else {
   	// try if there are deleted entries
     $query = "select `hash`, `deleted` as `edeleted`, `email` as `eemail` from `email`
         where `memid`='".intval($row['id'])."' and
         `email` ='".$uemail."'";
-    $dres = mysql_query($query);
-    $drow = mysql_fetch_assoc($dres);
+    $dres = mysqli_query($_SESSION['mconn'], $query);
+    $drow = mysqli_fetch_assoc($dres);
   }
 
   if ($drow) {
@@ -513,8 +513,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	          from `domains` inner join `domaincerts`
 	               on `domains`.`id` = `domaincerts`.`domid`
 	          where `domains`.`memid` = '".intval($row['id'])."' ";
-	$dres = mysql_query($query);
-	$drow = mysql_fetch_assoc($dres);
+	$dres = mysqli_query($_SESSION['mconn'], $query);
+	$drow = mysqli_fetch_assoc($dres);
 	$total = $drow['total'];
 
 	$maxexpire = "0000-00-00 00:00:00";
@@ -529,8 +529,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		          where `domains`.`memid` = '".intval($row['id'])."'
 		                and `revoked` = '0000-00-00 00:00:00'
 		                and `expire` > NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$valid = $drow['valid'];
 
 		$query = "select COUNT(*) as `expired`
@@ -538,8 +538,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		               on `domains`.`id` = `domaincerts`.`domid`
 		          where `domains`.`memid` = '".intval($row['id'])."'
 		                and `expire` <= NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$expired = $drow['expired'];
 
 		$query = "select COUNT(*) as `revoked`
@@ -547,8 +547,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		               on `domains`.`id` = `domaincerts`.`domid`
 		          where `domains`.`memid` = '".intval($row['id'])."'
 		                and `revoked` != '0000-00-00 00:00:00'";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$revoked = $drow['revoked'];
 		?>
 		<td class="DataTD"><?=intval($total)?></td>
@@ -571,8 +571,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$query = "select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
 	          from `emailcerts`
 	          where `memid` = '".intval($row['id'])."' ";
-	$dres = mysql_query($query);
-	$drow = mysql_fetch_assoc($dres);
+	$dres = mysqli_query($_SESSION['mconn'], $query);
+	$drow = mysqli_fetch_assoc($dres);
 	$total = $drow['total'];
 
 	$maxexpire = "0000-00-00 00:00:00";
@@ -586,24 +586,24 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		          where `memid` = '".intval($row['id'])."'
 		                and `revoked` = '0000-00-00 00:00:00'
 		                and `expire` > NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$valid = $drow['valid'];
 
 		$query = "select COUNT(*) as `expired`
 		          from `emailcerts`
 		          where `memid` = '".intval($row['id'])."'
 		                and `expire` <= NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$expired = $drow['expired'];
 
 		$query = "select COUNT(*) as `revoked`
 		          from `emailcerts`
 		          where `memid` = '".intval($row['id'])."'
 		                and `revoked` != '0000-00-00 00:00:00'";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$revoked = $drow['revoked'];
 		?>
 		<td class="DataTD"><?=intval($total)?></td>
@@ -626,8 +626,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	$query = "select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
 	          from `gpg`
 	          where `memid` = '".intval($row['id'])."' ";
-	$dres = mysql_query($query);
-	$drow = mysql_fetch_assoc($dres);
+	$dres = mysqli_query($_SESSION['mconn'], $query);
+	$drow = mysqli_fetch_assoc($dres);
 	$total = $drow['total'];
 
 	$maxexpire = "0000-00-00 00:00:00";
@@ -640,16 +640,16 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		          from `gpg`
 		          where `memid` = '".intval($row['id'])."'
 		                and `expire` > NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$valid = $drow['valid'];
 
 		$query = "select COUNT(*) as `expired`
 			from `gpg`
 			where `memid` = '".intval($row['id'])."'
 			and `expire` <= NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$expired = $drow['expired'];
 
 		?>
@@ -675,8 +675,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	          from `orgdomaincerts` as `orgcerts` inner join `org`
 	                   on `orgcerts`.`orgid` = `org`.`orgid`
 	          where `org`.`memid` = '".intval($row['id'])."' ";
-	$dres = mysql_query($query);
-	$drow = mysql_fetch_assoc($dres);
+	$dres = mysqli_query($_SESSION['mconn'], $query);
+	$drow = mysqli_fetch_assoc($dres);
 	$total = $drow['total'];
 
 	$maxexpire = "0000-00-00 00:00:00";
@@ -691,8 +691,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		          where `org`.`memid` = '".intval($row['id'])."'
 		                and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
 		                and `orgcerts`.`expire` > NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$valid = $drow['valid'];
 
 		$query = "select COUNT(*) as `expired`
@@ -700,8 +700,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
 		          where `org`.`memid` = '".intval($row['id'])."'
 		                and `orgcerts`.`expire` <= NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$expired = $drow['expired'];
 
 		$query = "select COUNT(*) as `revoked`
@@ -709,8 +709,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
 		          where `org`.`memid` = '".intval($row['id'])."'
 		                and `orgcerts`.`revoked` != '0000-00-00 00:00:00'";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$revoked = $drow['revoked'];
 		?>
 		<td class="DataTD"><?=intval($total)?></td>
@@ -735,8 +735,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 	          from `orgemailcerts` as `orgcerts` inner join `org`
 	                   on `orgcerts`.`orgid` = `org`.`orgid`
 	          where `org`.`memid` = '".intval($row['id'])."' ";
-	$dres = mysql_query($query);
-	$drow = mysql_fetch_assoc($dres);
+	$dres = mysqli_query($_SESSION['mconn'], $query);
+	$drow = mysqli_fetch_assoc($dres);
 	$total = $drow['total'];
 
 	$maxexpire = "0000-00-00 00:00:00";
@@ -751,8 +751,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		          where `org`.`memid` = '".intval($row['id'])."'
 		                and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
 		                and `orgcerts`.`expire` > NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$valid = $drow['valid'];
 
 		$query = "select COUNT(*) as `expired`
@@ -760,8 +760,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
 		          where `org`.`memid` = '".intval($row['id'])."'
 		                and `orgcerts`.`expire` <= NOW()";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$expired = $drow['expired'];
 
 		$query = "select COUNT(*) as `revoked`
@@ -769,8 +769,8 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 		                   on `orgcerts`.`orgid` = `org`.`orgid`
 		          where `org`.`memid` = '".intval($row['id'])."'
 		                and `orgcerts`.`revoked` != '0000-00-00 00:00:00'";
-		$dres = mysql_query($query);
-		$drow = mysql_fetch_assoc($dres);
+		$dres = mysqli_query($_SESSION['mconn'], $query);
+		$drow = mysqli_fetch_assoc($dres);
 		$revoked = $drow['revoked'];
 		?>
 		<td class="DataTD"><?=intval($total)?></td>
@@ -829,11 +829,11 @@ function showassuredto()
   </tr>
 <?
   $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'";
-  $dres = mysql_query($query);
+  $dres = mysqli_query($_SESSION['mconn'], $query);
   $points = 0;
-  while($drow = mysql_fetch_assoc($dres))
+  while($drow = mysqli_fetch_assoc($dres))
   {
-    $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($drow['from'])."'"));
+    $fromuser = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($drow['from'])."'"));
     $points += $drow['points'];
 ?>
   <tr>
@@ -875,11 +875,11 @@ function showassuredby()
   </tr>
 <?
   $query = "select * from `notary` where `from`='".intval($_GET['userid'])."'";
-  $dres = mysql_query($query);
+  $dres = mysqli_query($_SESSION['mconn'], $query);
   $points = 0;
-  while($drow = mysql_fetch_assoc($dres))
+  while($drow = mysqli_fetch_assoc($dres))
   {
-    $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".$drow['to']."'"));
+    $fromuser = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".$drow['to']."'"));
     $points += $drow['points'];
 ?>
   <tr>

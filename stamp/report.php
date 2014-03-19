@@ -54,9 +54,9 @@
 	{
 		$IP = mysql_real_escape_string(trim($_SERVER['REMOTE_ADDR']));
 		$iplong = ip2long($IP);
-		mysql_query("insert into `abusereports` set `when`=NOW(), `IP`='$iplong', `url`='$refer', `name`='$name', `email`='$email',
+		mysqli_query($_SESSION['mconn'], "insert into `abusereports` set `when`=NOW(), `IP`='$iplong', `url`='$refer', `name`='$name', `email`='$email',
 				`comment`='$comment', `reason`='$reason'");
-		$id = mysql_insert_id();
+		$id = mysqli_insert_id();
 
 		$body  = "New Abuse Report has been lodged via the the Stamp Interface:\n\n";
 		$body .= "Reported ID: $id\n";

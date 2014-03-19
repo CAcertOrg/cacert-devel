@@ -32,15 +32,15 @@
 function get_user_id_from_cert($serial, $issuer_cn)
 {
 	$query = "select `memid` from `emailcerts` where
-			`serial`='".mysql_escape_string($serial)."' and
+			`serial`='".mysql_real_escape_string($serial)."' and
 			`rootcert`= (select `id` from `root_certs` where
-				`Cert_Text`='".mysql_escape_string($issuer_cn)."') and
+				`Cert_Text`='".mysql_real_escape_string($issuer_cn)."') and
 			`revoked`=0 and disablelogin=0 and
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) > 0)
 	{
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		return intval($row['memid']);
 	}
 	
@@ -130,7 +130,7 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 	}
 }
 
-  	// returns 0 if $userID is an Assurer
+	// returns 0 if $userID is an Assurer
 	// Otherwise :
 	//	 Bit 0 is always set
 	//	 Bit 1 is set if 100 Assurance Points are not reached
@@ -139,25 +139,24 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 	function get_assurer_status($userID)
 	{
 		$Result = 0;
-		$query = mysql_query('SELECT * FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` '.
+		$query = mysqli_query($_SESSION['mconn'], 'SELECT * FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` '.
 			'  WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = \''.(int)intval($userID).'\'');
-		if(mysql_num_rows($query) < 1)
+		if(mysqli_num_rows($query) < 1)
 		{
 			$Result |= 5;
 		}
 		
-		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now()');
-		$row = mysql_fetch_assoc($query);
+		$query = mysqli_query($_SESSION['mconn'], 'SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now()');
+		$row = mysqli_fetch_assoc($query);
 		if ($row['points'] < 100) {
 			$Result |= 3;
 		}
 		
-		$query = mysql_query('SELECT `assurer_blocked` FROM `users` WHERE `id` = \''.(int)intval($userID).'\'');
-		$row = mysql_fetch_assoc($query);
+		$query = mysqli_query($_SESSION['mconn'], 'SELECT `assurer_blocked` FROM `users` WHERE `id` = \''.(int)intval($userID).'\'');
+		$row = mysqli_fetch_assoc($query);
 		if ($row['assurer_blocked'] > 0) {
 			$Result |= 9;
 		}
 		
 		return $Result;
 	}
-	

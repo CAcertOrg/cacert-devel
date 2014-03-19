@@ -19,7 +19,7 @@
 	$ccid = array_key_exists('ccid',$_REQUEST)?intval($_REQUEST['ccid']):0;
 	$regid = array_key_exists('regid',$_REQUEST)?intval($_REQUEST['regid']):0;
 	$locid = array_key_exists('locid',$_REQUEST)?intval($_REQUEST['locid']):0;
-	$name = array_key_exists('name',$_REQUEST)?mysql_escape_string($_REQUEST['name']):"";
+	$name = array_key_exists('name',$_REQUEST)?mysql_real_escape_string($_REQUEST['name']):"";
 
 	if($ccid > 0 && $_REQUEST['action'] == "add") { ?>
 <form method="post" action="account.php">
@@ -41,7 +41,7 @@
 </form>
 <? } if($regid > 0 && $_REQUEST['action'] == "edit") {
 	$query = "select * from `regions` where `id`='$regid' order by `name`";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$name = $row['name'];
 ?>
 <form method="post" action="account.php">
@@ -89,7 +89,7 @@
 </form>
 <? } if($locid > 0 && $_REQUEST['action'] == "edit") {
 	$query = "select * from `locations` where `id`='$locid'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 
 	if($name == "")
 		$name = $row['name'];
@@ -125,8 +125,8 @@
 </form>
 <? } if($locid > 0 && $_REQUEST['action'] == "aliases") {
 	$query = "select * from `localias` where `locid`='".intval($locid)."'";
-	$res = mysql_query($query);
-	$rc = mysql_num_rows($res);
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	$rc = mysqli_num_rows($res);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -143,7 +143,7 @@
     </td>
   </tr>
 <?
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysqli_fetch_assoc($res))
 	{
 ?>
   <tr>
@@ -169,7 +169,7 @@ document.getElementById("display1").style.display = "none";
 </script>
 <? } if($locid > 0 && $_REQUEST['action'] == "move") {
 	$query = "select * from `locations` where `id`='$locid'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$newreg = $_REQUEST['newreg'] = $row['regid'];
 ?>
 <form method="post" action="account.php">
@@ -186,8 +186,8 @@ document.getElementById("display1").style.display = "none";
     <td class="DataTD"><select name="newreg">
 <?
 	$query = "select * from `regions` where `ccid`='".intval($row['ccid'])."' order by `name`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		echo "<option value='".intval($row['id'])."'";
 		if($_REQUEST['newreg'] == $row['id'])
