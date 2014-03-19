@@ -61,9 +61,9 @@ if (array_key_exists('emails',$_SESSION['_config']) && is_array($_SESSION['_conf
   </tr>
   <tr name="expert">
     <td class="DataTD" colspan="2" align="left">
-        <input type="radio" id="root1" name="rootcert" value="1" checked="checked" /> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
-        <input type="radio" id="root2" name="rootcert" value="2" /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label><br />
-        <?=str_replace("\n", "<br>\n", wordwrap(_("Please note: The class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain. Until we are included in browsers this might not be a desirable option for most people"), 60))?>
+        <input type="radio" id="root1" name="rootcert" value="1" /> <label for="root1"><?=_("Sign by class 1 root certificate")?></label><br />
+        <input type="radio" id="root2" name="rootcert" value="2" checked="checked" /> <label for="root2"><?=_("Sign by class 3 root certificate")?></label><br />
+        <?=str_replace("\n", "<br>\n", wordwrap(_("Please note: If you use a certificate signed by the class 3 root, the class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain."), 60))?>
     </td>
   </tr>
 <? if($_SESSION['profile']['codesign'] && $_SESSION['profile']['points'] >= 100) { ?>
