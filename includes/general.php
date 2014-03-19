@@ -506,7 +506,7 @@
 		return(0);
 	}
 
-	function hex2bin($data)
+	function gpg_hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
 		{
