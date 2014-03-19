@@ -30,11 +30,11 @@
 <p><?=_("If you are a valid organisation and would like the organisation name in the certificates you can apply for an organisation assurance. Contact us via support@cacert.org for more information.")?></p>
 
 <form method="post" action="account.php">
-<p><?=_("Optional comment, only used in the certificate overview")?><br />
-	<input type="text" name="description" maxlength="80" size=80 />
+<p><label for="description"><?=_("Optional comment, only used in the certificate overview")?></label><br />
+	<input type="text" id="description" name="description" maxlength="80" size="80" />
 </p>
-<p><?=_("Paste your CSR(Certificate Signing Request) below...")?><br />
-	<textarea name="CSR" cols="80" rows="15"></textarea>
+<p><label for="CSR"><?=_("Paste your CSR (Certificate Signing Request) below...")?></label><br />
+	<textarea id="CSR" name="CSR" cols="80" rows="15"></textarea>
 </p>
 
 <fieldset>
@@ -56,7 +56,7 @@
 </fieldset>
 
 <p><input type="checkbox" id="CCA" name="CCA" /> <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong></label><br />
-  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
+  <?=_("Please note: You need to accept the CCA to proceed.")?></p>
 <input type="submit" name="process" value="<?=_("Submit")?>" />
 <input type="hidden" name="oldid" value="<?=$id?>" />
 </form>

@@ -27,11 +27,11 @@
 <p><?=_("If the Subscriber's name and/or domain name registration change the subscriber will immediately inform CAcert Inc. who shall revoke the digital certificate. When the Digital Certificate expires or is revoked the company will permanently remove the certificate from the server on which it is installed and will not use it for any purpose thereafter. The person responsible for key management and security is fully authorized to install and utilize the certificate to represent this organization's electronic presence.")?></p>
 
 <form method="post" action="account.php">
-<p> <?=_("Optional comment, only used in the certificate overview")?><br />
-	<input type="text" name="description" maxlength="80" size=80 />
+<p><label for="description"><?=_("Optional comment, only used in the certificate overview")?></label><br />
+	<input type="text" id="description" name="description" maxlength="80" size="80" />
 </p>
-<p><?=_("Paste your CSR below...")?><br />
-	<textarea name="CSR" cols="80" rows="15"></textarea>
+<p><label for="CSR"><?=_("Paste your CSR (Certificate Signing Request) below...")?></label><br />
+	<textarea id="CSR" name="CSR" cols="80" rows="15"></textarea>
 </p>
 
 <fieldset>
