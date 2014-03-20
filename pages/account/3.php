@@ -82,8 +82,8 @@ if($_SESSION['profile']['points'] >= 50)
       <input type="checkbox" id="login" name="login" value="1" checked="checked" />
     </td>
     <td class="DataTD" align="left">
-      <label for="login"><?=_("Enable certificate login with this certificate")?></label><br />
-      <?=_("By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ .")?><br/>
+      <label for="login"><?=_("Enable certificate login with this certificate")?><br />
+      <?=_("By allowing certificate login, this certificate can be used to login into this account at https://secure.cacert.org/ .")?></label>
     </td>
   </tr>
   <tr>
@@ -134,8 +134,8 @@ if($_SESSION['profile']['points'] >= 50)
       <input type="checkbox" id="codesign" name="codesign" value="1" />
     </td>
     <td class="DataTD" align="left">
-      <label for="codesign"><?=_("Code Signing")?></label><br />
-      <?=_("Please note: By ticking this box you will automatically have your name included in the certificate.")?>
+      <label for="codesign"><?=_("Code Signing")?><br />
+      <?=_("Please note: By ticking this box you will automatically have your name included in the certificate.")?></label>
     </td>
   </tr>
 <? } ?>
@@ -145,9 +145,9 @@ if($_SESSION['profile']['points'] >= 50)
       <input type="checkbox" id="SSO" name="SSO" value="1" />
     </td>
     <td class="DataTD" align="left">
-      <label for="SSO"><?=_("Add Single Sign On ID Information")?></label><br />
+      <label for="SSO"><?=_("Add Single Sign On ID Information")?><br />
       <?=str_replace("\n", "<br>\n", wordwrap(_("By adding Single Sign On (SSO) ID information to your certificates this could be used to track you, you can also issue certificates with no email addresses that are useful only for Authentication. Please see a more detailed description on our WIKI about it."), 125))?>
-      <a href="http://wiki.cacert.org/wiki/SSO"><?=_("SSO WIKI Entry")?></a>
+      <a href="http://wiki.cacert.org/wiki/SSO"><?=_("SSO WIKI Entry")?></a></label>
     </td>
   </tr>
 
@@ -164,8 +164,8 @@ if($_SESSION['profile']['points'] >= 50)
       <input type="checkbox" id="CCA" name="CCA" />
     </td>
     <td class="DataTD" align="left">
-      <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong></label><br />
-      <?=_("Please note: You need to accept the CCA to proceed.")?>
+      <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+      <?=_("Please note: You need to accept the CCA to proceed.")?></label>
     </td>
   </tr>
   <tr>
