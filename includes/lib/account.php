@@ -103,31 +103,33 @@ function fix_assurer_flag($userID = NULL)
  */
 class HashAlgorithms {
 	/**
-	 * List of identifiers of supported hash algorithms for signing certificates
-	 * @var array(string)
-	 */
-	public static $list = array(
-			"sha256",
-			"sha384",
-			"sha512",
-	);
-
-	/**
 	 * Default hash algorithm identifier for signing
 	 * @var string
 	 */
-	public static $default = "sha256";
+	public static $default = 'sha256';
 
 	/**
 	 * Get display strings for the supported hash algorithms
-	 * @return array(string=>string) hash_identifier => display_string
+	 * @return array(string=>array('name'=>string, 'info'=>string))
+	 *     - [$hash_identifier]['name'] = Name that should be displayed in UI
+	 *     - [$hash_identifier]['info'] = Additional information that can help
+	 *       with the selection of a suitable algorithm
 	 */
-	public static function display_strings() {
+	public static function getInfo() {
 		return array(
-					"sha256" => "SHA256 "._("recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x)."),
-					"sha384" => "SHA384",
-					"sha512" => "SHA512",
-				);
+				'sha256' => array(
+						'name' => 'SHA256',
+						'info' => _('Currently recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x) still shipped in Debian for example.'),
+					),
+				'sha384' => array(
+						'name' => 'SHA384',
+						'info' => '',
+					),
+				'sha512' => array(
+						'name' => 'SHA512',
+						'info' => _('Highest protection against hash collision attacks of the algorithms offered here.'),
+					),
+			);
 	}
 
 	/**
@@ -138,7 +140,7 @@ class HashAlgorithms {
 	 * @return string The cleaned identifier
 	 */
 	public static function clean($hash_identifier) {
-		if (in_array($hash_identifier, self::$list)) {
+		if (array_key_exists($hash_identifier, self::getInfo() )) {
 			return $hash_identifier;
 		} else {
 			return self::$default;
