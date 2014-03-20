@@ -288,12 +288,7 @@ function buildSubjectFromSession() {
 				$_SESSION['_config']['rootcert'] = 1;
 		}
 
-		// Check if we got a valid hash algorithm, otherwise use default
-		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
-			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
-		} else {
-			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
-		}
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
 
 		$csr = "";
 		if(trim($_REQUEST['optionalCSR']) == "")
@@ -776,12 +771,7 @@ function buildSubjectFromSession() {
 				$_SESSION['_config']['rootcert'] = 1;
 		}
 
-		// Check if we got a valid hash algorithm, otherwise use default
-		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
-			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
-		} else {
-			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
-		}
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
 	}
 
 	if($process != "" && $oldid == 11)
@@ -1508,12 +1498,7 @@ function buildSubjectFromSession() {
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-		// Check if we got a valid hash algorithm, otherwise use default
-		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
-			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
-		} else {
-			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
-		}
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
 
 		if(trim($_REQUEST['description']) != ""){
 			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
@@ -1949,12 +1934,7 @@ function buildSubjectFromSession() {
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-		// Check if we got a valid hash algorithm, otherwise use default
-		if (array_key_exists('hash_alg', $_REQUEST) && array_key_exists($_REQUEST['hash_alg'], HASH_ALGORITHMS)) {
-			$_SESSION['_config']['hash_alg'] = $_REQUEST['hash_alg'];
-		} else {
-			$_SESSION['_config']['hash_alg'] = DEFAULT_HASH_ALGORITHM;
-		}
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
 	}
 
 	if($process != "" && $oldid == 21)
