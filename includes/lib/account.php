@@ -99,19 +99,49 @@ function fix_assurer_flag($userID = NULL)
 
 
 /**
- * Contains a map of all hash algorithms currently supported for signing.
- *
- * @var array(string=>string) identifier => display_string
+ * Supported hash algorithms for signing certificates
  */
-define("HASH_ALGORITHMS", array(
-		"sha256" => "SHA256 "._("recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x)."),
-		"sha384" => "SHA384",
-		"sha512" => "SHA512",
-		));
+class HashAlgorithms {
+	/**
+	 * List of identifiers of supported hash algorithms for signing certificates
+	 * @var array(string)
+	 */
+	public static $list = array(
+			"sha256",
+			"sha384",
+			"sha512",
+	);
 
-/**
- * The identifier of the default hash algorithm used as found in HASH_ALGORITHMS
- *
- * @var string
- */
-define("DEFAULT_HASH_ALGORITHM", "sha256");
+	/**
+	 * Default hash algorithm identifier for signing
+	 * @var string
+	 */
+	public static $default = "sha256";
+
+	/**
+	 * Get display strings for the supported hash algorithms
+	 * @return array(string=>string) hash_identifier => display_string
+	 */
+	public static function display_strings() {
+		return array(
+					"sha256" => "SHA256 "._("recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x)."),
+					"sha384" => "SHA384",
+					"sha512" => "SHA512",
+				);
+	}
+
+	/**
+	 * Check if the input is a supported hash algorithm identifier otherwise
+	 * return the identifier of the default hash algorithm
+	 *
+	 * @param string $hash_identifier
+	 * @return string The cleaned identifier
+	 */
+	public static function clean($hash_identifier) {
+		if (in_array($hash_identifier, self::$list)) {
+			return $hash_identifier;
+		} else {
+			return self::$default;
+		}
+	}
+}

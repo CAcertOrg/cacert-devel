@@ -71,9 +71,9 @@ if (array_key_exists('emails',$_SESSION['_config']) && is_array($_SESSION['_conf
     <td class="DataTD" colspan="2" align="left">
       <?=_("Hash algorithm used when signing the certificate:")?><br />
       <?
-      foreach (HASH_ALGORITHMS as $algorithm => $display_string) {
+      foreach (HashAlgorithms::display_strings() as $algorithm => $display_string) {
       ?>
-        <input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(DEFAULT_HASH_ALGORITHM === $algorithm)?'checked="checked"':''?> />
+        <input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(HashAlgorithms::$default === $algorithm)?'checked="checked"':''?> />
         <label for="hash_alg_<?=$algorithm?>"><?=$display_string?></label><br />
       <?
       } ?>
