@@ -74,8 +74,8 @@ foreach (HashAlgorithms::display_strings() as $algorithm => $display_string) {
 </div>
 </fieldset>
 
-<p><input type="checkbox" id="CCA" name="CCA" /> <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong></label><br />
-  <?=_("Please note: You need to accept the CCA to proceed.")?></p>
+<p><input type="checkbox" id="CCA" name="CCA" /> <label for="CCA"><strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+  <?=_("Please note: You need to accept the CCA to proceed.")?></label></p>
 <input type="submit" name="process" value="<?=_("Submit")?>" />
 <input type="hidden" name="oldid" value="<?=$id?>" />
 </form>
