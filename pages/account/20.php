@@ -55,10 +55,10 @@
 <p class="attach_ul"><?=_("Hash algorithm used when signing the certificate:")?></p>
 <ul class="no_indent">
 <?
-foreach (HASH_ALGORITHMS as $algorithm => $display_string) {
+foreach (HashAlgorithms::display_strings() as $algorithm => $display_string) {
 ?>
 	<li>
-		<input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(DEFAULT_HASH_ALGORITHM === $algorithm)?'checked="checked"':''?> />
+		<input type="radio" id="hash_alg_<?=$algorithm?>" name="hash_alg" value="<?=$algorithm?>" <?=(HashAlgorithms::$default === $algorithm)?'checked="checked"':''?> />
 		<label for="hash_alg_<?=$algorithm?>"><?=$display_string?></label>
 	</li>
 <?
