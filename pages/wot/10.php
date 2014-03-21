@@ -64,7 +64,7 @@
     <td class="DataTD"><b><?=_("Method")?></b></td>
   </tr>
 <?
-	$query = "select `id`, `date`, `points`, `location`, `method` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
+	$query = "select `id`, `date`, `from`, `points`, `location`, `method` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
