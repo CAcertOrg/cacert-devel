@@ -51,7 +51,8 @@ function fix_assurer_flag($userID = NULL)
 				SELECT SUM(`points`) FROM `notary` AS `n`
 				WHERE `n`.`to` = `u`.`id`
 					AND (`n`.`expire` > now()
-					OR `n`.`expire` IS NULL) and `n`.`deleted` = 0
+					     OR `n`.`expire` IS NULL)
+					AND `n`.`deleted` = 0
 			) >= 100';
 
 	$query = mysql_query($sql);
@@ -85,7 +86,8 @@ function fix_assurer_flag($userID = NULL)
 						AND (
 							`n`.`expire` > now()
 							OR `n`.`expire` IS NULL
-						) and `n`.`deleted` = 0
+						)
+						AND `n`.`deleted` = 0
 				) < 100
 			)';
 

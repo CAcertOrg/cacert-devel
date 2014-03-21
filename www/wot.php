@@ -352,7 +352,8 @@ $iecho= "c";
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
 						`awarded`='$awarded' AND
 						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."' and `deleted` = 0";
+						`date`='".mysql_escape_string(stripslashes($_POST['date']))."' AND
+						`deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
