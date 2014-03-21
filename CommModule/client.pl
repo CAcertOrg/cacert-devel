@@ -834,8 +834,15 @@ sub HandleCerts($$)
 
       my $days=$org?($server?(365*2):365):calculateDays($row{"memid"});
 
+      my $md_id = 0;
+      $md_id = 1 if( $row{'md'} eq "md5");
+      $md_id = 2 if( $row{'md'} eq "sha1");
+      $md_id = 3 if( $row{'md'} eq "rmd160");
+      $md_id = 8 if( $row{'md'} eq "sha256");
+      $md_id = 9 if( $row{'md'} eq "sha384");
+      $md_id =10 if( $row{'md'} eq "sha512");
 
-      $crt=Request($ver,1,1,$row{'rootcert'}-1,$profile,$row{'md'}eq"sha1"?2:0,$days,$row{'keytype'}eq"NS"?1:0,$content,$SAN,$subject);
+      $crt=Request($ver,1,1,$row{'rootcert'}-1,$profile,$md_id,$days,$row{'keytype'}eq"NS"?1:0,$content,$SAN,$subject);
       if(length($crt))
       {
         if($crt=~m/^-----BEGIN CERTIFICATE-----/)

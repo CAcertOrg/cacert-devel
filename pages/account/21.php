@@ -14,41 +14,57 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
-	$org = $_SESSION['_config']['row'];
-	if($org['id'] <= 0)
-		$org = $_SESSION['_config']['altrow'];
+*/
+
+$org = $_SESSION['_config']['row'];
+if ($org['id'] <= 0) {
+	$org = $_SESSION['_config']['altrow'];
+}
 ?>
+
 <p>
-<?=_("Please make sure the following details are correct before proceeding any further.")?>
+<?=_("Please make sure the following details are correct before proceeding ".
+		"any further.")?>
 </p>
 
-<p>
-<? if(is_array($_SESSION['_config']['rows']))
-	foreach($_SESSION['_config']['rows'] as $row) { ?>
-<?=_("CommonName")?>: <?=$row?><br>
-<? } ?>
-<? if(is_array($_SESSION['_config']['altrows']))
-	foreach($_SESSION['_config']['altrows'] as $row) { ?>
-<?=_("subjectAltName")?>: <?=$row?><br>
-<? } ?>
-<?=_("Organisation")?>: <?=$org['O']?><br>
-<?=_("Org. Unit")?>: <?=($_SESSION['_config']['OU'])?><br>
-<?=_("Location")?>: <?=$org['L']?><br>
-<?=_("State/Province")?>: <?=$org['ST']?><br>
-<?=_("Country")?>: <?=$org['C']?><br>
+<p><?
+if (is_array($_SESSION['_config']['rows'])) {
+	foreach ($_SESSION['_config']['rows'] as $row) {
+		echo _("CommonName"), ": $row<br>\n";
+	}
+}
 
+if (is_array($_SESSION['_config']['altrows'])) {
+	foreach ($_SESSION['_config']['altrows'] as $row) {
+		echo _("subjectAltName"), ": $row<br>\n";
+	}
+}
+
+echo _("Organisation"), ": {$org['O']}<br>\n";
+echo _("Org. Unit"), ": {$_SESSION['_config']['OU']}<br>\n";
+echo _("Location"), ": {$org['L']}<br>\n";
+echo _("State/Province"), ": {$org['ST']}<br>\n";
+echo _("Country"), ": {$org['C']}<br>\n";
+?>
 
 <form method="post" action="account.php">
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
-
-
-<? if($_SESSION['profile']['admin'] == 1) { ?>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<input type="checkbox" name="ocspcert" value="OCSPCert"/> <?=_("OCSP certificate")?>
-<? } ?>
+	<p>
+		<input type="submit" name="process" value="<?=_("Submit")?>">
+		<input type="hidden" name="oldid" value="<?=$id?>">
+	</p>
+	
+	<?
+	if ($_SESSION['profile']['admin'] == 1) {
+		?>
+		<p>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+			<input type="checkbox" name="ocspcert" value="OCSPCert"/>
+				<?=_("OCSP certificate")?>
+		</p>
+		<?
+	}
+	?>
 
 </form>
-</p>

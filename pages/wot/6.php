@@ -79,7 +79,7 @@
 	AssureTextLine("",_("Only tick the next box if the Assurance was face to face."));
 	AssureBoxLine("assertion",_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."),array_key_exists('assertion',$_POST) && $_POST['assertion'] == 1);
 	AssureBoxLine("rules",_("I have read and understood the CAcert Community Agreement (CCA), Assurance Policy and the Assurance Handbook. I am making this Assurance subject to and in compliance with the CCA, Assurance policy and handbook."),array_key_exists('rules',$_POST) && $_POST['rules'] == 1);
-	AssureTextLine(_("Policy"),"<a href=\"/policy/CAcert Community Agreement.php\" target=\"_blank\">"._("CAcert Community Agreement")."</a> -<a href=\"/policy/AssurancePolicy.php\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
+	AssureTextLine(_("Policy"),"<a href=\"/policy/CAcertCommunityAgreement.php\" target=\"_blank\">"._("CAcert Community Agreement")."</a> -<a href=\"/policy/AssurancePolicy.php\" target=\"_blank\">"._("Assurance Policy")."</a> - <a href=\"http://wiki.cacert.org/AssuranceHandbook2\" target=\"_blank\">"._("Assurance Handbook")."</a>");
 	AssureInboxLine("points",_("Points"),"","<br />(Max. ".maxpoints().")");
 	AssureFoot($id,_("I confirm this Assurance"));
 ?>
