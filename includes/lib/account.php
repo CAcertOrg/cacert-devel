@@ -118,15 +118,15 @@ class HashAlgorithms {
 	public static function getInfo() {
 		return array(
 				'sha256' => array(
-						'name' => 'SHA256',
+						'name' => 'SHA-256',
 						'info' => _('Currently recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x) still shipped in Debian for example.'),
 					),
 				'sha384' => array(
-						'name' => 'SHA384',
+						'name' => 'SHA-384',
 						'info' => '',
 					),
 				'sha512' => array(
-						'name' => 'SHA512',
+						'name' => 'SHA-512',
 						'info' => _('Highest protection against hash collision attacks of the algorithms offered here.'),
 					),
 			);
