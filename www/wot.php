@@ -366,7 +366,8 @@ function send_reminder()
 						`to`='".$_SESSION['_config']['notarise']['id']."' AND
 						`awarded`='$awarded' AND
 						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' and `deleted` = 0";
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' and `deleted` = 0
+						`deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
