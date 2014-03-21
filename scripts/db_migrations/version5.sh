@@ -19,10 +19,6 @@
 
 # script to do database migrations
 
-# This particular version migrates from the preversioned state to version 5
-# If you want to reuse it for further migrations you probably should pay special
-# attention because you have to adjust it a bit
-
 set -e # script fails if any command fails
 
 STDIN=0
@@ -53,7 +49,7 @@ SQL
 if [ $schema_version != 4 ]; then
 	cat >&$STDERR <<- ERROR
 		Error: database schema is not in the right version to do the migration!
-		Expected version: 4 (i.e. the version before there was versioning)
+		Expected version: 4
 	ERROR
 	exit 2
 fi
