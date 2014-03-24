@@ -3138,11 +3138,9 @@ function buildSubjectFromSession() {
 	}
 
 	if($id == 59){
-		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
-			$_SESSION['support']=1;
-		}ELSEIF ($oldid == 13 && intval($_REQUEST['userid']) == $_SESSION['profile']['id']){
-			$_SESSION['support']=0;
-		}ELSE{
+		if (!($oldid == 43 && $_SESSION['profile']['admin'] == 1) &&
+		    !($oldid == 13 && intval($_REQUEST['userid']) == $_SESSION['profile']['id']))
+		{
 			showheader(_("My CAcert.org Account!"));
 			echo _("You do not have access to this page.");
 			showfooter();
