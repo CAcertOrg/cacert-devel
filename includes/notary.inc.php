@@ -35,7 +35,7 @@
 	function get_number_of_assurances ($userid)
 	{
 		$res = query_init ("SELECT count(*) AS `list` FROM `notary`
-		     	WHERE `method` = 'Face to Face Meeting' AND `deleted`=0 AND `from`='".intval($userid)."' ");
+				WHERE `method` = 'Face to Face Meeting' AND `deleted`=0 AND `from`='".intval($userid)."' ");
 		$row = query_getnextrow($res);
 
 		return intval($row['list']);
@@ -1803,8 +1803,8 @@ function output_gpg_certs($row, $support=0){
  */
 function output_log_given_assurances($userid, $support=0)
 {
-    output_assurances_header(_("Assurance given"),$support);
-    output_log_given_assurances_content($userid, $support);
+	output_assurances_header(_("Assurance given"),$support);
+	output_log_given_assurances_content($userid, $support);
 }
 
 /**
@@ -1816,19 +1816,19 @@ function output_log_given_assurances($userid, $support=0)
  */
 function output_log_given_assurances_content($userid, $support)
 {
-    $res = get_given_assurances(intval($userid), 1);
-    while($row = mysql_fetch_assoc($res))
-    {
-        $fromuser = get_user (intval($row['to']));
-        $apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
-        $name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-        $email = show_email_link ($fromuser['email'],intval($row['to']));
-        $revoked = '';
-        if ($row['date'] != 0) {
-            $revoked = $row['deleted'];
-        }
-        output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
-    }
+	$res = get_given_assurances(intval($userid), 1);
+	while($row = mysql_fetch_assoc($res))
+	{
+		$fromuser = get_user (intval($row['to']));
+		$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
+		$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
+		$email = show_email_link ($fromuser['email'],intval($row['to']));
+		$revoked = '';
+		if ($row['date'] != 0) {
+			$revoked = $row['deleted'];
+		}
+		output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+	}
 }
 
 /**
@@ -1840,8 +1840,8 @@ function output_log_given_assurances_content($userid, $support)
  */
 function output_log_received_assurances($userid, $support=0)
 {
-    output_assurances_header(_("Assurance received"), $support);
-    output_log_received_assurances_content($userid, $support);
+	output_assurances_header(_("Assurance received"), $support);
+	output_log_received_assurances_content($userid, $support);
 }
 
 /**
@@ -1856,19 +1856,19 @@ function output_log_received_assurances($userid, $support=0)
  */
 function output_log_received_assurances_content($userid, $support)
 {
-    $res = get_received_assurances(intval($userid), 1);
-    while($row = mysql_fetch_assoc($res))
-    {
-        $fromuser = get_user (intval($row['from']));
-        calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
-        $name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
-        $email = show_email_link ($fromuser['email'],intval($row['from']));
-        $revoked = '';
-        if ($row['date'] != 0) {
-            $revoked = $revoked = $row['deleted'];
-        }
-        output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
-    }
+	$res = get_received_assurances(intval($userid), 1);
+	while($row = mysql_fetch_assoc($res))
+	{
+		$fromuser = get_user (intval($row['from']));
+		calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
+		$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
+		$email = show_email_link ($fromuser['email'],intval($row['from']));
+		$revoked = '';
+		if ($row['date'] != 0) {
+			$revoked = $revoked = $row['deleted'];
+		}
+		output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+	}
 }
 
 /**
@@ -1892,42 +1892,41 @@ function output_log_received_assurances_content($userid, $support)
 function output_log_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
 {
 
-    $tdstyle="";
-    $emopen="";
-    $emclose="";
+	$tdstyle="";
+	$emopen="";
+	$emclose="";
 
-    if ($awarded == $points)
-    {
-        if ($awarded == "0")
-        {
-            if ($when < "2006-09-01")
-            {
-                $tdstyle="style='background-color: #ffff80'";
-                $emopen="<em>";
-                $emclose="</em>";
-            }
-        }
-    }
-    ?>
-    <tr>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
-    <?
-    if ($support == "1")
-    {
-        ?>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-        <?
-    }
-    ?>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
-        <td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked?><?=$emclose?></td>
-    </tr>
-    <?
+	if ($awarded == $points)
+	{
+		if ($awarded == "0")
+		{
+			if ($when < "2006-09-01")
+			{
+				$tdstyle="style='background-color: #ffff80'";
+				$emopen="<em>";
+				$emclose="</em>";
+			}
+		}
+	}
+	?>
+	<tr>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
+	<?
+	if ($support == "1")
+	{
+		?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
+		<?
+	}
+	?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked?><?=$emclose?></td>
+	</tr>
+	<?
 }
-

@@ -84,8 +84,8 @@ function buildSubjectFromSession() {
 	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
 	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
 	$ticketno = array_key_exists('ticketno',$_REQUEST) ? $_REQUEST['ticketno'] : "";
-    $ticketvalidation = FALSE;
-    $actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
+	$ticketvalidation = FALSE;
+	$actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
 
 
 	if(!$_SESSION['mconn'])
@@ -2728,9 +2728,9 @@ function buildSubjectFromSession() {
 		write_se_log($userid, $_SESSION['profile']['id'], 'SE Revoke all certificates',$ticketno);
 		$id=43;
 	}elseif($oldid == 43 && $actionrequest == "revokecert" && $ticketvalidation == FALSE){
-	    $id = 43;
-	    $oldid=0;
-	    $_SESSION['ticketmsg']='No certificates revokes. Ticket number is missing!';
+		$id = 43;
+		$oldid=0;
+		$_SESSION['ticketmsg']='No certificates revokes. Ticket number is missing!';
 	}
 
 	if($oldid == 48 && $_REQUEST['domain'] == "")
