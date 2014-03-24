@@ -2747,8 +2747,7 @@ function buildSubjectFromSession() {
 
 	if($id == 44)
 	{
-		if(intval($_REQUEST['userid']) != "")
-			$_REQUEST['userid'] = intval($_REQUEST['userid']);
+		$_REQUEST['userid'] = intval($_REQUEST['userid']);
 		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 		if($row['email'] == "")
 			$id = 42;
