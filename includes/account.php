@@ -3069,7 +3069,7 @@ function buildSubjectFromSession() {
 
 	if($id == 50)
 	{
-		if(array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) != "")
+		if(array_key_exists('userid',$_REQUEST) && $_REQUEST['userid'] !== "")
 			$_REQUEST['userid'] = intval($_REQUEST['userid']);
 
 		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
