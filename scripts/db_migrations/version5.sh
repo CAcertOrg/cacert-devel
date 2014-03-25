@@ -58,182 +58,182 @@ mysql $mysql_opt <<- 'SQL'
 
 -- Move myISAM to InnoDB bug #1172
 
-ALTER TABLE abusereports ENGINE=INNODB;
+ALTER TABLE `abusereports` ENGINE=INNODB;
 system echo "table abusereports altered to InnoDB"
 
 
-ALTER TABLE addlang ENGINE=INNODB;
+ALTER TABLE `addlang` ENGINE=INNODB;
 system echo "table addlang altered to InnoDB"
 
 
-ALTER TABLE adminlog ENGINE=INNODB;
+ALTER TABLE `adminlog` ENGINE=INNODB;
 system echo "table adminlog altered to InnoDB"
 
 
-ALTER TABLE advertising ENGINE=INNODB;
+ALTER TABLE `advertising` ENGINE=INNODB;
 system echo "table advertising altered to InnoDB"
 
 
-ALTER TABLE alerts ENGINE=INNODB;
+ALTER TABLE `alerts` ENGINE=INNODB;
 system echo "table alerts altered to InnoDB"
 
 
-ALTER TABLE baddomains  ENGINE=INNODB;
+ALTER TABLE `baddomains`  ENGINE=INNODB;
 system echo "table baddomains altered to InnoDB"
 
 
-ALTER TABLE cats_passed  ENGINE=INNODB;
+ALTER TABLE `cats_passed`  ENGINE=INNODB;
 system echo "table cats_passed altered to InnoDB"
 
 
-ALTER TABLE cats_type  ENGINE=INNODB;
+ALTER TABLE `cats_type`  ENGINE=INNODB;
 system echo "table cats_type altered to InnoDB"
 
 
-ALTER TABLE cats_variant  ENGINE=INNODB;
+ALTER TABLE `cats_variant`  ENGINE=INNODB;
 system echo "table cats_variant altered to InnoDB"
 
 
-ALTER TABLE countries  ENGINE=INNODB;
+ALTER TABLE `countries`  ENGINE=INNODB;
 system echo "table countries altered to InnoDB"
 
 
-ALTER TABLE disputedomain ENGINE=INNODB;
+ALTER TABLE `disputedomain` ENGINE=INNODB;
 system echo "table disputedomain altered to InnoDB"
 
 
-ALTER TABLE disputeemail ENGINE=INNODB;
+ALTER TABLE `disputeemail` ENGINE=INNODB;
 system echo "table disputeemail altered to InnoDB"
 
-ALTER TABLE domaincerts  ENGINE=INNODB;
+ALTER TABLE `domaincerts`  ENGINE=INNODB;
 system echo "table domainderts altered to InnoDB"
 
 
-ALTER TABLE domains ENGINE=INNODB;
+ALTER TABLE `domains` ENGINE=INNODB;
 system echo "table domains altered to InnoDB"
 
 
-ALTER TABLE domlink  ENGINE=INNODB;
+ALTER TABLE `domlink`  ENGINE=INNODB;
 system echo "table domlink altered to InnoDB"
 
 
-ALTER TABLE email  ENGINE=INNODB;
+ALTER TABLE `email`  ENGINE=INNODB;
 system echo "table email altered to InnoDB"
 
 
-ALTER TABLE emailcerts  ENGINE=INNODB;
+ALTER TABLE `emailcerts`  ENGINE=INNODB;
 system echo "table emailcerts altered to InnoDB"
 
 
-ALTER TABLE emaillink  ENGINE=INNODB;
+ALTER TABLE `emaillink`  ENGINE=INNODB;
 system echo "table emaillink altered to InnoDB"
 
 
-ALTER TABLE gpg  ENGINE=INNODB;
+ALTER TABLE `gpg`  ENGINE=INNODB;
 system echo "table gpg altered to InnoDB"
 
 
-ALTER TABLE languages ENGINE=INNODB;
+ALTER TABLE `languages` ENGINE=INNODB;
 system echo "table languages altered to InnoDB"
 
 
-ALTER TABLE localias  ENGINE=INNODB;
+ALTER TABLE `localias`  ENGINE=INNODB;
 system echo "table localias altered to InnoDB"
 
 
-ALTER TABLE locations  ENGINE=INNODB;
+ALTER TABLE `locations`  ENGINE=INNODB;
 system echo "table locations altered to InnoDB"
 
 
-ALTER TABLE news  ENGINE=INNODB;
+ALTER TABLE `news`  ENGINE=INNODB;
 system echo "table news altered to InnoDB"
 
 
-ALTER TABLE notary  ENGINE=INNODB;
+ALTER TABLE `notary`  ENGINE=INNODB;
 system echo "table notary altered to InnoDB"
 
 
-ALTER TABLE org  ENGINE=INNODB;
+ALTER TABLE `org`  ENGINE=INNODB;
 system echo "table org altered to InnoDB"
 
 
-ALTER TABLE orgadminlog  ENGINE=INNODB;
+ALTER TABLE `orgadminlog`  ENGINE=INNODB;
 system echo "table orgadminlog altered to InnoDB"
 
 
-ALTER TABLE orgdomaincerts  ENGINE=INNODB;
+ALTER TABLE `orgdomaincerts`  ENGINE=INNODB;
 system echo "table orgdomaincerts altered to InnoDB"
 
 
-ALTER TABLE orgdomains  ENGINE=INNODB;
+ALTER TABLE `orgdomains`  ENGINE=INNODB;
 system echo "table orgdomains altered to InnoDB"
 
 
-ALTER TABLE orgdomlink  ENGINE=INNODB;
+ALTER TABLE `orgdomlink`  ENGINE=INNODB;
 system echo "table orgdomlink altered to InnoDB"
 
 
-ALTER TABLE orgemailcerts  ENGINE=INNODB;
+ALTER TABLE `orgemailcerts`  ENGINE=INNODB;
 system echo "table orgemailcerts altered to InnoDB"
 
 
-ALTER TABLE orgemaillink  ENGINE=INNODB;
+ALTER TABLE `orgemaillink`  ENGINE=INNODB;
 system echo "table orgemaillink altered to InnoDB"
 
 
-ALTER TABLE orginfo  ENGINE=INNODB;
+ALTER TABLE `orginfo`  ENGINE=INNODB;
 system echo "table orginfo altered to InnoDB"
 
 
-ALTER TABLE otphashes ENGINE=INNODB;
-system echo "table  otphashes altered to InnoDB"
+ALTER TABLE `otphashes` ENGINE=INNODB;
+system echo "table otphashes altered to InnoDB"
 
 
-ALTER TABLE pinglog ENGINE=INNODB;
+ALTER TABLE `pinglog` ENGINE=INNODB;
 system echo "table pinglog altered to InnoDB"
 
 
-ALTER TABLE regions ENGINE=INNODB;
+ALTER TABLE `regions` ENGINE=INNODB;
 system echo "table regions altered to InnoDB"
 
 
-ALTER TABLE root_certs ENGINE=INNODB;
+ALTER TABLE `root_certs` ENGINE=INNODB;
 system echo "table root_certs altered to InnoDB"
 
 
-ALTER TABLE schema_version ENGINE=INNODB;
+ALTER TABLE `schema_version` ENGINE=INNODB;
 system echo "table schema_version altered to InnoDB"
 
 
-ALTER TABLE stampcache  ENGINE=INNODB;
+ALTER TABLE `stampcache`  ENGINE=INNODB;
 system echo "table stampcache altered to InnoDB"
 
 
-ALTER TABLE statscache  ENGINE=INNODB;
+ALTER TABLE `statscache`  ENGINE=INNODB;
 system echo "table statscache altered to InnoDB"
 
 
-ALTER TABLE tickets ENGINE=INNODB;
+ALTER TABLE `tickets` ENGINE=INNODB;
 system echo "table tickets altered to InnoDB"
 
 
-ALTER TABLE tverify ENGINE=INNODB;
+ALTER TABLE `tverify` ENGINE=INNODB;
 system echo "table tverify altered to InnoDB"
 
 
-ALTER TABLE tverify-vote  ENGINE=INNODB;
+ALTER TABLE `tverify-vote`  ENGINE=INNODB;
 system echo "table tverify-vote altered to InnoDB"
 
 
-ALTER TABLE user_agreements ENGINE=INNODB;
+ALTER TABLE `user_agreements` ENGINE=INNODB;
 system echo "table user_agreements altered to InnoDB"
 
 
-ALTER TABLE userlocations  ENGINE=INNODB;
+ALTER TABLE `userlocations`  ENGINE=INNODB;
 system echo "table userlocations altered to InnoDB"
 
 
-ALTER TABLE users  ENGINE=INNODB;
+ALTER TABLE `users`  ENGINE=INNODB;
 system echo "table users altered to InnoDB"
 
 
