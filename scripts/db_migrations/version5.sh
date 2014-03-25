@@ -58,11 +58,7 @@ mysql $mysql_opt <<- 'SQL'
 
 -- Move myISAM to InnoDB bug #1172
 
-ALTER TABLE schema_version ENGINE=INNODB;
-system echo "table schema_version altered to InnoDB"
-
-
-ALTER TABLE abuserreports ENGINE=INNODB;
+ALTER TABLE abusereports ENGINE=INNODB;
 system echo "table abusereports altered to InnoDB"
 
 
@@ -117,8 +113,8 @@ ALTER TABLE domains ENGINE=INNODB;
 system echo "table domains altered to InnoDB"
 
 
-ALTER TABLE domLink  ENGINE=INNODB;
-system echo "table domLink altered to InnoDB"
+ALTER TABLE domlink  ENGINE=INNODB;
+system echo "table domlink altered to InnoDB"
 
 
 ALTER TABLE email  ENGINE=INNODB;
@@ -161,6 +157,10 @@ ALTER TABLE org  ENGINE=INNODB;
 system echo "table org altered to InnoDB"
 
 
+ALTER TABLE orgadminlog  ENGINE=INNODB;
+system echo "table orgadminlog altered to InnoDB"
+
+
 ALTER TABLE orgdomaincerts  ENGINE=INNODB;
 system echo "table orgdomaincerts altered to InnoDB"
 
@@ -199,6 +199,10 @@ system echo "table regions altered to InnoDB"
 
 ALTER TABLE root_certs ENGINE=INNODB;
 system echo "table root_certs altered to InnoDB"
+
+
+ALTER TABLE schema_version ENGINE=INNODB;
+system echo "table schema_version altered to InnoDB"
 
 
 ALTER TABLE stampcache  ENGINE=INNODB;
