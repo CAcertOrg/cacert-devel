@@ -26,7 +26,7 @@ $res =get_user_data($userid);
 
 if(mysql_num_rows($res) <= 0)
 {
-    echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+    echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     exit;
 }
 
@@ -46,7 +46,8 @@ if(intval($_REQUEST['oldid'])==43){
 }
 $ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
 if (!valid_ticket_number($ticketno) && $support == 1) {
-    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number.%s"), '<br/>', '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>');
+    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number."), '<br/>');
+    echo '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>';
     showfooter();
     exit;
 }

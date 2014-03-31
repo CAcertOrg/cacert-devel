@@ -76,36 +76,34 @@
 	}
 
 	/**
-	 * get_given_assurances()
-	 *  returns the list of assurances given by the user
-	 * @param mixed $userid - user id for the account for report
-	 * @param integer $log - for log output = 1
-	 * @return
+	 * Get the list of assurances given by the user
+	 * @param int $userid - id of the assurer
+	 * @param int $log - if set to 1 also includes deleted assurances
+	 * @return resource - a MySQL result set
 	 */
-	function get_given_assurances ($userid, $log=0)
+	function get_given_assurances($userid, $log=0)
 	{
 		$deleted='';
 		if ($log == 0) {
 			$deleted = ' and `deleted` = 0 ';
 		}
-		$res = query_init ("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` $deleted order by `id` asc");
+		$res = query_init("select * from `notary` where `from`='".intval($userid)."' and `from` != `to` $deleted order by `id` asc");
 		return $res;
 	}
 
 	/**
-	 * get_received_assurances()
-	 *  returns the list of assurances received by the user
-	 * @param mixed $userid - user id for the account for report
-	 * @param integer $log - for log output = 1
-	 * @return
+	 * Get the list of assurances received by the user
+	 * @param int $userid - id of the assuree
+	 * @param integer $log - if set to 1 also includes deleted assurances
+	 * @return resource - a MySQL result set
 	 */
-	function get_received_assurances ($userid, $log=0)
+	function get_received_assurances($userid, $log=0)
 	{
 		$deleted='';
 		if ($log == 0) {
 			$deleted = ' and `deleted` = 0 ';
 		}
-		$res = query_init ("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` $deleted order by `id` asc  ");
+		$res = query_init("select * from `notary` where `to`='".intval($userid)."' and `from` != `to` $deleted order by `id` asc  ");
 		return $res;
 	}
 
@@ -308,6 +306,23 @@
 <?
 	}
 
+	/**
+	 * Render an assurance for a view
+	 * @param int     $assuranceid - id of the assurance
+	 * @param string  $date - When the assurance took place in user provided format
+	 * @param string  $when - When the assurance was entered (ISO format), only visible for support
+	 * @param string  $email - Email address of the other party, only visible for support
+	 * @param string  $name - Name of the other party
+	 * @param int     $awarded - The points the Assurer wanted to issue (not rounded down)
+	 * @param int     $points - The points recognised by the system (rounded down)
+	 * @param string  $location - Where the assurance took place
+	 * @param string  $method - The method used to make the assurance (Face-to-Face, Administrative Increase, etc.)
+	 * @param int     $experience - Number of experience points the Assurer got for this assurance
+	 * @param int     $userid - Id of the user whichs given/received assurances are displayed
+	 * @param int     $support - set to 1 if the output is for the support interface
+	 * @param bool    $revoked - whether the assurance is already revoked
+	 * @param string  $ticketno - ticket number currently set in the support interface
+	 */
 	function output_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked, $ticketno)
 	{
 
@@ -332,7 +347,7 @@
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
 <?
-		if ($support == "1")
+		if ($support == 1)
 		{
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
@@ -346,7 +361,7 @@
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
 <?
-		if ($support == "1")
+		if ($support == 1)
 		{
 			if ($revoked == true)
 			{
@@ -403,6 +418,14 @@
 
 // ************* output given assurances ******************
 
+	/**
+	 * Helper function to render assurances given by the user
+	 * @param int  $userid
+	 * @param int& $points - [out] sum of given points
+	 * @param int& $sum_experience - [out] sum of experience points gained
+	 * @param int  $support - set to 1 if the output is for the support interface
+	 * @param string $ticketno - the ticket number set in the support interface
+	 */
 	function output_given_assurances_content($userid,&$points,&$sum_experience,$support, $ticketno)
 	{
 		$points = 0;
@@ -420,6 +443,14 @@
 
 // ************* output received assurances ******************
 
+	/**
+	 * Helper function to render assurances received by the user
+	 * @param int  $userid
+	 * @param int& $points - [out] sum of received points
+	 * @param int& $sum_experience - [out] sum of experience points the assurers gained
+	 * @param int  $support - set to 1 if the output is for the support interface
+	 * @param string $ticketno - the ticket number set in the support interface
+	 */
 	function output_received_assurances_content($userid,&$points,&$sum_experience,$support, $ticketno)
 	{
 		$points = 0;
@@ -613,6 +644,12 @@
 		return $issue_points;
 	}
 
+	/**
+	 * Render assurances given by the user
+	 * @param int $userid
+	 * @param int $support - set to 1 if the output is for the support interface
+	 * @param string $ticketno - the ticket number set in the support interface
+	 */
 	function output_given_assurances($userid, $support=0, $ticketno='')
 	{
 		output_assurances_header(_("Assurance Points You Issued"),$support);
@@ -620,6 +657,12 @@
 		output_assurances_footer(_("Total Points Issued"),$points,_("Total Experience Points"),$sum_experience,$support);
 	}
 
+	/**
+	 * Render assurances received by the user
+	 * @param int $userid
+	 * @param int $support - set to 1 if the output is for the support interface
+	 * @param string $ticketno - the ticket number set in the support interface
+	 */
 	function output_received_assurances($userid,$support=0, $ticketno='')
 	{
 		output_assurances_header(_("Your Assurance Points"),$support);
