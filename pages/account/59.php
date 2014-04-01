@@ -181,7 +181,7 @@ $dres = get_training_result($userid);
 <br/>
 
 <?
-$dres = get_user_agreement($userid,'',1);
+$dres = get_user_agreements($userid);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>

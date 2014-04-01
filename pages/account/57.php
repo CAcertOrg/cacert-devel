@@ -48,12 +48,12 @@
     <td class="DataTD"><b><?=_('Type')?></b></td>
   </tr>
 <?
-  $data=get_first_user_agreement($user_id,1);
+  $data=get_first_user_agreement($user_id, 'CCA', 1);
   if (!isset($data['active'])){
       $type='';
-    }else{
+  }else{
       $type=_('active');
-    }
+  }
 ?>
   <tr>
     <td class="DataTD"><?=_('First active CCA')?></td>
@@ -62,7 +62,7 @@
     <td class="DataTD"><?=$type?></td>
   </tr>
 <?
-  $data=get_first_user_agreement($user_id,0);
+  $data=get_first_user_agreement($user_id, 'CCA', 0);
   if (!isset($data['active'])){
       $type="";
     }else{
@@ -76,14 +76,14 @@
     <td class="DataTD"><?=$type?></td>
   </tr>
 <?
-  $data=get_last_user_agreement($user_id);
+  $data=get_last_user_agreement($user_id, 'CCA');
   if (!isset($data['active'])){
-      $type="";
-    }elseif($data['active']==1){
-      $type=_('active');
-    }else{
-      $type=_('passive');
-    }
+    $type="";
+  }elseif($data['active']==1){
+    $type=_('active');
+  }else{
+    $type=_('passive');
+  }
 ?>
   <tr>
     <td class="DataTD"><?=_('Last CCA')?></td>

@@ -238,7 +238,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <? // list of flags ?>
         <tr>
             <td class="DataTD"><?=_("CCA accepted")?>:</td>
-            <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'])) ? _("Yes") : _("No") ?></a></td>
+            <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'], 'CCA')) ? _("Yes") : _("No") ?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Trainings")?>:</td>

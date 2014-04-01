@@ -723,18 +723,31 @@
 	}
 
 	/**
-	 * get_first_user_agreement()
-	 *  returns the first user_agreement entry of the requested type depending on thes status of active of a given user
-	 * @param mixed $memid
-	 * @param integer $active, 0 - passive, 1 -active
-	 * @param string $type
-	 * @return
+	 * Get the first user_agreement entry of the requested type
+	 * @param int $memid
+	 * @param string $type - the type of user agreement, by default all
+	 *     agreements are listed
+	 * @param int $active - whether to get active or passive agreements:
+	 *     0 := passive
+	 *     1 := active
+	 *     null := both
+	 * @return array(string=>mixed) - an associative array containing
+	 *     'document', 'date', 'method', 'comment', 'active'
 	 */
-	function get_first_user_agreement($memid, $active=1, $type="CCA"){
-	//returns an array (`document`,`date`,`method`, `comment`,`active`)
+	function get_first_user_agreement($memid, $type=null, $active=null){
+		$filter = '';
+		if (!is_null($type)) {
+			$filter .= " AND u.`document` = '".mysql_real_escape_string($type)."'";
+		}
+
+		if (!is_null($active)) {
+			$filter .= " AND u.`active` = ".intval($active);
+		}
+
 		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` AS u
-			WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND u.`memid`=" . intval($memid) . " AND u.`active`=" . intval($active) .
-			" ORDER BY u.`date` Limit 1;";
+			WHERE u.`memid`=".intval($memid)."
+				$filter
+			ORDER BY u.`date` LIMIT 1";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
 			$rec = mysql_fetch_assoc($res);
@@ -745,15 +758,31 @@
 	}
 
 	/**
-	 * get_last_user_agreement()
-	 *  returns the last user_agreement entry of a given type and of a given user
-	 * @param mixed $memid
-	 * @param string $type
-	 * @return
+	 * Get the last user_agreement entry of the requested type
+	 * @param int $memid
+	 * @param string $type - the type of user agreement, by default all
+	 *     agreements are listed
+	 * @param int $active - whether to get active or passive agreements:
+	 *     0 := passive,
+	 *     1 := active,
+	 *     null := both
+	 * @return array(string=>mixed) - an associative array containing
+	 *     'document', 'date', 'method', 'comment', 'active'
 	 */
-	function get_last_user_agreement($memid, $type="CCA"){
-	//returns an array (`document`,`date`,`method`, `comment`,`active`)
-		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM user_agreements u WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND (u.`memid`=" . intval($memid) . " ) order by `date` desc limit 1 " ;
+	function get_last_user_agreement($memid, $type=null, $active=null){
+		$filter = '';
+		if (!is_null($type)) {
+			$filter .= " AND u.`document` = '".mysql_real_escape_string($type)."'";
+		}
+
+		if (!is_null($active)) {
+			$filter .= " AND u.`active` = ".intval($active);
+		}
+
+		$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` AS u
+			WHERE u.`memid`=".intval($memid)."
+				$filter
+			ORDER BY u.`date` DESC LIMIT 1";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >0){
 			$rec = mysql_fetch_assoc($res);
@@ -763,14 +792,31 @@
 		return $rec;
 	}
 
-function get_user_agreement($memid){
-	$query="(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 1 as `active` FROM user_agreements u WHERE u.`document` = 'CCA' AND (u.`memid`=".$memid." ) order by u.`date` )
-			union
-			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` = 'CCA' AND ( u.`secmemid`=".$memid.") order by u.`date`)
-			union
-			(SELECT u.`document`, u.`date`, u.`method`, u.`comment`, 0 as `active` FROM user_agreements u WHERE u.`document` != 'CCA' AND ( u.`memid`=".$memid.") order by u.u.`document`, u.`date`) " ;
-	$res = mysql_query($query);
+/**
+ * Get the all user_agreement entries of the requested type
+ * @param int $memid
+ * @param string $type - the type of user agreement, by default all
+ *     agreements are listed
+ * @param int $active - whether to get an active or passive agreements:
+ *     0 := passive,
+ *     1 := active,
+ *     null := both
+ * @return resource - a mysql result set containing all agreements
+ */
+function get_user_agreements($memid, $type=null, $active=null){
+	$filter = '';
+	if (!is_null($type)) {
+		$filter .= " AND u.`document` = '".mysql_real_escape_string($type)."'";
+	}
 
+	if (!is_null($active)) {
+		$filter .= " AND u.`active` = ".intval($active);
+	}
+
+	$query="SELECT u.`document`, u.`date`, u.`method`, u.`comment`, u.`active` FROM `user_agreements` AS u
+		WHERE u.`memid`=".intval($memid)."
+			$filter
+		ORDER BY u.`date`";
 	return mysql_query($query);
 }
 
