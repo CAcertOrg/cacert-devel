@@ -52,7 +52,12 @@ if (!valid_ticket_number($ticketno) && $support == 1) {
     exit;
 }
 if ( $support == 1) {
-    write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
+    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno'])) {
+        echo _("Writing to the admin log failed. Can't continue.");
+        printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
+        showfooter();
+        exit;
+    }
 }
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">

@@ -1243,14 +1243,13 @@ function get_user_agreements($memid, $type=null, $active=null){
 	}
 
 /**
- * write_se_log()
- *  writes an information to the adminlog
+ * Write some information to the adminlog
  *
- * @param mixed $uid - id of the user account
- * @param mixed $adminid - id of the admin
- * @param mixed $type - what was changed
- * @param mixed $info - the ticket / arbitration no or other information
- * @return
+ * @param int $uid - id of the user account
+ * @param int $adminid - id of the admin
+ * @param string $type - the operation that was performed on the user account
+ * @param string $info - the ticket / arbitration number or other information
+ * @return bool - true := success, false := error
  */
 function write_se_log($uid, $adminid, $type, $info){
 	//records all support engineer actions changing a user account
@@ -1260,7 +1259,7 @@ function write_se_log($uid, $adminid, $type, $info){
 	$info = mysql_real_escape_string($info);
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`) values
 		(Now(), $uid, $adminid, '$type', '$info')";
-	mysql_query($query);
+	return mysql_query($query);
 }
 
 /**
