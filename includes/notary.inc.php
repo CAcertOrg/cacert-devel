@@ -1290,7 +1290,7 @@ function get_user_data($userid, $deleted=0){
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
-		$filter=' and `users`.`deleted`=0';
+		$filter .=' and `users`.`deleted`=0';
 	}
 	$query = "select * from `users` where `users`.`id`='$userid' ".$filter;
 	return mysql_query($query);
@@ -1317,7 +1317,7 @@ function get_email_address($userid, $primary,$deleted=0){
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
-		$filter=' and `deleted`=0';
+		$filter .= ' and `deleted`=0';
 	}
 	if ($primary) {
 		$filter= $filter." and `email`!='".mysql_real_escape_string($primary)."'";
@@ -1337,7 +1337,7 @@ function get_domains($userid, $deleted=0){
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
-		$filter=' and `deleted`=0';
+		$filter .= ' and `deleted`=0';
 	}
 	$query = "select * from `domains` where `memid`='".$userid."' and `hash`=''".$filter." order by `created`";
 	return mysql_query($query);
