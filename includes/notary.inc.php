@@ -1393,13 +1393,13 @@ function get_client_certs($userid,$viewall=0){
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 		UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 		UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
-		`emailcerts`.`expire` as `expires`,
+		`emailcerts`.`expire`,
 		`emailcerts`.`revoked` as `revoke`,
 		UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
 		`emailcerts`.`id`,
 		`emailcerts`.`CN`,
 		`emailcerts`.`serial`,
-		`emailcerts`.`disablelogin` as `disablelogin`,
+		`emailcerts`.`disablelogin`,
 		`emailcerts`.`description`
 		from `emailcerts`
 		where `emailcerts`.`memid`='".$userid."'";
@@ -1425,7 +1425,8 @@ function get_server_certs($userid,$viewall=0){
 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
-			`domaincerts`.`expire` as `expires`, `revoked` as `revoke`,
+			`domaincerts`.`expire`,
+			`domaincerts`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
 			`domaincerts`.`description`
 			from `domaincerts`,`domains`
@@ -1452,7 +1453,7 @@ function get_gpg_certs($userid,$viewall=0){
 	$query = $query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`expire`) as `expired`,
-			`expire` as `expires`, `id`, `level`,
+			`expire`, `id`, `level`,
 			`email`,`keyid`,`description` from `gpg` where `memid`='".$userid."'
 			ORDER BY `issued` desc";
 	return mysql_query($query);
@@ -1721,7 +1722,7 @@ function output_client_cert($row, $support=0){
 
 		<td class="DataTD"><?=$row['serial']?></td>
 		<td class="DataTD"><?=$row['revoke']?></td>
-		<td class="DataTD"><?=$row['expires']?></td>
+		<td class="DataTD"><?=$row['expire']?></td>
 
 	<? if ($support !=1) { ?>
 		<td class="DataTD">
@@ -1805,7 +1806,7 @@ function output_log_server_certs($row, $support=0){
 		<?}?>
 		<td class="DataTD"><?=$row['serial']?></td>
 		<td class="DataTD"><?=$row['revoke']?></td>
-		<td class="DataTD"><?=$row['expires']?></td>
+		<td class="DataTD"><?=$row['expire']?></td>
 		<?if ($support !=1) { ?>
 			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
 			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
@@ -1868,7 +1869,7 @@ function output_gpg_certs($row, $support=0){
 				<td class="DataTD"><?=$row['email']?></td>
 			<? } ?>
 		<? } ?>
-		<td class="DataTD"><?=$row['expires']?></td>
+		<td class="DataTD"><?=$row['expire']?></td>
 		<?if ($support != 1) { ?>
 			<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
 		<? } else { ?>

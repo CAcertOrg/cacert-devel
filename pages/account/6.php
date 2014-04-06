@@ -25,7 +25,7 @@ if(array_key_exists('cert',$_REQUEST)) {
 $query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
-			`emailcerts`.`expire` as `expires`,
+			`emailcerts`.`expire`,
 			`emailcerts`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
 			`emailcerts`.`id`,
@@ -149,7 +149,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Expires")?></td>
-		<td class="DataTD"><?=$row['expires']?></td>
+		<td class="DataTD"><?=$row['expire']?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Login")?></td>
