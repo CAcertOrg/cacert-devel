@@ -130,7 +130,7 @@ if ( $support == 1) {
 </table>
 <br/>
 <?
-$dres = get_email_address($userid,'',1);
+$dres = get_email_addresses($userid,'',1);
 if(mysql_num_rows($dres) > 0) {
 ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -166,7 +166,7 @@ if(mysql_num_rows($dres) > 0) {
 <br/>
 
 <?
-$dres = get_training_result($userid);
+$dres = get_training_results($userid);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>

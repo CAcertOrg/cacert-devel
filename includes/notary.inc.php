@@ -1312,15 +1312,15 @@ function get_alerts($userid){
  * @param int    $deleted - states if deleted data should be visible, default = 0 - not visible
  * @return resource - a mysql result set
  */
-function get_email_address($userid, $primary,$deleted=0){
+function get_email_addresses($userid, $exclude, $deleted=0){
 	//should be entered in account/2.php
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
 		$filter .= ' and `deleted`=0';
 	}
-	if ($primary) {
-		$filter= $filter." and `email`!='".mysql_real_escape_string($primary)."'";
+	if ($exclude) {
+		$filter .= " and `email`!='".mysql_real_escape_string($exclude)."'";
 	}
 	$query = "select * from `email` where `memid`='".$userid."' and `hash`='' ".$filter." order by `created`";
 	return mysql_query($query);
@@ -1348,7 +1348,7 @@ function get_domains($userid, $deleted=0){
  * @param int $userid
  * @return resource - a mysql result set
  */
-function get_training_result($userid){
+function get_training_results($userid){
 	//should be entered in account/55.php
 	$userid = intval($userid);
 	$query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
