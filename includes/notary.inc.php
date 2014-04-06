@@ -1322,7 +1322,7 @@ function get_email_address($userid, $primary,$deleted=0){
 	if ($primary) {
 		$filter= $filter." and `email`!='".mysql_real_escape_string($primary)."'";
 	}
-	$query = "select * from `email` where `memid`='".$userid."'".$filter." order by `created`";
+	$query = "select * from `email` where `memid`='".$userid."' and `hash`='' ".$filter." order by `created`";
 	return mysql_query($query);
 }
 
