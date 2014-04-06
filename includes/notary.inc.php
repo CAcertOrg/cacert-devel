@@ -1263,13 +1263,11 @@ function write_se_log($uid, $adminid, $type, $info){
 }
 
 /**
- * valid_ticket_number()
- * checks if the entered information is a valid ticket or arbitration number
- * @param mixed $ticketno
- * @return
+ * Check if the entered information is a valid ticket or arbitration number
+ * @param string $ticketno
+ * @return bool
  */
 function valid_ticket_number($ticketno){
-	//return if a given ticket number is valid
 	//a arbitration case
 	//d dispute action
 	//s support case
@@ -1283,11 +1281,10 @@ function valid_ticket_number($ticketno){
 
 // function for handling account/43.php
 /**
- * get_user_data()
- *  returns all data of to an account given by the id
- * @param mixed $userid - account id
- * @param mixed $deleted - states if deleted data should be visible , default = 0 - not visible
- * @return
+ * Get all data of an account given by the id from the `users` table
+ * @param int $userid - account id
+ * @param int $deleted - states if deleted data should be visible , default = 0 - not visible
+ * @return resource - a mysql result set
  */
 function get_user_data($userid, $deleted=0){
 	$userid = intval($userid);
@@ -1300,22 +1297,20 @@ function get_user_data($userid, $deleted=0){
 }
 
 /**
- * get_alerts()
- *  retrns all alert settings for one user
- * @param mixed $userid for the requested account
- * @return
+ * Get the alert settings for a user
+ * @param int $userid for the requested account
+ * @return array - associative array
  */
 function get_alerts($userid){
 	return mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($userid)."'"));
 }
 
 /**
- * get_email_address()
- *  returns all email address linked to one account
- * @param mixed $userid
- * @param string $primary if given the primary email address is not retirned
- * @param integer $deleted - states if deleted data should be visible , default = 0 - not visible
- * @return
+ * Get all email addresses linked to the account
+ * @param int    $userid
+ * @param string $exclude - if given the email address will be excluded
+ * @param int    $deleted - states if deleted data should be visible, default = 0 - not visible
+ * @return resource - a mysql result set
  */
 function get_email_address($userid, $primary,$deleted=0){
 	//should be entered in account/2.php
@@ -1332,11 +1327,10 @@ function get_email_address($userid, $primary,$deleted=0){
 }
 
 /**
- * get_domains()
- *  returns all domains to an account
- * @param mixed $userid
- * @param integer $deleted - states if deleted data should be visible , default = 0 - not visible
- * @return
+ * Get all domains linked to the account
+ * @param int $userid
+ * @param int $deleted - states if deleted data should be visible, default = 0 - not visible
+ * @return resource - a mysql result set
  */
 function get_domains($userid, $deleted=0){
 	//should be entered in account/9.php
@@ -1350,10 +1344,9 @@ function get_domains($userid, $deleted=0){
 }
 
 /**
- * get_training_result()
- *  returns all training results to an account
- * @param mixed $userid
- * @return
+ * Get all training results for the account
+ * @param int $userid
+ * @return resource - a mysql result set
  */
 function get_training_result($userid){
 	//should be entered in account/55.php
@@ -1366,10 +1359,9 @@ function get_training_result($userid){
 }
 
 /**
- * get_se_log()
- *  returns all SE log entries to an account
- * @param mixed $userid
- * @return
+ * Get all SE log entries for the account
+ * @param int $userid
+ * @return resource - a mysql result set
  */
 function get_se_log($userid){
 	$userid = intval($userid);
