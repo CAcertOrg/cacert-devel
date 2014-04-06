@@ -1381,14 +1381,13 @@ function get_se_log($userid){
 }
 
 /**
- * get_client_certs()
- *  returns all client certificates to an account
- * @param mixed $userid
- * @param integer $viewall- states if expired certs should be visible , default = 0 - not visible
- * @return
+ * Get all client certificates linked to the account
+ * @param int $userid
+ * @param int $viewall - states if expired certs should be visible, default = 0 - not visible
+ * @return resource - a mysql result set
  */
-//add to account/5.php
-function get_client_certs($userid,$viewall=0){
+function get_client_certs($userid, $viewall=0){
+	//add to account/5.php
 	$userid = intval($userid);
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 		UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
@@ -1403,23 +1402,20 @@ function get_client_certs($userid,$viewall=0){
 		`emailcerts`.`description`
 		from `emailcerts`
 		where `emailcerts`.`memid`='".$userid."'";
-	if($viewall != 1)
-		$query .= " AND `revoked`=0 AND `renewed`=0 ";
-	$query .= " GROUP BY `emailcerts`.`id` ";
-	if($viewall != 1)
-		$query .= " HAVING `timeleft` > 0 ";
+	if($viewall == 0)
+		$query .= " AND `emailcerts`.`revoked`=0 AND `emailcerts`.`renewed`=0";
+		$query .= " HAVING `timeleft` > 0";
 	$query .= " ORDER BY `emailcerts`.`modified` desc";
 	return mysql_query($query);
 }
 
 /**
- * get_server_certs()
- *  returns all server certs to an account
- * @param mixed $userid
- * @param integer $viewall states if expired certs should be visible , default = 0 - not visible
- * @return
+ * Get all server certs linked to the account
+ * @param int $userid
+ * @param int $viewall - states if expired certs should be visible, default = 0 - not visible
+ * @return resource - a mysql result set
  */
-function get_server_certs($userid,$viewall=0){
+function get_server_certs($userid, $viewall=0){
 	//add to account/12.php
 	$userid = intval($userid);
 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
@@ -1427,35 +1423,40 @@ function get_server_certs($userid,$viewall=0){
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
 			`domaincerts`.`expire`,
 			`domaincerts`.`revoked` as `revoke`,
-			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
+			UNIX_TIMESTAMP(`revoked`) as `revoked`,
+			`domaincerts`.`CN`,
+			`domaincerts`.`serial`,
+			`domaincerts`.`id`,
 			`domaincerts`.`description`
 			from `domaincerts`,`domains`
-			where `memid`='".$userid."' and `domaincerts`.`domid`=`domains`.`id` ";
-	if($viewall != 1)
+			where `domains`.`memid`='".$userid."' and `domaincerts`.`domid`=`domains`.`id`";
+	if($viewall == 0)
 	{
-		$query .= "AND `revoked`=0 AND `renewed`=0 ";
-		$query .= "HAVING `timeleft` > 0 ";
+		$query .= " AND `domaincerts`.`revoked`=0 AND `domaincerts`.`renewed`=0";
+		$query .= " HAVING `timeleft` > 0";
 	}
-	$query .= "ORDER BY `domaincerts`.`modified` desc";
+	$query .= " ORDER BY `domaincerts`.`modified` desc";
 	return mysql_query($query);
 }
 
 /**
- * get_gpg_certs()
- *  retruns all gpg certs to an account
- * @param mixed $userid
- * @param integer $viewall states if expired certs should be visible , default = 0 - not visible
- * @return
+ * Get all gpg certs linked to the account
+ * @param int $userid
+ * @param int $viewall - states if expired certs should be visible, default = 0 - not visible
+ * @return resource - a mysql result set
  */
-function get_gpg_certs($userid,$viewall=0){
+function get_gpg_certs($userid, $viewall=0){
 	//add to gpg/2.php
 	$userid = intval($userid);
 	$query = $query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`expire`) as `expired`,
-			`expire`, `id`, `level`,
-			`email`,`keyid`,`description` from `gpg` where `memid`='".$userid."'
-			ORDER BY `issued` desc";
+			`expire`, `id`, `level`, `email`, `keyid`, `description`
+			from `gpg` where `memid`='".$userid."'";
+	if ($viewall == 0) {
+		$query .= " HAVING `timeleft` > 0";
+	}
+	$query .= " ORDER BY `issued` desc";
 	return mysql_query($query);
 }
 
