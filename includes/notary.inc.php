@@ -1679,7 +1679,33 @@ function output_client_cert($row, $support=0){
 	?>
 	<tr>
 	<?
-	if ($verified != _("Pending") && $verified != _("Revoked")) {
+	if ($verified == _("Pending")) {
+		if (1 != $support) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="delid[]" value="<?=$row['id']?>">
+			</td>
+			<?
+		}
+
+		?>
+		<td class="DataTD"><?=$verified?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+		<?
+
+	} elseif ($verified == _("Revoked")) {
+		if (1 != $support) {
+			?>
+			<td class="DataTD">&nbsp;</td>
+			<?
+		}
+
+		?>
+		<td class="DataTD"><?=$verified?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+		<?
+
+	} else {
 		if (1 != $support) {
 			?>
 			<td class="DataTD">
@@ -1705,32 +1731,6 @@ function output_client_cert($row, $support=0){
 			<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
 			<?
 		}
-
-	} elseif ($verified != _("Revoked")) {
-		if (1 != $support) {
-			?>
-			<td class="DataTD">
-				<input type="checkbox" name="delid[]" value="<?=$row['id']?>">
-			</td>
-			<?
-		}
-
-		?>
-		<td class="DataTD"><?=$verified?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-		<?
-
-	} else {
-		if (1 != $support) {
-			?>
-			<td class="DataTD">&nbsp;</td>
-			<?
-		}
-
-		?>
-		<td class="DataTD"><?=$verified?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-		<?
 	}
 
 	?>
