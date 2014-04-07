@@ -1668,16 +1668,22 @@ function output_client_cert_header($support=0, $readonly=true){
 function output_client_cert($row, $support=0, $readonly=true){
 	//should be entered in account/5.php
 	$verified="";
-	if($row['timeleft'] > 0)
+	if ($row['timeleft'] > 0) {
 		$verified = _("Valid");
-	if($row['timeleft'] <= 0)
+	} else {
 		$verified = _("Expired");
-	if($row['expired'] == 0)
+	}
+
+	if ($row['expired'] == 0) {
 		$verified = _("Pending");
-	if($row['revoked'] > 0)
-		$verified = _("Revoked");
-	if($row['revoked'] == 0)
+	}
+
+	if ($row['revoked'] == 0) {
 		$row['revoke'] = _("Not Revoked");
+	} else {
+		$verified = _("Revoked");
+	}
+
 	?>
 	<tr>
 	<?
@@ -1791,16 +1797,23 @@ function output_server_certs_header($support=0, $readonly=true){
  */
 function output_server_certs($row, $support=0, $readonly=true){
 	//should be entered in account/12.php
-	if($row['timeleft'] > 0)
+	$verified="";
+	if ($row['timeleft'] > 0) {
 		$verified = _("Valid");
-	if($row['timeleft'] <= 0)
+	} else {
 		$verified = _("Expired");
-	if($row['expired'] == 0)
+	}
+
+	if ($row['expired'] == 0) {
 		$verified = _("Pending");
-	if($row['revoked'] > 0)
-		$verified = _("Revoked");
-	if($row['revoked'] == 0)
+	}
+
+	if ($row['revoked'] == 0) {
 		$row['revoke'] = _("Not Revoked");
+	} else {
+		$verified = _("Revoked");
+	}
+
 	?>
 	<tr>
 	<?
@@ -1900,12 +1913,17 @@ function output_gpg_certs_header($support=0, $readonly=true){
  */
 function output_gpg_certs($row, $support=0, $readonly=true){
 	//should be entered in account/55.php
-	if($row['timeleft'] > 0)
+	$verified="";
+	if ($row['timeleft'] > 0) {
 		$verified = _("Valid");
-	if($row['timeleft'] <= 0)
+	} else {
 		$verified = _("Expired");
-	if($row['expired'] == 0)
+	}
+
+	if ($row['expired'] == 0) {
 		$verified = _("Pending");
+	}
+
 	?>
 	<tr>
 		<td class="DataTD"><?=$verified?></td>
