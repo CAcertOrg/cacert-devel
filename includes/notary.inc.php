@@ -1752,42 +1752,48 @@ function output_client_cert($row, $support=0, $readonly=true){
 }
 
 /**
- * output_log_server_certs_header()
- *  shows the table header to the server cert table
- * @param integer $support - if support = 1 some columns ar not visible
- * @return
+ * Show the table header to the server cert table
+ * @param int  $support - if support = 1 some columns ar not visible
+ * @param bool $readonly - whether elements to modify data should be hidden, default is `true`
  */
-function output_log_server_certs_header($support=0){
+function output_server_certs_header($support=0, $readonly=true){
 	//should be entered in account/12.php
 	?>
 	<tr>
-		<?if ($support !=1) { ?>
+	<?
+		if (!$readonly) {
+			?>
 			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
-		<? } ?>
+			<?
+		}
+		?>
 		<td class="DataTD"><?=_("Status")?></td>
 		<td class="DataTD"><?=_("CommonName")?></td>
 		<td class="DataTD"><?=_("SerialNumber")?></td>
 		<td class="DataTD"><?=_("Revoked")?></td>
 		<td class="DataTD"><?=_("Expires")?></td>
-		<?if ($support !=1) { ?>
+		<?
+		if (1 != $support) {
+			?>
 			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
-		<? } ?>
+			<?
+		}
+	?>
 	</tr>
 	<?
 }
 
 /**
- * output_log_server_certs()
- *  show the server cert data
- * @param mixed $row - sql-query array
- * @param integer $support - if support = 1 some columns are not visible
- * @return
+ * Show the server cert data
+ * @param array $row - associative array containing the column data
+ * @param int   $support - if support = 1 some columns are not visible
+ * @param bool  $readonly - whether elements to modify data should be hidden, default is `true`
  */
-function output_log_server_certs($row, $support=0){
+function output_server_certs($row, $support=0, $readonly=true){
 	//should be entered in account/12.php
 	if($row['timeleft'] > 0)
 		$verified = _("Valid");
-	if($row['timeleft'] < 0)
+	if($row['timeleft'] <= 0)
 		$verified = _("Expired");
 	if($row['expired'] == 0)
 		$verified = _("Pending");
@@ -1797,96 +1803,162 @@ function output_log_server_certs($row, $support=0){
 		$row['revoke'] = _("Not Revoked");
 	?>
 	<tr>
-		<? if ($support !=1) {
-			if($verified != _("Pending") && $verified != _("Revoked")) { ?>
-				<td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"/></td>
-			<? } else if($verified != _("Revoked")) { ?>
-				<td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"/></td>
-			<? } else { ?>
-				<td class="DataTD">&nbsp;</td>
-			<? }
-		}?>
-		<td class="DataTD"><?=$verified?></td>
-		<?if ($support !=1) { ?>
-			<td class="DataTD"><a href="account.php?id=15&amp;cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
-		<? }ELSE{ ?>
-			<td class="DataTD"><?=$row['CN']?></td>
-		<?}?>
-		<td class="DataTD"><?=$row['serial']?></td>
-		<td class="DataTD"><?=$row['revoke']?></td>
-		<td class="DataTD"><?=$row['expire']?></td>
-		<?if ($support !=1) { ?>
-			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
-			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
-		<?}?>
-	</tr> <?
+	<?
+	if (!$readonly) {
+		if ($verified === _("Pending")) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="delid[]" value="<?=$row['id']?>"/>
+			</td>
+			<?
+		} elseif($verified === _("Revoked")) {
+			?>
+			<td class="DataTD">&nbsp;</td>
+			<?
+		} else {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"/>
+			</td>
+			<?
+		}
+	}
+
+	?>
+	<td class="DataTD"><?=$verified?></td>
+	<?
+
+	if ($verified === _("Pending")) {
+		?>
+		<td class="DataTD"><?=$row['CN']?></td>
+		<?
+	} else {
+		?>
+		<td class="DataTD">
+			<a href="account.php?id=15&amp;cert=<?=$row['id']?>">
+				<?=$row['CN']?>
+			</a>
+		</td>
+		<?
+	}
+
+	?>
+	<td class="DataTD"><?=$row['serial']?></td>
+	<td class="DataTD"><?=$row['revoke']?></td>
+	<td class="DataTD"><?=$row['expire']?></td>
+	<?
+
+	if (1 != $support) {
+		?>
+		<td class="DataTD">
+			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+		</td>
+		<?
+		if (!$readonly) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+			</td>
+			<?
+		}
+	}
+
+	?>
+	</tr>
+	<?
 }
 
 /**
- *  output_gpg_certs_header()
- *  shows the table header to the gpg cert table
- * @param integer $support - if support = 1 some columns ar not visible
- * @return
+ * Show the table header to the gpg cert table
+ * @param int  $support - if support = 1 some columns ar not visible
+ * @param bool $readonly - whether elements to modify data should be hidden, default is `true`
  */
-function output_gpg_certs_header($support=0){
+function output_gpg_certs_header($support=0, $readonly=true){
+	// $readonly is currently ignored but kept for consistency
 	?>
 	<tr>
 		<td class="DataTD"><?=_("Status")?></td>
 		<td class="DataTD"><?=_("Email Address")?></td>
 		<td class="DataTD"><?=_("Expires")?></td>
 		<td class="DataTD"><?=_("Key ID")?></td>
-		<?if ($support !=1) { ?>
+		<?
+		if (1 != $support) {
+			?>
 			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
-		<? }?>
+			<?
+		}
+	?>
 	</tr>
 	<?
 }
 
 /**
- * output_gpg_certs()
- *  show the gpg cert data
- * @param mixed $row - sql-query array
- * @param integer $support - if support = 1 some columns are not visible
- * @return
+ * Show the gpg cert data
+ * @param array $row - associative array containing the column data
+ * @param int   $support - if support = 1 some columns are not visible
+ * @param bool  $readonly - whether elements to modify data should be hidden, default is `true`
  */
-function output_gpg_certs($row, $support=0){
+function output_gpg_certs($row, $support=0, $readonly=true){
 	//should be entered in account/55.php
 	if($row['timeleft'] > 0)
 		$verified = _("Valid");
-	if($row['timeleft'] < 0)
+	if($row['timeleft'] <= 0)
 		$verified = _("Expired");
 	if($row['expired'] == 0)
 		$verified = _("Pending");
 	?>
 	<tr>
-		<? if($verified == _("Valid")) { ?>
-			<td class="DataTD"><?=$verified?></td>
-			<?if ($support !=1) { ?>
-				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
-			<? } else { ?>
-				<td class="DataTD"><?=$row['email']?></td>
-			<? } ?>
-		<? } else if($verified == _("Pending")) { ?>
-			<td class="DataTD"><?=$verified?></td>
-			<td class="DataTD"><?=$row['email']?></td>
-		<? } else { ?>
-			<td class="DataTD"><?=$verified?></td>
-			<?if ($support !=1) { ?>
-				<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
-			<? } else { ?>
-				<td class="DataTD"><?=$row['email']?></td>
-			<? } ?>
-		<? } ?>
-		<td class="DataTD"><?=$row['expire']?></td>
-		<?if ($support != 1) { ?>
-			<td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
-		<? } else { ?>
-			<td class="DataTD"><?=$row['keyid']?></td>
-		<? } ?>
-		<?if ($support !=1) { ?>
-			<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
-			<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
-		<? } ?>
+		<td class="DataTD"><?=$verified?></td>
+	<?
+
+	if($verified == _("Pending")) {
+		?>
+		<td class="DataTD"><?=$row['email']?></td>
+		<?
+	} else {
+		?>
+		<td class="DataTD">
+			<a href="gpg.php?id=3&amp;cert=<?=$row['id']?>">
+				<?=$row['email']?>
+			</a>
+		</td>
+		<?
+	}
+
+	?>
+	<td class="DataTD"><?=$row['expire']?></td>
+	<?
+
+	if($verified == _("Pending")) {
+		?>
+		<td class="DataTD"><?=$row['keyid']?></td>
+		<?
+	} else {
+		?>
+		<td class="DataTD">
+			<a href="gpg.php?id=3&amp;cert=<?=$row['id']?>">
+				<?=$row['keyid']?>
+			</a>
+		</td>
+		<?
+	}
+
+	if (1 != $support) {
+		?>
+		<td class="DataTD">
+			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+		</td>
+		<?
+		if (!$readonly) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+			</td>
+			<?
+		}
+	}
+
+	?>
 	</tr>
 	<?
 }

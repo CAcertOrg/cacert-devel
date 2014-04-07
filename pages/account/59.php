@@ -242,10 +242,10 @@ if (1 == $support) {
     </tr>
 <?
     if(mysql_num_rows($dres) > 0) {
-        output_log_server_certs_header($support);
+        output_server_certs_header($support);
         while($drow = mysql_fetch_assoc($dres))
         {
-            output_log_server_certs($drow,$support);
+            output_server_certs($drow,$support);
         }
     }ELSE{
         ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
