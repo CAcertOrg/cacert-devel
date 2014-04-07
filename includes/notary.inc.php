@@ -1457,9 +1457,7 @@ function get_gpg_certs($userid, $viewall=0){
 
 
 /**
- * output_log_email_header()
- *  shows the table header to the email table
- * @return
+ * Show the table header to the email table for the admin log
  */
 function output_log_email_header(){
 	?>
@@ -1472,13 +1470,11 @@ function output_log_email_header(){
 	<?
 }
 /**
- * output_log_email()
- *  shows all email data
- * @param mixed $row - sql-query array
- * @param mixed $primary - if given the primary address is highlighted
- * @return
+ * Show all email data for the admin log
+ * @param array  $row - associative array containing the column data
+ * @param string $primary - if given the primary address is highlighted
  */
-function output_log_email($row,$primary){
+function output_log_email($row, $primary){
 	$primaryemailaddress='';
 	$deletedemailaddress='';
 	if ($row['deleted'] !== NULL_DATETIME) {
@@ -1497,9 +1493,7 @@ function output_log_email($row,$primary){
 }
 
 /**
- * output_log_domains_header()
- *  shows the table header to the domains table
- * @return
+ * Show the table header to the domains table for the admin log
  */
 function output_log_domains_header(){
 	?>
@@ -1513,10 +1507,8 @@ function output_log_domains_header(){
 }
 
 /**
- * output_log_domains()
- *  shows the domain data
- * @param mixed $row - sql-query array
- * @return
+ * Show the domain data for the admin log
+ * @param array $row - associative array containing the column data
  */
 function output_log_domains($row){
 	$italic='';
@@ -1533,9 +1525,7 @@ function output_log_domains($row){
 }
 
 /**
- * output_log_agreement_header()
- *  shows the table header to the user agreement table
- * @return
+ * Show the table header to the user agreement table for the admin log
  */
 function output_log_agreement_header(){
 	?>
@@ -1549,10 +1539,8 @@ function output_log_agreement_header(){
 }
 
 /**
- * output_log_agreement()
- *  shows the agreement data
- * @param mixed $row - sql-query array
- * @return
+ * Show the agreement data for the admin log
+ * @param array $row - associative array containing the column data
  */
 function output_log_agreement($row){
 	?>
@@ -1566,9 +1554,7 @@ function output_log_agreement($row){
 }
 
 /**
- * output_log_training_header()
- *  shows the table header to the training table
- * @return
+ * Show the table header to the training table
  */
 function output_log_training_header(){
 	//should be entered in account/55.php
@@ -1582,10 +1568,8 @@ function output_log_training_header(){
 }
 
 /**
- * output_log_training()
- *  shows the training data
- * @param mixed $row - sql-query array
- * @return
+ * Show the training data
+ * @param array $row - associative array containing the column data
  */
 function output_log_training($row){
 	//should be entered in account/55.php
@@ -1599,10 +1583,8 @@ function output_log_training($row){
 }
 
 /**
- * output_log_se_header()
- *  shows the table header to the SE log table
- * @param integer $support - if support = 1 some columns ar not visible
- * @return
+ * Show the table header to the SE log table for the admin log
+ * @param int $support - if support = 1 more information is visible
  */
 function output_log_se_header($support=0){
 	?>
@@ -1620,11 +1602,9 @@ function output_log_se_header($support=0){
 }
 
 /**
- * output_log_se()
- *  show the SE log data
- * @param mixed $row - sql-query array
- * @param integer $support - if support = 1 some columns are added
- * @return
+ * Show the SE log data for the admin log
+ * @param array $row - associative array containing the column data
+ * @param int   $support - if support = 1 more information is visible
  */
 function output_log_se($row, $support=0){
 	//should be entered in account/55.php
@@ -1643,10 +1623,8 @@ function output_log_se($row, $support=0){
 }
 
 /**
- * output_client_cert_header()
- *  shows the table header to the cleint cert table
- * @param integer $support - if support = 1 some columns ar not visible
- * @return
+ * Shows the table header to the client cert table
+ * @param int $support - if support = 1 some columns ar not visible
  */
 function output_client_cert_header($support=0){
 	//should be added to account/5.php
@@ -1669,11 +1647,9 @@ function output_client_cert_header($support=0){
 }
 
 /**
- * output_client_cert()
- *  show the client cert data
- * @param mixed $row - sql-query array
- * @param integer $support - if support = 1 some columns are not visible
- * @return
+ * Show the client cert data
+ * @param array $row - associative array containing the column data
+ * @param int   $support - if support = 1 some columns are not visible
  */
 function output_client_cert($row, $support=0){
 	//should be entered in account/5.php
