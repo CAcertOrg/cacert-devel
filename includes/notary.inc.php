@@ -1628,14 +1628,15 @@ function output_log_se($row, $support=0){
 
 /**
  * Shows the table header to the client cert table
- * @param int $support - if support = 1 some columns ar not visible
+ * @param int  $support - if support = 1 some columns ar not visible
+ * @param bool $readonly - whether elements to modify data should be hidden, default is `true`
  */
-function output_client_cert_header($support=0){
+function output_client_cert_header($support=0, $readonly=true){
 	//should be added to account/5.php
 	?>
 	<tr>
 		<?
-		if (1 != $support) {
+		if (!$readonly) {
 			?>
 			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
 			<?
@@ -1662,8 +1663,9 @@ function output_client_cert_header($support=0){
  * Show the client cert data
  * @param array $row - associative array containing the column data
  * @param int   $support - if support = 1 some columns are not visible
+ * @param bool  $readonly - whether elements to modify data should be hidden, default is `true`
  */
-function output_client_cert($row, $support=0){
+function output_client_cert($row, $support=0, $readonly=true){
 	//should be entered in account/5.php
 	$verified="";
 	if($row['timeleft'] > 0)
@@ -1679,80 +1681,55 @@ function output_client_cert($row, $support=0){
 	?>
 	<tr>
 	<?
-	if ($verified == _("Pending")) {
-		if (1 != $support) {
+	if (!$readonly) {
+		if ($verified === _("Pending")) {
 			?>
 			<td class="DataTD">
 				<input type="checkbox" name="delid[]" value="<?=$row['id']?>">
 			</td>
 			<?
-		}
 
-		?>
-		<td class="DataTD"><?=$verified?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-		<?
-
-	} elseif ($verified == _("Revoked")) {
-		if (1 != $support) {
+		} elseif ($verified === _("Revoked")) {
 			?>
 			<td class="DataTD">&nbsp;</td>
 			<?
-		}
 
-		?>
-		<td class="DataTD"><?=$verified?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-		<?
-
-	} else {
-		if (1 != $support) {
+		} else {
 			?>
 			<td class="DataTD">
 				<input type="checkbox" name="revokeid[]" value="<?=$row['id']?>">
 			</td>
 			<?
 		}
+	}
 
+	?>
+	<td class="DataTD"><?=$verified?></td>
+	<?
+
+	if ($verified === _("Pending")) {
 		?>
-		<td class="DataTD"><?=$verified?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
 		<?
-
-		if (1 != $support) {
-			?>
-			<td class="DataTD">
-				<a href="account.php?id=6&amp;cert=<?=$row['id']?>">
-					<?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?>
-				</a>
-			</td>
-			<?
-		} else {
-			?>
-			<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-			<?
-		}
+	} else {
+		?>
+		<td class="DataTD">
+			<a href="account.php?id=6&amp;cert=<?=$row['id']?>">
+				<?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?>
+			</a>
+		</td>
+		<?
 	}
 
 	?>
 	<td class="DataTD"><?=$row['serial']?></td>
 	<td class="DataTD"><?=$row['revoke']?></td>
 	<td class="DataTD"><?=$row['expire']?></td>
+	<td class="DataTD">
+		<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> <?=$readonly?'disabled="disabled"':''?>/>
+		<input type="hidden" name="cert_<?=$row['id']?>" value="1" />
+	</td>
 	<?
-
-	if (1 != $support) {
-		?>
-		<td class="DataTD">
-			<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
-			<input type="hidden" name="cert_<?=$row['id']?>" value="1" />
-		</td>
-		<?
-	} else {
-		?>
-		<td class="DataTD">
-			<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> DISABLED/>
-		</td>
-		<?
-	}
 
 	if (1 != $support) {
 		?>
