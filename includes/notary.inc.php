@@ -1736,10 +1736,14 @@ function output_client_cert($row, $support=0, $readonly=true){
 		<td class="DataTD">
 			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
 		</td>
-		<td class="DataTD">
-			<input type="checkbox" name="check_comment_<?=$row['id']?>" />
-		</td>
 		<?
+		if (!$readonly) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+			</td>
+			<?
+		}
 	}
 
 	?>
