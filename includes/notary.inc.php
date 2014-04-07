@@ -16,6 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+define('NULL_DATETIME', '0000-00-00 00:00:00');
+
 	function query_init ($query)
 	{
 		return mysql_query($query);
@@ -1479,10 +1481,10 @@ function output_log_email_header(){
 function output_log_email($row,$primary){
 	$primaryemailaddress='';
 	$deletedemailaddress='';
-	if ($row['deleted'] > 0) {
+	if ($row['deleted'] !== NULL_DATETIME) {
 		$deletedemailaddress=' deletedemailaddress';
 	}
-	if ($primary==$row['email'] && $row['deleted'] == 0) {
+	if ($primary==$row['email'] && $row['deleted'] === NULL_DATETIME) {
 		$primaryemailaddress= ' primaryemailaddress';
 	}
 	?>
@@ -1518,14 +1520,14 @@ function output_log_domains_header(){
  */
 function output_log_domains($row){
 	$italic='';
-	if (0==$row['deleted']) {
-		$italic='italic ';
+	if ($row['deleted'] !== NULL_DATETIME) {
+		$italic=' italic';
 	}
 	?>
 	<tr>
-		<td class="DataTD <? $italic ?>"><?=$row['domain']?></td>
-		<td class="DataTD <? $italic ?>"><?=$row['created']?></td>
-		<td class="DataTD <? $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<? $italic ?>"><?=$row['domain']?></td>
+		<td class="DataTD<? $italic ?>"><?=$row['created']?></td>
+		<td class="DataTD<? $italic ?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
