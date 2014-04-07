@@ -26,7 +26,7 @@ $res =get_user_data($userid);
 
 if(mysql_num_rows($res) <= 0)
 {
-    echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+    echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     exit;
 }
 
@@ -46,12 +46,18 @@ if(intval($_REQUEST['oldid'])==43){
 }
 $ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
 if (!valid_ticket_number($ticketno) && $support == 1) {
-    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number.%s"), '<br/>', '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>');
+    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number."), '<br/>');
+    echo '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>';
     showfooter();
     exit;
 }
 if ( $support == 1) {
-    write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno']);
+    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno'])) {
+        echo _("Writing to the admin log failed. Can't continue.");
+        printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
+        showfooter();
+        exit;
+    }
 }
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -124,7 +130,7 @@ if ( $support == 1) {
 </table>
 <br/>
 <?
-$dres = get_email_address($userid,'',1);
+$dres = get_email_addresses($userid,'',1);
 if(mysql_num_rows($dres) > 0) {
 ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -160,7 +166,7 @@ if(mysql_num_rows($dres) > 0) {
 <br/>
 
 <?
-$dres = get_training_result($userid);
+$dres = get_training_results($userid);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
@@ -180,7 +186,7 @@ $dres = get_training_result($userid);
 <br/>
 
 <?
-$dres = get_user_agreement($userid,'',1);
+$dres = get_user_agreements($userid);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>

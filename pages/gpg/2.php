@@ -30,7 +30,7 @@
 	$query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`expire`) as `expired`,
-			`expire` as `expires`, `id`, `level`,
+			`expire`, `id`, `level`,
 			`email`,`keyid`,`description` from `gpg` where `memid`='".intval($_SESSION['profile']['id'])."'
 			ORDER BY `issued` desc";
 	$res = mysql_query($query);
@@ -61,7 +61,7 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['email']?></a></td>
 <? } ?>
-    <td class="DataTD"><?=$row['expires']?></td>
+    <td class="DataTD"><?=$row['expire']?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=$row['id']?>"><?=$row['keyid']?></a></td>
     <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>

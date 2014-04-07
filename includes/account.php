@@ -84,8 +84,8 @@ function buildSubjectFromSession() {
 	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
 	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
 	$ticketno = array_key_exists('ticketno',$_REQUEST) ? $_REQUEST['ticketno'] : "";
-    $ticketvalidation = FALSE;
-    $actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
+	$ticketvalidation = FALSE;
+	$actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
 
 
 	if(!$_SESSION['mconn'])
@@ -2738,6 +2738,13 @@ function buildSubjectFromSession() {
 	{
 		$id = 43;
 		$oldid=0;
+		$userid = intval($_REQUEST['userid']);
+		if (!write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$fname = mysql_real_escape_string($_REQUEST['fname']);
 		$mname = mysql_real_escape_string($_REQUEST['mname']);
 		$lname = mysql_real_escape_string($_REQUEST['lname']);
@@ -2745,10 +2752,8 @@ function buildSubjectFromSession() {
 		$day = intval($_REQUEST['day']);
 		$month = intval($_REQUEST['month']);
 		$year = intval($_REQUEST['year']);
-		$userid = intval($_REQUEST['userid']);
 		$query = "update `users` set `fname`='$fname',`mname`='$mname',`lname`='$lname',`suffix`='$suffix',`dob`='$year-$month-$day' where `id`='$userid'";
 		mysql_query($query);
-		write_se_log($userid, $_SESSION['profile']['id'],'SE Name/DOB Change',$ticketno);
 	}elseif($oldid == 43 && $actionrequest == "updatedob" && $ticketvalidation == FALSE){
 		$id = 43;
 		$oldid=0;
@@ -2758,13 +2763,18 @@ function buildSubjectFromSession() {
 	if($oldid == 43 && $actionrequest == 'revokecert' && $ticketvalidation == TRUE)
 	{
 		$userid = intval($_REQUEST['userid']);
+		if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE Revoke all certificates',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		revoke_all_private_cert($userid);
-		write_se_log($userid, $_SESSION['profile']['id'], 'SE Revoke all certificates',$ticketno);
 		$id=43;
 	}elseif($oldid == 43 && $actionrequest == "revokecert" && $ticketvalidation == FALSE){
-	    $id = 43;
-	    $oldid=0;
-	    $_SESSION['ticketmsg']='No certificates revokes. Ticket number is missing!';
+		$id = 43;
+		$oldid=0;
+		$_SESSION['ticketmsg']='No certificates revokes. Ticket number is missing!';
 	}
 
 	if($oldid == 48 && $_REQUEST['domain'] == "")
@@ -2781,8 +2791,7 @@ function buildSubjectFromSession() {
 
 	if($id == 44)
 	{
-		if(intval($_REQUEST['userid']) != "")
-			$_REQUEST['userid'] = intval($_REQUEST['userid']);
+		$_REQUEST['userid'] = intval($_REQUEST['userid']);
 		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 		if($row['email'] == "")
 			$id = 42;
@@ -2797,12 +2806,18 @@ function buildSubjectFromSession() {
 		{
 			echo _("No such user found.");
 		} else {
+			if (!write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'],'SE reset password',$ticketno)) {
+				showheader(_("Something went wrong"));
+				echo _("Writing to the admin log failed. Can't continue.");
+				showfooter();
+				exit;
+			}
 			mysql_query("update `users` set `password`=sha1('".mysql_real_escape_string(stripslashes($_REQUEST['newpass']))."') where `id`='".intval($_REQUEST['userid'])."'");
 			$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
-		$my_translation = L10n::get_translation();
-		L10n::set_recipient_language(intval($_REQUEST['userid']));
+			$my_translation = L10n::get_translation();
+			L10n::set_recipient_language(intval($_REQUEST['userid']));
 			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
 			$body .= _("You are receiving this email because a CAcert administrator ".
 					"has changed the password on your account.")."\n\n";
@@ -2811,8 +2826,7 @@ function buildSubjectFromSession() {
 
 			sendmail($row['email'], "[CAcert.org] "._("Password Update Notification"), $body,
 						"support@cacert.org", "", "", "CAcert Support");
-		L10n::set_translation($my_translation);
-			write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'],'SE reset password',$ticketno);
+			L10n::set_translation($my_translation);
 		}
 
 		showfooter();
@@ -2918,11 +2932,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('tverify',$_REQUEST) && $_REQUEST['tverify'] > 0 && $ticketvalidation==TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['tverify']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change tverify status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['tverify'];
 		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change tverify status',$ticketno);
 	}else{
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
@@ -2931,11 +2950,16 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('admsetassuret');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['assurer'];
 		mysql_query("update `users` set `assurer`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer status',$ticketno);
 	}elseif($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['assurer']);
 		$_SESSION['ticketmsg']='No action (Change assurer status) taken. Ticket number is missing!';
@@ -2944,11 +2968,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer blocked status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['assurer_blocked'];
 		mysql_query("update `users` set `assurer_blocked`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change assurer blocked status',$ticketno);
 	}elseif($id == 43 && array_key_exists('assurer_blocked',$_REQUEST) && $_REQUEST['assurer_blocked'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['assurer_blocked']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -2958,11 +2987,16 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('admactlock');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locked']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change locked status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['locked'];
 		mysql_query("update `users` set `locked`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change locked status',$ticketno);
 	}elseif($id == 43 && array_key_exists('locked',$_REQUEST) && $_REQUEST['locked'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['locked']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -2972,11 +3006,16 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('admcodesign');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['codesign']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change codesign status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['codesign'];
 		mysql_query("update `users` set `codesign`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change codesign status',$ticketno);
 	}elseif($id == 43 && array_key_exists('codesign',$_REQUEST) && $_REQUEST['codesign'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['codesign']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -2986,11 +3025,16 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('admorgadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change org assuer status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['orgadmin'];
 		mysql_query("update `users` set `orgadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change org assuer status',$ticketno);
 	}elseif($id == 43 && array_key_exists('orgadmin',$_REQUEST) && $_REQUEST['orgadmin'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['orgadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3000,11 +3044,16 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('admttpadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
+		if(!write_se_log($memid, $_SESSION['profile']['id'],'SE Change ttp admin status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['ttpadmin'];
 		mysql_query("update `users` set `ttpadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change ttp admin status',$ticketno);
 	}elseif($id == 43 && array_key_exists('ttpadmin',$_REQUEST) && $_REQUEST['ttpadmin'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['ttpadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3013,13 +3062,18 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['adadmin']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change advertising admin status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = $row['adadmin'] + 1;
 		if($ver > 2)
 			$ver = 0;
 		mysql_query("update `users` set `adadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change advertising admin status',$ticketno);
 	}elseif($id == 43 && array_key_exists('adadmin',$_REQUEST) && $_REQUEST['adadmin'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['adadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3028,11 +3082,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['locadmin']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change location admin status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['locadmin'];
 		mysql_query("update `users` set `locadmin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change location admin status',$ticketno);
 	}elseif($id == 43 && array_key_exists('locadmin',$_REQUEST) && $_REQUEST['locadmin'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['locadmin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3042,11 +3101,16 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('admsetadmin');
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['admin']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change SE status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `users` where `id`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['admin'];
 		mysql_query("update `users` set `admin`='$ver' where `id`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change SE status',$ticketno);
 	}elseif($id == 43 && array_key_exists('admin',$_REQUEST) && $_REQUEST['admin'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['admin']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3055,11 +3119,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['general']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change general status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['general'];
 		mysql_query("update `alerts` set `general`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change general status',$ticketno);
 	}elseif($id == 43 && array_key_exists('general',$_REQUEST) && $_REQUEST['general'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['general']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3068,11 +3137,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['country']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change country status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['country'];
 		mysql_query("update `alerts` set `country`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change country status',$ticketno);
 	}elseif($id == 43 && array_key_exists('country',$_REQUEST) && $_REQUEST['country'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['country']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3081,11 +3155,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['regional']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change regional status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['regional'];
 		mysql_query("update `alerts` set `regional`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change regional status',$ticketno);
 	}elseif($id == 43 && array_key_exists('regional',$_REQUEST) && $_REQUEST['regional'] > 0 && $ticketvalidation == FALSE){
 		$_REQUEST['userid'] = intval($_REQUEST['regional']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3094,11 +3173,16 @@ function buildSubjectFromSession() {
 	if($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0 && $ticketvalidation == TRUE)
 	{
 		$memid = $_REQUEST['userid'] = intval($_REQUEST['radius']);
+		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change radius status',$ticketno)) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			showfooter();
+			exit;
+		}
 		$query = "select * from `alerts` where `memid`='$memid'";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['radius'];
 		mysql_query("update `alerts` set `radius`='$ver' where `memid`='$memid'");
-		write_se_log($memid, $_SESSION['profile']['id'],'SE Change radius status',$ticketno);
 	}elseif($id == 43 && array_key_exists('radius',$_REQUEST) && $_REQUEST['radius'] > 0 && $ticketvalidation == false){
 		$_REQUEST['userid'] = intval($_REQUEST['radius']);
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
@@ -3106,7 +3190,7 @@ function buildSubjectFromSession() {
 
 	if($id == 50)
 	{
-		if(array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) != "")
+		if(array_key_exists('userid',$_REQUEST) && $_REQUEST['userid'] !== "")
 			$_REQUEST['userid'] = intval($_REQUEST['userid']);
 
 		$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
@@ -3162,8 +3246,14 @@ function buildSubjectFromSession() {
 			showfooter();
 			exit;
 		}
+		if (!write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'], 'SE Account delete', trim($_REQUEST['arbitrationno']))) {
+			showheader(_("Something went wrong"));
+			echo _("Writing to the admin log failed. Can't continue.");
+			printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
+			showfooter();
+			exit;
+		}
 		account_delete(intval($_REQUEST['userid']), trim($_REQUEST['arbitrationno']), $_SESSION['profile']['id']);
-		write_se_log(intval($_REQUEST['userid']), $_SESSION['profile']['id'], 'SE Account delete', trim($_REQUEST['arbitrationno']));
 	}
 
 	if(($id == 51 || $id == 52 || $oldid == 52))
@@ -3174,127 +3264,10 @@ function buildSubjectFromSession() {
 		exit;
 	}
 
-	/* this area not needed as the The Tverify programme is Terminated as of 16th November 2010
-
-	if(($id == 51 || $id == 52 || $oldid == 52) && $_SESSION['profile']['tverify'] <= 0)
-	{
-		showheader(_("My CAcert.org Account!"));
-		echo _("You don't have access to this area.");
-		showfooter();
-		exit;
-	}
-	if($oldid == 52)
-	{
-		$uid = intval($_REQUEST['uid']);
-		$query = "select * from `tverify` where `id`='$uid' and `modified`=0";
-		$rc = mysql_num_rows(mysql_query($query));
-		if($rc <= 0)
-		{
-			showheader(_("My CAcert.org Account!"));
-			echo _("Unable to find a valid tverify request for this ID.");
-			showfooter();
-			exit;
-		}
-	}
-
-	if($oldid == 52)
-	{
-		$query = "select * from `tverify-vote` where `tverify`='$uid' and `memid`='".$_SESSION['profile']['id']."'";
-		$rc = mysql_num_rows(mysql_query($query));
-		if($rc > 0)
-		{
-			showheader(_("My CAcert.org Account!"));
-			echo _("You have already voted on this request.");
-			showfooter();
-			exit;
-		}
-	}
-
-	if($oldid == 52 && ($_REQUEST['agree'] != "" || $_REQUEST['disagree'] != ""))
-	{
-		$vote = -1;
-		if($_REQUEST['agree'] != "")
-			$vote = 1;
-
-		$query = "insert into `tverify-vote` set
-				`tverify`='$uid',
-				`memid`='".$_SESSION['profile']['id']."',
-				`when`=NOW(), `vote`='$vote',
-				`comment`='".mysql_real_escape_string($_REQUEST['comment'])."'";
-		mysql_query($query);
-
-		$rc = mysql_num_rows(mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='1'"));
-		if($rc >= 8)
-		{
-			mysql_query("update `tverify` set `modified`=NOW() where `id`='$uid'");
-			$tverify = mysql_fetch_assoc(mysql_query("select * from `tverify` where `id`='$uid'"));
-			$memid = $tverify['memid'];
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$memid'"));
-			$tmp = mysql_fetch_assoc(mysql_query("select sum(`points`) as `points` from `notary` where `to`='$memid' and `deleted` = 0"));
-
-			$points = 0;
-			if($tverify['URL'] != "" && $tverify['photoid'] != "")
-				$points = 150 - intval($tmp['points']);
-			if($tverify['URL'] != "" && $tverify['photoid'] == "")
-				$points = 90 - intval($tmp['points']);
-			if($tverify['URL'] == "" && $tverify['photoid'] == "")
-				$points = 50 - intval($tmp['points']);
-
-			if($points < 0)
-				$points = 0;
-
-			if($points > 0)
-			{
-				mysql_query("insert into `notary` set `from`='0', `to`='$memid', `points`='$points',
-						`method`='Thawte Points Transfer', `when`=NOW()");
-				fix_assurer_flag($memid);
-			}
-			$totalpoints = intval($tmp['points']) + $points;
-
-			$body  = _("Your request to have points transfered was successful. You were issued $points points as a result, and you now have $totalpoints in total")."\n\n"._("The following comments were made by reviewers")."\n\n";
-			$res = mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='1'");
-			while($row = mysql_fetch_assoc($res))
-				$body .= $row['comment']."\n";
-			$body .= "\n";
-
-			$body .= _("Best regards")."\n";
-			$body .= _("CAcert Support Team");
-			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");
-		}
-
-		$rc = mysql_num_rows(mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='-1'"));
-		if($rc >= 4)
-		{
-			mysql_query("update `tverify` set `modified`=NOW() where `id`='$uid'");
-			$tverify = mysql_fetch_assoc(mysql_query("select * from `tverify` where `id`='$uid'"));
-			$memid = $tverify['memid'];
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$memid'"));
-
-			$body  = _("Unfortunately your request for a points increase has been denied, below is the comments from people that reviewed your request as to why they rejected your application.")."\n\n";
-			$res = mysql_query("select * from `tverify-vote` where `tverify`='$uid' and `vote`='-1'");
-			while($row = mysql_fetch_assoc($res))
-				$body .= $row['comment']."\n";
-			$body .= "\n";
-
-			$body .= _("You are welcome to try submitting another request at any time in the future, please make sure you take the reviewer comments into consideration or you risk having your application rejected again.")."\n\n";
-
-			$body .= _("Best regards")."\n";
-			$body .= _("CAcert Support Team");
-			sendmail($user['email'], "[CAcert.org] Thawte Notary Points Transfer", $body, "website-form@cacert.org", "support@cacert.org", "", "CAcert Tverify");
-		}
-
-		showheader(_("My CAcert.org Account!"));
-		echo _("Your vote has been accepted.");
-		showfooter();
-		exit;
-	}
- */
 	if($id == 59){
-		if ($oldid == 43 && $_SESSION['profile']['admin'] == 1) {
-			$_SESSION['support']=1;
-		}ELSEIF ($oldid == 13 && intval($_REQUEST['userid']) == $_SESSION['profile']['id']){
-			$_SESSION['support']=0;
-		}ELSE{
+		if (!($oldid == 43 && $_SESSION['profile']['admin'] == 1) &&
+		    !($oldid == 13 && intval($_REQUEST['userid']) == $_SESSION['profile']['id']))
+		{
 			showheader(_("My CAcert.org Account!"));
 			echo _("You do not have access to this page.");
 			showfooter();

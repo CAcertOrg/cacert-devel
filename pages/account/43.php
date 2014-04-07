@@ -142,16 +142,20 @@ if(intval($_REQUEST['userid']) > 0) {
 //deletes an assurance
         if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == true)
         {
-            $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
-            $trow = 0;
-            $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
-            if ($res) {
-                $trow = mysql_fetch_assoc($res);
-            }
-            mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
-            if ($trow) {
-                fix_assurer_flag($trow['to']);
-                write_se_log($userid, $_SESSION['profile']['id'], 'SE assurance revoke', $ticketno);
+            if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE assurance revoke', $ticketno)) {
+                $ticketmsg=_("Writing to the admin log failed. Can't continue.");
+            } else {
+                $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
+                $trow = 0;
+                $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
+                if ($res) {
+                    $trow = mysql_fetch_assoc($res);
+                }
+
+                mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
+                if ($trow) {
+                    fix_assurer_flag($trow['to']);
+                }
             }
         } elseif(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == FALSE) {
             $ticketmsg=_('No assurance revoked. Ticket number is missing!');
@@ -253,7 +257,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <? // list of flags ?>
         <tr>
             <td class="DataTD"><?=_("CCA accepted")?>:</td>
-            <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'])) ? _("Yes") : _("No") ?></a></td>
+            <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'], 'CCA')) ? _("Yes") : _("No") ?></a></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Trainings")?>:</td>
@@ -329,7 +333,16 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
                 // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
                 if(array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==true) {
-                    write_se_log($userid, $_SESSION['profile']['id'], 'SE view lost password information', $ticketno);
+                    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE view lost password information', $ticketno)) {
+    ?>
+        <tr>
+            <td class="DataTD" colspan="2"><?=_("Writing to the admin log failed. Can't continue.")?></td>
+        </tr>
+        <tr>
+            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=$row['id']?>&amp;showlostpw=yes&amp;ticketno=<?=$ticketno?>"><?=_("Show Lost Password Details")?></a></td>
+        </tr>
+    <?
+                    } else {
     ?>
         <tr>
             <td class="DataTD"><?=_("Lost Password")?> - Q1:</td>
@@ -372,6 +385,7 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD"><?=sanitizeHTML($row['A5'])?></td>
         </tr>
     <?
+                    }
                 } elseif (array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==false) {
     ?>
         <tr>
@@ -404,7 +418,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <br/>
     <?
     //list secondary email addresses
-                $dres = get_email_address(intval($row['id']),mysql_real_escape_string($row['email']));
+                $dres = get_email_addresses(intval($row['id']),mysql_real_escape_string($row['email']));
                 if(mysql_num_rows($dres) > 0) {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
