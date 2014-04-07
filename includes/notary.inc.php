@@ -1591,12 +1591,14 @@ function output_log_se_header($support=0){
 	<tr>
 		<td class="DataTD bold"><?= _("Date") ?></td>
 		<td class="DataTD bold"><?= _("Type") ?></td>
-		<?if (1==$support) {
+		<?
+		if (1 == $support) {
 			?>
-				<td class="DataTD bold"><?= _("Information") ?></td>
-				<td class="DataTD bold"><?= _("Admin") ?></td>
+			<td class="DataTD bold"><?= _("Information") ?></td>
+			<td class="DataTD bold"><?= _("Admin") ?></td>
 			<?
-		}?>
+		}
+		?>
 	</tr>
 	<?
 }
@@ -1612,12 +1614,14 @@ function output_log_se($row, $support=0){
 	<tr>
 		<td class="DataTD"><?=$row['when']?></td>
 		<td class="DataTD"><?=$row['type']?></td>
-		<?if (1==$support) {
+		<?
+		if (1 == $support) {
 			?>
 			<td class="DataTD"><?=$row['information']?></td>
 			<td class="DataTD"><?=$row['fname'].' '.$row['lname']?></td>
 			<?
-		}?>
+		}
+		?>
 	</tr>
 	<?
 }
@@ -1630,18 +1634,26 @@ function output_client_cert_header($support=0){
 	//should be added to account/5.php
 	?>
 	<tr>
-		<?if ($support !=1) { ?>
+		<?
+		if (1 != $support) {
+			?>
 			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
-		<? } ?>
+			<?
+		}
+		?>
 		<td class="DataTD"><?=_("Status")?></td>
 		<td class="DataTD"><?=_("Email Address")?></td>
 		<td class="DataTD"><?=_("SerialNumber")?></td>
 		<td class="DataTD"><?=_("Revoked")?></td>
 		<td class="DataTD"><?=_("Expires")?></td>
 		<td class="DataTD"><?=_("Login")?></td>
-		<?if ($support !=1) { ?>
+		<?
+		if (1 != $support) {
+			?>
 			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
-		<? } ?>
+			<?
+		}
+		?>
 	</tr>
 	<?
 }
@@ -1656,7 +1668,7 @@ function output_client_cert($row, $support=0){
 	$verified="";
 	if($row['timeleft'] > 0)
 		$verified = _("Valid");
-	if($row['timeleft'] < 0)
+	if($row['timeleft'] <= 0)
 		$verified = _("Expired");
 	if($row['expired'] == 0)
 		$verified = _("Pending");
@@ -1667,50 +1679,94 @@ function output_client_cert($row, $support=0){
 	?>
 	<tr>
 	<?
-	if($verified != _("Pending") && $verified != _("Revoked")) {
-		if ($support !=1) { ?>
-			<td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"></td>
-		<? } ?>
+	if ($verified != _("Pending") && $verified != _("Revoked")) {
+		if (1 != $support) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="revokeid[]" value="<?=$row['id']?>">
+			</td>
+			<?
+		}
+
+		?>
 		<td class="DataTD"><?=$verified?></td>
-		<? if ($support !=1) { ?>
-			<td class="DataTD"><a href="account.php?id=6&amp;cert=<?=$row['id']?>"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></a></td>
-		<? } ELSE {?>
+		<?
+
+		if (1 != $support) {
+			?>
+			<td class="DataTD">
+				<a href="account.php?id=6&amp;cert=<?=$row['id']?>">
+					<?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?>
+				</a>
+			</td>
+			<?
+		} else {
+			?>
 			<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-		<? } ?>
-	<? } else if($verified != _("Revoked")) {
-		if ($support !=1) { ?>
-			<td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
-		<? } ?>
+			<?
+		}
+
+	} elseif ($verified != _("Revoked")) {
+		if (1 != $support) {
+			?>
+			<td class="DataTD">
+				<input type="checkbox" name="delid[]" value="<?=$row['id']?>">
+			</td>
+			<?
+		}
+
+		?>
 		<td class="DataTD"><?=$verified?></td>
 		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-	<? } else {
-		if ($support !=1) { ?>
+		<?
+
+	} else {
+		if (1 != $support) {
+			?>
 			<td class="DataTD">&nbsp;</td>
-		<? } ?>
+			<?
+		}
+
+		?>
 		<td class="DataTD"><?=$verified?></td>
 		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
-	<? } ?>
+		<?
+	}
 
-		<td class="DataTD"><?=$row['serial']?></td>
-		<td class="DataTD"><?=$row['revoke']?></td>
-		<td class="DataTD"><?=$row['expire']?></td>
+	?>
+	<td class="DataTD"><?=$row['serial']?></td>
+	<td class="DataTD"><?=$row['revoke']?></td>
+	<td class="DataTD"><?=$row['expire']?></td>
+	<?
 
-	<? if ($support !=1) { ?>
+	if (1 != $support) {
+		?>
 		<td class="DataTD">
 			<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
 			<input type="hidden" name="cert_<?=$row['id']?>" value="1" />
 		</td>
-	<? } ELSE { ?>
+		<?
+	} else {
+		?>
 		<td class="DataTD">
 			<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> DISABLED/>
 		</td>
-	<? }
-	if ($support !=1) { ?>
-		<td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
-		<td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
-	<? }?>
-	</tr>
+		<?
+	}
 
+	if (1 != $support) {
+		?>
+		<td class="DataTD">
+			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+		</td>
+		<td class="DataTD">
+			<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+		</td>
+		<?
+	}
+
+	?>
+	</tr>
 	<?
 }
 
