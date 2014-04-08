@@ -107,9 +107,9 @@ if (file_exists("thawte_RU.txt"))
 
 // read last used id
 $lastid = 0;
-if (file_exists("send_thawte_lastid.txt"))
+if (file_exists("send_heartbleed_lastid.txt"))
 {
-	$fp = fopen("send_thawte_lastid.txt", "r");
+	$fp = fopen("send_heartbleed_lastid.txt", "r");
 	$lastid = trim(fgets($fp, 4096));
 	fclose($fp);
 }
@@ -156,7 +156,7 @@ while($row = mysql_fetch_assoc($res))
 
 	sendmail($row['email'], "[CAcert.org] Changes at CAcert", $mailtxt, "mailing@cacert.org", "", "", "CAcert", "returns@cacert.org", "");
 
-	$fp = fopen("send_thawte_lastid.txt", "w");
+	$fp = fopen("send_heartbleed_lastid.txt", "w");
 	fputs($fp, $row["id"]."\n");
 	fclose($fp);
 
