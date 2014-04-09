@@ -886,16 +886,16 @@ function buildSubjectFromSession() {
 
 				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into `domaincerts` set
-						`domid`='".$row['domid']."',
+						`domid`='".intval($row['domid'])."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
 						`subject`='".mysql_real_escape_string($row['subject'])."',".
 						//`csr_name`='".$row['csr_name']."', // RACE CONDITION
-						"`created`='".$row['created']."',
+						"`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`rootcert`='".$row['rootcert']."',
-						`type`='".$row['type']."',
-						`pkhash`='".$row['pkhash']."',
-						`description`='".$row['description']."'";
+						`rootcert`='".intval($row['rootcert'])."',
+						`type`='".intval($row['type'])."',
+						`pkhash`='".mysql_real_escape_string($row['pkhash'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
@@ -1063,17 +1063,17 @@ function buildSubjectFromSession() {
 
 				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into emailcerts set
-						`memid`='".$row['memid']."',
+						`memid`='".intval($row['memid'])."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
 						`subject`='".mysql_real_escape_string($row['subject'])."',
-						`keytype`='".$row['keytype']."',
-						`csr_name`='".$row['csr_name']."',
-						`created`='".$row['created']."',
+						`keytype`='".mysql_real_escape_string($row['keytype'])."',
+						`csr_name`='".mysql_real_escape_string($row['csr_name'])."',
+						`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`disablelogin`='".$row['disablelogin']."',
-						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`disablelogin`='".intval($row['disablelogin'])."',
+						`codesign`='".intval($row['codesign'])."',
+						`rootcert`='".intval($row['rootcert'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1699,17 +1699,17 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				$query = "insert into `orgemailcerts` set
-						`orgid`='".$row['orgid']."',
-						`CN`='".$row['CN']."',
-						`ou`='".$row['ou']."',
-						`subject`='".$row['subject']."',
-						`keytype`='".$row['keytype']."',
-						`csr_name`='".$row['csr_name']."',
-						`created`='".$row['created']."',
+						`orgid`='".intval($row['orgid'])."',
+						`CN`='".mysql_real_escape_string($row['CN'])."',
+						`ou`='".mysql_real_escape_string($row['ou'])."',
+						`subject`='".mysql_real_escape_string($row['subject'])."',
+						`keytype`='".mysql_real_escape_string($row['keytype'])."',
+						`csr_name`='".mysql_real_escape_string($row['csr_name'])."',
+						`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`codesign`='".intval($row['codesign'])."',
+						`rootcert`='".intval($row['rootcert'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -2053,15 +2053,15 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				$query = "insert into `orgdomaincerts` set
-						`orgid`='".$row['orgid']."',
-						`CN`='".$row['CN']."',
-						`csr_name`='".$row['csr_name']."',
-						`created`='".$row['created']."',
+						`orgid`='".intval($row['orgid'])."',
+						`CN`='".mysql_real_escape_string($row['CN'])."',
+						`csr_name`='".mysql_real_escape_string($row['csr_name'])."',
+						`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`subject`='".$row['subject']."',
-						`type`='".$row['type']."',
-						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`subject`='".mysql_real_escape_string($row['subject'])."',
+						`type`='".intval($row['type'])."',
+						`rootcert`='".intval($row['rootcert'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
