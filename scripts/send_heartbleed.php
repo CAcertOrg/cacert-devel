@@ -21,89 +21,21 @@ include_once("../includes/mysql.php");
 
 // read texts
 
-$lines_EN = "";
-if (file_exists("thawte_EN.txt"))
-{
-	$fp = fopen("thawte_EN.txt", "r");
-	while(!feof($fp))
-	{
-		$line = trim(fgets($fp, 4096));
-		$line = wordwrap($line, 75, "\n")."\n";
-		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-		$lines_EN .= $line;
-	}
-	fclose($fp);
-}
+$lines_EN = <<<EOF
 
-$lines_DE = "";
-if (file_exists("thawte_DE.txt"))
-{
-	$fp = fopen("thawte_DE.txt", "r");
-	while(!feof($fp))
-	{
-		$line = trim(fgets($fp, 4096));
-		$line = wordwrap($line, 75, "\n")."\n";
-		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-		$lines_DE .= $line;
-	}
-	fclose($fp);
-}
+EOF;
 
-$lines_NL = "";
-if (file_exists("thawte_NL.txt"))
-{
-	$fp = fopen("thawte_NL.txt", "r");
-	while(!feof($fp))
-	{
-		$line = trim(fgets($fp, 4096));
-		$line = wordwrap($line, 75, "\n")."\n";
-		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-		$lines_NL .= $line;
-	}
-	fclose($fp);
-}
+$lines_EN = wordwrap($lines_EN, 75, "\n");
+$lines_EN = mb_convert_encoding($lines_EN, "HTML-ENTITIES", "UTF-8");
 
-$lines_FR = "";
-if (file_exists("thawte_FR.txt"))
-{
-	$fp = fopen("thawte_FR.txt", "r");
-	while(!feof($fp))
-	{
-		$line = trim(fgets($fp, 4096));
-		$line = wordwrap($line, 75, "\n")."\n";
-		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-		$lines_FR .= $line;
-	}
-	fclose($fp);
-}
 
-$lines_ES = "";
-if (file_exists("thawte_ES.txt"))
-{
-	$fp = fopen("thawte_ES.txt", "r");
-	while(!feof($fp))
-	{
-		$line = trim(fgets($fp, 4096));
-		$line = wordwrap($line, 75, "\n")."\n";
-		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-		$lines_ES .= $line;
-	}
-	fclose($fp);
-}
+$lines_DE = <<<EOF
 
-$lines_RU = "";
-if (file_exists("thawte_RU.txt"))
-{
-	$fp = fopen("thawte_RU.txt", "r");
-	while(!feof($fp))
-	{
-		$line = trim(fgets($fp, 4096));
-		$line = wordwrap($line, 75, "\n")."\n";
-		$line = mb_convert_encoding($line, "HTML-ENTITIES", "UTF-8");
-		$lines_RU .= $line;
-	}
-	fclose($fp);
-}
+EOF;
+
+$lines_DE = wordwrap($lines_DE, 75, "\n");
+$lines_DE = mb_convert_encoding($lines_DE, "HTML-ENTITIES", "UTF-8");
+
 
 // read last used id
 $lastid = 0;
@@ -125,32 +57,12 @@ $res = mysql_query($query);
 
 while($row = mysql_fetch_assoc($res))
 {
-	$mailtxt = "Hello ${row["fname"]} ${row["lname"]},\n".$lines_EN."\n\n";
+	$mailtxt = "Dear ${row["fname"]} ${row["lname"]},\n".$lines_EN."\n\n";
 	switch ($row["language"])
 	{
 		case "de_DE":
 		case "de":
 			$mailtxt .= $lines_DE;
-			break;
-
-		case "nl_NL":
-		case "nl":
-			$mailtxt .= $lines_NL;
-			break;
-
-		case "fr_FR":
-		case "fr":
-			$mailtxt .= $lines_FR;
-			break;
-
-		case "es_ES":
-		case "es":
-			$mailtxt .= $lines_ES;
-			break;
-
-		case "ru_RU":
-		case "ru":
-			$mailtxt .= $lines_RU;
 			break;
 	}
 
