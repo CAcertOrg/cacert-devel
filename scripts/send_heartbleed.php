@@ -25,9 +25,9 @@ $lines_EN = <<<EOF
 
 there are news [1] about a bug in OpenSSL that may allow an attacker to leak arbitrary information from any process using OpenSSL. [2]
 
-We contacted you, because you have subscribed to get general announcements, or you have had a server certificate since the bug was introduced into the OpenSSL releases and are especially vulnerable to be affected by it.
+We contacted you, because you have subscribed to get general announcements, or you have had a server certificate since the bug was introduced into the OpenSSL releases and are especially likely to be affected by it.
 
-CAcert is not responsible for this issue. But we want to inform especially vulnerable members about it.
+CAcert is not responsible for this issue. But we want to inform members about it, who are especially likely to be vulnerable or otherwise affected.
 
 
 Good news:
@@ -76,7 +76,7 @@ CAcert's response to the bug:
 
 A list of affected and fixed infrastructure systems and new information can be found at:
 
-https://blog.cacert.org
+https://blog.cacert.org/2014/04/openssl-heartbleed-bug/
 
 
 Links:
@@ -92,7 +92,8 @@ $lines_EN = mb_convert_encoding($lines_EN, "HTML-ENTITIES", "UTF-8");
 
 
 $lines_DE = <<<EOF
-German Translation:
+---
+German Translation / Deutsche Übersetzung:
 
 
 Liebes CAcert-Mitglied,
@@ -113,20 +114,20 @@ Die schlechte Nachricht:
 ========================
 Dennoch kann jeder betroffen sein!
 
-Auch wenn keine Schlüssel von CAcert verraten wurden, können sie dennoch später kompromittiert worden sein, wenn auf Ihren Systemen eine angreifbaren Version von OpenSSL lief und die Schlüssel dort verwendet wurden.
+Auch wenn keine Schlüssel durch CAcert preisgegeben wurden, können sie dennoch später kompromittiert worden sein, wenn auf Ihren Systemen eine angreifbaren Version von OpenSSL lief und die Schlüssel dort verwendet wurden.
 
 
 Um ins Detail zu gehen:
 =======================
-Die zentralen Systeme und die Stammzertifikate von CAcert sind von diesem Problem nicht betroffen. Leider sind einige unserer Infrastruktur-Systeme durch den  Fehler betroffen. Wir arbeiten daran diese zu beheben und haben dies auch schon für die meisten erledigt. Jeder, der sich auf diese Systeme in den letzten zwei Jahre eingeloggt hat kann betroffen sein!
+Die zentralen Systeme und die Stammzertifikate von CAcert sind von diesem Problem nicht betroffen. Leider sind einige unserer Infrastruktur-Systeme durch den Fehler betroffen. Wir arbeiten daran diese zu beheben und haben dies auch schon für die meisten erledigt. Jeder, der sich auf diese Systeme in den letzten zwei Jahren eingeloggt hat kann betroffen sein!
 
-Aufgrund der Art des Fehlers, müssen wir leider davon ausgehen, dass die  Zertifikate unserer Mitglieder betroffen sind, wenn sie sich in eine  Umgebung eingeloggt haben, die über öffentliche OpenSSL-Verbindungen  zugänglich war (z.B. Apache Webserver, Mail-Server, Jabber-Server, ...).  Dieser Fehler war zwei Jahre lang in OpenSSL - seit Dezember 2011 - und  kam beginnend mit Version 1.0.1 in die Stabilen Versionen.
+Aufgrund der Art des Fehlers, müssen wir leider davon ausgehen, dass die Zertifikate unserer Mitglieder betroffen sind, wenn sie sich in eine Umgebung eingeloggt haben, die über öffentliche OpenSSL-Verbindungen zugänglich war (z.B. Apache Webserver, Mail-Server, Jabber-Server, ...). Dieser Fehler war zwei Jahre lang in OpenSSL - seit Dezember 2011 - und kam beginnend mit Version 1.0.1 in die stabilen Versionen.
 
-Angreifer, die einen verwundbaren Service erreichen, können die TLS-Erweiterung  "heartbeat" ausnutzen, um beliebige Abschnitte aus dem Speicher zu erlangen, indem sie eine fehlende Bereichsprüfung ausnutzen. Das kann zur Offenlegung von privaten Schlüsseln, im Speicher abgelegte Sitzungsschlüsseln, sonstige Schlüssel genauso wie jeglicher weiterer Speicherinhalt des Server-Prozesses wie Passwörter oder übermittelte Benutzerdaten (z.B. Webinhalte) oder andere vertrauliche Informationen führen.
+Angreifer, die einen verwundbaren Service erreichen können, können die TLS-Erweiterung "heartbeat" ausnutzen, um beliebige Speicherbereiche zu auslesen, indem sie eine fehlende Bereichsprüfung ausnutzen. Das kann zur Offenlegung von privaten Schlüsseln, im Speicher abgelegten Sitzungsschlüsseln, sonstige Schlüssel genauso wie jeglicher weiterer Speicherinhalt des Server-Prozesses wie Passwörter oder übermittelte Benutzerdaten (z.B. Webinhalte) oder anderer vertrauliche Informationen führen.
 
-Die Ausnutzung dieses Fehlers hinterlässt keine merklichen Spuren. Daher muss für jedes System, auf dem eine angreifbare Version von OpenSSL läuft (oder lief), angenommen werden, dass zumindest die verwendeten Server-Zertifikate kompromittiert sind und deswegen durch einen NEU generierte ersetzt werden müssen. Einfach die alten Zertifikate zu erneuern, reicht nicht aus! - Bitte NEUE Schlüssel mit 2048 Bit RSA oder stärker generieren!
+Die Ausnutzung dieses Fehlers hinterlässt keine merklichen Spuren. Daher muss für jedes System, auf dem eine angreifbare Version von OpenSSL läuft (oder lief), angenommen werden, dass zumindest die verwendeten Server-Zertifikate kompromittiert sind und deswegen durch NEU generierte ersetzt werden müssen. Einfach die alten Zertifikate zu erneuern, reicht nicht aus! - Bitte NEUE Schlüssel mit 2048 Bit RSA oder stärker generieren!
 
-Wie oben erwähnt kann dieser Fehler ausgenutzt werden, um Passwörter zu entwenden. Daher sollte jeder überlegen, alle Zugangsdaten zu möglicherweise betroffenen Systemen und allen Systemen bei denen diese sonst noch verwendet worden sein können, so bald wie möglich auszutauschen.
+Wie oben erwähnt kann dieser Fehler ausgenutzt werden, um Passwörter zu entwenden. Daher sollte jeder überlegen, alle Zugangsdaten zu möglicherweise betroffenen Systemen und allen Systemen bei denen diese sonst noch verwendet worden sein könnten, so bald wie möglich auszutauschen.
 
 Eine (unvollständige) Liste an weit verbreiteter Software die OpenSSL verwendet kann z.B. unter folgendem Link gefunden werden. [5]
 
@@ -138,19 +139,19 @@ Was ist zu tun?
 - Alle möglicherweise betroffenen Zertifikate widerrufen.
 - Überprüfen, welche fremden Dienste in den letzten zwei Jahren besucht worden sind.
 - Warten, bis dort wahrscheinlich der Fehler behoben wurde.
-- Dann (und erst dann) die Login-Daten für diese Dienste erneuern. Vorsicht: Wenn das zu früh  getan wird, also wenn der Dienst noch nicht bereinigt wurde, können die Daten wieder abgegriffen werden.
+- Dann (und erst dann) die Login-Daten für diese Dienste erneuern. Vorsicht: Wenn das zu früh getan wird, also wenn der Dienst noch nicht bereinigt wurde, können die Daten wieder abgegriffen werden.
 
 
 CAcerts Maßnahmen als Antwort auf den Bug:
 ==========================================
 - Wir haben so gut wie alle Infrastruktur-Systeme auf den neuesten OpenSSL-Stand gebracht und für diese neue Zertifikate zu generiert, die restlichen folgen so schnell wie möglich.
-- Wir haben die Gelegenheit genutzt, um dabei auf 4096 Bit RSA-Schlüssel, die mit SHA-512 signiert sind aufzurüsten.
+- Wir haben die Gelegenheit genutzt, um dabei auf 4096 Bit RSA-Schlüssel, die mit SHA-512 signiert sind, aufzurüsten.
 - Mit dieser E-Mail kontaktieren wir alle Mitglieder, die in den letzten zwei Jahren aktive Server-Zertifikate hatten.
 - Wir werden neue Informationen im Blog veröffentlichen.
 
-Eine Liste der betroffenen und reparierten Infrastructure-Systeme befindet sich unter:
+Eine Liste der betroffenen und reparierten Infrastruktur-Systeme befindet sich unter:
 
-https://blog.cacert.org
+https://blog.cacert.org/2014/04/openssl-heartbleed-bug/
 
 Links:
 [1] http://heartbleed.com/
