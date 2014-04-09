@@ -51,7 +51,48 @@ echo "ID now: $lastid\n";
 
 $count = 0;
 
-$query = "select `id`,`fname`,`lname`,`email`,`language` from `users` where `deleted` = 0 and `id` > '$lastid' order by `id`";
+$query = "
+	(
+		select u.`id`, u.`fname`, u.`lname`, u.`email`, u.`language`
+		from `users` as u, `alerts` as a
+		where u.`deleted` = 0 and u.`id` > '$lastid'
+			and a.`memid` = u.`id`
+			and a.`general` = 1
+	)
+	union distinct
+	(
+		select u.`id`, u.`fname`, u.`lname`, u.`email`, u.`language`
+		from `users` as u, `domains` as d, `domaincerts` as dc
+		where u.`deleted` = 0 and u.`id` > '$lastid'
+			and dc.`domid` = d.`id` and d.`memid` = u.`id`
+			and dc.`expire` >= '2011-12-01'
+	)
+	union distinct
+	(
+		select u.`id`, u.`fname`, u.`lname`, u.`email`, u.`language`
+		from `users` as u, `domains` as d, `domlink` as dl, `domaincerts` as dc
+		where u.`deleted` = 0 and u.`id` > '$lastid'
+			and dc.`id` = dl.`certid` and dl.`domid` = d.`id` and d.`memid` = u.`id`
+			and dc.`expire` >= '2011-12-01'
+	)
+	union distinct
+	(
+		select u.`id`, u.`fname`, u.`lname`, u.`email`, u.`language`
+		from `users` as u, `org` as o, `orgdomaincerts` as dc
+		where u.`deleted` = 0 and u.`id` > '$lastid'
+			and dc.`orgid` = o.`orgid` and o.`memid` = u.`id`
+			and dc.`expire` >= '2011-12-01'
+	)
+	union distinct
+	(
+		select u.`id`, u.`fname`, u.`lname`, u.`email`, u.`language`
+		from `users` as u, `org` as o, `orgdomains` as d, `orgdomlink` as dl, `orgdomaincerts` as dc
+		where u.`deleted` = 0 and u.`id` > '$lastid'
+			and dc.`id` = dl.`orgcertid` and dl.`orgdomid` = d.`id`
+				and d.`orgid` = o.`orgid` and o.`memid` = u.`id`
+			and dc.`expire` >= '2011-12-01'
+	)
+	order by `id`";
 
 $res = mysql_query($query);
 
