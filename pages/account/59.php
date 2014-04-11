@@ -40,25 +40,40 @@ $dob = $row['dob'];
 $username = $fname." ".$mname." ".$lname." ".$suffix;
 $email = $row['email'];
 $alerts =get_alerts($userid);
+
 $support=0;
-if(intval($_REQUEST['oldid'])==43){
+if(array_key_exists('admin', $_SESSION['profile'])){
     $support=$_SESSION['profile']['admin'];
 }
-$ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
-if (!valid_ticket_number($ticketno) && $support == 1) {
-    printf(_("I'm sorry, you did not enter a ticket number! %s Support is not allowed to view the account history without a ticket number."), '<br/>');
-    echo '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>';
-    showfooter();
-    exit;
+
+$ticketno = "";
+if(array_key_exists('ticketno', $_SESSION)) {
+    $ticketno = $_SESSION['ticketno'];
 }
-if ( $support == 1) {
-    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno'])) {
+
+// Support Engineer access restrictions
+if ($userid != $_SESSION['profile']['id']) {
+    if ($support == 0) {
+        echo _("You do not have access to this page.");
+        showfooter();
+        exit;
+    }
+
+    if (!valid_ticket_number($ticketno)) {
+        printf(_("I'm sorry, you did not enter a ticket number! %s Support is not allowed to view the account history without a ticket number."), '<br/>');
+        echo '<br/><a href="account.php?id=43&amp;userid='.$userid.'">'. _('Back to previous page.') .'</a>';
+        showfooter();
+        exit;
+    }
+
+    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $ticketno)) {
         echo _("Writing to the admin log failed. Can't continue.");
-        printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
+        echo '<br/><a href="account.php?id=43&amp;userid='.$userid.'">'. _('Back to previous page.') .'</a>';
         showfooter();
         exit;
     }
 }
+
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
