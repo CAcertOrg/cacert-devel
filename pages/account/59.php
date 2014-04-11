@@ -169,7 +169,9 @@ if (mysql_num_rows($dres) > 0) {
 </table>
 <br/>
 <?
-$dres = get_domains($userid,'',1);
+
+// Domains
+$dres = get_domains($userid, 1);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
@@ -182,9 +184,14 @@ if(mysql_num_rows($dres) > 0) {
     {
           output_log_domains($drow,$email);
     }
-}ELSE{?>
-          <td colspan="3" ><?=_('no entry avialable')?></td>
-<?}?>
+} else {
+    ?>
+    <tr>
+        <td colspan="3" ><?=_('no entry avialable')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
 
