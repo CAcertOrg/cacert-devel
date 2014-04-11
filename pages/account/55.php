@@ -23,7 +23,7 @@
   <tr>
     <td colspan="5" class="title"><?=_("Your passed Tests")?></td>
   </tr>
-  <tr> 
+  <tr>
     <td class="DataTD"><?=_("The list of tests you did pass at").' <a href="https://cats.cacert.org/">https://cats.cacert.org/</a>'?></td>
   </tr>
 </table>
@@ -34,7 +34,7 @@
     $res = mysql_query($query);
     if(mysql_num_rows($res) <= 0)
     {
-      echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+      echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
       $row = mysql_fetch_assoc($res);
     }
@@ -60,9 +60,9 @@
                  " FROM `cats_passed` AS CP, `cats_variant` AS CV, `cats_type` AS CT ".
                  " WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".(int)$user_id."'".
                  " ORDER BY `CP`.`pass_date`";
-                 
+
         $res = mysql_query($query);
-        
+
         $HaveTest=0;
         while($row = mysql_fetch_array($res, MYSQL_NUM))
         {
@@ -75,12 +75,12 @@
     <td class="DataTD"><?=$row[1]?></td>
     <td class="DataTD"><?=$row[2]?></td>
   </tr>
-<?      } 
+<?      }
 ?>
 </table>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr> 
+  <tr>
 <?
       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>

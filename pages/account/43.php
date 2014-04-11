@@ -114,7 +114,7 @@ if(intval($_REQUEST['userid']) > 0) {
     $userid = intval($_REQUEST['userid']);
     $res =get_user_data($userid);
     if(mysql_num_rows($res) <= 0) {
-        echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+        echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
         $row = mysql_fetch_assoc($res);
         $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
