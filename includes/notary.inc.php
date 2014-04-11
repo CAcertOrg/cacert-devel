@@ -372,7 +372,7 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 <?
 			} else {
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=$ticketno?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
 			}
 		}
