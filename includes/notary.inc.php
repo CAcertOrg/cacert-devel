@@ -1522,19 +1522,17 @@ function output_log_email_header(){
  * @param string $primary - if given the primary address is highlighted
  */
 function output_log_email($row, $primary){
-	$primaryemailaddress='';
-	$deletedemailaddress='';
+	$style = '';
 	if ($row['deleted'] !== NULL_DATETIME) {
-		$deletedemailaddress=' deletedemailaddress';
-	}
-	if ($primary==$row['email'] && $row['deleted'] === NULL_DATETIME) {
-		$primaryemailaddress= ' primaryemailaddress';
+		$style = ' deletedemailaddress';
+	} elseif ($primary == $row['email']) {
+		$style = ' primaryemailaddress';
 	}
 	?>
 	<tr>
-		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['email']?></td>
-		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['created']?></td>
-		<td class="DataTD<?= $primaryemailaddress . $deletedemailaddress ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?=$style?>"><?=$row['email']?></td>
+		<td class="DataTD<?=$style?>"><?=$row['created']?></td>
+		<td class="DataTD<?=$style?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }

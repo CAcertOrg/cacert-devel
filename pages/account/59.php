@@ -182,7 +182,7 @@ if(mysql_num_rows($dres) > 0) {
     output_log_domains_header();
     while($drow = mysql_fetch_assoc($dres))
     {
-          output_log_domains($drow,$email);
+          output_log_domains($drow);
     }
 } else {
     ?>
