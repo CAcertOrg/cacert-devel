@@ -14,10 +14,20 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<? if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") { ?><div color="orange">ERROR: <?=$_SESSION['_config']['error']?></div><? unset($_SESSION['_config']['error']); }
+*/
 
-$ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
+if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") {
+    ?>
+    <div color="orange">ERROR: <?=$_SESSION['_config']['error']?></div>
+    <?
+    unset($_SESSION['_config']['error']);
+}
+
+$ticketno = "";
+if (array_key_exists('ticketno', $_SESSION)) {
+    $ticketno = $_SESSION['ticketno'];
+}
+
 if (!valid_ticket_number($ticketno)) {
     printf(_("I'm sorry, you did not enter a ticket number!%sYou cannot reset the password."), '<br/>');
     echo '<br/><a href="account.php?id=43&amp;userid='.intval($_REQUEST['userid']).'">'._('Back to previous page.').'</a>';
