@@ -1562,9 +1562,9 @@ function output_log_domains($row){
 	}
 	?>
 	<tr>
-		<td class="DataTD<? $italic ?>"><?=$row['domain']?></td>
-		<td class="DataTD<? $italic ?>"><?=$row['created']?></td>
-		<td class="DataTD<? $italic ?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?=$italic?>"><?=$row['domain']?></td>
+		<td class="DataTD<?=$italic?>"><?=$row['created']?></td>
+		<td class="DataTD<?=$italic?>"><?=$row['deleted']?></td>
 	</tr>
 	<?
 }
