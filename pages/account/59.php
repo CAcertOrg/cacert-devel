@@ -132,15 +132,15 @@ if ($userid != $_SESSION['profile']['id']) {
     </tr>
     <tr>
           <td class="DataTD"><?=_("Country Announcements")?>:</td>
-          <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+          <td class="DataTD"><?= ($alerts['country']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Regional Announcements")?>:</td>
-        <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($alerts['regional']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
-        <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($alerts['radius']==0)? _('No'):_('Yes')?></td>
     </tr>
 </table>
 <br/>
