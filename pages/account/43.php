@@ -411,7 +411,6 @@ if(intval($_REQUEST['userid']) > 0) {
             <td colspan="5" class="title"><?=_("Alternate Verified Email Addresses")?></td>
         </tr>
     <?
-                    $rc = mysql_num_rows($dres);
                     while($drow = mysql_fetch_assoc($dres)) {
     ?>
         <tr>
@@ -435,7 +434,6 @@ if(intval($_REQUEST['userid']) > 0) {
             <td colspan="5" class="title"><?=_("Verified Domains")?></td>
         </tr>
     <?
-                    $rc = mysql_num_rows($dres);
                     while($drow = mysql_fetch_assoc($dres)) {
     ?>
         <tr>
