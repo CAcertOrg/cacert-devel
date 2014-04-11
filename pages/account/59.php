@@ -46,7 +46,7 @@ if(intval($_REQUEST['oldid'])==43){
 }
 $ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
 if (!valid_ticket_number($ticketno) && $support == 1) {
-    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number."), '<br/>');
+    printf(_("I'm sorry, you did not enter a ticket number! %s Support is not allowed to view the account history without a ticket number."), '<br/>');
     echo '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>';
     showfooter();
     exit;

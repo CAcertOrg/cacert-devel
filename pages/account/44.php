@@ -29,7 +29,7 @@ if (array_key_exists('ticketno', $_SESSION)) {
 }
 
 if (!valid_ticket_number($ticketno)) {
-    printf(_("I'm sorry, you did not enter a ticket number!%sYou cannot reset the password."), '<br/>');
+    printf(_("I'm sorry, you did not enter a ticket number! %s You cannot reset the password."), '<br/>');
     echo '<br/><a href="account.php?id=43&amp;userid='.intval($_REQUEST['userid']).'">'._('Back to previous page.').'</a>';
     showfooter();
     exit;
