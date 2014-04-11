@@ -146,21 +146,29 @@ if ($userid != $_SESSION['profile']['id']) {
 
 // Email addresses
 $dres = get_email_addresses($userid,'',1);
-if(mysql_num_rows($dres) > 0) {
 ?>
-    <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-        <tr>
-            <td colspan="3" class="title"><?=_('Email addresses')?></td>
-        </tr>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+    <tr>
+        <td colspan="3" class="title"><?=_('Email addresses')?></td>
+    </tr>
 <?
+if (mysql_num_rows($dres) > 0) {
     output_log_email_header();
     while($drow = mysql_fetch_assoc($dres))
     {
         output_log_email($drow,$email);
-    } ?>
+    }
+} else {
+    ?>
+    <tr>
+        <td colspan="3" ><?=_('no entry avialable')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
-<?}
+<?
 $dres = get_domains($userid,'',1);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
