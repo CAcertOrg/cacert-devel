@@ -370,15 +370,11 @@ if (mysql_num_rows($dres) > 0) {
     </tr>
     <?
 }
-    if ($support==1) {
-        ?>
-        <tr>
-            <td colspan="<?=$colspan?>" >
-                <a href="account.php?id=43&amp;userid=<?= $userid ?>"><?= _('Back to previous page.')?></a>
-            </td>
-        </tr>
-        <?
-    }
-
 ?>
+<tr>
+    <td colspan="<?=$colspan?>" >
+        <a href="account.php?id=<?=$oldid?intval($oldid):($support?43:13)?>&amp;userid=<?=$userid?>"><?= _('Back to previous page.')?></a>
+    </td>
+</tr>
+
 </table>
