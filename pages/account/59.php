@@ -18,7 +18,6 @@
 include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 
-$colspandefault=2;
 $userid = intval($_REQUEST['userid']);
 $res =get_user_data($userid);
 
@@ -77,10 +76,10 @@ if ($userid != $_SESSION['profile']['id']) {
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
-        <td colspan="<?=$colspandefault ?>" class="title"><?=sprintf(_('Account history of %s'),$username)?></td>
+        <td colspan="2" class="title"><?=sprintf(_('Account history of %s'),$username)?></td>
     </tr>
     <tr>
-        <td colspan="<?=$colspandefault ?>" class="title"><?=_('User actions')?></td>
+        <td colspan="2" class="title"><?=_('User actions')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_('User name')?></td>
