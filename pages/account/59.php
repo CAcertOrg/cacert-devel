@@ -38,19 +38,21 @@ $username = $fname." ".$mname." ".$lname." ".$suffix;
 $email = $user['email'];
 $alerts =get_alerts($userid);
 
-$support=0;
-if (array_key_exists('admin', $_SESSION['profile'])){
-    $support=$_SESSION['profile']['admin'];
-}
-
 $ticketno = "";
 if (array_key_exists('ticketno', $_SESSION)) {
     $ticketno = $_SESSION['ticketno'];
 }
 
 // Support Engineer access restrictions
+$support=0;
 if ($userid != $_SESSION['profile']['id']) {
-    if ($support == 0) {
+    // Check if support engineer
+    if (array_key_exists('admin', $_SESSION['profile']) &&
+        $_SESSION['profile']['admin'] != 0)
+    {
+        $support=$_SESSION['profile']['admin'];
+
+    } else {
         echo _("You do not have access to this page.");
         showfooter();
         exit;
