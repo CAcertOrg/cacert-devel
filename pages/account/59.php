@@ -21,7 +21,7 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 $userid = intval($_REQUEST['userid']);
 
 $res = get_user_data($userid);
-if(mysql_num_rows($res) <= 0)
+if (mysql_num_rows($res) <= 0)
 {
     echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     exit;
@@ -39,12 +39,12 @@ $email = $user['email'];
 $alerts =get_alerts($userid);
 
 $support=0;
-if(array_key_exists('admin', $_SESSION['profile'])){
+if (array_key_exists('admin', $_SESSION['profile'])){
     $support=$_SESSION['profile']['admin'];
 }
 
 $ticketno = "";
-if(array_key_exists('ticketno', $_SESSION)) {
+if (array_key_exists('ticketno', $_SESSION)) {
     $ticketno = $_SESSION['ticketno'];
 }
 
@@ -75,7 +75,7 @@ if ($userid != $_SESSION['profile']['id']) {
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
-        <td colspan="2" class="title"><?=sprintf(_('Account history of %s'),$username)?></td>
+        <td colspan="2" class="title"><?printf(_('Account history of %s'),$username)?></td>
     </tr>
     <tr>
         <td colspan="2" class="title"><?=_('User actions')?></td>
@@ -154,7 +154,7 @@ $dres = get_email_addresses($userid,'',1);
 <?
 if (mysql_num_rows($dres) > 0) {
     output_log_email_header();
-    while($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysql_fetch_assoc($dres))
     {
         output_log_email($drow,$email);
     }
@@ -178,9 +178,9 @@ $dres = get_domains($userid, 1);
         <td colspan="3" class="title"><?=_('Domains')?></td>
     </tr>
 <?
-if(mysql_num_rows($dres) > 0) {
+if (mysql_num_rows($dres) > 0) {
     output_log_domains_header();
-    while($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysql_fetch_assoc($dres))
     {
           output_log_domains($drow);
     }
@@ -204,13 +204,13 @@ $dres = get_training_results($userid);
         <td colspan="3" class="title"><?=_('Trainings')?></td>
     </tr>
 <?
-    if(mysql_num_rows($dres) > 0) {
-        output_log_training_header();
-        while($drow = mysql_fetch_assoc($dres))
-        {
-            output_log_training($drow);
-        }
-    }ELSE{
+if (mysql_num_rows($dres) > 0) {
+    output_log_training_header();
+    while ($drow = mysql_fetch_assoc($dres))
+    {
+        output_log_training($drow);
+    }
+} else {
     ?>
     <tr>
         <td colspan="3" ><?=_('no entry available')?></td>
@@ -230,22 +230,27 @@ $dres = get_user_agreements($userid);
         <td colspan="4" class="title"><?=_('User agreements')?></td>
     </tr>
 <?
-    if(mysql_num_rows($dres) > 0) {
-        output_log_agreement_header();
-        while($drow = mysql_fetch_assoc($dres))
-        {
-            output_log_agreement($drow);
-        }
-    }ELSE{
-        ?><td colspan="4" ><?=_('no entry available')?></td><?
-    }?>
+if (mysql_num_rows($dres) > 0) {
+    output_log_agreement_header();
+    while ($drow = mysql_fetch_assoc($dres))
+    {
+        output_log_agreement($drow);
+    }
+} else {
+    ?>
+    <tr>
+        <td colspan="4" ><?=_('no entry available')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
 
 <?
 $dres = get_client_certs($userid,1);
 $colspan=10;
-if (1==$support) {
+if (1 == $support) {
     $colspan=7;
 }
 ?>
@@ -254,15 +259,20 @@ if (1==$support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('Client certificates')?></td>
     </tr>
 <?
-    if(mysql_num_rows($dres) > 0) {
-        output_client_cert_header($support);
-        while($drow = mysql_fetch_assoc($dres))
-        {
-            output_client_cert($drow,$support);
-        }
-    }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
-    }?>
+if (mysql_num_rows($dres) > 0) {
+    output_client_cert_header($support);
+    while ($drow = mysql_fetch_assoc($dres))
+    {
+        output_client_cert($drow,$support);
+    }
+} else {
+    ?>
+    <tr>
+        <td colspan="<?=$colspan?>" ><?=_('no entry available')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
 
@@ -278,15 +288,20 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('Server certificates')?></td>
     </tr>
 <?
-    if(mysql_num_rows($dres) > 0) {
-        output_server_certs_header($support);
-        while($drow = mysql_fetch_assoc($dres))
-        {
-            output_server_certs($drow,$support);
-        }
-    }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
-    }?>
+if (mysql_num_rows($dres) > 0) {
+    output_server_certs_header($support);
+    while ($drow = mysql_fetch_assoc($dres))
+    {
+        output_server_certs($drow,$support);
+    }
+} else {
+    ?>
+    <tr>
+        <td colspan="<?=$colspan?>" ><?=_('no entry available')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
 
@@ -302,15 +317,19 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('GPG/PGP certificates')?></td>
     </tr>
 <?
-    if(mysql_num_rows($dres) > 0) {
-        output_gpg_certs_header($support);
-        while($drow = mysql_fetch_assoc($dres))
-        {
-            output_gpg_certs($drow,$support);
-        }
-    }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
-    }?>
+if (mysql_num_rows($dres) > 0) {
+    output_gpg_certs_header($support);
+    while ($drow = mysql_fetch_assoc($dres))
+    {
+        output_gpg_certs($drow, $support);
+    }
+} else {
+    ?>
+    <tr>
+        <td colspan="<?=$colspan?>" ><?=_('no entry available')?></td>
+    </tr>
+    <?
+}?>
 </table>
 <br/>
 
@@ -333,19 +352,28 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('Admin log')?></td>
     </tr>
 <?
-    if(mysql_num_rows($dres) > 0) {
-        output_log_se_header($support);
-        while($drow = mysql_fetch_assoc($dres))
-        {
-           output_log_se($drow,$support);
-        }
-    }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
+if (mysql_num_rows($dres) > 0) {
+    output_log_se_header($support);
+    while ($drow = mysql_fetch_assoc($dres))
+    {
+       output_log_se($drow,$support);
     }
-    if ($support==1) {
-        ?><td colspan="<?=$colspan?>" ><a href="account.php?id=43&amp;userid=<?= $userid ?>"><?= _('Back to previous page.')?></a></td><?
-    }
-
+} else {
     ?>
+    <tr>
+        <td colspan="<?=$colspan?>" ><?=_('no entry available')?></td>
+    </tr>
+    <?
+}
+    if ($support==1) {
+        ?>
+        <tr>
+            <td colspan="<?=$colspan?>" >
+                <a href="account.php?id=43&amp;userid=<?= $userid ?>"><?= _('Back to previous page.')?></a>
+            </td>
+        </tr>
+        <?
+    }
 
+?>
 </table>
