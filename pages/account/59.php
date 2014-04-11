@@ -161,7 +161,7 @@ if (mysql_num_rows($dres) > 0) {
 } else {
     ?>
     <tr>
-        <td colspan="3" ><?=_('no entry avialable')?></td>
+        <td colspan="3" ><?=_('no entry available')?></td>
     </tr>
     <?
 }
@@ -187,7 +187,7 @@ if(mysql_num_rows($dres) > 0) {
 } else {
     ?>
     <tr>
-        <td colspan="3" ><?=_('no entry avialable')?></td>
+        <td colspan="3" ><?=_('no entry available')?></td>
     </tr>
     <?
 }
@@ -196,6 +196,7 @@ if(mysql_num_rows($dres) > 0) {
 <br/>
 
 <?
+// Trainings
 $dres = get_training_results($userid);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -210,12 +211,18 @@ $dres = get_training_results($userid);
             output_log_training($drow);
         }
     }ELSE{
-        ?><td colspan="3" ><?=_('no entry avialable')?></td><?
-    }?>
+    ?>
+    <tr>
+        <td colspan="3" ><?=_('no entry available')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
 
 <?
+// User Agreements
 $dres = get_user_agreements($userid);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -230,7 +237,7 @@ $dres = get_user_agreements($userid);
             output_log_agreement($drow);
         }
     }ELSE{
-        ?><td colspan="4" ><?=_('no entry avialable')?></td><?
+        ?><td colspan="4" ><?=_('no entry available')?></td><?
     }?>
 </table>
 <br/>
@@ -254,7 +261,7 @@ if (1==$support) {
             output_client_cert($drow,$support);
         }
     }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
+        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
     }?>
 </table>
 <br/>
@@ -278,7 +285,7 @@ if (1 == $support) {
             output_server_certs($drow,$support);
         }
     }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
+        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
     }?>
 </table>
 <br/>
@@ -302,7 +309,7 @@ if (1 == $support) {
             output_gpg_certs($drow,$support);
         }
     }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
+        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
     }?>
 </table>
 <br/>
@@ -333,7 +340,7 @@ if (1 == $support) {
            output_log_se($drow,$support);
         }
     }ELSE{
-        ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
+        ?><td colspan="<?=$colspan?>" ><?=_('no entry available')?></td><?
     }
     if ($support==1) {
         ?><td colspan="<?=$colspan?>" ><a href="account.php?id=43&amp;userid=<?= $userid ?>"><?= _('Back to previous page.')?></a></td><?
