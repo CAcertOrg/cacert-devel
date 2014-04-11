@@ -18,54 +18,67 @@
 include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 
-$colspandefault=2;
 $userid = intval($_REQUEST['userid']);
-$res =get_user_data($userid);
 
-
-
+$res = get_user_data($userid);
 if(mysql_num_rows($res) <= 0)
 {
     echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     exit;
 }
 
-$row = mysql_fetch_assoc($res);
+$user = mysql_fetch_assoc($res);
 
-$fname = $row['fname'];
-$mname = $row['mname'];
-$lname = $row['lname'];
-$suffix = $row['suffix'];
-$dob = $row['dob'];
+$fname = $user['fname'];
+$mname = $user['mname'];
+$lname = $user['lname'];
+$suffix = $user['suffix'];
+$dob = $user['dob'];
 $username = $fname." ".$mname." ".$lname." ".$suffix;
-$email = $row['email'];
+$email = $user['email'];
 $alerts =get_alerts($userid);
+
 $support=0;
-if(intval($_REQUEST['oldid'])==43){
+if(array_key_exists('admin', $_SESSION['profile'])){
     $support=$_SESSION['profile']['admin'];
 }
-$ticketno = ""; if(array_key_exists('ticketno', $_SESSION)) $ticketno = $_SESSION['ticketno'];
-if (!valid_ticket_number($ticketno) && $support == 1) {
-    printf(_("I'm sorry, you did not enter a ticket number!%sSupport is not allowed to view the account history without a ticket number."), '<br/>');
-    echo '<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) .'">'. _('Back to previous page.').'</a>';
-    showfooter();
-    exit;
+
+$ticketno = "";
+if(array_key_exists('ticketno', $_SESSION)) {
+    $ticketno = $_SESSION['ticketno'];
 }
-if ( $support == 1) {
-    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $_REQUEST['ticketno'])) {
+
+// Support Engineer access restrictions
+if ($userid != $_SESSION['profile']['id']) {
+    if ($support == 0) {
+        echo _("You do not have access to this page.");
+        showfooter();
+        exit;
+    }
+
+    if (!valid_ticket_number($ticketno)) {
+        printf(_("I'm sorry, you did not enter a ticket number! %s Support is not allowed to view the account history without a ticket number."), '<br/>');
+        echo '<br/><a href="account.php?id=43&amp;userid='.$userid.'">'. _('Back to previous page.') .'</a>';
+        showfooter();
+        exit;
+    }
+
+    if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $ticketno)) {
         echo _("Writing to the admin log failed. Can't continue.");
-        printf('<br/><a href="account.php?id=43&amp;userid=' . intval($_REQUEST['userid']) . '">' . _('Back to previous page.') .'</a>');
+        echo '<br/><a href="account.php?id=43&amp;userid='.$userid.'">'. _('Back to previous page.') .'</a>';
         showfooter();
         exit;
     }
 }
+
+// Account details
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
-        <td colspan="<?=$colspandefault ?>" class="title"><?=sprintf(_('Account history of %s'),$username)?></td>
+        <td colspan="2" class="title"><?=sprintf(_('Account history of %s'),$username)?></td>
     </tr>
     <tr>
-        <td colspan="<?=$colspandefault ?>" class="title"><?=_('User actions')?></td>
+        <td colspan="2" class="title"><?=_('User actions')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_('User name')?></td>
@@ -77,39 +90,39 @@ if ( $support == 1) {
     </tr>
     <tr>
         <td class="DataTD"><?=_("Is Assurer")?>:</td>
-        <td class="DataTD"><?= ($row['assurer']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['assurer']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Blocked Assurer")?>:</td>
-        <td class="DataTD"><?= ($row['assurer_blocked']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['assurer_blocked']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Account Locking")?>:</td>
-        <td class="DataTD"><?= ($row['locked']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['locked']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Code Signing")?>:</td>
-        <td class="DataTD"><?= ($row['codesign']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['codesign']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Org Assurer")?>:</td>
-        <td class="DataTD"><?= ($row['orgadmin']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['orgadmin']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("TTP Admin")?>:</td>
-        <td class="DataTD"><?= $row['ttpadmin']._(' - 0 = none, 1 = TTP Admin, 2 = TTP TOPUP admin')?></td>
+        <td class="DataTD"><?= $user['ttpadmin']._(' - 0 = none, 1 = TTP Admin, 2 = TTP TOPUP admin')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Location Admin")?>:</td>
-        <td class="DataTD"><?= ($row['locadmin']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['locadmin']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Admin")?>:</td>
-        <td class="DataTD"><?= ($row['admin']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['admin']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Ad Admin")?>:</td>
-        <td class="DataTD"><?= $row['adadmin']._(' - 0 = none, 1 = submit, 2 = approve')?></td>
+        <td class="DataTD"><?= $user['adadmin']._(' - 0 = none, 1 = submit, 2 = approve')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("General Announcements")?>:</td>
@@ -117,36 +130,48 @@ if ( $support == 1) {
     </tr>
     <tr>
           <td class="DataTD"><?=_("Country Announcements")?>:</td>
-          <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+          <td class="DataTD"><?= ($alerts['country']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Regional Announcements")?>:</td>
-        <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($alerts['regional']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
-        <td class="DataTD"><?= ($row['id']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($alerts['radius']==0)? _('No'):_('Yes')?></td>
     </tr>
 </table>
 <br/>
 <?
+
+// Email addresses
 $dres = get_email_addresses($userid,'',1);
-if(mysql_num_rows($dres) > 0) {
 ?>
-    <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-        <tr>
-            <td colspan="3" class="title"><?=_('Email addresses')?></td>
-        </tr>
+<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+    <tr>
+        <td colspan="3" class="title"><?=_('Email addresses')?></td>
+    </tr>
 <?
+if (mysql_num_rows($dres) > 0) {
     output_log_email_header();
     while($drow = mysql_fetch_assoc($dres))
     {
         output_log_email($drow,$email);
-    } ?>
+    }
+} else {
+    ?>
+    <tr>
+        <td colspan="3" ><?=_('no entry avialable')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
-<?}
-$dres = get_domains($userid,'',1);
+<?
+
+// Domains
+$dres = get_domains($userid, 1);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
@@ -159,9 +184,14 @@ if(mysql_num_rows($dres) > 0) {
     {
           output_log_domains($drow,$email);
     }
-}ELSE{?>
-          <td colspan="3" ><?=_('no entry avialable')?></td>
-<?}?>
+} else {
+    ?>
+    <tr>
+        <td colspan="3" ><?=_('no entry avialable')?></td>
+    </tr>
+    <?
+}
+?>
 </table>
 <br/>
 
@@ -242,10 +272,10 @@ if (1 == $support) {
     </tr>
 <?
     if(mysql_num_rows($dres) > 0) {
-        output_log_server_certs_header($support);
+        output_server_certs_header($support);
         while($drow = mysql_fetch_assoc($dres))
         {
-            output_log_server_certs($drow,$support);
+            output_server_certs($drow,$support);
         }
     }ELSE{
         ?><td colspan="<?=$colspan?>" ><?=_('no entry avialable')?></td><?
