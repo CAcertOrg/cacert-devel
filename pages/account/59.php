@@ -19,25 +19,23 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 
 
 $userid = intval($_REQUEST['userid']);
-$res =get_user_data($userid);
 
-
-
+$res = get_user_data($userid);
 if(mysql_num_rows($res) <= 0)
 {
     echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     exit;
 }
 
-$row = mysql_fetch_assoc($res);
+$user = mysql_fetch_assoc($res);
 
-$fname = $row['fname'];
-$mname = $row['mname'];
-$lname = $row['lname'];
-$suffix = $row['suffix'];
-$dob = $row['dob'];
+$fname = $user['fname'];
+$mname = $user['mname'];
+$lname = $user['lname'];
+$suffix = $user['suffix'];
+$dob = $user['dob'];
 $username = $fname." ".$mname." ".$lname." ".$suffix;
-$email = $row['email'];
+$email = $user['email'];
 $alerts =get_alerts($userid);
 
 $support=0;
@@ -73,6 +71,7 @@ if ($userid != $_SESSION['profile']['id']) {
     }
 }
 
+// Account details
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>
@@ -91,39 +90,39 @@ if ($userid != $_SESSION['profile']['id']) {
     </tr>
     <tr>
         <td class="DataTD"><?=_("Is Assurer")?>:</td>
-        <td class="DataTD"><?= ($row['assurer']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['assurer']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Blocked Assurer")?>:</td>
-        <td class="DataTD"><?= ($row['assurer_blocked']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['assurer_blocked']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Account Locking")?>:</td>
-        <td class="DataTD"><?= ($row['locked']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['locked']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Code Signing")?>:</td>
-        <td class="DataTD"><?= ($row['codesign']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['codesign']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Org Assurer")?>:</td>
-        <td class="DataTD"><?= ($row['orgadmin']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['orgadmin']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("TTP Admin")?>:</td>
-        <td class="DataTD"><?= $row['ttpadmin']._(' - 0 = none, 1 = TTP Admin, 2 = TTP TOPUP admin')?></td>
+        <td class="DataTD"><?= $user['ttpadmin']._(' - 0 = none, 1 = TTP Admin, 2 = TTP TOPUP admin')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Location Admin")?>:</td>
-        <td class="DataTD"><?= ($row['locadmin']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['locadmin']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Admin")?>:</td>
-        <td class="DataTD"><?= ($row['admin']==0)? _('No'):_('Yes')?></td>
+        <td class="DataTD"><?= ($user['admin']==0)? _('No'):_('Yes')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Ad Admin")?>:</td>
-        <td class="DataTD"><?= $row['adadmin']._(' - 0 = none, 1 = submit, 2 = approve')?></td>
+        <td class="DataTD"><?= $user['adadmin']._(' - 0 = none, 1 = submit, 2 = approve')?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("General Announcements")?>:</td>
@@ -144,6 +143,8 @@ if ($userid != $_SESSION['profile']['id']) {
 </table>
 <br/>
 <?
+
+// Email addresses
 $dres = get_email_addresses($userid,'',1);
 if(mysql_num_rows($dres) > 0) {
 ?>
