@@ -250,10 +250,11 @@ if (mysql_num_rows($dres) > 0) {
 <br/>
 
 <?
-$dres = get_client_certs($userid,1);
-$colspan=10;
+// Client Certificates
+$dres = get_client_certs($userid, 1);
+$colspan=8;
 if (1 == $support) {
-    $colspan=7;
+    $colspan=6;
 }
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -279,8 +280,9 @@ if (mysql_num_rows($dres) > 0) {
 <br/>
 
 <?
+// Server Certificates
 $dres = get_server_certs($userid,1);
-$colspan = 8;
+$colspan = 7;
 if (1 == $support) {
     $colspan = 5;
 }
@@ -308,6 +310,7 @@ if (mysql_num_rows($dres) > 0) {
 <br/>
 
 <?
+// GPG Certificates
 $dres = get_gpg_certs($userid,1);
 $colspan = 6;
 if (1 == $support) {
