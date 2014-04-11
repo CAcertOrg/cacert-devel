@@ -43,6 +43,11 @@ if (array_key_exists('ticketno', $_SESSION)) {
     $ticketno = $_SESSION['ticketno'];
 }
 
+$oldid = 0;
+if (array_key_exists('oldid', $_REQUEST)) {
+    $oldid = intval($_REQUEST['oldid']);
+}
+
 // Support Engineer access restrictions
 $support=0;
 if ($userid != $_SESSION['profile']['id']) {
