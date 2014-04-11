@@ -2693,7 +2693,7 @@ function buildSubjectFromSession() {
 	//check if ticket number was entered
 	if ( $id == 43 || $oldid == 43 || $id == 44 || $oldid == 44 ) {
 		if ($ticketno != "" ) {
-			$ticketno = mysql_real_escape_string(trim($_REQUEST['ticketno']));
+			$ticketno = trim($_REQUEST['ticketno']);
 			$ticketvalidation = valid_ticket_number($ticketno);
 		}
 
