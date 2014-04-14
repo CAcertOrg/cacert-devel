@@ -388,10 +388,10 @@
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['to']));
+			$assuree = get_user (intval($row['to']));
 			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
-			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			$email = show_email_link ($fromuser['email'],intval($row['to']));
+			$name = show_user_link ($assuree['fname']." ".$assuree['lname'],intval($row['to']));
+			$email = show_email_link ($assuree['email'],intval($row['to']));
 			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
 		}
 	}
