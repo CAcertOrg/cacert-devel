@@ -425,8 +425,6 @@
 	function calc_points($row)
 	{
 		$awarded = intval($row['awarded']);
-		if ($awarded == "")
-			$awarded = 0;
 		if (intval($row['points']) < $awarded)
 			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
 		else
