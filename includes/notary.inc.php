@@ -1274,7 +1274,7 @@ function valid_ticket_number($ticketno){
 	//d dispute action
 	//s support case
 	//m board motion
-	$pattern='/[adsmADSM]\d{8}\./';
+	$pattern='/[adsmADSM]\d{8}\.\d+/';
 	if (preg_match($pattern, $ticketno)) {
 		return true;
 	}
