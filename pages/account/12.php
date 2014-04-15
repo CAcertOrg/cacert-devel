@@ -34,18 +34,20 @@
 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
-			`domaincerts`.`expire`,
+			`domaincerts`.`expire` as `expires`,
 			`domaincerts`.`revoked` as `revoke`,
-			UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
+			UNIX_TIMESTAMP(`revoked`) as `revoked`,
+			if (`domaincerts`.`expire`=0,CURRENT_TIMESTAMP(),`domaincerts`.`modified`) as `modified`,
+			`CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
 			`domaincerts`.`description`
 			from `domaincerts`,`domains`
 			where `memid`='".intval($_SESSION['profile']['id'])."' and `domaincerts`.`domid`=`domains`.`id` ";
 	if($viewall != 1)
 	{
 		$query .= "AND `revoked`=0 AND `renewed`=0 ";
-		$query .= "HAVING `timeleft` > 0 ";
+		$query .= "HAVING `timeleft` > 0 or `expires` = 0 ";
 	}
-	$query .= "ORDER BY `domaincerts`.`modified` desc";
+	$query .= "ORDER BY `modified` desc";
 //echo $query."<br>\n";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)

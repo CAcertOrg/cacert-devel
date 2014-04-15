@@ -37,6 +37,7 @@
 			`emailcerts`.`expire`,
 			`emailcerts`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
+			if (`emailcerts`.`expire`=0,CURRENT_TIMESTAMP(),`emailcerts`.`modified`) as `modified` ,
 			`emailcerts`.`id`,
 			`emailcerts`.`CN`,
 			`emailcerts`.`serial`,
@@ -49,8 +50,8 @@
 		$query .= " AND `revoked`=0 AND `renewed`=0 ";
 	$query .= " GROUP BY `emailcerts`.`id` ";
 	if($viewall != 1)
-                $query .= " HAVING `timeleft` > 0 ";
-	$query .= " ORDER BY `emailcerts`.`modified` desc";
+                $query .= " HAVING `timeleft` > 0 or `expires` = 0 ";
+	$query .= " ORDER BY `modified` desc";
 // echo $query."<br>\n";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
