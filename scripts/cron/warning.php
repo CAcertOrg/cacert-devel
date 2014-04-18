@@ -40,7 +40,8 @@
 			{
 				$row['crt_name'] = str_replace("../", "www/", $row['crt_name']);
 				$row['crt_name'] = "/home/cacert/".$row['crt_name'];
-				$subject = `openssl x509 -in '$row[crt_name]' -text -noout|grep Subject:`;
+				$crt_name = escapeshellarg($row['crt_name']);
+				$subject = `openssl x509 -in $crt_name -text -noout|grep Subject:`;
 				$bits = explode("/", $subject);
 				foreach($bits as $val)
 				{
