@@ -395,7 +395,8 @@ function buildSubjectFromSession() {
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-			$res=`openssl spkac -verify -in $CSRname`;
+			$CSRname_esc = escapeshellarg($CSRname);
+			$res=`openssl spkac -verify -in $CSRname_esc`;
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
 				$id = $oldid;
@@ -457,7 +458,9 @@ function buildSubjectFromSession() {
 				$csrsubject .= "/emailAddress = ".$user['uniqueID'];
 
 			$tmpname = tempnam("/tmp", "id4csr");
-			$do = `/usr/bin/openssl req -in $tmpfname -out $tmpname`; // -subj "$csr"`;
+			$tmpfname_esc = escapeshellarg($tmpfname);
+			$tmpname_esc = escapeshellarg($tmpname);
+			$do = `/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc`; // -subj "$csr"`;
 			@unlink($tmpfname);
 			$csr = "";
 			$fp = fopen($tmpname, "r");
@@ -733,9 +736,9 @@ function buildSubjectFromSession() {
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
 		fclose($fp);
-		$CSR = $_SESSION['_config']['tmpfname'];
-		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$CSR = escapeshellarg($_SESSION['_config']['tmpfname']);
+		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep "Subject:"`);
+		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -900,8 +903,9 @@ function buildSubjectFromSession() {
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
 				copy($row['csr_name'], $newfile);
-				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep "Subject:"`);
-				$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+				$newfile_esc = escapeshellarg($newfile);
+				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d "\\0"|grep "Subject:"`);
+				$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
 				foreach($bits as $val)
 				{
 					$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -930,7 +934,8 @@ function buildSubjectFromSession() {
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
 					$drow = mysql_fetch_assoc($res);
-					$cert = `/usr/bin/openssl x509 -in $drow[crt_name]`;
+					$crt_name = escapeshellarg($drow['crt_name']);
+					$cert = `/usr/bin/openssl x509 -in $crt_name`;
 					echo "<pre>\n$cert\n</pre>\n";
 				}
 			}
@@ -1552,7 +1557,8 @@ function buildSubjectFromSession() {
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-			$res=`openssl spkac -verify -in $CSRname`;
+			$CSRname_esc = escapeshellarg($CSRName);
+			$res=`openssl spkac -verify -in $CSRname_esc`;
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
 				$id = $oldid;
@@ -1604,7 +1610,9 @@ function buildSubjectFromSession() {
 				$csrsubject .= "/countryName=".$org['C'];
 
 			$tmpname = tempnam("/tmp", "id17csr");
-			$do = `/usr/bin/openssl req -in $tmpfname -out $tmpname`;
+			$tmpfname_esc = escapeshellarg($tmpfname);
+			$tmpname_esc = escapeshellarg($tmpname);
+			$do = `/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc`;
 			@unlink($tmpfname);
 			$csr = "";
 			$fp = fopen($tmpname, "r");
@@ -1860,9 +1868,9 @@ function buildSubjectFromSession() {
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
 		fclose($fp);
-		$CSR = $_SESSION['_config']['tmpfname'];
-		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$CSR = escapeshellarg($_SESSION['_config']['tmpfname']);
+		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep "Subject:"`);
+		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -2080,7 +2088,8 @@ function buildSubjectFromSession() {
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions.")." newid: $newid", "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
 					$drow = mysql_fetch_assoc($res);
-					$cert = `/usr/bin/openssl x509 -in $drow[crt_name]`;
+					$crtname = escapeshellarg($drow['crt_name']);
+					$cert = `/usr/bin/openssl x509 -in $crtname`;
 					echo "<pre>\n$cert\n</pre>\n";
 				}
 			}
