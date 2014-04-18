@@ -1557,7 +1557,7 @@ function buildSubjectFromSession() {
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-			$CSRname_esc = escapeshellarg($CSRName);
+			$CSRname_esc = escapeshellarg($CSRname);
 			$res=`openssl spkac -verify -in $CSRname_esc`;
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
