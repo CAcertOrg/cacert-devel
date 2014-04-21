@@ -219,7 +219,7 @@
 		//echo "Points due to name matches: $points<br/>";
 
 		$shellpwd = escapeshellarg($pwd);
-		$do = `grep $shellpwd /usr/share/dict/american-english`;
+		$do = `grep -F -- $shellpwd /usr/share/dict/american-english`;
 		if($do)
 			$points--;
 
@@ -506,7 +506,7 @@
 		return(0);
 	}
 
-	function hex2bin($data)
+	function gpg_hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
 		{
