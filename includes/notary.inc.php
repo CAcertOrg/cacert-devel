@@ -133,22 +133,34 @@
 
 		switch ($row['method'])
 		{
+			// These programmes have been revoked
 			case 'Thawte Points Transfer':	  // revoke all Thawte-points     (as per arbitration)
 			case 'CT Magazine - Germany':	   // revoke c't		   (only one test-entry)
 			case 'Temporary Increase':	      // revoke 'temporary increase'  (Current usage breaks audit aspects, needs to be reimplemented)
 				$points = 0;
 				break;
+
 			case 'Administrative Increase':	 // ignore AI with 2 points or less (historical for experiance points, now other calculation)
 				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
 					$points = 0;
 				break;
+
+			// TTP assurances, limit to 35
+			case 'TTP-Assisted':
+				$points = min($points, 35);
+				break;
+
+				// TTP TOPUP, limit to 30
+			case 'TOPUP':
+				$points = min($points, 30);
+
+			// All these should be preserved for the time being
 			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
 			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
-			case 'TTP-Assisted':	     // TTP assurances, limit to 35
-			case 'TOPUP':	     // TOPUP to be delevoped in the future, limit to 30
 			case '':				// to be revoked in the future? limit to max 50 pts?
-			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
+			case 'Face to Face Meeting': // normal assurances (and superassurances?), limit to 35/50 pts in the future?
 				break;
+
 			default:				// should never happen ... ;-)
 				$points = 0;
 		}
