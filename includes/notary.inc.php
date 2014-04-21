@@ -114,7 +114,15 @@
 	}
 
 
-	function calc_points($row)
+	/**
+	 * Calculate awarded points (corrects some issues like out of range points
+	 * or points that were issued by means that have been deprecated)
+	 *
+	 * @param array $row - associative array containing the data from the
+	 *     `notary` table
+	 * @return int - the awarded points for this assurance
+	 */
+	function calc_awarded($row)
 	{
 		$awarded = intval($row['awarded']);
 		if (intval($row['points']) < $awarded)
@@ -164,7 +172,7 @@
 
 	function calc_assurances ($row,&$points,&$experience,&$sumexperience,&$awarded,&$revoked)
 	{
-		$awarded = calc_points($row);
+		$awarded = calc_awarded($row);
 		$revoked = false;
 
 		if ($awarded > 100)
@@ -486,7 +494,7 @@
 		$res = get_received_assurances_summary($userid);
 		while($row = mysql_fetch_assoc($res))
 		{
-			$points = calc_points ($row);
+			$points = calc_awarded($row);
 
 			if ($points > $max_points)			// limit to 100 points, above is experience (needs to be fixed)
 			{
