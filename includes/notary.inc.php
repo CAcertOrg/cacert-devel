@@ -124,11 +124,13 @@
 	 */
 	function calc_awarded($row)
 	{
-		$awarded = intval($row['awarded']);
-		if (intval($row['points']) < $awarded)
-			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
-		else
-			$points = intval($row['points']);       // on very old assurances, awarded is '0' instead of correct value
+		// Back in the old days there was no `awarded` column => is now zero,
+		// there the `points` column contained that data
+		$points = max(intval($row['awarded']), intval($row['points']));
+
+		// Set negative points to zero, yes there are such things in the database
+		$points = max($points, 0);
+
 		switch ($row['method'])
 		{
 			case 'Thawte Points Transfer':	  // revoke all Thawte-points     (as per arbitration)
@@ -150,8 +152,7 @@
 			default:				// should never happen ... ;-)
 				$points = 0;
 		}
-		if ($points < 0)				// ignore negative points (bug needs to be fixed)
-			$points = 0;
+
 		return $points;
 	}
 
