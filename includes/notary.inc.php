@@ -113,6 +113,41 @@
 		return mysql_num_rows($res);
 	}
 
+
+	function calc_points($row)
+	{
+		$awarded = intval($row['awarded']);
+		if (intval($row['points']) < $awarded)
+			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
+		else
+			$points = intval($row['points']);       // on very old assurances, awarded is '0' instead of correct value
+		switch ($row['method'])
+		{
+			case 'Thawte Points Transfer':	  // revoke all Thawte-points     (as per arbitration)
+			case 'CT Magazine - Germany':	   // revoke c't		   (only one test-entry)
+			case 'Temporary Increase':	      // revoke 'temporary increase'  (Current usage breaks audit aspects, needs to be reimplemented)
+				$points = 0;
+				break;
+			case 'Administrative Increase':	 // ignore AI with 2 points or less (historical for experiance points, now other calculation)
+				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
+					$points = 0;
+				break;
+			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
+			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
+			case 'TTP-Assisted':	     // TTP assurances, limit to 35
+			case 'TOPUP':	     // TOPUP to be delevoped in the future, limit to 30
+			case '':				// to be revoked in the future? limit to max 50 pts?
+			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
+				break;
+			default:				// should never happen ... ;-)
+				$points = 0;
+		}
+		if ($points < 0)				// ignore negative points (bug needs to be fixed)
+			$points = 0;
+		return $points;
+	}
+
+
 	function calc_experience ($row,&$points,&$experience,&$sum_experience,&$revoked)
 	{
 		$apoints = max($row['points'], $row['awarded']);
@@ -420,39 +455,6 @@
 		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-$age));
 		$res = query_init ("select id from `users` where `id`='".$userid."' and `dob` < '$dob'");
 		return intval(query_get_number_of_rows($res));
-	}
-
-	function calc_points($row)
-	{
-		$awarded = intval($row['awarded']);
-		if (intval($row['points']) < $awarded)
-			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
-		else
-			$points = intval($row['points']);       // on very old assurances, awarded is '0' instead of correct value
-		switch ($row['method'])
-		{
-			case 'Thawte Points Transfer':	  // revoke all Thawte-points     (as per arbitration)
-			case 'CT Magazine - Germany':	   // revoke c't		   (only one test-entry)
-			case 'Temporary Increase':	      // revoke 'temporary increase'  (Current usage breaks audit aspects, needs to be reimplemented)
-				$points = 0;
-				break;
-			case 'Administrative Increase':	 // ignore AI with 2 points or less (historical for experiance points, now other calculation)
-				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
-					$points = 0;
-				break;
-			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
-			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
-			case 'TTP-Assisted':	     // TTP assurances, limit to 35
-			case 'TOPUP':	     // TOPUP to be delevoped in the future, limit to 30
-			case '':				// to be revoked in the future? limit to max 50 pts?
-			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
-				break;
-			default:				// should never happen ... ;-)
-				$points = 0;
-		}
-		if ($points < 0)				// ignore negative points (bug needs to be fixed)
-			$points = 0;
-		return $points;
 	}
 
 	function max_points($userid)
