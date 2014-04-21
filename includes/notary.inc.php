@@ -16,6 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+define('NULL_DATETIME', '0000-00-00 00:00:00');
+
 	function query_init ($query)
 	{
 		return mysql_query($query);
@@ -169,18 +171,36 @@
 	}
 
 
-	function calc_experience ($row,&$points,&$experience,&$sum_experience,&$revoked)
+	/**
+	 * Calculate the experience points from a given Assurance
+	 * @param array  $row - [inout] associative array containing the data from
+	 *     the `notary` table
+	 * @param int    $sum_points - [inout] the sum of already counted assurance
+	 *     points the assurer issued
+	 * @param int    $sum_experience - [inout] the sum of already counted
+	 *     experience points that were awarded to the assurer
+	 * @return int - the assurance points that were awarded for this assurance
+	 */
+	function calc_experience(&$row, &$sum_points, &$sum_experience)
 	{
-		$apoints = max($row['points'], $row['awarded']);
-		$points += $apoints;
-		$experience = "&nbsp;";
-		$revoked = false;				# to be coded later (after DB-upgrade)
+		$awarded = calc_awarded($row);
+
+		// Don't count revoked assurances even if we are displaying them
+		if ($row['deleted'] !== NULL_DATETIME) {
+			$row['experience'] = 0;
+			return $awarded;
+		}
+
+		$experience = 0;
 		if ($row['method'] == "Face to Face Meeting")
 		{
-			$sum_experience = $sum_experience +2;
-			$experience = "2";
+			$experience = 2;
 		}
-		return $apoints;
+		$sum_experience += $experience;
+		$row['experience'] = $experience;
+
+		$sum_points += $awarded;
+		return $awarded;
 	}
 
 	function calc_assurances ($row,&$points,&$experience,&$sumexperience,&$awarded,&$revoked)
@@ -378,7 +398,7 @@
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?$experience:'&nbsp;'?><?=$emclose?></td>
 <?
 		if ($support == "1")
 		{
@@ -437,18 +457,18 @@
 
 // ************* output given assurances ******************
 
-	function output_given_assurances_content($userid,&$points,&$sum_experience,$support)
+	function output_given_assurances_content($userid,&$sum_points,&$sum_experience,$support)
 	{
-		$points = 0;
+		$sum_points = 0;
 		$sumexperience = 0;
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
 			$assuree = get_user (intval($row['to']));
-			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
+			$apoints = calc_experience($row, $sum_points, $sum_experience);
 			$name = show_user_link ($assuree['fname']." ".$assuree['lname'],intval($row['to']));
 			$email = show_email_link ($assuree['email'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$row['experience'],$userid,$support,$row['deleted']!==NULL_DATETIME);
 		}
 	}
 
