@@ -17,6 +17,7 @@
 */
 
 define('NULL_DATETIME', '0000-00-00 00:00:00');
+define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 
 	function query_init ($query)
 	{
@@ -135,46 +136,137 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 		return mysql_num_rows($res);
 	}
 
-	function calc_experience ($row,&$points,&$experience,&$sum_experience,&$revoked)
+
+	/**
+	 * Calculate awarded points (corrects some issues like out of range points
+	 * or points that were issued by means that have been deprecated)
+	 *
+	 * @param array $row - associative array containing the data from the
+	 *     `notary` table
+	 * @return int - the awarded points for this assurance
+	 */
+	function calc_awarded($row)
 	{
-		$apoints = max($row['points'], $row['awarded']);
-		$points += $apoints;
-		$experience = "&nbsp;";
-		$revoked = false;				# to be coded later (after DB-upgrade)
-		if ($row['method'] == "Face to Face Meeting")
+		// Back in the old days there was no `awarded` column => is now zero,
+		// there the `points` column contained that data
+		$points = max(intval($row['awarded']), intval($row['points']));
+
+		// Set negative points to zero, yes there are such things in the database
+		$points = max($points, 0);
+
+		switch ($row['method'])
 		{
-			$sum_experience = $sum_experience +2;
-			$experience = "2";
+			// These programmes have been revoked
+			case 'Thawte Points Transfer':	  // revoke all Thawte-points     (as per arbitration)
+			case 'CT Magazine - Germany':	   // revoke c't		   (only one test-entry)
+			case 'Temporary Increase':	      // revoke 'temporary increase'  (Current usage breaks audit aspects, needs to be reimplemented)
+				$points = 0;
+				break;
+
+			case 'Administrative Increase':	 // ignore AI with 2 points or less (historical for experiance points, now other calculation)
+				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
+					$points = 0;
+				break;
+
+			// TTP assurances, limit to 35
+			case 'TTP-Assisted':
+				$points = min($points, 35);
+				break;
+
+				// TTP TOPUP, limit to 30
+			case 'TOPUP':
+				$points = min($points, 30);
+
+			// All these should be preserved for the time being
+			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
+			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
+			case '':				// to be revoked in the future? limit to max 50 pts?
+			case 'Face to Face Meeting': // normal assurances (and superassurances?), limit to 35/50 pts in the future?
+				break;
+
+			default:				// should never happen ... ;-)
+				$points = 0;
 		}
-		return $apoints;
+
+		return $points;
 	}
 
-	function calc_assurances ($row,&$points,&$experience,&$sumexperience,&$awarded,&$revoked)
-	{
-		$awarded = calc_points($row);
-		$revoked = false;
 
+	/**
+	 * Calculate the experience points from a given Assurance
+	 * @param array  $row - [inout] associative array containing the data from
+	 *     the `notary` table, a key 'experience' will be added
+	 * @param int    $sum_points - [inout] the sum of already counted assurance
+	 *     points the assurer issued
+	 * @param int    $sum_experience - [inout] the sum of already counted
+	 *     experience points that were awarded to the assurer
+	 * @return int - the assurance points that were awarded for this assurance
+	 */
+	function calc_experience(&$row, &$sum_points, &$sum_experience)
+	{
+		$awarded = calc_awarded($row);
+
+		// Don't count revoked assurances even if we are displaying them
+		if ($row['deleted'] !== NULL_DATETIME) {
+			$row['experience'] = 0;
+			return $awarded;
+		}
+
+		$experience = 0;
+		if ($row['method'] == "Face to Face Meeting")
+		{
+			$experience = 2;
+		}
+		$sum_experience += $experience;
+		$row['experience'] = $experience;
+
+		$sum_points += $awarded;
+		return $awarded;
+	}
+
+	/**
+	 * Calculate the points received from a received Assurance
+	 * @param array  $row - [inout] associative array containing the data from
+	 *     the `notary` table, a key 'experience' will be added
+	 * @param int    $sum_points - [inout] the sum of already counted assurance
+	 *     points the assuree received
+	 * @param int    $sum_experience - [inout] the sum of already counted
+	 *     experience points that were awarded to the assurer
+	 * @return int - the assurance points that were counted for this assurance
+	 */
+	function calc_assurances(&$row, &$sum_points, &$sum_experience)
+	{
+		$awarded = calc_awarded($row);
+		$experience = 0;
+
+		// High point values mean that some of them are experience points
 		if ($awarded > 100)
 		{
 			$experience = $awarded - 100;		// needs to be fixed in the future (limit 50 pts and/or no experience if pts > 100)
 			$awarded = 100;
 		}
-		else
-			$experience = 0;
 
 		switch ($row['method'])
 		{
 			case 'Thawte Points Transfer':
 			case 'CT Magazine - Germany':
 			case 'Temporary Increase':	      // Current usage of 'Temporary Increase' may break audit aspects, needs to be reimplemented
-				$awarded=sprintf("<strong style='color: red'>%s</strong>",_("Revoked"));
-				$experience=0;
-				$revoked=true;
+				$experience = 0;
+				$row['deleted'] = THAWTE_REVOCATION_DATETIME;
 				break;
-			default:
-				$points += $awarded;
 		}
-		$sumexperience = $sumexperience + $experience;
+
+		// Don't count revoked assurances even if we are displaying them
+		if ($row['deleted'] !== NULL_DATETIME) {
+			$row['experience'] = 0;
+			return $awarded;
+		}
+
+		$sum_experience += $experience;
+		$row['experience'] = $experience;
+		$sum_points += $awarded;
+
+		return $awarded;
 	}
 
 
@@ -357,10 +449,10 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 <?	}
 ?>
 	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked ? sprintf("<strong style='color: red'>%s</strong>",_("Revoked")) : $awarded?><?=$emclose?></td>
 	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
 	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
+	<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?$experience:'&nbsp;'?><?=$emclose?></td>
 <?
 	if ($support == 1)
 	{
@@ -422,23 +514,23 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 	/**
 	 * Helper function to render assurances given by the user
 	 * @param int  $userid
-	 * @param int& $points - [out] sum of given points
+	 * @param int& $sum_points - [out] sum of given points
 	 * @param int& $sum_experience - [out] sum of experience points gained
 	 * @param int  $support - set to 1 if the output is for the support interface
 	 * @param string $ticketno - the ticket number set in the support interface
 	 */
-	function output_given_assurances_content($userid,&$points,&$sum_experience,$support, $ticketno)
+	function output_given_assurances_content($userid,&$sum_points,&$sum_experience,$support, $ticketno)
 	{
-		$points = 0;
+		$sum_points = 0;
 		$sumexperience = 0;
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['to']));
-			$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
-			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-			$email = show_email_link ($fromuser['email'],intval($row['to']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked, $ticketno);
+			$assuree = get_user (intval($row['to']));
+			$apoints = calc_experience($row, $sum_points, $sum_experience);
+			$name = show_user_link ($assuree['fname']." ".$assuree['lname'],intval($row['to']));
+			$email = show_email_link ($assuree['email'],intval($row['to']));
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$row['experience'],$userid,$support,$row['deleted']!==NULL_DATETIME, $ticketno);
 		}
 	}
 
@@ -447,23 +539,23 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 	/**
 	 * Helper function to render assurances received by the user
 	 * @param int  $userid
-	 * @param int& $points - [out] sum of received points
+	 * @param int& $sum_points - [out] sum of received points
 	 * @param int& $sum_experience - [out] sum of experience points the assurers gained
 	 * @param int  $support - set to 1 if the output is for the support interface
 	 * @param string $ticketno - the ticket number set in the support interface
 	 */
-	function output_received_assurances_content($userid,&$points,&$sum_experience,$support, $ticketno)
+	function output_received_assurances_content($userid,&$sum_points,&$sum_experience,$support, $ticketno)
 	{
-		$points = 0;
+		$sum_points = 0;
 		$sumexperience = 0;
 		$res = get_received_assurances(intval($userid), $support);
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['from']));
-			calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
+			$awarded = calc_assurances($row, $sum_points, $sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
 			$email = show_email_link ($fromuser['email'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked, $ticketno);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$row['experience'],$userid,$support,$row['deleted']!==NULL_DATETIME, $ticketno);
 		}
 	}
 
@@ -474,41 +566,6 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-$age));
 		$res = query_init ("select id from `users` where `id`='".$userid."' and `dob` < '$dob'");
 		return intval(query_get_number_of_rows($res));
-	}
-
-	function calc_points($row)
-	{
-		$awarded = intval($row['awarded']);
-		if ($awarded == "")
-			$awarded = 0;
-		if (intval($row['points']) < $awarded)
-			$points = $awarded;      // if 'sum of added points' > 100, awarded shows correct value
-		else
-			$points = intval($row['points']);       // on very old assurances, awarded is '0' instead of correct value
-		switch ($row['method'])
-		{
-			case 'Thawte Points Transfer':	  // revoke all Thawte-points     (as per arbitration)
-			case 'CT Magazine - Germany':	   // revoke c't		   (only one test-entry)
-			case 'Temporary Increase':	      // revoke 'temporary increase'  (Current usage breaks audit aspects, needs to be reimplemented)
-				$points = 0;
-				break;
-			case 'Administrative Increase':	 // ignore AI with 2 points or less (historical for experiance points, now other calculation)
-				if ($points <= 2)	       // maybe limit to 35/50 pts in the future?
-					$points = 0;
-				break;
-			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
-			case 'Trusted Third Parties':	     // to be revoked in the future? limit to max 35 pts?
-			case 'TTP-Assisted':	     // TTP assurances, limit to 35
-			case 'TOPUP':	     // TOPUP to be delevoped in the future, limit to 30
-			case '':				// to be revoked in the future? limit to max 50 pts?
-			case 'Face to Face Meeting':	    // normal assurances, limit to 35/50 pts in the future?
-				break;
-			default:				// should never happen ... ;-)
-				$points = 0;
-		}
-		if ($points < 0)				// ignore negative points (bug needs to be fixed)
-			$points = 0;
-		return $points;
 	}
 
 	function max_points($userid)
@@ -540,7 +597,7 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 		$res = get_received_assurances_summary($userid);
 		while($row = mysql_fetch_assoc($res))
 		{
-			$points = calc_points ($row);
+			$points = calc_awarded($row);
 
 			if ($points > $max_points)			// limit to 100 points, above is experience (needs to be fixed)
 			{
