@@ -17,6 +17,7 @@
 */
 
 define('NULL_DATETIME', '0000-00-00 00:00:00');
+define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 
 	function query_init ($query)
 	{
@@ -174,7 +175,7 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 	/**
 	 * Calculate the experience points from a given Assurance
 	 * @param array  $row - [inout] associative array containing the data from
-	 *     the `notary` table
+	 *     the `notary` table, a key 'experience' will be added
 	 * @param int    $sum_points - [inout] the sum of already counted assurance
 	 *     points the assurer issued
 	 * @param int    $sum_experience - [inout] the sum of already counted
@@ -203,32 +204,49 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 		return $awarded;
 	}
 
-	function calc_assurances ($row,&$points,&$experience,&$sumexperience,&$awarded,&$revoked)
+	/**
+	 * Calculate the points received from a received Assurance
+	 * @param array  $row - [inout] associative array containing the data from
+	 *     the `notary` table, a key 'experience' will be added
+	 * @param int    $sum_points - [inout] the sum of already counted assurance
+	 *     points the assuree received
+	 * @param int    $sum_experience - [inout] the sum of already counted
+	 *     experience points that were awarded to the assurer
+	 * @return int - the assurance points that were counted for this assurance
+	 */
+	function calc_assurances(&$row, &$sum_points, &$sum_experience)
 	{
 		$awarded = calc_awarded($row);
-		$revoked = false;
+		$experience = 0;
 
+		// High point values mean that some of them are experience points
 		if ($awarded > 100)
 		{
 			$experience = $awarded - 100;		// needs to be fixed in the future (limit 50 pts and/or no experience if pts > 100)
 			$awarded = 100;
 		}
-		else
-			$experience = 0;
 
 		switch ($row['method'])
 		{
 			case 'Thawte Points Transfer':
 			case 'CT Magazine - Germany':
 			case 'Temporary Increase':	      // Current usage of 'Temporary Increase' may break audit aspects, needs to be reimplemented
-				$awarded=sprintf("<strong style='color: red'>%s</strong>",_("Revoked"));
-				$experience=0;
-				$revoked=true;
+				$experience = 0;
+				$row['deleted'] = THAWTE_REVOCATION_DATETIME;
 				break;
-			default:
-				$points += $awarded;
 		}
-		$sumexperience = $sumexperience + $experience;
+
+		// Don't count revoked assurances even if we are displaying them
+		if ($row['deleted'] !== NULL_DATETIME) {
+			$row['experience'] = 0;
+			return $awarded;
+		}
+
+		$sum_experience += $experience;
+		$row['experience'] = $experience;
+		$sum_points += $awarded;
+
+		return $awarded;
 	}
 
 
@@ -395,7 +413,7 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 		}
 ?>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked ? sprintf("<strong style='color: red'>%s</strong>",_("Revoked")) : $awarded?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?$experience:'&nbsp;'?><?=$emclose?></td>
@@ -474,18 +492,18 @@ define('NULL_DATETIME', '0000-00-00 00:00:00');
 
 // ************* output received assurances ******************
 
-	function output_received_assurances_content($userid,&$points,&$sum_experience,$support)
+	function output_received_assurances_content($userid,&$sum_points,&$sum_experience,$support)
 	{
-		$points = 0;
+		$sum_points = 0;
 		$sumexperience = 0;
 		$res = get_received_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['from']));
-			calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
+			$awarded = calc_assurances($row, $sum_points, $sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
 			$email = show_email_link ($fromuser['email'],intval($row['from']));
-			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
+			output_assurances_row (intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$row['experience'],$userid,$support,$row['deleted']!==NULL_DATETIME);
 		}
 	}
 
