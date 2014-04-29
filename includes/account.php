@@ -83,9 +83,11 @@ function buildSubjectFromSession() {
 	$orgid = array_key_exists('orgid',$_REQUEST) ? intval($_REQUEST['orgid']) : 0;
 	$memid = array_key_exists('memid',$_REQUEST) ? intval($_REQUEST['memid']) : 0;
 	$domid = array_key_exists('domid',$_REQUEST) ? intval($_REQUEST['domid']) : 0;
+
+	$actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
+
 	$ticketno = array_key_exists('ticketno',$_REQUEST) ? $_REQUEST['ticketno'] : "";
 	$ticketvalidation = FALSE;
-	$actionrequest = array_key_exists('action',$_REQUEST) ? $_REQUEST['action'] : "";
 
 
 	if(!$_SESSION['mconn'])
