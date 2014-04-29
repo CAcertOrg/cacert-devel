@@ -97,7 +97,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	/**
 	 * Get the list of assurances received by the user
 	 * @param int $userid - id of the assuree
-	 * @param integer $log - if set to 1 also includes deleted assurances
+	 * @param int $log - if set to 1 also includes deleted assurances
 	 * @return resource - a MySQL result set
 	 */
 	function get_received_assurances($userid, $log=0)
@@ -346,35 +346,41 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 <?
 	}
 
-	function output_assurances_header($title,$support)
+	/**
+	 * Render header for the assurance table (same for given/received)
+	 * @param string $title - The title for the table
+	 * @param int    $support - set to 1 if the output is for the support interface
+	 * @param int    $log - if set to 1 also includes deleted assurances
+	 */
+	function output_assurances_header($title, $support, $log)
 	{
+		if ($support == 1) {
+			$log = 1;
+		}
+
+		$colspan = 7;
+		if ($support == 1) {
+			$colspan += 2;
+		}
+		if ($log == 1) {
+			$colspan += 1;
+		}
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-<?
-	if ($support == "1")
-	{
-?>
-		<td colspan="10" class="title"><?=$title?></td>
-<?
-	} else {
-?>
-		<td colspan="7" class="title"><?=$title?></td>
-<?
-	}
-?>
+		<td colspan="<?=$colspan?>" class="title"><?=$title?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><strong><?=_("ID")?></strong></td>
 		<td class="DataTD"><strong><?=_("Date")?></strong></td>
 <?
-	if ($support == "1")
-	{
+		if ($support == 1)
+		{
 ?>
 		<td class="DataTD"><strong><?=_("When")?></strong></td>
 		<td class="DataTD"><strong><?=_("Email")?></strong></td>
 <?
-	}
+		}
 ?>
 		<td class="DataTD"><strong><?=_("Who")?></strong></td>
 		<td class="DataTD"><strong><?=_("Points")?></strong></td>
@@ -382,35 +388,49 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		<td class="DataTD"><strong><?=_("Method")?></strong></td>
 		<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
 <?
-	if ($support == "1")
-	{
+		if ($log == 1)
+		{
 ?>
-		<td class="DataTD"><strong><?=_("Revoke")?></strong></td>
+		<td class="DataTD"><strong><?=_("Revoked")?></strong></td>
 <?
-	}
+		}
 ?>
 	</tr>
 <?
 	}
 
-	function output_assurances_footer($points_txt,$points,$experience_txt,$sumexperience,$support)
+	/**
+	 * Render footer for the assurance table (same for given/received)
+	 * @param string $points_txt - Description for sum of assurance points
+	 * @param int    $sumpoints - sum of assurance points
+	 * @param string $experience_txt - Description for sum of experience points
+	 * @param int    $sumexperience - sum of experience points
+	 * @param int    $support - set to 1 if the output is for the support interface
+	 * @param int    $log - if set to 1 also includes deleted assurances
+	 */
+	function output_assurances_footer(
+			$points_txt,
+			$sumpoints,
+			$experience_txt,
+			$sumexperience,
+			$support,
+			$log)
 	{
 ?>
 	<tr>
-		<td<?=($support == "1")?' colspan="5"':' colspan="3"'?> class="DataTD"><strong><?=$points_txt?>:</strong></td>
-		<td class="DataTD"><?=$points?></td>
+		<td colspan="<?=($support == 1) ? 5 : 3 ?>" class="DataTD"><strong><?=$points_txt?>:</strong></td>
+		<td class="DataTD"><?=intval($sumpoints)?></td>
 		<td class="DataTD">&nbsp;</td>
 		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
-		<td class="DataTD"><?=$sumexperience?></td>
+		<td class="DataTD"><?=intval($sumexperience)?></td>
 <?
-	if ($support == "1")
-	{
+		if ($log == 1)
+		{
 ?>
 		<td class="DataTD">&nbsp;</td>
 <?
-	}
+		}
 ?>
-
 	</tr>
 </table>
 <br/>
@@ -424,8 +444,15 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param array   $other_user - associative array containing the other users data from the `users` table
 	 * @param int     $support - set to 1 if the output is for the support interface
 	 * @param string  $ticketno - ticket number currently set in the support interface
+	 * @param int     $log - if set to 1 also includes deleted assurances
 	 */
-	function output_assurances_row($assurance, $userid, $other_user, $support, $ticketno)
+	function output_assurances_row(
+			$assurance,
+			$userid,
+			$other_user,
+			$support,
+			$ticketno,
+			$log)
 	{
 		$assuranceid = intval($assurance['id']);
 		$date = $assurance['date'];
@@ -440,13 +467,17 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$email = show_email_link($other_user);
 		$name = show_user_link($other_user);
 
+		if ($support == 1) {
+			$log = 1;
+		}
+
 		$tdstyle="";
 		$emopen="";
 		$emclose="";
 
 		if ($awarded == $points)
 		{
-			if ($awarded == "0")
+			if ($awarded == 0)
 			{
 				if ($when < "2006-09-01")
 				{
@@ -475,21 +506,25 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
 		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?$experience:'&nbsp;'?><?=$emclose?></td>
 <?
-		if ($support == 1)
+		if ($log == 1)
 		{
 			if ($revoked == true)
 			{
 ?>
-		<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
+		<td class="DataTD" <?=$tdstyle?>><?=$assurance['deleted']?></td>
+<?
+			} elseif ($support == 1) {
+?>
+		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
 <?
 			} else {
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
+		<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
 <?
 			}
 		}
 ?>
-    </tr>
+	</tr>
 <?
 	}
 
@@ -539,17 +574,24 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param int& $sum_experience - [out] sum of experience points gained
 	 * @param int  $support - set to 1 if the output is for the support interface
 	 * @param string $ticketno - the ticket number set in the support interface
+	 * @param int  $log - if set to 1 also includes deleted assurances
 	 */
-	function output_given_assurances_content($userid,&$sum_points,&$sum_experience,$support, $ticketno)
+	function output_given_assurances_content(
+			$userid,
+			&$sum_points,
+			&$sum_experience,
+			$support,
+			$ticketno,
+			$log)
 	{
 		$sum_points = 0;
 		$sumexperience = 0;
-		$res = get_given_assurances(intval($userid));
+		$res = get_given_assurances(intval($userid), $log);
 		while($row = mysql_fetch_assoc($res))
 		{
 			$assuree = get_user(intval($row['to']));
 			calc_experience($row, $sum_points, $sum_experience);
-			output_assurances_row($row, $userid, $assuree, $support, $ticketno);
+			output_assurances_row($row, $userid, $assuree, $support, $ticketno, $log);
 		}
 	}
 
@@ -562,17 +604,24 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param int& $sum_experience - [out] sum of experience points the assurers gained
 	 * @param int  $support - set to 1 if the output is for the support interface
 	 * @param string $ticketno - the ticket number set in the support interface
+	 * @param int  $log - if set to 1 also includes deleted assurances
 	 */
-	function output_received_assurances_content($userid,&$sum_points,&$sum_experience,$support, $ticketno)
+	function output_received_assurances_content(
+			$userid,
+			&$sum_points,
+			&$sum_experience,
+			$support,
+			$ticketno,
+			$log)
 	{
 		$sum_points = 0;
 		$sumexperience = 0;
-		$res = get_received_assurances(intval($userid));
+		$res = get_received_assurances(intval($userid), $log);
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user (intval($row['from']));
+			$fromuser = get_user(intval($row['from']));
 			calc_assurances($row, $sum_points, $sum_experience);
-			output_assurances_row($row, $userid, $fromuser, $support, $ticketno);
+			output_assurances_row($row, $userid, $fromuser, $support, $ticketno, $log);
 		}
 	}
 
@@ -724,12 +773,30 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param int $userid
 	 * @param int $support - set to 1 if the output is for the support interface
 	 * @param string $ticketno - the ticket number set in the support interface
+	 * @param int $log - if set to 1 also includes deleted assurances
 	 */
-	function output_given_assurances($userid, $support=0, $ticketno='')
+	function output_given_assurances($userid, $support=0, $ticketno='', $log=0)
 	{
-		output_assurances_header(_("Assurance Points You Issued"),$support);
-		output_given_assurances_content($userid,$points,$sum_experience,$support, $ticketno);
-		output_assurances_footer(_("Total Points Issued"),$points,_("Total Experience Points"),$sum_experience,$support);
+		output_assurances_header(
+				_("Assurance Points You Issued"),
+				$support,
+				$log);
+
+		output_given_assurances_content(
+				$userid,
+				$sum_points,
+				$sum_experience,
+				$support,
+				$ticketno,
+				$log);
+
+		output_assurances_footer(
+				_("Total Points Issued"),
+				$sum_points,
+				_("Total Experience Points"),
+				$sum_experience,
+				$support,
+				$log);
 	}
 
 	/**
@@ -737,12 +804,30 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param int $userid
 	 * @param int $support - set to 1 if the output is for the support interface
 	 * @param string $ticketno - the ticket number set in the support interface
+	 * @param int $log - if set to 1 also includes deleted assurances
 	 */
-	function output_received_assurances($userid,$support=0, $ticketno='')
+	function output_received_assurances($userid, $support=0, $ticketno='', $log=0)
 	{
-		output_assurances_header(_("Your Assurance Points"),$support);
-		output_received_assurances_content($userid,$points,$sum_experience,$support, $ticketno);
-		output_assurances_footer(_("Total Assurance Points"),$points,_("Total Experience Points"),$sum_experience,$support);
+		output_assurances_header(
+				_("Assurance Points You Received"),
+				$support,
+				$log);
+
+		output_received_assurances_content(
+				$userid,
+				$sum_points,
+				$sum_experience,
+				$support,
+				$ticketno,
+				$log);
+
+		output_assurances_footer(
+				_("Total Points Received"),
+				$sum_points,
+				_("Total Experience Points"),
+				$sum_experience,
+				$support,
+				$log);
 	}
 
 	function output_summary($userid)
@@ -2048,143 +2133,6 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 	}
 
 	?>
-	</tr>
-	<?
-}
-
-/**
- * output_log_given_assurances()
- *  returns the list of all given assurances
- * @param mixed $userid - user id for the output
- * @param integer $support - support view = 1
- * @return
- */
-function output_log_given_assurances($userid, $support=0)
-{
-	output_assurances_header(_("Assurance given"),$support);
-	output_log_given_assurances_content($userid, $support);
-}
-
-/**
- * output_log_given_assurances_content()
- *
- * @param mixed $userid
- * @param mixed $support
- * @return
- */
-function output_log_given_assurances_content($userid, $support)
-{
-	$res = get_given_assurances(intval($userid), 1);
-	while($row = mysql_fetch_assoc($res))
-	{
-		$fromuser = get_user (intval($row['to']));
-		$apoints = calc_experience ($row,$points,$experience,$sum_experience,$revoked);
-		$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['to']));
-		$email = show_email_link ($fromuser['email'],intval($row['to']));
-		$revoked = '';
-		if ($row['date'] != 0) {
-			$revoked = $row['deleted'];
-		}
-		output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$apoints,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
-	}
-}
-
-/**
- * output_log_received_assurances()
- *
- * @param mixed $userid
- * @param integer $support
- * @return
- */
-function output_log_received_assurances($userid, $support=0)
-{
-	output_assurances_header(_("Assurance received"), $support);
-	output_log_received_assurances_content($userid, $support);
-}
-
-/**
- * output_log_received_assurances_content()
- *
- * @param mixed $userid
- * @param mixed $support
- * @param mixed $points
- * @param mixed $sum_experience
- * @param mixed $ticketno
- * @return
- */
-function output_log_received_assurances_content($userid, $support)
-{
-	$res = get_received_assurances(intval($userid), 1);
-	while($row = mysql_fetch_assoc($res))
-	{
-		$fromuser = get_user (intval($row['from']));
-		calc_assurances ($row,$points,$experience,$sum_experience,$awarded,$revoked);
-		$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
-		$email = show_email_link ($fromuser['email'],intval($row['from']));
-		$revoked = '';
-		if ($row['date'] != 0) {
-			$revoked = $revoked = $row['deleted'];
-		}
-		output_log_assurances_row(intval($row['id']),$row['date'],$row['when'],$email,$name,$awarded,intval($row['points']),$row['location'],$row['method']==""?"":_(sprintf("%s", $row['method'])),$experience,$userid,$support,$revoked);
-	}
-}
-
-/**
- * output_log_assurances_row()
- *
- * @param mixed $assuranceid
- * @param mixed $date
- * @param mixed $when
- * @param mixed $email
- * @param mixed $name
- * @param mixed $awarded
- * @param mixed $points
- * @param mixed $location
- * @param mixed $method
- * @param mixed $experience
- * @param mixed $userid
- * @param mixed $support
- * @param mixed $revoked
- * @return
- */
-function output_log_assurances_row($assuranceid,$date,$when,$email,$name,$awarded,$points,$location,$method,$experience,$userid,$support,$revoked)
-{
-
-	$tdstyle="";
-	$emopen="";
-	$emclose="";
-
-	if ($awarded == $points)
-	{
-		if ($awarded == "0")
-		{
-			if ($when < "2006-09-01")
-			{
-				$tdstyle="style='background-color: #ffff80'";
-				$emopen="<em>";
-				$emclose="</em>";
-			}
-		}
-	}
-	?>
-	<tr>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
-	<?
-	if ($support == "1")
-	{
-		?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-		<?
-	}
-	?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$awarded?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$location?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked?><?=$emclose?></td>
 	</tr>
 	<?
 }
