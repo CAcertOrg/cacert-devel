@@ -266,27 +266,47 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$sum_points += $row['calc_awarded'];
 	}
 
-
-	function show_user_link ($name,$userid)
+	/**
+	 * Generate a link to the support engineer page for the user with the name
+	 * of the user as link text
+	 * @param array $user - associative array containing the data from the
+	 *     `user` table
+	 * @return string
+	 */
+	function show_user_link($user)
 	{
-		$name = trim($name);
+		$name = trim($user['fname'].' '.$user['lname']);
+		$userid = intval($user['id']);
+
 		if($name == "")
 		{
-			if ($userid == 0)
+			if ($userid == 0) {
 				$name = _("System");
-			else
+			} else {
 				$name = _("Deleted account");
+			}
 		}
 		else
-			$name = "<a href='wot.php?id=9&amp;userid=".intval($userid)."'>".sanitizeHTML($name)."</a>";
+		{
+			$name = "<a href='wot.php?id=9&amp;userid=".$userid."'>".sanitizeHTML($name)."</a>";
+		}
+
 		return $name;
 	}
 
-	function show_email_link ($email,$userid)
+	/**
+	 * Generate a link to the support engineer page for the user with the email
+	 * address as link text
+	 * @param array $user - associative array containing the data from the
+	 *     `user` table
+	 * @return string
+	 */
+	function show_email_link($user)
 	{
-		$email = trim($email);
-		if($email != "")
-			$email = "<a href='account.php?id=43&amp;userid=".intval($userid)."'>".sanitizeHTML($email)."</a>";
+		$email = trim($user['email']);
+		if($email != "") {
+			$email = "<a href='account.php?id=43&amp;userid=".intval($user['id'])."'>".sanitizeHTML($email)."</a>";
+		}
 		return $email;
 	}
 
@@ -400,13 +420,12 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	/**
 	 * Render an assurance for a view
 	 * @param array   $assurance - associative array containing the data from the `notary` table
-	 * @param string  $email - Email address of the other party, only visible for support
-	 * @param string  $name - Name of the other party
 	 * @param int     $userid - Id of the user whichs given/received assurances are displayed
+	 * @param array   $other_user - associative array containing the other users data from the `users` table
 	 * @param int     $support - set to 1 if the output is for the support interface
 	 * @param string  $ticketno - ticket number currently set in the support interface
 	 */
-	function output_assurances_row($assurance, $email, $name, $userid, $support, $ticketno)
+	function output_assurances_row($assurance, $userid, $other_user, $support, $ticketno)
 	{
 		$assuranceid = intval($assurance['id']);
 		$date = $assurance['date'];
@@ -417,6 +436,9 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$method = $assurance['method'] ? _($assurance['method']) : '';
 		$experience = intval($assurance['experience']);
 		$revoked = $assurance['deleted'] !== NULL_DATETIME;
+
+		$email = show_email_link($other_user);
+		$name = show_user_link($other_user);
 
 		$tdstyle="";
 		$emopen="";
@@ -525,11 +547,9 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$res = get_given_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$assuree = get_user (intval($row['to']));
+			$assuree = get_user(intval($row['to']));
 			calc_experience($row, $sum_points, $sum_experience);
-			$name = show_user_link ($assuree['fname']." ".$assuree['lname'],intval($row['to']));
-			$email = show_email_link ($assuree['email'],intval($row['to']));
-			output_assurances_row($row, $email, $name, $userid, $support, $ticketno);
+			output_assurances_row($row, $userid, $assuree, $support, $ticketno);
 		}
 	}
 
@@ -552,9 +572,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		{
 			$fromuser = get_user (intval($row['from']));
 			calc_assurances($row, $sum_points, $sum_experience);
-			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
-			$email = show_email_link ($fromuser['email'],intval($row['from']));
-			output_assurances_row($row, $email, $name, $userid, $support, $ticketno);
+			output_assurances_row($row, $userid, $fromuser, $support, $ticketno);
 		}
 	}
 
