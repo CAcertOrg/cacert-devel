@@ -135,8 +135,8 @@ if(intval($_REQUEST['userid']) > 0) {
                 $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
                 if ($res) {
                     $trow = mysql_fetch_assoc($res);
-                    mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
                     if ($trow) {
+                        mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
                         fix_assurer_flag($trow['to']);
                     }
                 }
