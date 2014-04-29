@@ -195,21 +195,21 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	/**
 	 * Calculate the experience points from a given Assurance
 	 * @param array  $row - [inout] associative array containing the data from
-	 *     the `notary` table, a key 'experience' will be added
+	 *     the `notary` table, the keys 'experience' and 'calc_awarded' will be
+	 *     added
 	 * @param int    $sum_points - [inout] the sum of already counted assurance
 	 *     points the assurer issued
 	 * @param int    $sum_experience - [inout] the sum of already counted
 	 *     experience points that were awarded to the assurer
-	 * @return int - the assurance points that were awarded for this assurance
 	 */
 	function calc_experience(&$row, &$sum_points, &$sum_experience)
 	{
-		$awarded = calc_awarded($row);
+		$row['calc_awarded'] = calc_awarded($row);
 
 		// Don't count revoked assurances even if we are displaying them
 		if ($row['deleted'] !== NULL_DATETIME) {
 			$row['experience'] = 0;
-			return $awarded;
+			return;
 		}
 
 		$experience = 0;
@@ -220,30 +220,29 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$sum_experience += $experience;
 		$row['experience'] = $experience;
 
-		$sum_points += $awarded;
-		return $awarded;
+		$sum_points += $row['calc_awarded'];
 	}
 
 	/**
 	 * Calculate the points received from a received Assurance
 	 * @param array  $row - [inout] associative array containing the data from
-	 *     the `notary` table, a key 'experience' will be added
+	 *     the `notary` table, the keys 'experience' and 'calc_awarded' will be
+	 *     added
 	 * @param int    $sum_points - [inout] the sum of already counted assurance
 	 *     points the assuree received
 	 * @param int    $sum_experience - [inout] the sum of already counted
 	 *     experience points that were awarded to the assurer
-	 * @return int - the assurance points that were counted for this assurance
 	 */
 	function calc_assurances(&$row, &$sum_points, &$sum_experience)
 	{
-		$awarded = calc_awarded($row);
+		$row['calc_awarded'] = calc_awarded($row);
 		$experience = 0;
 
 		// High point values mean that some of them are experience points
-		if ($awarded > 100)
+		if ($row['calc_awarded'] > 100)
 		{
-			$experience = $awarded - 100;		// needs to be fixed in the future (limit 50 pts and/or no experience if pts > 100)
-			$awarded = 100;
+			$experience = $row['calc_awarded'] - 100;		// needs to be fixed in the future (limit 50 pts and/or no experience if pts > 100)
+			$row['calc_awarded'] = 100;
 		}
 
 		switch ($row['method'])
@@ -259,14 +258,12 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		// Don't count revoked assurances even if we are displaying them
 		if ($row['deleted'] !== NULL_DATETIME) {
 			$row['experience'] = 0;
-			return $awarded;
+			return;
 		}
 
 		$sum_experience += $experience;
 		$row['experience'] = $experience;
-		$sum_points += $awarded;
-
-		return $awarded;
+		$sum_points += $row['calc_awarded'];
 	}
 
 
@@ -405,16 +402,16 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param array   $assurance - associative array containing the data from the `notary` table
 	 * @param string  $email - Email address of the other party, only visible for support
 	 * @param string  $name - Name of the other party
-	 * @param int     $awarded - The points the Assurer wanted to issue (not rounded down)
 	 * @param int     $userid - Id of the user whichs given/received assurances are displayed
 	 * @param int     $support - set to 1 if the output is for the support interface
 	 * @param string  $ticketno - ticket number currently set in the support interface
 	 */
-	function output_assurances_row($assurance, $email, $name, $awarded, $userid, $support, $ticketno)
+	function output_assurances_row($assurance, $email, $name, $userid, $support, $ticketno)
 	{
 		$assuranceid = intval($assurance['id']);
 		$date = $assurance['date'];
 		$when = $assurance['when'];
+		$awarded = intval($assurance['calc_awarded']);
 		$points = intval($assurance['points']);
 		$location = $assurance['location'];
 		$method = $assurance['method'] ? _($assurance['method']) : '';
@@ -529,10 +526,10 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		while($row = mysql_fetch_assoc($res))
 		{
 			$assuree = get_user (intval($row['to']));
-			$apoints = calc_experience($row, $sum_points, $sum_experience);
+			calc_experience($row, $sum_points, $sum_experience);
 			$name = show_user_link ($assuree['fname']." ".$assuree['lname'],intval($row['to']));
 			$email = show_email_link ($assuree['email'],intval($row['to']));
-			output_assurances_row($row, $email, $name, $apoints, $userid, $support, $ticketno);
+			output_assurances_row($row, $email, $name, $userid, $support, $ticketno);
 		}
 	}
 
@@ -554,10 +551,10 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user (intval($row['from']));
-			$awarded = calc_assurances($row, $sum_points, $sum_experience);
+			calc_assurances($row, $sum_points, $sum_experience);
 			$name = show_user_link ($fromuser['fname']." ".$fromuser['lname'],intval($row['from']));
 			$email = show_email_link ($fromuser['email'],intval($row['from']));
-			output_assurances_row($row, $email, $name, $awarded, $userid, $support, $ticketno);
+			output_assurances_row($row, $email, $name, $userid, $support, $ticketno);
 		}
 	}
 
