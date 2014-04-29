@@ -22,29 +22,14 @@ $ticketno='';
 $ticketvalidation=FALSE;
 
 if (isset($_SESSION['ticketno'])) {
-	$ticketno = $_SESSION['ticketno'];
-	$ticketvalidation = valid_ticket_number($ticketno);
+    $ticketno = $_SESSION['ticketno'];
+    $ticketvalidation = valid_ticket_number($ticketno);
 }
 if (isset($_SESSION['ticketmsg'])) {
-	$ticketmsg = $_SESSION['ticketmsg'];
+    $ticketmsg = $_SESSION['ticketmsg'];
 } else {
-	$ticketmsg = '';
+    $ticketmsg = '';
 }
-
-
-  if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0)
-  {
-    $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
-    $row = 0;
-    $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
-    if ($res) {
-      $row = mysql_fetch_assoc($res);
-      mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
-      if ($row) {
-        fix_assurer_flag($row['to']);
-      }
-    }
-  }
 
 
 // search for an account by email search, if more than one is found display list to choose
@@ -147,14 +132,13 @@ if(intval($_REQUEST['userid']) > 0) {
             } else {
                 $assurance = mysql_escape_string(intval($_REQUEST['assurance']));
                 $trow = 0;
-                $res = mysql_query("select `to` from `notary` where `id`='$assurance'");
+                $res = mysql_query("select `to` from `notary` where `id`='$assurance' and `deleted` = 0");
                 if ($res) {
                     $trow = mysql_fetch_assoc($res);
-                }
-
-                mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
-                if ($trow) {
-                    fix_assurer_flag($trow['to']);
+                    if ($trow) {
+                        mysql_query("update `notary` set `deleted`=NOW() where `id`='$assurance'");
+                        fix_assurer_flag($trow['to']);
+                    }
                 }
             }
         } elseif(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == FALSE) {
@@ -980,6 +964,7 @@ if(intval($_REQUEST['userid']) > 0) {
     </table>
     <?
     //  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
+
 
     function showassuredto($ticketno)
     {

@@ -345,10 +345,10 @@ if (mysql_num_rows($dres) > 0) {
 
 <?
 
-output_log_given_assurances($userid, $support);
+output_given_assurances($userid, $support, $ticketno, 1);
 ?><br/><?
 
-output_log_received_assurances($userid, $support);
+output_received_assurances($userid, $support, $ticketno, 1);
 ?><br/><?
 
 $dres = get_se_log($userid);
