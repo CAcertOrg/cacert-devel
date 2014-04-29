@@ -2079,7 +2079,7 @@ function buildSubjectFromSession() {
 				echo _("Renewing").": ".$row['CN']."<br>\n";
 				$res = mysql_query("select * from `orgdomlink` where `orgcertid`='".$row['id']."'");
 				while($r2 = mysql_fetch_assoc($res))
-					mysql_query("insert into `orgdomlink` set `orgdomid`='".$r2['id']."', `orgcertid`='$newid'");
+					mysql_query("insert into `orgdomlink` set `orgdomid`='".intval($r2['orgdomid'])."', `orgcertid`='$newid'");
 				waitForResult("orgdomaincerts", $newid,$oldid,0);
 				$query = "select * from `orgdomaincerts` where `id`='$newid' and `crt_name` != ''";
 				$res = mysql_query($query);
