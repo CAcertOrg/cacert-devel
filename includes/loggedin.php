@@ -43,7 +43,7 @@
 		        //session_unregister($key);
 		}
 
-		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$uid'"));
+		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($uid)."'"));
 		if($_SESSION['profile']['locked'] == 0)
 			$_SESSION['profile']['loggedin'] = 1;
 		else
@@ -70,7 +70,7 @@
 			}
 
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-					"select * from `users` where `id`='".$user_id."'"));
+					"select * from `users` where `id`='".intval($user_id)."'"));
 			if($_SESSION['profile']['locked'] == 0)
 				$_SESSION['profile']['loggedin'] = 1;
 			else
@@ -113,7 +113,7 @@
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] > 0)
 	{
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `deleted` = 0 group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
 		$_SESSION['profile']['points'] = $row['total'];
@@ -121,7 +121,7 @@
 		if($_SESSION['profile']['language'] == "")
 		{
 			$query = "update `users` set `language`='".L10n::get_translation()."'
-							where `id`='".$_SESSION['profile']['id']."'";
+							where `id`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 		} else {
 			L10n::set_translation($_SESSION['profile']['language']);
