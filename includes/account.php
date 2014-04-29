@@ -2906,10 +2906,11 @@ function buildSubjectFromSession() {
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$ver = !$row['tverify'];
 		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
-	}else{
+	}elseif($id == 43 && array_key_exists('tverify',$_REQUEST) && $_REQUEST['tverify'] > 0 && $ticketvalidation==FALSE){
 		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
 	}
- */
+	*/
+
 	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admsetassuret');
