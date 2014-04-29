@@ -34,7 +34,7 @@
 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
-			`domaincerts`.`expire` as `expires`,
+			`domaincerts`.`expire`,
 			`domaincerts`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`revoked`) as `revoked`,
 			if (`domaincerts`.`expire`=0,CURRENT_TIMESTAMP(),`domaincerts`.`modified`) as `modified`,
