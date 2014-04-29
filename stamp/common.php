@@ -117,7 +117,7 @@
 			if($org == 0)
 			{
 				$query = "SELECT *, sum(`points`) AS `total` FROM `users`, `notary` WHERE `users`.`id` = '$cert[memid]' AND
-						`notary`.`to` = `users`.`id` and `notary`.`when` <= '$cert[issued]' GROUP BY `notary`.`to`";
+						`notary`.`to` = `users`.`id` and `notary`.`when` <= '$cert[issued]' and `notary`.`deleted`=0 GROUP BY `notary`.`to`";
 				$user = mysql_fetch_assoc(mysql_query($query));
 			} else {
 				$query = "select * from `orginfo` where `id`='$cert[orgid]'";

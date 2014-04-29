@@ -15,9 +15,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	
+
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
-	
+
 
 	$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
 	if(mysql_num_rows($res) <= 0)
@@ -28,7 +28,7 @@
 		$user = mysql_fetch_array($res);
 		$userlang = $user['language'];
 		$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-				where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
+				where `to`='".$user['id']."' and `deleted`=0 group by `to` HAVING SUM(`points`) > 0"));
 		if($points <= 0)
 		{
 			echo _("Sorry, I was unable to locate that user.");
