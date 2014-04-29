@@ -19,7 +19,7 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="8" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=12&amp;viewall=<?=!$viewall?>"><?=$viewall?_("Hide old certificates"):_("View all certificates")?></a></td>
+    <td colspan="8" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=12&amp;viewall=<?=intval(!$viewall)?>"><?=$viewall?_("Hide old certificates"):_("View all certificates")?></a></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
@@ -70,24 +70,24 @@
 ?>
   <tr>
 <? if($verified != _("Pending") && $verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"/></td>
+    <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>"/></td>
 <? } else if($verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"/></td>
+    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>"/></td>
 <? } else { ?>
     <td class="DataTD">&nbsp;</td>
 <? } ?>
     <td class="DataTD"><?=$verified?></td>
-    <td class="DataTD"><a href="account.php?id=15&amp;cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
+    <td class="DataTD"><a href="account.php?id=15&amp;cert=<?=intval($row['id'])?>"><?=htmlspecialchars($row['CN'])?></a></td>
     <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expire']?></td>
-    <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
-    <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
+    <td class="DataTD"><input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+    <td class="DataTD"><input type="checkbox" name="check_comment_<?=intval($row['id'])?>" /></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD" colspan="8">
-      <a href="account.php?id=12&amp;viewall=<?=!$viewall?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
+      <a href="account.php?id=12&amp;viewall=<?=intval(!$viewall)?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
     </td>
   </tr>
   <tr>
@@ -105,6 +105,6 @@
     <td class="DataTD" colspan="8"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>"/>
+<input type="hidden" name="oldid" value="<?=intval($id)?>"/>
 <input type="hidden" name="csrf" value="<?=make_csrf('srvcerchange')?>"/>
 </form>
