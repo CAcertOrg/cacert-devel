@@ -130,7 +130,7 @@ if(intval($_REQUEST['userid']) > 0) {
             if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE assurance revoke', $ticketno)) {
                 $ticketmsg=_("Writing to the admin log failed. Can't continue.");
             } else {
-                $assurance = mysql_real_escape_string(intval($_REQUEST['assurance']));
+                $assurance = intval($_REQUEST['assurance']);
                 $trow = 0;
                 $res = mysql_query("select `to` from `notary` where `id`='".intval($assurance)."' and `deleted` = 0");
                 if ($res) {
