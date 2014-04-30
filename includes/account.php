@@ -1325,8 +1325,8 @@ function buildSubjectFromSession() {
 		}
 
 		//!!!Should be rewritten
-		$_SESSION['_config']['user']['otphash'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otphash']))));
-		$_SESSION['_config']['user']['otppin'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['otppin']))));
+		$_SESSION['_config']['user']['otphash'] = trim(stripslashes(strip_tags($_REQUEST['otphash'])));
+		$_SESSION['_config']['user']['otppin']  = trim(stripslashes(strip_tags($_REQUEST['otppin'])));
 		if($_SESSION['_config']['user']['otphash'] != "" && $_SESSION['_config']['user']['otppin'] != "")
 		{
 			$query = "update `users` set `otphash`='".mysql_real_escape_string($_SESSION['_config']['user']['otphash'])."',
