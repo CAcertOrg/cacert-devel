@@ -43,6 +43,7 @@
 <? } else {
 	while($row = mysql_fetch_assoc($res))
 	{
+		$verified = '';
 		if($row['timeleft'] > 0)
 			$verified = _("Valid");
 		if($row['timeleft'] < 0)
@@ -52,7 +53,7 @@
 ?>
   <tr>
 <? if($verified == _("Valid")) { ?>
-    <td class="DataTD"><?=intval($verified)?></td>
+    <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>"><?=sanitizeHTML($row['email'])?></a></td>
 <? } else if($verified == _("Pending")) { ?>
     <td class="DataTD"><?=$verified?></td>
