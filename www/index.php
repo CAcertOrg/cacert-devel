@@ -307,19 +307,19 @@ require_once('../includes/lib/l10n.php');
 			$_SESSION['profile'] = "";
 			unset($_SESSION['profile']);
 			$_SESSION['profile'] = mysql_fetch_assoc($res);
-			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".$_SESSION['profile']['id']."'";
+			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 
 			if($_SESSION['profile']['language'] == "")
 			{
 				$query = "update `users` set `language`='".L10n::get_translation()."'
-						where `id`='".$_SESSION['profile']['id']."'";
+						where `id`='".intval($_SESSION['profile']['id'])."'";
 				mysql_query($query);
 			} else {
 				L10n::set_translation($_SESSION['profile']['language']);
 				L10n::init_gettext();
 			}
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `deleted`=0 group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
