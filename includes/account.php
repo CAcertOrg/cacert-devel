@@ -1436,7 +1436,7 @@ function buildSubjectFromSession() {
 				$_SESSION['_config']['emails'][] = $val;
 		}
 		$_SESSION['_config']['name'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['name'])));
-		$_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
+		$_SESSION['_config']['OU'] = stripslashes(trim($_REQUEST['OU']));
 
 		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 	}
@@ -1503,7 +1503,7 @@ function buildSubjectFromSession() {
 			if($_SESSION['_config']['name'] != "")
 				$emails .= "commonName = ".$_SESSION['_config']['name']."\n";
 			if($_SESSION['_config']['OU'])
-				$emails .= "organizationalUnitName = ".$_SESSION['_config']['OU']."\n";
+				$emails .= "organizationalUnitName = ".mysql_real_escape_string($_SESSION['_config']['OU'])."\n";
 			if($org['O'])
 				$emails .= "organizationName = ".$org['O']."\n";
 			if($org['L'])
@@ -2436,7 +2436,7 @@ function buildSubjectFromSession() {
 		else
 			$masteracc = $_SESSION['_config'][masteracc] = 0;
 		$_REQUEST['email'] = $_SESSION['_config']['email'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['email'])));
-		$OU = $_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
+		$_SESSION['_config']['OU'] = stripslashes(trim($_REQUEST['OU']));
 		$comments = $_SESSION['_config']['comments'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['comments'])));
 		$res = mysql_query("select * from `users` where `email`='".$_REQUEST['email']."' and `deleted`=0");
 		if(mysql_num_rows($res) <= 0)
@@ -2458,7 +2458,7 @@ function buildSubjectFromSession() {
 						set `memid`='".intval($row['id'])."',
 							`orgid`='".intval($_SESSION['_config']['orgid'])."',
 							`masteracc`='$masteracc',
-							`OU`='$OU',
+							`OU`='".mysql_real_escape_string($_SESSION['_config']['OU'])."',
 							`comments`='$comments'");
 			}
 		}
