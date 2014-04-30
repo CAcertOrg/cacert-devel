@@ -298,11 +298,8 @@ function buildSubjectFromSession() {
 			$_REQUEST['keytype'] = "MS";
 			$csr = clean_csr($_REQUEST['optionalCSR']);
 		}
-		if(trim($_REQUEST['description']) != ""){
-			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$_SESSION['_config']['description']= "";
-		}
+
+		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 	}
 
 	if($oldid == 4)
@@ -731,11 +728,7 @@ function buildSubjectFromSession() {
 			exit;
 		}
 
-		if(trim($_REQUEST['description']) != ""){
-			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$_SESSION['_config']['description']= "";
-		}
+		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id10CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
@@ -1445,12 +1438,7 @@ function buildSubjectFromSession() {
 		$_SESSION['_config']['name'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['name'])));
 		$_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
 
-
-		if(trim($_REQUEST['description']) != ""){
-			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$_SESSION['_config']['description']= "";
-		}
+		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 	}
 
 	if($oldid == 16 && (intval(count($_SESSION['_config']['emails'])) + 0) <= 0)
@@ -1479,11 +1467,7 @@ function buildSubjectFromSession() {
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
-		if(trim($_REQUEST['description']) != ""){
-			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$_SESSION['_config']['description']= "";
-		}
+		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 
 		if(@count($_SESSION['_config']['emails']) > 0)
 			$id = 17;
@@ -1863,11 +1847,7 @@ function buildSubjectFromSession() {
 			exit;
 		}
 
-		if(trim($_REQUEST['description']) != ""){
-			$_SESSION['_config']['description']= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
-		}else{
-			$_SESSION['_config']['description']= "";
-		}
+		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 
 		$_SESSION['_config']['tmpfname'] = tempnam("/tmp", "id20CSR");
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
