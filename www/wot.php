@@ -133,9 +133,9 @@ function send_reminder()
 			//This mail does not need to be translated
 			$body = "Hi TTP adminstrators,\n\n";
 			$body .= "User ".$_SESSION['profile']['fname']." ".
-			$_SESSION['profile']['lname']." with email address '".
-			$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-			mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+				$_SESSION['profile']['lname']." with email address '".
+				$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
+				mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{

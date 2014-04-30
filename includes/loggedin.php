@@ -38,9 +38,9 @@
 			if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 				continue;
 			if(is_int($key) || is_string($key))
-		                unset($_SESSION[$key]);
-		        unset($$key);
-		        //session_unregister($key);
+				unset($_SESSION[$key]);
+			unset($$key);
+			//session_unregister($key);
 		}
 
 		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($uid)."'"));
@@ -64,9 +64,9 @@
 				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
 				if(is_int($key) || is_string($key))
-			                unset($_SESSION[$key]);
-			        unset($$key);
-			        //session_unregister($key);
+					unset($_SESSION[$key]);
+				unset($$key);
+				//session_unregister($key);
 			}
 
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
@@ -82,9 +82,9 @@
 			{
 				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
-			        unset($_SESSION[$key]);
-			        unset($$key);
-			        //session_unregister($key);
+				unset($_SESSION[$key]);
+				unset($$key);
+				//session_unregister($key);
 			}
 
 			$_SESSION['_config']['oldlocation'] = '';
@@ -136,9 +136,9 @@
 		$_SESSION['profile'] = "";
 		foreach($_SESSION as $key => $value)
 		{
-		        unset($_SESSION[$key]);
-		        unset($$key);
-		        //session_unregister($key);
+			unset($_SESSION[$key]);
+			unset($$key);
+			//session_unregister($key);
 		}
 
 		header("location: https://".$normalhost."/index.php");

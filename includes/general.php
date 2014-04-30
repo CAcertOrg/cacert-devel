@@ -77,7 +77,7 @@
 	L10n::detect_language();
 	L10n::init_gettext();
 
-        if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
+	if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
 		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 		if($locked['locked'] == 0)

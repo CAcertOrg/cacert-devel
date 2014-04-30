@@ -42,6 +42,7 @@
 	}
 	$query = "select * from `email` where `memid`='".intval($memid)."' and `hash`='' and `deleted`=0";
 	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysql_fetch_assoc($res)) {
 		echo "EMAIL=".sanitizeHTML($row['email'])."\n";
+	}
 ?>
