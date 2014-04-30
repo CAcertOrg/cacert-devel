@@ -58,7 +58,7 @@
 <?
         $query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
                  " FROM `cats_passed` AS CP, `cats_variant` AS CV, `cats_type` AS CT ".
-                 " WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".(int)$user_id."'".
+                 " WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".intval($user_id)."'".
                  " ORDER BY `CP`.`pass_date`";
 
         $res = mysql_query($query);
@@ -71,9 +71,9 @@
           }
 ?>
   <tr>
-    <td class="DataTD"><?=$row[0]?></td>
-    <td class="DataTD"><?=$row[1]?></td>
-    <td class="DataTD"><?=$row[2]?></td>
+    <td class="DataTD"><?=sanitizeHTML($row[0])?></td>
+    <td class="DataTD"><?=sanitizeHTML($row[1])?></td>
+    <td class="DataTD"><?=sanitizeHTML($row[2])?></td>
   </tr>
 <?      }
 ?>
@@ -84,7 +84,7 @@
 <?
       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>
-    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=$user_id ?>">back</a></td></tr>
+    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($user_id)?>">back</a></td></tr>
 <?    } else {
         $query = 'SELECT `u`.id, `u`.`assurer`, SUM(`points`) FROM `users` AS `u`, `notary` AS `n` '.
                  '  WHERE `u`.`id` = \''.(int)intval($_SESSION['profile']['id']).'\' AND `n`.`to` = `u`.`id` AND `expire` < now() and  and `n`.`deleted` = 0'.

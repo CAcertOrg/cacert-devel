@@ -137,11 +137,11 @@ if (array_key_exists('format', $_REQUEST)) {
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Email Address")?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : sanitizeHTML($row['CN']))?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("SerialNumber")?></td>
-		<td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=sanitizeHTML($row['serial'])?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Revoked")?></td>

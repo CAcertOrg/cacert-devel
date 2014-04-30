@@ -98,7 +98,7 @@
 <?
       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>
-    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=$user_id ?>">back</a></td></tr>
+    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($user_id)?>">back</a></td></tr>
 <?    }
 ?>  </table>
 <?
