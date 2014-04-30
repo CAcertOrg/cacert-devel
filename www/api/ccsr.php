@@ -73,7 +73,9 @@ require_once '../../includes/lib/check_weak_key.php';
 	$fp = fopen($incsr, "w");
 	fputs($fp, $CSR);
 	fclose($fp);
-	$do = `/usr/bin/openssl req -in $incsr -out $checkedcsr`;
+	$incsr_esc = escapeshellarg($incsr);
+	$checkedcsr_esc = escapeshellarg($checkedcsr);
+	$do = `/usr/bin/openssl req -in $incsr_esc -out $checkedcsr_esc`;
 	@unlink($incsr);
 	if(filesize($checkedcsr) <= 0)
 		die("404,Invalid or missing CSR");

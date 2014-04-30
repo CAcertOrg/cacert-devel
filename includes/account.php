@@ -400,7 +400,8 @@ function buildSubjectFromSession() {
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-			$res=`openssl spkac -verify -in $CSRname`;
+			$CSRname_esc = escapeshellarg($CSRname);
+			$res=`openssl spkac -verify -in $CSRname_esc`;
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
 				$id = $oldid;
@@ -462,7 +463,9 @@ function buildSubjectFromSession() {
 				$csrsubject .= "/emailAddress = ".$user['uniqueID'];
 
 			$tmpname = tempnam("/tmp", "id4csr");
-			$do = `/usr/bin/openssl req -in $tmpfname -out $tmpname`; // -subj "$csr"`;
+			$tmpfname_esc = escapeshellarg($tmpfname);
+			$tmpname_esc = escapeshellarg($tmpname);
+			$do = `/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc`; // -subj "$csr"`;
 			@unlink($tmpfname);
 			$csr = "";
 			$fp = fopen($tmpname, "r");
@@ -738,9 +741,9 @@ function buildSubjectFromSession() {
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
 		fclose($fp);
-		$CSR = $_SESSION['_config']['tmpfname'];
-		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$CSR = escapeshellarg($_SESSION['_config']['tmpfname']);
+		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep "Subject:"`);
+		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -891,22 +894,23 @@ function buildSubjectFromSession() {
 
 				mysql_query("update `domaincerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into `domaincerts` set
-						`domid`='".$row['domid']."',
+						`domid`='".intval($row['domid'])."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
 						`subject`='".mysql_real_escape_string($row['subject'])."',".
 						//`csr_name`='".$row['csr_name']."', // RACE CONDITION
-						"`created`='".$row['created']."',
+						"`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`rootcert`='".$row['rootcert']."',
-						`type`='".$row['type']."',
-						`pkhash`='".$row['pkhash']."',
-						`description`='".$row['description']."'";
+						`rootcert`='".intval($row['rootcert'])."',
+						`type`='".intval($row['type'])."',
+						`pkhash`='".mysql_real_escape_string($row['pkhash'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
 				copy($row['csr_name'], $newfile);
-				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep "Subject:"`);
-				$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$newfile"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+				$newfile_esc = escapeshellarg($newfile);
+				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d "\\0"|grep "Subject:"`);
+				$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
 				foreach($bits as $val)
 				{
 					$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -935,7 +939,8 @@ function buildSubjectFromSession() {
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions."), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
 					$drow = mysql_fetch_assoc($res);
-					$cert = `/usr/bin/openssl x509 -in $drow[crt_name]`;
+					$crt_name = escapeshellarg($drow['crt_name']);
+					$cert = `/usr/bin/openssl x509 -in $crt_name`;
 					echo "<pre>\n$cert\n</pre>\n";
 				}
 			}
@@ -1068,17 +1073,17 @@ function buildSubjectFromSession() {
 
 				mysql_query("update `emailcerts` set `renewed`='1' where `id`='$id'");
 				$query = "insert into emailcerts set
-						`memid`='".$row['memid']."',
+						`memid`='".intval($row['memid'])."',
 						`CN`='".mysql_real_escape_string($row['CN'])."',
 						`subject`='".mysql_real_escape_string($row['subject'])."',
-						`keytype`='".$row['keytype']."',
-						`csr_name`='".$row['csr_name']."',
-						`created`='".$row['created']."',
+						`keytype`='".mysql_real_escape_string($row['keytype'])."',
+						`csr_name`='".mysql_real_escape_string($row['csr_name'])."',
+						`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`disablelogin`='".$row['disablelogin']."',
-						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`disablelogin`='".intval($row['disablelogin'])."',
+						`codesign`='".intval($row['codesign'])."',
+						`rootcert`='".intval($row['rootcert'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1557,7 +1562,8 @@ function buildSubjectFromSession() {
 			fputs($fp, $emails);
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
-			$res=`openssl spkac -verify -in $CSRname`;
+			$CSRname_esc = escapeshellarg($CSRname);
+			$res=`openssl spkac -verify -in $CSRname_esc`;
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
 				$id = $oldid;
@@ -1609,7 +1615,9 @@ function buildSubjectFromSession() {
 				$csrsubject .= "/countryName=".$org['C'];
 
 			$tmpname = tempnam("/tmp", "id17csr");
-			$do = `/usr/bin/openssl req -in $tmpfname -out $tmpname`;
+			$tmpfname_esc = escapeshellarg($tmpfname);
+			$tmpname_esc = escapeshellarg($tmpname);
+			$do = `/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc`;
 			@unlink($tmpfname);
 			$csr = "";
 			$fp = fopen($tmpname, "r");
@@ -1704,17 +1712,17 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				$query = "insert into `orgemailcerts` set
-						`orgid`='".$row['orgid']."',
-						`CN`='".$row['CN']."',
-						`ou`='".$row['ou']."',
-						`subject`='".$row['subject']."',
-						`keytype`='".$row['keytype']."',
-						`csr_name`='".$row['csr_name']."',
-						`created`='".$row['created']."',
+						`orgid`='".intval($row['orgid'])."',
+						`CN`='".mysql_real_escape_string($row['CN'])."',
+						`ou`='".mysql_real_escape_string($row['ou'])."',
+						`subject`='".mysql_real_escape_string($row['subject'])."',
+						`keytype`='".mysql_real_escape_string($row['keytype'])."',
+						`csr_name`='".mysql_real_escape_string($row['csr_name'])."',
+						`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`codesign`='".$row['codesign']."',
-						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`codesign`='".intval($row['codesign'])."',
+						`rootcert`='".intval($row['rootcert'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -1865,9 +1873,9 @@ function buildSubjectFromSession() {
 		$fp = fopen($_SESSION['_config']['tmpfname'], "w");
 		fputs($fp, $CSR);
 		fclose($fp);
-		$CSR = $_SESSION['_config']['tmpfname'];
-		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in "$CSR"|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$CSR = escapeshellarg($_SESSION['_config']['tmpfname']);
+		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep "Subject:"`);
+		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -2058,15 +2066,15 @@ function buildSubjectFromSession() {
 					continue;
 				}
 				$query = "insert into `orgdomaincerts` set
-						`orgid`='".$row['orgid']."',
-						`CN`='".$row['CN']."',
-						`csr_name`='".$row['csr_name']."',
-						`created`='".$row['created']."',
+						`orgid`='".intval($row['orgid'])."',
+						`CN`='".mysql_real_escape_string($row['CN'])."',
+						`csr_name`='".mysql_real_escape_string($row['csr_name'])."',
+						`created`='".mysql_real_escape_string($row['created'])."',
 						`modified`=NOW(),
-						`subject`='".$row['subject']."',
-						`type`='".$row['type']."',
-						`rootcert`='".$row['rootcert']."',
-						`description`='".$row['description']."'";
+						`subject`='".mysql_real_escape_string($row['subject'])."',
+						`type`='".intval($row['type'])."',
+						`rootcert`='".intval($row['rootcert'])."',
+						`description`='".mysql_real_escape_string($row['description'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
@@ -2085,7 +2093,8 @@ function buildSubjectFromSession() {
 					printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions.")." newid: $newid", "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				} else {
 					$drow = mysql_fetch_assoc($res);
-					$cert = `/usr/bin/openssl x509 -in $drow[crt_name]`;
+					$crtname = escapeshellarg($drow['crt_name']);
+					$cert = `/usr/bin/openssl x509 -in $crtname`;
 					echo "<pre>\n$cert\n</pre>\n";
 				}
 			}
