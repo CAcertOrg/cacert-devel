@@ -151,7 +151,7 @@ function buildSubjectFromSession() {
 			exit;
 		}
 		$hash = make_hash();
-		$query = "insert into `email` set `email`='".mysql_real_escape_string($_REQUEST['email'])."',`memid`='".intval($_SESSION['profile']['id'])."',`created`=NOW(),`hash`='$hash'";
+		$query = "insert into `email` set `email`='".$_REQUEST['email']."',`memid`='".intval($_SESSION['profile']['id'])."',`created`=NOW(),`hash`='$hash'";
 		mysql_query($query);
 		$emailid = mysql_insert_id();
 
