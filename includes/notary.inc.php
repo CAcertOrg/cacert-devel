@@ -1895,7 +1895,7 @@ function output_client_cert($row, $support=0, $readonly=true){
 		if ($verified === _("Pending")) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="delid[]" value="<?=$row['id']?>">
+				<input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>">
 			</td>
 			<?
 
@@ -1907,7 +1907,7 @@ function output_client_cert($row, $support=0, $readonly=true){
 		} else {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="revokeid[]" value="<?=$row['id']?>">
+				<input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>">
 			</td>
 			<?
 		}
@@ -1919,13 +1919,13 @@ function output_client_cert($row, $support=0, $readonly=true){
 
 	if ($verified === _("Pending")) {
 		?>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : htmlspecialchars($row['CN']))?></td>
 		<?
 	} else {
 		?>
 		<td class="DataTD">
-			<a href="account.php?id=6&amp;cert=<?=$row['id']?>">
-				<?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?>
+			<a href="account.php?id=6&amp;cert=<?=intval($row['id'])?>">
+				<?=(trim($row['CN'])=="" ? _("empty") : htmlspecialchars($row['CN']))?>
 			</a>
 		</td>
 		<?
@@ -1936,21 +1936,21 @@ function output_client_cert($row, $support=0, $readonly=true){
 	<td class="DataTD"><?=$row['revoke']?></td>
 	<td class="DataTD"><?=$row['expire']?></td>
 	<td class="DataTD">
-		<input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> <?=$readonly?'disabled="disabled"':''?>/>
-		<input type="hidden" name="cert_<?=$row['id']?>" value="1" />
+		<input type="checkbox" name="disablelogin_<?=intval($row['id'])?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> <?=$readonly?'disabled="disabled"':''?>/>
+		<input type="hidden" name="cert_<?=intval($row['id'])?>" value="1" />
 	</td>
 	<?
 
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
-			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+			<input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
 		</td>
 		<?
 		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+				<input type="checkbox" name="check_comment_<?=intval($row['id'])?>" />
 			</td>
 			<?
 		}
@@ -2025,7 +2025,7 @@ function output_server_certs($row, $support=0, $readonly=true){
 		if ($verified === _("Pending")) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="delid[]" value="<?=$row['id']?>"/>
+				<input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>"/>
 			</td>
 			<?
 		} elseif($verified === _("Revoked")) {
@@ -2035,7 +2035,7 @@ function output_server_certs($row, $support=0, $readonly=true){
 		} else {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"/>
+				<input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>"/>
 			</td>
 			<?
 		}
@@ -2047,13 +2047,13 @@ function output_server_certs($row, $support=0, $readonly=true){
 
 	if ($verified === _("Pending")) {
 		?>
-		<td class="DataTD"><?=$row['CN']?></td>
+		<td class="DataTD"><?=htmlspecialchars($row['CN'])?></td>
 		<?
 	} else {
 		?>
 		<td class="DataTD">
-			<a href="account.php?id=15&amp;cert=<?=$row['id']?>">
-				<?=$row['CN']?>
+			<a href="account.php?id=15&amp;cert=<?=intval($row['id'])?>">
+				<?=htmlspecialchars($row['CN'])?>
 			</a>
 		</td>
 		<?
@@ -2068,13 +2068,13 @@ function output_server_certs($row, $support=0, $readonly=true){
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
-			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+			<input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
 		</td>
 		<?
 		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+				<input type="checkbox" name="check_comment_<?=intval($row['id'])?>" />
 			</td>
 			<?
 		}
@@ -2135,13 +2135,13 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 
 	if($verified == _("Pending")) {
 		?>
-		<td class="DataTD"><?=$row['email']?></td>
+		<td class="DataTD"><?=htmlspecialchars($row['email'])?></td>
 		<?
 	} else {
 		?>
 		<td class="DataTD">
-			<a href="gpg.php?id=3&amp;cert=<?=$row['id']?>">
-				<?=$row['email']?>
+			<a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>">
+				<?=htmlspecialchars($row['email'])?>
 			</a>
 		</td>
 		<?
@@ -2153,13 +2153,13 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 
 	if($verified == _("Pending")) {
 		?>
-		<td class="DataTD"><?=$row['keyid']?></td>
+		<td class="DataTD"><?=htmlspecialchars($row['keyid'])?></td>
 		<?
 	} else {
 		?>
 		<td class="DataTD">
-			<a href="gpg.php?id=3&amp;cert=<?=$row['id']?>">
-				<?=$row['keyid']?>
+			<a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>">
+				<?=htmlspecialchars($row['keyid'])?>
 			</a>
 		</td>
 		<?
@@ -2168,13 +2168,13 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
-			<input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+			<input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
 		</td>
 		<?
 		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?=$row['id']?>" />
+				<input type="checkbox" name="check_comment_<?=intval($row['id'])?>" />
 			</td>
 			<?
 		}

@@ -31,7 +31,7 @@ require_once '../../includes/lib/check_weak_key.php';
 	foreach($_REQUEST['email'] as $email)
 	{
 		$email = mysql_real_escape_string(trim($email));
-		$query = "select * from `email` where `memid`='$memid' and `hash`='' and `deleted`=0 and `email`='$email'";
+		$query = "select * from `email` where `memid`='".intval($memid)."' and `hash`='' and `deleted`=0 and `email`='$email'";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
@@ -42,7 +42,7 @@ require_once '../../includes/lib/check_weak_key.php';
 	}
 	if(count($emails) <= 0)
 		die("404,Wasn't able to match any emails sent against your account");
-	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' and `notary`.`deleted`=0 group by `to`";
+	$query = "select sum(`points`) as `points` from `notary` where `to`='".intval($memid)."' and `notary`.`deleted`=0 group by `to`";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$points = $row['points'];
 
@@ -84,9 +84,9 @@ require_once '../../includes/lib/check_weak_key.php';
 	foreach($emails as $id => $email)
 		$csrsubject .= "/emailAddress=".$email;
 
-	$query = "insert into `emailcerts` set `CN`='".$user['email']."', `keytype`='MS',
-				`memid`='".$user['id']."', `created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
-				`subject`='$csrsubject', `codesign`='$codesign'";
+	$query = "insert into `emailcerts` set `CN`='".mysql_real_escape_string($user['email'])."', `keytype`='MS',
+				`memid`='".intval($user['id'])."', `created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
+				`subject`='".mysql_real_escape_string($csrsubject)."', `codesign`='".intval($codesign)."'";
 	mysql_query($query);
 	$certid = mysql_insert_id();
 	$CSRname = generatecertpath("csr","client",$certid);
@@ -95,14 +95,14 @@ require_once '../../includes/lib/check_weak_key.php';
 	mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='$certid'");
 
 	foreach($emails as $emailid => $email)
-		mysql_query("insert into `emaillink` set `emailcertsid`='$certid', `emailid`='$emailid'");
+		mysql_query("insert into `emaillink` set `emailcertsid`='$certid', `emailid`='".intval($emailid)."'");
 
 	$do = `../../scripts/runclient`;
 	sleep(10); // THIS IS BROKEN AND SHOULD BE FIXED
 	$query = "select * from `emailcerts` where `id`='$certid' and `crt_name` != ''";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
-		die("404,Your certificate request has failed. ID: $certid");
+		die("404,Your certificate request has failed. ID: ".intval($certid));
 	$cert = mysql_fetch_assoc($res);
 	echo "200,Authentication Ok\n";
 	readfile("../".$cert['crt_name']);

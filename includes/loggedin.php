@@ -39,12 +39,12 @@
 			if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 				continue;
 			if(is_int($key) || is_string($key))
-		                unset($_SESSION[$key]);
-		        unset($$key);
-		        //session_unregister($key);
+				unset($_SESSION[$key]);
+			unset($$key);
+			//session_unregister($key);
 		}
 
-		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$uid'"));
+		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($uid)."'"));
 		if($_SESSION['profile']['locked'] == 0)
 			$_SESSION['profile']['loggedin'] = 1;
 		else
@@ -65,13 +65,13 @@
 				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
 				if(is_int($key) || is_string($key))
-			                unset($_SESSION[$key]);
-			        unset($$key);
-			        //session_unregister($key);
+					unset($_SESSION[$key]);
+				unset($$key);
+				//session_unregister($key);
 			}
 
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-					"select * from `users` where `id`='".$user_id."'"));
+					"select * from `users` where `id`='".intval($user_id)."'"));
 			if($_SESSION['profile']['locked'] == 0)
 				$_SESSION['profile']['loggedin'] = 1;
 			else
@@ -83,9 +83,9 @@
 			{
 				if($key == '_config' || $key == 'mconn' || 'csrf_' == substr($key, 0, 5))
 					continue;
-			        unset($_SESSION[$key]);
-			        unset($$key);
-			        //session_unregister($key);
+				unset($_SESSION[$key]);
+				unset($$key);
+				//session_unregister($key);
 			}
 
 			$_SESSION['_config']['oldlocation'] = $_SERVER['REQUEST_URI'];
@@ -102,7 +102,7 @@
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] > 0)
 	{
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `deleted` = 0 group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
 		$_SESSION['profile']['points'] = $row['total'];
@@ -110,7 +110,7 @@
 		if($_SESSION['profile']['language'] == "")
 		{
 			$query = "update `users` set `language`='".L10n::get_translation()."'
-							where `id`='".$_SESSION['profile']['id']."'";
+							where `id`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 		} else {
 			L10n::set_translation($_SESSION['profile']['language']);
@@ -125,9 +125,9 @@
 		$_SESSION['profile'] = "";
 		foreach($_SESSION as $key => $value)
 		{
-		        unset($_SESSION[$key]);
-		        unset($$key);
-		        //session_unregister($key);
+			unset($_SESSION[$key]);
+			unset($$key);
+			//session_unregister($key);
 		}
 
 		header("Location: https://{$normalhost}/index.php");

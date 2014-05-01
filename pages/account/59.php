@@ -65,14 +65,14 @@ if ($userid != $_SESSION['profile']['id']) {
 
     if (!valid_ticket_number($ticketno)) {
         printf(_("I'm sorry, you did not enter a ticket number! %s Support is not allowed to view the account history without a ticket number."), '<br/>');
-        echo '<br/><a href="account.php?id=43&amp;userid='.$userid.'">'. _('Back to previous page.') .'</a>';
+        echo '<br/><a href="account.php?id=43&amp;userid='.intval($userid).'">'. _('Back to previous page.') .'</a>';
         showfooter();
         exit;
     }
 
     if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE View account history', $ticketno)) {
         echo _("Writing to the admin log failed. Can't continue.");
-        echo '<br/><a href="account.php?id=43&amp;userid='.$userid.'">'. _('Back to previous page.') .'</a>';
+        echo '<br/><a href="account.php?id=43&amp;userid='.intval($userid).'">'. _('Back to previous page.') .'</a>';
         showfooter();
         exit;
     }
@@ -89,11 +89,11 @@ if ($userid != $_SESSION['profile']['id']) {
     </tr>
     <tr>
         <td class="DataTD"><?=_('User name')?></td>
-        <td class="DataTD"><?=$username?></td>
+        <td class="DataTD"><?=sanitizeHTML($username)?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_('Date of Birth')?></td>
-        <td class="DataTD"><?=$dob?></td>
+        <td class="DataTD"><?=sanitizeHTML($dob)?></td>
     </tr>
     <tr>
         <td class="DataTD"><?=_("Is Assurer")?>:</td>
@@ -378,7 +378,7 @@ if (mysql_num_rows($dres) > 0) {
 ?>
 <tr>
     <td colspan="<?=$colspan?>" >
-        <a href="account.php?id=<?=$oldid?intval($oldid):($support?43:13)?>&amp;userid=<?=$userid?>"><?= _('Back to previous page.')?></a>
+        <a href="account.php?id=<?=$oldid?intval($oldid):($support?43:13)?>&amp;userid=<?=intval($userid)?>"><?= _('Back to previous page.')?></a>
     </td>
 </tr>
 

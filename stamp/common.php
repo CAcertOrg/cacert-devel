@@ -41,9 +41,9 @@
 				if($row['certid'] > 0)
 				{
 					if($row['org'] == 0)
-						$query = "select * from `domaincerts` where `id`='$row[certid]' and `expire`>NOW() and `revoked`=0";
+						$query = "select * from `domaincerts` where `id`='".intval($row['certid'])."' and `expire`>NOW() and `revoked`=0";
 					else
-						$query = "select * from `orgdomaincerts` where `id`='$row[certid]' and `expire`>NOW() and `revoked`=0";
+						$query = "select * from `orgdomaincerts` where `id`='".intval($row['certid'])."' and `expire`>NOW() and `revoked`=0";
 					if($_REQUEST['debug'] == 1)
 						echo $query."<br>\n";
 					$res = mysql_query($query);

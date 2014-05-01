@@ -135,9 +135,9 @@ function send_reminder()
 			//This mail does not need to be translated
 			$body = "Hi TTP adminstrators,\n\n";
 			$body .= "User ".$_SESSION['profile']['fname']." ".
-			$_SESSION['profile']['lname']." with email address '".
-			$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-			mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+				$_SESSION['profile']['lname']." with email address '".
+				$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
+				mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{
@@ -237,8 +237,8 @@ function send_reminder()
 			exit;
 		}
 
-		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' and
-			`to`='".$_SESSION['_config']['notarise']['id']."' and `deleted` = 0";
+		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and
+			`to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
@@ -323,7 +323,7 @@ function send_reminder()
 			exit;
 		}
 
-		$query = "select * from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
+		$query = "select * from `users` where `id`='".intval($_SESSION['_config']['notarise']['id'])."'";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
 		$name = $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];
@@ -345,7 +345,7 @@ function send_reminder()
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
 
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' and `deleted` = 0 group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
 		$oldpoints = intval($drow['total']);
@@ -362,11 +362,11 @@ function send_reminder()
 		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
-		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' AND
-						`to`='".$_SESSION['_config']['notarise']['id']."' AND
-						`awarded`='$awarded' AND
+		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' AND
+						`to`='".intval($_SESSION['_config']['notarise']['id'])."' AND
+						`awarded`='".intval($awarded)."' AND
 						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' and `deleted` = 0
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' AND
 						`deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
@@ -378,9 +378,9 @@ function send_reminder()
 
 	if($oldid == 6)
 	{
-		$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
-						`to`='".$_SESSION['_config']['notarise']['id']."',
-						`points`='$newpoints', `awarded`='$awarded',
+		$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
+						`to`='".intval($_SESSION['_config']['notarise']['id'])."',
+						`points`='".intval($newpoints)."', `awarded`='".intval($awarded)."',
 						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
 						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
@@ -406,9 +406,9 @@ function send_reminder()
 				$addpoints = 2;
 			else if($_SESSION['profile']['points'] == 149 && $_SESSION['profile']['points'] >= 100)
 				$addpoints = 1;
-			$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
-							`to`='".$_SESSION['profile']['id']."',
-							`points`='$addpoints', `awarded`='$addpoints',
+			$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
+							`to`='".intval($_SESSION['profile']['id'])."',
+							`points`='".intval($addpoints)."', `awarded`='".intval($addpoints)."',
 							`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
 							`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 							`method`='Administrative Increase',
@@ -534,7 +534,7 @@ for($i = 1; $i <= 31; $i++)
 		$_SESSION['profile']['listme'] = $listme;
 		$_SESSION['profile']['contactinfo'] = $info;
 
-		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".$_SESSION['profile']['id']."'";
+		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".intval($_SESSION['profile']['id'])."'";
 		mysql_query($query);
 
 		showheader(_("My CAcert.org Account!"));
@@ -555,9 +555,9 @@ for($i = 1; $i <= 31; $i++)
 			$body = $_REQUEST['message'];
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$userid' and `listme`=1"));
+			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
 			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-						where `to`='".$user['id']."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
+						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{
 				$my_translation = L10n::get_translation();
@@ -593,7 +593,7 @@ for($i = 1; $i <= 31; $i++)
 
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
-					<? printf(_("Your email has been sent to %s."), $user['fname']); ?>
+					<? printf(_("Your email has been sent to %s."), sanitizeHTML($user['fname'])); ?>
 				</p>
 				<p>[ <a href='javascript:history.go(-2)'><?= _("Go Back") ?></a> ]</p>
 				<?

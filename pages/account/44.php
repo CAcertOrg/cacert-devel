@@ -54,6 +54,6 @@ if (!valid_ticket_number($ticketno)) {
   </tr>
 </table>
 <input type="hidden" name="userid" value="<?=intval($_REQUEST['userid'])?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?=intval($id)?>">
 <input type="hidden" name="ticketno" value="<?=sanitizeHTML($ticketno)?>"/>
 </form>

@@ -83,12 +83,12 @@
 	L10n::detect_language();
 	L10n::init_gettext();
 
-        if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
+	if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
-		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".$_SESSION['profile']['id']."'"));
+		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 		if($locked['locked'] == 0)
 		{
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' and `deleted` = 0 group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
@@ -293,7 +293,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".$_SESSION['profile']['id']."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -345,7 +345,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".$_SESSION['profile']['id']."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -384,7 +384,7 @@
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
 				$query = "select *, `orginfo`.`id` as `id` from `orginfo`,`orgdomains`,`org` where
-						`org`.`memid`='".$_SESSION['profile']['id']."' and
+						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
@@ -432,7 +432,7 @@
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
 				$query = "select * from `orginfo`,`orgdomains`,`org` where
-						`org`.`memid`='".$_SESSION['profile']['id']."' and
+						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
@@ -464,7 +464,7 @@
 				$dom = $bits[$i];
 			$dom = mysql_real_escape_string($dom);
 			$query = "select * from `org`,`orgdomains`,`orginfo`
-					where `org`.`memid`='".$_SESSION['profile']['id']."'
+					where `org`.`memid`='".intval($_SESSION['profile']['id'])."'
 					and `orgdomains`.`orgid`=`org`.`orgid`
 					and `orginfo`.`id`=`org`.`orgid`
 					and `orgdomains`.`domain`='$dom'";
@@ -488,7 +488,7 @@
 		$points = $row['points'];
 
 		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-18));
-		$query = "select * from `users` where `id`='".$_SESSION['profile']['id']."' and `dob` < '$dob'";
+		$query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `dob` < '$dob'";
 		if(mysql_num_rows(mysql_query($query)) < 1)
 		{
 			if($points >= 100)
@@ -587,7 +587,7 @@
 
 					$line = mysql_real_escape_string(trim(strip_tags($line)));
 					$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
-					if(isset($_SESSION['profile']) && is_array($_SESSION['profile']) && isset($_SESSION['profile']['id'])) $query.=", `uid`='".$_SESSION['profile']['id']."'";
+					if(isset($_SESSION['profile']) && is_array($_SESSION['profile']) && isset($_SESSION['profile']['id'])) $query.=", `uid`='".intval($_SESSION['profile']['id'])."'";
 					mysql_query($query);
 
 					if(substr($line, 0, 3) != "250")
@@ -597,7 +597,7 @@
 				}
 			}
 		}
-		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".$_SESSION['profile']['id']."',
+		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".intval($_SESSION['profile']['id'])."',
 				`email`='$myemail', `result`='Failed to make a connection to the mail server'";
 		mysql_query($query);
 		return _("Failed to make a connection to the mail server");

@@ -71,11 +71,11 @@
 		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['from'])."'"));
 ?>
   <tr>
-    <td class="DataTD"><?=$row['id']?></td>
+    <td class="DataTD"><?=intval($row['id'])?></td>
     <td class="DataTD"><?=$row['date']?></td>
-    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from'])?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
-    <td class="DataTD"><?=$row['points']?></td>
-    <td class="DataTD"><?=$row['location']?></td>
+    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from'])?>"><?=sanitizeHTML(trim($fromuser['fname']." ".$fromuser['lname']))?></td>
+    <td class="DataTD"><?=intval($row['points'])?></td>
+    <td class="DataTD"><?=sanitizeHTML($row['location'])?></td>
     <td class="DataTD"><?=_(sprintf("%s", $row['method']))?></td>
   </tr>
 <?
@@ -119,25 +119,25 @@ if ($thawte)
 	while($row = mysql_fetch_assoc($res))
 	{
 		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['to'])."'"));
-		$points += $row['points'];
+		$points += intval($row['points']);
 		$name = trim($fromuser['fname']." ".$fromuser['lname']);
 		if($name == "")
 			$name = _("Deleted before Verification");
 		else
-			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to'])."'>$name</a>";
+			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to'])."'>".sanitizeHTML($name)."</a>";
 ?>
   <tr>
     <td class="DataTD"><?=intval($row['id'])?></td>
     <td class="DataTD"><?=$row['date']?></td>
-    <td class="DataTD"><?=$name?></td>
+    <td class="DataTD"><?=sanitizeHTML($name)?></td>
     <td class="DataTD"><?=intval($row['points'])?></td>
-    <td class="DataTD"><?=$row['location']?></td>
+    <td class="DataTD"><?=sanitizeHTML($row['location'])?></td>
     <td class="DataTD"><?=$row['method']==""?"":_(sprintf("%s", $row['method']))?></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Points Issued")?>:</b></td>
-    <td class="DataTD"><?=$points?></td>
+    <td class="DataTD"><?=intval($points)?></td>
     <td class="DataTD" colspan="2">&nbsp;</td>
   </tr>
 </table>

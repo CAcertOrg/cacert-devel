@@ -48,7 +48,7 @@ if (array_key_exists('emails',$_SESSION['_config']) && is_array($_SESSION['_conf
   </tr>
   <tr>
     <td class="DataTD"><label for="OU"><?=_("Department")?></label></td>
-    <td class="DataTD"><input type="text" id="OU" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?($_SESSION['_config']['OU']):''?>"/></td>
+    <td class="DataTD"><input type="text" id="OU" name="OU" value="<?=array_key_exists('OU',$_SESSION['_config'])?(sanitizeHTML($_SESSION['_config']['OU'])):''?>"/></td>
   </tr>
 
   <tr name="expertoff" style="display:none">
