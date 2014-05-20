@@ -129,7 +129,7 @@ if ($thawte)
   <tr>
     <td class="DataTD"><?=intval($row['id'])?></td>
     <td class="DataTD"><?=$row['date']?></td>
-    <td class="DataTD"><?=sanitizeHTML($name)?></td>
+    <td class="DataTD"><?=$name?></td>
     <td class="DataTD"><?=intval($row['points'])?></td>
     <td class="DataTD"><?=sanitizeHTML($row['location'])?></td>
     <td class="DataTD"><?=$row['method']==""?"":_(sprintf("%s", $row['method']))?></td>
