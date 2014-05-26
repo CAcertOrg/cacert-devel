@@ -1555,8 +1555,10 @@ function get_client_certs($userid, $viewall=0){
 		from `emailcerts`
 		where `emailcerts`.`memid`='".$userid."'";
 	if($viewall == 0)
+	{
 		$query .= " AND `emailcerts`.`revoked`=0 AND `emailcerts`.`renewed`=0";
 		$query .= " HAVING `timeleft` > 0";
+	}
 	$query .= " ORDER BY `emailcerts`.`modified` desc";
 	return mysql_query($query);
 }
