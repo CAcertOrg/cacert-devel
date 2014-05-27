@@ -34,7 +34,7 @@
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
-			`emailcerts`.`expire` as `expires`,
+			`emailcerts`.`expire`,
 			`emailcerts`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
 			if (`emailcerts`.`expire`=0,CURRENT_TIMESTAMP(),`emailcerts`.`modified`) as `modified` ,
@@ -50,7 +50,7 @@
 		$query .= " AND `revoked`=0 AND `renewed`=0 ";
 	$query .= " GROUP BY `emailcerts`.`id` ";
 	if($viewall != 1)
-                $query .= " HAVING `timeleft` > 0 or `expires` = 0 ";
+		$query .= " HAVING `timeleft` > 0 or `expire` = 0 ";
 	$query .= " ORDER BY `modified` desc";
 // echo $query."<br>\n";
 	$res = mysql_query($query);
@@ -90,7 +90,7 @@
 <? } ?>
     <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
-    <td class="DataTD"><?=$row['expires']?></td>
+    <td class="DataTD"><?=$row['expire']?></td>
     <td class="DataTD">
       <input type="checkbox" name="disablelogin_<?=$row['id']?>" value="1" <?=$row['disablelogin']?"":'checked="checked"'?>/>
       <input type="hidden" name="cert_<?=$row['id']?>" value="1" />
