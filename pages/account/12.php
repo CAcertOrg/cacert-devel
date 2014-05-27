@@ -45,7 +45,7 @@
 	if($viewall != 1)
 	{
 		$query .= "AND `revoked`=0 AND `renewed`=0 ";
-		$query .= "HAVING `timeleft` > 0 or `expires` = 0 ";
+		$query .= "HAVING `timeleft` > 0 or `expire` = 0 ";
 	}
 	$query .= "ORDER BY `modified` desc";
 //echo $query."<br>\n";
