@@ -34,7 +34,8 @@
 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
-			`domaincerts`.`expire` as `expires`, `revoked` as `revoke`,
+			`domaincerts`.`expire`,
+			`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`revoked`) as `revoked`,
 			if (`domaincerts`.`expire`=0,CURRENT_TIMESTAMP(),`domaincerts`.`modified`) as `modified`,
 			`CN`, `domaincerts`.`serial`, `domaincerts`.`id` as `id`,
@@ -44,7 +45,7 @@
 	if($viewall != 1)
 	{
 		$query .= "AND `revoked`=0 AND `renewed`=0 ";
-		$query .= "HAVING `timeleft` > 0 or `expires` = 0 ";
+		$query .= "HAVING `timeleft` > 0 or `expire` = 0 ";
 	}
 	$query .= "ORDER BY `modified` desc";
 //echo $query."<br>\n";
@@ -81,7 +82,7 @@
     <td class="DataTD"><a href="account.php?id=15&amp;cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
     <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
-    <td class="DataTD"><?=$row['expires']?></td>
+    <td class="DataTD"><?=$row['expire']?></td>
     <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
