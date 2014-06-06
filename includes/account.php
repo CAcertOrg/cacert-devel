@@ -2447,9 +2447,9 @@ function buildSubjectFromSession() {
 	{
 		csrf_check('orgadmadd');
 		if($_SESSION['profile']['orgadmin'] == 1)
-			$masteracc = $_SESSION['_config'][masteracc] = intval($_REQUEST['masteracc']);
+			$masteracc = $_SESSION['_config']['masteracc'] = intval($_REQUEST['masteracc']);
 		else
-			$masteracc = $_SESSION['_config'][masteracc] = 0;
+			$masteracc = $_SESSION['_config']['masteracc'] = 0;
 		$_REQUEST['email'] = $_SESSION['_config']['email'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['email'])));
 		$OU = $_SESSION['_config']['OU'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['OU'])));
 		$comments = $_SESSION['_config']['comments'] = mysql_real_escape_string(stripslashes(trim($_REQUEST['comments'])));
