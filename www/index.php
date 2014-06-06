@@ -125,7 +125,7 @@ require_once('../includes/lib/l10n.php');
 				showfooter();
 				exit;
 			}
-		}		
+		}
 	}
 
 	if($oldid == 5 && $process != "")
@@ -153,13 +153,13 @@ require_once('../includes/lib/l10n.php');
 		include_once("../includes/lib/general.php");
 		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
 				$_SERVER['SSL_CLIENT_I_DN_CN']);
-		
+
 		if($user_id >= 0)
 		{
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-				"select * from `users` where 
+				"select * from `users` where
 				`id`='$user_id' and `deleted`=0 and `locked`=0"));
-			
+
 			if($_SESSION['profile']['id'] != 0)
 			{
 				$_SESSION['profile']['loggedin'] = 1;
@@ -307,19 +307,19 @@ require_once('../includes/lib/l10n.php');
 			$_SESSION['profile'] = "";
 			unset($_SESSION['profile']);
 			$_SESSION['profile'] = mysql_fetch_assoc($res);
-			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".$_SESSION['profile']['id']."'";
+			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 
 			if($_SESSION['profile']['language'] == "")
 			{
 				$query = "update `users` set `language`='".L10n::get_translation()."'
-						where `id`='".$_SESSION['profile']['id']."'";
+						where `id`='".intval($_SESSION['profile']['id'])."'";
 				mysql_query($query);
 			} else {
 				L10n::set_translation($_SESSION['profile']['language']);
 				L10n::init_gettext();
 			}
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
@@ -499,7 +499,7 @@ require_once('../includes/lib/l10n.php');
 			if($checkemail != "OK")
 			{
 				$id = 1;
-				if (substr($checkemail, 0, 1) == "4") 
+				if (substr($checkemail, 0, 1) == "4")
 				{
 					$_SESSION['_config']['errmsg'] .= _("The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes.");
 				} else {
@@ -566,9 +566,9 @@ require_once('../includes/lib/l10n.php');
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
-		
+
 		//check for spam via honeypot
-		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){
 			echo _("Form could not be sent.");
 			showfooter();
 			exit;
@@ -641,7 +641,7 @@ require_once('../includes/lib/l10n.php');
 		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
-	
+
 	if ($id == 19)
 	{
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
@@ -655,7 +655,7 @@ require_once('../includes/lib/l10n.php');
 		$newUrl = $protocol . '://wiki.cacert.org/Board';
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
-	
+
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();

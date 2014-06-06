@@ -24,7 +24,7 @@
     <td colspan="5" class="title"><?=_("Assurer Ranking")?></td>
   </tr>
   <tr>
-<?
+<?// the rank calculation is not adjusted to the new deletion method
 	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			AND `from`='".intval($_SESSION['profile']['id'])."' GROUP BY `notary`.`from`";
@@ -36,8 +36,8 @@
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc' ORDER BY `notary`.`when` DESC";
 */
-	$query = "SELECT count(*) AS `list` FROM `users` 
-			inner join `notary` on `users`.`id` = `notary`.`from` 
+	$query = "SELECT count(*) AS `list` FROM `users`
+			inner join `notary` on `users`.`id` = `notary`.`from`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc'";
 
 	$rank = mysql_num_rows(mysql_query($query)) + 1;
@@ -64,18 +64,18 @@
     <td class="DataTD"><b><?=_("Method")?></b></td>
   </tr>
 <?
-	$query = "select * from `notary` where `to`='".intval($_SESSION['profile']['id'])."'";
+	$query = "select `id`, `date`, `from`, `points`, `location`, `method` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['from'])."'"));
+		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['from'])."'"));
 ?>
   <tr>
-    <td class="DataTD"><?=$row['id']?></td>
+    <td class="DataTD"><?=intval($row['id'])?></td>
     <td class="DataTD"><?=$row['date']?></td>
-    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from'])?>"><?=$fromuser['fname']." ".$fromuser['lname']?></td>
-    <td class="DataTD"><?=$row['points']?></td>
-    <td class="DataTD"><?=$row['location']?></td>
+    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['from'])?>"><?=sanitizeHTML(trim($fromuser['fname']." ".$fromuser['lname']))?></td>
+    <td class="DataTD"><?=intval($row['points'])?></td>
+    <td class="DataTD"><?=sanitizeHTML($row['location'])?></td>
     <td class="DataTD"><?=_(sprintf("%s", $row['method']))?></td>
   </tr>
 <?
@@ -114,30 +114,30 @@ if ($thawte)
   </tr>
 <?
 	$points = 0;
-	$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'";
+	$query = "select `id`, `date`, `points`, `to`, `location`, `method` from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'  and `deleted`=0" ;
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['to'])."'"));
-		$points += $row['points'];
+		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['to'])."'"));
+		$points += intval($row['points']);
 		$name = trim($fromuser['fname']." ".$fromuser['lname']);
 		if($name == "")
 			$name = _("Deleted before Verification");
 		else
-			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to'])."'>$name</a>";
+			$name = "<a href='wot.php?id=9&amp;userid=".intval($row['to'])."'>".sanitizeHTML($name)."</a>";
 ?>
   <tr>
     <td class="DataTD"><?=intval($row['id'])?></td>
     <td class="DataTD"><?=$row['date']?></td>
     <td class="DataTD"><?=$name?></td>
     <td class="DataTD"><?=intval($row['points'])?></td>
-    <td class="DataTD"><?=$row['location']?></td>
+    <td class="DataTD"><?=sanitizeHTML($row['location'])?></td>
     <td class="DataTD"><?=$row['method']==""?"":_(sprintf("%s", $row['method']))?></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Points Issued")?>:</b></td>
-    <td class="DataTD"><?=$points?></td>
+    <td class="DataTD"><?=intval($points)?></td>
     <td class="DataTD" colspan="2">&nbsp;</td>
   </tr>
 </table>
