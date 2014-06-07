@@ -97,7 +97,8 @@
 		case 510:
 		case 511:
 		case 512:
-		case 516: $expand = " explode('WoT');"; break;  //Assurer check
+		case 516:                                       // TTP form
+		case 517: $expand = " explode('WoT');"; break;  //Assurer check
 		case 1000:
 		case 1001:
 		case 1002:

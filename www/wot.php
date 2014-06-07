@@ -80,7 +80,7 @@ function show_page($target,$message,$error)
 		case '15':
 		case 'MyPointsNew':	includeit(15, "wot");
 					break;
-	    case '16':
+	    case '17':
 	    case 'AssurerCheck':	includeit(16, "wot");
 	        break;
 	}
