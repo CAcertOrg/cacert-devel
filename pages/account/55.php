@@ -87,9 +87,18 @@
     <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($user_id)?>">back</a></td></tr>
 <?
     } else {
-        $query = 'SELECT `u`.id, `u`.`assurer`, SUM(`points`) FROM `users` AS `u`, `notary` AS `n` '.
-                 '  WHERE `u`.`id` = \''.(int)intval($_SESSION['profile']['id']).'\' AND `n`.`to` = `u`.`id` AND `expire` < now() and  and `n`.`deleted` = 0'.
-                 '  GROUP BY `u`.id, `u`.`assurer`';
+        $query = '
+            SELECT  `u`.`id`,
+                    `u`.`assurer`,
+                    SUM(`points`)
+            FROM    `users` AS `u`,
+                    `notary` AS `n`
+            WHERE   `u`.`id` = \''.intval($_SESSION['profile']['id']).'\'
+            AND     `n`.`to` = `u`.`id`
+            AND     `expire` < NOW()
+            AND     `n`.`deleted` = 0
+            GROUP BY `u`.`id`, `u`.`assurer`
+            ';
         $res = mysql_query($query);
         if (!$res) {
           print '<td colspan="3" class="DataTD">'._('Internal Error').'</td>'."\n";
