@@ -64,7 +64,7 @@ class L10n {
 	 * 
 	 * @var array(string => string)
 	 */
-	private static $locales = array(
+	public static $locales = array(
 				"ar" => "ar_JO",
 				"bg" => "bg_BG",
 				"cs" => "cs_CZ",
