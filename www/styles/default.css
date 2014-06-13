@@ -14,7 +14,7 @@ body {
 	margin: 0px;
 	padding: 0px;
 	background: #cccccc;
-/*  url("/siteimages/bg_grad.jpg") fixed;   */
+/*	url("/siteimages/bg_grad.jpg") fixed;   */
 }
 
 
@@ -227,7 +227,7 @@ ul.no_indent {
 }
 
 #globalNav img {
-    margin-bottom: -4px;
+	margin-bottom: -4px;
 }
 
 #gnl {
@@ -562,6 +562,19 @@ td.storyLeft {
 	border-right: 1px #cfcfcf solid;
 }
 
+.DataTDError {
+    border-style: inset;
+    border-width: 1px;
+    font-size: 8pt;
+    color: #ff0000;
+    font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+
+    background: #ffffff;
+    padding: 1px 5px 1px 5px;
+    border: 1px #cfcfcf solid;
+    border-left: 1px #cfcfcf dotted;
+    border-right: 1px #cfcfcf dotted;
+}
 .wrapper {
 	border-collapse: collapse;
 	font-family: verdana, sans-serif;
@@ -575,7 +588,12 @@ td.greytxt {
 	text-align: right;
 	vertical-align: bottom;
 }
-
+.bold, .primaryemailaddress {
+	font-weight:bold;
+}
+.italic, .deletedemailaddress {
+	font-style:italic;
+}
 .title {
 	background: #e2e2e2;
 	font-weight: bold;

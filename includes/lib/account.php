@@ -51,7 +51,8 @@ function fix_assurer_flag($userID = NULL)
 				SELECT SUM(`points`) FROM `notary` AS `n`
 				WHERE `n`.`to` = `u`.`id`
 					AND (`n`.`expire` > now()
-					OR `n`.`expire` IS NULL)
+					     OR `n`.`expire` IS NULL)
+					AND `n`.`deleted` = 0
 			) >= 100';
 
 	$query = mysql_query($sql);
@@ -86,6 +87,7 @@ function fix_assurer_flag($userID = NULL)
 							`n`.`expire` > now()
 							OR `n`.`expire` IS NULL
 						)
+						AND `n`.`deleted` = 0
 				) < 100
 			)';
 
@@ -96,7 +98,6 @@ function fix_assurer_flag($userID = NULL)
 
 	return true;
 }
-
 
 /**
  * Supported hash algorithms for signing certificates

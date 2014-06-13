@@ -52,22 +52,22 @@
 <? if($_SESSION['profile']['points'] == 0) { ?>
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
-    <td class="DataTD" width="125"><input type="text" name="fname" value="<?=$user['fname']?>"></td>
+    <td class="DataTD" width="125"><input type="text" name="fname" value="<?=sanitizeHTML($user['fname'])?>"></td>
   </tr>
   <tr>
     <td class="DataTD" valign="top"><?=_("Middle Name(s)")?><br>
       (<?=_("optional")?>)
     </td>
-    <td class="DataTD"><input type="text" name="mname" value="<?=$user['mname']?>"></td>
+    <td class="DataTD"><input type="text" name="mname" value="<?=sanitizeHTML($user['mname'])?>"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Last Name")?>: </td>
-    <td class="DataTD"><input type="text" name="lname" value="<?=$user['lname']?>"></td>
+    <td class="DataTD"><input type="text" name="lname" value="<?=sanitizeHTML($user['lname'])?>"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Suffix")?><br>
       (<?=_("optional")?>)</td>
-    <td class="DataTD"><input type="text" name="suffix" value="<?=$user['suffix']?>"></td>
+    <td class="DataTD"><input type="text" name="suffix" value="<?=sanitizeHTML($user['suffix'])?>"></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?><br>
@@ -100,22 +100,22 @@
 <? } else { ?>
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
-    <td class="DataTD" width="125"><?=$user['fname']?></td>
+    <td class="DataTD" width="125"><?=sanitizeHTML($user['fname'])?></td>
   </tr>
   <tr>
     <td class="DataTD" valign="top"><?=_("Middle Name(s)")?><br>
       (<?=_("optional")?>)
     </td>
-    <td class="DataTD"><?=$user['mname']?></td>
+    <td class="DataTD"><?=sanitizeHTML($user['mname'])?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Last Name")?>: </td>
-    <td class="DataTD"><?=$user['lname']?></td>
+    <td class="DataTD"><?=sanitizeHTML($user['lname'])?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Suffix")?><br>
       (<?=_("optional")?>)</td>
-    <td class="DataTD"><?=$user['suffix']?></td>
+    <td class="DataTD"><?=sanitizeHTML($user['suffix'])?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Date of Birth")?><br>
@@ -124,7 +124,10 @@
   </tr>
 <? } ?>
   <tr>
-    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=!$showdetails?>"><?=_("View secret question & answers and OTP phrases")?></a></td>
+    <td colspan="2" class="title"><a href="account.php?id=59&amp;oldid=13&amp;userid=<?=intval($_SESSION['profile']['id'])?>"><?=_('Show account history')?></a></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=intval(!$showdetails)?>"><?=_("View secret question & answers and OTP phrases")?></a></td>
   </tr>
   <? if($showdetails){ ?>
   <tr>
@@ -167,5 +170,5 @@
   </tr>
 </table>
 <input type="hidden" name="csrf" value="<?=make_csrf('perschange')?>" />
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?=intval($id)?>">
 </form>
