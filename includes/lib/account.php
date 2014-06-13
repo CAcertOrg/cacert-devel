@@ -98,3 +98,53 @@ function fix_assurer_flag($userID = NULL)
 
 	return true;
 }
+
+/**
+ * Supported hash algorithms for signing certificates
+ */
+class HashAlgorithms {
+	/**
+	 * Default hash algorithm identifier for signing
+	 * @var string
+	 */
+	public static $default = 'sha256';
+
+	/**
+	 * Get display strings for the supported hash algorithms
+	 * @return array(string=>array('name'=>string, 'info'=>string))
+	 *     - [$hash_identifier]['name'] = Name that should be displayed in UI
+	 *     - [$hash_identifier]['info'] = Additional information that can help
+	 *       with the selection of a suitable algorithm
+	 */
+	public static function getInfo() {
+		return array(
+				'sha256' => array(
+						'name' => 'SHA-256',
+						'info' => _('Currently recommended, because the other algorithms might break on some older versions of the GnuTLS library (older than 3.x) still shipped in Debian for example.'),
+					),
+				'sha384' => array(
+						'name' => 'SHA-384',
+						'info' => '',
+					),
+				'sha512' => array(
+						'name' => 'SHA-512',
+						'info' => _('Highest protection against hash collision attacks of the algorithms offered here.'),
+					),
+			);
+	}
+
+	/**
+	 * Check if the input is a supported hash algorithm identifier otherwise
+	 * return the identifier of the default hash algorithm
+	 *
+	 * @param string $hash_identifier
+	 * @return string The cleaned identifier
+	 */
+	public static function clean($hash_identifier) {
+		if (array_key_exists($hash_identifier, self::getInfo() )) {
+			return $hash_identifier;
+		} else {
+			return self::$default;
+		}
+	}
+}

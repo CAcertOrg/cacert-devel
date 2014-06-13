@@ -94,6 +94,14 @@ ul.no_indent {
 	padding: 0px;
 }
 
+.attach_ul {
+	margin-bottom: 0px;
+}
+
+.attach_ul + ul {
+	margin-top: 0px;
+}
+
 
 /***********************************************/
 /* Layout Divs                                 */
@@ -412,10 +420,6 @@ a.glink:hover {
 .story h3 {
 	font: bold 125% Arial,sans-serif;
 	color: #000000;
-}
-
-.story p {
-	padding: 0px 0px 10px 0px;
 }
 
 .story a.capsule {

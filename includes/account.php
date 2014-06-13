@@ -289,6 +289,9 @@ function buildSubjectFromSession() {
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
 		}
+
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
+
 		$csr = "";
 		if(trim($_REQUEST['optionalCSR']) == "")
 		{
@@ -386,6 +389,7 @@ function buildSubjectFromSession() {
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -490,6 +494,7 @@ function buildSubjectFromSession() {
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`disablelogin`='".($_SESSION['_config']['disablelogin']?1:0)."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -763,6 +768,8 @@ function buildSubjectFromSession() {
 			if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 				$_SESSION['_config']['rootcert'] = 1;
 		}
+
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
 	}
 
 	if($process != "" && $oldid == 11)
@@ -807,6 +814,7 @@ function buildSubjectFromSession() {
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['rowid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 		} elseif(array_key_exists('0',$_SESSION['_config']['altid']) && $_SESSION['_config']['altid']['0'] > 0) {
 			$query = "insert into `domaincerts` set
@@ -814,6 +822,7 @@ function buildSubjectFromSession() {
 						`domid`='".mysql_real_escape_string($_SESSION['_config']['altid']['0'])."',
 						`created`=NOW(),`subject`='".mysql_real_escape_string($subject)."',
 						`rootcert`='".mysql_real_escape_string($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 		} else {
 			showheader(_("My CAcert.org Account!"));
@@ -1467,6 +1476,8 @@ function buildSubjectFromSession() {
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
 
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
+
 		$_SESSION['_config']['description']= trim(stripslashes($_REQUEST['description']));
 
 		if(@count($_SESSION['_config']['emails']) > 0)
@@ -1534,6 +1545,7 @@ function buildSubjectFromSession() {
 						`created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -1629,6 +1641,7 @@ function buildSubjectFromSession() {
 						`subject`='".mysql_real_escape_string($csrsubject)."',
 						`codesign`='".intval($_SESSION['_config']['codesign'])."',
 						`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+						`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 						`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 			mysql_query($query);
 			$emailid = mysql_insert_id();
@@ -1893,6 +1906,8 @@ function buildSubjectFromSession() {
 		$_SESSION['_config']['rootcert'] = intval($_REQUEST['rootcert']);
 		if($_SESSION['_config']['rootcert'] < 1 || $_SESSION['_config']['rootcert'] > 2)
 			$_SESSION['_config']['rootcert'] = 1;
+
+		$_SESSION['_config']['hash_alg'] = HashAlgorithms::clean($_REQUEST['hash_alg']);
 	}
 
 	if($process != "" && $oldid == 21)
@@ -1967,6 +1982,7 @@ function buildSubjectFromSession() {
 					`created`=NOW(),
 					`subject`='".mysql_real_escape_string($csrsubject)."',
 					`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+					`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 					`type`='".$type."',
 					`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 		} else {
@@ -1976,6 +1992,7 @@ function buildSubjectFromSession() {
 					`created`=NOW(),
 					`subject`='".mysql_real_escape_string($csrsubject)."',
 					`rootcert`='".intval($_SESSION['_config']['rootcert'])."',
+					`md`='".mysql_real_escape_string($_SESSION['_config']['hash_alg'])."',
 					`type`='".$type."',
 					`description`='".mysql_real_escape_string($_SESSION['_config']['description'])."'";
 		}
