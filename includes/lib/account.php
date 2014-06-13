@@ -99,7 +99,6 @@ function fix_assurer_flag($userID = NULL)
 	return true;
 }
 
-
 /**
  * Supported hash algorithms for signing certificates
  */
