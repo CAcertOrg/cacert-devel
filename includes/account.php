@@ -906,7 +906,7 @@ function buildSubjectFromSession() {
 						`type`='".intval($row['type'])."',
 						`pkhash`='".mysql_real_escape_string($row['pkhash'])."',
 						`description`='".mysql_real_escape_string($row['description'])."',
-                                                `md`='".$row['md']."'";
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
@@ -1087,7 +1087,7 @@ function buildSubjectFromSession() {
 						`codesign`='".intval($row['codesign'])."',
 						`rootcert`='".intval($row['rootcert'])."',
 						`description`='".mysql_real_escape_string($row['description'])."',
-						`md`='".$row['md']."'";
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1722,7 +1722,7 @@ function buildSubjectFromSession() {
 						`codesign`='".intval($row['codesign'])."',
 						`rootcert`='".intval($row['rootcert'])."',
 						`description`='".mysql_real_escape_string($row['description'])."',
-                                                `md`='".$row['md']."'";
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -2075,7 +2075,7 @@ function buildSubjectFromSession() {
 						`type`='".intval($row['type'])."',
 						`rootcert`='".intval($row['rootcert'])."',
 						`description`='".mysql_real_escape_string($row['description'])."',
-                                                `md`='".$row['md']."'";
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
