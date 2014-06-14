@@ -37,7 +37,9 @@
       "But if you received this mail without a recognisable reason, ".
       "there is a danger that an unauthorised person accessed your ".
       "account, and you should promptly change your password and your ".
-      "secret questions and answers."),$_SERVER['REMOTE_ADDR'], date("d.m.Y H:i:s T"))."\n\n";
+      "secret questions and answers."),
+      $_SERVER['REMOTE_ADDR'],
+      date("Y-m-d H:i:s T"))."\n\n";
 
     $body .= _("Best regards")."\n"._("CAcert Support");
 
