@@ -905,7 +905,8 @@ function buildSubjectFromSession() {
 						`rootcert`='".intval($row['rootcert'])."',
 						`type`='".intval($row['type'])."',
 						`pkhash`='".mysql_real_escape_string($row['pkhash'])."',
-						`description`='".mysql_real_escape_string($row['description'])."'";
+						`description`='".mysql_real_escape_string($row['description'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","server",$newid);
@@ -1085,7 +1086,8 @@ function buildSubjectFromSession() {
 						`disablelogin`='".intval($row['disablelogin'])."',
 						`codesign`='".intval($row['codesign'])."',
 						`rootcert`='".intval($row['rootcert'])."',
-						`description`='".mysql_real_escape_string($row['description'])."'";
+						`description`='".mysql_real_escape_string($row['description'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1736,7 +1738,8 @@ function buildSubjectFromSession() {
 						`modified`=NOW(),
 						`codesign`='".intval($row['codesign'])."',
 						`rootcert`='".intval($row['rootcert'])."',
-						`description`='".mysql_real_escape_string($row['description'])."'";
+						`description`='".mysql_real_escape_string($row['description'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -2088,7 +2091,8 @@ function buildSubjectFromSession() {
 						`subject`='".mysql_real_escape_string($row['subject'])."',
 						`type`='".intval($row['type'])."',
 						`rootcert`='".intval($row['rootcert'])."',
-						`description`='".mysql_real_escape_string($row['description'])."'";
+						`description`='".mysql_real_escape_string($row['description'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysql_query($query);
 				$newid = mysql_insert_id();
 				//echo "NewID: $newid<br/>\n";
