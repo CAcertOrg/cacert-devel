@@ -402,7 +402,7 @@ function buildSubjectFromSession() {
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
 			$CSRname_esc = escapeshellarg($CSRname);
-			$res=`openssl spkac -verify -in $CSRname_esc`;
+			$res=shell_exec("openssl spkac -verify -in $CSRname_esc");
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
 				$id = $oldid;
@@ -466,7 +466,7 @@ function buildSubjectFromSession() {
 			$tmpname = tempnam("/tmp", "id4csr");
 			$tmpfname_esc = escapeshellarg($tmpfname);
 			$tmpname_esc = escapeshellarg($tmpname);
-			$do = `/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc`; // -subj "$csr"`;
+			$do = shell_exec("/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc"); // -subj "$csr";
 			@unlink($tmpfname);
 			$csr = "";
 			$fp = fopen($tmpname, "r");
@@ -570,7 +570,7 @@ function buildSubjectFromSession() {
 		$addy = array();
 		$adds = array();
 		if(strtolower(substr($newdom, -4, 3)) != ".jp")
-			$adds = explode("\n", trim(`/usr/bin/whois $newdom|grep "@"`));
+			$adds = explode("\n", trim(shell_exec("/usr/bin/whois $newdom|grep \"@\"")));
 		if(substr($newdomain, -4) == ".org" || substr($newdomain, -5) == ".info")
 		{
 			if(is_array($adds))
@@ -740,8 +740,8 @@ function buildSubjectFromSession() {
 		fputs($fp, $CSR);
 		fclose($fp);
 		$CSR = escapeshellarg($_SESSION['_config']['tmpfname']);
-		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$_SESSION['_config']['subject'] = trim(shell_exec("/usr/bin/openssl req -text -noout -in $CSR |tr -d \"\\0\"|grep \"Subject:\""));
+		$bits = explode(",", trim(shell_exec("/usr/bin/openssl req -text -noout -in $CSR |tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -911,8 +911,8 @@ function buildSubjectFromSession() {
 				$newfile=generatecertpath("csr","server",$newid);
 				copy($row['csr_name'], $newfile);
 				$newfile_esc = escapeshellarg($newfile);
-				$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d "\\0"|grep "Subject:"`);
-				$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+				$_SESSION['_config']['subject'] = trim(shell_exec("/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d \"\\0\"|grep \"Subject:\""));
+				$bits = explode(",", trim(shell_exec("/usr/bin/openssl req -text -noout -in $newfile_esc |tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
 				foreach($bits as $val)
 				{
 					$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -942,7 +942,7 @@ function buildSubjectFromSession() {
 				} else {
 					$drow = mysql_fetch_assoc($res);
 					$crt_name = escapeshellarg($drow['crt_name']);
-					$cert = `/usr/bin/openssl x509 -in $crt_name`;
+					$cert = shell_exec("/usr/bin/openssl x509 -in $crt_name");
 					echo "<pre>\n$cert\n</pre>\n";
 				}
 			}
@@ -1559,7 +1559,7 @@ function buildSubjectFromSession() {
 			fclose($fp);
 			$challenge=$_SESSION['spkac_hash'];
 			$CSRname_esc = escapeshellarg($CSRname);
-			$res=`openssl spkac -verify -in $CSRname_esc`;
+			$res=shell_exec("openssl spkac -verify -in $CSRname_esc");
 			if(!strstr($res,"Challenge String: ".$challenge))
 			{
 				$id = $oldid;
@@ -1613,7 +1613,7 @@ function buildSubjectFromSession() {
 			$tmpname = tempnam("/tmp", "id17csr");
 			$tmpfname_esc = escapeshellarg($tmpfname);
 			$tmpname_esc = escapeshellarg($tmpname);
-			$do = `/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc`;
+			$do = shell_exec("/usr/bin/openssl req -in $tmpfname_esc -out $tmpname_esc");
 			@unlink($tmpfname);
 			$csr = "";
 			$fp = fopen($tmpname, "r");
@@ -1867,8 +1867,8 @@ function buildSubjectFromSession() {
 		fputs($fp, $CSR);
 		fclose($fp);
 		$CSR = escapeshellarg($_SESSION['_config']['tmpfname']);
-		$_SESSION['_config']['subject'] = trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`/usr/bin/openssl req -text -noout -in $CSR |tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$_SESSION['_config']['subject'] = trim(shell_exec("/usr/bin/openssl req -text -noout -in $CSR |tr -d \"\\0\"|grep \"Subject:\""));
+		$bits = explode(",", trim(shell_exec("/usr/bin/openssl req -text -noout -in $CSR |tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -2091,7 +2091,7 @@ function buildSubjectFromSession() {
 				} else {
 					$drow = mysql_fetch_assoc($res);
 					$crtname = escapeshellarg($drow['crt_name']);
-					$cert = `/usr/bin/openssl x509 -in $crtname`;
+					$cert = shell_exec("/usr/bin/openssl x509 -in $crtname");
 					echo "<pre>\n$cert\n</pre>\n";
 				}
 			}
@@ -2812,8 +2812,8 @@ function buildSubjectFromSession() {
 	{
 		$CSR = clean_csr($CSR);
 		$_SESSION['_config']['CSR'] = $CSR;
-		$_SESSION['_config']['subject'] = trim(`echo "$CSR"|/usr/bin/openssl req -text -noout|tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`echo "$CSR"|/usr/bin/openssl req -text -noout|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$_SESSION['_config']['subject'] = trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep \"Subject:\""));
+		$bits = explode(",", trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -2837,8 +2837,8 @@ function buildSubjectFromSession() {
 	if($process != "" && $oldid == 46)
 	{
 		$CSR = clean_csr($_SESSION['_config']['CSR']);
-		$_SESSION['_config']['subject'] = trim(`echo "$CSR"|/usr/bin/openssl req -text -noout|tr -d "\\0"|grep "Subject:"`);
-		$bits = explode(",", trim(`echo "$CSR"|/usr/bin/openssl req -text -noout|tr -d "\\0"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:`));
+		$_SESSION['_config']['subject'] = trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep \"Subject:\""));
+		$bits = explode(",", trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);

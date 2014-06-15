@@ -60,7 +60,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	}
 
 	$crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname $outform`;
+	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname $outform");
 
 	header("Content-Type: application/pkix-cert");
 	header("Content-Length: ".strlen($cert));
@@ -82,7 +82,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	} else {
 		// All other browsers
 		$crtname=escapeshellarg($row['crt_name']);
-		$cert = `/usr/bin/openssl x509 -in $crtname -outform DER`;
+		$cert = shell_exec("/usr/bin/openssl x509 -in $crtname -outform DER");
 
 		header("Content-Type: application/x-x509-user-cert");
 		header("Content-Length: ".strlen($cert));
@@ -111,7 +111,7 @@ if (array_key_exists('format', $_REQUEST)) {
 
 	// Allow to directly copy and paste the cert in PEM format
 	$crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname -outform PEM`;
+	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname -outform PEM");
 	echo "<pre>$cert</pre>";
 
 	?>
