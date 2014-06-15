@@ -1185,8 +1185,8 @@
         ?>
           <tr>
             <td class="DataTD"><?=$label?>:</td>
-            <td class="DataTD"><input type="text" name="<?=$name?>" value="<?=$value?>" maxlength="<?=$length?>" size="90"></td>
-            <td class="DataTD"><? printf(_('max %s characters'),$length)?></td>
+            <td class="DataTD"><input type="text" name="<?=$name?>" value="<?=SanitizeHTML($value)?>" maxlength="<?=intval($length)?>" size="90"></td>
+            <td class="DataTD"><? printf(_('max %d characters'),$length)?></td>
           </tr>
         <?
     }
@@ -1204,10 +1204,10 @@
         ?>
           <tr>
             <td class="DataTD"><?=$label?>:</td>
-            <td class="DataTD"><input type="text" name="<?=$name?>" value="<?=$value?>" maxlength="<?=$length?>" size="<?=$length?>">
+            <td class="DataTD"><input type="text" name="<?=$name?>" value="<?=SanitizeHTML($value)?>" maxlength="<?=intval($length)?>" size="<?=intval($length)?>">
                 <? printf(_('(2 letter %s ISO code %s )'), '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">', '</a>')?>
             </td>
-            <td class="DataTD"><?=sprintf(_('max %s characters'),$length)?></td>
+            <td class="DataTD"><?=sprintf(_('max %d characters'),$length)?></td>
           </tr>
         <?
     }
@@ -1224,7 +1224,7 @@
         ?>
           <tr>
             <td class="DataTD"><?=$label?>:</td>
-            <td class="DataTD"><textarea name="<?=$name?>" cols=60 rows=10><?=$value?></textarea></td>
+            <td class="DataTD"><textarea name="<?=$name?>" cols=60 rows=10><?=SanitizeHTML($value)?></textarea></td>
             <td class="DataTD">&nbsp</td>
           </tr>
         <?
