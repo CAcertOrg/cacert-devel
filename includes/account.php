@@ -2812,8 +2812,10 @@ function buildSubjectFromSession() {
 	{
 		$CSR = clean_csr($CSR);
 		$_SESSION['_config']['CSR'] = $CSR;
-		$_SESSION['_config']['subject'] = trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep \"Subject:\""));
-		$bits = explode(",", trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
+		runCommand("/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep \"Subject:\"", $CSR, $CSRSubjects);
+		runCommand("/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:", $CSR, $CSRAlts);
+		$_SESSION['_config']['subject'] = trim($CSRSubjects);
+		$bits = explode(",", trim($CSRAlts));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
@@ -2837,8 +2839,11 @@ function buildSubjectFromSession() {
 	if($process != "" && $oldid == 46)
 	{
 		$CSR = clean_csr($_SESSION['_config']['CSR']);
-		$_SESSION['_config']['subject'] = trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep \"Subject:\""));
-		$bits = explode(",", trim(shell_exec("echo \"$CSR\"|/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:")));
+		runCommand("/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep \"Subject:\"", $CSR, $CSRSubjects);
+		runCommand("/usr/bin/openssl req -text -noout|tr -d \"\\0\"|grep -A1 'X509v3 Subject Alternative Name:'|grep DNS:", $CSR, $CSRAlts);
+
+		$_SESSION['_config']['subject'] = trim($CSRSubjects);
+		$bits = explode(",", trim($CSRAlts));
 		foreach($bits as $val)
 		{
 			$_SESSION['_config']['subject'] .= "/subjectAltName=".trim($val);
