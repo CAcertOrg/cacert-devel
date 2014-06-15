@@ -1127,119 +1127,121 @@
 	}
 
 	// table layout for organisation
-    /**
-     * org_edit_org_table()
-     *
-     * @param mixed $orgname
-     * @param mixed $contactmail
-     * @param mixed $town
-     * @param mixed $state
-     * @param mixed $country
-     * @param mixed $comment
-     * @param integer $type  0 - new, 1, edit
-     * @return
-     */
-    function org_edit_org_table($orgname, $contactmail, $town, $state, $country, $comment, $type=0){
-        if ($type > 0) {
-            $title = _('Edit Organisation');
-            $action = _('Update');
-        } else {
-            $title = _('New Organisation');
-            $action = _('Next');
-        }
-        org_edit_org_table_header($title);
-        org_edit_org_table_row(_('Organisation Name'), 'O', $orgname, 64);
-        org_edit_org_table_row(_('Contact Email'), 'contact', $contactmail, 255);
-        org_edit_org_table_row(_('Town/Suburb'), 'L', $town, 128);
-        org_edit_org_table_row(_('State/Province'), 'ST', $state, 128);
-        org_edit_org_table_country(_('Country'), 'C', $country, 2);
-        org_edit_org_table_comment(_('Comments'), 'comments', $comment);
-        org_edit_org_table_footer($action);
-    }
+	/**
+	 * org_edit_org_table()
+	 *
+	 * @param mixed $orgname
+	 * @param mixed $contactmail
+	 * @param mixed $town
+	 * @param mixed $state
+	 * @param mixed $country
+	 * @param mixed $comment
+	 * @param integer $type  0 - new, 1, edit
+	 * @return
+	 */
+	function org_edit_org_table($orgname, $contactmail, $town, $state, $country, $comment, $type=0){
+		if ($type > 0) {
+			$title = _('Edit Organisation');
+			$action = _('Update');
+		} else {
+			$title = _('New Organisation');
+			$action = _('Next');
+		}
+		org_edit_org_table_header($title);
+		org_edit_org_table_row(_('Organisation Name'), 'O', $orgname, 64);
+		org_edit_org_table_row(_('Contact Email'), 'contact', $contactmail, 255);
+		org_edit_org_table_row(_('Town/Suburb'), 'L', $town, 128);
+		org_edit_org_table_row(_('State/Province'), 'ST', $state, 128);
+		org_edit_org_table_country(_('Country'), 'C', $country, 2);
+		org_edit_org_table_comment(_('Comments'), 'comments', $comment);
+		org_edit_org_table_footer($action);
+	}
 
-    /**
-     * org_edit_org_table_header()
-     *
-     * @param mixed $title
-     * @return
-     */
-    function org_edit_org_table_header($title){
-        ?>
-        <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-            <tr>
-                <td colspan="3" class="title"><?=$title?></td>
-          </tr>
-        <?
-    }
+	/**
+	 * org_edit_org_table_header()
+	 *
+	 * @param mixed $title
+	 * @return
+	 */
+	function org_edit_org_table_header($title){
+?>
+		<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
+			<tr>
+				<td colspan="3" class="title"><?=$title?></td>
+			</tr>
+<?
+	}
 
-    /**
-     * org_edit_org_table_row()
-     *
-     * @param mixed $label
-     * @param mixed $name
-     * @param mixed $value
-     * @param mixed $length
-     * @return
-     */
-    function org_edit_org_table_row($label, $name, $value, $length){
-        ?>
-          <tr>
-            <td class="DataTD"><?=$label?>:</td>
-            <td class="DataTD"><input type="text" name="<?=$name?>" value="<?=SanitizeHTML($value)?>" maxlength="<?=intval($length)?>" size="90"></td>
-            <td class="DataTD"><? printf(_('max %d characters'),$length)?></td>
-          </tr>
-        <?
-    }
+	/**
+	 * org_edit_org_table_row()
+	 *
+	 * @param mixed $label
+	 * @param mixed $name
+	 * @param mixed $value
+	 * @param mixed $length
+	 * @return
+	 */
+	function org_edit_org_table_row($label, $name, $value, $length){
+?>
+			<tr>
+				<td class="DataTD"><?=$label?>:</td>
+				<td class="DataTD"><input type="text" name="<?=$name?>" value="<?=SanitizeHTML($value)?>" maxlength="<?=intval($length)?>" size="90"></td>
+				<td class="DataTD"><? printf(_('max %d characters'),$length)?></td>
+			</tr>
+<?
+	}
 
-    /**
-     * org_edit_org_table_country()
-     *
-     * @param mixed $label
-     * @param mixed $name
-     * @param mixed $value
-     * @param mixed $length
-     * @return
-     */
-    function org_edit_org_table_country($label, $name, $value, $length){
-        ?>
-          <tr>
-            <td class="DataTD"><?=$label?>:</td>
-            <td class="DataTD"><input type="text" name="<?=$name?>" value="<?=SanitizeHTML($value)?>" maxlength="<?=intval($length)?>" size="<?=intval($length)?>">
-                <? printf(_('(2 letter %s ISO code %s )'), '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">', '</a>')?>
-            </td>
-            <td class="DataTD"><?=sprintf(_('max %d characters'),$length)?></td>
-          </tr>
-        <?
-    }
+	/**
+	 * org_edit_org_table_country()
+	 *
+	 * @param mixed $label
+	 * @param mixed $name
+	 * @param mixed $value
+	 * @param mixed $length
+	 * @return
+	 */
+	function org_edit_org_table_country($label, $name, $value, $length){
+?>
+			<tr>
+				<td class="DataTD"><?=$label?>:</td>
+				<td class="DataTD">
+					<input type="text" name="<?=$name?>" value="<?=SanitizeHTML($value)?>" maxlength="<?=intval($length)?>" size="<?=intval($length)?>" />
+					<? printf(_('(2 letter %s ISO code %s )'), '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">', '</a>')?>
+				</td>
+				<td class="DataTD"><?=sprintf(_('max %d characters'),$length)?></td>
+			</tr>
+<?
+	}
 
-    /**
-     * org_edit_org_table_comment()
-     *
-     * @param mixed $label
-     * @param mixed $name
-     * @param mixed $value
-     * @return
-     */
-    function org_edit_org_table_comment($label, $name, $value){
-        ?>
-          <tr>
-            <td class="DataTD"><?=$label?>:</td>
-            <td class="DataTD"><textarea name="<?=$name?>" cols=60 rows=10><?=SanitizeHTML($value)?></textarea></td>
-            <td class="DataTD">&nbsp</td>
-          </tr>
-        <?
-    }
-    /**
-     * org_edit_org_table_footer()
-     *
-     * @param mixed $label
-     * @return
-     */
-    function org_edit_org_table_footer($label){
-        ?>
-          <tr>
-            <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=$label?>"></td>
-          </tr>
-        </table>
-        <?
+	/**
+	 * org_edit_org_table_comment()
+	 *
+	 * @param mixed $label
+	 * @param mixed $name
+	 * @param mixed $value
+	 * @return
+	 */
+	function org_edit_org_table_comment($label, $name, $value){
+?>
+			<tr>
+				<td class="DataTD"><?=$label?>:</td>
+				<td class="DataTD"><textarea name="<?=$name?>" cols=60 rows=10><?=SanitizeHTML($value)?></textarea></td>
+				<td class="DataTD">&nbsp</td>
+			</tr>
+<?
+	}
+
+	/**
+	 * org_edit_org_table_footer()
+	 *
+	 * @param mixed $label
+	 * @return
+	 */
+	function org_edit_org_table_footer($label){
+?>
+			<tr>
+				<td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=$label?>"></td>
+			</tr>
+		</table>
+<?
     }
