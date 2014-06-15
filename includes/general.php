@@ -57,7 +57,7 @@
 		exit;
 	}
 
-	if(array_key_exists('HTTP_HOST',$_SERVER) && 
+	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] ||
 			$_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify']))
 	{
@@ -77,12 +77,12 @@
 	L10n::detect_language();
 	L10n::init_gettext();
 
-        if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
+	if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
-		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".$_SESSION['profile']['id']."'"));
+		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 		if($locked['locked'] == 0)
 		{
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
@@ -169,19 +169,19 @@
 			$points++;
 
 		//echo "Points due to length and charset: $points<br/>";
-		
+
 		// check for historical password proposal
 		if ($pwd === "Fr3d Sm|7h") {
 			return 0;
 		}
-		
+
 		return $points;
 	}
 
 	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
 	{
 		$points = checkpwlight($pwd);
-		
+
 		if(@strstr(strtolower($pwd), strtolower($email)))
 			$points--;
 
@@ -219,7 +219,7 @@
 		//echo "Points due to name matches: $points<br/>";
 
 		$shellpwd = escapeshellarg($pwd);
-		$do = `grep $shellpwd /usr/share/dict/american-english`;
+		$do = `grep -F -- $shellpwd /usr/share/dict/american-english`;
 		if($do)
 			$points--;
 
@@ -232,7 +232,7 @@
 	{
 		$bits = explode(": ", $_SESSION['_config']['subject'], 2);
 		$bits = str_replace(", ", "|", str_replace("/", "|", array_key_exists('1',$bits)?$bits['1']:""));
-		$bits = explode("|", $bits);    
+		$bits = explode("|", $bits);
 
 		$_SESSION['_config']['cnc'] = $_SESSION['_config']['subaltc'] = 0;
 		$_SESSION['_config']['OU'] = "";
@@ -287,7 +287,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".$_SESSION['profile']['id']."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -339,7 +339,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".$_SESSION['profile']['id']."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -378,7 +378,7 @@
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
 				$query = "select *, `orginfo`.`id` as `id` from `orginfo`,`orgdomains`,`org` where
-						`org`.`memid`='".$_SESSION['profile']['id']."' and
+						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
@@ -426,7 +426,7 @@
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
 				$query = "select * from `orginfo`,`orgdomains`,`org` where
-						`org`.`memid`='".$_SESSION['profile']['id']."' and
+						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
@@ -458,7 +458,7 @@
 				$dom = $bits[$i];
 			$dom = mysql_real_escape_string($dom);
 			$query = "select * from `org`,`orgdomains`,`orginfo`
-					where `org`.`memid`='".$_SESSION['profile']['id']."'
+					where `org`.`memid`='".intval($_SESSION['profile']['id'])."'
 					and `orgdomains`.`orgid`=`org`.`orgid`
 					and `orginfo`.`id`=`org`.`orgid`
 					and `orgdomains`.`domain`='$dom'";
@@ -477,12 +477,12 @@
 		if($id <= 0)
 			$id = $_SESSION['profile']['id'];
 
-		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' group by `to`";
+		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' and `deleted` = 0 group by `to`";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$points = $row['points'];
 
 		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-18));
-		$query = "select * from `users` where `id`='".$_SESSION['profile']['id']."' and `dob` < '$dob'";
+		$query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `dob` < '$dob'";
 		if(mysql_num_rows(mysql_query($query)) < 1)
 		{
 			if($points >= 100)
@@ -506,7 +506,7 @@
 		return(0);
 	}
 
-	function hex2bin($data)
+	function gpg_hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
 		{
@@ -557,7 +557,7 @@
 				$fp = @fsockopen($domain,25,$errno,$errstr,5);
 				if($fp)
 				{
-				
+
 					$line = fgets($fp, 4096);
                                         while(substr($line, 0, 4) == "220-")
                                                $line = fgets($fp, 4096);
@@ -581,7 +581,7 @@
 
 					$line = mysql_real_escape_string(trim(strip_tags($line)));
 					$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
-					if(is_array($_SESSION['profile'])) $query.=", `uid`='".$_SESSION['profile']['id']."'";
+					if(is_array($_SESSION['profile'])) $query.=", `uid`='".intval($_SESSION['profile']['id'])."'";
 					mysql_query($query);
 
 					if(substr($line, 0, 3) != "250")
@@ -591,7 +591,7 @@
 				}
 			}
 		}
-		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".$_SESSION['profile']['id']."',
+		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".intval($_SESSION['profile']['id'])."',
 				`email`='$myemail', `result`='Failed to make a connection to the mail server'";
 		mysql_query($query);
 		return _("Failed to make a connection to the mail server");
@@ -662,7 +662,7 @@
 		return $ticket;
 	}
 
-	function sanitizeHTML($input) 
+	function sanitizeHTML($input)
 	{
 		return htmlentities(strip_tags($input), ENT_QUOTES);
 		//In case of problems, please use the following line again:
@@ -732,7 +732,7 @@
 		$text=preg_replace("/[^\w-.@]/","",$text);
 		return($text);
 	}
-	
+
 
 	// returns text message to be shown to the user given the result of is_no_assurer
 	function no_assurer_text($Status)
@@ -775,7 +775,7 @@
 			$name="../$type/$kind/".intval($id/1000)."/$kind-".intval($id).".$type";
 			if (!is_dir("../csr")) { mkdir("../csr",0777); }
 			if (!is_dir("../crt")) { mkdir("../crt",0777); }
-			
+
 			if (!is_dir("../csr/$kind")) { mkdir("../csr/$kind",0777); }
 			if (!is_dir("../crt/$kind")) { mkdir("../crt/$kind",0777); }
 			if (!is_dir("../csr/$kind/".intval($id/1000))) { mkdir("../csr/$kind/".intval($id/1000)); }

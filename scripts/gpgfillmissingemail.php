@@ -18,7 +18,7 @@
 	require_once("../includes/mysql.php"); //general.php");
 	//include "../includes/general.php";
 
-function hex2bin($data)
+function gpg_hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
 		{
@@ -69,7 +69,7 @@ echo "Found:\n";
 				if (preg_match("/<([\w.-]*\@[\w.-]*)>/", $bits[9],$match)) 
 				{
                                   //echo "Found: ".$match[1];
-                                   $mail = trim(hex2bin($match[1]));
+                                   $mail = trim(gpg_hex2bin($match[1]));
 
 
 				echo "EMail: *$mail**\n";

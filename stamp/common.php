@@ -41,9 +41,9 @@
 				if($row['certid'] > 0)
 				{
 					if($row['org'] == 0)
-						$query = "select * from `domaincerts` where `id`='$row[certid]' and `expire`>NOW() and `revoked`=0";
+						$query = "select * from `domaincerts` where `id`='".intval($row['certid'])."' and `expire`>NOW() and `revoked`=0";
 					else
-						$query = "select * from `orgdomaincerts` where `id`='$row[certid]' and `expire`>NOW() and `revoked`=0";
+						$query = "select * from `orgdomaincerts` where `id`='".intval($row['certid'])."' and `expire`>NOW() and `revoked`=0";
 					if($_REQUEST['debug'] == 1)
 						echo $query."<br>\n";
 					$res = mysql_query($query);
@@ -117,7 +117,7 @@
 			if($org == 0)
 			{
 				$query = "SELECT *, sum(`points`) AS `total` FROM `users`, `notary` WHERE `users`.`id` = '$cert[memid]' AND
-						`notary`.`to` = `users`.`id` and `notary`.`when` <= '$cert[issued]' GROUP BY `notary`.`to`";
+						`notary`.`to` = `users`.`id` and `notary`.`when` <= '$cert[issued]' and `notary`.`deleted`=0 GROUP BY `notary`.`to`";
 				$user = mysql_fetch_assoc(mysql_query($query));
 			} else {
 				$query = "select * from `orginfo` where `id`='$cert[orgid]'";
