@@ -225,7 +225,7 @@
 		//echo "Points due to name matches: $points<br/>";
 
 		$shellpwd = escapeshellarg($pwd);
-		$do = `grep -F -- $shellpwd /usr/share/dict/american-english`;
+		$do = shell_exec("grep -F -- $shellpwd /usr/share/dict/american-english");
 		if($do)
 			$points--;
 
@@ -533,7 +533,8 @@
 		$fp = fopen($tmpfname, "w");
 		fputs($fp, $message);
 		fclose($fp);
-		$do = `/usr/bin/gpg --homedir /home/gpg --clearsign "$tmpfname"|/usr/sbin/sendmail "$to"`;
+		$to_esc = escapeshellarg($to);
+		$do = shell_exec("/usr/bin/gpg --homedir /home/gpg --clearsign \"$tmpfname\"|/usr/sbin/sendmail ".$to_esc);
 		@unlink($tmpfname);
 	}
 
@@ -544,9 +545,9 @@
 		{
 			list($username,$domain)=explode('@',$email,2);
 			$dom = escapeshellarg($domain);
-			$line = trim(`dig +short MX $dom 2>&1`);
+			$line = trim(shell_exec("dig +short MX $dom 2>&1"));
 #echo $email."-$dom-$line-\n";
-#echo `dig +short mx heise.de 2>&1`."-<br>\n";
+#echo shell_exec("dig +short mx heise.de 2>&1")."-<br>\n";
 
 			$list = explode("\n", $line);
 			foreach($list as $row) {

@@ -112,7 +112,7 @@ function verifyEmail($email)
 					clean_gpgcsr($CSR),
 					$gpg);
 
-			`rm -r $tmpdir`;
+			shell_exec("rm -r $tmpdir");
 		}
 
 		if ($err)
@@ -340,7 +340,7 @@ function verifyEmail($email)
 
 
 		$cmd_keyid = escapeshellarg($keyid);
-		$gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1`);
+		$gpg = trim(shell_exec("gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1"));
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
@@ -525,7 +525,7 @@ function verifyEmail($email)
 
 		$csrname=generatecertpath("csr","gpg",$insert_id);
 		$cmd_keyid = escapeshellarg($keyid);
-		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname`;
+		$do=shell_exec("gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname");
 
 		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
 		waitForResult('gpg', $insert_id);
