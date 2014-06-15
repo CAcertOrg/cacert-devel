@@ -141,10 +141,17 @@ require_once('../includes/notary.inc.php');
 		{
 			$id = $oldid;
 			$oldid = 0;
-			$_SESSION['_config']['errmsg'] = _("Unable to match your details with any user accounts on file");
+			$_SESSION['_config']['errmsg'] = _('Unable to match your details with any user accounts on file');
 		} else {
-			$id = 6;
 			$_SESSION['lostpw']['user'] = mysql_fetch_assoc($res);
+			//check wether account is locked or deleted
+			if ($_SESSION['lostpw']['user']['locked'] == 1 || $_SESSION['lostpw']['user']['deleted'] != 0) {
+				$id = $oldid;
+				$oldid = 0;
+				$_SESSION['_config']['errmsg'] = printf(_('The account is not available, please get in contact with support(%s).'),'support@cacert.org');
+			} else {
+				$id = 6;
+			}
 		}
 	}
 

@@ -37,7 +37,7 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
 {
     $_REQUEST['userid'] = 0;
 
-    $emailsearch = $email = mysql_real_escape_string(stripslashes($_REQUEST['email']));
+    $emailsearch = $email = mysql_real_escape_string(stripslashes(trim($_REQUEST['email'])));
 
     //Disabled to speed up the queries
     //if(!strstr($email, "%"))
