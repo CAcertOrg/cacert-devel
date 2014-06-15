@@ -16,51 +16,25 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
-	// Reset session variables regarding Org's, present empty form	
-	if (array_key_exists('O',$_SESSION['_config']))         $_SESSION['_config']['O'] = "";
-  if (array_key_exists('contact',$_SESSION['_config']))   $_SESSION['_config']['contact'] = "";	
-  if (array_key_exists('L',$_SESSION['_config']))         $_SESSION['_config']['L'] = "";
-  if (array_key_exists('ST',$_SESSION['_config']))        $_SESSION['_config']['ST'] = "";
-  if (array_key_exists('C',$_SESSION['_config']))         $_SESSION['_config']['C'] = "";
-  if (array_key_exists('comments',$_SESSION['_config']))  $_SESSION['_config']['comments'] = "";
-	
+$orgname = '';
+$contactmail = '';
+$town = '';
+$state = '';
+$country = '';
+$comment = '';
+
+	// Reset session variables regarding Org's, present empty form
+if (array_key_exists('O',$_SESSION['_config']))         $_SESSION['_config']['O'] = "";
+if (array_key_exists('contact',$_SESSION['_config']))   $_SESSION['_config']['contact'] = "";
+if (array_key_exists('L',$_SESSION['_config']))         $_SESSION['_config']['L'] = "";
+if (array_key_exists('ST',$_SESSION['_config']))        $_SESSION['_config']['ST'] = "";
+if (array_key_exists('C',$_SESSION['_config']))         $_SESSION['_config']['C'] = "";
+if (array_key_exists('comments',$_SESSION['_config']))  $_SESSION['_config']['comments'] = "";
+
 ?>
 <form method="post" action="account.php">
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="2" class="title"><?=_("New Organisation")?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Organisation Name")?>:</td>
-    <td class="DataTD"><input type="text" name="O" value="" maxlength="50" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Contact Email")?>:</td>
-    <td class="DataTD"><input type="text" name="contact" value="" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Town/Suburb")?>:</td>
-    <td class="DataTD"><input type="text" name="L" value="" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("State/Province")?>:</td>
-    <td class="DataTD"><input type="text" name="ST" value="" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Country")?>:</td>
-    <td class="DataTD"><input type="text" name="C" value="" size="5">
-        <?php printf(_('(2 letter %s ISO code %s )'),
-            '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">',
-            '</a>')?>
-    </td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><textarea name="comments" cols="60" rows="10"></textarea></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
-  </tr>
-</table>
+<?
+org_edit_org_table($orgname, $contactmail, $town, $state, $country, $comment, 0);
+?>
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form>

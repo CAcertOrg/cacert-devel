@@ -16,46 +16,20 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
-	$row = mysql_fetch_assoc(mysql_query("select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'"));
+    $orgid = intval($_REQUEST['orgid']);
+    $row = mysql_fetch_assoc(mysql_query("select * from `orginfo` where `id`='" . $orgid . "'"));
+    $orgname = $row['O'];
+    $contactmail = $row['contact'];
+    $town = $row['L'];
+    $state = $row['ST'];
+    $country = $row['C'];
+    $comment = $row['comments'];
 ?>
 <form method="post" action="account.php">
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="2" class="title"><?=_("Edit Organisation")?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Organisation Name")?>:</td>
-    <td class="DataTD"><input type="text" name="O" value="<?=$row['O']?>" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Contact Email")?>:</td>
-    <td class="DataTD"><input type="text" name="contact" value="<?=($row['contact'])?>" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Town/Suburb")?>:</td>
-    <td class="DataTD"><input type="text" name="L" value="<?=($row['L'])?>" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("State/Province")?>:</td>
-    <td class="DataTD"><input type="text" name="ST" value="<?=($row['ST'])?>" size="90"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Country")?>:</td>
-    <td class="DataTD"><input type="text" name="C" value="<?=($row['C'])?>" size="5">
-        <?php printf(_('(2 letter %s ISO code %s )'),
-            '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">',
-            '</a>')?>
-    </td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Comments")?>:</td>
-    <td class="DataTD"><textarea name="comments" cols=60 rows=10><?=($row['comments'])?></textarea></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
-  </tr>
-</table>
+<?
+    org_edit_org_table($orgname, $contactmail, $town, $state, $country, $comment, 1);
+?>
 <input type="hidden" name="oldid" value="<?=intval($id)?>">
-<input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
+<input type="hidden" name="orgid" value="<?=$orgid?>">
 <input type="hidden" name="csrf" value="<?=make_csrf('orgdetchange')?>" />
 </form>

@@ -2260,7 +2260,7 @@ function buildSubjectFromSession() {
 						`contact`='".$_SESSION['_config']['contact']."',
 						`L`='".$_SESSION['_config']['L']."',
 						`ST`='".$_SESSION['_config']['ST']."',
-						`C`='".$_SESSION['_config']['C']."',
+						`C`='".strtoupper($_SESSION['_config']['C'])."',
 						`comments`='".$_SESSION['_config']['comments']."'");
 			showheader(_("My CAcert.org Account!"));
 			printf(_("'%s' has just been successfully added as an organisation to the database."), sanitizeHTML($_SESSION['_config']['O']));
@@ -2288,7 +2288,7 @@ function buildSubjectFromSession() {
 						`contact`='".$_SESSION['_config']['contact']."',
 						`L`='".$_SESSION['_config']['L']."',
 						`ST`='".$_SESSION['_config']['ST']."',
-						`C`='".$_SESSION['_config']['C']."',
+						`C`='".strtoupper($_SESSION['_config']['C'])."',
 						`comments`='".$_SESSION['_config']['comments']."'
 					where `id`='".intval($_SESSION['_config']['orgid'])."'");
 			showheader(_("My CAcert.org Account!"));
