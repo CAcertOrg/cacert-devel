@@ -527,7 +527,8 @@
 		$fp = fopen($tmpfname, "w");
 		fputs($fp, $message);
 		fclose($fp);
-		$do = shell_exec("/usr/bin/gpg --homedir /home/gpg --clearsign \"$tmpfname\"|/usr/sbin/sendmail ".escapeshellarg($to));
+		$to_esc = escapeshellarg($to);
+		$do = shell_exec("/usr/bin/gpg --homedir /home/gpg --clearsign \"$tmpfname\"|/usr/sbin/sendmail ".$to_esc);
 		@unlink($tmpfname);
 	}
 
