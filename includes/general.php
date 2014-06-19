@@ -272,6 +272,16 @@
 		}
 	}
 
+	function isValidWildcard($name){
+		if(substr($name,0,2) == "*."){
+			$name = substr($name, 2);
+		}
+		if(!preg_match("/[a-zA-Z0-9_]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?/",$name)){
+			return false;
+		}
+		return strpos($name, "*") === false;
+	}
+
 	function getcn()
 	{
 		unset($_SESSION['_config']['rows']);
@@ -285,6 +295,12 @@
 			$bits = explode(".", $CN);
 			$dom = "";
 			$cnok = 0;
+
+			if(!isValidWildcard($CN)){
+				$_SESSION['_config']['rejected'][] = $CN;
+				continue;
+			}
+
 			for($i = count($bits) - 1; $i >= 0; $i--)
 			{
 				if($dom)
@@ -293,7 +309,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` = '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -334,6 +350,11 @@
 			else
 				continue;
 
+			if(!isValidWildcard($alt)){
+				$_SESSION['_config']['rejected'][] = $alt;
+				continue;
+			}
+
 			$bits = explode(".", $alt);
 			$dom = "";
 			$altok = 0;
@@ -345,7 +366,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` = '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -375,6 +396,12 @@
 			$CN = $_SESSION['_config']["$cnc.CN"];
 			$bits = explode(".", $CN);
 			$dom = "";
+
+                        if(!isValidWildcard($CN)){
+                                $_SESSION['_config']['rejected'][] = $CN;
+                                continue;
+                        }
+
 			for($i = count($bits) - 1; $i >= 0; $i--)
 			{
 				if($dom)
@@ -420,6 +447,11 @@
 				$alt = substr($subalt, 4);
 			else
 				continue;
+
+                        if(!isValidWildcard($alt)){
+                                $_SESSION['_config']['rejected'][] = $alt;
+                                continue;
+                        }
 
 			$bits = explode(".", $alt);
 			$dom = "";
