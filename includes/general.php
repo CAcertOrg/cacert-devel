@@ -270,7 +270,7 @@
 		if(substr($name,0,2) == "*."){
 			$name = substr($name, 2);
 		}
-		if(!preg_match("/[a-zA-Z0-9_]([a-zA-Z0-9\\-_]*[a-zA-Z0-9])?/",$name)){
+		if(!preg_match('/^(\\.(?!-)[a-z0-9_-]*[a-z0-9])+$/i','.'.$name)){
 			return false;
 		}
 		return strpos($name, "*") === false;
