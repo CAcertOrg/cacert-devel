@@ -287,7 +287,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` = '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -339,7 +339,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` = '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
