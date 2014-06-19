@@ -266,6 +266,13 @@
 		}
 	}
 
+	function isValidWildcard($name){
+		if(substr($name,0,2) == "*."){
+			$name = substr($name, 2);
+		}
+		return strpos($name, "*") === false;
+	}
+
 	function getcn()
 	{
 		unset($_SESSION['_config']['rows']);
@@ -279,6 +286,12 @@
 			$bits = explode(".", $CN);
 			$dom = "";
 			$cnok = 0;
+
+			if(!isValidWildcard($CN)){
+				$_SESSION['_config']['rejected'][] = $CN;
+				continue;
+			}
+
 			for($i = count($bits) - 1; $i >= 0; $i--)
 			{
 				if($dom)
@@ -328,6 +341,11 @@
 			else
 				continue;
 
+			if(!isValidWildcard($alt)){
+				$_SESSION['_config']['rejected'][] = $alt;
+				continue;
+			}
+
 			$bits = explode(".", $alt);
 			$dom = "";
 			$altok = 0;
@@ -369,6 +387,12 @@
 			$CN = $_SESSION['_config']["$cnc.CN"];
 			$bits = explode(".", $CN);
 			$dom = "";
+
+                        if(!isValidWildcard($CN)){
+                                $_SESSION['_config']['rejected'][] = $CN;
+                                continue;
+                        }
+
 			for($i = count($bits) - 1; $i >= 0; $i--)
 			{
 				if($dom)
@@ -414,6 +438,11 @@
 				$alt = substr($subalt, 4);
 			else
 				continue;
+
+                        if(!isValidWildcard($alt)){
+                                $_SESSION['_config']['rejected'][] = $alt;
+                                continue;
+                        }
 
 			$bits = explode(".", $alt);
 			$dom = "";
