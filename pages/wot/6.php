@@ -24,9 +24,9 @@
 	}
 
 	$row = $_SESSION['_config']['notarise'];
-	$_SESSION['assuresomeone']['year'] = '';
-	$_SESSION['assuresomeone']['month'] = '';
-	$_SESSION['assuresomeone']['day'] = '';
+	$_SESSION['assuresomeone']['year'] = 0;
+	$_SESSION['assuresomeone']['month'] = 0;
+	$_SESSION['assuresomeone']['day'] = 0;
 
 	if($_SESSION['profile']['ttpadmin'] == 1)
 //		$methods = array("Face to Face Meeting", "Trusted 3rd Parties", "TopUP");

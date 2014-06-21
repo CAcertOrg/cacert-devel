@@ -199,9 +199,9 @@ function send_reminder()
 				exit;
 			}
 			if ($_SESSION['profile']['ttpadmin'] != 1) {
-				$_SESSION['assuresomeone']['year'] = mysql_real_escape_string(stripslashes($_POST['year']));
-				$_SESSION['assuresomeone']['month'] = mysql_real_escape_string(stripslashes($_POST['month']));
-				$_SESSION['assuresomeone']['day'] = mysql_real_escape_string(stripslashes($_POST['day']));
+				$_SESSION['assuresomeone']['year'] = intval($_POST['year']);
+				$_SESSION['assuresomeone']['month'] = intval($_POST['month']);
+				$_SESSION['assuresomeone']['day'] = intval($_POST['day']);
 				$dob = $_SESSION['assuresomeone']['year'] . '-' . sprintf('%02d',$_SESSION['assuresomeone']['month']) . '-' . sprintf('%02d', $_SESSION['assuresomeone']['day']);
 
 				if (	$_SESSION['_config']['notarise']['dob'] != $dob) {
