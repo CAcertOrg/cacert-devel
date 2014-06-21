@@ -75,7 +75,7 @@
         <?=_("Date of Birth")?><br/>
         (<?=_("yyyy/mm/dd")?>)</td>
     <td class="DataTD">
-        <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['year']) !== 0 ? intval($_SESSION['assuresomeone']['year']):''?>" size="4" autocomplete="off"></nobr>
+        <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['year']) >= 1900 ? intval($_SESSION['assuresomeone']['year']):''?>" size="4" autocomplete="off"></nobr>
         <select name="month">
 <?
 for($i = 1; $i <= 12; $i++)
