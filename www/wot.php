@@ -453,66 +453,7 @@ function send_reminder()
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
 
-		showheader(_("My CAcert.org Account!"));
-		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
-?><form method="post" action="wot.php">
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-	<tr>
-		<td colspan="2" class="title"><?=_("Assure Someone")?></td>
-	</tr>
-	<tr>
-		<td class="DataTD"><?=_("Email")?>:</td>
-		<td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-	</tr>
-	<tr>
-	<td class="DataTD">
-		<?=_("Date of Birth")?><br/>
-		(<?=_("yyyy/mm/dd")?>)</td>
-	<td class="DataTD">
-		<input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) ? sanitizeHTML($_SESSION['assuresomeone']['year']):""?>" size="4" autocomplete="off"></nobr>
-		<select name="month">
-			<?
-for($i = 1; $i <= 12; $i++)
-{
-	echo "<option value='$i'";
-	if(array_key_exists('month',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['month'] == $i)
-		echo " selected=\"selected\"";
-	echo ">".ucwords(strftime("%B", mktime(0,0,0,$i,1,date("Y"))))." ($i)</option>\n";
-}
-			?>
-		</select>
-		<select name="day">
-			<?
-for($i = 1; $i <= 31; $i++)
-{
-	echo "<option";
-	if(array_key_exists('day',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['day'] == $i)
-		echo " selected=\"selected\"";
-	echo ">$i</option>";
-}
-			?>
-		</select>
-	</td>
-  </tr>
-
-	<tr>
-		<td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
-	</tr>
-</table>
-<input type="hidden" name="oldid" value="5">
-</form>
-<SCRIPT LANGUAGE="JavaScript">
-//<![CDATA[
-	function my_init()
-	{
-		document.getElementById("email").focus();
-	}
-
-	window.onload = my_init();
-//]]>
-</script>
-<?
-		showfooter();
+		show_page('EnterEmail', _("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this."));
 		exit;
 	}
 
