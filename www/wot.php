@@ -202,7 +202,7 @@ function send_reminder()
 				$_SESSION['assuresomeone']['year'] = intval($_POST['year']);
 				$_SESSION['assuresomeone']['month'] = intval($_POST['month']);
 				$_SESSION['assuresomeone']['day'] = intval($_POST['day']);
-				$dob = $_SESSION['assuresomeone']['year'] . '-' . sprintf('%02d',$_SESSION['assuresomeone']['month']) . '-' . sprintf('%02d', $_SESSION['assuresomeone']['day']);
+				$dob = sprintf('%04d-%02d-%02d', $_SESSION['assuresomeone']['year'], $_SESSION['assuresomeone']['month'], $_SESSION['assuresomeone']['day']);
 
 				if (	$_SESSION['_config']['notarise']['dob'] != $dob) {
 					show_page("EnterEmail","",_("The data entered is not matching with an account."));
