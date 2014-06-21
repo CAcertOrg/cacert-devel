@@ -28,13 +28,13 @@
   }
 
   if (!isset($_SESSION['assuresomeone']['year'])) {
-      $_SESSION['assuresomeone']['year'] = '';
+      $_SESSION['assuresomeone']['year'] = 0;
   }
   if (!isset($_SESSION['assuresomeone']['month'])) {
-      $_SESSION['assuresomeone']['month'] = '';
+      $_SESSION['assuresomeone']['month'] = 0;
   }
   if (!isset($_SESSION['assuresomeone']['day'])) {
-      $_SESSION['assuresomeone']['day'] = '';
+      $_SESSION['assuresomeone']['day'] = 0;
   }
 ?>
 <? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
@@ -75,13 +75,13 @@
         <?=_("Date of Birth")?><br/>
         (<?=_("yyyy/mm/dd")?>)</td>
     <td class="DataTD">
-        <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) ? sanitizeHTML($_SESSION['assuresomeone']['year']):""?>" size="4" autocomplete="off"></nobr>
+        <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['year']) !== 0 ? intval($_SESSION['assuresomeone']['year']):''?>" size="4" autocomplete="off"></nobr>
         <select name="month">
 <?
 for($i = 1; $i <= 12; $i++)
 {
     echo "<option value='$i'";
-    if(array_key_exists('month',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['month'] == $i)
+    if(array_key_exists('month',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['month']) === $i)
         echo " selected=\"selected\"";
     echo ">".ucwords(strftime("%B", mktime(0,0,0,$i,1,date("Y"))))." ($i)</option>\n";
 }
@@ -92,7 +92,7 @@ for($i = 1; $i <= 12; $i++)
 for($i = 1; $i <= 31; $i++)
 {
     echo "<option";
-    if(array_key_exists('day',$_SESSION['assuresomeone']) && $_SESSION['assuresomeone']['day'] == $i)
+    if(array_key_exists('day',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['day']) === $i)
         echo " selected=\"selected\"";
     echo ">$i</option>";
 }
