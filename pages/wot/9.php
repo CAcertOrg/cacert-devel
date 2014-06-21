@@ -26,7 +26,7 @@
 	} else {
 
 		$user = mysql_fetch_array($res);
-		$userlang = $user['language'];
+		$userlang = L10n::normalise_translation($user['language']);
 		$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
 				where `to`='".intval($user['id'])."' and `deleted`=0 group by `to` HAVING SUM(`points`) > 0"));
 		if($points <= 0) {
@@ -49,18 +49,7 @@
 <? if($userlang != "") { ?>
   <tr>
     <td class="DataTD"><?=_("Language")?>:</td>
-    <?
-	$userlang = explode("_", $userlang, 2);
-	if(count($userlang) == 2){
-		$printlang = array_search(strtolower($userlang[0]) . "_" . strtoupper($userlang[1]), L10n::$locales);
-		if($printlang === false){
-			$printlang = $userlang[0];
-		}
-	}else{
-		$printlang = strtolower($userlang[0]);
-	}
-    ?>
-    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$printlang]) ?></td>
+    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$userlang]) ?></td>
   </tr>
 <? } ?>
 <?
