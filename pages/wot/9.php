@@ -49,11 +49,7 @@
 <? if($userlang != "") { ?>
   <tr>
     <td class="DataTD"><?=_("Language")?>:</td>
-    <?
-    $parts = explode("_", $userlang ,2);
-    $printlang = strtolower($parts[0]);
-    ?>
-    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$printlang]) ?></td>
+    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$userlang]) ?></td>
   </tr>
 <? } ?>
 <?
