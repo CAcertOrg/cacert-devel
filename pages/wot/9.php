@@ -50,14 +50,14 @@
   <tr>
     <td class="DataTD"><?=_("Language")?>:</td>
     <?
-	$userlang = explode("_", $userlang, 2);
-	if(count($userlang) == 2){
-		$printlang = array_search(strtolower($userlang[0]) . "_" . strtoupper($userlang[1]), L10n::$locales);
+	$parts = explode("_", $userlang ,2);
+	if(count($parts == 2)){
+		$printlang = array_search( strtolower($parts[0])."_".strtoupper($parts[1]), L10n::$locales);
 		if($printlang === false){
-			$printlang = $userlang[0];
+			$printlang = $parts[0];
 		}
 	}else{
-		$printlang = strtolower($userlang[0]);
+		$printlang = strtolower($parts[0]);
 	}
     ?>
     <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$printlang]) ?></td>
