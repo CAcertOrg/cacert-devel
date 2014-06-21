@@ -22,10 +22,10 @@
 class L10n {
 	/**
 	 * These are tranlations we currently support.
-	 * 
+	 *
 	 * If another translation is added, it doesn't suffice to have gettext set
 	 * up, you also need to add it here, because it acts as a white list.
-	 * 
+	 *
 	 * @var array("ISO-language code" => "native name of the language")
 	 */
 	public static $translations = array(
@@ -53,15 +53,15 @@ class L10n {
 				"zh-cn" => "&#x4e2d;&#x6587;(&#x7b80;&#x4f53;)",
 				"zh-tw" => "&#x4e2d;&#x6587;(&#33274;&#28771;)",
 			);
-	
+
 	/**
 	 * setlocale needs a language + region code for whatever reason so here's
 	 * the mapping from a translation code to locales with the region that
 	 * seemed the most common for this language
-	 * 
+	 *
 	 * You probably never need this. Use {@link set_translation()} to change the
 	 * language instead of manually calling setlocale().
-	 * 
+	 *
 	 * @var array(string => string)
 	 */
 	private static $locales = array(
@@ -101,11 +101,11 @@ class L10n {
 				"zh-cn" => "zh_CN",
 				"zh-tw" => "zh_TW",
 			);
-	
+
 	/**
 	 * Auto-detects the language that should be used and sets it. Only works for
 	 * HTTP, not in a command line script.
-	 * 
+	 *
 	 * Priority:
 	 * <ol>
 	 * 	<li>explicit parameter "lang" passed in HTTP (e.g. via GET)</li>
@@ -128,10 +128,10 @@ class L10n {
 				return;
 			}
 		}
-		
-		
+
+
 		$languages = array();
-		
+
 		// parse Accept-Language header
 		if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
 			$bits = explode(",", strtolower(
@@ -144,29 +144,29 @@ class L10n {
 					$c = floatval(substr($b[1], 2));
 				else
 					$c = 1;
-				
+
 				if ($c != 0)
 				{
 					$languages[trim($b[0])] = $c;
 				}
 			}
 		}
-		
+
 		// check if there is an explicit language given as parameter
 		if(array_key_exists("lang",$_REQUEST) && trim($_REQUEST["lang"]) != "")
 		{
 			// higher priority than those values in the header
 			$languages[strtolower(trim($_REQUEST["lang"]))] = 2.0;
 		}
-		
+
 		arsort($languages, SORT_NUMERIC);
-		
+
 		// this is used to be compatible with browsers like internet
 		// explorer which only provide the language code including the
 		// region not without. Also handles the fallback to English (qvalues
 		// may only have three digits after the .)
 		$fallbacks = array("en" => 0.0005);
-		
+
 		foreach($languages as $lang => $qvalue)
 		{
 			// ignore any non-conforming values (that's why we don't need to
@@ -179,7 +179,7 @@ class L10n {
 			}
 			$lang_prefix = $matches[1]; // usually two-letter language code
 			$fallbacks[$lang_prefix] = $qvalue;
-			
+
 			$chosen_translation = "";
 			if ($lang === '*') {
 				// According to the standard '*' matches anything but any
@@ -202,7 +202,7 @@ class L10n {
 					}
 				}
 			}
-			
+
 			if ($chosen_translation !== "")
 			{
 				if (self::set_translation($chosen_translation)) {
@@ -210,7 +210,7 @@ class L10n {
 				}
 			}
 		}
-		
+
 		// No translation found yet => try the prefixes
 		arsort($fallbacks, SORT_NUMERIC);
 		foreach ($fallbacks as $lang => $qvalue) {
@@ -218,16 +218,16 @@ class L10n {
 				return;
 			}
 		}
-		
+
 		// should not get here, as the fallback of "en" is provided and that
 		// should always work => log an error
 		trigger_error("L10n::detect_language(): could not set language",
 		        E_USER_WARNING);
 	}
-	
+
 	/**
 	 * Get the set translation
-	 * 
+	 *
 	 * @return string
 	 * 		a translation code or the empty string if not set
 	 */
@@ -238,13 +238,13 @@ class L10n {
 			return "";
 		}
 	}
-	
+
 	/**
 	 * Set the translation to use.
-	 * 
+	 *
 	 * @param string $translation_code
 	 * 		the translation code as specified in the keys of {@link $translations}
-	 * 
+	 *
 	 * @return bool
 	 * 		<ul>
 	 * 		<li>true if the translation has been set successfully</li>
@@ -262,10 +262,10 @@ class L10n {
 			                    $matches) !== 1 ) {
 				return false;
 			}
-			
+
 			$lang_code = $matches[1];
 			$region_code = strtolower($matches[2]);
-			
+
 			if ( array_key_exists("${lang_code}-${region_code}",
 			                          self::$translations) ) {
 				$translation_code = "${lang_code}-${region_code}";
@@ -275,7 +275,7 @@ class L10n {
 				return false;
 			}
 		}
-		
+
 		// map translation to locale
 		if ( !array_key_exists($translation_code, self::$locales) ) {
 			// weird. maybe you added a translation but haven't added a
@@ -285,7 +285,7 @@ class L10n {
 			return false;
 		}
 		$locale = self::$locales[$translation_code];
-		
+
 		// set up locale
 		if ( !putenv("LANG=$locale") ) {
 			trigger_error("L10n::set_translation(): could not set the ".
@@ -297,42 +297,42 @@ class L10n {
 				"LC_ALL to $locale", E_USER_WARNING);
 			return false;
 		}
-		
-		
+
+
 		// only set if we're running in a server not in a script
 		if (isset($_SESSION)) {
 			// save the setting
 			$_SESSION['_config']['language'] = $translation_code;
-			
-			
+
+
 			// Set up the recode settings needed e.g. in PDF creation
 			$_SESSION['_config']['recode'] = "html..latin-1";
-			
+
 			if($translation_code === "zh-cn" || $translation_code === "zh-tw")
 			{
 				$_SESSION['_config']['recode'] = "html..gb2312";
-				
+
 			} else if($translation_code === "pl" || $translation_code === "hu") {
 				$_SESSION['_config']['recode'] = "html..ISO-8859-2";
-				
+
 			} else if($translation_code === "ja") {
 				$_SESSION['_config']['recode'] = "html..SHIFT-JIS";
-				
+
 			} else if($translation_code === "ru") {
 				$_SESSION['_config']['recode'] = "html..ISO-8859-5";
-				
+
 			} else if($translation_code == "lt") { // legacy, keep for reference
 				$_SESSION['_config']['recode'] = "html..ISO-8859-13";
-				
+
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Sets up the text domain used by gettext
-	 * 
+	 *
 	 * @param string $domain
 	 * 		the gettext domain that should be used, defaults to "messages"
 	 */
