@@ -26,7 +26,7 @@
 	} else {
 
 		$user = mysql_fetch_array($res);
-		$userlang = $user['language'];
+		$userlang = L10n::normalise_translation($user['language']);
 		$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
 				where `to`='".intval($user['id'])."' and `deleted`=0 group by `to` HAVING SUM(`points`) > 0"));
 		if($points <= 0) {

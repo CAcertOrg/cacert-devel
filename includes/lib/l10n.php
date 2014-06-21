@@ -226,6 +226,37 @@ class L10n {
 	}
 
 	/**
+	 * Normalise the translation code (e.g. from the old codes to the new)
+	 *
+	 * @return string
+	 * 		a translation code or the empty string if it can't be normalised
+	 */
+	public static function normalise_translation($translation_code) {
+		// check $translation_code against whitelist
+		if (array_key_exists($translation_code, self::$translations) ) {
+			return $translation_code;
+		}
+
+		// maybe it's a locale as previously used in the system? e.g. en_AU
+		if (preg_match('/^([a-z][a-z])_([A-Z][A-Z])$/', $translation_code, $matches) !== 1) {
+			return '';
+		}
+
+		$lang_code = $matches[1];
+		$region_code = strtolower($matches[2]);
+
+		if (array_key_exists("${lang_code}-${region_code}", self::$translations)) {
+			return "${lang_code}-${region_code}";
+		}
+
+		if (array_key_exists($lang_code, self::$translations)) {
+			return $lang_code;
+		}
+
+		return '';
+	}
+
+	/**
 	 * Get the set translation
 	 *
 	 * @return string
@@ -255,25 +286,9 @@ class L10n {
 	 * 		</ul>
 	 */
 	public static function set_translation($translation_code) {
-		// check $translation_code against whitelist
-		if ( !array_key_exists($translation_code, self::$translations) ) {
-			// maybe it's a locale as previously used in the system? e.g. en_AU
-			if ( preg_match('/^([a-z][a-z])_([A-Z][A-Z])$/', $translation_code,
-			                    $matches) !== 1 ) {
-				return false;
-			}
-
-			$lang_code = $matches[1];
-			$region_code = strtolower($matches[2]);
-
-			if ( array_key_exists("${lang_code}-${region_code}",
-			                          self::$translations) ) {
-				$translation_code = "${lang_code}-${region_code}";
-			} elseif ( array_key_exists($lang_code, self::$translations) ) {
-				$translation_code = $lang_code;
-			} else {
-				return false;
-			}
+		$translation_code = self::normalise_translation($translation_code);
+		if (empty($translation_code)) {
+			return false;
 		}
 
 		// map translation to locale
