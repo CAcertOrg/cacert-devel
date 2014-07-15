@@ -61,7 +61,7 @@
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>
-    <td class="DataTD" align="left"><? printf(_("%s will also accept email in %s - %s"), sanitizeHTML($user['fname']), sanitizeHTML($lang['lang']), sanitizeHTML($lang['country'])) ?></td>
+    <td class="DataTD" align="left"><? printf(_("%s will also accept email in %s - %s"), sanitizeHTML($user['fname']), $lang['lang'], $lang['country']) ?></td>
   </tr>
 <? } ?>
   <tr>
