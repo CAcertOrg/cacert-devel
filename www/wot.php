@@ -198,6 +198,17 @@ function send_reminder()
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
 				exit;
 			}
+			if ($_SESSION['profile']['ttpadmin'] != 1) {
+				$_SESSION['assuresomeone']['year'] = intval($_POST['year']);
+				$_SESSION['assuresomeone']['month'] = intval($_POST['month']);
+				$_SESSION['assuresomeone']['day'] = intval($_POST['day']);
+				$dob = sprintf('%04d-%02d-%02d', $_SESSION['assuresomeone']['year'], $_SESSION['assuresomeone']['month'], $_SESSION['assuresomeone']['day']);
+
+				if (	$_SESSION['_config']['notarise']['dob'] != $dob) {
+					show_page("EnterEmail","",_("The data entered is not matching with an account."));
+					exit;
+				}
+			}
 		}
 		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
 		$res = mysql_query($query);
@@ -236,7 +247,7 @@ function send_reminder()
 
 	if($oldid == 6)
 	{
-$iecho= "c";
+		$iecho= "c";
 		//date checks
 		if(trim($_REQUEST['date']) == '')
 		{
@@ -443,35 +454,7 @@ $iecho= "c";
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
 
-		showheader(_("My CAcert.org Account!"));
-		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
-?><form method="post" action="wot.php">
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-	<tr>
-		<td colspan="2" class="title"><?=_("Assure Someone")?></td>
-	</tr>
-	<tr>
-		<td class="DataTD"><?=_("Email")?>:</td>
-		<td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-	</tr>
-	<tr>
-		<td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
-	</tr>
-</table>
-<input type="hidden" name="oldid" value="5">
-</form>
-<SCRIPT LANGUAGE="JavaScript">
-//<![CDATA[
-	function my_init()
-	{
-		document.getElementById("email").focus();
-	}
-
-	window.onload = my_init();
-//]]>
-</script>
-<?
-		showfooter();
+		show_page('EnterEmail', _("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this."));
 		exit;
 	}
 
