@@ -173,7 +173,7 @@ function checkWeakKeyText($text)
 			$exponent = $exponent[1]; // exponent might be very big =>
 			//handle as string using bc*()
 
-			if (bccomp($exponent, "3") === 0)
+			if (bccomp($exponent, "65537") < 0)
 			{
 				return sprintf(_("The keys you use might be insecure. ".
 							"Although there is currently no known attack for ".
