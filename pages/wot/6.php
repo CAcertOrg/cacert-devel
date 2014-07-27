@@ -50,10 +50,10 @@ if(!array_key_exists('notarise',$_SESSION['_config']))
 		'12' => _('December')
 		);
 
-	$fname = $row['fname'];
-	$mname = $row['mname'];
-	$lname = $row['lname'];
-	$suffix = $row['suffix'];
+	$fname = sanitizeHTML($row['fname']);
+	$mname = sanitizeHTML($row['mname']);
+	$lname = sanitizeHTML($row['lname']);
+	$suffix = sanitizeHTML($row['suffix']);
 	$dob = $row['dob'];
 
 	$dob_date = explode('-', $dob, 3);
@@ -77,8 +77,8 @@ if(!array_key_exists('notarise',$_SESSION['_config']))
 	AssureMethodLine(_("Method"),$methods,'');
 	AssureBoxLine("certify",sprintf(_("I certify that %s %s %s %s has appeared in person."), $fname, $mname, $lname, $suffix),array_key_exists('certify',$_POST) && $_POST['certify'] == 1);
 	AssureBoxLine("CCAAgreed",sprintf(_("I verify that %s %s %s %s has accepted the CAcert Community Agreement."), $fname, $mname, $lname, $suffix),array_key_exists('CCAAgreed',$_POST) && $_POST['CCAAgreed'] == 1);
-	AssureInboxLine("location",_("Location"),array_key_exists('location',$_SESSION['_config'])?$_SESSION['_config']['location']:"","");
-	AssureInboxLine("date",_("Date"),array_key_exists('date',$_SESSION['_config'])?$_SESSION['_config']['date']:date("Y-m-d"),"<br/>"._("The date when the assurance took place. Please adjust the date if you assured the person on a different day (YYYY-MM-DD)."));
+	AssureInboxLine("location",_("Location"),array_key_exists('location',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['location']):"","");
+	AssureInboxLine("date",_("Date"),array_key_exists('date',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['date']):date("Y-m-d"),"<br/>"._("The date when the assurance took place. Please adjust the date if you assured the person on a different day (YYYY-MM-DD)."));
 	AssureTextLine("",_("Only tick the next box if the Assurance was face to face."));
 	AssureBoxLine("assertion",_("I believe that the assertion of identity I am making is correct, complete and verifiable. I have seen original documentation attesting to this identity. I accept that the CAcert Arbitrator may call upon me to provide evidence in any dispute, and I may be held responsible."),array_key_exists('assertion',$_POST) && $_POST['assertion'] == 1);
 	AssureBoxLine("rules",_("I have read and understood the CAcert Community Agreement (CCA), Assurance Policy and the Assurance Handbook. I am making this Assurance subject to and in compliance with the CCA, Assurance policy and handbook."),array_key_exists('rules',$_POST) && $_POST['rules'] == 1);
