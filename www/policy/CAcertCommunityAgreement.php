@@ -1,11 +1,157 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" />
+ <title> CAcert Community Agreement </title>
+<style type="text/css">
+<!--
+.comment {
+        color : steelblue;
+}
+.first-does-not-work {
+        color : red;
+}
+.q {
+        color : green;
+        font-weight: bold;
+        text-align: center;
+        font-style:italic;
+}
+.change {
+        color : blue;
+        font-weight: bold;
+}
+.change2 {
+        color : blue;
+		font-weight: bold;
+}
+.change3 {
+        color : blue;
+		font-weight: bold;
+}
+.change4 {
+        color : blue;
+	font-weight: bold;
+}
+.change5 {
+        color : blue;
+	font-weight: bold;
+}
+.change6 {
+        color : blue;
+	font-weight: bold;
+}
+.change7 {
+        color : blue ;
+	font-weight: bold;
+}
+.change8 {
+        color : blue;
+	font-weight: bold;
+}
+.change9 {
+        color : blue;
+	font-weight: bold;
+}
+.change10 {
+        color : blue;
+	font-weight: bold;
+}
+.change11 {
+        color : blue;
+	font-weight: bold;
+}
+.change12 {
+        color : blue;
+	font-weight: bold;
+}
+.change13 {
+        color : blue;
+	font-weight: bold;
+}
+.strike {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike2 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike4 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike5 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike6 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike7 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike8 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike9 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike10 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike11 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike12 {
+        color : blue;
+        text-decoration:line-through;
+}
+.strike13 {
+        color : blue;
+        text-decoration:line-through;
+}
+-->
+</style>
 
-<html>
-<head><title>CAcert Community Agreement</title></head>
+</head>
 <body>
+    <a href="http://validator.w3.org/check?uri=referer"><img style="float: right; border-width: 0" src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+  <hr />
 
+<div class="comment">
+<table width="100%">
 
+<tr>
+<td rowspan="2">
+  Name: CCA <a style="color: steelblue" href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">COD9</a><br />
+  Status: POLICY <a style="color: steelblue" href="https://wiki.cacert.org/PolicyDecisions#p20080109.1_CCA_to_POLICY_status">p20080109.1</a><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           <span class="draftadd">DRAFT  <a style="color: steelblue" href="https://wiki.cacert.org/PolicyDecisions#p20140709_CCA_update_to_DRAFT">p20140709</a></span> <br />
+  Editor: <a style="color: steelblue" href="https://wiki.cacert.org/Community/HomePagesMembers/BenediktHeintel">Benedikt</a><br />
+  Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licence" title="this document is Copyright &copy; CAcert Inc., licensed openly under CC-by-sa with all disputes resolved under DRP.  More at wiki.cacert.org/Policy">CC-by-sa+DRP</a><br />
 
+</td>
+<td valign="top" align="right">
+  <a href="https://www.cacert.org/policy/PolicyOnPolicy.php"><img src="images/cacert-policy.png" alt="CCA Status - POLICY" height="31" width="88" style="border-style: none;" /></a>
+
+<!-- XXXXXXXXXXXXXX delete this going to POLICY -->
+<br />
+<a href="https://www.cacert.org/policy/PolicyOnPolicy.php"><img src="images/cacert-draft.png" alt="CCA Status - DRAFT" height="31" width="88" style="border-style: none;" /></a>
+
+</td>
+</tr>
+</table>
+</div>
+
+<h2> CAcert Community Agreement </h2>
 
 <h3> <a name="0"> 0. </a>  Introduction </h3>
 
@@ -48,12 +194,12 @@ being an operator of services to the Community.
     being someone who is not a
     Member, is not part of the Community,
     and has not registered their agreement.
-    Such people are offered the NRP-DaL
-    another agreement allowing the USE of certificates.
+    <span class="strike7">Such people are offered the NRP-DaL
+    another agreement allowing the USE of certificates.</span>
   </li><li>
-    "Non-Related Persons - Disclaimer and Licence" ("NRP-DaL"),
+    <span class="strike7">"Non-Related Persons - Disclaimer and Licence" ("NRP-DaL"),
     another agreement that is offered to persons outside the
-    Community.
+    Community.</span><span class="change7">(withdrawn)</span>
   </li><li>
     "Arbitration"
     is the Community's forum for
@@ -93,12 +239,14 @@ being an operator of services to the Community.
     used for signing certificates for Members.
     In this document, the term includes any subroots.
   </li><li>
-    "CAcert Official Document" ("COD" => COD3)
-    in a standard format for describing the details of
+    "CAcert Official Document" ("COD" <span class="strike4">=> COD3</span>)
+    <span class="strike4">in a standard format for describing the details of
     operation and governance essential to a certificate authority.
     Changes are managed and controlled.
     CODs define more technical terms.
-    See 4.2 for listing of relevant CODs.
+    See 4.2 for listing of relevant CODs.</span>
+	<span class="change4"> is an official managed and
+controlled document (e. g. a Policy) of CAcert.</span>
   </li><li>
     "Certification Practice Statement" ("CPS" => COD6)
     is the document that controls details
@@ -110,11 +258,7 @@ being an operator of services to the Community.
 
 <h4> <a name="1.1"> 1.1 </a>  Agreement </h4>
 
-<p>
-You and CAcert both agree to the terms and conditions
-in this agreement.
-Your agreement is given by any of
-</p>
+<p>You <span class="strike">and CAcert both</span> agree to the terms and conditions in this agreement. Your agreement is given by <span class="change2"> but not limited to</span> <span class="strike2">any of</span></p>
 
 <ul><li>
     your signature on a form to request assurance of identity
@@ -136,8 +280,8 @@ Your agreement
 is effective from the date of the first event above
 that makes this agreement known to you.
 This Agreement
-replaces and supercedes prior agreements,
-including the NRP-DaL.
+replaces and <span class="strike2"> supercedes prior agreements,
+including the NRP-DaL.</span> <span class="change2">supersedes any prior agreements.</span>
 </p>
 
 
@@ -193,7 +337,10 @@ Note that the following exceptions override this clause:
     Policy on Policy ("PoP" => COD1)
   </li><li>
     Source code is subject to an open source licence regime.
-</li></ol>
+</li>
+	<li><span class="change">Personal data</span></li>
+	<li><span class="change">Postings under competing licenses if clearly stated when posted<span></li>
+</ol>
 
 <h4> <a name="1.4"> 1.4 </a>  Privacy </h4>
 
@@ -268,7 +415,12 @@ and obligations within this agreement.
   </li><li>
     to submit all your disputes to Arbitration
     (DRP => COD7).
-</li></ol>
+</li><span class="change3"><li>
+    to assist the Arbitrator by truthfully providing information, or with any other reasonable request.
+</li></span>
+<span class="change7"><li>
+    to not share your CAcert account.
+</li></span></ol>
 
 <h4> <a name="2.4"> 2.4 </a>  Principles </h4>
 
@@ -290,14 +442,15 @@ Your security obligations include
 </p>
 
 <ol><li>
-    to secure yourself and your computing platform (e.g., PC),
+    to secure yourself and your computing platform (e. g. PC),
   </li><li>
     to keep your email account in good working order,
   </li><li>
     to secure your CAcert account
-    (e.g., credentials such as username, password),
+    (e. g., credentials such as username, password),
   </li><li>
-    to secure your private keys,
+    to secure your private keys,<span class="change8"> ensuring that they are
+	only used as indicated by the certificate, or by wider agreement with others,</span>
   </li><li>
     to review certificates for accuracy,
     and
@@ -359,30 +512,67 @@ that is simply support actions, and you may file disputes in
 order to initiate support actions.
 </p>
 
+
 <h4> <a name="3.3"> 3.3 </a>  Termination </h4>
+<span class="strike12">
 <p>
-You may terminate this agreement by resigning
-from CAcert.  You may do this at any time by
-writing to CAcert's online support forum and
-filing dispute to resign.
-All services will be terminated, and your
-certificates will be revoked.
-However, some information will continue to
-be held for certificate processing purposes.
+You may terminate this agreement by resigning from CAcert.  You may do this at any time by
+writing to CAcert's online support forum and filing dispute to resign.
+All services will be terminated, and your certificates will be revoked.
+However, some information will continue to be held for certificate processing purposes.
 </p>
 
 <p>
-The provisions on Arbitration survive any termination
-by you by leaving CAcert.
-That is, even if you resign from CAcert,
-you are still bound by the DRP (COD7),
-and the Arbitrator may reinstate any provision of this
-agreement or bind you to a ruling.
+The provisions on Arbitration survive any termination by you by leaving CAcert.
+That is, even if you resign from CAcert, you are still bound by the DRP (COD7),
+and the Arbitrator may reinstate any provision of this agreement or bind you to a ruling.
 </p>
 
 <p>
 Only the Arbitrator may terminate this agreement with you.
 </p>
+</span>
+
+<span class="change12">
+<p>The CAcert Community Agreement is terminated</p>
+
+<ol>
+	<li>based on a Policy Group decision following (PoP => COD1). This
+		terminates the Agreement with every member.</li>
+
+	<li>with a ruling of the Arbitrator or the completion of a termination
+		process defined by an Arbitrator ruling (DRP => COD7).</li>
+
+	<li>by the end of existence of a member (i.e. death in the case of
+		individuals).</li>
+</ol>
+
+<p>A member may declare the wish to resign from CAcert at any time by
+writing to <em>support AT cacert.org</em>. This triggers a process for
+termination of this agreement with the member.</p>
+
+<h4> <a name="3.3"> 3.3a </a> Consequences of Termination </h4>
+
+<p>The termination discontinues the right to USE, OFFER and CREATE
+personal certificates in any account of the former member. Those
+certificates will be revoked and all services to the former member will
+be terminated as soon as possible. However, some information will
+continue to be held for certificate processing purposes.</p>
+
+<p>The provisions on Arbitration for the time of membership survive any
+termination. Former members
+are still bound by the DRP (COD7), and the Arbitrator may reinstate any
+provision of this agreement or bind them to a ruling.</p>
+
+<p>As far as Organisations are concerned details are also defined in the
+Organisation Assurance Policy (OAP => COD11).</p>
+
+<p>Every member learning about the death of a member or termination of
+existence of a member should notify <em>support AT cacert.org</em>.</p>
+</span>
+
+
+
 
 <h4> <a name="3.4"> 3.4 </a>  Changes of Agreement </h4>
 
@@ -402,33 +592,21 @@ by you.
 
 <h4> <a name="3.5"> 3.5 </a>  Communication </h4>
 
-<p>
-Notifications to CAcert are to be sent by
-email to the address
-<b>support</b> <i>at</i> CAcert.org.
-You should attach a digital signature,
-but need not do so in the event of security
-or similar urgency.
-</p>
+<p><span class="change6">
+You are responsible for keeping your primary email account in good working order and able to receive emails from CAcert.</span></p>
 
-<p>
-Notifications to you are sent
-by CAcert to the primary email address
-registered with your account.
-You are responsible for keeping your email
-account in good working order and able
-to receive emails from CAcert.
-</p>
+<p>Notifications to CAcert are to be sent by email to the address <em>support AT cacert.org</em>. You should attach a digital signature<span class="strike6">, but need not do so in the event of security or similar urgency</span>.</p>
 
-<p>
-Arbitration is generally conducted by email.
-</p>
+<span class="strike6">
+<p>Notifications to you are sent by CAcert to the primary email address registered with your account. You are responsible for keeping your email account in good working order and able to receive emails from CAcert.</p>
+
+<p>Arbitration is generally conducted by email.</p></span>
 
 <h3> <a name="4"> 4. </a> Miscellaneous </h3>
 
-<h4> <a name="4.1"> 4.1 </a>  Other Parties Within the Community </h4>
+<h4> <a name="4.1"> 4.1 </a> <span class="strike10">Other Parties Within the Community</span> <span class="change10">(withdrawn)</span></h4>
 
-<p>
+<p class="strike10">
 As well as you and other Members in the Community,
 CAcert forms agreements with third party
 vendors and others.
@@ -438,18 +616,22 @@ policy process as this agreement, and they should
 mirror and reinforce these terms.
 </p>
 
-
 <h4> <a name="4.2"> 4.2 </a>  References and Other Binding Documents </h4>
 
-<p>
+<p class="strike11">
 This agreement is CAcert Official Document 9 (COD9)
 and is a controlled document.
 </p>
 
 <p>
 You are also bound by
+<span class="change11">
+the Policies of the Community under the control of Policy on Policy ("PoP" => COD1) and listed in
+<a href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">Controlled Document List</a>.
+</span>
 </p>
 
+<span class="strike11">
 <ol><li>
     <a href="http://www.cacert.org/policy/CertificationPracticeStatement.php">
     Certification Practice Statement</a> (CPS => COD6).
@@ -463,50 +645,58 @@ You are also bound by
     <a href="http://svn.cacert.org/CAcert/principles.html">
     Principles of the Community</a>.
 </li></ol>
+</span>
 
-<p>
+<p class="strike11">
 Where documents are referred to as <i>=> COD x</i>,
 they are controlled documents
 under the control of Policy on Policies (COD1).
 </p>
 
-<p>
+<p class ="strike11">
 This agreement and controlled documents above are primary,
 and may not be replaced or waived except
 by formal policy channels and by Arbitration.
 </p>
 
+<p class="change11">
+Controlled documents are primary, and may not be replaced or waived except by formal policy
+channels and Arbitration.
+</p>
+
+<p class="change11">
+This agreement is controlled document COD9.
+</p>
+
 <h4> <a name="4.3"> 4.3 </a>  Informative References </h4>
 
 <p>
-The governing documents are in English.
-Documents may be translated for convenience.
-Because we cannot control the legal effect of translations,
-the English documents are the ruling ones.
+The governing documents are in English. Documents may be translated for convenience.
+Because we cannot control the legal effect of translations, the English documents are the ruling ones.
 </p>
 
-<p>
-You are encouraged to be familiar with the
-Assurer Handbook,
-which provides a more readable introduction for much of
-the information needed.
+<p class="strike9">
+You are encouraged to be familiar with the Assurer Handbook,
+which provides a more readable introduction for much of the information needed.
 The Handbook is not however an agreement, and is overruled
 by this agreement and others listed above.
 </p>
 
-<h4> <a name="4.4"> 4.4 </a>  Not Covered in this Agreement </h4>
+<p class="change9">
+Beside this Agreement and the Policies, there are other documents, i.
+e. Policy Guides, Manuals and Handbooks, supporting and explaining this
+Agreement and the Policies. These documents are not binding and in doubt
+this Agreement and the Policies are valid.</p>
 
-<p>
+<h4> <a name="4.4"> 4.4 </a> <span class="strike9">Not Covered in this Agreement</span> <span class="change9">(withdrawn)</span></h4>
+
+<p class="strike9">
 <b>Intellectual Property.</b>
-This Licence does not transfer any intellectual
-property rights ("IPR") to you.  CAcert asserts and
-maintains its IPR over its roots, issued certificates,
-brands, logos and other assets.
-Note that the certificates issued to you
-are CAcert's intellectual property
+This Licence does not transfer any intellectual property rights ("IPR") to you.  CAcert asserts and
+maintains its IPR over its roots, issued certificates, brands, logos and other assets.
+Note that the certificates issued to you are CAcert's intellectual property
 and you do not have rights other than those stated.
 </p>
-
 
 </body>
 </html>
