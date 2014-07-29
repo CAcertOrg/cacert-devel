@@ -324,7 +324,7 @@ function send_reminder()
 		$query = "select * from `users` where `id`='".intval($_SESSION['_config']['notarise']['id'])."'";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
-		$name = $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];
+		$name = sanitizeHTML($row['fname'])." ".sanitizeHTML($row['mname'])." ".sanitizeHTML($row['lname'])." ".sanitizeHTML($row['suffix']);
 		if($_SESSION['_config']['wothash'] != md5($name."-".$row['dob']) || $_SESSION['_config']['wothash'] != $_REQUEST['pagehash'])
 		{
 			show_page("VerifyData","",_("Race condition discovered, user altered details during assurance procedure. PLEASE MAKE SURE THE NEW DETAILS BELOW MATCH THE ID DOCUMENTS."));
