@@ -31,7 +31,7 @@ use DBI;
 use Locale::gettext;
 use IO::Socket;
 use MIME::Base64;
-use Digest::SHA1 qw(sha1_hex);
+use Digest::SHA qw(sha1_hex);
 
 #Protocol version:
 my $ver=1;
