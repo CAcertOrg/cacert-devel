@@ -128,7 +128,7 @@ function checkWeakKeyText($text)
 
 	if ($algorithm === "rsaEncryption")
 	{
-		if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text, $keysize))
+		if (!preg_match('/^\s*Public-Key: \((\d+) bit\)$/m', $text, $keysize))
 		{
 			return failWithId("checkWeakKeyText(): Couldn't parse the RSA ".
 						"key size.\nData:\n$text");
@@ -308,7 +308,7 @@ function checkDebianVulnerability($text, $keysize = 0)
 		if ($algorithm !== "rsaEncryption") return false;
 			
 		/* Extract public key size */
-		if (!preg_match('/^\s*RSA Public Key: \((\d+) bit\)$/m', $text,
+		if (!preg_match('/^\s*Public-Key: \((\d+) bit\)$/m', $text,
 		$keysize))
 		{
 			trigger_error("checkDebianVulnerability(): Couldn't parse the ".
@@ -338,7 +338,7 @@ function checkDebianVulnerability($text, $keysize = 0)
 
 
 	/* Extract RSA modulus */
-	if (!preg_match('/^\s*Modulus \(\d+ bit\):\n'.
+	if (!preg_match('/^\s*Modulus:\n'.
 				'((?:\s*[0-9a-f][0-9a-f]:(?:\n)?)+[0-9a-f][0-9a-f])$/m',
 	$text, $modulus))
 	{
