@@ -122,9 +122,6 @@
 
 </head>
 <body>
-    <a href="http://validator.w3.org/check?uri=referer"><img style="float: right; border-width: 0" src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
-  <hr />
-
 <div class="comment">
 <table width="100%">
 
