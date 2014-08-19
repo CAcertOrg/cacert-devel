@@ -296,68 +296,65 @@
     stated when posted</span></li>
   </ol>
 
-  <h4><span class="change"><a name="1.4">1.4</a> Privacy</span></h4>
+  <h4><a name="1.4">1.4</a> Privacy</h4>
 
-  <p><span class="change">You give rights to CAcert to store, verify and
+  <p>You give rights to CAcert to store, verify and
   process and publish your data in accordance with policies in force. These
   rights include shipping the data to foreign countries for system
   administration, support and processing purposes. Such shipping will only be
-  done among CAcert Community administrators and Assurers.</span></p>
+  done among CAcert Community administrators and Assurers.</p>
 
-  <p><span class="change">Privacy is further covered in the Privacy Policy
-  ("PP" =&gt; COD5).</span></p>
+  <p>Privacy is further covered in the Privacy Policy ("PP" =&gt; COD5).</p>
 
-  <h3><span class="change"><a name="2">2.</a> Your Risks, Liabilities and
-  Obligations</span></h3>
+  <h3><a name="2">2.</a> Your Risks, Liabilities and Obligations</h3>
 
-  <p><span class="change">As a Member, you have risks, liabilities and
-  obligations within this agreement.</span></p>
+  <p>As a Member, you have risks, liabilities and obligations within this agreement.</p>
 
-  <h4><span class="change"><a name="2.1">2.1</a> Risks</span></h4>
+  <h4><a name="2.1">2.1</a> Risks</h4>
 
   <ol>
-    <li><span class="change">A certificate may prove unreliable.</span></li>
+    <li>A certificate may prove unreliable.</li>
 
-    <li><span class="change">Your account, keys or other security tools may be
-    lost or otherwise compromised.</span></li>
+    <li>Your account, keys or other security tools may be
+    lost or otherwise compromised.</li>
 
-    <li><span class="change">You may find yourself subject to Arbitration (DRP
-    =&gt; COD7).</span></li>
+    <li>You may find yourself subject to Arbitration (DRP
+    =&gt; COD7).</li>
   </ol>
 
-  <h4><span class="change"><a name="2.2">2.2</a> Liabilities</span></h4>
+  <h4><a name="2.2">2.2</a> Liabilities</h4>
 
   <ol>
-    <li><span class="change">You are liable for any penalties as awarded
-    against you by the Arbitrator.</span></li>
+    <li>You are liable for any penalties as awarded
+    against you by the Arbitrator.</li>
 
-    <li><span class="change">Remedies are as defined in the DRP (COD7). An
+    <li>Remedies are as defined in the DRP (COD7). An
     Arbitrator's ruling may include monetary amounts, awarded against
-    you.</span></li>
+    you.</li>
 
-    <li><span class="change">Your liability is limited to a total maximum of
-    <b>1000 Euros</b>.</span></li>
+    <li>Your liability is limited to a total maximum of
+    <b>1000 Euros</b>.</li>
 
-    <li><span class="change">"Foreign Courts" may assert jurisdiction. These
+    <li>"Foreign Courts" may assert jurisdiction. These
     include your local courts, and are outside our Arbitration. Foreign Courts
     will generally refer to the Arbitration Act of their country, which will
     generally refer civil cases to Arbitration. The Arbitration Act will not
-    apply to criminal cases.</span></li>
+    apply to criminal cases.</li>
   </ol>
 
-  <h4><span class="change"><a name="2.3">2.3</a> Obligations</span></h4>
+  <h4><a name="2.3">2.3</a> Obligations</h4>
 
-  <p><span class="change">You are obliged</span></p>
+  <p>You are obliged</p>
 
   <ol>
-    <li><span class="change">to provide accurate information as part of
+    <li>to provide accurate information as part of
     Assurance. You give permission for verification of the information using
-    CAcert-approved methods.</span></li>
+    CAcert-approved methods.</li>
 
-    <li><span class="change">to make no false representations.</span></li>
+    <li>to make no false representations.</li>
 
-    <li><span class="change">to submit all your disputes to Arbitration (DRP
-    =&gt; COD7).</span></li>
+    <li>to submit all your disputes to Arbitration (DRP
+    =&gt; COD7).</li>
 
     <li><span class="change">to assist the Arbitrator by truthfully providing
     information, or with any other reasonable request.</span></li>
