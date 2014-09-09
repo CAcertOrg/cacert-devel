@@ -807,8 +807,9 @@
 	  */
 	function anonymizeIP($ip){
 		$bits = @inet_pton($ip);
-		if($bits === false)
+		if($bits === false) {
 			return false;
+		}
 
 		if(strlen($bits) == 4) {
 			$bits[2] = "\0";
@@ -830,5 +831,3 @@
 		}
 		return false;
 	}
-
-?>

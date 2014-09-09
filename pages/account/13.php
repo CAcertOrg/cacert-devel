@@ -14,8 +14,8 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
+*/
+
   $query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `users`.`deleted`=0";
   $res = mysql_query($query);
   $user = mysql_fetch_assoc($res);
@@ -28,8 +28,9 @@
   if($showdetails){
     $body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
     $ip = anonymizeIp($_SERVER['REMOTE_ADDR']);
-    if($ip === false)
-      $ip = _("Error");
+    if($ip === false) {
+      $ip = _("Error anonymising IP/network information");
+    }
     $body .= sprintf(_("You receive this automatic mail since you yourself or someone ".
       "else looked up your secret questions and answers for a forgotten ".
       "password.\n\n".
