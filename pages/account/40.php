@@ -40,15 +40,15 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
       <td width="300"><input type="text" name="who"></td>
     </tr>
     <tr>
-      <td width="100"><?=_("Your Email")?>:</td>
+      <td><?=_("Your Email")?>:</td>
       <td><input type="text" name="email"></td>
     </tr>
     <tr>
-      <td width="100"><?=_("Subject")?>:</td>
+      <td><?=_("Subject")?>:</td>
       <td><input type="text" name="subject"></td>
     </tr>
     <tr>
-      <td width="100" valign="top"><?=_("Message")?>:</td>
+      <td valign="top"><?=_("Message")?>:</td>
       <td><textarea name="message" cols="70" rows="10"></textarea></td>
     </tr>
     <tr>
