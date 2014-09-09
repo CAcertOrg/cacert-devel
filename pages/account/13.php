@@ -14,8 +14,8 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
+*/
+
   $query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `users`.`deleted`=0";
   $res = mysql_query($query);
   $user = mysql_fetch_assoc($res);
@@ -27,10 +27,14 @@
 
   if($showdetails){
     $body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
+    $ip = anonymizeIp($_SERVER['REMOTE_ADDR']);
+    if($ip === false) {
+      $ip = _("Error anonymising IP/network information");
+    }
     $body .= sprintf(_("You receive this automatic mail since you yourself or someone ".
       "else looked up your secret questions and answers for a forgotten ".
       "password.\n\n".
-      "IP-Address: %s\nTime: %s\n\n".
+      "Network: %s\nTime: %s\n\n".
       "If it was you who looked up or changed that data, or clicked ".
       "through the menu in your account, everything is in best order ".
       "and you can ignore this mail.\n\n".
@@ -38,7 +42,7 @@
       "there is a danger that an unauthorised person accessed your ".
       "account, and you should promptly change your password and your ".
       "secret questions and answers."),
-      $_SERVER['REMOTE_ADDR'],
+      $ip,
       date("Y-m-d H:i:s T"))."\n\n";
 
     $body .= _("Best regards")."\n"._("CAcert Support");

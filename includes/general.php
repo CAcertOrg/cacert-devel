@@ -841,5 +841,32 @@
 		return $res;
 	}
 
+	/**
+	  * Returns the given ip address truncated to /16 (ipv4) or to /48 (ipv6)
+	  */
+	function anonymizeIP($ip){
+		$bits = @inet_pton($ip);
+		if($bits === false) {
+			return false;
+		}
 
-?>
+		if(strlen($bits) == 4) {
+			$bits[2] = "\0";
+			$bits[3] = "\0";
+			$newIP = @inet_ntop($bits);
+			if($newIP !== false) {
+				$newIP .= "/16";
+			}
+			return $newIP;
+		} else if(strlen($bits) == 16) {
+			for($i=6;$i<16;$i++){
+				$bits[$i]="\0";
+			}
+			$newIP = @inet_ntop($bits);
+			if($newIP !== false) {
+				$newIP .= "/48";
+			}
+			return $newIP;
+		}
+		return false;
+	}
