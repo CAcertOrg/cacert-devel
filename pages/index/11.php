@@ -36,16 +36,27 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <input name="robotest" type="text" id="robotest" class="robotest" />
   </p>
   <table border="0">
-    <tr><td width="100"><?=_("Your Name")?>:</td><td width="100"><input type="text" name="who"></td><td width="100"></td><td width="100"></td>
-    <tr><td width="100"><?=_("Your Email")?>:</td><td colspan="3"><input type="text" name="email"></td>
-    <tr><td width="100"><?=_("Subject")?>:</td><td colspan="3"><input type="text" name="subject"></td></tr>
-    <tr><td width="100" valign="top"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
-
     <tr>
-      <td colspan="4"><?=_("For confidential data use \"send to support\".")?></td>
+      <td width="100"><?=_("Your Name")?>:</td>
+      <td width="300"><input type="text" name="who"></td>
     </tr>
     <tr>
-      <td colspan="4"><input type="submit" name="process[1]" value="<?=_("Send to support")?>"></td>
+      <td><?=_("Your Email")?>:</td>
+      <td><input type="text" name="email"></td>
+    </tr>
+    <tr>
+      <td><?=_("Subject")?>:</td>
+      <td><input type="text" name="subject"></td>
+    </tr>
+    <tr>
+      <td valign="top"><?=_("Message")?>:</td>
+      <td><textarea name="message" cols="70" rows="10"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2"><?=_("For confidential data use \"send to support\".")?></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="process[1]" value="<?=_("Send to support")?>"></td>
     </tr>
   </table>
 </form>
