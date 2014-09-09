@@ -25,7 +25,6 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
 <p><?=_("Before contacting us, be sure to read the information on our official and unofficial HowTo and FAQ pages.")?> - <a href="//wiki.cacert.org/HELP/"><?=_("Go here for more details.")?></a></p>
 <p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
-<p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><?=_("You can use the form below to contact the support team directly. The mail is NOT send to the mailing list.")?></p>
 <form method="post" action="account.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
@@ -62,7 +61,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     </tr>
   </table>
 </form>
-
+<p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><b>IRC</b></p>
 <p><a href="irc://irc.CAcert.org/CAcert">irc://irc.CAcert.org/CAcert</a></p>
 <p><b>Secure IRC</b></p>
