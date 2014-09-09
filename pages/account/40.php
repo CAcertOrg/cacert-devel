@@ -25,8 +25,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
 <p><?=_("Before contacting us, be sure to read the information on our official and unofficial HowTo and FAQ pages.")?> - <a href="//wiki.cacert.org/HELP/"><?=_("Go here for more details.")?></a></p>
 <p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
-<p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
-<p><?=_("You can alternatively use the form below, however joining the list is the prefered option to support your queries")?></p>
+<p><?=_("You can use the form below to contact the support team directly. The mail is NOT send to the mailing list.")?></p>
 <form method="post" action="account.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
 <!--   <input type="hidden" name="support" value="yes"> --> 
@@ -35,23 +34,32 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
     <label>If you're human leave this blank:</label>
     <input name="robotest" type="text" id="robotest" class="robotest" />
   </p>
-<table border="0">
-    <tr><td width="100"><?=_("Your Name")?>:</td><td width="100"><input type="text" name="who"></td><td width="100"></td><td width="100"></td>
-    <tr><td width="100"><?=_("Your Email")?>:</td><td colspan="3"><input type="text" name="email"></td>
-    <tr><td width="100"><?=_("Subject")?>:</td><td colspan="3"><input type="text" name="subject"></td></tr>
-    <tr><td width="100" valign="top"><?=_("Message")?>:</td><td colspan="3"><textarea name="message" cols="70" rows="10"></textarea></td></tr>
-
+  <table border="0">
     <tr>
-      <td colspan="2"><font color="#ff0000"><?=_("Warning: Please do not use \"send to mailing list\" when you entered confidential data. The request is being sent to a public mailinglist.")?></font></td>
+      <td width="100"><?=_("Your Name")?>:</td>
+      <td width="300"><input type="text" name="who"></td>
+    </tr>
+    <tr>
+      <td><?=_("Your Email")?>:</td>
+      <td><input type="text" name="email"></td>
+    </tr>
+    <tr>
+      <td><?=_("Subject")?>:</td>
+      <td><input type="text" name="subject"></td>
+    </tr>
+    <tr>
+      <td valign="top"><?=_("Message")?>:</td>
+      <td><textarea name="message" cols="70" rows="10"></textarea></td>
+    </tr>
+    <tr>
       <td colspan="2"><?=_("For confidential data use \"send to support\".")?></td>
     </tr>
     <tr>
-      <td colspan="2"><input type="submit" name="process[0]" value="<?=_("Send to mailing list")?>"></td>
       <td colspan="2"><input type="submit" name="process[1]" value="<?=_("Send to support")?>"></td>
     </tr>
   </table>
 </form>
-
+<p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <p><b>IRC</b></p>
 <p><a href="irc://irc.CAcert.org/CAcert">irc://irc.CAcert.org/CAcert</a></p>
 <p><b>Secure IRC</b></p>
