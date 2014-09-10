@@ -29,7 +29,7 @@
 <p><?=_("Processing")?><br>
 <?=_("After the meeting, visit the CAcert Web site's make an Assurance page and:")?><br>
 <br>
-* <?=_("Enter the applicant's email address;")?><br>
+* <?=_("Enter the applicant's email address and date of birth;")?><br>
 * <?=_("Compare the online information to the information recorded on the paper form;")?><br>
 * <?=_("If, and only if, the two match completely - you may award trust points up to the maximum points you are able to allocate;")?><br>
 </p>
