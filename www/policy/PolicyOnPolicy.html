@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8" lang="en">
- <title>Policy on Policy</title>
-<style type="text/css"> /*only for WIP*/
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" lang="en">
+<title>Policy on Policy</title>
+<style type="text/css">
+<!--
 body {
         font-family : verdana, helvetica, arial, sans-serif;
 }
@@ -12,62 +13,67 @@ th {
         text-align : left;
 }
 
+.comment {
+        color : steelblue;
+}
 .q {
         color : green;
         font-weight: bold;
         text-align: center;
         font-style:italic;
 }
-
-.change {
-        color : blue;
-        font-weight: bold;
-}
-.strike {
-        color : blue;
-        text-decoration:line-through;
-}
-.r {
-    text-align : right;
-}
+-->
 </style>
-
 </head>
-<body lang="en-GB">
+<body>
 
-<table style="width: 100%;">
+<div class="comment">
 
+<table width="100%">
+
+<tbody>
 <tr>
-<td>Name: PoP <a style="color: steelblue" href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">COD1</a><br />
-Status: POLICY&nbsp;<a href="https://wiki.cacert.org/PolicyDecisions#p20080204.1">p20080204.1</a>, DRAFT&nbsp;<a href="https://wiki.cacert.org/PolicyDecisions#p20130223">p20130223</a><br />
-Editor: Iang 20080309<br />
-Changes: <!-- span class="change">20100507, 20130223</span --><br />
-Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licence" title="this document is Copyright &copy; CAcert Inc., licensed openly under CC-by-sa with all disputes resolved under DRP.  More at wiki.cacert.org/Policy" > CC-by-sa+DRP </a>
+ 
+<td rowspan="2">
+	Name: PoP <a style="color: steelblue" href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">COD1</a>
+<br>
+	Status: POLICY&nbsp;<a href="https://wiki.cacert.org/PolicyDecisions#p20140731">p20140731</a>
+<br>
+	Editor: Iang 20080309
+<br>
+	Changes: 20100507, 20130223, 20140731
+<br>
+	Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licence" title="this document is Copyright © CAcert Inc., licensed openly under CC-by-sa with all disputes resolved under DRP.  More at wiki.cacert.org/Policy">CC-by-sa+DRP</a>
+<br>
 </td>
-<td class="r">
-  <a href="https://www.cacert.org/policy/PolicyOnPolicy.html"><img src="images/cacert-policy.png" alt="PoP Status - POLICY" height="31" width="88" style="border-style: none;" /></a><br />
-  <a href="https://www.cacert.org/policy/PolicyOnPolicy.html"><img src="images/cacert-draft.png" alt="PoP Status - DRAFT" height="31" width="88" style="border-style: none;" /></a>
-</td>
-</tr>
 
-
+<td align="right" valign="top">
+	<a href="https://www.cacert.org/policy/PolicyOnPolicy.php">
+<img src="images/cacert-policy.png" alt="CCA Status - POLICY" style="border-style: none;" height="31" width="88">
+</a>
+    </td>
+  </tr>
+  </tbody>
 </table>
+</div>
 
-
-<p><br /></p>
+<p>
+<br>
+</p>
 
 <h1> Policy&nbsp;on&nbsp;Policy </h1>
 
 
-<h2 id="s0"> 0. Preliminaries </h2>
+
+<h2 id="g0.1">Preliminaries </h2>
 <p>
     Policy on Policy adopts the IETF model of
     'rough consensus' to create CAcert documents
-    within the open <span class="strike">[policy] mail list forum.</span> <span class="change">CAcert Policy Group <a href="https://lists.cacert.org/wws/info/cacert-policy"> mail list forum</a></span>.
+    within the open CAcert Policy Group <a href="https://lists.cacert.org/wws/info/cacert-policy"> mail list forum</a>.
 </p>
 
 
-<h2 id="s1"> 1. Scope and Purpose </h2>
+<h2 id="g0.2">Scope and Purpose </h2>
 
 <p id="s1.1">
 1.1
@@ -88,9 +94,8 @@ and also documents part of the CCS.
 <p id="s1.3">
 1.3
 The policies so created are generally binding on
-<span class="strike">CAcert, registered users and related parties</span>
-<span class="change">CAcert Inc., members under CAcert Community Agreement
-(CCA =&gt; COD9) and other related parties under other agreements</span>.
+CAcert Inc., members under CAcert Community Agreement
+(CCA =&gt; COD9) and other related parties under other agreements.
 </p>
 
 <p id="s1.4">
@@ -98,11 +103,12 @@ The policies so created are generally binding on
 The Policy Officer manages all policies
 and the policy group.
 The policy group is formed on the open mailing list
-known as <span class="strike">[cacert-policy]</span> <span class="change">CAcert Policy Group</span>, and is to be open to all
+known as CAcert Policy Group, and is to be open to all
 Community Members of CAcert.
 </p>
 
-<h2 id="s2"> 2. Basic Model </h2>
+
+<h2 id="g0.3">Basic Model </h2>
 
 <p id="s2.1">
 2.1
@@ -135,26 +141,30 @@ date / time of the last edit,
 Abstract.
 </p>
 
-<p class="change">
+<p id="s2.5">
 2.5
 Editors may make the following changes, where
      it is clear that the change does not change the policy:</p>
-<ul><li>
-      <span class="change">fixes to errors in grammar and spelling,</span>
-    </li><li>
-      <span class="change">anchors, HTML errors, URLs &amp; formatting,</span>
-    </li><li>
-      <span class="change">COD numbers and other references, and</span>
-    </li><li>
-      <span class="change">other minutiae, as agreed under 2.3.</span>
+<ul>
+<li>
+      fixes to errors in grammar and spelling,
+    </li>
+<li>
+      anchors, HTML errors, URLs &amp; formatting,
+    </li>
+<li>
+      COD numbers and other references, and
+    </li>
+<li>
+      other minutiae, as agreed under 2.3.
     </li>
 </ul>
-<p class="change">
+<p>
 Such changes to be notified to the policy group, and to be folded into effect, etc, without further ado.
 </p>
 
 
-<p class="change">
+<p id="s2.6">
 2.6
 Documents of lower status (work-in-progress or DRAFT)
 must not be confusable with documents of higher status
@@ -162,7 +172,6 @@ must not be confusable with documents of higher status
 Copies should be eliminated where not being worked on.
 </p>
 
-<h2 id="s3"> 3. Work-In-Progress </h2>
 
 <p id="s3.1">
 3.1
@@ -192,7 +201,7 @@ Documents start with the status of
 </p>
 
 
-<h2 id="s4"> 4. DRAFT status </h2>
+<h2 id="g0.4">DRAFT status </h2>
 
 <p id="s4.1">
 4.1
@@ -232,8 +241,7 @@ CAcert Inc. retains a veto over
 policies that effect the running of CAcert Inc.
 </p>
 
-
-<h2 id="s5"> 5. POLICY status </h2>
+<h2 id="g0.5">POLICY status </h2>
 <p id="s5.1">
 5.1
 After DRAFT period has elapsed with no revision beyond
@@ -257,13 +265,12 @@ they may be included in the POLICY document,
 but must be clearly indicated within as DRAFT not POLICY.
 </p>
 
-<p class="change">
+<p id="s5.4">
 5.4
 POLICY documents are published on the CAcert website in plain HTML.  Change control must be in place.
 </p>
 
-
-<h2 id="s6"> 6. Open Process </h2>
+<h2 id="g0.6">Open Process </h2>
 
 <p id="s6.1">
 6.1
@@ -309,10 +316,10 @@ and clear licence by CAcert, Inc.
 6.5
 Mailing lists should be archived,
 and important meetings should be minuted.
-<span class="change">A record of decisions is to be maintained.</span>
+A record of decisions is to be maintained.
 </p>
 
-<h2 id="s7"> 7. Disputes. </h2>
+<h2 id="g0.7">Disputes. </h2>
 
 <p id="s7.1">
 7.1
@@ -338,10 +345,9 @@ to further group discussion.
 7.4
 The external avenue for disputes is to file a dispute
 according to CAcert's
-<a href="https://www.cacert.org/policy/DisputeResolutionPolicy.html">
+<a href="https://www.cacert.org/policy/DisputeResolutionPolicy.php">
 Dispute Resolution Policy</a>
 DRP =&gt; COD7.
 </p>
-<p><a href="http://validator.w3.org/check?uri=referer"><img src="images/valid-html50-blue.png" alt="Valid HTML 5" height="31" width="88"></a></p>
 </body>
 </html>

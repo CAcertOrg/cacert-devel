@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" lang="en">
+<title>Configuration-Control Specification</title>
+<style type="text/css">
+<!--
+body {
+        font-family : verdana, helvetica, arial, sans-serif;
+}
+th {
+        text-align : left;
+}
+.comment {
+        color : steelblue;
+}
+.q {
+        color : green;
+        font-weight: bold;
+        text-align: center;
+        font-style:italic;
+}
+a:hover {
+        color : gray;
+}
+-->
+</style>
+</head>
+<body lang="en-GB">
+<h1> Configuration-Control Specification </h1>
+<!-- Absolute URL because the policies are located absolutely. -->
+<div class="comment">
+<table width="100%">
+<tbody>
+<tr>
+<td rowspan="2">
+   Name: CCS <a style="color: steelblue" href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">COD2</a>
+<br>
+   Creation Date : 20091214
+<br>
+   Editor: Iang
+<br>
+   Status: POLICY <a href="https://wiki.cacert.org/PolicyDecisions#p20140731">p20140731</a>
+<br>
+   Licence: <a style="color: steelblue" href="https://wiki.cacert.org/Policy#Licence" title="this document is Copyright © CAcert Inc., licensed openly under CC-by-sa with all disputes resolved under DRP.  More at wiki.cacert.org/Policy">CC-by-sa+DRP</a>
+
+</td>
+<td align="right" valign="top">
+	<a href="https://www.cacert.org/policy/PolicyOnPolicy.php">
+<img src="images/cacert-policy.png" alt="CCA Status - POLICY" style="border-style: none;" height="31" width="88">
+</a>
+    </td>
+ </tr>
+</tbody>
+</table>
+</div>
+
+
+<h3 id="g0.0.1">Introduction </h3>
+
+<!-- This section from A.1.a through A.1.c -->
+
+<p>
+The Configuration-Control Specification (CCS COD2) controls and tracks
+those documents, processes and assets which are critical to the
+business, security and governance of the CAcert operations.
+</p>
+
+<p>
+This document is the procedure for CCS.
+This document itself is a component of the CCS,
+see §2.
+<!-- A.1.c The configuration-control specification controls its own revision process. -->
+All other documentation and process specified within
+is derivative and is ruled by the CCS.
+</p>
+
+<p>
+CCS is formated, inspired and designed to meet the needs of
+David Ross Criteria -
+<a href="http://rossde.com/CA_review/">Certificate Authority Review Checklist</a>
+- section A.1 (DRC-A.1)
+CCS may be seen as the index to systems audit under DRC.
+</p>
+
+<h3 id="g0.0.2">Documents  </h3>
+
+<!-- A.1.c-h: The configuration-control specification controls the revision process for the CCS,CP,CPS,PP,SP,R/L/O  -->
+
+<h4 id="g0.0.2.1">Controlled Document List  </h4>
+
+<p>
+This CCS creates a
+Controlled Document List (CDL)
+of Primary or "root" documents known as Policies.
+Primary documents may authorise other secondary documents
+into the CDL, or "practices" outside the list.
+</p>
+
+<p>
+The Controlled Document List
+contains numbers, locations and status
+of all controlled documents.
+The list is part of this CCS.
+</p>
+
+<!-- See A.1.k, logging of documents. -->
+
+<h4 id="g0.0.2.2">Change  </h4>
+
+
+<p>
+Change to the documents
+is as specified by
+Policy on Policy (PoP).
+Policy Officer is to manage the
+<a href="https://svn.cacert.org/CAcert/Policies/ControlledDocumentList.html">CDL</a>.
+</p>
+
+<h4 id="g0.0.2.3">Control  </h4>
+
+<p>
+CAcert policies are required to be owned / transferred to CAcert. See PoP 6.2.
+</p>
+
+<h3 id="g0.0.3">Hardware  </h3>
+
+<!-- This section from A.1.j -->
+
+<h4 id="g0.0.3.1">Controlled Hardware List  </h4>
+
+<p>
+Critical systems are defined by Security Policy.
+</p>
+
+<h4 id="g0.0.3.2">Change  </h4>
+
+<p> See Security Policy.  </p>
+
+<h4 id="g0.0.3.3">Control  </h4>
+
+<p>
+Security Policy places executive responsibility for Hardware with the Board of CAcert Inc.
+Access is delegated to Access Engineers (SP 2) and Systems Administrators (SP 3).
+Legal ownership may be delegated by agreement to other organisations (SP 9.4).
+</p>
+
+<h3 id="g0.0.4">Software  </h3>
+<!-- A.1.i: The configuration-control specification controls changes to software involved in: certs; data; comms to public -->
+<h4 id="g0.0.4.1">Controlled Software List  </h4>
+
+<p>
+Critical software is defined by Security Policy.
+</p>
+
+<!--
+
+<ul class="q">
+
+<li> Following are questions for exec + audit, not policy.
+
+<li>One thing that is not so well covered by CAcert is the last bullet point of A.1.i</li>
+
+<li>"communicating with subscribers and with the general public."</li>
+
+<li>website is under SP;  maillists,blogs,etc are not.</li>
+
+<li>as community has deliberately gone this direction, I suggest we argue it that way.</li>
+
+<li> What is far more problematic is the failure to do CCA &amp; Challenge notification.</li>
+
+<li> What about translingo and voting? </li>
+
+<li> See <a href="https://lists.cacert.org/wws/arc/cacert-sysadm/2010-02/msg00008.html">thread</a> </li>
+  </ul>
+-->
+
+<h4 id="g0.0.4.2">Change  </h4>
+
+<p> See Security Policy.  </p>
+
+<h4 id="g0.0.4.3">Control  </h4>
+
+<p>
+CAcert owns its code, or requires control over open source code in use
+by means of an approved free and open licence.
+Such code must be identified and managed by Software Assessment.
+</p>
+
+<p>
+Developers transfer full rights to CAcert
+(in a similar fashion to documents),
+or organise their contributions under a
+proper free and open source code regime,
+as approved by Board.
+Where code is published
+(beyond scope of this document)
+care must be taken not to infringe licence conditions.
+For example, mingling issues with GPL.
+</p>
+
+<p>
+The Software Assessment Team Leader
+maintains a registry of assignments
+of title or full licence,
+and a registry of software under approved open source licences.
+</p>
+
+<h3 id="g0.0.5">Certificates  </h3>
+
+<!-- This section from A.1.b -->
+
+<p> This section applies to Root and Sub-root certificates, not to End-entity (subscriber, member) certificates. </p>
+
+<h4 id="g0.0.5.1">Certificates List  </h4>
+
+<p> Certificates (Root and sub-root) are to be listed in the CPS.  </p>
+
+<h4 id="g0.0.5.2">Changes  </h4>
+
+<p>
+Creation and handling of Certificates
+is controlled by Security Policy.
+Usage of Certificates
+is controlled by Certification Practice Statement.
+</p>
+
+<h4 id="g0.0.5.3">Archive  </h4>
+
+<p> See Security Policy. </p>
+
+<h3 id="g0.0.6">Logs  </h3>
+
+<!-- This section from A.1.k -->
+
+<h4 id="g0.0.6.1">Controlled Logs List  </h4>
+
+<p> Logs are defined by Security Policy.  </p>
+
+<h4 id="g0.0.6.2">Changes  </h4>
+
+<p> Changes to Hardware, Software and Root Certificates are logged according to Security Policy.  </p>
+
+<h4 id="g0.0.6.3">Archive  </h4>
+
+<p> See Security Policy.  </p>
+
+<h3 id="g0.0.7">Data  </h3>
+
+<!-- This section from A.1.i-j, bullets 2,3 -->
+
+<h4 id="g0.0.7.1">Types of Data  </h4>
+
+<p>
+Types of critical member data is defined by Assurance Policy.
+</p>
+
+<h4 id="g0.0.7.2">Changes  </h4>
+
+<p>
+Changes and access to critical member data
+is as defined under Assurance Policy,
+CAcert Community Agreement and
+Dispute Resolution Policy.
+Implementation of
+collection and storage of critical member data
+(user interface software and databases)
+is defined by Security Policy.
+</p>
+
+<h4 id="g0.0.7.3">Archive  </h4>
+
+<p>
+Data retention is controlled by Security Policy and CAcert Community Agreement.
+</p>
+</body>
+</html>
