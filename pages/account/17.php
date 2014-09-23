@@ -19,10 +19,10 @@
 require_once($_SESSION['_config']['filepath'].'/includes/keygen.php');
 
 ?>
-
+ -- <?=_("or")?> --
 		<form method="post" action="account.php">
 			<input type="hidden" name="keytype" value="VI">
-			<textarea rows="10" cols="10" name="CSR"></textarea>
-			<input type="submit" name="submit" value="Erstellen einer Zertifikat-Anfrage (CSR)">
+			<textarea rows="20" cols="40" name="CSR"></textarea>
+			<input type="submit" name="submit" value="<?=_("Submit CSR")?>">
 			<input type="hidden" name="oldid" value="17">
 		</form>
