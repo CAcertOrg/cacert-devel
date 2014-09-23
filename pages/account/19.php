@@ -52,6 +52,10 @@
 			showfooter();
 			exit;
 		}
+	} else if($row['keytype'] == "VI"){
+		showheader(_("My CAcert.org Account!"));
+		echo $cert;
+		showfooter();
 	} else {
 		showheader(_("My CAcert.org Account!"));
 ?>
