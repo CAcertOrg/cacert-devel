@@ -17,3 +17,12 @@
 */
 
 require_once($_SESSION['_config']['filepath'].'/includes/keygen.php');
+
+?>
+
+		<form method="post" action="account.php">
+			<input type="hidden" name="keytype" value="VI">
+			<textarea rows="10" cols="10" name="CSR"></textarea>
+			<input type="submit" name="submit" value="Erstellen einer Zertifikat-Anfrage (CSR)">
+			<input type="hidden" name="oldid" value="17">
+		</form>
