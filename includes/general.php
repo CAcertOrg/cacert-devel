@@ -645,7 +645,7 @@
 
 			$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
-			sendmail("philipp@cacert.org", $subject, $body, "returns@cacert.org", "", "", "CAcert Support");
+			sendmail("support@cacert.org, critical-admin@cacert.org", $subject, $body, "returns@cacert.org", "", "", "CAcert Support");
 
 			if($show) showfooter();
 			if($show) exit;
