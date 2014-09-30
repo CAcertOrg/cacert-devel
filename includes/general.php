@@ -671,13 +671,13 @@
 			$subject="";
 			if(mysql_num_rows($res) > 0)
 			{
-				printf(_("Your certificate request is still queued and hasn't been processed yet. Please wait, and go to Certificates -> View to see it's status."));
+				printf('<p>' . _("Your certificate request is still queued and hasn't been processed yet. Please wait, and go to Certificates -> View to see it's status." . '</p>'));
 				$subject="[CAcert.org] Certificate TIMEOUT";
 				$body = "A certificate has timed out!\n\n";
 			}
 			else
 			{
-				printf(_("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions.")." certid:$table:".intval($certid), "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
+				printf('<p>' . _("Your certificate request has failed to be processed correctly, see %sthe WIKI page%s for reasons and solutions.") . " certid:$table:".intval($certid) . '</p>', "<a href='http://wiki.cacert.org/wiki/FAQ/CertificateRenewal'>", "</a>");
 				$subject="[CAcert.org] Certificate FAILURE";
 				$body = "A certificate has failed: $table $certid $id $show\n\n";
 			}
