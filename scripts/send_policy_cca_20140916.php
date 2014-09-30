@@ -108,12 +108,12 @@ $count = 0;
 
 $query = "
 
-	SELECT `fname`, `lname`, `email`
+	SELECT `id`, `fname`, `lname`, `email`
 	FROM `users`
 	WHERE `deleted` = '0000-00-00 00:00:00'
 	AND `modified` != '0000-00-00 00:00:00'
 	AND `verified` = '1'
-
+	AND `id` >= '$lastid'
 	ORDER BY `id`";
 
 $res = mysql_query($query);
