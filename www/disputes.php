@@ -223,7 +223,7 @@
 		}
 
 		//check if email belongs to locked account
-		$res = mysql_query("select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		$res = mysql_query("select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1) and `email`.`deleted` = 0");
 		if(mysql_num_rows($res) > 0)
 		{
 			showheader(_("Email Dispute"));
@@ -312,7 +312,7 @@
 		}
 
 		//check if domain belongs to locked account
-		$res = mysql_query("select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		$res = mysql_query("select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1) and `domains`.`deleted` = 0");
 		if(mysql_num_rows($res) > 0)
 		{
 			showheader(_("Domain Dispute"));
