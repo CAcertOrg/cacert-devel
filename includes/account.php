@@ -1589,7 +1589,12 @@ function buildSubjectFromSession() {
 			}
 			mysql_query("update `orgemailcerts` set `csr_name`='$CSRname' where `id`='$emailid'");
 		} else if($_REQUEST['keytype'] == "MS" || $_REQUEST['keytype']=="VI") {
-			$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".clean_csr($_REQUEST['CSR'])."\n-----END CERTIFICATE REQUEST-----\n";
+			$csr = clean_csr($_REQUEST['CSR']);
+			if(strpos($csr,"---BEGIN") === FALSE)
+			{
+				// In case the CSR is missing the ---BEGIN lines, add them automatically:
+				$csr = "-----BEGIN CERTIFICATE REQUEST-----\n".$csr."\n-----END CERTIFICATE REQUEST-----\n";
+			}
 
 			if (($weakKey = checkWeakKeyCSR($csr)) !== "")
 			{

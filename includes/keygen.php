@@ -121,7 +121,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 			<input type="hidden" name="keytype" value="NS">
 			<?=_("Keysize:")?> <keygen name="SPKAC" challenge="<? $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
 
-			<input type="submit" name="submit" value="<?=_("Generate keypair within browser")?>">
+			<input type="submit" name="submit" value="<?=_("Generate key pair within browser")?>">
 			<input type="hidden" name="oldid" value="<?=intval($id)?>">
 		</form>
 	</p>

@@ -104,6 +104,7 @@ if (array_key_exists('emails',$_SESSION['_config']) && is_array($_SESSION['_conf
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form>
+<?=_("Please fill out the form, when all data is entered and you click \"Next\" you can add either a CSR (certificate signing request) or create a new key with your browser. Even in the case that a CSR is given the data from this form will be used for the certificate. Only the public key information of the CSR will be copied.")?>
 
 <script language="javascript">
 function showExpert(a)
