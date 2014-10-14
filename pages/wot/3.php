@@ -17,7 +17,7 @@
 */ ?>
 <h3><?=_("CAcert Web of Trust Rules")?></h3>
 
-<p><?=_("CAcert Assurers should understand and follow the rules  below to ensure that applicants for assurance are suitably identified, which, in turn, maintains trust in the system.")?></p>
+<p><?=_("CAcert Assurers should understand and follow the rules.")?></p>
 <p><?=_("The assurance process consists of two parts")?></p>
 <ol>
    <li><?=_("a face to face meeting between the assurer and the assuree")?></li>
@@ -31,7 +31,7 @@
        <li><?=_("All names of the assuree that appear in the account")?></li>
        <li><?=_("Date of birth of the assuree")?></li>
        <li><?=_("Primary email address of the assuree")?></li>
-       <li><?=sprintf(_("The acceptance of the CAcert Community Agreement (%sCCA%s) by the assuree"), "<a href=\"/policy/CAcertCommunityAgreement.html\">", "</a>")?></li>
+       <li><?=sprintf(_("The acceptance of the %sCAcert Community Agreement%s (CCA) by the assuree"), "<a href=\"/policy/CAcertCommunityAgreement.html\">", "</a>")?></li>
        <li><?=_("The agreement to enter an assurance by the assuree")?></li>
        <li><?=_("The signature of the assuree")?></li>
        <li><?=_("The date of the signature")?></li>
@@ -50,19 +50,19 @@
        <li><?=_("Place of the assurance")?></li>
        <li><?=_("Record over the type of documents used during the assurance (no numbers may be noted)")?></li>
        <li><?=_("Points issued by the assurer")?></li>
-       <li><?=sprintf(_("That the assurance was done under the Assurance Policy (%s AP %s)"), "<a href=\"/policy/AssurancePolicy.html\">", "</a>")?></li>
+       <li><?=sprintf(_("That the assurance was done under the %sAssurance Policy%s (AP)"), "<a href=\"/policy/AssurancePolicy.html\">", "</a>")?></li>
        <li><?=_("The signature of the assurer")?></li>
      </ul>
    </li>
 </ul>
-<h5><?=_("Validating and entering the data to the CAcert system")?></h5>
+<h4><?=_("Validating and entering the data to the CAcert system")?></h4>
 <p><?=_("After the meeting the assurer has to log into the CAcert webpage and follow the \"Assure Someone\" link.")?></p>
 <ul>
    <li><?=_("The primary email address and the date of birth from the assuree, as written on the CAP-form have to be entered by the assurer.")?></li>
    <li><?=_("Only if they were entered correctly the assurer gets access to the assurance page with the remaining data of the assuree.")?></li>
    <li><?=_("This page shows the names, date of birth and primary email address of the assuree.")?></li>
    <li><?=_("It has to be compared to the data written on the CAP-form by the assurer.")?></li>
-   <li><?=_("If the data matches completely, the assurer may enter the assurance. (The acceptable discrepancies for the names can be found in the Assurance Handbook (%s AH %s)", "<a href=\"//wiki.cacert.org/AssuranceHandbook2\">", "</a>")?></li>
+   <li><?=sprintf(_("If the data matches completely, the assurer may enter the assurance. (The acceptable discrepancies for the names can be found in the %sAssurance Handbook%s (AH)"), "<a href=\"//wiki.cacert.org/AssuranceHandbook2\">", "</a>")?></li>
    <li><?=_("The assurer has to enter the assurance points.")?></li>
    <li><?=_("The assurer has to acknowledge the face-to-face meeting with the assuree, that the data on the pages matches the assuree, and that the CCA is accepted by the assurer.
 ")?></li>
@@ -81,4 +81,4 @@
 <p><?=_("The assurer may charge a fee for the expenses however not for the assurance itself, but only if the assuree has been advised of the amount prior to the meeting.")?></p>
 
 <h4><?=_("Liability")?></h4>
-<p><?=sprintf(_("An assurer who assures someone contrary to this process, as it is defined in the Assurance Policy (%s AP %s) may be held liable up to 1000 € per case."), "<a href=\"/policy/AssurancePolicy.html\">", "</a>")?></p>
+<p><?=_("An assurer who assures someone contrary to this process, as it is defined in the Assurance Policy (AP) may be held liable up to 1000 EUR per case.")?></p>
