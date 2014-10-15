@@ -62,7 +62,7 @@
    <li><?=_("Only if they were entered correctly the assurer gets access to the assurance page with the remaining data of the assuree.")?></li>
    <li><?=_("This page shows the names, date of birth and primary email address of the assuree.")?></li>
    <li><?=_("It has to be compared to the data written on the CAP-form by the assurer.")?></li>
-   <li><?=sprintf(_("If the data matches completely, the assurer may enter the assurance. (The acceptable discrepancies for the names can be found in the %sAssurance Handbook%s (AH)"), "<a href=\"//wiki.cacert.org/AssuranceHandbook2\">", "</a>")?></li>
+   <li><?=sprintf(_("If the data matches completely, the assurer may enter the assurance. (The acceptable discrepancies for the names can be found in the %sAssurance Handbook%s (AH))"), "<a href=\"//wiki.cacert.org/AssuranceHandbook2\">", "</a>")?></li>
    <li><?=_("The assurer has to enter the assurance points.")?></li>
    <li><?=_("The assurer has to acknowledge the face-to-face meeting with the assuree, that the data on the pages matches the assuree, and that the CCA is accepted by the assurer.
 ")?></li>
