@@ -1,5 +1,5 @@
 #!/usr/bin/php -q
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -19,6 +19,7 @@
 
 	require_once(dirname(__FILE__).'/../../includes/mysql.php');
 	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
+	require_once(dirname(__FILE__).'/../../includes/lib/general.php');
 
 	$days = array("1" => "3", "15" => "2", "30" => "1", "45" => "0");
 
@@ -41,7 +42,7 @@
 				$row['crt_name'] = str_replace("../", "www/", $row['crt_name']);
 				$row['crt_name'] = "/home/cacert/".$row['crt_name'];
 				$crt_name = escapeshellarg($row['crt_name']);
-				$subject = `openssl x509 -in $crt_name -text -noout|grep Subject:`;
+				$subject = runCommand("openssl x509 -in $crt_name -text -noout|grep Subject:");
 				$bits = explode("/", $subject);
 				foreach($bits as $val)
 				{
