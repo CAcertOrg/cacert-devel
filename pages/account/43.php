@@ -136,8 +136,7 @@ if(intval($_REQUEST['userid']) > 0) {
                 if ($res) {
                     $trow = mysql_fetch_assoc($res);
                     if ($trow) {
-                        mysql_query("update `notary` set `deleted`=NOW() where `id`='".intval($assurance)."'");
-                        fix_assurer_flag($trow['to']);
+                        revoke_assurance(intval($assurance),$trow['to']);
                     }
                 }
             }
