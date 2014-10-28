@@ -2151,37 +2151,29 @@ function revoke_assurance($assuranceid, $toid){
 	$toid = intval($toid);
 	$points = 0;
 
-	$query = "select * from `notary` where `id` = '$assuranceid'";
-
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res)){
-		$points = $row['points'];
-	}
-
-	$query = "update `notary` set `deleted` = NOW() where `id` = '$assuranceid'";
+	$query = "update `notary` set `deleted` = NOW() where `id` = '$assuranceid' LIMIT 1";
 	mysql_query($query);
 
-	if ($points > 0) {
-		$query = "select * from `notary` where `to` = '$toid' order by `when`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res)){
-			if ($points == 0) {
-				break;
+	$query = "select * from `notary` where `to` = '$toid' and `deleted` = 0 order by `when`";
+	$res = mysql_query($query);
+	while($row = mysql_fetch_assoc($res)){
+		if ($row['points'] < $row['awarded'] and $points < 100) {
+			if ($row['awarded'] + $points < 100) {
+				$newpoints = $row['awarded'];
+			} else {
+				$newpoints = 100 -$points;
 			}
-			$diff = 0;
-			if ($row['points'] < $row['awarded']) {
-				$diff = $row['awarded'] - $row['points'];
-				if ($diff <= $points) {
-					$newpoints = $diff +  $row['points'];
-					$points -= $diff;
-				} else {
-					$newpoints = $points +  $row['points'];
-					$points = 0 ;
-				}
-				$query = "update `notary` set `points` = $newpoints where `id`='" . $row['id'] ."'";
-				mysql_query($query);
-			}
+			$points += $newpoints;
+			$query = "update `notary` set `points` = $newpoints where `id`='" . $row['id'] ."' LIMIT 1";
+			mysql_query($query);
+		} else {
+			$points += $row['points'];
+		}
+
+		if ($points >= 100) {
+			break;
 		}
 	}
+
 	fix_assurer_flag($toid);
 }
