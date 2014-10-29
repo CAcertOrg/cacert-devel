@@ -2327,7 +2327,7 @@ function revoke_assurance($assuranceid, $toid){
 		$maxToAward = max(100 - $points, 0);
 		$newpoints = min($row['awarded'], $maxToAward);
 
-		$points += $row['points'];
+		$points += $row['awarded'];
 
 		$query = "update `notary` set `points` = '". (int)$newpoints ."' where `id`='" . (int)$row['id'] . "' LIMIT 1";
 		mysql_query($query);
