@@ -54,7 +54,7 @@ if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error
             </select></td>
     </tr>
     <tr>
-        <td class="DataTD" colspan="2"><?=_('If you request the assurer status the result is send to yourself as well as to the person of whom you request the status of.')?></td>
+        <td class="DataTD" colspan="2"><?=_('If you request the assurer status the result is send via mail to the person of whom you request the status of.')?></td>
     </tr>
     <tr>
         <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
