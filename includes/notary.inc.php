@@ -2141,7 +2141,7 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 
 /**
  * revoke_assurance()
- *  revokes an assurance and adjusts the old point calculation
+ * revokes an assurance and adjusts the old point calculation
  * @param mixed $assuranceid - id of the assurance
  * @param mixed $toid        - id of the assuree
  * @return
@@ -2154,25 +2154,16 @@ function revoke_assurance($assuranceid, $toid){
 	$query = "update `notary` set `deleted` = NOW() where `id` = '$assuranceid' LIMIT 1";
 	mysql_query($query);
 
-	$query = "select * from `notary` where `to` = '$toid' and `deleted` = 0 order by `when`";
+	$query = "select * from `notary` where `to` = '$toid' and `method` != 'Administrative Increase' and `deleted` = 0 order by `when`";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res)){
-		if ($row['points'] < $row['awarded'] and $points < 100) {
-			if ($row['awarded'] + $points < 100) {
-				$newpoints = $row['awarded'];
-			} else {
-				$newpoints = 100 -$points;
-			}
-			$points += $newpoints;
-			$query = "update `notary` set `points` = $newpoints where `id`='" . $row['id'] ."' LIMIT 1";
-			mysql_query($query);
-		} else {
-			$points += $row['points'];
-		}
+		$maxToAward = max(100 - $points, 0);
+		$newpoints = min($row['awarded'], $maxToAward);
 
-		if ($points >= 100) {
-			break;
-		}
+		$points += $row['points'];
+
+		$query = "update `notary` set `points` = '". (int)$newpoints ."' where `id`='" . (int)$row['id'] . "' LIMIT 1";
+		mysql_query($query);
 	}
 
 	fix_assurer_flag($toid);
