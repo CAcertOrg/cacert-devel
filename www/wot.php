@@ -570,11 +570,11 @@ $iecho= "c";
 		exit;
 	}
 // Assurer Check
-    if($oldid == 16 )
+    if($oldid == 17 )
     {
-        $oldid=0;
-        $id = 0;
-        $number=5;
+        $oldid = 0;
+        $id = 17;
+        $number = 5;
         $email = mysql_real_escape_string(trim($_REQUEST['email']));
         $reason = mysql_real_escape_string(trim($_REQUEST['reason']));
         $uid = get_user_id_from_email($email);
