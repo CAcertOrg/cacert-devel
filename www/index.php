@@ -177,73 +177,6 @@ require_once('../includes/lib/l10n.php');
 		exit;
 	}
 
-	function getOTP64($otp)
-	{
-		$lookupChar = "123456789abcdefhkmnprstuvwxyzABCDEFGHKMNPQRSTUVWXYZ=+[]&@#*!-?%:";
-
-		for($i = 0; $i < 6; $i++)
-			$val[$i] = hexdec(substr($otp, $i * 2, 2));
-
-		$tmp1 = $val[0] >> 2;
-		$OTP = $lookupChar[$tmp1 & 63];
-		$tmp2 = $val[0] - ($tmp1 << 2);
-		$tmp1 = $val[1] >> 4;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[1] - ($tmp1 << 4);
-		$tmp1 = $val[2] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[2] - ($tmp1 << 6);
-		$OTP .= $lookupChar[$tmp2 & 63];
-		$tmp1 = $val[3] >> 2;
-		$OTP .= $lookupChar[$tmp1 & 63];
-		$tmp2 = $val[3] - ($tmp1 << 2);
-		$tmp1 = $val[4] >> 4;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[4] - ($tmp1 << 4);
-		$tmp1 = $val[5] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[5] - ($tmp1 << 6);
-		$OTP .= $lookupChar[$tmp2 & 63];
-
-		return $OTP;
-	}
-
-	function getOTP32($otp)
-	{
-		$lookupChar = "0123456789abcdefghkmnoprstuvwxyz";
-
-		for($i = 0; $i < 7; $i++)
-			$val[$i] = hexdec(substr($otp, $i * 2, 2));
-
-		$tmp1 = $val[0] >> 3;
-		$OTP = $lookupChar[$tmp1 & 31];
-		$tmp2 = $val[0] - ($tmp1 << 3);
-		$tmp1 = $val[1] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = ($val[1] - ($tmp1 << 6)) >> 1;
-		$OTP .= $lookupChar[$tmp2 & 31];
-		$tmp2 = $val[1] - (($val[1] >> 1) << 1);
-		$tmp1 = $val[2] >> 4;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = $val[2] - ($tmp1 << 4);
-		$tmp1 = $val[3] >> 7;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = ($val[3] - ($tmp1 << 7)) >> 2;
-		$OTP .= $lookupChar[$tmp2 & 31];
-		$tmp2 = $val[3] - (($val[3] - ($tmp1 << 7)) >> 2) << 2;
-		$tmp1 = $val[4] >> 5;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = $val[4] - ($tmp1 << 5);
-		$OTP .= $lookupChar[$tmp2 & 31];
-		$tmp1 = $val[5] >> 3;
-		$OTP .= $lookupChar[$tmp1 & 31];
-		$tmp2 = $val[5] - ($tmp1 << 3);
-		$tmp1 = $val[6] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-
-		return $OTP;
-       }
-
 	if($oldid == 4)
 	{
 		$oldid = 0;
@@ -256,52 +189,6 @@ require_once('../includes/lib/l10n.php');
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
-		{
-			$otpquery = "select * from `users` where `email`='$email' and `otphash`!='' and `verified`=1 and `deleted`=0 and `locked`=0";
-			$otpres = mysql_query($otpquery);
-			if(mysql_num_rows($otpres) > 0)
-			{
-				$otp = mysql_fetch_assoc($otpres);
-				$otphash = $otp['otphash'];
-				$otppin = $otp['otppin'];
-				if(strlen($pword) == 6)
-				{
-					$matchperiod = 18;
-					$time = round(gmdate("U") / 10);
-				} else {
-					$matchperiod = 3;
-					$time = round(gmdate("U") / 60);
-				}
-
-				$query = "delete from `otphashes` where UNIX_TIMESTAMP(`when`) <= UNIX_TIMESTAMP(NOW()) - 600";
-				mysql_query($query);
-
-				$query = "select * from `otphashes` where `username`='$email' and `otp`='$pword'";
-				if(mysql_num_rows(mysql_query($query)) <= 0)
-				{
-					$query = "insert into `otphashes` set `when`=NOW(), `username`='$email', `otp`='$pword'";
-					mysql_query($query);
-					for($i = $time - $matchperiod; $i <= $time + $matchperiod * 2; $i++)
-					{
-						if($otppin > 0)
-							$tmpmd5 = md5("$i$otphash$otppin");
-						else
-							$tmpmd5 = md5("$i$otphash");
-
-						if(strlen($pword) == 6)
-							$md5 = substr(md5("$i$otphash"), 0, 6);
-						else if(strlen($pword) == 8)
-							$md5 = getOTP64(md5("$i$otphash"));
-						else
-							$md5 = getOTP32(md5("$i$otphash"));
-
-						if($pword == $md5)
-							$res = mysql_query($otpquery);
-					}
-				}
-			}
-		}
 		if(mysql_num_rows($res) > 0)
 		{
 			$_SESSION['profile'] = "";

@@ -127,19 +127,9 @@
     <td colspan="2" class="title"><a href="account.php?id=59&amp;oldid=13&amp;userid=<?=intval($_SESSION['profile']['id'])?>"><?=_('Show account history')?></a></td>
   </tr>
   <tr>
-    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=intval(!$showdetails)?>"><?=_("View secret question & answers and OTP phrases")?></a></td>
+    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=intval(!$showdetails)?>"><?=_("View secret question & answers")?></a></td>
   </tr>
   <? if($showdetails){ ?>
-  <tr>
-   <td class="DataTD"><?=_("OTP Hash")?><br>
-    (<?=_("Not displayed")?>)</td>
-   <td class="DataTD"><input type="text" name="otphash"></td>
-  </tr>
-  <tr>
-   <td class="DataTD"><?=_("OTP PIN")?><br>
-    (<?=_("Not displayed")?>)</td>
-   <td class="DataTD"><input type="text" name="otppin"></td>
-  </tr>
   <tr>
     <td class="DataTD" colspan="2"><?=_("Lost Pass Phrase Questions")?></td>
   </tr>
