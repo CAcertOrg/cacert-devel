@@ -1333,16 +1333,6 @@ function buildSubjectFromSession() {
 			mysql_query($query);
 		}
 
-		//!!!Should be rewritten
-		$_SESSION['_config']['user']['otphash'] = trim(stripslashes(strip_tags($_REQUEST['otphash'])));
-		$_SESSION['_config']['user']['otppin']  = trim(stripslashes(strip_tags($_REQUEST['otppin'])));
-		if($_SESSION['_config']['user']['otphash'] != "" && $_SESSION['_config']['user']['otppin'] != "")
-		{
-			$query = "update `users` set `otphash`='".mysql_real_escape_string($_SESSION['_config']['user']['otphash'])."',
-						`otppin`='".mysql_real_escape_string($_SESSION['_config']['user']['otppin'])."' where `id`='".intval($_SESSION['profile']['id'])."'";
-			mysql_query($query);
-		}
-
 		$_SESSION['_config']['user']['set'] = 0;
 		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 		$_SESSION['profile']['loggedin'] = 1;
