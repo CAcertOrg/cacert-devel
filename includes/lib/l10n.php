@@ -355,4 +355,21 @@ class L10n {
 		bindtextdomain($domain, $_SESSION['_config']['filepath'].'/locale');
 		textdomain($domain);
 	}
+
+	public static function set_recipient_language($accountid) {
+		//returns the language of a recipient to make sure that the language is correct
+		//use together with
+		$query = "select `language` from `users` where `id`='".intval($accountid)."'";
+		$res = mysql_query($query);
+		if (mysql_num_rows($res)>=0) {
+			$row = mysql_fetch_assoc($res);
+			if (NULL==$row['language'] || $row['language']=='') {
+				self::set_translation('en');
+			} else {
+				self::set_translation($row['language']);
+			}
+		} else {
+			self::set_translation('en');
+		}
+	}
 }

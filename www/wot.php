@@ -21,7 +21,6 @@ require_once("../includes/lib/l10n.php");
 require_once("../includes/notary.inc.php");
 
 
-
 function show_page($target,$message,$error)
 {
 	showheader(_("My CAcert.org Account!"));

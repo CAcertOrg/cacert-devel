@@ -2780,7 +2780,8 @@ function buildSubjectFromSession() {
 			$row = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."'"));
 			printf(_("The password for %s has been updated successfully in the system."), sanitizeHTML($row['email']));
 
-
+		$my_translation = L10n::get_translation();
+		L10n::set_recipient_language(intval($_REQUEST['userid']));
 			$body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
 			$body .= _("You are receiving this email because a CAcert administrator ".
 					"has changed the password on your account.")."\n\n";
@@ -2789,6 +2790,7 @@ function buildSubjectFromSession() {
 
 			sendmail($row['email'], "[CAcert.org] "._("Password Update Notification"), $body,
 						"support@cacert.org", "", "", "CAcert Support");
+		L10n::set_translation($my_translation);
 		}
 
 		showfooter();
