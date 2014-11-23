@@ -19,6 +19,7 @@
 	include_once("../includes/lib/general.php");
 	require_once("../includes/lib/l10n.php");
 	include_once("../includes/mysql.php");
+	require_once('../includes/notary.inc.php');
 
 	if(!isset($_SESSION['profile']) || !is_array($_SESSION['profile'])) {
 		$_SESSION['profile'] = array( 'id' => 0, 'loggedin' => 0 );
@@ -87,27 +88,15 @@
 				//session_unregister($key);
 			}
 
-			$_SESSION['_config']['oldlocation'] = '';
-
-			foreach($_GET as $key => $val)
-			{
-				if($_SESSION['_config']['oldlocation'])
-					$_SESSION['_config']['oldlocation'] .= "&";
-
-				$key = str_replace(array("\n", "\r"), '', $key);
-				$val = str_replace(array("\n", "\r"), '', $val);
-				$_SESSION['_config']['oldlocation'] .= "$key=$val";
- 			}
-			$_SESSION['_config']['oldlocation'] = substr($_SERVER['SCRIPT_NAME'], 1)."?".$_SESSION['_config']['oldlocation'];
-
-			header("location: https://".$_SESSION['_config']['securehostname']."/index.php?id=4");
+			$_SESSION['_config']['oldlocation'] = $_SERVER['REQUEST_URI'];
+			header("Location: https://{$_SESSION['_config']['securehostname']}/index.php?id=4");
 			exit;
 		}
 	}
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && ($_SESSION['profile']['id'] <= 0 || $_SESSION['profile']['loggedin'] == 0))
 	{
-		header("location: https://".$_SESSION['_config']['normalhostname']);
+		header("Location: https://{$_SESSION['_config']['normalhostname']}");
 		exit;
 	}
 
@@ -141,27 +130,23 @@
 			//session_unregister($key);
 		}
 
-		header("location: https://".$normalhost."/index.php");
+		header("Location: https://{$normalhost}/index.php");
 		exit;
 	}
 
 	if($_SESSION['profile']['loggedin'] < 1)
 	{
-		$_SESSION['_config']['oldlocation'] = '';
-
-		foreach($_REQUEST as $key => $val)
-		{
-			if('' != $_SESSION['_config']['oldlocation'])
-				$_SESSION['_config']['oldlocation'] .= "&";
-
-			$key = str_replace(array("\n", "\r"), '', $key);
-			$val = str_replace(array("\n", "\r"), '', $val);
-			$_SESSION['_config']['oldlocation'] .= "$key=$val";
-		}
-		$_SESSION['_config']['oldlocation'] = substr($_SERVER['SCRIPT_NAME'], 1)."?".$_SESSION['_config']['oldlocation'];
-		$hostname=$_SERVER['HTTP_HOST'];
-		$hostname = str_replace(array("\n", "\r"), '', $hostname);
-		header("location: https://".$hostname."/index.php?id=4");
+		$_SESSION['_config']['oldlocation'] = $_SERVER['REQUEST_URI'];
+		header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
 		exit;
+	}
+
+	if (!isset($_SESSION['profile']['ccaagreement']) || !$_SESSION['profile']['ccaagreement']) {
+		$_SESSION['profile']['ccaagreement']=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+		if (!$_SESSION['profile']['ccaagreement']) {
+			$_SESSION['_config']['oldlocation'] = $_SERVER['REQUEST_URI'];
+			header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=52");
+			exit;
+		}
 	}
 ?>

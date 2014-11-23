@@ -17,7 +17,7 @@
 */
 
 require_once('../includes/lib/l10n.php');
-
+require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
@@ -148,6 +148,7 @@ require_once('../includes/lib/l10n.php');
 		}
 	}
 
+	//client login
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
 		include_once("../includes/lib/general.php");
@@ -170,6 +171,7 @@ require_once('../includes/lib/l10n.php');
 			}
 		}
 	}
+
 
 	if($id == 4 && array_key_exists('profile',$_SESSION) && array_key_exists('loggedin',array($_SESSION['profile'])) && $_SESSION['profile']['loggedin'] == 1)
 	{
@@ -218,12 +220,16 @@ require_once('../includes/lib/l10n.php');
 				$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>";
 				$_SESSION['_config']['oldlocation'] = "account.php?id=13";
 			}
+			if (!isset($_SESSION['_config']['oldlocation'])){
+				$_SESSION['_config']['oldlocation']='';
+			}
 			if (checkpwlight($pword) < 3)
 				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
-			if($_SESSION['_config']['oldlocation'] != "")
+			if($_SESSION['_config']['oldlocation'] != ""){
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
-			else
+			}else{
 				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+			}
 			exit;
 		}
 
@@ -237,6 +243,40 @@ require_once('../includes/lib/l10n.php');
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
 		}
 	}
+
+// check for CCA acceptance prior to login
+if ($oldid == 52 )
+{
+	// Check if the user is already authenticated
+	if (!array_key_exists('profile',$_SESSION)
+			|| !array_key_exists('loggedin',$_SESSION['profile'])
+			|| $_SESSION['profile']['loggedin'] != 1)
+	{
+		header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
+		exit;
+	}
+
+	if (array_key_exists('agree',$_REQUEST) && $_REQUEST['agree'] != "")
+	{
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "Login acception", "", 1);
+		$_SESSION['profile']['ccaagreement']=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+
+		if (array_key_exists("oldlocation",$_SESSION['_config'])
+				&& $_SESSION['_config']['oldlocation']!="")
+		{
+			header("Location: https://{$_SERVER['HTTP_HOST']}/{$_SESSION['_config']['oldlocation']}");
+			exit;
+		} else {
+			header("Location: https://{$_SERVER['HTTP_HOST']}/account.php");
+			exit;
+		}
+	}
+
+	// User didn't agree
+	header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
+	exit;
+}
+
 
 	if($process && $oldid == 1)
 	{
@@ -432,7 +472,6 @@ require_once('../includes/lib/l10n.php');
 						`regional`='".$_SESSION['signup']['regional']."',
 						`radius`='".$_SESSION['signup']['radius']."'";
 			mysql_query($query);
-			include_once("../includes/notary.inc.php");
 			write_user_agreement($memid, "CCA", "account creation", "", 1);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
