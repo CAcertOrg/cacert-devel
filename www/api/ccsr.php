@@ -75,7 +75,7 @@ require_once '../../includes/lib/check_weak_key.php';
 	fclose($fp);
 	$incsr_esc = escapeshellarg($incsr);
 	$checkedcsr_esc = escapeshellarg($checkedcsr);
-	$do = `/usr/bin/openssl req -in $incsr_esc -out $checkedcsr_esc`;
+	$do = shell_exec("/usr/bin/openssl req -in $incsr_esc -out $checkedcsr_esc");
 	@unlink($incsr);
 	if(filesize($checkedcsr) <= 0)
 		die("404,Invalid or missing CSR");
@@ -97,7 +97,7 @@ require_once '../../includes/lib/check_weak_key.php';
 	foreach($emails as $emailid => $email)
 		mysql_query("insert into `emaillink` set `emailcertsid`='$certid', `emailid`='".intval($emailid)."'");
 
-	$do = `../../scripts/runclient`;
+	$do = shell_exec("../../scripts/runclient");
 	sleep(10); // THIS IS BROKEN AND SHOULD BE FIXED
 	$query = "select * from `emailcerts` where `id`='$certid' and `crt_name` != ''";
 	$res = mysql_query($query);
