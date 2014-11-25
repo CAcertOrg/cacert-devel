@@ -17,7 +17,7 @@
 */
 if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['secrethash'] = md5(date("YmdHis").rand(0, intval(date("u"))));
 ?>
-<H3><?=_("Contact Us")?></H3>
+<h3><?=_("Contact Us")?></h3>
 
 <p><b><?=_("General Questions")?></b></p>
 <p><b><?=_("PLEASE NOTE: Due to the large amounts of support questions, incorrectly directed emails may be over looked, this is a volunteer effort and directing general questions to the right place will help everyone, including yourself as you will get a reply quicker.")?></b></p>
