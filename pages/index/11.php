@@ -22,7 +22,7 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><b><?=_("General Questions")?></b></p>
 <p><b><?=_("PLEASE NOTE: CAcert support is a volunteer effort. You would help everyone, including yourself to get a reply quickly, by directing general questions to the right place. Due to the large amounts of support questions, incorrectly directed emails may be overlooked.")?></b></p>
 <p><b><?=_("If you are contacting us about advertising, please use the form at the bottom of the website, the first contact form is not the correct place.")?></b></p>
-<p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
+<p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='//wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
 <p><?=_("Before contacting us, be sure to read the information on our official and unofficial HowTo and FAQ pages.")?> - <a href="//wiki.cacert.org/HELP/"><?=_("Go here for more details.")?></a></p>
 <p><?=_("General questions about CAcert should be sent to the general support mailing list. This list is read by many more volunteers, then those directly involved in the support team. Please send all emails in ENGLISH only, as everyone on the mailing list understands English, even if this is not their native language. Doing so will increase your chance to get a competent reply.")?></p>
 <p>
