@@ -543,7 +543,7 @@
 			if( !getmxrr($domain, $mxhosts, $mxweight) ) {
 				$mxhostrr = array($domain);
 				$mxweight = array(0);
-			} else if ( !empty($mxhosts) ) {
+			} else if ( empty($mxhosts) ) {
 				$mxhostrr = array($domain);
 				$mxweight = array(0);
 			}
