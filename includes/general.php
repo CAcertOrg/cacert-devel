@@ -555,28 +555,69 @@
 
 			foreach($mxhosts as $key => $domain)
 			{
-				$fp = @fsockopen($domain,25,$errno,$errstr,5);
+				$fp_opt = array(
+					'ssl' => array(
+						'verify_peer'   => false,	// Opportunistic Encryption
+						)
+					);
+				$fp_ctx = stream_context_create($fp_opt);
+				$fp = @stream_socket_client("tcp://$domain:25",$errno,$errstr,5,STREAM_CLIENT_CONNECT,$fp_ctx);
 				if($fp)
 				{
+					stream_set_blocking($fp, true);
 
-					$line = fgets($fp, 4096);
-                                        while(substr($line, 0, 4) == "220-")
-                                               $line = fgets($fp, 4096);
-					if(substr($line, 0, 3) != "220")
-						continue;
-					fputs($fp, "HELO www.cacert.org\r\n");
-					$line = fgets($fp, 4096);
-					while(substr($line, 0, 3) == "220")
+					$has_starttls = false;
+
+					do {
 						$line = fgets($fp, 4096);
-					if(substr($line, 0, 3) != "250")
+					} while(substr($line, 0, 4) == "220-");
+					if(substr($line, 0, 3) != "220") {
+						fclose($fp);
 						continue;
-					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
-					$line = fgets($fp, 4096);
+					}
 
-					if(substr($line, 0, 3) != "250")
+					fputs($fp, "EHLO www.cacert.org\r\n");
+					do {
+						$line = fgets($fp, 4096);
+						$has_starttls |= trim($line) == "220-STARTTLS";
+					} while(substr($line, 0, 4) == "250-");
+					if(substr($line, 0, 3) != "220") {
+						fclose($fp);
 						continue;
+					}
+
+					if($has_starttls) {
+						stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+
+						fputs($fp, "EHLO www.cacert.org\r\n");
+						do {
+							$line = fgets($fp, 4096);
+							$has_starttls |= trim($line) == "220-STARTTLS";
+						} while(substr($line, 0, 4) == "250-");
+						if(substr($line, 0, 3) != "220") {
+							fclose($fp);
+							continue;
+						}
+					}
+
+					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
+					do {
+						$line = fgets($fp, 4096);
+					} while(substr($line, 0, 4) == "250-");
+					if(substr($line, 0, 3) != "250") {
+						fclose($fp);
+						continue;
+					}
+
 					fputs($fp, "RCPT TO:<$email>\r\n");
-					$line = trim(fgets($fp, 4096));
+					do {
+						$line = fgets($fp, 4096);
+					} while(substr($line, 0, 4) == "250-");
+					if(substr($line, 0, 3) != "250") {
+						fclose($fp);
+						continue;
+					}
+
 					fputs($fp, "QUIT\r\n");
 					fclose($fp);
 
