@@ -540,7 +540,7 @@
 			list($username,$domain)=explode('@',$email,2);
 			$mxhosts = array();
 			$mxweight = array();
-			if( !getmxrr($domain, $mxhosts) ) {
+			if( !getmxrr($domain, $mxhosts, $mxweight) ) {
 				$mxhostrr = array($domain);
 				$mxweight = array(0);
 			} else if ( !empty($mxhosts) ) {
