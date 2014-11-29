@@ -579,9 +579,9 @@
 					fputs($fp, "EHLO www.cacert.org\r\n");
 					do {
 						$line = fgets($fp, 4096);
-						$has_starttls |= trim($line) == "220-STARTTLS";
+						$has_starttls |= trim($line) == "250-STARTTLS";
 					} while(substr($line, 0, 4) == "250-");
-					if(substr($line, 0, 3) != "220") {
+					if(substr($line, 0, 3) != "250") {
 						fclose($fp);
 						continue;
 					}
@@ -592,9 +592,9 @@
 						fputs($fp, "EHLO www.cacert.org\r\n");
 						do {
 							$line = fgets($fp, 4096);
-							$has_starttls |= trim($line) == "220-STARTTLS";
+							$has_starttls |= trim($line) == "250-STARTTLS";
 						} while(substr($line, 0, 4) == "250-");
-						if(substr($line, 0, 3) != "220") {
+						if(substr($line, 0, 3) != "250") {
 							fclose($fp);
 							continue;
 						}
