@@ -18,8 +18,8 @@
 */
 
 	require_once(dirname(__FILE__).'/../../includes/mysql.php');
-	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
 	require_once(dirname(__FILE__).'/../../includes/lib/general.php');
+	require_once(dirname(__FILE__).'/../../includes/lib/l10n.php');
 
 	$days = array("1" => "3", "15" => "2", "30" => "1", "45" => "0");
 

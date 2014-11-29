@@ -589,7 +589,6 @@ if ($oldid == 52 )
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
 
-
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
