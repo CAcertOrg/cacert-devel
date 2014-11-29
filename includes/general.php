@@ -631,22 +631,31 @@
 					fputs($fp, "EHLO www.cacert.org\r\n");
 					do {
 						$line = fgets($fp, 4096);
-						$has_starttls |= trim($line) == "220-STARTTLS";
+						$has_starttls |= trim($line) == "250-STARTTLS";
 					} while(substr($line, 0, 4) == "250-");
-					if(substr($line, 0, 3) != "220") {
+					if(substr($line, 0, 3) != "250") {
 						fclose($fp);
 						continue;
 					}
 
 					if($has_starttls) {
+						fputs($fp, "STARTTLS\r\n");
+						do {
+							$line = fgets($fp, 4096);
+						} while(substr($line, 0, 4) == "220-");
+						if(substr($line, 0, 3) != "220") {
+							fclose($fp);
+							continue;
+						}
+
 						stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
 
 						fputs($fp, "EHLO www.cacert.org\r\n");
 						do {
 							$line = fgets($fp, 4096);
-							$has_starttls |= trim($line) == "220-STARTTLS";
+							$has_starttls |= trim($line) == "250-STARTTLS";
 						} while(substr($line, 0, 4) == "250-");
-						if(substr($line, 0, 3) != "220") {
+						if(substr($line, 0, 3) != "250") {
 							fclose($fp);
 							continue;
 						}
