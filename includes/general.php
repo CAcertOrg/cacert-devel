@@ -564,7 +564,7 @@
 			foreach($mxhostprio as $mx_prio => $mxhostnames) {
 				foreach($mxhostnames as $mx_host) {
 					$mxhosts[] = $mx_host;
-				]
+				}
 			}
 
 			foreach($mxhosts as $key => $domain)
