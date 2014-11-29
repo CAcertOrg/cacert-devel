@@ -538,20 +538,34 @@
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
 			list($username,$domain)=explode('@',$email,2);
-			$dom = escapeshellarg($domain);
-			$line = trim(shell_exec("dig +short MX $dom 2>&1"));
-#echo $email."-$dom-$line-\n";
-#echo shell_exec("dig +short mx heise.de 2>&1")."-<br>\n";
-
-			$list = explode("\n", $line);
-			foreach($list as $row) {
-				if(!strstr($row, " ")) {
-					continue;
-				}
-				list($pri, $mxhosts[]) = explode(" ", trim($row), 2);
+			$mxhosts = array();
+			$mxweight = array();
+			if( !getmxrr($domain, $mxhosts) ) {
+				$mxhostrr = array($domain);
+				$mxweight = array(0);
+			} else if ( !empty($mxhosts) ) {
+				$mxhostrr = array($domain);
+				$mxweight = array(0);
 			}
-			$mxhosts[] = $domain;
-			array_walk($mxhosts, function(&$mx) { $mx = trim($mx, '.'); } );
+
+			$mxhostprio = array();
+			for($i = 0; $i < count($mxhostrr); $i++) {
+				$mx_host = trim($mxhostrr[$i], '.');
+				$mx_prio = $mxweight[$i];
+				if(empty($mxhostprio[$mx_prio])) {
+					$mxhostprio[$mx_prio] = arraY();
+				}
+				$mxhostprio[$mx_prio][] = $mx_host;
+			}
+
+			array_walk($mxhostprio, function(&$mx) { shuffle($mx); } );
+
+			$mxhosts = array();
+			foreach($mxhostprio as $mx_prio => $mxhostnames) {
+				foreach($mxhostnames as $mx_host) {
+					$mxhosts[] = $mx_host;
+				]
+			}
 
 			foreach($mxhosts as $key => $domain)
 			{
