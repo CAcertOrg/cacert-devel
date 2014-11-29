@@ -559,6 +559,7 @@
 			}
 
 			array_walk($mxhostprio, function(&$mx) { shuffle($mx); } );
+			ksort($mxhostprio);
 
 			$mxhosts = array();
 			foreach($mxhostprio as $mx_prio => $mxhostnames) {
