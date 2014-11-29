@@ -578,10 +578,10 @@
 			list($username,$domain)=explode('@',$email,2);
 			$mxhosts = array();
 			$mxweight = array();
-			if( !getmxrr($domain, $mxhosts, $mxweight) ) {
+			if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
 				$mxhostrr = array($domain);
 				$mxweight = array(0);
-			} else if ( empty($mxhosts) ) {
+			} else if ( empty($mxhostrr) ) {
 				$mxhostrr = array($domain);
 				$mxweight = array(0);
 			}
