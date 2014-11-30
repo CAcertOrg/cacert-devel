@@ -553,7 +553,7 @@
 				$mx_host = trim($mxhostrr[$i], '.');
 				$mx_prio = $mxweight[$i];
 				if(empty($mxhostprio[$mx_prio])) {
-					$mxhostprio[$mx_prio] = arraY();
+					$mxhostprio[$mx_prio] = array();
 				}
 				$mxhostprio[$mx_prio][] = $mx_host;
 			}
