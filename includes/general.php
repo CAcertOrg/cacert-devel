@@ -632,7 +632,7 @@
 					fputs($fp, "EHLO www.cacert.org\r\n");
 					do {
 						$line = fgets($fp, 4096);
-						$has_starttls |= trim($line) == "250-STARTTLS";
+						$has_starttls |= substr(trim($line),4) == "STARTTLS";
 					} while(substr($line, 0, 4) == "250-");
 					if(substr($line, 0, 3) != "250") {
 						fclose($fp);
