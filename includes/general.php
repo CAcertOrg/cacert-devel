@@ -576,7 +576,7 @@
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
 			list($username,$domain)=explode('@',$email,2);
-			$mxhosts = array();
+			$mxhostrr = array();
 			$mxweight = array();
 			if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
 				$mxhostrr = array($domain);
@@ -591,7 +591,7 @@
 				$mx_host = trim($mxhostrr[$i], '.');
 				$mx_prio = $mxweight[$i];
 				if(empty($mxhostprio[$mx_prio])) {
-					$mxhostprio[$mx_prio] = arraY();
+					$mxhostprio[$mx_prio] = array();
 				}
 				$mxhostprio[$mx_prio][] = $mx_host;
 			}
