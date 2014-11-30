@@ -538,7 +538,7 @@
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
 			list($username,$domain)=explode('@',$email,2);
-			$mxhosts = array();
+			$mxhostrr = array();
 			$mxweight = array();
 			if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
 				$mxhostrr = array($domain);
