@@ -19,14 +19,16 @@
 	$userid=0; if(array_key_exists('userid',$_GET)) $userid=intval($_GET['userid']);
 	if($userid <= 0)
 	{
-		$domainsearch = $domain = mysql_real_escape_string(stripslashes($_POST['domain']));
-		if(!strstr($domain, "%"))
+		$domainsearch = $domain = mysql_real_escape_string(trim(stripslashes($_POST['domain'])));
+		if(!strstr($domain, "%")) {
 			$domainsearch = "%$domain%";
-		if(preg_match("/^\d+$/",$domain))
-			$domainsearch = "";
+		}
+
 		//check if request is id if not set search ID to -1
-		$domainid = intval($domain);
-		if($domain !== $domainid){
+		if(preg_match('/^#(\d+)$/', $domain, $match)) {
+			$domainsearch = "";
+			$domainid = intval($match[1]);
+		} else {
 			$domainid = -1;
 		}
 
