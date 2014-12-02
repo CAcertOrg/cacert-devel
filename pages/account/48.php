@@ -26,6 +26,9 @@
     <td class="DataTD"><input type="text" name="domain" value="<?=array_key_exists('domain',$_POST)?sanitizeHTML($_POST['domain']):''?>"></td>
   </tr>
   <tr>
+    <td class="DataTD" colspan="2"><?=_("For search by ID use # prefix e.g. #123456")?></td>
+  </tr>
+  <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
   </tr>
 </table>
