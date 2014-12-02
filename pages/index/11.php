@@ -27,7 +27,6 @@ if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['s
 <p><?=_("General questions about CAcert should be sent to the general support mailing list. This list is read by many more volunteers, then those directly involved in the support team. Please send all emails in ENGLISH only, as everyone on the mailing list understands English, even if this is not their native language. Doing so will increase your chance to get a competent reply.")?></p>
 <p>
 <?=sprintf(_("You can use the form below to contact the support team directly. The mail is NOT send to the mailing list. Alternatively you can contact the support team by writing an email to %ssupport@cacert.org%s"), "<a href='mailto:support@cacert.org'>", "</a>");?></p>
-<p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <form method="post" action="index.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
 <!--   <input type="hidden" name="support" value="yes"> -->
