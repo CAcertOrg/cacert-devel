@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2014  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,15 +17,17 @@
 */
 if(!array_key_exists('secrethash',$_SESSION['_config'])) $_SESSION['_config']['secrethash'] = md5(date("YmdHis").rand(0, intval(date("u"))));
 ?>
-<H3><?=_("Contact Us")?></H3>
+<h3><?=_("Contact Us")?></h3>
 
 <p><b><?=_("General Questions")?></b></p>
-<p><b><?=_("PLEASE NOTE: Due to the large amounts of support questions, incorrectly directed emails may be over looked, this is a volunteer effort and directing general questions to the right place will help everyone, including yourself as you will get a reply quicker.")?></b></p>
+<p><b><?=_("PLEASE NOTE: CAcert support is a volunteer effort. You would help everyone, including yourself to get a reply quickly, by directing general questions to the right place. Due to the large amounts of support questions, incorrectly directed emails may be overlooked.")?></b></p>
 <p><b><?=_("If you are contacting us about advertising, please use the form at the bottom of the website, the first contact form is not the correct place.")?></b></p>
-<p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
+<p><?=sprintf(_("If you are having trouble with your username or password, please visit our %swiki page%s for more information"), "<a href='//wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount' target='_new'>", "</a>");?></p>
 <p><?=_("Before contacting us, be sure to read the information on our official and unofficial HowTo and FAQ pages.")?> - <a href="//wiki.cacert.org/HELP/"><?=_("Go here for more details.")?></a></p>
-<p><?=_("General questions about CAcert should be sent to the general support list, please send all emails in ENGLISH only, this list has many more volunteers then those directly involved with the running of the website, everyone on the mailing list understands english, even if this isn't their native language this will increase your chance at a competent reply. While it's best if you sign up to the mailing list to get replied to, you don't have to, but please make sure you note this in your email, otherwise it might seem like you didn't get a reply to your question.")?></p>
-<p><?=_("You can use the form below to contact the support team directly. The mail is NOT send to the mailing list.")?></p>
+<p><?=_("General questions about CAcert should be sent to the general support mailing list. This list is read by many more volunteers, then those directly involved in the support team. Please send all emails in ENGLISH only, as everyone on the mailing list understands English, even if this is not their native language. Doing so will increase your chance to get a competent reply.")?></p>
+<p>
+<?=sprintf(_("You can use the form below to contact the support team directly. The mail is NOT send to the mailing list. Alternatively you can contact the support team by writing an email to %ssupport@cacert.org%s"), "<a href='mailto:support@cacert.org'>", "</a>");?></p>
+<p><a href="https://lists.cacert.org/wws/info/cacert-support"><?=_("Click here to go to the Support List")?></a></p>
 <form method="post" action="index.php" name="form1">
   <input type="hidden" name="oldid" value="<?=$id?>">
 <!--   <input type="hidden" name="support" value="yes"> -->
