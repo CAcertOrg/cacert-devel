@@ -39,7 +39,7 @@
 				`users`.`verified`=1
 				group by `users`.`id` limit 100";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1) { ?>
+		if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Select Specific User Account Details")?></td>
@@ -64,7 +64,7 @@
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
-			$_GET['userid'] = intval($row['id']);
+			$userid = intval($row['id']);
 		} else {
 			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 				<tr>
@@ -74,7 +74,7 @@
 		}
 		$query = "select `orgid`,`domain`,`id` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domainid' limit 100";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1) { ?>
+		if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Select Specific Organisation Account Details")?></td>
@@ -99,7 +99,7 @@
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
-			$_GET['userid'] = intval($row['id']);
+			$userid = intval($row['id']);
 		} else {
 			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 				<tr>
@@ -111,7 +111,7 @@
 
 	if($userid > 0)
 	{
-		header("location: account.php?id=43&userid=".intval($_GET['userid']));
+		header("location: account.php?id=43&userid=".intval($userid));
 		exit;
 	}
 ?>
