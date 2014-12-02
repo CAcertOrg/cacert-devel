@@ -39,32 +39,31 @@
 				`users`.`verified`=1
 				group by `users`.`id` limit 100";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1) { ?>
+		if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Select Specific User Account Details")?></td>
   </tr>
-<?
-	while($row = mysql_fetch_assoc($res))
-	{ ?>
+<?			while($row = mysql_fetch_assoc($res)) { ?>
   <tr>
     <td class="DataTD"><?=_("Domain")?>:</td>
     <td class="DataTD"><?=$row['domid']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>"><?=sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<?			}
+			if(mysql_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
-<? } else { ?>
+<?			} else { ?>
   <tr>
     <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
-<? } ?>
+<?			} ?>
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
-			$_GET['userid'] = intval($row['id']);
+			$userid = intval($row['id']);
 		} else {
 			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 				<tr>
@@ -74,32 +73,31 @@
 		}
 		$query = "select `orgid`,`domain`,`id` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domainid' limit 100";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1) { ?>
+		if(mysql_num_rows($res) > 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?=_("Select Specific Organisation Account Details")?></td>
   </tr>
-<?
-	while($row = mysql_fetch_assoc($res))
-	{ ?>
+<?			while($row = mysql_fetch_assoc($res)) { ?>
   <tr>
     <td class="DataTD"><?=_("Domain")?>:</td>
     <td class="DataTD"><?=$row['id']?></td>
     <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?=intval($row['orgid'])?>"><?=sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<?			}
+			if(mysql_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
-<? } else { ?>
+<?			} else { ?>
   <tr>
     <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
-<? } ?>
+<?			} ?>
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
-			$_GET['userid'] = intval($row['id']);
+			$userid = intval($row['id']);
 		} else {
 			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 				<tr>
@@ -111,7 +109,7 @@
 
 	if($userid > 0)
 	{
-		header("location: account.php?id=43&userid=".intval($_GET['userid']));
+		header("location: account.php?id=43&userid=".intval($userid));
 		exit;
 	}
 ?>
