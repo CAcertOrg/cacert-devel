@@ -28,7 +28,7 @@
     $res = mysql_query($query);
     if(mysql_num_rows($res) <= 0)
     {
-      echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are a foot!");
+      echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
       $row = mysql_fetch_assoc($res);
 ?>
@@ -48,12 +48,12 @@
     <td class="DataTD"><b><?=_('Type')?></b></td>
   </tr>
 <?
-  $data=get_first_user_agreement($user_id,1);
+  $data=get_first_user_agreement($user_id, 'CCA', 1);
   if (!isset($data['active'])){
       $type='';
-    }else{
+  }else{
       $type=_('active');
-    }
+  }
 ?>
   <tr>
     <td class="DataTD"><?=_('First active CCA')?></td>
@@ -62,7 +62,7 @@
     <td class="DataTD"><?=$type?></td>
   </tr>
 <?
-  $data=get_first_user_agreement($user_id,0);
+  $data=get_first_user_agreement($user_id, 'CCA', 0);
   if (!isset($data['active'])){
       $type="";
     }else{
@@ -76,14 +76,14 @@
     <td class="DataTD"><?=$type?></td>
   </tr>
 <?
-  $data=get_last_user_agreement($user_id);
+  $data=get_last_user_agreement($user_id, 'CCA');
   if (!isset($data['active'])){
-      $type="";
-    }elseif($data['active']==1){
-      $type=_('active');
-    }else{
-      $type=_('passive');
-    }
+    $type="";
+  }elseif($data['active']==1){
+    $type=_('active');
+  }else{
+    $type=_('passive');
+  }
 ?>
   <tr>
     <td class="DataTD"><?=_('Last CCA')?></td>
@@ -98,7 +98,7 @@
 <?
       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>
-    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=$user_id ?>">back</a></td></tr>
+    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($user_id)?>">back</a></td></tr>
 <?    }
 ?>  </table>
 <?

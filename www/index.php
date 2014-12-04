@@ -17,7 +17,7 @@
 */
 
 require_once('../includes/lib/l10n.php');
-
+require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
@@ -125,7 +125,7 @@ require_once('../includes/lib/l10n.php');
 				showfooter();
 				exit;
 			}
-		}		
+		}
 	}
 
 	if($oldid == 5 && $process != "")
@@ -148,18 +148,19 @@ require_once('../includes/lib/l10n.php');
 		}
 	}
 
+	//client login
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
 		include_once("../includes/lib/general.php");
 		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
 				$_SERVER['SSL_CLIENT_I_DN_CN']);
-		
+
 		if($user_id >= 0)
 		{
 			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-				"select * from `users` where 
+				"select * from `users` where
 				`id`='$user_id' and `deleted`=0 and `locked`=0"));
-			
+
 			if($_SESSION['profile']['id'] != 0)
 			{
 				$_SESSION['profile']['loggedin'] = 1;
@@ -171,78 +172,12 @@ require_once('../includes/lib/l10n.php');
 		}
 	}
 
+
 	if($id == 4 && array_key_exists('profile',$_SESSION) && array_key_exists('loggedin',array($_SESSION['profile'])) && $_SESSION['profile']['loggedin'] == 1)
 	{
 		header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 		exit;
 	}
-
-	function getOTP64($otp)
-	{
-		$lookupChar = "123456789abcdefhkmnprstuvwxyzABCDEFGHKMNPQRSTUVWXYZ=+[]&@#*!-?%:";
-
-		for($i = 0; $i < 6; $i++)
-			$val[$i] = hexdec(substr($otp, $i * 2, 2));
-
-		$tmp1 = $val[0] >> 2;
-		$OTP = $lookupChar[$tmp1 & 63];
-		$tmp2 = $val[0] - ($tmp1 << 2);
-		$tmp1 = $val[1] >> 4;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[1] - ($tmp1 << 4);
-		$tmp1 = $val[2] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[2] - ($tmp1 << 6);
-		$OTP .= $lookupChar[$tmp2 & 63];
-		$tmp1 = $val[3] >> 2;
-		$OTP .= $lookupChar[$tmp1 & 63];
-		$tmp2 = $val[3] - ($tmp1 << 2);
-		$tmp1 = $val[4] >> 4;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[4] - ($tmp1 << 4);
-		$tmp1 = $val[5] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 63];
-		$tmp2 = $val[5] - ($tmp1 << 6);
-		$OTP .= $lookupChar[$tmp2 & 63];
-
-		return $OTP;
-	}
-
-	function getOTP32($otp)
-	{
-		$lookupChar = "0123456789abcdefghkmnoprstuvwxyz";
-
-		for($i = 0; $i < 7; $i++)
-			$val[$i] = hexdec(substr($otp, $i * 2, 2));
-
-		$tmp1 = $val[0] >> 3;
-		$OTP = $lookupChar[$tmp1 & 31];
-		$tmp2 = $val[0] - ($tmp1 << 3);
-		$tmp1 = $val[1] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = ($val[1] - ($tmp1 << 6)) >> 1;
-		$OTP .= $lookupChar[$tmp2 & 31];
-		$tmp2 = $val[1] - (($val[1] >> 1) << 1);
-		$tmp1 = $val[2] >> 4;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = $val[2] - ($tmp1 << 4);
-		$tmp1 = $val[3] >> 7;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = ($val[3] - ($tmp1 << 7)) >> 2;
-		$OTP .= $lookupChar[$tmp2 & 31];
-		$tmp2 = $val[3] - (($val[3] - ($tmp1 << 7)) >> 2) << 2;
-		$tmp1 = $val[4] >> 5;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-		$tmp2 = $val[4] - ($tmp1 << 5);
-		$OTP .= $lookupChar[$tmp2 & 31];
-		$tmp1 = $val[5] >> 3;
-		$OTP .= $lookupChar[$tmp1 & 31];
-		$tmp2 = $val[5] - ($tmp1 << 3);
-		$tmp1 = $val[6] >> 6;
-		$OTP .= $lookupChar[($tmp1 + $tmp2) & 31];
-
-		return $OTP;
-       }
 
 	if($oldid == 4)
 	{
@@ -256,70 +191,24 @@ require_once('../includes/lib/l10n.php');
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
-		{
-			$otpquery = "select * from `users` where `email`='$email' and `otphash`!='' and `verified`=1 and `deleted`=0 and `locked`=0";
-			$otpres = mysql_query($otpquery);
-			if(mysql_num_rows($otpres) > 0)
-			{
-				$otp = mysql_fetch_assoc($otpres);
-				$otphash = $otp['otphash'];
-				$otppin = $otp['otppin'];
-				if(strlen($pword) == 6)
-				{
-					$matchperiod = 18;
-					$time = round(gmdate("U") / 10);
-				} else {
-					$matchperiod = 3;
-					$time = round(gmdate("U") / 60);
-				}
-
-				$query = "delete from `otphashes` where UNIX_TIMESTAMP(`when`) <= UNIX_TIMESTAMP(NOW()) - 600";
-				mysql_query($query);
-
-				$query = "select * from `otphashes` where `username`='$email' and `otp`='$pword'";
-				if(mysql_num_rows(mysql_query($query)) <= 0)
-				{
-					$query = "insert into `otphashes` set `when`=NOW(), `username`='$email', `otp`='$pword'";
-					mysql_query($query);
-					for($i = $time - $matchperiod; $i <= $time + $matchperiod * 2; $i++)
-					{
-						if($otppin > 0)
-							$tmpmd5 = md5("$i$otphash$otppin");
-						else
-							$tmpmd5 = md5("$i$otphash");
-
-						if(strlen($pword) == 6)
-							$md5 = substr(md5("$i$otphash"), 0, 6);
-						else if(strlen($pword) == 8)
-							$md5 = getOTP64(md5("$i$otphash"));
-						else
-							$md5 = getOTP32(md5("$i$otphash"));
-
-						if($pword == $md5)
-							$res = mysql_query($otpquery);
-					}
-				}
-			}
-		}
 		if(mysql_num_rows($res) > 0)
 		{
 			$_SESSION['profile'] = "";
 			unset($_SESSION['profile']);
 			$_SESSION['profile'] = mysql_fetch_assoc($res);
-			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".$_SESSION['profile']['id']."'";
+			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".intval($_SESSION['profile']['id'])."'";
 			mysql_query($query);
 
 			if($_SESSION['profile']['language'] == "")
 			{
 				$query = "update `users` set `language`='".L10n::get_translation()."'
-						where `id`='".$_SESSION['profile']['id']."'";
+						where `id`='".intval($_SESSION['profile']['id'])."'";
 				mysql_query($query);
 			} else {
 				L10n::set_translation($_SESSION['profile']['language']);
 				L10n::init_gettext();
 			}
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
@@ -331,12 +220,16 @@ require_once('../includes/lib/l10n.php');
 				$_SESSION['_config']['errmsg'] .= _("For your own security you must enter 5 lost password questions and answers.")."<br>";
 				$_SESSION['_config']['oldlocation'] = "account.php?id=13";
 			}
+			if (!isset($_SESSION['_config']['oldlocation'])){
+				$_SESSION['_config']['oldlocation']='';
+			}
 			if (checkpwlight($pword) < 3)
 				$_SESSION['_config']['oldlocation'] = "account.php?id=14&force=1";
-			if($_SESSION['_config']['oldlocation'] != "")
+			if($_SESSION['_config']['oldlocation'] != ""){
 				header("location: https://".$_SERVER['HTTP_HOST']."/".$_SESSION['_config']['oldlocation']);
-			else
+			}else{
 				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
+			}
 			exit;
 		}
 
@@ -350,6 +243,40 @@ require_once('../includes/lib/l10n.php');
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
 		}
 	}
+
+// check for CCA acceptance prior to login
+if ($oldid == 52 )
+{
+	// Check if the user is already authenticated
+	if (!array_key_exists('profile',$_SESSION)
+			|| !array_key_exists('loggedin',$_SESSION['profile'])
+			|| $_SESSION['profile']['loggedin'] != 1)
+	{
+		header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
+		exit;
+	}
+
+	if (array_key_exists('agree',$_REQUEST) && $_REQUEST['agree'] != "")
+	{
+		write_user_agreement($_SESSION['profile']['id'], "CCA", "Login acception", "", 1);
+		$_SESSION['profile']['ccaagreement']=get_user_agreement_status($_SESSION['profile']['id'],'CCA');
+
+		if (array_key_exists("oldlocation",$_SESSION['_config'])
+				&& $_SESSION['_config']['oldlocation']!="")
+		{
+			header("Location: https://{$_SERVER['HTTP_HOST']}/{$_SESSION['_config']['oldlocation']}");
+			exit;
+		} else {
+			header("Location: https://{$_SERVER['HTTP_HOST']}/account.php");
+			exit;
+		}
+	}
+
+	// User didn't agree
+	header("Location: https://{$_SERVER['HTTP_HOST']}/index.php?id=4");
+	exit;
+}
+
 
 	if($process && $oldid == 1)
 	{
@@ -499,7 +426,7 @@ require_once('../includes/lib/l10n.php');
 			if($checkemail != "OK")
 			{
 				$id = 1;
-				if (substr($checkemail, 0, 1) == "4") 
+				if (substr($checkemail, 0, 1) == "4")
 				{
 					$_SESSION['_config']['errmsg'] .= _("The mail server responsible for your domain indicated a temporary failure. This may be due to anti-SPAM measures, such as greylisting. Please try again in a few minutes.");
 				} else {
@@ -545,7 +472,6 @@ require_once('../includes/lib/l10n.php');
 						`regional`='".$_SESSION['signup']['regional']."',
 						`radius`='".$_SESSION['signup']['radius']."'";
 			mysql_query($query);
-			include_once("../includes/notary.inc.php");
 			write_user_agreement($memid, "CCA", "account creation", "", 1);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";
@@ -566,9 +492,9 @@ require_once('../includes/lib/l10n.php');
 		$subject = stripslashes($_REQUEST['subject']);
 		$message = stripslashes($_REQUEST['message']);
 		$secrethash = $_REQUEST['secrethash2'];
-		
+
 		//check for spam via honeypot
-		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){ 
+		if(!isset($_REQUEST['robotest']) || !empty($_REQUEST['robotest'])){
 			echo _("Form could not be sent.");
 			showfooter();
 			exit;
@@ -641,7 +567,7 @@ require_once('../includes/lib/l10n.php');
 		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
-	
+
 	if ($id == 19)
 	{
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
@@ -655,7 +581,7 @@ require_once('../includes/lib/l10n.php');
 		$newUrl = $protocol . '://wiki.cacert.org/Board';
 		header('Location: '.$newUrl, true, 301); // 301 = Permanently Moved
 	}
-	
+
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();

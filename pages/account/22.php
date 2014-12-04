@@ -78,7 +78,9 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
       UNIX_TIMESTAMP(`orgdomaincerts`.`expire`) as `expired`,
       `orgdomaincerts`.`expire` as `expires`, `revoked` as `revoke`,
-      UNIX_TIMESTAMP(`revoked`) as `revoked`, `CN`,
+      UNIX_TIMESTAMP(`orgdomaincerts`.`revoked`) as `revoked`,
+      if (`orgdomaincerts`.`expire`=0,CURRENT_TIMESTAMP(),`orgdomaincerts`.`modified`) as `modified`,
+       `CN`,
       `orgdomaincerts`.`serial`,
       `orgdomaincerts`.`id` as `id`,
       `orgdomaincerts`.`description`, `orginfo`.`O`
@@ -94,14 +96,14 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
     if(0==$status)
     {
       $query .= "AND `revoked`=0 AND `renewed`=0 ";
-      $query .= "HAVING `timeleft` > 0 ";
+      $query .= "HAVING `timeleft` > 0 or `expires` = 0 ";
     }
     switch ($sorting){
       case 0:
-        $query .= "ORDER BY `orginfo`.`O`, `orgdomaincerts`.`expire` desc";
+        $query .= "ORDER BY `orginfo`.`O`, `modified` desc";
         break;
       case 1:
-        $query .= "ORDER BY `orginfo`.`O`, `orgdomaincerts`.`CN`, `orgdomaincerts`.`expire` desc";
+        $query .= "ORDER BY `orginfo`.`O`, `orgdomaincerts`.`CN`, `modified` desc";
         break;
     }
 

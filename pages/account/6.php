@@ -25,7 +25,7 @@ if(array_key_exists('cert',$_REQUEST)) {
 $query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`emailcerts`.`expire`) as `expired`,
-			`emailcerts`.`expire` as `expires`,
+			`emailcerts`.`expire`,
 			`emailcerts`.`revoked` as `revoke`,
 			UNIX_TIMESTAMP(`emailcerts`.`revoked`) as `revoked`,
 			`emailcerts`.`id`,
@@ -60,7 +60,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	}
 
 	$crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname $outform`;
+	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname $outform");
 
 	header("Content-Type: application/pkix-cert");
 	header("Content-Length: ".strlen($cert));
@@ -82,7 +82,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	} else {
 		// All other browsers
 		$crtname=escapeshellarg($row['crt_name']);
-		$cert = `/usr/bin/openssl x509 -in $crtname -outform DER`;
+		$cert = shell_exec("/usr/bin/openssl x509 -in $crtname -outform DER");
 
 		header("Content-Type: application/x-x509-user-cert");
 		header("Content-Length: ".strlen($cert));
@@ -111,7 +111,7 @@ if (array_key_exists('format', $_REQUEST)) {
 
 	// Allow to directly copy and paste the cert in PEM format
 	$crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname -outform PEM`;
+	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname -outform PEM");
 	echo "<pre>$cert</pre>";
 
 	?>
@@ -137,11 +137,11 @@ if (array_key_exists('format', $_REQUEST)) {
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Email Address")?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : $row['CN'])?></td>
+		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : sanitizeHTML($row['CN']))?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("SerialNumber")?></td>
-		<td class="DataTD"><?=$row['serial']?></td>
+		<td class="DataTD"><?=sanitizeHTML($row['serial'])?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Revoked")?></td>
@@ -149,7 +149,7 @@ if (array_key_exists('format', $_REQUEST)) {
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Expires")?></td>
-		<td class="DataTD"><?=$row['expires']?></td>
+		<td class="DataTD"><?=$row['expire']?></td>
 	</tr>
 	<tr>
 		<td class="DataTD"><?=_("Login")?></td>

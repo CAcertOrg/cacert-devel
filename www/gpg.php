@@ -63,12 +63,18 @@ if(0)
 function verifyName($name)
 {
 	if($name == "") return 0;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']) return 1;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']) return 1;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix']) return 1;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix']) return 1;
-	return 0;
 
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'])) return 1; // John Doe
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname'])) return 1; // John Joseph Doe
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname'])) return 1; // John J Doe
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname'])) return 1; // John J. Doe
+
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; // John Doe Jr.
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John Joseph Doe Jr.
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J Doe Jr.
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J. Doe Jr.
+
+	return 0;
 }
 
 function verifyEmail($email)
@@ -106,7 +112,7 @@ function verifyEmail($email)
 					clean_gpgcsr($CSR),
 					$gpg);
 
-			`rm -r $tmpdir`;
+			shell_exec("rm -r $tmpdir");
 		}
 
 		if ($err)
@@ -334,7 +340,7 @@ function verifyEmail($email)
 
 
 		$cmd_keyid = escapeshellarg($keyid);
-		$gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1`);
+		$gpg = trim(shell_exec("gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1"));
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
@@ -519,7 +525,7 @@ function verifyEmail($email)
 
 		$csrname=generatecertpath("csr","gpg",$insert_id);
 		$cmd_keyid = escapeshellarg($keyid);
-		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname`;
+		$do=shell_exec("gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname");
 
 		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
 		waitForResult('gpg', $insert_id);

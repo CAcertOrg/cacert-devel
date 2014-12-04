@@ -14,9 +14,9 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
-<?
-        $res=mysql_fetch_assoc(mysql_query("select sum(acount) as summe from countries"));
+*/
+
+	$res=mysql_fetch_assoc(mysql_query("select sum(acount) as summe from countries"));
 	$total1 =$res['summe'];
 
 	$locid=array_key_exists('locid',$_REQUEST)?intval($_REQUEST['locid']):0;
@@ -91,7 +91,7 @@
 	{
 	$query = "select *, `users`.`id` as `id` from `users`,`notary` where `listme`='1' and
 			`ccid`='".$ccid."' and `regid`='".$regid."' and
-			`locid`='".$locid."' and `users`.`id`=`notary`.`to`
+			`locid`='".$locid."' and `users`.`id`=`notary`.`to` and `notary`.`deleted`=0
 			group by `notary`.`to` HAVING SUM(`points`) >= 100 order by `points` desc";
 	$list = mysql_query($query);
 	if(mysql_num_rows($list) > 0)
@@ -104,19 +104,19 @@
     <td class="title"><?=_("Contact Details")?></td>
     <td class="title"><?=_("Email Assurer")?></td>
     <td class="title"><?=_("Assurer Challenge")?></td>
-
   </tr>
-<? while($row = mysql_fetch_assoc($list)) { ?>
+
+<?		while($row = mysql_fetch_assoc($list)) { ?>
   <tr>
-    <td class="DataTD" width="100"><nobr><?=$row['fname']?> <?=substr($row['lname'], 0, 1)?></nobr></td>
+    <td class="DataTD" width="100"><nobr><?=sanitizeHTML($row['fname'])?> <?=substr($row['lname'], 0, 1)?>.</nobr></td>
     <td class="DataTD"><?=maxpoints($row['id'])?></td>
-    <td class="DataTD"><?=$row['contactinfo']?></td>
+    <td class="DataTD"><?=sanitizeHTML($row['contactinfo'])?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['id'])?>"><?=_("Email Me")?></a></td>
     <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
-
   </tr>
-<? } 
-        }
+<?
+		}
+	}
 ?>
 </table>
 <br>

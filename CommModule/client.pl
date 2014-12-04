@@ -31,7 +31,7 @@ use DBI;
 use Locale::gettext;
 use IO::Socket;
 use MIME::Base64;
-use Digest::SHA1 qw(sha1_hex);
+use Digest::SHA qw(sha1_hex);
 
 #Protocol version:
 my $ver=1;
@@ -441,7 +441,7 @@ sub calculateDays($)
 {
   if($_[0])
   {
-    my @sum = $dbh->selectrow_array("select sum(`points`) as `total` from `notary` where `to`='".$_[0]."' group by `to`");
+    my @sum = $dbh->selectrow_array("select sum(`points`) as `total` from `notary` where `to`='".$_[0]."' and `deleted`=0 group by `to`");
     SysLog("Summe: $sum[0]\n") if($debug);
 
     return ($sum[0]>=50)?730:180;
