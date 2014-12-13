@@ -1002,7 +1002,7 @@ my @ready=$sel->can_read($starttime);
 my $count=0;
 
 #As soon as the client connected successfully, the client has to send a request faster than every 10 seconds
-while(@ready = $sel->can_read(15) && -f "./server.pl-active")
+while((@ready = $sel->can_read(15)) && -f "./server.pl-active")
 {
   my $data="";
   #my $length=read SER,$data,1;
