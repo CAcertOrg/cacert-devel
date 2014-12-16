@@ -17,6 +17,8 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
+	require_once("../includes/lib/general.php");
+	require_once('../includes/notary.inc.php');
 
         $id = 0; if(array_key_exists('id',$_REQUEST)) $id=intval($_REQUEST['id']);
 	$oldid = $_REQUEST['oldid'] = array_key_exists('oldid',$_REQUEST) ? intval($_REQUEST['oldid']) : 0;
@@ -52,7 +54,7 @@ if(0)
   {
     showheader(_("Welcome to CAcert.org"));
     echo "The OpenPGP signing system is currently shutdown due to a maintenance. We hope to get it fixed within the next few hours. We are very sorry for the inconvenience.";
-  
+
     exit(0);
   }
 }
@@ -61,12 +63,18 @@ if(0)
 function verifyName($name)
 {
 	if($name == "") return 0;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']) return 1;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']) return 1;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix']) return 1;
-	if($name == $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix']) return 1;
-	return 0;
 
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'])) return 1; // John Doe
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname'])) return 1; // John Joseph Doe
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname'])) return 1; // John J Doe
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname'])) return 1; // John J. Doe
+
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; // John Doe Jr.
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John Joseph Doe Jr.
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J Doe Jr.
+	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J. Doe Jr.
+
+	return 0;
 }
 
 function verifyEmail($email)
@@ -82,17 +90,44 @@ function verifyEmail($email)
 	$state=0;
 	if($oldid == "0" && $CSR != "")
 	{
-		$debugkey = $gpgkey = clean_gpgcsr($CSR);
+		if(!array_key_exists('CCA',$_REQUEST))
+		{
+			showheader(_("My CAcert.org Account!"));
+			echo _("You did not accept the CAcert Community Agreement (CCA), hit the back button and try again.");
+			showfooter();
+			exit;
+		}
 
-		$tnam = tempnam('/tmp/', '__gpg');
-		$fp = fopen($tnam, 'w');
-		fwrite($fp, $gpgkey);
-		fclose($fp);
-		$debugpg = $gpg = trim(`gpg --with-colons --homedir /tmp 2>&1 < $tnam`);
-		unlink($tnam);
+		$err = runCommand('mktemp --directory /tmp/cacert_gpg.XXXXXXXXXX',
+				"",
+				$tmpdir);
+		if (!$tmpdir)
+		{
+			$err = true;
+		}
+
+		if (!$err)
+		{
+			$err = runCommand("gpg --with-colons --homedir $tmpdir 2>&1",
+					clean_gpgcsr($CSR),
+					$gpg);
+
+			shell_exec("rm -r $tmpdir");
+		}
+
+		if ($err)
+		{
+			showheader(_("Welcome to CAcert.org"));
+
+			echo "<p style='color:#ff0000'>"._("There was an error parsing your key.")."</p>";
+			unset($_REQUEST['process']);
+			$id = $oldid;
+			unset($oldid);
+			exit();
+		}
 
 		$lines = "";
-		$gpgarr = explode("\n", $gpg);
+		$gpgarr = explode("\n", trim($gpg));
 		foreach($gpgarr as $line)
 		{
 			#echo "Line[]: $line <br/>\n";
@@ -143,7 +178,7 @@ function verifyEmail($email)
 			$uidformatwrong=0;
 
 			if(sizeof($bits)<10) $uidformatwrong=1;
-			
+
 			if(preg_match("/\@.*\@/",$bits[9]))
 			{
 				showheader(_("Welcome to CAcert.org"));
@@ -158,18 +193,18 @@ function verifyEmail($email)
 			// Name (Comment) <Email>
 			if(preg_match("/^([^\(\)\[@<>]+) \(([^\(\)@<>]*)\) <([\w=\/%.-]*\@[\w.-]*|[\w.-]*\![\w=\/%.-]*)>/",$bits[9],$matches))
 			{
-			  $name=trim(hex2bin($matches[1]));
+			  $name=trim(gpg_hex2bin($matches[1]));
 			  $nocomment=0;
-			  $comm=trim(hex2bin($matches[2]));
-			  $mail=trim(hex2bin($matches[3]));
+			  $comm=trim(gpg_hex2bin($matches[2]));
+			  $mail=trim(gpg_hex2bin($matches[3]));
 			}
 			// Name <EMail>
 			elseif(preg_match("/^([^\(\)\[@<>]+) <([\w=\/%.-]*\@[\w.-]*|[\w.-]*\![\w=\/%.-]*)>/",$bits[9],$matches))
 			{
-			  $name=trim(hex2bin($matches[1]));
+			  $name=trim(gpg_hex2bin($matches[1]));
 			  $nocomment=1;
 			  $comm="";
-			  $mail=trim(hex2bin($matches[2]));
+			  $mail=trim(gpg_hex2bin($matches[2]));
 			}
 			// Unrecognized format
 			else
@@ -251,7 +286,6 @@ function verifyEmail($email)
 		}
 		$resulttable.="</table>";
 
-
 		if($nok==0)
 		{
 			showheader(_("Welcome to CAcert.org"));
@@ -261,7 +295,6 @@ function verifyEmail($email)
 			unset($_REQUEST['process']);
 			$id = $oldid;
 			unset($oldid);
-			$do = `echo "$debugkey\n--\n$debugpg\n--" >> /www/tmp/gpg.debug`;
 			exit();
 		}
 		elseif($nerr)
@@ -275,17 +308,27 @@ function verifyEmail($email)
 
 	if($oldid == "0" && $CSR != "")
 	{
+		write_user_agreement(intval($_SESSION['profile']['id']), "CCA", "certificate creation", "", 1);
+
+		//set variable for comment
+		if(trim($_REQUEST['description']) == ""){
+			$description= "";
+		}else{
+			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+		}
+
 		$query = "insert into `gpg` set `memid`='".intval($_SESSION['profile']['id'])."',
 						`email`='".mysql_real_escape_string($lastvalidemail)."',
 						`level`='1',
 						`expires`='".mysql_real_escape_string($expires)."',
 						`multiple`='".mysql_real_escape_string($multiple)."',
-						`keyid`='".mysql_real_escape_string($keyid)."'";
+						`keyid`='".mysql_real_escape_string($keyid)."',
+						`description`='".mysql_real_escape_string($description)."'";
 		mysql_query($query);
-		$id = mysql_insert_id();
+		$insert_id = mysql_insert_id();
 
 
-		$cwd = '/tmp/gpgspace'.$id;
+		$cwd = '/tmp/gpgspace'.$insert_id;
 		mkdir($cwd,0755);
 
 		$fp = fopen("$cwd/gpg.csr", "w");
@@ -296,7 +339,8 @@ function verifyEmail($email)
 		system("gpg --homedir $cwd --import $cwd/gpg.csr");
 
 
-		$debugpg = $gpg = trim(`gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $keyid 2>&1`);
+		$cmd_keyid = escapeshellarg($keyid);
+		$gpg = trim(shell_exec("gpg --homedir $cwd --with-colons --fixed-list-mode --list-keys $cmd_keyid 2>&1"));
 		$lines = "";
 		$gpgarr = explode("\n", $gpg);
 		foreach($gpgarr as $line)
@@ -319,13 +363,13 @@ function verifyEmail($email)
 					$pos = strlen($bits[9]);
 				}
 
-				$name = trim(hex2bin(trim(substr($bits[9], 0, $pos))));
+				$name = trim(gpg_hex2bin(trim(substr($bits[9], 0, $pos))));
 				$nameok=verifyName($name);
 				if($nocomment == 0)
 				{
 					$pos += 2;
 					$pos2 = strpos($bits[9], ")");
-					$comm = trim(hex2bin(trim(substr($bits[9], $pos, $pos2 - $pos))));
+					$comm = trim(gpg_hex2bin(trim(substr($bits[9], $pos, $pos2 - $pos))));
 					if($comm != "")
 						$comment[] = $comm;
 					$pos = $pos2 + 3;
@@ -334,15 +378,15 @@ function verifyEmail($email)
 				}
 
 				$mail="";
-	                        if (preg_match("/<([\w.-]*\@[\w.-]*)>/", $bits[9],$match)) {
+				if (preg_match("/<([\w.-]*\@[\w.-]*)>/", $bits[9],$match)) {
 					//echo "Found: ".$match[1];
-					$mail = trim(hex2bin($match[1]));
+					$mail = trim(gpg_hex2bin($match[1]));
 				}
 				else
 				{
 					//echo "Not found!\n";
 				}
-	
+
 				$emailok=verifyEmail($mail);
 
 				$uidid=$bits[7];
@@ -384,95 +428,90 @@ function verifyEmail($email)
 			}
 		}
 
+		if(count($ToBeDeleted)>0)
+		{
+			$descriptorspec = array(
+				0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+				1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+				2 => array("pipe", "w") // stderr is a file to write to
+			);
 
+			$stderr = fopen('php://stderr', 'w');
 
+			//echo "Keyid: $keyid\n";
 
-        if(count($ToBeDeleted)>0)
-	{
+			$cmd_keyid = escapeshellarg($keyid);
+			$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $cmd_keyid", $descriptorspec, $pipes);
 
+			//echo "Process: $process\n";
+			//fputs($stderr,"Process: $process\n");
 
-		$descriptorspec = array(
-			0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-			1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-			2 => array("pipe", "w") // stderr is a file to write to
-		);
- 
-		$stderr = fopen('php://stderr', 'w'); 
+			if (is_resource($process)) {
+			//echo("it is a resource\n");
+			// $pipes now looks like this:
+			// 0 => writeable handle connected to child stdin
+			// 1 => readable handle connected to child stdout
+			// Any error output will be appended to /tmp/error-output.txt
+				while (!feof($pipes[1]))
+				{
+					$buffer = fgets($pipes[1], 4096);
+					//echo $buffer;
 
-
-		//echo "Keyid: $keyid\n";
-
-		$process = proc_open("/usr/bin/gpg --homedir $cwd --no-tty --command-fd 0 --status-fd 1 --logger-fd 2 --edit-key $keyid", $descriptorspec, $pipes);
- 
-		//echo "Process: $process\n";
-		//fputs($stderr,"Process: $process\n");
-
-		if (is_resource($process)) {
-		//echo("it is a resource\n");
-		// $pipes now looks like this:
-		// 0 => writeable handle connected to child stdin
-		// 1 => readable handle connected to child stdout
-		// Any error output will be appended to /tmp/error-output.txt
-			while (!feof($pipes[1])) 
+			if($buffer == "[GNUPG:] GET_BOOL keyedit.sign_all.okay\n")
 			{
-				$buffer = fgets($pipes[1], 4096);
-				//echo $buffer;
-
-      if($buffer == "[GNUPG:] GET_BOOL keyedit.sign_all.okay\n")
-      {
-        fputs($pipes[0],"yes\n");
-      }
-      elseif($buffer == "[GNUPG:] GOT_IT\n")
-      {
-      }
-      elseif(ereg("^\[GNUPG:\] GET_BOOL keyedit\.remove\.uid\.okay\s*",$buffer))
-      {
-        fputs($pipes[0],"yes\n");
-      }
-      elseif(ereg("^\[GNUPG:\] GET_LINE keyedit\.prompt\s*",$buffer))
-      {
-        if(count($ToBeDeleted)>0)
-        {
-	  $delthisuid=array_pop($ToBeDeleted);
-	  //echo "Deleting an UID $delthisuid\n";
-          fputs($pipes[0],"uid ".$delthisuid."\n");
-        }
-        else
-        {
-	  //echo "Saving\n";
-          fputs($pipes[0],$state?"save\n":"deluid\n");
-          $state++;
-        }
-      }
-      elseif($buffer == "[GNUPG:] GOOD_PASSPHRASE\n")
-      {
-      }
-      elseif(ereg("^\[GNUPG:\] KEYEXPIRED ",$buffer))
-      {
-        echo "Key expired!\n";
-	exit;
-      }
-      elseif($buffer == "")
-      {
-        //echo "Empty!\n";
-      }
-      else
-      {
-        echo "ERROR: UNKNOWN $buffer\n";
-      }
+				fputs($pipes[0],"yes\n");
+			}
+			elseif($buffer == "[GNUPG:] GOT_IT\n")
+			{
+			}
+			elseif(ereg("^\[GNUPG:\] GET_BOOL keyedit\.remove\.uid\.okay\s*",$buffer))
+			{
+				fputs($pipes[0],"yes\n");
+			}
+			elseif(ereg("^\[GNUPG:\] GET_LINE keyedit\.prompt\s*",$buffer))
+			{
+				if(count($ToBeDeleted)>0)
+				{
+					$delthisuid=array_pop($ToBeDeleted);
+					//echo "Deleting an UID $delthisuid\n";
+					fputs($pipes[0],"uid ".$delthisuid."\n");
+				}
+				else
+				{
+					//echo "Saving\n";
+					fputs($pipes[0],$state?"save\n":"deluid\n");
+					$state++;
+				}
+			}
+			elseif($buffer == "[GNUPG:] GOOD_PASSPHRASE\n")
+			{
+			}
+			elseif(ereg("^\[GNUPG:\] KEYEXPIRED ",$buffer))
+			{
+				echo "Key expired!\n";
+				exit;
+			}
+			elseif($buffer == "")
+			{
+				//echo "Empty!\n";
+			}
+			else
+			{
+				echo "ERROR: UNKNOWN $buffer\n";
+			}
 
 
 			}
 			//echo "Fertig\n";
 			fclose($pipes[0]);
- 
+
 			//echo stream_get_contents($pipes[1]);
 			fclose($pipes[1]);
- 
+
 			// It is important that you close any pipes before calling
 			// proc_close in order to avoid a deadlock
 			$return_value = proc_close($process);
- 
+
 			//echo "command returned $return_value\n";
 		}
 		else
@@ -484,15 +523,16 @@ function verifyEmail($email)
 		}
 
 
-		$csrname=generatecertpath("csr","gpg",$id);
-		$do=`gpg --homedir $cwd --batch --export-options export-minimal --export $keyid >$csrname`;
+		$csrname=generatecertpath("csr","gpg",$insert_id);
+		$cmd_keyid = escapeshellarg($keyid);
+		$do=shell_exec("gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname");
 
-		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$id'");
-		waitForResult('gpg', $id);
+		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
+		waitForResult('gpg', $insert_id);
 
 		showheader(_("Welcome to CAcert.org"));
 		echo $resulttable;
-		$query = "select * from `gpg` where `id`='$id' and `crt`!=''";
+		$query = "select * from `gpg` where `id`='$insert_id' and `crt`!=''";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) <= 0)
 		{
@@ -500,10 +540,27 @@ function verifyEmail($email)
 			echo _("If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you.");
 		} else {
 			echo "<pre>";
-			readfile(generatecertpath("crt","gpg",$id));
+			readfile(generatecertpath("crt","gpg",$insert_id));
 			echo "</pre>";
 		}
 
+		showfooter();
+		exit;
+	}
+
+	if($oldid == 2 && array_key_exists('change',$_REQUEST) && $_REQUEST['change'] != "")
+	{
+		showheader(_("My CAcert.org Account!"));
+		foreach($_REQUEST as $id => $val)
+		{
+			if(substr($id,0,14)=="check_comment_")
+			{
+				$cid = intval(substr($id,14));
+				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
+				mysql_query("update `gpg` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+			}
+		}
+		echo(_("Certificate settings have been changed.")."<br/>\n");
 		showfooter();
 		exit;
 	}

@@ -17,6 +17,8 @@
 */ ?>
 <?
 	require_once("../includes/loggedin.php");
+	require_once("../includes/notary.inc.php");
+	require_once("../includes/lib/l10n.php");
 
 	loadem("account");
 
@@ -58,24 +60,13 @@
 			{
 				$row = mysql_fetch_assoc($res);
 				echo $row['email']."<br>\n";
-				$query = "select `emailcerts`.`id`
-						from `emaillink`,`emailcerts` where
-						`emailid`='$emailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and
-						`revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0
-						group by `emailcerts`.`id`";
-				$dres = mysql_query($query);
-				while($drow = mysql_fetch_assoc($dres))
-					mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01' where `id`='".intval($drow['id'])."'");
-
-				$do = `../scripts/runclient`;
-				$query = "update `email` set `deleted`=NOW() where `id`='".intval($emailid)."'";
-				mysql_query($query);
+				account_email_delete($row['id']);
 			}
 			mysql_query("update `disputeemail` set hash='',action='accept' where `id`='$emailid'");
-	                $rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
-        	        $rc = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
-        	        $res = mysql_query("select * from `users` where `id`='$oldmemid'");
-	                $user = mysql_fetch_assoc($res);
+			$rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
+			$rc2 = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
+			$res = mysql_query("select * from `users` where `id`='$oldmemid'");
+			$user = mysql_fetch_assoc($res);
 			if($rc == 0 && $rc2 == 0 && $_SESSION['_config']['email'] == $user['email'])
 			{
 				mysql_query("update `users` set `deleted`=NOW() where `id`='$oldmemid'");
@@ -160,17 +151,13 @@
 			showheader(_("Domain Dispute"));
 			echo "<p>"._("You have opted to accept this dispute and the request will now remove this domain from the existing account, and revoke any current certificates.")."</p>";
 			echo "<p>"._("The following accounts have been removed:")."<br>\n";
+			//new account_domain_delete($domainid, $memberID)
 			$query = "select * from `domains` where `id`='$domainid' and deleted=0";
 			$res = mysql_query($query);
 			if(mysql_num_rows($res) > 0)
 			{
-                                echo $_SESSION['_config']['domain']."<br>\n";
-                                mysql_query("update `domains` set `deleted`=NOW() where `id`='$domainid'");
-				$query = "select * from `domlink` where `domid`='$domainid'";
-				$res = mysql_query($query);
-				while($row = mysql_fetch_assoc($res))
-	                                mysql_query("update `domaincerts` set `revoked`='1970-01-01 10:00:01' where `id`='".$row['certid']."' and `revoked`=0 and UNIX_TIMESTAMP(`expire`)-UNIX_TIMESTAMP() > 0");
-				$do = `../scripts/runserver`;
+				echo $_SESSION['_config']['domain']."<br>\n";
+				account_domain_delete($domainid);
 			}
 			mysql_query("update `disputedomain` set hash='',action='accept' where `id`='$domainid'");
 			showfooter();
@@ -236,6 +223,23 @@
 			exit;
 		}
 
+		//check if email belongs to locked account
+		$res = mysql_query("select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysql_num_rows($res) > 0)
+		{
+			showheader(_("Email Dispute"));
+			printf(_("Sorry, the email address '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($email),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = sprintf("Someone has just attempted to dispute this email '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $email, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
+
+			showfooter();
+			exit;
+		}
+
 		$res = mysql_query("select * from `disputeemail` where `email`='$email' and hash!=''");
 		if(mysql_num_rows($res) > 0)
 		{
@@ -284,11 +288,15 @@
 				`IP`='".$_SERVER['REMOTE_ADDR']."'";
 		mysql_query($query);
 
+		$my_translation = L10n::get_translation();
+		L10n::set_recipient_language($oldmemid);
+
 		$body = sprintf(_("You have been sent this email as the email address '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"), $email)."\n\n";
 		$body .= "https://".$_SESSION['_config']['normalhostname']."/disputes.php?type=email&emailid=$emailid&hash=$hash\n\n";
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
 
 		sendmail($email, "[CAcert.org] "._("Dispute Probe"), $body, "support@cacert.org", "", "", "CAcert Support");
+		L10n::set_translation($my_translation);
 
 		showheader(_("Email Dispute"));
 		printf(_("The email address '%s' has been entered into the dispute system, the email address will now be sent an email which will give the recipent the option of accepting or rejecting the request, if after 2 days we haven't received a valid response for or against we will discard the request."), sanitizeHTML($email));
@@ -304,6 +312,23 @@
 		{
 			showheader(_("Domain Dispute"));
 			echo _("Not a valid Domain. Can't continue.");
+			showfooter();
+			exit;
+		}
+
+		//check if domain belongs to locked account
+		$res = mysql_query("select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysql_num_rows($res) > 0)
+		{
+			showheader(_("Domain Dispute"));
+			printf(_("Sorry, the domain '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($domain),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
+			$duser=$_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'];
+			$body = sprintf("Someone has just attempted to dispute this domain '%s', which belongs to a locked account:\n".
+				"Username(ID): %s (%s)\n".
+				"email: %s\n".
+				"IP/Hostname: %s\n", $domain, $duser, $_SESSION['profile']['id'], $_SESSION['profile']['email'], $_SERVER['REMOTE_ADDR'].(array_key_exists('REMOTE_HOST',$_SERVER)?"/".$_SERVER['REMOTE_HOST']:""));
+			sendmail("support@cacert.org", "[CAcert.org] failed dispute on locked account", $body, $_SESSION['profile']['email'], "", "", $duser);
+
 			showfooter();
 			exit;
 		}
@@ -427,10 +452,13 @@
 		$query = "insert into `disputedomain` set `domain`='$domain',`memid`='".$_SESSION['profile']['id']."',
 				`oldmemid`='$oldmemid',`created`=NOW(),`hash`='$hash',`id`='$domainid'";
 		mysql_query($query);
+		$my_translation = L10n::get_translation();
+		L10n::set_recipient_language($oldmemid);
 
 		$body = sprintf(_("You have been sent this email as the domain '%s' is being disputed. You have the option to accept or reject this request, after 2 days the request will automatically be discarded. Click the following link to accept or reject the dispute:"), $domain)."\n\n";
 		$body .= "https://".$_SESSION['_config']['normalhostname']."/disputes.php?type=domain&domainid=$domainid&hash=$hash\n\n";
 		$body .= _("Best regards")."\n"._("CAcert.org Support!");
+		L10n::set_recipient_language($my_translation);
 
 		sendmail($authaddy, "[CAcert.org] "._("Dispute Probe"), $body, "support@cacert.org", "", "", "CAcert Support");
 

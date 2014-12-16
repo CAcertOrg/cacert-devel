@@ -6,20 +6,22 @@
 /***********************************************/
 /* HTML tag styles                             */
 /***********************************************/
-body{
+
+body {
 	font-family: Arial,sans-serif;
 	color: #333333;
-	line-height: 1.166;	
+	line-height: 1.166;
 	margin: 0px;
 	padding: 0px;
-	background: #cccccc; 
-/*      url("/siteimages/bg_grad.jpg") fixed;   */
+	background: #cccccc;
+/*	url("/siteimages/bg_grad.jpg") fixed;   */
 }
+
 
 /******* hyperlink and anchor tag styles *******/
 
 a:link, a:visited {
-	color: #005FA9;
+	color: #005fa9;
 	text-decoration: none;
 }
 
@@ -27,85 +29,95 @@ a:hover {
 	text-decoration: underline;
 }
 
+
 /************** header tag styles **************/
 
-h1{
- font: bold 120% Arial,sans-serif;
- color: #334d55;
- margin: 0px;
- padding: 0px;
+h1 {
+	font: bold 120% Arial ,sans-serif;
+	color: #334d55;
+	margin: 0px;
+	padding: 0px;
 }
 
-h2{
- font: bold 114% Arial,sans-serif;
- color: #006699;
- margin: 0px;
- padding: 0px;
+h2 {
+	font: bold 114% Arial ,sans-serif;
+	color: #006699;
+	margin: 0px;
+	padding: 0px;
 }
 
-h3{
- font: bold 100% Arial,sans-serif;
- color: #334d55;
- margin: 0px;
- padding: 0px;
+h3 {
+	font: bold 100% Arial ,sans-serif;
+	color: #334d55;
+	margin: 0px;
+	padding: 0px;
 }
 
-h3.pointer{
- cursor: pointer;
- /* cursor: hand; */
+h3.pointer {
+	cursor: pointer;
+	/* cursor: hand; */
 }
 
-h4{
- font: bold 100% Arial,sans-serif;
- color: #333333;
- margin: 0px;
- padding: 0px;
+h4 {
+	font: bold 100% Arial ,sans-serif;
+	color: #333333;
+	margin: 0px;
+	padding: 0px;
 }
 
-h5{
- font: 100% Arial,sans-serif;
- color: #334d55;
- margin: 0px;
- padding: 0px;
+h5 {
+	font: 100% Arial ,sans-serif;
+	color: #334d55;
+	margin: 0px;
+	padding: 0px;
 }
 
 
 /*************** list tag styles ***************/
 
 ul.menu {
-list-style: none;
-margin :0px 0px 0px 15px;
-padding-left: 5px;
-border-left: 1px dotted #000;
+	list-style: none;
+	margin: 0px 0px 0px 15px;
+	padding-left: 5px;
+	border-left: 1px dotted #000;
 }
 
 ul.top {
-list-style: none;
-margin: 0px 0px 0px 15px;
-padding-left: 5px;
-border-left: 0px;
+	list-style: none;
+	margin: 0px 0px 0px 15px;
+	padding-left: 5px;
+	border-left: 0px;
 }
 
 ul.no_indent {
-list-style: none;
-padding: 0px;
+	list-style: none;
+	padding: 0px;
 }
+
+.attach_ul {
+	margin-bottom: 0px;
+}
+
+.attach_ul + ul {
+	margin-top: 0px;
+}
+
 
 /***********************************************/
 /* Layout Divs                                 */
 /***********************************************/
-#pagecell1{
-	position:absolute;
+
+#pagecell1 {
+	position: absolute;
 	top: 2%;
 	left: 2%;
 	right: 2%;
 	width: 96%;
 	background-color: #ffffff;
-	
 }
 
 #tl {
-	position:absolute;
+	position: absolute;
 	top: -1px;
 	left: -1px;
 	margin: 0px;
@@ -114,7 +126,7 @@ padding: 0px;
 }
 
 #tr {
-	position:absolute;
+	position: absolute;
 	top: -1px;
 	right: -1px;
 	margin: 0px;
@@ -122,43 +134,43 @@ padding: 0px;
 	z-index: 100;
 }
 
-#masthead{
+#masthead {
 	position: absolute;
 	top: 0px;
 	left: 2%;
 	right: 2%;
-	width:95.6%;
-	
+	width: 95.6%;
 }
 
-#pageNav{
+#pageNav {
 	float: right;
-	width:178px;
+	width: 178px;
 	padding: 0px;
 	background-color: #F5f7f7;
 	border-left: 1px solid #cccccc;
 	font: small Verdana,sans-serif;
 }
 
-#content{
+#content {
 	padding: 0px 10px 0px 0px;
-	margin:0px 178px 0px 0px;
+	margin: 0px 178px 0px 0px;
 }
 
 
 /***********************************************/
 /* Component Divs                              */
 /***********************************************/
-#siteName{
+#siteName {
 	margin: 0px;
 	padding: 16px 0px 8px 0px;
 	color: #ffffff;
 	font-weight: normal;
 }
 
+
 /************** utility styles *****************/
 
-#utility{
+#utility {
 	font: 75% Verdana,sans-serif;
 	position: absolute;
 	top: 16px;
@@ -166,7 +178,7 @@ padding: 0px;
 	color: #919999;
 }
 
-#utility a{
+#utility a {
 	color: #ffffff;
 }
 
@@ -174,46 +186,48 @@ padding: 0px;
 	text-decoration: underline;
 }
 
+
 /************** pageName styles ****************/
 
-#pageName{
+#pageName {
 	padding: 0px 0px 14px 10px;
 	margin: 0px;
-	border-bottom:1px solid #ccd2d2;
+	border-bottom: 1px solid #ccd2d2;
 	z-index: 2;
 }
 
-#pageName h2{
+#pageName h2 {
 	font: bold 175% Arial,sans-serif;
 	color: #000000;
-	margin:0px;
+	margin: 0px;
 	padding: 0px;
 }
+
 /*
 #pageLogo {
-      position: absolute;
-      top: 8px;
-      left: 10px;
-      z-index: 5;
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	z-index: 5;
 }
 */
 
+
 /************* globalNav styles ****************/
 
-#globalNav{
-position: relative;
-width: 100%;
-min-width: 640px;
-height: 32px;
-color: #cccccc;
-padding: 0px;
-margin: 0px;
-background-image:  url("siteimages/glbnav_background.gif");
+#globalNav {
+	position: relative;
+	width: 100%;
+	min-width: 640px;
+	height: 32px;
+	color: #cccccc;
+	padding: 0px;
+	margin: 0px;
+	background-image: url("siteimages/glbnav_background.gif");
 }
 
-#globalNav img{
+#globalNav img {
 	margin-bottom: -4px;
- 
 }
 
 #gnl {
@@ -228,7 +242,7 @@ background-image:  url("siteimages/glbnav_background.gif");
 	right:0px;
 }
 
-#globalLink{
+#globalLink {
 	position: absolute;
 	top: 6px;
 	height: 22px;
@@ -241,24 +255,27 @@ background-image:  url("siteimages/glbnav_background.gif");
 
 
 a.glink, a.glink:visited {
-  	font-size: small;
-  	color: #000000;
+	font-size: small;
+	color: #000000;
 	font-weight: bold;
 	margin: 0px;
 	padding: 2px 5px 4px 5px;
-	border-right: 1px solid #8FB8BC;
+	border-right: 1px solid #8fb8bc;
 }
 
 a.glink:hover {
-  	background-image:  url("siteimages/glblnav_selected.gif");
+	background-image: url("siteimages/glblnav_selected.gif");
 	text-decoration: none;
 }
 
-.skipLinks {display: none;}
+.skipLinks {
+	display: none;
+}
+
 
 /************ subglobalNav styles **************/
 
-.subglobalNav{
+.subglobalNav {
 	position: absolute;
 	top: 84px;
 	left: 0px;
@@ -279,13 +296,15 @@ a.glink:hover {
 	color: #cccccc;
 }
 
+
 /*************** search styles *****************/
 /*
 #listshow {
 	z-order: 101;
 }
 */
-#search{
+
+#search {
 	position: absolute;
 	top: 125px;
 	right: 0px;
@@ -300,46 +319,46 @@ a.glink:hover {
 	font-size: 11px;
 }
 
-#search1{
+#search1 {
 	position: absolute;
 	top: 85px;
 	right: 300px;
 }
 
-#search2{
+#search2 {
 	position: absolute;
 	top: 100px;
 	right: 300px;
 }
 
-#search3{
+#search3 {
 	position: absolute;
 	top: 85px;
 	right: 240px;
 }
 
-#search4{
+#search4 {
 	position: absolute;
 	top: 100px;
 	right: 226px;
 }
 
-#googlead{
+#googlead {
 	position: absolute;
 	top: 5px;
 	right: 0px;
 	z-index: -10;
 }
 
-#search input{
-  font-size: 70%;
-  margin: 0px  0px 0px 10px;
+#search input {
+	font-size: 70%;
+	margin: 0px 0px 0px 10px;
 }
- 
+
 #search a:link, #search a:visited {
 	font-size: 80%;
 	font-weight: bold;
-	
+
 }
 
 #search a:hover {
@@ -349,40 +368,42 @@ a.glink:hover {
 
 /************* breadCrumb styles ***************/
 
-#breadCrumb{
+#breadCrumb {
 	padding: 5px 0px 5px 10px;
 	font: small Verdana,sans-serif;
-	color: #AAAAAA;
+	color: #aaaaaa;
 }
 
-#breadCrumb a{
-	color: #AAAAAA;
+#breadCrumb a {
+	color: #aaaaaa;
 }
 
 #breadCrumb a:hover {
-	color: #005FA9;
+	color: #005fa9;
 	text-decoration: underline;
 }
 
 
 /************** feature styles *****************/
 
-.feature{
+.feature {
 	padding: 0px 0px 10px 10px;
 	font-size: 80%;
 	min-height: 200px;
 	height: 200px;
 }
 
-.feature {height: auto;}
+.feature {
+	height: auto;
+}
 
-.feature h3{
+.feature h3 {
 	font: bold 175% Arial,sans-serif;
 	color: #000000;
 	padding: 30px 0px 5px 0px;
 }
 
-.feature img{
+.feature img {
 	float: left;
 	padding: 0px 10px 0px 0px;
 }
@@ -396,19 +417,15 @@ a.glink:hover {
 	min-height: 450px;
 }
 
-.story h3{
+.story h3 {
 	font: bold 125% Arial,sans-serif;
 	color: #000000;
 }
 
-.story p {
-	padding: 0px 0px 10px 0px;
-}
-
-.story a.capsule{
+.story a.capsule {
 	font: bold 1em Arial,sans-serif;
 	color: #005FA9;
-	display:block;
+	display: block;
 	padding-bottom: 5px;
 }
 
@@ -416,14 +433,14 @@ a.glink:hover {
 	text-decoration: underline;
 }
 
-td.storyLeft{
+td.storyLeft {
 	padding-right: 12px;
 }
 
 
 /************** siteInfo styles ****************/
 
-#siteInfo{
+#siteInfo {
 	clear: both;
 	border-top: 1px solid #cccccc;
 	font-size: small;
@@ -431,15 +448,15 @@ td.storyLeft{
 	padding: 10px 10px 10px 10px;
 }
 
+
 /************ sectionLinks styles **************/
 
-#sectionLinks{
+#sectionLinks {
 	margin: 0px;
 	padding: 0px;
-
 }
 
-#sectionLinks h3{
+#sectionLinks h3 {
 	padding: 10px 0px 2px 10px;
 	border-bottom: 1px solid #cccccc;
 }
@@ -448,7 +465,7 @@ td.storyLeft{
 	display: block;
 	border-top: 1px solid #ffffff;
 	border-bottom: 1px solid #cccccc;
-	background-image:  url("siteimages/bg_nav.jpg");
+	background-image: url("siteimages/bg_nav.jpg");
 	font-weight: bold;
 	padding: 3px 0px 3px 10px;
 	color: #21536A;
@@ -465,85 +482,99 @@ td.storyLeft{
 
 /************* relatedLinks styles **************/
 
-.relatedLinks{
+.relatedLinks {
 	margin: 0px;
 	padding: 0px 0px 10px 10px;
 	border-bottom: 1px solid #cccccc;
 }
 
-.relatedLinks h3{
+.relatedLinks h3 {
 	padding: 10px 0px 2px 0px;
 }
 
-.relatedLinks a{
-	display: block; 
+.relatedLinks a {
+	display: block;
 }
 
 
 /**************** advert styles *****************/
 
-#advert{
+#advert {
 	padding: 10px;
 }
 
-#advert img{
+#advert img {
 	display: block;
 }
+
 
 /********************* end **********************/
 
 .DataTD input, .DataTD textarea {
-	FONT-SIZE: 92%;
+	font-size: 92%;
 }
 
 .DataTD select, .DataTD option {
-	FONT-SIZE: 92%;
+	font-size: 92%;
 }
 
 .DataTD {
-	background-color: #E2E2E2;
+	background-color: #e2e2e2;
 	border-style: inset;
 	border-width: 1px;
-	FONT-SIZE: 8pt;
-	COLOR: #000000;
-	FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
 
 	background: #ffffff;
 	padding: 1px 5px 1px 5px;
-	border: 1px #CFCFCF solid;
-	border-left: 1px #CFCFCF dotted;
-	border-right: 1px #CFCFCF dotted;
+	border: 1px #cfcfcf solid;
+	border-left: 1px #cfcfcf dotted;
+	border-right: 1px #cfcfcf dotted;
 }
 
 .DataTDGrey {
 	background-color: #EFEDED;
 	border-style: inset;
 	border-width: 1px;
-	FONT-SIZE: 8pt;
-	COLOR: #000000;
-	FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
 
 	padding: 1px 5px 1px 5px;
 	border: 1px #CFCFCF solid;
-	border-left: 1px #CFCFCF dotted;
-	border-right: 1px #CFCFCF dotted;
+	border-left: 1px #cfcfcf dotted;
+	border-right: 1px #cfcfcf dotted;
 }
 
 .DataTDNotDotted {
-	background-color: #E2E2E2;
+	background-color: #e2e2e2;
 	border-style: inset;
 	border-width: 1px;
-	FONT-SIZE: 8pt;
-	COLOR: #000000;
-	FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #000000;
+	font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
 
 	background: #ffffff;
 	padding: 1px 5px 1px 5px;
 	border: 1px #CFCFCF solid;
-	border-left: 1px #CFCFCF solid;
-	border-right: 1px #CFCFCF solid;
+	border-left: 1px #cfcfcf solid;
+	border-right: 1px #cfcfcf solid;
 }
 
+.DataTDError {
+    border-style: inset;
+    border-width: 1px;
+    font-size: 8pt;
+    color: #ff0000;
+    font-family: Arial, Tahoma, Verdana, Helvetica, sans-serif;
+
+    background: #ffffff;
+    padding: 1px 5px 1px 5px;
+    border: 1px #cfcfcf solid;
+    border-left: 1px #cfcfcf dotted;
+    border-right: 1px #cfcfcf dotted;
+}
 .wrapper {
 	border-collapse: collapse;
 	font-family: verdana, sans-serif;
@@ -552,104 +583,147 @@ td.storyLeft{
 }
 
 td.greytxt {
-	color: #CCCCCC;
+	color: #cccccc;
 	font-size: smaller;
 	text-align: right;
 	vertical-align: bottom;
 }
-
+.bold, .primaryemailaddress {
+	font-weight:bold;
+}
+.italic, .deletedemailaddress {
+	font-style:italic;
+}
 .title {
-	background: #E2E2E2;
-	font-weight:BOLD;
+	background: #e2e2e2;
+	font-weight: bold;
 	padding: 1px 5px 1px 5px;
-	border: 1px solid #CFCFCF;
-	border-bottom: 3px double #CFCFCF;
+	border: 1px solid #cfcfcf;
+	border-bottom: 3px double #cfcfcf;
 	border-top: 1px solid #656565;
 	text-align: center;
 }
 
 .errmsg {
-	font-weight: BOLD;
+	font-weight: bold;
 	color: #FF0000;
 }
 
-.ac_menu
-{
-        border:1px solid black
+.ac_menu {
+	border: 1px solid black
 }
-.ac_normal
-{
-	background-color:#ffffff;
-        cursor:pointer;
+
+.ac_normal {
+	background-color: #ffffff;
+	cursor: pointer;
 }
-.ac_highlight
-{
-        background-color:#3366cc;
-	color:white;
-        cursor:pointer;
+
+.ac_highlight {
+	background-color: #3366cc;
+	color: white;
+	cursor: pointer;
 }
-.ac_normal .a
-{
-        font-size:13px;
-        color:black;
+
+.ac_normal .a {
+	font-size: 13px;
+	color: black;
 }
-.ac_highlight .a
-{
-	font-size:13px;
+
+.ac_highlight .a {
+	font-size: 13px;
 }
-.ac_normal .d
-{
-	float:right;
-        font-size:10px;
-        color:green;
+
+.ac_normal .d {
+	float: right;
+	font-size: 10px;
+	color: green;
 }
-.ac_highlight .d
-{
-	float:right;
-        font-size:10px;
+
+.ac_highlight .d {
+	float: right;
+	font-size: 10px;
 }
+
 
 /************** sponsorInfo styles ****************/
 
 div.sponsorinfo {
-      clear: both;
-      border-top: 1px solid #cccccc;
-      font-size: small;
-      color: #000000;
-      padding: 10px 10px 10px 10px;
+	clear: both;
+	border-top: 1px solid #cccccc;
+	font-size: small;
+	color: #000000;
+	padding: 10px 10px 10px 10px;
 }
 
 img.sponsorlogo {
-      margin-left: 10px;
-      margin-right: 10px;
-      border: 0px none;
-      vertical-align: middle;
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 0px none;
+	vertical-align: middle;
 }
+
 
 /************ Newsbox *************/
 
-#lnews {             /* class for the text "Latest News" */
-      font-size: small;
-      font-variant: small-caps;
+#lnews {	/* class for the text "Latest News" */
+	font-size: small;
+	font-variant: small-caps;
 }
 
 div.newsbox {
-      border-top: 1px solid #cccccc;
-      color: #101010;
-      padding: 10px 10px 10px 10px;
+	border-top: 1px solid #cccccc;
+	color: #101010;
+	padding: 10px 10px 10px 10px;
 }
+
 
 /************ SQL Performance ***********/
 
 div.footerbar {
-  clear: both;
-  border-top: 1px solid #cccccc;
-  font-size: small;
-  color: black;
-  padding: 10px 10px 10px 10px;
+	clear: both;
+	border-top: 1px solid #cccccc;
+	font-size: small;
+	color: black;
+	padding: 10px 10px 10px 10px;
 }
+
 
 /************ Honeypot  ***********/
 
-.robotic { display: none; }
+.robotic {
+	display: none;
+}
 
+
+/************  unicode fallbacks ***********/
+
+/* Some embedding of font */
+@font-face {
+	font-family: 'Source Code Pro';
+	src: local('Source Code Pro');
+/*  src: url(/res/fonts/SourceCodePro-Medium.ttf); */
+}
+
+@font-face {
+	font-family: 'Last Resort';
+	src: local('LastResort');
+/*  src: url(/res/fonts/LastResort.ttf); */
+}
+
+.accountdetail {
+	font-family: 'Source Code Pro', 'Lucida Console', 'Arial Unicode MS', monospace, 'Last Resort';
+	font-size: 1.1em;
+}
+
+.accountdetail.fname {
+}
+
+.accountdetail.mname {
+}
+
+.accountdetail.lname {
+	font-weight: bold;
+}
+
+.accountdetail.suffix {
+}

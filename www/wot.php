@@ -18,6 +18,7 @@
 <?
 require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
+require_once("../includes/notary.inc.php");
 
 
 function show_page($target,$message,$error)
@@ -113,9 +114,6 @@ function send_reminder()
 	$_SESSION['_config']['error'] = _("A reminder notice has been sent.");
 }
 
-
-
-
 	loadem("account");
 	if(array_key_exists('date',$_POST) && $_POST['date'] != "")
 		$_SESSION['_config']['date'] = $_POST['date'];
@@ -127,16 +125,16 @@ function send_reminder()
 
 	if($oldid == 12)
 		$id = $oldid;
-		
+
 	if($oldid == 4)
 	{
 		if ($_POST['ttp']!='') {
 			//This mail does not need to be translated
 			$body = "Hi TTP adminstrators,\n\n";
 			$body .= "User ".$_SESSION['profile']['fname']." ".
-			$_SESSION['profile']['lname']." with email address '".
-			$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-			mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+				$_SESSION['profile']['lname']." with email address '".
+				$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
+				mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{
@@ -199,6 +197,17 @@ function send_reminder()
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
 				exit;
 			}
+			if ($_SESSION['profile']['ttpadmin'] != 1) {
+				$_SESSION['assuresomeone']['year'] = intval($_POST['year']);
+				$_SESSION['assuresomeone']['month'] = intval($_POST['month']);
+				$_SESSION['assuresomeone']['day'] = intval($_POST['day']);
+				$dob = sprintf('%04d-%02d-%02d', $_SESSION['assuresomeone']['year'], $_SESSION['assuresomeone']['month'], $_SESSION['assuresomeone']['day']);
+
+				if (	$_SESSION['_config']['notarise']['dob'] != $dob) {
+					show_page("EnterEmail","",_("The data entered is not matching with an account."));
+					exit;
+				}
+			}
 		}
 		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
 		$res = mysql_query($query);
@@ -225,8 +234,8 @@ function send_reminder()
 			exit;
 		}
 
-		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' and
-							`to`='".$_SESSION['_config']['notarise']['id']."'";
+		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and
+			`to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
@@ -237,42 +246,84 @@ function send_reminder()
 
 	if($oldid == 6)
 	{
-$iecho= "c";
+		$iecho= "c";
+		//date checks
+		if(trim($_REQUEST['date']) == '')
+		{
+			show_page("VerifyData","",_("You must enter the date when you met the assuree."));
+			exit;
+		}
+
+		if(!check_date_format(trim($_REQUEST['date'])))
+		{
+			show_page("VerifyData","",_("You must enter the date in this format: YYYY-MM-DD."));
+			exit;
+		}
+
+		if(!check_date_difference(trim($_REQUEST['date'])))
+		{
+			show_page("VerifyData","",_("You must not enter a date in the future."));
+			exit;
+		}
+
+		//proof of identity check and accept arbitration, implements CCA
 		if(!array_key_exists('assertion',$_POST) || $_POST['assertion'] != 1)
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-/*		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
-		{
-			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
-			exit;
-		}
-*/
-
-		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_SESSION['profile']['ttpadmin'] != 1)
+		//proof of CCA agreement by assuree after 2010-01-01
+		if((!array_key_exists('CCAAgreed',$_POST) || $_POST['CCAAgreed'] != 1) and (check_date_format(trim($_REQUEST['date']),2010)))
 		{
 			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
 			exit;
 		}
 
-		if($_SESSION['profile']['ttpadmin'] != 1 && $_POST['location'] == "")
+		//assurance done according to rules
+		if(!array_key_exists('rules',$_POST) || $_POST['rules'] != 1)
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+
+		//met assuree in person, not appliciable for TTP / TTP Topup assurances
+		if((!array_key_exists('certify',$_POST) || $_POST['certify'] != 1 )  && $_REQUEST['method'] != "Trusted 3rd Parties")
+		{
+			show_page("VerifyData","",_("You failed to check all boxes to validate your adherence to the rules and policies of CAcert"));
+			exit;
+		}
+
+		//check location, min 3 characters
+		if(!array_key_exists('location',$_POST) || trim($_POST['location']) == "")
 		{
 			show_page("VerifyData","",_("You failed to enter a location of your meeting."));
 			exit;
 		}
 
+		if(strlen(trim($_REQUEST['location']))<=2)
+		{
+			show_page("VerifyData","",_("You must enter a location with at least 3 characters eg town and country."));
+			exit;
+		}
+
+		//check for points in range 0-35, for nucleus 35 + 15 temporary
 		if($_REQUEST['points'] == "" || !is_numeric($_REQUEST['points']))
 		{
 			show_page("VerifyData","",_("You must enter the number of points you wish to allocate to this person."));
 			exit;
 		}
 
-		$query = "select * from `users` where `id`='".$_SESSION['_config']['notarise']['id']."'";
+		if($_REQUEST['points'] <0 || ($_REQUEST['points']>35))
+		{
+			show_page("VerifyData","",_("The number of points you entered are out of the range given by policy."));
+			exit;
+		}
+
+		$query = "select * from `users` where `id`='".intval($_SESSION['_config']['notarise']['id'])."'";
 		$res = mysql_query($query);
 		$row = mysql_fetch_assoc($res);
-		$name = $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];
+		$name = sanitizeHTML($row['fname'])." ".sanitizeHTML($row['mname'])." ".sanitizeHTML($row['lname'])." ".sanitizeHTML($row['suffix']);
 		if($_SESSION['_config']['wothash'] != md5($name."-".$row['dob']) || $_SESSION['_config']['wothash'] != $_REQUEST['pagehash'])
 		{
 			show_page("VerifyData","",_("Race condition discovered, user altered details during assurance procedure. PLEASE MAKE SURE THE NEW DETAILS BELOW MATCH THE ID DOCUMENTS."));
@@ -291,7 +342,7 @@ $iecho= "c";
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
 
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['_config']['notarise']['id']."' group by `to`";
+		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
 
@@ -304,40 +355,42 @@ $iecho= "c";
 		if($newpoints < 0)
 			$newpoints = 0;
 
-		if(mysql_escape_string(stripslashes($_POST['date'])) == "")
+		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
-		$query = "select * from `notary` where `from`='".$_SESSION['profile']['id']."' AND
-						`to`='".$_SESSION['_config']['notarise']['id']."' AND
-						`awarded`='$awarded' AND
-						`location`='".mysql_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."'";
+		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' AND
+						`to`='".intval($_SESSION['_config']['notarise']['id'])."' AND
+						`awarded`='".intval($awarded)."' AND
+						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' AND
+						`deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0)
 		{
-                        show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
+			show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
 			exit;
 		}
 	}
 
 	if($oldid == 6)
 	{
-		$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
-						`to`='".$_SESSION['_config']['notarise']['id']."',
-						`points`='$newpoints', `awarded`='$awarded',
-						`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
-						`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
+		$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
+						`to`='".intval($_SESSION['_config']['notarise']['id'])."',
+						`points`='".intval($newpoints)."', `awarded`='".intval($awarded)."',
+						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
+						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
+		//record active acceptance by Assurer
+		if (check_date_format(trim($_REQUEST['date']),2010)) {
+			write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);
+			write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']);
+		}
 		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
 		include_once("../includes/notary.inc.php");
-/*to be activated after CCA accept option is implemented in form
-		write_user_agreement($_SESSION['profile']['id'], "CCA", "assurance", "Assuring", 1, $_SESSION['_config']['notarise']['id']);}*/
-/* to be activated after the CCA recording is announced
-		write_user_agreement($_SESSION['_config']['notarise']['id'], "CCA", "assurance", "Being assured", 0, $_SESSION['profile']['id']); */
 
 		if($_SESSION['profile']['points'] < 150)
 		{
@@ -346,11 +399,11 @@ $iecho= "c";
 				$addpoints = 2;
 			else if($_SESSION['profile']['points'] == 149 && $_SESSION['profile']['points'] >= 100)
 				$addpoints = 1;
-			$query = "insert into `notary` set `from`='".$_SESSION['profile']['id']."',
-							`to`='".$_SESSION['profile']['id']."',
-							`points`='$addpoints', `awarded`='$addpoints',
-							`location`='".mysql_escape_string(stripslashes($_POST['location']))."',
-							`date`='".mysql_escape_string(stripslashes($_POST['date']))."',
+			$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
+							`to`='".intval($_SESSION['profile']['id'])."',
+							`points`='".intval($addpoints)."', `awarded`='".intval($addpoints)."',
+							`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
+							`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 							`method`='Administrative Increase',
 							`when`=NOW()";
 			mysql_query($query);
@@ -400,35 +453,7 @@ $iecho= "c";
 
 		sendmail($_SESSION['profile']['email'], "[CAcert.org] "._("You've Assured Another Member."), $body, "support@cacert.org", "", "", "CAcert Support");
 
-		showheader(_("My CAcert.org Account!"));
-		echo "<p>"._("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this.")."</p>";
-?><form method="post" action="wot.php">
-<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
-  <tr>
-    <td colspan="2" class="title"><?=_("Assure Someone")?></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-  </tr>
-  <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
-  </tr>
-</table>
-<input type="hidden" name="oldid" value="5">
-</form>
-<SCRIPT LANGUAGE="JavaScript">
-//<![CDATA[
-	function my_init()
-	{
-		document.getElementById("email").focus();
-	}
-
-	window.onload = my_init();
-//]]>
-</script>
-<?
-		showfooter();
+		show_page('EnterEmail', _("Shortly you and the person you were assuring will receive an email confirmation. There is no action on your behalf required to complete this."));
 		exit;
 	}
 
@@ -436,7 +461,7 @@ $iecho= "c";
 	{
 		csrf_check("chgcontact");
 
-		$info = mysql_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
+		$info = mysql_real_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
 		$listme = intval($_POST['listme']);
 		if($listme < 0 || $listme > 1)
 			$listme = 0;
@@ -444,7 +469,7 @@ $iecho= "c";
 		$_SESSION['profile']['listme'] = $listme;
 		$_SESSION['profile']['contactinfo'] = $info;
 
-		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".$_SESSION['profile']['id']."'";
+		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".intval($_SESSION['profile']['id'])."'";
 		mysql_query($query);
 
 		showheader(_("My CAcert.org Account!"));
@@ -465,9 +490,9 @@ $iecho= "c";
 			$body = $_REQUEST['message'];
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$userid' and `listme`=1"));
-	                $points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-						where `to`='".$user['id']."' group by `to` HAVING SUM(`points`) > 0"));
+			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
+			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
+						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
 			if($points > 0)
 			{
 				$my_translation = L10n::get_translation();
@@ -503,7 +528,7 @@ $iecho= "c";
 
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
-					<? printf(_("Your email has been sent to %s."), $user['fname']); ?>
+					<? printf(_("Your email has been sent to %s."), sanitizeHTML($user['fname'])); ?>
 				</p>
 				<p>[ <a href='javascript:history.go(-2)'><?= _("Go Back") ?></a> ]</p>
 				<?

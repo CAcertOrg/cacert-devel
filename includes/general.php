@@ -21,10 +21,10 @@
 	session_name("cacert");
 	session_start();
 
-	session_register("_config");
-	session_register("profile");
-	session_register("signup");
-	session_register("lostpw");
+//	session_register("_config");
+//	session_register("profile");
+//	session_register("signup");
+//	session_register("lostpw");
 //	if($_SESSION['profile']['id'] > 0)
 //		session_regenerate_id();
 
@@ -57,7 +57,7 @@
 		exit;
 	}
 
-	if(array_key_exists('HTTP_HOST',$_SERVER) && 
+	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] ||
 			$_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify']))
 	{
@@ -77,12 +77,12 @@
 	L10n::detect_language();
 	L10n::init_gettext();
 
-        if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
+	if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
-		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".$_SESSION['profile']['id']."'"));
+		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 		if($locked['locked'] == 0)
 		{
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".$_SESSION['profile']['id']."' group by `to`";
+			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
 			$res = mysql_query($query);
 			$row = mysql_fetch_assoc($res);
 			$_SESSION['profile']['points'] = $row['total'];
@@ -169,19 +169,19 @@
 			$points++;
 
 		//echo "Points due to length and charset: $points<br/>";
-		
+
 		// check for historical password proposal
 		if ($pwd === "Fr3d Sm|7h") {
 			return 0;
 		}
-		
+
 		return $points;
 	}
 
 	function checkpw($pwd, $email, $fname, $mname, $lname, $suffix)
 	{
 		$points = checkpwlight($pwd);
-		
+
 		if(@strstr(strtolower($pwd), strtolower($email)))
 			$points--;
 
@@ -219,7 +219,7 @@
 		//echo "Points due to name matches: $points<br/>";
 
 		$shellpwd = escapeshellarg($pwd);
-		$do = `grep $shellpwd /usr/share/dict/american-english`;
+		$do = shell_exec("grep -F -- $shellpwd /usr/share/dict/american-english");
 		if($do)
 			$points--;
 
@@ -232,7 +232,7 @@
 	{
 		$bits = explode(": ", $_SESSION['_config']['subject'], 2);
 		$bits = str_replace(", ", "|", str_replace("/", "|", array_key_exists('1',$bits)?$bits['1']:""));
-		$bits = explode("|", $bits);    
+		$bits = explode("|", $bits);
 
 		$_SESSION['_config']['cnc'] = $_SESSION['_config']['subaltc'] = 0;
 		$_SESSION['_config']['OU'] = "";
@@ -287,7 +287,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".$_SESSION['profile']['id']."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -339,7 +339,7 @@
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
-				$query = "select * from domains where `memid`='".$_SESSION['profile']['id']."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
+				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
 				$res = mysql_query($query);
 				if(mysql_num_rows($res) > 0)
 				{
@@ -378,7 +378,7 @@
 				$_SESSION['_config']['row'] = "";
 				$dom = mysql_real_escape_string($dom);
 				$query = "select *, `orginfo`.`id` as `id` from `orginfo`,`orgdomains`,`org` where
-						`org`.`memid`='".$_SESSION['profile']['id']."' and
+						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
@@ -426,7 +426,7 @@
 				$_SESSION['_config']['altrow'] = "";
 				$dom = mysql_real_escape_string($dom);
 				$query = "select * from `orginfo`,`orgdomains`,`org` where
-						`org`.`memid`='".$_SESSION['profile']['id']."' and
+						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
@@ -458,7 +458,7 @@
 				$dom = $bits[$i];
 			$dom = mysql_real_escape_string($dom);
 			$query = "select * from `org`,`orgdomains`,`orginfo`
-					where `org`.`memid`='".$_SESSION['profile']['id']."'
+					where `org`.`memid`='".intval($_SESSION['profile']['id'])."'
 					and `orgdomains`.`orgid`=`org`.`orgid`
 					and `orginfo`.`id`=`org`.`orgid`
 					and `orgdomains`.`domain`='$dom'";
@@ -477,12 +477,12 @@
 		if($id <= 0)
 			$id = $_SESSION['profile']['id'];
 
-		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' group by `to`";
+		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' and `deleted` = 0 group by `to`";
 		$row = mysql_fetch_assoc(mysql_query($query));
 		$points = $row['points'];
 
 		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-18));
-		$query = "select * from `users` where `id`='".$_SESSION['profile']['id']."' and `dob` < '$dob'";
+		$query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `dob` < '$dob'";
 		if(mysql_num_rows(mysql_query($query)) < 1)
 		{
 			if($points >= 100)
@@ -506,7 +506,7 @@
 		return(0);
 	}
 
-	function hex2bin($data)
+	function gpg_hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
 		{
@@ -527,7 +527,8 @@
 		$fp = fopen($tmpfname, "w");
 		fputs($fp, $message);
 		fclose($fp);
-		$do = `/usr/bin/gpg --homedir /home/gpg --clearsign "$tmpfname"|/usr/sbin/sendmail "$to"`;
+		$to_esc = escapeshellarg($to);
+		$do = shell_exec("/usr/bin/gpg --homedir /home/gpg --clearsign \"$tmpfname\"|/usr/sbin/sendmail ".$to_esc);
 		@unlink($tmpfname);
 	}
 
@@ -536,47 +537,116 @@
 		$myemail = mysql_real_escape_string($email);
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
-			list($username,$domain)=split('@',$email);
-			$dom = escapeshellarg($domain);
-			$line = trim(`dig +short MX $dom 2>&1`);
-#echo $email."-$dom-$line-\n";
-#echo `dig +short mx heise.de 2>&1`."-<br>\n";
+			list($username,$domain)=explode('@',$email,2);
+			$mxhostrr = array();
+			$mxweight = array();
+			if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
+				$mxhostrr = array($domain);
+				$mxweight = array(0);
+			} else if ( empty($mxhostrr) ) {
+				$mxhostrr = array($domain);
+				$mxweight = array(0);
+			}
 
-			$list = explode("\n", $line);
-			foreach($list as $row)
-				list($pri, $mxhosts[]) = explode(" ", substr(trim($row), 0, -1));
-			$mxhosts[] = $domain;
-#print_r($mxhosts); die;
+			$mxhostprio = array();
+			for($i = 0; $i < count($mxhostrr); $i++) {
+				$mx_host = trim($mxhostrr[$i], '.');
+				$mx_prio = $mxweight[$i];
+				if(empty($mxhostprio[$mx_prio])) {
+					$mxhostprio[$mx_prio] = array();
+				}
+				$mxhostprio[$mx_prio][] = $mx_host;
+			}
+
+			array_walk($mxhostprio, function(&$mx) { shuffle($mx); } );
+			ksort($mxhostprio);
+
+			$mxhosts = array();
+			foreach($mxhostprio as $mx_prio => $mxhostnames) {
+				foreach($mxhostnames as $mx_host) {
+					$mxhosts[] = $mx_host;
+				}
+			}
+
 			foreach($mxhosts as $key => $domain)
 			{
-				$fp = @fsockopen($domain,25,$errno,$errstr,5);
+				$fp_opt = array(
+					'ssl' => array(
+						'verify_peer'   => false,	// Opportunistic Encryption
+						)
+					);
+				$fp_ctx = stream_context_create($fp_opt);
+				$fp = @stream_socket_client("tcp://$domain:25",$errno,$errstr,5,STREAM_CLIENT_CONNECT,$fp_ctx);
 				if($fp)
 				{
-				
-					$line = fgets($fp, 4096);
-                                        while(substr($line, 0, 4) == "220-")
-                                               $line = fgets($fp, 4096);
-					if(substr($line, 0, 3) != "220")
-						continue;
-					fputs($fp, "HELO www.cacert.org\r\n");
-					$line = fgets($fp, 4096);
-					while(substr($line, 0, 3) == "220")
-						$line = fgets($fp, 4096);
-					if(substr($line, 0, 3) != "250")
-						continue;
-					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
-					$line = fgets($fp, 4096);
+					stream_set_blocking($fp, true);
 
-					if(substr($line, 0, 3) != "250")
+					$has_starttls = false;
+
+					do {
+						$line = fgets($fp, 4096);
+					} while(substr($line, 0, 4) == "220-");
+					if(substr($line, 0, 3) != "220") {
+						fclose($fp);
 						continue;
+					}
+
+					fputs($fp, "EHLO www.cacert.org\r\n");
+					do {
+						$line = fgets($fp, 4096);
+						$has_starttls |= substr(trim($line),4) == "STARTTLS";
+					} while(substr($line, 0, 4) == "250-");
+					if(substr($line, 0, 3) != "250") {
+						fclose($fp);
+						continue;
+					}
+
+					if($has_starttls) {
+						fputs($fp, "STARTTLS\r\n");
+						do {
+							$line = fgets($fp, 4096);
+						} while(substr($line, 0, 4) == "220-");
+						if(substr($line, 0, 3) != "220") {
+							fclose($fp);
+							continue;
+						}
+
+						stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+
+						fputs($fp, "EHLO www.cacert.org\r\n");
+						do {
+							$line = fgets($fp, 4096);
+						} while(substr($line, 0, 4) == "250-");
+						if(substr($line, 0, 3) != "250") {
+							fclose($fp);
+							continue;
+						}
+					}
+
+					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
+					do {
+						$line = fgets($fp, 4096);
+					} while(substr($line, 0, 4) == "250-");
+					if(substr($line, 0, 3) != "250") {
+						fclose($fp);
+						continue;
+					}
+
 					fputs($fp, "RCPT TO:<$email>\r\n");
-					$line = trim(fgets($fp, 4096));
+					do {
+						$line = fgets($fp, 4096);
+					} while(substr($line, 0, 4) == "250-");
+					if(substr($line, 0, 3) != "250") {
+						fclose($fp);
+						continue;
+					}
+
 					fputs($fp, "QUIT\r\n");
 					fclose($fp);
 
 					$line = mysql_real_escape_string(trim(strip_tags($line)));
 					$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
-					if(is_array($_SESSION['profile'])) $query.=", `uid`='".$_SESSION['profile']['id']."'";
+					if(is_array($_SESSION['profile'])) $query.=", `uid`='".intval($_SESSION['profile']['id'])."'";
 					mysql_query($query);
 
 					if(substr($line, 0, 3) != "250")
@@ -586,7 +656,7 @@
 				}
 			}
 		}
-		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".$_SESSION['profile']['id']."',
+		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".intval($_SESSION['profile']['id'])."',
 				`email`='$myemail', `result`='Failed to make a connection to the mail server'";
 		mysql_query($query);
 		return _("Failed to make a connection to the mail server");
@@ -657,9 +727,9 @@
 		return $ticket;
 	}
 
-	function sanitizeHTML($input) 
+	function sanitizeHTML($input)
 	{
-		return htmlentities(strip_tags($input), ENT_QUOTES);
+		return htmlentities(strip_tags($input), ENT_QUOTES, 'ISO-8859-1');
 		//In case of problems, please use the following line again:
 		//return htmlentities(strip_tags(utf8_decode($input)), ENT_QUOTES);
 		//return htmlspecialchars(strip_tags($input));
@@ -727,7 +797,7 @@
 		$text=preg_replace("/[^\w-.@]/","",$text);
 		return($text);
 	}
-	
+
 
 	// returns text message to be shown to the user given the result of is_no_assurer
 	function no_assurer_text($Status)
@@ -770,7 +840,7 @@
 			$name="../$type/$kind/".intval($id/1000)."/$kind-".intval($id).".$type";
 			if (!is_dir("../csr")) { mkdir("../csr",0777); }
 			if (!is_dir("../crt")) { mkdir("../crt",0777); }
-			
+
 			if (!is_dir("../csr/$kind")) { mkdir("../csr/$kind",0777); }
 			if (!is_dir("../crt/$kind")) { mkdir("../crt/$kind",0777); }
 			if (!is_dir("../csr/$kind/".intval($id/1000))) { mkdir("../csr/$kind/".intval($id/1000)); }
