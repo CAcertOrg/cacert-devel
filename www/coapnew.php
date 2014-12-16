@@ -70,7 +70,7 @@ define('REV', '$Revision: 1.4 $');
 **     On transliteration and abbreviation of a name:
 **        if shoes a std way show accepted conversion as pdf comment
 **     Orientation: on landscape (dflt) print 2-up
-**     PDF URL links are used to web, wiki, and faq for more info search 
+**     PDF URL links are used to web, wiki, and faq for more info search
 **     Only on non-ascii chars in a name the utf8 routines are loaded
 **     PDF reader has wiki info url's and easy email feedback
 **  ENABLED:
@@ -94,7 +94,7 @@ define('REV', '$Revision: 1.4 $');
 **         recode(), recode_string(0 is said to have too many (japanese) defeats
 **         recode_string() is only used on GET[] input (html->utf-8),
 **  UTF-8  use routines from http://www.sourceforge.net/projects/phputf8
-**         which replaces php recode() package. 
+**         which replaces php recode() package.
 **         on many places own utf-8 handling code exists and is loaded (tcpdf problem)
 **  _() translation routine. The returned HTML string is translated to utf-8 string.
 **  the GET() routines expects utf-8 code (see test defs) but might be changed
@@ -221,7 +221,7 @@ define('REV', '$Revision: 1.4 $');
 **     Form Revision string is generated from RCS revision string.
 **     More info on PDF fields:
 **        http://www.adobe.com/devnet/acrobat/pdfs/js_developer_guide.pdf
-**     
+**
 */
 
 // use next define if you test this code
@@ -281,7 +281,7 @@ if( defined( 'TEST' ) ) {
         // trade office information
         $_GET['identifier'] = "NL-238603-AA02";
         $_GET['tor'] = "Kamer van Koophandel";
-        $_GET['torregion'] = "Amsterdam"; 
+        $_GET['torregion'] = "Amsterdam";
         //$_GET['tordate'] = "2008-04-03";
         // contact name(s)
         $_GET['domain1'] = "oophaga.org, oophaga.nl";
@@ -345,7 +345,7 @@ define('ARBIT', WIKI."/ArbitrationForum");
 // CAcert Community Agreement
 define('CCA', "CAcertCommunityAgreement"); // default policy to print
 define('POLICY','policy/'); // default polciy doc directory
-define('EXT','.php'); // default polciy doc extention, should be html
+define('EXT','.html'); // default polciy doc extention, should be html
 /* finger print CAcert Root Key */ // should obtain this automatically
 define('CLASS1_SHA1','135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33');
 define('CLASS3_SHA1','AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE');
@@ -427,7 +427,7 @@ class COAPPDF extends TCPDF {
 	strtok(REV, " ");
         return(strtok(" "));
     }
-    
+
     /*public*/ function myHeader( $msg = NULL, $url = NULL )
     {
        static $my_url = NULL;
@@ -450,7 +450,7 @@ class COAPPDF extends TCPDF {
        $this->setXY($this->lMargin, MARGIN+3);
        $this->y0 = $this->getY();
      }
- 
+
      // undefine default header and footer handling
      // default routines do not handle columns
      function Footer() { }
@@ -458,7 +458,7 @@ class COAPPDF extends TCPDF {
      function Mark( $string = "" ) {
          return array( $string, 1+substr_count($string,'.') );
      }
- 
+
      /*public*/ function myFooter( $msg = NULL, $url = NULL )
      {
        static $my_url = NULL;
@@ -501,7 +501,7 @@ class COAPPDF extends TCPDF {
            $this->StopTransform();
            $this->SetXY($savex,$savey);
         }
- 
+
         if( !empty($font_fam ) )
             $this->SetFont($font_fam,$font_style,$font_size);
         $this->InFooter = false;
@@ -519,16 +519,16 @@ class COAPPDF extends TCPDF {
 
     //number of colums
     /*protected*/ var $ncols=1;
-    
+
     // columns width
     /*protected*/ var $colwidth=0;
 
     // space between columns
     /*protected*/ var $column_space = 0;
-    
+
     //Current column
     /*protected*/ var $col=0;
-    
+
     //Ordinate of column start
     /*protected*/ var $y0;
 
@@ -570,7 +570,7 @@ class COAPPDF extends TCPDF {
         $this->SetDisplayMode(intval($this->scale), 'SinglePage', 'UseOC');
         return( $format );
     }
-        
+
     //Set position at a given column
     /*private*/ function SetCol($col = -1) {
         static $pagecolwidth = 1.0;
@@ -610,7 +610,7 @@ class COAPPDF extends TCPDF {
 	    $this->myFooter(); // print footer msg if defined
         }
         if( $col >= $this->ncols ) {
-                $this->addPage(); $col = 0; 
+                $this->addPage(); $col = 0;
                 $this->ScaleXY($this->scale,0,0);
                 $this->y0 = 0;  //no header/footer done...
         } elseif ( $col > 0  AND $col < $this->ncols) {
@@ -710,7 +710,7 @@ class COAPPDF extends TCPDF {
             elseif( preg_match('/\./', $nm ) ) {
                 if( $first_name < 0 ) $first_name = $j;
                 if( $first_name >= 0 ) $success = TRUE; // was abbreviated
-                continue; // title 
+                continue; // title
             }
             if( $first_name < 0 ) $first_name = $j;
             if( $married == 0 ) $fam = $j;
@@ -732,7 +732,7 @@ class COAPPDF extends TCPDF {
             elseif( preg_match('/\./', $nm ) ) $name .= $nm;
             elseif( $j < $fam ) { // need to abbreviate
                  // not utf8
-                 // and abbreviate 
+                 // and abbreviate
                 if( $j == $first_name )
                     $abr = "(". $substr( $nm, 1 ) . ")";
                 else $abr = ".";
@@ -746,7 +746,7 @@ class COAPPDF extends TCPDF {
             $nm = $tk[0];
             if( $ext < 0 AND preg_match('/(^[^A-Z]|\.)/', $nm ) ) continue;
             if( $ext < 0 ) $ext = $j+1;
-            if( preg_match('/\./', $nm ) ) {  $success = TRUE; break; } 
+            if( preg_match('/\./', $nm ) ) {  $success = TRUE; break; }
         }
         return( $success? $name : "" ); // and return abbriviated name
     }
@@ -859,7 +859,7 @@ class COAPPDF extends TCPDF {
             $this->StatementOrganisation($organisation);
             $this->StatementAssurer( $assurer, $assurance );
     }
-    
+
     //Add form and/or CCA (on duplex only when more as one page is printed)
     /*public*/ function PrintForm( $organisation = NULL, $registry = NULL, $assurer = NULL, $page = NULL ) {
 
@@ -1045,7 +1045,7 @@ class COAPPDF extends TCPDF {
         $this->Line($this->lMargin,$tSide+$height,$this->lMargin+$this->colwidth,$tSide+$height);
         $this->Line($this->lMargin+$this->colwidth,$tSide-1, $this->lMargin+$this->colwidth, $tSide+$height);
         $this->SetDrawColor(0);
-	$this->SetY($tSide + $height + 1); // set Y ordinate to plus 7 
+	$this->SetY($tSide + $height + 1); // set Y ordinate to plus 7
         $tSide = -1; $title = "";
 	return($this->GetY());
     }
@@ -1078,7 +1078,7 @@ class COAPPDF extends TCPDF {
             if ( BW ) {
                 $this->SetFillColor(241);
             } else {
-                //$this->SetFillColor(173,197,215); 
+                //$this->SetFillColor(173,197,215);
                 $this->SetFillColor(234, 241, 246);
             }
             $this->Rect($this->lMargin+37.5,$this->GetY()+0.1,
@@ -1141,7 +1141,7 @@ class COAPPDF extends TCPDF {
         if( $phone ) {
             $TextProps['value'] = $phone ? $phone : $this->unhtmlentities( _('phone nr') ) . "?";
             $TextProps['userName'] = $this->unhtmlentities( _('For organisation administrators and assurer: provide email address and optionally your phone number.') );
-            $this->TextField($field.'Phone', $this->SetFieldXY($this->lMargin+$this->colwidth-25, $savey, 24), 4.5, $TextProps ); 
+            $this->TextField($field.'Phone', $this->SetFieldXY($this->lMargin+$this->colwidth-25, $savey, 24), 4.5, $TextProps );
             $this->SetFieldXY();
         }
         $savey += 3;
@@ -1156,7 +1156,7 @@ class COAPPDF extends TCPDF {
         if( $email ) {
             $TextProps['value'] = $email ? $email : $this->unhtmlentities( _('email') ) . "?";
             $TextProps['userName'] = $this->unhtmlentities( _('For organisation administrators and assurer: provide email address and optionally your phone number.') );
-            $this->TextField($field.'Email', $this->SetFieldXY($this->lMargin+2+$l, $savey, $this->colwidth-$l-28), 4.5, $TextProps); 
+            $this->TextField($field.'Email', $this->SetFieldXY($this->lMargin+2+$l, $savey, $this->colwidth-$l-28), 4.5, $TextProps);
             $this->SetFieldXY(); $savey += 3;
         }
 // phone number
@@ -1166,7 +1166,7 @@ class COAPPDF extends TCPDF {
     }
 
 // All information of Applicant goes in one table
-/*public*/ function InfoOrganisation( $organisation = NULL, $registry = NULL ){ 
+/*public*/ function InfoOrganisation( $organisation = NULL, $registry = NULL ){
         // Applicant Identity information part
         $tSide = $this->PrintTable($this->unhtmlentities( _('Organisation Identity Information') ))+1;
 
@@ -1220,7 +1220,7 @@ class COAPPDF extends TCPDF {
                          $strg,
                          NULL, NULL, true);
         $this->Ln(0.4);
-        $strg = ""; foreach( $organisation['domains'] as $i ) 
+        $strg = ""; foreach( $organisation['domains'] as $i )
             $strg .= ($strg != "" ? ", " : "") . $i;
         $this->PrintName(
                          $this->unhtmlentities( _('The internet domain name(s) the organisation controls and owns. The names will be checked with WHOIS with e.g. the DNS official top domain registrar e.g. the country ccTLD .<country code> registrar.') ),
@@ -1233,7 +1233,7 @@ class COAPPDF extends TCPDF {
 	// contact info o-admin address assuree
         $cnt = $organisation['admincnt'];
         $space = $this->getPageHeight()/$this->scale*100.0 -MINH ; // margin
-        for( $i = 0; $i < $cnt; $i++ )  { // names to be printed 
+        for( $i = 0; $i < $cnt; $i++ )  { // names to be printed
             $this->PrintName(
                     $this->unhtmlentities( _('The organisation administrator (CAcert Assurer) contact information. The administrator is appointed by the organisation director to administer the organisation domain certificates, secure the certificates and maintain them.') ),
                     $this->unhtmlentities( _('Organisation Administrator') ),
@@ -1400,7 +1400,7 @@ class COAPPDF extends TCPDF {
 // get $form, $orientation, $assuree, $assurer, $assurance info
 // FONT and BW are set already
 
-// import info 
+// import info
 $utf8 = false;
 function GET( $key = "" ) {
     global $utf8;
@@ -1457,7 +1457,7 @@ $registry = array (
 $organisation = array (
                    'names'      => array( ), // [0] full name, [>0] DBA's
                    'namecnt'    => 0,
-                   'date'       => my_recode(GET('date')) == "now" ? date("Y-m-d") : 
+                   'date'       => my_recode(GET('date')) == "now" ? date("Y-m-d") :
                                    my_recode(GET('date')),
                    'address'    => my_recode(GET('address')),
                    'state'	=> my_recode(GET('state')),
@@ -1507,7 +1507,7 @@ for( $i = 0; $i <= 25 AND $j < 2; $i++ ) {
         if( $domains != "" ) $domains .= ",";
         $domains .= strtolower($name);
     } else $j ++;
-} 
+}
 $i = 0;
 if( $domains ) { // csv list to array and trim white spaces
     $domains = strtok($domains,',');
@@ -1547,7 +1547,7 @@ unset( $i ); unset( $j); unset( $utf8 ); // unset($_GET);
        PDF_UNIT /* mm */,
        /* PDF_PAGE_FORMAT */ $page['format'],
        true
-       ); 
+       );
     $pdf->SetFormat( $page['format']  ); // set paper size scaling
 
 // protection is encryption and this will cause 3.5 times performance loss
@@ -1570,10 +1570,10 @@ unset( $i ); unset( $j); unset( $utf8 ); // unset($_GET);
     $pdf->SetAutoPageBreak(TRUE, MARGIN*0.707);
 
 //set image scale factor
-    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 //set some language-dependent strings
-    $pdf->setLanguageArray($l); 
+    $pdf->setLanguageArray($l);
 
 //initialize document
     $pdf->AliasNbPages();
@@ -1589,6 +1589,6 @@ unset( $i ); unset( $j); unset( $utf8 ); // unset($_GET);
     $pdf->Output("CAcert COAP.pdf", "I");
 
 //============================================================+
-// END OF FILE                                                 
+// END OF FILE
 //============================================================+
 ?>

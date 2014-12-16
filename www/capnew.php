@@ -68,7 +68,7 @@ define('REV', '$Revision: 1.4 $');
 **     On transliteration and abbreviation of a name:
 **        if shoes a std way show accepted conversion as pdf comment
 **     Orientation: on landscape (dflt) print 2-up
-**     PDF URL links are used to web, wiki, and faq for more info search 
+**     PDF URL links are used to web, wiki, and faq for more info search
 **     Only on non-ascii chars in a name the utf8 routines are loaded
 **     PDF reader has wiki info url's and easy email feedback
 **  ENABLED:
@@ -92,7 +92,7 @@ define('REV', '$Revision: 1.4 $');
 **         recode(), recode_string(0 is said to have too many (japanese) defeats
 **         recode_string() is only used on GET[] input (html->utf-8),
 **  UTF-8  use routines from http://www.sourceforge.net/projects/phputf8
-**         which replaces php recode() package. 
+**         which replaces php recode() package.
 **         on many places own utf-8 handling code exists and is loaded (tcpdf problem)
 **  _() translation routine. The returned HTML string is translated to utf-8 string.
 **  the GET() routines expects utf-8 code (see test defs) but might be changed
@@ -196,7 +196,7 @@ define('REV', '$Revision: 1.4 $');
 **     Form Revision string is generated from RCS revision string.
 **     More info on PDF fields:
 **        http://www.adobe.com/devnet/acrobat/pdfs/js_developer_guide.pdf
-**     
+**
 */
 
 // use next define if you test this code
@@ -235,7 +235,7 @@ if( defined( 'TEST' ) ) {
         //$_GET['orientation'] = 'portrait'; // default 2 pages, or portrait
     }
     $_GET['nocca'] = isset($_SERVER['CCA']) ? $_SERVER['CCA'] : '';
-    //$_GET['policy1'] = 'policy/PolicyOnPolicy.php';
+    //$_GET['policy1'] = 'policy/PolicyOnPolicy.html';
     if( isset($_SERVER['FORM']) AND $_SERVER['FORM'] == 'noform' )
         $_GET['noform'] = 'true';
 
@@ -310,7 +310,7 @@ define('ARBIT', WIKI.'/ArbitrationForum');
 // CAcert Community Agreement
 define('CCA', 'CAcertCommunityAgreement'); // default policy to print
 define('POLICY','policy/'); // default polciy doc directory
-define('EXT','.php'); // default polciy doc extention, should be html
+define('EXT','.html'); // default polciy doc extention, should be html
 /* finger print CAcert Root Key */ // should obtain this automatically
 define('CLASS1_SHA1','135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33');
 define('CLASS3_SHA1','AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE');
@@ -484,16 +484,16 @@ class CAPPDF extends TCPDF {
 
     //number of colums
     /*protected*/ var $ncols=1;
-    
+
     // columns width
     /*protected*/ var $colwidth=0;
 
     // space between columns
     /*protected*/ var $column_space = 0;
-    
+
     //Current column
     /*protected*/ var $col=0;
-    
+
     //Ordinate of column start
     /*protected*/ var $y0;
 
@@ -535,7 +535,7 @@ class CAPPDF extends TCPDF {
         $this->SetDisplayMode(intval($this->scale), 'SinglePage', 'UseOC');
         return( $format );
     }
-        
+
     //Set position at a given column
     /*private*/ function SetCol($col = -1) {
         static $pagecolwidth = 1.0;
@@ -576,7 +576,7 @@ class CAPPDF extends TCPDF {
 	    $this->myFooter(); // print footer msg if defined
         }
         if( $col >= $this->ncols ) {
-                $this->addPage(); $col = 0; 
+                $this->addPage(); $col = 0;
                 $this->ScaleXY($this->scale,0,0);
                 $this->y0 = 0;  //no header/footer done...
         } elseif ( $col > 0  AND $col < $this->ncols) {
@@ -599,7 +599,7 @@ class CAPPDF extends TCPDF {
         $this->PrintTable('', 0); // if in table reprint title table
         $this->InFooter = false;
     }
-    
+
     //Method accepting or not automatic page break
     /*public*/ function AcceptPageBreak() {
        $this->SetCol();
@@ -688,7 +688,7 @@ class CAPPDF extends TCPDF {
             elseif( preg_match('/\./', $nm ) ) {
                 if( $first_name < 0 ) $first_name = $j;
                 if( $first_name >= 0 ) $success = TRUE; // was abbreviated
-                continue; // title 
+                continue; // title
             }
             if( $first_name < 0 ) $first_name = $j;
             if( $married == 0 ) $fam = $j;
@@ -710,7 +710,7 @@ class CAPPDF extends TCPDF {
             elseif( preg_match('/\./', $nm ) ) $name .= $nm;
             elseif( $j < $fam ) { // need to abbreviate
                  // not utf8
-                 // and abbreviate 
+                 // and abbreviate
                 if( $j == $first_name )
                     $abr = '('. $substr( $nm, 1 ) . ')';
                 else $abr = '.';
@@ -724,7 +724,7 @@ class CAPPDF extends TCPDF {
             $nm = $tk[0];
             if( $ext < 0 AND preg_match('/(^[^A-Z]|\.)/', $nm ) ) continue;
             if( $ext < 0 ) $ext = $j+1;
-            if( preg_match('/\./', $nm ) ) {  $success = TRUE; break; } 
+            if( preg_match('/\./', $nm ) ) {  $success = TRUE; break; }
         }
         return( $success? $name : '' ); // and return abbriviated name
     }
@@ -841,7 +841,7 @@ class CAPPDF extends TCPDF {
         $this->StatementAssuree( $assuree['date']);
         $this->StatementAssurer( $assurer, $assurance );
     }
-    
+
     //Add form and/or CCA (on duplex only when more as one page is printed)
     /*public*/ function PrintForm( $assuree = NULL, $assurer = NULL, $assurance = NULL, $page = NULL ) {
 
@@ -1033,7 +1033,7 @@ class CAPPDF extends TCPDF {
         $this->Line($this->lMargin,$tSide+$height,$this->lMargin+$this->colwidth,$tSide+$height);
         $this->Line($this->lMargin+$this->colwidth,$tSide-1, $this->lMargin+$this->colwidth, $tSide+$height);
         $this->SetDrawColor(0);
-	$this->SetY($tSide + $height + 1); // set Y ordinate to plus 7 
+	$this->SetY($tSide + $height + 1); // set Y ordinate to plus 7
         $tSide = -1; $title = '';
 	return($this->GetY());
     }
@@ -1045,7 +1045,7 @@ class CAPPDF extends TCPDF {
         $id_type = $names == NULL ? '' : $names['idtype'];
         // store current margin values
 	static $nr = 0;
-        static $idtypes = NULL; 
+        static $idtypes = NULL;
         static $listpoints = NULL;
         static $ComboProps = array( 'fillColor'=> LBLUE, 'strokeColor'=> LLBLUE, 'editable'=> 'true', 'textSize' => 9, 'rotate'=> '0');
         static $TextProps = array('strokeColor'=> LLBLUE, 'value' => ' ', 'fillColor'=> LBLUE, 'doNotScrole'=> 'false', 'textSize' => 12, 'rotate'=> '0');
@@ -1146,7 +1146,7 @@ class CAPPDF extends TCPDF {
             $this->SetFont(FONT, 'B', (F_SIZE+1)/6*H);
             $this->Cell($this->colwidth-37, 2, '('.$id_type .')', 0, 0, 'R');
             // hide id type print on screen with the formfields, just nicety
-            // one could extend the name field, but this has more drawbacks 
+            // one could extend the name field, but this has more drawbacks
             $this->TextField(sprintf('AssureeNames_%d_None',$nr), $this->SetFieldXY($this->lMargin+$this->colwidth-38,$savey+0.5,20), 7/6*H, $TextBlankProps);
             $this->SetFieldXY();
         }
@@ -1200,7 +1200,7 @@ class CAPPDF extends TCPDF {
         // all (max) three names with ID type right aligned.
         $cnt = $assuree['namecnt'];
         $space = $this->getPageHeight()/$this->scale*100.0 -MINH ; // margin
-        for( $i = 0; $i < $cnt; $i++ )  { // names to be printed 
+        for( $i = 0; $i < $cnt; $i++ )  { // names to be printed
             $this->PrintName( $assuree['names'][$i], $assurer['maxpoints'] < 0? 35: $assurer['maxpoints'] );
             if( $space < $this->getY() ) break;
         }
@@ -1390,7 +1390,7 @@ class CAPPDF extends TCPDF {
         $this->SetFieldXY();
         $TextProps['value'] = $assurer['email'] ? $assurer['email'] : $this->unhtmlentities( _('email') ) . '?';
         $TextProps['userName'] = $this->unhtmlentities( _('On mutual assurance provide email address of Assurer.') );
-        $this->TextField('AssurerEmail', $this->SetFieldXY($this->lMargin+68.5, $savey+1, 35), 5, $TextProps ); 
+        $this->TextField('AssurerEmail', $this->SetFieldXY($this->lMargin+68.5, $savey+1, 35), 5, $TextProps );
         $this->SetFieldXY();
         $this->SetXY($this->lMargin+2, $savey+5);
 
@@ -1457,7 +1457,7 @@ class CAPPDF extends TCPDF {
 // get $form, $orientation, $assuree, $assurer, $assurance info
 // FONT and BW are set already
 
-// import info 
+// import info
 function GET( $key = '' ) {
     return ( array_key_exists( $key, $_GET) ? $_GET[$key] : '');
 }
@@ -1532,7 +1532,7 @@ for( $i = 1; $i <= 9 AND $j < 2; $i++) { // max 9 names we only print 4 max...
         $assuree[ 'namecnt' ]++;
         $assuree[ 'names' ] [] = array (
             'name' => $name ? $name : '',
-            'idtype' => my_recode(GET(Dstr('ID',$i)))? my_recode(GET(Dstr('ID',$i))) : '', 
+            'idtype' => my_recode(GET(Dstr('ID',$i)))? my_recode(GET(Dstr('ID',$i))) : '',
             'points' => my_recode(GET(Dstr('Pnts',$i))) != '' ? intval(my_recode(GET(Dstr('Pnts',$i)))) : -1
         );
         if( $name  != '' AND
@@ -1565,7 +1565,7 @@ unset( $document ); unset( $i ); unset( $j); // unset($_GET);
        PDF_UNIT /* mm */,
        /* PDF_PAGE_FORMAT */ $page['format'],
        true
-       ); 
+       );
     $pdf->SetFormat( $page['format']  ); // set paper size scaling
 
 // protection is encryption and this will cause 3.5 times performance loss
@@ -1588,10 +1588,10 @@ unset( $document ); unset( $i ); unset( $j); // unset($_GET);
     $pdf->SetAutoPageBreak(TRUE, MARGIN*0.707);
 
 //set image scale factor
-    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 //set some language-dependent strings
-    $pdf->setLanguageArray($l); 
+    $pdf->setLanguageArray($l);
 
 //initialize document
     $pdf->AliasNbPages();
@@ -1608,6 +1608,6 @@ unset( $document ); unset( $i ); unset( $j); // unset($_GET);
     $pdf->Output('CAcert CAP.pdf', 'I');
 
 //============================================================+
-// END OF FILE                                                 
+// END OF FILE
 //============================================================+
 ?>

@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ 
+*/
 loadem("index");
 showheader(_("CAcert - Policies"));
 ?>
@@ -23,17 +23,11 @@ showheader(_("CAcert - Policies"));
 <ul>
 <?php
 
-foreach (glob("*.html") as $filename) 
+foreach (glob("*.html") as $filename)
 {
-	echo "<li><a href='$filename'>$filename</a></li>\n";
-}
-
-foreach (glob("*.php") as $filename) 
-{
-   if($filename != "index.php" && $filename != "NRPDisclaimerAndLicence.php")
-   {
-     echo "<li><a href='$filename'>$filename</a></li>\n";
-   }
+	if($filename != "NRPDisclaimerAndLicence.html"){
+		echo "<li><a href='".htmlspecialchars($filename)."'>".htmlspecialchars($filename)."</a></li>\n";
+	}
 }
 
 

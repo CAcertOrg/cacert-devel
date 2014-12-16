@@ -146,7 +146,7 @@
 	echo '<tbody>', "\n";
 	echo '<tr>', "\n";
 	echo '    <td colspan="3">'._("Make sure you have read and agreed with the CAcert Community Agreement");
-	echo '(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">CCA</a>)<br>', "\n";
+	echo '(<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.html">CCA</a>)<br>', "\n";
 	echo '</td>', "    \n", '</tr>', "\n";
 /*
 	echo '</tbody>', "\n";
@@ -158,7 +158,7 @@
 	echo '</td>', "\n".'</tr>', "\n";
 	echo '<tr>', "\n". '    <td colspan="3"><input type="checkbox" checked name="checked" value="2"> ';
 	echo _("I agree to the CAcert Community Agreement.").' (';
-	echo '<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.php">CCA</a>)</dd>', "\n";
+	echo '<a href="http://www.cacert.org/policy/CAcertCommunityAgreement.html">CCA</a>)</dd>', "\n";
 	echo '</td>', "\n".'</tr>', "\n";
 /*
 	echo '</tbody>', "\n";
