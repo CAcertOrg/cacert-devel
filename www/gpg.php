@@ -59,20 +59,40 @@ if(0)
   }
 }
 
+function normalizeName($name) {
+    $name = sanitizeHTML($name);
+
+    return $name;
+}
+
+function compareName($requested, $acceptable) {
+    if(empty($acceptable) || empty($requested)) {
+        return false;
+    }
+
+    $requested = normalizeName($requested);
+    $acceptable = normalizeName($acceptable);
+
+    if(0 === strcasecmp($requested, $acceptable)) {
+        return true;
+    }
+
+    return false;
+}
 
 function verifyName($name)
 {
 	if($name == "") return 0;
 
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'])) return 1; // John Doe
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname'])) return 1; // John Joseph Doe
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname'])) return 1; // John J Doe
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname'])) return 1; // John J. Doe
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'])) return 1; // John Doe
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname'])) return 1; // John Joseph Doe
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname'])) return 1; // John J Doe
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname'])) return 1; // John J. Doe
 
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; // John Doe Jr.
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John Joseph Doe Jr.
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J Doe Jr.
-	if(!strcasecmp($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J. Doe Jr.
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; // John Doe Jr.
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John Joseph Doe Jr.
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J Doe Jr.
+	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J. Doe Jr.
 
 	return 0;
 }
@@ -212,7 +232,7 @@ function verifyEmail($email)
 				$nocomment=1;
 				$uidformatwrong=1;
 			}
-  		  	$nameok=verifyName($name);
+			$nameok=verifyName($name);
 			$emailok=verifyEmail($mail);
 
 
