@@ -767,7 +767,7 @@
 
 	function sanitizeHTML($input)
 	{
-		return htmlentities(strip_tags($input), ENT_QUOTES, 'ISO-8859-1');
+		return htmlentities(strip_tags($input), ENT_QUOTES | ENT_SUBSTITUTE, 'ISO-8859-1', false);
 		//In case of problems, please use the following line again:
 		//return htmlentities(strip_tags(utf8_decode($input)), ENT_QUOTES);
 		//return htmlspecialchars(strip_tags($input));
