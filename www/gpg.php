@@ -322,7 +322,7 @@ function normalizeName($name) {
 
     //Enhanced version of SanitizeHTML which is charset-aware for UTF-8 + ISO-8859-1
     $charset = mb_detect_encoding($name, "auto, ISO-8859-1, UTF-8", true);
-    if(false === $charset) {
+    if(false === $charset || !in_array($charset, array('UTF-8', 'ISO-8859-1', 'ISO-8859-15', 'cp1251', 'cp1252', 'KOI8-R', 'BIG5', 'GB2312', 'BIG5-HKSCS', 'Shift_JIS', 'EUC-JP')) ) {
         $charset = 'ISO-8859-1';
     }
     $name = htmlentities($name, ENT_QUOTES, $charset, false);
