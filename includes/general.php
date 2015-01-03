@@ -544,6 +544,56 @@
 		return(0);
 	}
 
+	/**
+	 * Decode UTF-8 byte sequences into HTML entities
+	 *
+	 * @see https://blog.benny-baumann.de/?p=332
+	 */
+	function charset_decode_utf8_callback($match) {
+		$m = $match[0];
+
+		switch(strlen($m)) {
+		case 6:
+			// decode six byte unicode characters
+			return '&#'.((ord($m[0])-252)*1073741824+(ord($m[1])-200)*16777216+(ord($m[2])-200)*262144+(ord($m[3])-128)*4096+(ord($m[4])-128)*64+(ord($m[5])-128)).';';
+		case 5:
+			// decode five byte unicode characters
+			return '&#'.((ord($m[0])-248)*16777216+(ord($m[1])-200)*262144+(ord($m[2])-128)*4096+(ord($m[3])-128)*64+(ord($m[4])-128)).';';
+		case 4:
+			// decode four byte unicode characters
+			return '&#'.((ord($m[0])-240)*262144+(ord($m[1])-128)*4096+(ord($m[2])-128)*64+(ord($m[3])-128)).';';
+		case 3:
+			// decode three byte unicode characters
+			return '&#'.((ord($m[0])-224)*4096+(ord($m[1])-128)*64+(ord($m[2])-128)).';';
+		case 2:
+			// decode two byte unicode characters
+			return '&#'.((ord($m[0])-192)*64+(ord($m[1])-128)).';';
+		default:
+			return $m;
+		}
+	}
+
+	/**
+	 * Decode utf-8 strings
+	 * @param string $string Encoded string
+	 * @return string Decoded string
+	 * @see https://blog.benny-baumann.de/?p=332
+	 */
+	function charset_decode_utf8 ($string) {
+		// decode 2-6 byte unicode characters
+		$string = preg_replace_callback("/[\374-\375][\200-\277][\200-\277][\200-\277][\200-\277][\200-\277]|".
+			"[\370-\373][\200-\277][\200-\277][\200-\277][\200-\277]|".
+			"[\360-\367][\200-\277][\200-\277][\200-\277]|".
+			"[\340-\357][\200-\277][\200-\277]|".
+			"[\300-\337][\200-\277]/",
+			'charset_decode_utf8_callback', $string);
+
+		// remove broken unicode
+		$string = preg_replace("/[\200-\237]|\240|[\241-\377]/",'?',$string);
+
+		return $string;
+	}
+
 	function gpg_hex2bin($data)
 	{
 		while(strstr($data, "\\x"))
@@ -554,7 +604,7 @@
 			$after = substr($data, $pos + 4);
 			$data = $before.$char.$after;
 		}
-		return(utf8_decode($data));
+		return charset_decode_utf8($data);
 	}
 
 	function signmail($to, $subject, $message, $from, $replyto = "")
