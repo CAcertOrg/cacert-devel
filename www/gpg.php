@@ -424,6 +424,7 @@ function expandVariants($name) {
     }
 
     $variants = array_filter($variants, function($a) { return false === strstr($a, "&"); } );
+    $variants = array_unique($variants);
 
     return $variants;
 }
