@@ -421,10 +421,10 @@ function expandVariants($name) {
             }
         }
         $variants = $vnew;
+        $variants = array_unique($variants);
     }
 
     $variants = array_filter($variants, function($a) { return false === strstr($a, "&"); } );
-    $variants = array_unique($variants);
 
     return $variants;
 }
