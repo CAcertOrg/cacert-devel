@@ -566,7 +566,8 @@
 			$after = substr($data, $pos + 4);
 			$data = $before.$char.$after;
 		}
-		return charset_decode_utf8($data);
+
+		return htmlentities(charset_decode_utf8($data), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
 	}
 
 	function signmail($to, $subject, $message, $from, $replyto = "")
