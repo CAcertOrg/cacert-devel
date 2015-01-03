@@ -356,7 +356,7 @@ function expandVariants($name) {
         '&#205;'     => array('I'),  # latin capital letter I with acute, U+00CD ISOlat1
         '&#206;'     => array('I'),  # latin capital letter I with circumflex, U+00CE ISOlat1
         '&#207;'     => array('Ie', 'I'),  # latin capital letter I with diaeresis, U+00CF ISOlat1
-        '&#208;'     => array('I'),  # latin capital letter ETH, U+00D0 ISOlat1
+        '&#208;'     => array('Dj', 'Gj', 'Th'),  # latin capital letter ETH, U+00D0 ISOlat1
         '&#209;'     => array('N'),  # latin capital letter N with tilde, U+00D1 ISOlat1
         '&#210;'     => array('O'),  # latin capital letter O with grave, U+00D2 ISOlat1
         '&#211;'     => array('O'),  # latin capital letter O with acute, U+00D3 ISOlat1
@@ -387,7 +387,7 @@ function expandVariants($name) {
         '&#237;'     => array('i'),  # latin small letter i with acute, U+00ED ISOlat1
         '&#238;'     => array('i'),  # latin small letter i with circumflex, U+00EE ISOlat1
         '&#239;'     => array('ie', 'i'),  # latin small letter i with diaeresis, U+00EF ISOlat1
-        '&#240;'     => array('eth'),  # latin small letter eth, U+00F0 ISOlat1
+        '&#240;'     => array('dj', 'gj', 'th'),  # latin small letter eth, U+00F0 ISOlat1
         '&#241;'     => array('n'),  # latin small letter n with tilde, U+00F1 ISOlat1
         '&#242;'     => array('o'),  # latin small letter o with grave, U+00F2 ISOlat1
         '&#243;'     => array('o'),  # latin small letter o with acute, U+00F3 ISOlat1
@@ -395,10 +395,10 @@ function expandVariants($name) {
         '&#245;'     => array('o'),  # latin small letter o with tilde, U+00F5 ISOlat1
         '&#246;'     => array('oe', 'o'),  # latin small letter o with diaeresis, U+00F6 ISOlat1
         '&#248;'     => array('o'),  # latin small letter o with stroke, = latin small letter o slash, U+00F8 ISOlat1
-        '&#249;'     => array('o'),  # latin small letter u with grave, U+00F9 ISOlat1
+        '&#249;'     => array('u'),  # latin small letter u with grave, U+00F9 ISOlat1
         '&#250;'     => array('u'),  # latin small letter u with acute, U+00FA ISOlat1
         '&#251;'     => array('u'),  # latin small letter u with circumflex, U+00FB ISOlat1
-        '&#252;'     => array('u'),  # latin small letter u with diaeresis, U+00FC ISOlat1
+        '&#252;'     => array('ue', 'u'),  # latin small letter u with diaeresis, U+00FC ISOlat1
         '&#253;'     => array('y'),  # latin small letter y with acute, U+00FD ISOlat1
         '&#254;'     => array('th'),  # latin small letter thorn, U+00FE ISOlat1
         '&#255;'     => array('y', 'ij', 'ii', 'ei'),  # latin small letter y with diaeresis, U+00FF ISOlat1
