@@ -335,31 +335,11 @@ function normalizeName($name) {
 
 function expandVariants($name) {
     static $replacements = array(
-        '&#160;'     => array(' '),  # no-break space = non-breaking space, U+00A0 ISOnum
-        '&#161;'     => array('!'),  # inverted exclamation mark, U+00A1 ISOnum
-        '&#166;'     => array(''),  # broken bar = broken vertical bar, U+00A6 ISOnum
-        '&#167;'     => array(''),  # section sign, U+00A7 ISOnum
         '&#168;'     => array(''),  # diaeresis = spacing diaeresis, U+00A8 ISOdia
-        '&#169;'     => array('(c)'),  # copyright sign, U+00A9 ISOnum
-        '&#170;'     => array(''),  # feminine ordinal indicator, U+00AA ISOnum
-        '&#171;'     => array('"'),  # left-pointing double angle quotation mark = left pointing guillemet, U+00AB ISOnum
-        '&#172;'     => array(''),  # not sign, U+00AC ISOnum
         '&#173;'     => array('-'),  # soft hyphen = discretionary hyphen, U+00AD ISOnum
-        '&#174;'     => array('(r)'),  # registered sign = registered trade mark sign, U+00AE ISOnum
         '&#175;'     => array(''),  # macron = spacing macron = overline = APL overbar, U+00AF ISOdia
-        '&#178;'     => array('^2'),  # superscript two = superscript digit two = squared, U+00B2 ISOnum
-        '&#179;'     => array('^3'),  # superscript three = superscript digit three = cubed, U+00B3 ISOnum
         '&#180;'     => array(''),  # acute accent = spacing acute, U+00B4 ISOdia
-        '&#181;'     => array('mu'),  # micro sign, U+00B5 ISOnum
-        '&#183;'     => array('.'),  # middle dot = Georgian comma = Greek middle dot, U+00B7 ISOnum
         '&#184;'     => array(''),  # cedilla = spacing cedilla, U+00B8 ISOdia
-        '&#185;'     => array('^1'),  # superscript one = superscript digit one, U+00B9 ISOnum
-        '&#186;'     => array(''),  # masculine ordinal indicator, U+00BA ISOnum
-        '&#187;'     => array('"'),  # right-pointing double angle quotation mark = right pointing guillemet, U+00BB ISOnum
-        '&#188;'     => array('1/4'),  # vulgar fraction one quarter = fraction one quarter, U+00BC ISOnum
-        '&#189;'     => array('1/2'),  # vulgar fraction one half = fraction one half, U+00BD ISOnum
-        '&#190;'     => array('3/4'),  # vulgar fraction three quarters = fraction three quarters, U+00BE ISOnum
-        '&#191;'     => array('?'),  # inverted question mark = turned question mark, U+00BF ISOnum
         '&#192;'     => array('A'),  # latin capital letter A with grave = latin capital letter A grave, U+00C0 ISOlat1
         '&#193;'     => array('A'),  # latin capital letter A with acute, U+00C1 ISOlat1
         '&#194;'     => array('A'),  # latin capital letter A with circumflex, U+00C2 ISOlat1
@@ -383,7 +363,6 @@ function expandVariants($name) {
         '&#212;'     => array('O'),  # latin capital letter O with circumflex, U+00D4 ISOlat1
         '&#213;'     => array('O'),  # latin capital letter O with tilde, U+00D5 ISOlat1
         '&#214;'     => array('Oe', 'O'),  # latin capital letter O with diaeresis, U+00D6 ISOlat1
-        '&#215;'     => array('*'),  # multiplication sign, U+00D7 ISOnum
         '&#216;'     => array('O'),  # latin capital letter O with stroke = latin capital letter O slash, U+00D8 ISOlat1
         '&#217;'     => array('U'),  # latin capital letter U with grave, U+00D9 ISOlat1
         '&#218;'     => array('U'),  # latin capital letter U with acute, U+00DA ISOlat1
@@ -415,7 +394,6 @@ function expandVariants($name) {
         '&#244;'     => array('o'),  # latin small letter o with circumflex, U+00F4 ISOlat1
         '&#245;'     => array('o'),  # latin small letter o with tilde, U+00F5 ISOlat1
         '&#246;'     => array('oe', 'o'),  # latin small letter o with diaeresis, U+00F6 ISOlat1
-        '&#247;'     => array('/'),  # division sign, U+00F7 ISOnum
         '&#248;'     => array('o'),  # latin small letter o with stroke, = latin small letter o slash, U+00F8 ISOlat1
         '&#249;'     => array('o'),  # latin small letter u with grave, U+00F9 ISOlat1
         '&#250;'     => array('u'),  # latin small letter u with acute, U+00FA ISOlat1
@@ -425,37 +403,12 @@ function expandVariants($name) {
         '&#254;'     => array('th'),  # latin small letter thorn, U+00FE ISOlat1
         '&#255;'     => array('y', 'ij', 'ii', 'ei'),  # latin small letter y with diaeresis, U+00FF ISOlat1
         '&#402;'     => array('f'),  # latin small f with hook = function = florin, U+0192 ISOtech
-        '&#8230;'    => array('...'), # horizontal ellipsis = three dot leader, U+2026 ISOpub
-        '&#8242;'    => array('\''), # prime = minutes = feet, U+2032 ISOtech
-        '&#8243;'    => array('"'), # double prime = seconds = inches, U+2033 ISOtech
-        '&#8254;'    => array(''), # overline = spacing overscore, U+203E NEW
-        '&#8260;'    => array('/'), # fraction slash, U+2044 NEW
-        '&#8482;'    => array('(tm)', 'tm'), # trade mark sign, U+2122 ISOnum
-        '&#8722;'    => array('-'), # minus sign, U+2212 ISOtech
-        '&#8727;'    => array('*'), # asterisk operator, U+2217 ISOtech
-        '&#8764;'    => array('~'), # tilde operator = varies with = similar to, U+223C ISOtech
-        '&#8853;'    => array('+'), # circled plus = direct sum, U+2295 ISOamsb
-        '&#8855;'    => array('*'), # circled times = vector product, U+2297 ISOamsb
         '&#338;'     => array('OE'),  # latin capital ligature OE, U+0152 ISOlat2
         '&#339;'     => array('oe'),  # latin small ligature oe, U+0153 ISOlat2
         '&#352;'     => array('s'),  # latin capital letter S with caron, U+0160 ISOlat2
         '&#353;'     => array('s'),  # latin small letter s with caron, U+0161 ISOlat2
         '&#376;'     => array('Y', 'Ij', 'Ii', 'Ei'),  # latin capital letter Y with diaeresis, U+0178 ISOlat2
         '&#710;'     => array(''),  # modifier letter circumflex accent, U+02C6 ISOpub
-        '&#732;'     => array('~'),  # small tilde, U+02DC ISOdia
-        '&#8194;'    => array(' '), # en space, U+2002 ISOpub
-        '&#8195;'    => array(' '), # em space, U+2003 ISOpub
-        '&#8201;'    => array(' '), # thin space, U+2009 ISOpub
-        '&#8211;'    => array('-'), # em dash, U+2014 ISOpub
-        '&#8212;'    => array('-'), # em dash, U+2014 ISOpub
-        '&#8216;'    => array('\''), # left single quotation mark, U+2018 ISOnum
-        '&#8217;'    => array('\''), # right single quotation mark, U+2019 ISOnum
-        '&#8218;'    => array('\''), # single low-9 quotation mark, U+201A NEW
-        '&#8220;'    => array('"'), # left double quotation mark, U+201C ISOnum
-        '&#8221;'    => array('"'), # right double quotation mark, U+201D ISOnum
-        '&#8222;'    => array('"'), # double low-9 quotation mark, U+201E NEW
-        '&#8249;'    => array('\''), # single left-pointing angle quotation mark, U+2039 ISO proposed
-        '&#8250;'    => array('\''), # single right-pointing angle quotation mark, U+203A ISO proposed
     );
 
     $variants = array($name);
