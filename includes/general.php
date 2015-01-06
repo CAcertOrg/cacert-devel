@@ -104,9 +104,6 @@
 
 		if($section == "index")
 			include_once($_SESSION['_config']['filepath']."/includes/general_stuff.php");
-
-		if($section == "tverify")
-			include_once($_SESSION['_config']['filepath']."/includes/tverify_stuff.php");
 	}
 
 	function includeit($id = "0", $section = "index")
