@@ -47,7 +47,6 @@
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['securehostname'] &&
-			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['tverify'] &&
 			$_SERVER['HTTP_HOST'] != "stamp.cacert.org")
 	{
 		if(array_key_exists('HTTPS',$_SERVER) && $_SERVER['HTTPS'] == "on")
@@ -58,8 +57,7 @@
 	}
 
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
-			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] ||
-			$_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify']))
+			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname']
 	{
 		if(array_key_exists('HTTPS',$_SERVER) && $_SERVER['HTTPS'] == "on")
 		{
@@ -68,8 +66,6 @@
 		{
 			if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 			header("location: https://". $_SESSION['_config']['securehostname']);
-			if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify'])
-			header("location: https://".$_SESSION['_config']['tverify']);
 			exit;
 		}
 	}
@@ -94,7 +90,7 @@
 
 	function loadem($section = "index")
 	{
-		if($section != "index" && $section != "account" && $section != "tverify")
+		if($section != "index" && $section != "account")
 		{
 			$section = "index";
 		}
@@ -109,14 +105,12 @@
 	function includeit($id = "0", $section = "index")
 	{
 		$id = intval($id);
-		if($section != "index" && $section != "account" && $section != "wot" && $section != "help" && $section != "gpg" && $section != "disputes" && $section != "tverify" && $section != "advertising")
+		if($section != "index" && $section != "account" && $section != "wot" && $section != "help" && $section != "gpg" && $section != "disputes" && $section != "advertising")
 		{
 			$section = "index";
 		}
 
-		if($section == "tverify" && file_exists($_SESSION['_config']['filepath']."/tverify/index/$id.php"))
-			include_once($_SESSION['_config']['filepath']."/tverify/index/$id.php");
-		else if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php"))
+		if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php"))
 			include_once($_SESSION['_config']['filepath']."/pages/$section/$id.php");
 		else {
 			$id = "0";
