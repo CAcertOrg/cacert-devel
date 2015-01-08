@@ -24,7 +24,6 @@
 	}
 	$_SESSION['_config']['normalhostname'] = "www.cacert.org";
 	$_SESSION['_config']['securehostname'] = "secure.cacert.org";
-	$_SESSION['_config']['tverify'] = "tverify.cacert.org";
 
 	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $extra="")
 	{
