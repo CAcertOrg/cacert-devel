@@ -2902,25 +2902,6 @@ function buildSubjectFromSession() {
 		}
 	}
 
-	/* presently not needed
-	if($id == 43 && array_key_exists('tverify',$_REQUEST) && $_REQUEST['tverify'] > 0 && $ticketvalidation==TRUE)
-	{
-		$memid = $_REQUEST['userid'] = intval($_REQUEST['tverify']);
-		if (!write_se_log($memid, $_SESSION['profile']['id'],'SE Change tverify status',$ticketno)) {
-			showheader(_("Something went wrong"));
-			echo _("Writing to the admin log failed. Can't continue.");
-			showfooter();
-			exit;
-		}
-		$query = "select * from `users` where `id`='$memid'";
-		$row = mysql_fetch_assoc(mysql_query($query));
-		$ver = !$row['tverify'];
-		mysql_query("update `users` set `tverify`='$ver' where `id`='$memid'");
-	}elseif($id == 43 && array_key_exists('tverify',$_REQUEST) && $_REQUEST['tverify'] > 0 && $ticketvalidation==FALSE){
-		$_SESSION['ticketmsg']='No action taken. Ticket number is missing!';
-	}
-	*/
-
 	if($id == 43 && array_key_exists('assurer',$_REQUEST) && $_REQUEST['assurer'] > 0 && $ticketvalidation == TRUE)
 	{
 		csrf_check('admsetassuret');
