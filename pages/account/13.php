@@ -28,8 +28,9 @@
   if($showdetails){
     $body  = sprintf(_("Hi %s,"),$user['fname'])."\n\n";
     $ip = anonymizeIp($_SERVER['REMOTE_ADDR']);
-    if($ip === false)
+    if($ip === false) {
       $ip = _("Error");
+    }
     $body .= sprintf(_("You receive this automatic mail since you yourself or someone ".
       "else looked up your secret questions and answers for a forgotten ".
       "password.\n\n".
