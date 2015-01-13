@@ -283,12 +283,6 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD"><?=_("Ad Admin")?>:</td>
             <td class="DataTD"><a href="account.php?id=43&amp;adadmin=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['adadmin'])?></a> (0 = none, 1 = submit, 2 = approve)</td>
         </tr>
-    <!-- presently not needed
-        <tr>
-            <td class="DataTD"><?=_("Tverify Account")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;tverify=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['tverify'])?></a></td>
-        </tr>
-    -->
         <tr>
             <td class="DataTD"><?=_("General Announcements")?>:</td>
             <td class="DataTD"><a href="account.php?id=43&amp;general=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($alerts['general'])?></a></td>
