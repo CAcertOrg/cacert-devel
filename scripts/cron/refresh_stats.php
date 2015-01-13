@@ -217,7 +217,9 @@ function getDataFromLive() {
 
 	$totalcerts = 0;
 	$totalusers = 0;
-	$totassurers = 0;
+	$totalcandidates = 0;
+	$totalassurers = 0;
+
 	for($i = date("Y"); $i >= 2002; $i--) {
 		$first_ts = mktime(0, 0, 0, 1, 1, $i);
 		$next_year_ts =  mktime(0, 0, 0, 1, 1, $i + 1);
@@ -233,14 +235,8 @@ function getDataFromLive() {
 				and `deleted` = 0
 				and `locked` = 0");
 
-		$totassurers += $assurers = tc(
-			"select count(*) as `count` from (
-				select 1 from `notary`
-					where `when` >= '$first' and `when` < '$next_year'
-					and `method`!='Administrative Increase'
-					and `deleted` = 0
-					group by `to` having sum(`points`) >= 100
-				) as `assurer_candidates`");
+		$totalcandidates += $candidates = assurer_count($first, $next_year, 0);
+		$totalassurers += $assurers = assurer_count($first, $next_year, 1);
 
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
@@ -267,6 +263,7 @@ function getDataFromLive() {
 		$tmp_arr = array();
 		$tmp_arr['date'] = $i;
 		$tmp_arr['new_users'] = number_format($users);
+		$tmp_arr['new_candidates'] = number_format($candidates);
 		$tmp_arr['new_assurers'] = number_format($assurers);
 		$tmp_arr['new_certificates'] = number_format($certs);
 
@@ -274,7 +271,8 @@ function getDataFromLive() {
 	}
 	$stats['growth_last_years_total'] = array(
 			'new_users' => number_format($totalusers),
-			'new_assurers' => number_format($totassurers),
+			'new_candidates' => number_format($totalcandidates),
+			'new_assurers' => number_format($totalassurers),
 			'new_certificates' => number_format($totalcerts),
 		);
 
