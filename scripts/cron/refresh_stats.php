@@ -299,7 +299,7 @@ function assurer_count($from, $to, $type = 1){
             FROM cacert.notary as n
             WHERE 1
                 AND n.`from` != n.`to`
-                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @a)
+                AND (n.`deleted` = '0000-00-00 00:00:00')
                 AND n.`when` < @a
                 $atype
             GROUP by n.`to`
@@ -312,7 +312,7 @@ function assurer_count($from, $to, $type = 1){
             FROM cacert.notary as n
             WHERE 1
                 AND n.`from` != n.`to`
-                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @b)
+                AND (n.`deleted` = '0000-00-00 00:00:00')
                 AND n.`when` < @b
                 $btype
             GROUP by n.`to`
