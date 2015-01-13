@@ -168,14 +168,8 @@ function getDataFromLive() {
 				and `deleted` = 0
 				and `locked` = 0");
 
-		$totassurers += $assurers = tc(
-			"select count(*) as `count` from (
-				select 1 from `notary`
-					where `when` >= '$first' and `when` < '$next_month'
-					and `method`!='Administrative Increase'
-					and `deleted` = 0
-					group by `to` having sum(`points`) >= 100
-				) as `assurer_candidates`");
+		$totalcandidates += $candidates = assurer_count($first, $next_month, 0);
+		$totalassurers += $assurers = assurer_count($first, $next_month, 1);
 
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
