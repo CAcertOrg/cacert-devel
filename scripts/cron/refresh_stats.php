@@ -138,9 +138,9 @@ function getDataFromLive() {
 	$startdate = date("Y-m-d", mktime(0, 0, 0, 1, 1, 2002));
 	$enddate = date("Y-m-d", mktime(0, 0, 0, 1, 1, date("Y") + 1));
 
-	$stats['aussurers_with_test'] = number_format(assurer_count($startdate, $enddate,1));
+	$stats['assurers_with_test'] = number_format(assurer_count($startdate, $enddate,1));
 
-	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $stats['aussurers_with_test']);
+	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $stats['assurers_with_test']);
 
 
 	$stats['points_issued'] = number_format(tc(
@@ -299,7 +299,7 @@ function assurer_count($from, $to, $type = 1){
             FROM cacert.notary as n
             WHERE 1
                 AND n.`from` != n.`to`
-                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @a)
+                AND (n.`deleted` = '0000-00-00 00:00:00')
                 AND n.`when` < @a
                 $atype
             GROUP by n.`to`
@@ -312,7 +312,7 @@ function assurer_count($from, $to, $type = 1){
             FROM cacert.notary as n
             WHERE 1
                 AND n.`from` != n.`to`
-                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @b)
+                AND (n.`deleted` = '0000-00-00 00:00:00')
                 AND n.`when` < @b
                 $btype
             GROUP by n.`to`
