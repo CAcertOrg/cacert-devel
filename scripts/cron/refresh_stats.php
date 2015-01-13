@@ -299,6 +299,73 @@ function getDataFromLive() {
 	return $stats;
 }
 
+/**
+ * assurer_count()
+ *   returns the number of new assurer in period given through from and to, type is defining the CATS type that is used as definition to be assurer
+ * @param mixed $from
+ * @param mixed $to
+ * @param integer $type
+ * @return
+ */
+function assurer_count($from, $to, $type = 1){
+    if ($type == 0) {
+        $atype = "";
+        $btype = "";
+    } else {
+        $atype = " AND n.`to` in (SELECT c.user_id FROM cats_passed as c, cats_variant as v WHERE c.variant_id = v.id and v.type_id = $type and pass_date < @a) ";
+        $btype = " AND n.`to` in (SELECT c.user_id FROM cats_passed as c, cats_variant as v WHERE c.variant_id = v.id and v.type_id = $type and pass_date < @b) ";
+    }
+
+    $query1 = "SET @a = '$from';";
+
+    $query2 = "SET @b = '$to';";
+
+    $query3 = "CREATE TEMPORARY TABLE a
+            SELECT n.`to`, sum(n.awarded) as `received_pts`, max(n.`when`) as `last_assurance`
+            FROM cacert.notary as n
+            WHERE 1
+                AND n.`from` != n.`to`
+                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @a)
+                AND n.`when` < @a
+                $atype
+            GROUP by n.`to`
+            HAVING 1
+                AND `received_pts` >= 100
+            ORDER by `last_assurance` DESC;";
+
+    $query4 = "CREATE TEMPORARY TABLE b
+            SELECT n.`to`, sum(n.awarded) as `received_pts`, max(n.`when`) as `last_assurance`
+            FROM cacert.notary as n
+            WHERE 1
+                AND n.`from` != n.`to`
+                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @b)
+                AND n.`when` < @b
+                $btype
+            GROUP by n.`to`
+            HAVING 1
+                AND `received_pts` >= 100
+            ORDER by `last_assurance` DESC;";
+
+    $query5 = "SELECT count(*) as `count` FROM b WHERE b.`to` NOT IN (SELECT a.`to` FROM a);";
+
+    $query6 = "DROP TEMPORARY TABLE a;";
+
+    $query7 = "DROP TEMPORARY TABLE b;";
+
+
+    sql_query($query1);
+    sql_query($query2);
+    sql_query($query3);
+    sql_query($query4);
+
+    $row = mysql_fetch_assoc(sql_query($query5));
+
+    sql_query($query6);
+    sql_query($query7);
+
+    return(intval($row['count']));
+}
+
 
 $stats = getDataFromLive();
 if (! updateCache($stats) ) {
