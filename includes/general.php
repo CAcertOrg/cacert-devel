@@ -64,9 +64,11 @@
 		}
 		else
 		{
-			if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
-			header("location: https://". $_SESSION['_config']['securehostname']);
+			if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname']){
+				header("location: https://". $_SESSION['_config']['securehostname']);
+			}
 			exit;
+
 		}
 	}
 
@@ -95,11 +97,13 @@
 			$section = "index";
 		}
 
-		if($section == "account")
+		if($section == "account"){
 			include_once($_SESSION['_config']['filepath']."/includes/account_stuff.php");
+		}
 
-		if($section == "index")
+		if($section == "index"){
 			include_once($_SESSION['_config']['filepath']."/includes/general_stuff.php");
+		}
 	}
 
 	function includeit($id = "0", $section = "index")
@@ -110,22 +114,24 @@
 			$section = "index";
 		}
 
-		if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php"))
+		if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php")){
 			include_once($_SESSION['_config']['filepath']."/pages/$section/$id.php");
+		}
 		else {
 			$id = "0";
 
-			if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php"))
+			if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php")){
 				include_once($_SESSION['_config']['filepath']."/pages/$section/$id.php");
-			else {
+			} else {
 
 				$section = "index";
 				$id = "0";
 
-				if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php"))
+				if(file_exists($_SESSION['_config']['filepath']."/pages/$section/$id.php")){
 					include_once($_SESSION['_config']['filepath']."/pages/$section/$id.php");
-				else
+				} else {
 					include_once($_SESSION['_config']['filepath']."/www/error404.php");
+				}
 			}
 		}
 	}
