@@ -135,44 +135,24 @@ function getDataFromLive() {
 				having sum(`points`) >= 50 and sum(`points`) < 100
 			) as `high_points`"));
 
-	$stats['assurer_candidates'] = number_format(tc(
-		"select count(*) as `count` from `users`
-			where (
-				select sum(`points`) from `notary`
-					where `to`=`users`.`id`
-					and `deleted` = 0
-				) >= 100
-			and not exists(
-				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
-					where `cp`.`user_id`=`users`.`id`
-					and `cp`.`variant_id`=`cv`.`id`
-					and `cv`.`type_id`=1
-				)"
-		));
+	$startdate = date("Y-m-d", mktime(0, 0, 0, 1, 1, 2002));
+	$enddate = date("Y-m-d", mktime(0, 0, 0, 1, 1, date("Y") + 1));
 
-	$stats['aussurers_with_test'] = number_format(tc(
-		"select count(*) as `count` from `users`
-			where (
-				select sum(`points`) from `notary`
-					where `to`=`users`.`id`
-					and `deleted` = 0
-				) >= 100
-			and exists(
-				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
-					where `cp`.`user_id`=`users`.`id`
-					and `cp`.`variant_id`=`cv`.`id`
-					and `cv`.`type_id`=1
-				)"
-		));
+	$stats['aussurers_with_test'] = number_format(assurer_count($startdate, $enddate,1));
+
+	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $stats['aussurers_with_test']);
+
 
 	$stats['points_issued'] = number_format(tc(
 		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`
 			where `deleted` = 0
 			and `method` = 'Face to Face Meeting'"));
 
-	$totalusers=0;
-	$totassurers=0;
-	$totalcerts=0;
+	$totalcerts = 0;
+	$totalusers = 0;
+	$totalcandidates = 0;
+	$totalassurers = 0;
+
 	for($i = 0; $i < 12; $i++) {
 		$first_ts = mktime(0, 0, 0, date("m") - $i, 1, date("Y"));
 		$next_month_ts =  mktime(0, 0, 0, date("m") - $i + 1, 1, date("Y"));
@@ -222,6 +202,7 @@ function getDataFromLive() {
 		$tmp_arr = array();
 		$tmp_arr['date'] = date("Y-m", $first_ts);
 		$tmp_arr['new_users'] = number_format($users);
+		$tmp_arr['new_candidates'] = number_format($candidates);
 		$tmp_arr['new_assurers'] = number_format($assurers);
 		$tmp_arr['new_certificates'] = number_format($certs);
 
@@ -229,7 +210,8 @@ function getDataFromLive() {
 	}
 	$stats['growth_last_12m_total'] = array(
 			'new_users' => number_format($totalusers),
-			'new_assurers' => number_format($totassurers),
+			'new_candidates' => number_format($totalcandidates),
+			'new_assurers' => number_format($totalassurers),
 			'new_certificates' => number_format($totalcerts),
 		);
 
