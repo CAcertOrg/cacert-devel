@@ -57,7 +57,7 @@
 	}
 
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
-			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname']
+			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname']))
 	{
 		if(array_key_exists('HTTPS',$_SERVER) && $_SERVER['HTTPS'] == "on")
 		{
