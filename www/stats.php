@@ -102,7 +102,7 @@
   <tr>
     <td class="DataTD"><b><?=_("Date")?></b>
     <td class="DataTD"><b><?=_("New Users")?></b>
-    <td class="DataTD"><b><?=_("New Assurers")?></b>
+    <td class="DataTD"><b><?=_("New Assurers")  . ' *'?></b>
     <td class="DataTD"><b><?=_("New Certificates")?></b>
   </tr>
 <?
@@ -111,14 +111,14 @@
   <tr>
     <td class="DataTD"><?=$stats['growth_last_12m'][$i]['date'];?></td>
     <td class="DataTD"><?=$stats['growth_last_12m'][$i]['new_users'];?></td>
-    <td class="DataTD"><?=$stats['growth_last_12m'][$i]['new_assurers'];?></td>
+    <td class="DataTD"><?= $stats['growth_last_12m'][$i]['new_candidates'] . '/' . $stats['growth_last_12m'][$i]['new_assurers'];?></td>
     <td class="DataTD"><?=$stats['growth_last_12m'][$i]['new_certificates'];?></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD"><?=_("Total")?></td>
     <td class="DataTD"><?=$stats['growth_last_12m_total']['new_users'];?></td>
-    <td class="DataTD"><?=$stats['growth_last_12m_total']['new_assurers'];?></td>
+    <td class="DataTD"><?=$stats['growth_last_12m_total']['new_candidates'] . '/' . $stats['growth_last_12m_total']['new_assurers'];?></td>
     <td class="DataTD"><?=$stats['growth_last_12m_total']['new_certificates'];?></td>
   </tr>
 </table>
@@ -130,7 +130,7 @@
   <tr>
     <td class="DataTD"><b><?=_("Date")?></b>
     <td class="DataTD"><b><?=_("New Users")?></b>
-    <td class="DataTD"><b><?=_("New Assurers")?></b>
+    <td class="DataTD"><b><?=_("New Assurers") . ' *'?></b>
     <td class="DataTD"><b><?=_("New Certificates")?></b>
   </tr>
 <?
@@ -139,20 +139,21 @@
   <tr>
     <td class="DataTD"><?=$stats['growth_last_years'][$i]['date'];?></td>
     <td class="DataTD"><?=$stats['growth_last_years'][$i]['new_users'];?></td>
-    <td class="DataTD"><?=$stats['growth_last_years'][$i]['new_assurers'];?></td>
+    <td class="DataTD"><?=$stats['growth_last_years'][$i]['new_candidates'] . '/' . $stats['growth_last_years'][$i]['new_assurers'];?></td>
     <td class="DataTD"><?=$stats['growth_last_years'][$i]['new_certificates'];?></td>
   </tr>
 <? } ?>
   <tr>
     <td class="DataTD"><?=_("Total")?></td>
     <td class="DataTD"><?=$stats['growth_last_years_total']['new_users'];?></td>
-    <td class="DataTD"><?=$stats['growth_last_years_total']['new_assurers'];?></td>
+    <td class="DataTD"><?=$stats['growth_last_years_total']['new_candidates'] . '/' . $stats['growth_last_years_total']['new_assurers'];?></td>
     <td class="DataTD"><?=$stats['growth_last_years_total']['new_certificates'];?></td>
   </tr>
 </table>
 <br>
 
 <div style="text-align: center;font-size: small;"><?
+	echo _('* user with at least 100 assurance points / assurer with CATS') . '</br>';
 	printf(_("Last updated: %s"), date('Y-m-d H:i:s', $stats['timestamp']));?>
 </div>
 

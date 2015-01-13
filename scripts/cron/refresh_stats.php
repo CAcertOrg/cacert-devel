@@ -135,44 +135,24 @@ function getDataFromLive() {
 				having sum(`points`) >= 50 and sum(`points`) < 100
 			) as `high_points`"));
 
-	$stats['assurer_candidates'] = number_format(tc(
-		"select count(*) as `count` from `users`
-			where (
-				select sum(`points`) from `notary`
-					where `to`=`users`.`id`
-					and `deleted` = 0
-				) >= 100
-			and not exists(
-				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
-					where `cp`.`user_id`=`users`.`id`
-					and `cp`.`variant_id`=`cv`.`id`
-					and `cv`.`type_id`=1
-				)"
-		));
+	$startdate = date("Y-m-d", mktime(0, 0, 0, 1, 1, 2002));
+	$enddate = date("Y-m-d", mktime(0, 0, 0, 1, 1, date("Y") + 1));
 
-	$stats['aussurers_with_test'] = number_format(tc(
-		"select count(*) as `count` from `users`
-			where (
-				select sum(`points`) from `notary`
-					where `to`=`users`.`id`
-					and `deleted` = 0
-				) >= 100
-			and exists(
-				select 1 from `cats_passed` as `cp`, `cats_variant` as `cv`
-					where `cp`.`user_id`=`users`.`id`
-					and `cp`.`variant_id`=`cv`.`id`
-					and `cv`.`type_id`=1
-				)"
-		));
+	$stats['aussurers_with_test'] = number_format(assurer_count($startdate, $enddate,1));
+
+	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $stats['aussurers_with_test']);
+
 
 	$stats['points_issued'] = number_format(tc(
 		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`
 			where `deleted` = 0
 			and `method` = 'Face to Face Meeting'"));
 
-	$totalusers=0;
-	$totassurers=0;
-	$totalcerts=0;
+	$totalcerts = 0;
+	$totalusers = 0;
+	$totalcandidates = 0;
+	$totalassurers = 0;
+
 	for($i = 0; $i < 12; $i++) {
 		$first_ts = mktime(0, 0, 0, date("m") - $i, 1, date("Y"));
 		$next_month_ts =  mktime(0, 0, 0, date("m") - $i + 1, 1, date("Y"));
@@ -188,14 +168,8 @@ function getDataFromLive() {
 				and `deleted` = 0
 				and `locked` = 0");
 
-		$totassurers += $assurers = tc(
-			"select count(*) as `count` from (
-				select 1 from `notary`
-					where `when` >= '$first' and `when` < '$next_month'
-					and `method`!='Administrative Increase'
-					and `deleted` = 0
-					group by `to` having sum(`points`) >= 100
-				) as `assurer_candidates`");
+		$totalcandidates += $candidates = assurer_count($first, $next_month, 0);
+		$totalassurers += $assurers = assurer_count($first, $next_month, 1);
 
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
@@ -222,6 +196,7 @@ function getDataFromLive() {
 		$tmp_arr = array();
 		$tmp_arr['date'] = date("Y-m", $first_ts);
 		$tmp_arr['new_users'] = number_format($users);
+		$tmp_arr['new_candidates'] = number_format($candidates);
 		$tmp_arr['new_assurers'] = number_format($assurers);
 		$tmp_arr['new_certificates'] = number_format($certs);
 
@@ -229,13 +204,16 @@ function getDataFromLive() {
 	}
 	$stats['growth_last_12m_total'] = array(
 			'new_users' => number_format($totalusers),
-			'new_assurers' => number_format($totassurers),
+			'new_candidates' => number_format($totalcandidates),
+			'new_assurers' => number_format($totalassurers),
 			'new_certificates' => number_format($totalcerts),
 		);
 
 	$totalcerts = 0;
 	$totalusers = 0;
-	$totassurers = 0;
+	$totalcandidates = 0;
+	$totalassurers = 0;
+
 	for($i = date("Y"); $i >= 2002; $i--) {
 		$first_ts = mktime(0, 0, 0, 1, 1, $i);
 		$next_year_ts =  mktime(0, 0, 0, 1, 1, $i + 1);
@@ -251,14 +229,8 @@ function getDataFromLive() {
 				and `deleted` = 0
 				and `locked` = 0");
 
-		$totassurers += $assurers = tc(
-			"select count(*) as `count` from (
-				select 1 from `notary`
-					where `when` >= '$first' and `when` < '$next_year'
-					and `method`!='Administrative Increase'
-					and `deleted` = 0
-					group by `to` having sum(`points`) >= 100
-				) as `assurer_candidates`");
+		$totalcandidates += $candidates = assurer_count($first, $next_year, 0);
+		$totalassurers += $assurers = assurer_count($first, $next_year, 1);
 
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
@@ -285,6 +257,7 @@ function getDataFromLive() {
 		$tmp_arr = array();
 		$tmp_arr['date'] = $i;
 		$tmp_arr['new_users'] = number_format($users);
+		$tmp_arr['new_candidates'] = number_format($candidates);
 		$tmp_arr['new_assurers'] = number_format($assurers);
 		$tmp_arr['new_certificates'] = number_format($certs);
 
@@ -292,11 +265,79 @@ function getDataFromLive() {
 	}
 	$stats['growth_last_years_total'] = array(
 			'new_users' => number_format($totalusers),
-			'new_assurers' => number_format($totassurers),
+			'new_candidates' => number_format($totalcandidates),
+			'new_assurers' => number_format($totalassurers),
 			'new_certificates' => number_format($totalcerts),
 		);
 
 	return $stats;
+}
+
+/**
+ * assurer_count()
+ *   returns the number of new assurer in period given through from and to, type is defining the CATS type that is used as definition to be assurer
+ * @param mixed $from
+ * @param mixed $to
+ * @param integer $type
+ * @return
+ */
+function assurer_count($from, $to, $type = 1){
+    if ($type == 0) {
+        $atype = "";
+        $btype = "";
+    } else {
+        $atype = " AND n.`to` in (SELECT c.user_id FROM cats_passed as c, cats_variant as v WHERE c.variant_id = v.id and v.type_id = $type and pass_date < @a) ";
+        $btype = " AND n.`to` in (SELECT c.user_id FROM cats_passed as c, cats_variant as v WHERE c.variant_id = v.id and v.type_id = $type and pass_date < @b) ";
+    }
+
+    $query1 = "SET @a = '$from';";
+
+    $query2 = "SET @b = '$to';";
+
+    $query3 = "CREATE TEMPORARY TABLE a
+            SELECT n.`to`, sum(n.awarded) as `received_pts`, max(n.`when`) as `last_assurance`
+            FROM cacert.notary as n
+            WHERE 1
+                AND n.`from` != n.`to`
+                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @a)
+                AND n.`when` < @a
+                $atype
+            GROUP by n.`to`
+            HAVING 1
+                AND `received_pts` >= 100
+            ORDER by `last_assurance` DESC;";
+
+    $query4 = "CREATE TEMPORARY TABLE b
+            SELECT n.`to`, sum(n.awarded) as `received_pts`, max(n.`when`) as `last_assurance`
+            FROM cacert.notary as n
+            WHERE 1
+                AND n.`from` != n.`to`
+                AND (n.`deleted` = '0000-00-00 00:00:00' OR n.`deleted` >= @b)
+                AND n.`when` < @b
+                $btype
+            GROUP by n.`to`
+            HAVING 1
+                AND `received_pts` >= 100
+            ORDER by `last_assurance` DESC;";
+
+    $query5 = "SELECT count(*) as `count` FROM b WHERE b.`to` NOT IN (SELECT a.`to` FROM a);";
+
+    $query6 = "DROP TEMPORARY TABLE a;";
+
+    $query7 = "DROP TEMPORARY TABLE b;";
+
+
+    sql_query($query1);
+    sql_query($query2);
+    sql_query($query3);
+    sql_query($query4);
+
+    $row = mysql_fetch_assoc(sql_query($query5));
+
+    sql_query($query6);
+    sql_query($query7);
+
+    return(intval($row['count']));
 }
 
 
