@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2015  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,17 +54,6 @@
 			exit;
 		}
 
-	} else if($id == 51 && $_GET['img'] == "show") {
-		$query = "select * from `tverify` where `id`='".intval($_GET['photoid'])."' and `modified`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res))
-		{
-			$row = mysql_fetch_assoc($res);
-			readfile($row['photoid']);
-		} else {
-			die("No such file.");
-		}
-		exit;
 	} else if ($id == 37) {
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
 		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';
