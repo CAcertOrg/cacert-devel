@@ -1060,9 +1060,15 @@ sub HandleGPG()
   
     my $prefix="gpg";
     my $short=int($row{'id'}/1000);
-    my $csrname = "../csr/$prefix-".$row{'id'}.".csr";
-    $csrname = "../csr/$prefix/$short/$prefix-".$row{'id'}.".csr" if($newlayout);
-    SysLog("New Layout: "."../csr/$prefix/$short/$prefix-".$row{'id'}.".csr\n");
+
+    my $dirname="../csr";
+    $dirname="../csr/$prefix/$short" if ($newlayout);
+
+    #Ensure the directory exists
+    mkdir $dirname, 0755;
+
+    my $csrname = "$dirname/$prefix-".$row{'id'}.".csr";
+    SysLog("New Layout: $csrname\n");
 
     #my $crtname = "../crt/$prefix-".$row{'id'}.".crt";
     my $crtname=$csrname; $crtname=~s/^\.\.\/csr/..\/crt/; $crtname=~s/\.csr$/.crt/;
