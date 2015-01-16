@@ -1057,7 +1057,7 @@ sub HandleGPG()
   while ( $rowdata = $sth->fetchrow_hashref() )
   {
     my %row=%{$rowdata};
-  
+
     my $prefix="gpg";
     my $short=int($row{'id'}/1000);
 
@@ -1074,14 +1074,13 @@ sub HandleGPG()
     my $crtname=$csrname; $crtname=~s/^\.\.\/csr/..\/crt/; $crtname=~s/\.csr$/.crt/;
     SysLog("New Layout: $crtname\n");
 
-
     #my $csrname = "../csr/gpg-".$row{'id'}.".csr";
     #my $crtname = "../crt/gpg-".$row{'id'}.".crt";
-  
+
     SysLog "Opening $csrname\n";
-  
+
     my $crt="";
-  
+
     if(-s $csrname && open(IN,"<$csrname"))
     {
       undef $/;
@@ -1107,12 +1106,12 @@ sub HandleGPG()
     {
       SysLog "Opening $crtname\n";
       setUsersLanguage($row{memid});
-  
+
       my $date=OpenPGPextractExpiryDate($crtname);
       my %user=getUserData($row{memid});
-  
+
       $dbh->do("update `gpg` set `crt`='$crtname', issued=now(), `expire`='$date' where `id`='".$row{'id'}."'");
-  
+
       my $body = _("Hi")." $user{fname},\n\n";
       $body .= sprintf(_("Your CAcert signed key for %s is available online at:")."\n\n", $row{'email'});
       $body .= "https://www.cacert.org/gpg.php?id=3&cert=$row{id}\n\n";
