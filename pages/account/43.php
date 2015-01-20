@@ -332,13 +332,9 @@ if(intval($_REQUEST['userid']) > 0) {
                             "looked up your secret questions and answers for a forgotten ".
                             "password.\n\n".
                             "Time: %s\n\n".
-                            "If it was you who looked up or changed that data, or clicked ".
-                            "through the menu in your account, everything is in best order ".
-                            "and you can ignore this mail.\n\n".
-                            "But if you received this mail without a recognisable reason, ".
+                            "If you received this mail without a recognisable reason, ".
                             "there is a danger that an unauthorised person accessed your ".
-                            "account, and you should promptly change your password and your ".
-                            "secret questions and answers."),
+                            "account, and you should promptly report this to support@cacert.org."),
                             date("Y-m-d H:i:s T"))."\n\n";
 
                         $body .= _("Best regards")."\n"._("CAcert Support");
