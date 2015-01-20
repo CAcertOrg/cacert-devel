@@ -455,15 +455,20 @@ function verifyName($name)
 {
 	if($name == "") return 0;
 
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname'])) return 1; // John Doe
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname'])) return 1; // John Joseph Doe
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname'])) return 1; // John J Doe
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname'])) return 1; // John J. Doe
+	$q = mysql_query("SELECT CONVERT(fname USING UTF8), CONVERT(mname USING UTF8), CONVERT(lname USING UTF8), CONVERT(suffix USING UTF8) FROM users WHERE id='" . intval($_SESSION["profile"]["id"]) . "'");
+	if( false === ($row = mysql_fetch_assoc($q)) ) {
+		return 0;
+	}
 
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; // John Doe Jr.
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname']." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John Joseph Doe Jr.
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0]." ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J Doe Jr.
-	if(compareName($name, $_SESSION['profile']['fname']." ".$_SESSION['profile']['mname'][0].". ".$_SESSION['profile']['lname']." ".$_SESSION['profile']['suffix'])) return 1; //John J. Doe Jr.
+	if(compareName($name, $row['fname']." ".$row['lname'])) return 1; // John Doe
+	if(compareName($name, $row['fname']." ".$row['mname']." ".$row['lname'])) return 1; // John Joseph Doe
+	if(compareName($name, $row['fname']." ".$row['mname'][0]." ".$row['lname'])) return 1; // John J Doe
+	if(compareName($name, $row['fname']." ".$row['mname'][0].". ".$row['lname'])) return 1; // John J. Doe
+
+	if(compareName($name, $row['fname']." ".$row['lname']." ".$row['suffix'])) return 1; // John Doe Jr.
+	if(compareName($name, $row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'])) return 1; //John Joseph Doe Jr.
+	if(compareName($name, $row['fname']." ".$row['mname'][0]." ".$row['lname']." ".$row['suffix'])) return 1; //John J Doe Jr.
+	if(compareName($name, $row['fname']." ".$row['mname'][0].". ".$row['lname']." ".$row['suffix'])) return 1; //John J. Doe Jr.
 
 	return 0;
 }
