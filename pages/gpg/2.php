@@ -64,7 +64,7 @@
 <? } ?>
     <td class="DataTD"><?=$row['expire']?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>"><?=sanitizeHTML($row['keyid'])?></a></td>
-    <td class="DataTD"><input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
+    <td class="DataTD"><input name="comment_<?=intval($row['id'])?>" type="text" value="<?=sanitizeHTML($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=intval($row['id'])?>" /></td>
   </tr>
 <? } ?>
