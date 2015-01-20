@@ -455,10 +455,15 @@ function verifyName($name)
 {
 	if($name == "") return 0;
 
-	$q = mysql_query("SELECT CONVERT(fname USING UTF8), CONVERT(mname USING UTF8), CONVERT(lname USING UTF8), CONVERT(suffix USING UTF8) FROM users WHERE id='" . intval($_SESSION["profile"]["id"]) . "'");
+	$q = mysql_query("SELECT HEX(CONVERT(users.fname USING utf8)) as fname, HEX(CONVERT(users.mname USING utf8)) as mname, HEX(CONVERT(users.lname USING utf8)) as lname, HEX(CONVERT(users.suffix USING UTF8)) as suffix FROM users WHERE id='" . intval($_SESSION["profile"]["id"]) . "'");
 	if( false === ($row = mysql_fetch_assoc($q)) ) {
 		return 0;
 	}
+
+	$row['fname'] = hex2bin($row['fname']);
+	$row['mname'] = hex2bin($row['mname']);
+	$row['lname'] = hex2bin($row['lname']);
+	$row['suffix'] = hex2bin($row['suffix']);
 
 	if(compareName($name, $row['fname']." ".$row['lname'])) return 1; // John Doe
 	if(compareName($name, $row['fname']." ".$row['mname']." ".$row['lname'])) return 1; // John Joseph Doe
