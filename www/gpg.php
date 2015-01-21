@@ -547,7 +547,7 @@ function verifyEmail($email)
 			if($npubs>1)
 			{
 				showheader(_("Welcome to CAcert.org"));
-				echo "<font color='#ff0000'>"._("Please upload only one key at a time.")."</font>";
+				echo "<span class=\"error_indicator\">"._("Please upload only one key at a time.")."</span>";
 				unset($_REQUEST['process']);
 				$id = $oldid;
 				unset($oldid);
@@ -571,7 +571,7 @@ function verifyEmail($email)
 			{
 				showheader(_("Welcome to CAcert.org"));
 
-				echo "<font color='#ff0000'>"._("Multiple Email Adresses per UID are not allowed.")."</font>";
+				echo "<span class=\"error_indicator\">"._("Multiple Email Adresses per UID are not allowed.")."</span>";
 				unset($_REQUEST['process']);
 				$id = $oldid;
 				unset($oldid);
@@ -679,7 +679,7 @@ function verifyEmail($email)
 			showheader(_("Welcome to CAcert.org"));
 			echo $resulttable;
 
-			echo "<font color='#ff0000'>"._("No valid UIDs found on your key")."</font>";
+			echo "<span class=\"error_indicator\">"._("No valid UIDs found on your key")."</span>";
 			unset($_REQUEST['process']);
 			$id = $oldid;
 			unset($oldid);

@@ -35,7 +35,7 @@
 
 			$_SESSION['_config']['pagehash'] = md5(date("U"));
 ?>
-<? if($_SESSION['_config']['error'] != "") { ?><font color="#ff0000" size="+1">ERROR: <?=$_SESSION['_config']['error']?></font><? unset($_SESSION['_config']['error']); } ?>
+<? if($_SESSION['_config']['error'] != "") { ?><span class="error_fatal">ERROR: <?=$_SESSION['_config']['error']?></span><? unset($_SESSION['_config']['error']); } ?>
 <form method="post" action="wot.php">
 <input type="hidden" name="userid" value="<?=intval($user['id'])?>">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">

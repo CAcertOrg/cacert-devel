@@ -644,6 +644,24 @@ td.greytxt {
 	font-size: 10px;
 }
 
+/************** error and warning styles ****************/
+
+.error_fatal {
+	font-size: x-large;
+	color: #ff0000;
+	font-family: Arial,sans-serif;
+}
+
+.error_warning {
+	font-size: large;
+	color: #ffa500;
+	font-family: Arial,sans-serif;
+}
+
+.error_indicator, .warning_indicator {
+	color: #ff0000;
+}
+
 
 /************** sponsorInfo styles ****************/
 

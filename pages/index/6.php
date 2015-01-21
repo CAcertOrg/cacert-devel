@@ -79,15 +79,15 @@
   </tr>
 <? } ?>
   <tr>
-    <td class="DataTD"><?=_("New Pass Phrase")?><font color="red">*</font>: </td>
+    <td class="DataTD"><?=_("New Pass Phrase")?><span class="error_indicator">*</span>: </td>
     <td class="DataTD"><input type="password" name="newpass1" autocomplete="off"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Repeat")?><font color="red">*</font>: </td>
+    <td class="DataTD"><?=_("Repeat")?><span class="error_indicator">*</span>: </td>
     <td class="DataTD"><input type="password" name="newpass2" autocomplete="off"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><font color="red">*</font><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
+    <td class="DataTD" colspan="2"><span class="error_indicator">*</span><?=_("Please note, in the interests of good security, the pass phrase must be made up of an upper case letter, lower case letter, number and symbol.")?></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>

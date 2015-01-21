@@ -270,7 +270,7 @@ function hideall() {
     <div class="story">
       <h3><?=$title2?></h3>
 <? if($_SESSION['_config']['errmsg'] != "") { ?>
-<p><font color="#ff0000" size="+2"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
+<p class="error_fatal"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?></p>
 <? } ?>
 <?
 	}
