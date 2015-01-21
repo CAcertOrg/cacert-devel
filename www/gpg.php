@@ -48,17 +48,6 @@
 
 	$keyid="";
 
-if(0)
-{
-  if($_SESSION["profile"]["id"] != 5897)
-  {
-    showheader(_("Welcome to CAcert.org"));
-    echo "The OpenPGP signing system is currently shutdown due to a maintenance. We hope to get it fixed within the next few hours. We are very sorry for the inconvenience.";
-
-    exit(0);
-  }
-}
-
 function normalizeName($name) {
     // Based on http://stackoverflow.com/questions/11176752/converting-named-html-entities-to-numeric-html-entities
     static $HTML401NamedToNumeric = array(
@@ -484,8 +473,6 @@ function verifyEmail($email)
 	if(mysql_num_rows(mysql_query("select * from `email` where `memid`='".$_SESSION['profile']['id']."' and `email`='".mysql_real_escape_string($email)."' and `deleted`=0 and `hash`=''")) > 0) return 1;
 	return 0;
 }
-
-
 
 	$ToBeDeleted=array();
 	$state=0;
