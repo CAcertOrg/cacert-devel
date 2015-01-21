@@ -268,7 +268,7 @@ function hideall() {
     <div class="story">
       <h3><?=$title2?></h3>
 <? if($_SESSION['_config']['errmsg'] != "") { ?>
-<p class="error_fatale"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?></p>
+<p class="error_fatal"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?></p>
 <? } ?>
 <?
 	}

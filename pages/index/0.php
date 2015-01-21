@@ -27,7 +27,7 @@
 <?=sprintf(_("This license applies to using the CAcert %s root keys %s."),'<a href="/index.php?id=3">','</a>')?></p>
 
 
-<? if(!array_key_exists('mconn',$_SESSION) || !$_SESSION['mconn']) echo "<span class=\"error_fatale\">"._("Most CAcert functions are currently unavailable. Please come back later.")."</span>";?>
+<? if(!array_key_exists('mconn',$_SESSION) || !$_SESSION['mconn']) echo "<span class=\"error_fatal\">"._("Most CAcert functions are currently unavailable. Please come back later.")."</span>";?>
 
 
 

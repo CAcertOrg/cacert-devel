@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") { ?><span class="error_fatale">ERROR: <?=$_SESSION['_config']['error']?></span><? unset($_SESSION['_config']['error']); } ?>
+<? if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") { ?><span class="error_fatal">ERROR: <?=$_SESSION['_config']['error']?></span><? unset($_SESSION['_config']['error']); } ?>
 <form method="post" action="wot.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

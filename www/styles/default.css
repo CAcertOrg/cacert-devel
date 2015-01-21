@@ -624,7 +624,7 @@ td.greytxt {
 
 /************** error and warning styles ****************/
 
-.error_fatale {
+.error_fatal {
 	font-size: x-large;
 	color: #ff0000;
 	font-family: Arial,sans-serif;

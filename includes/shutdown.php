@@ -21,7 +21,7 @@
 
 	if(0)
 	{ ?>
-		<span class="error_fatale"><? printf(_("This function is currently disabled. Please visit %s for more information."),
+		<span class="error_fatal"><? printf(_("This function is currently disabled. Please visit %s for more information."),
 			"<a target='_blank' href='http://wiki.cacert.org/wiki/ClientSecurity'>http://wiki.cacert.org/wiki/ClientSecurity</a>")?></span>
 <?
 		exit;
