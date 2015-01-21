@@ -146,7 +146,7 @@
 			$this->SetFont("Arial", "", "9");
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','',9);
-			$this->MultiCell($this->w - 29, 3, recode($_SESSION['_config']['recode'], _("I agree to the CAcert Community Agreement.")." ( http://www.cacert.org/policy/CAcertCommunityAgreement.php )"));
+			$this->MultiCell($this->w - 29, 3, recode($_SESSION['_config']['recode'], _("I agree to the CAcert Community Agreement.")." ( http://www.cacert.org/policy/CAcertCommunityAgreement.html )"));
 // new da end
 			$this->SetXY(13, $top + 55); //45->55
 			$this->Write(0, recode($_SESSION['_config']['recode'], _("Applicant's signature")).": __________________________________");
@@ -265,7 +265,7 @@
 				$this->Write(0, str_pad($date, 13, " "));
 			}
 
-		}	
+		}
 	}
 
 	$format = array_key_exists('format',$_REQUEST)?$_REQUEST['format']:"";
@@ -283,7 +283,7 @@
 	$pdf->AddPage();
 	$pdf->Body(array_key_exists('name',$_REQUEST)?$_REQUEST['name']:"", array_key_exists('dob',$_REQUEST)?$_REQUEST['dob']:"", array_key_exists('email',$_REQUEST)?$_REQUEST['email']:"", array_key_exists('assurer',$_REQUEST)?$_REQUEST['assurer']:"", array_key_exists('date',$_REQUEST)?$_REQUEST['date']:"", $maxpoints, array_key_exists('document1',$_REQUEST)?$_REQUEST['document1']:"", array_key_exists('document2',$_REQUEST)?$_REQUEST['document2']:"", array_key_exists('location',$_REQUEST)?$_REQUEST['location']:"");
 	header("Expires: ".gmdate("D, j M Y G:i:s \G\M\T", time()+10800));
-	header("Content-Disposition: attachment; filename=cap.pdf"); 
+	header("Content-Disposition: attachment; filename=cap.pdf");
 	header("Cache-Control: public, max-age=10800");
 	header("Pragma: cache");
 	$pdf->output();

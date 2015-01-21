@@ -25,7 +25,7 @@
 	echo "200,Authentication Ok\n";
 	$user = mysql_fetch_assoc($res);
 	$memid = $user['id'];
-	$query = "select sum(`points`) as `points` from `notary` where `to`='$memid' group by `to`";
+	$query = "select sum(`points`) as `points` from `notary` where `to`='".intval($memid)."' and `notary`.`deleted`=0 group by `to`";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$points = $row['points'];
 	echo "CS=".intval($user['codesign'])."\n";
@@ -40,8 +40,9 @@
 		if($user['mname'] != "" && $user['suffix'] != "")
 			echo "NAME=".sanitizeHTML($user['fname'])." ".sanitizeHTML($user['mname'])." ".sanitizeHTML($user['lname'])." ".sanitizeHTML($user['suffix'])."\n";
 	}
-	$query = "select * from `email` where `memid`='$memid' and `hash`='' and `deleted`=0";
+	$query = "select * from `email` where `memid`='".intval($memid)."' and `hash`='' and `deleted`=0";
 	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
-		echo "EMAIL=".$row['email']."\n";
+	while($row = mysql_fetch_assoc($res)) {
+		echo "EMAIL=".sanitizeHTML($row['email'])."\n";
+	}
 ?>

@@ -41,7 +41,7 @@ if (is_array($_SESSION['_config']['altrows'])) {
 }
 
 echo _("Organisation"), ": {$org['O']}<br>\n";
-echo _("Org. Unit"), ": {$_SESSION['_config']['OU']}<br>\n";
+echo _("Org. Unit"), ": ", sanitizeHTML($_SESSION['_config']['OU']), "<br>\n";
 echo _("Location"), ": {$org['L']}<br>\n";
 echo _("State/Province"), ": {$org['ST']}<br>\n";
 echo _("Country"), ": {$org['C']}<br>\n";
@@ -52,7 +52,7 @@ echo _("Country"), ": {$org['C']}<br>\n";
 		<input type="submit" name="process" value="<?=_("Submit")?>">
 		<input type="hidden" name="oldid" value="<?=$id?>">
 	</p>
-	
+
 	<?
 	if ($_SESSION['profile']['admin'] == 1) {
 		?>

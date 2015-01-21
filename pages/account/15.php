@@ -30,7 +30,7 @@
 	}
 	$row = mysql_fetch_assoc($res);
         $crtname=escapeshellarg($row['crt_name']);
-	$cert = `/usr/bin/openssl x509 -in $crtname`;
+	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname");
 ?>
 <h3><?=_("Below is your Server Certificate")?></h3>
 <pre>

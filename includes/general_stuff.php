@@ -38,7 +38,7 @@ google_color_text = "000000";
 google_color_border = "FFFFFF";
 //-->
 </script>
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><? } else { 
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><? } else {
 ?><h2><?=_("Free digital certificates!")?></h2><? } ?></div>
   </div>
   <div id="pageNav">
@@ -47,15 +47,15 @@ google_color_border = "FFFFFF";
       <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=1"><?=_("Join")?></a>
       <? } ?>
-      <a href="/policy/CAcertCommunityAgreement.php"><?=_("Community Agreement")?></a>
+      <a href="/policy/CAcertCommunityAgreement.html"><?=_("Community Agreement")?></a>
       <a href="/index.php?id=3"><?=_("Root Certificate")?></a>
     </div>
     <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
       <h3 class="pointer"><?=_("My Account")?></h3>
-      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4"><?=_("Password Login")?></a> 
+      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4"><?=_("Password Login")?></a>
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=5"><?=_("Lost Password")?></a>
-      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4&amp;noauto=1"><?=_("Net Cafe Login")?></a> 
+      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4&amp;noauto=1"><?=_("Net Cafe Login")?></a>
       <a href="https://<?=$_SESSION['_config']['securehostname']?>/index.php?id=4"><?=_("Certificate Login")?></a>
     </div>
     <? } ?>
@@ -137,8 +137,8 @@ if(!function_exists("showfooter"))
         <a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> |
         <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
 	&copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
-</div>  
-</body>             
+</div>
+</body>
 </html><?
 	}
 }

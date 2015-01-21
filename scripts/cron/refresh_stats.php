@@ -23,7 +23,7 @@ require_once(dirname(__FILE__).'/../../includes/mysql.php');
 /**
  * Wrapper around mysql_query() to provide some error handling. Prints an error
  * message and dies if query fails
- * 
+ *
  * @param string $sql
  * 		the SQL statement to execute
  * @return resource|boolean
@@ -35,7 +35,7 @@ function sql_query($sql) {
 		fwrite(STDERR, "MySQL query failed:\n\"$sql\"\n".mysql_error());
 		die(1);
 	}
-	
+
 	return $res;
 }
 
@@ -54,7 +54,7 @@ function updateCache($stats) {
 	$sql = "insert into `statscache` (`timestamp`, `cache`) values
 	('$timestamp', '".mysql_real_escape_string(serialize($stats))."')";
 	sql_query($sql);
-	
+
 	// Make sure the new statistic was inserted successfully
 	$res = sql_query(
 		"select 1 from `statscache` where `timestamp` = '$timestamp'");
@@ -62,7 +62,7 @@ function updateCache($stats) {
 		fwrite(STDERR, "Error on inserting the new statistic");
 		return false;
 	}
-	
+
 	sql_query("delete from `statscache` where `timestamp` != '$timestamp'");
 	return true;
 }
@@ -74,22 +74,22 @@ function updateCache($stats) {
 */
 function getDataFromLive() {
 	echo "Calculating current statistics\n";
-	
+
 	$stats = array();
 	$stats['verified_users'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where `verified` = 1
 			and `deleted` = 0
 			and `locked` = 0"));
-	
+
 	$stats['verified_emails'] = number_format(tc(
 		"select count(*) as `count` from `email`
 			where `hash` = '' and `deleted` = 0"));
-	
+
 	$stats['verified_domains'] = number_format(tc(
 		"select count(*) as `count` from `domains`
 			where `hash` = '' and `deleted` = 0"));
-	
+
 	$certs = tc("select count(*) as `count` from `domaincerts`
 			where `expire` != 0");
 	$certs += tc("select count(*) as `count` from `emailcerts`
@@ -101,7 +101,7 @@ function getDataFromLive() {
 	$certs += tc("select count(*) as `count` from `orgemailcerts`
 			where `expire` != 0");
 	$stats['verified_certificates'] = number_format($certs);
-	
+
 	$certs = tc("select count(*) as `count` from `domaincerts`
 		where `revoked` = 0 and `expire` > NOW()");
 	$certs += tc("select count(*) as `count` from `emailcerts`
@@ -113,11 +113,12 @@ function getDataFromLive() {
 	$certs += tc("select count(*) as `count` from `orgemailcerts`
 		where `revoked` = 0 and `expire` > NOW()");
 	$stats['valid_certificates'] = number_format($certs);
-	
+
 	$stats['assurances_made'] = number_format(tc(
 		"select count(*) as `count` from `notary`
-			where `method` = '' or `method` = 'Face to Face Meeting'"));
-	
+			where (`method` = '' or `method` = 'Face to Face Meeting')
+			and `deleted` = 0"));
+
 	$stats['users_1to49'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary`
@@ -125,7 +126,7 @@ function getDataFromLive() {
 				group by `to`
 				having sum(`points`) > 0 and sum(`points`) < 50
 			) as `low_points`"));
-	
+
 	$stats['users_50to99'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary`
@@ -133,7 +134,7 @@ function getDataFromLive() {
 				group by `to`
 				having sum(`points`) >= 50 and sum(`points`) < 100
 			) as `high_points`"));
-	
+
 	$stats['assurer_candidates'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where (
@@ -148,7 +149,7 @@ function getDataFromLive() {
 					and `cv`.`type_id`=1
 				)"
 		));
-	
+
 	$stats['aussurers_with_test'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where (
@@ -163,7 +164,7 @@ function getDataFromLive() {
 					and `cv`.`type_id`=1
 				)"
 		));
-	
+
 	$stats['points_issued'] = number_format(tc(
 		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`
 			where `deleted` = 0
@@ -177,16 +178,16 @@ function getDataFromLive() {
 		$next_month_ts =  mktime(0, 0, 0, date("m") - $i + 1, 1, date("Y"));
 		$first = date("Y-m-d", $first_ts);
 		$next_month = date("Y-m-d", $next_month_ts);
-		
+
 		echo "Calculating statistics for month $first\n";
-		
+
 		$totalusers += $users = tc(
-			"select count(*) as `count` from `users` 
+			"select count(*) as `count` from `users`
 				where `created` >= '$first' and `created` < '$next_month'
 				and `verified` = 1
 				and `deleted` = 0
 				and `locked` = 0");
-		
+
 		$totassurers += $assurers = tc(
 			"select count(*) as `count` from (
 				select 1 from `notary`
@@ -195,7 +196,7 @@ function getDataFromLive() {
 					and `deleted` = 0
 					group by `to` having sum(`points`) >= 100
 				) as `assurer_candidates`");
-		
+
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
 				where `created` >= '$first' and `created` < '$next_month'
@@ -240,16 +241,16 @@ function getDataFromLive() {
 		$next_year_ts =  mktime(0, 0, 0, 1, 1, $i + 1);
 		$first = date("Y-m-d", $first_ts);
 		$next_year = date("Y-m-d", $next_year_ts);
-		
+
 		echo "Calculating statistics for year $i\n";
-		
+
 		$totalusers += $users = tc(
-			"select count(*) as `count` from `users` 
+			"select count(*) as `count` from `users`
 				where `created` >= '$first' and `created` < '$next_year'
 				and `verified` = 1
 				and `deleted` = 0
 				and `locked` = 0");
-		
+
 		$totassurers += $assurers = tc(
 			"select count(*) as `count` from (
 				select 1 from `notary`
@@ -258,7 +259,7 @@ function getDataFromLive() {
 					and `deleted` = 0
 					group by `to` having sum(`points`) >= 100
 				) as `assurer_candidates`");
-		
+
 		$certs = tc(
 			"select count(*) as `count` from `domaincerts`
 				where `created` >= '$first' and `created` < '$next_year'
@@ -286,7 +287,7 @@ function getDataFromLive() {
 		$tmp_arr['new_users'] = number_format($users);
 		$tmp_arr['new_assurers'] = number_format($assurers);
 		$tmp_arr['new_certificates'] = number_format($certs);
-		
+
 		$stats['growth_last_years'][] = $tmp_arr;
 	}
 	$stats['growth_last_years_total'] = array(

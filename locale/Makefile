@@ -144,7 +144,7 @@ GETTEXT_FILE_PATTERN := \
 ../pages/*/*.php \
 ../scripts/*.php \
 ../www/*.php \
-../www/*/*.php \
+../www/[a-z]*/*.php \
 # ../tverify/*.php \
 # ../tverify/*/*.php \
 

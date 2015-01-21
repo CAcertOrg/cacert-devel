@@ -17,5 +17,5 @@
 */
 
     header('HTTP/1.0 301 Moved Permanently');
-    header('Location: http://www.cacert.org/policy/CertificationPracticeStatement.php');
+    header('Location: http://www.cacert.org/policy/CertificationPracticeStatement.html');
     exit();

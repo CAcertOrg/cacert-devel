@@ -32,7 +32,7 @@
 			$stats['timestamp'] = $ar['timestamp'];
 			return $stats;
 		}
-		
+
 		return null;
 	}
 
@@ -40,7 +40,7 @@
 	if ($stats === null) {
 		echo '<p>', _("Error while retrieving the statistics!"), '</p>';
 		showfooter();
-		die(); 
+		die();
 	}
 ?>
 <h1>CAcert.org <?=_("Statistics")?></h1>
@@ -157,4 +157,3 @@
 </div>
 
 <? showfooter(); ?>
-

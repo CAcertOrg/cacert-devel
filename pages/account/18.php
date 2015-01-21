@@ -79,6 +79,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
       UNIX_TIMESTAMP(`oemail`.`expire`) as `expired`,
       `oemail`.`expire` as `expires`, `oemail`.`revoked` as `revoke`,
       UNIX_TIMESTAMP(`oemail`.`revoked`) as `revoked`,
+      if (`oemail`.`expire`=0,CURRENT_TIMESTAMP(),`oemail`.`modified`) as `modified`,
       `oemail`.`CN`, `oemail`.`serial`, `oemail`.`id`,
       `oemail`.`description`, `oemail`.`ou`, `orginfo`.`O`
       from `orgemailcerts` as `oemail`, `org`, `orginfo`
@@ -92,17 +93,17 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
   if(0==$status)
   {
     $query .= "AND `oemail`.`revoked`=0 AND `oemail`.`renewed`=0 ";
-    $query .= "HAVING `timeleft` > 0 AND `revoked`=0 ";
+    $query .= "HAVING `timeleft` > 0 AND `revoked`=0 or `expires` = 0 ";
   }
   switch ($sorting){
     case 0:
-      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`expire` desc";
+      $query .= "ORDER BY `orginfo`.`O`, `modified` desc";
       break;
     case 1:
-      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`ou`, `oemail`.`expire` desc";
+      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`ou`, `modified` desc";
       break;
     case 2:
-      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `oemail`.`expire` desc";
+      $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `modified` desc";
       break;
   }
   $res = mysql_query($query);

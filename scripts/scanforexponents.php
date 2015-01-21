@@ -29,10 +29,11 @@
 		if(!is_file($file))
 			continue;
 
+		$file_esc = escapeshellarg($file);
 		if(substr($file, -3) == "der")
-			$do = trim(`openssl x509 -inform der -in $file -text -noout 2>&1 |grep 'Exponent'`);
+			$do = trim(`openssl x509 -inform der -in $file_esc -text -noout 2>&1 |grep 'Exponent'`);
 		else
-			$do = trim(`openssl x509 -in $file -text -noout 2>&1 |grep 'Exponent'`);
+			$do = trim(`openssl x509 -in $file_esc -text -noout 2>&1 |grep 'Exponent'`);
 
 		if($do == "")
 			continue;
