@@ -328,7 +328,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
                     } else {
                         $body  = sprintf(_("Hi %s,"),$row['fname'])."\n\n";
-                        $body .= sprintf(_("You receive this automatic mail since a supporter ".
+                        $body .= sprintf(_("You receive this automatic mail becasue a supporter ".
                             "looked up your secret questions and answers for a forgotten ".
                             "password.\n\n".
                             "Time: %s\n\n".
