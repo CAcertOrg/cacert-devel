@@ -80,8 +80,11 @@ function show_page($target,$message,$error)
 		case 'MyPointsNew':	includeit(15, "wot");
 					break;
 		case '16':
-		case 'TTPForm':	includeit(16, "wot");
-			break;
+		case 'TTPForm':		includeit(16, "wot");
+					break;
+		case '17':
+		case 'AssurerCheck':	includeit(17, "wot");
+					break;
 	}
 
 	showfooter();
@@ -124,6 +127,7 @@ function send_reminder()
 	if(array_key_exists('location',$_POST) && $_POST['location'] != "")
 		$_SESSION['_config']['location'] = $_POST['location'];
 
+	$id=array_key_exists('id',$_REQUEST)?intval($_REQUEST['id']):0;
 	$oldid=array_key_exists('oldid',$_REQUEST)?intval($_REQUEST['oldid']):0;
 
 	if($oldid == 12)
@@ -555,9 +559,76 @@ function send_reminder()
 		exit;
 	}
 
-//	showheader(_("My CAcert.org Account!"));
-//	echo "ID now = ".$id."/".$oldid.">>".$iecho;
-//	includeit($id, "wot");
-//	showfooter();
+	// Assurer Check
+	if($oldid == 17 )
+	{
+		$oldid = 0;
+		$id = 17;
+		$number = 5;
+		$email = mysql_real_escape_string(trim($_REQUEST['email']));
+		$reason = mysql_real_escape_string(trim($_REQUEST['reason']));
+		$uid = get_user_id_from_email($email);
+
+		if ($uid == 0) {
+			show_page("AssurerCheck", "", _("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
+			exit;
+		}
+
+		if ($reason == "--") {
+			show_page("AssurerCheck", "" ,_("I'm sorry, there was no reason given why you need to check the assurer status."));
+			exit;
+		}
+
+		if (get_number_of_adminlog_entries($_SESSION['profile']['id'],1000,1) > $number) {
+			show_page("AssurerCheck", "", sprintf(_("I'm sorry, you reached the maximum requests of %s per hour. Please wait until you try it again."),$number));
+			exit;
+		}
+
+		if (is_assurer($uid)) {
+			$status = _('Is assurer');
+		} else {
+			 $status = _('Is no assurer');
+		}
+
+		write_se_log($uid, $_SESSION['profile']['id'], 'User Assurer status check', '', 1000);
+
+		$assurer = get_user($uid);
+
+		//mail to member
+		$my_translation = L10n::get_translation();
+		L10n::set_translation($assurer['language']);
+
+		$subject = "[CAcert.org] ". _("Assurer status report for you");
+
+		$body  = sprintf(_("Hi %s,"), $assurer['fname'])."\n\n";
+		$body .= sprintf(_("%s %s (%s) has requested your assurer status for %s."),
+			$_SESSION['profile']['fname'],
+			$_SESSION['profile']['lname'],
+			$_SESSION['profile']['email'],
+			$reason)."\n\n";
+		$body .= sprintf(_("The transmitted result: %s"), $status)."\n";
+		$body .= _("Best regards")."\n";
+		$body .= _("CAcert Support Team");
+
+		sendmail($assurer['email'], "[CAcert.org] ". $subject, $body,
+			"support@cacert.org", //from
+			"", //replyto
+			"", //toname
+			"CAcert Support"); //fromname
+
+		L10n::set_translation($my_translation);
+
+		showheader(_("My CAcert.org Account!"));?>
+		<p>
+			<?=sprintf(_('The assurer status for %s %s (%s) is: %s'),
+				$assurer['fname'],
+				$assurer['lname'],
+				$assurer['email'],
+				$status) . '<br/>'. _('The mail with the status request has been sent to the email address above.'); ?>
+		</p>
+		<?
+		showfooter();
+		exit;
+	}
+
 show_page ($id,"","");
-?>
