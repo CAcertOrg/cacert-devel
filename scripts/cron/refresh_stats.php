@@ -138,10 +138,10 @@ function getDataFromLive() {
 	$startdate = date("Y-m-d", mktime(0, 0, 0, 1, 1, 2002));
 	$enddate = date("Y-m-d", mktime(0, 0, 0, 1, 1, date("Y") + 1));
 
-	$stats['assurers_with_test'] = number_format(assurer_count($startdate, $enddate,1));
+	$assurercount= assurer_count($startdate, $enddate,1);
+	$stats['assurer_with_test'] = number_format($assurercount);
 
-	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $stats['assurers_with_test']);
-
+	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $assurercount);
 
 	$stats['points_issued'] = number_format(tc(
 		"select sum(greatest(`points`, `awarded`)) as `count` from `notary`

@@ -87,7 +87,7 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Assurers with test")?>:</td>
-    <td class="DataTD"><?=$stats['assurers_with_test'];?></td>
+    <td class="DataTD"><?=$stats['assurer_with_test'];?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Points Issued")?>:</td>
@@ -153,8 +153,9 @@
 <br>
 
 <div style="text-align: center;font-size: small;"><?
-	echo _('* user with at least 100 assurance points / assurer with CATS') . '</br>';
-	printf(_("Last updated: %s"), date('Y-m-d H:i:s', $stats['timestamp']));?>
+    echo _('* user with at least 100 assurance points / assurer with CATS') . '</br>';
+    echo _('Difference of calculation of assurer between total and running total result from assurers that have been deleted from the system.') . '</br>';
+    printf(_("Last updated: %s"), date('Y-m-d H:i:s', $stats['timestamp']));?>
 </div>
 
 <? showfooter(); ?>
