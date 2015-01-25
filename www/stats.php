@@ -87,7 +87,7 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Assurers with test")?>:</td>
-    <td class="DataTD"><?=$stats['assurers_with_test'];?></td>
+    <td class="DataTD"><?=$stats['assurer_with_test'];?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Points Issued")?>:</td>
