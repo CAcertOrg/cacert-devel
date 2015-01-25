@@ -17,8 +17,7 @@
 */
 include_once("../includes/shutdown.php");
 require_once("../includes/lib/l10n.php");
-?>
-<?
+
 if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "")
 {
     ?><font color="orange" size="+1">
@@ -26,9 +25,12 @@ if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error
     </font>
     <?unset($_SESSION['_config']['error']);
 }
+
+if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) {
+    unset($_SESSION['_config']['noemailfound']);
+}
+
 ?>
-<? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
-    <? unset($_SESSION['_config']['noemailfound']); } ?>
 <form method="post" action="wot.php" name="form1">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
     <tr>

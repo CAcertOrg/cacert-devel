@@ -1168,4 +1168,3 @@ function write_se_log($uid, $adminid, $type, $info, $typeid=1){
 		(Now(), $uid, $adminid, '$type', '$info', '$typeid')";
 	mysql_query($query);
 }
-
