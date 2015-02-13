@@ -1023,17 +1023,29 @@ sub RevokeCerts($$)
 
       if($result)
       {
-        setUsersLanguage($row{memid});
-
-        my %user=getUserData($row{memid});
-
         $dbh->do("update `$table` set `revoked`=now() where `id`='".$row{'id'}."'");
 
-        my $body = _("Hi")." $user{fname},\n\n";
-        $body .= sprintf(_("Your certificate for '%s' with the serial number '%s' has been revoked, as per request.")."\n\n", $row{'CN'}, $row{'serial'});
-        $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
-	SysLog("Sending email to ".$user{"email"}."\n") if($debug);
-        sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
+        if($org eq "")
+        {
+          if($server)
+          {
+            my @a=$dbh->selectrow_array("select `memid` from `domains` where `id`='".int($row{domid})."'");
+            sendRevokeMail($a[0],  $row{'CN'}, $row{'serial'});
+          }
+          else
+          {
+            sendRevokeMail($row{memid}, $row{'CN'}, $row{'serial'});
+          }
+        }
+        else
+        {
+          my $orgsth = $dbh->prepare("select `memid` from `org` where `orgid`='".int($row{orgid})."'");
+          $orgsth->execute();
+          while ( my ($memid) = $orgsth->fetchrow_array() )
+          {
+            sendRevokeMail($memid, $row{'CN'}, $row{'serial'});
+          }
+        }
       }
 
     }
@@ -1046,6 +1058,21 @@ sub RevokeCerts($$)
 
 }
 
+sub sendRevokeMail()
+{
+    my $memid = $_[0];
+    my $certName = $_[1];
+    my $serial = $_[2];
+    setUsersLanguage($memid);
+
+    my %user=getUserData($memid);
+
+    my $body = _("Hi")." $user{fname},\n\n";
+    $body .= sprintf(_("Your certificate for '%s' with the serial number '%s' has been revoked, as per request.")."\n\n", $certName, $serial);
+    $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
+    SysLog("Sending email to ".$user{"email"}."\n") if($debug);
+    sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
+}
 
 
 
