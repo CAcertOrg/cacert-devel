@@ -124,7 +124,7 @@ function getDataFromLive() {
 			select 1 from `notary`
 				where `deleted` = 0
 				group by `to`
-				having sum(`points`) > 0 and sum(`points`) < 50
+				having sum(`awarded`) > 0 and sum(`awarded`) < 50
 			) as `low_points`"));
 
 	$stats['users_50to99'] = number_format(tc(
@@ -132,13 +132,13 @@ function getDataFromLive() {
 			select 1 from `notary`
 				where `deleted` = 0
 				group by `to`
-				having sum(`points`) >= 50 and sum(`points`) < 100
+				having sum(`awarded`) >= 50 and sum(`awarded`) < 100
 			) as `high_points`"));
 
 	$stats['assurer_candidates'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where (
-				select sum(`points`) from `notary`
+				select sum(`awarded`) from `notary`
 					where `to`=`users`.`id`
 					and `deleted` = 0
 				) >= 100
@@ -153,7 +153,7 @@ function getDataFromLive() {
 	$stats['aussurers_with_test'] = number_format(tc(
 		"select count(*) as `count` from `users`
 			where (
-				select sum(`points`) from `notary`
+				select sum(`awarded`) from `notary`
 					where `to`=`users`.`id`
 					and `deleted` = 0
 				) >= 100
@@ -194,7 +194,7 @@ function getDataFromLive() {
 					where `when` >= '$first' and `when` < '$next_month'
 					and `method`!='Administrative Increase'
 					and `deleted` = 0
-					group by `to` having sum(`points`) >= 100
+					group by `to` having sum(`awarded`) >= 100
 				) as `assurer_candidates`");
 
 		$certs = tc(
@@ -257,7 +257,7 @@ function getDataFromLive() {
 					where `when` >= '$first' and `when` < '$next_year'
 					and `method`!='Administrative Increase'
 					and `deleted` = 0
-					group by `to` having sum(`points`) >= 100
+					group by `to` having sum(`awarded`) >= 100
 				) as `assurer_candidates`");
 
 		$certs = tc(
