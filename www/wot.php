@@ -342,7 +342,7 @@ function send_reminder()
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
 
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
+		$query = "select sum(`awarded`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
 		$res = mysql_query($query);
 		$drow = mysql_fetch_assoc($res);
 
@@ -491,8 +491,8 @@ function send_reminder()
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
-			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
+			$points = mysql_num_rows(mysql_query("select sum(`awarded`) as `total` from `notary`
+						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`awarded`) > 0"));
 			if($points > 0)
 			{
 				$my_translation = L10n::get_translation();
