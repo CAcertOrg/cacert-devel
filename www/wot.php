@@ -134,7 +134,7 @@ function send_reminder()
 			$body .= "User ".$_SESSION['profile']['fname']." ".
 				$_SESSION['profile']['lname']." with email address '".
 				$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-				mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+				mysql_real_escape_string(stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{
@@ -181,7 +181,7 @@ function send_reminder()
 
 	if($oldid == 5)
 	{
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
+		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) != 1)
 		{
@@ -209,7 +209,7 @@ function send_reminder()
 				}
 			}
 		}
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
+		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >= 1)
 		{

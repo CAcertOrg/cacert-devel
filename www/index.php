@@ -53,7 +53,7 @@ require_once('../includes/notary.inc.php');
 		$oldid = 0;
 		if(array_key_exists('Q1',$_REQUEST) && $_REQUEST['Q1'])
 		{
-			$_SESSION['lostpw']['A1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A1']))));
+			$_SESSION['lostpw']['A1'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A1']))));
 
 			if(stripslashes(strtolower($_SESSION['lostpw']['A1'])) == strtolower($_SESSION['lostpw']['user']['A1']))
 				$answers++;
@@ -61,7 +61,7 @@ require_once('../includes/notary.inc.php');
 		}
 		if(array_key_exists('Q2',$_REQUEST) && $_REQUEST['Q2'])
 		{
-			$_SESSION['lostpw']['A2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A2']))));
+			$_SESSION['lostpw']['A2'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A2']))));
 
 			if(stripslashes(strtolower($_SESSION['lostpw']['A2'])) == strtolower($_SESSION['lostpw']['user']['A2']))
 				$answers++;
@@ -69,7 +69,7 @@ require_once('../includes/notary.inc.php');
 		}
 		if(array_key_exists('Q3',$_REQUEST) && $_REQUEST['Q3'])
 		{
-			$_SESSION['lostpw']['A3'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A3']))));
+			$_SESSION['lostpw']['A3'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A3']))));
 
 			if(stripslashes(strtolower($_SESSION['lostpw']['A3'])) == strtolower($_SESSION['lostpw']['user']['A3']))
 				$answers++;
@@ -77,7 +77,7 @@ require_once('../includes/notary.inc.php');
 		}
 		if(array_key_exists('Q4',$_REQUEST) && $_REQUEST['Q4'])
 		{
-			$_SESSION['lostpw']['A4'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
+			$_SESSION['lostpw']['A4'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
 
 			if(stripslashes(strtolower($_SESSION['lostpw']['A4'])) == strtolower($_SESSION['lostpw']['user']['A4']))
 				$answers++;
@@ -85,15 +85,15 @@ require_once('../includes/notary.inc.php');
 		}
 		if(array_key_exists('Q5',$_REQUEST) && $_REQUEST['Q5'])
 		{
-			$_SESSION['lostpw']['A5'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
+			$_SESSION['lostpw']['A5'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
 
 			if(stripslashes(strtolower($_SESSION['lostpw']['A5'])) == strtolower($_SESSION['lostpw']['user']['A5']))
 				$answers++;
 			$body .= "System: ".$_SESSION['lostpw']['user']['A5']."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw']['A5']))."\n";
 		}
 
-		$_SESSION['lostpw']['pw1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['newpass1']))));
-		$_SESSION['lostpw']['pw2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['newpass2']))));
+		$_SESSION['lostpw']['pw1'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['newpass1']))));
+		$_SESSION['lostpw']['pw2'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['newpass2']))));
 
 		if($answers < $_SESSION['lostpw']['total'] || $answers < 3)
 		{
@@ -130,7 +130,7 @@ require_once('../includes/notary.inc.php');
 
 	if($oldid == 5 && $process != "")
 	{
-		$email = $_SESSION['lostpw']['email'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['email']))));
+		$email = $_SESSION['lostpw']['email'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['email']))));
 		$_SESSION['lostpw']['day'] = intval($_REQUEST['day']);
 		$_SESSION['lostpw']['month'] = intval($_REQUEST['month']);
 		$_SESSION['lostpw']['year'] = intval($_REQUEST['year']);
@@ -186,8 +186,8 @@ require_once('../includes/notary.inc.php');
 
 		$_SESSION['_config']['errmsg'] = "";
 
-		$email = mysql_escape_string(stripslashes(strip_tags(trim($_REQUEST['email']))));
-		$pword = mysql_escape_string(stripslashes(trim($_REQUEST['pword'])));
+		$email = mysql_real_escape_string(stripslashes(strip_tags(trim($_REQUEST['email']))));
+		$pword = mysql_real_escape_string(stripslashes(trim($_REQUEST['pword'])));
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0";
 		$res = mysql_query($query);
@@ -285,26 +285,26 @@ if ($oldid == 52 )
 
 		$_SESSION['_config']['errmsg'] = "";
 
-		$_SESSION['signup']['email'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['email']))));
-		$_SESSION['signup']['fname'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['fname']))));
-		$_SESSION['signup']['mname'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['mname']))));
-		$_SESSION['signup']['lname'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['lname']))));
-		$_SESSION['signup']['suffix'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['suffix']))));
+		$_SESSION['signup']['email'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['email']))));
+		$_SESSION['signup']['fname'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['fname']))));
+		$_SESSION['signup']['mname'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['mname']))));
+		$_SESSION['signup']['lname'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['lname']))));
+		$_SESSION['signup']['suffix'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['suffix']))));
 		$_SESSION['signup']['day'] = intval($_REQUEST['day']);
 		$_SESSION['signup']['month'] = intval($_REQUEST['month']);
 		$_SESSION['signup']['year'] = intval($_REQUEST['year']);
-		$_SESSION['signup']['pword1'] = trim(mysql_escape_string(stripslashes($_REQUEST['pword1'])));
-		$_SESSION['signup']['pword2'] = trim(mysql_escape_string(stripslashes($_REQUEST['pword2'])));
-		$_SESSION['signup']['Q1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q1']))));
-		$_SESSION['signup']['Q2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q2']))));
-		$_SESSION['signup']['Q3'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q3']))));
-		$_SESSION['signup']['Q4'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q4']))));
-		$_SESSION['signup']['Q5'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q5']))));
-		$_SESSION['signup']['A1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A1']))));
-		$_SESSION['signup']['A2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A2']))));
-		$_SESSION['signup']['A3'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A3']))));
-		$_SESSION['signup']['A4'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
-		$_SESSION['signup']['A5'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
+		$_SESSION['signup']['pword1'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['pword1'])));
+		$_SESSION['signup']['pword2'] = trim(mysql_real_escape_string(stripslashes($_REQUEST['pword2'])));
+		$_SESSION['signup']['Q1'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['Q1']))));
+		$_SESSION['signup']['Q2'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['Q2']))));
+		$_SESSION['signup']['Q3'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['Q3']))));
+		$_SESSION['signup']['Q4'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['Q4']))));
+		$_SESSION['signup']['Q5'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['Q5']))));
+		$_SESSION['signup']['A1'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A1']))));
+		$_SESSION['signup']['A2'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A2']))));
+		$_SESSION['signup']['A3'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A3']))));
+		$_SESSION['signup']['A4'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
+		$_SESSION['signup']['A5'] = trim(mysql_real_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
 		$_SESSION['signup']['general'] = intval(array_key_exists('general',$_REQUEST)?$_REQUEST['general']:0);
 		$_SESSION['signup']['country'] = intval(array_key_exists('country',$_REQUEST)?$_REQUEST['country']:0);
 		$_SESSION['signup']['regional'] = intval(array_key_exists('regional',$_REQUEST)?$_REQUEST['regional']:0);

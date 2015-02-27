@@ -19,7 +19,7 @@
 	$userid=0; if(array_key_exists('userid',$_GET)) $userid=intval($_GET['userid']);
 	if($userid <= 0)
 	{
-		$domainsearch = $domain = mysql_escape_string(stripslashes($_POST['domain']));
+		$domainsearch = $domain = mysql_real_escape_string(stripslashes($_POST['domain']));
 		if(!strstr($domain, "%"))
 			$domainsearch = "%$domain%";
 		if(preg_match("/^\d+$/",$domain))

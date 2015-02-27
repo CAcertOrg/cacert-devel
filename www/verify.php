@@ -43,7 +43,7 @@
 	{
 		$id = 1;
 		$emailid = intval($_REQUEST['emailid']);
-		$hash = mysql_escape_string(stripslashes($_REQUEST['hash']));
+		$hash = mysql_real_escape_string(stripslashes($_REQUEST['hash']));
 
 		$query = "select * from `email` where `id`='$emailid' and hash!='' and deleted=0";
 		$res = mysql_query($query);
@@ -101,7 +101,7 @@
 	{
 		$id = 7;
 		$domainid = intval($_REQUEST['domainid']);
-		$hash = mysql_escape_string(stripslashes($_REQUEST['hash']));
+		$hash = mysql_real_escape_string(stripslashes($_REQUEST['hash']));
 
 		$query = "select * from `domains` where `id`='$domainid' and hash!='' and deleted=0";
 		$res = mysql_query($query);

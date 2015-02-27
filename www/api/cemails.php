@@ -15,8 +15,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$username = mysql_escape_string($_REQUEST['username']);
-	$password = mysql_escape_string($_REQUEST['password']);
+	$username = mysql_real_escape_string($_REQUEST['username']);
+	$password = mysql_real_escape_string($_REQUEST['password']);
 
 	$query = "select * from `users` where `email`='$username' and (`password`=old_password('$password') or `password`=sha1('$password'))";
 	$res = mysql_query($query);

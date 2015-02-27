@@ -19,7 +19,7 @@
 	$ccid = array_key_exists('ccid',$_REQUEST)?intval($_REQUEST['ccid']):0;
 	$regid = array_key_exists('regid',$_REQUEST)?intval($_REQUEST['regid']):0;
 	$locid = array_key_exists('locid',$_REQUEST)?intval($_REQUEST['locid']):0;
-	$name = array_key_exists('name',$_REQUEST)?mysql_escape_string($_REQUEST['name']):"";
+	$name = array_key_exists('name',$_REQUEST)?mysql_real_escape_string($_REQUEST['name']):"";
 
 	if($ccid > 0 && $_REQUEST['action'] == "add") { ?>
 <form method="post" action="account.php">

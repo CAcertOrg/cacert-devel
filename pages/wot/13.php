@@ -21,9 +21,9 @@ if(array_key_exists('location',$_REQUEST) && $_REQUEST['location'] != "") {
 	{
 		$bits = explode(",", $_REQUEST['location']);
 
-		$loc = trim(mysql_escape_string($bits['0']));
-		$reg = ''; if(array_key_exists('1',$bits)) $reg=trim(mysql_escape_string($bits['1']));
-		$ccname = ''; if(array_key_exists('2',$bits)) $ccname=trim(mysql_escape_string($bits['2']));
+		$loc = trim(mysql_real_escape_string($bits['0']));
+		$reg = ''; if(array_key_exists('1',$bits)) $reg=trim(mysql_real_escape_string($bits['1']));
+		$ccname = ''; if(array_key_exists('2',$bits)) $ccname=trim(mysql_real_escape_string($bits['2']));
 		$query = "select `locations`.`id` as `locid` from `locations`, `regions`, `countries` where
 			`locations`.`name` like '$loc%' and `regions`.`name` like '$reg%' and `countries`.`name` like '$ccname%' and
 			`locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
