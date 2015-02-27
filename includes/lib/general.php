@@ -32,9 +32,9 @@
 function get_user_id_from_cert($serial, $issuer_cn)
 {
 	$query = "select `memid` from `emailcerts` where
-			`serial`='".mysql_escape_string($serial)."' and
+			`serial`='".mysql_real_escape_string($serial)."' and
 			`rootcert`= (select `id` from `root_certs` where
-				`Cert_Text`='".mysql_escape_string($issuer_cn)."') and
+				`Cert_Text`='".mysql_real_escape_string($issuer_cn)."') and
 			`revoked`=0 and disablelogin=0 and
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
 	$res = mysql_query($query);

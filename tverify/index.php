@@ -49,10 +49,10 @@
 
 	if($id == 1)
 	{
-		$email = mysql_escape_string(trim($_REQUEST["email"]));
-		$password = mysql_escape_string(stripslashes(trim($_REQUEST["pword"])));
-		$URL = mysql_escape_string(trim($_REQUEST["notaryURL"]));
-		$CN = mysql_escape_string($_SESSION['_config']['CN']);
+		$email = mysql_real_escape_string(trim($_REQUEST["email"]));
+		$password = mysql_real_escape_string(stripslashes(trim($_REQUEST["pword"])));
+		$URL = mysql_real_escape_string(trim($_REQUEST["notaryURL"]));
+		$CN = mysql_real_escape_string($_SESSION['_config']['CN']);
 		$memid = intval($_SESSION['_config']['uid']);
 		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='$memid'"));
 		$tmp = mysql_fetch_assoc(mysql_query("select sum(`points`) as `points` from `notary` where `to`='$memid'"));
@@ -99,7 +99,7 @@
 			if($nofile == 0)
 			{
 				$filename = $photoid['tmp_name'];
-				$newfile = mysql_escape_string('/www/photoid/'.$tverify.".".$ext);
+				$newfile = mysql_real_escape_string('/www/photoid/'.$tverify.".".$ext);
 				move_uploaded_file($filename, $newfile);
 				$query = "update `tverify` set `photoid`='$newfile' where `id`='$tverify'";
 				mysql_query($query);
