@@ -24,7 +24,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 			'manually created certificate requests instead.')?></p>
 	</noscript>
 
-	<div id="noActiveX" style="color:red">
+	<div id="noActiveX" class="error_fatal">
 		<p><?=_('Could not initialize ActiveX object required for certificate generation.')?></p>
 		<p><?=_('You have to enable ActiveX for this to work. On Windows Vista, Windows 7 and '.
 			'later versions you have to add this website to the list of trusted sites '.
@@ -41,7 +41,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 		</p>
 	</div>
 
-	<form method="post" style="display:none" action="account.php"
+	<form method="post" style="display:none;" action="account.php"
 			id="CertReqForm">
 		<input type="hidden" name="oldid" value="<?=intval($id)?>" />
 		<input type="hidden" id="CSR" name="CSR" />
@@ -72,7 +72,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 				// the maximum is 2048, then only 1024, 1536 and 2048 bits may
 				// be specified as key size.
 				echo _('Step')?>: <span id="keySizeStep"></span></p>
-			<p style="color:red"><?php
+			<p class="error_fatal"><?php
 				printf(_('Please note that RSA key sizes smaller than %d bit '.
 					'will not be accepted by CAcert.'),
 					2048)?>
