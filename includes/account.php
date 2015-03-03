@@ -1362,7 +1362,7 @@ function buildSubjectFromSession() {
 		showheader(_("My CAcert.org Account!"));
 		if($_SESSION['_config']['user']['pword1'] == "" || $_SESSION['_config']['user']['pword1'] != $_SESSION['_config']['user']['pword2'])
 		{
-			echo '<h3 style="color:red">', _("Failure: Pass Phrase not Changed"),
+			echo '<h3 class="error_fatal">', _("Failure: Pass Phrase not Changed"),
 				'</h3>', "\n";
 			echo _("New Pass Phrases specified don't match or were blank.");
 		} else {
@@ -1380,15 +1380,15 @@ function buildSubjectFromSession() {
 			}
 
 			if(strlen($_SESSION['_config']['user']['pword1']) < 6) {
-				echo '<h3 style="color:red">',
+				echo '<h3 class="error_fatal">',
 					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				echo _("The Pass Phrase you submitted was too short.");
 			} else if($score < 3) {
-				echo '<h3 style="color:red">',
+				echo '<h3 class="error_fatal">',
 					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				printf(_("The Pass Phrase you submitted failed to contain enough differing characters and/or contained words from your name and/or email address. Only scored %s points out of 6."), $score);
 			} else if($rc <= 0) {
-				echo '<h3 style="color:red">',
+				echo '<h3 class="error_fatal">',
 					_("Failure: Pass Phrase not Changed"), '</h3>', "\n";
 				echo _("You failed to correctly enter your current Pass Phrase.");
 			} else {
