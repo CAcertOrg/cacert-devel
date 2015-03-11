@@ -241,10 +241,8 @@ require_once('../includes/notary.inc.php');
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=0 and `deleted`=0";
 		$res = mysql_query($query);
-		if(!$rateLimit) {
-			$_SESSION['_config']['errmsg'] = _("You hit the login rate limit of 1 login per 5 seconds.");
-		} else if(mysql_num_rows($res) <= 0) {
-			$_SESSION['_config']['errmsg'] = _("Incorrect email address and/or Pass Phrase.");
+		if(!$rateLimit || mysql_num_rows($res) <= 0) {
+			$_SESSION['_config']['errmsg'] = _("Login failed due to incorrect email address, wrong passphrase or because the rate limit of one login per 5 seconds was hit.");
 		} else {
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
 		}
