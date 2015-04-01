@@ -322,6 +322,39 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$rank_of_assuree = get_top_assuree_position($num_of_assurees);
 	}
 
+	/**
+	 * Helper function to sum all assurance points received by the user
+	 * @param int  $userid
+	 */
+	function get_received_assurance_points($userid)
+	{
+		$sum_points = 0;
+		$sum_experience = 0;
+		$res = get_received_assurances(intval($userid), $log);
+		while($row = mysql_fetch_assoc($res))
+		{
+			$fromuser = get_user(intval($row['from']));
+			calc_assurances($row, $sum_points, $sum_experience);
+		}
+		return $sum_points;
+	}
+
+	/**
+	 * Helper function to sum all assurance points received by the user
+	 * @param int  $userid
+	 */
+	function get_received_experience_points($userid)
+	{
+		$sum_points = 0;
+		$sum_experience = 0;
+		$res = get_received_assurances(intval($userid), $log);
+		while($row = mysql_fetch_assoc($res))
+		{
+			$fromuser = get_user(intval($row['from']));
+			calc_assurances($row, $sum_points, $sum_experience);
+		}
+		return $sum_experience;
+	}
 
 // ************* html table definitions ******************
 
@@ -585,7 +618,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 			$log)
 	{
 		$sum_points = 0;
-		$sumexperience = 0;
+		$sum_experience = 0;
 		$res = get_given_assurances(intval($userid), $log);
 		while($row = mysql_fetch_assoc($res))
 		{
@@ -615,7 +648,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 			$log)
 	{
 		$sum_points = 0;
-		$sumexperience = 0;
+		$sum_experience = 0;
 		$res = get_received_assurances(intval($userid), $log);
 		while($row = mysql_fetch_assoc($res))
 		{
