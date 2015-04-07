@@ -356,6 +356,30 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		return $sum_experience;
 	}
 
+	/**
+	 * Helper function to sum all points received by the user
+	 * @param int  $userid
+	 */
+	function get_received_total_points($userid)
+	{
+		$sum_points = 0;
+		$sum_experience = 0;
+		$res = get_received_assurances(intval($userid), $log);
+		while($row = mysql_fetch_assoc($res))
+		{
+			$fromuser = get_user(intval($row['from']));
+			calc_assurances($row, $sum_points, $sum_experience);
+		}
+		return $sum_experience + $sum_points;
+	}
+
+	/**
+         * Updates the assurance points in $_SESSION['profile']
+         */
+	function update_points_in_profile(){
+		 $_SESSION['profile']['points'] = get_received_total_points($_SESSION['profile']['id']);
+	}
+
 // ************* html table definitions ******************
 
 	function output_ranking($userid)
