@@ -92,7 +92,7 @@
 	$query = "select *, `users`.`id` as `id` from `users`,`notary` where `listme`='1' and
 			`ccid`='".$ccid."' and `regid`='".$regid."' and
 			`locid`='".$locid."' and `users`.`id`=`notary`.`to` and `notary`.`deleted`=0
-			group by `notary`.`to` HAVING SUM(`points`) >= 100 order by `points` desc";
+			group by `notary`.`to` HAVING SUM(`awarded`) >= 100 order by `points` desc";
 	$list = mysql_query($query);
 	if(mysql_num_rows($list) > 0)
 	{
