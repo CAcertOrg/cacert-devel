@@ -97,6 +97,16 @@ if (array_key_exists('format', $_REQUEST)) {
 
 } else {
 	showheader(_("My CAcert.org Account!"), _("Install your certificate"));
+	echo '<p>'.
+	echo _('If you just created the key for your certificate with your browser, ',
+		'install the certificate into your browser.').' ';
+	echo sprintf(_('To backup and/or use with ',
+		'other programs (like e.g. your email client) find your certificate in ',
+		'the certificate management of your browser and select "Export" ',
+		'(visit our %sWiki%s for details).'),
+		'<a href="https://wiki.cacert.org/HowToDocuments/InstallClientCertificate">',
+		'</a>');
+	echo '</p>';
 	echo '<ul class="no_indent">';
 	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;install'>".
 		_("Install the certificate into your browser").
