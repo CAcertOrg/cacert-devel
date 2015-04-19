@@ -47,8 +47,7 @@
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['securehostname'] &&
-			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['tverify'] &&
-			$_SERVER['HTTP_HOST'] != "stamp.cacert.org")
+			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['tverify'])
 	{
 		if(array_key_exists('HTTPS',$_SERVER) && $_SERVER['HTTPS'] == "on")
 			header("location: https://".$_SESSION['_config']['normalhostname']);
