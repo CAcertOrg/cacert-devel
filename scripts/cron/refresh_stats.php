@@ -122,7 +122,7 @@ function getDataFromLive() {
 	$stats['users_1to49'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary`
-				where `deleted` = 0
+				where `deleted` = 0 AND `method` != 'Administrative Increase' AND `from` != `to`
 				group by `to`
 				having sum(`awarded`) > 0 and sum(`awarded`) < 50
 			) as `low_points`"));
@@ -130,7 +130,7 @@ function getDataFromLive() {
 	$stats['users_50to99'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary`
-				where `deleted` = 0
+				where `deleted` = 0 AND `method` != 'Administrative Increase' AND `from` != `to`
 				group by `to`
 				having sum(`awarded`) >= 50 and sum(`awarded`) < 100
 			) as `high_points`"));
@@ -139,7 +139,7 @@ function getDataFromLive() {
 		"select count(*) as `count` from `users`
 			where (
 				select sum(`awarded`) from `notary`
-					where `to`=`users`.`id`
+					where `to`=`users`.`id` AND `method` != 'Administrative Increase' AND `from` != `to`
 					and `deleted` = 0
 				) >= 100
 			and not exists(
@@ -154,7 +154,7 @@ function getDataFromLive() {
 		"select count(*) as `count` from `users`
 			where (
 				select sum(`awarded`) from `notary`
-					where `to`=`users`.`id`
+					where `to`=`users`.`id` AND `method` != 'Administrative Increase' AND `from` != `to`
 					and `deleted` = 0
 				) >= 100
 			and exists(
