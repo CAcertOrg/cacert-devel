@@ -342,16 +342,14 @@ function send_reminder()
 		if($newpoints < 0)
 			$newpoints = $awarded = 0;
 
-		$query = "select sum(`awarded`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
-		$res = mysql_query($query);
-		$drow = mysql_fetch_assoc($res);
+		$drow_points = get_received_total_points(intval($_SESSION['_config']['notarise']['id']));
 
 		$_POST['expire'] = 0;
 
-		if(($drow['total'] + $newpoints) > 100 && $max < 100)
-			$newpoints = 100 - $drow['total'];
-		if(($drow['total'] + $newpoints) > $max && $max >= 100)
-			$newpoints = $max - $drow['total'];
+		if(($drow_points + $newpoints) > 100 && $max < 100)
+			$newpoints = 100 - $drow_points;
+		if(($drow_points + $newpoints) > $max && $max >= 100)
+			$newpoints = $max - $drow_points;
 		if($newpoints < 0)
 			$newpoints = 0;
 
