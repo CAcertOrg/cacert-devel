@@ -191,7 +191,9 @@ require_once('../includes/notary.inc.php');
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$query = "SELECT 1 FROM `users` WHERE `email`='$email' and (UNIX_TIMESTAMP(`lastLoginAttempt`) < UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - 5 or `lastLoginAttempt` is NULL)" ;
+		$rateLimit = mysql_num_rows(mysql_query($query)) > 0;
+		if(mysql_num_rows($res) > 0 && $rateLimit)
 		{
 			$_SESSION['profile'] = "";
 			unset($_SESSION['profile']);
@@ -208,10 +210,8 @@ require_once('../includes/notary.inc.php');
 				L10n::set_translation($_SESSION['profile']['language']);
 				L10n::init_gettext();
 			}
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 group by `to`";
-			$res = mysql_query($query);
-			$row = mysql_fetch_assoc($res);
-			$_SESSION['profile']['points'] = $row['total'];
+			update_points_in_profile();
+
 			$_SESSION['profile']['loggedin'] = 1;
 			if($_SESSION['profile']['Q1'] == "" || $_SESSION['profile']['Q2'] == "" ||
 				$_SESSION['profile']['Q3'] == "" || $_SESSION['profile']['Q4'] == "" ||
@@ -231,14 +231,16 @@ require_once('../includes/notary.inc.php');
 				header("location: https://".$_SERVER['HTTP_HOST']."/account.php");
 			}
 			exit;
+		} else if($rateLimit){
+			$query = "update `users` set `lastLoginAttempt`=CURRENT_TIMESTAMP WHERE `email`='$email'";
+			mysql_query($query);
 		}
 
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=0 and `deleted`=0";
 		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
-		{
-			$_SESSION['_config']['errmsg'] = _("Incorrect email address and/or Pass Phrase.");
+		if(!$rateLimit || mysql_num_rows($res) <= 0) {
+			$_SESSION['_config']['errmsg'] = _("Login failed due to incorrect email address, wrong passphrase or because the rate limit of one login per 5 seconds was hit.");
 		} else {
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
 		}
