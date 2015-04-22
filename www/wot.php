@@ -475,9 +475,7 @@ function send_reminder()
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
-			$points = mysql_num_rows(mysql_query("select sum(`awarded`) as `total` from `notary`
-						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`awarded`) > 0"));
-			if($points > 0)
+			if(is_assurer($userid) > 0)
 			{
 				$my_translation = L10n::get_translation();
 				L10n::set_translation($user['language']);
