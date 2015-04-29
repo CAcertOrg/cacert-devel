@@ -102,12 +102,9 @@
 
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] > 0)
 	{
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-		$res = mysql_query($query);
-		$row = mysql_fetch_assoc($res);
-		$_SESSION['profile']['points'] = $row['total'];
+		update_points_in_profile();
 
-		if($_SESSION['profile']['language'] == "")
+		If($_SESSION['profile']['language'] == "")
 		{
 			$query = "update `users` set `language`='".L10n::get_translation()."'
 							where `id`='".intval($_SESSION['profile']['id'])."'";
