@@ -90,10 +90,11 @@
         $query = '
             SELECT  `u`.`id`,
                     `u`.`assurer`,
-                    SUM(`points`)
+                    SUM(`awarded`)
             FROM    `users` AS `u`,
                     `notary` AS `n`
             WHERE   `u`.`id` = \''.intval($_SESSION['profile']['id']).'\'
+            AND `n`.`method` != 'Administrative Increase' AND `n`.`from` != `n`.`to`
             AND     `n`.`to` = `u`.`id`
             AND     `expire` < NOW()
             AND     `n`.`deleted` = 0
