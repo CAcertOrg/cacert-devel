@@ -63,7 +63,7 @@
 		$domcount = mysql_num_rows($r2);
 ?>
   <tr>
-    <td class="DataTD"><?=htmlspecialchars($row['O'])?>, <?=htmlspecialchars($row['ST'])?> <?=htmlspecialchars($row['C'])?></td>
+    <td class="DataTD"><?=sanitizeHTML($row['O'])?>, <?=sanitizeHTML($row['ST'])?> <?=sanitizeHTML($row['C'])?></td>
     <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?=intval($row['id'])?>"><?=_("Domains")?> (<?=$domcount?>)</a></td>
     <td class="DataTD"><a href="account.php?id=32&amp;orgid=<?=$row['id']?>"><?=_("Admins")?> (<?=$admincount?>)</a></td>
     <td class="DataTD"><a href="account.php?id=27&amp;orgid=<?=$row['id']?>"><?=_("Edit")?></a></td>
