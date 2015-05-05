@@ -104,7 +104,7 @@
 	{
 		update_points_in_profile();
 
-		If($_SESSION['profile']['language'] == "")
+		if($_SESSION['profile']['language'] == "")
 		{
 			$query = "update `users` set `language`='".L10n::get_translation()."'
 							where `id`='".intval($_SESSION['profile']['id'])."'";
