@@ -330,7 +330,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	{
 		$sum_points = 0;
 		$sum_experience = 0;
-		$res = get_received_assurances(intval($userid), $log);
+		$res = get_received_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user(intval($row['from']));
@@ -347,7 +347,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	{
 		$sum_points = 0;
 		$sum_experience = 0;
-		$res = get_received_assurances(intval($userid), $log);
+		$res = get_received_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user(intval($row['from']));
@@ -364,7 +364,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	{
 		$sum_points = 0;
 		$sum_experience = 0;
-		$res = get_received_assurances(intval($userid), $log);
+		$res = get_received_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
 			$fromuser = get_user(intval($row['from']));
