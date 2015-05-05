@@ -17,7 +17,7 @@
 */
 	header('Content-Type: text/html; charset=UTF-8');
 
-	if($_REQUEST['i'] != "")
+	if(isset($_REQUEST['i']) && $_REQUEST['i'] != "")
 		echo "<html><body><script language=\"JavaScript\"><!--\n";
 
 	$s = mysql_real_escape_string($_REQUEST['s']);
@@ -27,9 +27,9 @@
 
 	$bits = explode(",", $s);
 
-	$loc = trim(mysql_real_escape_string($bits['0']));
-	$reg = trim(mysql_real_escape_string($bits['1']));
-	$ccname = trim(mysql_real_escape_string($bits['2']));
+	$loc = trim(mysql_real_escape_string($bits[0]));
+	$reg = trim(mysql_real_escape_string(isset($bits[1])?$bits[1]:""));
+	$ccname = trim(mysql_real_escape_string(isset($bits[2])?$bits[2]:""));
 	$query = "select `locations`.`id` as `locid`, `locations`.`name` as `locname`, `regions`.`name` as `regname`,
 			`countries`.`name` as `ccname` from `locations`, `regions`, `countries` where
 			`locations`.`name` like '$loc%' and `regions`.`name` like '$reg%' and `countries`.`name` like '$ccname%' and
@@ -45,7 +45,7 @@
 	}
 	echo ");";
 
-	if($_REQUEST['i'] != "")
+	if(isset($_REQUEST['i']) && $_REQUEST['i'] != "")
 		echo "\n\n// -->\n</script></body></html>";
 
 	exit;
