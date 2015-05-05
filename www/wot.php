@@ -343,25 +343,13 @@ function send_reminder()
 	{
 		$max =  maxpoints();
 
-		$awarded = $newpoints = intval($_POST['points']);
-		if($newpoints > $max)
-			$newpoints = $awarded = $max;
-		if($newpoints < 0)
-			$newpoints = $awarded = 0;
+		$awarded = intval($_POST['points']);
+		if($awarded > $max)
+			$awarded = $max;
+		if($awarded < 0)
+			$awarded = 0;
 
-		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
-		$res = mysql_query($query);
-		$drow = mysql_fetch_assoc($res);
-		$oldpoints = intval($drow['total']);
-
-		$_POST['expire'] = 0;
-
-		if(($oldpoints + $newpoints) > 100 && $max < 100)
-			$newpoints = 100 - $oldpoints;
-		if(($oldpoints + $newpoints) > $max && $max >= 100)
-			$newpoints = $max - $oldpoints;
-		if($newpoints < 0)
-			$newpoints = 0;
+		$drow_points = get_received_total_points(intval($_SESSION['_config']['notarise']['id']));
 
 		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
@@ -384,7 +372,7 @@ function send_reminder()
 	{
 		$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
 						`to`='".intval($_SESSION['_config']['notarise']['id'])."',
-						`points`='".intval($newpoints)."', `awarded`='".intval($awarded)."',
+						`points`='0', `awarded`='".intval($awarded)."',
 						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
 						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
@@ -426,19 +414,16 @@ function send_reminder()
 		$my_translation = L10n::get_translation();
 		L10n::set_translation($_SESSION['_config']['notarise']['language']);
 
-		$assurer =  $_SESSION['profile']['fname'].' '.$_SESSION['profile']['lname'];
-		$body  = sprintf(_("You are receiving this email because you have been assured by %s (%s)."), $assurer, $_SESSION['profile']['email'])."\n\n";
-		if(($oldpoints + $newpoints) >= 100)
-			$body .= sprintf(_("You were issued %s points. However the system only counts up to 100 assurance points."), $awarded)."\n\n";
-		else
-			$body .= sprintf(_("You were issued %s points and you now have %s points in total."), $awarded, ($newpoints + $oldpoints))."\n\n";
+		$body  = sprintf(_("You are receiving this email because you have been assured by %s %s (%s)."), $_SESSION['profile']['fname'], $_SESSION['profile']['lname'], $_SESSION['profile']['email'])."\n\n";
 
-		if(($oldpoints + $newpoints) < 100 && ($oldpoints + $newpoints) >= 50)
+		$body .= sprintf(_("You were issued %s assurance points and you now have %s assurance points in total."), $awarded, ($awarded + $drow_total))."\n\n";
+
+		if(($drow_total + $awarded) < 100 && ($drow_total + $awarded) >= 50)
 		{
 			$body .= _("You now have over 50 points, and can now have your name added to client certificates, and issue server certificates for up to 2 years.")."\n\n";
 		}
 
-		if(($oldpoints + $newpoints) >= 100 && $newpoints > 0)
+		if(($drow_total + $awarded) >= 100 && $drow_total < 0 && !is_assurer(intval($_SESSION['_config']['notarise']['id'])) )
 		{
 			$body .= _("You have at least 100 Assurance Points, if you want to become an assurer try the Assurer Challenge")." ( https://cats.cacert.org )\n\n";
 			$body .= _("To make it easier for others in your area to find you, it's helpful to list yourself as an assurer (this is voluntary), as well as a physical location where you live or work the most. You can flag your account to be listed, and add a comment to the display by going to:")."\n";
@@ -454,9 +439,8 @@ function send_reminder()
 
 		L10n::set_translation($my_translation);
 
-		$assuree = $_SESSION['_config']['notarise']['fname'].' '.$_SESSION['_config']['notarise']['lname'];
-		$body  = sprintf(_("You are receiving this email because you have assured %s (%s)."), $assuree, $_SESSION['_config']['notarise']['email'])."\n\n";
-		$body .= sprintf(_("You issued %s points."), $awarded)."\n\n";
+		$body  = sprintf(_("You are receiving this email because you have assured %s %s (%s)."), $_SESSION['_config']['notarise']['fname'], $_SESSION['_config']['notarise']['lname'], $_SESSION['_config']['notarise']['email'])."\n\n";
+		$body .= sprintf(_("You issued %s assurance points and they now have %s assurance points in total."), $awarded, ($awarded + $drow['total']))."\n\n";
 
 		$body .= _("Best regards")."\n";
 		$body .= _("CAcert Support Team");
@@ -501,9 +485,7 @@ function send_reminder()
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
 			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
-			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
-			if($points > 0)
+			if(is_assurer($userid) > 0)
 			{
 				$my_translation = L10n::get_translation();
 				L10n::set_translation($user['language']);

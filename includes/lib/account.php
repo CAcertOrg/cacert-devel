@@ -48,8 +48,8 @@ function fix_assurer_flag($userID = NULL)
 					AND `cp`.`user_id` = `u`.`id`
 			)
 			AND (
-				SELECT SUM(`points`) FROM `notary` AS `n`
-				WHERE `n`.`to` = `u`.`id`
+				SELECT SUM(`awarded`) FROM `notary` AS `n`
+				WHERE `n`.`to` = `u`.`id` AND `n`.`method` != 'Administrative Increase' AND `n`.`from` != `n`.`to`
 					AND (`n`.`expire` > now()
 					     OR `n`.`expire` IS NULL)
 					AND `n`.`deleted` = 0
@@ -81,8 +81,8 @@ function fix_assurer_flag($userID = NULL)
 						AND `cp`.`user_id` = `u`.`id`
 				)
 				OR (
-					SELECT SUM(`points`) FROM `notary` AS `n`
-					WHERE `n`.`to` = `u`.`id`
+					SELECT SUM(`awarded`) FROM `notary` AS `n`
+					WHERE `n`.`to` = `u`.`id` AND `n`.`method` != 'Administrative Increase' AND `n`.`from` != `n`.`to`
 						AND (
 							`n`.`expire` > now()
 							OR `n`.`expire` IS NULL

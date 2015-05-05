@@ -122,23 +122,23 @@ function getDataFromLive() {
 	$stats['users_1to49'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary`
-				where `deleted` = 0
+				where `deleted` = 0 AND `method` != 'Administrative Increase' AND `from` != `to`
 				group by `to`
-				having sum(`points`) > 0 and sum(`points`) < 50
+				having sum(`awarded`) > 0 and sum(`awarded`) < 50
 			) as `low_points`"));
 
 	$stats['users_50to99'] = number_format(tc(
 		"select count(*) as `count` from (
 			select 1 from `notary`
-				where `deleted` = 0
+				where `deleted` = 0 AND `method` != 'Administrative Increase' AND `from` != `to`
 				group by `to`
-				having sum(`points`) >= 50 and sum(`points`) < 100
+				having sum(`awarded`) >= 50 and sum(`awarded`) < 100
 			) as `high_points`"));
 
 	$startdate = date("Y-m-d", mktime(0, 0, 0, 1, 1, 2002));
 	$enddate = date("Y-m-d", mktime(0, 0, 0, 1, 1, date("Y") + 1));
 
-	$assurercount= assurer_count($startdate, $enddate,1);
+	$assurercount = assurer_count($startdate, $enddate, 1);
 	$stats['assurer_with_test'] = number_format($assurercount);
 
 	$stats['assurer_candidates'] = number_format(assurer_count($startdate, $enddate,0) - $assurercount);

@@ -1294,10 +1294,7 @@ function buildSubjectFromSession() {
 
 	if($oldid == 13 && $process != "")
 	{
-		$ddquery = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-		$ddres = mysql_query($ddquery);
-		$ddrow = mysql_fetch_assoc($ddres);
-		$_SESSION['profile']['points'] = $ddrow['total'];
+		update_points_in_profile();
 
 		if($_SESSION['profile']['points'] == 0)
 		{
@@ -1356,10 +1353,7 @@ function buildSubjectFromSession() {
 		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 		$_SESSION['profile']['loggedin'] = 1;
 
-		$ddquery = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-		$ddres = mysql_query($ddquery);
-		$ddrow = mysql_fetch_assoc($ddres);
-		$_SESSION['profile']['points'] = $ddrow['total'];
+		update_points_in_profile();
 
 
 		$id = 13;
