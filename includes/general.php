@@ -17,6 +17,7 @@
 */
 
 	require_once(dirname(__FILE__)."/lib/general.php");
+	require_once(dirname(__FILE__)."/notary.inc.php");
 
 	session_name("cacert");
 	session_start();
