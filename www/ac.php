@@ -36,6 +36,7 @@
 			`locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
 			order by `locations`.`acount` DESC, `locations`.`name` ASC limit 10";
 	$res = mysql_query($query);
+	$rc = 0;
 	while($row = mysql_fetch_assoc($res))
 	{
 		$rc++;
