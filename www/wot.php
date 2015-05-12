@@ -378,9 +378,10 @@ function send_reminder()
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
 		mysql_query($query);
-		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
 		include_once("../includes/notary.inc.php");
 
+		recalculate_old_assurance_points($_SESSION['_config']['notarise']['id']);
+		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
 		if($_SESSION['profile']['points'] < 150)
 		{
 			$addpoints = 0;
