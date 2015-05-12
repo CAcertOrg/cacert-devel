@@ -116,13 +116,6 @@ if(intval($_REQUEST['userid']) > 0) {
     if(mysql_num_rows($res) <= 0) {
         echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
-        $row = mysql_fetch_assoc($res);
-        $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
-        $dres = mysql_query($query);
-        $drow = mysql_fetch_assoc($dres);
-        $alerts =get_alerts(intval($row['id']));
-
-//display account data
 
 //deletes an assurance
         if(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == true)
@@ -143,6 +136,15 @@ if(intval($_REQUEST['userid']) > 0) {
         } elseif(array_key_exists('assurance',$_REQUEST) && $_REQUEST['assurance'] > 0 && $ticketvalidation == FALSE) {
             $ticketmsg=_('No assurance revoked. Ticket number is missing!');
         }
+
+        $row = mysql_fetch_assoc($res);
+        $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
+        $dres = mysql_query($query);
+        $drow = mysql_fetch_assoc($dres);
+        $alerts =get_alerts(intval($row['id']));
+
+//display account data
+
 
 //Ticket number
 ?>
