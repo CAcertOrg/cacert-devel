@@ -2195,3 +2195,40 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 	</tr>
 	<?
 }
+
+/**
+ * revoke_assurance()
+ * revokes an assurance and adjusts the old point calculation
+ * @param mixed $assuranceid - id of the assurance
+ * @param mixed $toid        - id of the assuree
+ * @return
+ */
+function revoke_assurance($assuranceid, $toid){
+	$assuranceid = intval($assuranceid);
+	$toid = intval($toid);
+	$points = 0;
+
+	$query = "update `notary` set `deleted` = NOW() where `id` = '$assuranceid' LIMIT 1";
+	mysql_query($query);
+	recalculate_old_assurance_points($toid);
+	fix_assurer_flag($toid);
+}
+
+/**
+ * recalculates the old points of an assuree
+ * @param int $toid        - id of the assuree
+ */
+function recalculate_old_assurance_points($toid){
+	$query = "select * from `notary` where `to` = '$toid' and `method` != 'Administrative Increase' and `deleted` = 0 order by `when`";
+	$res = mysql_query($query);
+	while($row = mysql_fetch_assoc($res)){
+		$maxToAward = max(100 - $points, 0);
+		$newpoints = min($row['awarded'], $maxToAward);
+
+		$points += $row['awarded'];
+
+		$query = "update `notary` set `points` = '". (int)$newpoints ."' where `id`='" . (int)$row['id'] . "' LIMIT 1";
+		mysql_query($query);
+	}
+
+}
