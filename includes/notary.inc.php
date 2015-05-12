@@ -2153,7 +2153,15 @@ function revoke_assurance($assuranceid, $toid){
 
 	$query = "update `notary` set `deleted` = NOW() where `id` = '$assuranceid' LIMIT 1";
 	mysql_query($query);
+	recalculate_old_assurance_points($toid);
+	fix_assurer_flag($toid);
+}
 
+/**
+ * recalculates the old points of an assuree
+ * @param int $toid        - id of the assuree
+ */
+function recalculate_old_assurance_points($toid){
 	$query = "select * from `notary` where `to` = '$toid' and `method` != 'Administrative Increase' and `deleted` = 0 order by `when`";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res)){
@@ -2166,5 +2174,4 @@ function revoke_assurance($assuranceid, $toid){
 		mysql_query($query);
 	}
 
-	fix_assurer_flag($toid);
 }
