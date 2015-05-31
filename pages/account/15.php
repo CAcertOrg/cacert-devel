@@ -36,3 +36,4 @@
 <pre>
 <?=$cert?>
 </pre>
+<button onclick="window.location=/account.php?id=60&cert=<?=$_REQUEST['cert']?>">Download</button>
