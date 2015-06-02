@@ -112,8 +112,8 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
 // display user information for given user id
 if(intval($_REQUEST['userid']) > 0) {
     $userid = intval($_REQUEST['userid']);
-    $res =get_user_data($userid);
-    if(mysql_num_rows($res) <= 0) {
+    $user_data_res =get_user_data($userid);
+    if(mysql_num_rows($user_data_res) <= 0) {
         echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
 
@@ -137,7 +137,7 @@ if(intval($_REQUEST['userid']) > 0) {
             $ticketmsg=_('No assurance revoked. Ticket number is missing!');
         }
 
-        $row = mysql_fetch_assoc($res);
+        $row = mysql_fetch_assoc($user_data_res);
         $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
         $dres = mysql_query($query);
         $drow = mysql_fetch_assoc($dres);
