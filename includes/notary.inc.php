@@ -194,6 +194,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 
 	/**
 	 * Calculate the experience points from a given Assurance
+	 *
 	 * @param array  $row - [inout] associative array containing the data from
 	 *     the `notary` table, the keys 'experience' and 'calc_awarded' will be
 	 *     added
@@ -254,7 +255,6 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 				$row['deleted'] = THAWTE_REVOCATION_DATETIME;
 				break;
 		}
-
 		// Don't count revoked assurances even if we are displaying them
 		if ($row['deleted'] !== NULL_DATETIME) {
 			$row['experience'] = 0;
@@ -333,7 +333,6 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$res = get_received_assurances(intval($userid));
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user(intval($row['from']));
 			calc_assurances($row, $sum_points, $sum_experience);
 		}
 		return $sum_points;
@@ -348,10 +347,19 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$sum_points = 0;
 		$sum_experience = 0;
 		$res = get_received_assurances(intval($userid));
+
+		// this loop sums experience points from recieved assurances
+		// this happens when the member has assurances with more than 150 points (super assurances)
+		// such points/assurances should be removed from the database. Afterwards, this logic can be removed.
 		while($row = mysql_fetch_assoc($res))
 		{
-			$fromuser = get_user(intval($row['from']));
 			calc_assurances($row, $sum_points, $sum_experience);
+		}
+
+		$res = get_given_assurances(intval($userid));
+		while($row = mysql_fetch_assoc($res))
+		{
+			calc_experience($row, $sum_points, $sum_experience);
 		}
 		return $sum_experience;
 	}
@@ -362,15 +370,8 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 */
 	function get_received_total_points($userid)
 	{
-		$sum_points = 0;
-		$sum_experience = 0;
-		$res = get_received_assurances(intval($userid));
-		while($row = mysql_fetch_assoc($res))
-		{
-			$fromuser = get_user(intval($row['from']));
-			calc_assurances($row, $sum_points, $sum_experience);
-		}
-		return $sum_experience + $sum_points;
+		$res = min(100, get_received_assurance_points($userid)) + min(50, get_received_experience_points($userid));
+		return $res;
 	}
 
 	/**
