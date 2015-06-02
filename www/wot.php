@@ -342,7 +342,7 @@ function send_reminder()
 		if($awarded < 0)
 			$awarded = 0;
 
-		$drow_points = get_received_total_points(intval($_SESSION['_config']['notarise']['id']));
+		$drow_points = get_received_assurance_points(intval($_SESSION['_config']['notarise']['id']));
 
 		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
