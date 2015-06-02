@@ -1166,5 +1166,5 @@ function write_se_log($uid, $adminid, $type, $info, $typeid=1){
 	$typeid = intval($typeid);
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`,`actiontypeid`) values
 		(Now(), $uid, $adminid, '$type', '$info', '$typeid')";
-	mysql_query($query);
+	return mysql_query($query);
 }
