@@ -146,7 +146,7 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 			$Result |= 5;
 		}
 
-		if (get_received_assurance_points(int($userID)) < 100) {
+		if (get_received_assurance_points(intval($userID)) < 100) {
 			$Result |= 3;
 		}
 
