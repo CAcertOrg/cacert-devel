@@ -94,6 +94,10 @@ if (array_key_exists('format', $_REQUEST)) {
 		<td class="DataTD"><?=$verified?></td>
 	</tr>
 	<tr>
+		<td class="DataTD"><?=_("CommonName")?></td>
+		<td class="DataTD"><?=htmlspecialchars($row['CN'])?></td>
+	</tr>
+	<tr>
 		<td class="DataTD"><?=_("SerialNumber")?></td>
 		<td class="DataTD"><?=sanitizeHTML($row['serial'])?></td>
 	</tr>
