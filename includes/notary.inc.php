@@ -370,8 +370,13 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 */
 	function get_received_total_points($userid)
 	{
-		$res = min(100, get_received_assurance_points($userid)) + min(50, get_received_experience_points($userid));
-		return $res;
+		$assurance = min(100, get_received_assurance_points($userid));
+		$experience = min(50, get_received_experience_points($userid));
+		if($assurance < 100) {
+			return $assurance;
+		} else {
+			return 100 + $experience;
+		}
 	}
 
 	/**
