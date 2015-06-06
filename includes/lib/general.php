@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
+include_once( __DIR__ . "/../notary.inc.php");
 /**
  * Checks if the user may log in and retrieve the user id
  *
@@ -146,9 +146,7 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 			$Result |= 5;
 		}
 
-		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now() and `deleted` = 0');
-		$row = mysql_fetch_assoc($query);
-		if ($row['points'] < 100) {
+		if (get_received_assurance_points(int($userID)) < 100) {
 			$Result |= 3;
 		}
 
