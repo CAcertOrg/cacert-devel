@@ -417,15 +417,11 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 */
 	function output_assurances_header($title, $support, $log)
 	{
-		if ($support == 1) {
-			$log = 1;
-		}
-
 		$colspan = 7;
 		if ($support == 1) {
 			$colspan += 2;
 		}
-		if ($log == 1) {
+		if ($log == 1 || $support == 1) {
 			$colspan += 1;
 		}
 ?>
@@ -451,7 +447,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
     	<td class="DataTD"><strong><?=_("Method")?></strong></td>
     	<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
 <?
-		if ($log == 1)
+		if ($log == 1 || $support == 1)
 		{
 ?>
 		<td class="DataTD"><strong><?=_("Revoked")?></strong></td>
@@ -487,7 +483,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
 		<td class="DataTD"><?=intval($sumexperience)?></td>
 <?
-		if ($log == 1)
+		if ($log == 1 || $support == 1)
 		{
 ?>
     	<td class="DataTD">&nbsp;</td>

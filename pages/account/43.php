@@ -398,7 +398,7 @@ if(intval($_REQUEST['userid']) > 0) {
     ?>
         <tr>
             <td class="DataTD"><?=_("Assurance Points")?>:</td>
-            <td class="DataTD"><?=intval($drow['points'])?></td>
+            <td class="DataTD"><?=get_received_total_points(intval($row['id']))?></td>
         </tr>
     <?
     // show account history
