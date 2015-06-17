@@ -66,7 +66,7 @@ google_color_border = "FFFFFF";
     </div>
     <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
-      <h3 class="pointer" onclick="explode('recom')"><?=_("Advertising")?></h3>
+      <h3 class="pointer" onclick="explode('recom')">Funding</h3>
       <ul class="menu" id="recom"><?
 	$query = "select * from `advertising` where `expires`>NOW() and `active`=1";
 	$res = mysql_query($query);
