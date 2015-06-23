@@ -97,6 +97,11 @@ if (array_key_exists('format', $_REQUEST)) {
 
 } else {
 	showheader(_("My CAcert.org Account!"), _("Install your certificate"));
+
+	echo '<p>'.sprintf(_('Find the signed certificate together with links for download below. Depending on the way your key was generated you will need to either import the certificate into your browser and export the combined key from there, or save the certificate and combine it with your key file using a tool like OpenSSL or XCA. More information is available in the %sWiki%s.'), '<a href="https://wiki.cacert.org/HowToDocuments/InstallClientCertificate" target="_blank">','</a>').'</p>';
+
+	echo '<p>'.sprintf(_('Nota bene: We need your support to keep our services operational. Please consider to %sdonate%s or support our teams with your work.'), '<a href="https://funding.cacert.org" target="_blank">','</a>').'</p>';
+
 	echo '<ul class="no_indent">';
 	echo "<li><a href='account.php?id=$id&amp;cert=$certid&amp;install'>".
 		_("Install the certificate into your browser").
