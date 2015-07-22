@@ -83,7 +83,7 @@
 			fputs($smtp, "Subject: $subject\r\n");
 		}
 		fputs($smtp, "Mime-Version: 1.0\r\n");
-		if($extra == "")
+		if($use_utf8)
 		{
 			fputs($smtp, "Content-Type: text/plain; charset=\"utf-8\"\r\n");
 		}
