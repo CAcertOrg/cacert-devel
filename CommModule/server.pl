@@ -491,8 +491,8 @@ sub SignX509($$$$$$$$)
   $subject=~ s/\\x([A-F0-9]{2})/pack("C", hex($1))/egi;
   $san=~ s/\\x([A-F0-9]{2})/pack("C", hex($1))/egi;
 
-  Error "Invalid characters in SubjectAltName!\n" if($san=~m/[ \n\r\t\x00"'\\]/);
-  Error "Invalid characters in Subject: ".hexdump($subject)." - $subject\n" if($subject=~m/[\n\r\t\x00"'\\]/);
+  Error "Invalid characters in SubjectAltName!\n" if($san=~m/[ \n\r\t\x00#"'\\]/);
+  Error "Invalid characters in Subject: ".hexdump($subject)." - $subject\n" if($subject=~m/[\n\r\t\x00#"'\\]/);
 
   print "Subject: $subject\n";
   print "SAN: $san\n";
@@ -590,8 +590,8 @@ sub SignOpenPGP
 
   my $keyid=undef;
 
-  Error "Invalid characters in SubjectAltName!\n" if($san=~m/[ \n\r\t\x00"'\\]/);
-  Error "Invalid characters in Subject!\n" if($subject=~m/[ \n\r\t\x00"'\\;]/);
+  Error "Invalid characters in SubjectAltName!\n" if($san=~m/[ \n\r\t\x00#"'\\]/);
+  Error "Invalid characters in Subject!\n" if($subject=~m/[ \n\r\t\x00#"'\\;]/);
 
 
   if(open OUT,">$wid/request.key")
@@ -843,7 +843,7 @@ sub RevokeX509
 {
   my ($root,$template,$hash,$days,$spkac,$request,$san,$subject)=@_;
 
-  Error "Invalid characters in SubjectAltName!\n" if($san=~m/[ \n\r\t\x00"'\\]/);
+  Error "Invalid characters in SubjectAltName!\n" if($san=~m/[ \n\r\t\x00#"'\\]/);
   Error "Invalid characters in Hash!\n" if(! $subject=~m/^[0-9a-fA-F]+$/);
 
   SysLog "Widerrufe $PkiSystems{$_[0]}\n";
