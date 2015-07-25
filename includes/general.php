@@ -298,8 +298,14 @@
 				}
 			}
 
-			if($cnok == 0)
+			if(!preg_match("/(?=^.{4,253}$)(^(?:\\*\\.)?((?!-)[a-zA-Z0-9_-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$)/i", $CN)) {
+				$cnok = 0;
+			}
+
+			if($cnok == 0) {
 				$_SESSION['_config']['rejected'][] = $CN;
+				continue;
+			}
 
 			if($_SESSION['_config']['row'] != "")
 				$rows[] = $CN;
@@ -350,8 +356,14 @@
 				}
 			}
 
-			if($altok == 0)
+			if(!preg_match("/(?=^.{4,253}$)(^(?:\\*\\.)?((?!-)[a-zA-Z0-9_-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$)/i", $subalt)) {
+				$altok = 0;
+			}
+
+			if($altok == 0) {
 				$_SESSION['_config']['rejected'][] = $alt;
+				continue;
+			}
 
 			if($_SESSION['_config']['altrow'] != "")
 				$altrows[] = $subalt;
@@ -389,6 +401,10 @@
 					$rowid[] = $_SESSION['_config']['row']['id'];
 					break;
 				}
+			}
+
+			if(!preg_match("/(?=^.{4,253}$)(^(?:\\*\\.)?((?!-)[a-zA-Z0-9_-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$)/i", $CN)) {
+				continue;
 			}
 
 			if($_SESSION['_config']['row'] != "")
@@ -437,6 +453,10 @@
 					$altid[] = $_SESSION['_config']['altrow']['id'];
 					break;
 				}
+			}
+
+			if(!preg_match("/(?=^.{4,253}$)(^(?:\\*\\.)?((?!-)[a-zA-Z0-9_-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$)/i", $subalt)) {
+				continue;
 			}
 
 			if($_SESSION['_config']['altrow'] != "")
