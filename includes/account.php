@@ -116,7 +116,8 @@ function buildSubjectFromSession() {
 		if(strstr($_REQUEST['newemail'], "xn--") && $_SESSION['profile']['codesign'] <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
-			echo _("Due to the possibility for punycode domain exploits we currently do not allow any certificates to sign punycode domains or email addresses.");
+			echo _("Due to the possibility for punycode domain exploits we currently only offer the use of IDN domains if your account has the code signing flag.") . "\n";
+			printf(_("More information can be found %sin our wiki%s."), '<a href="//wiki.cacert.org/FAQ/Privilege">', '</a>');
 			showfooter();
 			exit;
 		}
@@ -541,7 +542,8 @@ function buildSubjectFromSession() {
 		if(strstr($newdomain, "xn--") && $_SESSION['profile']['codesign'] <= 0)
 		{
 			showheader(_("My CAcert.org Account!"));
-			echo _("Due to the possibility for punycode domain exploits we currently do not allow any certificates to sign punycode domains or email addresses.");
+			echo _("Due to the possibility for punycode domain exploits we currently only offer the use of IDN domains if your account has the code signing flag.") . "\n";
+			printf(_("More information can be found %sin our wiki%s."),'<a href="//wiki.cacert.org/FAQ/Privilege">', '</a>');
 			showfooter();
 			exit;
 		}
