@@ -636,131 +636,199 @@
 	function checkEmail($email)
 	{
 		$myemail = mysql_real_escape_string($email);
-		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
+		$myuid = intval($_SESSION['profile']['id']);
+		if(!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
-			list($username,$domain)=explode('@',$email,2);
-			$mxhostrr = array();
-			$mxweight = array();
-			if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
-				$mxhostrr = array($domain);
-				$mxweight = array(0);
-			} else if ( empty($mxhostrr) ) {
-				$mxhostrr = array($domain);
-				$mxweight = array(0);
+			$query = "INSERT INTO `pinglog` SET `when` = NOW(), `uid` = '$myuid', `email` = '$myemail',
+				`result` = 'Format of email address not recognized'";
+			mysql_query($query);
+			return _("Format of email address not recognized");
+		}
+
+		// Start with a blank transcript which is filled with information in the course of this routine
+		$transcript = "";
+
+		list($username,$domain)=explode('@',$email,2);
+		$transcript .= "Processing email address:\n";
+		$transcript .= "- Domain Name:  " . sanitizeHTML($domain) . "\n";
+		$transcript .= "- Mailbox Name: " . sanitizeHTML($username) . "\n";
+
+		$transcript .= "Determining MX records for mail delivery:\n";
+		$mxhostrr = array();
+		$mxweight = array();
+		if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
+			$transcript .= "- DNS lookup for MX records failed\n";
+			$transcript .= "- Defaulting to MX = '".sanitizeHTML($domain)."' at priority 0\n";
+			$mxhostrr = array($domain);
+			$mxweight = array(0);
+		} else if ( empty($mxhostrr) ) {
+			$transcript .= "- DNS lookup for MX records returned empty result\n";
+			$transcript .= "- Defaulting to MX = '".sanitizeHTML($domain)."' at priority 0\n";
+			$mxhostrr = array($domain);
+			$mxweight = array(0);
+		} else {
+			$transcript .= "- DNS lookup for MX records successful\n";
+			$transcript .= "- Received ".count($mxhostrr)." records\n";
+		}
+
+		$transcript .= "Building priority queue for test of servers:\n";
+		$mxhostprio = array();
+		for($i = 0; $i < count($mxhostrr); $i++) {
+			$mx_host = trim($mxhostrr[$i], '.');
+			$mx_prio = $mxweight[$i];
+			if(empty($mxhostprio[$mx_prio])) {
+				$mxhostprio[$mx_prio] = array();
 			}
+			$mxhostprio[$mx_prio][] = $mx_host;
+		}
 
-			$mxhostprio = array();
-			for($i = 0; $i < count($mxhostrr); $i++) {
-				$mx_host = trim($mxhostrr[$i], '.');
-				$mx_prio = $mxweight[$i];
-				if(empty($mxhostprio[$mx_prio])) {
-					$mxhostprio[$mx_prio] = array();
+		array_walk($mxhostprio, function(&$mx) { shuffle($mx); } );
+		ksort($mxhostprio);
+
+		$mxhosts = array();
+		foreach($mxhostprio as $mx_prio => $mxhostnames) {
+			foreach($mxhostnames as $mx_host) {
+				$transcript .= "- Will test server id ".count($mxhosts)." at host '".sanitizeHTML($mx_host)."' with priority ".intval($mx_prio)."\n";
+				$ipv6rr = dns_get_record($mx_host, DNS_AAAA);
+				if(!empty($ipv6rr)) {
+					$transcript .= "- Will prefer IPv6 for server id ".count($mxhosts)." for host '".sanitizeHTML($mx_host)."'\n";
 				}
-				$mxhostprio[$mx_prio][] = $mx_host;
-			}
 
-			array_walk($mxhostprio, function(&$mx) { shuffle($mx); } );
-			ksort($mxhostprio);
-
-			$mxhosts = array();
-			foreach($mxhostprio as $mx_prio => $mxhostnames) {
-				foreach($mxhostnames as $mx_host) {
-					$mxhosts[] = $mx_host;
-				}
-			}
-
-			foreach($mxhosts as $key => $domain)
-			{
-				$fp_opt = array(
-					'ssl' => array(
-						'verify_peer'   => false,	// Opportunistic Encryption
-						)
-					);
-				$fp_ctx = stream_context_create($fp_opt);
-				$fp = @stream_socket_client("tcp://$domain:25",$errno,$errstr,5,STREAM_CLIENT_CONNECT,$fp_ctx);
-				if($fp)
-				{
-					stream_set_blocking($fp, true);
-
-					$has_starttls = false;
-
-					do {
-						$line = fgets($fp, 4096);
-					} while(substr($line, 0, 4) == "220-");
-					if(substr($line, 0, 3) != "220") {
-						fclose($fp);
-						continue;
-					}
-
-					fputs($fp, "EHLO www.cacert.org\r\n");
-					do {
-						$line = fgets($fp, 4096);
-						$has_starttls |= substr(trim($line),4) == "STARTTLS";
-					} while(substr($line, 0, 4) == "250-");
-					if(substr($line, 0, 3) != "250") {
-						fclose($fp);
-						continue;
-					}
-
-					if($has_starttls) {
-						fputs($fp, "STARTTLS\r\n");
-						do {
-							$line = fgets($fp, 4096);
-						} while(substr($line, 0, 4) == "220-");
-						if(substr($line, 0, 3) != "220") {
-							fclose($fp);
-							continue;
-						}
-
-						stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
-
-						fputs($fp, "EHLO www.cacert.org\r\n");
-						do {
-							$line = fgets($fp, 4096);
-						} while(substr($line, 0, 4) == "250-");
-						if(substr($line, 0, 3) != "250") {
-							fclose($fp);
-							continue;
-						}
-					}
-
-					fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
-					do {
-						$line = fgets($fp, 4096);
-					} while(substr($line, 0, 4) == "250-");
-					if(substr($line, 0, 3) != "250") {
-						fclose($fp);
-						continue;
-					}
-
-					fputs($fp, "RCPT TO:<$email>\r\n");
-					do {
-						$line = fgets($fp, 4096);
-					} while(substr($line, 0, 4) == "250-");
-					if(substr($line, 0, 3) != "250") {
-						fclose($fp);
-						continue;
-					}
-
-					fputs($fp, "QUIT\r\n");
-					fclose($fp);
-
-					$line = mysql_real_escape_string(trim(strip_tags($line)));
-					$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
-					if(isset($_SESSION['profile']) && is_array($_SESSION['profile']) && isset($_SESSION['profile']['id'])) $query.=", `uid`='".intval($_SESSION['profile']['id'])."'";
-					mysql_query($query);
-
-					if(substr($line, 0, 3) != "250")
-						return $line;
-					else
-						return "OK";
-				}
+				$mxhosts[] = $mx_host;
 			}
 		}
-		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".intval($_SESSION['profile']['id'])."',
-				`email`='$myemail', `result`='Failed to make a connection to the mail server'";
+
+		foreach($mxhosts as $key => $domain) {
+			$transcript .= "\n";
+			$transcript .= "Starting test for id ".intval($key)." for host '".sanitizeHTML($domain)."'\n";
+
+			$transcript .= "- Trying to connect to 'tcp://".sanitizeHTML($domain).":25' ... ";
+			$fp_opt = array(
+				'ssl' => array(
+					'verify_peer'   => false,	// Opportunistic Encryption
+					)
+				);
+			$fp_ctx = stream_context_create($fp_opt);
+			$fp = @stream_socket_client("tcp://$domain:25",$errno,$errstr,5,STREAM_CLIENT_CONNECT,$fp_ctx);
+
+			$transcript .= $fp ? "OK\n" : "FAILED\n";
+			if(!$fp) {
+				$transcript .= "- Connection failed with code $errno: ".sanitizeHTML($errstr)."\n";
+				continue;
+			}
+
+			$transcript .= "- Settng up the socket for blocking operation\n";
+			stream_set_blocking($fp, true);
+
+			$has_starttls = false;
+
+			$transcript .= "- Connection set up, dialog follows:\n";
+
+			do {
+				$line = fgets($fp, 4096);
+				$transcript .= "! S-&gt;C: ".sanitizeHTML(rtrim($line,"\r\n\0"))."\n";
+			} while(substr($line, 0, 4) == "220-");
+			if(substr($line, 0, 3) != "220") {
+				$transcript .= "- Unexpected status code, expected code 220\n";
+				$transcript .= "- Closing connection and trying the next host\n";
+				fclose($fp);
+				continue;
+			}
+
+			$transcript .= "! C-&gt;S: EHLO www.cacert.org\n";
+			fputs($fp, "EHLO www.cacert.org\r\n");
+			do {
+				$line = fgets($fp, 4096);
+				$transcript .= "! S-&gt;C: ".sanitizeHTML(rtrim($line,"\r\n\0"))."\n";
+				$has_starttls |= substr(trim($line),4) == "STARTTLS";
+			} while(substr($line, 0, 4) == "250-");
+			if(substr($line, 0, 3) != "250") {
+				$transcript .= "- Unexpected status code, expected code 250\n";
+				$transcript .= "- Closing connection and trying the next host\n";
+				fclose($fp);
+				continue;
+			}
+
+			if($has_starttls) {
+				$transcript .= "- STARTTLS support detected; will use it!\n";
+				$transcript .= "! C-&gt;S: STARTTLS\n";
+				fputs($fp, "STARTTLS\r\n");
+				do {
+					$line = fgets($fp, 4096);
+					$transcript .= "! S-&gt;C: ".sanitizeHTML(rtrim($line,"\r\n\0"))."\n";
+				} while(substr($line, 0, 4) == "220-");
+				if(substr($line, 0, 3) != "220") {
+					$transcript .= "- Unexpected status code, expected code 220\n";
+					$transcript .= "- Closing connection and trying the next host\n";
+					fclose($fp);
+					continue;
+				}
+
+				$transcript .= "- Establishing encrypted connection\n";
+				stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+
+				$transcript .= "! C-&gt;S: EHLO www.cacert.org\n";
+				fputs($fp, "EHLO www.cacert.org\r\n");
+				do {
+					$line = fgets($fp, 4096);
+					$transcript .= "! S-&gt;C: ".sanitizeHTML(rtrim($line,"\r\n\0"))."\n";
+				} while(substr($line, 0, 4) == "250-");
+				if(substr($line, 0, 3) != "250") {
+					$transcript .= "- Unexpected status code, expected code 250\n";
+					$transcript .= "- Closing connection and trying the next host\n";
+					fclose($fp);
+					continue;
+				}
+			}
+
+			$transcript .= "! C-&gt;S: MAIL FROM:&lt;returns@cacert.org&gt;\n";
+			fputs($fp, "MAIL FROM:<returns@cacert.org>\r\n");
+			do {
+				$line = fgets($fp, 4096);
+				$transcript .= "! S-&gt;C: ".sanitizeHTML(rtrim($line,"\r\n\0"))."\n";
+			} while(substr($line, 0, 4) == "250-");
+			if(substr($line, 0, 3) != "250") {
+				$transcript .= "- Unexpected status code, expected code 250\n";
+				$transcript .= "- Closing connection and trying the next host\n";
+				fclose($fp);
+				continue;
+			}
+
+			$transcript .= "! C-&gt;S: MAIL FROM:&lt;".sanitizeHTML($email)."&gt;\n";
+			fputs($fp, "RCPT TO:<$email>\r\n");
+			do {
+				$line = fgets($fp, 4096);
+				$transcript .= "! S-&gt;C: ".sanitizeHTML(rtrim($line,"\r\n\0"))."\n";
+			} while(substr($line, 0, 4) == "250-");
+			if(substr($line, 0, 3) != "250") {
+				$transcript .= "- Unexpected status code, expected code 250\n";
+				$transcript .= "- Closing connection and trying the next host\n";
+				fclose($fp);
+				continue;
+			}
+
+			$transcript .= "! C-&gt;S: QUIT\n";
+			fputs($fp, "QUIT\r\n");
+			fclose($fp);
+			$transcript .= "- Connection to host closed\n";
+
+			$line = mysql_real_escape_string(trim(strip_tags($line)));
+			$query = "INSERT INTO `pinglog` SET `when` = NOW(), `uid` = '$myuid', `email` = '$myemail', `result` = '$line'";
+			mysql_query($query);
+
+			if(substr($line, 0, 3) != "250") {
+				return "<pre>" . $transcript . "</pre>";
+			} else {
+				return "OK";
+			}
+		}
+
+		$query = "INSERT INTO `pinglog` SET `when` = NOW(), `uid` = '$myuid', `email`='$myemail',
+			`result` = 'None of the email servers could be reached'";
 		mysql_query($query);
-		return _("Failed to make a connection to the mail server");
+		$transcript .= _("None of the email servers could be reached");
+
+		return "<pre>" . $transcript . "</pre>";
 	}
 
 	function waitForResult($table, $certid, $id = 0, $show = 1)
