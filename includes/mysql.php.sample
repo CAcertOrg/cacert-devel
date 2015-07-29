@@ -48,8 +48,8 @@
 		$smtp = fsockopen("localhost", 25);
 		if(!$smtp)
 		{
-		  echo("Could not connect to mailserver at localhost:25\n");
-		  return;
+			echo("Could not connect to mailserver at localhost:25\n");
+			return;
 		}
 		$InputBuffer = fgets($smtp, 1024);
 		fputs($smtp, "HELO www.cacert.org\r\n");
@@ -98,9 +98,9 @@
 //		fputs($smtp, chunk_split(base64_encode(recode("html..utf-8", $message)))."\r\n.\r\n");
 		$encoded_lines = explode( "\n", str_replace("\r", "", $message) );
 		array_walk( $encoded_lines,
-		function (&$a) {
-		  $a = quoted_printable_encode(recode("html..utf-8", $a));
-		});
+			function (&$a) {
+				$a = quoted_printable_encode(recode("html..utf-8", $a));
+			});
 		$encoded_message = implode("\n", $encoded_lines);
 
 		$encoded_message = str_replace("\r.", "\r=2E", $encoded_message);
