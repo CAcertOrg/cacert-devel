@@ -26,7 +26,7 @@
 	$_SESSION['_config']['securehostname'] = "secure.cacert.org";
 	$_SESSION['_config']['tverify'] = "tverify.cacert.org";
 
-	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $extra="")
+	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $use_utf8 = true)
 	{
 		$lines = explode("\n", $message);
 		$message = "";
@@ -49,8 +49,8 @@
 		$smtp = fsockopen("localhost", 25);
 		if(!$smtp)
 		{
-                  echo("Could not connect to mailserver at localhost:25\n");
-		  return;
+			echo("Could not connect to mailserver at localhost:25\n");
+			return;
 		}
 		$InputBuffer = fgets($smtp, 1024);
 		fputs($smtp, "HELO www.cacert.org\r\n");
@@ -83,19 +83,31 @@
 			fputs($smtp, "Subject: $subject\r\n");
 		}
 		fputs($smtp, "Mime-Version: 1.0\r\n");
-		if($extra == "")
+		if($use_utf8)
 		{
 			fputs($smtp, "Content-Type: text/plain; charset=\"utf-8\"\r\n");
-			fputs($smtp, "Content-Transfer-Encoding: 8bit\r\n");
-		} else {
-			fputs($smtp, "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n");
-			fputs($smtp, "Content-Transfer-Encoding: quoted-printable\r\n");
-			fputs($smtp, "Content-Disposition: inline\r\n");
 		}
+		else
+		{
+			fputs($smtp, "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n");
+		}
+		fputs($smtp, "Content-Transfer-Encoding: quoted-printable\r\n");
+		fputs($smtp, "Content-Disposition: inline\r\n");
+
 //		fputs($smtp, "Content-Transfer-Encoding: BASE64\r\n");
 		fputs($smtp, "\r\n");
 //		fputs($smtp, chunk_split(base64_encode(recode("html..utf-8", $message)))."\r\n.\r\n");
-		fputs($smtp, recode("html..utf-8", $message)."\r\n.\r\n");
+		$encoded_lines = explode( "\n", str_replace("\r", "", $message) );
+		array_walk( $encoded_lines,
+			function (&$a) {
+				$a = quoted_printable_encode(recode("html..utf-8", $a));
+			});
+		$encoded_message = implode("\n", $encoded_lines);
+
+		$encoded_message = str_replace("\r.", "\r=2E", $encoded_message);
+		$encoded_message = str_replace("\n.", "\n=2E", $encoded_message);
+		fputs($smtp, $encoded_message);
+		fputs($smtp, "\r\n.\r\n");
 		fputs($smtp, "QUIT\n");
 		$InputBuffer = fgets($smtp, 1024);
 		fclose($smtp);
