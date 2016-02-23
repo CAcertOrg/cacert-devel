@@ -536,6 +536,13 @@ function buildSubjectFromSession() {
 			exit;
 		}
 
+		if(!isValidWildcard($_REQUEST['newdomain']) || strstr($_REQUEST['newdomain'],"*") !== false) {
+			showheader(_("My CAcert.org Account!"));
+			echo _("Your domain is not valid.");
+			showfooter();
+			exit;
+		}
+
 		list($newdomain) = explode(" ", $_REQUEST['newdomain'], 2); // Ignore the rest
 		while($newdomain['0'] == '-')
 			$newdomain = substr($newdomain, 1);
@@ -572,7 +579,7 @@ function buildSubjectFromSession() {
 		$addy = array();
 		$adds = array();
 		if(strtolower(substr($newdom, -4, 3)) != ".jp")
-			$adds = explode("\n", trim(shell_exec("/usr/bin/whois $newdom|grep \"@\"")));
+			$adds = explode("\n", trim(shell_exec("/usr/bin/whois -- $newdom|grep \"@\"")));
 		if(substr($newdomain, -4) == ".org" || substr($newdomain, -5) == ".info")
 		{
 			if(is_array($adds))

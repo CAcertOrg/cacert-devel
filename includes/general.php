@@ -273,6 +273,9 @@
 		if(!preg_match('/^(\\.(?!-)[a-z0-9_-]*[a-z0-9])+$/i','.'.$name)){
 			return false;
 		}
+		if(preg_match('/^(\\.[0-9]*)+$/i','.'.$name)){
+			return false;
+		}
 		return strpos($name, "*") === false;
 	}
 
