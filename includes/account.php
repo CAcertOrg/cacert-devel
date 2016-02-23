@@ -535,6 +535,13 @@ function buildSubjectFromSession() {
 			exit;
 		}
 
+		if(!isValidWildcard($_REQUEST['newdomain']) || strstr($_REQUEST['newdomain'],"*") !== false) {
+			showheader(_("My CAcert.org Account!"));
+			echo _("Your domain is not valid.");
+			showfooter();
+			exit;
+		}
+
 		list($newdomain) = explode(" ", $_REQUEST['newdomain'], 2); // Ignore the rest
 		while($newdomain['0'] == '-')
 			$newdomain = substr($newdomain, 1);
