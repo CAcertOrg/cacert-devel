@@ -577,7 +577,7 @@ function buildSubjectFromSession() {
 		$addy = array();
 		$adds = array();
 		if(strtolower(substr($newdom, -4, 3)) != ".jp")
-			$adds = explode("\n", trim(`/usr/bin/whois $newdom|grep "@"`));
+			$adds = explode("\n", trim(`/usr/bin/whois -- $newdom|grep "@"`));
 		if(substr($newdomain, -4) == ".org" || substr($newdomain, -5) == ".info")
 		{
 			if(is_array($adds))
