@@ -19,8 +19,8 @@
 // Comment (to be romeved): better to disable shot open tags in php.ini
 
 /*
-   cats_import.php 
-   
+   cats_import.php
+
    API for CATS to import passed tests into main CAcert database.
 */
 
@@ -32,7 +32,7 @@ function sanitize_string($buffer) {
 
 define ('UNDEFINED', 'nd');
 // Specific for testserver: Accept Test-CATS-Server
-define ('ALLOWED_IP', '192.109.159.27');
+define ('ALLOWED_IP', '172.16.2.10');
 //define ('ALLOWED_IP', '213.154.225.243');
 define ('ALLOWED_IP2', '192.109.159.28');
 define ('CONFIG_FILEPATH', '/www/');
@@ -47,7 +47,7 @@ $access = FALSE;
 // Access only from CATS.cacert.org with a client certificate for cats@cacert.org
 if (
  ($remote_addr == ALLOWED_IP || $remote_addr == ALLOWED_IP2)  &&
- $https == 'on' && 
+ $https == 'on' &&
  // Comment (to be romeved): better to use preg_match matching the end of the line (since this is on the end of the line right?)
  // Ted: Is this specified? I don't think so, therefore I'd keep stristr
  strlen(stristr($ssl_client_s_dn, '/emailAddress=cats@cacert.org')) > 0
@@ -85,7 +85,7 @@ if (get_magic_quotes_gpc()) {
  $variant = $_POST['variant'];
  $date = $_POST['date'];
 }
-  
+
 // Explicitly select all those IDs so I can insert new rows if needed.
 $query = mysql_query('SELECT `id` FROM `cats_type` WHERE `type_text` = \''.mysql_real_escape_string($type).'\';');
 if (!$query) {
@@ -164,6 +164,6 @@ if (!fix_assurer_flag($userID)) {
   exit();
 }
 
-echo 'OK'."\r\n";    
+echo 'OK'."\r\n";
 
 ?>
