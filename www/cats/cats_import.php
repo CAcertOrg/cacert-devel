@@ -48,9 +48,9 @@ $access = FALSE;
 if (
  ($remote_addr == ALLOWED_IP || $remote_addr == ALLOWED_IP2)  &&
  $https == 'on' &&
- // Comment (to be romeved): better to use preg_match matching the end of the line (since this is on the end of the line right?)
- // Ted: Is this specified? I don't think so, therefore I'd keep stristr
- strlen(stristr($ssl_client_s_dn, '/emailAddress=cats@cacert.org')) > 0
+ // This should match the email element at the start, the end, or somewhere in the middle,
+ // and accept slashes (old convention) as well as commas (new convention) as delimiters
+ preg_match("/(^|,|\/)emailAddress=cats@cacert.org(,|\/|$)/", $ssl_client_s_dn)
 ) $access = TRUE;
 
 if ($access !== TRUE) {
