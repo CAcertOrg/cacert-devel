@@ -128,6 +128,8 @@ function verifyEmail($email)
 
 		$lines = "";
 		$gpgarr = explode("\n", trim($gpg));
+		$containsphoto = FALSE;
+
 		foreach($gpgarr as $line)
 		{
 			#echo "Line[]: $line <br/>\n";
@@ -137,7 +139,23 @@ function verifyEmail($email)
 					$lines .= "\n";
 				$lines .= $line;
 			}
+			elseif(substr($line, 0, 3) == "uat")
+                        {
+                            $containsphoto = TRUE;
+                        }
 		}
+
+		if ($containsphoto)
+		{
+		    showheader(_("Welcome to CAcert.org"));
+
+		    echo "<p style='color:#ff0000'>"._("There is an image/photo in your key.")."</p>";
+		    unset($_REQUEST['process']);
+		    $id = $oldid;
+		    unset($oldid);
+		    exit();
+		}
+
 		$gpg = $lines;
 		$expires = 0;
 		$nerr=0; $nok=0;
