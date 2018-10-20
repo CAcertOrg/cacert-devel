@@ -41,7 +41,7 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 		</p>
 	</div>
 
-	<form method="post" style="display:none;" action="account.php"
+	<form method="post" style="display:none" action="account.php"
 			id="CertReqForm">
 		<input type="hidden" name="oldid" value="<?=intval($id)?>" />
 		<input type="hidden" id="CSR" name="CSR" />
