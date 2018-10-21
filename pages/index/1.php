@@ -98,6 +98,7 @@
     <td class="DataTD"><input type="password" name="pword1" size="30" autocomplete="off"></td>
     <td class="DataTD" rowspan="2">&nbsp;</td>
   </tr>
+
   <tr>
     <td class="DataTD"><?=_("Pass Phrase Again")?><span class="error_indicator">*</span>: </td>
     <td class="DataTD"><input type="password" name="pword2" size="30" autocomplete="off"></td>
