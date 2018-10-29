@@ -1,0 +1,121 @@
+[Danish]
+Gennem det sidste års tid er der sket mange ændringer hos CAcert. Mange mundtlige regler er blevet skrevet ned i politikker. Nye procedurer (f.eks. Assurer Challenge) og forpligtelser (f.eks. CAcert Community Agreement) har set dagens lys.
+Assurandør trænings events (ATE) forsøger at udbrede disse informationer.
+-          Hvad mangler på den gamle CAP formular?
+-          Hvorfor skal jeg huske R/L/O?
+-          Hvad kan du gøre hvis en person fremviser ID dokumenter jeg ikke kender?
+Disse og flere spørgsmål vil blive besvaret under en Assurandør trænings event (ATE)
+Yderligere, træner man på ATE, hvordan man verificere og kontrollere verificeringer for at måle kvaliteten af verificeringsprocessen i det daglige. Der er en del fejl, som er nemme at falde i. Assurandører får mulighed for at se disse fejl og hvordan man undgår dem.
+Som IanG sagde: ATE eller Assurandør Træningens events er klart anbefalet til alle assurandører og indeholder dele som hjælper direkte med vores godkendelseskontrol. Kom og find ud af hvordan du også kan hjælpe.
+ 
+Den næste event, som afholdes i dit område er:
+-          Søndag d. 20. September 2015
+-          Kl. 10:00 – ca. 17:00
+-          ShowIT Media
+-          Slotsbryggen 14 A-D
+-          4800 Nykøbing F.
+-          Denmark
+ 
+BEMÆRK: eventen foregår på engelsk
+Detaljerne om eventen og programmet kan findes på:
+Wiki [https://wiki.cacert.org/Events/2015-09-20-ATE-DK-Nykobing]
+Blog [https://blog.cacert.org/2015/07/ate-nykobing-denmark-on-september-20th-2015/]
+Du kan tilmelde dig ved at besvare denne mail og i emnet feltet skrive: 'I will attend the ATE-Nykobing'
+Event teamet ser frem til din deltagelse
+Kontakt: events@cacert.org
+
+[English]
+
+During the last years many changes took place inside CAcert. Many "oral"
+rules have been put into Policies. New procedures
+(e.g. Assurer Challenge) and obligations
+(e.g. CAcert Community Agreement) have been put into live.
+The Assurer Training Events (ATE) try to spread this information:
+
+- What is missing on the "old" CAP forms?
+- Why should I remember R/L/O?
+- What can you do if an Assuree shows an ID document unknown to you?
+
+These and more questions will be answered during the
+Assurer Training Events (ATEs)
+
+Furthermore, the ATE trains how to do assurances and audits assurances,
+to measure the quality of assurances in the daily routine. Here are some
+possible errors and pitfalls which need to be found. Assurers have the
+opportunity to see those errors and how to avoid them.
+
+As IanG said: The ATE or Assurer Training Event is exceptionally
+recommended for all Assurers and includes parts which contribute
+directly to our audit. Come and find out how you can also contribute.
+
+The next event held in your area will be:
+
+- Sunday 20th September 2015
+- during 10:00 - ca. 17:00
+- ShowIT Media
+- Slotsbryggen 14 A-D
+- 4800 Nykobing F
+- Denmark
+
+Important: the speeches will be held in English.
+
+Details to the location and the agenda can be found:
+Wiki [https://wiki.cacert.org/Events/2015-09-20-ATE-DK-Nykobing]
+Blog [https://blog.cacert.org/2015/07/ate-nykobing-denmark-on-september-20th-2015/]
+
+User reply for registration: 'I will attend the ATE-Nykobing'
+
+The event team is looking forward for your attendance:
+
+Contact: events@cacert.org
+
+[Deutsch]
+
+Es hat sich viel getan im letzten Jahr. Eine ganze Reihe von bisher
+eher "mündlich überlieferten" Regeln wurden in Policies gegossen.
+Neue Prozeduren (z.B. die Assurer Challenge) und Verpflichtungen (z.B.
+in dem CAcert Community Agreement) wurden beschlossen. Die Assurer
+Training Events wollen versuchen, die ganzen Informationen unter's
+Volk zu bringen:
+
+- Welcher Satz fehlt auf alten CAP Formularen?
+- Warum soll ich mir R/L/O einprägen?
+- Wie verhältst du dich,
+    wenn du ein fremdes Ausweisdokument das erste Mal prüfst?
+
+Antworten auf diese und weitere Fragen erhältst du bei den
+Assurer Training Events (ATEs).
+
+Darüber hinaus wird beim ATE der Vorgang der Identitätsüberprüfung
+trainiert und auditiert, um die Qualität der Assurances in der
+täglichen Praxis zu erfassen. Dabei gilt es mögliche Fehler und
+Fallstricke zu erkennen und aufzudecken. Die Assurer haben also die
+Möglichkeit, sich mit den Fehlern auseinanderzusetzen und zu erfahren,
+wie diese vermieden werden können.
+
+Wie IanG sagte: The ATE or Assurer Training Event is exceptionally
+recommended for all Assurers, and include parts which contribute
+directly to our audit. Come and find out how you can also contribute.
+
+Die kommende Veranstaltung in deiner Nähe findet statt am:
+
+- Sonntag, den 20. September 2015
+- in der Zeit von: 10:00 - ca. 17:00 Uhr
+- ShowIT Media
+- Slotsbryggen 14 A-D
+- 4800 Nykobing F
+- Denmark
+
+Wichtig: Die Vortragsprache ist Englisch.
+
+Details zum Ablauf, Veranstaltungsort und Anfahrthinweise findet Ihr im
+Wiki [https://wiki.cacert.org/Events/2015-09-20-ATE-DK-Nykobing]
+Blog [https://blog.cacert.org/2015/07/ate-nykobing-denmark-on-september-20th-2015/]
+
+Teilnehmer Registrierung mit Rückantwort:
+ 'Ich moechte am ATE-Nykobing teilnehmen'
+
+Das Veranstaltungs-Team freut sich schon auf Eure Teilnahme.
+
+Kontakt: events@cacert.org
+

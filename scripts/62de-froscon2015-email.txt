@@ -1,0 +1,33 @@
+Hallo,
+
+CAcert wird dieses Jahr zum zehnten Mal mit einem Stand auf der FrOSCon
+vertreten sein. Damit gehoert CAcert zu den Projekten, die bei allen zehn
+Auflagen der FrOSCon dabei waren.
+
+CAcert wird neben dem Stand, an dem wie ueblich Assured und ueber CAcert
+informiert wird, auch mit einem Projektraum vertreten sein. In diesem
+Projektraum wird an aktuellen Softwareentwicklungen bei CAcert gearbeitet,
+z.B. Test der Root Erstellung, Gigi/Cassiopeia dem Redesign der Software.
+
+Wir hoffen, dass wir viele von Euch auf der FrOSCon treffen werden.
+
+Wann?
+- Samstag + Sonntag, 22. + 23. August 2015
+- Einlass Samstag ab 08:30h und Sonntag ab 09:00h
+
+Ort:
+- in der Hochschule Bonn-Rhein-Sieg
+- Grantham-Allee 20
+- 53757 Sankt Augustin
+
+Tickets
+- Der Eintritt ist in diesem Jahr frei!
+
+
+Euer Event Team
+
+Kontakt: events@cacert.org
+
+
+[1] [https://www.froscon.de]
+[2] [https://wiki.cacert.org/Events/FrOSCon2015]

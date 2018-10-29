@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-        Version: $Id: coap.html.php,v 1.2 2011-06-10 18:30:41 wytze Exp $
+        Version: $Id: coap.html.php,v 1.3 2015/01/08 15:02:41 wytze Exp $
 */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
