@@ -17,8 +17,8 @@
 */ ?>
 <?
   $query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `users`.`deleted`=0";
-  $res = mysql_query($query);
-  $user = mysql_fetch_assoc($res);
+  $res = mysqli_query($_SESSION['mconn'], $query);
+  $user = mysqli_fetch_assoc($res);
 
   $year = intval(substr($user['dob'], 0, 4));
   $month = intval(substr($user['dob'], 5, 2));

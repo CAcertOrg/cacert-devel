@@ -20,7 +20,7 @@
 
 	function clean($key)
 	{
-		return(mysql_real_escape_string(strip_tags(trim($_REQUEST[$key]))));
+		return(mysqli_real_escape_string($_SESSION['mconn'], strip_tags(trim($_REQUEST[$key]))));
 	}
 
 	function checkhostname($ref)
@@ -31,10 +31,10 @@
 
 		$stampid = 0;
 		$query = "select * from `stampcache` where `hostname`='$ref'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			if($row['cacheexpire'] >= date("U"))
 				return(array($row['valid'], $row));
 			else {
@@ -46,13 +46,13 @@
 						$query = "select * from `orgdomaincerts` where `id`='".intval($row['certid'])."' and `expire`>NOW() and `revoked`=0";
 					if($_REQUEST['debug'] == 1)
 						echo $query."<br>\n";
-					$res = mysql_query($query);
-					if(mysql_num_rows($res) > 0)
+					$res = mysqli_query($_SESSION['mconn'], $query);
+					if(mysqli_num_rows($res) > 0)
 					{
 						$query = "update `stampcache` set `cacheexpire`='".(date("U")+600)."' where `id`='$row[id]'";
 						if($_REQUEST['debug'] == 1)
 							echo $query."<br>\n";
-						mysql_query($query);
+						mysqli_query($_SESSION['mconn'], $query);
 						return(array($row['valid'], $row));
 					}
 				}
@@ -68,8 +68,8 @@
 				group by `domaincerts`.`id` order by `domaincerts`.`id`";
 		if($_REQUEST['debug'] == 1)
 			echo $query."<br>\n";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			$bits = explode(".", $ref);
 			for($i = 1; $i < count($bits); $i++)
@@ -88,8 +88,8 @@
 					group by `domaincerts`.`id` order by `domaincerts`.`id`";
 			if($_REQUEST['debug'] == 1)
 				echo $query."<br>\n";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) <= 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) <= 0)
 			{
 				$query = "select *,`orgdomaincerts`.`id` as `certid`,`orgdomaincerts`.`created` as `issued` from `orgdomaincerts`,`orgdomlink`,`orgdomains` where
 						(`orgdomaincerts`.`subject` like '%=DNS:$ref/%' or `orgdomaincerts`.`subject` like '%=DNS:*.$ref2/%' OR
@@ -101,8 +101,8 @@
 						group by `orgdomaincerts`.`id` order by `orgdomaincerts`.`id`";
 				if($_REQUEST['debug'] == 1)
 					echo $query."<br>\n";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) <= 0)
+				$res = mysqli_query($_SESSION['mconn'], $query);
+				if(mysqli_num_rows($res) <= 0)
 				{
 					$invalid = 1;
 				} else {
@@ -113,15 +113,15 @@
 
 		if($invalid == 0)
 		{
-			$cert = mysql_fetch_assoc($res);
+			$cert = mysqli_fetch_assoc($res);
 			if($org == 0)
 			{
 				$query = "SELECT *, sum(`points`) AS `total` FROM `users`, `notary` WHERE `users`.`id` = '$cert[memid]' AND
 						`notary`.`to` = `users`.`id` and `notary`.`when` <= '$cert[issued]' and `notary`.`deleted`=0 GROUP BY `notary`.`to`";
-				$user = mysql_fetch_assoc(mysql_query($query));
+				$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 			} else {
 				$query = "select * from `orginfo` where `id`='$cert[orgid]'";
-				$orgi = mysql_fetch_assoc(mysql_query($query));
+				$orgi = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 			}
 
 			if($stampid <= 0)
@@ -134,12 +134,12 @@
 						`expire`='$cert[expire]',`subject`='$cert[subject]',`hostname`='$ref',`org`='$org',`points`='$user[total]',
 						`O`='$orgi[O]',`L`='$orgi[L]',`ST`='$orgi[ST]',`C`='$orgi[C]',`valid`='$invalid' where `id`='$stampid'";
 			}
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		} else if($stampid > 0) {
-			mysql_query("update `stampcache` set `cacheexpire`='".(date("U")+600)."' where `id`='$stampid'");
+			mysqli_query($_SESSION['mconn'], "update `stampcache` set `cacheexpire`='".(date("U")+600)."' where `id`='$stampid'");
 		} else {
 			$query = "insert into `stampcache` set `cacheexpire`='".(date("U")+600)."',`hostname`='$ref',`valid`='$invalid'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 
 		$arr = array("issued" => $cert['issued'], "expire" => $cert['expire'], "subject" => $cert['subject'], "hostname" => $ref,

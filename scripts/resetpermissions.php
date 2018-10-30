@@ -26,26 +26,26 @@ foreach ($flags as $flag) {
 	echo "Resetting $flag flag:\n";
 	$query = "select `id`, `fname`, `lname`, `email` from `users`
 			where `$flag` = 1";
-	if(! $res = mysql_query($query) ) {
+	if(! $res = mysqli_query($_SESSION['mconn'], $query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
 				"\"$query\"\n".
-				mysql_error()
+				mysqli_error($_SESSION['mconn'])
 		);
 	
 		continue;
 	}
 	
-	while ($row = mysql_fetch_assoc($res)) {
+	while ($row = mysqli_fetch_assoc($res)) {
 		echo "$row[fname] $row[lname] $row[email]";
 		
 		$update = "update `users` set `$flag` = 0 where `id` = $row[id]";
-		if(! $res2 = mysql_query($update) ) {
+		if(! $res2 = mysqli_query($_SESSION['mconn'], $update) ) {
 			echo " NOT RESET!!!\n";
 			fwrite(STDERR,
 					"MySQL query for $flag flag reset on user $row[id] failed:\n".
 					"\"$update\"\n".
-					mysql_error()
+					mysqli_error($_SESSION['mconn'])
 			);
 			
 		} else {

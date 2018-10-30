@@ -37,7 +37,7 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
 {
     $_REQUEST['userid'] = 0;
 
-    $emailsearch = $email = mysql_real_escape_string(stripslashes($_REQUEST['email']));
+    $emailsearch = $email = mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['email']));
 
     //Disabled to speed up the queries
     //if(!strstr($email, "%"))
@@ -63,8 +63,8 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
             group by `users`.`id` limit 100";
     }
     // bug-975 ted+uli changes --- end
-    $res = mysql_query($query);
-    if(mysql_num_rows($res) > 1) {
+    $res = mysqli_query($_SESSION['mconn'], $query);
+    if(mysqli_num_rows($res) > 1) {
 ?>
         <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
             <tr>
@@ -75,7 +75,7 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
                 <td class="DataTD"><?=_("Email")?></td>
             </tr>
 <?
-        while($row = mysql_fetch_assoc($res))
+        while($row = mysqli_fetch_assoc($res))
         {
 ?>
             <tr>
@@ -85,7 +85,7 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
 <?
         }
 
-        if(mysql_num_rows($res) >= 100) {
+        if(mysqli_num_rows($res) >= 100) {
 ?>
             <tr>
                 <td class="DataTD" colspan="2"><?=_("Only the first 100 rows are displayed.")?></td>
@@ -94,15 +94,15 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
         } else {
 ?>
             <tr>
-                <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+                <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysqli_num_rows($res)); ?></td>
             </tr>
 <?
         }
 ?>
         </table><br><br>
 <?
-    } elseif(mysql_num_rows($res) == 1) {
-        $row = mysql_fetch_assoc($res);
+    } elseif(mysqli_num_rows($res) == 1) {
+        $row = mysqli_fetch_assoc($res);
         $_REQUEST['userid'] = $row['id'];
     } else {
         printf(_("No users found matching %s"), sanitizeHTML($email));
@@ -113,13 +113,13 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
 if(intval($_REQUEST['userid']) > 0) {
     $userid = intval($_REQUEST['userid']);
     $res =get_user_data($userid);
-    if(mysql_num_rows($res) <= 0) {
+    if(mysqli_num_rows($res) <= 0) {
         echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
-        $row = mysql_fetch_assoc($res);
+        $row = mysqli_fetch_assoc($res);
         $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($row['id'])."' and `deleted` = 0";
-        $dres = mysql_query($query);
-        $drow = mysql_fetch_assoc($dres);
+        $dres = mysqli_query($_SESSION['mconn'], $query);
+        $drow = mysqli_fetch_assoc($dres);
         $alerts =get_alerts(intval($row['id']));
 
 //display account data
@@ -132,11 +132,11 @@ if(intval($_REQUEST['userid']) > 0) {
             } else {
                 $assurance = intval($_REQUEST['assurance']);
                 $trow = 0;
-                $res = mysql_query("select `to` from `notary` where `id`='".intval($assurance)."' and `deleted` = 0");
+                $res = mysqli_query($_SESSION['mconn'], "select `to` from `notary` where `id`='".intval($assurance)."' and `deleted` = 0");
                 if ($res) {
-                    $trow = mysql_fetch_assoc($res);
+                    $trow = mysqli_fetch_assoc($res);
                     if ($trow) {
-                        mysql_query("update `notary` set `deleted`=NOW() where `id`='".intval($assurance)."'");
+                        mysqli_query($_SESSION['mconn'], "update `notary` set `deleted`=NOW() where `id`='".intval($assurance)."'");
                         fix_assurer_flag($trow['to']);
                     }
                 }
@@ -403,14 +403,14 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
     //list secondary email addresses
                 $dres = get_email_addresses(intval($row['id']),$row['email']);
-                if(mysql_num_rows($dres) > 0) {
+                if(mysqli_num_rows($dres) > 0) {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td colspan="5" class="title"><?=_("Alternate Verified Email Addresses")?></td>
         </tr>
     <?
-                    while($drow = mysql_fetch_assoc($dres)) {
+                    while($drow = mysqli_fetch_assoc($dres)) {
     ?>
         <tr>
             <td class="DataTD"><?=_("Secondary Emails")?>:</td>
@@ -426,14 +426,14 @@ if(intval($_REQUEST['userid']) > 0) {
 
     // list of domains
                 $dres=get_domains(intval($row['id']));
-                if(mysql_num_rows($dres) > 0) {
+                if(mysqli_num_rows($dres) > 0) {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td colspan="5" class="title"><?=_("Verified Domains")?></td>
         </tr>
     <?
-                    while($drow = mysql_fetch_assoc($dres)) {
+                    while($drow = mysqli_fetch_assoc($dres)) {
     ?>
         <tr>
             <td class="DataTD"><?=_("Domain")?>:</td>
@@ -488,7 +488,7 @@ if(intval($_REQUEST['userid']) > 0) {
                    4. users.email = primary-email
 
                 --- Assurer, assure someone find user query
-                select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."'
+                select * from `users` where `email`='".mysqli_real_escape_string($_SESSION['mconn'], $_POST['email']))."'
                     and `deleted`=0
                  => requirements
                    1. users.deleted = 0
@@ -527,8 +527,8 @@ if(intval($_REQUEST['userid']) > 0) {
                 // current userid  intval($row['id'])
                 $query = "select `email` as `uemail`, `deleted` as `udeleted`, `verified`, `locked`
                     from `users` where `id`='".intval($row['id'])."' ";
-                $dres = mysql_query($query);
-                $drow = mysql_fetch_assoc($dres);
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                $drow = mysqli_fetch_assoc($dres);
                 $uemail    = $drow['uemail'];
                 $udeleted  = $drow['udeleted'];
                 $uverified = $drow['verified'];
@@ -538,16 +538,16 @@ if(intval($_REQUEST['userid']) > 0) {
                     where `memid`='".intval($row['id'])."' and
                         `email` ='".$uemail."' and
                         `deleted` = 0";
-                $dres = mysql_query($query);
-                if ($drow = mysql_fetch_assoc($dres)) {
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                if ($drow = mysqli_fetch_assoc($dres)) {
                     $drow['edeleted'] = 0;
                 } else {
                     // try if there are deleted entries
                     $query = "select `hash`, `deleted` as `edeleted`, `email` as `eemail` from `email`
                         where `memid`='".intval($row['id'])."' and
                             `email` ='".$uemail."'";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                 }
 
                 if ($drow) {
@@ -626,8 +626,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         on `domains`.`id` = `domaincerts`.`domid`
                     where `domains`.`memid` = '".intval($row['id'])."'
                     ";
-                $dres = mysql_query($query);
-                $drow = mysql_fetch_assoc($dres);
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                $drow = mysqli_fetch_assoc($dres);
                 $total = $drow['total'];
 
                 $maxexpire = "0000-00-00 00:00:00";
@@ -644,8 +644,8 @@ if(intval($_REQUEST['userid']) > 0) {
                             and `revoked` = '0000-00-00 00:00:00'
                             and `expire` > NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $valid = $drow['valid'];
 
                     $query = "
@@ -655,8 +655,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `domains`.`memid` = '".intval($row['id'])."'
                             and `expire` <= NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $expired = $drow['expired'];
 
                     $query = "
@@ -666,8 +666,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `domains`.`memid` = '".intval($row['id'])."'
                             and `revoked` != '0000-00-00 00:00:00'
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
             <td class="DataTD"><?=intval($total)?></td>
@@ -692,8 +692,8 @@ if(intval($_REQUEST['userid']) > 0) {
                     from `emailcerts`
                     where `memid` = '".intval($row['id'])."'
                     ";
-                $dres = mysql_query($query);
-                $drow = mysql_fetch_assoc($dres);
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                $drow = mysqli_fetch_assoc($dres);
                 $total = $drow['total'];
 
                 $maxexpire = "0000-00-00 00:00:00";
@@ -709,8 +709,8 @@ if(intval($_REQUEST['userid']) > 0) {
                             and `revoked` = '0000-00-00 00:00:00'
                             and `expire` > NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $valid = $drow['valid'];
 
                     $query = "
@@ -719,8 +719,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `memid` = '".intval($row['id'])."'
                             and `expire` <= NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $expired = $drow['expired'];
 
                     $query = "
@@ -729,8 +729,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `memid` = '".intval($row['id'])."'
                             and `revoked` != '0000-00-00 00:00:00'
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
             <td class="DataTD"><?=intval($total)?></td>
@@ -755,8 +755,8 @@ if(intval($_REQUEST['userid']) > 0) {
                     from `gpg`
                     where `memid` = '".intval($row['id'])."'
                     ";
-                $dres = mysql_query($query);
-                $drow = mysql_fetch_assoc($dres);
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                $drow = mysqli_fetch_assoc($dres);
                 $total = $drow['total'];
 
                 $maxexpire = "0000-00-00 00:00:00";
@@ -771,8 +771,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `memid` = '".intval($row['id'])."'
                             and `expire` > NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $valid = $drow['valid'];
 
                     $query = "
@@ -781,8 +781,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `memid` = '".intval($row['id'])."'
                             and `expire` <= NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $expired = $drow['expired'];
     ?>
             <td class="DataTD"><?=intval($total)?></td>
@@ -809,8 +809,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         on `orgcerts`.`orgid` = `org`.`orgid`
                     where `org`.`memid` = '".intval($row['id'])."'
                     ";
-                $dres = mysql_query($query);
-                $drow = mysql_fetch_assoc($dres);
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                $drow = mysqli_fetch_assoc($dres);
                 $total = $drow['total'];
 
                 $maxexpire = "0000-00-00 00:00:00";
@@ -827,8 +827,8 @@ if(intval($_REQUEST['userid']) > 0) {
                             and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
                             and `orgcerts`.`expire` > NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $valid = $drow['valid'];
 
                     $query = "
@@ -838,8 +838,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `org`.`memid` = '".intval($row['id'])."'
                             and `orgcerts`.`expire` <= NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $expired = $drow['expired'];
 
                     $query = "
@@ -849,8 +849,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `org`.`memid` = '".intval($row['id'])."'
                             and `orgcerts`.`revoked` != '0000-00-00 00:00:00'
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
             <td class="DataTD"><?=intval($total)?></td>
@@ -877,8 +877,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         on `orgcerts`.`orgid` = `org`.`orgid`
                     where `org`.`memid` = '".intval($row['id'])."'
                     ";
-                $dres = mysql_query($query);
-                $drow = mysql_fetch_assoc($dres);
+                $dres = mysqli_query($_SESSION['mconn'], $query);
+                $drow = mysqli_fetch_assoc($dres);
                 $total = $drow['total'];
 
                 $maxexpire = "0000-00-00 00:00:00";
@@ -895,8 +895,8 @@ if(intval($_REQUEST['userid']) > 0) {
                             and `orgcerts`.`revoked` = '0000-00-00 00:00:00'
                             and `orgcerts`.`expire` > NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $valid = $drow['valid'];
 
                     $query = "
@@ -906,8 +906,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `org`.`memid` = '".intval($row['id'])."'
                             and `orgcerts`.`expire` <= NOW()
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $expired = $drow['expired'];
 
                     $query = "
@@ -917,8 +917,8 @@ if(intval($_REQUEST['userid']) > 0) {
                         where `org`.`memid` = '".intval($row['id'])."'
                             and `orgcerts`.`revoked` != '0000-00-00 00:00:00'
                         ";
-                    $dres = mysql_query($query);
-                    $drow = mysql_fetch_assoc($dres);
+                    $dres = mysqli_query($_SESSION['mconn'], $query);
+                    $drow = mysqli_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
             <td class="DataTD"><?=intval($total)?></td>
@@ -985,10 +985,10 @@ if(intval($_REQUEST['userid']) > 0) {
         </tr>
     <?
         $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'  and `deleted` = 0";
-        $dres = mysql_query($query);
+        $dres = mysqli_query($_SESSION['mconn'], $query);
         $points = 0;
-        while($drow = mysql_fetch_assoc($dres)) {
-            $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($drow['from'])."'"));
+        while($drow = mysqli_fetch_assoc($dres)) {
+            $fromuser = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($drow['from'])."'"));
             $points += $drow['points'];
     ?>
         <tr>
@@ -1032,10 +1032,10 @@ if(intval($_REQUEST['userid']) > 0) {
         </tr>
     <?
         $query = "select * from `notary` where `from`='".intval($_GET['userid'])."' and `deleted` = 0";
-        $dres = mysql_query($query);
+        $dres = mysqli_query($_SESSION['mconn'], $query);
         $points = 0;
-        while($drow = mysql_fetch_assoc($dres)) {
-            $fromuser = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($drow['to'])."'"));
+        while($drow = mysqli_fetch_assoc($dres)) {
+            $fromuser = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($drow['to'])."'"));
             $points += intval($drow['points']);
     ?>
         <tr>
