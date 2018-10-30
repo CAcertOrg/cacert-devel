@@ -21,13 +21,13 @@ include_once($_SESSION['_config']['filepath']."/includes/notary.inc.php");
 $userid = intval($_REQUEST['userid']);
 
 $res = get_user_data($userid);
-if (mysql_num_rows($res) <= 0)
+if (mysqli_num_rows($res) <= 0)
 {
     echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     exit;
 }
 
-$user = mysql_fetch_assoc($res);
+$user = mysqli_fetch_assoc($res);
 
 $fname = $user['fname'];
 $mname = $user['mname'];
@@ -159,9 +159,9 @@ $dres = get_email_addresses($userid,'',1);
         <td colspan="3" class="title"><?=_('Email addresses')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_log_email_header();
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
         output_log_email($drow,$email);
     }
@@ -185,9 +185,9 @@ $dres = get_domains($userid, 1);
         <td colspan="3" class="title"><?=_('Domains')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_log_domains_header();
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
           output_log_domains($drow);
     }
@@ -211,9 +211,9 @@ $dres = get_training_results($userid);
         <td colspan="3" class="title"><?=_('Trainings')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_log_training_header();
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
         output_log_training($drow);
     }
@@ -237,9 +237,9 @@ $dres = get_user_agreements($userid);
         <td colspan="4" class="title"><?=_('User agreements')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_log_agreement_header();
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
         output_log_agreement($drow);
     }
@@ -267,9 +267,9 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('Client certificates')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_client_cert_header($support);
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
         output_client_cert($drow,$support);
     }
@@ -297,9 +297,9 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('Server certificates')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_server_certs_header($support);
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
         output_server_certs($drow,$support);
     }
@@ -327,9 +327,9 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('GPG/PGP certificates')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_gpg_certs_header($support);
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
         output_gpg_certs($drow, $support);
     }
@@ -362,9 +362,9 @@ if (1 == $support) {
         <td colspan="<?=$colspan?>" class="title"><?=_('Admin log')?></td>
     </tr>
 <?
-if (mysql_num_rows($dres) > 0) {
+if (mysqli_num_rows($dres) > 0) {
     output_log_se_header($support);
-    while ($drow = mysql_fetch_assoc($dres))
+    while ($drow = mysqli_fetch_assoc($dres))
     {
        output_log_se($drow,$support);
     }

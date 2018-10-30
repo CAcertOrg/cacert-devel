@@ -21,19 +21,19 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 } else {
 	$user_id = intval($_REQUEST['userid']);
 	$query = "select `users`.`fname`, `users`.`mname`, `users`.`lname` from `users` where `id`='$user_id' and `users`.`deleted`=0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) != 1){
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) != 1){
 		echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
 	} else {
-		if ($row = mysql_fetch_assoc($res)){
+		if ($row = mysqli_fetch_assoc($res)){
 			$username=sanitizeHTML($row['fname']).' '.sanitizeHTML($row['mname']).' '.sanitizeHTML($row['lname']);
 			$query = "select `orginfo`.`o`, `org`.`masteracc`
 				FROM `orginfo`, `org`
 				WHERE `orginfo`.`id` = `org`.`orgid`
 				AND `org`.`memid`='$user_id' order by `orginfo`.`o`";
-			$res1 = mysql_query($query);?>
+			$res1 = mysqli_query($_SESSION['mconn'], $query);?>
 			<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper"><?
-			if (mysql_num_rows($res1) <= 0) {?>
+			if (mysqli_num_rows($res1) <= 0) {?>
 				<tr>
 					<td colspan="2" class="title"><?=sprintf(_('%s is not listed as Organisation Administrator'), $username)?></td>
 				</tr>
@@ -45,7 +45,7 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 					<td class="DataTD"><b><?=_('Organisation')?></b></td>
 					<td class="DataTD"><b><?=_('Masteraccount')?></b></td>
 				</tr><?
-				while($drow = mysql_fetch_assoc($res1)){?>
+				while($drow = mysqli_fetch_assoc($res1)){?>
 					<tr>
 						<td class="DataTD"><?=$drow['o']?></td>
 						<td class="DataTD"><?=$drow['masteracc'] ? _("Yes") : _("No") ?></td>

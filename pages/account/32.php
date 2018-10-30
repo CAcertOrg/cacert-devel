@@ -17,7 +17,7 @@
 */ ?>
 <?
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="500">
   <tr>
@@ -32,10 +32,10 @@
   </tr>
 <?
 	$query = "select * from `org` where `orgid`='".intval($_REQUEST['orgid'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['memid'])."'"));
+		$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($row['memid'])."'"));
 ?>
   <tr>
     <td class="DataTD"><a href='mailto:<?=sanitizeHTML($user['email'])?>'><?=sanitizeHTML($user['fname'])?> <?=sanitizeHTML($user['lname'])?></a></td>
