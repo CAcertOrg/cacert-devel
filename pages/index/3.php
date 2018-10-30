@@ -27,12 +27,11 @@
 
 <h3><?=_("Class 1 PKI Key")?></h3>
 <ul class="no_indent">
-	<li><a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
-	<li><a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a></li>
-	<li><a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a></li>
+	<li><a href="https://wiki.cacert.org/FAQ?action=AttachFile&do=get&target=root_256.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
+	<li><a href="https://wiki.cacert.org/FAQ?action=AttachFile&do=get&target=root_256.der"><?=_("Root Certificate (DER Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a></li>
-	<li><?=_("SHA1 Fingerprint:")?> 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33</li>
-	<li><?=_("MD5 Fingerprint:")?> A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B</li>
+	<li><?=_("SHA256 Fingerprint:")?> 07:ED:BD:82:4A:49:88:CF:EF:42:15:DA:20:D4:8C:2B:41:D7:15:29:D7:C9:00:F5:70:92:6F:27:7C:C2:30:C5</li>
+	<li><?=_("SHA1 Fingerprint:")?> DD:FC:DA:54:1E:75:77:AD:DC:A8:7E:88:27:A9:8A:50:60:32:52:A5</li>
 </ul>
 
 <h3><?=_("Class 3 PKI Key")?></h3>
