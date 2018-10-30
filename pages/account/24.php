@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	// Reset session variables regarding Org's, present empty form	
+<?php 	// Reset session variables regarding Org's, present empty form
 	if (array_key_exists('O',$_SESSION['_config']))         $_SESSION['_config']['O'] = "";
   if (array_key_exists('contact',$_SESSION['_config']))   $_SESSION['_config']['contact'] = "";	
   if (array_key_exists('L',$_SESSION['_config']))         $_SESSION['_config']['L'] = "";
@@ -28,26 +27,26 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("New Organisation")?></td>
+    <td colspan="2" class="title"><?php echo _("New Organisation")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Organisation Name")?>:</td>
+    <td class="DataTD"><?php echo _("Organisation Name")?>:</td>
     <td class="DataTD"><input type="text" name="O" value="" maxlength="50" size="90"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Contact Email")?>:</td>
+    <td class="DataTD"><?php echo _("Contact Email")?>:</td>
     <td class="DataTD"><input type="text" name="contact" value="" size="90"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Town/Suburb")?>:</td>
+    <td class="DataTD"><?php echo _("Town/Suburb")?>:</td>
     <td class="DataTD"><input type="text" name="L" value="" size="90"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("State/Province")?>:</td>
+    <td class="DataTD"><?php echo _("State/Province")?>:</td>
     <td class="DataTD"><input type="text" name="ST" value="" size="90"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Country")?>:</td>
+    <td class="DataTD"><?php echo _("Country")?>:</td>
     <td class="DataTD"><input type="text" name="C" value="" size="5">
         <?php printf(_('(2 letter %s ISO code %s )'),
             '<a href="http://www.iso.org/iso/home/standards/country_codes/iso-3166-1_decoding_table.htm">',
@@ -55,12 +54,12 @@
     </td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Comments")?>:</td>
+    <td class="DataTD"><?php echo _("Comments")?>:</td>
     <td class="DataTD"><textarea name="comments" cols="60" rows="10"></textarea></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Next")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?php echo $id?>">
 </form>

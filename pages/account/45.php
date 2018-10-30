@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,9 +15,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<p><?=_("Paste your CSR below...")?></p>
+<p><?php echo _("Paste your CSR below...")?></p>
 <form method="post" action="account.php">
 <textarea name="CSR" cols="80" rows="15"></textarea><br>
-<input type="submit" name="process" value="<?=_("Submit")?>">
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="submit" name="process" value="<?php echo _("Submit")?>">
+<input type="hidden" name="oldid" value="<?php echo $id?>">
 </form>

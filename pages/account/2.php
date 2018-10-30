@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -18,16 +18,15 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="4" class="title"><?=_("Email Accounts")?></td>
+    <td colspan="4" class="title"><?php echo _("Email Accounts")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Default")?></td>
-    <td class="DataTD"><?=_("Status")?></td>
-    <td class="DataTD"><?=_("Delete")?></td>
-    <td class="DataTD"><?=_("Address")?></td>
+    <td class="DataTD"><?php echo _("Default")?></td>
+    <td class="DataTD"><?php echo _("Status")?></td>
+    <td class="DataTD"><?php echo _("Delete")?></td>
+    <td class="DataTD"><?php echo _("Address")?></td>
 
-<?
-	$query = "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
+<?php 	$query = "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
@@ -37,25 +36,25 @@
 			$verified = _("Unverified");
 ?>
   <tr>
-    <td class="DataTD"><? if($row['hash'] == "") { ?><input type="radio" name="emailid" value="<?=$row['id']?>"
-	<? if($row['email'] == $_SESSION['profile']['email']) echo " checked"; ?>><? } else { echo "&nbsp;"; } ?></td>
-    <td class="DataTD"><?=$verified?></td>
-<? if($row['email'] == $_SESSION['profile']['email']) { ?>
-    <td class="DataTD"><?=_("N/A")?></td>
-<? } else { ?>
-    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
-<? } ?>
-    <td class="DataTD"><?=sanitizeHTML($row['email'])?></td>
+    <td class="DataTD"><?php if($row['hash'] == "") { ?><input type="radio" name="emailid" value="<?php echo $row['id']?>"
+	<?php if($row['email'] == $_SESSION['profile']['email']) echo " checked"; ?>><?php } else { echo "&nbsp;"; } ?></td>
+    <td class="DataTD"><?php echo $verified?></td>
+<?php if($row['email'] == $_SESSION['profile']['email']) { ?>
+    <td class="DataTD"><?php echo _("N/A")?></td>
+<?php } else { ?>
+    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?php echo $row['id']?>"></td>
+<?php } ?>
+    <td class="DataTD"><?php echo sanitizeHTML($row['email'])?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="makedefault" value="<?=_("Make Default")?>"></td>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Delete")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="makedefault" value="<?php echo _("Make Default")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Delete")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
-<input type="hidden" name="csrf" value="<?=make_csrf('chgdef')?>" />
+<input type="hidden" name="oldid" value="<?php echo $id?>">
+<input type="hidden" name="csrf" value="<?php echo make_csrf('chgdef')?>" />
 </form>
 <p>
-<?=_("Please Note: You can not set an unverified account as a default account, and you can not remove a default account. To remove the default account you must set another verified account as the default.")?>
+<?php echo _("Please Note: You can not set an unverified account as a default account, and you can not remove a default account. To remove the default account you must set another verified account as the default.")?>
 </p>

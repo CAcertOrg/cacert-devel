@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -68,40 +68,35 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
 ?>
         <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
             <tr>
-                <td colspan="5" class="title"><?=_("Select Specific Account Details")?></td>
+                <td colspan="5" class="title"><?php echo _("Select Specific Account Details")?></td>
             </tr>
             <tr>
-                <td class="DataTD"><?=_("User ID")?></td>
-                <td class="DataTD"><?=_("Email")?></td>
+                <td class="DataTD"><?php echo _("User ID")?></td>
+                <td class="DataTD"><?php echo _("Email")?></td>
             </tr>
-<?
-        while($row = mysql_fetch_assoc($res))
+<?php         while($row = mysql_fetch_assoc($res))
         {
 ?>
             <tr>
-                <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>"><?=intval($row['id'])?></a></td>
-                <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>"><?=sanitizeHTML($row['email'])?></a></td>
+                <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>"><?php echo intval($row['id'])?></a></td>
+                <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>"><?php echo sanitizeHTML($row['email'])?></a></td>
             </tr>
-<?
-        }
+<?php         }
 
         if(mysql_num_rows($res) >= 100) {
 ?>
             <tr>
-                <td class="DataTD" colspan="2"><?=_("Only the first 100 rows are displayed.")?></td>
+                <td class="DataTD" colspan="2"><?php echo _("Only the first 100 rows are displayed.")?></td>
             </tr>
-<?
-        } else {
+<?php         } else {
 ?>
             <tr>
-                <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+                <td class="DataTD" colspan="2"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
             </tr>
-<?
-        }
+<?php         }
 ?>
         </table><br><br>
-<?
-    } elseif(mysql_num_rows($res) == 1) {
+<?php     } elseif(mysql_num_rows($res) == 1) {
         $row = mysql_fetch_assoc($res);
         $_REQUEST['userid'] = $row['id'];
     } else {
@@ -148,20 +143,20 @@ if(intval($_REQUEST['userid']) > 0) {
 //Ticket number
 ?>
 
-<form method="post" action="account.php?id=43&userid=<?=intval($_REQUEST['userid'])?>">
+<form method="post" action="account.php?id=43&userid=<?php echo intval($_REQUEST['userid'])?>">
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="2" class="title"><?=_('Ticket handling') ?></td>
+            <td colspan="2" class="title"><?php echo _('Ticket handling') ?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_('Ticket no')?>:</td>
-            <td class="DataTD"><input type="text" name="ticketno" value="<?=sanitizeHTML($ticketno)?>"/></td>
+            <td class="DataTD"><?php echo _('Ticket no')?>:</td>
+            <td class="DataTD"><input type="text" name="ticketno" value="<?php echo sanitizeHTML($ticketno)?>"/></td>
         </tr>
         <tr>
-            <td colspan="2" class="DataTDError"><?=$ticketmsg?></td><?php $_SESSION['ticketmsg']='' ?>
+            <td colspan="2" class="DataTDError"><?php echo $ticketmsg?></td><?php $_SESSION['ticketmsg']='' ?>
         </tr>
         <tr>
-            <td colspan="2" ><input type="submit" value="<?=_('Set ticket number') ?>"></td>
+            <td colspan="2" ><input type="submit" value="<?php echo _('Set ticket number') ?>"></td>
         </tr>
     </table>
 </form>
@@ -171,47 +166,45 @@ if(intval($_REQUEST['userid']) > 0) {
 <!-- display data table -->
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="5" class="title"><? printf(_("%s's Account Details"), sanitizeHTML($row['email'])); ?></td>
+            <td colspan="5" class="title"><?php printf(_("%s's Account Details"), sanitizeHTML($row['email'])); ?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Email")?>:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['email'])?></td>
+            <td class="DataTD"><?php echo _("Email")?>:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['email'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("First Name")?>:</td>
-            <td class="DataTD"><form method="post" action="account.php" onSubmit="if(!confirm('<?=_("Are you sure you want to modify this DOB and/or last name?")?>')) return false;">
-                <input type="hidden" name="csrf" value="<?=make_csrf('admchangepers')?>" />
-                <input type="text" name="fname" value="<?=sanitizeHTML($row['fname'])?>">
+            <td class="DataTD"><?php echo _("First Name")?>:</td>
+            <td class="DataTD"><form method="post" action="account.php" onSubmit="if(!confirm('<?php echo _("Are you sure you want to modify this DOB and/or last name?")?>')) return false;">
+                <input type="hidden" name="csrf" value="<?php echo make_csrf('admchangepers')?>" />
+                <input type="text" name="fname" value="<?php echo sanitizeHTML($row['fname'])?>">
             </td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Middle Name")?>:</td>
-            <td class="DataTD"><input type="text" name="mname" value="<?=sanitizeHTML($row['mname'])?>"></td>
+            <td class="DataTD"><?php echo _("Middle Name")?>:</td>
+            <td class="DataTD"><input type="text" name="mname" value="<?php echo sanitizeHTML($row['mname'])?>"></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Last Name")?>:</td>
+            <td class="DataTD"><?php echo _("Last Name")?>:</td>
             <td class="DataTD">  <input type="hidden" name="oldid" value="43">
                 <input type="hidden" name="action" value="updatedob">
-                <input type="hidden" name="userid" value="<?=intval($userid)?>">
-                <input type="text" name="lname" value="<?=sanitizeHTML($row['lname'])?>">
+                <input type="hidden" name="userid" value="<?php echo intval($userid)?>">
+                <input type="text" name="lname" value="<?php echo sanitizeHTML($row['lname'])?>">
             </td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Suffix")?>:</td>
-            <td class="DataTD"><input type="text" name="suffix" value="<?=sanitizeHTML($row['suffix'])?>"></td>
+            <td class="DataTD"><?php echo _("Suffix")?>:</td>
+            <td class="DataTD"><input type="text" name="suffix" value="<?php echo sanitizeHTML($row['suffix'])?>"></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Date of Birth")?>:</td>
+            <td class="DataTD"><?php echo _("Date of Birth")?>:</td>
             <td class="DataTD">
-                <?
-                $year = intval(substr($row['dob'], 0, 4));
+                <?php                 $year = intval(substr($row['dob'], 0, 4));
                 $month = intval(substr($row['dob'], 5, 2));
                 $day = intval(substr($row['dob'], 8, 2));
     ?>
                 <nobr>
                         <select name="day">
-    <?
-                for($i = 1; $i <= 31; $i++) {
+    <?php                 for($i = 1; $i <= 31; $i++) {
                     echo "<option";
                     if($day == $i) {
                         echo " selected='selected'";
@@ -221,8 +214,7 @@ if(intval($_REQUEST['userid']) > 0) {
     ?>
                         </select>
                         <select name="month">
-    <?
-                for($i = 1; $i <= 12; $i++) {
+    <?php                 for($i = 1; $i <= 12; $i++) {
                     echo "<option value='$i'";
                     if($month == $i)
                             echo " selected='selected'";
@@ -230,199 +222,190 @@ if(intval($_REQUEST['userid']) > 0) {
                 }
     ?>
                         </select>
-                        <input type="text" name="year" value="<?=$year?>" size="4">
+                        <input type="text" name="year" value="<?php echo $year?>" size="4">
                         <input type="submit" value="Go">
-                        <input type="hidden" name="ticketno" value="<?=sanitizeHTML($ticketno)?>"/>
+                        <input type="hidden" name="ticketno" value="<?php echo sanitizeHTML($ticketno)?>"/>
                     </form>
                 </nobr>
             </td>
         </tr>
 
-    <? // list of flags ?>
+    <?php // list of flags ?>
         <tr>
-            <td class="DataTD"><?=_("CCA accepted")?>:</td>
-            <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'], 'CCA')) ? _("Yes") : _("No") ?></a></td>
+            <td class="DataTD"><?php echo _("CCA accepted")?>:</td>
+            <td class="DataTD"><a href="account.php?id=57&amp;userid=<?php echo intval($row['id'])?>"><?php echo intval(get_user_agreement_status($row['id'], 'CCA')) ? _("Yes") : _("No") ?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Trainings")?>:</td>
-            <td class="DataTD"><a href="account.php?id=55&amp;userid=<?=intval($row['id'])?>">show</a></td>
+            <td class="DataTD"><?php echo _("Trainings")?>:</td>
+            <td class="DataTD"><a href="account.php?id=55&amp;userid=<?php echo intval($row['id'])?>">show</a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Is Assurer")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;assurer=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admsetassuret')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['assurer'])?></a></td>
+            <td class="DataTD"><?php echo _("Is Assurer")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;assurer=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admsetassuret')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['assurer'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Blocked Assurer")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;assurer_blocked=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['assurer_blocked'])?></a></td>
+            <td class="DataTD"><?php echo _("Blocked Assurer")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;assurer_blocked=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['assurer_blocked'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Account Locking")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;locked=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admactlock')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['locked'])?></a></td>
+            <td class="DataTD"><?php echo _("Account Locking")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;locked=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admactlock')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['locked'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Code Signing")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admcodesign')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['codesign'])?></a></td>
+            <td class="DataTD"><?php echo _("Code Signing")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;codesign=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admcodesign')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['codesign'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Org Assurer")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admorgadmin')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['orgadmin'])?></a></td>
+            <td class="DataTD"><?php echo _("Org Assurer")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;orgadmin=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admorgadmin')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['orgadmin'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("TTP Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;ttpadmin=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admttpadmin')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['ttpadmin'])?></a></td>
+            <td class="DataTD"><?php echo _("TTP Admin")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;ttpadmin=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admttpadmin')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['ttpadmin'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Location Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;locadmin=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=$row['locadmin']?></a></td>
+            <td class="DataTD"><?php echo _("Location Admin")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;locadmin=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo $row['locadmin']?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;admin=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admsetadmin')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['admin'])?></a></td>
+            <td class="DataTD"><?php echo _("Admin")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;admin=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admsetadmin')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['admin'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Ad Admin")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;adadmin=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['adadmin'])?></a> (0 = none, 1 = submit, 2 = approve)</td>
+            <td class="DataTD"><?php echo _("Ad Admin")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;adadmin=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['adadmin'])?></a> (0 = none, 1 = submit, 2 = approve)</td>
         </tr>
     <!-- presently not needed
         <tr>
-            <td class="DataTD"><?=_("Tverify Account")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;tverify=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($row['tverify'])?></a></td>
+            <td class="DataTD"><?php echo _("Tverify Account")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;tverify=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($row['tverify'])?></a></td>
         </tr>
     -->
         <tr>
-            <td class="DataTD"><?=_("General Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;general=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($alerts['general'])?></a></td>
+            <td class="DataTD"><?php echo _("General Announcements")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;general=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($alerts['general'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Country Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;country=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($alerts['country'])?></a></td>
+            <td class="DataTD"><?php echo _("Country Announcements")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;country=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($alerts['country'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Regional Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;regional=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($alerts['regional'])?></a></td>
+            <td class="DataTD"><?php echo _("Regional Announcements")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;regional=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($alerts['regional'])?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
-            <td class="DataTD"><a href="account.php?id=43&amp;radius=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($alerts['radius'])?></a></td>
+            <td class="DataTD"><?php echo _("Within 200km Announcements")?>:</td>
+            <td class="DataTD"><a href="account.php?id=43&amp;radius=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo intval($alerts['radius'])?></a></td>
         </tr>
-    <? //change password, view secret questions and delete account section ?>
+    <?php //change password, view secret questions and delete account section ?>
         <tr>
-            <td class="DataTD"><?=_("Change Password")?>:</td>
-            <td class="DataTD"><a href="account.php?id=44&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Change Password")?></a></td>
+            <td class="DataTD"><?php echo _("Change Password")?>:</td>
+            <td class="DataTD"><a href="account.php?id=44&amp;userid=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Change Password")?></a></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Delete Account")?>:</td>
-            <td class="DataTD"><a href="account.php?id=50&amp;userid=<?=intval($row['id'])?>&amp;csrf=<?=make_csrf('admdelaccount')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Delete Account")?></a></td>
+            <td class="DataTD"><?php echo _("Delete Account")?>:</td>
+            <td class="DataTD"><a href="account.php?id=50&amp;userid=<?php echo intval($row['id'])?>&amp;csrf=<?php echo make_csrf('admdelaccount')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Delete Account")?></a></td>
         </tr>
-    <?
-                // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
+    <?php                 // This is intensionally a $_GET for audit purposes. DO NOT CHANGE!!!
                 if(array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==true) {
                     if (!write_se_log($userid, $_SESSION['profile']['id'], 'SE view lost password information', $ticketno)) {
     ?>
         <tr>
-            <td class="DataTD" colspan="2"><?=_("Writing to the admin log failed. Can't continue.")?></td>
+            <td class="DataTD" colspan="2"><?php echo _("Writing to the admin log failed. Can't continue.")?></td>
         </tr>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Show Lost Password Details")?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Show Lost Password Details")?></a></td>
         </tr>
-    <?
-                    } else {
+    <?php                     } else {
     ?>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - Q1:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['Q1'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - Q1:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['Q1'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - A1:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['A1'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - A1:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['A1'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - Q2:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['Q2'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - Q2:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['Q2'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - A2:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['A2'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - A2:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['A2'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - Q3:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['Q3'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - Q3:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['Q3'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - A3:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['A3'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - A3:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['A3'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - Q4:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['Q4'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - Q4:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['Q4'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - A4:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['A4'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - A4:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['A4'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - Q5:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['Q5'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - Q5:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['Q5'])?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Lost Password")?> - A5:</td>
-            <td class="DataTD"><?=sanitizeHTML($row['A5'])?></td>
+            <td class="DataTD"><?php echo _("Lost Password")?> - A5:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($row['A5'])?></td>
         </tr>
-    <?
-                    }
+    <?php                     }
                 } elseif (array_key_exists('showlostpw',$_GET) && $_GET['showlostpw'] == "yes" && $ticketvalidation==false) {
     ?>
         <tr>
-            <td class="DataTD" colspan="2"><?=_('No access granted. Ticket number is missing')?></td>
+            <td class="DataTD" colspan="2"><?php echo _('No access granted. Ticket number is missing')?></td>
         </tr>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Show Lost Password Details")?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Show Lost Password Details")?></a></td>
         </tr>
-    <?
-                } else {
+    <?php                 } else {
                     ?>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Show Lost Password Details")?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Show Lost Password Details")?></a></td>
         </tr>
-    <?                }
+    <?php                }
 
     // list assurance points
     ?>
         <tr>
-            <td class="DataTD"><?=_("Assurance Points")?>:</td>
-            <td class="DataTD"><?=intval($drow['points'])?></td>
+            <td class="DataTD"><?php echo _("Assurance Points")?>:</td>
+            <td class="DataTD"><?php echo intval($drow['points'])?></td>
         </tr>
-    <?
-    // show account history
+    <?php     // show account history
     ?>
         <tr>
-            <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;oldid=43&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_('Show account history')?></a></td>
+            <td class="DataTD" colspan="2"><a href="account.php?id=59&amp;oldid=43&amp;userid=<?php echo intval($row['id'])?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _('Show account history')?></a></td>
         </tr>
     </table>
     <br/>
-    <?
-    //list secondary email addresses
+    <?php     //list secondary email addresses
                 $dres = get_email_addresses(intval($row['id']),$row['email']);
                 if(mysql_num_rows($dres) > 0) {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="5" class="title"><?=_("Alternate Verified Email Addresses")?></td>
+            <td colspan="5" class="title"><?php echo _("Alternate Verified Email Addresses")?></td>
         </tr>
-    <?
-                    while($drow = mysql_fetch_assoc($dres)) {
+    <?php                     while($drow = mysql_fetch_assoc($dres)) {
     ?>
         <tr>
-            <td class="DataTD"><?=_("Secondary Emails")?>:</td>
-            <td class="DataTD"><?=sanitizeHTML($drow['email'])?></td>
+            <td class="DataTD"><?php echo _("Secondary Emails")?>:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['email'])?></td>
         </tr>
-    <?
-                    }
+    <?php                     }
     ?>
     </table>
     <br/>
-    <?
-                }
+    <?php                 }
 
     // list of domains
                 $dres=get_domains(intval($row['id']));
@@ -430,31 +413,27 @@ if(intval($_REQUEST['userid']) > 0) {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="5" class="title"><?=_("Verified Domains")?></td>
+            <td colspan="5" class="title"><?php echo _("Verified Domains")?></td>
         </tr>
-    <?
-                    while($drow = mysql_fetch_assoc($dres)) {
+    <?php                     while($drow = mysql_fetch_assoc($dres)) {
     ?>
         <tr>
-            <td class="DataTD"><?=_("Domain")?>:</td>
-            <td class="DataTD"><?=sanitizeHTML($drow['domain'])?></td>
+            <td class="DataTD"><?php echo _("Domain")?>:</td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['domain'])?></td>
         </tr>
-    <?
-                    }
+    <?php                     }
     ?>
     </table>
     <br/>
-    <?
-                }
+    <?php                 }
     ?>
-    <? //  Begin - Debug infos ?>
+    <?php //  Begin - Debug infos ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="2" class="title"><?=_("Account State")?></td>
+            <td colspan="2" class="title"><?php echo _("Account State")?></td>
         </tr>
 
-    <?
-                // ---  bug-975 begin ---
+    <?php                 // ---  bug-975 begin ---
                 //  potential db inconsistency like in a20110804.1
                 //    Admin console -> don't list user account
                 //    User login -> impossible
@@ -582,44 +561,41 @@ if(intval($_REQUEST['userid']) > 0) {
                     // $inconsistencydisp = _("Yes");
     ?>
         <tr>
-            <td class="DataTD"><?=_("Account inconsistency")?>:</td>
-            <td class="DataTD"><?=$inccause?><br>code: <?=intval($inconsistency)?></td>
+            <td class="DataTD"><?php echo _("Account inconsistency")?>:</td>
+            <td class="DataTD"><?php echo $inccause?><br>code: <?php echo intval($inconsistency)?></td>
         </tr>
         <tr>
             <td colspan="2" class="DataTD" style="max-width: 75ex;">
-                <?=_("Account inconsistency can cause problems in daily account operations and needs to be fixed manually through arbitration/critical team.")?>
+                <?php echo _("Account inconsistency can cause problems in daily account operations and needs to be fixed manually through arbitration/critical team.")?>
             </td>
         </tr>
-    <?
-                }
+    <?php                 }
 
                 // ---  bug-975 end ---
     ?>
     </table>
     <br />
-    <?
-    //  End - Debug infos
+    <?php     //  End - Debug infos
 
     // certificate overview
     ?>
 
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="6" class="title"><?=_("Certificates")?></td>
+            <td colspan="6" class="title"><?php echo _("Certificates")?></td>
         </tr>
         <tr>
-            <td class="DataTD"><?=_("Cert Type")?>:</td>
-            <td class="DataTD"><?=_("Total")?></td>
-            <td class="DataTD"><?=_("Valid")?></td>
-            <td class="DataTD"><?=_("Expired")?></td>
-            <td class="DataTD"><?=_("Revoked")?></td>
-            <td class="DataTD"><?=_("Latest Expire")?></td>
+            <td class="DataTD"><?php echo _("Cert Type")?>:</td>
+            <td class="DataTD"><?php echo _("Total")?></td>
+            <td class="DataTD"><?php echo _("Valid")?></td>
+            <td class="DataTD"><?php echo _("Expired")?></td>
+            <td class="DataTD"><?php echo _("Revoked")?></td>
+            <td class="DataTD"><?php echo _("Latest Expire")?></td>
         </tr>
         <!-- server certificates -->
         <tr>
-            <td class="DataTD"><?=_("Server")?>:</td>
-    <?
-                $query = "
+            <td class="DataTD"><?php echo _("Server")?>:</td>
+    <?php                 $query = "
                     select COUNT(*) as `total`,
                         MAX(`domaincerts`.`expire`) as `maxexpire`
                     from `domains` inner join `domaincerts`
@@ -670,24 +646,21 @@ if(intval($_REQUEST['userid']) > 0) {
                     $drow = mysql_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
-            <td class="DataTD"><?=intval($total)?></td>
-            <td class="DataTD"><?=intval($valid)?></td>
-            <td class="DataTD"><?=intval($expired)?></td>
-            <td class="DataTD"><?=intval($revoked)?></td>
-            <td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
-    <?
-                } else { // $total > 0
+            <td class="DataTD"><?php echo intval($total)?></td>
+            <td class="DataTD"><?php echo intval($valid)?></td>
+            <td class="DataTD"><?php echo intval($expired)?></td>
+            <td class="DataTD"><?php echo intval($revoked)?></td>
+            <td class="DataTD"><?php echo ($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
+    <?php                 } else { // $total > 0
     ?>
-            <td colspan="5" class="DataTD"><?=_("None")?></td>
-    <?
-                }
+            <td colspan="5" class="DataTD"><?php echo _("None")?></td>
+    <?php                 }
     ?>
         </tr>
         <!-- client certificates -->
         <tr>
-            <td class="DataTD"><?=_("Client")?>:</td>
-    <?
-                $query = "
+            <td class="DataTD"><?php echo _("Client")?>:</td>
+    <?php                 $query = "
                     select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
                     from `emailcerts`
                     where `memid` = '".intval($row['id'])."'
@@ -733,24 +706,21 @@ if(intval($_REQUEST['userid']) > 0) {
                     $drow = mysql_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
-            <td class="DataTD"><?=intval($total)?></td>
-            <td class="DataTD"><?=intval($valid)?></td>
-            <td class="DataTD"><?=intval($expired)?></td>
-            <td class="DataTD"><?=intval($revoked)?></td>
-            <td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
-    <?
-                } else { // $total > 0
+            <td class="DataTD"><?php echo intval($total)?></td>
+            <td class="DataTD"><?php echo intval($valid)?></td>
+            <td class="DataTD"><?php echo intval($expired)?></td>
+            <td class="DataTD"><?php echo intval($revoked)?></td>
+            <td class="DataTD"><?php echo ($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
+    <?php                 } else { // $total > 0
     ?>
-            <td colspan="5" class="DataTD"><?=_("None")?></td>
-    <?
-                }
+            <td colspan="5" class="DataTD"><?php echo _("None")?></td>
+    <?php                 }
     ?>
         </tr>
         <!-- gpg certificates -->
         <tr>
-            <td class="DataTD"><?=_("GPG")?>:</td>
-    <?
-                $query = "
+            <td class="DataTD"><?php echo _("GPG")?>:</td>
+    <?php                 $query = "
                     select COUNT(*) as `total`, MAX(`expire`) as `maxexpire`
                     from `gpg`
                     where `memid` = '".intval($row['id'])."'
@@ -785,24 +755,21 @@ if(intval($_REQUEST['userid']) > 0) {
                     $drow = mysql_fetch_assoc($dres);
                     $expired = $drow['expired'];
     ?>
-            <td class="DataTD"><?=intval($total)?></td>
-            <td class="DataTD"><?=intval($valid)?></td>
-            <td class="DataTD"><?=intval($expired)?></td>
+            <td class="DataTD"><?php echo intval($total)?></td>
+            <td class="DataTD"><?php echo intval($valid)?></td>
+            <td class="DataTD"><?php echo intval($expired)?></td>
             <td class="DataTD"></td>
-            <td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
-    <?
-                } else { // $total > 0
+            <td class="DataTD"><?php echo ($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
+    <?php                 } else { // $total > 0
     ?>
-            <td colspan="5" class="DataTD"><?=_("None")?></td>
-    <?
-                }
+            <td colspan="5" class="DataTD"><?php echo _("None")?></td>
+    <?php                 }
     ?>
         </tr>
         <!-- org server certificates -->
         <tr>
-            <td class="DataTD"><a href="account.php?id=58&amp;userid=<?=intval($row['id'])?>"><?=_("Org Server")?></a>:</td>
-    <?
-                $query = "
+            <td class="DataTD"><a href="account.php?id=58&amp;userid=<?php echo intval($row['id'])?>"><?php echo _("Org Server")?></a>:</td>
+    <?php                 $query = "
                     select COUNT(*) as `total`,
                         MAX(`orgcerts`.`expire`) as `maxexpire`
                     from `orgdomaincerts` as `orgcerts` inner join `org`
@@ -853,24 +820,21 @@ if(intval($_REQUEST['userid']) > 0) {
                     $drow = mysql_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
-            <td class="DataTD"><?=intval($total)?></td>
-            <td class="DataTD"><?=intval($valid)?></td>
-            <td class="DataTD"><?=intval($expired)?></td>
-            <td class="DataTD"><?=intval($revoked)?></td>
-            <td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
-    <?
-                } else { // $total > 0
+            <td class="DataTD"><?php echo intval($total)?></td>
+            <td class="DataTD"><?php echo intval($valid)?></td>
+            <td class="DataTD"><?php echo intval($expired)?></td>
+            <td class="DataTD"><?php echo intval($revoked)?></td>
+            <td class="DataTD"><?php echo ($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
+    <?php                 } else { // $total > 0
     ?>
-            <td colspan="5" class="DataTD"><?=_("None")?></td>
-    <?
-                }
+            <td colspan="5" class="DataTD"><?php echo _("None")?></td>
+    <?php                 }
     ?>
         </tr>
         <!-- org client certificates -->
         <tr>
-            <td class="DataTD"><?=_("Org Client")?>:</td>
-    <?
-                $query = "
+            <td class="DataTD"><?php echo _("Org Client")?>:</td>
+    <?php                 $query = "
                     select COUNT(*) as `total`,
                         MAX(`orgcerts`.`expire`) as `maxexpire`
                     from `orgemailcerts` as `orgcerts` inner join `org`
@@ -921,49 +885,46 @@ if(intval($_REQUEST['userid']) > 0) {
                     $drow = mysql_fetch_assoc($dres);
                     $revoked = $drow['revoked'];
     ?>
-            <td class="DataTD"><?=intval($total)?></td>
-            <td class="DataTD"><?=intval($valid)?></td>
-            <td class="DataTD"><?=intval($expired)?></td>
-            <td class="DataTD"><?=intval($revoked)?></td>
-            <td class="DataTD"><?=($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
-    <?
-                } else { // $total > 0
+            <td class="DataTD"><?php echo intval($total)?></td>
+            <td class="DataTD"><?php echo intval($valid)?></td>
+            <td class="DataTD"><?php echo intval($expired)?></td>
+            <td class="DataTD"><?php echo intval($revoked)?></td>
+            <td class="DataTD"><?php echo ($maxexpire != "0000-00-00 00:00:00")?substr($maxexpire, 0, 10) : _("Pending")?></td>
+    <?php                 } else { // $total > 0
     ?>
-            <td colspan="5" class="DataTD"><?=_("None")?></td>
-    <?
-                }
+            <td colspan="5" class="DataTD"><?php echo _("None")?></td>
+    <?php                 }
     ?>
         </tr>
         <tr>
             <td colspan="6" class="title">
-                <form method="post" action="account.php" onSubmit="if(!confirm('<?=_("Are you sure you want to revoke all private certificates?")?>')) return false;">
+                <form method="post" action="account.php" onSubmit="if(!confirm('<?php echo _("Are you sure you want to revoke all private certificates?")?>')) return false;">
                     <input type="hidden" name="action" value="revokecert">
                     <input type="hidden" name="oldid" value="43">
-                    <input type="hidden" name="userid" value="<?=intval($userid)?>">
-                    <input type="submit" value="<?=_('revoke certificates')?>">
-                    <input type="hidden" name="ticketno" value="<?=sanitizeHTML($ticketno)?>"/>
+                    <input type="hidden" name="userid" value="<?php echo intval($userid)?>">
+                    <input type="submit" value="<?php echo _('revoke certificates')?>">
+                    <input type="hidden" name="ticketno" value="<?php echo sanitizeHTML($ticketno)?>"/>
                 </form>
             </td>
         </tr>
     </table>
     <br />
-    <? // list assurances ?>
+    <?php // list assurances ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td class="DataTD">
-                <a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;shownotary=assuredto&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Show Assurances the user got")?></a>
-                (<a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;shownotary=assuredto15&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("New calculation")?></a>)
+                <a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;shownotary=assuredto&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Show Assurances the user got")?></a>
+                (<a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;shownotary=assuredto15&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("New calculation")?></a>)
             </td>
         </tr>
         <tr>
             <td class="DataTD">
-                <a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;shownotary=assuredby&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Show Assurances the user gave")?></a>
-                (<a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;shownotary=assuredby15&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("New calculation")?></a>)
+                <a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;shownotary=assuredby&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("Show Assurances the user gave")?></a>
+                (<a href="account.php?id=43&amp;userid=<?php echo intval($row['id'])?>&amp;shownotary=assuredby15&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>"><?php echo _("New calculation")?></a>)
             </td>
         </tr>
     </table>
-    <?
-    //  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
+    <?php     //  if(array_key_exists('assuredto',$_GET) && $_GET['assuredto'] == "yes") {
 
 
     function showassuredto($ticketno)
@@ -971,20 +932,19 @@ if(intval($_REQUEST['userid']) > 0) {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="8" class="title"><?=_("Assurance Points")?></td>
+            <td colspan="8" class="title"><?php echo _("Assurance Points")?></td>
         </tr>
         <tr>
-            <td class="DataTD"><b><?=_("ID")?></b></td>
-            <td class="DataTD"><b><?=_("Date")?></b></td>
-            <td class="DataTD"><b><?=_("Who")?></b></td>
-            <td class="DataTD"><b><?=_("Email")?></b></td>
-            <td class="DataTD"><b><?=_("Points")?></b></td>
-            <td class="DataTD"><b><?=_("Location")?></b></td>
-            <td class="DataTD"><b><?=_("Method")?></b></td>
-            <td class="DataTD"><b><?=_("Revoke")?></b></td>
+            <td class="DataTD"><b><?php echo _("ID")?></b></td>
+            <td class="DataTD"><b><?php echo _("Date")?></b></td>
+            <td class="DataTD"><b><?php echo _("Who")?></b></td>
+            <td class="DataTD"><b><?php echo _("Email")?></b></td>
+            <td class="DataTD"><b><?php echo _("Points")?></b></td>
+            <td class="DataTD"><b><?php echo _("Location")?></b></td>
+            <td class="DataTD"><b><?php echo _("Method")?></b></td>
+            <td class="DataTD"><b><?php echo _("Revoke")?></b></td>
         </tr>
-    <?
-        $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'  and `deleted` = 0";
+    <?php         $query = "select * from `notary` where `to`='".intval($_GET['userid'])."'  and `deleted` = 0";
         $dres = mysql_query($query);
         $points = 0;
         while($drow = mysql_fetch_assoc($dres)) {
@@ -992,46 +952,43 @@ if(intval($_REQUEST['userid']) > 0) {
             $points += $drow['points'];
     ?>
         <tr>
-            <td class="DataTD"><?=$drow['id']?></td>
-            <td class="DataTD"><?=sanitizeHTML($drow['date'])?></td>
-            <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
-            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['from'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
-            <td class="DataTD"><?=intval($drow['points'])?></td>
-            <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
-            <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
-            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>&amp;assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),intval($drow['id']))?>');"><?=_("Revoke")?></a></td>
+            <td class="DataTD"><?php echo $drow['id']?></td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['date'])?></td>
+            <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?php echo intval($drow['from'])?>"><?php echo sanitizeHTML($fromuser['fname'])." ".sanitizeHTML($fromuser['lname'])?></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($drow['from'])?>"><?php echo sanitizeHTML($fromuser['email'])?></a></td>
+            <td class="DataTD"><?php echo intval($drow['points'])?></td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['location'])?></td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['method'])?></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($drow['to'])?>&amp;assurance=<?php echo intval($drow['id'])?>&amp;csrf=<?php echo make_csrf('admdelassurance')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>" onclick="return confirm('<?php echo sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),intval($drow['id']))?>');"><?php echo _("Revoke")?></a></td>
         </tr>
-    <?
-        }
+    <?php         }
     ?>
         <tr>
-            <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
-            <td class="DataTD"><?=intval($points)?></td>
+            <td class="DataTD" colspan="4"><b><?php echo _("Total Points")?>:</b></td>
+            <td class="DataTD"><?php echo intval($points)?></td>
             <td class="DataTD" colspan="3">&nbsp;</td>
         </tr>
     </table>
-    <?
-    }
+    <?php     }
 
     function showassuredby($ticketno)
     {
     ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="8" class="title"><?=_("Assurance Points The User Issued")?></td>
+            <td colspan="8" class="title"><?php echo _("Assurance Points The User Issued")?></td>
         </tr>
         <tr>
-            <td class="DataTD"><b><?=_("ID")?></b></td>
-            <td class="DataTD"><b><?=_("Date")?></b></td>
-            <td class="DataTD"><b><?=_("Who")?></b></td>
-            <td class="DataTD"><b><?=_("Email")?></b></td>
-            <td class="DataTD"><b><?=_("Points")?></b></td>
-            <td class="DataTD"><b><?=_("Location")?></b></td>
-            <td class="DataTD"><b><?=_("Method")?></b></td>
-            <td class="DataTD"><b><?=_("Revoke")?></b></td>
+            <td class="DataTD"><b><?php echo _("ID")?></b></td>
+            <td class="DataTD"><b><?php echo _("Date")?></b></td>
+            <td class="DataTD"><b><?php echo _("Who")?></b></td>
+            <td class="DataTD"><b><?php echo _("Email")?></b></td>
+            <td class="DataTD"><b><?php echo _("Points")?></b></td>
+            <td class="DataTD"><b><?php echo _("Location")?></b></td>
+            <td class="DataTD"><b><?php echo _("Method")?></b></td>
+            <td class="DataTD"><b><?php echo _("Revoke")?></b></td>
         </tr>
-    <?
-        $query = "select * from `notary` where `from`='".intval($_GET['userid'])."' and `deleted` = 0";
+    <?php         $query = "select * from `notary` where `from`='".intval($_GET['userid'])."' and `deleted` = 0";
         $dres = mysql_query($query);
         $points = 0;
         while($drow = mysql_fetch_assoc($dres)) {
@@ -1039,28 +996,26 @@ if(intval($_REQUEST['userid']) > 0) {
             $points += intval($drow['points']);
     ?>
         <tr>
-            <td class="DataTD"><?=intval($drow['id'])?></td>
-            <td class="DataTD"><?=$drow['date']?></td>
-            <td class="DataTD"><a href="wot.php?id=9&userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['fname']." ".$fromuser['lname'])?></td>
-            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($drow['to'])?>"><?=sanitizeHTML($fromuser['email'])?></a></td>
-            <td class="DataTD"><?=intval($drow['points'])?></td>
-            <td class="DataTD"><?=sanitizeHTML($drow['location'])?></td>
-            <td class="DataTD"><?=sanitizeHTML($drow['method'])?></td>
-            <td class="DataTD"><a href="account.php?id=43&userid=<?=intval($drow['from'])?>&assurance=<?=intval($drow['id'])?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),intval($drow['id']))?>');"><?=_("Revoke")?></a></td>
+            <td class="DataTD"><?php echo intval($drow['id'])?></td>
+            <td class="DataTD"><?php echo $drow['date']?></td>
+            <td class="DataTD"><a href="wot.php?id=9&userid=<?php echo intval($drow['to'])?>"><?php echo sanitizeHTML($fromuser['fname']." ".$fromuser['lname'])?></td>
+            <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($drow['to'])?>"><?php echo sanitizeHTML($fromuser['email'])?></a></td>
+            <td class="DataTD"><?php echo intval($drow['points'])?></td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['location'])?></td>
+            <td class="DataTD"><?php echo sanitizeHTML($drow['method'])?></td>
+            <td class="DataTD"><a href="account.php?id=43&userid=<?php echo intval($drow['from'])?>&assurance=<?php echo intval($drow['id'])?>&amp;csrf=<?php echo make_csrf('admdelassurance')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>" onclick="return confirm('<?php echo sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),intval($drow['id']))?>');"><?php echo _("Revoke")?></a></td>
         </tr>
-    <?
-        }
+    <?php         }
     ?>
         <tr>
-            <td class="DataTD" colspan="4"><b><?=_("Total Points")?>:</b></td>
-            <td class="DataTD"><?=intval($points)?></td>
+            <td class="DataTD" colspan="4"><b><?php echo _("Total Points")?>:</b></td>
+            <td class="DataTD"><?php echo intval($points)?></td>
             <td class="DataTD" colspan="3">&nbsp;</td>
         </tr>
     </table>
     <?} ?>
 <br/><br/>
-<?
-} }
+<?php } }
 
 if(isset($_GET['shownotary'])) {
     switch($_GET['shownotary']) {

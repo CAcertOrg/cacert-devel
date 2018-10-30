@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
+<?php 	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
 
 	$query = "select * from `orgdomaincerts`,`org` where `orgdomaincerts`.`id`='$certid' and
 			`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
@@ -32,7 +31,7 @@
         $crtname=escapeshellarg($row['crt_name']);
 	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname");
 ?>
-<h3><?=_("Below is your Server Certificate")?></h3>
+<h3><?php echo _("Below is your Server Certificate")?></h3>
 <pre>
-<?=$cert?>
+<?php echo $cert?>
 </pre>

@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -23,12 +23,11 @@ if ($org['id'] <= 0) {
 ?>
 
 <p>
-<?=_("Please make sure the following details are correct before proceeding ".
+<?php echo _("Please make sure the following details are correct before proceeding ".
 		"any further.")?>
 </p>
 
-<p><?
-if (is_array($_SESSION['_config']['rows'])) {
+<p><?php if (is_array($_SESSION['_config']['rows'])) {
 	foreach ($_SESSION['_config']['rows'] as $row) {
 		echo _("CommonName"), ": $row<br>\n";
 	}
@@ -49,22 +48,20 @@ echo _("Country"), ": {$org['C']}<br>\n";
 
 <form method="post" action="account.php">
 	<p>
-		<input type="submit" name="process" value="<?=_("Submit")?>">
-		<input type="hidden" name="oldid" value="<?=$id?>">
+		<input type="submit" name="process" value="<?php echo _("Submit")?>">
+		<input type="hidden" name="oldid" value="<?php echo $id?>">
 	</p>
 
-	<?
-	if ($_SESSION['profile']['admin'] == 1) {
+	<?php 	if ($_SESSION['profile']['admin'] == 1) {
 		?>
 		<p>
 			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<input type="checkbox" name="ocspcert" value="OCSPCert"/>
-				<?=_("OCSP certificate")?>
+				<?php echo _("OCSP certificate")?>
 		</p>
-		<?
-	}
+		<?php 	}
 	?>
 
 </form>

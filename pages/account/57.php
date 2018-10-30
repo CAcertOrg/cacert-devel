@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-  include_once($_SESSION['_config']['filepath'].'/includes/notary.inc.php');
+<?php   include_once($_SESSION['_config']['filepath'].'/includes/notary.inc.php');
 
   if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) || intval($_REQUEST['userid']) < 1) {
 
@@ -34,7 +33,7 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_('CCA agreement of').' '.sanitizeHTML($row['fname']).' '.sanitizeHTML($row['mname']).' '.sanitizeHTML($row['lname'])?></td>
+    <td colspan="5" class="title"><?php echo _('CCA agreement of').' '.sanitizeHTML($row['fname']).' '.sanitizeHTML($row['mname']).' '.sanitizeHTML($row['lname'])?></td>
   </tr>
 </table>
 
@@ -42,13 +41,12 @@
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td class="DataTD"><b><?=_('CCA type')?></b></td>
-    <td class="DataTD"><b><?=_('Date')?></b></td>
-    <td class="DataTD"><b><?=_('Method')?></b></td>
-    <td class="DataTD"><b><?=_('Type')?></b></td>
+    <td class="DataTD"><b><?php echo _('CCA type')?></b></td>
+    <td class="DataTD"><b><?php echo _('Date')?></b></td>
+    <td class="DataTD"><b><?php echo _('Method')?></b></td>
+    <td class="DataTD"><b><?php echo _('Type')?></b></td>
   </tr>
-<?
-  $data=get_first_user_agreement($user_id, 'CCA', 1);
+<?php   $data=get_first_user_agreement($user_id, 'CCA', 1);
   if (!isset($data['active'])){
       $type='';
   }else{
@@ -56,13 +54,12 @@
   }
 ?>
   <tr>
-    <td class="DataTD"><?=_('First active CCA')?></td>
-    <td class="DataTD"><?=isset($data['date'])?$data['date']:''?></td>
-    <td class="DataTD"><?=isset($data['method'])?$data['method']:''?></td>
-    <td class="DataTD"><?=$type?></td>
+    <td class="DataTD"><?php echo _('First active CCA')?></td>
+    <td class="DataTD"><?php echo isset($data['date'])?$data['date']:''?></td>
+    <td class="DataTD"><?php echo isset($data['method'])?$data['method']:''?></td>
+    <td class="DataTD"><?php echo $type?></td>
   </tr>
-<?
-  $data=get_first_user_agreement($user_id, 'CCA', 0);
+<?php   $data=get_first_user_agreement($user_id, 'CCA', 0);
   if (!isset($data['active'])){
       $type="";
     }else{
@@ -70,13 +67,12 @@
     }
 ?>
   <tr>
-    <td class="DataTD"><?=_('First passive CCA')?></td>
-    <td class="DataTD"><?=isset($data['date'])?$data['date']:''?></td>
-    <td class="DataTD"><?=isset($data['method'])?$data['method']:''?></td>
-    <td class="DataTD"><?=$type?></td>
+    <td class="DataTD"><?php echo _('First passive CCA')?></td>
+    <td class="DataTD"><?php echo isset($data['date'])?$data['date']:''?></td>
+    <td class="DataTD"><?php echo isset($data['method'])?$data['method']:''?></td>
+    <td class="DataTD"><?php echo $type?></td>
   </tr>
-<?
-  $data=get_last_user_agreement($user_id, 'CCA');
+<?php   $data=get_last_user_agreement($user_id, 'CCA');
   if (!isset($data['active'])){
     $type="";
   }elseif($data['active']==1){
@@ -86,22 +82,20 @@
   }
 ?>
   <tr>
-    <td class="DataTD"><?=_('Last CCA')?></td>
-    <td class="DataTD"><?=isset($data['date'])?$data['date']:''?></td>
-    <td class="DataTD"><?=isset($data['method'])?$data['method']:''?></td>
-    <td class="DataTD"><?=$type?></td>
+    <td class="DataTD"><?php echo _('Last CCA')?></td>
+    <td class="DataTD"><?php echo isset($data['date'])?$data['date']:''?></td>
+    <td class="DataTD"><?php echo isset($data['method'])?$data['method']:''?></td>
+    <td class="DataTD"><?php echo $type?></td>
   </tr>
 </table>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-<?
-      if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
+<?php       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>
-    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($user_id)?>">back</a></td></tr>
-<?    }
+    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($user_id)?>">back</a></td></tr>
+<?php    }
 ?>  </table>
-<?
-  }
+<?php   }
 }
 ?>

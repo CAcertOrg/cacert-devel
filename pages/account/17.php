@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -19,10 +19,10 @@
 require_once($_SESSION['_config']['filepath'].'/includes/keygen.php');
 
 ?>
- -- <?=_("or")?> --
+ -- <?php echo _("or")?> --
 		<form method="post" action="account.php">
 			<input type="hidden" name="keytype" value="VI">
 			<textarea rows="20" cols="40" name="CSR"></textarea>
-			<input type="submit" name="submit" value="<?=_("Submit CSR")?>">
+			<input type="submit" name="submit" value="<?php echo _("Submit CSR")?>">
 			<input type="hidden" name="oldid" value="17">
 		</form>

@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-require_once("../includes/loggedin.php");
+<?php require_once("../includes/loggedin.php");
 require_once("../includes/lib/l10n.php");
 require_once("../includes/notary.inc.php");
 
@@ -528,11 +527,10 @@ function send_reminder()
 
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
-					<? printf(_("Your email has been sent to %s."), sanitizeHTML($user['fname'])); ?>
+					<?php printf(_("Your email has been sent to %s."), sanitizeHTML($user['fname'])); ?>
 				</p>
-				<p>[ <a href='javascript:history.go(-2)'><?= _("Go Back") ?></a> ]</p>
-				<?
-				showfooter();
+				<p>[ <a href='javascript:history.go(-2)'><?php echo _("Go Back") ?></a> ]</p>
+				<?php 				showfooter();
 				exit;
 			} else {
 				show_page(0,"",_("Sorry, I was unable to locate that user."));

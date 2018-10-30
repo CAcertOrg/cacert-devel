@@ -1,4 +1,3 @@
-<?
-	header("location: ..");
+<?php 	header("location: ..");
 	exit;
 ?>

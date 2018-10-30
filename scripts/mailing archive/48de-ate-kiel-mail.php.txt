@@ -1,5 +1,5 @@
 #!/usr/bin/php -q
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2009  CAcert Inc.
 

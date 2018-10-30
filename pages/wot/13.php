@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -79,16 +79,16 @@ function oncomplete() {
 }
 // -->
 </script>
-<p><?=_("Please enter your town or suburb name, followed by region or state or province and then the country (please separate by commas)")?><br />
-<?=_("eg Sydney, New South Wales, Australia")?></p>
-<p><?=_("This is an AJAX form which depends heavily on javascript for auto-complete functionality and while it will work without javascript the usability will be heavily degraded.")?></p>
-<p><?=sprintf(_("Your current location is set as: %s"), "$loc[name], $reg[name], $cc[name]")?></p>
+<p><?php echo _("Please enter your town or suburb name, followed by region or state or province and then the country (please separate by commas)")?><br />
+<?php echo _("eg Sydney, New South Wales, Australia")?></p>
+<p><?php echo _("This is an AJAX form which depends heavily on javascript for auto-complete functionality and while it will work without javascript the usability will be heavily degraded.")?></p>
+<p><?php echo sprintf(_("Your current location is set as: %s"), "$loc[name], $reg[name], $cc[name]")?></p>
 <form name="f" action="wot.php" method="post">
 <input type='hidden' name='id' value='13' />
 <table>
   <tr>
-    <td align=right valign=middle><?=_("Location:")?></td>
-    <td><input autocomplete="off" type="text" id="location" name="location" value="" size="50" /> <?=_("(hit enter to submit)")?></td>
+    <td align=right valign=middle><?php echo _("Location:")?></td>
+    <td><input autocomplete="off" type="text" id="location" name="location" value="" size="50" /> <?php echo _("(hit enter to submit)")?></td>
   </tr>
 </table>
 

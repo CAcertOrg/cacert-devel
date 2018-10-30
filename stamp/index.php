@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -26,9 +26,9 @@
 <body>
  <div id="pagecell1">
   <div id="pageName"><br>
-    <h2><a href="http<? if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org">
-	<img src="http<? if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org/images/cacert3.png" border="0" alt="CAcert.org logo"></a></h2>
-<? if($_SERVER['HTTPS']!="on") { ?>
+    <h2><a href="http<?php if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org">
+	<img src="http<?php if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org/images/cacert3.png" border="0" alt="CAcert.org logo"></a></h2>
+<?php if($_SERVER['HTTPS']!="on") { ?>
 <div id="googlead"><br><script type="text/javascript"><!--
 google_ad_client = "pub-0959373285729680";
 google_alternate_color = "ffffff";
@@ -39,7 +39,7 @@ google_ad_type = "text";
 google_ad_channel = "";
 //--></script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>
-<? } ?>
+<?php } ?>
   </div>
   <div id="content">
     <div class="story">
@@ -59,7 +59,7 @@ google_ad_channel = "";
 	// - -&gt;<br />
 	&lt;/script&gt;</p>
 	< s c ript type="text/javascript">
-	< ! -<? ?> -
+	< ! -<?php ?> -
 		document.write('<');
 		document.write('script type="text/javascript" src="'+location.protocol+'//stamp.cacert.org/showlogo.php"><');
 		document.write('/script>');

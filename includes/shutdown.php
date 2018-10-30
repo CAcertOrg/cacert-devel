@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -21,9 +21,8 @@
 
 	if(0)
 	{ ?>
-		<font color="#ff0000"><? printf(_("This function is currently disabled. Please visit %s for more information."),
+		<font color="#ff0000"><?php printf(_("This function is currently disabled. Please visit %s for more information."),
 			"<a target='_blank' href='http://wiki.cacert.org/wiki/ClientSecurity'>http://wiki.cacert.org/wiki/ClientSecurity</a>")?></font>
-<?
-		exit;
+<?php 		exit;
 	}
 ?>

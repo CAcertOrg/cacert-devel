@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	if($_SESSION['profile']['adadmin'] <= 0)
+<?php 	if($_SESSION['profile']['adadmin'] <= 0)
 	{
                 showheader(_("My CAcert.org Account!"));
                 echo _("You don't have access to this area.");

@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
+<?php 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	
 	// Reset session variables regarding OrgAdmin's, present empty form
@@ -27,36 +26,36 @@
 	
 ?>
 <form method="post" action="account.php">
-<input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
+<input type="hidden" name="orgid" value="<?php echo intval($_REQUEST['orgid'])?>">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><? printf(_("New Admin for %s"), ($row['O'])); ?></td>
+    <td colspan="2" class="title"><?php printf(_("New Admin for %s"), ($row['O'])); ?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Email")?>:</td>
+    <td class="DataTD"><?php echo _("Email")?>:</td>
     <td class="DataTD"><input type="text" name="email" value=""></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Department")?>:</td>
+    <td class="DataTD"><?php echo _("Department")?>:</td>
     <td class="DataTD"><input type="text" name="OU" value=""></td>
   </tr>
-<? if($_SESSION['profile']['orgadmin'] == 1) { ?>
+<?php if($_SESSION['profile']['orgadmin'] == 1) { ?>
   <tr>
-    <td class="DataTD"><?=_("Master Account")?>:</td>
+    <td class="DataTD"><?php echo _("Master Account")?>:</td>
     <td class="DataTD"><select name="masteracc">
 		<option value="0">No</option>     // make default option as of SA telco 2011-08-02 on bug 966
 		<option value="1">Yes</option>
 	</select></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
-    <td class="DataTD"><?=_("Comments")?>:</td>
+    <td class="DataTD"><?php echo _("Comments")?>:</td>
     <td class="DataTD"><textarea name="comments" cols="30" rows="5"></textarea></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Add")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
-<input type="hidden" name="csrf" value="<?=make_csrf('orgadmadd')?>" />
+<input type="hidden" name="oldid" value="<?php echo $id?>">
+<input type="hidden" name="csrf" value="<?php echo make_csrf('orgadmadd')?>" />
 </form>

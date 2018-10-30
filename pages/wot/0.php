@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<h3><?=_("CAcert Web of Trust")?></h3>
+<h3><?php echo _("CAcert Web of Trust")?></h3>
 
-<p><?=_("CAcert.org was designed to be by the community for the community, and instead of placing all the labour on a central authority and in turn increasing the cost of certificates, the idea was to get community in conjunction with this website to have trust maintained in a dispersed and automated manner!")?></p>
+<p><?php echo _("CAcert.org was designed to be by the community for the community, and instead of placing all the labour on a central authority and in turn increasing the cost of certificates, the idea was to get community in conjunction with this website to have trust maintained in a dispersed and automated manner!")?></p>
 

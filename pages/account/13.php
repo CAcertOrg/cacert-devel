@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-  $query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `users`.`deleted`=0";
+<?php   $query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `users`.`deleted`=0";
   $res = mysql_query($query);
   $user = mysql_fetch_assoc($res);
 
@@ -47,34 +46,33 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
   <tr>
-    <td colspan="2" class="title"><?=_("My Details")?></td>
+    <td colspan="2" class="title"><?php echo _("My Details")?></td>
   </tr>
-<? if($_SESSION['profile']['points'] == 0) { ?>
+<?php if($_SESSION['profile']['points'] == 0) { ?>
   <tr>
-    <td class="DataTD" width="125"><?=_("First Name")?>: </td>
-    <td class="DataTD" width="125"><input type="text" name="fname" value="<?=sanitizeHTML($user['fname'])?>"></td>
+    <td class="DataTD" width="125"><?php echo _("First Name")?>: </td>
+    <td class="DataTD" width="125"><input type="text" name="fname" value="<?php echo sanitizeHTML($user['fname'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" valign="top"><?=_("Middle Name(s)")?><br>
-      (<?=_("optional")?>)
+    <td class="DataTD" valign="top"><?php echo _("Middle Name(s)")?><br>
+      (<?php echo _("optional")?>)
     </td>
-    <td class="DataTD"><input type="text" name="mname" value="<?=sanitizeHTML($user['mname'])?>"></td>
+    <td class="DataTD"><input type="text" name="mname" value="<?php echo sanitizeHTML($user['mname'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Last Name")?>: </td>
-    <td class="DataTD"><input type="text" name="lname" value="<?=sanitizeHTML($user['lname'])?>"></td>
+    <td class="DataTD"><?php echo _("Last Name")?>: </td>
+    <td class="DataTD"><input type="text" name="lname" value="<?php echo sanitizeHTML($user['lname'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Suffix")?><br>
-      (<?=_("optional")?>)</td>
-    <td class="DataTD"><input type="text" name="suffix" value="<?=sanitizeHTML($user['suffix'])?>"></td>
+    <td class="DataTD"><?php echo _("Suffix")?><br>
+      (<?php echo _("optional")?>)</td>
+    <td class="DataTD"><input type="text" name="suffix" value="<?php echo sanitizeHTML($user['suffix'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Date of Birth")?><br>
-	    (<?=_("dd/mm/yyyy")?>)</td>
+    <td class="DataTD"><?php echo _("Date of Birth")?><br>
+	    (<?php echo _("dd/mm/yyyy")?>)</td>
     <td class="DataTD"><nobr><select name="day">
-<?
-  for($i = 1; $i <= 31; $i++)
+<?php   for($i = 1; $i <= 31; $i++)
   {
     echo "<option";
     if($day == $i)
@@ -84,8 +82,7 @@
 ?>
     </select>
     <select name="month">
-<?
-  for($i = 1; $i <= 12; $i++)
+<?php   for($i = 1; $i <= 12; $i++)
   {
     echo "<option value='$i'";
     if($month == $i)
@@ -94,71 +91,71 @@
   }
 ?>
     </select>
-    <input type="text" name="year" value="<?=$year?>" size="4"></nobr>
+    <input type="text" name="year" value="<?php echo $year?>" size="4"></nobr>
     </td>
   </tr>
-<? } else { ?>
+<?php } else { ?>
   <tr>
-    <td class="DataTD" width="125"><?=_("First Name")?>: </td>
-    <td class="DataTD" width="125"><?=sanitizeHTML($user['fname'])?></td>
+    <td class="DataTD" width="125"><?php echo _("First Name")?>: </td>
+    <td class="DataTD" width="125"><?php echo sanitizeHTML($user['fname'])?></td>
   </tr>
   <tr>
-    <td class="DataTD" valign="top"><?=_("Middle Name(s)")?><br>
-      (<?=_("optional")?>)
+    <td class="DataTD" valign="top"><?php echo _("Middle Name(s)")?><br>
+      (<?php echo _("optional")?>)
     </td>
-    <td class="DataTD"><?=sanitizeHTML($user['mname'])?></td>
+    <td class="DataTD"><?php echo sanitizeHTML($user['mname'])?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Last Name")?>: </td>
-    <td class="DataTD"><?=sanitizeHTML($user['lname'])?></td>
+    <td class="DataTD"><?php echo _("Last Name")?>: </td>
+    <td class="DataTD"><?php echo sanitizeHTML($user['lname'])?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Suffix")?><br>
-      (<?=_("optional")?>)</td>
-    <td class="DataTD"><?=sanitizeHTML($user['suffix'])?></td>
+    <td class="DataTD"><?php echo _("Suffix")?><br>
+      (<?php echo _("optional")?>)</td>
+    <td class="DataTD"><?php echo sanitizeHTML($user['suffix'])?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Date of Birth")?><br>
-      (<?=_("dd/mm/yyyy")?>)</td>
-    <td class="DataTD"><?=$day?> <?=ucwords(recode("utf-8..html", strftime("%B", mktime(0,0,0,$month,1,1))))?> <?=$year?></td>
+    <td class="DataTD"><?php echo _("Date of Birth")?><br>
+      (<?php echo _("dd/mm/yyyy")?>)</td>
+    <td class="DataTD"><?php echo $day?> <?php echo ucwords(recode("utf-8..html", strftime("%B", mktime(0,0,0,$month,1,1))))?> <?php echo $year?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
-    <td colspan="2" class="title"><a href="account.php?id=59&amp;oldid=13&amp;userid=<?=intval($_SESSION['profile']['id'])?>"><?=_('Show account history')?></a></td>
-  </tr>
-  <tr>
-    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=intval(!$showdetails)?>"><?=_("View secret question & answers")?></a></td>
-  </tr>
-  <? if($showdetails){ ?>
-  <tr>
-    <td class="DataTD" colspan="2"><?=_("Lost Pass Phrase Questions")?></td>
+    <td colspan="2" class="title"><a href="account.php?id=59&amp;oldid=13&amp;userid=<?php echo intval($_SESSION['profile']['id'])?>"><?php echo _('Show account history')?></a></td>
   </tr>
   <tr>
-    <td class="DataTD">1)&nbsp;<input type="text" name="Q1" size="15" value="<?=sanitizeHTML($user['Q1'])?>"></td>
-    <td class="DataTD"><input type="text" name="A1" value="<?=sanitizeHTML($user['A1'])?>"></td>
+    <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?php echo intval(!$showdetails)?>"><?php echo _("View secret question & answers")?></a></td>
+  </tr>
+  <?php if($showdetails){ ?>
+  <tr>
+    <td class="DataTD" colspan="2"><?php echo _("Lost Pass Phrase Questions")?></td>
   </tr>
   <tr>
-    <td class="DataTD">2)&nbsp;<input type="text" name="Q2" size="15" value="<?=sanitizeHTML($user['Q2'])?>"></td>
-    <td class="DataTD"><input type="text" name="A2" value="<?=sanitizeHTML($user['A2'])?>"></td>
+    <td class="DataTD">1)&nbsp;<input type="text" name="Q1" size="15" value="<?php echo sanitizeHTML($user['Q1'])?>"></td>
+    <td class="DataTD"><input type="text" name="A1" value="<?php echo sanitizeHTML($user['A1'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">3)&nbsp;<input type="text" name="Q3" size="15" value="<?=sanitizeHTML($user['Q3'])?>"></td>
-    <td class="DataTD"><input type="text" name="A3" value="<?=sanitizeHTML($user['A3'])?>"></td>
+    <td class="DataTD">2)&nbsp;<input type="text" name="Q2" size="15" value="<?php echo sanitizeHTML($user['Q2'])?>"></td>
+    <td class="DataTD"><input type="text" name="A2" value="<?php echo sanitizeHTML($user['A2'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">4)&nbsp;<input type="text" name="Q4" size="15" value="<?=sanitizeHTML($user['Q4'])?>"></td>
-    <td class="DataTD"><input type="text" name="A4" value="<?=sanitizeHTML($user['A4'])?>"></td>
+    <td class="DataTD">3)&nbsp;<input type="text" name="Q3" size="15" value="<?php echo sanitizeHTML($user['Q3'])?>"></td>
+    <td class="DataTD"><input type="text" name="A3" value="<?php echo sanitizeHTML($user['A3'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD">5)&nbsp;<input type="text" name="Q5" size="15" value="<?=sanitizeHTML($user['Q5'])?>"></td>
-    <td class="DataTD"><input type="text" name="A5" value="<?=sanitizeHTML($user['A5'])?>"></td>
+    <td class="DataTD">4)&nbsp;<input type="text" name="Q4" size="15" value="<?php echo sanitizeHTML($user['Q4'])?>"></td>
+    <td class="DataTD"><input type="text" name="A4" value="<?php echo sanitizeHTML($user['A4'])?>"></td>
+  </tr>
+  <tr>
+    <td class="DataTD">5)&nbsp;<input type="text" name="Q5" size="15" value="<?php echo sanitizeHTML($user['Q5'])?>"></td>
+    <td class="DataTD"><input type="text" name="A5" value="<?php echo sanitizeHTML($user['A5'])?>"></td>
   </tr>
   <tr>
   <input type="hidden" name="showdetails" value="1" />
-  <? } ?>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
+  <?php } ?>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Update")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="csrf" value="<?=make_csrf('perschange')?>" />
-<input type="hidden" name="oldid" value="<?=intval($id)?>">
+<input type="hidden" name="csrf" value="<?php echo make_csrf('perschange')?>" />
+<input type="hidden" name="oldid" value="<?php echo intval($id)?>">
 </form>

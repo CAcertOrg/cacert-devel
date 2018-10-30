@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,23 +15,22 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? $viewall=0; if(array_key_exists('viewall',$_REQUEST)) $viewall=intval($_REQUEST['viewall']); ?>
+<?php $viewall=0; if(array_key_exists('viewall',$_REQUEST)) $viewall=intval($_REQUEST['viewall']); ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="8" class="title"><?=_("Domain Certificates")?> - <a href="account.php?id=12&amp;viewall=<?=intval(!$viewall)?>"><?=$viewall?_("Hide old certificates"):_("View all certificates")?></a></td>
+    <td colspan="8" class="title"><?php echo _("Domain Certificates")?> - <a href="account.php?id=12&amp;viewall=<?php echo intval(!$viewall)?>"><?php echo $viewall?_("Hide old certificates"):_("View all certificates")?></a></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
-    <td class="DataTD"><?=_("Status")?></td>
-    <td class="DataTD"><?=_("CommonName")?></td>
-    <td class="DataTD"><?=_("SerialNumber")?></td>
-    <td class="DataTD"><?=_("Revoked")?></td>
-    <td class="DataTD"><?=_("Expires")?></td>
-    <td colspan="2" class="DataTD"><?=_("Comment *")?></td>
+    <td class="DataTD"><?php echo _("Renew/Revoke/Delete")?></td>
+    <td class="DataTD"><?php echo _("Status")?></td>
+    <td class="DataTD"><?php echo _("CommonName")?></td>
+    <td class="DataTD"><?php echo _("SerialNumber")?></td>
+    <td class="DataTD"><?php echo _("Revoked")?></td>
+    <td class="DataTD"><?php echo _("Expires")?></td>
+    <td colspan="2" class="DataTD"><?php echo _("Comment *")?></td>
   </tr>
-<?
-	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
+<?php 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) - UNIX_TIMESTAMP() as `timeleft`,
 			UNIX_TIMESTAMP(`domaincerts`.`expire`) as `expired`,
 			`domaincerts`.`expire`,
@@ -54,9 +53,9 @@
 	{
 ?>
   <tr>
-    <td colspan="8" class="DataTD"><?=_("No certificates are currently listed.")?></td>
+    <td colspan="8" class="DataTD"><?php echo _("No certificates are currently listed.")?></td>
   </tr>
-<? } else {
+<?php } else {
 	while($row = mysql_fetch_assoc($res))
 	{
 		if($row['timeleft'] > 0)
@@ -71,42 +70,42 @@
 			$row['revoke'] = _("Not Revoked");
 ?>
   <tr>
-<? if($verified != _("Pending") && $verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>"/></td>
-<? } else if($verified != _("Revoked")) { ?>
-    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>"/></td>
-<? } else { ?>
+<?php if($verified != _("Pending") && $verified != _("Revoked")) { ?>
+    <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?php echo intval($row['id'])?>"/></td>
+<?php } else if($verified != _("Revoked")) { ?>
+    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?php echo intval($row['id'])?>"/></td>
+<?php } else { ?>
     <td class="DataTD">&nbsp;</td>
-<? } ?>
-    <td class="DataTD"><?=$verified?></td>
-    <td class="DataTD"><a href="account.php?id=15&amp;cert=<?=intval($row['id'])?>"><?=htmlspecialchars($row['CN'])?></a></td>
-    <td class="DataTD"><?=$row['serial']?></td>
-    <td class="DataTD"><?=$row['revoke']?></td>
-    <td class="DataTD"><?=$row['expire']?></td>
-    <td class="DataTD"><input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
-    <td class="DataTD"><input type="checkbox" name="check_comment_<?=intval($row['id'])?>" /></td>
+<?php } ?>
+    <td class="DataTD"><?php echo $verified?></td>
+    <td class="DataTD"><a href="account.php?id=15&amp;cert=<?php echo intval($row['id'])?>"><?php echo htmlspecialchars($row['CN'])?></a></td>
+    <td class="DataTD"><?php echo $row['serial']?></td>
+    <td class="DataTD"><?php echo $row['revoke']?></td>
+    <td class="DataTD"><?php echo $row['expire']?></td>
+    <td class="DataTD"><input name="comment_<?php echo intval($row['id'])?>" type="text" value="<?php echo htmlspecialchars($row['description'])?>" /></td>
+    <td class="DataTD"><input type="checkbox" name="check_comment_<?php echo intval($row['id'])?>" /></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="8">
-      <a href="account.php?id=12&amp;viewall=<?=intval(!$viewall)?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
+      <a href="account.php?id=12&amp;viewall=<?php echo intval(!$viewall)?>"><b><?php echo $viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
     </td>
   </tr>
   <tr>
     <td class="DataTD" colspan="8">
-      <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
+      <?php echo _('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
     </td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="6"><input type="submit" name="renew" value="<?=_("Renew")?>"/>&#160;&#160;&#160;&#160;
-	    <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
-	<td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"/> </td>
+    <td class="DataTD" colspan="6"><input type="submit" name="renew" value="<?php echo _("Renew")?>"/>&#160;&#160;&#160;&#160;
+	    <input type="submit" name="revoke" value="<?php echo _("Revoke/Delete")?>"></td>
+	<td class="DataTD" colspan="2"><input type="submit" name="change" value="<?php echo _("Change settings")?>"/> </td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
-    <td class="DataTD" colspan="8"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
+    <td class="DataTD" colspan="8"><?php echo _("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=intval($id)?>"/>
-<input type="hidden" name="csrf" value="<?=make_csrf('srvcerchange')?>"/>
+<input type="hidden" name="oldid" value="<?php echo intval($id)?>"/>
+<input type="hidden" name="csrf" value="<?php echo make_csrf('srvcerchange')?>"/>
 </form>

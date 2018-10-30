@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,20 +15,18 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-  if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) || intval($_REQUEST['userid']) < 1) {
+<?php   if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) || intval($_REQUEST['userid']) < 1) {
     $user_id = intval($_SESSION['profile']['id']);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Your passed Tests")?></td>
+    <td colspan="5" class="title"><?php echo _("Your passed Tests")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("The list of tests you did pass at").' <a href="https://cats.cacert.org/">https://cats.cacert.org/</a>'?></td>
+    <td class="DataTD"><?php echo _("The list of tests you did pass at").' <a href="https://cats.cacert.org/">https://cats.cacert.org/</a>'?></td>
   </tr>
 </table>
-<?
-  } else {
+<?php   } else {
     $user_id = intval($_REQUEST['userid']);
     $query = "select * from `users` where `id`='$user_id' and `users`.`deleted`=0";
     $res = mysql_query($query);
@@ -41,22 +39,20 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Passed Tests of")." ".sanitizeHTML($row['fname'])." ".sanitizeHTML($row['mname'])." ".sanitizeHTML($row['lname'])?></td>
+    <td colspan="5" class="title"><?php echo _("Passed Tests of")." ".sanitizeHTML($row['fname'])." ".sanitizeHTML($row['mname'])." ".sanitizeHTML($row['lname'])?></td>
   </tr>
 </table>
 
-<?
-  }
+<?php   }
 ?>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td class="DataTD"><b><?=_("Date")?></b></td>
-    <td class="DataTD"><b><?=_("Test")?></b></td>
-    <td class="DataTD"><b><?=_("Variant")?></b></td>
+    <td class="DataTD"><b><?php echo _("Date")?></b></td>
+    <td class="DataTD"><b><?php echo _("Test")?></b></td>
+    <td class="DataTD"><b><?php echo _("Variant")?></b></td>
   </tr>
-<?
-        $query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
+<?php         $query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
                  " FROM `cats_passed` AS CP, `cats_variant` AS CV, `cats_type` AS CT ".
                  " WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".intval($user_id)."'".
                  " ORDER BY `CP`.`pass_date`";
@@ -71,22 +67,20 @@
           }
 ?>
   <tr>
-    <td class="DataTD"><?=sanitizeHTML($row[0])?></td>
-    <td class="DataTD"><?=sanitizeHTML($row[1])?></td>
-    <td class="DataTD"><?=sanitizeHTML($row[2])?></td>
+    <td class="DataTD"><?php echo sanitizeHTML($row[0])?></td>
+    <td class="DataTD"><?php echo sanitizeHTML($row[1])?></td>
+    <td class="DataTD"><?php echo sanitizeHTML($row[2])?></td>
   </tr>
-<?      }
+<?php      }
 ?>
 </table>
 <br>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-<?
-      if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
+<?php       if ($_SESSION['profile']['admin'] == 1 && array_key_exists('userid',$_REQUEST) && intval($_REQUEST['userid']) > 0) {
 ?>
-    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?=intval($user_id)?>">back</a></td></tr>
-<?
-    } else {
+    <tr><td colspan="3" class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo intval($user_id)?>">back</a></td></tr>
+<?php     } else {
         $query = '
             SELECT  `u`.`id`,
                     `u`.`assurer`,
@@ -109,12 +103,12 @@
               // This should not happen...
               fix_assurer_flag($_SESSION['profile']['id']);
             }
-?>  <td colspan="3" class="DataTD"><?=_("You have passed the Assurer Challenge and collected at least 100 Assurance Points, you are an Assurer.")?></td>
-<?        } elseif (($row[2]>=100) && !$HaveTest) {
-?>  <td colspan="3" class="DataTD"><?=_("You have at least 100 Assurance Points, if you want to become an assurer try the ").'<a href="https://cats.cacert.org">'._("Assurer Challenge").'</a>!'?></td>
-<?        } elseif ($HaveTest && ($row[2]<100)) {
-?>  <td colspan="3" class="DataTD"><?=_("You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!")?></td>
-<?        }
+?>  <td colspan="3" class="DataTD"><?php echo _("You have passed the Assurer Challenge and collected at least 100 Assurance Points, you are an Assurer.")?></td>
+<?php        } elseif (($row[2]>=100) && !$HaveTest) {
+?>  <td colspan="3" class="DataTD"><?php echo _("You have at least 100 Assurance Points, if you want to become an assurer try the ").'<a href="https://cats.cacert.org">'._("Assurer Challenge").'</a>!'?></td>
+<?php        } elseif ($HaveTest && ($row[2]<100)) {
+?>  <td colspan="3" class="DataTD"><?php echo _("You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!")?></td>
+<?php        }
         }
       }
 ?>  </tr>

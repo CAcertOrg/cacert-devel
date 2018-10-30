@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,24 +15,23 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
+<?php 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><? printf(_("New Domain for %s"), sanitizeHTML($row['O'])); ?></td>
+    <td colspan="2" class="title"><?php printf(_("New Domain for %s"), sanitizeHTML($row['O'])); ?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Domain")?>:</td>
-    <td class="DataTD"><input type="text" name="domainname" value="<?=array_key_exists('domain',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['domain']):""?>"></td>
+    <td class="DataTD"><?php echo _("Domain")?>:</td>
+    <td class="DataTD"><input type="text" name="domainname" value="<?php echo array_key_exists('domain',$_SESSION['_config'])?sanitizeHTML($_SESSION['_config']['domain']):""?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Add")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=intval($id)?>">
-<input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
+<input type="hidden" name="oldid" value="<?php echo intval($id)?>">
+<input type="hidden" name="orgid" value="<?php echo intval($_REQUEST['orgid'])?>">
 
 </form>

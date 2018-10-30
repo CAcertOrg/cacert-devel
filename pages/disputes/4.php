@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,28 +15,28 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<H3><?=_("Email Dispute")?></H3>
-<p><? printf(_("Currently the email '%s' is in dispute, you have been sent an email to resolve the issue, below you have the option to accept, reject or report the request as fraudulent."), sanitizeHTML($_SESSION['_config']['email'])); ?></p>
+<H3><?php echo _("Email Dispute")?></H3>
+<p><?php printf(_("Currently the email '%s' is in dispute, you have been sent an email to resolve the issue, below you have the option to accept, reject or report the request as fraudulent."), sanitizeHTML($_SESSION['_config']['email'])); ?></p>
 <form method="post" action="disputes.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Email Dispute")?></td>
+    <td colspan="2" class="title"><?php echo _("Email Dispute")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="radio" name="action" value="reject" checked> <?=_("Reject Dispute")?></td>
+    <td class="DataTD" colspan="2"><input type="radio" name="action" value="reject" checked> <?php echo _("Reject Dispute")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="radio" name="action" value="accept"> <?=_("Accept Dispute")?></td>
+    <td class="DataTD" colspan="2"><input type="radio" name="action" value="accept"> <?php echo _("Accept Dispute")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="radio" name="action" value="abuse"> <?=_("Report Dispute as Abuse")?></td>
+    <td class="DataTD" colspan="2"><input type="radio" name="action" value="abuse"> <?php echo _("Report Dispute as Abuse")?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update Dispute")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Update Dispute")?>"></td>
   </tr>
 </table>     
 <input type="hidden" name="type" value="reallyemail">
-<input type="hidden" name="emailid" value="<?=intval($_REQUEST['emailid'])?>">
-<input type="hidden" name="hash" value="<?=sanitizeHTML($_REQUEST['hash'])?>">
+<input type="hidden" name="emailid" value="<?php echo intval($_REQUEST['emailid'])?>">
+<input type="hidden" name="hash" value="<?php echo sanitizeHTML($_REQUEST['hash'])?>">
 
 </form> 

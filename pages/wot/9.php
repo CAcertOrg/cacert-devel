@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -35,50 +35,49 @@
 
 			$_SESSION['_config']['pagehash'] = md5(date("U"));
 ?>
-<? if($_SESSION['_config']['error'] != "") { ?><font color="#ff0000" size="+1">ERROR: <?=$_SESSION['_config']['error']?></font><? unset($_SESSION['_config']['error']); } ?>
+<?php if($_SESSION['_config']['error'] != "") { ?><font color="#ff0000" size="+1">ERROR: <?php echo $_SESSION['_config']['error']?></font><?php unset($_SESSION['_config']['error']); } ?>
 <form method="post" action="wot.php">
-<input type="hidden" name="userid" value="<?=intval($user['id'])?>">
+<input type="hidden" name="userid" value="<?php echo intval($user['id'])?>">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Contact Assurer")?></td>
+    <td colspan="2" class="title"><?php echo _("Contact Assurer")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("To")?>:</td>
-    <td class="DataTD" align="left"><?=sanitizeHTML(trim($user['fname'].' '.substr($user['lname'], 0, 1)))?></td>
+    <td class="DataTD"><?php echo _("To")?>:</td>
+    <td class="DataTD" align="left"><?php echo sanitizeHTML(trim($user['fname'].' '.substr($user['lname'], 0, 1)))?></td>
   </tr>
-<? if($userlang != "") { ?>
+<?php if($userlang != "") { ?>
   <tr>
-    <td class="DataTD"><?=_("Language")?>:</td>
-    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$userlang]) ?></td>
+    <td class="DataTD"><?php echo _("Language")?>:</td>
+    <td class="DataTD" align="left"><?php printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$userlang]) ?></td>
   </tr>
-<? } ?>
-<?
-	$query = "select * from `addlang` where `userid`='".intval($user['id'])."'";
+<?php } ?>
+<?php 	$query = "select * from `addlang` where `userid`='".intval($user['id'])."'";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
 		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_real_escape_string($row['lang'])."'"));
 ?>
   <tr>
-    <td class="DataTD"><?=_("Additional Language")?>:</td>
-    <td class="DataTD" align="left"><? printf(_("%s will also accept email in %s - %s"), sanitizeHTML($user['fname']), $lang['lang'], $lang['country']) ?></td>
+    <td class="DataTD"><?php echo _("Additional Language")?>:</td>
+    <td class="DataTD" align="left"><?php printf(_("%s will also accept email in %s - %s"), sanitizeHTML($user['fname']), $lang['lang'], $lang['country']) ?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
-    <td class="DataTD"><?=_("Subject")?>:</td>
-    <td class="DataTD" align="left"><input type="text" name="subject" value="<?=sanitizeHTML($_POST['subject'])?>"></td>
-  </tr>
-  <tr>
-    <td class="DataTD"><?=_("Message")?>:</td>
-    <td class="DataTD"><textarea name="message" cols="40" rows="5" wrap="virtual"><?=sanitizeHTML($_POST['message'])?></textarea></td>
+    <td class="DataTD"><?php echo _("Subject")?>:</td>
+    <td class="DataTD" align="left"><input type="text" name="subject" value="<?php echo sanitizeHTML($_POST['subject'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Send")?>"></td>
+    <td class="DataTD"><?php echo _("Message")?>:</td>
+    <td class="DataTD"><textarea name="message" cols="40" rows="5" wrap="virtual"><?php echo sanitizeHTML($_POST['message'])?></textarea></td>
+  </tr>
+  <tr>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Send")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="pageid" value="<?=$_SESSION['_config']['pagehash']?>">
-<input type="hidden" name="userid" value="<?=intval($_REQUEST['userid'])?>">
-<input type="hidden" name="oldid" value="<?=intval($id)?>">
+<input type="hidden" name="pageid" value="<?php echo $_SESSION['_config']['pagehash']?>">
+<input type="hidden" name="userid" value="<?php echo intval($_REQUEST['userid'])?>">
+<input type="hidden" name="oldid" value="<?php echo intval($id)?>">
 </form>
-<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
-<? } } ?>
+<p>[ <a href='javascript:history.go(-1)'><?php echo _("Go Back")?></a> ]</p>
+<?php } } ?>

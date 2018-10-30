@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	require_once("../includes/loggedin.php");
+<?php 	require_once("../includes/loggedin.php");
 	require_once("../includes/lib/general.php");
 	require_once('../includes/notary.inc.php');
 

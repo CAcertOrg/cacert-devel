@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
+<?php 	$certid = 0; if(array_key_exists('cert',$_REQUEST)) $certid=intval($_REQUEST['cert']);
 
 	$query = "select * from `orgemailcerts`,`org` where `orgemailcerts`.`id`='".intval($certid)."' and
 			`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
@@ -59,15 +58,15 @@
 	} else {
 		showheader(_("My CAcert.org Account!"));
 ?>
-<h3><?=_("Installing your certificate")?></h3>
+<h3><?php echo _("Installing your certificate")?></h3>
 
-<p><?=_("Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above.")?>
+<p><?php echo _("Hit the 'Install your Certificate' button below to install the certificate into MS IE 5.x and above.")?>
 
 <OBJECT classid="clsid:127698e4-e730-4e5c-a2b1-21490a70c8a1" codebase="/xenroll.cab#Version=5,131,3659,0" id="cec">
-<?=_("You must enable ActiveX for this to work.")?>
+<?php echo _("You must enable ActiveX for this to work.")?>
 </OBJECT>
 <FORM >
-<INPUT TYPE=BUTTON NAME="CertInst" VALUE="<?=_("Install Your Certificate")?>">
+<INPUT TYPE=BUTTON NAME="CertInst" VALUE="<?php echo _("Install Your Certificate")?>">
 </FORM>
 
 </P>
@@ -75,8 +74,7 @@
 <SCRIPT LANGUAGE=VBS>
    Sub CertInst_OnClick
       certchain  = _
-<?
-	$lines = explode("\n", $cert);
+<?php 	$lines = explode("\n", $cert);
 	if(is_array($lines))
 	foreach($lines as $line)
 	{
@@ -102,18 +100,18 @@
       err.clear
       cec.acceptPKCS7(certchain)
       if err.number <> 0 then
-         errorMsg = "<?=_("Certificate installation failed!")?>" & chr(13) & chr(10) & _
+         errorMsg = "<?php echo _("Certificate installation failed!")?>" & chr(13) & chr(10) & _
                         "(Error code " & err.number & ")"
-         msgRes   = MsgBox(errorMsg, 0, "<?=_("Certificate Installation Error")?>")
+         msgRes   = MsgBox(errorMsg, 0, "<?php echo _("Certificate Installation Error")?>")
       else
-         okMsg    = "<?=_("Personal Certificate Installed.")?>" & chr(13) & chr(10) & _
+         okMsg    = "<?php echo _("Personal Certificate Installed.")?>" & chr(13) & chr(10) & _
                         "See Tools->Internet Options->Content->Certificates"
-         msgRes   = MsgBox(okMsg, 0, "<?=_("Certificate Installation Complete!")?>")
+         msgRes   = MsgBox(okMsg, 0, "<?php echo _("Certificate Installation Complete!")?>")
       end if
    End Sub
 </SCRIPT>
 
-<? 
+<?php
 		showfooter();
 		exit;
 	}

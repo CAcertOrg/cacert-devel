@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -20,8 +20,8 @@
   <title>SecurityLayer Result</title>
  </head>
  <body>
-  <h1>User: <?=htmlspecialchars($_REQUEST['user'])?></h1>
+  <h1>User: <?php echo htmlspecialchars($_REQUEST['user'])?></h1>
   The following is the result that your signature card has sent to CAcert. At this point, CAcert would have to parse the result and verify the signature, but this hasn't been implemented yet. Our developers might ask you to send them this data. But please be careful, since it contains your personal data!
-  <pre><?=htmlspecialchars($_REQUEST['XMLResponse'])?></pre>
+  <pre><?php echo htmlspecialchars($_REQUEST['XMLResponse'])?></pre>
  </body>
  </html>

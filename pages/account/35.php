@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -18,8 +18,7 @@
 
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
 
-<?
-$query = "select *
+<?php $query = "select *
 			from `orginfo`,`org`
 			where `orginfo`.`id`=`org`.`orgid`
 			and `org`.`memid`='".intval($_SESSION['profile']['id'])."'";
@@ -29,30 +28,29 @@ while($row = mysql_fetch_assoc($res))
 {
 	?>
 	<tr>
-		<td colspan="3" class="title"><?=_("Organisation")?></td>
+		<td colspan="3" class="title"><?php echo _("Organisation")?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Organisation Name")?>:</td>
-		<td colspan="2" class="DataTD" ><b><?=$row['O']?></b></td>
+		<td class="DataTD"><?php echo _("Organisation Name")?>:</td>
+		<td colspan="2" class="DataTD" ><b><?php echo $row['O']?></b></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Contact Email")?>:</td>
-		<td colspan="2" class="DataTD"><?=($row['contact'])?></td>
+		<td class="DataTD"><?php echo _("Contact Email")?>:</td>
+		<td colspan="2" class="DataTD"><?php echo ($row['contact'])?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Town/Suburb")?>:</td>
-		<td colspan="2" class="DataTD"><?=($row['L'])?></td>
+		<td class="DataTD"><?php echo _("Town/Suburb")?>:</td>
+		<td colspan="2" class="DataTD"><?php echo ($row['L'])?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("State/Province")?>:</td>
-		<td colspan="2" class="DataTD"><?=($row['ST'])?></td>
+		<td class="DataTD"><?php echo _("State/Province")?>:</td>
+		<td colspan="2" class="DataTD"><?php echo ($row['ST'])?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Country")?>:</td>
-		<td colspan="2" class="DataTD"><?=($row['C'])?></td>
+		<td class="DataTD"><?php echo _("Country")?>:</td>
+		<td colspan="2" class="DataTD"><?php echo ($row['C'])?></td>
 	</tr>
-	<?
-	
+	<?php
 	//domain info
 	$query = "select `domain` from `orgdomains` where `orgid`='".intval($row['id'])."'";
 	$res1 = mysql_query($query);
@@ -60,20 +58,18 @@ while($row = mysql_fetch_assoc($res))
 	{
 		?>
 		<tr>
-			<td class="DataTD"><?=_("Domain")?></td>
-			<td colspan="2" class="DataTD"><?=sanitizeHTML($domain['domain'])?></td>
+			<td class="DataTD"><?php echo _("Domain")?></td>
+			<td colspan="2" class="DataTD"><?php echo sanitizeHTML($domain['domain'])?></td>
 		</tr>
-		<?
-	}
+		<?php 	}
 	
 	?>
 	<tr>
-		<td class="DataTD"><?=_("Administrator")?></td>
-		<td class="DataTD"><?=_("Master Account")?></td>
-		<td class="DataTD"><?=_("Department")?></td>
+		<td class="DataTD"><?php echo _("Administrator")?></td>
+		<td class="DataTD"><?php echo _("Master Account")?></td>
+		<td class="DataTD"><?php echo _("Department")?></td>
 	</tr>
-	<?
-	
+	<?php
 	//org admins
 	$query = "select * from `org` where `orgid`='".intval($row['id'])."'";
 	$res2 = mysql_query($query);
@@ -82,22 +78,20 @@ while($row = mysql_fetch_assoc($res))
 		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($org['memid'])."'"));
 		?> 
 		<tr>
-			<td class="DataTD"><a href='mailto:<?=$user['email']?>'><?=($user['fname'])?> <?=($user['lname'])?></a></td>
-			<td class="DataTD"><?=($org['masteracc'])?></td>
-			<td class="DataTD"><?=($org['OU'])?></td>
+			<td class="DataTD"><a href='mailto:<?php echo $user['email']?>'><?php echo ($user['fname'])?> <?php echo ($user['lname'])?></a></td>
+			<td class="DataTD"><?php echo ($org['masteracc'])?></td>
+			<td class="DataTD"><?php echo ($org['OU'])?></td>
 		</tr>
-		<?
-		
+		<?php
 		if(intval($org['masteracc']) === 1 &&
 				 intval($org['memid']) === intval($_SESSION['profile']['id']))
 		{ 
 			$master="account.php?id=32&amp;orgid=".intval($row['id']);
 			?>
 			<tr>
-				<td colspan="3" class="DataTD"><a href="<?=$master ?>"><?=_("Edit")?></a></td>
+				<td colspan="3" class="DataTD"><a href="<?php echo $master ?>"><?php echo _("Edit")?></a></td>
 			</tr>
-			<?
-		}
+			<?php 		}
 	} 
 } ?>
 </table>

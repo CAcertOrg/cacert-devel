@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$town = array_key_exists('town',$_REQUEST)?mysql_escape_string(stripslashes($_REQUEST['town'])):"";
+<?php 	$town = array_key_exists('town',$_REQUEST)?mysql_escape_string(stripslashes($_REQUEST['town'])):"";
 	$regid = array_key_exists('regid',$_REQUEST)?intval($_REQUEST['regid']):0;
 	$ccid = array_key_exists('ccid',$_REQUEST)?intval($_REQUEST['ccid']):0;
 	$start = array_key_exists('start',$_REQUEST)?intval($_REQUEST['start']):0;
