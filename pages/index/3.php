@@ -18,6 +18,37 @@
 
 <p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.html'>","</a>")?></p>
 
+<h1><?=_("re-signed versions from 2016 - ")?><a href="https://blog.cacert.org/2016/03/successful-root-re-sign/"><?=_("see blog")?></a></h1>
+<br>
+
+<h3><?=_("Windows Installer") ?></h3>
+<ul class="no_indent">
+	<li><? printf(_("%s Windows installer package %s for browsers that use the Windows certificate store %s (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates_256.msi">', '</a>', '<br/>')?></li>
+	<li><?=_("SHA1 Hash:") ?> f27e06391e5cfd87200baa1a0f674a9725516a4f</li>
+	<li><?=_("SHA256 Hash:") ?> 412c5fa846da64a80148f788b5bb0b70517d6f12bfb133ae6a87cc6bd1921b90</li>
+</ul>
+
+<h3><?=_("Class 1 PKI Key")?></h3>
+<ul class="no_indent">
+	<li><a href="certs/root_256.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/root_256.der"><?=_("Root Certificate (DER Format)")?></a></li>
+	<li><a href="certs/root_256.txt"><?=_("Root Certificate (Text Format)")?></a></li>
+	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a></li>
+	<li><?=_("SHA256 fingerprint:")?> 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5</li>
+</ul>
+
+<h3><?=_("Class 3 PKI Key")?></h3>
+<ul class="no_indent">
+	<li><a href="certs/class3_256.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/class3_256.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
+	<li><a href="certs/class3_256.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
+	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
+	<li><?=_("SHA256 fingerprint:")?> F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544</li>
+</ul>
+
+<h1><?=_("old versions")?></h1>
+<br>
+
 <h3><?=_("Windows Installer") ?></h3>
 <ul class="no_indent">
 	<li><? printf(_("%s Windows installer package %s for browsers that use the Windows certificate store %s (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates.msi">', '</a>', '<br/>')?></li>
