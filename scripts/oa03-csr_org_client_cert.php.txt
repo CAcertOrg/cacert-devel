@@ -78,10 +78,10 @@ $query = "SELECT orginfo.contact as email, orginfo.O, 1 as status
     // comment next line when starting to send mail not only to me 
     //	$query = "select * from `users` where `email` like 'cacerttest%'";
 
-	$res = mysql_query($query);
-	$xrows = mysql_num_rows($res);
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	$xrows = mysqli_num_rows($res);
 
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysqli_fetch_assoc($res))
 	{
     //    uncomment next line to send mails ...
 		sendmail($row['email'], "[CAcert.org] ".$subject.(empty($country)?"":" (".$country.")") , $lines, "support@cacert.org", "", "", "CAcert OA Support", "returns@cacert.org", 1);
