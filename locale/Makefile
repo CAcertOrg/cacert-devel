@@ -127,7 +127,7 @@ SSH_USER := critical
 SSH_OPTIONS :=
 SCP_OPTIONS := $(SSH_OPTIONS)
 
-FILE_OWNER := www-data
+FILE_OWNER := pootle
 
 POT_UPLOAD_PATH := /var/www/Pootle/po/cacert/templates/messages.pot
 MANAGE_PY := /var/www/Pootle/manage.py

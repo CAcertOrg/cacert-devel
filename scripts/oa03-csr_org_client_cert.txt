@@ -1,0 +1,58 @@
+[German version below]
+Dear Sir or Madam,
+ Dear CEO or CAcert Organisation Administrator,
+
+We're proud to announce that the software team has implemented a new variant
+to create Organisation Client Certificates!
+
+Until now, client certificates in an Organisation Account could only be created 
+by using the browser feature to create a key pair and signing request in one 
+run.
+
+The new feature is called CSR, Certificate Signing Request. The end user can 
+create a CSR (certificate signing request) on his own computer and give it to 
+the Organisation Administrator. The Organisation Administrator will copy & paste 
+it into the web form and will receive the signed certificate which he will send 
+back to the user. This means that the user generates the private key for the 
+signed certificate.
+
+The key benefit of this approach is that the Organisation Administrator has no access to the end-user's private key.
+
+See also
+https://blog.cacert.org/2014/12/creating-certificates-with-csr-now-possible-for-org-accounts/
+https://wiki.cacert.org/OrganisationAssurance/OA/OrgAdmin/Handbook/EN#clientcert
+
+Best regards
+
+Marcus Maengel
+CAcert Organisation Assurance Officer
+
+[German version]
+Sehr geehrte Damen und Herren,
+  sehr geehrte CEO und Organisationsadministratoren,
+
+Wir freuen uns darüber, Ihnen mitteilen zu können, dass das Software Team einen 
+weitere Methode der Software hinzugefügt hat, mit der man Organisations-Client-
+Zertifikate erstellen kann.
+
+Der bisher einzige Weg war es, die Organisations-Client-Zertifikate im Browser 
+zu erstellen. Dabei werden sowohl der private Schlüssel erzeugt als auch das 
+Signieren in einem Schritt durchgeführt.
+
+Die neue Methode nutzt den CSR (Certificate Signing Request). Ein Anwender kann 
+auf seinem eigenen PC den privaten Schlüssel und den CSR erstellen. Letzterer 
+wird an den Organisationsadminstrator gesendet. Der Organisationsadminstrator 
+kopiert den CSR in das Web-Formular und erhält den signierten öffentlichen 
+Schlüssel, der dann an den Anwender zurück gesendet wird.
+
+Ein Vorteil dieser Methode ist es, dass der Organisationsadministrator keinen 
+Zugriff auf den privaten Schlüssel des Anwenders benötigt.
+
+Weiteres ist hier zu finden
+https://blog.cacert.org/2014/12/creating-certificates-with-csr-now-possible-for-org-accounts/
+https://wiki.cacert.org/OrganisationAssurance/OA/OrgAdmin/Handbook/DE#clientcert
+
+Mit freundlichen Grüßen
+
+Marcus Maengel
+CAcert Organisation Assurance Officer

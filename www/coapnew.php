@@ -17,8 +17,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//   $Id: coapnew.php,v 1.4 2012-01-24 14:26:05 root Exp $
-define('REV', '$Revision: 1.4 $');
+//   $Id: coapnew.php,v 1.5 2015/01/08 15:02:41 wytze Exp $
+define('REV', '$Revision: 1.5 $');
 
 /*
 **  Created from old cap.php 2003, which used the now obsoleted ftpdf package
@@ -422,7 +422,7 @@ function utf8_is_ascii_ctrl($str) {
 // extend TCPF with custom functions
 class COAPPDF extends TCPDF {
 
-    // do cap form version numbering automatically "$Revision: 1.4 $"
+    // do cap form version numbering automatically "$Revision: 1.5 $"
     /*public*/ function Version() {
 	strtok(REV, " ");
         return(strtok(" "));
