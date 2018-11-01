@@ -68,17 +68,17 @@ function csvize($str) {
 }
 	mb_regex_encoding("UTF-8");
 
-	$res = mysql_query("SELECT id, memid FROM gpg WHERE crt != ''");
+	$res = mysqli_query($_SESSION['mconn'], "SELECT id, memid FROM gpg WHERE crt != ''");
 	if (!$res) {
 		echo "Query FROM gpg failed!\n";
 		exit;
 	}
 
 	$keys = array();
-	while ($row = mysql_fetch_row($res)) {
+	while ($row = mysqli_fetch_row($res)) {
 	    array_push($keys, $row);
 	}
-	mysql_free_result($res);
+	mysqli_free_result($res);
 
 	foreach ($keys as $key) {
 		$crt = "../crt/gpg-" . $key[0] . ".crt";
@@ -87,28 +87,28 @@ function csvize($str) {
 			continue;
 		}
 
-		$res = mysql_query("SELECT fname, mname, lname, suffix FROM users WHERE id = " . $key[1]);
+		$res = mysqli_query($_SESSION['mconn'], "SELECT fname, mname, lname, suffix FROM users WHERE id = " . $key[1]);
 		if (!$res) {
 			echo "Query FROM users failed!\n";
 			exit;
 		}
-		$user = mysql_fetch_assoc($res);
+		$user = mysqli_fetch_assoc($res);
 		if (!$user) {
 			echo "User #" . $key[1] . " not found?!\n";
 			continue;
 		}
-		mysql_free_result($res);
+		mysqli_free_result($res);
 
-		$res = mysql_query("SELECT email FROM email WHERE hash = '' AND memid = " . $key[1]);
+		$res = mysqli_query($_SESSION['mconn'], "SELECT email FROM email WHERE hash = '' AND memid = " . $key[1]);
 		if (!$res) {
 			echo "Query FROM email failed!\n";
 			exit;
 		}
 		$addrs = array();
-		while ($addr = mysql_fetch_row($res)) {
+		while ($addr = mysqli_fetch_row($res)) {
 			array_push($addrs, $addr[0]);
 		}
-		mysql_free_result($res);
+		mysqli_free_result($res);
 
 		$gpg = `gpg --with-colons --homedir /tmp $crt 2>/dev/null`;
 		//echo "gpg says\n".htmlspecialchars($gpg);

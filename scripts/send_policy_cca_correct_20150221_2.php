@@ -76,9 +76,9 @@ $query = "
 			AND        user_agreements.document = 'CCA')
 	GROUP BY users.id";
 
-$res = mysql_query($query);
+$res = mysqli_query($_SESSION['mconn'], $query);
 
-while($row = mysql_fetch_assoc($res))
+while($row = mysqli_fetch_assoc($res))
 {
 	$mailtxt = "Dear ${row["fname"]} ${row["lname"]},\n".$lines_EN."\n\n";
 

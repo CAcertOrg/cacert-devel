@@ -170,7 +170,7 @@ class L10n {
 		foreach($languages as $lang => $qvalue)
 		{
 			// ignore any non-conforming values (that's why we don't need to
-			// mysql_real_escape() or escapeshellarg(), but take care of
+			// mysqli_real_escape_string($_SESSION['mconn'], ) or escapeshellarg(), but take care of
 			// the '*')
 			// spec: ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )
 			if ( preg_match('/^(?:([a-zA-Z]{1,8})(?:-[a-zA-Z]{1,8})*|\*)$/',
@@ -360,9 +360,9 @@ class L10n {
 		//returns the language of a recipient to make sure that the language is correct
 		//use together with
 		$query = "select `language` from `users` where `id`='".intval($accountid)."'";
-		$res = mysql_query($query);
-		if (mysql_num_rows($res)>=0) {
-			$row = mysql_fetch_assoc($res);
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if (mysqli_num_rows($res)>=0) {
+			$row = mysqli_fetch_assoc($res);
 			if (NULL==$row['language'] || $row['language']=='') {
 				self::set_translation('en');
 			} else {

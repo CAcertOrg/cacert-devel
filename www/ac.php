@@ -20,23 +20,23 @@
 	if($_REQUEST['i'] != "")
 		echo "<html><body><script language=\"JavaScript\"><!--\n";
 
-	$s = mysql_real_escape_string($_REQUEST['s']);
+	$s = mysqli_real_escape_string($_SESSION['mconn'], $_REQUEST['s']);
 
-	$id = mysql_real_escape_string(strip_tags($_REQUEST['id']));
+	$id = mysqli_real_escape_string($_SESSION['mconn'], strip_tags($_REQUEST['id']));
 	echo "parent._ac_rpc('".sanitizeHTML($id)."',";
 
 	$bits = explode(",", $s);
 
-	$loc = trim(mysql_real_escape_string($bits['0']));
-	$reg = trim(mysql_real_escape_string($bits['1']));
-	$ccname = trim(mysql_real_escape_string($bits['2']));
+	$loc = trim(mysqli_real_escape_string($_SESSION['mconn'], $bits['0']));
+	$reg = trim(mysqli_real_escape_string($_SESSION['mconn'], $bits['1']));
+	$ccname = trim(mysqli_real_escape_string($_SESSION['mconn'], $bits['2']));
 	$query = "select `locations`.`id` as `locid`, `locations`.`name` as `locname`, `regions`.`name` as `regname`,
 			`countries`.`name` as `ccname` from `locations`, `regions`, `countries` where
 			`locations`.`name` like '$loc%' and `regions`.`name` like '$reg%' and `countries`.`name` like '$ccname%' and
 			`locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
 			order by `locations`.`acount` DESC, `locations`.`name` ASC limit 10";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$rc++;
 		if($rc > 1)

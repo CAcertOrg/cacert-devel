@@ -39,14 +39,14 @@ $query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
 		where `emailcerts`.`id`='$certid' and
 			`emailcerts`.`memid`='".intval($_SESSION['profile']['id'])."'";
 
-$res = mysql_query($query);
-if(mysql_num_rows($res) <= 0) {
+$res = mysqli_query($_SESSION['mconn'], $query);
+if(mysqli_num_rows($res) <= 0) {
 	showheader(_("My CAcert.org Account!"));
 	echo _("No such certificate attached to your account.");
 	showfooter();
 	exit;
 }
-$row = mysql_fetch_assoc($res);
+$row = mysqli_fetch_assoc($res);
 
 
 if (array_key_exists('format', $_REQUEST)) {

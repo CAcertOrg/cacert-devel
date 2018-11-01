@@ -80,7 +80,7 @@ function verifyName($name)
 function verifyEmail($email)
 {
 	if($email == "") return 0;
-	if(mysql_num_rows(mysql_query("select * from `email` where `memid`='".$_SESSION['profile']['id']."' and `email`='".mysql_real_escape_string($email)."' and `deleted`=0 and `hash`=''")) > 0) return 1;
+	if(mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `email` where `memid`='".$_SESSION['profile']['id']."' and `email`='".mysqli_real_escape_string($_SESSION['mconn'], $email)."' and `deleted`=0 and `hash`=''")) > 0) return 1;
 	return 0;
 }
 
@@ -314,18 +314,18 @@ function verifyEmail($email)
 		if(trim($_REQUEST['description']) == ""){
 			$description= "";
 		}else{
-			$description= trim(mysql_real_escape_string(stripslashes($_REQUEST['description'])));
+			$description= trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['description'])));
 		}
 
 		$query = "insert into `gpg` set `memid`='".intval($_SESSION['profile']['id'])."',
-						`email`='".mysql_real_escape_string($lastvalidemail)."',
+						`email`='".mysqli_real_escape_string($_SESSION['mconn'], $lastvalidemail)."',
 						`level`='1',
-						`expires`='".mysql_real_escape_string($expires)."',
-						`multiple`='".mysql_real_escape_string($multiple)."',
-						`keyid`='".mysql_real_escape_string($keyid)."',
-						`description`='".mysql_real_escape_string($description)."'";
-		mysql_query($query);
-		$insert_id = mysql_insert_id();
+						`expires`='".mysqli_real_escape_string($_SESSION['mconn'], $expires)."',
+						`multiple`='".mysqli_real_escape_string($_SESSION['mconn'], $multiple)."',
+						`keyid`='".mysqli_real_escape_string($_SESSION['mconn'], $keyid)."',
+						`description`='".mysqli_real_escape_string($_SESSION['mconn'], $description)."'";
+		mysqli_query($_SESSION['mconn'], $query);
+		$insert_id = mysqli_insert_id($_SESSION['mconn']);
 
 
 		$cwd = '/tmp/gpgspace'.$insert_id;
@@ -527,14 +527,14 @@ function verifyEmail($email)
 		$cmd_keyid = escapeshellarg($keyid);
 		$do=shell_exec("gpg --homedir $cwd --batch --export-options export-minimal --export $cmd_keyid >$csrname");
 
-		mysql_query("update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
+		mysqli_query($_SESSION['mconn'], "update `gpg` set `csr`='$csrname' where `id`='$insert_id'");
 		waitForResult('gpg', $insert_id);
 
 		showheader(_("Welcome to CAcert.org"));
 		echo $resulttable;
 		$query = "select * from `gpg` where `id`='$insert_id' and `crt`!=''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			echo _("Your certificate request has failed to be processed correctly, please try submitting it again.")."<br>\n";
 			echo _("If this is a re-occuring problem, please send a copy of the key you are trying to signed to support@cacert.org. Thank you.");
@@ -556,8 +556,8 @@ function verifyEmail($email)
 			if(substr($id,0,14)=="check_comment_")
 			{
 				$cid = intval(substr($id,14));
-				$comment=trim(mysql_real_escape_string(stripslashes($_REQUEST['comment_'.$cid])));
-				mysql_query("update `gpg` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
+				$comment=trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['comment_'.$cid])));
+				mysqli_query($_SESSION['mconn'], "update `gpg` set `description`='$comment' where `id`='$cid' and `memid`='".$_SESSION['profile']['id']."'");
 			}
 		}
 		echo(_("Certificate settings have been changed.")."<br/>\n");

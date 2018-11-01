@@ -18,24 +18,24 @@
 
 require_once '../../includes/lib/check_weak_key.php';
 
-	$username = mysql_real_escape_string($_REQUEST['username']);
-	$password = mysql_real_escape_string($_REQUEST['password']);
+	$username = mysqli_real_escape_string($_SESSION['mconn'], $_REQUEST['username']);
+	$password = mysqli_real_escape_string($_SESSION['mconn'], $_REQUEST['password']);
 
 	$query = "select * from `users` where `email`='$username' and (`password`=old_password('$password') or `password`=sha1('$password'))";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) != 1)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) != 1)
 		die("403,That username couldn't be found\n");
-	$user = mysql_fetch_assoc($res);
+	$user = mysqli_fetch_assoc($res);
 	$memid = $user['id'];
 	$emails = array();
 	foreach($_REQUEST['email'] as $email)
 	{
-		$email = mysql_real_escape_string(trim($email));
+		$email = mysqli_real_escape_string($_SESSION['mconn'], trim($email));
 		$query = "select * from `email` where `memid`='".intval($memid)."' and `hash`='' and `deleted`=0 and `email`='$email'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$id = $row['id'];
 			$emails[$id] = $email;
 		}
@@ -43,11 +43,11 @@ require_once '../../includes/lib/check_weak_key.php';
 	if(count($emails) <= 0)
 		die("404,Wasn't able to match any emails sent against your account");
 	$query = "select sum(`points`) as `points` from `notary` where `to`='".intval($memid)."' and `notary`.`deleted`=0 group by `to`";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$points = $row['points'];
 
 	$name = "CAcert WoT User\n";
-	$newname = mysql_real_escape_string(trim($_REQUEST['name']));
+	$newname = mysqli_real_escape_string($_SESSION['mconn'], trim($_REQUEST['name']));
 	if($points >= 50)
 	{
 		if($newname == $user['fname']." ".$user['lname'] ||
@@ -84,26 +84,26 @@ require_once '../../includes/lib/check_weak_key.php';
 	foreach($emails as $id => $email)
 		$csrsubject .= "/emailAddress=".$email;
 
-	$query = "insert into `emailcerts` set `CN`='".mysql_real_escape_string($user['email'])."', `keytype`='MS',
+	$query = "insert into `emailcerts` set `CN`='".mysqli_real_escape_string($_SESSION['mconn'], $user['email'])."', `keytype`='MS',
 				`memid`='".intval($user['id'])."', `created`=FROM_UNIXTIME(UNIX_TIMESTAMP()),
-				`subject`='".mysql_real_escape_string($csrsubject)."', `codesign`='".intval($codesign)."'";
-	mysql_query($query);
-	$certid = mysql_insert_id();
+				`subject`='".mysqli_real_escape_string($_SESSION['mconn'], $csrsubject)."', `codesign`='".intval($codesign)."'";
+	mysqli_query($_SESSION['mconn'], $query);
+	$certid = mysqli_insert_id($_SESSION['mconn']);
 	$CSRname = generatecertpath("csr","client",$certid);
 	rename($checkedcsr, $CSRname);
 
-	mysql_query("update `emailcerts` set `csr_name`='$CSRname' where `id`='$certid'");
+	mysqli_query($_SESSION['mconn'], "update `emailcerts` set `csr_name`='$CSRname' where `id`='$certid'");
 
 	foreach($emails as $emailid => $email)
-		mysql_query("insert into `emaillink` set `emailcertsid`='$certid', `emailid`='".intval($emailid)."'");
+		mysqli_query($_SESSION['mconn'], "insert into `emaillink` set `emailcertsid`='$certid', `emailid`='".intval($emailid)."'");
 
 	$do = shell_exec("../../scripts/runclient");
 	sleep(10); // THIS IS BROKEN AND SHOULD BE FIXED
 	$query = "select * from `emailcerts` where `id`='$certid' and `crt_name` != ''";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 		die("404,Your certificate request has failed. ID: ".intval($certid));
-	$cert = mysql_fetch_assoc($res);
+	$cert = mysqli_fetch_assoc($res);
 	echo "200,Authentication Ok\n";
 	readfile("../".$cert['crt_name']);
 ?>

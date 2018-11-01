@@ -19,11 +19,11 @@
 	$tz = intval($_REQUEST['tz']);
 	$now = date("Y-m-d", gmmktime("U") + ($tz * 3600));
 
-	$arr = explode("//", mysql_real_escape_string(trim($_REQUEST['refer'])), 2);
+	$arr = explode("//", mysqli_real_escape_string($_SESSION['mconn'], trim($_REQUEST['refer'])), 2);
 	$arr = explode("/", $arr['1'], 2);
 	$ref = $arr['0'];
 
-        $arr = explode("//", mysql_real_escape_string(trim($_SERVER['HTTP_REFERER'])), 2);
+        $arr = explode("//", mysqli_real_escape_string($_SESSION['mconn'], trim($_SERVER['HTTP_REFERER'])), 2);
         $arr = explode("/", $arr['1'], 2);
         $siteref = $arr['0'];
 
