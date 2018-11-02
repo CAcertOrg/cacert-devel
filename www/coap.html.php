@@ -329,7 +329,7 @@ table#TAB1 td { border: 0 }
 	        'http://svn.cacert.org/CAcert/Policies/OrganisationAssurancePolicy/OrganizationAssuranceSubPolicyUnitedStates.html',
 	);
 	$cnt = 0;
-	while( list($key, $ref) = each($policies) ) {
+	foreach( $policies as $key => $ref ) {
 	    $cnt++;
 	    if( $cnt < 2 ) {
 		echo '<p><dd>'. _("Applicable Organisation Policy documents and information can be attached to the pdf output file. Mark those documents, which need to be attached") . ":<br>\n";
