@@ -246,7 +246,15 @@ sub createTemporaryIndex ($){
 			my @field  = split /\s+/, $record;
 			my $flag   = $field[0];
 
+<<<<<<< HEAD
 			if ( $flag eq "R" ) {
+=======
+			if ( $flag ne "R" ) {
+				# certificate is unrevoked
+				print $fileOutput $record;
+			}
+			else {
+>>>>>>> 2f185e9f5cab5bfe317eee7e120df97223835da6
 				# certificate is revoked
 				my $expirationDate = $field[1];
 				my $revokationDate = $field[2];
