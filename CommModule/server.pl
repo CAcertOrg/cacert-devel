@@ -183,8 +183,88 @@ sub unpack3array($)
   return @retarr;
 }
 
+#
+# this module creates a temporary file that includes all records of the index.txt-file
+# used to build the next CRL the returned parameter $chosseSection is a fallback if the
+# temporary file couldn't be created. In that case the original index.txt file is to be used.
+#
+# param: $root: number of root-certificate 0 or 1
+#
+# returns: $chooseSection: "-name GenCRL " if all went ok
+#						   " " else (fallback)
+#
+# cave: this sub only works as long as for each root-certificate only one directory is used.
+#       this sub assumes that only roots 0 & 1 are used.
+#
+sub createTemporaryIndex ($){
+	my $root =@_[0];
 
+	my $chooseSection ="-name GenCRL ";
 
+# calculate the date upto which the record of a revoked certificate can be ignored
+	my $eliminationDateLimit = $actualDate - 100 * 24 * 60 * 60;    #subtract 100 days from current time
+    my $eliminationDateLimitS = strftime( "%Y-%m-%d", gmtime($eliminationDateLimit) );
+    my $eliminateDate =
+        substr( $eliminationDateLimitS, 2, 2 )
+      . substr( $eliminationDateLimitS, 5, 2 )
+      . substr( $eliminationDateLimitS, 8, 2 );
+
+# assign correct directory for root
+    my $directory = " ";
+    if($root==0)
+    {
+	    $directory="/etc/ssl/CA/";
+	}
+	elsif($root==1)
+	{
+		$directory="/etc/ssl/class3/";
+	}
+	else
+	{
+		$chooseSection = " ";
+	}
+
+	if  ($chooseSection ne " ") {
+# assign necessary filenames
+		my $filenameInput = $directory."index.txt";
+		my $filenameOutput = $directory."index.tmp.txt";
+
+# opening files
+		my $fileInput = undef;
+		open( $fileInput, "<", "$filenameInput" )
+		|| {$chooseSection =" "};
+
+		my $fileOutput = undef;
+		open( $fileOutput, ">", "$filenameOutput" )
+		|| {$chooseSection =" "};
+    }
+
+# reading file and write CRL-records
+	if($chooseSection ne " ") {
+		while (<$fileInput>) {
+			my $record = $_;
+			my @field  = split /\s+/, $record;
+			my $flag   = $field[0];
+
+			if ( $flag ne "R" ) {
+				# certificate is unrevoked
+				print $fileOutput $record;
+			}
+			else {
+				# certificate is revoked
+				my $expirationDate = $field[1];
+				my $revokationDate = $field[2];
+				if ( $expirationDate ge $eliminateDate or $revokationDate ge $eliminateDate) {
+					print $fileOutput $record;
+				}
+			}
+		}
+		if ($!) {
+			$chooseSection =" ";
+		}
+	}
+	return ($chooseSection);
+} #end sub createTemporaryIndex
 
 my $timestamp=strftime("%Y-%m-%d %H:%M:%S",localtime);
 
@@ -880,8 +960,10 @@ sub RevokeX509
     print OUT $request;
     close OUT;
 
-    my $do = `$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -revoke $wid/request.crt > /dev/null 2>&1`;
-    $do = `$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -gencrl -crldays 7 -crlexts crl_ext -out $wid/cacert-revoke.crl > /dev/null 2>&1`;
+	my $chooseSection = createTemporaryIndex($root);
+
+	my $do = `$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -revoke $wid/request.crt > /dev/null 2>&1`;
+    $do = `$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -gencrl $chooseSection -crldays 7 -crlexts crl_ext -out $wid/cacert-revoke.crl > /dev/null 2>&1`;
     $do = `$opensslbin crl -inform PEM -in $wid/cacert-revoke.crl -outform DER -out $wid/revoke.crl > /dev/null 2>&1`;
     unlink "$wid/cacert-revoke.crl";
 
