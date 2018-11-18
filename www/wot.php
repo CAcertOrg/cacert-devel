@@ -141,7 +141,7 @@ function send_reminder()
 			$body .= "User ".$_SESSION['profile']['fname']." ".
 				$_SESSION['profile']['lname']." with email address '".
 				$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-				mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+				mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{
@@ -188,9 +188,9 @@ function send_reminder()
 
 	if($oldid == 5)
 	{
-		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) != 1)
+		$query = "select * from `users` where `email`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['email']))."' and `deleted`=0";
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) != 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 1;
 			show_page("EnterEmail","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
@@ -198,7 +198,7 @@ function send_reminder()
 		} else
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
-			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
+			$_SESSION['_config']['notarise'] = mysqli_fetch_assoc($res);
 			if ($_SESSION['_config']['notarise']['verified'] == 0)
 			{
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
@@ -216,9 +216,9 @@ function send_reminder()
 				}
 			}
 		}
-		$query = "select * from `users` where `email`='".mysql_real_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1)
+		$query = "select * from `users` where `email`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['email']))."' and `locked`=1";
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) >= 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
 			show_page("EnterEmail","",_("This account is locked and can not be assured. For more information ask support@cacert.org."));
@@ -243,8 +243,8 @@ function send_reminder()
 
 		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and
 			`to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
 			show_page("EnterEmail","",_("You are only allowed to Assure someone once!"));
 			exit;
@@ -328,8 +328,8 @@ function send_reminder()
 		}
 
 		$query = "select * from `users` where `id`='".intval($_SESSION['_config']['notarise']['id'])."'";
-		$res = mysql_query($query);
-		$row = mysql_fetch_assoc($res);
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		$row = mysqli_fetch_assoc($res);
 		$name = sanitizeHTML($row['fname'])." ".sanitizeHTML($row['mname'])." ".sanitizeHTML($row['lname'])." ".sanitizeHTML($row['suffix']);
 		if($_SESSION['_config']['wothash'] != md5($name."-".$row['dob']) || $_SESSION['_config']['wothash'] != $_REQUEST['pagehash'])
 		{
@@ -351,17 +351,17 @@ function send_reminder()
 
 		$drow_points = get_received_assurance_points(intval($_SESSION['_config']['notarise']['id']));
 
-		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
+		if(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
 		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' AND
 						`to`='".intval($_SESSION['_config']['notarise']['id'])."' AND
 						`awarded`='".intval($awarded)."' AND
-						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' AND
+						`location`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['location']))."' AND
+						`date`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['date']))."' AND
 						`deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
 			show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
 			exit;
@@ -373,8 +373,8 @@ function send_reminder()
 		$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
 						`to`='".intval($_SESSION['_config']['notarise']['id'])."',
 						`points`='0', `awarded`='".intval($awarded)."',
-						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
-						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
+						`location`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['location']))."',
+						`date`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['date']))."',
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		if (check_date_format(trim($_REQUEST['date']),2010)) {
@@ -387,7 +387,8 @@ function send_reminder()
 		if($_SESSION['profile']['ttpadmin'] == 2 && $_POST['method'] == 'TTP-TOPUP') {
 			$query .= ",\n`method`='TTP-TOPUP'";
 		}
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
+
 		include_once("../includes/notary.inc.php");
 
 		recalculate_old_assurance_points($_SESSION['_config']['notarise']['id']);
@@ -402,11 +403,11 @@ function send_reminder()
 			$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
 							`to`='".intval($_SESSION['profile']['id'])."',
 							`points`='".intval($addpoints)."', `awarded`='".intval($addpoints)."',
-							`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
-							`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
+							`location`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['location']))."',
+							`date`='".mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['date']))."',
 							`method`='Administrative Increase',
 							`when`=NOW()";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
@@ -456,7 +457,7 @@ function send_reminder()
 	{
 		csrf_check("chgcontact");
 
-		$info = mysql_real_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
+		$info = mysqli_real_escape_string($_SESSION['mconn'], strip_tags(stripslashes($_POST['contactinfo'])));
 		$listme = intval($_POST['listme']);
 		if($listme < 0 || $listme > 1)
 			$listme = 0;
@@ -465,7 +466,7 @@ function send_reminder()
 		$_SESSION['profile']['contactinfo'] = $info;
 
 		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".intval($_SESSION['profile']['id'])."'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Your account information has been updated.")."</p>";
@@ -485,7 +486,7 @@ function send_reminder()
 			$body = $_REQUEST['message'];
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
+			$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
 			if(is_assurer($userid) > 0)
 			{
 				$my_translation = L10n::get_translation();
@@ -548,8 +549,8 @@ function send_reminder()
 		$oldid = 0;
 		$id = 17;
 		$number = 5;
-		$email = mysql_real_escape_string(trim($_REQUEST['email']));
-		$reason = mysql_real_escape_string(trim($_REQUEST['reason']));
+		$email = mysqli_real_escape_string($_SESSION['mconn'],trim($_REQUEST['email']));
+		$reason = mysqli_real_escape_string($_SESSION['mconn'],trim($_REQUEST['reason']));
 		$uid = get_user_id_from_email($email);
 
 		if ($uid == 0) {

@@ -19,13 +19,13 @@
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 
 
-	$res = mysql_query("select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($_REQUEST['userid'])."' and `listme`='1'");
+	if(mysqli_num_rows($res) <= 0)
 	{
 		echo _("Sorry, I was unable to locate that user, the person doesn't wish to be contacted, or isn't an assurer.");
 	} else {
 
-		$user = mysql_fetch_array($res);
+		$user = mysqli_fetch_array($res);
 		$userlang = L10n::normalise_translation($user['language']);
 		$points = get_received_total_points(intval($user['id']));
 		if($points <= 0) {
@@ -53,10 +53,10 @@
 <? } ?>
 <?
 	$query = "select * from `addlang` where `userid`='".intval($user['id'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_real_escape_string($row['lang'])."'"));
+		$lang = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `languages` where `locale`='".mysqli_real_escape_string($_SESSION['mconn'], $row['lang'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>

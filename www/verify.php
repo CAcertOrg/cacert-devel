@@ -43,41 +43,41 @@
 	{
 		$id = 1;
 		$emailid = intval($_REQUEST['emailid']);
-		$hash = mysql_real_escape_string(stripslashes($_REQUEST['hash']));
+		$hash = mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['hash']));
 
 		$query = "select * from `email` where `id`='$emailid' and hash!='' and deleted=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$row['attempts']++;
 			if($row['attempts'] >= 6)
 			{
-				mysql_query("update `email` set `hash`='', `attempts`='$row[attempts]', `deleted`=NOW() where `id`='$emailid'");
+				mysqli_query($_SESSION['mconn'], "update `email` set `hash`='', `attempts`='$row[attempts]', `deleted`=NOW() where `id`='$emailid'");
 				showheader(_("Error!"), _("Error!"));
 				echo _("You've attempted to verify the same email address a fourth time with an invalid hash, subsequently this request has been deleted in the system");
 				showfooter();
 				exit;
 			}
-			mysql_query("update `email` set `attempts`='$row[attempts]' where `id`='$emailid'");
+			mysqli_query($_SESSION['mconn'], "update `email` set `attempts`='$row[attempts]' where `id`='$emailid'");
 		}
 
 		$query = "select * from `email` where `id`='$emailid' and `hash`='$hash' and hash!='' and deleted=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("Error!"), _("Error!"));
 			echo _("The ID or Hash has already been verified, or something weird happened.");
 			showfooter();
 			exit;
 		}
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		if(array_key_exists('Yes',$_REQUEST) && $_REQUEST['Yes'] != "")
 		{
 			$query = "update `email` set `hash`='',`modified`=NOW() where `id`='$emailid'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 			$query = "update `users` set `verified`='1' where `id`='".intval($row['memid'])."' and `email`='".$row['email']."' and `verified`='0'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 			showheader(_("Updated"), _("Updated"));
 			echo _("Your account and/or email address has been verified. You can now start issuing certificates for this address.");
 		} else if(array_key_exists('No',$_REQUEST) && $_REQUEST['No'] != "") {
@@ -101,13 +101,13 @@
 	{
 		$id = 7;
 		$domainid = intval($_REQUEST['domainid']);
-		$hash = mysql_real_escape_string(stripslashes($_REQUEST['hash']));
+		$hash = mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['hash']));
 
 		$query = "select * from `domains` where `id`='$domainid' and hash!='' and deleted=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = mysqli_fetch_assoc($res);
 			$row['attempts']++;
 			if($row['attempts'] >= 6)
 			{
@@ -118,23 +118,23 @@
 				exit;
 			}
 			$query = "update `domains` set `attempts`='".intval($row['attempts'])."' where `id`='$domainid'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 
 		$query = "select * from `domains` where `id`='$domainid' and `hash`='$hash' and hash!='' and deleted=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("Error!"), _("Error!"));
 			echo _("The ID or Hash has already been verified, the domain no longer exists in the system, or something weird happened.");
 			showfooter();
 			exit;
 		}
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		if(array_key_exists('Yes',$_REQUEST) && $_REQUEST['Yes'] != "")
 		{
 			$query = "update `domains` set `hash`='',`modified`=NOW() where `id`='$domainid'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 			showheader(_("Updated"), _("Updated"));
 			echo _("Your domain has been verified. You can now start issuing certificates for this domain.");
 		} else if(array_key_exists('No',$_REQUEST) && $_REQUEST['No'] != "") {

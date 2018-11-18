@@ -117,11 +117,11 @@ $adminlist = array();
 foreach ($flags as $flag => $flag_properties) {
 	$flagname = explode('=', $flag, 2 );
 	$query = "select `fname`, `lname`, `email` from `users` where `$flagname[0]` = '$flagname[1]'";
-	if(! $res = mysql_query($query) ) {
+	if(! $res = mysqli_query($_SESSION['mconn'], $query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
 				"\"$query\"\n".
-				mysql_error()
+				mysqli_error($_SESSION['mconn'])
 			);
 
 		continue;
@@ -129,7 +129,7 @@ foreach ($flags as $flag => $flag_properties) {
 
 	$adminlist[$flag] = array();
 
-	while ($row = mysql_fetch_assoc($res)) {
+	while ($row = mysqli_fetch_assoc($res)) {
 		$adminlist[$flag][] = $row;
 	}
 

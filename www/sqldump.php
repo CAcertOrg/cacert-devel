@@ -25,14 +25,14 @@
 # Database: `cacert`
 #
 <?
-    $tables = mysql_query("SHOW TABLES");
-    while(list($table_name) = mysql_fetch_array($tables))
+    $tables = mysqli_query($_SESSION['mconn'], "SHOW TABLES");
+    while(list($table_name) = mysqli_fetch_array($tables), MYSQLI_BOTH)
     {
         echo "# --------------------------------------------------------\n\n";
         echo "#\n# Table structure for table `$table_name`\n#\n\n";
 
         echo "DROP TABLE IF EXISTS `$table_name`;\n";
-        $create = mysql_fetch_assoc(mysql_query("SHOW CREATE TABLE `$table_name`"));
+        $create = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "SHOW CREATE TABLE `$table_name`"));
         echo $create['Create Table'].";\n\n";
     }
 ?>

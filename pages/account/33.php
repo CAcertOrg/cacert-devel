@@ -17,7 +17,7 @@
 */ ?>
 <?
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	
 	// Reset session variables regarding OrgAdmin's, present empty form
   if (array_key_exists('email',$_SESSION['_config']))     $_SESSION['_config']['email']=""; 

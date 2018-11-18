@@ -16,13 +16,14 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	$_SESSION['mconn'] = mysql_connect("127.0.0.1", "username", "password");
-	if ($_SESSION['mconn'] != FALSE)
-	{
-		mysql_select_db("database");
-		$_SESSION['mconn'] = TRUE;
-	}
-	$_SESSION['_config']['normalhostname'] = "www.cacert.org";
+    $_SESSION['mconn'] = mysqli_connect("127.0.0.1", "username", "password", "database");
+
+//    if (!$_SESSION['mconn']) {
+//    die('Connect Error (' . mysqli_connect_errno() . ') '
+//            . mysqli_connect_error());
+//    }
+
+    $_SESSION['_config']['normalhostname'] = "www.cacert.org";
 	$_SESSION['_config']['securehostname'] = "secure.cacert.org";
 
 	function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "returns@cacert.org", $use_utf8 = true)

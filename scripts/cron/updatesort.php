@@ -26,44 +26,44 @@
 	}
 
 
-	mysql_query("update `locations` set `acount`=0");
+	mysqli_query($_SESSION['mconn'], "update `locations` set `acount`=0");
 	$query = "SELECT `users`.`locid` AS `locid`, count(*) AS `total` FROM `users`
 			WHERE users.assurer='1' AND `users`.`locid` != 0 and users.listme=1 and `users`.`deleted` = 0
 			GROUP BY `users`.`locid`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$query = "update `locations` set `acount`='${row['total']}' where `id`='${row['locid']}'";
 		echo $query."\n";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 	}
 
 
-	mysql_query("update `regions` set `acount`=0");
+	mysqli_query($_SESSION['mconn'], "update `regions` set `acount`=0");
 	$query = "SELECT `users`.`regid` AS `regid`, count(*) AS `total` FROM `users`
 			WHERE users.assurer='1' AND `users`.`regid` != 0 and users.listme=1 and `users`.`deleted` = 0
 			GROUP BY `users`.`regid`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$query = "update `regions` set `acount`='${row['total']}' where `id`='${row['regid']}'";
 		echo $query."\n";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 	}
 
 
 
 
-	mysql_query("update `countries` set `acount`=0");
+	mysqli_query($_SESSION['mconn'], "update `countries` set `acount`=0");
 	$query = "SELECT `users`.`ccid` AS `ccid`, count(*) AS `total` FROM `users`
 			WHERE users.assurer='1' AND `users`.`ccid` != 0 and users.listme=1 and `users`.`deleted` = 0
 			GROUP BY `users`.`ccid`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$query = "update `countries` set `acount`='${row['total']}' where `id`='${row['ccid']}'";
 		echo $query."\n";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 	}
 
 

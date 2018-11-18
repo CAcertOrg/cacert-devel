@@ -20,18 +20,18 @@
    
   if ($ipadress=='72.36.220.19' && $_SERVER['HTTPS']=="on")
   {
-    $serial=mysql_real_escape_string($_REQUEST["serial"]);
+    $serial=mysqli_real_escape_string($_SESSION['mconn'], $_REQUEST["serial"]);
     $root=intval($_REQUEST["root"]);
        
     $sql="select memid from emailcerts where serial='$serial' and rootcert='$root'";
-    $query= mysql_query($sql); 
-    if(mysql_num_rows($query) != 1)
+    $query= mysqli_query($_SESSION['mconn'], $sql); 
+    if(mysqli_num_rows($query) != 1)
     {
       echo "NOT FOUND: ".sanitizeHTML($sql);
     }
     else
     {
-      $memid = mysql_fetch_assoc($query);
+      $memid = mysqli_fetch_assoc($query);
       echo sanitizeHTML($memid['memid']);
     }
   }

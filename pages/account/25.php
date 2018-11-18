@@ -54,13 +54,13 @@
 	
 	// Safe because $order_by only contains fixed strings
 	$query = sprintf("select * from `orginfo` ORDER BY %s", $order_by);
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$r2 = mysql_query("select * from `org` where `orgid`='".intval($row['id'])."'");
-		$admincount = mysql_num_rows($r2);
-		$r2 = mysql_query("select * from `orgdomains` where `orgid`='".intval($row['id'])."'");
-		$domcount = mysql_num_rows($r2);
+		$r2 = mysqli_query($_SESSION['mconn'], "select * from `org` where `orgid`='".intval($row['id'])."'");
+		$admincount = mysqli_num_rows($r2);
+		$r2 = mysqli_query($_SESSION['mconn'], "select * from `orgdomains` where `orgid`='".intval($row['id'])."'");
+		$domcount = mysqli_num_rows($r2);
 ?>
   <tr>
     <td class="DataTD"><?=sanitizeHTML($row['O'])?>, <?=sanitizeHTML($row['ST'])?> <?=sanitizeHTML($row['C'])?></td>

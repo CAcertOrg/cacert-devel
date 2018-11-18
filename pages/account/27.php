@@ -17,7 +17,7 @@
 */ ?>
 <?
     $orgid = intval($_REQUEST['orgid']);
-    $row = mysql_fetch_assoc(mysql_query("select * from `orginfo` where `id`='" . $orgid . "'"));
+    $row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'"));
     $orgname = $row['O'];
     $contactmail = $row['contact'];
     $town = $row['L'];

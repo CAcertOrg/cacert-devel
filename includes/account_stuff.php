@@ -203,7 +203,7 @@ function hideall() {
       <h3 class="pointer" onclick="explode('servercert')">+ <?=_("Server Certificates")?></h3>
       <ul class="menu" id="servercert"><li><a href="account.php?id=10"><?=_("New")?></a></li><li><a href="account.php?id=12"><?=_("View")?></a></li></ul>
     </div>
-<? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
+<? if(mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('clientorg')">+ <?=_("Org Client Certs")?></h3>
       <ul class="menu" id="clientorg"><li><a href="account.php?id=16"><?=_("New")?></a></li><li><a href="account.php?id=18"><?=_("View")?></a></li></ul>
@@ -213,7 +213,7 @@ function hideall() {
       <ul class="menu" id="serverorg"><li><a href="account.php?id=20"><?=_("New")?></a></li><li><a href="account.php?id=22"><?=_("View")?></a></li></ul>
     </div>
 <? } ?>
-<? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
+<? if(mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('orgadmin')">+ <?=_("Org Admin")?></h3>
       <ul class="menu" id="orgadmin"><? if($_SESSION['profile']['orgadmin'] == 1) { ?><li><a href="account.php?id=24"><?=_("New Organisation")?></a></li><li><a href="account.php?id=25"><?=_("View Organisations")?></a></li><? } ?><li><a href="account.php?id=35"><?=_("View")?></a></li></ul>

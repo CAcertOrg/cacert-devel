@@ -49,8 +49,8 @@ output_received_assurances(intval($userid),2); //support==2 => TTP
 
 
 $query = "select sum(`points`) as `points` from `notary` where `to`='".intval($userid)."'";
-$dres = mysql_query($query);
-$drow = mysql_fetch_assoc($dres);
+$dres = mysqli_query($_SESSION['mconn'],$query);
+$drow = mysqli_fetch_assoc($_SESSION['mconn'],$dres);
 
 $points=$drow['points'];
 if ($points<1) {
@@ -58,7 +58,7 @@ if ($points<1) {
 }
 
 $res = get_received_assurances(intval($userid), 2);
-$ttp_assurances_count=$num_rows = mysql_num_rows($res);
+$ttp_assurances_count=$num_rows = mysqli_num_rows($_SESSION['mconn'],$res);
 
 //Form
 ?>

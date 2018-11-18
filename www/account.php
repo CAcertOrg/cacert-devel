@@ -54,6 +54,7 @@
 			exit;
 		}
 
+
 	} else if ($id == 37) {
 		$protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
 		$newUrl = $protocol . '://wiki.cacert.org/FAQ/AboutUs';

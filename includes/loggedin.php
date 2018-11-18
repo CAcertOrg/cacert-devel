@@ -44,7 +44,7 @@
 			//session_unregister($key);
 		}
 
-		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($uid)."'"));
+		$_SESSION['profile'] = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($uid)."'"));
 		if($_SESSION['profile']['locked'] == 0)
 			$_SESSION['profile']['loggedin'] = 1;
 		else
@@ -70,7 +70,7 @@
 				//session_unregister($key);
 			}
 
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
+			$_SESSION['profile'] = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], 
 					"select * from `users` where `id`='".intval($user_id)."'"));
 			if($_SESSION['profile']['locked'] == 0)
 				$_SESSION['profile']['loggedin'] = 1;
@@ -108,7 +108,7 @@
 		{
 			$query = "update `users` set `language`='".L10n::get_translation()."'
 							where `id`='".intval($_SESSION['profile']['id'])."'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		} else {
 			L10n::set_translation($_SESSION['profile']['language']);
 			L10n::init_gettext();
