@@ -114,7 +114,7 @@
     // comment next line when starting to send mail not only to me
     //  $query = "select * from `users` where `email` like 'cacerttest%'";
 
-    $res = mmysqli_query($_SESSION['mconn'], $query);
+    $res = mysqli_query($_SESSION['mconn'], $query);
     $xrows = mysqli_num_rows($res);
 
     while($row = mysqli_fetch_assoc($res))
