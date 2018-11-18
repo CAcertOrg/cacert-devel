@@ -1258,7 +1258,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		mysqli_query($_SESSION['mconn'], $query);
 
 	//clear all admin and board flags
-		mmysqli_query($_SESSION['mconn'],
+		mysqli_query($_SESSION['mconn'], 
 			"update `users` set
 				`assurer`='0',
 				`assurer_blocked`='0',
