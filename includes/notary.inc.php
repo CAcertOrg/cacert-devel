@@ -1258,7 +1258,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		mysqli_query($_SESSION['mconn'], $query);
 
 	//clear all admin and board flags
-		mysqli_query($_SESSION['mconn'], 
+		mysqli_query($_SESSION['mconn'],
 			"update `users` set
 				`assurer`='0',
 				`assurer_blocked`='0',
@@ -1663,7 +1663,7 @@ function write_se_log($uid, $adminid, $type, $info, $typeid=1){
 	$uid = intval($uid);
 	$adminid = intval($adminid);
 	$type = mysqli_real_escape_string($_SESSION['mconn'], $type);
-	$info = mysqli_real_escape_string($_SESSION['mconn'], g($info);
+	$info = mysqli_real_escape_string($_SESSION['mconn'], g($info));
 	$typeid = intval($typeid);
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`,`actiontypeid`) values
 	          (Now(), $uid, $adminid, '$type', '$info')";
