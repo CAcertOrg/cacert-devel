@@ -914,8 +914,8 @@ function buildSubjectFromSession() {
 						`rootcert`='".intval($row['rootcert'])."',
 						`type`='".intval($row['type'])."',
 						`pkhash`='".mysqli_real_escape_string($_SESSION['mconn'], $row['pkhash'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."', 
 						`description`='".mysqli_real_escape_string($_SESSION['mconn'], $row['description'])."'";
-						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysqli_query($_SESSION['mconn'],$query);
 				$newid = mysqli_insert_id($_SESSION['mconn']);
 				$newfile=generatecertpath("csr","server",$newid);
@@ -1095,8 +1095,8 @@ function buildSubjectFromSession() {
 						`disablelogin`='".intval($row['disablelogin'])."',
 						`codesign`='".intval($row['codesign'])."',
 						`rootcert`='".intval($row['rootcert'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."',
 						`description`='".mysqli_real_escape_string($_SESSION['mconn'], $row['description'])."'";
-						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysqli_query($_SESSION['mconn'],$query);
 				$newid = mysqli_insert_id($_SESSION['mconn']);
 				$newfile=generatecertpath("csr","client",$newid);
@@ -1735,8 +1735,8 @@ function buildSubjectFromSession() {
 						`modified`=NOW(),
 						`codesign`='".intval($row['codesign'])."',
 						`rootcert`='".intval($row['rootcert'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."',
 						`description`='".mysqli_real_escape_string($_SESSION['mconn'], $row['description'])."'";
-						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysqli_query($_SESSION['mconn'],$query);
 				$newid = mysqli_insert_id($_SESSION['mconn']);
 				$newfile=generatecertpath("csr","orgclient",$newid);
@@ -2088,8 +2088,8 @@ function buildSubjectFromSession() {
 						`subject`='".mysqli_real_escape_string($_SESSION['mconn'], $row['subject'])."',
 						`type`='".intval($row['type'])."',
 						`rootcert`='".intval($row['rootcert'])."',
+						`md`='".HashAlgorithms::clean($row['md'])."',
 						`description`='".mysqli_real_escape_string($_SESSION['mconn'], $row['description'])."'";
-						`md`='".HashAlgorithms::clean($row['md'])."'";
 				mysqli_query($_SESSION['mconn'],$query);
 				$newid = mysqli_insert_id($_SESSION['mconn']);
 				//echo "NewID: $newid<br/>\n";

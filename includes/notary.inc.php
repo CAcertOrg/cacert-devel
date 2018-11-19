@@ -1666,6 +1666,7 @@ function write_se_log($uid, $adminid, $type, $info, $typeid=1){
 	$info = mysqli_real_escape_string($_SESSION['mconn'], g($info);
 	$typeid = intval($typeid);
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`,`actiontypeid`) values
+	          (Now(), $uid, $adminid, '$type', '$info')";
 	return mysqli_query($_SESSION['mconn'], $query);
 }
 
