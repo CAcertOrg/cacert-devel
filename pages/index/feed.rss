@@ -9,6 +9,16 @@
 		<language>en</language>
 
 		<item>
+			<title>Active branch</title>
+			<description>The currently checked out branch on this testserver is testserver-1260. This branch ist intended for
+			  the children of bugtracker issue 1260.
+			  At the moment only the bug-1442 child
+			  has been merged into this branch, but bug-1444 should follow soon. 
+			  More branches will be merged in when available.
+			</description>
+			<link>https://bugs.cacert.org/view.php?id=1260</link>
+		</item>
+		<item>
 			<title>Looking for confirmation email on creating account?</title>
 			<description>Please go to https://ca-mgr1.it-sls.de/login login with your just created account and password. Under MAIL you'll find your individual confirmation email.
 			</description>
