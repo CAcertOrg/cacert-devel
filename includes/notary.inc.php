@@ -1106,7 +1106,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 	//called from account_delete
 		$domainid = intval($domainid);
 		revoke_all_server_cert($domainid);
-		mysqli_query($_SESSION['mconn'], 
+		mysqli_query($_SESSION['mconn'],
 			"update `domains`
 			set `deleted`=NOW()
 			where `id` = '$domainid'");
@@ -1154,7 +1154,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		}
 
 	//clear alert settings
-		mysqli_query($_SESSION['mconn'], 
+		mysqli_query($_SESSION['mconn'],
 			"update `alerts` set
 				`general`='0',
 				`country`='0',
@@ -1199,7 +1199,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		mysqli_query($_SESSION['mconn'], $query);
 
 	//clear all admin and board flags
-		mysqli_query($_SESSION['mconn'], 
+		mysqli_query($_SESSION['mconn'],
 			"update `users` set
 				`assurer`='0',
 				`assurer_blocked`='0',
@@ -1332,7 +1332,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		$dres = mysqli_query($_SESSION['mconn'], $query);
 		while($drow = mysqli_fetch_assoc($dres))
 		{
-			mysqli_query($_SESSION['mconn'], 
+			mysqli_query($_SESSION['mconn'],
 			"update `domaincerts`
 				set `revoked`='1970-01-01 10:00:01'
 				where `id` = '".$drow['id']."'
@@ -1416,7 +1416,7 @@ function write_se_log($uid, $adminid, $type, $info){
 	$uid = intval($uid);
 	$adminid = intval($adminid);
 	$type = mysqli_real_escape_string($_SESSION['mconn'], $type);
-	$info = mysqli_real_escape_string($_SESSION['mconn'], g($info);
+	$info = mysqli_real_escape_string($_SESSION['mconn'], g($info));
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`) values
 		(Now(), $uid, $adminid, '$type', '$info')";
 	return mysqli_query($_SESSION['mconn'], $query);
