@@ -12,7 +12,7 @@ use File::CounterFile;
 use Time::HiRes q(usleep);
 use IPC::Open3;
 use File::Copy;
-use Digest::SHA1 qw(sha1_hex);
+use Digest::SHA qw(sha1_hex);
 
 #Protocol version:
 my $ver=1;
@@ -881,6 +881,8 @@ sub RevokeX509
     close OUT;
 
     my $do = `$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -revoke $wid/request.crt > /dev/null 2>&1`;
+
+	SysLog "$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -gencrl -crldays 7 -crlexts crl_ext -out $wid/cacert-revoke.crl\n";
     $do = `$opensslbin ca $hashes{$hash} -config $opensslcnf -key test -batch -gencrl -crldays 7 -crlexts crl_ext -out $wid/cacert-revoke.crl > /dev/null 2>&1`;
     $do = `$opensslbin crl -inform PEM -in $wid/cacert-revoke.crl -outform DER -out $wid/revoke.crl > /dev/null 2>&1`;
     unlink "$wid/cacert-revoke.crl";
@@ -1002,7 +1004,7 @@ my @ready=$sel->can_read($starttime);
 my $count=0;
 
 #As soon as the client connected successfully, the client has to send a request faster than every 10 seconds
-while(@ready = $sel->can_read(15) && -f "./server.pl-active")
+while((@ready = $sel->can_read(15)) && -f "./server.pl-active")
 {
   my $data="";
   #my $length=read SER,$data,1;
