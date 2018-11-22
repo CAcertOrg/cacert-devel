@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- generator="WordPress/2.5.1" -->
+<rss version="0.92">
+	<channel>
+		<title>CAcert NEWS Blog</title>
+		<link>http://blog.cacert.org</link>
+		<description>CAcert NEWS and up coming events.</description>
+		<lastBuildDate>Fri, 20 Aug 2010 11:54:30 +0000</lastBuildDate>
+		<docs>http://backend.userland.com/rss092</docs>
+		<language>en</language>
+
+		<item>
+			<title>Usage of integration branch</title>
+			<description>
+			  This is the integration branch. If it is not, please change this message in pages/index/feed.rss
+			  
+			  The integration branch is used as the base branch for the testserver. Ideally it should differ
+			  from the release branch only in the explicit changes for the testserver (other icon and styles).
+			  
+			  For a test campaign you should create a new branch (something like "testserver-<campaign name>")
+			  and merge in the bug-branches which are to be tested in the campaign. After the campaign is
+			  finished the testserver should be reverted to the integration branch.
+			  
+			  If a patch is handed off to critical to be installed on the production system, the patch is
+			  usually also merged into the release branch (so it continues to mirror the production system).
+			  Then the patch should also be merged into the integration branch for the same reason.
+			</description>
+			<link>https://wiki.cacert.org/Software/Assessment/testserver/setup#Changes_to_the_release_branch</link>
+		</item>
+	</channel>
+</rss>

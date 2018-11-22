@@ -21,7 +21,7 @@ body {
 /******* hyperlink and anchor tag styles *******/
 
 a:link, a:visited {
-	color: #005fa9;
+	color: #a90000;
 	text-decoration: none;
 }
 
@@ -34,14 +34,14 @@ a:hover {
 
 h1 {
 	font: bold 120% Arial ,sans-serif;
-	color: #334d55;
+	color: #550000;
 	margin: 0px;
 	padding: 0px;
 }
 
 h2 {
 	font: bold 114% Arial ,sans-serif;
-	color: #006699;
+	color: #990000;
 	margin: 0px;
 	padding: 0px;
 }
@@ -260,7 +260,7 @@ a.glink, a.glink:visited {
 	font-weight: bold;
 	margin: 0px;
 	padding: 2px 5px 4px 5px;
-	border-right: 1px solid #8fb8bc;
+	border-right: 1px solid #BC8F8F;
 }
 
 a.glink:hover {
@@ -379,7 +379,7 @@ a.glink:hover {
 }
 
 #breadCrumb a:hover {
-	color: #005fa9;
+	color: #A90000;
 	text-decoration: underline;
 }
 
@@ -424,7 +424,7 @@ a.glink:hover {
 
 .story a.capsule {
 	font: bold 1em Arial,sans-serif;
-	color: #005FA9;
+	color: #A90000;
 	display: block;
 	padding-bottom: 5px;
 }
@@ -468,12 +468,12 @@ td.storyLeft {
 	background-image: url("siteimages/bg_nav.jpg");
 	font-weight: bold;
 	padding: 3px 0px 3px 10px;
-	color: #21536A;
+	color: #6A2121;
 }
 
 #sectionLinks a:hover {
 	border-top: 1px solid #cccccc;
-	background-color: #DDEEFF;
+	background-color: #FFDDDD;
 	background-image: none;
 	font-weight: bold;
 	text-decoration: none;
@@ -619,7 +619,7 @@ td.greytxt {
 }
 
 .ac_highlight {
-	background-color: #3366cc;
+	background-color: #cc3333;
 	color: white;
 	cursor: pointer;
 }
