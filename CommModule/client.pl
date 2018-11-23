@@ -40,8 +40,8 @@ my $paranoid=1;
 
 my $debug=0;
 
-#my $serialport="/dev/ttyS0";
-my $serialport="/dev/ttyUSB0";
+my $serialport="/dev/ttyS0";
+#my $serialport="/dev/ttyUSB0";
 
 my $gpgbin="/usr/bin/gpg";
 
