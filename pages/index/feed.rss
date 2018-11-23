@@ -11,12 +11,12 @@
 		<item>
 			<title>Usage of integration branch</title>
 			<description>
-			  This is the integration branch. If it is not, please change this message in pages/index/feed.rss
+			  This is the <b>integration branch</b>. If it is not, please change this message in pages/index/feed.rss
 			  
 			  The integration branch is used as the base branch for the testserver. Ideally it should differ
 			  from the release branch only in the explicit changes for the testserver (other icon and styles).
 			  
-			  For a test campaign you should create a new branch (something like "testserver-<campaign name>")
+			  For a test campaign you should create a new branch (something like "testserver-&lt;campaign name&gt;")
 			  and merge in the bug-branches which are to be tested in the campaign. After the campaign is
 			  finished the testserver should be reverted to the integration branch.
 			  
