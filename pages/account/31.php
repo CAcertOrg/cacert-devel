@@ -17,7 +17,7 @@
 */ ?>
 <?
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$org = mysql_fetch_assoc(mysql_query($query));
+	$org = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 
 ?>
 <form method="post" action="account.php">

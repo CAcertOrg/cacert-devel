@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 require_once(dirname(__FILE__).'/../../includes/mysql.php');
 
 /**
- * Wrapper around mysql_query() to provide some error handling. Prints an error
+ * Wrapper around mysqli_query($_SESSION['mconn'], ) to provide some error handling. Prints an error
  * message and dies if query fails
  *
  * @param string $sql
@@ -30,9 +30,9 @@ require_once(dirname(__FILE__).'/../../includes/mysql.php');
  * 		the MySQL result set
  */
 function sql_query($sql) {
-	$res = mysql_query($sql);
+	$res = mysqli_query($_SESSION['mconn'], $sql);
 	if (!$res) {
-		fwrite(STDERR, "MySQL query failed:\n\"$sql\"\n".mysql_error());
+		fwrite(STDERR, "MySQL query failed:\n\"$sql\"\n".mysqli_error($_SESSION['mconn']));
 		die(1);
 	}
 
@@ -40,7 +40,7 @@ function sql_query($sql) {
 }
 
 function tc($sql) {
-	$row = mysql_fetch_assoc(sql_query($sql));
+	$row = mysqli_fetch_assoc(sql_query($sql));
 	return(intval($row['count']));
 }
 
@@ -52,13 +52,13 @@ function tc($sql) {
 function updateCache($stats) {
 	$timestamp = time();
 	$sql = "insert into `statscache` (`timestamp`, `cache`) values
-	('$timestamp', '".mysql_real_escape_string(serialize($stats))."')";
+	('$timestamp', '".mysqli_real_escape_string($_SESSION['mconn'], serialize($stats))."')";
 	sql_query($sql);
 
 	// Make sure the new statistic was inserted successfully
 	$res = sql_query(
 		"select 1 from `statscache` where `timestamp` = '$timestamp'");
-	if (mysql_num_rows($res) !== 1) {
+	if (mysqli_num_rows($res) !== 1) {
 		fwrite(STDERR, "Error on inserting the new statistic");
 		return false;
 	}

@@ -96,7 +96,7 @@
    $city = "19. November 2014";
 
     $query = "select * from `locations` where `id`='$locid'";
-        $loc = mysql_fetch_assoc(mysql_query($query));
+        $loc = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 
     $query = "SELECT ROUND(6378.137 * ACOS(0.9999999*((SIN(PI() * $loc[lat] / 180) * SIN(PI() * `locations`.`lat` / 180)) +
             (COS(PI() * $loc[lat] / 180 ) * COS(PI() * `locations`.`lat` / 180) *
@@ -114,10 +114,10 @@
     // comment next line when starting to send mail not only to me
     //  $query = "select * from `users` where `email` like 'cacerttest%'";
 
-    $res = mysql_query($query);
-    $xrows = mysql_num_rows($res);
+    $res = mysqli_query($_SESSION['mconn'], $query);
+    $xrows = mysqli_num_rows($res);
 
-    while($row = mysql_fetch_assoc($res))
+    while($row = mysqli_fetch_assoc($res))
     {
     //    uncomment next line to send mails ...
         sendmail($row['email'], "[CAcert.org] $eventname - $city", $lines, "events@cacert.org", "", "", "CAcert Events Organisation", "returns@cacert.org", 1);
