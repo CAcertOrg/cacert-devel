@@ -14,6 +14,7 @@
 			  This is the branch to test bug-1260 and its children.
 			  
 			  Merged in children are bug-1442.
+			  Additional changes: Cherry-picked bug-1305 (the cap/coap-forms only)
 			</description>
 			<link>https://bugs.cacert.org/view.php?id=1260</link>		</item>
 	</channel>
