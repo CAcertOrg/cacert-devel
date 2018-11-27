@@ -311,6 +311,10 @@ define('ARBIT', WIKI.'/ArbitrationForum');
 define('CCA', 'CAcertCommunityAgreement'); // default policy to print
 define('POLICY','policy/'); // default polciy doc directory
 define('EXT','.html'); // default polciy doc extention, should be html
+/* finger print CAcert Root Key SHA256 since 2019*/ // should obtain this automatically
+define('CLASS1_SHA256','07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5');
+define('CLASS3_SHA256','F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544');
+/* finger print CAcert Root Key */  // not to use since 2019
 /* finger print CAcert Root Key */ // should obtain this automatically
 define('CLASS1_SHA1','135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33');
 define('CLASS3_SHA1','AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE');
@@ -918,7 +922,7 @@ class CAPPDF extends TCPDF {
             $this->SetXY($savex,$savey);
 
             // sha1 fingerprint CAcert rootkeys class 1 and class 3
-            $strg = $this->unhtmlentities( _("CAcert's Root Certificate sha1 fingerprints") ) . ', class 1: '. CLASS1_SHA1 . ', class 3: ' . CLASS3_SHA1;
+            $strg = $this->unhtmlentities( _("CAcert's Root Certificate sha256 fingerprints (since 2019)") ) . ', class 1: '. CLASS1_SHA256 . ', class 3: ' . CLASS3_SHA256;
             $this->Ln(3); $this->SetX($this->lMargin);
             $this->SetFont(FONT,'',F_SIZE * $this->colwidth / ($this->GetStringWidth($strg) +1));
             $this->Cell($this->colwidth,10, $strg,0,0,'C',0,NULL);

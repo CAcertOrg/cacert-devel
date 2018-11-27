@@ -44,12 +44,12 @@
 	echo '<tbody>', "\n";
 	echo '<tr><td>', "\n";
 	echo '<tr>', "\n";
-	echo '    <td align="left"><font size=-7>'._("CAcert's Root Certificate sha1 fingerprints").'</font></td>', "\n";
-	echo '    <td align="right"><font size=-7>class 1: 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33</font></td>', "\n";
+	echo '    <td align="left"><font size=-7>'._("CAcert's Root Certificate sha256 fingerprints (since 2019)").'</font></td>', "\n";
+	echo '    <td align="right"><font size=-7>class 1: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5</font></td>', "\n";
 	echo '</tr>', "\n";
 	echo '<tr>', "\n";
 	echo '    <td></td>', "\n";
-	echo '    <td align="right"><font size=-7>class 3: AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE</font></td>', "\n";
+	echo '    <td align="right"><font size=-7>class 3: F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544</font></td>', "\n";
 	echo '<tr>', "\n";
 	echo '</font>', "\n";
 	echo '</td>', "\n";
