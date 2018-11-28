@@ -18,12 +18,6 @@
 
 <p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.html'>","</a>")?></p>
 
-<h3><?=_("Windows Installer") ?></h3>
-<ul class="no_indent">
-	<li><? printf(_("%s Windows installer package %s for browsers that use the Windows certificate store %s (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates_X0F_X0E.msi">', '</a>', '<br/>')?></li>
-	<li><?=_("SHA256 Hash:") ?> 0A87 5483 1472 4971 DB5C 85AF 5B01 92E5 2325 259A 1485 1CEF 4AB9 02EC 70BF A5D5</li>
-</ul>
-
 <h3><?=_("Class 1 PKI Key")?></h3>
 <ul class="no_indent">
 	<li><a href="certs/root_X0F.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
