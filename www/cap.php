@@ -53,7 +53,9 @@
 			$this->SetFont('Arial','',6);
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','',6);
-			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints (since 2019)")).": 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5 "._("and")." F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544",0,0,'C');
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints (since 2019)")),0,0,'C');
+			$this->ln(3);
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "root: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5 "._("and")." class3: F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544"),0,0,'C');
 			$this->SetLineWidth(0.05);
 			$this->Line(1, 43, $this->w - 1, 43);
 			$this->SetLineWidth(0.2);
