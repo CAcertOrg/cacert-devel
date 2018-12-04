@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,6 +15,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+require_once( '../classes/CAcertConfig.class.php') ;
 
 require_once('../includes/lib/l10n.php');
 require_once('../includes/notary.inc.php');
@@ -589,4 +591,5 @@ if ($oldid == 52 )
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
+
 ?>
