@@ -15,6 +15,7 @@
 			  
 			  Merged in children are bug-1442.
 			  Additional changes:
+			  2018-12-16: More changes from bug-1305 (cap forms): CAcert address and fingerprint format
 			  2018-12-12: More changes from bug-1305 (cap forms)
 			  2018-12-01: Once more cherry-picked cap form changes from bug-1305
 			  2018-11-27: Cherry-picked bug-1305 (the cap/coap-forms only)
