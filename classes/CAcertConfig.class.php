@@ -81,6 +81,14 @@ class CAcertConfig
 	var $_values ;
 
 
+	/**
+	 * Base Filepath for various Includes and Requires
+	 *
+	 * @var string $base_filepath
+	 */
+	var $base_filepath ;
+
+
 
 	/**
 	 * CAcertConfig constructor.
@@ -95,6 +103,9 @@ class CAcertConfig
 				/*
 				 * parse the INI file with extreme paranoia
 				 */
+				if ( in_array( 'base_filepath', $ini_array )) {
+					$this->base_filepath = $ini_array[ 'base_filepath'] ;
+				}
 				if ( in_array( 'testmode', $ini_array )) {
 					$this->testmode = $ini_array[ 'testmode'] ;
 				}
@@ -130,6 +141,7 @@ class CAcertConfig
 					$this->testmode = "test" ;
 				}
 			} else {
+				$this->base_filepath = "/www" ;
 				$this->testmode = "test" ;
 				$this->dbtype = "mysqli" ;
 				$this->dbhost = "127.0.0.1" ;
