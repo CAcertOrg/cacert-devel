@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+/*
 	require_once(dirname(__FILE__)."/lib/general.php");
 
 	session_name("cacert");
@@ -43,6 +44,7 @@
 	require_once($_SESSION['_config']['filepath']."/includes/mysql.php");
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/account.php');
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
+*/
 
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
