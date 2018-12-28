@@ -1,4 +1,5 @@
-<? /*
+<?php
+/*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -14,7 +15,17 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
+*/
+?>
+<p><?=_("Due to the increasing number of people that haven't been able to recover their passwords via the lost password form, there are now two other options available. 1.) If you don't care about your account you can signup under a new account and file dispute forms to recover your email accounts and domains. 2.) If you would like to recover your password via help from support staff, this requires a small payment to cover a real person's time to verify your claim of ownership on an account.  After you pay the required fee you will have to contact the proper person to arrange the verification. Click the payment button below to continue.")." "?><? printf(_("Alternatively visit our %sinformation page%s on this subject for more details."), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount'>", "</a>")?></p>
+<h3 >Password Recovery</h3>
+<h4 >Are you sure that you have attempted ALL of the following steps before completing the form below?</h4>
+<ol >
+    <li >Searched all of your notes</li>
+    <li >Asked an Assurer for help</li>
+    <li >Checked all of your recorded passwords</li>
+    <li >etc</li>
+</ol>
 <form method="post" action="index.php" autocomplete="off">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -53,7 +64,7 @@
 </table>     
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form> 
-<p><?=_("Due to the increasing number of people that haven't been able to recover their passwords via the lost password form, there are now two other options available. 1.) If you don't care about your account you can signup under a new account and file dispute forms to recover your email accounts and domains. 2.) If you would like to recover your password via help from support staff, this requires a small payment to cover a real person's time to verify your claim of ownership on an account.  After you pay the required fee you will have to contact the proper person to arrange the verification. Click the payment button below to continue.")." "?><? printf(_("Alternatively visit our %sinformation page%s on this subject for more details."), "<a href='http://wiki.cacert.org/wiki/FAQ/LostPasswordOrAccount'>", "</a>")?></p>
+
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
