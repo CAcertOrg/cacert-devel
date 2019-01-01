@@ -12,55 +12,55 @@ class CAcertConfig
 	 * @var string
 	 * @private
 	 */
-	var $testmode ;
+	protected $testmode ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $dbtype ;
+	protected $dbtype ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $dbhost ;
+	protected $dbhost ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $dbuser ;
+	protected $dbuser ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $dbpass ;
+	protected $dbpass ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $dbname ;
+	protected $dbname ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $normalhostname ;
+	protected $normalhostname ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $securehostname ;
+	protected $securehostname ;
 
 	/**
 	 * @var string
 	 * @private
 	 */
-	var $tverify ;
+	protected $tverify ;
 
 
 	/**
@@ -69,7 +69,7 @@ class CAcertConfig
 	 * @var string
 	 * @private
 	 */
-	var $ini_file_name = "../cacert-config.ini" ;
+	protected $ini_file_name = "../cacert-config.ini" ;
 
 
 	/**
@@ -78,7 +78,7 @@ class CAcertConfig
 	 * @var array
 	 * @private
 	 */
-	var $_values ;
+	protected $_values ;
 
 
 	/**
@@ -86,7 +86,7 @@ class CAcertConfig
 	 *
 	 * @var string $base_filepath
 	 */
-	var $base_filepath ;
+	protected $base_filepath ;
 
 
 
