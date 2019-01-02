@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -40,7 +40,7 @@
   <tr>
     <td colspan="6" class="DataTD"><?=_("No OpenPGP keys are currently listed.")?></td>
   </tr>
-<? } else {
+<?php } else {
 	while($row = mysql_fetch_assoc($res))
 	{
 		$verified = '';
@@ -52,23 +52,23 @@
 			$verified = _("Pending");
 ?>
   <tr>
-<? if($verified == _("Valid")) { ?>
+<?php if($verified == _("Valid")) { ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>"><?=sanitizeHTML($row['email'])?></a></td>
-<? } else if($verified == _("Pending")) { ?>
+<?php } else if($verified == _("Pending")) { ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><?=sanitizeHTML($row['email'])?></td>
-<? } else { ?>
+<?php } else { ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>"><?=sanitizeHTML($row['email'])?></a></td>
-<? } ?>
+<?php } ?>
     <td class="DataTD"><?=$row['expire']?></td>
     <td class="DataTD"><a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>"><?=sanitizeHTML($row['keyid'])?></a></td>
     <td class="DataTD"><input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=intval($row['id'])?>" /></td>
   </tr>
-<? } ?>
-<? } ?>
+<?php } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="6">
       <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>

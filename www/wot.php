@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -528,7 +528,7 @@ function send_reminder()
 
 				showheader(_("My CAcert.org Account!"));?>
 				<p>
-					<? printf(_("Your email has been sent to %s."), sanitizeHTML($user['fname'])); ?>
+					<?php printf(_("Your email has been sent to %s."), sanitizeHTML($user['fname'])); ?>
 				</p>
 				<p>[ <a href='javascript:history.go(-2)'><?= _("Go Back") ?></a> ]</p>
 				<?

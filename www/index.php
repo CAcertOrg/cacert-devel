@@ -21,7 +21,17 @@ require_once('../classes/CAcertConfig.class.php');
 
 $CAcertConfig = new CAcertConfig() ;
 
-require_once('../includes/lib/general.php');      // a few useful functions
+
+$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
+$_SESSION[ '_config' ][ 'normalhostname' ] = $CAcertConfig->value( 'normalhostname' ) ;
+$_SESSION[ '_config' ][ 'securehostname' ] = $CAcertConfig->value( 'securehostname' ) ;
+$_SESSION[ '_config' ][ 'tverify' ] = $CAcertConfig->value( 'tverify' ) ;
+//$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
+//$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
+//$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
+
+require_once('../includes/lib/general.php');    // a few useful functions
+require_once('../includes/general.php');        // a few more useful functions
 
 session_name( "cacert" );
 session_start();
@@ -32,14 +42,6 @@ $junk = array( _( "Face to Face Meeting" ), _( "Trusted Third Parties" ), _( "Th
 	_( "CT Magazine - Germany" ), _( "Temporary Increase" ), _( "Unknown" ) );
 
 
-$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
-$_SESSION[ '_config' ][ 'normalhostname' ] = $CAcertConfig->value( 'normalhostname' ) ;
-$_SESSION[ '_config' ][ 'securehostname' ] = $CAcertConfig->value( 'securehostname' ) ;
-$_SESSION[ '_config' ][ 'tverify' ] = $CAcertConfig->value( 'tverify' ) ;
-//$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
-//$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
-//$_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
-
 require_once('../includes/lib/l10n.php');
 require_once('../includes/notary.inc.php');
 require_once('../includes/mysql.php');
@@ -48,7 +50,6 @@ require_once('../includes/lib/account.php');
 // require_once($_SESSION[ '_config' ][ 'filepath' ] . '/includes/lib/account.php');
 // require_once($_SESSION[ '_config' ][ 'filepath' ] . '/includes/lib/l10n.php');
 
-$db = $_SESSION[ 'mconn' ] ;
 
 if ( array_key_exists( 'HTTP_HOST', $_SERVER ) &&
 	$_SERVER[ 'HTTP_HOST' ] != $_SESSION[ '_config' ][ 'normalhostname' ] &&
@@ -80,10 +81,10 @@ L10n::detect_language();
 L10n::init_gettext();
 
 if ( array_key_exists( 'profile', $_SESSION ) && is_array( $_SESSION[ 'profile' ] ) && array_key_exists( 'id', $_SESSION[ 'profile' ] ) && $_SESSION[ 'profile' ][ 'id' ] > 0 ) {
-	$locked = mysqli_fetch_assoc( mysqli_query( $db, "select `locked` from `users` where `id`='" . intval( $_SESSION[ 'profile' ][ 'id' ] ) . "'" ) );
+	$locked = mysqli_fetch_assoc( mysqli_query( $_SESSION[ 'mconn' ], "select `locked` from `users` where `id`='" . intval( $_SESSION[ 'profile' ][ 'id' ] ) . "'" ) );
 			if ( $locked[ 'locked' ] == 0 ) {
 				$query                             = "select sum(`points`) as `total` from `notary` where `to`='" . intval( $_SESSION[ 'profile' ][ 'id' ] ) . "' and `deleted` = 0 group by `to`";
-				$res                               = mysqli_query( $db, $query );
+				$res                               = mysqli_query( $_SESSION[ 'mconn' ], $query );
 				$row                               = mysqli_fetch_assoc( $res );
 				$_SESSION[ 'profile' ][ 'points' ] = $row[ 'total' ];
 			}
@@ -95,11 +96,11 @@ if ( array_key_exists( 'profile', $_SESSION ) && is_array( $_SESSION[ 'profile' 
 
 if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 {
-	$locked = mysqli_fetch_assoc(mysqli_query( $db,"select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
+	$locked = mysqli_fetch_assoc(mysqli_query( $_SESSION[ 'mconn' ],"select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
 	if($locked['locked'] == 0)
 	{
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-		$res = mysqli_query( $db, $query);
+		$res = mysqli_query( $_SESSION[ 'mconn' ], $query);
 		$row = mysqli_fetch_assoc($res);
 		$_SESSION['profile']['points'] = $row['total'];
 	} else {
@@ -206,7 +207,7 @@ if ( $oldid == 6 && $process != "" ) {
 		else {
 			$query = "update `users` set `password`=sha1('" . $_SESSION[ 'lostpw' ][ 'pw1' ] . "')
 						where `id`='" . intval( $_SESSION[ 'lostpw' ][ 'user' ][ 'id' ] ) . "'";
-			mysqli_query( $db, $query ) || die( mysqli_error( $db ) );
+			mysqli_query( $_SESSION[ 'mconn' ], $query ) || die( mysqli_error( $_SESSION[ 'mconn' ] ) );
 			showheader( _( "Welcome to CAcert.org" ) );
 			echo _( "Your Pass Phrase has been changed now. You can now login with your new password." );
 			showfooter();
@@ -222,7 +223,7 @@ if ( $oldid == 5 && $process != "" ) {
 	$_SESSION[ 'lostpw' ][ 'year' ]  = intval( $_REQUEST[ 'year' ] );
 	$dob                             = $_SESSION[ 'lostpw' ][ 'year' ] . "-" . $_SESSION[ 'lostpw' ][ 'month' ] . "-" . $_SESSION[ 'lostpw' ][ 'day' ];
 	$query                           = "select * from `users` where `email`='$email' and `dob`='$dob'";
-	$res                             = mysqli_query( $db, $query );
+	$res                             = mysqli_query( $_SESSION[ 'mconn' ], $query );
 	if ( mysqli_num_rows( $res ) <= 0 ) {
 		$id                                = $oldid;
 		$oldid                             = 0;
@@ -241,7 +242,7 @@ if ( $id == 4 && $_SERVER[ 'HTTP_HOST' ] == $_SESSION[ '_config' ][ 'securehostn
 		$_SERVER[ 'SSL_CLIENT_I_DN_CN' ] );
 
 	if ( $user_id >= 0 ) {
-		$_SESSION[ 'profile' ] = mysqli_fetch_assoc( mysqli_query( $db,
+		$_SESSION[ 'profile' ] = mysqli_fetch_assoc( mysqli_query( $_SESSION[ 'mconn' ],
 			"select * from `users` where
 				`id` = '$user_id' and `deleted` = 0 and `locked` = 0" ) );
 
@@ -272,27 +273,27 @@ if ( $oldid == 4 ) {
 	$pword     = mysqli_real_escape_string( $_SESSION['mconn'], stripslashes( trim( $_REQUEST[ 'pword' ] ) ) );
 	$query     = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0";
-	$res       = mysqli_query( $db, $query );
+	$res       = mysqli_query( $_SESSION[ 'mconn' ], $query );
 	$query     = "SELECT 1 FROM `users` WHERE `email`='$email' and (UNIX_TIMESTAMP(`lastLoginAttempt`) < UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - 5 or `lastLoginAttempt` is NULL)";
-	$rateLimit = mysqli_num_rows( mysqli_query( $db, $query ) ) > 0;
+	$rateLimit = mysqli_num_rows( mysqli_query( $_SESSION[ 'mconn' ], $query ) ) > 0;
 	if ( mysqli_num_rows( $res ) > 0 && $rateLimit ) {
 		$_SESSION[ 'profile' ] = "";
 		unset( $_SESSION[ 'profile' ] );
 		$_SESSION[ 'profile' ] = mysqli_fetch_assoc( $res );
 		$query                 = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='" . intval( $_SESSION[ 'profile' ][ 'id' ] ) . "'";
-		mysqli_query( $db, $query );
+		mysqli_query( $_SESSION[ 'mconn' ], $query );
 
 		if ( $_SESSION[ 'profile' ][ 'language' ] == "" ) {
 			$query = "update `users` set `language`='" . L10n::get_translation() . "'
 						where `id`='" . intval( $_SESSION[ 'profile' ][ 'id' ] ) . "'";
-			mysqli_query( $db, $query );
+			mysqli_query( $_SESSION[ 'mconn' ], $query );
 		}
 		else {
 			L10n::set_translation( $_SESSION[ 'profile' ][ 'language' ] );
 			L10n::init_gettext();
 		}
 		$query                               = "select sum(`points`) as `total` from `notary` where `to`='" . intval( $_SESSION[ 'profile' ][ 'id' ] ) . "' and `deleted`=0 group by `to`";
-		$res                                 = mysqli_query( $db, $query );
+		$res                                 = mysqli_query( $_SESSION[ 'mconn' ], $query );
 		$row                                 = mysqli_fetch_assoc( $res );
 		$_SESSION[ 'profile' ][ 'points' ]   = $row[ 'total' ];
 		$_SESSION[ 'profile' ][ 'loggedin' ] = 1;
@@ -317,12 +318,12 @@ if ( $oldid == 4 ) {
 	}
 	else if ( $rateLimit ) {
 		$query = "update `users` set `lastLoginAttempt`=CURRENT_TIMESTAMP WHERE `email`='$email'";
-		mysqli_query( $db, $query );
+		mysqli_query( $_SESSION[ 'mconn' ], $query );
 	}
 
 	$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=0 and `deleted`=0";
-	$res   = mysqli_query( $db, $query );
+	$res   = mysqli_query( $_SESSION[ 'mconn' ], $query );
 	if ( !$rateLimit || mysqli_num_rows( $res ) <= 0 ) {
 		$_SESSION[ '_config' ][ 'errmsg' ] = _( "Login failed due to incorrect email address, wrong passphrase or because the rate limit of one login per 5 seconds was hit." );
 	}
@@ -472,17 +473,17 @@ if ( $process && $oldid == 1 ) {
 
 	if ( $id == 2 ) {
 		$query = "select * from `email` where `email`='" . $_SESSION[ 'signup' ][ 'email' ] . "' and `deleted`=0";
-		$res1  = mysqli_query( $db, $query );
+		$res1  = mysqli_query( $_SESSION[ 'mconn' ], $query );
 
 		$query = "select * from `users` where `email`='" . $_SESSION[ 'signup' ][ 'email' ] . "' and `deleted`=0";
-		$res2  = mysqli_query( $db, $query );
+		$res2  = mysqli_query( $_SESSION[ 'mconn' ], $query );
 		if ( mysqli_num_rows( $res1 ) > 0 || mysqli_num_rows( $res2 ) > 0 ) {
 			$id                                = 1;
 			$_SESSION[ '_config' ][ 'errmsg' ] .= _( "This email address is currently valid in the system." ) . "<br>\n";
 		}
 
 		$query = "select `domain` from `baddomains` where `domain`=RIGHT('" . $_SESSION[ 'signup' ][ 'email' ] . "', LENGTH(`domain`))";
-		$res   = mysqli_query( $db, $query );
+		$res   = mysqli_query( $_SESSION[ 'mconn' ], $query );
 		if ( mysqli_num_rows( $res ) > 0 ) {
 			$domain                            = mysqli_fetch_assoc( $res );
 			$domain                            = $domain[ 'domain' ];
@@ -526,20 +527,20 @@ if ( $process && $oldid == 1 ) {
 							`A4`='" . $_SESSION[ 'signup' ][ 'A4' ] . "',
 							`A5`='" . $_SESSION[ 'signup' ][ 'A5' ] . "',
 							`created`=NOW(), `uniqueID`=SHA1(CONCAT(NOW(),'$hash'))";
-		mysqli_query( $db, $query );
-		$memid = mysqli_insert_id( $db );
+		mysqli_query( $_SESSION[ 'mconn' ], $query );
+		$memid = mysqli_insert_id( $_SESSION[ 'mconn' ] );
 		$query = "insert into `email` set `email`='" . $_SESSION[ 'signup' ][ 'email' ] . "',
 							`hash`='$hash',
 							`created`=NOW(),
 							`memid`='$memid'";
-		mysqli_query( $db, $query );
-		$emailid = mysqli_insert_id( $db );
+		mysqli_query( $_SESSION[ 'mconn' ], $query );
+		$emailid = mysqli_insert_id( $_SESSION[ 'mconn' ] );
 		$query   = "insert into `alerts` set `memid`='$memid',
 						`general`='" . $_SESSION[ 'signup' ][ 'general' ] . "',
 						`country`='" . $_SESSION[ 'signup' ][ 'country' ] . "',
 						`regional`='" . $_SESSION[ 'signup' ][ 'regional' ] . "',
 						`radius`='" . $_SESSION[ 'signup' ][ 'radius' ] . "'";
-		mysqli_query( $db, $query );
+		mysqli_query( $_SESSION[ 'mconn' ], $query );
 		write_user_agreement( $memid, "CCA", "account creation", "", 1 );
 
 		$body = _( "Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!" ) . "\n\n";

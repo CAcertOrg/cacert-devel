@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -21,7 +21,7 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="500">
   <tr>
-    <td colspan="5" class="title"><? printf(_("%s's Administrators"), $row['O']); ?> (<a href="account.php?id=33&amp;orgid=<?=$row['id']?>"><?=_("Add")?></a>)</td>
+    <td colspan="5" class="title"><?php printf(_("%s's Administrators"), $row['O']); ?> (<a href="account.php?id=33&amp;orgid=<?=$row['id']?>"><?=_("Add")?></a>)</td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Administrator")?></td>
@@ -42,11 +42,11 @@
     <td class="DataTD"><?=($row['masteracc'])?></a></td>
     <td class="DataTD"><?=sanitizeHTML($row['OU'])?></a></td>
     <td class="DataTD"><?=sanitizeHTML($row['comments'])?></a></td>
-<? if($row['masteracc'] == 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
+<?php if($row['masteracc'] == 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <td class="DataTD"><a href="account.php?id=34&amp;orgid=<?=$row['orgid']?>&amp;memid=<?=$row['memid']?>"><?=_("Delete")?></a></td>
-<? } else { ?>
+<?php } else { ?>
     <td class="DataTD">N/A</td>
-<? } ?>
+<?php } ?>
   </tr>
-<? } ?>
+<?php } ?>
 </table>

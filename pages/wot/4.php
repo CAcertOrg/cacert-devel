@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -62,7 +62,7 @@ if ($_SESSION['profile']['points']<100){
 			</tr>
 		</table>
 	</form>
-<? //"
+<?php //"
 	} else {
 	/* As soon as the TPP TOPUP Programme is established this routine should be used
 	<p><?=_("As you have already got 2 TTP assurances you can only take part in the TTP TOPUP programme. If you want to ask for the TTP TOPUP programme use the submit button to send the request to support@cacert.org to start the process. CAcert will then inform you about the next steps.")?></p>

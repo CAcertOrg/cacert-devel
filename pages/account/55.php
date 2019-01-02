@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -75,7 +75,7 @@
     <td class="DataTD"><?=sanitizeHTML($row[1])?></td>
     <td class="DataTD"><?=sanitizeHTML($row[2])?></td>
   </tr>
-<?      }
+<?php      }
 ?>
 </table>
 <br>
@@ -110,11 +110,11 @@
               fix_assurer_flag($_SESSION['profile']['id']);
             }
 ?>  <td colspan="3" class="DataTD"><?=_("You have passed the Assurer Challenge and collected at least 100 Assurance Points, you are an Assurer.")?></td>
-<?        } elseif (($row[2]>=100) && !$HaveTest) {
+<?php        } elseif (($row[2]>=100) && !$HaveTest) {
 ?>  <td colspan="3" class="DataTD"><?=_("You have at least 100 Assurance Points, if you want to become an assurer try the ").'<a href="https://cats.cacert.org">'._("Assurer Challenge").'</a>!'?></td>
-<?        } elseif ($HaveTest && ($row[2]<100)) {
+<?php        } elseif ($HaveTest && ($row[2]<100)) {
 ?>  <td colspan="3" class="DataTD"><?=_("You have passed the Assurer Challenge, but to become an Assurer you still have to reach 100 Assurance Points!")?></td>
-<?        }
+<?php        }
         }
       }
 ?>  </tr>

@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 
-<? if(!array_key_exists('location',$_REQUEST) || $_REQUEST['location'] == "") { ?>
+<?php if(!array_key_exists('location',$_REQUEST) || $_REQUEST['location'] == "") { ?>
 <script language="javascript" src="/ac.js"></script>
 <script language="javascript">
 <!--
@@ -60,7 +60,7 @@ ac1.enable_unicode();
 document.f.location.focus();
 // -->
 </script>
-<? } else {
+<?php } else {
 	if(intval($_REQUEST['location']) == 0)
 	{
 		$bits = explode(",", $_REQUEST['location']);
@@ -130,6 +130,6 @@ document.f.location.focus();
     <td class="DataTD"><?=$row['contactinfo']?></td>
     <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=$row['uid']?>"><?=_("Email Me")?></a></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
-<? } ?>
+<?php } ?>

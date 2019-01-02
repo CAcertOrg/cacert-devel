@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -33,7 +33,7 @@
 </p>
 
 <p><?=_("CAcert Logo, colour version, PNG format")?>
-<? $px = array("100x24", "120x28", "150x35", "180x42", "210x49", "270x62", "330x76", "390x90", "470x108", "560x128", "680x156", "820x188", "1000x229") ?>
+<?php $px = array("100x24", "120x28", "150x35", "180x42", "210x49", "270x62", "330x76", "390x90", "470x108", "560x128", "680x156", "820x188", "1000x229") ?>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;|
 <?
 foreach ( $px as $i ) {
@@ -42,10 +42,10 @@ foreach ( $px as $i ) {
      printf(" | ");
    }
 ?><a href="http://svn.cacert.org/CAcert/PR/Logos/CAcert-logo-colour-<?=$w?>.png"><?=$i?></a>
-<? } ?> |</p>
+<?php } ?> |</p>
 
 <p><?=_("CAcert Logo, monochrome version, PNG format")?>
-<? $px = array("100x24", "120x28", "150x35", "180x42", "210x49", "270x63", "330x76", "390x90", "470x108", "560x129", "680x157", "820x189", "1000x230") ?>
+<?php $px = array("100x24", "120x28", "150x35", "180x42", "210x49", "270x63", "330x76", "390x90", "470x108", "560x129", "680x157", "820x189", "1000x230") ?>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;|
 <?
 foreach ( $px as $i ) {
@@ -54,5 +54,5 @@ foreach ( $px as $i ) {
      printf(" | ");
    }
 ?><a href="http://svn.cacert.org/CAcert/PR/Logos/CAcert-logo-mono-<?=$w?>.png"><?=$i?></a>
-<? } ?> |</p>
+<?php } ?> |</p>
 

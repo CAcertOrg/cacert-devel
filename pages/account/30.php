@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -28,10 +28,10 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><? printf(_("Delete Domain for %s"), ($org['O'])); ?></td>
+    <td colspan="2" class="title"><?php printf(_("Delete Domain for %s"), ($org['O'])); ?></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><? printf(_("Are you really sure you want to remove %s and all certificates issued under this domain?"), sanitizeHTML($row['domain'])); ?></td>
+    <td class="DataTD" colspan="2"><?php printf(_("Are you really sure you want to remove %s and all certificates issued under this domain?"), sanitizeHTML($row['domain'])); ?></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="cancel" value="<?=_("Cancel")?>">

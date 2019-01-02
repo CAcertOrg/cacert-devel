@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -30,7 +30,7 @@
 <input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><? printf(_("New Admin for %s"), ($row['O'])); ?></td>
+    <td colspan="2" class="title"><?php printf(_("New Admin for %s"), ($row['O'])); ?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Email")?>:</td>
@@ -40,7 +40,7 @@
     <td class="DataTD"><?=_("Department")?>:</td>
     <td class="DataTD"><input type="text" name="OU" value=""></td>
   </tr>
-<? if($_SESSION['profile']['orgadmin'] == 1) { ?>
+<?php if($_SESSION['profile']['orgadmin'] == 1) { ?>
   <tr>
     <td class="DataTD"><?=_("Master Account")?>:</td>
     <td class="DataTD"><select name="masteracc">
@@ -48,7 +48,7 @@
 		<option value="1">Yes</option>
 	</select></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("Comments")?>:</td>
     <td class="DataTD"><textarea name="comments" cols="30" rows="5"></textarea></td>

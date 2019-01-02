@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -68,9 +68,9 @@
     <td class="DataTD"><a href="account.php?id=32&amp;orgid=<?=$row['id']?>"><?=_("Admins")?> (<?=$admincount?>)</a></td>
     <td class="DataTD"><a href="account.php?id=27&amp;orgid=<?=$row['id']?>"><?=_("Edit")?></a></td>
     <td class="DataTD"><a href="account.php?id=31&amp;orgid=<?=$row['id']?>"><?=_("Delete")?></a></td>
-    <? if(array_key_exists('viewcomment',$_REQUEST) && $_REQUEST['viewcomment']!='') { ?>
+    <?php if(array_key_exists('viewcomment',$_REQUEST) && $_REQUEST['viewcomment']!='') { ?>
     <td class="DataTD"><?=sanitizeHTML($row['comments'])?></td>
-    <? } ?>
+    <?php } ?>
   </tr>
-<? } ?>
+<?php } ?>
 </table>

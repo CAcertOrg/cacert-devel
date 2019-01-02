@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -37,17 +37,17 @@
 			$verified = _("Unverified");
 ?>
   <tr>
-    <td class="DataTD"><? if($row['hash'] == "") { ?><input type="radio" name="emailid" value="<?=$row['id']?>"
-	<? if($row['email'] == $_SESSION['profile']['email']) echo " checked"; ?>><? } else { echo "&nbsp;"; } ?></td>
+    <td class="DataTD"><?php if($row['hash'] == "") { ?><input type="radio" name="emailid" value="<?=$row['id']?>"
+	<?php if($row['email'] == $_SESSION['profile']['email']) echo " checked"; ?>><?php } else { echo "&nbsp;"; } ?></td>
     <td class="DataTD"><?=$verified?></td>
-<? if($row['email'] == $_SESSION['profile']['email']) { ?>
+<?php if($row['email'] == $_SESSION['profile']['email']) { ?>
     <td class="DataTD"><?=_("N/A")?></td>
-<? } else { ?>
+<?php } else { ?>
     <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
-<? } ?>
+<?php } ?>
     <td class="DataTD"><?=sanitizeHTML($row['email'])?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="makedefault" value="<?=_("Make Default")?>"></td>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Delete")?>"></td>

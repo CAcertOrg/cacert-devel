@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -22,7 +22,7 @@
   if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "")
   {
     ?><font color="orange" size="+1">
-      <? echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
+      <?php echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
     </font>
     <?unset($_SESSION['_config']['error']);
   }
@@ -37,7 +37,7 @@
       $_SESSION['assuresomeone']['day'] = 0;
   }
 ?>
-<? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
+<?php if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
 <form method="post" action="wot.php">
 <input type="hidden" name="email" value="<?=sanitizeHTML($_POST['email'])?>"><br>
 <select name="reminder-lang">
@@ -56,7 +56,7 @@
 <input type="hidden" name="oldid" value="<?=$id?>">
 <input type="submit" name="reminder" value="<?=_("Send reminder notice")?>">
 </form>
-<? unset($_SESSION['_config']['noemailfound']); } ?>
+<?php unset($_SESSION['_config']['noemailfound']); } ?>
 <form method="post" action="wot.php" name="form1">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -64,11 +64,11 @@
   </tr>
   <tr>
     <td class="DataTD"><?=_("Email")?>:</td>
-<? if(array_key_exists('remindersent',$_SESSION['_config']) && $_SESSION['_config']['remindersent'] == 1) { unset($_SESSION['_config']['remindersent']) ?>
+<?php if(array_key_exists('remindersent',$_SESSION['_config']) && $_SESSION['_config']['remindersent'] == 1) { unset($_SESSION['_config']['remindersent']) ?>
     <td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-<? } else { ?>
+<?php } else { ?>
     <td class="DataTD"><input type="text" name="email" id="email" value="<?=array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):""?>"></td>
-<? } ?>
+<?php } ?>
   </tr>
     <tr>
     <td class="DataTD">

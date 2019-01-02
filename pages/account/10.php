@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -44,7 +44,7 @@
 </legend>
 <div id="advanced_options">
 
-<? if($_SESSION['profile']['points'] >= 50) { ?>
+<?php if($_SESSION['profile']['points'] >= 50) { ?>
 <ul class="no_indent">
 	<li>
 		<input type="radio" id="root1" name="rootcert" value="1" />
@@ -56,7 +56,7 @@
 	</li>
 </ul>
 <p><?=_("Please note: The class 3 root certificate needs to be setup in your webserver as a chained certificate, while slightly more complicated to setup, this root certificate is more likely to be trusted by more people.")?></p>
-<? } ?>
+<?php } ?>
 
 <p class="attach_ul"><?=_("Hash algorithm used when signing the certificate:")?></p>
 <ul class="no_indent">

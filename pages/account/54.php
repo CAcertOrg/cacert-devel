@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? 
+<?php
 	$ccid = array_key_exists('ccid',$_REQUEST)?intval($_REQUEST['ccid']):0;
 	$regid = array_key_exists('regid',$_REQUEST)?intval($_REQUEST['regid']):0;
 	$locid = array_key_exists('locid',$_REQUEST)?intval($_REQUEST['locid']):0;
@@ -39,7 +39,7 @@
 <input type="hidden" name="ccid" value="<?=$ccid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($regid > 0 && $_REQUEST['action'] == "edit") {
+<?php } if($regid > 0 && $_REQUEST['action'] == "edit") {
 	$query = "select * from `regions` where `id`='$regid' order by `name`";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$name = $row['name'];
@@ -61,7 +61,7 @@
 <input type="hidden" name="regid" value="<?=$regid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($regid > 0 && $_REQUEST['action'] == "add") { ?>
+<?php } if($regid > 0 && $_REQUEST['action'] == "add") { ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -87,7 +87,7 @@
 <input type="hidden" name="regid" value="<?=$regid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($locid > 0 && $_REQUEST['action'] == "edit") {
+<?php } if($locid > 0 && $_REQUEST['action'] == "edit") {
 	$query = "select * from `locations` where `id`='$locid'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 
@@ -123,7 +123,7 @@
 <input type="hidden" name="locid" value="<?=$locid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($locid > 0 && $_REQUEST['action'] == "aliases") {
+<?php } if($locid > 0 && $_REQUEST['action'] == "aliases") {
 	$query = "select * from `localias` where `locid`='".intval($locid)."'";
 	$res = mysql_query($query);
 	$rc = mysql_num_rows($res);
@@ -150,7 +150,7 @@
     <td class="DataTD"><?=$row['name']?></td>
     <td class="DataTD"><a href="account.php?id=54&amp;locid=<?=$locid?>&amp;name=<?=($row['name'])?>&amp;action=delalias" onclick="return confirm('Are you sure you want to delete this location alias?');"><?=_("Delete")?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -167,7 +167,7 @@ function Show_Stuff()
 document.getElementById("display1").style.display = "none";
 -->
 </script>
-<? } if($locid > 0 && $_REQUEST['action'] == "move") {
+<?php } if($locid > 0 && $_REQUEST['action'] == "move") {
 	$query = "select * from `locations` where `id`='$locid'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$newreg = $_REQUEST['newreg'] = $row['regid'];
@@ -205,5 +205,5 @@ document.getElementById("display1").style.display = "none";
 <input type="hidden" name="locid" value="<?=$locid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } ?>
+<?php } ?>
 

@@ -103,31 +103,31 @@ class CAcertConfig
 				/*
 				 * parse the INI file with extreme paranoia
 				 */
-				if ( in_array( 'base_filepath', $ini_array )) {
+				if ( array_key_exists( 'base_filepath', $ini_array )) {
 					$this->base_filepath = $ini_array[ 'base_filepath'] ;
 				}
-				if ( in_array( 'testmode', $ini_array )) {
+				if ( array_key_exists( 'testmode', $ini_array )) {
 					$this->testmode = $ini_array[ 'testmode'] ;
 				}
-				if ( in_array( 'dbtype', $ini_array )) {
+				if ( array_key_exists( 'dbtype', $ini_array )) {
 					$this->dbtype = $ini_array[ 'dbtype'] ;
 				}
-				if ( in_array( 'dbhost', $ini_array )) {
+				if ( array_key_exists( 'dbhost', $ini_array )) {
 					$this->dbhost = $ini_array[ 'dbhost'] ;
 				}
-				if ( in_array( 'dbuser', $ini_array )) {
+				if ( array_key_exists( 'dbuser', $ini_array )) {
 					$this->dbuser = $ini_array[ 'dbuser'] ;
 				}
-				if ( in_array( 'dbpass', $ini_array )) {
+				if ( array_key_exists( 'dbpass', $ini_array )) {
 					$this->dbpass = $ini_array[ 'dbpass'] ;
 				}
-				if ( in_array( 'normalhostname', $ini_array )) {
+				if ( array_key_exists( 'normalhostname', $ini_array )) {
 					$this->normalhostname = $ini_array[ 'normalhostname'] ;
 				}
-				if ( in_array( 'securehostname', $ini_array )) {
+				if ( array_key_exists( 'securehostname', $ini_array )) {
 					$this->securehostname = $ini_array[ 'securehostname'] ;
 				}
-				if ( in_array( 'tverify', $ini_array )) {
+				if ( array_key_exists( 'tverify', $ini_array )) {
 					$this->tverify = $ini_array[ 'tverify'] ;
 				}
 

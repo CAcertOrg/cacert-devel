@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -22,10 +22,10 @@
   </tr>
   <tr>
     <td class="DataTD" valign="top"><b><?=_("Alert me if")?></b>: </td>
-    <td class="DataTD" align="left"><input type="checkbox" name="general" value="1"<? if(array_key_exists('general',$_REQUEST) && $_REQUEST['general']) echo " checked='checked'"; ?>><?=_("General Announcements")?><br>
-	<input type="checkbox" name="country" value="1"<? if(array_key_exists('country',$_REQUEST) && $_REQUEST['country']) echo " checked='checked'"; ?>><?=_("Country Announcements")?><br>
-	<input type="checkbox" name="regional" value="1"<? if(array_key_exists('regional',$_REQUEST) && $_REQUEST['regional']) echo " checked='checked'"; ?>><?=_("Regional Announcements")?><br>
-	<input type="checkbox" name="radius" value="1"<? if(array_key_exists('radius',$_REQUEST) && $_REQUEST['radius']) echo " checked='checked'"; ?>><?=_("Within 200km Announcements")?></td>
+    <td class="DataTD" align="left"><input type="checkbox" name="general" value="1"<?php if(array_key_exists('general',$_REQUEST) && $_REQUEST['general']) echo " checked='checked'"; ?>><?=_("General Announcements")?><br>
+	<input type="checkbox" name="country" value="1"<?php if(array_key_exists('country',$_REQUEST) && $_REQUEST['country']) echo " checked='checked'"; ?>><?=_("Country Announcements")?><br>
+	<input type="checkbox" name="regional" value="1"<?php if(array_key_exists('regional',$_REQUEST) && $_REQUEST['regional']) echo " checked='checked'"; ?>><?=_("Regional Announcements")?><br>
+	<input type="checkbox" name="radius" value="1"<?php if(array_key_exists('radius',$_REQUEST) && $_REQUEST['radius']) echo " checked='checked'"; ?>><?=_("Within 200km Announcements")?></td>
   </tr>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update My Settings")?>"></td>

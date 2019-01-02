@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -29,5 +29,5 @@
 ?>
 <h3><?=_("Below is your OpenPGP key")?></h3>
 <pre>
-<? readfile($row['crt']); ?>
+<?php readfile($row['crt']); ?>
 </pre>

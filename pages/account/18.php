@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -33,7 +33,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
       <td colspan="8" class="DataTD" >
         <select name="orgfilterid">
            <?=sprintf('<option value="%d"%s>%s</option>',0, 0 == $orgfilterid ? " selected" : "" ,_("All")) ?>
-<?  $query = "select `orginfo`.`O`, `orginfo`.`id`
+<?php  $query = "select `orginfo`.`O`, `orginfo`.`id`
       from `org`, `orginfo`
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
       ORDER BY `orginfo`.`O` ";
@@ -114,7 +114,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
   <tr>
     <td colspan="9" class="DataTD"><?=_("No client certificates are currently listed.")?></td>
   </tr>
-<? } else {
+<?php } else {
   $orgname='';
   while($row = mysql_fetch_assoc($res))
   {
@@ -124,7 +124,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
     <td colspan="9" class="title"></td>
   </tr>
   <tr>
-    <td colspan="9" class="title"><? printf(_("Certificates for %s"), $orgname)?> </td>
+    <td colspan="9" class="title"><?php printf(_("Certificates for %s"), $orgname)?> </td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("OU/Department")?></td>
@@ -151,26 +151,26 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
 ?>
   <tr>
     <td class="DataTD"><?=$row['ou']?></td>
-    <? if($verified == _("Valid") || $verified == _("Expired")) { ?>
+    <?php if($verified == _("Valid") || $verified == _("Expired")) { ?>
     <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=$row['id']?>"></td>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
-<? } else if($verified == _("Pending")) { ?>
+<?php } else if($verified == _("Pending")) { ?>
     <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=$row['id']?>"></td>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><?=$row['CN']?></td>
-<? } else { ?>
+<?php } else { ?>
     <td class="DataTD">&nbsp;</td>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=19&cert=<?=$row['id']?>"><?=$row['CN']?></a></td>
-<? } ?>
+<?php } ?>
     <td class="DataTD"><?=$row['serial']?></td>
     <td class="DataTD"><?=$row['revoke']?></td>
     <td class="DataTD"><?=$row['expires']?></td>
     <td class="DataTD"><input name="comment_<?=$row['id']?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=$row['id']?>" /></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="9">
       <?=_('* Comment is NOT included in the certificate as it is intended for your personal reference only. To change the comment tick the checkbox and hit "Change Settings".')?>
@@ -184,7 +184,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
   <tr>
     <td class="DataTD" colspan="9"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>">
 <input type="hidden" name="csrf" value="<?=make_csrf('clicerchange')?>" />

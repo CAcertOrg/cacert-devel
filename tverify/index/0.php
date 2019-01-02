@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -111,7 +111,7 @@
 <?=_("By just submitting your Thawte certificate you can be issued 50 points automatically to any matching account in the system that you operate.")?><br>
 <?=_("To receive an additional 40 points you must also include a valid link to your notary listing on the Thawte website.")?><br>
 <?=_("If you meet the above criteria you are also elligible to receive an additional 60 points by submitting a legible government issued copy of your photo ID. If details on your photo ID aren't legible you may be excluded from receiving these points.")?></p>
-<? if($_SESSION['_config']['errmsg'] != "") { ?><p>&nbsp;</p><p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;"><?
+<?php if($_SESSION['_config']['errmsg'] != "") { ?><p>&nbsp;</p><p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;"><?
 	echo $_SESSION['_config']['errmsg']."</p>";
 	unset($_SESSION['_config']['errmsg']);
 } ?>

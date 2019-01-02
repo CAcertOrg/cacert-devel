@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -35,7 +35,7 @@
 
 			$_SESSION['_config']['pagehash'] = md5(date("U"));
 ?>
-<? if($_SESSION['_config']['error'] != "") { ?><font color="#ff0000" size="+1">ERROR: <?=$_SESSION['_config']['error']?></font><? unset($_SESSION['_config']['error']); } ?>
+<?php if($_SESSION['_config']['error'] != "") { ?><font color="#ff0000" size="+1">ERROR: <?=$_SESSION['_config']['error']?></font><?php unset($_SESSION['_config']['error']); } ?>
 <form method="post" action="wot.php">
 <input type="hidden" name="userid" value="<?=intval($user['id'])?>">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -46,12 +46,12 @@
     <td class="DataTD"><?=_("To")?>:</td>
     <td class="DataTD" align="left"><?=sanitizeHTML(trim($user['fname'].' '.substr($user['lname'], 0, 1)))?></td>
   </tr>
-<? if($userlang != "") { ?>
+<?php if($userlang != "") { ?>
   <tr>
     <td class="DataTD"><?=_("Language")?>:</td>
-    <td class="DataTD" align="left"><? printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$userlang]) ?></td>
+    <td class="DataTD" align="left"><?php printf(_("%s prefers to be contacted in %s"), sanitizeHTML($user['fname']), L10n::$translations[$userlang]) ?></td>
   </tr>
-<? } ?>
+<?php } ?>
 <?
 	$query = "select * from `addlang` where `userid`='".intval($user['id'])."'";
 	$res = mysql_query($query);
@@ -61,9 +61,9 @@
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>
-    <td class="DataTD" align="left"><? printf(_("%s will also accept email in %s - %s"), sanitizeHTML($user['fname']), $lang['lang'], $lang['country']) ?></td>
+    <td class="DataTD" align="left"><?php printf(_("%s will also accept email in %s - %s"), sanitizeHTML($user['fname']), $lang['lang'], $lang['country']) ?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("Subject")?>:</td>
     <td class="DataTD" align="left"><input type="text" name="subject" value="<?=sanitizeHTML($_POST['subject'])?>"></td>
@@ -81,4 +81,4 @@
 <input type="hidden" name="oldid" value="<?=intval($id)?>">
 </form>
 <p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
-<? } } ?>
+<?php } } ?>

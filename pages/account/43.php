@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -94,7 +94,7 @@ if(intval(array_key_exists('userid',$_REQUEST)?$_REQUEST['userid']:0) <= 0)
         } else {
 ?>
             <tr>
-                <td class="DataTD" colspan="2"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+                <td class="DataTD" colspan="2"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
             </tr>
 <?
         }
@@ -171,7 +171,7 @@ if(intval($_REQUEST['userid']) > 0) {
 <!-- display data table -->
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
-            <td colspan="5" class="title"><? printf(_("%s's Account Details"), sanitizeHTML($row['email'])); ?></td>
+            <td colspan="5" class="title"><?php printf(_("%s's Account Details"), sanitizeHTML($row['email'])); ?></td>
         </tr>
         <tr>
             <td class="DataTD"><?=_("Email")?>:</td>
@@ -238,7 +238,7 @@ if(intval($_REQUEST['userid']) > 0) {
             </td>
         </tr>
 
-    <? // list of flags ?>
+    <?php // list of flags ?>
         <tr>
             <td class="DataTD"><?=_("CCA accepted")?>:</td>
             <td class="DataTD"><a href="account.php?id=57&amp;userid=<?=intval($row['id'])?>"><?=intval(get_user_agreement_status($row['id'], 'CCA')) ? _("Yes") : _("No") ?></a></td>
@@ -305,7 +305,7 @@ if(intval($_REQUEST['userid']) > 0) {
             <td class="DataTD"><?=_("Within 200km Announcements")?>:</td>
             <td class="DataTD"><a href="account.php?id=43&amp;radius=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=intval($alerts['radius'])?></a></td>
         </tr>
-    <? //change password, view secret questions and delete account section ?>
+    <?php //change password, view secret questions and delete account section ?>
         <tr>
             <td class="DataTD"><?=_("Change Password")?>:</td>
             <td class="DataTD"><a href="account.php?id=44&amp;userid=<?=intval($row['id'])?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Change Password")?></a></td>
@@ -384,7 +384,7 @@ if(intval($_REQUEST['userid']) > 0) {
         <tr>
             <td class="DataTD" colspan="2"><a href="account.php?id=43&amp;userid=<?=intval($row['id'])?>&amp;showlostpw=yes&amp;ticketno=<?=sanitizeHTML($ticketno)?>"><?=_("Show Lost Password Details")?></a></td>
         </tr>
-    <?                }
+    <?php                }
 
     // list assurance points
     ?>
@@ -447,7 +447,7 @@ if(intval($_REQUEST['userid']) > 0) {
     <?
                 }
     ?>
-    <? //  Begin - Debug infos ?>
+    <?php //  Begin - Debug infos ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td colspan="2" class="title"><?=_("Account State")?></td>
@@ -947,7 +947,7 @@ if(intval($_REQUEST['userid']) > 0) {
         </tr>
     </table>
     <br />
-    <? // list assurances ?>
+    <?php // list assurances ?>
     <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
         <tr>
             <td class="DataTD">

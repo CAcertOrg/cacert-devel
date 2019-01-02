@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -49,9 +49,9 @@
 <body>
  <div id="pagecell1">
   <div id="pageName"><br>
-    <h2><a href="http<? if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org">
-	<img src="http<? if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org/images/cacert3.png" border="0" alt="CAcert.org logo"></a></h2>
-<? if($_SERVER['HTTPS']!="on") { ?>
+    <h2><a href="http<?php if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org">
+	<img src="http<?php if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org/images/cacert3.png" border="0" alt="CAcert.org logo"></a></h2>
+<?php if($_SERVER['HTTPS']!="on") { ?>
 <div id="googlead"><br><script type="text/javascript"><!--
 google_ad_client = "pub-0959373285729680";
 google_alternate_color = "ffffff";
@@ -62,23 +62,23 @@ google_ad_type = "text";
 google_ad_channel = "";
 //--></script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>
-<? } ?>
+<?php } ?>
   </div>
   <div id="content">
     <div class="story">
       <h3>SSL Certificate Details for <?=$ref?></h3>
-<? if($invalid == 0) { ?>
+<?php if($invalid == 0) { ?>
       <p>
 	Status: Valid<br />
 	Valid From: <?=$info['issued']?> GMT<br />
 	Valid To: <?=$info['expire']?> GMT<br />
 	Subject: <a href="#" title="<?=$info['subject']?>" onClick="return false;"><?=substr($info['subject'],0,80)?></a><br />
-	Organisation: <? if($info['org'] == 0) { ?>N/A<? } else { echo $info['O'].", ".$info['L']." ".$info['ST']." ".$info['C']; } ?><br />
-	Verification: <? if($info['points'] >= 50) { echo "Person had been assured at time of issue with at least 50 points."; } 
-		else if($info['org'] == 1) { ?>This organisation was assured at the time the certificate was issued.<? } ?></p>
-<? } else { ?>
+	Organisation: <?php if($info['org'] == 0) { ?>N/A<?php } else { echo $info['O'].", ".$info['L']." ".$info['ST']." ".$info['C']; } ?><br />
+	Verification: <?php if($info['points'] >= 50) { echo "Person had been assured at time of issue with at least 50 points."; } 
+		else if($info['org'] == 1) { ?>This organisation was assured at the time the certificate was issued.<?php } ?></p>
+<?php } else { ?>
 	<p style="color:red">This site has potentially abused CAcert logos and Copyrights, please report it so we may further investigate.</p>
-<? } ?>
+<?php } ?>
 	<p><a href="report.php">Problem with this site? Please report it</a></p>
     </div>
    </div>

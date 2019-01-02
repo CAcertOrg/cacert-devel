@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -48,5 +48,5 @@
 <h3><?=_("Create more badges")?></h3>
 
 <p><?=_(sprintf("CAcert lives from the community! If you want to contribute additional images please send them to %s to have them added to this website.", "<a href='mailto:cacert@lists.cacert.org'>cacert@lists.cacert.org</a>"))?></p>
-<? showfooter(); ?>
+<?php showfooter(); ?>
 

@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -134,7 +134,7 @@ if ($thawte)
     <td class="DataTD"><?=sanitizeHTML($row['location'])?></td>
     <td class="DataTD"><?=$row['method']==""?"":_(sprintf("%s", $row['method']))?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="3"><b><?=_("Total Points Issued")?>:</b></td>
     <td class="DataTD"><?=intval($points)?></td>

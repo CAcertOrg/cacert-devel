@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -36,7 +36,7 @@
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
     <td class="DataTD" width="125"><input type="text" name="fname" size="30" value="<?=array_key_exists('fname',$_REQUEST)?sanitizeHTML($_REQUEST['fname']):""?>" autocomplete="off"></td>
-    <td rowspan="4" class="DataTD" width="125"><? printf(_("Help on Names %sin the wiki%s"),'<a href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
+    <td rowspan="4" class="DataTD" width="125"><?php printf(_("Help on Names %sin the wiki%s"),'<a href="//wiki.cacert.org/FAQ/HowToEnterNamesInJoinForm" target="_blank">','</a>')?></td>
   </tr>
 
   <tr>

@@ -1,6 +1,6 @@
-<? header("location: http://blog.CAcert.org/feed/"); exit; ?>
-<? /*			<author>$row['who'] &lt;nomail@nospam.sss&gt;</author> */ ?>
-<? header("Content-Type: application/xml");
+<?php header("location: http://blog.CAcert.org/feed/"); exit; ?>
+<?php /*			<author>$row['who'] &lt;nomail@nospam.sss&gt;</author> */ ?>
+<?php header("Content-Type: application/xml");
 ?><<?="?"?>xml version="1.0" encoding="UTF-8" <?="?"?>>
 <rss version="2.0">
 	<channel>
@@ -21,7 +21,7 @@
 			<link>http://www.cacert.org/news.php?from=rss&amp;id=<?=$row['id']?></link>
 			<pubDate><?=date("D, d M Y H:i:s O", $row['TS'])?></pubDate>
 		</item>
-<? } ?>
+<?php } ?>
 
 	</channel>
 </rss>

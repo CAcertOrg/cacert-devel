@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -50,13 +50,13 @@ function deUmlaut($str) {
 }
 
 function deUmlaut2($str) {
-	return mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "Ä"), "Ae",
-		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "Ö"), "Oe",
-		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "Ü"), "Ue",
-		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ä"), "ae",
-		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ö"), "oe",
-		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ü"), "ue",
-		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ß"), "ss",
+	return mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "Ae",
+		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "Oe",
+		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "Ue",
+		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "ae",
+		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "oe",
+		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "ue",
+		 mb_ereg_replace(iconv("ISO-8859-1", "UTF-8", "ï¿½"), "ss",
 				 mb_convert_encoding($str, "UTF-8"))))))));
 }
 
