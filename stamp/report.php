@@ -40,7 +40,7 @@
 
 	if($process != "")
 	{
-		$checkemail = checkEmail($email);
+		$checkemail = checkEmailDummy($email);
 		if($checkemail != "OK")
 		{
 			$errmsg = $checkemail;
