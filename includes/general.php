@@ -552,6 +552,27 @@
 		@unlink($tmpfname);
 	}
 
+    /* This function is used on testservers to replace the email address check, so you can create accounts
+       for arbitraty mail addresses. It only roughly checks the syntax of the address.
+       Do not use this on a production server! " */
+	function checkEmailDummy($email)
+	{
+		$myemail = mysql_real_escape_string($email);
+		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
+		{
+			$line = "250 No address check on testserver.";
+			$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
+			if(is_array($_SESSION['profile'])) $query.=", `uid`='".intval($_SESSION['profile']['id'])."'";
+			mysql_query($query);
+
+			if(substr($line, 0, 3) != "250")
+				return $line;
+			else
+				return "OK";
+	    }
+	    return "Invalid mail address";
+	}
+
 	function checkEmail($email)
 	{
 		$myemail = mysql_real_escape_string($email);
