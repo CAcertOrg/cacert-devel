@@ -136,7 +136,7 @@ function buildSubjectFromSession() {
 			showfooter();
 			exit;
 		}
-		$checkemail = checkEmail($_REQUEST['newemail']);
+		$checkemail = checkEmailDummy($_REQUEST['newemail']);
 		if($checkemail != "OK")
 		{
 			showheader(_("My CAcert.org Account!"));
@@ -642,7 +642,7 @@ function buildSubjectFromSession() {
 			showfooter();
 			exit;
 		}
-		$checkemail = checkEmail($authaddy);
+		$checkemail = checkEmailDummy($authaddy);
 		if($checkemail != "OK")
 		{
 			showheader(_("My CAcert.org Account!"));
