@@ -56,7 +56,7 @@
     <td colspan="8" class="DataTD"><?php echo _("No certificates are currently listed.")?></td>
   </tr>
 <?php } else {
-	while($row = mysqli_fetch_assoc($res))
+		while($row = mysql_fetch_assoc($res))
 	{
 		if($row['timeleft'] > 0)
 			$verified = _("Valid");

@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2011  CAcert Inc.
 
@@ -176,6 +177,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 				// TTP TOPUP, limit to 30
 			case 'TOPUP':
 				$points = min($points, 30);
+				break;
 
 			// All these should be preserved for the time being
 			case 'Unknown':			 // to be revoked in the future? limit to max 50 pts?
@@ -543,7 +545,8 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		<td class="DataTD"><?php echo $points_countable?></td>
 		<td class="DataTD"><?php echo $remark?></td>
 	</tr>
-<?php 	}
+<?php
+	}
 
 
 // ************* output given assurances ******************
@@ -1055,7 +1058,8 @@ function get_user_agreements($memid, $type=null, $active=null){
 <input type="hidden" name="pagehash" value="<?php echo $_SESSION['_config']['wothash']?>" />
 <input type="hidden" name="oldid" value="<?php echo $oldid?>" />
 </form>
-<?php 	}
+<?php
+	}
 
 	function account_email_delete($mailid){
 	//deletes an email entry from an acount
@@ -1066,7 +1070,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		$mailid = intval($mailid);
 		revoke_all_client_cert($mailid);
 		$query = "update `email` set `deleted`=NOW() where `id`='$mailid'";
-		mysqli_query($_SESSION['mconn'], $query);
+		mysqli_query( $_SESSION[ 'mconn' ],$query);
 	}
 
 	function account_domain_delete($domainid){
@@ -1593,9 +1597,9 @@ function get_gpg_certs($userid, $viewall=0){
 function output_log_email_header(){
 	?>
 	<tr>
-		<td class="DataTD bold"><?php echo _("Email, primary bold") ?></td>
-		<td class="DataTD bold"><?php echo _("Created") ?></td>
-		<td class="DataTD bold"><?php echo _("Deleted") ?></td>
+		<td class="DataTD bold"><?php echo  _("Email, primary bold") ?></td>
+		<td class="DataTD bold"><?php echo  _("Created") ?></td>
+		<td class="DataTD bold"><?php echo  _("Deleted") ?></td>
 	</tr>
 
 	<?php }
@@ -1625,9 +1629,9 @@ function output_log_email($row, $primary){
 function output_log_domains_header(){
 	?>
 	<tr>
-		<td class="DataTD bold"><?php echo _("Domain") ?></td>
-		<td class="DataTD bold"><?php echo _("Created") ?></td>
-		<td class="DataTD bold"><?php echo _("Deleted") ?></td>
+		<td class="DataTD bold"><?php echo  _("Domain") ?></td>
+		<td class="DataTD bold"><?php echo  _("Created") ?></td>
+		<td class="DataTD bold"><?php echo  _("Deleted") ?></td>
 	</tr>
 
 	<?php }
@@ -1655,10 +1659,10 @@ function output_log_domains($row){
 function output_log_agreement_header(){
 	?>
 	<tr>
-		<td class="DataTD bold"><?php echo _("Agreement") ?></td>
-		<td class="DataTD bold"><?php echo _("Date") ?></td>
-		<td class="DataTD bold"><?php echo _("Method") ?></td>
-		<td class="DataTD bold"><?php echo _("Active ") ?></td>
+		<td class="DataTD bold"><?php echo  _("Agreement") ?></td>
+		<td class="DataTD bold"><?php echo  _("Date") ?></td>
+		<td class="DataTD bold"><?php echo  _("Method") ?></td>
+		<td class="DataTD bold"><?php echo  _("Active ") ?></td>
 	</tr>
 	<?php }
 
@@ -1672,7 +1676,7 @@ function output_log_agreement($row){
 		<td class="DataTD" ><?php echo $row['document']?></td>
 		<td class="DataTD" ><?php echo $row['date']?></td>
 		<td class="DataTD" ><?php echo $row['method']?></td>
-		<td class="DataTD"><?php echo ($row['active']==0)? _('passive'):_('active')?></td>
+		<td class="DataTD"><?php echo  ($row['active']==0)? _('passive'):_('active')?></td>
 	</tr>
 	<?php }
 
@@ -1683,9 +1687,9 @@ function output_log_training_header(){
 	//should be entered in account/55.php
 	?>
 	<tr>
-		<td class="DataTD bold"><?php echo _("Agreement") ?></td>
-		<td class="DataTD bold"><?php echo _("Test") ?></td>
-		<td class="DataTD bold"><?php echo _("Variant") ?></td>
+		<td class="DataTD bold"><?php echo  _("Agreement") ?></td>
+		<td class="DataTD bold"><?php echo  _("Test") ?></td>
+		<td class="DataTD bold"><?php echo  _("Variant") ?></td>
 	</tr>
 	<?php }
 
@@ -1710,11 +1714,11 @@ function output_log_training($row){
 function output_log_se_header($support=0){
 	?>
 	<tr>
-		<td class="DataTD bold"><?php echo _("Date") ?></td>
+		<td class="DataTD bold"><?php echo  _("Date") ?></td>
 		<td class="DataTD bold"><?php echo _("Type") ?></td>
 		<?php 		if (1 == $support) {
 			?>
-			<td class="DataTD bold"><?php echo _("Information") ?></td>
+			<td class="DataTD bold"><?php echo  _("Information") ?></td>
 			<td class="DataTD bold"><?php echo _("Admin") ?></td>
 			<?php 		}
 		?>
@@ -1881,7 +1885,8 @@ function output_server_certs_header($support=0, $readonly=true){
 			<?php 		}
 	?>
 	</tr>
-	<?php }
+	<?php
+}
 
 /**
  * Show the server cert data
@@ -1910,59 +1915,70 @@ function output_server_certs($row, $support=0, $readonly=true){
 
 	?>
 	<tr>
-	<?php 	if (!$readonly) {
+	<?php
+	if (!$readonly) {
 		if ($verified === _("Pending")) {
 			?>
 			<td class="DataTD">
 				<input type="checkbox" name="delid[]" value="<?php echo intval($row['id'])?>"/>
 			</td>
-			<?php 		} elseif($verified === _("Revoked")) {
+			<?php
+		} elseif($verified === _("Revoked")) {
 			?>
 			<td class="DataTD">&nbsp;</td>
-			<?php 		} else {
+			<?php
+		} else {
 			?>
 			<td class="DataTD">
 				<input type="checkbox" name="revokeid[]" value="<?php echo intval($row['id'])?>"/>
 			</td>
-			<?php 		}
+			<?php
+		}
 	}
 
 	?>
 	<td class="DataTD"><?php echo $verified?></td>
 	<?php
+
 	if ($verified === _("Pending")) {
 		?>
 		<td class="DataTD"><?php echo htmlspecialchars($row['CN'])?></td>
-		<?php 	} else {
+		<?php
+	} else {
 		?>
 		<td class="DataTD">
 			<a href="account.php?id=15&amp;cert=<?php echo intval($row['id'])?>">
 				<?php echo htmlspecialchars($row['CN'])?>
 			</a>
 		</td>
-		<?php 	}
+		<?php
+	}
 
 	?>
 	<td class="DataTD"><?php echo $row['serial']?></td>
 	<td class="DataTD"><?php echo $row['revoke']?></td>
 	<td class="DataTD"><?php echo $row['expire']?></td>
 	<?php
+
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
 			<input name="comment_<?php echo intval($row['id'])?>" type="text" value="<?php echo htmlspecialchars($row['description'])?>" />
 		</td>
-		<?php 		if (!$readonly) {
+		<?php
+		if (!$readonly) {
 			?>
 			<td class="DataTD">
 				<input type="checkbox" name="check_comment_<?php echo intval($row['id'])?>" />
 			</td>
-			<?php 		}
+			<?php
+		}
 	}
 
 	?>
 	</tr>
-	<?php }
+	<?php
+}
 
 /**
  * Show the table header to the gpg cert table
@@ -1977,13 +1993,16 @@ function output_gpg_certs_header($support=0, $readonly=true){
 		<td class="DataTD"><?php echo _("Email Address")?></td>
 		<td class="DataTD"><?php echo _("Expires")?></td>
 		<td class="DataTD"><?php echo _("Key ID")?></td>
-		<?php 		if (1 != $support) {
+		<?php
+		if (1 != $support) {
 			?>
 			<td colspan="2" class="DataTD"><?php echo _("Comment *")?></td>
-			<?php 		}
+			<?php
+		}
 	?>
 	</tr>
-	<?php }
+	<?php
+}
 
 /**
  * Show the gpg cert data
@@ -2008,46 +2027,55 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 	<tr>
 		<td class="DataTD"><?php echo $verified?></td>
 	<?php
+
 	if($verified == _("Pending")) {
 		?>
 		<td class="DataTD"><?php echo htmlspecialchars($row['email'])?></td>
-		<?php 	} else {
+		<?php
+	} else {
 		?>
 		<td class="DataTD">
 			<a href="gpg.php?id=3&amp;cert=<?php echo intval($row['id'])?>">
 				<?php echo htmlspecialchars($row['email'])?>
 			</a>
 		</td>
-		<?php 	}
+		<?php
+	}
 
 	?>
 	<td class="DataTD"><?php echo $row['expire']?></td>
 	<?php
+
 	if($verified == _("Pending")) {
 		?>
 		<td class="DataTD"><?php echo htmlspecialchars($row['keyid'])?></td>
-		<?php 	} else {
+		<?php
+	} else {
 		?>
 		<td class="DataTD">
 			<a href="gpg.php?id=3&amp;cert=<?php echo intval($row['id'])?>">
 				<?php echo htmlspecialchars($row['keyid'])?>
 			</a>
 		</td>
-		<?php 	}
+		<?php
+	}
 
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
 			<input name="comment_<?php echo intval($row['id'])?>" type="text" value="<?php echo htmlspecialchars($row['description'])?>" />
 		</td>
-		<?php 		if (!$readonly) {
+		<?php
+		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?php echo intval($row['id'])?>" />
+				<input type="checkbox" name="check_comment_<?php echo intval($row['id']) ?>" />
 			</td>
-			<?php 		}
+			<?php
+		}
 	}
 
 	?>
 	</tr>
-	<?php }
+	<?php
+}

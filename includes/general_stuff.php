@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -39,7 +40,7 @@ google_color_border = "FFFFFF";
 //-->
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><?php } else {
-?><h2><?php echo _("Free digital certificates!")?></h2><?php } ?></div>
+?><h2><?php echo_("Free digital certificates!")?></h2><?php } ?></div>
   </div>
   <div id="pageNav">
     <div class="relatedLinks">
@@ -67,9 +68,10 @@ google_color_border = "FFFFFF";
     <?php if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('recom')"><?php echo _("Advertising")?></h3>
-      <ul class="menu" id="recom"><?php 	$query = "select * from `advertising` where `expires`>NOW() and `active`=1";
-	$res = mysqli_query($_SESSION['mconn'], $query);
-	while($row = mysqli_fetch_assoc($res))
+      <ul class="menu" id="recom"><?php
+	$query = "select * from `advertising` where `expires`>NOW() and `active`=1";
+	$res = mysql_query($query);
+	while($row = mysql_fetch_assoc($res))
 		echo "<li><a href='$row[link]' target='_blank'>$row[title]</a></li>";
 ?></ul>
     </div>
@@ -82,6 +84,7 @@ google_color_border = "FFFFFF";
 <p><font color="#ff0000" size="+2"><?php echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
 <?php } ?>
 <?php
+
 	}
 
 	function showheader($title = "CAcert.org", $title2 = "")
@@ -117,7 +120,8 @@ function hideall() {
 </script>
 </head>
 <body onload="hideall();">
-<?php 		showbodycontent($title,$title2);
+<?php
+		showbodycontent($title,$title2);
 	}
 }
 
@@ -136,6 +140,7 @@ if(!function_exists("showfooter"))
 	&copy;2002-<?php echo date("Y")?> <?php echo _("by CAcert")?></div>
 </div>
 </body>
-</html><?php 	}
+</html><?php
+	}
 }
 ?>

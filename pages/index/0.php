@@ -1,4 +1,5 @@
-<?php /*
+<?php
+/*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -14,7 +15,8 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/ ?>
+*/
+?>
 <h3><?php echo _("Are you new to CAcert?")?></h3>
 
 <p><?php echo _("CAcert.org is a community-driven Certificate Authority that issues certificates to the public at large for free.")?></p>
@@ -32,7 +34,8 @@
 
 
 <div class="newsbox">
-<?php 	printf("<p id='lnews'>%s</p>\n\n",_('Latest News'));
+<?php
+	printf("<p id='lnews'>%s</p>\n\n",_('Latest News'));
 
 	$xml = "/www/pages/index/feed.rss"; // FIXME: use relative path to allow operation with different document root
 	$dom = new DOMDocument();

@@ -1,5 +1,6 @@
 #!/usr/bin/php -q
-<?php /**
+<?php
+/**
  * check site seal
  *
  * @package org.cacert.framework
