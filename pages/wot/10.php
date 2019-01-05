@@ -23,7 +23,8 @@
     <td colspan="5" class="title"><?php echo _("Assurer Ranking")?></td>
   </tr>
   <tr>
-<?// the rank calculation is not adjusted to the new deletion method
+<?php
+// the rank calculation is not adjusted to the new deletion method
 	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			AND `from`='".intval($_SESSION['profile']['id'])."' GROUP BY `notary`.`from`";
