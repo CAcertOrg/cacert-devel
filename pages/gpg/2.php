@@ -32,15 +32,15 @@
 			`expire`, `id`, `level`,
 			`email`,`keyid`,`description` from `gpg` where `memid`='".intval($_SESSION['profile']['id'])."'
 			ORDER BY `issued` desc";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 	{
 ?>
   <tr>
     <td colspan="6" class="DataTD"><?php echo _("No OpenPGP keys are currently listed.")?></td>
   </tr>
 <?php } else {
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$verified = '';
 		if($row['timeleft'] > 0)

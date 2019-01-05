@@ -17,14 +17,14 @@
 */ ?>
 <?php 	$certid = intval($_REQUEST['cert']);
 	$query = "select * from `gpg` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 	{
 		echo _("No such OpenPGP key attached to your account.");
 		showfooter();
 		exit;
 	}
-	$row = mysql_fetch_assoc($res);
+	$row = mysqli_fetch_assoc($res);
 ?>
 <h3><?php echo _("Below is your OpenPGP key")?></h3>
 <pre>

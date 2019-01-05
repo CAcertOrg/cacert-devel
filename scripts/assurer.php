@@ -38,9 +38,9 @@ select u.email, fname, lname, sum(n.points) from users u, notary n
 			";
 //	echo $query;
 // comment next line when starting to send mail not only to me 
-	$res = mysql_query($query);
-	$xrows = mysql_num_rows($res);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	$xrows = mysqli_num_rows($res);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		 echo $row['pts']."..".$row['email']."...\n";
     // uncomment next line to send mails ...

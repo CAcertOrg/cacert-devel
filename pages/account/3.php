@@ -37,8 +37,8 @@
   </tr>
 
 <?php 	$query = "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `hash`=''";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{ ?>
   <tr>
     <td class="DataTD"><input type="checkbox" id="addid<?php echo intval($row['id'])?>" name="addid[]" value="<?php echo intval($row['id'])?>"></td>

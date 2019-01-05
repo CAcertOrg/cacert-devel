@@ -15,18 +15,18 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$username = mysql_escape_string($_REQUEST['username']);
-	$password = mysql_escape_string($_REQUEST['password']);
+	$username = mysqli_real_escape_string($_SESSION['mconn'], $_REQUEST['username']);
+	$password = mysqli_real_escape_string($_SESSION['mconn'], $_REQUEST['password']);
 
 	$query = "select * from `users` where `email`='$username' and (`password`=old_password('$password') or `password`=sha1('$password'))";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) != 1)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) != 1)
 		die("403,That username couldn't be found\n");
 	echo "200,Authentication Ok\n";
-	$user = mysql_fetch_assoc($res);
+	$user = mysqli_fetch_assoc($res);
 	$memid = $user['id'];
 	$query = "select sum(`points`) as `points` from `notary` where `to`='".intval($memid)."' and `notary`.`deleted`=0 group by `to`";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$points = $row['points'];
 	echo "CS=".intval($user['codesign'])."\n";
 	echo "NAME=CAcert WoT User\n";
@@ -41,8 +41,8 @@
 			echo "NAME=".sanitizeHTML($user['fname'])." ".sanitizeHTML($user['mname'])." ".sanitizeHTML($user['lname'])." ".sanitizeHTML($user['suffix'])."\n";
 	}
 	$query = "select * from `email` where `memid`='".intval($memid)."' and `hash`='' and `deleted`=0";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res)) {
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res)) {
 		echo "EMAIL=".sanitizeHTML($row['email'])."\n";
 	}
 ?>

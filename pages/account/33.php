@@ -15,9 +15,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?php 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
-	
+<?php
+	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
+
 	// Reset session variables regarding OrgAdmin's, present empty form
   if (array_key_exists('email',$_SESSION['_config']))     $_SESSION['_config']['email']=""; 
   if (array_key_exists('OU',$_SESSION['_config']))        $_SESSION['_config']['OU'] = "";

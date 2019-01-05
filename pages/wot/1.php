@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	$res=mysql_fetch_assoc(mysql_query("select sum(acount) as summe from countries"));
+	$res=mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select sum(acount) as summe from countries"));
 	$total1 =$res['summe'];
 
 	$locid=array_key_exists('locid',$_REQUEST)?intval($_REQUEST['locid']):0;
@@ -29,7 +29,7 @@
 	$display = "";
 	if($locid > 0)
 	{
-		$loc = mysql_fetch_assoc(mysql_query("select * from `locations` where `id`='".$locid."'"));
+		$loc = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `locations` where `id`='".$locid."'"));
 		$display = "<ul class='top'>\n<li>\n".
 			"<a href='wot.php?id=1&locid=".$locid."'>".$loc['name']." ("._("Listed").": ".$loc['acount'].")</a>\n".
 			$display;
@@ -38,7 +38,7 @@
 
 	if($regid > 0)
 	{
-		$reg = mysql_fetch_assoc(mysql_query("select * from `regions` where `id`='".$regid."'"));
+		$reg = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `regions` where `id`='".$regid."'"));
 		$display = "<ul class='top'>\n<li>\n".
 			"<a href='wot.php?id=1&regid=".$regid."'>".$reg['name']." ("._("Listed").": ".$reg['acount'].")</a>\n".
 			$display;
@@ -47,7 +47,7 @@
 
 	if($ccid > 0)
 	{
-		$cnt = mysql_fetch_assoc(mysql_query("select * from `countries` where `id`='".$ccid."'"));
+		$cnt = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `countries` where `id`='".$ccid."'"));
 		$display = "<ul class='top'>\n<li>\n".
 			"<a href='wot.php?id=1&ccid=".$ccid."'>".$cnt['name']." ("._("Listed").": ".$cnt['acount'].")</a>\n".
 			$display;
@@ -60,8 +60,8 @@
 	{
 		echo "<ul>\n";
 		$query = "select * from countries where acount>0 order by `name`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
 		{
 			echo "<li><a href='wot.php?id=1&ccid=".$row['id']."'>".$row['name']." ("._("Listed").": ".$row['acount'].")</a></li>\n";
 		}
@@ -69,8 +69,8 @@
 	} elseif($ccid > 0 && $regid <= 0 && $locid <= 0) {
 		echo "<ul>\n";
 		$query = "select * from regions where ccid='".$ccid."' and acount>0 order by `name`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
 		{
 			echo "<li><a href='wot.php?id=1&regid=".$row['id']."'>".$row['name']." ("._("Listed").": ".$row['acount'].")</a></li>\n";
 		}
@@ -78,8 +78,8 @@
 	} elseif($regid > 0 && $locid <= 0) {
 		echo "<ul>\n";
 		$query = "select * from locations where regid='".$regid."' and acount>0 order by `name`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
 		{
 			echo "<li><a href='wot.php?id=1&locid=".$row['id']."'>".$row['name']." ("._("Listed").": ".$row['acount'].")</a></li>\n";
 		}
@@ -93,8 +93,8 @@
 			`ccid`='".$ccid."' and `regid`='".$regid."' and
 			`locid`='".$locid."' and `users`.`id`=`notary`.`to` and `notary`.`deleted`=0
 			group by `notary`.`to` HAVING SUM(`points`) >= 100 order by `points` desc";
-	$list = mysql_query($query);
-	if(mysql_num_rows($list) > 0)
+	$list = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($list) > 0)
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="550">
@@ -106,7 +106,7 @@
     <td class="title"><?php echo _("Assurer Challenge")?></td>
   </tr>
 
-<?		while($row = mysql_fetch_assoc($list)) { ?>
+<?		while($row = mysqli_fetch_assoc($list)) { ?>
   <tr>
     <td class="DataTD" width="100"><nobr><?php echo sanitizeHTML($row['fname'])?> <?php echo substr($row['lname'], 0, 1)?>.</nobr></td>
     <td class="DataTD"><?php echo maxpoints($row['id'])?></td>

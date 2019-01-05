@@ -29,7 +29,7 @@
 
 	$query = "select * from `users` where `id`='1'";
 	$query = "select * from `locations` where `id`='718475'";
-        $loc = mysql_fetch_assoc(mysql_query($query));
+        $loc = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
         $query = "select `users`.* from `users`,`alerts`,`locations` where 
 			((`lat` > ".$loc['lat']."-5 and `lat`<".$loc['lat']."+5 and `long`>".$loc['long']."-5 and `long`<".$loc['long']."+5) OR
 				`users`.`email` like '%.at' OR `users`.`email` like '%.fr' OR `users`.`email` like '%.de' OR
@@ -38,8 +38,8 @@
 			(`alerts`.`general`=1 OR `alerts`.`country`=1 OR `alerts`.`regional`=1 OR `alerts`.`radius`=1) AND
 			`locations`.`id` = `users`.`locid` and `users`.`id`=`alerts`.`memid`";
 //	$query = "select * from `users` where `email`='eg@linuxkun.de'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 			sendmail($row['email'], "[CAcert.org] CeBIT 2006", $lines, "support@cacert.org", "", "", "CAcert Support", "returns@cacert.org", 1);
 echo $row['email']."\n";

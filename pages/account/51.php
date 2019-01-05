@@ -18,13 +18,13 @@
 <?php if($_SESSION['profile']['tverify'] <= 0) { echo _("You don't have access to this area."); } else { ?>
 <?php 	$uid = intval($_GET['photoid']);
 	$query = "select * from `tverify` where `id`='$uid' and `modified`=0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0) { ?>
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) > 0) { ?>
 <img src="account.php?id=51&amp;photoid=<?php echo $uid ?>&amp;img=show" border="0" width="800">
 <?php } else {
         $query = "select * from `tverify` where `id`='$uid' and `modified`=1";
-        $res = mysql_query($query);
-        if(mysql_num_rows($res) > 0)
+        $res = mysqli_query($_SESSION['mconn'], $query);
+        if(mysqli_num_rows($res) > 0)
         {
                 echo _("This UID has already been voted on.");
         } else {

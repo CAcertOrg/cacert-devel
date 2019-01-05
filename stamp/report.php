@@ -15,11 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$arr = explode("//", mysql_real_escape_string(trim($_SESSION['_stamp']['ref'])), 2);
+	$arr = explode("//", mysqli_real_escape_string($_SESSION['mconn'], trim($_SESSION['_stamp']['ref'])), 2);
 	$arr = explode("/", $arr['1'], 2);
 	$ref = $arr['0'];
 
-	$refer = mysql_real_escape_string(strip_tags(trim($_SESSION['_stamp']['ref'])));
+	$refer = mysqli_real_escape_string($_SESSION['mconn'], strip_tags(trim($_SESSION['_stamp']['ref'])));
 	$name = clean('name');
 	$email = clean('email');
 	$comment = clean('comment');
@@ -52,11 +52,11 @@
 
 	if($process != "")
 	{
-		$IP = mysql_real_escape_string(trim($_SERVER['REMOTE_ADDR']));
+		$IP = mysqli_real_escape_string($_SESSION['mconn'], trim($_SERVER['REMOTE_ADDR']));
 		$iplong = ip2long($IP);
-		mysql_query("insert into `abusereports` set `when`=NOW(), `IP`='$iplong', `url`='$refer', `name`='$name', `email`='$email',
+		mysqli_query($_SESSION['mconn'], "insert into `abusereports` set `when`=NOW(), `IP`='$iplong', `url`='$refer', `name`='$name', `email`='$email',
 				`comment`='$comment', `reason`='$reason'");
-		$id = mysql_insert_id();
+		$id = mysqli_insert_id($_SESSION['mconn']);
 
 		$body  = "New Abuse Report has been lodged via the the Stamp Interface:\n\n";
 		$body .= "Reported ID: $id\n";

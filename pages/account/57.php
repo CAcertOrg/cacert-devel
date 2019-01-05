@@ -24,12 +24,12 @@
   } else {
     $user_id = intval($_REQUEST['userid']);
     $query = "select * from `users` where `id`='$user_id' and `users`.`deleted`=0";
-    $res = mysql_query($query);
-    if(mysql_num_rows($res) <= 0)
+    $res = mysqli_query($_SESSION['mconn'], $query);
+    if(mysqli_num_rows($res) <= 0)
     {
       echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
-      $row = mysql_fetch_assoc($res);
+      $row = mysqli_fetch_assoc($res);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

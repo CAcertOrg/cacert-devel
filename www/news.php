@@ -24,7 +24,7 @@
 	if($id > 0)
 	{
 		$query = "select * from `news` where `id`='$id'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 
 		echo "<h3>".$row['short']."</h3>\n";
 		echo "<p>Posted by ".$row['who']." at ".$row['when']."</p>\n";
@@ -32,8 +32,8 @@
 		echo "<p>".str_replace("\n", "<br>\n", $row['story'])."</p>\n";
 	} else {
 		$query = "select *, UNIX_TIMESTAMP(`when`) as `TS` from news order by `when` desc";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
 		{
 			echo "<p><b>".date("Y-m-d", $row['TS'])."</b> - ".$row['short']."</p>\n";
 			if($row['story'] != "")

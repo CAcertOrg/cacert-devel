@@ -20,8 +20,8 @@
 	include_once("../includes/mysql.php");
 
 	$query = "select * from `users` where ccid=13 OR email like '%.at'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['id']." ccid: ".$row['ccid'].")\n";
 	}

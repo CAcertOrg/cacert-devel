@@ -27,22 +27,22 @@
 	if($type == "reallyemail")
 	{
 		$emailid = intval($_SESSION['_config']['emailid']);
-		$hash = mysql_escape_string(trim($_SESSION['_config']['hash']));
+		$hash = mysqli_real_escape_string($_SESSION['mconn'], trim($_SESSION['_config']['hash']));
 
-		$res = mysql_query("select * from `disputeemail` where `id`='$emailid' and `hash`='$hash'");
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `disputeemail` where `id`='$emailid' and `hash`='$hash'");
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("Email Dispute"));
 			echo _("This dispute no longer seems to be in the database, can't continue.");
 			showfooter();
 			exit;
 		}
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		$oldmemid = $row['oldmemid'];
 
 		if($action == "reject")
 		{
-			mysql_query("update `disputeemail` set hash='',action='reject' where `id`='".intval($emailid)."'");
+			mysqli_query($_SESSION['mconn'], "update `disputeemail` set hash='',action='reject' where `id`='".intval($emailid)."'");
 			showheader(_("Email Dispute"));
 			echo _("You have opted to reject this dispute and the request will be removed from the database");
 			showfooter();
@@ -54,21 +54,21 @@
 			echo "<p>"._("You have opted to accept this dispute and the request will now remove this email address from the existing account, and revoke any current certificates.")."</p>";
 			echo "<p>"._("The following accounts have been removed:")."<br>\n";
 			$query = "select * from `email` where `id`='".intval($emailid)."' and deleted=0";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) > 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) > 0)
 			{
-				$row = mysql_fetch_assoc($res);
+				$row = mysqli_fetch_assoc($res);
 				echo $row['email']."<br>\n";
 				account_email_delete($row['id']);
 			}
-			mysql_query("update `disputeemail` set hash='',action='accept' where `id`='$emailid'");
-			$rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
-			$rc2 = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
-			$res = mysql_query("select * from `users` where `id`='$oldmemid'");
-			$user = mysql_fetch_assoc($res);
+			mysqli_query($_SESSION['mconn'], "update `disputeemail` set hash='',action='accept' where `id`='$emailid'");
+			$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
+			$rc2 = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
+			$res = mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='$oldmemid'");
+			$user = mysqli_fetch_assoc($res);
 			if($rc == 0 && $rc2 == 0 && $_SESSION['_config']['email'] == $user['email'])
 			{
-				mysql_query("update `users` set `deleted`=NOW() where `id`='$oldmemid'");
+				mysqli_query($_SESSION['mconn'], "update `users` set `deleted`=NOW() where `id`='$oldmemid'");
 				echo _("This was the primary email on the account, and no emails or domains were left linked so the account has also been removed from the system.");
 			}
 
@@ -80,7 +80,7 @@
 	if($type == "email")
 	{
 		$emailid = intval($_REQUEST['emailid']);
-		$hash = trim(mysql_escape_string(stripslashes($_REQUEST['hash'])));
+		$hash = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['hash'])));
 		if($emailid <= 0 || $hash == "")
 		{
 			showheader(_("Email Dispute"));
@@ -89,19 +89,19 @@
 			exit;
 		}
 
-		$res = mysql_query("select * from `disputeemail` where `id`='$emailid' and `hash`='$hash'");
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `disputeemail` where `id`='$emailid' and `hash`='$hash'");
+		if(mysqli_num_rows($res) <= 0)
 		{
-			$res = mysql_query("select * from `disputeemail` where `id`='$emailid' and hash!=''");
-			if(mysql_num_rows($res) > 0)
+			$res = mysqli_query($_SESSION['mconn'], "select * from `disputeemail` where `id`='$emailid' and hash!=''");
+			if(mysqli_num_rows($res) > 0)
 			{
-				$row = mysql_fetch_assoc($res);
-				mysql_query("update `disputeemail` set `attempts`='".intval($row['attempts'] + 1)."' where `id`='".$row['id']."'");
+				$row = mysqli_fetch_assoc($res);
+				mysqli_query($_SESSION['mconn'], "update `disputeemail` set `attempts`='".intval($row['attempts'] + 1)."' where `id`='".$row['id']."'");
 				showheader(_("Email Dispute"));
 				if($row['attempts'] >= 3)
 				{
 					echo _("Your attempt to accept or reject a disputed email is invalid due to the hash string not matching with the email ID. Your attempt has been logged and the request will be removed from the system as a result.");
-					mysql_query("update `disputeemail` set hash='',action='failed' where `id`='$emailid'");
+					mysqli_query($_SESSION['mconn'], "update `disputeemail` set hash='',action='failed' where `id`='$emailid'");
 				} else
 					echo _("Your attempt to accept or reject a disputed email is invalid due to the hash string not matching with the email ID.");
 				showfooter();
@@ -115,7 +115,7 @@
 		}
 		$_SESSION['_config']['emailid'] = $emailid;
 		$_SESSION['_config']['hash'] = $hash;
-		$row = mysql_fetch_assoc(mysql_query("select * from `disputeemail` where `id`='$emailid'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `disputeemail` where `id`='$emailid'"));
 		$_SESSION['_config']['email'] = $row['email'];
 		showheader(_("Email Dispute"));
 		includeit("4", "disputes");
@@ -126,10 +126,10 @@
 	if($type == "reallydomain")
 	{
 		$domainid = intval($_SESSION['_config']['domainid']);
-		$hash = mysql_escape_string(trim($_SESSION['_config']['hash']));
+		$hash = mysqli_real_escape_string($_SESSION['mconn'], trim($_SESSION['_config']['hash']));
 
-		$res = mysql_query("select * from `disputedomain` where `id`='$domainid' and `hash`='$hash'");
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `disputedomain` where `id`='$domainid' and `hash`='$hash'");
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("Domain Dispute"));
 			echo _("This dispute no longer seems to be in the database, can't continue.");
@@ -139,7 +139,7 @@
 
 		if($action == "reject")
 		{
-			mysql_query("update `disputedomain` set hash='',action='reject' where `id`='$domainid'");
+			mysqli_query($_SESSION['mconn'], "update `disputedomain` set hash='',action='reject' where `id`='$domainid'");
 			showheader(_("Domain Dispute"));
 			echo _("You have opted to reject this dispute and the request will be removed from the database");
 			showfooter();
@@ -152,13 +152,13 @@
 			echo "<p>"._("The following accounts have been removed:")."<br>\n";
 			//new account_domain_delete($domainid, $memberID)
 			$query = "select * from `domains` where `id`='$domainid' and deleted=0";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) > 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) > 0)
 			{
 				echo $_SESSION['_config']['domain']."<br>\n";
 				account_domain_delete($domainid);
 			}
-			mysql_query("update `disputedomain` set hash='',action='accept' where `id`='$domainid'");
+			mysqli_query($_SESSION['mconn'], "update `disputedomain` set hash='',action='accept' where `id`='$domainid'");
 			showfooter();
 			exit;
 		}
@@ -167,7 +167,7 @@
 	if($type == "domain")
 	{
 		$domainid = intval($_REQUEST['domainid']);
-		$hash = trim(mysql_escape_string(stripslashes($_REQUEST['hash'])));
+		$hash = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['hash'])));
 		if($domainid <= 0 || $hash == "")
 		{
 			showheader(_("Domain Dispute"));
@@ -176,19 +176,19 @@
 			exit;
 		}
 
-		$res = mysql_query("select * from `disputedomain` where `id`='$domainid' and `hash`='$hash'");
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `disputedomain` where `id`='$domainid' and `hash`='$hash'");
+		if(mysqli_num_rows($res) <= 0)
 		{
-			$res = mysql_query("select * from `disputedomain` where `id`='$domainid' and hash!=''");
-			if(mysql_num_rows($res) > 0)
+			$res = mysqli_query($_SESSION['mconn'], "select * from `disputedomain` where `id`='$domainid' and hash!=''");
+			if(mysqli_num_rows($res) > 0)
 			{
-				$row = mysql_fetch_assoc($res);
-				mysql_query("update `disputedomain` set `attempts`='".intval($row['attempts'] + 1)."' where `id`='".$row['id']."'");
+				$row = mysqli_fetch_assoc($res);
+				mysqli_query($_SESSION['mconn'], "update `disputedomain` set `attempts`='".intval($row['attempts'] + 1)."' where `id`='".$row['id']."'");
 				showheader(_("Domain Dispute"));
 				if($row['attempts'] >= 3)
 				{
 					echo _("Your attempt to accept or reject a disputed domain is invalid due to the hash string not matching with the domain ID. Your attempt has been logged and the request will be removed from the system as a result.");
-					mysql_query("update `disputedomain` set hash='',action='failed' where `id`='$domainid'");
+					mysqli_query($_SESSION['mconn'], "update `disputedomain` set hash='',action='failed' where `id`='$domainid'");
 				} else
 					echo _("Your attempt to accept or reject a disputed domain is invalid due to the hash string not matching with the domain ID.");
 				showfooter();
@@ -202,7 +202,7 @@
 		}
 		$_SESSION['_config']['domainid'] = $domainid;
 		$_SESSION['_config']['hash'] = $hash;
-		$row = mysql_fetch_assoc(mysql_query("select * from `disputedomain` where `id`='$domainid'"));
+		$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `disputedomain` where `id`='$domainid'"));
 		$_SESSION['_config']['domain'] = $row['domain'];
 		showheader(_("Domain Dispute"));
 		includeit("6", "disputes");
@@ -213,7 +213,7 @@
 	if($oldid == "1")
 	{
 		csrf_check('emaildispute');
-		$email = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
+		$email = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['dispute'])));
 		if($email == "")
 		{
 			showheader(_("Email Dispute"));
@@ -223,8 +223,8 @@
 		}
 
 		//check if email belongs to locked account
-		$res = mysql_query("select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], "select 1 from `email`, `users` where `email`.`email`='$email' and `email`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysqli_num_rows($res) > 0)
 		{
 			showheader(_("Email Dispute"));
 			printf(_("Sorry, the email address '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($email),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
@@ -239,8 +239,8 @@
 			exit;
 		}
 
-		$res = mysql_query("select * from `disputeemail` where `email`='$email' and hash!=''");
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], "select * from `disputeemail` where `email`='$email' and hash!=''");
+		if(mysqli_num_rows($res) > 0)
 		{
 			showheader(_("Email Dispute"));
 			printf(_("The email address '%s' already exists in the dispute system. Can't continue."), sanitizeHTML($email));
@@ -250,15 +250,15 @@
 
 		unset($oldid);
 		$query = "select * from `email` where `email`='$email' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			showheader(_("Email Dispute"));
 			printf(_("The email address '%s' doesn't exist in the system. Can't continue."), sanitizeHTML($email));
 			showfooter();
 			exit;
 		}
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		$oldmemid = $row['memid'];
 		$emailid = $row['id'];
 		if($_SESSION['profile']['id'] == $oldmemid)
@@ -269,10 +269,10 @@
 			exit;
 		}
 
-		$res = mysql_query("select * from `users` where `id`='$oldmemid'");
-		$user = mysql_fetch_assoc($res);
-		$rc = mysql_num_rows(mysql_query("select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
-		$rc2 = mysql_num_rows(mysql_query("select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
+		$res = mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='$oldmemid'");
+		$user = mysqli_fetch_assoc($res);
+		$rc = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `domains` where `memid`='$oldmemid' and `deleted`=0"));
+		$rc2 = mysqli_num_rows(mysqli_query($_SESSION['mconn'], "select * from `email` where `memid`='$oldmemid' and `deleted`=0 and `id`!='$emailid'"));
 		if($user['email'] == $email && ($rc > 0 || $rc2 > 0))
 		{
 			showheader(_("Email Dispute"));
@@ -285,7 +285,7 @@
 		$query = "insert into `disputeemail` set `email`='$email',`memid`='".intval($_SESSION['profile']['id'])."',
 				`oldmemid`='$oldmemid',`created`=NOW(),`hash`='$hash',`id`='".intval($emailid)."',
 				`IP`='".$_SERVER['REMOTE_ADDR']."'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 
 		$my_translation = L10n::get_translation();
 		L10n::set_recipient_language($oldmemid);
@@ -306,7 +306,7 @@
 	if($oldid == "2")
 	{
 		csrf_check('domaindispute');
-		$domain = trim(mysql_escape_string(stripslashes($_REQUEST['dispute'])));
+		$domain = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['dispute'])));
 		if($domain == "")
 		{
 			showheader(_("Domain Dispute"));
@@ -316,8 +316,8 @@
 		}
 
 		//check if domain belongs to locked account
-		$res = mysql_query("select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], "select 1 from `domains`, `users` where `domains`.`domain`='$domain' and `domains`.`memid`=`users`.`id` and (`users`.`assurer_blocked`=1 or `users`.`locked`=1)");
+		if(mysqli_num_rows($res) > 0)
 		{
 			showheader(_("Domain Dispute"));
 			printf(_("Sorry, the domain '%s' cannot be disputed for administrative reasons. To solve this problem please get in contact with %s."), sanitizeHTML($domain),"<a href='mailto:support@cacert.org'>support@cacert.org</a>");
@@ -333,8 +333,8 @@
 		}
 
 		$query = "select * from `disputedomain` where `domain`='$domain' and hash!=''";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) > 0)
 		{
 			showheader(_("Domain Dispute"));
 			printf(_("The domain '%s' already exists in the dispute system. Can't continue."), sanitizeHTML($domain));
@@ -343,12 +343,12 @@
 		}
 		unset($oldid);
 		$query = "select * from `domains` where `domain`='$domain' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) <= 0)
 		{
 			$query = "select 1 from `orgdomains` where `domain`='$domain'";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) > 0)
+			$res = mysqli_query($_SESSION['mconn'], $query);
+			if(mysqli_num_rows($res) > 0)
 			{
 				showheader(_("Domain Dispute"));
 				printf(_("The domain '%s' is included in an organisation account. Please send a mail to %s to dispute this domain."), sanitizeHTML($domain),'<a href="mailto:support@cacert.org">support@cacert.org</a>');
@@ -360,7 +360,7 @@
 			showfooter();
 			exit;
 		}
-		$row = mysql_fetch_assoc($res);
+		$row = mysqli_fetch_assoc($res);
 		$oldmemid = $row['memid'];
 		if($_SESSION['profile']['id'] == $oldmemid)
 		{
@@ -388,7 +388,7 @@
                                 $bits = explode(":", $line, 2);
                                 $line = trim($bits[1]);
                                 if(!in_array($line, $addy) && $line != "")
-                                        $addy[] = trim(mysql_escape_string(stripslashes($line)));
+                                        $addy[] = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($line)));
                         }
                 } else {
                         if(is_array($adds))
@@ -405,7 +405,7 @@
                                                 $line = $bit;
                                 }
                                 if(!in_array($line, $addy) && $line != "")
-                                        $addy[] = trim(mysql_escape_string(stripslashes($line)));
+                                        $addy[] = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($line)));
                         }
                 }
 
@@ -422,7 +422,7 @@
 
 	if($oldid == "5")
 	{
-                $authaddy = trim(mysql_escape_string(stripslashes($_REQUEST['authaddy'])));
+                $authaddy = trim(mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_REQUEST['authaddy'])));
 
                 if(!in_array($authaddy, $_SESSION['_config']['addy']) || $authaddy == "")
                 {
@@ -433,8 +433,8 @@
                 }
 
                 $query = "select * from `domains` where `domain`='".$_SESSION['_config']['domain']."' and `deleted`=0";
-                $res = mysql_query($query);
-                if(mysql_num_rows($res) <= 0)
+                $res = mysqli_query($_SESSION['mconn'], $query);
+                if(mysqli_num_rows($res) <= 0)
                 {
                         showheader(_("Domain Dispute!"));
                         printf(_("The domain '%s' isn't in the system. Can't continue."), sanitizeHTML($_SESSION['_config']['domain']));
@@ -445,12 +445,12 @@
 		$domainid = intval($_SESSION['_config']['domainid']);
 		$memid = intval($_SESSION['_config']['memid']);
 		$oldmemid = intval($_SESSION['_config']['oldmemid']);
-		$domain = mysql_escape_string($_SESSION['_config']['domain']);
+		$domain = mysqli_real_escape_string($_SESSION['mconn'], $_SESSION['_config']['domain']);
 
 		$hash = make_hash();
 		$query = "insert into `disputedomain` set `domain`='$domain',`memid`='".$_SESSION['profile']['id']."',
 				`oldmemid`='$oldmemid',`created`=NOW(),`hash`='$hash',`id`='$domainid'";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		$my_translation = L10n::get_translation();
 		L10n::set_recipient_language($oldmemid);
 

@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?php 	$row = mysql_fetch_assoc(mysql_query("select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'"));
+<?php 	$row = mysqli_fetch_assoc(mysql_query($_SESSION['mconn'], "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'"));
 ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">

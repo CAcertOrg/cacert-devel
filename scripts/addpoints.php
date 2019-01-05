@@ -22,17 +22,17 @@
 	include_once("../includes/mysql.php");
 
 	$query = "select * from `notary` group by `from`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$query = "select *,sum(`points`) as `points` from `users`, `notary` where `users`.`id`=`notary`.`to` and `users`.`id`='".$row['from']."' group by `notary`.`to`";
-		$drow = mysql_fetch_assoc(mysql_query($query));
+		$drow = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 		if($drow['points'] < 100 || $drow['points'] >= 150)
 			continue;
 		$query = "select * from `notary` where `from`='".$drow['id']."' and `to`='".$drow['id']."'";
-		$num = mysql_num_rows(mysql_query($query));
+		$num = mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query));
 		$query = "select * from `notary` where `from`='".$drow['id']."' and `to`!='".$drow['id']."'";
-		$newnum = mysql_num_rows(mysql_query($query));
+		$newnum = mysqli_num_rows(mysqli_query($_SESSION['mconn'], $query));
 		if($num < $newnum)
 		{
 			echo $drow['fname']." ".$drow['lname']." <".$drow['email']."> (memid: ".$drow['id']." points: ".$drow['points']." - num: $num newnum: $newnum)\n";
@@ -45,7 +45,7 @@
 					$newpoints = 1;
 				$query = "insert into `notary` set `from`='".$drow['id']."', `to`='".$drow['id']."',
 						`points`='$newpoints', `method`='Administrative Increase', `date`=NOW()";
-				mysql_query($query);
+				mysqli_query($_SESSION['mconn'], $query);
 				$drow['points'] += $newpoints;
 				fix_assurer_flag($drow['id']);
 			}

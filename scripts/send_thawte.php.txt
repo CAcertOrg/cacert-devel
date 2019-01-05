@@ -120,9 +120,9 @@
 
 	$query = "select `id`,`fname`,`lname`,`email`,`language` from `users` where `deleted` = 0 and `id` > '$lastid' order by `id`";
 
-	$res = mysql_query($query);
+	$res = mysqli_query($_SESSION['mconn'], $query);
 
-	while($row = mysql_fetch_assoc($res))
+	while($row = mysqli_fetch_assoc($res))
 	{
 		$mailtxt = "Hello ${row["fname"]} ${row["lname"]},\n".$lines_EN."\n\n";
 		switch ($row["language"])

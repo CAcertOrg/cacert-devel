@@ -37,9 +37,9 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
       from `org`, `orginfo`
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
       ORDER BY `orginfo`.`O` ";
-    $reso = mysql_query($query);
-    if(mysql_num_rows($reso) >= 1){
-      while($row = mysql_fetch_assoc($reso)){
+    $reso = mysqli_query($_SESSION['mconn'], $query);
+    if(mysqli_num_rows($reso) >= 1){
+      while($row = mysqli_fetch_assoc($reso)){
         printf('<option value="%d"%s>%s</option>',$row['id'], $row['id'] == $orgfilterid ? " selected" : "" , $row['O']);
       }
     }?>
@@ -108,8 +108,8 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
 
 
 //echo $query."<br>\n";
-  $res = mysql_query($query);
-  if(mysql_num_rows($res) <= 0)
+  $res = mysqli_query($_SESSION['mconn'], $query);
+  if(mysqli_num_rows($res) <= 0)
   {
 ?>
   <tr>
@@ -117,7 +117,7 @@ $status = array_key_exists('dstatus',$_SESSION['_config']) ? intval($_SESSION['_
   </tr>
 <?php } else {
   $orgname='';
-  while($row = mysql_fetch_assoc($res))
+  while($row = mysqli_fetch_assoc($res))
   {
     if ($row['O']<>$orgname) {
       $orgname=$row['O'];?>

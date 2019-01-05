@@ -52,10 +52,10 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td colspan="2" class="title"><?php echo _("Additional Language Preferences")?></td>
   </tr>
 <?php 	$query = "select * from `addlang` where `userid`='".intval($_SESSION['profile']['id'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_escape_string($row['lang'])."'"));
+		$lang = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `languages` where `locale`='".mysqli_real_escape_string($_SESSION['mconn'], $row['lang'])."'"));
 ?>
   <tr>
     <td class="DataTD"><?php echo _("Additional Language")?>:</td>
@@ -67,8 +67,8 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td class="DataTD"><?php echo _("Secondary languages")?>:</td>
     <td class="DataTD"><select name="addlang">
 <?php 	$query = "select * from `languages` order by `locale`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
 		printf("<option value=\"%s\">[%s] %s (%s)</option>\n",
 			sanitizeHTML($row['locale']),

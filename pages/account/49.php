@@ -18,7 +18,7 @@
 <?php 	$userid=0; if(array_key_exists('userid',$_GET)) $userid=intval($_GET['userid']);
 	if($userid <= 0)
 	{
-		$domainsearch = $domain = mysql_escape_string(stripslashes($_POST['domain']));
+		$domainsearch = $domain = mysqli_real_escape_string($_SESSION['mconn'], stripslashes($_POST['domain']));
 		if(!strstr($domain, "%"))
 			$domainsearch = "%$domain%";
 		if(preg_match("/^\d+$/",$domain))
@@ -29,31 +29,31 @@
 				`domains`.`deleted`=0 and `users`.`deleted`=0 and
 				`users`.`verified`=1
 				group by `users`.`id` limit 100";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1) { ?>
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?php echo _("Select Specific User Account Details")?></td>
   </tr>
-<?php 	while($row = mysql_fetch_assoc($res))
+<?php 	while($row = mysqli_fetch_assoc($res))
 	{ ?>
   <tr>
     <td class="DataTD"><?php echo _("Domain")?>:</td>
     <td class="DataTD"><?php echo $row['domid']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo $row['id']?>"><?php echo sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<?php } if(mysql_num_rows($res) >= 100) { ?>
+<?php } if(mysqli_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="3"><?php echo _("Only the first 100 rows are displayed.")?></td>
   </tr>
 <?php } else { ?>
   <tr>
-    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysqli_num_rows($res)); ?></td>
   </tr>
 <?php } ?>
 </table><br><br>
-<?		} elseif(mysql_num_rows($res) == 1) {
-			$row = mysql_fetch_assoc($res);
+<?		} elseif(mysqli_num_rows($res) == 1) {
+			$row = mysqli_fetch_assoc($res);
 			$_GET['userid'] = intval($row['id']);
 		} else {
 			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
@@ -63,31 +63,31 @@
 		</table><br><br><?php 		}
 
 		$query = "select `orgid`,`domain`,`id` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domain' limit 100";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1) { ?>
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		if(mysqli_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
     <td colspan="5" class="title"><?php echo _("Select Specific Organisation Account Details")?></td>
   </tr>
-<?php 	while($row = mysql_fetch_assoc($res))
+<?php 	while($row = mysqli_fetch_assoc($res))
 	{ ?>
   <tr>
     <td class="DataTD"><?php echo _("Domain")?>:</td>
     <td class="DataTD"><?php echo $row['id']?></td>
     <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?php echo intval($row['orgid'])?>"><?php echo sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<?php } if(mysql_num_rows($res) >= 100) { ?>
+<?php } if(mysqli_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="3"><?php echo _("Only the first 100 rows are displayed.")?></td>
   </tr>
 <?php } else { ?>
   <tr>
-    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysqli_num_rows($res)); ?></td>
   </tr>
 <?php } ?>
 </table><br><br>
-<?		} elseif(mysql_num_rows($res) == 1) {
-			$row = mysql_fetch_assoc($res);
+<?		} elseif(mysqli_num_rows($res) == 1) {
+			$row = mysqli_fetch_assoc($res);
 			$_GET['userid'] = intval($row['id']);
 		} else {
 			?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">

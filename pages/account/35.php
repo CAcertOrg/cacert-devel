@@ -23,8 +23,8 @@
 			where `orginfo`.`id`=`org`.`orgid`
 			and `org`.`memid`='".intval($_SESSION['profile']['id'])."'";
 
-$res = mysql_query($query);
-while($row = mysql_fetch_assoc($res))
+$res = mysqli_query($_SESSION['mconn'], $query);
+while($row = mysqli_fetch_assoc($res))
 {
 	?>
 	<tr>
@@ -53,8 +53,8 @@ while($row = mysql_fetch_assoc($res))
 	<?php
 	//domain info
 	$query = "select `domain` from `orgdomains` where `orgid`='".intval($row['id'])."'";
-	$res1 = mysql_query($query);
-	while($domain = mysql_fetch_assoc($res1))
+	$res1 = mysqli_query($_SESSION['mconn'], $query);
+	while($domain = mysqli_fetch_assoc($res1))
 	{
 		?>
 		<tr>
@@ -72,10 +72,10 @@ while($row = mysql_fetch_assoc($res))
 	<?php
 	//org admins
 	$query = "select * from `org` where `orgid`='".intval($row['id'])."'";
-	$res2 = mysql_query($query);
-	while($org = mysql_fetch_assoc($res2))
+	$res2 = mysqli_query($_SESSION['mconn'], $query);
+	while($org = mysqli_fetch_assoc($res2))
 	{
-		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($org['memid'])."'"));
+		$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($org['memid'])."'"));
 		?> 
 		<tr>
 			<td class="DataTD"><a href='mailto:<?php echo $user['email']?>'><?php echo ($user['fname'])?> <?php echo ($user['lname'])?></a></td>

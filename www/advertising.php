@@ -34,8 +34,8 @@
 
 	if($oldid == 1 && $process != "")
 	{
-		$title = mysql_real_escape_string(strip_tags(trim(htmlentities($_POST['title']))));
-		$link = mysql_real_escape_string(strip_tags(trim($_POST['link'])));
+		$title = mysqli_real_escape_string($_SESSION['mconn'], strip_tags(trim(htmlentities($_POST['title']))));
+		$link = mysqli_real_escape_string($_SESSION['mconn'], strip_tags(trim($_POST['link'])));
 		$months = intval($_POST['months']);
 
 		if(!strstr($link, "://"))
@@ -72,7 +72,7 @@
 	{
 		$query = "insert into `advertising` set `link`='$link', `title`='$title', `months`='$months', `who`='".$_SESSION['profile']['id']."',
 				`when`=NOW()";
-		mysql_query($query);
+		mysqli_query($_SESSION['mconn'], $query);
 		unset($link);
 		unset($title);
 		unset($months);

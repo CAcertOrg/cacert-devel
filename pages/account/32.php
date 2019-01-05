@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?php 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysql_query($_SESSION['mconn'], $query));
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="500">
   <tr>
@@ -29,11 +29,12 @@
     <td class="DataTD"><?php echo _("Comments")?></td>
     <td class="DataTD"><?php echo _("Delete")?></td>
   </tr>
-<?php 	$query = "select * from `org` where `orgid`='".intval($_REQUEST['orgid'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+<?php
+	$query = "select * from `org` where `orgid`='".intval($_REQUEST['orgid'])."'";
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{
-		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($row['memid'])."'"));
+		$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], "select * from `users` where `id`='".intval($row['memid'])."'"));
 ?>
   <tr>
     <td class="DataTD"><a href='mailto:<?php echo sanitizeHTML($user['email'])?>'><?php echo sanitizeHTML($user['fname'])?> <?php echo sanitizeHTML($user['lname'])?></a></td>

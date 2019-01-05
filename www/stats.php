@@ -25,9 +25,9 @@
      */
 	function getData() {
 		$sql = 'select * from `statscache` order by `timestamp` desc limit 1';
-		$res = mysql_query($sql);
-		if ($res && mysql_numrows($res) > 0) {
-			$ar = mysql_fetch_assoc($res);
+		$res = mysqli_query($_SESSION['mconn'], $sql);
+		if ($res && mysqli_numrows($res) > 0) {
+			$ar = mysqli_fetch_assoc($res);
 			$stats = unserialize($ar['cache']);
 			$stats['timestamp'] = $ar['timestamp'];
 			return $stats;

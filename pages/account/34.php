@@ -16,11 +16,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?php 	$query = "select * from `orgdomains` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$org = mysql_fetch_assoc(mysql_query($query));
+	$org = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 	$query = "select * from `users` where `id`='".intval($_REQUEST['memid'])."'";
-	$user = mysql_fetch_assoc(mysql_query($query));
+	$user = mysqli_fetch_assoc(mysqli_query($_SESSION['mconn'], $query));
 
 	$_SESSION['_config']['domain'] = $row['domain'];
 ?>

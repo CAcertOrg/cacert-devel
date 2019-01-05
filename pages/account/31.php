@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?php 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$org = mysql_fetch_assoc(mysql_query($query));
+	$org = mysqli_fetch_assoc(mysql_query($_SESSION['mconn'], $query));
 
 ?>
 <form method="post" action="account.php">

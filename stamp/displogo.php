@@ -16,11 +16,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 	$img = "/www/stamp/images/CAverify.png";
-	$arr = explode("//", mysql_real_escape_string(trim($_REQUEST['refer'])), 2);
+	$arr = explode("//", mysqli_real_escape_string($_SESSION['mconn'], trim($_REQUEST['refer'])), 2);
 	$arr = explode("/", $arr['1'], 2);
 	$ref = $arr['0'];
 
-	$arr = explode("//", mysql_real_escape_string(trim($_SERVER['HTTP_REFERER'])), 2);
+	$arr = explode("//", mysqli_real_escape_string($_SESSION['mconn'], trim($_SERVER['HTTP_REFERER'])), 2);
 	$arr = explode("/", $arr['1'], 2);
 	$siteref = $arr['0'];
 

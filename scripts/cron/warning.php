@@ -33,8 +33,8 @@
 				UNIX_TIMESTAMP(`emailcerts`.`expire`) - UNIX_TIMESTAMP(NOW()) < $day * 86400 and
 				`emailcerts`.`renewed`=0 and `emailcerts`.`warning` <= '$warning' and
 				`emailcerts`.`revoked`=0 and `users`.`id`=`emailcerts`.`memid`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
 		{
 			L10n::set_recipient_language(intval($row['id']));
 			if($row['subject'] == "")
@@ -70,7 +70,7 @@
 			sendmail($row['email'], "[CAcert.org] "._("Your Certificate is about to expire"), $body, "support@cacert.org", "", "", "CAcert Support");
 echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid']." Subj: ".$row['subject']." timeleft: ".$row['daysleft'].")\n";
 			$query = "update `emailcerts` set `warning`='".($warning+1)."' where `id`='".$row['id']."'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 	}
 
@@ -107,8 +107,8 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 					`domains`
 				WHERE $where_clause
 				AND `domlink`.`domid` = `domains`.`id`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = mysqli_query($_SESSION['mconn'], $query);
+		while($row = mysqli_fetch_assoc($res))
 		{
 			L10n::set_recipient_language(intval($row['memid']));
 			if($row['subject'] == "")
@@ -128,7 +128,7 @@ echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid
 			sendmail($row['email'], "[CAcert.org] "._("Your Certificate is about to expire"), $body, "support@cacert.org", "", "", "CAcert Support");
 echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['memid']." Subj: ".$row['CN']." timeleft: ".$row['daysleft'].")\n";
 			$query = "update `domaincerts` set `warning`='".($warning+1)."' where `id`='".$row['id']."'";
-			mysql_query($query);
+			mysqli_query($_SESSION['mconn'], $query);
 		}
 	}
 ?>

@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?php 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = mysqli_fetch_assoc(mysql_query($_SESSION['mconn'], $query));
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
   <tr>
@@ -28,8 +28,8 @@
     <td class="DataTD"><?php echo _("Delete")?></td>
   </tr>
 <?php 	$query = "select * from `orgdomains` where `orgid`='".intval($_REQUEST['orgid'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	while($row = mysqli_fetch_assoc($res))
 	{ ?>
   <tr>
     <td class="DataTD"><?php echo sanitizeHTML($row['domain'])?></a></td>

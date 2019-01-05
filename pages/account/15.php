@@ -20,14 +20,14 @@
 	$query = "select * from `domaincerts`,`domains` where `domaincerts`.`id`='$certid' and
 			`domains`.`memid`='".intval($_SESSION['profile']['id'])."' and
 			`domains`.`id`=`domaincerts`.`domid`";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = mysqli_query($_SESSION['mconn'], $query);
+	if(mysqli_num_rows($res) <= 0)
 	{
 		echo _("No such certificate attached to your account.");
 		showfooter();
 		exit;
 	}
-	$row = mysql_fetch_assoc($res);
+	$row = mysqli_fetch_assoc($res);
         $crtname=escapeshellarg($row['crt_name']);
 	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname");
 ?>
