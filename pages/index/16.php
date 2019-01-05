@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -16,40 +16,40 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 
-<p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.html'>","</a>")?></p>
+<p><?php echo sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.html'>","</a>")?></p>
 
 <p>
-Class 1 <?=_("PKI Key")?><br>
-<a href="index.php?id=17"><?=_("Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x")?></a><br>
-<a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a><br>
-<a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a><br>
-<a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a><br>
-<a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a><br>
-<?=_("Fingerprint")?> SHA1: 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33<br/>
-<?=_("Fingerprint")?> MD5: A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B<br/>
+Class 1 <?php echo _("PKI Key")?><br>
+<a href="index.php?id=17"><?php echo _("Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x")?></a><br>
+<a href="certs/root.crt"><?php echo _("Root Certificate (PEM Format)")?></a><br>
+<a href="certs/root.der"><?php echo _("Root Certificate (DER Format)")?></a><br>
+<a href="certs/root.txt"><?php echo _("Root Certificate (Text Format)")?></a><br>
+<a href="<?php echo $_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a><br>
+<?php echo _("Fingerprint")?> SHA1: 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33<br/>
+<?php echo _("Fingerprint")?> MD5: A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B<br/>
 </p>
 
 <p>
-Class 3 <?=_("PKI Key")?><br>
-<a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a><br/>
-<a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a><br/>
-<a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a><br/>
-<a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a><br/>
+Class 3 <?php echo _("PKI Key")?><br>
+<a href="certs/class3.crt"><?php echo _("Intermediate Certificate (PEM Format)")?></a><br/>
+<a href="certs/class3.der"><?php echo _("Intermediate Certificate (DER Format)")?></a><br/>
+<a href="certs/class3.txt"><?php echo _("Intermediate Certificate (Text Format)")?></a><br/>
+<a href="<?php echo $_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a><br/>
 <?php /*
   class3 subroot fingerprint updated: 2011-05-23  class3 Re-sign project
   https://wiki.cacert.org/Roots/Class3ResignProcedure/Migration
 */ ?>
-<?=_("Fingerprint")?> SHA1: AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE<br/>
-<?=_("Fingerprint")?> MD5: F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42<br/>
+<?php echo _("Fingerprint")?> SHA1: AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE<br/>
+<?php echo _("Fingerprint")?> MD5: F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42<br/>
 </p>
 
 <p>
-<?=_("GPG Key")?><br>
-<a href="certs/cacert.asc"><?=_("CAcert's GPG Key")?></a><br>
+<?php echo _("GPG Key")?><br>
+<a href="certs/cacert.asc"><?php echo _("CAcert's GPG Key")?></a><br>
 </p>
 
 <p>
-<?=_("PKI finger/thumb print signed by the CAcert GPG Key")?><br>
+<?php echo _("PKI finger/thumb print signed by the CAcert GPG Key")?><br>
 <pre>
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
@@ -85,7 +85,7 @@ TG1yj+lkktROGGyn0hJ5SbM=
 </p>
 
 <p>
-<? printf(_('An overview over all CA certificates ever issued can be found in '.
+<?php printf(_('An overview over all CA certificates ever issued can be found in '.
         '%sthe wiki%s.'),
     '<a href="//wiki.cacert.org/Roots/StateOverview">',
     '</a>') ?>

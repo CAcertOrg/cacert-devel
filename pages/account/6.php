@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -117,10 +117,9 @@ if (array_key_exists('format', $_REQUEST)) {
 	?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-		<td colspan="2" class="title"><?=_("Information about the certificate")?></td>
+		<td colspan="2" class="title"><?php echo _("Information about the certificate")?></td>
 	</tr>
-<?
-	if($row['timeleft'] > 0)
+<?php 	if($row['timeleft'] > 0)
 		$verified = _("Valid");
 	if($row['timeleft'] < 0)
 		$verified = _("Expired");
@@ -132,37 +131,36 @@ if (array_key_exists('format', $_REQUEST)) {
 		$row['revoke'] = _("Not Revoked");
 ?>
 	<tr>
-		<td class="DataTD"><?=_("Status")?></td>
-		<td class="DataTD"><?=$verified?></td>
+		<td class="DataTD"><?php echo _("Status")?></td>
+		<td class="DataTD"><?php echo $verified?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Email Address")?></td>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : sanitizeHTML($row['CN']))?></td>
+		<td class="DataTD"><?php echo _("Email Address")?></td>
+		<td class="DataTD"><?php echo (trim($row['CN'])=="" ? _("empty") : sanitizeHTML($row['CN']))?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("SerialNumber")?></td>
-		<td class="DataTD"><?=sanitizeHTML($row['serial'])?></td>
+		<td class="DataTD"><?php echo _("SerialNumber")?></td>
+		<td class="DataTD"><?php echo sanitizeHTML($row['serial'])?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Revoked")?></td>
-		<td class="DataTD"><?=$row['revoke']?></td>
+		<td class="DataTD"><?php echo _("Revoked")?></td>
+		<td class="DataTD"><?php echo $row['revoke']?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Expires")?></td>
-		<td class="DataTD"><?=$row['expire']?></td>
+		<td class="DataTD"><?php echo _("Expires")?></td>
+		<td class="DataTD"><?php echo $row['expire']?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Login")?></td>
+		<td class="DataTD"><?php echo _("Login")?></td>
 		<td class="DataTD">
-			<input type="checkbox" name="disablelogin" disabled="disabled" value="1" <?=$row['disablelogin']?"":"checked='checked'"?>/>
+			<input type="checkbox" name="disablelogin" disabled="disabled" value="1" <?php echo $row['disablelogin']?"":"checked='checked'"?>/>
 		</td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=_("Comment")?></td>
-		<td class="DataTD"><?=htmlspecialchars($row['description'])?></td>
+		<td class="DataTD"><?php echo _("Comment")?></td>
+		<td class="DataTD"><?php echo htmlspecialchars($row['description'])?></td>
 	</tr>
 </table>
-<?
-	showfooter();
+<?php 	showfooter();
 	exit;
 }

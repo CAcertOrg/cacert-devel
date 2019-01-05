@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$tdcols = 6;
+<?php 	$tdcols = 6;
 	if($_SESSION['profile']['adadmin'] == 2)
 		$tdcols++;
 
@@ -52,7 +51,7 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="500">
   <tr>
-    <td colspan="<?=$tdcols?>" class="title"><?=_("View Advertising")?> <a href="advertising.php?id=<?=$id?>&showall=1"><?=_("Show All")?></a></td>
+    <td colspan="<?php echo $tdcols?>" class="title"><?php echo _("View Advertising")?> <a href="advertising.php?id=<?php echo $id?>&showall=1"><?php echo _("Show All")?></a></td>
   </tr>
   <tr>
 	<td class="DataTD">ID</td>
@@ -61,10 +60,9 @@
 	<td class="DataTD">Expires</td>
 	<td class="DataTD">Edit</td>
 	<td class="DataTD">Disable</td>
-<? if($_SESSION['profile']['adadmin'] == 2) { echo "\t<td class='DataTD'>Approve</td>\n"; }
+<?php if($_SESSION['profile']['adadmin'] == 2) { echo "\t<td class='DataTD'>Approve</td>\n"; }
 ?>  </tr>
-<?
-	$query = "select *,UNIX_TIMESTAMP(`expires`)-UNIX_TIMESTAMP(NOW()) as `timeleft` from `advertising` where `replaced`=0 ";
+<?php 	$query = "select *,UNIX_TIMESTAMP(`expires`)-UNIX_TIMESTAMP(NOW()) as `timeleft` from `advertising` where `replaced`=0 ";
 	if(!array_key_exists('showall',$_REQUEST) || $_REQUEST['showall'] != 1)
 		$query .= "and `active`=1 having `timeleft` > 0 ";
 	$query .= "order by `id` desc";

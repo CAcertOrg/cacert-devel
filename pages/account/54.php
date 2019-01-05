@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? 
+<?php
 	$ccid = array_key_exists('ccid',$_REQUEST)?intval($_REQUEST['ccid']):0;
 	$regid = array_key_exists('regid',$_REQUEST)?intval($_REQUEST['regid']):0;
 	$locid = array_key_exists('locid',$_REQUEST)?intval($_REQUEST['locid']):0;
@@ -25,21 +25,21 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Add Region")?></td>
+    <td colspan="2" class="title"><?php echo _("Add Region")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Region")?>:</td>
-    <td class="DataTD"><input type="text" name="name" value="<?=sanitizeHTML($name)?>"></td>
+    <td class="DataTD"><?php echo _("Region")?>:</td>
+    <td class="DataTD"><input type="text" name="name" value="<?php echo sanitizeHTML($name)?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Add")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="action" value="add">
-<input type="hidden" name="ccid" value="<?=$ccid?>">
+<input type="hidden" name="ccid" value="<?php echo $ccid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($regid > 0 && $_REQUEST['action'] == "edit") {
+<?php } if($regid > 0 && $_REQUEST['action'] == "edit") {
 	$query = "select * from `regions` where `id`='$regid' order by `name`";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$name = $row['name'];
@@ -47,47 +47,47 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Edit Region")?></td>
+    <td colspan="2" class="title"><?php echo _("Edit Region")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Region")?>:</td>
-    <td class="DataTD"><input type="text" name="name" value="<?=sanitizeHTML($name)?>"></td>
+    <td class="DataTD"><?php echo _("Region")?>:</td>
+    <td class="DataTD"><input type="text" name="name" value="<?php echo sanitizeHTML($name)?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Update")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="action" value="edit">
-<input type="hidden" name="regid" value="<?=$regid?>">
+<input type="hidden" name="regid" value="<?php echo $regid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($regid > 0 && $_REQUEST['action'] == "add") { ?>
+<?php } if($regid > 0 && $_REQUEST['action'] == "add") { ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Add Location")?></td>
+    <td colspan="2" class="title"><?php echo _("Add Location")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Location")?>:</td>
-    <td class="DataTD"><input type="text" name="name" value="<?=sanitizeHTML($name)?>"></td>
+    <td class="DataTD"><?php echo _("Location")?>:</td>
+    <td class="DataTD"><input type="text" name="name" value="<?php echo sanitizeHTML($name)?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Longitude")?>:</td>
-    <td class="DataTD"><input type="text" name="longitude" value="<?=array_key_exists('longitude',$_REQUEST)?sanitizeHTML($_REQUEST['longitude']):""?>"></td>
+    <td class="DataTD"><?php echo _("Longitude")?>:</td>
+    <td class="DataTD"><input type="text" name="longitude" value="<?php echo array_key_exists('longitude',$_REQUEST)?sanitizeHTML($_REQUEST['longitude']):""?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Latitude")?>:</td>
-    <td class="DataTD"><input type="text" name="latitude" value="<?=array_key_exists('latitude',$_REQUEST)?sanitizeHTML($_REQUEST['latitude']):""?>"></td>
+    <td class="DataTD"><?php echo _("Latitude")?>:</td>
+    <td class="DataTD"><input type="text" name="latitude" value="<?php echo array_key_exists('latitude',$_REQUEST)?sanitizeHTML($_REQUEST['latitude']):""?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Add")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Add")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="action" value="add">
-<input type="hidden" name="regid" value="<?=$regid?>">
+<input type="hidden" name="regid" value="<?php echo $regid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($locid > 0 && $_REQUEST['action'] == "edit") {
+<?php } if($locid > 0 && $_REQUEST['action'] == "edit") {
 	$query = "select * from `locations` where `id`='$locid'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 
@@ -101,56 +101,55 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Edit Location")?></td>
+    <td colspan="2" class="title"><?php echo _("Edit Location")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Location")?>:</td>
-    <td class="DataTD"><input type="text" name="name" value="<?=sanitizeHTML($name)?>"></td>
+    <td class="DataTD"><?php echo _("Location")?>:</td>
+    <td class="DataTD"><input type="text" name="name" value="<?php echo sanitizeHTML($name)?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Longitude")?>:</td>
-    <td class="DataTD"><input type="text" name="longitude" value="<?=sanitizeHTML($_REQUEST['longitude'])?>"></td>
+    <td class="DataTD"><?php echo _("Longitude")?>:</td>
+    <td class="DataTD"><input type="text" name="longitude" value="<?php echo sanitizeHTML($_REQUEST['longitude'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Latitude")?>:</td>
-    <td class="DataTD"><input type="text" name="latitude" value="<?=sanitizeHTML($_REQUEST['latitude'])?>"></td>
+    <td class="DataTD"><?php echo _("Latitude")?>:</td>
+    <td class="DataTD"><input type="text" name="latitude" value="<?php echo sanitizeHTML($_REQUEST['latitude'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Update")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="action" value="edit">
-<input type="hidden" name="locid" value="<?=$locid?>">
+<input type="hidden" name="locid" value="<?php echo $locid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } if($locid > 0 && $_REQUEST['action'] == "aliases") {
+<?php } if($locid > 0 && $_REQUEST['action'] == "aliases") {
 	$query = "select * from `localias` where `locid`='".intval($locid)."'";
 	$res = mysql_query($query);
 	$rc = mysql_num_rows($res);
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Location Aliases")?> - <a href="javascript:Show_Stuff()"><?=_("Add")?></a></td>
+    <td colspan="2" class="title"><?php echo _("Location Aliases")?> - <a href="javascript:Show_Stuff()"><?php echo _("Add")?></a></td>
   </tr>
   <tr ID="display1">
     <td colspan="2" class="DataTD">
 	<form method="post" action="account.php" ACCEPTCHARSET="utf-8">
-	<?=_("Location Alias")?>: <input type="text" name="name"> <input type="submit" value="Add">
+	<?php echo _("Location Alias")?>: <input type="text" name="name"> <input type="submit" value="Add">
 	<input type="hidden" name="action" value="alias">
-	<input type="hidden" name="locid" value="<?=intval($locid)?>">
+	<input type="hidden" name="locid" value="<?php echo intval($locid)?>">
 	<input type="hidden" name="oldid" value="54">
 	</form>
     </td>
   </tr>
-<?
-	while($row = mysql_fetch_assoc($res))
+<?php 	while($row = mysql_fetch_assoc($res))
 	{
 ?>
   <tr>
-    <td class="DataTD"><?=$row['name']?></td>
-    <td class="DataTD"><a href="account.php?id=54&amp;locid=<?=$locid?>&amp;name=<?=($row['name'])?>&amp;action=delalias" onclick="return confirm('Are you sure you want to delete this location alias?');"><?=_("Delete")?></td>
+    <td class="DataTD"><?php echo $row['name']?></td>
+    <td class="DataTD"><a href="account.php?id=54&amp;locid=<?php echo $locid?>&amp;name=<?php echo ($row['name'])?>&amp;action=delalias" onclick="return confirm('Are you sure you want to delete this location alias?');"><?php echo _("Delete")?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -167,7 +166,7 @@ function Show_Stuff()
 document.getElementById("display1").style.display = "none";
 -->
 </script>
-<? } if($locid > 0 && $_REQUEST['action'] == "move") {
+<?php } if($locid > 0 && $_REQUEST['action'] == "move") {
 	$query = "select * from `locations` where `id`='$locid'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$newreg = $_REQUEST['newreg'] = $row['regid'];
@@ -175,17 +174,16 @@ document.getElementById("display1").style.display = "none";
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Move Location")?></td>
+    <td colspan="2" class="title"><?php echo _("Move Location")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Location")?>:</td>
-    <td class="DataTD"><?=$row['name']?></td>
+    <td class="DataTD"><?php echo _("Location")?>:</td>
+    <td class="DataTD"><?php echo $row['name']?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Set Region")?>:</td>
+    <td class="DataTD"><?php echo _("Set Region")?>:</td>
     <td class="DataTD"><select name="newreg">
-<?
-	$query = "select * from `regions` where `ccid`='".intval($row['ccid'])."' order by `name`";
+<?php 	$query = "select * from `regions` where `ccid`='".intval($row['ccid'])."' order by `name`";
 	$res = mysql_query($query);
 	while($row = mysql_fetch_assoc($res))
 	{
@@ -198,12 +196,12 @@ document.getElementById("display1").style.display = "none";
     </select></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Update")?>"></td>
   </tr>
 </table>
 <input type="hidden" name="action" value="move">
-<input type="hidden" name="locid" value="<?=$locid?>">
+<input type="hidden" name="locid" value="<?php echo $locid?>">
 <input type="hidden" name="oldid" value="54">
 </form>
-<? } ?>
+<?php } ?>
 

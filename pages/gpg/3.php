@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$certid = intval($_REQUEST['cert']);
+<?php 	$certid = intval($_REQUEST['cert']);
 	$query = "select * from `gpg` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
@@ -27,7 +26,7 @@
 	}
 	$row = mysql_fetch_assoc($res);
 ?>
-<h3><?=_("Below is your OpenPGP key")?></h3>
+<h3><?php echo _("Below is your OpenPGP key")?></h3>
 <pre>
-<? readfile($row['crt']); ?>
+<?php readfile($row['crt']); ?>
 </pre>

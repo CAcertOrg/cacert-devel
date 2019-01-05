@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 
-<? if(!array_key_exists('location',$_REQUEST) || $_REQUEST['location'] == "") { ?>
+<?php if(!array_key_exists('location',$_REQUEST) || $_REQUEST['location'] == "") { ?>
 <script language="javascript" src="/ac.js"></script>
 <script language="javascript">
 <!--
@@ -25,17 +25,16 @@ function oncomplete() {
 }
 // -->
 </script>
-<p><?=_("Please enter your town or suburb name, followed by region or state or province and then the country (please separate by commas)")?><br />
-<?=_("eg Sydney, New South Wales, Australia")?></p>
-<p><?=_("This is an AJAX form which depends heavily on javascript for auto-complete functionality and while it will work without javascript the usability will be heavily degraded.")?></p>
+<p><?php echo _("Please enter your town or suburb name, followed by region or state or province and then the country (please separate by commas)")?><br />
+<?php echo _("eg Sydney, New South Wales, Australia")?></p>
+<p><?php echo _("This is an AJAX form which depends heavily on javascript for auto-complete functionality and while it will work without javascript the usability will be heavily degraded.")?></p>
 <form name="f" action="wot.php" method="post">
 <input type='hidden' name='oldid' value='12' />
 <table>
   <tr>
-    <td align=right valign=middle><?=_("Maximum Distance:")?></td>
+    <td align=right valign=middle><?php echo _("Maximum Distance:")?></td>
     <td><select name="maxdist">
-<?
-	$arr = array(10, 25, 50, 100, 250, 500, 1000);
+<?php 	$arr = array(10, 25, 50, 100, 250, 500, 1000);
 	foreach($arr as $val)
 	{
 		echo "<option value='$val'";
@@ -47,7 +46,7 @@ function oncomplete() {
     </td>
   </tr>
   <tr>
-    <td align=right valign=middle><?=_("Location:")?></td>
+    <td align=right valign=middle><?php echo _("Location:")?></td>
     <td><input autocomplete="off" type="text" id="location" name="location" value="" size="50" /> <input type="submit" name="process" value="Go"></td>
   </tr>
 </table>
@@ -60,7 +59,7 @@ ac1.enable_unicode();
 document.f.location.focus();
 // -->
 </script>
-<? } else {
+<?php } else {
 	if(intval($_REQUEST['location']) == 0)
 	{
 		$bits = explode(",", $_REQUEST['location']);
@@ -111,11 +110,11 @@ document.f.location.focus();
 	$res = mysql_query($query);
 ?><table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="700">
   <tr>
-    <td class="title"><?=_("Name")?></td>
-    <td class="title"><?=_("Distance")?></td>
-    <td class="title"><?=_("Max Points")?></td>
-    <td class="title"><?=_("Contact Details")?></td>
-    <td class="title"><?=_("Email Assurer")?></td>
+    <td class="title"><?php echo _("Name")?></td>
+    <td class="title"><?php echo _("Distance")?></td>
+    <td class="title"><?php echo _("Max Points")?></td>
+    <td class="title"><?php echo _("Contact Details")?></td>
+    <td class="title"><?php echo _("Email Assurer")?></td>
   </tr>
 <?	while($row = mysql_fetch_assoc($res))
 	{
@@ -124,12 +123,12 @@ document.f.location.focus();
 			$points = 35;
 ?>
   <tr>
-    <td class="DataTD" width="100"><nobr><?=$row['name']?></nobr></td>
-    <td class="DataTD"><?=$row['distance']?>km</td>
-    <td class="DataTD"><?=$points?></td>
-    <td class="DataTD"><?=$row['contactinfo']?></td>
-    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=$row['uid']?>"><?=_("Email Me")?></a></td>
+    <td class="DataTD" width="100"><nobr><?php echo $row['name']?></nobr></td>
+    <td class="DataTD"><?php echo $row['distance']?>km</td>
+    <td class="DataTD"><?php echo $points?></td>
+    <td class="DataTD"><?php echo $row['contactinfo']?></td>
+    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?php echo $row['uid']?>"><?php echo _("Email Me")?></a></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
-<? } ?>
+<?php } ?>

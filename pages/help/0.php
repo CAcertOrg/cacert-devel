@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <p style="background-color: #FF8080; font-size: 150%">
-<?
-printf(_("This page has been moved to the %swiki%s. Please update your ".
+<?php printf(_("This page has been moved to the %swiki%s. Please update your ".
 		"bookmarks and report any broken links."),
 	'<a href="//wiki.cacert.org/HELP/0">', '</a>');
 ?>

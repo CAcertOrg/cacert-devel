@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -99,25 +99,24 @@
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="550">
   <tr>
-    <td class="title"><?=_("Name")?></td>
-    <td class="title"><?=_("Max Points")?></td>
-    <td class="title"><?=_("Contact Details")?></td>
-    <td class="title"><?=_("Email Assurer")?></td>
-    <td class="title"><?=_("Assurer Challenge")?></td>
+    <td class="title"><?php echo _("Name")?></td>
+    <td class="title"><?php echo _("Max Points")?></td>
+    <td class="title"><?php echo _("Contact Details")?></td>
+    <td class="title"><?php echo _("Email Assurer")?></td>
+    <td class="title"><?php echo _("Assurer Challenge")?></td>
   </tr>
 
 <?		while($row = mysql_fetch_assoc($list)) { ?>
   <tr>
-    <td class="DataTD" width="100"><nobr><?=sanitizeHTML($row['fname'])?> <?=substr($row['lname'], 0, 1)?>.</nobr></td>
-    <td class="DataTD"><?=maxpoints($row['id'])?></td>
-    <td class="DataTD"><?=sanitizeHTML($row['contactinfo'])?></td>
-    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?=intval($row['id'])?>"><?=_("Email Me")?></a></td>
-    <td class="DataTD"><?=$row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
+    <td class="DataTD" width="100"><nobr><?php echo sanitizeHTML($row['fname'])?> <?php echo substr($row['lname'], 0, 1)?>.</nobr></td>
+    <td class="DataTD"><?php echo maxpoints($row['id'])?></td>
+    <td class="DataTD"><?php echo sanitizeHTML($row['contactinfo'])?></td>
+    <td class="DataTD"><a href="wot.php?id=9&amp;userid=<?php echo intval($row['id'])?>"><?php echo _("Email Me")?></a></td>
+    <td class="DataTD"><?php echo $row['assurer']?_("Yes"):("<font color=\"#ff0000\">"._("Not yet!")."</font>")?></td>
   </tr>
-<?
-		}
+<?php 		}
 	}
 ?>
 </table>
 <br>
-<? } ?>
+<?php } ?>

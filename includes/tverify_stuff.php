@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -24,38 +24,37 @@ if(!function_exists("showheader"))
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title><?=$title?></title>
-<? if($_SESSION['_config']['header'] != "") { ?><?=$_SESSION['_config']['header']?><? } ?>
+<title><?php echo $title?></title>
+<?php if($_SESSION['_config']['header'] != "") { ?><?php echo $_SESSION['_config']['header']?><?php } ?>
 <link rel="stylesheet" href="/styles/default.css" type="text/css">
 <link href="http://my.rsscache.com/www.cacert.org/rss.php" rel="alternate" type="application/rss+xml" title="rss">
 </head>
 <body>
  <div id="pagecell1">
   <div id="pageName"><br>
-    <h2><a href="http://<?=$_SESSION['_config']['normalhostname']?>"><img src="https://www.CAcert.org/images/cacert4.png" border="0" alt="CAcert.org logo"></a></h2>
-<div id="googlead"><h2><?=_("Free digital certificates!")?></h2></div>
+    <h2><a href="http://<?php echo $_SESSION['_config']['normalhostname']?>"><img src="https://www.CAcert.org/images/cacert4.png" border="0" alt="CAcert.org logo"></a></h2>
+<div id="googlead"><h2><?php echo _("Free digital certificates!")?></h2></div>
   </div>
   <div id="pageNav">
     <div class="relatedLinks">
-      <h3><?=_("Join CAcert.org")?></h3>
-      <a href="http://<?=$_SESSION['_config']['normalhostname']?>/"><?=_("Main Website")?></a> 
-      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=1"><?=_("Join")?></a> 
+      <h3><?php echo _("Join CAcert.org")?></h3>
+      <a href="http://<?php echo $_SESSION['_config']['normalhostname']?>/"><?php echo _("Main Website")?></a>
+      <a href="https://<?php echo $_SESSION['_config']['normalhostname']?>/index.php?id=1"><?php echo _("Join")?></a>
     </div>
     <div class="relatedLinks">
-      <h3><?=_("My Account")?></h3>
-      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4"><?=_("Normal Login")?></a> 
-      <a href="https://<?=$_SESSION['_config']['securehostname']?>/index.php?id=4"><?=_("Cert Login")?></a>
-      <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=5"><?=_("Lost Password")?></a>
+      <h3><?php echo _("My Account")?></h3>
+      <a href="https://<?php echo $_SESSION['_config']['normalhostname']?>/index.php?id=4"><?php echo _("Normal Login")?></a>
+      <a href="https://<?php echo $_SESSION['_config']['securehostname']?>/index.php?id=4"><?php echo _("Cert Login")?></a>
+      <a href="https://<?php echo $_SESSION['_config']['normalhostname']?>/index.php?id=5"><?php echo _("Lost Password")?></a>
     </div>
   </div>
   <div id="content">
     <div class="story">
-      <h3><?=$title2?></h3>
-<? if($_SESSION['_config']['errmsg'] != "") { ?>
-<p><font color="#ff0000" size="+2"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
-<? } ?>
-<?
-	}
+      <h3><?php echo $title2?></h3>
+<?php if($_SESSION['_config']['errmsg'] != "") { ?>
+<p><font color="#ff0000" size="+2"><?php echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
+<?php } ?>
+<?php 	}
 }
 
 if(!function_exists("showfooter"))
@@ -66,13 +65,12 @@ if(!function_exists("showfooter"))
       </div>
     </div>
   <div id="siteInfo">
-        <a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
-        <a href="/index.php?id=10"><?=_("Privacy Policy")?></a> |
-        <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
-        <a href="/index.php?id=19"><?=_("Further Information")?></a> | &copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
+        <a href="//wiki.cacert.org/FAQ/AboutUs"><?php echo _("About Us")?></a> | <a href="/index.php?id=13"><?php echo _("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?php echo _("Association Membership")?></a> |
+        <a href="/index.php?id=10"><?php echo _("Privacy Policy")?></a> |
+        <a href="/index.php?id=51"><?php echo _("Mission Statement")?></a> | <a href="/index.php?id=11"><?php echo _("Contact Us")?></a> |
+        <a href="/index.php?id=19"><?php echo _("Further Information")?></a> | &copy;2002-<?php echo date("Y")?> <?php echo _("by CAcert")?></div>
 </div>  
 </body>             
-</html><?
-	}
+</html><?php 	}
 }
 ?>

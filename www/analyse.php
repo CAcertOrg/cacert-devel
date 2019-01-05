@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	loadem("index");
+<?php 	loadem("index");
 
 	showheader(_("Welcome to CAcert.org"));
 
@@ -27,7 +26,7 @@
 <form method="post">
 <p>Please paste the PEM encoded certificate signing request you would like to analyze in the text area below:</p>
 <p><textarea name="csr" cols="64" rows="12"></textarea></p>
-<p><input type="submit" name="process" value="<?=_("Analyse")?>"></p>
+<p><input type="submit" name="process" value="<?php echo _("Analyse")?>"></p>
 </form>
 <?	} else {
 		echo "<pre>".htmlspecialchars(print_r(openssl_x509_parse(openssl_x509_read($_POST['csr'])),true))."</pre>";

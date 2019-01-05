@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -17,13 +17,13 @@
 */
 	include_once("../includes/shutdown.php");
 ?>
-<p><?=_("Paste your own public OpenPGP key below. It should not contain a picture. CAcert will sign your key after submission.")?></p>
+<p><?php echo _("Paste your own public OpenPGP key below. It should not contain a picture. CAcert will sign your key after submission.")?></p>
 <form method="post" action="gpg.php">
-<p><?=_("Optional comment, only used in the certificate overview")?><br />
+<p><?php echo _("Optional comment, only used in the certificate overview")?><br />
        <input type="text" name="description" maxlength="80" size=80 /></p>
-<textarea name="CSR" cols="80" rows="15"><?=array_key_exists('CSR',$_POST)?strip_tags($_POST['CSR']):""?></textarea><br />
-<p><input type="checkbox" name="CCA" /> <strong><?=sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
-  <?=_("Please Note: You need to accept the CCA to proceed.")?></p>
-<input type="submit" name="process" value="<?=_("Submit")?>" />
-<input type="hidden" name="oldid" value="<?=$id?>" />
+<textarea name="CSR" cols="80" rows="15"><?php echo array_key_exists('CSR',$_POST)?strip_tags($_POST['CSR']):""?></textarea><br />
+<p><input type="checkbox" name="CCA" /> <strong><?php echo sprintf(_("I accept the CAcert Community Agreement (%s)."),"<a href='/policy/CAcertCommunityAgreement.html'>CCA</a>")?></strong><br />
+  <?php echo _("Please Note: You need to accept the CCA to proceed.")?></p>
+<input type="submit" name="process" value="<?php echo _("Submit")?>" />
+<input type="hidden" name="oldid" value="<?php echo $id?>" />
 </form>

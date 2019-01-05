@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -18,23 +18,22 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="3" class="title"><?=_("Domains")?></td>
+    <td colspan="3" class="title"><?php echo _("Domains")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Delete")?></td>
-    <td class="DataTD"><?=_("Status")?></td>
-    <td class="DataTD"><?=_("Address")?></td>
+    <td class="DataTD"><?php echo _("Delete")?></td>
+    <td class="DataTD"><?php echo _("Status")?></td>
+    <td class="DataTD"><?php echo _("Address")?></td>
 
-<?
-	$query = "select * from `domains` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
+<?php 	$query = "select * from `domains` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
 	$res = mysql_query($query);
 	if(mysql_num_rows($res) <= 0)
 	{
 ?>
   <tr>
-    <td colspan="3" class="DataTD"><?=_("No domains are currently listed.")?></td>
+    <td colspan="3" class="DataTD"><?php echo _("No domains are currently listed.")?></td>
   </tr>
-<? } else {
+<?php } else {
 	while($row = mysql_fetch_assoc($res))
 	{
 		if($row['hash'] == "")
@@ -43,15 +42,15 @@
 			$verified = _("Unverified");
 ?>
   <tr>
-    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>"></td>
-    <td class="DataTD"><?=$verified?></td>
-    <td class="DataTD"><?=sanitizeHTML($row['domain'])?></td>
+    <td class="DataTD"><input type="checkbox" name="delid[]" value="<?php echo intval($row['id'])?>"></td>
+    <td class="DataTD"><?php echo $verified?></td>
+    <td class="DataTD"><?php echo sanitizeHTML($row['domain'])?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
-    <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=_("Delete")?>"></td>
+    <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?php echo _("Delete")?>"></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?php echo $id?>">
 </form>

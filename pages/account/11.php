@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -17,12 +17,11 @@
 */ ?>
 
 <p>
-<?=_("Please make sure the following details are correct before proceeding ".
+<?php echo _("Please make sure the following details are correct before proceeding ".
 		"any further.")?>
 </p>
 
-<p><?
-if (is_array($_SESSION['_config']['rows'])) {
+<p><?php if (is_array($_SESSION['_config']['rows'])) {
 	foreach ($_SESSION['_config']['rows'] as $row) {
 		echo _("CommonName"), ": $row<br>\n";
 	}
@@ -36,12 +35,11 @@ if (is_array($_SESSION['_config']['altrows'])) {
 ?></p>
 
 <p>
-<?=_("No additional information will be included on certificates because it ".
+<?php echo _("No additional information will be included on certificates because it ".
 		"can not be automatically checked by the system.")?>
 </p>
 
-<p><?
-if (array_key_exists('rejected',$_SESSION['_config']) &&
+<p><?php if (array_key_exists('rejected',$_SESSION['_config']) &&
 		is_array($_SESSION['_config']['rejected'])) {
 	echo _("The following hostnames were rejected because the system couldn't ".
 			"link them to your account, if they are valid please verify the ".
@@ -54,22 +52,19 @@ if (array_key_exists('rejected',$_SESSION['_config']) &&
 }
 ?></p>
 
-<?
-if (is_array($_SESSION['_config']['rows']) ||
+<?php if (is_array($_SESSION['_config']['rows']) ||
 		is_array($_SESSION['_config']['altrows'])) {
 	?>
 	<form method="post" action="account.php">
 		<p>
-			<input type="submit" name="process" value="<?=_("Submit")?>">
-			<input type="hidden" name="oldid" value="<?=$id?>">
+			<input type="submit" name="process" value="<?php echo _("Submit")?>">
+			<input type="hidden" name="oldid" value="<?php echo $id?>">
 		</p>
 	</form>
-	<?
-} else {
+	<?php } else {
 	?>
 	<p>
-		<b><?=_("Unable to continue as no valid commonNames or ".
+		<b><?php echo _("Unable to continue as no valid commonNames or ".
 				"subjectAltNames were present on your certificate request.")?></b>
 	</p>
-	<?
-}
+	<?php }

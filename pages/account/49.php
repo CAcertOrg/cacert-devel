@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,8 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$userid=0; if(array_key_exists('userid',$_GET)) $userid=intval($_GET['userid']);
+<?php 	$userid=0; if(array_key_exists('userid',$_GET)) $userid=intval($_GET['userid']);
 	if($userid <= 0)
 	{
 		$domainsearch = $domain = mysql_escape_string(stripslashes($_POST['domain']));
@@ -34,25 +33,24 @@
 		if(mysql_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Select Specific User Account Details")?></td>
+    <td colspan="5" class="title"><?php echo _("Select Specific User Account Details")?></td>
   </tr>
-<?
-	while($row = mysql_fetch_assoc($res))
+<?php 	while($row = mysql_fetch_assoc($res))
 	{ ?>
   <tr>
-    <td class="DataTD"><?=_("Domain")?>:</td>
-    <td class="DataTD"><?=$row['domid']?></td>
-    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>"><?=sanitizeHTML($row['domain'])?></a></td>
+    <td class="DataTD"><?php echo _("Domain")?>:</td>
+    <td class="DataTD"><?php echo $row['domid']?></td>
+    <td class="DataTD"><a href="account.php?id=43&amp;userid=<?php echo $row['id']?>"><?php echo sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<?php } if(mysql_num_rows($res) >= 100) { ?>
   <tr>
-    <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
+    <td class="DataTD" colspan="3"><?php echo _("Only the first 100 rows are displayed.")?></td>
   </tr>
-<? } else { ?>
+<?php } else { ?>
   <tr>
-    <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
@@ -62,33 +60,31 @@
 				<tr>
 				<td colspan="5" class="title"><?printf(_("No personal domains found matching %s"), sanitizeHTML($domain));?></td>
 			</tr>
-		</table><br><br><?
-		}
+		</table><br><br><?php 		}
 
 		$query = "select `orgid`,`domain`,`id` from `orgdomains` where `domain` like '$domainsearch' or `id`='$domain' limit 100";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) >= 1) { ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="5" class="title"><?=_("Select Specific Organisation Account Details")?></td>
+    <td colspan="5" class="title"><?php echo _("Select Specific Organisation Account Details")?></td>
   </tr>
-<?
-	while($row = mysql_fetch_assoc($res))
+<?php 	while($row = mysql_fetch_assoc($res))
 	{ ?>
   <tr>
-    <td class="DataTD"><?=_("Domain")?>:</td>
-    <td class="DataTD"><?=$row['id']?></td>
-    <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?=intval($row['orgid'])?>"><?=sanitizeHTML($row['domain'])?></a></td>
+    <td class="DataTD"><?php echo _("Domain")?>:</td>
+    <td class="DataTD"><?php echo $row['id']?></td>
+    <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?php echo intval($row['orgid'])?>"><?php echo sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<?php } if(mysql_num_rows($res) >= 100) { ?>
   <tr>
-    <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
+    <td class="DataTD" colspan="3"><?php echo _("Only the first 100 rows are displayed.")?></td>
   </tr>
-<? } else { ?>
+<?php } else { ?>
   <tr>
-    <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
@@ -98,8 +94,7 @@
 				<tr>
 				<td colspan="5" class="title"><?printf(_("No organisational domains found matching %s"), sanitizeHTML($domain));?></td>
 			</tr>
-		</table><br><br><?
-		}
+		</table><br><br><?php 		}
 	}
 
 	if($userid > 0)

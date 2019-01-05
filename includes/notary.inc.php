@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2011  CAcert Inc.
 
@@ -333,18 +333,17 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-		<td class="title"><?=_("Assurer Ranking")?></td>
+		<td class="title"><?php echo _("Assurer Ranking")?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
+		<td class="DataTD"><?php echo sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($num_of_assurances), intval($rank_of_assurer) )?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><?=sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
+		<td class="DataTD"><?php echo sprintf(_("You have received %s assurances which ranks you as the #%s top assuree."), intval($num_of_assurees), intval($rank_of_assuree) )?></td>
 	</tr>
 </table>
 <br/>
-<?
-	}
+<?php 	}
 
 	/**
 	 * Render header for the assurance table (same for given/received)
@@ -368,36 +367,31 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-		<td colspan="<?=$colspan?>" class="title"><?=$title?></td>
+		<td colspan="<?php echo $colspan?>" class="title"><?php echo $title?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><strong><?=_("ID")?></strong></td>
-		<td class="DataTD"><strong><?=_("Date")?></strong></td>
-<?
-		if ($support == 1)
+		<td class="DataTD"><strong><?php echo _("ID")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Date")?></strong></td>
+<?php 		if ($support == 1)
 		{
 ?>
-		<td class="DataTD"><strong><?=_("When")?></strong></td>
-		<td class="DataTD"><strong><?=_("Email")?></strong></td>
-<?
-		}
+		<td class="DataTD"><strong><?php echo _("When")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Email")?></strong></td>
+<?php 		}
 ?>
-		<td class="DataTD"><strong><?=_("Who")?></strong></td>
-		<td class="DataTD"><strong><?=_("Points")?></strong></td>
-		<td class="DataTD"><strong><?=_("Location")?></strong></td>
-		<td class="DataTD"><strong><?=_("Method")?></strong></td>
-		<td class="DataTD"><strong><?=_("Experience Points")?></strong></td>
-<?
-		if ($log == 1)
+		<td class="DataTD"><strong><?php echo _("Who")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Points")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Location")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Method")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Experience Points")?></strong></td>
+<?php 		if ($log == 1)
 		{
 ?>
-		<td class="DataTD"><strong><?=_("Revoked")?></strong></td>
-<?
-		}
+		<td class="DataTD"><strong><?php echo _("Revoked")?></strong></td>
+<?php 		}
 ?>
 	</tr>
-<?
-	}
+<?php 	}
 
 	/**
 	 * Render footer for the assurance table (same for given/received)
@@ -418,24 +412,21 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	{
 ?>
 	<tr>
-		<td colspan="<?=($support == 1) ? 5 : 3 ?>" class="DataTD"><strong><?=$points_txt?>:</strong></td>
-		<td class="DataTD"><?=intval($sumpoints)?></td>
+		<td colspan="<?php echo ($support == 1) ? 5 : 3 ?>" class="DataTD"><strong><?php echo $points_txt?>:</strong></td>
+		<td class="DataTD"><?php echo intval($sumpoints)?></td>
 		<td class="DataTD">&nbsp;</td>
-		<td class="DataTD"><strong><?=$experience_txt?>:</strong></td>
-		<td class="DataTD"><?=intval($sumexperience)?></td>
-<?
-		if ($log == 1)
+		<td class="DataTD"><strong><?php echo $experience_txt?>:</strong></td>
+		<td class="DataTD"><?php echo intval($sumexperience)?></td>
+<?php 		if ($log == 1)
 		{
 ?>
 		<td class="DataTD">&nbsp;</td>
-<?
-		}
+<?php 		}
 ?>
 	</tr>
 </table>
 <br/>
-<?
-	}
+<?php 	}
 
 	/**
 	 * Render an assurance for a view
@@ -489,80 +480,70 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		}
 ?>
 	<tr>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$assuranceid?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$date?><?=$emclose?></td>
-<?
-		if ($support == 1)
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $assuranceid?><?php echo $emclose?></td>
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $date?><?php echo $emclose?></td>
+<?php 		if ($support == 1)
 		{
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$when?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$email?><?=$emclose?></td>
-<?
-		}
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $when?><?php echo $emclose?></td>
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $email?><?php echo $emclose?></td>
+<?php 		}
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$name?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$revoked ? sprintf("<strong style='color: red'>%s</strong>",_("Revoked")) : $awarded?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=sanitizeHTML($location)?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$method?><?=$emclose?></td>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><?=$experience?$experience:'&nbsp;'?><?=$emclose?></td>
-<?
-		if ($log == 1)
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $name?><?php echo $emclose?></td>
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $revoked ? sprintf("<strong style='color: red'>%s</strong>",_("Revoked")) : $awarded?><?php echo $emclose?></td>
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo sanitizeHTML($location)?><?php echo $emclose?></td>
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $method?><?php echo $emclose?></td>
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><?php echo $experience?$experience:'&nbsp;'?><?php echo $emclose?></td>
+<?php 		if ($log == 1)
 		{
 			if ($revoked == true)
 			{
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$assurance['deleted']?></td>
-<?
-			} elseif ($support == 1) {
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $assurance['deleted']?></td>
+<?php 			} elseif ($support == 1) {
 ?>
-		<td class="DataTD" <?=$tdstyle?>><?=$emopen?><a href="account.php?id=43&amp;userid=<?=intval($userid)?>&amp;assurance=<?=intval($assuranceid)?>&amp;csrf=<?=make_csrf('admdelassurance')?>&amp;ticketno=<?=sanitizeHTML($ticketno)?>" onclick="return confirm('<?=sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?=_("Revoke")?></a><?=$emclose?></td>
-<?
-			} else {
+		<td class="DataTD" <?php echo $tdstyle?>><?php echo $emopen?><a href="account.php?id=43&amp;userid=<?php echo intval($userid)?>&amp;assurance=<?php echo intval($assuranceid)?>&amp;csrf=<?php echo make_csrf('admdelassurance')?>&amp;ticketno=<?php echo sanitizeHTML($ticketno)?>" onclick="return confirm('<?php echo sprintf(_("Are you sure you want to revoke the assurance with ID &quot;%s&quot;?"),$assuranceid)?>');"><?php echo _("Revoke")?></a><?php echo $emclose?></td>
+<?php 			} else {
 ?>
-		<td class="DataTD" <?=$tdstyle?>>&nbsp;</td>
-<?
-			}
+		<td class="DataTD" <?php echo $tdstyle?>>&nbsp;</td>
+<?php 			}
 		}
 ?>
 	</tr>
-<?
-	}
+<?php 	}
 
 	function output_summary_header()
 	{
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
 	<tr>
-		<td colspan="4" class="title"><?=_("Summary of your Points")?></td>
+		<td colspan="4" class="title"><?php echo _("Summary of your Points")?></td>
 	</tr>
 	<tr>
-		<td class="DataTD"><strong><?=_("Description")?></strong></td>
-		<td class="DataTD"><strong><?=_("Points")?></strong></td>
-		<td class="DataTD"><strong><?=_("Countable Points")?></strong></td>
-		<td class="DataTD"><strong><?=_("Remark")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Description")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Points")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Countable Points")?></strong></td>
+		<td class="DataTD"><strong><?php echo _("Remark")?></strong></td>
     </tr>
-<?
-	}
+<?php 	}
 
 	function output_summary_footer()
 	{
 ?>
 </table>
 <br/>
-<?
-	}
+<?php 	}
 
 	function output_summary_row($title,$points,$points_countable,$remark)
 	{
 ?>
 	<tr>
-		<td class="DataTD"><strong><?=$title?></strong></td>
-		<td class="DataTD"><?=$points?></td>
-		<td class="DataTD"><?=$points_countable?></td>
-		<td class="DataTD"><?=$remark?></td>
+		<td class="DataTD"><strong><?php echo $title?></strong></td>
+		<td class="DataTD"><?php echo $points?></td>
+		<td class="DataTD"><?php echo $points_countable?></td>
+		<td class="DataTD"><?php echo $remark?></td>
 	</tr>
-<?
-	}
+<?php 	}
 
 
 // ************* output given assurances ******************
@@ -840,9 +821,8 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	function output_end_of_page()
 	{
 ?>
-	<p>[ <a href='javascript:history.go(-1)'><?=_("Go Back")?></a> ]</p>
-<?
-	}
+	<p>[ <a href='javascript:history.go(-1)'><?php echo _("Go Back")?></a> ]</p>
+<?php 	}
 
 	//functions to do with recording user agreements
 	/**
@@ -1004,87 +984,78 @@ function get_user_agreements($memid, $type=null, $active=null){
 <form method="post" action="wot.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="600">
 	<tr>
-		<td colspan="2" class="title"><?=$confirmation?></td>
+		<td colspan="2" class="title"><?php echo $confirmation?></td>
 	</tr>
 	<tr>
-		<td class="DataTD" colspan="2" align="left"><?=$checkname?></td>
+		<td class="DataTD" colspan="2" align="left"><?php echo $checkname?></td>
 	</tr>
-<?
-	}
+<?php 	}
 
 	function AssureTextLine($field1,$field2)
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field1.(empty($field1)?'':':')?></td>
-		<td class="DataTD"><?=$field2?></td>
+		<td class="DataTD"><?php echo $field1.(empty($field1)?'':':')?></td>
+		<td class="DataTD"><?php echo $field2?></td>
 	</tr>
-<?
-	}
+<?php 	}
 
 	function AssureBoxLine($type,$text,$checked)
 	{
 ?>
 	<tr>
-		<td class="DataTD"><input type="checkbox" name="<?=$type?>" value="1" <?=$checked?"checked":""?>></td>
-		<td class="DataTD"><?=$text?></td>
+		<td class="DataTD"><input type="checkbox" name="<?php echo $type?>" value="1" <?php echo $checked?"checked":""?>></td>
+		<td class="DataTD"><?php echo $text?></td>
 	</tr>
-<?
-	}
+<?php 	}
 
 	function AssureMethodLine($text,$methods,$remark)
 	{
 		if (count($methods) != 1) {
 ?>
 	<tr>
-		<td class="DataTD"><?=$text.(empty($text)?'':':')?></td>
+		<td class="DataTD"><?php echo $text.(empty($text)?'':':')?></td>
 		<td class="DataTD">
 			<select name="method">
-<?
-			foreach($methods as $val) {
+<?php 			foreach($methods as $val) {
 ?>
-				<option value="<?=$val?>"><?=$val?></option>
-<?
-			}
+				<option value="<?php echo $val?>"><?php echo $val?></option>
+<?php 			}
 ?>
 			</select>
 			<br />
-			<?=$remark?>
+			<?php echo $remark?>
 		</td>
 	</tr>
-<?
-		} else {
+<?php 		} else {
 ?>
-	<input type="hidden" name="method" value="<?=$methods[0]?>" />
-<?
-		}
+	<input type="hidden" name="method" value="<?php echo $methods[0]?>" />
+<?php 		}
 	}
 
 	function AssureInboxLine($type,$field,$value,$description)
 	{
 ?>
 	<tr>
-		<td class="DataTD"><?=$field.(empty($field)?'':':')?></td>
-		<td class="DataTD"><input type="text" name="<?=$type?>" value="<?=$value?>"><?=$description?></td>
+		<td class="DataTD"><?php echo $field.(empty($field)?'':':')?></td>
+		<td class="DataTD"><input type="text" name="<?php echo $type?>" value="<?php echo $value?>"><?php echo $description?></td>
 	</tr>
-<?
-	}
+<?php 	}
 
 	function AssureFoot($oldid,$confirm)
 	{
 ?>
 	<tr>
 		<td class="DataTD" colspan="2">
-			<input type="submit" name="process" value="<?=$confirm?>" />
-			<input type="submit" name="cancel" value="<?=_("Cancel")?>" />
+			<input type="submit" name="process" value="<?php echo $confirm?>" />
+			<input type="submit" name="cancel" value="<?php echo _("Cancel")?>" />
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="pagehash" value="<?=$_SESSION['_config']['wothash']?>" />
-<input type="hidden" name="oldid" value="<?=$oldid?>" />
+<input type="hidden" name="pagehash" value="<?php echo $_SESSION['_config']['wothash']?>" />
+<input type="hidden" name="oldid" value="<?php echo $oldid?>" />
 </form>
-<?
-	}
+<?php 	}
 
 	function account_email_delete($mailid){
 	//deletes an email entry from an acount
@@ -1622,13 +1593,12 @@ function get_gpg_certs($userid, $viewall=0){
 function output_log_email_header(){
 	?>
 	<tr>
-		<td class="DataTD bold"><?= _("Email, primary bold") ?></td>
-		<td class="DataTD bold"><?= _("Created") ?></td>
-		<td class="DataTD bold"><?= _("Deleted") ?></td>
+		<td class="DataTD bold"><?php echo _("Email, primary bold") ?></td>
+		<td class="DataTD bold"><?php echo _("Created") ?></td>
+		<td class="DataTD bold"><?php echo _("Deleted") ?></td>
 	</tr>
 
-	<?
-}
+	<?php }
 /**
  * Show all email data for the admin log
  * @param array  $row - associative array containing the column data
@@ -1643,12 +1613,11 @@ function output_log_email($row, $primary){
 	}
 	?>
 	<tr>
-		<td class="DataTD<?=$style?>"><?=$row['email']?></td>
-		<td class="DataTD<?=$style?>"><?=$row['created']?></td>
-		<td class="DataTD<?=$style?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?php echo $style?>"><?php echo $row['email']?></td>
+		<td class="DataTD<?php echo $style?>"><?php echo $row['created']?></td>
+		<td class="DataTD<?php echo $style?>"><?php echo $row['deleted']?></td>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the table header to the domains table for the admin log
@@ -1656,13 +1625,12 @@ function output_log_email($row, $primary){
 function output_log_domains_header(){
 	?>
 	<tr>
-		<td class="DataTD bold"><?= _("Domain") ?></td>
-		<td class="DataTD bold"><?= _("Created") ?></td>
-		<td class="DataTD bold"><?= _("Deleted") ?></td>
+		<td class="DataTD bold"><?php echo _("Domain") ?></td>
+		<td class="DataTD bold"><?php echo _("Created") ?></td>
+		<td class="DataTD bold"><?php echo _("Deleted") ?></td>
 	</tr>
 
-	<?
-}
+	<?php }
 
 /**
  * Show the domain data for the admin log
@@ -1675,12 +1643,11 @@ function output_log_domains($row){
 	}
 	?>
 	<tr>
-		<td class="DataTD<?=$italic?>"><?=$row['domain']?></td>
-		<td class="DataTD<?=$italic?>"><?=$row['created']?></td>
-		<td class="DataTD<?=$italic?>"><?=$row['deleted']?></td>
+		<td class="DataTD<?php echo $italic?>"><?php echo $row['domain']?></td>
+		<td class="DataTD<?php echo $italic?>"><?php echo $row['created']?></td>
+		<td class="DataTD<?php echo $italic?>"><?php echo $row['deleted']?></td>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the table header to the user agreement table for the admin log
@@ -1688,13 +1655,12 @@ function output_log_domains($row){
 function output_log_agreement_header(){
 	?>
 	<tr>
-		<td class="DataTD bold"><?= _("Agreement") ?></td>
-		<td class="DataTD bold"><?= _("Date") ?></td>
-		<td class="DataTD bold"><?= _("Method") ?></td>
-		<td class="DataTD bold"><?= _("Active ") ?></td>
+		<td class="DataTD bold"><?php echo _("Agreement") ?></td>
+		<td class="DataTD bold"><?php echo _("Date") ?></td>
+		<td class="DataTD bold"><?php echo _("Method") ?></td>
+		<td class="DataTD bold"><?php echo _("Active ") ?></td>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the agreement data for the admin log
@@ -1703,13 +1669,12 @@ function output_log_agreement_header(){
 function output_log_agreement($row){
 	?>
 	<tr>
-		<td class="DataTD" ><?=$row['document']?></td>
-		<td class="DataTD" ><?=$row['date']?></td>
-		<td class="DataTD" ><?=$row['method']?></td>
-		<td class="DataTD"><?= ($row['active']==0)? _('passive'):_('active')?></td>
+		<td class="DataTD" ><?php echo $row['document']?></td>
+		<td class="DataTD" ><?php echo $row['date']?></td>
+		<td class="DataTD" ><?php echo $row['method']?></td>
+		<td class="DataTD"><?php echo ($row['active']==0)? _('passive'):_('active')?></td>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the table header to the training table
@@ -1718,12 +1683,11 @@ function output_log_training_header(){
 	//should be entered in account/55.php
 	?>
 	<tr>
-		<td class="DataTD bold"><?= _("Agreement") ?></td>
-		<td class="DataTD bold"><?= _("Test") ?></td>
-		<td class="DataTD bold"><?= _("Variant") ?></td>
+		<td class="DataTD bold"><?php echo _("Agreement") ?></td>
+		<td class="DataTD bold"><?php echo _("Test") ?></td>
+		<td class="DataTD bold"><?php echo _("Variant") ?></td>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the training data
@@ -1733,12 +1697,11 @@ function output_log_training($row){
 	//should be entered in account/55.php
 	?>
 	<tr>
-		<td class="DataTD"><?=$row['pass_date']?></td>
-		<td class="DataTD"><?=$row['type_text']?></td>
-		<td class="DataTD"><?=$row['test_text']?></td>
+		<td class="DataTD"><?php echo $row['pass_date']?></td>
+		<td class="DataTD"><?php echo $row['type_text']?></td>
+		<td class="DataTD"><?php echo $row['test_text']?></td>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the table header to the SE log table for the admin log
@@ -1747,19 +1710,16 @@ function output_log_training($row){
 function output_log_se_header($support=0){
 	?>
 	<tr>
-		<td class="DataTD bold"><?= _("Date") ?></td>
-		<td class="DataTD bold"><?= _("Type") ?></td>
-		<?
-		if (1 == $support) {
+		<td class="DataTD bold"><?php echo _("Date") ?></td>
+		<td class="DataTD bold"><?php echo _("Type") ?></td>
+		<?php 		if (1 == $support) {
 			?>
-			<td class="DataTD bold"><?= _("Information") ?></td>
-			<td class="DataTD bold"><?= _("Admin") ?></td>
-			<?
-		}
+			<td class="DataTD bold"><?php echo _("Information") ?></td>
+			<td class="DataTD bold"><?php echo _("Admin") ?></td>
+			<?php 		}
 		?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the SE log data for the admin log
@@ -1770,19 +1730,16 @@ function output_log_se($row, $support=0){
 	//should be entered in account/55.php
 	?>
 	<tr>
-		<td class="DataTD"><?=$row['when']?></td>
-		<td class="DataTD"><?=$row['type']?></td>
-		<?
-		if (1 == $support) {
+		<td class="DataTD"><?php echo $row['when']?></td>
+		<td class="DataTD"><?php echo $row['type']?></td>
+		<?php 		if (1 == $support) {
 			?>
-			<td class="DataTD"><?=$row['information']?></td>
-			<td class="DataTD"><?=$row['fname'].' '.$row['lname']?></td>
-			<?
-		}
+			<td class="DataTD"><?php echo $row['information']?></td>
+			<td class="DataTD"><?php echo $row['fname'].' '.$row['lname']?></td>
+			<?php 		}
 		?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Shows the table header to the client cert table
@@ -1793,29 +1750,24 @@ function output_client_cert_header($support=0, $readonly=true){
 	//should be added to account/5.php
 	?>
 	<tr>
-		<?
-		if (!$readonly) {
+		<?php 		if (!$readonly) {
 			?>
-			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
-			<?
-		}
+			<td class="DataTD"><?php echo _("Renew/Revoke/Delete")?></td>
+			<?php 		}
 		?>
-		<td class="DataTD"><?=_("Status")?></td>
-		<td class="DataTD"><?=_("Email Address")?></td>
-		<td class="DataTD"><?=_("SerialNumber")?></td>
-		<td class="DataTD"><?=_("Revoked")?></td>
-		<td class="DataTD"><?=_("Expires")?></td>
-		<td class="DataTD"><?=_("Login")?></td>
-		<?
-		if (1 != $support) {
+		<td class="DataTD"><?php echo _("Status")?></td>
+		<td class="DataTD"><?php echo _("Email Address")?></td>
+		<td class="DataTD"><?php echo _("SerialNumber")?></td>
+		<td class="DataTD"><?php echo _("Revoked")?></td>
+		<td class="DataTD"><?php echo _("Expires")?></td>
+		<td class="DataTD"><?php echo _("Login")?></td>
+		<?php 		if (1 != $support) {
 			?>
-			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
-			<?
-		}
+			<td colspan="2" class="DataTD"><?php echo _("Comment *")?></td>
+			<?php 		}
 		?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the client cert data
@@ -1844,76 +1796,65 @@ function output_client_cert($row, $support=0, $readonly=true){
 
 	?>
 	<tr>
-	<?
-	if (!$readonly) {
+	<?php 	if (!$readonly) {
 		if ($verified === _("Pending")) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>">
+				<input type="checkbox" name="delid[]" value="<?php echo intval($row['id'])?>">
 			</td>
-			<?
-
+			<?php
 		} elseif ($verified === _("Revoked")) {
 			?>
 			<td class="DataTD">&nbsp;</td>
-			<?
-
+			<?php
 		} else {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>">
+				<input type="checkbox" name="revokeid[]" value="<?php echo intval($row['id'])?>">
 			</td>
-			<?
-		}
+			<?php 		}
 	}
 
 	?>
-	<td class="DataTD"><?=$verified?></td>
-	<?
-
+	<td class="DataTD"><?php echo $verified?></td>
+	<?php
 	if ($verified === _("Pending")) {
 		?>
-		<td class="DataTD"><?=(trim($row['CN'])=="" ? _("empty") : htmlspecialchars($row['CN']))?></td>
-		<?
-	} else {
+		<td class="DataTD"><?php echo (trim($row['CN'])=="" ? _("empty") : htmlspecialchars($row['CN']))?></td>
+		<?php 	} else {
 		?>
 		<td class="DataTD">
-			<a href="account.php?id=6&amp;cert=<?=intval($row['id'])?>">
-				<?=(trim($row['CN'])=="" ? _("empty") : htmlspecialchars($row['CN']))?>
+			<a href="account.php?id=6&amp;cert=<?php echo intval($row['id'])?>">
+				<?php echo (trim($row['CN'])=="" ? _("empty") : htmlspecialchars($row['CN']))?>
 			</a>
 		</td>
-		<?
-	}
+		<?php 	}
 
 	?>
-	<td class="DataTD"><?=$row['serial']?></td>
-	<td class="DataTD"><?=$row['revoke']?></td>
-	<td class="DataTD"><?=$row['expire']?></td>
+	<td class="DataTD"><?php echo $row['serial']?></td>
+	<td class="DataTD"><?php echo $row['revoke']?></td>
+	<td class="DataTD"><?php echo $row['expire']?></td>
 	<td class="DataTD">
-		<input type="checkbox" name="disablelogin_<?=intval($row['id'])?>" value="1" <?=$row['disablelogin']?"":"checked='checked'"?> <?=$readonly?'disabled="disabled"':''?>/>
-		<input type="hidden" name="cert_<?=intval($row['id'])?>" value="1" />
+		<input type="checkbox" name="disablelogin_<?php echo intval($row['id'])?>" value="1" <?php echo $row['disablelogin']?"":"checked='checked'"?> <?php echo $readonly?'disabled="disabled"':''?>/>
+		<input type="hidden" name="cert_<?php echo intval($row['id'])?>" value="1" />
 	</td>
-	<?
-
+	<?php
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
-			<input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+			<input name="comment_<?php echo intval($row['id'])?>" type="text" value="<?php echo htmlspecialchars($row['description'])?>" />
 		</td>
-		<?
-		if (!$readonly) {
+		<?php 		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?=intval($row['id'])?>" />
+				<input type="checkbox" name="check_comment_<?php echo intval($row['id'])?>" />
 			</td>
-			<?
-		}
+			<?php 		}
 	}
 
 	?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the table header to the server cert table
@@ -1924,28 +1865,23 @@ function output_server_certs_header($support=0, $readonly=true){
 	//should be entered in account/12.php
 	?>
 	<tr>
-	<?
-		if (!$readonly) {
+	<?php 		if (!$readonly) {
 			?>
-			<td class="DataTD"><?=_("Renew/Revoke/Delete")?></td>
-			<?
-		}
+			<td class="DataTD"><?php echo _("Renew/Revoke/Delete")?></td>
+			<?php 		}
 		?>
-		<td class="DataTD"><?=_("Status")?></td>
-		<td class="DataTD"><?=_("CommonName")?></td>
-		<td class="DataTD"><?=_("SerialNumber")?></td>
-		<td class="DataTD"><?=_("Revoked")?></td>
-		<td class="DataTD"><?=_("Expires")?></td>
-		<?
-		if (1 != $support) {
+		<td class="DataTD"><?php echo _("Status")?></td>
+		<td class="DataTD"><?php echo _("CommonName")?></td>
+		<td class="DataTD"><?php echo _("SerialNumber")?></td>
+		<td class="DataTD"><?php echo _("Revoked")?></td>
+		<td class="DataTD"><?php echo _("Expires")?></td>
+		<?php 		if (1 != $support) {
 			?>
-			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
-			<?
-		}
+			<td colspan="2" class="DataTD"><?php echo _("Comment *")?></td>
+			<?php 		}
 	?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the server cert data
@@ -1974,70 +1910,59 @@ function output_server_certs($row, $support=0, $readonly=true){
 
 	?>
 	<tr>
-	<?
-	if (!$readonly) {
+	<?php 	if (!$readonly) {
 		if ($verified === _("Pending")) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>"/>
+				<input type="checkbox" name="delid[]" value="<?php echo intval($row['id'])?>"/>
 			</td>
-			<?
-		} elseif($verified === _("Revoked")) {
+			<?php 		} elseif($verified === _("Revoked")) {
 			?>
 			<td class="DataTD">&nbsp;</td>
-			<?
-		} else {
+			<?php 		} else {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>"/>
+				<input type="checkbox" name="revokeid[]" value="<?php echo intval($row['id'])?>"/>
 			</td>
-			<?
-		}
+			<?php 		}
 	}
 
 	?>
-	<td class="DataTD"><?=$verified?></td>
-	<?
-
+	<td class="DataTD"><?php echo $verified?></td>
+	<?php
 	if ($verified === _("Pending")) {
 		?>
-		<td class="DataTD"><?=htmlspecialchars($row['CN'])?></td>
-		<?
-	} else {
+		<td class="DataTD"><?php echo htmlspecialchars($row['CN'])?></td>
+		<?php 	} else {
 		?>
 		<td class="DataTD">
-			<a href="account.php?id=15&amp;cert=<?=intval($row['id'])?>">
-				<?=htmlspecialchars($row['CN'])?>
+			<a href="account.php?id=15&amp;cert=<?php echo intval($row['id'])?>">
+				<?php echo htmlspecialchars($row['CN'])?>
 			</a>
 		</td>
-		<?
-	}
+		<?php 	}
 
 	?>
-	<td class="DataTD"><?=$row['serial']?></td>
-	<td class="DataTD"><?=$row['revoke']?></td>
-	<td class="DataTD"><?=$row['expire']?></td>
-	<?
-
+	<td class="DataTD"><?php echo $row['serial']?></td>
+	<td class="DataTD"><?php echo $row['revoke']?></td>
+	<td class="DataTD"><?php echo $row['expire']?></td>
+	<?php
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
-			<input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+			<input name="comment_<?php echo intval($row['id'])?>" type="text" value="<?php echo htmlspecialchars($row['description'])?>" />
 		</td>
-		<?
-		if (!$readonly) {
+		<?php 		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?=intval($row['id'])?>" />
+				<input type="checkbox" name="check_comment_<?php echo intval($row['id'])?>" />
 			</td>
-			<?
-		}
+			<?php 		}
 	}
 
 	?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the table header to the gpg cert table
@@ -2048,20 +1973,17 @@ function output_gpg_certs_header($support=0, $readonly=true){
 	// $readonly is currently ignored but kept for consistency
 	?>
 	<tr>
-		<td class="DataTD"><?=_("Status")?></td>
-		<td class="DataTD"><?=_("Email Address")?></td>
-		<td class="DataTD"><?=_("Expires")?></td>
-		<td class="DataTD"><?=_("Key ID")?></td>
-		<?
-		if (1 != $support) {
+		<td class="DataTD"><?php echo _("Status")?></td>
+		<td class="DataTD"><?php echo _("Email Address")?></td>
+		<td class="DataTD"><?php echo _("Expires")?></td>
+		<td class="DataTD"><?php echo _("Key ID")?></td>
+		<?php 		if (1 != $support) {
 			?>
-			<td colspan="2" class="DataTD"><?=_("Comment *")?></td>
-			<?
-		}
+			<td colspan="2" class="DataTD"><?php echo _("Comment *")?></td>
+			<?php 		}
 	?>
 	</tr>
-	<?
-}
+	<?php }
 
 /**
  * Show the gpg cert data
@@ -2084,57 +2006,48 @@ function output_gpg_certs($row, $support=0, $readonly=true){
 
 	?>
 	<tr>
-		<td class="DataTD"><?=$verified?></td>
-	<?
-
+		<td class="DataTD"><?php echo $verified?></td>
+	<?php
 	if($verified == _("Pending")) {
 		?>
-		<td class="DataTD"><?=htmlspecialchars($row['email'])?></td>
-		<?
-	} else {
+		<td class="DataTD"><?php echo htmlspecialchars($row['email'])?></td>
+		<?php 	} else {
 		?>
 		<td class="DataTD">
-			<a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>">
-				<?=htmlspecialchars($row['email'])?>
+			<a href="gpg.php?id=3&amp;cert=<?php echo intval($row['id'])?>">
+				<?php echo htmlspecialchars($row['email'])?>
 			</a>
 		</td>
-		<?
-	}
+		<?php 	}
 
 	?>
-	<td class="DataTD"><?=$row['expire']?></td>
-	<?
-
+	<td class="DataTD"><?php echo $row['expire']?></td>
+	<?php
 	if($verified == _("Pending")) {
 		?>
-		<td class="DataTD"><?=htmlspecialchars($row['keyid'])?></td>
-		<?
-	} else {
+		<td class="DataTD"><?php echo htmlspecialchars($row['keyid'])?></td>
+		<?php 	} else {
 		?>
 		<td class="DataTD">
-			<a href="gpg.php?id=3&amp;cert=<?=intval($row['id'])?>">
-				<?=htmlspecialchars($row['keyid'])?>
+			<a href="gpg.php?id=3&amp;cert=<?php echo intval($row['id'])?>">
+				<?php echo htmlspecialchars($row['keyid'])?>
 			</a>
 		</td>
-		<?
-	}
+		<?php 	}
 
 	if (1 != $support) {
 		?>
 		<td class="DataTD">
-			<input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" />
+			<input name="comment_<?php echo intval($row['id'])?>" type="text" value="<?php echo htmlspecialchars($row['description'])?>" />
 		</td>
-		<?
-		if (!$readonly) {
+		<?php 		if (!$readonly) {
 			?>
 			<td class="DataTD">
-				<input type="checkbox" name="check_comment_<?=intval($row['id'])?>" />
+				<input type="checkbox" name="check_comment_<?php echo intval($row['id'])?>" />
 			</td>
-			<?
-		}
+			<?php 		}
 	}
 
 	?>
 	</tr>
-	<?
-}
+	<?php }

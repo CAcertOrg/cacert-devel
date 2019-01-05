@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -18,11 +18,10 @@
 	include_once("../includes/shutdown.php");
 	require_once("../includes/lib/l10n.php");
 ?>
-<?
-  if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "")
+<?php   if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "")
   {
     ?><font color="orange" size="+1">
-      <? echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
+      <?php echo _("ERROR").": ".$_SESSION['_config']['error'] ?>
     </font>
     <?unset($_SESSION['_config']['error']);
   }
@@ -37,12 +36,11 @@
       $_SESSION['assuresomeone']['day'] = 0;
   }
 ?>
-<? if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
+<?php if(array_key_exists('noemailfound',$_SESSION['_config']) && $_SESSION['_config']['noemailfound'] == 1) { ?>
 <form method="post" action="wot.php">
-<input type="hidden" name="email" value="<?=sanitizeHTML($_POST['email'])?>"><br>
+<input type="hidden" name="email" value="<?php echo sanitizeHTML($_POST['email'])?>"><br>
 <select name="reminder-lang">
-<?
-	if($_SESSION['_config']['reminder-lang'] == "")
+<?php 	if($_SESSION['_config']['reminder-lang'] == "")
 		$_SESSION['_config']['reminder-lang'] = L10n::get_translation();
         foreach(L10n::$translations as $key => $val)
         {
@@ -53,32 +51,31 @@
         }
 ?>
         </select><br>
-<input type="hidden" name="oldid" value="<?=$id?>">
-<input type="submit" name="reminder" value="<?=_("Send reminder notice")?>">
+<input type="hidden" name="oldid" value="<?php echo $id?>">
+<input type="submit" name="reminder" value="<?php echo _("Send reminder notice")?>">
 </form>
-<? unset($_SESSION['_config']['noemailfound']); } ?>
+<?php unset($_SESSION['_config']['noemailfound']); } ?>
 <form method="post" action="wot.php" name="form1">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Assure Someone")?></td>
+    <td colspan="2" class="title"><?php echo _("Assure Someone")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Email")?>:</td>
-<? if(array_key_exists('remindersent',$_SESSION['_config']) && $_SESSION['_config']['remindersent'] == 1) { unset($_SESSION['_config']['remindersent']) ?>
+    <td class="DataTD"><?php echo _("Email")?>:</td>
+<?php if(array_key_exists('remindersent',$_SESSION['_config']) && $_SESSION['_config']['remindersent'] == 1) { unset($_SESSION['_config']['remindersent']) ?>
     <td class="DataTD"><input type="text" name="email" id="email" value=""></td>
-<? } else { ?>
-    <td class="DataTD"><input type="text" name="email" id="email" value="<?=array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):""?>"></td>
-<? } ?>
+<?php } else { ?>
+    <td class="DataTD"><input type="text" name="email" id="email" value="<?php echo array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):""?>"></td>
+<?php } ?>
   </tr>
     <tr>
     <td class="DataTD">
-        <?=_("Date of Birth")?><br/>
-        (<?=_("yyyy/mm/dd")?>)</td>
+        <?php echo _("Date of Birth")?><br/>
+        (<?php echo _("yyyy/mm/dd")?>)</td>
     <td class="DataTD">
-        <input type="text" name="year" value="<?=array_key_exists('year',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['year']) >= 1900 ? intval($_SESSION['assuresomeone']['year']):''?>" size="4" autocomplete="off"></nobr>
+        <input type="text" name="year" value="<?php echo array_key_exists('year',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['year']) >= 1900 ? intval($_SESSION['assuresomeone']['year']):''?>" size="4" autocomplete="off"></nobr>
         <select name="month">
-<?
-for($i = 1; $i <= 12; $i++)
+<?php for($i = 1; $i <= 12; $i++)
 {
     echo "<option value='$i'";
     if(array_key_exists('month',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['month']) === $i)
@@ -88,8 +85,7 @@ for($i = 1; $i <= 12; $i++)
 ?>
         </select>
         <select name="day">
-<?
-for($i = 1; $i <= 31; $i++)
+<?php for($i = 1; $i <= 31; $i++)
 {
     echo "<option";
     if(array_key_exists('day',$_SESSION['assuresomeone']) && intval($_SESSION['assuresomeone']['day']) === $i)
@@ -102,10 +98,10 @@ for($i = 1; $i <= 31; $i++)
   </tr>
 
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Next")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?php echo $id?>">
 </form>
 <SCRIPT LANGUAGE="JavaScript">
 //<![CDATA[

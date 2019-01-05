@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -49,30 +49,29 @@ if($_SESSION['profile']['tverify'] <= 0) {
 			$tobe = 0;
 		}
 ?>
-<?=_("Request Details")?>:<br>
-<?=_("Name on file")?>: <?=sanitizeHTML($user['fname']." ".$user['mname']." ".$user['lname']." ".$user['suffix'])?><br>
-<?=_("Primary email address")?>: <?=sanitizeHTML($user['email'])." (".intval($user['id']).")"?><br>
-<?=_("Certificate Subject")?>: <?=sanitizeHTML($row['CN'])?><br>
+<?php echo _("Request Details")?>:<br>
+<?php echo _("Name on file")?>: <?php echo sanitizeHTML($user['fname']." ".$user['mname']." ".$user['lname']." ".$user['suffix'])?><br>
+<?php echo _("Primary email address")?>: <?php echo sanitizeHTML($user['email'])." (".intval($user['id']).")"?><br>
+<?php echo _("Certificate Subject")?>: <?php echo sanitizeHTML($row['CN'])?><br>
 <?		if($row['URL'] != '') { ?>
-<?=_("Notary URL")?>: <a href="<?=$row['URL']?>"><?=$row['URL']?></a><br>
+<?php echo _("Notary URL")?>: <a href="<?php echo $row['URL']?>"><?php echo $row['URL']?></a><br>
 <?		} ?>
 <?		if($row['photoid'] != '') { ?>
-<?=_("Photo ID URL")?>: <a href="/account.php?id=51&amp;photoid=<?=intval($row['id'])?>"><?=_("Here")?></a><br>
+<?php echo _("Photo ID URL")?>: <a href="/account.php?id=51&amp;photoid=<?php echo intval($row['id'])?>"><?php echo _("Here")?></a><br>
 <?		} ?>
-<?=_("Current Points")?>: <?=intval($notary['points'])?><br>
-<?=_("Potential Points")?>: <?=intval($tobe)?><br>
-<?=_("Date of Birth")?>: <?=$user['dob']?> (YYYY-MM-DD)<br>
+<?php echo _("Current Points")?>: <?php echo intval($notary['points'])?><br>
+<?php echo _("Potential Points")?>: <?php echo intval($tobe)?><br>
+<?php echo _("Date of Birth")?>: <?php echo $user['dob']?> (YYYY-MM-DD)<br>
 
 <br>
 <form method="post" action="account.php">
-<?=_("Comment")?>: <input type="text" name="comment"><br>
-<input type="submit" name="agree" value="<?=_("I agree with this Application")?>">
-<input type="submit" name="disagree" value="<?=_("I don't agree with this Application")?>">
-<input type="hidden" name="oldid" value="<?=intval($_GET['id'])?>">
-<input type="hidden" name="uid" value="<?=intval($uid)?>">
+<?php echo _("Comment")?>: <input type="text" name="comment"><br>
+<input type="submit" name="agree" value="<?php echo _("I agree with this Application")?>">
+<input type="submit" name="disagree" value="<?php echo _("I don't agree with this Application")?>">
+<input type="hidden" name="oldid" value="<?php echo intval($_GET['id'])?>">
+<input type="hidden" name="uid" value="<?php echo intval($uid)?>">
 </form>
-<?
-	} else {
+<?php 	} else {
 		$query = "select * from `tverify` where `id`='".intval($uid)."' and `modified`=1";
 		$res = mysql_query($query);
 		if(mysql_num_rows($res) > 0) {

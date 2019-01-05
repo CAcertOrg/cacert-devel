@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,13 +15,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? 
+<?php
   include("../includes/general_stuff.php");
   ?>
 
 <html>
 <head>
-<title><?=_("Install CAcert Root using CEnroll Active-X component and PKCS-7")?></title>
+<title><?php echo _("Install CAcert Root using CEnroll Active-X component and PKCS-7")?></title>
 <link rel="stylesheet" href="styles/default.css" type="text/css">
 </head>
 
@@ -131,8 +131,8 @@ Sub InstallCert
 </SCRIPT>
 <body LANGUAGE="VBScript" ONLOAD="InstallCert">
 
-<? showbodycontent("CAcert.org",""); ?>
-<p><?=_("Install a Root Certificate using Internet Explorer and the CEnroll ActiveX control. This avoids the Microsoft Certificate Installation wizard and all of its complexity and extra screens for users. This however will ONLY work for Microsoft Internet Explorer.")?></p>
-<? showfooter(); ?>
+<?php showbodycontent("CAcert.org",""); ?>
+<p><?php echo _("Install a Root Certificate using Internet Explorer and the CEnroll ActiveX control. This avoids the Microsoft Certificate Installation wizard and all of its complexity and extra screens for users. This however will ONLY work for Microsoft Internet Explorer.")?></p>
+<?php showfooter(); ?>
 
 

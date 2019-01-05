@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -20,12 +20,11 @@
 # CAcert SQL Dump
 # version 0.0.3
 #
-# Generation Time: <?=date('r')?>
+# Generation Time: <?php echo date('r')?>
 #
 # Database: `cacert`
 #
-<?
-    $tables = mysql_query("SHOW TABLES");
+<?php     $tables = mysql_query("SHOW TABLES");
     while(list($table_name) = mysql_fetch_array($tables))
     {
         echo "# --------------------------------------------------------\n\n";

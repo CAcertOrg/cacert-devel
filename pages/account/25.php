@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -17,26 +17,25 @@
 */ ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="700">
   <tr>
-    <td colspan="5" class="title"><?=_("Organisations")?></td>
+    <td colspan="5" class="title"><?php echo _("Organisations")?></td>
   </tr>
 
 <tr>
-  <td colspan="5" class="title"><?=_("Order by:")?>
-    <a href="account.php?id=25"><?=_("Id")?></a> -
-    <a href="account.php?id=25&amp;ord=1"><?=_("Country")?></a> -
-    <a href="account.php?id=25&amp;ord=2"><?=_("Name")?></a>
+  <td colspan="5" class="title"><?php echo _("Order by:")?>
+    <a href="account.php?id=25"><?php echo _("Id")?></a> -
+    <a href="account.php?id=25&amp;ord=1"><?php echo _("Country")?></a> -
+    <a href="account.php?id=25&amp;ord=2"><?php echo _("Name")?></a>
   </td>
 </tr>
 
   <tr>
-    <td class="DataTD" width="350"><?=_("Organisation")?></td>
-    <td class="DataTD"><?=_("Domains")?></td>
-    <td class="DataTD"><?=_("Admins")?></td>
-    <td class="DataTD"><?=_("Edit")?></td>
-    <td class="DataTD"><?=_("Delete")?></td>
+    <td class="DataTD" width="350"><?php echo _("Organisation")?></td>
+    <td class="DataTD"><?php echo _("Domains")?></td>
+    <td class="DataTD"><?php echo _("Admins")?></td>
+    <td class="DataTD"><?php echo _("Edit")?></td>
+    <td class="DataTD"><?php echo _("Delete")?></td>
   </tr>
-<?
-	$order = 0;
+<?php 	$order = 0;
 	if (array_key_exists('ord',$_REQUEST)) {
 		$order = intval($_REQUEST['ord']);
 	}
@@ -63,14 +62,14 @@
 		$domcount = mysql_num_rows($r2);
 ?>
   <tr>
-    <td class="DataTD"><?=htmlspecialchars($row['O'])?>, <?=htmlspecialchars($row['ST'])?> <?=htmlspecialchars($row['C'])?></td>
-    <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?=intval($row['id'])?>"><?=_("Domains")?> (<?=$domcount?>)</a></td>
-    <td class="DataTD"><a href="account.php?id=32&amp;orgid=<?=$row['id']?>"><?=_("Admins")?> (<?=$admincount?>)</a></td>
-    <td class="DataTD"><a href="account.php?id=27&amp;orgid=<?=$row['id']?>"><?=_("Edit")?></a></td>
-    <td class="DataTD"><a href="account.php?id=31&amp;orgid=<?=$row['id']?>"><?=_("Delete")?></a></td>
-    <? if(array_key_exists('viewcomment',$_REQUEST) && $_REQUEST['viewcomment']!='') { ?>
-    <td class="DataTD"><?=sanitizeHTML($row['comments'])?></td>
-    <? } ?>
+    <td class="DataTD"><?php echo htmlspecialchars($row['O'])?>, <?php echo htmlspecialchars($row['ST'])?> <?php echo htmlspecialchars($row['C'])?></td>
+    <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?php echo intval($row['id'])?>"><?php echo _("Domains")?> (<?php echo $domcount?>)</a></td>
+    <td class="DataTD"><a href="account.php?id=32&amp;orgid=<?php echo $row['id']?>"><?php echo _("Admins")?> (<?php echo $admincount?>)</a></td>
+    <td class="DataTD"><a href="account.php?id=27&amp;orgid=<?php echo $row['id']?>"><?php echo _("Edit")?></a></td>
+    <td class="DataTD"><a href="account.php?id=31&amp;orgid=<?php echo $row['id']?>"><?php echo _("Delete")?></a></td>
+    <?php if(array_key_exists('viewcomment',$_REQUEST) && $_REQUEST['viewcomment']!='') { ?>
+    <td class="DataTD"><?php echo sanitizeHTML($row['comments'])?></td>
+    <?php } ?>
   </tr>
-<? } ?>
+<?php } ?>
 </table>

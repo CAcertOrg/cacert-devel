@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,19 +15,19 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") { ?><div color="orange">ERROR: <?=$_SESSION['_config']['error']?></div><? unset($_SESSION['_config']['error']); } ?>
+<?php if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") { ?><div color="orange">ERROR: <?php echo $_SESSION['_config']['error']?></div><?php unset($_SESSION['_config']['error']); } ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Find User")?></td>
+    <td colspan="2" class="title"><?php echo _("Find User")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><input type="text" name="email" value="<?=array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):''?>" size="30" title="<?=_("use % as wildcard")?>"></td>
+    <td class="DataTD"><?php echo _("Email")?>:</td>
+    <td class="DataTD"><input type="text" name="email" value="<?php echo array_key_exists('email',$_POST)?sanitizeHTML($_POST['email']):''?>" size="30" title="<?php echo _("use % as wildcard")?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Next")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=$id?>">
+<input type="hidden" name="oldid" value="<?php echo $id?>">
 </form>

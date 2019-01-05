@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,12 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	loadem("index");
+<?php 	loadem("index");
 	showheader(_("My CAcert.org Account!"));
 ?>
-<h3><?=_("File not found!")?></h3>
+<h3><?php echo _("File not found!")?></h3>
 
-<p><?=_("Due to recent site changes bookmarks may no longer be valid, please update your bookmarks.")?></p>
+<p><?php echo _("Due to recent site changes bookmarks may no longer be valid, please update your bookmarks.")?></p>
 
-<? showfooter(); ?>
+<?php showfooter(); ?>

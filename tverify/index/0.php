@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -108,36 +108,35 @@
 		$_SESSION['_config']['CN'] = trim($_SERVER['SSL_CLIENT_S_DN']);
 ?>
 <p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;">
-<?=_("By just submitting your Thawte certificate you can be issued 50 points automatically to any matching account in the system that you operate.")?><br>
-<?=_("To receive an additional 40 points you must also include a valid link to your notary listing on the Thawte website.")?><br>
-<?=_("If you meet the above criteria you are also elligible to receive an additional 60 points by submitting a legible government issued copy of your photo ID. If details on your photo ID aren't legible you may be excluded from receiving these points.")?></p>
-<? if($_SESSION['_config']['errmsg'] != "") { ?><p>&nbsp;</p><p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;"><?
-	echo $_SESSION['_config']['errmsg']."</p>";
+<?php echo _("By just submitting your Thawte certificate you can be issued 50 points automatically to any matching account in the system that you operate.")?><br>
+<?php echo _("To receive an additional 40 points you must also include a valid link to your notary listing on the Thawte website.")?><br>
+<?php echo _("If you meet the above criteria you are also elligible to receive an additional 60 points by submitting a legible government issued copy of your photo ID. If details on your photo ID aren't legible you may be excluded from receiving these points.")?></p>
+<?php if($_SESSION['_config']['errmsg'] != "") { ?><p>&nbsp;</p><p style="border:dotted 1px #900;padding:0.3em;background-color:#ffe;"><?php 	echo $_SESSION['_config']['errmsg']."</p>";
 	unset($_SESSION['_config']['errmsg']);
 } ?>
 <form method="post" action="index.php" enctype="multipart/form-data">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Points Transfer and Verification")?></td>
+    <td colspan="2" class="title"><?php echo _("Points Transfer and Verification")?></td>
   </tr>
   <tr>
-    <td class="DataTD" width="125"><?=_("Email Address")?>: </td>
-    <td class="DataTD" width="125"><input type="text" name="email" value="<?=$row['email']?>"></td>
+    <td class="DataTD" width="125"><?php echo _("Email Address")?>: </td>
+    <td class="DataTD" width="125"><input type="text" name="email" value="<?php echo $row['email']?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" width="125"><?=_("Notary URL")?>: </td>
-    <td class="DataTD" width="125"><input type="text" name="notaryURL" value="<?=htmlentities($_POST['notaryURL'])?>"></td>
+    <td class="DataTD" width="125"><?php echo _("Notary URL")?>: </td>
+    <td class="DataTD" width="125"><input type="text" name="notaryURL" value="<?php echo htmlentities($_POST['notaryURL'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" width="125"><?=_("Photo ID")?>: </td>
+    <td class="DataTD" width="125"><?php echo _("Photo ID")?>: </td>
     <td class="DataTD" width="125"><input type="file" name="photoid"></td>
   </tr>
   <tr> 
-    <td class="DataTD"><?=_("Pass Phrase")?>: </td>
+    <td class="DataTD"><?php echo _("Pass Phrase")?>: </td>
     <td class="DataTD"><input type="password" name="pword"></td>
   </tr> 
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Submit Application for Points Transfer")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Submit Application for Points Transfer")?>"></td>
   </tr>
 
 </table>     

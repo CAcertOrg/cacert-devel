@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,32 +15,31 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<?
-	$query = "select * from `orgdomains` where `id`='".intval($_REQUEST['domid'])."'";
+<?php 	$query = "select * from `orgdomains` where `id`='".intval($_REQUEST['domid'])."'";
 	$row = mysql_fetch_assoc(mysql_query($query));
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
 	$org = mysql_fetch_assoc(mysql_query($query));
 
 	$_SESSION['_config']['domain'] = $row['domain'];
 ?>
-<h3><?=_("Warning!")?></h3>
-<p><?=_("Hitting update will also revoke all existing certificates issued under this domain")?></p>
+<h3><?php echo _("Warning!")?></h3>
+<p><?php echo _("Hitting update will also revoke all existing certificates issued under this domain")?></p>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><? printf(_("Update Domain for %s"), ($org['O'])); ?></td>
+    <td colspan="2" class="title"><?php printf(_("Update Domain for %s"), ($org['O'])); ?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Domain")?>:</td>
-    <td class="DataTD"><input type="text" name="domainname" value="<?=sanitizeHTML($_SESSION['_config']['domain'])?>"></td>
+    <td class="DataTD"><?php echo _("Domain")?>:</td>
+    <td class="DataTD"><input type="text" name="domainname" value="<?php echo sanitizeHTML($_SESSION['_config']['domain'])?>"></td>
   </tr>
   <tr>
-    <td class="DataTD"><input type="submit" name="cancel" value="<?=_("Cancel")?>"></td>
-    <td class="DataTD"><input type="submit" name="process" value="<?=_("Update")?>"></td>
+    <td class="DataTD"><input type="submit" name="cancel" value="<?php echo _("Cancel")?>"></td>
+    <td class="DataTD"><input type="submit" name="process" value="<?php echo _("Update")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="oldid" value="<?=intval($id)?>">
-<input type="hidden" name="orgid" value="<?=intval($_REQUEST['orgid'])?>">
-<input type="hidden" name="domid" value="<?=intval($_REQUEST['domid'])?>">
+<input type="hidden" name="oldid" value="<?php echo intval($id)?>">
+<input type="hidden" name="orgid" value="<?php echo intval($_REQUEST['orgid'])?>">
+<input type="hidden" name="domid" value="<?php echo intval($_REQUEST['domid'])?>">
 
 </form>

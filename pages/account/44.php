@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -18,9 +18,8 @@
 
 if(array_key_exists('error',$_SESSION['_config']) && $_SESSION['_config']['error'] != "") {
     ?>
-    <div style="color: orange;">ERROR: <?=$_SESSION['_config']['error']?></div>
-    <?
-    unset($_SESSION['_config']['error']);
+    <div style="color: orange;">ERROR: <?php echo $_SESSION['_config']['error']?></div>
+    <?php     unset($_SESSION['_config']['error']);
 }
 
 $ticketno = "";
@@ -39,21 +38,21 @@ if (!valid_ticket_number($ticketno)) {
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><?=_("Change Password")?></td>
+    <td colspan="2" class="title"><?php echo _("Change Password")?></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("Email")?>:</td>
-    <td class="DataTD"><b><?=sanitizeHTML($_REQUEST['email'])?></b></td>
+    <td class="DataTD"><?php echo _("Email")?>:</td>
+    <td class="DataTD"><b><?php echo sanitizeHTML($_REQUEST['email'])?></b></td>
   </tr>
   <tr>
-    <td class="DataTD"><?=_("New Password")?>:</td>
-    <td class="DataTD"><input type="text" name="newpass" value="<?=array_key_exists('newpass',$_REQUEST)?sanitizeHTML($_REQUEST['newpass']):""?>"></td>
+    <td class="DataTD"><?php echo _("New Password")?>:</td>
+    <td class="DataTD"><input type="text" name="newpass" value="<?php echo array_key_exists('newpass',$_REQUEST)?sanitizeHTML($_REQUEST['newpass']):""?>"></td>
   </tr>
   <tr>
-    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Next")?>"></td>
+    <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?php echo _("Next")?>"></td>
   </tr>
 </table>
-<input type="hidden" name="userid" value="<?=intval($_REQUEST['userid'])?>">
-<input type="hidden" name="oldid" value="<?=intval($id)?>">
-<input type="hidden" name="ticketno" value="<?=sanitizeHTML($ticketno)?>"/>
+<input type="hidden" name="userid" value="<?php echo intval($_REQUEST['userid'])?>">
+<input type="hidden" name="oldid" value="<?php echo intval($id)?>">
+<input type="hidden" name="ticketno" value="<?php echo sanitizeHTML($ticketno)?>"/>
 </form>
