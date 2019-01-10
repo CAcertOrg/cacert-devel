@@ -121,6 +121,9 @@ class CAcertConfig
 				if ( array_key_exists( 'dbpass', $ini_array )) {
 					$this->dbpass = $ini_array[ 'dbpass'] ;
 				}
+				if ( array_key_exists( 'dbname', $ini_array )) {
+					$this->dbname = $ini_array[ 'dbname'] ;
+				}
 				if ( array_key_exists( 'normalhostname', $ini_array )) {
 					$this->normalhostname = $ini_array[ 'normalhostname'] ;
 				}
@@ -147,6 +150,7 @@ class CAcertConfig
 				$this->dbhost = "127.0.0.1" ;
 				$this->dbuser = "username" ;
 				$this->dbpass = "password" ;
+				$this->dbname = "dummy" ;
 				$this->normalhostname = "test.cacert.org" ;
 				$this->securehostname = "test.cacert.org" ;
 				$this->tverify = "test.cacert.org" ;
