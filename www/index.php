@@ -21,6 +21,9 @@ require_once('../classes/CAcertConfig.class.php');
 
 $CAcertConfig = new CAcertConfig() ;
 
+session_name( "cacert" );
+session_start();
+
 
 $_SESSION[ '_config' ][ 'filepath' ] = $CAcertConfig->value( 'base_filepath' ) ;
 $_SESSION[ '_config' ][ 'normalhostname' ] = $CAcertConfig->value( 'normalhostname' ) ;
@@ -32,9 +35,6 @@ $_SESSION[ '_config' ][ 'tverify' ] = $CAcertConfig->value( 'tverify' ) ;
 
 require_once('../includes/lib/general.php');    // a few useful functions
 require_once('../includes/general.php');        // a few more useful functions
-
-session_name( "cacert" );
-session_start();
 
 $pageLoadTime_Start = microtime( true );
 
