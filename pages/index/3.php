@@ -18,29 +18,22 @@
 
 <p><?=sprintf(_("You are bound by the %s Root Distribution Licence %s for any re-distributions of CAcert's roots."),"<a href='/policy/RootDistributionLicense.html'>","</a>")?></p>
 
-
 <h3><?=_("Class 1 PKI Key")?></h3>
 <ul class="no_indent">
-	<li><a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
-	<li><a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a></li>
-	<li><a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a></li>
+	<li><a href="certs/root_X0F.crt"><?=_("Root Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/root_X0F.der"><?=_("Root Certificate (DER Format)")?></a></li>
+	<li><a href="certs/root_X0F.txt"><?=_("Root Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a></li>
-	<li><?=_("SHA1 Fingerprint:")?> 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33</li>
-	<li><?=_("MD5 Fingerprint:")?> A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B</li>
+	<li><?=_("SHA256 fingerprint:")?> 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5</li>
 </ul>
 
 <h3><?=_("Class 3 PKI Key")?></h3>
 <ul class="no_indent">
-	<li><a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
-	<li><a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
-	<li><a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
+	<li><a href="certs/class3_X0E.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/class3_X0E.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
+	<li><a href="certs/class3_X0E.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
-<?php /*
-  class3 subroot fingerprint updated: 2011-05-23  class3 Re-sign project
-  https://wiki.cacert.org/Roots/Class3ResignProcedure/Migration
-*/ ?>
-	<li><?=_("SHA1 Fingerprint:")?> AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE</li>
-	<li><?=_("MD5 Fingerprint:")?> F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42</li>
+    <li><?=_("SHA256 fingerprint:")?> F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544</li>
 </ul>
 
 <h3><?=_("GPG Key")?></h3>
