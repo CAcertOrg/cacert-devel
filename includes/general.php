@@ -631,7 +631,7 @@
 							continue;
 						}
 
-						stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+						stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT|STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT|STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT);
 
 						fputs($fp, "EHLO www.cacert.org\r\n");
 						do {
