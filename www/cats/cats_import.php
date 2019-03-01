@@ -50,7 +50,7 @@ if (
  $https == 'on' && 
  // Comment (to be romeved): better to use preg_match matching the end of the line (since this is on the end of the line right?)
  // Ted: Is this specified? I don't think so, therefore I'd keep stristr
- strlen(stristr($ssl_client_s_dn, '/emailAddress=cats@cacert.org')) > 0
+ strlen(stristr($ssl_client_s_dn, 'emailAddress=cats@cacert.org')) > 0 // Test to fix upload problems...
 ) $access = TRUE;
 
 if ($access !== TRUE) {

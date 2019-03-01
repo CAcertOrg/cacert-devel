@@ -40,7 +40,9 @@
 
 	if($process != "")
 	{
-		$checkemail = checkEmailDummy($email);
+		// Temporarily (?) re-enabled mail checking
+		//$checkemail = checkEmailDummy($email);
+		$checkemail = checkEmail($email);
 		if($checkemail != "OK")
 		{
 			$errmsg = $checkemail;
