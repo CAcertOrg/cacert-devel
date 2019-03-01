@@ -628,6 +628,7 @@
 						$line = fgets($fp, 4096);
 					} while(substr($line, 0, 4) == "220-");
 					if(substr($line, 0, 3) != "220") {
+						$line = $line . " when talking to $domain";
 						fclose($fp);
 						continue;
 					}
@@ -638,6 +639,7 @@
 						$has_starttls |= substr(trim($line),4) == "STARTTLS";
 					} while(substr($line, 0, 4) == "250-");
 					if(substr($line, 0, 3) != "250") {
+						$line = $line . " when talking to $domain";
 						fclose($fp);
 						continue;
 					}
@@ -648,6 +650,7 @@
 							$line = fgets($fp, 4096);
 						} while(substr($line, 0, 4) == "220-");
 						if(substr($line, 0, 3) != "220") {
+							$line = $line . " when talking to $domain";
 							fclose($fp);
 							continue;
 						}
@@ -659,6 +662,7 @@
 							$line = fgets($fp, 4096);
 						} while(substr($line, 0, 4) == "250-");
 						if(substr($line, 0, 3) != "250") {
+							$line = $line . " when talking to $domain";
 							fclose($fp);
 							continue;
 						}
@@ -669,6 +673,7 @@
 						$line = fgets($fp, 4096);
 					} while(substr($line, 0, 4) == "250-");
 					if(substr($line, 0, 3) != "250") {
+						$line = $line . " when talking to $domain";
 						fclose($fp);
 						continue;
 					}
@@ -678,8 +683,7 @@
 						$line = fgets($fp, 4096);
 					} while(substr($line, 0, 4) == "250-");
 					if(substr($line, 0, 3) != "250") {
-						fclose($fp);
-						continue;
+						$line = $line . " when talking to $domain";
 					}
 
 					fputs($fp, "QUIT\r\n");
@@ -700,7 +704,11 @@
 		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".intval($_SESSION['profile']['id'])."',
 				`email`='$myemail', `result`='Failed to make a connection to the mail server'";
 		mysqli_query($_SESSION['mconn'], $query);
-		return _("Failed to make a connection to the mail server");
+		if ($line) {
+			return $line;
+		} else {
+			return _("Failed to make a connection to the mail server");
+		}
 	}
 
 	function waitForResult($table, $certid, $id = 0, $show = 1)
