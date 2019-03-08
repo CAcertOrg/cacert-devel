@@ -297,7 +297,7 @@ define('LLBLUE','#D6E2EB'); // lighhter blue RGB 173 197 215
 define('LIME', '#C7FF00');  // RGB 199 255 0
 define('GREEN', '#00BE00'); // 0 190 0
 
-define('POBOX','CAcert Inc. - P.O. Box 4107 - Denistone East NSW 2112 - Australia');
+define('POBOX','Hangar 10 Airfield Avenue, Murwillumbah NSW 2484, New South Wales, (Commonwealth of) Australia');
 define('WEB', 'http://www.cacert.org');
 define('WIKI','http://wiki.cacert.org/wiki');
 define('ROOTKEYS','http://www.cacert.org/index.php?id=3');

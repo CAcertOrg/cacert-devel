@@ -38,9 +38,9 @@
 	echo '<div style="text-align: right;">', "\n";
 	echo '<big><big><span style="font-weight: bold;">'._("Identity Verification Form (CAP) form").'</span></big></big><br>', "\n";
 	echo '</div>', "\n";
-	echo '<div style="text-align: right;">'.'CAcert Inc. - P.O. Box 4107 - Denistone East NSW 2112 - Australia - <a href="http://www.cacert.org/"> http://www.cacert.org/</a><br></div>', "\n";
+	echo '<div style="text-align: right;">'.'Hangar 10 Airfield Avenue, Murwillumbah NSW 2484, New South Wales, (Commonwealth of) Australia  - <a href="http://www.cacert.org/"> http://www.cacert.org/</a><br></div>', "\n";
 
-	echo '<table border=1 cellspacing="0" cellpadding="0" bordercolor="lightblue" cellpadding="0" cellspacing="0" width="100%" style="color: white; background-color: rgb(112, 154, 186);" rules="groups">', "\n";
+	echo '<table border=1 cellspacing="0" cellpadding="0" bordercolor="lightblue" width="100%" style="color: white; background-color: rgb(112, 154, 186);" rules="groups">', "\n";
 	echo '<tbody>', "\n";
 	echo '<tr><td>', "\n";
 	echo '<tr>', "\n";
