@@ -21,6 +21,9 @@ require_once('../classes/CAcertConfig.class.php');
 
 $CAcertConfig = new CAcertConfig();
 
+session_name( "cacert" );
+session_start();
+
 
 $_SESSION[ '_config' ][ 'filepath' ]       = $CAcertConfig->value( 'base_filepath' );
 $_SESSION[ '_config' ][ 'normalhostname' ] = $CAcertConfig->value( 'normalhostname' );
@@ -32,9 +35,6 @@ $_SESSION[ '_config' ][ 'tverify' ]        = $CAcertConfig->value( 'tverify' );
 
 require_once('../includes/lib/general.php');    // a few useful functions
 require_once('../includes/general.php');        // a few more useful functions
-
-session_name( "cacert" );
-session_start();
 
 $pageLoadTime_Start = microtime( true );
 
@@ -243,7 +243,7 @@ if ( $id == 4 && $_SERVER[ 'HTTP_HOST' ] == $_SESSION[ '_config' ][ 'securehostn
 	if ( $user_id >= 0 ) {
 		$_SESSION[ 'profile' ] = mysqli_fetch_assoc( mysqli_query( $_SESSION[ 'mconn' ],
 			"select * from `users` where
-				`id`='$user_id' and `deleted`=0 and `locked`=0" ) );
+				`id` = '$user_id' and `deleted` = 0 and `locked` = 0" ) );
 
 		if ( $_SESSION[ 'profile' ][ 'id' ] != 0 ) {
 			$_SESSION[ 'profile' ][ 'loggedin' ] = 1;
