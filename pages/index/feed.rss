@@ -15,6 +15,7 @@
 			  
 			  Merged in children are bug-1442.
 			  Additional changes:
+			  2019-03-12: Recent changes of Brian in bug-1305 (postal address in CAP/COAP forms) are now merged in
 			  2019-03-01: Mail checking re-activated, improvements to error reporting
 			  2019-01-18: Now bug-1305 is fully merged in, not only the cherry picked cap forms as before.
 			  2019-01-03: Disabled mail address checking, so it is possible to create new accounts now

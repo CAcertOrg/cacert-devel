@@ -55,7 +55,7 @@
 				$this->SetFont('SJIS','',6);
 			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints"). _(" (since 2019)")),0,0,'C');
 			$this->ln(3);
-			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA1: root: DD:FC:DA:54:1E:75:77:AD:DC:A8:7E:88:27:A9:8A:50:60:32:52:A5 "._("and")." class3: A7:C4:8F:BE:6B:02:6D:BD:0E:C1:B4:65:B8:8D:D8:13:EE:1D:EF:A0"),0,0,'C');
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA1: root: DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5 "._("and")." class3: A7C4 8FBE 6B02 6DBD 0EC1 B465 B88D D813 EE1D EFA0"),0,0,'C');
 			$this->ln(3);
 			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA256: root: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5 "._("and")." class3: F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544"),0,0,'C');
 			$this->SetLineWidth(0.05); // added 3 points to the abcissa 43 -> 46 to get second line fingerprints
