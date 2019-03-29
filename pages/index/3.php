@@ -25,7 +25,7 @@
 	<li><a href="certs/root_X0F.txt"><?=_("Root Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a></li>
 	<li><?=_("SHA256 fingerprint:")?> 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5</li>
-    <li><?=_("Old SHA1 fingerprint:")?> 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33</li>
+    <li><?=_("SHA1 fingerprint:")?> DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5</li>
 </ul>
 
 <h3><?=_("Class 3 PKI Key")?></h3>
@@ -35,7 +35,7 @@
 	<li><a href="certs/class3_X0E.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
     <li><?=_("SHA256 fingerprint:")?> F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544</li>
-    <li><?=_("Old SHA1 fingerprint:")?> AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE</li>
+    <li><?=_("SHA1 fingerprint:")?> A7C4 8FBE 6B02 6DBD 0EC1 B465 B88D D813 EE1D EFA0</li>
 </ul>
 
 <h3><?=_("GPG Key")?></h3>
@@ -45,8 +45,10 @@
 	<li><?=_("Fingerprint:")?> A31D 4F81 EF4E BD07 B456 FA04 D2BB 0D01 65D0 FD58</li>
 </ul>
 
+
 <h4><?=_("PKI fingerprint signed by the CAcert GPG Key")?></h4>
-<pre>
+<?php if ( false ) { ?>
+    <pre>
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
@@ -63,6 +65,8 @@ Mch2LMZhK4h/SBIft5ROzVU=
 =R/pJ
 -----END PGP SIGNATURE-----
 </pre>
+<?php } ?>
+
 <pre>
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
