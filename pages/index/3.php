@@ -46,8 +46,14 @@
 </ul>
 
 
-<h4><?=_("PKI fingerprint signed by the CAcert GPG Key")?></h4>
 <?php if ( false ) { ?>
+    /**
+    Since we don't seem to have a way to GPG sign our current key, we have, at least temporarily, removed this.
+
+    https://bugs.cacert.org/view.php?id=1305#c5784
+
+    **/
+<h4><?=_("PKI fingerprint signed by the CAcert GPG Key")?></h4>
     <pre>
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
