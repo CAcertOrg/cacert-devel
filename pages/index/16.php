@@ -21,26 +21,26 @@
 <p>
 Class 1 <?=_("PKI Key")?><br>
 <a href="index.php?id=17"><?=_("Click here if you want to import the root certificate into Microsoft Internet Explorer 5.x/6.x")?></a><br>
-<a href="certs/root.crt"><?=_("Root Certificate (PEM Format)")?></a><br>
-<a href="certs/root.der"><?=_("Root Certificate (DER Format)")?></a><br>
-<a href="certs/root.txt"><?=_("Root Certificate (Text Format)")?></a><br>
+<a href="certs/root_X0F.crt"><?=_("Root Certificate (PEM Format)")?></a><br>
+<a href="certs/root_X0F.der"><?=_("Root Certificate (DER Format)")?></a><br>
+<a href="certs/root_X0F.txt"><?=_("Root Certificate (Text Format)")?></a><br>
 <a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/revoke.crl">CRL</a><br>
-<?=_("Fingerprint")?> SHA1: 13:5C:EC:36:F4:9C:B8:E9:3B:1A:B2:70:CD:80:88:46:76:CE:8F:33<br/>
-<?=_("Fingerprint")?> MD5: A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B<br/>
+<?=_("Fingerprint")?> SHA1: DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5<br/>
+<?=_("Fingerprint")?> SHA256: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5<br/>
 </p>
 
 <p>
 Class 3 <?=_("PKI Key")?><br>
-<a href="certs/class3.crt"><?=_("Intermediate Certificate (PEM Format)")?></a><br/>
-<a href="certs/class3.der"><?=_("Intermediate Certificate (DER Format)")?></a><br/>
-<a href="certs/class3.txt"><?=_("Intermediate Certificate (Text Format)")?></a><br/>
+<a href="certs/class3_X0E.crt"><?=_("Intermediate Certificate (PEM Format)")?></a><br/>
+<a href="certs/class3_X0E.der"><?=_("Intermediate Certificate (DER Format)")?></a><br/>
+<a href="certs/class3_X0E.txt"><?=_("Intermediate Certificate (Text Format)")?></a><br/>
 <a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a><br/>
 <?php /*
   class3 subroot fingerprint updated: 2011-05-23  class3 Re-sign project
   https://wiki.cacert.org/Roots/Class3ResignProcedure/Migration
 */ ?>
-<?=_("Fingerprint")?> SHA1: AD:7C:3F:64:FC:44:39:FE:F4:E9:0B:E8:F4:7C:6C:FA:8A:AD:FD:CE<br/>
-<?=_("Fingerprint")?> MD5: F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42<br/>
+<?=_("Fingerprint")?> SHA1: A7C4 8FBE 6B02 6DBD 0EC1 B465 B88D D813 EE1D EFA0<br/>
+<?=_("Fingerprint")?> SHA256: F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544<br/>
 </p>
 
 <p>
@@ -48,6 +48,13 @@ Class 3 <?=_("PKI Key")?><br>
 <a href="certs/cacert.asc"><?=_("CAcert's GPG Key")?></a><br>
 </p>
 
+<?php if ( false ) { ?>
+/**
+Since we don't seem to have a way to GPG sign our current key, we have, at least temporarily, removed this.
+
+https://bugs.cacert.org/view.php?id=1305#c5784
+
+**/
 <p>
 <?=_("PKI finger/thumb print signed by the CAcert GPG Key")?><br>
 <pre>
@@ -67,6 +74,7 @@ Mch2LMZhK4h/SBIft5ROzVU=
 =R/pJ
 -----END PGP SIGNATURE-----
 </pre>
+<?php } ?>
 <pre>
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
