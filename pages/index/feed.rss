@@ -15,6 +15,7 @@
 			  
 			  Merged in children are bug-1442.
 			  Additional changes:
+			  2019-05-14: Merged in post-installation changes in preparation of a follow-up
 			  2019-03-31: Another change in bug-1305: removed sub-header 
 			  2019-03-31: Once more the changes of bug-1305 have been merged in
 			  2019-03-12: Recent changes of Brian in bug-1305 (postal address in CAP/COAP forms) are now merged in

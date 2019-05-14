@@ -1,8 +1,8 @@
 Certificate:
     Data:
         Version: 3 (0x2)
-        Serial Number: 15 (0xf)
-    Signature Algorithm: sha256WithRSAEncryption
+        Serial Number: 0 (0x0)
+        Signature Algorithm: md5WithRSAEncryption
         Issuer: O=Root CA, OU=http://www.cacert.org, CN=CA Cert Signing Authority/emailAddress=support@cacert.org
         Validity
             Not Before: Mar 30 12:29:49 2003 GMT
@@ -10,8 +10,8 @@ Certificate:
         Subject: O=Root CA, OU=http://www.cacert.org, CN=CA Cert Signing Authority/emailAddress=support@cacert.org
         Subject Public Key Info:
             Public Key Algorithm: rsaEncryption
-                Public-Key: (4096 bit)
-                Modulus:
+            RSA Public Key: (4096 bit)
+                Modulus (4096 bit):
                     00:ce:22:c0:e2:46:7d:ec:36:28:07:50:96:f2:a0:
                     33:40:8c:4b:f1:3b:66:3f:31:e5:6b:02:36:db:d6:
                     7c:f6:f1:88:8f:4e:77:36:05:41:95:f9:09:f0:12:
@@ -51,57 +51,54 @@ Certificate:
         X509v3 extensions:
             X509v3 Subject Key Identifier: 
                 16:B5:32:1B:D4:C7:F3:E0:E6:8E:F3:BD:D2:B0:3A:EE:B2:39:18:D1
+            X509v3 Authority Key Identifier: 
+                keyid:16:B5:32:1B:D4:C7:F3:E0:E6:8E:F3:BD:D2:B0:3A:EE:B2:39:18:D1
+                DirName:/O=Root CA/OU=http://www.cacert.org/CN=CA Cert Signing Authority/emailAddress=support@cacert.org
+                serial:00
+
             X509v3 Basic Constraints: critical
                 CA:TRUE
+            X509v3 CRL Distribution Points: 
+                URI:https://www.cacert.org/revoke.crl
+
+            Netscape CA Revocation Url: 
+                https://www.cacert.org/revoke.crl
             Netscape CA Policy Url: 
                 http://www.cacert.org/index.php?id=10
             Netscape Comment: 
                 To get your own certificate for FREE head over to http://www.cacert.org
-            X509v3 CRL Distribution Points: 
-
-                Full Name:
-                  URI:http://crl.cacert.org/revoke.crl
-
-            Netscape CA Revocation Url: 
-                URI:http://crl.cacert.org/revoke.crl
-            Authority Information Access: 
-                OCSP - URI:http://ocsp.cacert.org
-
-            X509v3 Authority Key Identifier: 
-                keyid:16:B5:32:1B:D4:C7:F3:E0:E6:8E:F3:BD:D2:B0:3A:EE:B2:39:18:D1
-
-    Signature Algorithm: sha256WithRSAEncryption
-         47:9c:d7:b3:a2:17:d3:52:53:b7:b4:6a:dd:bf:9b:35:15:21:
-         6c:ef:6f:18:13:20:81:cc:e8:ed:1d:2a:22:1d:64:76:14:ba:
-         5b:37:2b:0e:83:ba:3e:4a:6e:46:0d:0b:de:a3:3b:61:00:7a:
-         a7:0d:95:fa:e6:f3:17:bc:65:e0:2d:07:5a:5b:5f:cc:f4:db:
-         cc:01:dd:26:d8:da:25:0c:3b:41:a0:65:98:06:29:37:60:8b:
-         07:a2:5e:83:ca:bf:d5:7a:60:77:0f:fe:20:fd:46:47:07:60:
-         ef:15:29:45:e5:00:e3:cd:a5:e0:c1:f5:91:fd:16:d1:a7:7d:
-         e1:2b:88:7c:d5:90:1d:c7:4b:02:99:a7:a3:f4:94:87:56:e9:
-         67:27:96:ac:c9:e5:86:41:8d:0c:a3:31:08:24:17:43:7e:b4:
-         4f:01:47:73:c7:5f:10:06:aa:e6:bc:ba:71:9c:e6:d6:87:ad:
-         ae:44:af:88:4d:aa:a1:fc:6f:bf:55:45:89:0f:bd:4d:7d:ff:
-         ce:41:02:0a:c5:01:fc:48:cf:33:49:71:14:19:ae:f5:3e:48:
-         87:e1:2a:9e:cf:62:be:6a:c4:21:00:ef:f6:d3:72:24:7b:8b:
-         b0:33:6a:6d:40:5a:97:b3:a8:88:f6:67:5e:4f:4b:1f:ea:9b:
-         fa:92:df:d6:87:ef:e6:7a:32:e6:f5:f6:6b:93:8a:79:b1:de:
-         fb:41:31:fc:0e:de:f8:6f:c7:b8:e8:d5:36:a8:59:f6:3e:4d:
-         8a:ca:5f:ab:dc:cd:c8:e1:c6:58:3f:28:7e:3f:03:1f:00:79:
-         d0:bd:57:87:91:fe:11:b2:28:81:af:e1:24:24:27:46:dc:56:
-         90:73:fa:f7:d4:f5:26:92:c5:63:06:a9:82:99:62:bc:5e:13:
-         16:fe:1f:aa:9d:27:1d:32:82:d7:1f:60:1a:b2:20:be:e6:09:
-         97:5b:71:20:a9:b1:5d:d7:c9:ce:0b:1c:33:3a:a9:69:b8:6d:
-         1c:e3:17:3a:2c:10:06:95:b3:c8:99:28:7c:5f:f0:e7:97:b4:
-         2e:db:59:0c:19:04:b2:29:55:fe:f5:b4:08:9b:0f:b3:77:8d:
-         69:01:7e:88:c5:ac:70:63:a4:80:b1:65:5a:c0:12:dc:7c:32:
-         89:82:cd:26:8d:ba:6a:ac:96:3d:a2:1d:73:c1:38:72:4e:d2:
-         93:4f:16:ac:5a:c7:20:ad:c4:1e:be:27:d4:56:70:98:ba:45:
-         02:fb:9c:2a:a8:25:d2:1a:fe:da:3c:a9:ca:1e:69:b8:0d:ca:
-         92:c1:c5:dc:2b:14:ce:33:14:bf:3c:4c:87:29:21:f7:3a:cc:
-         c5:00:07:2c:15:6b:1b:07
+    Signature Algorithm: md5WithRSAEncryption
+        28:c7:ee:9c:82:02:ba:5c:80:12:ca:35:0a:1d:81:6f:89:6a:
+        99:cc:f2:68:0f:7f:a7:e1:8d:58:95:3e:bd:f2:06:c3:90:5a:
+        ac:b5:60:f6:99:43:01:a3:88:70:9c:9d:62:9d:a4:87:af:67:
+        58:0d:30:36:3b:e6:ad:48:d3:cb:74:02:86:71:3e:e2:2b:03:
+        68:f1:34:62:40:46:3b:53:ea:28:f4:ac:fb:66:95:53:8a:4d:
+        5d:fd:3b:d9:60:d7:ca:79:69:3b:b1:65:92:a6:c6:81:82:5c:
+        9c:cd:eb:4d:01:8a:a5:df:11:55:aa:15:ca:1f:37:c0:82:98:
+        70:61:db:6a:7c:96:a3:8e:2e:54:3e:4f:21:a9:90:ef:dc:82:
+        bf:dc:e8:45:ad:4d:90:73:08:3c:94:65:b0:04:99:76:7f:e2:
+        bc:c2:6a:15:aa:97:04:37:24:d8:1e:94:4e:6d:0e:51:be:d6:
+        c4:8f:ca:96:6d:f7:43:df:e8:30:65:27:3b:7b:bb:43:43:63:
+        c4:43:f7:b2:ec:68:cc:e1:19:8e:22:fb:98:e1:7b:5a:3e:01:
+        37:3b:8b:08:b0:a2:f3:95:4e:1a:cb:9b:cd:9a:b1:db:b2:70:
+        f0:2d:4a:db:d8:b0:e3:6f:45:48:33:12:ff:fe:3c:32:2a:54:
+        f7:c4:f7:8a:f0:88:23:c2:47:fe:64:7a:71:c0:d1:1e:a6:63:
+        b0:07:7e:a4:2f:d3:01:8f:dc:9f:2b:b6:c6:08:a9:0f:93:48:
+        25:fc:12:fd:9f:42:dc:f3:c4:3e:f6:57:b0:d7:dd:69:d1:06:
+        77:34:0a:4b:d2:ca:a0:ff:1c:c6:8c:c9:16:be:c4:cc:32:37:
+        68:73:5f:08:fb:51:f7:49:53:36:05:0a:95:02:4c:f2:79:1a:
+        10:f6:d8:3a:75:9c:f3:1d:f1:a2:0d:70:67:86:1b:b3:16:f5:
+        2f:e5:a4:eb:79:86:f9:3d:0b:c2:73:0b:a5:99:ac:6f:fc:67:
+        b8:e5:2f:0b:a6:18:24:8d:7b:d1:48:35:29:18:40:ac:93:60:
+        e1:96:86:50:b4:7a:59:d8:8f:21:0b:9f:cf:82:91:c6:3b:bf:
+        6b:dc:07:91:b9:97:56:23:aa:b6:6c:94:c6:48:06:3c:e4:ce:
+        4e:aa:e4:f6:2f:09:dc:53:6f:2e:fc:74:eb:3a:63:99:c2:a6:
+        ac:89:bc:a7:b2:44:a0:0d:8a:10:e3:6c:f2:24:cb:fa:9b:9f:
+        70:47:2e:de:14:8b:d4:b2:20:09:96:a2:64:f1:24:1c:dc:a1:
+        35:9c:15:b2:d4:bc:55:2e:7d:06:f5:9c:0e:55:f4:5a:d6:93:
+        da:76:ad:25:73:4c:c5:43
 -----BEGIN CERTIFICATE-----
-MIIG7jCCBNagAwIBAgIBDzANBgkqhkiG9w0BAQsFADB5MRAwDgYDVQQKEwdSb290
+MIIHPTCCBSWgAwIBAgIBADANBgkqhkiG9w0BAQQFADB5MRAwDgYDVQQKEwdSb290
 IENBMR4wHAYDVQQLExVodHRwOi8vd3d3LmNhY2VydC5vcmcxIjAgBgNVBAMTGUNB
 IENlcnQgU2lnbmluZyBBdXRob3JpdHkxITAfBgkqhkiG9w0BCQEWEnN1cHBvcnRA
 Y2FjZXJ0Lm9yZzAeFw0wMzAzMzAxMjI5NDlaFw0zMzAzMjkxMjI5NDlaMHkxEDAO
@@ -118,25 +115,26 @@ epKwDpUeb+agRThHqtdB7Uq3EvbXG4OKDy7YCbZZ16oE/9KTfWgu3YtLq1i6L43q
 laegw1SJpfvbi1EinbLDvhG+LJGGi5Z4rSDTii8aP8bQUWWHIbEZAWV/RRyH9XzQ
 QUxPKZgh/TMfdQwEUfoZd9vUFBzugcMd9Zi3aQaRIt0AUMyBMawSB3s42mhb5ivU
 fslfrejrckzzAeVLIL+aplfKkQABi6F1ITe1Yw1nPkZPcCBnzsXWWdsC4PDSy826
-YreQQejdIOQpvGQpQsgi3Hia/0PsmBsJUUtaWsJx8cTLc6nloQsCAwEAAaOCAX8w
-ggF7MB0GA1UdDgQWBBQWtTIb1Mfz4OaO873SsDrusjkY0TAPBgNVHRMBAf8EBTAD
-AQH/MDQGCWCGSAGG+EIBCAQnFiVodHRwOi8vd3d3LmNhY2VydC5vcmcvaW5kZXgu
-cGhwP2lkPTEwMFYGCWCGSAGG+EIBDQRJFkdUbyBnZXQgeW91ciBvd24gY2VydGlm
-aWNhdGUgZm9yIEZSRUUgaGVhZCBvdmVyIHRvIGh0dHA6Ly93d3cuY2FjZXJ0Lm9y
-ZzAxBgNVHR8EKjAoMCagJKAihiBodHRwOi8vY3JsLmNhY2VydC5vcmcvcmV2b2tl
-LmNybDAzBglghkgBhvhCAQQEJhYkVVJJOmh0dHA6Ly9jcmwuY2FjZXJ0Lm9yZy9y
-ZXZva2UuY3JsMDIGCCsGAQUFBwEBBCYwJDAiBggrBgEFBQcwAYYWaHR0cDovL29j
-c3AuY2FjZXJ0Lm9yZzAfBgNVHSMEGDAWgBQWtTIb1Mfz4OaO873SsDrusjkY0TAN
-BgkqhkiG9w0BAQsFAAOCAgEAR5zXs6IX01JTt7Rq3b+bNRUhbO9vGBMggczo7R0q
-Ih1kdhS6WzcrDoO6PkpuRg0L3qM7YQB6pw2V+ubzF7xl4C0HWltfzPTbzAHdJtja
-JQw7QaBlmAYpN2CLB6Jeg8q/1Xpgdw/+IP1GRwdg7xUpReUA482l4MH1kf0W0ad9
-4SuIfNWQHcdLApmno/SUh1bpZyeWrMnlhkGNDKMxCCQXQ360TwFHc8dfEAaq5ry6
-cZzm1oetrkSviE2qofxvv1VFiQ+9TX3/zkECCsUB/EjPM0lxFBmu9T5Ih+Eqns9i
-vmrEIQDv9tNyJHuLsDNqbUBal7OoiPZnXk9LH+qb+pLf1ofv5noy5vX2a5OKebHe
-+0Ex/A7e+G/HuOjVNqhZ9j5Nispfq9zNyOHGWD8ofj8DHwB50L1Xh5H+EbIoga/h
-JCQnRtxWkHP699T1JpLFYwapgplivF4TFv4fqp0nHTKC1x9gGrIgvuYJl1txIKmx
-XdfJzgscMzqpabhtHOMXOiwQBpWzyJkofF/w55e0LttZDBkEsilV/vW0CJsPs3eN
-aQF+iMWscGOkgLFlWsAS3HwyiYLNJo26aqyWPaIdc8E4ck7Sk08WrFrHIK3EHr4n
-1FZwmLpFAvucKqgl0hr+2jypyh5puA3KksHF3CsUzjMUvzxMhykh9zrMxQAHLBVr
-Gwc=
+YreQQejdIOQpvGQpQsgi3Hia/0PsmBsJUUtaWsJx8cTLc6nloQsCAwEAAaOCAc4w
+ggHKMB0GA1UdDgQWBBQWtTIb1Mfz4OaO873SsDrusjkY0TCBowYDVR0jBIGbMIGY
+gBQWtTIb1Mfz4OaO873SsDrusjkY0aF9pHsweTEQMA4GA1UEChMHUm9vdCBDQTEe
+MBwGA1UECxMVaHR0cDovL3d3dy5jYWNlcnQub3JnMSIwIAYDVQQDExlDQSBDZXJ0
+IFNpZ25pbmcgQXV0aG9yaXR5MSEwHwYJKoZIhvcNAQkBFhJzdXBwb3J0QGNhY2Vy
+dC5vcmeCAQAwDwYDVR0TAQH/BAUwAwEB/zAyBgNVHR8EKzApMCegJaAjhiFodHRw
+czovL3d3dy5jYWNlcnQub3JnL3Jldm9rZS5jcmwwMAYJYIZIAYb4QgEEBCMWIWh0
+dHBzOi8vd3d3LmNhY2VydC5vcmcvcmV2b2tlLmNybDA0BglghkgBhvhCAQgEJxYl
+aHR0cDovL3d3dy5jYWNlcnQub3JnL2luZGV4LnBocD9pZD0xMDBWBglghkgBhvhC
+AQ0ESRZHVG8gZ2V0IHlvdXIgb3duIGNlcnRpZmljYXRlIGZvciBGUkVFIGhlYWQg
+b3ZlciB0byBodHRwOi8vd3d3LmNhY2VydC5vcmcwDQYJKoZIhvcNAQEEBQADggIB
+ACjH7pyCArpcgBLKNQodgW+JapnM8mgPf6fhjViVPr3yBsOQWqy1YPaZQwGjiHCc
+nWKdpIevZ1gNMDY75q1I08t0AoZxPuIrA2jxNGJARjtT6ij0rPtmlVOKTV39O9lg
+18p5aTuxZZKmxoGCXJzN600BiqXfEVWqFcofN8CCmHBh22p8lqOOLlQ+TyGpkO/c
+gr/c6EWtTZBzCDyUZbAEmXZ/4rzCahWqlwQ3JNgelE5tDlG+1sSPypZt90Pf6DBl
+Jzt7u0NDY8RD97LsaMzhGY4i+5jhe1o+ATc7iwiwovOVThrLm82asduycPAtStvY
+sONvRUgzEv/+PDIqVPfE94rwiCPCR/5kenHA0R6mY7AHfqQv0wGP3J8rtsYIqQ+T
+SCX8Ev2fQtzzxD72V7DX3WnRBnc0CkvSyqD/HMaMyRa+xMwyN2hzXwj7UfdJUzYF
+CpUCTPJ5GhD22Dp1nPMd8aINcGeGG7MW9S/lpOt5hvk9C8JzC6WZrG/8Z7jlLwum
+GCSNe9FINSkYQKyTYOGWhlC0elnYjyELn8+CkcY7v2vcB5G5l1YjqrZslMZIBjzk
+zk6q5PYvCdxTby78dOs6Y5nCpqyJvKeyRKANihDjbPIky/qbn3BHLt4Ui9SyIAmW
+omTxJBzcoTWcFbLUvFUufQb1nA5V9FrWk9p2rSVzTMVD
 -----END CERTIFICATE-----
