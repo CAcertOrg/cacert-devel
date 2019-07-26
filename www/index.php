@@ -426,7 +426,7 @@ if ($oldid == 52 )
 
 		if($id == 2)
 		{
-			$checkemail = checkEmailDummy($_SESSION['signup']['email']);
+			$checkemail = checkEmail($_SESSION['signup']['email']);
 			if($checkemail != "OK")
 			{
 				$id = 1;
