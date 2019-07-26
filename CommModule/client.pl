@@ -832,7 +832,7 @@ sub HandleCerts($$)
       SysLog "SAN: --$SAN--\n" if($debug);
       SysLog "memid: $row{'memid'}\n" if($debug);
 
-      my $days=$org?($server?(365*2):365):calculateDays($row{"memid"});
+      my $days=$org?730:calculateDays($row{"memid"});
 
       my $md_id = 0;
       $md_id = 1 if( $row{'md'} eq "md5");

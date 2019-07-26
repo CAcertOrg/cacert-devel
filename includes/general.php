@@ -614,6 +614,7 @@
 				$fp_opt = array(
 					'ssl' => array(
 						'verify_peer'   => false,	// Opportunistic Encryption
+						'verify_peer_name'   => false,	// Opportunistic Encryption
 						)
 					);
 				$fp_ctx = stream_context_create($fp_opt);
