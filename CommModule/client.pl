@@ -40,7 +40,6 @@ my $paranoid=1;
 
 my $debug=0;
 
-#my $serialport="/dev/ttyS0";
 my $serialport="/dev/ttyS1";
 #my $serialport="/dev/ttyUSB0";
 
@@ -897,8 +896,8 @@ sub HandleCerts($$)
       $body .= "https://www.cacert.org/account.php?id=".($server?"15":"6")."&cert=$row{id}\n\n";
       $body .= _("If you have not imported CAcert's root certificate, please go to:")."\n";
       $body .= "https://www.cacert.org/index.php?id=3\n";
-      $body .= "Root cert fingerprint = A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B\n";
-      $body .= "Root cert fingerprint = 135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33\n\n";
+      $body .= "Root cert SHA256 fingerprint: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5\n";
+      $body .= "Root cert SHA1 fingerprint: DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5\n\n";
       $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
       sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
     }
