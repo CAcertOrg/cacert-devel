@@ -135,6 +135,7 @@ if(!function_exists("showfooter"))
   <div id="siteInfo">
 	<a href="//wiki.cacert.org/FAQ/AboutUs"><?=_("About Us")?></a> | <a href="/index.php?id=13"><?=_("Donations")?></a> | <a href="http://wiki.cacert.org/wiki/CAcertIncorporated"><?=_("Association Membership")?></a> |
         <a href="/policy/PrivacyPolicy.html"><?=_("Privacy Policy")?></a> |
+        <a href="https://wiki.cacert.org/Privacy/EU-EEA-DataProtectionDeclaration"><?=_("EU-EEA-DataProtectionDeclaration")?></a> |
         <a href="/index.php?id=51"><?=_("Mission Statement")?></a> | <a href="/index.php?id=11"><?=_("Contact Us")?></a> |
 	&copy;2002-<?=date("Y")?> <?=_("by CAcert")?></div>
 </div>
