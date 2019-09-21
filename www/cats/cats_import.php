@@ -32,7 +32,7 @@ function sanitize_string($buffer) {
 
 define ('UNDEFINED', 'nd');
 // Specific for testserver: Accept Test-CATS-Server
-define ('ALLOWED_IP', '172.16.2.10');
+define ('ALLOWED_IP', '10.0.0.148');
 //define ('ALLOWED_IP', '213.154.225.243');
 define ('ALLOWED_IP2', '192.109.159.28');
 define ('CONFIG_FILEPATH', '/www/');
@@ -59,6 +59,7 @@ if ($access !== TRUE) {
  echo 'Server: '.sanitize_string($server_name).'<br>'."\r\n";
  echo 'HTTPS: '.sanitize_string($https).'<br>'."\r\n";
  echo 'Client cert: '.sanitize_string($ssl_client_s_dn).'<br>'."\r\n";
+ echo 'Test: '.sanitize_string(stristr($ssl_client_s_dn, 'emailAddress=cats@cacert.org')).'<br>'."\r\n";
  trigger_error('Unauthorized access: ip('.$remote_addr.') server('.$server_name.') https('.$https.') cert('.$ssl_client_s_dn.')', E_USER_ERROR);
  exit();
 }
