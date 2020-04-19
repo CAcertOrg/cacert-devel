@@ -16,7 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-	require_once(dirname(__FILE__)."/lib/general.php");
+require_once ( '../classes/config.class.php') ;
+
+$cacert_config = new config() ;
+$testmode = $cacert_config->value( "testmode") ;
+
+require_once(dirname(__FILE__)."/lib/general.php");
 
 	session_name("cacert");
 	session_start();
