@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -28,7 +28,7 @@
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
-    <td colspan="2" class="title"><? printf(_("Update Domain for %s"), ($org['O'])); ?></td>
+    <td colspan="2" class="title"><?php printf(_("Update Domain for %s"), ($org['O'])); ?></td>
   </tr>
   <tr>
     <td class="DataTD"><?=_("Domain")?>:</td>

@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -44,15 +44,15 @@
     <td class="DataTD"><?=$row['domid']?></td>
     <td class="DataTD"><a href="account.php?id=43&amp;userid=<?=$row['id']?>"><?=sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<?php } if(mysql_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
-<? } else { ?>
+<?php } else { ?>
   <tr>
-    <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);
@@ -80,15 +80,15 @@
     <td class="DataTD"><?=$row['id']?></td>
     <td class="DataTD"><a href="account.php?id=26&amp;orgid=<?=intval($row['orgid'])?>"><?=sanitizeHTML($row['domain'])?></a></td>
   </tr>
-<? } if(mysql_num_rows($res) >= 100) { ?>
+<?php } if(mysql_num_rows($res) >= 100) { ?>
   <tr>
     <td class="DataTD" colspan="3"><?=_("Only the first 100 rows are displayed.")?></td>
   </tr>
-<? } else { ?>
+<?php } else { ?>
   <tr>
-    <td class="DataTD" colspan="3"><? printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
+    <td class="DataTD" colspan="3"><?php printf(_("%s rows displayed."), mysql_num_rows($res)); ?></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table><br><br>
 <?		} elseif(mysql_num_rows($res) == 1) {
 			$row = mysql_fetch_assoc($res);

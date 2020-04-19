@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -23,4 +23,4 @@
 
 <p><?=_("Due to recent site changes bookmarks may no longer be valid, please update your bookmarks.")?></p>
 
-<? showfooter(); ?>
+<?php showfooter(); ?>

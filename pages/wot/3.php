@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 

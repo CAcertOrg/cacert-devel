@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -34,7 +34,7 @@
   <tr>
     <td colspan="3" class="DataTD"><?=_("No domains are currently listed.")?></td>
   </tr>
-<? } else {
+<?php } else {
 	while($row = mysql_fetch_assoc($res))
 	{
 		if($row['hash'] == "")
@@ -47,11 +47,11 @@
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><?=sanitizeHTML($row['domain'])?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="3"><input type="submit" name="process" value="<?=_("Delete")?>"></td>
   </tr>
-<? } ?>
+<?php } ?>
 </table>
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form>

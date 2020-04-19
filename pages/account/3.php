@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -45,7 +45,7 @@
     <td class="DataTD"><input type="checkbox" id="addid<?=intval($row['id'])?>" name="addid[]" value="<?=intval($row['id'])?>"></td>
     <td class="DataTD" align="left"><label for="addid<?=intval($row['id'])?>"><?=sanitizeHTML($row['email'])?></label></td>
   </tr>
-<? }
+<?php }
 if($_SESSION['profile']['points'] >= 50)
 {
 	$fname = $_SESSION['profile']['fname'];
@@ -57,25 +57,25 @@ if($_SESSION['profile']['points'] >= 50)
     <td class="DataTD" colspan="2" align="left">
       <input type="radio" id="incname0" name="incname" value="0" checked="checked" />
         <label for="incname0"><?=_("No Name")?></label><br />
-      <? if($fname && $lname) { ?>
+      <?php if($fname && $lname) { ?>
         <input type="radio" id="incname1" name="incname" value="1" />
         <label for="incname1"><?=_("Include")?> '<?=$fname." ".$lname?>'</label><br />
-      <? } ?>
-      <? if($fname && $mname && $lname) { ?>
+      <?php } ?>
+      <?php if($fname && $mname && $lname) { ?>
         <input type="radio" id="incname2" name="incname" value="2" />
         <label for="incname2"><?=_("Include")?> '<?=$fname." ".$mname." ".$lname?>'</label><br />
-      <? } ?>
-      <? if($fname && $lname && $suffix) { ?>
+      <?php } ?>
+      <?php if($fname && $lname && $suffix) { ?>
         <input type="radio" id="incname3" name="incname" value="3" />
         <label for="incname3"><?=_("Include")?> '<?=$fname." ".$lname." ".$suffix?>'</label><br />
-      <? } ?>
-      <? if($fname && $mname && $lname && $suffix) { ?>
+      <?php } ?>
+      <?php if($fname && $mname && $lname && $suffix) { ?>
         <input type="radio" id="incname4" name="incname" value="4" />
         <label for="incname4"><?=_("Include")?> '<?=$fname." ".$mname." ".$lname." ".$suffix?>'</label><br />
-      <? } ?>
+      <?php } ?>
     </td>
   </tr>
-<? } ?>
+<?php } ?>
 
   <tr>
     <td class="DataTD">
@@ -113,7 +113,7 @@ if($_SESSION['profile']['points'] >= 50)
       <?=str_replace("\n", "<br />\n", wordwrap(_("Please note: If you use a certificate signed by the class 3 root, the class 3 root certificate needs to be imported into your email program as well as the class 1 root certificate so your email program can build a full trust path chain."), 125))?>
     </td>
   </tr>
-<? } ?>
+<?php } ?>
 
   <tr name="expert">
     <td class="DataTD" colspan="2" align="left">
@@ -129,7 +129,7 @@ if($_SESSION['profile']['points'] >= 50)
     </td>
   </tr>
 
-<? if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
+<?php if($_SESSION['profile']['points'] >= 100 && $_SESSION['profile']['codesign'] > 0) { ?>
   <tr name="expert">
     <td class="DataTD">
       <input type="checkbox" id="codesign" name="codesign" value="1" />
@@ -139,7 +139,7 @@ if($_SESSION['profile']['points'] >= 50)
       <?=_("Please note: By ticking this box you will automatically have your name included in the certificate.")?></label>
     </td>
   </tr>
-<? } ?>
+<?php } ?>
 
   <tr name="expert">
     <td class="DataTD">

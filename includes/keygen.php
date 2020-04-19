@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2011  CAcert Inc.
 
@@ -115,14 +115,14 @@ if (array_key_exists('HTTP_USER_AGENT',$_SERVER) && strstr($_SERVER['HTTP_USER_A
 
 	<script type="text/javascript" src="keygenIE.js"></script>
 
-<? } else { ?>
+<?php } else { ?>
 	<p>
 		<form method="post" action="account.php">
 			<input type="hidden" name="keytype" value="NS">
-			<?=_("Keysize:")?> <keygen name="SPKAC" challenge="<? $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
+			<?=_("Keysize:")?> <keygen name="SPKAC" challenge="<?php $_SESSION['spkac_hash']=make_hash(); echo $_SESSION['spkac_hash']; ?>">
 
 			<input type="submit" name="submit" value="<?=_("Generate key pair within browser")?>">
 			<input type="hidden" name="oldid" value="<?=intval($id)?>">
 		</form>
 	</p>
-<? }
+<?php }

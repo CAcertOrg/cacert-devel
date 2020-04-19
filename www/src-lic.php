@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -39,10 +39,10 @@
 <p align="center">CAcert Inc.<br>
 Source Code License Terms</p>
 <pre>
-<? include("../LICENSE"); ?>
+<?php include("../LICENSE"); ?>
 </pre>
 <form method="post">
 <input type="checkbox" name="iagree" value="yes"> Tick this box to acknowledge you agree to these terms and conditions<br>
 <input type="submit" name="process" value="Confirm, I agree to these terms and conditions">
 </form>
-<? showfooter(); ?>
+<?php showfooter(); ?>

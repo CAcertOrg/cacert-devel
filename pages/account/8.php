@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -21,14 +21,14 @@
   <tr>
     <td colspan="2" class="title"><?=_("Please choose an authority email address")?></td>
   </tr>
-<? $tagged=0;
+<?php $tagged=0;
   if(is_array($_SESSION['_config']['addy']))
 	foreach($_SESSION['_config']['addy'] as $add) { ?>
   <tr>
-    <td class="DataTD" width="75"><input type="radio" name="authaddy" value="<?=$add?>"<? if($tagged == 0) { echo " checked=\"checked\""; $tagged = 1; } ?> /></td>
+    <td class="DataTD" width="75"><input type="radio" name="authaddy" value="<?=$add?>"<?php if($tagged == 0) { echo " checked=\"checked\""; $tagged = 1; } ?> /></td>
     <td class="DataTD" width="175"><?=$add?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Probe")?>"></td>
   </tr>

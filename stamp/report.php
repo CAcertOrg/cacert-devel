@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -78,9 +78,9 @@
 <body>
  <div id="pagecell1">
   <div id="pageName"><br>
-    <h2><a href="http<? if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org">
-	<img src="http<? if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org/images/cacert3.png" border="0" alt="CAcert.org logo"></a></h2>
-<? if($_SERVER['HTTPS']!="on") { ?>
+    <h2><a href="http<?php if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org">
+	<img src="http<?php if($_SERVER['HTTPS']=="on") { echo "s"; } ?>://www.cacert.org/images/cacert3.png" border="0" alt="CAcert.org logo"></a></h2>
+<?php if($_SERVER['HTTPS']!="on") { ?>
 <div id="googlead"><br><script type="text/javascript"><!--
 google_ad_client = "pub-0959373285729680";
 google_alternate_color = "ffffff";
@@ -91,30 +91,30 @@ google_ad_type = "text";
 google_ad_channel = "";
 //--></script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>
-<? } ?>
+<?php } ?>
   </div>
   <div id="content">
     <div class="story">
       <h3>Report abuse for <?=$ref?></h3>
-<? if($process == "") { ?>
-<? if($errmsg != "") { ?><p style="color:red"><?=$errmsg?></p><? } else { ?><br /><? } ?>
+<?php if($process == "") { ?>
+<?php if($errmsg != "") { ?><p style="color:red"><?=$errmsg?></p><?php } else { ?><br /><?php } ?>
       <form method="post" action="report.php">
 	<label for="refer">URL: </label><input type="text" name="refer" value="<?=$refer?>" readonly="1" /><br />
 	<label for="name">Name: </label><input type="text" name="name" value="<?=$name?>" /><br />
 	<label for="email">Email: </label><input type="text" name="email" value="<?=$email?>" /><br />
 	<label for="reason">Reason: </label><select name="reason">
-		<option value='invalid'<? if($reason == "invalid") { echo " selected"; } ?>>Invalid Domain</option>
-		<option value='phishing'<? if($reason == "phishing") { echo " selected"; } ?>>Phishing Site</option>
-		<option value='spam'<? if($reason == "spam") { echo " selected"; } ?>>Spam</option>
-		<option value='other'<? if($reason == "other") { echo " selected"; } ?>>Other</option>
+		<option value='invalid'<?php if($reason == "invalid") { echo " selected"; } ?>>Invalid Domain</option>
+		<option value='phishing'<?php if($reason == "phishing") { echo " selected"; } ?>>Phishing Site</option>
+		<option value='spam'<?php if($reason == "spam") { echo " selected"; } ?>>Spam</option>
+		<option value='other'<?php if($reason == "other") { echo " selected"; } ?>>Other</option>
 		</select><br />
 	<label for="comment">Comment/Other: </label><input type="text" name="comment" value="<?=$comment?>" /><br /><br />
 	<label for="sub">&nbsp;</label><input type="submit" name="process" value="Report Site"><br />
 	<input type="hidden" name="pagehash" value="<?=$pagehash?>">
       </form>
-<? } else { ?>
+<?php } else { ?>
       <p>We thank you for your attention to detail, your report has been accepted and we will tend to your report as soon as humanly possible.</p>
-<? } ?>
+<?php } ?>
     </div>
    </div>
 </body>

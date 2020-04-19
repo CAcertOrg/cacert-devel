@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -77,7 +77,7 @@
     <td class="DataTD"><input type="text" name="<?=$a?>" autocomplete="off">
 	<input type="hidden" name="<?=$q?>" value="<?=sanitizeHTML($_SESSION['lostpw']['user'][$q])?>"></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("New Pass Phrase")?><font color="red">*</font>: </td>
     <td class="DataTD"><input type="password" name="newpass1" autocomplete="off"></td>
@@ -95,6 +95,6 @@
 </table>     
 <input type="hidden" name="oldid" value="<?=$id?>">
 </form> 
-<? } else { ?>
+<?php } else { ?>
 <p><?=_("You do not have enough/any lost password questions set. You will not be able to continue to reset your password via this method.")?></p>
-<? } ?>
+<?php } ?>

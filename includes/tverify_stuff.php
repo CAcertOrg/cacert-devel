@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -25,7 +25,7 @@ if(!function_exists("showheader"))
 <html>
 <head>
 <title><?=$title?></title>
-<? if($_SESSION['_config']['header'] != "") { ?><?=$_SESSION['_config']['header']?><? } ?>
+<?php if($_SESSION['_config']['header'] != "") { ?><?=$_SESSION['_config']['header']?><?php } ?>
 <link rel="stylesheet" href="/styles/default.css" type="text/css">
 <link href="http://my.rsscache.com/www.cacert.org/rss.php" rel="alternate" type="application/rss+xml" title="rss">
 </head>
@@ -51,9 +51,9 @@ if(!function_exists("showheader"))
   <div id="content">
     <div class="story">
       <h3><?=$title2?></h3>
-<? if($_SESSION['_config']['errmsg'] != "") { ?>
-<p><font color="#ff0000" size="+2"><? echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
-<? } ?>
+<?php if($_SESSION['_config']['errmsg'] != "") { ?>
+<p><font color="#ff0000" size="+2"><?php echo $_SESSION['_config']['errmsg']; $_SESSION['_config']['errmsg'] = ""; ?> </font></p>
+<?php } ?>
 <?
 	}
 }

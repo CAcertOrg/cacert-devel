@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -30,12 +30,12 @@
   <tr>
     <td colspan="2" class="title"><?=_("Change Pass Phrase")?></td>
   </tr>
-<? if($_SESSION['_config']['hostname'] != $_SESSION['_config']['securehostname']) { ?>
+<?php if($_SESSION['_config']['hostname'] != $_SESSION['_config']['securehostname']) { ?>
   <tr>
     <td class="DataTD"><?=_("Old Pass Phrase")?>: </td>
     <td class="DataTD"><input type="password" name="oldpassword"></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("New Pass Phrase")?><font color="red">*</font>: </td>
     <td class="DataTD"><input type="password" name="pword1"></td>

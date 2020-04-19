@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -85,7 +85,7 @@ TG1yj+lkktROGGyn0hJ5SbM=
 </p>
 
 <p>
-<? printf(_('An overview over all CA certificates ever issued can be found in '.
+<?php printf(_('An overview over all CA certificates ever issued can be found in '.
         '%sthe wiki%s.'),
     '<a href="//wiki.cacert.org/Roots/StateOverview">',
     '</a>') ?>

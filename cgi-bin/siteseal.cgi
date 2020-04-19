@@ -35,7 +35,7 @@ header("Content-Disposition: inline; filename=\"siteseal.js\"");
 ?>
 
 var <?=$var1?> = window.location.href;
-<? // var <?=$var2?> = '<?=$http?>://www.cacert.org/certdetails.php?referer=' + <?=$var1?>; ?>
+<?php // var <?=$var2?> = '<?=$http?>://www.cacert.org/certdetails.php?referer=' + <?=$var1?>; ?>
 var <?=$var2?> = '<?=$http?>://www.cacert.org';
 var <?=$var3?> = (new Date()).getTimezoneOffset();
 

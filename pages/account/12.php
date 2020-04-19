@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -15,7 +15,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
-<? $viewall=0; if(array_key_exists('viewall',$_REQUEST)) $viewall=intval($_REQUEST['viewall']); ?>
+<?php $viewall=0; if(array_key_exists('viewall',$_REQUEST)) $viewall=intval($_REQUEST['viewall']); ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>
@@ -56,7 +56,7 @@
   <tr>
     <td colspan="8" class="DataTD"><?=_("No certificates are currently listed.")?></td>
   </tr>
-<? } else {
+<?php } else {
 	while($row = mysql_fetch_assoc($res))
 	{
 		if($row['timeleft'] > 0)
@@ -71,13 +71,13 @@
 			$row['revoke'] = _("Not Revoked");
 ?>
   <tr>
-<? if($verified != _("Pending") && $verified != _("Revoked")) { ?>
+<?php if($verified != _("Pending") && $verified != _("Revoked")) { ?>
     <td class="DataTD"><input type="checkbox" name="revokeid[]" value="<?=intval($row['id'])?>"/></td>
-<? } else if($verified != _("Revoked")) { ?>
+<?php } else if($verified != _("Revoked")) { ?>
     <td class="DataTD"><input type="checkbox" name="delid[]" value="<?=intval($row['id'])?>"/></td>
-<? } else { ?>
+<?php } else { ?>
     <td class="DataTD">&nbsp;</td>
-<? } ?>
+<?php } ?>
     <td class="DataTD"><?=$verified?></td>
     <td class="DataTD"><a href="account.php?id=15&amp;cert=<?=intval($row['id'])?>"><?=htmlspecialchars($row['CN'])?></a></td>
     <td class="DataTD"><?=$row['serial']?></td>
@@ -86,7 +86,7 @@
     <td class="DataTD"><input name="comment_<?=intval($row['id'])?>" type="text" value="<?=htmlspecialchars($row['description'])?>" /></td>
     <td class="DataTD"><input type="checkbox" name="check_comment_<?=intval($row['id'])?>" /></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="8">
       <a href="account.php?id=12&amp;viewall=<?=intval(!$viewall)?>"><b><?=$viewall?_("Hide old certificates"):_("View all certificates")?></b></a>
@@ -102,7 +102,7 @@
 	    <input type="submit" name="revoke" value="<?=_("Revoke/Delete")?>"></td>
 	<td class="DataTD" colspan="2"><input type="submit" name="change" value="<?=_("Change settings")?>"/> </td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="8"><?=_("From here you can delete pending requests, or revoke valid certificates.")?></td>
   </tr>

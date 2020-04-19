@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -61,7 +61,7 @@
 	<td class="DataTD">Expires</td>
 	<td class="DataTD">Edit</td>
 	<td class="DataTD">Disable</td>
-<? if($_SESSION['profile']['adadmin'] == 2) { echo "\t<td class='DataTD'>Approve</td>\n"; }
+<?php if($_SESSION['profile']['adadmin'] == 2) { echo "\t<td class='DataTD'>Approve</td>\n"; }
 ?>  </tr>
 <?
 	$query = "select *,UNIX_TIMESTAMP(`expires`)-UNIX_TIMESTAMP(NOW()) as `timeleft` from `advertising` where `replaced`=0 ";

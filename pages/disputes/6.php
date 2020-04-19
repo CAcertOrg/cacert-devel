@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <H3><?=_("Domain Dispute")?></H3>
-<p><? printf(_("Currently the domain '%s' is in dispute, you have been sent an email to resolve the issue, below you have the option to accept, reject or report the request as fraudulent."), sanitizeHTML($_SESSION['_config']['domain'])); ?></p>
+<p><?php printf(_("Currently the domain '%s' is in dispute, you have been sent an email to resolve the issue, below you have the option to accept, reject or report the request as fraudulent."), sanitizeHTML($_SESSION['_config']['domain'])); ?></p>
 <form method="post" action="disputes.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

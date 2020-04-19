@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -114,7 +114,7 @@
     <td class="DataTD"><?=$stats['growth_last_12m'][$i]['new_assurers'];?></td>
     <td class="DataTD"><?=$stats['growth_last_12m'][$i]['new_certificates'];?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("Total")?></td>
     <td class="DataTD"><?=$stats['growth_last_12m_total']['new_users'];?></td>
@@ -142,7 +142,7 @@
     <td class="DataTD"><?=$stats['growth_last_years'][$i]['new_assurers'];?></td>
     <td class="DataTD"><?=$stats['growth_last_years'][$i]['new_certificates'];?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("Total")?></td>
     <td class="DataTD"><?=$stats['growth_last_years_total']['new_users'];?></td>
@@ -156,4 +156,4 @@
 	printf(_("Last updated: %s"), date('Y-m-d H:i:s', $stats['timestamp']));?>
 </div>
 
-<? showfooter(); ?>
+<?php showfooter(); ?>

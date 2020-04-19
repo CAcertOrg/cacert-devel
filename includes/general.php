@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -16,12 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+<<<<<<< HEAD
 require_once ( '../classes/config.class.php') ;
 
 $cacert_config = new config() ;
 $testmode = $cacert_config->value( "testmode") ;
 
 require_once(dirname(__FILE__)."/lib/general.php");
+=======
+/*
+	require_once(dirname(__FILE__)."/lib/general.php");
+>>>>>>> 9698d41d07abb38ac2e6b8f50bfad88d806b78cf
 
 	session_name("cacert");
 	session_start();
@@ -48,54 +53,7 @@ require_once(dirname(__FILE__)."/lib/general.php");
 	require_once($_SESSION['_config']['filepath']."/includes/mysql.php");
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/account.php');
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
-
-	if(array_key_exists('HTTP_HOST',$_SERVER) &&
-			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
-			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['securehostname'] &&
-			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['tverify'] &&
-			$_SERVER['HTTP_HOST'] != "stamp.cacert.org")
-	{
-		if(array_key_exists('HTTPS',$_SERVER) && $_SERVER['HTTPS'] == "on")
-			header("location: https://".$_SESSION['_config']['normalhostname']);
-		else
-			header("location: http://".$_SESSION['_config']['normalhostname']);
-		exit;
-	}
-
-	if(array_key_exists('HTTP_HOST',$_SERVER) &&
-			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] ||
-			$_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify']))
-	{
-		if(array_key_exists('HTTPS',$_SERVER) && $_SERVER['HTTPS'] == "on")
-		{
-		}
-		else
-		{
-			if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
-			header("location: https://". $_SESSION['_config']['securehostname']);
-			if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify'])
-			header("location: https://".$_SESSION['_config']['tverify']);
-			exit;
-		}
-	}
-
-	L10n::detect_language();
-	L10n::init_gettext();
-
-	if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
-	{
-		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
-		if($locked['locked'] == 0)
-		{
-			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-			$res = mysql_query($query);
-			$row = mysql_fetch_assoc($res);
-			$_SESSION['profile']['points'] = $row['total'];
-		} else {
-			$_SESSION['profile'] = "";
-			unset($_SESSION['profile']);
-		}
-	}
+*/
 
 	function loadem($section = "index")
 	{

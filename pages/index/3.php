@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -20,7 +20,7 @@
 
 <h3><?=_("Windows Installer") ?></h3>
 <ul class="no_indent">
-	<li><? printf(_("%s Windows installer package %s for browsers that use the Windows certificate store %s (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates.msi">', '</a>', '<br/>')?></li>
+	<li><?php printf(_("%s Windows installer package %s for browsers that use the Windows certificate store %s (for example Internet Explorer, Chrome on Windows and Safari on Windows)"), '<a href="certs/CAcert_Root_Certificates.msi">', '</a>', '<br/>')?></li>
 	<li><?=_("SHA1 Hash:") ?> 2db1957db31aa0d778d1a65ea146760ee1e67611</li>
 	<li><?=_("SHA256 Hash:") ?> 88883f2e3117bae6f43922fbaef8501b94efe4143c12116244ca5d0c23bcbb16</li>
 </ul>
@@ -92,7 +92,7 @@ TG1yj+lkktROGGyn0hJ5SbM=
 
 <h3><?=_("History")?></h3>
 <p>
-<? printf(_('An overview over all CA certificates ever issued can be found in '.
+<?php printf(_('An overview over all CA certificates ever issued can be found in '.
         '%sthe wiki%s.'),
     '<a href="//wiki.cacert.org/Roots/StateOverview">',
     '</a>') ?>

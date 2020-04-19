@@ -6,11 +6,11 @@
 	<li><a href="/policy/"><?=_("Policies")?></a></li>
 	<li><a href="//wiki.cacert.org/FAQ/Privileges"><?=_("Point System")?></a></li>
 	<li><a href="http://bugs.CAcert.org/"><?=_("Bug Database")?></a></li>
-<? //	<li><a href="/index.php?id=47"><  = _ ("PR Materials" )  > </a></li> ?>
-<? //	<li><a href="/logos.php">< ? = _ ( " CAcert Logos " ) ? > </a></li> ?>
-<? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>	<li><a href="/stats.php"><?=_("CAcert Statistics")?></a></li> <? } ?>
+<?php //	<li><a href="/index.php?id=47"><  = _ ("PR Materials" )  > </a></li> ?>
+<?php //	<li><a href="/logos.php">< ? = _ ( " CAcert Logos " ) ? > </a></li> ?>
+<?php if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>	<li><a href="/stats.php"><?=_("CAcert Statistics")?></a></li> <?php } ?>
 	<li><a href="http://blog.CAcert.org/feed/"><?=_("RSS News Feed")?></a></li>
-<? //-	<li><a href="/index.php?id=7"> < ? = _ ( " Credits " ) ? > </a></li> ?>
+<?php //-	<li><a href="/index.php?id=7"> < ? = _ ( " Credits " ) ? > </a></li> ?>
 	<li><a href="//wiki.cacert.org/Board"><?=_("CAcert Board")?></a></li>
 	<li><a href="https://lists.cacert.org/wws"><?=_("Mailing Lists")?></a></li>
 	<li><a href="/src-lic.php"><?=_("Sourcecode")?></a></li>

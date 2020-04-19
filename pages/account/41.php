@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -61,10 +61,10 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>
-    <td class="DataTD" align="left"><? echo "${lang['lang']} - ${lang['country']}"; ?>
+    <td class="DataTD" align="left"><?php echo "${lang['lang']} - ${lang['country']}"; ?>
 		<a href="account.php?oldid=41&amp;action=dellang&amp;remove=<?=$row['lang']?>&amp;csrf=<?=make_csrf('seclang')?>"><?=_("Delete")?></a></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD"><?=_("Secondary languages")?>:</td>
     <td class="DataTD"><select name="addlang">

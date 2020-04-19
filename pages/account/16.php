@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -81,14 +81,14 @@ if (array_key_exists('emails',$_SESSION['_config']) && is_array($_SESSION['_conf
     </td>
   </tr>
 
-<? if($_SESSION['profile']['codesign'] && $_SESSION['profile']['points'] >= 100) { ?>
+<?php if($_SESSION['profile']['codesign'] && $_SESSION['profile']['points'] >= 100) { ?>
   <tr name="expert">
     <td class="DataTD" colspan="2" align="left">
       <input type="checkbox" id="codesign" name="codesign" value="1" />
       <label for="codesign"><?=_("Code Signing")?></label>
     </td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td class="DataTD" colspan="2" align="left">
       <label for="description"><?=_("Optional comment, only used in the certificate overview")?></label><br />

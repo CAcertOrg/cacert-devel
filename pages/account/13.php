@@ -1,4 +1,4 @@
-<? /*
+<?php /*
     LibreSSL - CAcert web application
     Copyright (C) 2004-2008  CAcert Inc.
 
@@ -49,7 +49,7 @@
   <tr>
     <td colspan="2" class="title"><?=_("My Details")?></td>
   </tr>
-<? if($_SESSION['profile']['points'] == 0) { ?>
+<?php if($_SESSION['profile']['points'] == 0) { ?>
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
     <td class="DataTD" width="125"><input type="text" name="fname" value="<?=sanitizeHTML($user['fname'])?>"></td>
@@ -97,7 +97,7 @@
     <input type="text" name="year" value="<?=$year?>" size="4"></nobr>
     </td>
   </tr>
-<? } else { ?>
+<?php } else { ?>
   <tr>
     <td class="DataTD" width="125"><?=_("First Name")?>: </td>
     <td class="DataTD" width="125"><?=sanitizeHTML($user['fname'])?></td>
@@ -122,14 +122,14 @@
       (<?=_("dd/mm/yyyy")?>)</td>
     <td class="DataTD"><?=$day?> <?=ucwords(recode("utf-8..html", strftime("%B", mktime(0,0,0,$month,1,1))))?> <?=$year?></td>
   </tr>
-<? } ?>
+<?php } ?>
   <tr>
     <td colspan="2" class="title"><a href="account.php?id=59&amp;oldid=13&amp;userid=<?=intval($_SESSION['profile']['id'])?>"><?=_('Show account history')?></a></td>
   </tr>
   <tr>
     <td colspan="2" class="title"><a href="account.php?id=13&amp;showdetails=<?=intval(!$showdetails)?>"><?=_("View secret question & answers")?></a></td>
   </tr>
-  <? if($showdetails){ ?>
+  <?php if($showdetails){ ?>
   <tr>
     <td class="DataTD" colspan="2"><?=_("Lost Pass Phrase Questions")?></td>
   </tr>
@@ -155,7 +155,7 @@
   </tr>
   <tr>
   <input type="hidden" name="showdetails" value="1" />
-  <? } ?>
+  <?php } ?>
     <td class="DataTD" colspan="2"><input type="submit" name="process" value="<?=_("Update")?>"></td>
   </tr>
 </table>
