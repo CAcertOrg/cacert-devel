@@ -8,7 +8,7 @@
 	<li><a href="http://bugs.CAcert.org/"><?=_("Bug Database")?></a></li>
 <? //	<li><a href="/index.php?id=47"><  = _ ("PR Materials" )  > </a></li> ?>
 <? //	<li><a href="/logos.php">< ? = _ ( " CAcert Logos " ) ? > </a></li> ?>
-<? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>	<li><a href="/stats.php"><?=_("CAcert Statistics")?></a></li> <? } ?>
+<? if($GLOBALS["db_conn"]) { ?>	<li><a href="/stats.php"><?=_("CAcert Statistics")?></a></li> <? } ?>
 	<li><a href="http://blog.CAcert.org/feed/"><?=_("RSS News Feed")?></a></li>
 <? //-	<li><a href="/index.php?id=7"> < ? = _ ( " Credits " ) ? > </a></li> ?>
 	<li><a href="//wiki.cacert.org/Board"><?=_("CAcert Board")?></a></li>

@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,15 +28,15 @@
 	fclose($fp);
 
 	$query = "select * from `locations` where `id`='417638'";
-        $loc = mysql_fetch_assoc(mysql_query($query));
+        $loc = $db_conn->query($query)->fetch_assoc();
         $query = "select `users`.* from `users`,`alerts`,`locations` where 
 			((`lat` > ".$loc['lat']."-0.1 and `lat`<".$loc['lat']."+0.1 and `long`>".$loc['long']."-0.1 and `long`<".$loc['long']."+0.1)
 )and
 			(`alerts`.`general`=1 OR `alerts`.`country`=1 OR `alerts`.`regional`=1 OR `alerts`.`radius`=1) AND
 			`locations`.`id` = `users`.`locid` and `users`.`id`=`alerts`.`memid`";
 	//$query = "select * from `users` where `email`='pg@futureware.at'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 			sendmail($row['email'], "[CAcert.org] Keysigningparty Koeln", $lines, "support@cacert.org", "", "", "CAcert Support", "returns@cacert.org", 1);
 echo $row['email']."\n";

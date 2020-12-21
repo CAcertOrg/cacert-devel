@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -134,7 +134,7 @@ function send_reminder()
 			$body .= "User ".$_SESSION['profile']['fname']." ".
 				$_SESSION['profile']['lname']." with email address '".
 				$_SESSION['profile']['email']."' is requesting a TTP assurances for ".
-				mysql_escape_string(stripslashes($_POST['country'])).".\n\n";
+				$db_conn->real_escape_string(stripslashes($_POST['country'])).".\n\n";
 			if ($_POST['ttptopup']=='1') {
 				$body .= "The user is also requesting TTP TOPUP.\n\n";
 			}else{
@@ -181,9 +181,9 @@ function send_reminder()
 
 	if($oldid == 5)
 	{
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) != 1)
+		$query = "select * from `users` where `email`='".$db_conn->real_escape_string(stripslashes($_POST['email']))."' and `deleted`=0";
+		$res = $db_conn->query($query);
+		if($res->num_rows != 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 1;
 			show_page("EnterEmail","",_("I'm sorry, there was no email matching what you entered in the system. Please double check your information."));
@@ -191,7 +191,7 @@ function send_reminder()
 		} else
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
-			$_SESSION['_config']['notarise'] = mysql_fetch_assoc($res);
+			$_SESSION['_config']['notarise'] = $res->fetch_assoc();
 			if ($_SESSION['_config']['notarise']['verified'] == 0)
 			{
 				show_page("EnterEmail","",_("User is not yet verified. Please try again in 24 hours!"));
@@ -209,9 +209,9 @@ function send_reminder()
 				}
 			}
 		}
-		$query = "select * from `users` where `email`='".mysql_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >= 1)
+		$query = "select * from `users` where `email`='".$db_conn->real_escape_string(stripslashes($_POST['email']))."' and `locked`=1";
+		$res = $db_conn->query($query);
+		if($res->num_rows >= 1)
 		{
 			$_SESSION['_config']['noemailfound'] = 0;
 			show_page("EnterEmail","",_("This account is locked and can not be assured. For more information ask support@cacert.org."));
@@ -236,8 +236,8 @@ function send_reminder()
 
 		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and
 			`to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = $db_conn->query($query);
+		if($res->num_rows > 0)
 		{
 			show_page("EnterEmail","",_("You are only allowed to Assure someone once!"));
 			exit;
@@ -321,8 +321,8 @@ function send_reminder()
 		}
 
 		$query = "select * from `users` where `id`='".intval($_SESSION['_config']['notarise']['id'])."'";
-		$res = mysql_query($query);
-		$row = mysql_fetch_assoc($res);
+		$res = $db_conn->query($query);
+		$row = $res->fetch_assoc();
 		$name = sanitizeHTML($row['fname'])." ".sanitizeHTML($row['mname'])." ".sanitizeHTML($row['lname'])." ".sanitizeHTML($row['suffix']);
 		if($_SESSION['_config']['wothash'] != md5($name."-".$row['dob']) || $_SESSION['_config']['wothash'] != $_REQUEST['pagehash'])
 		{
@@ -343,8 +343,8 @@ function send_reminder()
 			$newpoints = $awarded = 0;
 
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['_config']['notarise']['id'])."' and `deleted` = 0 group by `to`";
-		$res = mysql_query($query);
-		$drow = mysql_fetch_assoc($res);
+		$res = $db_conn->query($query);
+		$drow = $res->fetch_assoc();
 
 		$_POST['expire'] = 0;
 
@@ -355,17 +355,17 @@ function send_reminder()
 		if($newpoints < 0)
 			$newpoints = 0;
 
-		if(mysql_real_escape_string(stripslashes($_POST['date'])) == "")
+		if($db_conn->real_escape_string(stripslashes($_POST['date'])) == "")
 			$_POST['date'] = date("Y-m-d H:i:s");
 
 		$query = "select * from `notary` where `from`='".intval($_SESSION['profile']['id'])."' AND
 						`to`='".intval($_SESSION['_config']['notarise']['id'])."' AND
 						`awarded`='".intval($awarded)."' AND
-						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."' AND
-						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."' AND
+						`location`='".$db_conn->real_escape_string(stripslashes($_POST['location']))."' AND
+						`date`='".$db_conn->real_escape_string(stripslashes($_POST['date']))."' AND
 						`deleted`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = $db_conn->query($query);
+		if($res->num_rows > 0)
 		{
 			show_page("VerifyEmail","",_("Identical Assurance attempted, will not continue."));
 			exit;
@@ -377,8 +377,8 @@ function send_reminder()
 		$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
 						`to`='".intval($_SESSION['_config']['notarise']['id'])."',
 						`points`='".intval($newpoints)."', `awarded`='".intval($awarded)."',
-						`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
-						`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
+						`location`='".$db_conn->real_escape_string(stripslashes($_POST['location']))."',
+						`date`='".$db_conn->real_escape_string(stripslashes($_POST['date']))."',
 						`when`=NOW()";
 		//record active acceptance by Assurer
 		if (check_date_format(trim($_REQUEST['date']),2010)) {
@@ -388,7 +388,7 @@ function send_reminder()
 		if($_SESSION['profile']['ttpadmin'] == 1 && ($_POST['method'] == 'Trusted 3rd Parties' || $_POST['method'] == 'Trusted Third Parties')) {
 			$query .= ",\n`method`='TTP-Assisted'";
 		}
-		mysql_query($query);
+		$db_conn->query($query);
 		fix_assurer_flag($_SESSION['_config']['notarise']['id']);
 		include_once("../includes/notary.inc.php");
 
@@ -402,11 +402,11 @@ function send_reminder()
 			$query = "insert into `notary` set `from`='".intval($_SESSION['profile']['id'])."',
 							`to`='".intval($_SESSION['profile']['id'])."',
 							`points`='".intval($addpoints)."', `awarded`='".intval($addpoints)."',
-							`location`='".mysql_real_escape_string(stripslashes($_POST['location']))."',
-							`date`='".mysql_real_escape_string(stripslashes($_POST['date']))."',
+							`location`='".$db_conn->real_escape_string(stripslashes($_POST['location']))."',
+							`date`='".$db_conn->real_escape_string(stripslashes($_POST['date']))."',
 							`method`='Administrative Increase',
 							`when`=NOW()";
-			mysql_query($query);
+			$db_conn->query($query);
 
 			// No need to fix_assurer_flag here, this should only happen for assurers...
 			$_SESSION['profile']['points'] += $addpoints;
@@ -461,7 +461,7 @@ function send_reminder()
 	{
 		csrf_check("chgcontact");
 
-		$info = mysql_real_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
+		$info = $db_conn->real_escape_string(strip_tags(stripslashes($_POST['contactinfo'])));
 		$listme = intval($_POST['listme']);
 		if($listme < 0 || $listme > 1)
 			$listme = 0;
@@ -470,7 +470,7 @@ function send_reminder()
 		$_SESSION['profile']['contactinfo'] = $info;
 
 		$query = "update `users` set `listme`='$listme',`contactinfo`='$info' where `id`='".intval($_SESSION['profile']['id'])."'";
-		mysql_query($query);
+		$db_conn->query($query);
 
 		showheader(_("My CAcert.org Account!"));
 		echo "<p>"._("Your account information has been updated.")."</p>";
@@ -490,9 +490,9 @@ function send_reminder()
 			$body = $_REQUEST['message'];
 			$subject = $_REQUEST['subject'];
 			$userid = intval($_REQUEST['userid']);
-			$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($userid)."' and `listme`=1"));
-			$points = mysql_num_rows(mysql_query("select sum(`points`) as `total` from `notary`
-						where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0"));
+			$user = $db_conn->query("select * from `users` where `id`='".intval($userid)."' and `listme`=1")->fetch_assoc();
+			$points = $db_conn->query("select sum(`points`) as `total` from `notary`
+                where `to`='".intval($user['id'])."' and `deleted` = 0 group by `to` HAVING SUM(`points`) > 0")->num_rows;
 			if($points > 0)
 			{
 				$my_translation = L10n::get_translation();

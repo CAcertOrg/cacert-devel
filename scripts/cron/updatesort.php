@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,44 +26,44 @@
 	}
 
 
-	mysql_query("update `locations` set `acount`=0");
+	$db_conn->query("update `locations` set `acount`=0");
 	$query = "SELECT `users`.`locid` AS `locid`, count(*) AS `total` FROM `users`
 			WHERE users.assurer='1' AND `users`.`locid` != 0 and users.listme=1
 			GROUP BY `users`.`locid`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		$query = "update `locations` set `acount`='${row['total']}' where `id`='${row['locid']}'";
 		echo $query."\n";
-		mysql_query($query);
+		$db_conn->query($query);
 	}
 
 
-	mysql_query("update `regions` set `acount`=0");
+	$db_conn->query("update `regions` set `acount`=0");
 	$query = "SELECT `users`.`regid` AS `regid`, count(*) AS `total` FROM `users`
 			WHERE users.assurer='1' AND `users`.`regid` != 0 and users.listme=1
 			GROUP BY `users`.`regid`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		$query = "update `regions` set `acount`='${row['total']}' where `id`='${row['regid']}'";
 		echo $query."\n";
-		mysql_query($query);
+		$db_conn->query($query);
 	}
 
 
 
 
-	mysql_query("update `countries` set `acount`=0");
+	$db_conn->query("update `countries` set `acount`=0");
 	$query = "SELECT `users`.`ccid` AS `ccid`, count(*) AS `total` FROM `users`
 			WHERE users.assurer='1' AND `users`.`ccid` != 0 and users.listme=1
 			GROUP BY `users`.`ccid`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		$query = "update `countries` set `acount`='${row['total']}' where `id`='${row['ccid']}'";
 		echo $query."\n";
-		mysql_query($query);
+		$db_conn->query($query);
 	}
 
 

@@ -1,7 +1,7 @@
 <?php
 /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
  */
 function fix_assurer_flag($userID = NULL)
 {
+	global $db_conn;
 	// Update Assurer-Flag on users table if 100 points and CATS passed.
 	//
 	// We may have some performance issues here if no userID is given
@@ -55,7 +56,7 @@ function fix_assurer_flag($userID = NULL)
 					AND `n`.`deleted` = 0
 			) >= 100';
 
-	$query = mysql_query($sql);
+	$query = $db_conn->query($sql);
 	if (!$query) {
 		return false;
 	}
@@ -91,7 +92,7 @@ function fix_assurer_flag($userID = NULL)
 				) < 100
 			)';
 
-	$query = mysql_query($sql);
+	$query = $db_conn->query($sql);
 	if (!$query) {
 		return false;
 	}

@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2009  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,9 +38,9 @@ select u.email, fname, lname, sum(n.points) from users u, notary n
 			";
 //	echo $query;
 // comment next line when starting to send mail not only to me 
-	$res = mysql_query($query);
-	$xrows = mysql_num_rows($res);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	$xrows = $res->num_rows;
+	while($row = $res->fetch_assoc())
 	{
 		 echo $row['pts']."..".$row['email']."...\n";
     // uncomment next line to send mails ...

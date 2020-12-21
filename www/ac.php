@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,36 +17,36 @@
 */
 	header('Content-Type: text/html; charset=UTF-8');
 
-	if($_REQUEST['i'] != "")
-		echo "<html><body><script language=\"JavaScript\"><!--\n";
+	if(array_key_exists("i", $_REQUEST) && $_REQUEST['i'] != "")
+		echo '<!DOCTYPE html><html lang="en"><body><script type="application/javascript">';
 
-	$s = mysql_real_escape_string($_REQUEST['s']);
+	/** @var mysqli $db_conn */
+	$s = $db_conn->real_escape_string($_REQUEST['s']);
 
-	$id = mysql_real_escape_string(strip_tags($_REQUEST['id']));
-	echo "parent._ac_rpc('".sanitizeHTML($id)."',";
+	$id = $db_conn->real_escape_string(strip_tags($_REQUEST['id']));
 
 	$bits = explode(",", $s);
 
-	$loc = trim(mysql_real_escape_string($bits['0']));
-	$reg = trim(mysql_real_escape_string($bits['1']));
-	$ccname = trim(mysql_real_escape_string($bits['2']));
-	$query = "select `locations`.`id` as `locid`, `locations`.`name` as `locname`, `regions`.`name` as `regname`,
-			`countries`.`name` as `ccname` from `locations`, `regions`, `countries` where
-			`locations`.`name` like '$loc%' and `regions`.`name` like '$reg%' and `countries`.`name` like '$ccname%' and
-			`locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
-			order by `locations`.`acount` DESC, `locations`.`name` ASC limit 10";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$location_name = count($bits) > 0 ? $db_conn->real_escape_string(trim($bits['0'])) : '';
+	$region_name = count($bits) > 1 ? $db_conn->real_escape_string(trim($bits['1'])) : '';
+	$country_name = count($bits) > 2 ? $db_conn->real_escape_string(trim($bits['2'])) : '';
+	$query = sprintf("SELECT locations.id AS locid, locations.name AS locname, regions.name AS regname, countries.name AS ccname
+FROM locations, regions, countries
+WHERE locations.name LIKE '%s%%' AND regions.name LIKE '%s%%' AND countries.name LIKE '%s%%'
+  AND locations.regid = regions.id AND locations.ccid = countries.id
+ORDER BY locations.acount DESC, locations.name
+LIMIT 10", $location_name, $region_name, $country_name);
+	$res = $db_conn->query($query);
+	$rc = 0;
+	$locations = [];
+	while($row = $res->fetch_assoc())
 	{
-		$rc++;
-		if($rc > 1)
-			echo ",";
-		echo '"'.$row['locname'].', '.$row['regname'].', '.$row['ccname'].'", "'.$row['locid'].'"';
+		array_push($locations, sprintf("\"%s, %s, %s\", \"%s\"", $row['locname'], $row['regname'], $row['ccname'],
+			$row['locid']));
 	}
-	echo ");";
+	printf("parent._ac_rpc('%s',%s);", sanitizeHTML($id), implode(",", $locations));
 
-	if($_REQUEST['i'] != "")
-		echo "\n\n// -->\n</script></body></html>";
+	if(array_key_exists("i", $_REQUEST) && $_REQUEST['i'] != "")
+		echo "</script></body></html>";
 
 	exit;
-?>

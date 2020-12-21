@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,15 +49,15 @@
 	}
 	$query .= "ORDER BY `modified` desc";
 //echo $query."<br>\n";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = $db_conn->query($query);
+	if($res->num_rows <= 0)
 	{
 ?>
   <tr>
     <td colspan="8" class="DataTD"><?=_("No certificates are currently listed.")?></td>
   </tr>
 <? } else {
-	while($row = mysql_fetch_assoc($res))
+	while($row = $res->fetch_assoc())
 	{
 		if($row['timeleft'] > 0)
 			$verified = _("Valid");

@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 	if($id > 0)
 	{
 		$query = "select * from `news` where `id`='$id'";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$row = $db_conn->query($query)->fetch_assoc();
 
 		echo "<h3>".$row['short']."</h3>\n";
 		echo "<p>Posted by ".$row['who']." at ".$row['when']."</p>\n";
@@ -33,8 +33,8 @@
 		echo "<p>".str_replace("\n", "<br>\n", $row['story'])."</p>\n";
 	} else {
 		$query = "select *, UNIX_TIMESTAMP(`when`) as `TS` from news order by `when` desc";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = $db_conn->query($query);
+		while($row = $res->fetch_assoc())
 		{
 			echo "<p><b>".date("Y-m-d", $row['TS'])."</b> - ".$row['short']."</p>\n";
 			if($row['story'] != "")

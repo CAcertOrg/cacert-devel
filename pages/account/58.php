@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,19 +21,19 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 } else {
 	$user_id = intval($_REQUEST['userid']);
 	$query = "select `users`.`fname`, `users`.`mname`, `users`.`lname` from `users` where `id`='$user_id' and `users`.`deleted`=0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) != 1){
+	$res = $db_conn->query($query);
+	if($res->num_rows != 1){
 		echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
 	} else {
-		if ($row = mysql_fetch_assoc($res)){
+		if ($row = $res->fetch_assoc()){
 			$username=sanitizeHTML($row['fname']).' '.sanitizeHTML($row['mname']).' '.sanitizeHTML($row['lname']);
 			$query = "select `orginfo`.`o`, `org`.`masteracc`
 				FROM `orginfo`, `org`
 				WHERE `orginfo`.`id` = `org`.`orgid`
 				AND `org`.`memid`='$user_id' order by `orginfo`.`o`";
-			$res1 = mysql_query($query);?>
+			$res1 = $db_conn->query($query);?>
 			<table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper"><?
-			if (mysql_num_rows($res1) <= 0) {?>
+			if ($res1->num_rows <= 0) {?>
 				<tr>
 					<td colspan="2" class="title"><?=sprintf(_('%s is not listed as Organisation Administrator'), $username)?></td>
 				</tr>
@@ -45,7 +45,7 @@ if ($_SESSION['profile']['admin'] != 1 || !array_key_exists('userid',$_REQUEST) 
 					<td class="DataTD"><b><?=_('Organisation')?></b></td>
 					<td class="DataTD"><b><?=_('Masteraccount')?></b></td>
 				</tr><?
-				while($drow = mysql_fetch_assoc($res1)){?>
+				while($drow = $res1->fetch_assoc()){?>
 					<tr>
 						<td class="DataTD"><?=$drow['o']?></td>
 						<td class="DataTD"><?=$drow['masteracc'] ? _("Yes") : _("No") ?></td>

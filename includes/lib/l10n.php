@@ -1,6 +1,6 @@
 <?php /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2011  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ class L10n {
 		foreach($languages as $lang => $qvalue)
 		{
 			// ignore any non-conforming values (that's why we don't need to
-			// mysql_real_escape() or escapeshellarg(), but take care of
+			// $db_conn->real_escape_string() or escapeshellarg(), but take care of
 			// the '*')
 			// spec: ( ( 1*8ALPHA *( "-" 1*8ALPHA ) ) | "*" )
 			if ( preg_match('/^(?:([a-zA-Z]{1,8})(?:-[a-zA-Z]{1,8})*|\*)$/',
@@ -357,12 +357,13 @@ class L10n {
 	}
 
 	public static function set_recipient_language($accountid) {
+		global $db_conn;
 		//returns the language of a recipient to make sure that the language is correct
 		//use together with
 		$query = "select `language` from `users` where `id`='".intval($accountid)."'";
-		$res = mysql_query($query);
-		if (mysql_num_rows($res)>=0) {
-			$row = mysql_fetch_assoc($res);
+		$res = $db_conn->query($query);
+		if ($res->num_rows>=0) {
+			$row = $res->fetch_assoc();
 			if (NULL==$row['language'] || $row['language']=='') {
 				self::set_translation('en');
 			} else {

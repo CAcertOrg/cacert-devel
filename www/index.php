@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
 
 require_once('../includes/lib/l10n.php');
 require_once('../includes/notary.inc.php');
+
+/** @var mysqli $db_conn */
 
         $id = 0; if(array_key_exists("id",$_REQUEST)) $id=intval($_REQUEST['id']);
         $oldid = 0; if(array_key_exists("oldid",$_REQUEST)) $oldid=intval($_REQUEST['oldid']);
@@ -51,49 +53,20 @@ require_once('../includes/notary.inc.php');
 		$qs = array();
 		$id = $oldid;
 		$oldid = 0;
-		if(array_key_exists('Q1',$_REQUEST) && $_REQUEST['Q1'])
-		{
-			$_SESSION['lostpw']['A1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A1']))));
-
-			if(stripslashes(strtolower($_SESSION['lostpw']['A1'])) == strtolower($_SESSION['lostpw']['user']['A1']))
+		$lostpw_keys = [["Q1", "A1"], ["Q2", "A2"], ["Q3", "A3"], ["Q4", "A4"], ["Q5", "A5"]];
+		foreach ($lostpw_keys as $qa_key) {
+			if(array_key_exists($qa_key[0],$_REQUEST) && $_REQUEST[$qa_key[0]]) {
+				$_SESSION['lostpw'][$qa_key[0]] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST[$qa_key[0]]))));
+			}
+			$_SESSION['lostpw'][$qa_key[1]] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST[$qa_key[1]]))));
+			if (stripslashes(strtolower($_SESSION['lostpw'][$qa_key[1]])) == strtolower($_SESSION['lostpw']['user']['A1'])) {
 				$answers++;
-			$body .= "System: ".$_SESSION['lostpw']['user']['A1']."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw']['A1']))."\n";
-		}
-		if(array_key_exists('Q2',$_REQUEST) && $_REQUEST['Q2'])
-		{
-			$_SESSION['lostpw']['A2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A2']))));
-
-			if(stripslashes(strtolower($_SESSION['lostpw']['A2'])) == strtolower($_SESSION['lostpw']['user']['A2']))
-				$answers++;
-			$body .= "System: ".$_SESSION['lostpw']['user']['A2']."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw']['A2']))."\n";
-		}
-		if(array_key_exists('Q3',$_REQUEST) && $_REQUEST['Q3'])
-		{
-			$_SESSION['lostpw']['A3'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A3']))));
-
-			if(stripslashes(strtolower($_SESSION['lostpw']['A3'])) == strtolower($_SESSION['lostpw']['user']['A3']))
-				$answers++;
-			$body .= "System: ".$_SESSION['lostpw']['user']['A3']."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw']['A3']))."\n";
-		}
-		if(array_key_exists('Q4',$_REQUEST) && $_REQUEST['Q4'])
-		{
-			$_SESSION['lostpw']['A4'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
-
-			if(stripslashes(strtolower($_SESSION['lostpw']['A4'])) == strtolower($_SESSION['lostpw']['user']['A4']))
-				$answers++;
-			$body .= "System: ".$_SESSION['lostpw']['user']['A4']."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw']['A4']))."\n";
-		}
-		if(array_key_exists('Q5',$_REQUEST) && $_REQUEST['Q5'])
-		{
-			$_SESSION['lostpw']['A5'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
-
-			if(stripslashes(strtolower($_SESSION['lostpw']['A5'])) == strtolower($_SESSION['lostpw']['user']['A5']))
-				$answers++;
-			$body .= "System: ".$_SESSION['lostpw']['user']['A5']."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw']['A5']))."\n";
+			}
+			$body .= "System: ".$_SESSION['lostpw']['user'][$qa_key[1]]."\nEntered: ".stripslashes(strip_tags($_SESSION['lostpw'][$qa_key[1]]))."\n";
 		}
 
-		$_SESSION['lostpw']['pw1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['newpass1']))));
-		$_SESSION['lostpw']['pw2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['newpass2']))));
+		$_SESSION['lostpw']['pw1'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['newpass1']))));
+		$_SESSION['lostpw']['pw2'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['newpass2']))));
 
 		if($answers < $_SESSION['lostpw']['total'] || $answers < 3)
 		{
@@ -119,7 +92,10 @@ require_once('../includes/notary.inc.php');
 			} else {
 				$query = "update `users` set `password`=sha1('".$_SESSION['lostpw']['pw1']."')
 						where `id`='".intval($_SESSION['lostpw']['user']['id'])."'";
-				mysql_query($query) || die(mysql_error());
+				if (!$db_conn->query($query)) {
+					error_log($db_conn->error);
+					die($db_conn->error);
+				}
 				showheader(_("Welcome to CAcert.org"));
 				echo _("Your Pass Phrase has been changed now. You can now login with your new password.");
 				showfooter();
@@ -130,21 +106,20 @@ require_once('../includes/notary.inc.php');
 
 	if($oldid == 5 && $process != "")
 	{
-		$email = $_SESSION['lostpw']['email'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['email']))));
+		$email = $_SESSION['lostpw']['email'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['email']))));
 		$_SESSION['lostpw']['day'] = intval($_REQUEST['day']);
 		$_SESSION['lostpw']['month'] = intval($_REQUEST['month']);
 		$_SESSION['lostpw']['year'] = intval($_REQUEST['year']);
 		$dob = $_SESSION['lostpw']['year']."-".$_SESSION['lostpw']['month']."-".$_SESSION['lostpw']['day'];
 		$query = "select * from `users` where `email`='$email' and `dob`='$dob'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <= 0)
-		{
+		$res = $db_conn->query($query);
+		if($res->num_rows <= 0) {
 			$id = $oldid;
 			$oldid = 0;
 			$_SESSION['_config']['errmsg'] = _("Unable to match your details with any user accounts on file");
 		} else {
 			$id = 6;
-			$_SESSION['lostpw']['user'] = mysql_fetch_assoc($res);
+			$_SESSION['lostpw']['user'] = $res->fetch_assoc();
 		}
 	}
 
@@ -152,14 +127,13 @@ require_once('../includes/notary.inc.php');
 	if($id == 4 && $_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'])
 	{
 		include_once("../includes/lib/general.php");
-		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'],
-				$_SERVER['SSL_CLIENT_I_DN_CN']);
+		$user_id = get_user_id_from_cert($_SERVER['SSL_CLIENT_M_SERIAL'], $_SERVER['SSL_CLIENT_I_DN_CN']);
 
 		if($user_id >= 0)
 		{
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-				"select * from `users` where
-				`id`='$user_id' and `deleted`=0 and `locked`=0"));
+			$res = $db_conn->query(sprintf(
+				"select * from `users` where `id`=%d and `deleted` = 0 and `locked` = 0", $user_id));
+			$_SESSION['profile'] = $res->fetch_assoc();
 
 			if($_SESSION['profile']['id'] != 0)
 			{
@@ -186,33 +160,35 @@ require_once('../includes/notary.inc.php');
 
 		$_SESSION['_config']['errmsg'] = "";
 
-		$email = mysql_escape_string(stripslashes(strip_tags(trim($_REQUEST['email']))));
-		$pword = mysql_escape_string(stripslashes(trim($_REQUEST['pword'])));
+		$email = $db_conn->real_escape_string(stripslashes(strip_tags(trim($_REQUEST['email']))));
+		$pword = $db_conn->real_escape_string(stripslashes(trim($_REQUEST['pword'])));
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=1 and `deleted`=0 and `locked`=0";
-		$res = mysql_query($query);
-		$query = "SELECT 1 FROM `users` WHERE `email`='$email' and (UNIX_TIMESTAMP(`lastLoginAttempt`) < UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - 5 or `lastLoginAttempt` is NULL)" ;
-		$rateLimit = mysql_num_rows(mysql_query($query)) > 0;
-		if(mysql_num_rows($res) > 0 && $rateLimit)
+		$res = $db_conn->query($query);
+
+		$query = "SELECT 1 FROM `users` WHERE `email`='$email' and (UNIX_TIMESTAMP(`lastLoginAttempt`) < UNIX_TIMESTAMP(CURRENT_TIMESTAMP) - 5 or `lastLoginAttempt` is NULL)";
+		$rate_res = $db_conn->query($query);
+		$rateLimit = $rate_res->num_rows > 0;
+		if($res->num_rows > 0 && $rateLimit)
 		{
 			$_SESSION['profile'] = "";
 			unset($_SESSION['profile']);
-			$_SESSION['profile'] = mysql_fetch_assoc($res);
+			$_SESSION['profile'] = $res->fetch_assoc();
 			$query = "update `users` set `modified`=NOW(), `password`=sha1('$pword') where `id`='".intval($_SESSION['profile']['id'])."'";
-			mysql_query($query);
+			$db_conn->query($query);
 
 			if($_SESSION['profile']['language'] == "")
 			{
 				$query = "update `users` set `language`='".L10n::get_translation()."'
 						where `id`='".intval($_SESSION['profile']['id'])."'";
-				mysql_query($query);
+				$db_conn->query($query);
 			} else {
 				L10n::set_translation($_SESSION['profile']['language']);
 				L10n::init_gettext();
 			}
 			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 group by `to`";
-			$res = mysql_query($query);
-			$row = mysql_fetch_assoc($res);
+			$res = $db_conn->query($query);
+			$row = $res->fetch_assoc();
 			$_SESSION['profile']['points'] = $row['total'];
 			$_SESSION['profile']['loggedin'] = 1;
 			if($_SESSION['profile']['Q1'] == "" || $_SESSION['profile']['Q2'] == "" ||
@@ -235,13 +211,13 @@ require_once('../includes/notary.inc.php');
 			exit;
 		} else if($rateLimit){
 			$query = "update `users` set `lastLoginAttempt`=CURRENT_TIMESTAMP WHERE `email`='$email'";
-			mysql_query($query);
+			$db_conn->query($query);
 		}
 
 		$query = "select * from `users` where `email`='$email' and (`password`=old_password('$pword') or `password`=sha1('$pword') or
 						`password`=password('$pword')) and `verified`=0 and `deleted`=0";
-		$res = mysql_query($query);
-		if(!$rateLimit || mysql_num_rows($res) <= 0) {
+		$res = $db_conn->query($query);
+		if(!$rateLimit || $res->num_rows <= 0) {
 			$_SESSION['_config']['errmsg'] = _("Login failed due to incorrect email address, wrong passphrase or because the rate limit of one login per 5 seconds was hit.");
 		} else {
 			$_SESSION['_config']['errmsg'] = _("Your account has not been verified yet, please check your email account for the signup messages.");
@@ -289,26 +265,26 @@ if ($oldid == 52 )
 
 		$_SESSION['_config']['errmsg'] = "";
 
-		$_SESSION['signup']['email'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['email']))));
-		$_SESSION['signup']['fname'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['fname']))));
-		$_SESSION['signup']['mname'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['mname']))));
-		$_SESSION['signup']['lname'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['lname']))));
-		$_SESSION['signup']['suffix'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['suffix']))));
+		$_SESSION['signup']['email'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['email']))));
+		$_SESSION['signup']['fname'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['fname']))));
+		$_SESSION['signup']['mname'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['mname']))));
+		$_SESSION['signup']['lname'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['lname']))));
+		$_SESSION['signup']['suffix'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['suffix']))));
 		$_SESSION['signup']['day'] = intval($_REQUEST['day']);
 		$_SESSION['signup']['month'] = intval($_REQUEST['month']);
 		$_SESSION['signup']['year'] = intval($_REQUEST['year']);
-		$_SESSION['signup']['pword1'] = trim(mysql_escape_string(stripslashes($_REQUEST['pword1'])));
-		$_SESSION['signup']['pword2'] = trim(mysql_escape_string(stripslashes($_REQUEST['pword2'])));
-		$_SESSION['signup']['Q1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q1']))));
-		$_SESSION['signup']['Q2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q2']))));
-		$_SESSION['signup']['Q3'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q3']))));
-		$_SESSION['signup']['Q4'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q4']))));
-		$_SESSION['signup']['Q5'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['Q5']))));
-		$_SESSION['signup']['A1'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A1']))));
-		$_SESSION['signup']['A2'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A2']))));
-		$_SESSION['signup']['A3'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A3']))));
-		$_SESSION['signup']['A4'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A4']))));
-		$_SESSION['signup']['A5'] = trim(mysql_escape_string(stripslashes(strip_tags($_REQUEST['A5']))));
+		$_SESSION['signup']['pword1'] = $db_conn->real_escape_string(trim(stripslashes($_REQUEST['pword1'])));
+		$_SESSION['signup']['pword2'] = $db_conn->real_escape_string(trim(stripslashes($_REQUEST['pword2'])));
+		$_SESSION['signup']['Q1'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['Q1']))));
+		$_SESSION['signup']['Q2'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['Q2']))));
+		$_SESSION['signup']['Q3'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['Q3']))));
+		$_SESSION['signup']['Q4'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['Q4']))));
+		$_SESSION['signup']['Q5'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['Q5']))));
+		$_SESSION['signup']['A1'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['A1']))));
+		$_SESSION['signup']['A2'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['A2']))));
+		$_SESSION['signup']['A3'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['A3']))));
+		$_SESSION['signup']['A4'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['A4']))));
+		$_SESSION['signup']['A5'] = $db_conn->real_escape_string(trim(stripslashes(strip_tags($_REQUEST['A5']))));
 		$_SESSION['signup']['general'] = intval(array_key_exists('general',$_REQUEST)?$_REQUEST['general']:0);
 		$_SESSION['signup']['country'] = intval(array_key_exists('country',$_REQUEST)?$_REQUEST['country']:0);
 		$_SESSION['signup']['regional'] = intval(array_key_exists('regional',$_REQUEST)?$_REQUEST['regional']:0);
@@ -403,21 +379,21 @@ if ($oldid == 52 )
 		if($id == 2)
 		{
 			$query = "select * from `email` where `email`='".$_SESSION['signup']['email']."' and `deleted`=0";
-			$res1 = mysql_query($query);
+			$res1 = $db_conn->query($query);
 
 			$query = "select * from `users` where `email`='".$_SESSION['signup']['email']."' and `deleted`=0";
-			$res2 = mysql_query($query);
-			if(mysql_num_rows($res1) > 0 || mysql_num_rows($res2) > 0)
+			$res2 = $db_conn->query($query);
+			if($res1->num_rows > 0 || $res2->num_rows > 0)
 			{
 				$id = 1;
 				$_SESSION['_config']['errmsg'] .= _("This email address is currently valid in the system.")."<br>\n";
 			}
 
 			$query = "select `domain` from `baddomains` where `domain`=RIGHT('".$_SESSION['signup']['email']."', LENGTH(`domain`))";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) > 0)
+			$res = $db_conn->query($query);
+			if($res->num_rows > 0)
 			{
-				$domain = mysql_fetch_assoc($res);
+				$domain = $res->fetch_assoc();
 				$domain = $domain['domain'];
 				$id = 1;
 				$_SESSION['_config']['errmsg'] .= sprintf(_("We don't allow signups from people using email addresses from %s"), $domain)."<br>\n";
@@ -462,20 +438,20 @@ if ($oldid == 52 )
 							`A4`='".$_SESSION['signup']['A4']."',
 							`A5`='".$_SESSION['signup']['A5']."',
 							`created`=NOW(), `uniqueID`=SHA1(CONCAT(NOW(),'$hash'))";
-			mysql_query($query);
-			$memid = mysql_insert_id();
+			$db_conn->query($query);
+			$memid = $db_conn->insert_id;
 			$query = "insert into `email` set `email`='".$_SESSION['signup']['email']."',
 							`hash`='$hash',
 							`created`=NOW(),
 							`memid`='$memid'";
-			mysql_query($query);
-			$emailid = mysql_insert_id();
+			$db_conn->query($query);
+			$emailid = $db_conn->insert_id;
 			$query = "insert into `alerts` set `memid`='$memid',
 						`general`='".$_SESSION['signup']['general']."',
 						`country`='".$_SESSION['signup']['country']."',
 						`regional`='".$_SESSION['signup']['regional']."',
 						`radius`='".$_SESSION['signup']['radius']."'";
-			mysql_query($query);
+			$db_conn->query($query);
 			write_user_agreement($memid, "CCA", "account creation", "", 1);
 
 			$body = _("Thanks for signing up with CAcert.org, below is the link you need to open to verify your account. Once your account is verified you will be able to start issuing certificates till your hearts' content!")."\n\n";

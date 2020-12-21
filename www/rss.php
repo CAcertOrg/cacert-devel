@@ -1,4 +1,5 @@
-<? header("location: http://blog.CAcert.org/feed/"); exit; ?>
+<? header("location: http://blog.CAcert.org/feed/"); exit;
+// TODO: replace with web server redirect ?>
 <? /*			<author>$row['who'] &lt;nomail@nospam.sss&gt;</author> */ ?>
 <? header("Content-Type: application/xml");
 ?><<?="?"?>xml version="1.0" encoding="UTF-8" <?="?"?>>
@@ -12,8 +13,8 @@
 		<lastBuildDate><?=date("D, d M Y H:i:s O")?></lastBuildDate>
 		<ttl>3600</ttl><?
 	$query = "select *, UNIX_TIMESTAMP(`when`) as `TS` from news order by `when` desc limit 10";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{ ?>
 		<item>
 			<title><?=strip_tags($row['short'])?></title>
