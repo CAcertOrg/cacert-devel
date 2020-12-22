@@ -95,7 +95,6 @@ function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $
 		return;
 	}
 	$InputBuffer = fgets($smtp, 1024);
-	print($InputBuffer);
 	fputs($smtp, "EHLO test.cacert.localhost\r\n");
 	$InputBuffer = fgets($smtp, 1024);
 	fputs($smtp, "MAIL FROM:<returns@cacert.localhost>\r\n");
