@@ -17,9 +17,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-$required_env_vars = ["MYSQL_APP_HOSTNAME", "MYSQL_APP_USER", "MYSQL_APP_PASSWORD", "MYSQL_APP_DATABASE",
-                      "CSR_DIRECTORY", "CRT_DIRECTORY", "DEFAULT_HOSTNAME", "SECURE_HOSTNAME", "TVERIFY_HOSTNAME",
-                      "RETURN_ADDRESS", "SMTP_HOST"];
+$required_env_vars = ["MYSQL_WEBDB_HOSTNAME", "MYSQL_WEBDB_USER", "MYSQL_WEBDB_PASSWORD", "MYSQL_WEBDB_DATABASE",
+	"CSR_DIRECTORY", "CRT_DIRECTORY", "DEFAULT_HOSTNAME", "SECURE_HOSTNAME", "TVERIFY_HOSTNAME", "RETURN_ADDRESS",
+	"SMTP_HOST"];
 
 $missing_env_vars = [];
 foreach ($required_env_vars as $var) {
@@ -32,8 +32,8 @@ if ($missing_env_vars) {
 	die("Not configured correctly.");
 }
 
-$db_conn = mysqli_connect(getenv("MYSQL_APP_HOSTNAME"), getenv("MYSQL_APP_USER"), getenv("MYSQL_APP_PASSWORD"),
-	getenv("MYSQL_APP_DATABASE"));
+$db_conn = mysqli_connect(getenv("MYSQL_WEBDB_HOSTNAME"), getenv("MYSQL_WEBDB_USER"), getenv("MYSQL_WEBDB_PASSWORD"),
+	getenv("MYSQL_WEBDB_DATABASE"));
 if (!$db_conn) {
 	echo "Error: Unable to connect to database." . PHP_EOL;
 	error_log("unable to connect to database: %d %s", mysqli_connect_errno(), mysqli_connect_error());
@@ -42,18 +42,21 @@ if (!$db_conn) {
 $http_port = getenv("INSECURE_PORT");
 $https_port = getenv("SECURE_PORT");
 
-$base_urls = ["insecure" => sprintf("http://%s%s", getenv("DEFAULT_HOSTNAME"), $http_port ? ":" . $http_port : ""),
-              "normal"   => sprintf("https://%s%s", getenv("DEFAULT_HOSTNAME"), $https_port ? ":" . $https_port : ""),
-              "secure"   => sprintf("https://%s%s", getenv("SECURE_HOSTNAME"), $https_port ? ":" . $https_port : ""),
-              "tverify"  => sprintf("https://%s%s", getenv("TVERIFY_HOSTNAME"), $https_port ? ":" . $https_port : "")];
+$insecure_host = sprintf("%s%s", getenv("DEFAULT_HOSTNAME"), $http_port ? ":" . $http_port : "");
+$default_host = sprintf("%s%s", getenv("DEFAULT_HOSTNAME"), $https_port ? ":" . $https_port : "");
+$secure_host = sprintf("%s%s", getenv("SECURE_HOSTNAME"), $https_port ? ":" . $https_port : "");
+$tverify_host = sprintf("%s%s", getenv("TVERIFY_HOSTNAME"), $https_port ? ":" . $https_port : "");
+
+$base_urls = ["insecure" => sprintf("http://%s", $insecure_host), "normal" => sprintf("https://%s", $default_host),
+	"secure" => sprintf("https://%s", $secure_host), "tverify" => sprintf("https://%s", $tverify_host)];
 
 // TODO: replace with $base_urls
-$_SESSION['_config']['normalhostname'] = "test.cacert.localhost:8443";
-$_SESSION['_config']['securehostname'] = "secure.test.cacert.localhost:8443";
-$_SESSION['_config']['tverify'] = "tverify.cacert.localhost";
+$_SESSION['_config']['normalhostname'] = $default_host;
+$_SESSION['_config']['securehostname'] = $secure_host;
+$_SESSION['_config']['tverify'] = $tverify_host;
 
-
-function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "", $use_utf8 = true) {
+function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $fromname = "", $errorsto = "",
+				  $use_utf8 = true) {
 	if (!$errorsto) {
 		$errorsto = getenv("RETURN_ADDRESS");
 	}
@@ -151,11 +154,10 @@ function sendmail($to, $subject, $message, $from, $replyto = "", $toname = "", $
 	fclose($smtp);
 }
 
-
 function build_verify_url($params) {
 	global $base_urls;
 	$url_params = [];
-	foreach ($params as $key=> $value) {
+	foreach ($params as $key => $value) {
 		$url_params[] = sprintf("%s=%s", $key, urlencode($value));
 	}
 	return sprintf("%s/verify.php?%s", $base_urls["normal"], implode("&", $url_params));

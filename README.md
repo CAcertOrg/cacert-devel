@@ -73,10 +73,10 @@ Variable | Description | Default value
 `DEPLOYMENT_NAME` | name of the specific instance | `"CAcert.org Website"`
 `CRT_DIRECTORY`* | directory where certificates are stored | none
 `CSR_DIRECTORY`* | directory where CSRs are stored | none
-`MYSQL_APP_DATABASE`* | database name | none
-`MYSQL_APP_HOSTNAME`* | database hostname | none
-`MYSQL_APP_PASSWORD`* | database password | none
-`MYSQL_APP_USER`* | database user name | none
+`MYSQL_WEBDB_DATABASE`* | database name | none
+`MYSQL_WEBDB_HOSTNAME`* | database hostname | none
+`MYSQL_WEBDB_PASSWORD`* | database password | none
+`MYSQL_WEBDB_USER`* | database user name | none
 `RETURN_ADDRESS`* | return address (Errors-To header) for outgoing mails | none
 `SMTP_HOST`* | mail server to use for outgoing mails | none
 `SMTP_PORT` | port of the mail server | `25`
