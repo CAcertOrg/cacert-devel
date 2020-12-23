@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,15 +33,15 @@
 			`expire`, `id`, `level`,
 			`email`,`keyid`,`description` from `gpg` where `memid`='".intval($_SESSION['profile']['id'])."'
 			ORDER BY `issued` desc";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = $db_conn->query($query);
+	if($res->num_rows <= 0)
 	{
 ?>
   <tr>
     <td colspan="6" class="DataTD"><?=_("No OpenPGP keys are currently listed.")?></td>
   </tr>
 <? } else {
-	while($row = mysql_fetch_assoc($res))
+	while($row = $res->fetch_assoc())
 	{
 		$verified = '';
 		if($row['timeleft'] > 0)

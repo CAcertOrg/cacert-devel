@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 			//session_unregister($key);
 		}
 
-		$_SESSION['profile'] = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($uid)."'"));
+		$_SESSION['profile'] = $db_conn->query("select * from `users` where `id`='".intval($uid)."'")->fetch_assoc();
 		if($_SESSION['profile']['locked'] == 0)
 			$_SESSION['profile']['loggedin'] = 1;
 		else
@@ -70,8 +70,8 @@
 				//session_unregister($key);
 			}
 
-			$_SESSION['profile'] = mysql_fetch_assoc(mysql_query(
-					"select * from `users` where `id`='".intval($user_id)."'"));
+			$_SESSION['profile'] = $db_conn->query(
+					"select * from `users` where `id`='".intval($user_id)."'")->fetch_assoc();
 			if($_SESSION['profile']['locked'] == 0)
 				$_SESSION['profile']['loggedin'] = 1;
 			else
@@ -103,15 +103,15 @@
 	if($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] && $_SESSION['profile']['id'] > 0 && $_SESSION['profile']['loggedin'] > 0)
 	{
 		$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-		$res = mysql_query($query);
-		$row = mysql_fetch_assoc($res);
+		$res = $db_conn->query($query);
+		$row = $res->fetch_assoc();
 		$_SESSION['profile']['points'] = $row['total'];
 
 		if($_SESSION['profile']['language'] == "")
 		{
 			$query = "update `users` set `language`='".L10n::get_translation()."'
 							where `id`='".intval($_SESSION['profile']['id'])."'";
-			mysql_query($query);
+			$db_conn->query($query);
 		} else {
 			L10n::set_translation($_SESSION['profile']['language']);
 			L10n::init_gettext();

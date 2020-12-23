@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2011  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,37 +44,37 @@ while($in_string = rtrim(fgets($in))) {
 		$query = "UPDATE `domaincerts` SET `revoked`='1970-01-01 10:00:01'
 			where `id`='$cert_recid' AND `revoked`<'1970-01-01 10:00:01'";
 		
-		if (!mysql_query($query)) {
+		if (!$db_conn->query($query)) {
 			$num_failures++;
 		}
-		$num_domain+=mysql_affected_rows();
+		$num_domain+=$db_conn->affected_rows;
 		
 	} else if ($cert_type == "EmailCert") {
 		$query = "UPDATE `emailcerts` SET `revoked`='1970-01-01 10:00:01'
 			where `id`='$cert_recid' AND `revoked`<'1970-01-01 10:00:01'";
 		
-		if (!mysql_query($query)) {
+		if (!$db_conn->query($query)) {
 			$num_failures++;
 		}
-		$num_client+=mysql_affected_rows();
+		$num_client+=$db_conn->affected_rows;
 		
 	} else if ($cert_type == "OrgServerCert") {
 		$query = "UPDATE `orgdomaincerts` SET `revoked`='1970-01-01 10:00:01'
 			where `id`='$cert_recid' AND `revoked`<'1970-01-01 10:00:01'";
 		
-		if (!mysql_query($query)) {
+		if (!$db_conn->query($query)) {
 			$num_failures++;
 		}
-		$num_orgdomain+=mysql_affected_rows();
+		$num_orgdomain+=$db_conn->affected_rows;
 		
 	} else if ($cert_type == "OrgEmailCert") {
 		$query = "UPDATE `orgemailcerts` SET `revoked`='1970-01-01 10:00:01'
 			where `id`='$cert_recid' AND `revoked`<'1970-01-01 10:00:01'";
 		
-		if (!mysql_query($query)) {
+		if (!$db_conn->query($query)) {
 			$num_failures++;
 		}
-		$num_orgclient+=mysql_affected_rows();
+		$num_orgclient+=$db_conn->affected_rows;
 	}
 }
 

@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 	function showheader($title = "CAcert.org", $title2 = "")
 	{
-		global $id, $PHP_SELF;
+		global $id, $db_conn;
 	$PHP_SELF = &$_SERVER['PHP_SELF'];
 	$expand="";
 	$tmpid = $id;
@@ -167,7 +167,7 @@ function hideall() {
 <body onload="hideall(); explode('home');<?=$expand?>">
  <div id="pagecell1">
   <div id="pageName"><br>
-    <div id="pageLogo"><a href="http://<?=$_SESSION['_config']['normalhostname']?>"><img src="/images/cacert4.png" border="0" alt="CAcert.org logo"></a></div>
+    <div id="pageLogo"><a href="<?= build_resource_url("/") ?>"><img src="/images/cacert4.png" border="0" alt="CAcert.org logo"></a></div>
     <div id="googlead"><h2><?=_("Free digital certificates!")?></h2></div>
   </div>
   <div id="pageNav">
@@ -206,7 +206,8 @@ function hideall() {
       <h3 class="pointer" onclick="explode('servercert')">+ <?=_("Server Certificates")?></h3>
       <ul class="menu" id="servercert"><li><a href="account.php?id=10"><?=_("New")?></a></li><li><a href="account.php?id=12"><?=_("View")?></a></li></ul>
     </div>
-<? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
+<? if($db_conn->query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")
+        ->num_rows > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('clientorg')">+ <?=_("Org Client Certs")?></h3>
       <ul class="menu" id="clientorg"><li><a href="account.php?id=16"><?=_("New")?></a></li><li><a href="account.php?id=18"><?=_("View")?></a></li></ul>
@@ -216,7 +217,7 @@ function hideall() {
       <ul class="menu" id="serverorg"><li><a href="account.php?id=20"><?=_("New")?></a></li><li><a href="account.php?id=22"><?=_("View")?></a></li></ul>
     </div>
 <? } ?>
-<? if(mysql_num_rows(mysql_query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")) > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
+<? if($db_conn->query("select * from `org` where `memid`='".intval($_SESSION['profile']['id'])."'")->num_rows > 0 || $_SESSION['profile']['orgadmin'] == 1) { ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('orgadmin')">+ <?=_("Org Admin")?></h3>
       <ul class="menu" id="orgadmin"><? if($_SESSION['profile']['orgadmin'] == 1) { ?><li><a href="account.php?id=24"><?=_("New Organisation")?></a></li><li><a href="account.php?id=25"><?=_("View Organisations")?></a></li><? } ?><li><a href="account.php?id=35"><?=_("View")?></a></li></ul>

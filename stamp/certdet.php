@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,11 +19,11 @@
 	$tz = intval($_REQUEST['tz']);
 	$now = date("Y-m-d", gmmktime("U") + ($tz * 3600));
 
-	$arr = explode("//", mysql_real_escape_string(trim($_REQUEST['refer'])), 2);
+	$arr = explode("//", $db_conn->real_escape_string(trim($_REQUEST['refer'])), 2);
 	$arr = explode("/", $arr['1'], 2);
 	$ref = $arr['0'];
 
-        $arr = explode("//", mysql_real_escape_string(trim($_SERVER['HTTP_REFERER'])), 2);
+        $arr = explode("//", $db_conn->real_escape_string(trim($_SERVER['HTTP_REFERER'])), 2);
         $arr = explode("/", $arr['1'], 2);
         $siteref = $arr['0'];
 

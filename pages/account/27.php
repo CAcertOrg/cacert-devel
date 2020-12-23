@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
-	$row = mysql_fetch_assoc(mysql_query("select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'"));
+	$row = $db_conn->query("select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'")->fetch_assoc();
 ?>
 <form method="post" action="account.php">
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">

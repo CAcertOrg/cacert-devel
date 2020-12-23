@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,11 +18,13 @@
 	if($_SESSION['_config']['language'] != "ja")
 	{
 		define('FPDF_FONTPATH','/usr/share/fpdf/font/');
+		// TODO: replace with tcpdf https://tcpdf.org/ which is packaged as php-tcpdf at least since Debian 8 Jessie
 		require_once('/usr/share/ufpdf/fpdf.php');
 		class PDF2 extends FPDF
 		{
 		}
 	} else {
+		// TODO: replace with tcpdf https://tcpdf.org/ which is packaged as php-tcpdf at least since Debian 8 Jessie
 		require('/usr/share/fpdf/japanese.php');
 		class PDF2 extends PDF_Japanese
 		{

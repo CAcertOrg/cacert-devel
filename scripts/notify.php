@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,14 +23,14 @@
 			where `users`.`verified`=0 and
 			(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`users`.`created`)) >= 300 and
 			`users`.`id`=`email`.`memid` and `users`.`email`=`email`.`email`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
                         $rnd = fopen("/dev/urandom", "r");
                         $hash = md5(fgets($rnd, 64));
                         fclose($rnd);
 
-		mysql_query("update `email` set `hash`='$hash' where `id`='".$row['id']."'");
+		$db_conn->query("update `email` set `hash`='$hash' where `id`='".$row['id']."'");
 
 		$body = "Hi ".$row['fname']."\n\n";
 		$body .= "Due to some bugs with the new website we initially had issues with emails being sent out. This email is being sent to those effected so they can be re-sent their email probe to over come earlier issues. We apologise for any inconvenience this may have cause. To verify your account, simply click on the link below.\n\n";

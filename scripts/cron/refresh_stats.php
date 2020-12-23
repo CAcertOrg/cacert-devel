@@ -2,7 +2,7 @@
 <?php
 /*
 LibreSSL - CAcert web application
-Copyright (C) 2004-2012  CAcert Inc.
+Copyright (C) 2004-2020  CAcert Inc.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 require_once(dirname(__FILE__).'/../../includes/mysql.php');
 
 /**
- * Wrapper around mysql_query() to provide some error handling. Prints an error
+ * Wrapper around mysqli_query() to provide some error handling. Prints an error
  * message and dies if query fails
  *
  * @param string $sql
@@ -30,9 +30,10 @@ require_once(dirname(__FILE__).'/../../includes/mysql.php');
  * 		the MySQL result set
  */
 function sql_query($sql) {
-	$res = mysql_query($sql);
+    global $db_conn;
+	$res = $db_conn->query($sql);
 	if (!$res) {
-		fwrite(STDERR, "MySQL query failed:\n\"$sql\"\n".mysql_error());
+		fwrite(STDERR, "MySQL query failed:\n\"$sql\"\n".$db_conn->error);
 		die(1);
 	}
 
@@ -40,7 +41,7 @@ function sql_query($sql) {
 }
 
 function tc($sql) {
-	$row = mysql_fetch_assoc(sql_query($sql));
+	$row = sql_query($sql)->fetch_assoc();
 	return(intval($row['count']));
 }
 
@@ -50,15 +51,16 @@ function tc($sql) {
 * @return boolean
 */
 function updateCache($stats) {
+    global $db_conn;
 	$timestamp = time();
 	$sql = "insert into `statscache` (`timestamp`, `cache`) values
-	('$timestamp', '".mysql_real_escape_string(serialize($stats))."')";
+	('$timestamp', '".$db_conn->real_escape_string(serialize($stats))."')";
 	sql_query($sql);
 
 	// Make sure the new statistic was inserted successfully
 	$res = sql_query(
 		"select 1 from `statscache` where `timestamp` = '$timestamp'");
-	if (mysql_num_rows($res) !== 1) {
+	if ($res->num_rows !== 1) {
 		fwrite(STDERR, "Error on inserting the new statistic");
 		return false;
 	}

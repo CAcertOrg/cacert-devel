@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
 	include_once("../includes/mysql.php");
 
 	$query = "select * from `users` where ccid=13 OR email like '%.at'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		echo $row['fname']." ".$row['lname']." <".$row['email']."> (memid: ".$row['id']." ccid: ".$row['ccid'].")\n";
 	}

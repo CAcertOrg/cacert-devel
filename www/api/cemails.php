@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,18 +15,18 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$username = mysql_escape_string($_REQUEST['username']);
-	$password = mysql_escape_string($_REQUEST['password']);
+	$username = $db_conn->real_escape_string($_REQUEST['username']);
+	$password = $db_conn->real_escape_string($_REQUEST['password']);
 
 	$query = "select * from `users` where `email`='$username' and (`password`=old_password('$password') or `password`=sha1('$password'))";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) != 1)
+	$res = $db_conn->query($query);
+	if($res->num_rows != 1)
 		die("403,That username couldn't be found\n");
 	echo "200,Authentication Ok\n";
-	$user = mysql_fetch_assoc($res);
+	$user = $res->fetch_assoc();
 	$memid = $user['id'];
 	$query = "select sum(`points`) as `points` from `notary` where `to`='".intval($memid)."' and `notary`.`deleted`=0 group by `to`";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = $db_conn->query($query)->fetch_assoc();
 	$points = $row['points'];
 	echo "CS=".intval($user['codesign'])."\n";
 	echo "NAME=CAcert WoT User\n";
@@ -41,8 +41,8 @@
 			echo "NAME=".sanitizeHTML($user['fname'])." ".sanitizeHTML($user['mname'])." ".sanitizeHTML($user['lname'])." ".sanitizeHTML($user['suffix'])."\n";
 	}
 	$query = "select * from `email` where `memid`='".intval($memid)."' and `hash`='' and `deleted`=0";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res)) {
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc()) {
 		echo "EMAIL=".sanitizeHTML($row['email'])."\n";
 	}
 ?>

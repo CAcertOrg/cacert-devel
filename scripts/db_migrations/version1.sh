@@ -56,7 +56,7 @@ schema_version=$( mysql $mysql_opt <<- 'SQL'
 SQL
 )
 
-if [ $schema_version != "NULL" ]; then
+if [ $schema_version != "0" ]; then
 	cat >&$STDERR <<- ERROR
 		Error: database schema is not in the right version to do the migration!
 		Expected version: 0 (i.e. the version before there was versioning)

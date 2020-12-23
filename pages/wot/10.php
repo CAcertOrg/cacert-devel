@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@
 	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
 			WHERE `users`.`id` = `notary`.`from` AND `notary`.`from` != `notary`.`to`
 			AND `from`='".intval($_SESSION['profile']['id'])."' GROUP BY `notary`.`from`";
-	$res = mysql_query($query);
-	$row = mysql_fetch_assoc($res);
+	$res = $db_conn->query($query);
+	$row = $res->fetch_assoc();
 	$rc = intval($row['list']);
 /*
 	$query = "SELECT `users`. *, count(*) AS `list` FROM `users`, `notary`
@@ -40,7 +40,7 @@
 			inner join `notary` on `users`.`id` = `notary`.`from`
 			GROUP BY `notary`.`from` HAVING count(*) > '$rc'";
 
-	$rank = mysql_num_rows(mysql_query($query)) + 1;
+	$rank = $db_conn->query($query)->num_rows + 1;
 ?>
     <td class="DataTD"><?=sprintf(_("You have made %s assurances which ranks you as the #%s top assurer."), intval($rc), intval($rank))?></td>
   </tr>
@@ -65,10 +65,10 @@
   </tr>
 <?
 	$query = "select `id`, `date`, `from`, `points`, `location`, `method` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted`=0";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['from'])."'"));
+		$fromuser = $db_conn->query("select `fname`, `lname` from `users` where `id`='".intval($row['from'])."'")->fetch_assoc();
 ?>
   <tr>
     <td class="DataTD"><?=intval($row['id'])?></td>
@@ -115,10 +115,10 @@ if ($thawte)
 <?
 	$points = 0;
 	$query = "select `id`, `date`, `points`, `to`, `location`, `method` from `notary` where `from`='".intval($_SESSION['profile']['id'])."' and `to`!='".intval($_SESSION['profile']['id'])."'  and `deleted`=0" ;
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
-		$fromuser = mysql_fetch_assoc(mysql_query("select `fname`, `lname` from `users` where `id`='".intval($row['to'])."'"));
+		$fromuser = $db_conn->query("select `fname`, `lname` from `users` where `id`='".intval($row['to'])."'")->fetch_assoc();
 		$points += intval($row['points']);
 		$name = trim($fromuser['fname']." ".$fromuser['lname']);
 		if($name == "")

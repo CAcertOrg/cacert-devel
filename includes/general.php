@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,6 +44,7 @@
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/account.php');
 	require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 
+	// TODO: clarify whether this should be done via web server configuration
 	if(array_key_exists('HTTP_HOST',$_SERVER) &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['normalhostname'] &&
 			$_SERVER['HTTP_HOST'] != $_SESSION['_config']['securehostname'] &&
@@ -79,12 +80,15 @@
 
 	if(array_key_exists('profile',$_SESSION) && is_array($_SESSION['profile']) && array_key_exists('id',$_SESSION['profile']) && $_SESSION['profile']['id'] > 0)
 	{
-		$locked = mysql_fetch_assoc(mysql_query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'"));
+		$res = $db_conn->query("select `locked` from `users` where `id`='".intval($_SESSION['profile']['id'])."'");
+		$locked = $res->fetch_assoc();
+		$res->close();
 		if($locked['locked'] == 0)
 		{
 			$query = "select sum(`points`) as `total` from `notary` where `to`='".intval($_SESSION['profile']['id'])."' and `deleted` = 0 group by `to`";
-			$res = mysql_query($query);
-			$row = mysql_fetch_assoc($res);
+			$res = $db_conn->query($query);
+			$row = $res->fetch_assoc();
+			$res->close();
 			$_SESSION['profile']['points'] = $row['total'];
 		} else {
 			$_SESSION['profile'] = "";
@@ -111,6 +115,8 @@
 
 	function includeit($id = "0", $section = "index")
 	{
+		global /** @noinspection PhpUnusedLocalVariableInspection */
+		$db_conn;
 		$id = intval($id);
 		if($section != "index" && $section != "account" && $section != "wot" && $section != "help" && $section != "gpg" && $section != "disputes" && $section != "tverify" && $section != "advertising")
 		{
@@ -268,6 +274,7 @@
 
 	function getcn()
 	{
+		global $db_conn;
 		unset($_SESSION['_config']['rows']);
 		unset($_SESSION['_config']['rowid']);
 		unset($_SESSION['_config']['rejected']);
@@ -286,13 +293,12 @@
 				else
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
-				$dom = mysql_real_escape_string($dom);
+				$dom = $db_conn->real_escape_string($dom);
 				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
-				{
+				$res = $db_conn->query($query);
+				if ($res->num_rows > 0) {
 					$cnok = 1;
-					$_SESSION['_config']['row'] = mysql_fetch_assoc($res);
+					$_SESSION['_config']['row'] = $res->fetch_assoc();
 					$rowid[] = $_SESSION['_config']['row']['id'];
 					break;
 				}
@@ -322,6 +328,8 @@
 
 	function getalt()
 	{
+		global $db_conn;
+
 		unset($_SESSION['_config']['altrows']);
 		unset($_SESSION['_config']['altid']);
 		$altrows=array();
@@ -344,13 +352,12 @@
 				else
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
-				$dom = mysql_real_escape_string($dom);
+				$dom = $db_conn->real_escape_string($dom);
 				$query = "select * from domains where `memid`='".intval($_SESSION['profile']['id'])."' and `domain` like '$dom' and `deleted`=0 and `hash`=''";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
-				{
+				$res = $db_conn->query($query);
+				if($res->num_rows > 0) {
 					$altok = 1;
-					$_SESSION['_config']['altrow'] = mysql_fetch_assoc($res);
+					$_SESSION['_config']['altrow'] = $res->fetch_assoc();
 					$altid[] = $_SESSION['_config']['altrow']['id'];
 					break;
 				}
@@ -374,6 +381,7 @@
 
 	function getcn2()
 	{
+		global $db_conn;
 		$rows=array();
 		$rowid=array();
 		for($cnc = 0; $cnc < $_SESSION['_config']['cnc']; $cnc++)
@@ -388,16 +396,16 @@
 				else
 					$dom = $bits[$i];
 				$_SESSION['_config']['row'] = "";
-				$dom = mysql_real_escape_string($dom);
+				$dom = $db_conn->real_escape_string($dom);
 				$query = "select *, `orginfo`.`id` as `id` from `orginfo`,`orgdomains`,`org` where
 						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
+				$res = $db_conn->query($query);
+				if($res->num_rows > 0)
 				{
-					$_SESSION['_config']['row'] = mysql_fetch_assoc($res);
+					$_SESSION['_config']['row'] = $res->fetch_assoc();
 					$rowid[] = $_SESSION['_config']['row']['id'];
 					break;
 				}
@@ -421,6 +429,7 @@
 
 	function getalt2()
 	{
+		global $db_conn;
 		$altrows=array();
 		$altid=array();
 		for($altc = 0; $altc < $_SESSION['_config']['subaltc']; $altc++)
@@ -440,16 +449,16 @@
 				else
 					$dom = $bits[$i];
 				$_SESSION['_config']['altrow'] = "";
-				$dom = mysql_real_escape_string($dom);
+				$dom = $db_conn->real_escape_string($dom);
 				$query = "select * from `orginfo`,`orgdomains`,`org` where
 						`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 						`org`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`orgid`=`orginfo`.`id` and
 						`orgdomains`.`domain`='$dom'";
-				$res = mysql_query($query);
-				if(mysql_num_rows($res) > 0)
+				$res = $db_conn->query($query);
+				if($res->num_rows > 0)
 				{
-					$_SESSION['_config']['altrow'] = mysql_fetch_assoc($res);
+					$_SESSION['_config']['altrow'] = $res->fetch_assoc();
 					$altid[] = $_SESSION['_config']['altrow']['id'];
 					break;
 				}
@@ -468,6 +477,7 @@
 
 	function checkownership($hostname)
 	{
+		global $db_conn;
 		$bits = explode(".", $hostname);
 		$dom = "";
 		for($i = count($bits) - 1; $i >= 0; $i--)
@@ -476,16 +486,15 @@
 				$dom = $bits[$i].".".$dom;
 			else
 				$dom = $bits[$i];
-			$dom = mysql_real_escape_string($dom);
+			$dom = $db_conn->real_escape_string($dom);
 			$query = "select * from `org`,`orgdomains`,`orginfo`
 					where `org`.`memid`='".intval($_SESSION['profile']['id'])."'
 					and `orgdomains`.`orgid`=`org`.`orgid`
 					and `orginfo`.`id`=`org`.`orgid`
 					and `orgdomains`.`domain`='$dom'";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) > 0)
-			{
-				$_SESSION['_config']['row'] = mysql_fetch_assoc($res);
+			$res = $db_conn->query($query);
+			if($res->num_rows > 0) {
+				$_SESSION['_config']['row'] = $res->fetch_assoc();
 				return(true);
 			}
 		}
@@ -494,16 +503,19 @@
 
 	function maxpoints($id = 0)
 	{
+		global $db_conn;
 		if($id <= 0)
 			$id = $_SESSION['profile']['id'];
 
 		$query = "select sum(`points`) as `points` from `notary` where `to`='$id' and `deleted` = 0 group by `to`";
-		$row = mysql_fetch_assoc(mysql_query($query));
+		$res = $db_conn->query($query);
+		$row = $res->fetch_assoc();
 		$points = $row['points'];
 
 		$dob = date("Y-m-d", mktime(0,0,0,date("m"),date("d"),date("Y")-18));
 		$query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `dob` < '$dob'";
-		if(mysql_num_rows(mysql_query($query)) < 1)
+		$res = $db_conn->query($query);
+		if($res->num_rows < 1)
 		{
 			if($points >= 100)
 				return(10);
@@ -554,7 +566,8 @@
 
 	function checkEmail($email)
 	{
-		$myemail = mysql_real_escape_string($email);
+		global $db_conn;
+		$myemail = $db_conn->real_escape_string($email);
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
 			list($username,$domain)=explode('@',$email,2);
@@ -665,10 +678,12 @@
 					fputs($fp, "QUIT\r\n");
 					fclose($fp);
 
-					$line = mysql_real_escape_string(trim(strip_tags($line)));
-					$query = "insert into `pinglog` set `when`=NOW(), `email`='$myemail', `result`='$line'";
+					$line = $db_conn->real_escape_string(trim(strip_tags($line)));
+					$query = sprintf(
+						"INSERT INTO pinglog SET `when`=NOW(), email='%s', result='%s'",
+						$myemail, $line);
 					if(is_array($_SESSION['profile'])) $query.=", `uid`='".intval($_SESSION['profile']['id'])."'";
-					mysql_query($query);
+					$db_conn->query($query);
 
 					if(substr($line, 0, 3) != "250")
 						return $line;
@@ -677,14 +692,16 @@
 				}
 			}
 		}
-		$query = "insert into `pinglog` set `when`=NOW(), `uid`='".intval($_SESSION['profile']['id'])."',
-				`email`='$myemail', `result`='Failed to make a connection to the mail server'";
-		mysql_query($query);
+		$query = sprintf(
+			"INSERT INTO pinglog SET `when`=NOW(), uid='%s', email='%s', result='Failed to make a connection to the mail server'",
+			intval($_SESSION['profile']['id']), $myemail);
+		$db_conn->query($query);
 		return _("Failed to make a connection to the mail server");
 	}
 
 	function waitForResult($table, $certid, $id = 0, $show = 1)
 	{
+		global $db_conn;
 		$found = $trycount = 0;
 		if($certid<=0)
 		{
@@ -700,8 +717,8 @@
 				$query = "select * from `$table` where `id`='".intval($certid)."' and `crt` != ''";
 			else
 				$query = "select * from `$table` where `id`='".intval($certid)."' and `crt_name` != ''";
-			$res = mysql_query($query);
-			if(mysql_num_rows($res) > 0)
+			$res = $db_conn->query($query);
+			if($res->num_rows > 0)
 			{
 				$found = 1;
 				break;
@@ -713,10 +730,10 @@
 		{
 			if($show) showheader(_("My CAcert.org Account!"));
 			$query = "select * from `$table` where `id`='".intval($certid)."' ";
-			$res = mysql_query($query);
+			$res = $db_conn->query($query);
 			$body="";
 			$subject="";
-			if(mysql_num_rows($res) > 0)
+			if($res->num_rows > 0)
 			{
 				printf(_("Your certificate request is still queued and hasn't been processed yet. Please wait, and go to Certificates -> View to see it's status."));
 				$subject="[CAcert.org] Certificate TIMEOUT";
@@ -742,9 +759,10 @@
 
 	function generateTicket()
 	{
+		global $db_conn;
 		$query = "insert into tickets (timestamp) values (now()) ";
-		mysql_query($query);
-		$ticket = mysql_insert_id();
+		$db_conn->query($query);
+		$ticket = $db_conn->insert_id;
 		return $ticket;
 	}
 
@@ -869,24 +887,5 @@
 		}
 		return $name;
 	}
-
-	/**
-	  * Run the sql query given in $sql.
-	  * The resource returned by mysql_query is
-	  * returned by this function.
-	  *
-	  * It should be safe to replace every mysql_query
-	  * call by a mysql_extended_query call.
-	  */
-	function mysql_timed_query($sql)
-	{
-		global $sql_data_log;
-		$query_start = microtime(true);
-		$res = mysql_query($sql);
-		$query_end = microtime(true);
-		$sql_data_log[] = array("sql" => $sql, "duration" => $query_end - $query_start);
-		return $res;
-	}
-
 
 ?>

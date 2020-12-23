@@ -8,7 +8,7 @@
 ################################################################################
 
 DOWNLOAD_SERVER := translations.cacert.org
-PO_URL_TEMPLATE := http://$(DOWNLOAD_SERVER)/export/cacert/%/messages.po
+PO_URL_TEMPLATE := https://$(DOWNLOAD_SERVER)/export/cacert/%/messages.po
 
 # Only use languages that have 10% or more of translated strings
 AUTO_LANGS := \
@@ -111,7 +111,7 @@ $(LANGS:%=$(MO_FILE_TEMPLATE)): $(MO_FILE_TEMPLATE): $(PO_FILE_TEMPLATE)
 .PHONY: $(LANGS:%=$(PO_FILE_TEMPLATE))
 $(LANGS:%=$(PO_FILE_TEMPLATE)):
 	mkdir -p $(@D)
-	wget --output-document - '$(@:$(PO_FILE_TEMPLATE)=$(PO_URL_TEMPLATE))' | \
+	curl --silent --fail '$(@:$(PO_FILE_TEMPLATE)=$(PO_URL_TEMPLATE))' | \
 		php -f escape_special_chars.php \
 		> $@
 

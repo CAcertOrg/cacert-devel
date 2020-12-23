@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -85,70 +85,72 @@ if (get_magic_quotes_gpc()) {
 }
   
 // Explicitly select all those IDs so I can insert new rows if needed.
-$query = mysql_query('SELECT `id` FROM `cats_type` WHERE `type_text` = \''.mysql_real_escape_string($type).'\';');
+$query = $db_conn->query('SELECT `id` FROM `cats_type` WHERE `type_text` = \''.$db_conn->real_escape_string($type).'\';');
 if (!$query) {
   echo 'Invalid query'."\r\n";
   trigger_error('Invalid query', E_USER_ERROR);
   exit();
 }
 
-if (mysql_num_rows($query) > 0) {
-  $result = mysql_fetch_array($query);
+if ($query->num_rows > 0) {
+  $result = $query->fetch_array();
   $typeID = $result['0'];
 } else {
-  $query = mysql_query('INSERT INTO `cats_type` (`type_text`) VALUES (\''.mysql_real_escape_string($type).'\');');
+  $query = $db_conn->query('INSERT INTO `cats_type` (`type_text`) VALUES (\''.$db_conn->real_escape_string($type).'\');');
   if (!$query) {
     echo 'Invalid query'."\r\n";
     trigger_error('Invalid query', E_USER_ERROR);
     exit();
   }
 
-  $typeID = mysql_insert_id();
+  $typeID = $db_conn->insert_id;
 }
 
-$query = mysql_query('SELECT `id` FROM `cats_variant` WHERE `type_id` = \''.(int)intval($typeID).'\' AND `test_text` = \''.mysql_real_escape_string($variant).'\';');
+$query = $db_conn->query('SELECT `id` FROM `cats_variant` WHERE `type_id` = \''.(int)intval($typeID).'\' AND `test_text` = \''
+    .$db_conn->real_escape_string($variant).'\';');
 if (!$query) {
   echo 'Invalid query'."\r\n";
   trigger_error('Invalid query', E_USER_ERROR);
   exit();
 }
 
-if (mysql_num_rows($query) > 0) {
-  $result = mysql_fetch_array($query);
+if ($query->num_rows > 0) {
+  $result = $query->fetch_array($query);
   $variantID = $result['0'];
 } else {
-  $query = mysql_query('INSERT INTO `cats_variant` (`type_id`, `test_text`) VALUES (\''.(int)intval($typeID).'\', \''.mysql_real_escape_string($variant).'\');');
+  $query = $db_conn->query('INSERT INTO `cats_variant` (`type_id`, `test_text`) VALUES (\''.(int)intval($typeID).'\', \''
+      .$db_conn->real_escape_string($variant).'\');');
   if (!$query) {
     echo 'Invalid query'."\r\n";
     trigger_error('Invalid query', E_USER_ERROR);
     exit();
   }
 
-  $variantID = mysql_insert_id();
+  $variantID = $db_conn->insert_id;
 }
 
 // Now find the userid from cert serial
-$query = mysql_query('SELECT `ec`.`memid` FROM `emailcerts` AS `ec`, `root_certs` AS `rc` WHERE `ec`.`rootcert` = `rc`.`id` AND `ec`.`serial` = \''.mysql_real_escape_string($serial).'\' AND `rc`.`cert_text` = \''.mysql_real_escape_string($root).'\';');
+$query = $db_conn->query('SELECT `ec`.`memid` FROM `emailcerts` AS `ec`, `root_certs` AS `rc` WHERE `ec`.`rootcert` = `rc`.`id` AND `ec`.`serial` = \''.$db_conn->real_escape_string($serial).'\' AND `rc`.`cert_text` = \''.$db_conn->real_escape_string($root).'\';');
 if (!$query) {
   echo 'Invalid query'."\r\n";
   trigger_error('Invalid query', E_USER_ERROR);
   exit();
 }
 
-if (mysql_num_rows($query) > 0) {
-  $result = mysql_fetch_array($query);
+if ($query->num_rows > 0) {
+  $result = $query->fetch_array();
   $userID = $result['0'];
 } else {
   echo 'Cannot find cert '.sanitize_string($serial).' / '.sanitize_string($root)."\r\n";
   // Let's treat this as an error, since it should not happen.
-  trigger_error('Cannot find cert '.$serial.' / '.$root.'!'.mysql_error(), E_USER_ERROR);
+  trigger_error('Cannot find cert '.$serial.' / '.$root.'!'.$db_conn->error, E_USER_ERROR);
   exit();
 }
 
 // The unique constraint on cats_passed assures that records are not stored multiply
-$query = mysql_query('INSERT INTO `cats_passed` (`user_id`, `variant_id`, `pass_date`) VALUES (\''.(int)intval($userID).'\', \''.(int)intval($variantID).'\', \''.mysql_real_escape_string($date).'\');');
+$query = $db_conn->query('INSERT INTO `cats_passed` (`user_id`, `variant_id`, `pass_date`) VALUES (\''.(int)intval($userID) .'\', \''.(int)intval($variantID).'\', \''.$db_conn->real_escape_string($date).'\');');
 if (!$query) {
-  if (mysql_errno() != 1062) { // Duplicate Entry is considered success
+  if ($db_conn->errno != 1062) { // Duplicate Entry is considered success
     echo 'Invalid query'."\r\n";
     trigger_error('Invalid query', E_USER_ERROR);
     exit();

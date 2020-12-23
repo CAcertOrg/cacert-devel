@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,14 +25,14 @@
 # Database: `cacert`
 #
 <?
-    $tables = mysql_query("SHOW TABLES");
-    while(list($table_name) = mysql_fetch_array($tables))
+    $tables = $db_conn->query("SHOW TABLES");
+    while(list($table_name) = $tables->fetch_array())
     {
         echo "# --------------------------------------------------------\n\n";
         echo "#\n# Table structure for table `$table_name`\n#\n\n";
 
         echo "DROP TABLE IF EXISTS `$table_name`;\n";
-        $create = mysql_fetch_assoc(mysql_query("SHOW CREATE TABLE `$table_name`"));
+        $create = $db_conn->query("SHOW CREATE TABLE `$table_name`")->fetch_assoc();
         echo $create['Create Table'].";\n\n";
     }
 ?>

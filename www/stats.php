@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,10 +24,11 @@
      * @return array
      */
 	function getData() {
+	    global $db_conn;
 		$sql = 'select * from `statscache` order by `timestamp` desc limit 1';
-		$res = mysql_query($sql);
-		if ($res && mysql_numrows($res) > 0) {
-			$ar = mysql_fetch_assoc($res);
+		$res = $db_conn->query($sql);
+		if ($res && $res->num_rows > 0) {
+			$ar = $res->fetch_assoc();
 			$stats = unserialize($ar['cache']);
 			$stats['timestamp'] = $ar['timestamp'];
 			return $stats;

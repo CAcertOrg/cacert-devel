@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 <?=sprintf(_("This license applies to using the CAcert %s root keys %s."),'<a href="/index.php?id=3">','</a>')?></p>
 
 
-<? if(!array_key_exists('mconn',$_SESSION) || !$_SESSION['mconn']) echo "<font size='+1'>"._("Most CAcert functions are currently unavailable. Please come back later.")."</font>";?>
+<? if(!$GLOBALS["db_conn"]) echo "<font size='+1'>"._("Most CAcert functions are currently unavailable. Please come back later.")."</font>";?>
 
 
 

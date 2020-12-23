@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,8 +35,8 @@
 
 	if($oldid == 1 && $process != "")
 	{
-		$title = mysql_real_escape_string(strip_tags(trim(htmlentities($_POST['title']))));
-		$link = mysql_real_escape_string(strip_tags(trim($_POST['link'])));
+		$title = $db_conn->real_escape_string(strip_tags(trim(htmlentities($_POST['title']))));
+		$link = $db_conn->real_escape_string(strip_tags(trim($_POST['link'])));
 		$months = intval($_POST['months']);
 
 		if(!strstr($link, "://"))
@@ -73,7 +73,7 @@
 	{
 		$query = "insert into `advertising` set `link`='$link', `title`='$title', `months`='$months', `who`='".$_SESSION['profile']['id']."',
 				`when`=NOW()";
-		mysql_query($query);
+		$db_conn->query($query);
 		unset($link);
 		unset($title);
 		unset($months);

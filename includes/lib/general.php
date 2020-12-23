@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2011  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,16 +31,17 @@
  */
 function get_user_id_from_cert($serial, $issuer_cn)
 {
+	global $db_conn;
 	$query = "select `memid` from `emailcerts` where
-			`serial`='".mysql_escape_string($serial)."' and
+			`serial`='".$db_conn->real_escape_string($serial)."' and
 			`rootcert`= (select `id` from `root_certs` where
-				`Cert_Text`='".mysql_escape_string($issuer_cn)."') and
+				`Cert_Text`='".$db_conn->real_escape_string($issuer_cn)."') and
 			`revoked`=0 and disablelogin=0 and
 			UNIX_TIMESTAMP(`expire`) - UNIX_TIMESTAMP() > 0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0)
+	$res = $db_conn->query($query);
+	if($res->num_rows > 0)
 	{
-		$row = mysql_fetch_assoc($res);
+		$row = $res->fetch_assoc();
 		return intval($row['memid']);
 	}
 
@@ -138,22 +139,24 @@ function runCommand($command, $input = "", &$output = null, &$errors = true) {
 	//	 Bit 3 is set if the user is not allowed to be an Assurer (assurer_blocked > 0)
 	function get_assurer_status($userID)
 	{
+		global $db_conn;
 		$Result = 0;
-		$query = mysql_query('SELECT * FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` '.
+		$query = $db_conn->query('SELECT * FROM `cats_passed` AS `tp`, `cats_variant` AS `cv` '.
 			'  WHERE `tp`.`variant_id` = `cv`.`id` AND `cv`.`type_id` = 1 AND `tp`.`user_id` = \''.(int)intval($userID).'\'');
-		if(mysql_num_rows($query) < 1)
+		if($query->num_rows < 1)
 		{
 			$Result |= 5;
 		}
 
-		$query = mysql_query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval($userID).'\' AND `n`.`expire` < now() and `deleted` = 0');
-		$row = mysql_fetch_assoc($query);
+		$query = $db_conn->query('SELECT SUM(`points`) AS `points` FROM `notary` AS `n` WHERE `n`.`to` = \''.(int)intval
+			($userID).'\' AND `n`.`expire` < now() and `deleted` = 0');
+		$row = $query->fetch_assoc();
 		if ($row['points'] < 100) {
 			$Result |= 3;
 		}
 
-		$query = mysql_query('SELECT `assurer_blocked` FROM `users` WHERE `id` = \''.(int)intval($userID).'\'');
-		$row = mysql_fetch_assoc($query);
+		$query = $db_conn->query('SELECT `assurer_blocked` FROM `users` WHERE `id` = \''.(int)intval($userID).'\'');
+		$row = $query->fetch_assoc();
 		if ($row['assurer_blocked'] > 0) {
 			$Result |= 9;
 		}

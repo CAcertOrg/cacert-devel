@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,14 +21,14 @@
 	$query = "select * from `orgdomaincerts`,`org` where `orgdomaincerts`.`id`='$certid' and
 			`org`.`memid`='".intval($_SESSION['profile']['id'])."' and
 			`org`.`orgid`=`orgdomaincerts`.`orgid`";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = $db_conn->query($query);
+	if($res->num_rows <= 0)
 	{
 		echo _("No such certificate attached to your account.");
 		showfooter();
 		exit;
 	}
-	$row = mysql_fetch_assoc($res);
+	$row = $res->fetch_assoc();
         $crtname=escapeshellarg($row['crt_name']);
 	$cert = shell_exec("/usr/bin/openssl x509 -in $crtname");
 ?>

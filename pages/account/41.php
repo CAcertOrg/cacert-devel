@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,10 +54,10 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
   </tr>
 <?
 	$query = "select * from `addlang` where `userid`='".intval($_SESSION['profile']['id'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
-		$lang = mysql_fetch_assoc(mysql_query("select * from `languages` where `locale`='".mysql_escape_string($row['lang'])."'"));
+		$lang = $db_conn->query("select * from `languages` where `locale`='".$db_conn->real_escape_string($row['lang'])."'")->fetch_assoc();
 ?>
   <tr>
     <td class="DataTD"><?=_("Additional Language")?>:</td>
@@ -70,8 +70,8 @@ require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
     <td class="DataTD"><select name="addlang">
 <?
 	$query = "select * from `languages` order by `locale`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		printf("<option value=\"%s\">[%s] %s (%s)</option>\n",
 			sanitizeHTML($row['locale']),

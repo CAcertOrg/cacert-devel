@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,9 +37,9 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
       from `org`, `orginfo`
       where `org`.`memid`='".intval($_SESSION['profile']['id'])."' and `orginfo`.`id` = `org`.`orgid`
       ORDER BY `orginfo`.`O` ";
-    $reso = mysql_query($query);
-    if(mysql_num_rows($reso) >= 1){
-      while($row = mysql_fetch_assoc($reso)){
+    $reso = $db_conn->query($query);
+    if($reso->num_rows >= 1){
+      while($row = $reso->fetch_assoc()){
         printf('<option value="%d"%s>%s</option>',$row['id'], $row['id'] == $orgfilterid ? " selected" : "" , $row['O']);
       }
     }?>
@@ -106,8 +106,8 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
       $query .= "ORDER BY `orginfo`.`O`, `oemail`.`CN`, `modified` desc";
       break;
   }
-  $res = mysql_query($query);
-  if(mysql_num_rows($res) <= 0)
+  $res = $db_conn->query($query);
+  if($res->num_rows <= 0)
   {
 ?>
 
@@ -116,7 +116,7 @@ $status = array_key_exists('status',$_SESSION['_config']) ? intval($_SESSION['_c
   </tr>
 <? } else {
   $orgname='';
-  while($row = mysql_fetch_assoc($res))
+  while($row = $res->fetch_assoc())
   {
     if ($row['O']<>$orgname) {
       $orgname=$row['O'];?>

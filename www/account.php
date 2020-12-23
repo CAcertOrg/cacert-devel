@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,10 +56,10 @@
 
 	} else if($id == 51 && $_GET['img'] == "show") {
 		$query = "select * from `tverify` where `id`='".intval($_GET['photoid'])."' and `modified`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res))
+		$res = $db_conn->query($query);
+		if($res->num_rows)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = $res->fetch_assoc();
 			readfile($row['photoid']);
 		} else {
 			die("No such file.");

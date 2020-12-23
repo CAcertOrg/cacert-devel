@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2011  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,18 +21,18 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 
 	function query_init ($query)
 	{
-		return mysql_query($query);
+	    global $db_conn;
+		return $db_conn->query($query);
 	}
 
 	function query_getnextrow ($res)
 	{
-		$row1 = mysql_fetch_assoc($res);
-		return $row1;
+        return $res->fetch_assoc();
 	}
 
 	function query_get_number_of_rows ($resultset)
 	{
-		return intval(mysql_num_rows($resultset));
+		return intval($resultset->num_rows);
 	}
 
 	function get_number_of_assurances ($userid)
@@ -125,7 +125,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	function get_user ($userid)
 	{
 		$res = query_init ("select * from `users` where `id`='".intval($userid)."'");
-		return mysql_fetch_assoc($res);
+		return $res->fetch_assoc();
 	}
 
 	function get_cats_state ($userid)
@@ -133,7 +133,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 
 		$res = query_init ("select * from `cats_passed` inner join `cats_variant` on `cats_passed`.`variant_id` = `cats_variant`.`id` and `cats_variant`.`type_id` = 1
 			WHERE `cats_passed`.`user_id` = '".intval($userid)."'");
-		return mysql_num_rows($res);
+		return $res->num_rows;
 	}
 
 
@@ -587,7 +587,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$sum_points = 0;
 		$sumexperience = 0;
 		$res = get_given_assurances(intval($userid), $log);
-		while($row = mysql_fetch_assoc($res))
+		while($row = $res->fetch_assoc())
 		{
 			$assuree = get_user(intval($row['to']));
 			calc_experience($row, $sum_points, $sum_experience);
@@ -617,7 +617,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		$sum_points = 0;
 		$sumexperience = 0;
 		$res = get_received_assurances(intval($userid), $log);
-		while($row = mysql_fetch_assoc($res))
+		while($row = $res->fetch_assoc())
 		{
 			$fromuser = get_user(intval($row['from']));
 			calc_assurances($row, $sum_points, $sum_experience);
@@ -661,7 +661,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		}
 
 		$res = get_received_assurances_summary($userid);
-		while($row = mysql_fetch_assoc($res))
+		while($row = $res->fetch_assoc())
 		{
 			$points = calc_awarded($row);
 
@@ -674,7 +674,7 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 		}
 
 		$res = get_given_assurances_summary($userid);
-		while($row = mysql_fetch_assoc($res))
+		while($row = $res->fetch_assoc())
 		{
 			switch ($row['method'])
 			{
@@ -855,13 +855,13 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 * @param mixed $comment
 	 * @param integer $active
 	 * @param integer $secmemid
-	 * @return
 	 */
 	function write_user_agreement($memid, $document, $method, $comment, $active=1, $secmemid=0){
+	    global $db_conn;
 	// write a new record to the table user_agreement
 		$query="insert into `user_agreements` set `memid`=".intval($memid).", `secmemid`=".intval($secmemid).
-			",`document`='".mysql_real_escape_string($document)."',`date`=NOW(), `active`=".intval($active).",`method`='".mysql_real_escape_string($method)."',`comment`='".mysql_real_escape_string($comment)."'" ;
-		$res = mysql_query($query);
+			",`document`='".$db_conn->real_escape_string($document)."',`date`=NOW(), `active`=".intval($active).",`method`='".$db_conn->real_escape_string($method)."',`comment`='".$db_conn->real_escape_string($comment)."'" ;
+		$db_conn->query($query);
 	}
 
 	/**
@@ -869,13 +869,13 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 *  returns 1 if the user has an entry for the given type in user_agreement, 0 if no entry is recorded
 	 * @param mixed $memid
 	 * @param string $type
-	 * @return
 	 */
 	function get_user_agreement_status($memid, $type="CCA"){
+	    global $db_conn;
 		$query="SELECT u.`document` FROM `user_agreements` u
-			WHERE u.`document` = '" . mysql_real_escape_string($type) . "' AND u.`memid`=" . intval($memid) ;
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) <=0){
+			WHERE u.`document` = '" . $db_conn->real_escape_string($type) . "' AND u.`memid`=" . intval($memid) ;
+		$res = $db_conn->query($query);
+		if($res->num_rows <=0){
 			return 0;
 		}else{
 			return 1;
@@ -895,9 +895,10 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 *     'document', 'date', 'method', 'comment', 'active'
 	 */
 	function get_first_user_agreement($memid, $type=null, $active=null){
+	    global $db_conn;
 		$filter = '';
 		if (!is_null($type)) {
-			$filter .= " AND u.`document` = '".mysql_real_escape_string($type)."'";
+			$filter .= " AND u.`document` = '".$db_conn->real_escape_string($type)."'";
 		}
 
 		if (!is_null($active)) {
@@ -908,9 +909,9 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 			WHERE u.`memid`=".intval($memid)."
 				$filter
 			ORDER BY u.`date` LIMIT 1";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >0){
-			$rec = mysql_fetch_assoc($res);
+		$res = $db_conn->query($query);
+		if($res->num_rows >0){
+			$rec = $res->fetch_assoc();
 		}else{
 			$rec=array();
 		}
@@ -930,9 +931,10 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 	 *     'document', 'date', 'method', 'comment', 'active'
 	 */
 	function get_last_user_agreement($memid, $type=null, $active=null){
+	    global $db_conn;
 		$filter = '';
 		if (!is_null($type)) {
-			$filter .= " AND u.`document` = '".mysql_real_escape_string($type)."'";
+			$filter .= " AND u.`document` = '".$db_conn->real_escape_string($type)."'";
 		}
 
 		if (!is_null($active)) {
@@ -943,9 +945,9 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
 			WHERE u.`memid`=".intval($memid)."
 				$filter
 			ORDER BY u.`date` DESC LIMIT 1";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) >0){
-			$rec = mysql_fetch_assoc($res);
+		$res = $db_conn->query($query);
+		if($res->num_rows >0){
+			$rec = $res->fetch_assoc();
 		}else{
 			$rec=array();
 		}
@@ -964,9 +966,10 @@ define('THAWTE_REVOCATION_DATETIME', '2010-11-16 00:00:00');
  * @return resource - a mysql result set containing all agreements
  */
 function get_user_agreements($memid, $type=null, $active=null){
+    global $db_conn;
 	$filter = '';
 	if (!is_null($type)) {
-		$filter .= " AND u.`document` = '".mysql_real_escape_string($type)."'";
+		$filter .= " AND u.`document` = '".$db_conn->real_escape_string($type)."'";
 	}
 
 	if (!is_null($active)) {
@@ -977,7 +980,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		WHERE u.`memid`=".intval($memid)."
 			$filter
 		ORDER BY u.`date`";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 	/**
@@ -985,15 +988,15 @@ function get_user_agreements($memid, $type=null, $active=null){
 	 *  deletes all entries for a given type from user_agreement of a given user, if type is not given all
 	 * @param mixed $memid
 	 * @param string $type
-	 * @return
 	 */
 	function delete_user_agreement($memid, $type=false){
+	    global $db_conn;
 		if ($type === false) {
 			$filter = '';
 		} else {
-			$filter = " and `document` = '" . mysql_real_escape_string($type) . "'";
+			$filter = " and `document` = '" . $db_conn->real_escape_string($type) . "'";
 		}
-		mysql_query("delete from `user_agreements` where `memid`=" . intval($memid) . $filter );
+		$db_conn->query("delete from `user_agreements` where `memid`=" . intval($memid) . $filter );
 	}
 
 	// functions for 6.php (assure somebody)
@@ -1087,6 +1090,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 	}
 
 	function account_email_delete($mailid){
+	    global $db_conn;
 	//deletes an email entry from an acount
 	//revolkes all certifcates for that email address
 	//called from www/account.php if($process != "" && $oldid == 2)
@@ -1095,10 +1099,11 @@ function get_user_agreements($memid, $type=null, $active=null){
 		$mailid = intval($mailid);
 		revoke_all_client_cert($mailid);
 		$query = "update `email` set `deleted`=NOW() where `id`='$mailid'";
-		mysql_query($query);
+		$db_conn->query($query);
 	}
 
 	function account_domain_delete($domainid){
+	    global $db_conn;
 	//deletes an domain entry from an acount
 	//revolkes all certifcates for that domain address
 	//called from www/account.php if($process != "" && $oldid == 9)
@@ -1106,18 +1111,19 @@ function get_user_agreements($memid, $type=null, $active=null){
 	//called from account_delete
 		$domainid = intval($domainid);
 		revoke_all_server_cert($domainid);
-		mysql_query(
+		$db_conn->query(
 			"update `domains`
 			set `deleted`=NOW()
 			where `id` = '$domainid'");
 	}
 
 	function account_delete($id, $arbno, $adminid){
+	    global $db_conn;
 	//deletes an account following the deleted account routnie V3
 	// called from www/account.php if($oldid == 50 && $process != "")
 	//change password
 		$id = intval($id);
-		$arbno = mysql_real_escape_string($arbno);
+		$arbno = $db_conn->real_escape_string($arbno);
 		$adminid = intval($adminid);
 		$pool = 'abcdefghijklmnopqrstuvwxyz';
 		$pool .= '0123456789!()§';
@@ -1128,33 +1134,33 @@ function get_user_agreements($memid, $type=null, $active=null){
 		{
 			$password .= substr($pool,(rand()%(strlen ($pool))), 1);
 		}
-		mysql_query("update `users` set `password`=sha1('".$password."') where `id`='".$id."'");
+		$db_conn->query("update `users` set `password`=sha1('".$password."') where `id`='".$id."'");
 
 	//create new mail for arbitration number
 		$query = "insert into `email` set `email`='".$arbno."@cacert.org',`memid`='".$id."',`created`=NOW(),`modified`=NOW(), `attempts`=-1";
-		mysql_query($query);
-		$emailid = mysql_insert_id();
+		$db_conn->query($query);
+		$emailid = $db_conn->insert_id;
 
 	//set new mail as default
 		$query = "update `users` set `email`='".$arbno."@cacert.org' where `id`='".$id."'";
-		mysql_query($query);
+		$db_conn->query($query);
 
 	//delete all other email address
 		$query = "select `id` from `email` where `memid`='".$id."' and `id`!='".$emailid."'" ;
-		$res=mysql_query($query);
-		while($row = mysql_fetch_assoc($res)){
+		$res=$db_conn->query($query);
+		while($row = $res->fetch_assoc()){
 			account_email_delete($row['id']);
 		}
 
 	//delete all domains
 		$query = "select `id` from `domains` where `memid`='".$id."'";
-		$res=mysql_query($query);
-		while($row = mysql_fetch_assoc($res)){
+		$res=$db_conn->query($query);
+		while($row = $res->fetch_assoc()){
 			account_domain_delete($row['id']);
 		}
 
 	//clear alert settings
-		mysql_query(
+		$db_conn->query(
 			"update `alerts` set
 				`general`='0',
 				`country`='0',
@@ -1164,17 +1170,17 @@ function get_user_agreements($memid, $type=null, $active=null){
 
 	//set default location
 		$query = "update `users` set `locid`='2256755', `regid`='243', `ccid`='12' where `id`='".$id."'";
-		mysql_query($query);
+		$db_conn->query($query);
 
 	//clear listings
 		$query = "update `users` set `listme`=' ',`contactinfo`=' ' where `id`='".$id."'";
-		mysql_query($query);
+		$db_conn->query($query);
 
 	//set lanuage to default
 		//set default language
-		mysql_query("update `users` set `language`='en_AU' where `id`='".$id."'");
+		$db_conn->query("update `users` set `language`='en_AU' where `id`='".$id."'");
 		//delete secondary langugaes
-		mysql_query("delete from `addlang` where `userid`='".$id."'");
+		$db_conn->query("delete from `addlang` where `userid`='".$id."'");
 
 	//change secret questions
 		for($i=1;$i<=5;$i++){
@@ -1186,7 +1192,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 				$a .= substr($pool,(rand()%(strlen ($pool))), 1);
 			}
 			$query = "update `users` set `Q$i`='$q', `A$i`='$a' where `id`='".$id."'";
-			mysql_query($query);
+			$db_conn->query($query);
 		}
 
 	//change personal information to arbitration number and DOB=1900-01-01
@@ -1196,10 +1202,10 @@ function get_user_agreements($memid, $type=null, $active=null){
 			`suffix`='".$arbno."',
 			`dob`='1900-01-01'
 			where `id`='".$id."'";
-		mysql_query($query);
+		$db_conn->query($query);
 
 	//clear all admin and board flags
-		mysql_query(
+		$db_conn->query(
 			"update `users` set
 				`assurer`='0',
 				`assurer_blocked`='0',
@@ -1214,20 +1220,22 @@ function get_user_agreements($memid, $type=null, $active=null){
 			where `id`='$id'");
 
 	//block account
-		mysql_query("update `users` set `locked`='1' where `id`='$id'");  //, `deleted`=Now()
+		$db_conn->query("update `users` set `locked`='1' where `id`='$id'");  //, `deleted`=Now()
 	}
 
 
 	function check_email_exists($email){
+	    global $db_conn;
 	// called from includes/account.php if($process != "" && $oldid == 1)
 	// called from includes/account.php	if($oldid == 50 && $process != "")
-		$email = mysql_real_escape_string($email);
+		$email = $db_conn->real_escape_string($email);
 		$query = "select 1 from `email` where `email`='$email' and `deleted`=0";
-		$res = mysql_query($query);
-		return mysql_num_rows($res) > 0;
+		$res = $db_conn->query($query);
+		return $res->num_rows > 0;
 	}
 
 	function check_gpg_cert_running($uid,$cca=0){
+	    global $db_conn;
 		//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
 		// called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
@@ -1236,11 +1244,12 @@ function get_user_agreements($memid, $type=null, $active=null){
 		}else{
 			$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>(NOW()-90*86400)";
 		}
-		$res = mysql_query($query);
-		return mysql_num_rows($res) > 0;
+		$res = $db_conn->query($query);
+		return $res->num_rows() > 0;
 	}
 
 	function check_client_cert_running($uid,$cca=0){
+	    global $db_conn;
 		//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
 		// called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
@@ -1251,15 +1260,16 @@ function get_user_agreements($memid, $type=null, $active=null){
 			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>(NOW()-90*86400)  and `revoked`<`created`";
 			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>(NOW()-90*86400)";
 		}
-		$res = mysql_query($query1);
-		$r1 = mysql_num_rows($res)>0;
-		$res = mysql_query($query2);
-		$r2 = mysql_num_rows($res)>0;
+		$res = $db_conn->query($query1);
+		$r1 = $res->num_rows>0;
+		$res = $db_conn->query($query2);
+		$r2 = $res->num_rows>0;
 		return !!($r1 || $r2);
 	}
 
 	function check_server_cert_running($uid,$cca=0){
-		//if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
+        global $db_conn;
+        //if $cca =0 if just expired, =1 if CCA retention +3 month should be obeyed
 		// called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
 		if (0==$cca) {
@@ -1287,37 +1297,40 @@ function get_user_agreements($memid, $type=null, $active=null){
 				where `domains`.`memid` = '$uid'
 					and `revoked`>(NOW()-90*86400)";
 		}
-		$res = mysql_query($query1);
-		$r1 = mysql_num_rows($res)>0;
-		$res = mysql_query($query2);
-		$r2 = mysql_num_rows($res)>0;
+		$res = $db_conn->query($query1);
+		$r1 = $res->num_rows>0;
+		$res = $db_conn->query($query2);
+		$r2 = $res->num_rows>0;
 		return !!($r1 || $r2);
 	}
 
 	function check_is_orgadmin($uid){
-		// called from includes/account.php	if($oldid == 50 && $process != "")
+        global $db_conn;
+        // called from includes/account.php	if($oldid == 50 && $process != "")
 		$uid = intval($uid);
 		$query = "select 1 from `org` where `memid`='$uid' and `deleted`=0";
-		$res = mysql_query($query);
-		return mysql_num_rows($res) > 0;
+		$res = $db_conn->query($query);
+		return $res->num_rows > 0;
 	}
 
 
 	// revokation of certificates
 	function revoke_all_client_cert($mailid){
+        global $db_conn;
 		//revokes all client certificates for an email address
 		$mailid = intval($mailid);
 		$query = "select `emailcerts`.`id`
 			from `emaillink`,`emailcerts` where
 			`emaillink`.`emailid`='$mailid' and `emaillink`.`emailcertsid`=`emailcerts`.`id` and `emailcerts`.`revoked`=0
 			group by `emailcerts`.`id`";
-		$dres = mysql_query($query);
-		while($drow = mysql_fetch_assoc($dres)){
-			mysql_query("update `emailcerts` set `revoked`='1970-01-01 10:00:01', `disablelogin`=1 where `id`='".$drow['id']."'");
+		$dres = $db_conn->query($query);
+		while($drow = $dres->fetch_assoc()){
+			$db_conn->query("update `emailcerts` set `revoked`='1970-01-01 10:00:01', `disablelogin`=1 where `id`='".$drow['id']."'");
 		}
 	}
 
-	function revoke_all_server_cert($domainid){
+	function revoke_all_server_cert($domainid) {
+	    global $db_conn;
 		//revokes all server certs for an domain
 		$domainid = intval($domainid);
 		$query =
@@ -1329,10 +1342,10 @@ function get_user_agreements($memid, $type=null, $active=null){
 				from `domaincerts`, `domlink`
 				where `domaincerts`.`id` = `domlink`.`certid`
 				and `domlink`.`domid` = '$domainid'";
-		$dres = mysql_query($query);
-		while($drow = mysql_fetch_assoc($dres))
+		$dres = $db_conn->query($query);
+		while($drow = $dres->fetch_assoc())
 		{
-			mysql_query(
+			$db_conn->query(
 			"update `domaincerts`
 				set `revoked`='1970-01-01 10:00:01'
 				where `id` = '".$drow['id']."'
@@ -1341,19 +1354,20 @@ function get_user_agreements($memid, $type=null, $active=null){
 	}
 
 	function revoke_all_private_cert($uid){
+		global $db_conn;
 		//revokes all certificates linked to a personal accounts
 		//gpg revokation needs to be added to a later point
 		$uid=intval($uid);
 		$query = "select `id` from `email` where `memid`='".$uid."'";
-		$res=mysql_query($query);
-		while($row = mysql_fetch_assoc($res)){
+		$res=$db_conn->query($query);
+		while($row = $res->fetch_assoc()){
 			revoke_all_client_cert($row['id']);
 		}
 
 
 		$query = "select `id` from `domains` where `memid`='".$uid."'";
-		$res=mysql_query($query);
-		while($row = mysql_fetch_assoc($res)){
+		$res=$db_conn->query($query);
+		while($row = $res->fetch_assoc()){
 			revoke_all_server_cert($row['id']);
 		}
 	}
@@ -1412,14 +1426,15 @@ function get_user_agreements($memid, $type=null, $active=null){
  * @return bool - true := success, false := error
  */
 function write_se_log($uid, $adminid, $type, $info){
+	global $db_conn;
 	//records all support engineer actions changing a user account
 	$uid = intval($uid);
 	$adminid = intval($adminid);
-	$type = mysql_real_escape_string($type);
-	$info = mysql_real_escape_string($info);
+	$type = $db_conn->real_escape_string($type);
+	$info = $db_conn->real_escape_string($info);
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`) values
 		(Now(), $uid, $adminid, '$type', '$info')";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1447,13 +1462,14 @@ function valid_ticket_number($ticketno){
  * @return resource - a mysql result set
  */
 function get_user_data($userid, $deleted=0){
+	global $db_conn;
 	$userid = intval($userid);
 	$filter='';
 	if (0==$deleted) {
 		$filter .=' and `users`.`deleted`=0';
 	}
 	$query = "select * from `users` where `users`.`id`='$userid' ".$filter;
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1462,7 +1478,8 @@ function get_user_data($userid, $deleted=0){
  * @return array - associative array
  */
 function get_alerts($userid){
-	return mysql_fetch_assoc(mysql_query("select * from `alerts` where `memid`='".intval($userid)."'"));
+    global $db_conn;
+	return $db_conn->query("select * from `alerts` where `memid`='".intval($userid)."'")->fetch_assoc();
 }
 
 /**
@@ -1473,6 +1490,7 @@ function get_alerts($userid){
  * @return resource - a mysql result set
  */
 function get_email_addresses($userid, $exclude, $deleted=0){
+	global $db_conn;
 	//should be entered in account/2.php
 	$userid = intval($userid);
 	$filter='';
@@ -1480,10 +1498,10 @@ function get_email_addresses($userid, $exclude, $deleted=0){
 		$filter .= ' and `deleted`=0';
 	}
 	if ($exclude) {
-		$filter .= " and `email`!='".mysql_real_escape_string($exclude)."'";
+		$filter .= " and `email`!='".$db_conn->real_escape_string($exclude)."'";
 	}
 	$query = "select * from `email` where `memid`='".$userid."' and `hash`='' ".$filter." order by `created`";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1493,6 +1511,7 @@ function get_email_addresses($userid, $exclude, $deleted=0){
  * @return resource - a mysql result set
  */
 function get_domains($userid, $deleted=0){
+	global $db_conn;
 	//should be entered in account/9.php
 	$userid = intval($userid);
 	$filter='';
@@ -1500,7 +1519,7 @@ function get_domains($userid, $deleted=0){
 		$filter .= ' and `deleted`=0';
 	}
 	$query = "select * from `domains` where `memid`='".$userid."' and `hash`=''".$filter." order by `created`";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1509,13 +1528,14 @@ function get_domains($userid, $deleted=0){
  * @return resource - a mysql result set
  */
 function get_training_results($userid){
+	global $db_conn;
 	//should be entered in account/55.php
 	$userid = intval($userid);
 	$query = "SELECT `CP`.`pass_date`, `CT`.`type_text`, `CV`.`test_text` ".
 		" FROM `cats_passed` AS CP, `cats_variant` AS CV, `cats_type` AS CT ".
 		" WHERE `CP`.`variant_id`=`CV`.`id` AND `CV`.`type_id`=`CT`.`id` AND `CP`.`user_id` ='".$userid."'".
 		" ORDER BY `CP`.`pass_date`";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1524,12 +1544,13 @@ function get_training_results($userid){
  * @return resource - a mysql result set
  */
 function get_se_log($userid){
+	global $db_conn;
 	$userid = intval($userid);
 	$query = "SELECT `adminlog`.`when`, `adminlog`.`type`, `adminlog`.`information`, `users`.`fname`, `users`.`lname`
 		FROM `adminlog`, `users`
 		WHERE `adminlog`.`adminid` = `users`.`id` and `adminlog`.`uid`=".$userid."
 		ORDER BY `adminlog`.`when`";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1539,6 +1560,7 @@ function get_se_log($userid){
  * @return resource - a mysql result set
  */
 function get_client_certs($userid, $viewall=0){
+	global $db_conn;
 	//add to account/5.php
 	$userid = intval($userid);
 	$query = "select UNIX_TIMESTAMP(`emailcerts`.`created`) as `created`,
@@ -1560,7 +1582,7 @@ function get_client_certs($userid, $viewall=0){
 		$query .= " HAVING `timeleft` > 0";
 	}
 	$query .= " ORDER BY `emailcerts`.`modified` desc";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1570,6 +1592,7 @@ function get_client_certs($userid, $viewall=0){
  * @return resource - a mysql result set
  */
 function get_server_certs($userid, $viewall=0){
+	global $db_conn;
 	//add to account/12.php
 	$userid = intval($userid);
 	$query = "select UNIX_TIMESTAMP(`domaincerts`.`created`) as `created`,
@@ -1590,7 +1613,7 @@ function get_server_certs($userid, $viewall=0){
 		$query .= " HAVING `timeleft` > 0";
 	}
 	$query .= " ORDER BY `domaincerts`.`modified` desc";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 /**
@@ -1600,6 +1623,7 @@ function get_server_certs($userid, $viewall=0){
  * @return resource - a mysql result set
  */
 function get_gpg_certs($userid, $viewall=0){
+	global $db_conn;
 	//add to gpg/2.php
 	$userid = intval($userid);
 	$query = $query = "select UNIX_TIMESTAMP(`issued`) as `issued`,
@@ -1611,7 +1635,7 @@ function get_gpg_certs($userid, $viewall=0){
 		$query .= " HAVING `timeleft` > 0";
 	}
 	$query .= " ORDER BY `issued` desc";
-	return mysql_query($query);
+	return $db_conn->query($query);
 }
 
 

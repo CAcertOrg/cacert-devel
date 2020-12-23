@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,17 +22,17 @@
 	include_once("../includes/mysql.php");
 
 	$query = "select * from `notary` group by `from`";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		$query = "select *,sum(`points`) as `points` from `users`, `notary` where `users`.`id`=`notary`.`to` and `users`.`id`='".$row['from']."' group by `notary`.`to`";
-		$drow = mysql_fetch_assoc(mysql_query($query));
+		$drow = $db_conn->query($query)->fetch_assoc();
 		if($drow['points'] < 100 || $drow['points'] >= 150)
 			continue;
 		$query = "select * from `notary` where `from`='".$drow['id']."' and `to`='".$drow['id']."'";
-		$num = mysql_num_rows(mysql_query($query));
+		$num = $db_conn->query($query)->num_rows;
 		$query = "select * from `notary` where `from`='".$drow['id']."' and `to`!='".$drow['id']."'";
-		$newnum = mysql_num_rows(mysql_query($query));
+		$newnum = $db_conn->query($query)->num_rows;
 		if($num < $newnum)
 		{
 			echo $drow['fname']." ".$drow['lname']." <".$drow['email']."> (memid: ".$drow['id']." points: ".$drow['points']." - num: $num newnum: $newnum)\n";
@@ -45,7 +45,7 @@
 					$newpoints = 1;
 				$query = "insert into `notary` set `from`='".$drow['id']."', `to`='".$drow['id']."',
 						`points`='$newpoints', `method`='Administrative Increase', `date`=NOW()";
-				mysql_query($query);
+				$db_conn->query($query);
 				$drow['points'] += $newpoints;
 				fix_assurer_flag($drow['id']);
 			}

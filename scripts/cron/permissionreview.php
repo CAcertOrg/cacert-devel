@@ -2,7 +2,7 @@
 <?php
 /*
 LibreSSL - CAcert web application
-Copyright (C) 2004-2012  CAcert Inc.
+Copyright (C) 2004-2020  CAcert Inc.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -117,11 +117,11 @@ $adminlist = array();
 foreach ($flags as $flag => $flag_properties) {
 	$flagname = explode('=', $flag, 2 );
 	$query = "select `fname`, `lname`, `email` from `users` where `$flagname[0]` = '$flagname[1]'";
-	if(! $res = mysql_query($query) ) {
+	if(! $res = $db_conn->query($query) ) {
 		fwrite(STDERR,
 				"MySQL query for flag $flag failed:\n".
 				"\"$query\"\n".
-				mysql_error()
+				$db_conn->error
 			);
 
 		continue;
@@ -129,7 +129,7 @@ foreach ($flags as $flag => $flag_properties) {
 
 	$adminlist[$flag] = array();
 
-	while ($row = mysql_fetch_assoc($res)) {
+	while ($row = $res->fetch_assoc()) {
 		$adminlist[$flag][] = $row;
 	}
 

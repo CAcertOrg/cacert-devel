@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@
 			if($bits['0'] == "emailAddress")
 			{
 				$query = "select * from `email` where `email`='".$bits['1']."' and `deleted`=0 and hash=''";
-				$account = mysql_query($query);
-				if(mysql_num_rows($account))
+				$account = $db_conn->query($query);
+				if($account->num_rows)
 					$addy[] = $bits['1'];
 			}
 		}
@@ -51,14 +51,14 @@
 	//If we found one, we extract the member-id from the sql result of the query we did above, and fetch the name of that user
 	if($continue == 1)
 	{
-		$row = mysql_fetch_assoc($account);
+		$row = $account->fetch_assoc();
 		$memid = $row['memid'];
 
 
                 //Fetching the name of the user we have in the database:
                 $query = "select `fname`, `mname`, `lname`, `suffix` from `users` where `id`='$memid' and `deleted`=0";
- 		$res = mysql_query($query);
- 		$row = mysql_fetch_assoc($res);
+ 		$res = $db_conn->query($query);
+ 		$row = $res->fetch_assoc();
 
 		//Building the user´s name, and ignoring punctuation
 		$cacert_name=$row['fname']." ".$row['mname']." ".$row['lname']." ".$row['suffix'];

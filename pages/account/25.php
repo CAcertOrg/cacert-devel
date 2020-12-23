@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,13 +54,13 @@
 	
 	// Safe because $order_by only contains fixed strings
 	$query = sprintf("select * from `orginfo` ORDER BY %s", $order_by);
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
-		$r2 = mysql_query("select * from `org` where `orgid`='".intval($row['id'])."'");
-		$admincount = mysql_num_rows($r2);
-		$r2 = mysql_query("select * from `orgdomains` where `orgid`='".intval($row['id'])."'");
-		$domcount = mysql_num_rows($r2);
+		$r2 = $db_conn->query("select * from `org` where `orgid`='".intval($row['id'])."'");
+		$admincount = $r2->num_rows;
+		$r2 = $db_conn->query("select * from `orgdomains` where `orgid`='".intval($row['id'])."'");
+		$domcount = $r2->num_rows;
 ?>
   <tr>
     <td class="DataTD"><?=htmlspecialchars($row['O'])?>, <?=htmlspecialchars($row['ST'])?> <?=htmlspecialchars($row['C'])?></td>

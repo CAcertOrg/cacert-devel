@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 */ ?>
 <?
 	$query = "select * from `orginfo` where `id`='".intval($_REQUEST['orgid'])."'";
-	$row = mysql_fetch_assoc(mysql_query($query));
+	$row = $db_conn->query($query)->fetch_assoc();
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper" width="400">
   <tr>
@@ -30,8 +30,8 @@
   </tr>
 <?
 	$query = "select * from `orgdomains` where `orgid`='".intval($_REQUEST['orgid'])."'";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{ ?>
   <tr>
     <td class="DataTD"><?=sanitizeHTML($row['domain'])?></a></td>

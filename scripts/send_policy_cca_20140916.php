@@ -2,7 +2,7 @@
 <?php
 /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2009  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -116,9 +116,9 @@ $query = "
 	AND `id` >= '$lastid'
 	ORDER BY `id`";
 
-$res = mysql_query($query);
+$res = $db_conn->query($query);
 
-while($row = mysql_fetch_assoc($res))
+while($row = $res->fetch_assoc())
 {
 	$mailtxt = "Dear ${row["fname"]} ${row["lname"]},\n".$lines_EN."\n\n";
 

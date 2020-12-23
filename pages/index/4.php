@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 */ ?>
 
 <?
-   if(!array_key_exists('mconn',$_SESSION) || !$_SESSION['mconn'])
+   if(!$GLOBALS["db_conn"])
    {
      echo _("This function is currently unavailable. Please come back later.");
      exit;

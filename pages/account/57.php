@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,12 +25,12 @@
   } else {
     $user_id = intval($_REQUEST['userid']);
     $query = "select * from `users` where `id`='$user_id' and `users`.`deleted`=0";
-    $res = mysql_query($query);
-    if(mysql_num_rows($res) <= 0)
+    $res = $db_conn->query($query);
+    if($res->num_rows <= 0)
     {
       echo _("I'm sorry, the user you were looking for seems to have disappeared! Bad things are afoot!");
     } else {
-      $row = mysql_fetch_assoc($res);
+      $row = $res->fetch_assoc();
 ?>
 <table align="center" valign="middle" border="0" cellspacing="0" cellpadding="0" class="wrapper">
   <tr>

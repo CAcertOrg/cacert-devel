@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,40 +21,40 @@ if(array_key_exists('location',$_REQUEST) && $_REQUEST['location'] != "") {
 	{
 		$bits = explode(",", $_REQUEST['location']);
 
-		$loc = trim(mysql_escape_string($bits['0']));
-		$reg = ''; if(array_key_exists('1',$bits)) $reg=trim(mysql_escape_string($bits['1']));
-		$ccname = ''; if(array_key_exists('2',$bits)) $ccname=trim(mysql_escape_string($bits['2']));
+		$loc = trim($db_conn->real_escape_string($bits['0']));
+		$reg = ''; if(array_key_exists('1',$bits)) $reg=trim($db_conn->real_escape_string($bits['1']));
+		$ccname = ''; if(array_key_exists('2',$bits)) $ccname=trim($db_conn->real_escape_string($bits['2']));
 		$query = "select `locations`.`id` as `locid` from `locations`, `regions`, `countries` where
 			`locations`.`name` like '$loc%' and `regions`.`name` like '$reg%' and `countries`.`name` like '$ccname%' and
 			`locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
 			order by `locations`.`name` limit 1";
-		$res = mysql_query($query);
-                if($reg != "" && $ccname == "" && mysql_num_rows($res) <= 0)
+		$res = $db_conn->query($query);
+                if($reg != "" && $ccname == "" && $res->num_rows <= 0)
                 {
                         $query = "select `locations`.`id` as `locid` from `locations`, `regions`, `countries` where
                                 `locations`.`name` like '$loc%' and `countries`.`name` like '$reg%' and
                                 `locations`.`regid`=`regions`.`id` and `locations`.`ccid`=`countries`.`id`
                                 order by `locations`.`name` limit 1";
-                        $res = mysql_query($query);
+                        $res = $db_conn->query($query);
                 }
-                if(mysql_num_rows($res) <= 0)
+                if($res->num_rows <= 0)
                         die("Unable to find suitable location");
 
-		$row = mysql_fetch_assoc($res);
+		$row = $res->fetch_assoc();
 		$_REQUEST['location'] = $row['locid'];
 	}
 
 	$locid = intval($_REQUEST['location']);
 	$query = "select * from `locations` where `id`='$locid'";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0)
+	$res = $db_conn->query($query);
+	if($res->num_rows > 0)
 	{
-		$loc = mysql_fetch_assoc($res);
+		$loc = $res->fetch_assoc();
 	        $_SESSION['profile']['ccid'] = $loc['ccid'];
         	$_SESSION['profile']['regid'] = $loc['regid'];
 	        $_SESSION['profile']['locid'] = $loc['id'];
 		$query = "update `users` set `locid`='$loc[id]', `regid`='$loc[regid]', `ccid`='$loc[ccid]' where `id`='".$_SESSION['profile']['id']."'";
-		mysql_query($query);
+		$db_conn->query($query);
 		echo "<p>"._("Your location has been updated")."</p>\n";
 	} else {
 		echo "<p>"._("I was unable to match your location with places in my database.")."</p>\n";
@@ -62,14 +62,14 @@ if(array_key_exists('location',$_REQUEST) && $_REQUEST['location'] != "") {
 }
 
 	$query = "select `name` from `locations` where `id`='".$_SESSION['profile']['locid']."'";
-	$res = mysql_query($query);
-	$loc = mysql_fetch_assoc($res);
+	$res = $db_conn->query($query);
+	$loc = $res->fetch_assoc();
 	$query = "select `name` from `regions` where `id`='".$_SESSION['profile']['regid']."'";
-	$res = mysql_query($query);
-	$reg = mysql_fetch_assoc($res);
+	$res = $db_conn->query($query);
+	$reg = $res->fetch_assoc();
 	$query = "select `name` from `countries` where `id`='".$_SESSION['profile']['ccid']."'";
-	$res = mysql_query($query);
-	$cc = mysql_fetch_assoc($res);
+	$res = $db_conn->query($query);
+	$cc = $res->fetch_assoc();
 ?>
 <script language="javascript" src="/ac.js"></script>
 <script language="javascript">
