@@ -444,7 +444,7 @@ sub calculateDays($)
     my @sum = $dbh->selectrow_array("select sum(`points`) as `total` from `notary` where `to`='".$_[0]."' and `deleted`=0 group by `to`");
     SysLog("Summe: $sum[0]\n") if($debug);
 
-    return ($sum[0]>=50)?730:180;
+    return ($sum[0]>=50)?366:180;
   }
   return 180;
 }
