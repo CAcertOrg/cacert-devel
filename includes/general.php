@@ -569,7 +569,8 @@
 			}
 
 			$mxhostprio = array();
-			for($i = 0; $i < count($mxhostrr); $i++) {
+			$lim = count( $mxhostrr ) ;
+			for($i = 0; $i < $lim ; $i++) {
 				$mx_host = trim($mxhostrr[$i], '.');
 				$mx_prio = $mxweight[$i];
 				if(empty($mxhostprio[$mx_prio])) {

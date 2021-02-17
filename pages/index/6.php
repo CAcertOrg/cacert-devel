@@ -33,9 +33,10 @@
 		$nums[] = $i;
 	}
 
-	for($i = 0; $i < count($nums); $i++)
+	$lim = count( $nums ) ;
+	for($i = 0; $i < $lim ; $i++)
 	{
-		if(count($num2) == count($nums))
+		if(count($num2) == $lim )
 			break;
 
 		$val = rand(1, 5);

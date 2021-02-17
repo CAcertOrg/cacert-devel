@@ -72,7 +72,8 @@
 		if(mysql_num_rows($res) <= 0)
 		{
 			$bits = explode(".", $ref);
-			for($i = 1; $i < count($bits); $i++)
+			$lim = count( $bits ) ;
+			for($i = 1; $i < $lim ; $i++)
 			{
 				if($ref2 != "")
 					$ref2 .= ".";

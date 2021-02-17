@@ -20,7 +20,7 @@
 <p><?php echo _("On this page you find materials that can be used for CAcert publicity")?>
 <br /><?php echo sprintf(_("Use of these materials is subject to the rules described in the %s."), "<a href='http://svn.cacert.org/CAcert/PR/CAcert_Styleguide.pdf'>CAcert Style Guide</a>")?></p>
 
-<h5><?php echo _("CAcert logos")?></h4>
+<h5><?php echo _("CAcert logos")?></h5>
 
 <p><?php echo sprintf(_("Here you find a number of logos to use in documents or to add to your website. Help CAcert to get some publicity by using a logo to link back to %s or to indicate that you or your website are using a CAcert certificates for security and privacy."), "<a href='http://www.cacert.org'>http://www.cacert.org</a>")?></p>
 

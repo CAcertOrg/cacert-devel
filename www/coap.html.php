@@ -36,7 +36,6 @@ table#TAB1 td { border: 0 }
 
 <p>
 <div style="text-align: right;"><img align="absbottum" style="width: 30%; float: none;" alt="CAcert logo" src="http://www.cacert.org/logos/CAcert-logo-colour-1000.png" vspace="3" /></div>
-</div>
 </p>
 <p>
 <div style="text-align: right;">
@@ -63,18 +62,17 @@ table#TAB1 td { border: 0 }
     <td border=0></td>
     <td border=0 align="right"><font size=-7>class 3: AD7C 3F64 FC44 39FE F4E9 0BE8 F47C 6CFA 8AAD FDCE</font></td>
 <tr>
-</font>
-</td>
 </tr>
 </tbody>
 </table>
 <p>
 <?php
-	echo _("The CAcert Organisation Programme (COAP) aims to verify the identity of the organisation."), "<br>\n";
-	echo _("The Applicant asks the Organisation Assurer to verify to CAcert Community that the information provided by the Applicant is correct, and according to the official trade office registration bodies."), "<br>\n";
+$brnl = "<br>\n" ;
+	echo _("The CAcert Organisation Programme (COAP) aims to verify the identity of the organisation."), $brnl;
+	echo _("The Applicant asks the Organisation Assurer to verify to CAcert Community that the information provided by the Applicant is correct, and according to the official trade office registration bodies."), $brnl;
 	echo _("For more information about the CAcert Organisation Assurance Programme, including detailed guides to CAcert Organisation Assurers, please visit:"), ' ';
 	echo ' <a href="http://www.cacert.org/">http://www.cacert.org</a><br>';
-	echo _("A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."), "<br>\n";
+	echo _("A CAcert Arbitrator can require the Organisation Assurer to deliver the completed forms and accompanying documents in the event of a dispute."), $brnl;
 	echo _("For the CAcert Individual Assurance Programme there is a separate special CAP form.");
 ?>
 
@@ -92,23 +90,26 @@ table#TAB1 td { border: 0 }
 <tbody>
 <tr>
 <?php
-	echo '    <td nowrap>'. _("Name of the organisation").'</td>', "\n";
+$tdtag = "</td>" ;
+$endtrtag = "</tr>" ;
+
+	echo '    <td nowrap>'. _("Name of the organisation").$endtdtag, "\n";
         echo '    <td colspan="3"><input size=\"60\" maxlength=\"80\" name=\"name\"></td>', "\n";
-	echo '</tr>', "\n";
+	echo $endtrtag, "\n";
 	echo '<tr>', "\n";
 	echo '    <td nowrap>'. _("Address").' ('. _("comma separated"). ')';
         echo '    <td colspan="3"><input size=\"60\" maxlength=\"80\" name=\"address\"></td>', "\n";
-	echo '</tr>', "\n";
+	echo $endtrtag, "\n";
 ?>
 </tbody>
 <tbody>
 <tr>
 <?php
-	echo '    <td>'. _("Jurisdiction info"). '</td>', "\n";
+	echo '    <td>'. _("Jurisdiction info"). $endtdtag, "\n";
 	echo '    <td align="left"><i>'. _("type"). '</td></i>', "\n";
 	echo '    <td align="left"><i>'. _("state"). '</td></i>', "\n";
 	echo '    <td align="right"><i>'. _("country code"). '</td></i>', "\n";
-	echo '</tr>', "\n";
+	echo $endtrtag, "\n";
 	echo '<tr>', "\n";
 	echo '    <td></td>', "\n";
         echo '    <td align="left"><input size=\"25\" maxlength=\"80\" name=\"type\"></td>', "\n";
@@ -122,22 +123,22 @@ table#TAB1 td { border: 0 }
 	for ( $i = 0; $i < 2; $i++ ) {
 	    echo '<tr>', "\n", '    <td>';
 	    if ( $i < 1 ) { echo _("Registered Trade Names");}
-	    echo '</td>', "\n";
+	    echo $endtdtag, "\n";
 	    for ( $j = 1; $j <= 3; $j++ ) {
 		printf("    <td align=\"%s\"><input size=\"25\" maxlength=\"80\" name=\"dba%d\"></td>\n", $j > 2 ? "right" : ($j > 2 ? "center" : "left") , $i * 3 + $j);
 	    }
-            echo '</tr>', "\n";
+            echo $endtrtag, "\n";
 	}
 ?>
 </tbody>
 <tbody>
 <tr>
 <?php
-	echo '    <td>'. _("Trade Office info"). '</td>', "\n";
+	echo '    <td>'. _("Trade Office info"). $endtdtag, "\n";
 	echo '    <td align="left"><i>'. _("reg. number"). '</td></i>', "\n";
 	echo '    <td align="left"><i>'. _("trade office"). '</td></i>', "\n";
 	echo '    <td align="right"><i>'. _("region"). '</td></i>', "\n";
-	echo '</tr>', "\n";
+	echo $endtrtag, "\n";
 	echo '<tr>', "\n";
 	echo '    <td></td>', "\n";
         echo '    <td align="left"><input size=\"25\" maxlength=\"80\" name=\"identity\"></td>', "\n";
@@ -151,11 +152,11 @@ table#TAB1 td { border: 0 }
         for ( $i = 0; $i < 2; $i++ ) {
             echo '<tr>', "\n", '    <td>';
             if ( $i < 1 ) { echo _("Internet Domain(s)");}
-            echo '</td>', "\n";
+            echo $endtdtag, "\n";
             for ( $j = 1; $j <= 3; $j++ ) {
                 printf("    <td align=\"%s\"><input size=\"25\" maxlength=\"80\" name=\"domain%d\"></td>\n",  $j > 2 ? "right" : ($j > 2 ? "center" : "left"), $i * 3 + $j);
             }
-            echo '</tr>', "\n";
+            echo $endtrtag, "\n";
         }
 ?>
 </tbody>
@@ -164,7 +165,7 @@ table#TAB1 td { border: 0 }
 	for ( $i = 1; $i <=2; $i++ ) {
 	    echo '<tr>', "\n", '    <td>';
 	    if( $i < 2 ) { echo _("Organisation Administrator(s)"); }
-	    echo '</td>', "\n";
+	    echo $endtdtag, "\n";
 	    printf("    <td colspan=\"3\"<input size=\"65\" maxlength=\"80\" name=\"admin%d\"></td>\n</tr>\n",$i);
 	    echo "<tr>\n    <td></td><td colspan=\"2\" align=\"left\"><i>". _("email") . "</i> ";
 	    printf("<input size=\"45\" maxlength=\"80\" name=\"admin%demail\"></td>\n", $i);
@@ -182,8 +183,7 @@ table#TAB1 td { border: 0 }
 	echo _("Organisation's Statement");
 ?>
 </big></big></th>
-</thead>
-<tbody>
+</tr>
 <tr>
     <td colspan="2"><i>
 <?php
@@ -275,7 +275,7 @@ table#TAB1 td { border: 0 }
 ?>
 <br><input maxlength="10" size="11" name="assurerdate"></td>
 <?php
-	echo '    <td align="right" valign="top">'._("Signature").'</td>', "\n";
+	echo '    <td align="right" valign="top">'._("Signature").$endtdtag, "\n";
 ?>
 </tr>
 <tr><td colspan="2"></td><tr>
@@ -296,7 +296,7 @@ table#TAB1 td { border: 0 }
 <?php
 	echo _("How To Print this CAP form");
 ?>
-</big></big></td>
+</big></big></th>
 </tr>
 </thead>
 </table>

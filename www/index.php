@@ -589,4 +589,3 @@ if ($oldid == 52 )
 	showheader(_("Welcome to CAcert.org"));
 	includeit($id);
 	showfooter();
-?>

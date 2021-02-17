@@ -328,7 +328,7 @@ function verifyEmail($email)
 
 
 		$cwd = '/tmp/gpgspace'.$insert_id;
-		mkdir($cwd,0755);
+		@mkdir($cwd,0755);
 
 		$fp = fopen("$cwd/gpg.csr", "w");
 		fputs($fp, clean_gpgcsr($CSR));

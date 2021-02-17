@@ -132,7 +132,8 @@
     <td class="DataTD"><b><?php echo _("New Assurers")?></b>
     <td class="DataTD"><b><?php echo _("New Certificates")?></b>
   </tr>
-<?php 	for($i = 0; $i < count($stats['growth_last_years']); $i++) {
+<?php 	$lim = count( $stats['growth_last_years'] ) ;
+for($i = 0; $i < $lim ; $i++) {
 ?>
   <tr>
     <td class="DataTD"><?php echo $stats['growth_last_years'][$i]['date'];?></td>
