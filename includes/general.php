@@ -57,7 +57,7 @@
 		exit;
 	}
 
-	if(array_key_exists('HTTP_HOST',$_SERVER) &&
+	if(array_key_exists('HTTP_HOST',$_SERVER) && array_key_exists('tverify',  $_SESSION['_config']) &&
 			($_SERVER['HTTP_HOST'] == $_SESSION['_config']['securehostname'] ||
 			$_SERVER['HTTP_HOST'] == $_SESSION['_config']['tverify']))
 	{
