@@ -1416,7 +1416,7 @@ function write_se_log($uid, $adminid, $type, $info){
 	$uid = intval($uid);
 	$adminid = intval($adminid);
 	$type = mysqli_real_escape_string($_SESSION['mconn'], $type);
-	$info = mysqli_real_escape_string($_SESSION['mconn'], g($info));
+	$info = mysqli_real_escape_string($_SESSION['mconn'], $info);
 	$query="insert into `adminlog` (`when`, `uid`, `adminid`,`type`,`information`) values
 		(Now(), $uid, $adminid, '$type', '$info')";
 	return mysqli_query($_SESSION['mconn'], $query);
