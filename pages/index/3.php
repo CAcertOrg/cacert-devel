@@ -30,9 +30,9 @@
 
 <h3><?=_("Class 3 PKI Key")?></h3>
 <ul class="no_indent">
-	<li><a href="certs/CAcert_Class3Root_x14E228.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
-	<li><a href="certs/CAcert_Class3Root_x14E228.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
-	<li><a href="certs/CAcert_Class3Root_x14E228.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
+	<li><a href="certs/class3_2021.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/class3_2021.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
+	<li><a href="certs/class3_2021.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
     <li><?=_("SHA256 fingerprint:")?> 1BC5 A61A 2C0C 0132 C52B 284F 3DA0 D8DA CF71 7A0F 6C1D DF81 D80B 36EE E444 2869</li>
     <li><?=_("SHA1 fingerprint:")?> D8A8 3A64 117F FD21 94FE E198 3DD2 5C7B 32A8 FFC8</li>
