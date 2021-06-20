@@ -40,6 +40,9 @@ my $paranoid=1;
 
 my $debug=0;
 
+# number of attempts before giving up
+my $warn_threshold = 3;
+
 #my $serialport="/dev/ttyS0";
 my $serialport="/dev/ttyUSB0";
 
@@ -734,7 +737,9 @@ sub HandleCerts($$)
 
   SysLog "HandleCerts $table\n";
 
-  my $sth = $dbh->prepare("select * from $table where crt_name='' and csr_name!='' and warning<3");
+  my $sth = $dbh->prepare(sprintf(
+    "select * from %s where crt_name='' and csr_name!='' and warning<%d", $table, $warn_threshold
+  ));
   $sth->execute();
   #$rowdata;
   while ( my $rowdata = $sth->fetchrow_hashref() )
@@ -904,7 +909,7 @@ sub HandleCerts($$)
     else
     {
       SysLog("Could not find the issued certificate. $crtname ".$row{"id"}."\n");
-      $dbh->do("update `$table` set warning=warning+1 where `id`='".$row{'id'}."'");
+      $dbh->do(sprintf("update %s set warning=warning+1 where id=%d", $table, $row{'id'}));
     }
   }
 }
@@ -1078,7 +1083,9 @@ sub sendRevokeMail()
 
 sub HandleGPG()
 {
-  my $sth = $dbh->prepare("select * from gpg where crt='' and csr!='' ");
+  my $sth = $dbh->prepare(sprintf(
+    "select * from gpg where crt='' and csr!='' and warning<%d", $warn_threshold
+  ));
   $sth->execute();
   my $rowdata;
   while ( $rowdata = $sth->fetchrow_hashref() )
@@ -1144,7 +1151,7 @@ sub HandleGPG()
       sendmail($user{email}, "[CAcert.org] Your GPG/PGP Key", $body, "support\@cacert.org", "", "", "CAcert Support");
     } else {
       SysLog("Could not find the issued gpg key. ".$row{"id"}."\n");
-      #$dbh->do("delete from `gpg` where `id`='".$row{'id'}."'");
+      $dbh->do(sprintf("update gpg set warning=warning+1 where id=%d", $row{'id'}));
     }
   }
 }
