@@ -332,7 +332,7 @@ define('LLBLUE','#D6E2EB'); // lighhter blue RGB 173 197 215
 define('LIME', '#C7FF00');  // RGB 199 255 0
 define('GREEN', '#00BE00'); // 0 190 0
 
-define('POBOX','Hangar 10 Airfield Avenue, Murwillumbah NSW 2484, New South Wales, (Commonwealth of) Australia ');
+define('POBOX','Clos Belmont 2, 1208 Genève, Suisse ');
 define('WEB', 'http://www.cacert.org');
 define('WIKI','http://wiki.cacert.org/wiki');
 define('ROOTKEYS','http://www.cacert.org/index.php?id=3');
@@ -348,11 +348,11 @@ define('POLICY','policy/'); // default polciy doc directory
 define('EXT','.html'); // default polciy doc extention, should be html
 /* finger print CAcert Root Key SHA256 since 2019*/ // should obtain this automatically
 define('CLASS1_SHA256','07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5');
-define('CLASS3_SHA256','F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544');
+define('CLASS3_SHA256','1BC5 A61A 2C0C 0132 C52B 284F 3DA0 D8DA CF71 7A0F 6C1D DF81 D80B 36EE E444 2869');
 /* finger print CAcert Root Key */  // not to use since 2019
 /* finger print CAcert Root Key */ // should obtain this automatically
 define('CLASS1_SHA1','DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5');
-define('CLASS3_SHA1','A7C4 8FBE 6B02 6DBD 0EC1 B465 B88D D813 EE1D EFA0');
+define('CLASS3_SHA1','D8A8 3A64 117F FD21 94FE E198 3DD2 5C7B 32A8 FFC8');
 // next two are not used on the form
 define('CLASS1_MD5','A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B');
 define('CLASS3_MD5','F7:25:12:82:4E:67:B5:D0:8D:92:B7:7C:0B:86:7A:42');
