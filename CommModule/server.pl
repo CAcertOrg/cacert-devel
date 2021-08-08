@@ -26,6 +26,8 @@ my $serialport="/dev/ttyS0";
 
 my $CPSUrl="http://www.cacert.org/cps.php";
 
+my $GPGCertDigestAlgo="SHA256";
+
 my $OCSPUrl="http://ocsp.cacert.org/";
 
 my $gpgbin="/usr/bin/gpg";
@@ -688,7 +690,7 @@ sub SignOpenPGP
 
     $ENV{'LANG'}="";
 
-    my $line="$gpgbin --no-tty --default-key $gpgID --homedir $homedir --default-cert-expire $days"."d --ask-cert-expire --cert-policy-url $CPSUrl --command-fd 0 --status-fd 1 --logger-fd 2 --sign-key $keyid ";
+    my $line="$gpgbin --no-tty --default-key $gpgID --homedir $homedir --default-cert-expire $days"."d --ask-cert-expire --cert-policy-url $CPSUrl --command-fd 0 --cert-digest-algo $GPGCertDigestAlgo --status-fd 1 --logger-fd 2 --sign-key $keyid ";
     SysLog($line."\n");
 
     my $pid = open3($stdin,$stdout,$stderr,$line);
