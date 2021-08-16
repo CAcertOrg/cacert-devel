@@ -30,12 +30,12 @@
 
 <h3><?=_("Class 3 PKI Key")?></h3>
 <ul class="no_indent">
-	<li><a href="certs/class3_X0E.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
-	<li><a href="certs/class3_X0E.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
-	<li><a href="certs/class3_X0E.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
+	<li><a href="certs/CAcert_Class3Root_x14E228.crt"><?=_("Intermediate Certificate (PEM Format)")?></a></li>
+	<li><a href="certs/CAcert_Class3Root_x14E228.der"><?=_("Intermediate Certificate (DER Format)")?></a></li>
+	<li><a href="certs/CAcert_Class3Root_x14E228.txt"><?=_("Intermediate Certificate (Text Format)")?></a></li>
 	<li><a href="<?=$_SERVER['HTTPS']?"https":"http"?>://crl.cacert.org/class3-revoke.crl">CRL</a></li>
-    <li><?=_("SHA256 fingerprint:")?> F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544</li>
-    <li><?=_("SHA1 fingerprint:")?> A7C4 8FBE 6B02 6DBD 0EC1 B465 B88D D813 EE1D EFA0</li>
+    <li><?=_("SHA256 fingerprint:")?> 1BC5 A61A 2C0C 0132 C52B 284F 3DA0 D8DA CF71 7A0F 6C1D DF81 D80B 36EE E444 2869</li>
+    <li><?=_("SHA1 fingerprint:")?> D8A8 3A64 117F FD21 94FE E198 3DD2 5C7B 32A8 FFC8</li>
 </ul>
 
 <h3><?=_("GPG Key")?></h3>
