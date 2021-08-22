@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,8 +38,8 @@
 
 <?
 	$query = "select * from `email` where `memid`='".intval($_SESSION['profile']['id'])."' and `deleted`=0 and `hash`=''";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{ ?>
   <tr>
     <td class="DataTD"><input type="checkbox" id="addid<?=intval($row['id'])?>" name="addid[]" value="<?=intval($row['id'])?>"></td>

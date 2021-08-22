@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,13 +24,13 @@
 	{
 		$approve = intval($_REQUEST['approve']);
 		$query = "select * from `advertising` where `id`='$approve' and `expires`='0000-00-00 00:00:00'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = $db_conn->query($query);
+		if($res->num_rows > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = $res->fetch_assoc();
 			$end = date("Y-m-d H:i:s", mktime(date("H"), date("i"), date("s"), date("m")+$row['months'], date("d"), date("Y")));
 			$query = "update `advertising` set `expires`='$end', `active`=1, `approvedby`='".$_SESSION['profile']['id']."' where `id`='$approve'";
-			mysql_query($query);
+			$db_conn->query($query);
 			echo "<p>The ad was approved and is now active.</p>\n";
 		}
 	}
@@ -38,13 +38,13 @@
 	{
 		$deactive = intval($_REQUEST['deactive']);
 		$query = "select * from `advertising` where `id`='$deactive'";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0)
+		$res = $db_conn->query($query);
+		if($res->num_rows > 0)
 		{
-			$row = mysql_fetch_assoc($res);
+			$row = $res->fetch_assoc();
 			$end = date("Y-m-d H:i:s", mktime(date("H"), date("i"), date("s"), date("m")+$row['months'], date("d"), date("Y")));
 			$query = "update `advertising` set `active`=0 where `id`='$deactive'";
-			mysql_query($query);
+			$db_conn->query($query);
 			echo "<p>The ad was deactivated and is now inactive.</p>\n";
 		}
 	}
@@ -69,8 +69,8 @@
 		$query .= "and `active`=1 having `timeleft` > 0 ";
 	$query .= "order by `id` desc";
 
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 	{
 		if($row['expires'] == "0000-00-00 00:00:00")
 			$status = "Pending";

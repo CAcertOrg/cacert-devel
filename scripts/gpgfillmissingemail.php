@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ function csvize($str)
 	mb_regex_encoding("UTF-8");
 
 echo "Seaching ...\n";
-	$res = mysql_query("SELECT * FROM gpg WHERE crt != '' and email=''");
+	$res = $db_conn->query("SELECT * FROM gpg WHERE crt != '' and email=''");
 	if (!$res) {
 		echo "Query FROM gpg failed!\n";
 		exit;
@@ -50,7 +50,7 @@ echo "Seaching ...\n";
 echo "Found:\n";
 
 	$keys = array();
-	while ($row = mysql_fetch_assoc($res)) {
+	while ($row = $res->fetch_assoc()) {
 	    echo "ID: ".$row["id"]."\n"; 
 		$crt=$row["crt"];
 
@@ -74,7 +74,7 @@ echo "Found:\n";
 
 				echo "EMail: *$mail**\n";
 				echo "update gpg set email='$mail' where id=$row[id]\n";
-				  mysql_query("update gpg set email='$mail' where id=$row[id];");
+				  $db_conn->query("update gpg set email='$mail' where id=$row[id];");
 				}
 			}
 		}
@@ -82,7 +82,7 @@ echo "Found:\n";
 
 	}
 	echo "Done\n";
-	mysql_free_result($res);
+	$res->close();
 
 
 ?>

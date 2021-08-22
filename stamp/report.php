@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,11 +15,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$arr = explode("//", mysql_real_escape_string(trim($_SESSION['_stamp']['ref'])), 2);
+	$arr = explode("//", $db_conn->real_escape_string(trim($_SESSION['_stamp']['ref'])), 2);
 	$arr = explode("/", $arr['1'], 2);
 	$ref = $arr['0'];
 
-	$refer = mysql_real_escape_string(strip_tags(trim($_SESSION['_stamp']['ref'])));
+	$refer = $db_conn->real_escape_string(strip_tags(trim($_SESSION['_stamp']['ref'])));
 	$name = clean('name');
 	$email = clean('email');
 	$comment = clean('comment');
@@ -52,11 +52,11 @@
 
 	if($process != "")
 	{
-		$IP = mysql_real_escape_string(trim($_SERVER['REMOTE_ADDR']));
+		$IP = $db_conn->real_escape_string(trim($_SERVER['REMOTE_ADDR']));
 		$iplong = ip2long($IP);
-		mysql_query("insert into `abusereports` set `when`=NOW(), `IP`='$iplong', `url`='$refer', `name`='$name', `email`='$email',
+		$db_conn->query("insert into `abusereports` set `when`=NOW(), `IP`='$iplong', `url`='$refer', `name`='$name', `email`='$email',
 				`comment`='$comment', `reason`='$reason'");
-		$id = mysql_insert_id();
+		$id = $db_conn->insert_id;
 
 		$body  = "New Abuse Report has been lodged via the the Stamp Interface:\n\n";
 		$body .= "Reported ID: $id\n";

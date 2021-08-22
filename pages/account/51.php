@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
 <?
 	$uid = intval($_GET['photoid']);
 	$query = "select * from `tverify` where `id`='$uid' and `modified`=0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0) { ?>
+	$res = $db_conn->query($query);
+	if($res->num_rows > 0) { ?>
 <img src="account.php?id=51&amp;photoid=<?=$uid ?>&amp;img=show" border="0" width="800">
 <? } else {
         $query = "select * from `tverify` where `id`='$uid' and `modified`=1";
-        $res = mysql_query($query);
-        if(mysql_num_rows($res) > 0)
+        $res = $db_conn->query($query);
+        if($res->num_rows > 0)
         {
                 echo _("This UID has already been voted on.");
         } else {

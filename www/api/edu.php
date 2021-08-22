@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,18 +20,18 @@
    
   if ($ipadress=='72.36.220.19' && $_SERVER['HTTPS']=="on")
   {
-    $serial=mysql_escape_string($_REQUEST["serial"]);
+    $serial=$db_conn->real_escape_string($_REQUEST["serial"]);
     $root=intval($_REQUEST["root"]);
        
     $sql="select memid from emailcerts where serial='$serial' and rootcert='$root'";
-    $query= mysql_query($sql); 
-    if(mysql_num_rows($query) != 1)
+    $query= $db_conn->query($sql);
+    if($query->num_rows != 1)
     {
       echo "NOT FOUND: ".sanitizeHTML($sql);
     }
     else
     {
-      $memid = mysql_fetch_assoc($query);
+      $memid = $query->fetch_assoc();
       echo sanitizeHTML($memid['memid']);
     }
   }

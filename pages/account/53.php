@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */ ?>
 <?
-	$town = array_key_exists('town',$_REQUEST)?mysql_escape_string(stripslashes($_REQUEST['town'])):"";
+	$town = array_key_exists('town',$_REQUEST)?$db_conn->real_escape_string(stripslashes($_REQUEST['town'])):"";
 	$regid = array_key_exists('regid',$_REQUEST)?intval($_REQUEST['regid']):0;
 	$ccid = array_key_exists('ccid',$_REQUEST)?intval($_REQUEST['ccid']):0;
 	$start = array_key_exists('start',$_REQUEST)?intval($_REQUEST['start']):0;
@@ -29,7 +29,7 @@
 
 	if($regid > 0)
 	{
-		$reg = mysql_fetch_assoc(mysql_query("select * from `regions` where `id`='$regid'"));
+		$reg = $db_conn->query("select * from `regions` where `id`='$regid'")->fetch_assoc();
 		$display = "<ul class='top'>\n<li>\n".
 			"<a href='account.php?id=53&amp;regid=$regid'>".sanitizeHTML($reg['name'])."</a> - <a href='account.php?action=add&amp;id=54&amp;regid=$regid'>"._("Add")."</a>\n".
 			$display;
@@ -38,7 +38,7 @@
 
 	if($ccid > 0)
 	{
-		$cnt = mysql_fetch_assoc(mysql_query("select * from `countries` where `id`='$ccid'"));
+		$cnt = $db_conn->query("select * from `countries` where `id`='$ccid'")->fetch_assoc();
 		$display = "<ul class='top'>\n<li>\n".
 			"<a href='account.php?id=53&amp;ccid=$ccid'>".sanitizeHTML($cnt['name'])."</a> - <a href='account.php?action=add&amp;id=54&amp;ccid=$ccid'>"._("Add")."</a>\n".
 			$display;
@@ -51,16 +51,16 @@
 	{
 		echo "<ul>\n";
 		$query = "select * from `countries` order by `name`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = $db_conn->query($query);
+		while($row = $res->fetch_assoc())
 			echo "<li><a href='account.php?id=53&amp;ccid=".intval($row['id'])."'>".sanitizeHTML($row['name'])."</a></li>\n";
 
 		echo "</ul>\n</li>\n</ul></div>\n<br>\n";
 	} elseif($regid <= 0) {
 		echo "<ul>\n";
 		$query = "select * from `regions` where `ccid`='$ccid' order by `name`";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = $db_conn->query($query);
+		while($row = $res->fetch_assoc())
 		{
 			echo "<li>( <a href='account.php?action=edit&amp;id=54&regid=".intval($row['id'])."'>"._("edit")."</a> |";
 			echo " <a href='account.php?action=delete&amp;id=53&regid=".intval($row['id'])."'";
@@ -74,11 +74,11 @@
 		if($town != "")
 		{
 			$query = "select * from `locations` where `regid`='$regid' and `name` < '$town'";
-			$start = mysql_num_rows(mysql_query($query));
+			$start = $db_conn->query($query)->num_rows;
 		}
 		$query = "select * from `locations` where `regid`='$regid' order by `name` limit $start, $limit";
-		$res = mysql_query($query);
-		while($row = mysql_fetch_assoc($res))
+		$res = $db_conn->query($query);
+		while($row = $res->fetch_assoc())
 		{
 			echo "<li>( <a href='account.php?action=move&amp;id=54&amp;locid=".intval($row['id'])."'>"._("move")."</a> |";
 			echo " <a href='account.php?action=aliases&amp;id=54&amp;locid=".intval($row['id'])."'>"._("aliases")."</a> |";
@@ -89,7 +89,7 @@
 
 		echo "</ul>\n</li>\n</ul>\n</li>\n</ul></div>\n<br>\n";
 		$st="";$prev="";$end="";$next="";
-		$rc = mysql_num_rows(mysql_query("select * from `locations` where `regid`='$regid'"));
+		$rc = $db_conn->query("select * from `locations` where `regid`='$regid'")->num_rows;
 		if($start > 0)
 		{
 			$prev = $start - $limit;

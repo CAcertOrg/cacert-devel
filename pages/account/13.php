@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 */ ?>
 <?
   $query = "select * from `users` where `id`='".intval($_SESSION['profile']['id'])."' and `users`.`deleted`=0";
-  $res = mysql_query($query);
-  $user = mysql_fetch_assoc($res);
+  $res = $db_conn->query($query);
+  $user = $res->fetch_assoc();
 
   $year = intval(substr($user['dob'], 0, 4));
   $month = intval(substr($user['dob'], 5, 2));

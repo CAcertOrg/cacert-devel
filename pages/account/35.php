@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@ $query = "select *
 			where `orginfo`.`id`=`org`.`orgid`
 			and `org`.`memid`='".intval($_SESSION['profile']['id'])."'";
 
-$res = mysql_query($query);
-while($row = mysql_fetch_assoc($res))
+$res = $db_conn->query($query);
+while($row = $res->fetch_assoc())
 {
 	?>
 	<tr>
@@ -55,8 +55,8 @@ while($row = mysql_fetch_assoc($res))
 	
 	//domain info
 	$query = "select `domain` from `orgdomains` where `orgid`='".intval($row['id'])."'";
-	$res1 = mysql_query($query);
-	while($domain = mysql_fetch_assoc($res1))
+	$res1 = $db_conn->query($query);
+	while($domain = $res1->fetch_assoc())
 	{
 		?>
 		<tr>
@@ -76,10 +76,10 @@ while($row = mysql_fetch_assoc($res))
 	
 	//org admins
 	$query = "select * from `org` where `orgid`='".intval($row['id'])."'";
-	$res2 = mysql_query($query);
-	while($org = mysql_fetch_assoc($res2))
+	$res2 = $db_conn->query($query);
+	while($org = $res2->fetch_assoc())
 	{
-		$user = mysql_fetch_assoc(mysql_query("select * from `users` where `id`='".intval($org['memid'])."'"));
+		$user = $db_conn->query("select * from `users` where `id`='".intval($org['memid'])."'")->fetch_assoc();
 		?> 
 		<tr>
 			<td class="DataTD"><a href='mailto:<?=$user['email']?>'><?=($user['fname'])?> <?=($user['lname'])?></a></td>

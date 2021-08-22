@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,10 +18,11 @@
 
 require_once($_SESSION['_config']['filepath'].'/includes/lib/l10n.php');
 
-if(!function_exists("showheader"))
+if(!function_exists("showbodycontent"))
 {
 	function showbodycontent($title = "CAcert.org", $title2 = "")
 	{
+	    global $db_conn;
 ?> <div id="pagecell1">
   <div id="pageName"><br>
     <div id="pageLogo"><a href="http://<?=$_SESSION['_config']['normalhostname']?>"><img src="/images/cacert4.png" border="0" alt="CAcert.org logo"></a></div>
@@ -44,13 +45,13 @@ google_color_border = "FFFFFF";
   <div id="pageNav">
     <div class="relatedLinks">
       <h3><?=_("Join CAcert.org")?></h3>
-      <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
+      <? if($GLOBALS["db_conn"]) { ?>
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=1"><?=_("Join")?></a>
       <? } ?>
       <a href="/policy/CAcertCommunityAgreement.html"><?=_("Community Agreement")?></a>
       <a href="/index.php?id=3"><?=_("Root Certificate")?></a>
     </div>
-    <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
+    <? if($GLOBALS["db_conn"]) { ?>
     <div class="relatedLinks">
       <h3 class="pointer"><?=_("My Account")?></h3>
       <a href="https://<?=$_SESSION['_config']['normalhostname']?>/index.php?id=4"><?=_("Password Login")?></a>
@@ -64,13 +65,13 @@ google_color_border = "FFFFFF";
       <h3 class="pointer" onclick="explode('trans')">+ <?=_("Translations")?></h3>
       <ul class="menu" id="trans"><? foreach(L10n::$translations as $key => $val) { ?><li><a href="<?=$_SERVER['SCRIPT_NAME']?>?id=<?=intval(array_key_exists('id',$_REQUEST)?$_REQUEST['id']:0)?>&amp;lang=<?=$key?>"><?=$val?></a></li><? } ?></ul>
     </div>
-    <? if(array_key_exists('mconn',$_SESSION) && $_SESSION['mconn']) { ?>
+    <? if($GLOBALS["db_conn"]) { ?>
     <div class="relatedLinks">
       <h3 class="pointer" onclick="explode('recom')"><?=_("Advertising")?></h3>
       <ul class="menu" id="recom"><?
 	$query = "select * from `advertising` where `expires`>NOW() and `active`=1";
-	$res = mysql_query($query);
-	while($row = mysql_fetch_assoc($res))
+	$res = $db_conn->query($query);
+	while($row = $res->fetch_assoc())
 		echo "<li><a href='$row[link]' target='_blank'>$row[title]</a></li>";
 ?></ul>
     </div>

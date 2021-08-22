@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@
 <?
 	$certid = intval($_REQUEST['cert']);
 	$query = "select * from `gpg` where `id`='$certid' and `memid`='".intval($_SESSION['profile']['id'])."'";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) <= 0)
+	$res = $db_conn->query($query);
+	if($res->num_rows <= 0)
 	{
 		echo _("No such OpenPGP key attached to your account.");
 		showfooter();
 		exit;
 	}
-	$row = mysql_fetch_assoc($res);
+	$row = $res->fetch_assoc();
 ?>
 <h3><?=_("Below is your OpenPGP key")?></h3>
 <pre>

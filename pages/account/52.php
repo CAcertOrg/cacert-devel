@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2020  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,13 +21,13 @@ if($_SESSION['profile']['tverify'] <= 0) {
 } else {
 	$uid = intval($_GET['uid']);
 	$query = "select * from `tverify` where `id`='".intval($uid)."' and `modified`=0";
-	$res = mysql_query($query);
-	if(mysql_num_rows($res) > 0) {
-		$row = mysql_fetch_assoc($res);
+	$res = $db_conn->query($query);
+	if($res->num_rows > 0) {
+		$row = $res->fetch_assoc();
 		$memid = intval($row['memid']);
 
 		$query2 = "select * from `tverify-vote` where `tverify`='".intval($uid)."' and `memid`='".intval($_SESSION['profile']['id'])."'";
-		$rc2 = mysql_num_rows(mysql_query($query2));
+		$rc2 = $db_conn->query($query2)->num_rows;
 		if($rc2 > 0) {
 			showheader(_("My CAcert.org Account!"));
 			echo _("You have already voted on this request.");
@@ -36,9 +36,9 @@ if($_SESSION['profile']['tverify'] <= 0) {
 		}
 
 		$query = "select sum(`points`) as `points` from `notary` where `to`='".intval($memid)."' and `deleted` = 0";
-		$notary = mysql_fetch_assoc(mysql_query($query));
+		$notary = $db_conn->query($query)->fetch_assoc();
 		$query = "select * from `users` where `id`='".intval($memid)."'";
-		$user = mysql_fetch_assoc(mysql_query($query));
+		$user = $db_conn->query($query)->fetch_assoc();
 		$tobe = 50 - $notary['points'];
 		if($row['URL'] != '' && $row['photoid'] != '') {
 			$tobe = 150 - $notary['points'];
@@ -74,8 +74,8 @@ if($_SESSION['profile']['tverify'] <= 0) {
 <?
 	} else {
 		$query = "select * from `tverify` where `id`='".intval($uid)."' and `modified`=1";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0) {
+		$res = $db_conn->query($query);
+		if($res->num_rows > 0) {
 			echo _("This UID has already been voted on.")."<br/>";
 		} else {
 			if($uid) echo _("Unable to locate a valid request for that UID.")."<br/>";
@@ -83,13 +83,13 @@ if($_SESSION['profile']['tverify'] <= 0) {
 
 		// Search for open requests:
 		$query = "select * from `tverify` where `modified`=0";
-		$res = mysql_query($query);
-		if(mysql_num_rows($res) > 0) {
+		$res = $db_conn->query($query);
+		if($res->num_rows > 0) {
 			echo "<br/>"._("The following requests are still open:")."<br/><ul>";
-			while($row = mysql_fetch_assoc($res)) {
+			while($row = $res->fetch_assoc()) {
 				$uid=intval($row['id']);
 				$query3 = "select * from `tverify-vote` where `tverify`='".intval($uid)."' and `memid`='".intval($_SESSION['profile']['id'])."'";
-				$rc3 = mysql_num_rows(mysql_query($query3));
+				$rc3 = $db_conn->query($query3)->num_rows;
 				if($rc3 <= 0)
 				{
 					echo "<li><a href='account.php?id=52&amp;uid=".intval($row['id'])."'>".intval($row['id'])."</a></li>\n";
