@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2021  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,11 +58,14 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-For most software, the fingerprint is reported as:
-A6:1B:37:5E:39:0D:9C:36:54:EE:BD:20:31:46:1F:6B
+For most software, the fingerprint is reported as (SHA1):
+DD:FC:DA:54:1E:75:77:AD:DC:A8:7E:88:27:A9:8A:50:60:32:52:A5
+(and/or SHA256):
+07:ED:BD:82:4A:49:88:CF:EF:42:15:DA:20:D4:8C:2B:
+41:D7:15:29:D7:C9:00:F5:70:92:6F:27:7C:C2:30:C5
 
-Under MSIE the thumbprint is reported as:
-135C EC36 F49C B8E9 3B1A B270 CD80 8846 76CE 8F33
+Under MS MMC-Certificates and MS browsers the thumbprint is reported as:
+ddfc da54 1e75 77ad dca8 7e88 27a9 8a50 6032 52a5
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.2 (GNU/Linux)
 
