@@ -896,8 +896,8 @@ sub HandleCerts($$)
       $body .= "https://www.cacert.org/account.php?id=".($server?"15":"6")."&cert=$row{id}\n\n";
       $body .= _("If you have not imported CAcert's root certificate, please go to:")."\n";
       $body .= "https://www.cacert.org/index.php?id=3\n";
-      $body .= "Root cert fingerprint SHA1 = DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5\n\n";
       $body .= "Root cert fingerprint SHA256 = 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5\n";
+      $body .= "Root cert fingerprint SHA1 = DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5\n\n";
       $body .= _("Best regards")."\n"._("CAcert.org Support!")."\n\n";
       sendmail($user{email}, "[CAcert.org] "._("Your certificate"), $body, "support\@cacert.org", "", "", "CAcert Support");
     }
