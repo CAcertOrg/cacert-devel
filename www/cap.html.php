@@ -38,13 +38,13 @@
 	echo '<div style="text-align: right;">', "\n";
 	echo '<big><big><span style="font-weight: bold;">'._("Identity Verification Form (CAP) form").'</span></big></big><br>', "\n";
 	echo '</div>', "\n";
-	echo '<div style="text-align: right;">'.'Hangar 10 Airfield Avenue, Murwillumbah NSW 2484, New South Wales, (Commonwealth of) Australia  - <a href="http://www.cacert.org/"> http://www.cacert.org/</a><br></div>', "\n";
+	echo '<div style="text-align: right;">CAcert Inc., Clos Belmont 2, 1208 Genève, Suisse - <a href="http://www.cacert.org">http://www.CAcert.org</a><br></div>', "\n";
 
 	echo '<table border=1 cellspacing="0" cellpadding="0" bordercolor="lightblue" width="100%" style="color: white; background-color: rgb(112, 154, 186);" rules="groups">', "\n";
 	echo '<tbody>', "\n";
 	echo '<tr><td>', "\n";
 	echo '<tr>', "\n";
-	echo '    <td align="left"><font size=-7>'._("CAcert's Root Certificate sha256 fingerprints (since 2019)").'</font></td>', "\n";
+	echo '    <td align="left"><font size=-7>'._("CAcert's Class 1 Root Certificate sha256 fingerprints (since 2019)").'</font></td>', "\n";
 	echo '    <td align="right"><font size=-7>class 1: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5</font></td>', "\n";
 	echo '</tr>', "\n";
 	echo '<tr>', "\n";
