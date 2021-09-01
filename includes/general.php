@@ -554,10 +554,27 @@
 
 	function checkEmail($email)
 	{
+		if ( is_devmode() ) {
+			return "OK" ;
+             }
+
 		$myemail = mysql_real_escape_string($email);
 		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\+\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/" , $email))
 		{
 			list($username,$domain)=explode('@',$email,2);
+
+			/*
+						   * Check if the MX_WHITELIST environment variable is set,
+							* and, if so, see if it contains the domain name for
+							* this e-mail address.
+							*/
+			if ( strlen( getenv( "MX_WHITELIST" )) > 0 ) {
+				$whitelist_arr = explode( ",", getenv( "MX_WHITELIST" )) ;
+				if ( in_array( $domain, $whitelist_arr ) ) {
+					return "OK" ;
+				}
+			}
+
 			$mxhostrr = array();
 			$mxweight = array();
 			if( !getmxrr($domain, $mxhostrr, $mxweight) ) {
@@ -818,6 +835,40 @@
 		$text=preg_replace("/[^\w-.@]/","",$text);
 		return($text);
 	}
+
+	       /**
+	        * Test whether the MODE environment variable
+	        * is set to DEV.
+	        */
+	       function is_devmode() {
+	               return( getenv( "MODE" ) == "DEV" ) ;
+       }
+
+       /**
+        * Test whether the MODE environment variable
+        * is set to PROD.
+        *
+        * If it is not set at all, assume PROD.
+        */
+       function is_prodmode() {
+	               $prod_mode == false ;
+
+	               $is_prod = getenv( "MODE" ) == "PROD" ;
+	               if ( ! $is_prod && ! ( getenv( "MODE" ) == "DEV" ) ) {
+		                       $prod_mode = true ;
+		               }
+
+               return $prod_mode ;
+       }
+
+       /**
+        * Test whether the MODE environment variable
+        * is set to TEST.
+        */
+       function is_testmode() {
+	               return ( getenv( "MODE" ) == "TEST" ) ;
+       }
+
 
 
 	// returns text message to be shown to the user given the result of is_no_assurer
