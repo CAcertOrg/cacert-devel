@@ -48,7 +48,7 @@
 			$this->SetFont('Arial','I',8);
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','I',8);
-			$this->Cell(0,0,'CAcert Inc., Clos Belmont 2, 1208 GenÃ¨ve, Suisse - http://www.CAcert.org',0,0,'C');
+			$this->Cell(0,0,'CAcert Inc., Clos Belmont 2, 1208 Genève, Suisse - http://www.CAcert.org',0,0,'C');
 			$this->Ln(3);
 			$this->SetFont('Arial','',6);
 			if($_SESSION['_config']['language'] == "ja")
