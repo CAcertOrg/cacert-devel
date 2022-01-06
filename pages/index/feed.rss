@@ -15,6 +15,7 @@
 			  
 			  Merged in children are bug-1442.
 			  Additional changes:
+        2022-01-06: Merged in update for bug-1533 from alkastner
         2021-08-08: Merged in bug-1473 (PGP keys should be signed with SHA256)
 			  2021-08-07: Merged in bug-1533 (update hashes in CAP forms)
 			  2019-09-26: Merged in bug-1423 (remove link to Open Architecture Netword)
