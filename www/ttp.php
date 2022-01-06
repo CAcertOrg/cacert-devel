@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2021  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,12 +56,12 @@
 			$this->SetFont('Arial','I',8);
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','I',8);
-			$this->Cell(0,0,'CAcert Inc. - Hangar 10 Airfield Avenue - Murwillumbah NSW 2484 -  Australia - http://www.CAcert.org',0,0,'C');
+			$this->Cell(0,0,'CAcert Inc., Clos Belmont 2, 1208 Genève, Suisse - http://www.CAcert.org',0,0,'C');
 			$this->SetY(-7);
 			$this->SetFont('Arial','',6);
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','',6);
-			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints")).": SHA1=DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5 "._("and")." SHA256=07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5",0,0,'C');
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints")).": DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5 "._("and")." 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5",0,0,'C');
 		}
 
 		function Body($name = "", $dob = "", $email = "", $date = "")

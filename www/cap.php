@@ -1,6 +1,6 @@
 <? /*
     LibreSSL - CAcert web application
-    Copyright (C) 2004-2008  CAcert Inc.
+    Copyright (C) 2004-2021  CAcert Inc.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,16 +48,16 @@
 			$this->SetFont('Arial','I',8);
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','I',8);
-			$this->Cell(0,0,'CAcert Inc. - Hangar 10 Airfield Avenue - Murwillumbah NSW 2484 -  Australia - http://www.CAcert.org',0,0,'C');
+			$this->Cell(0,0,'CAcert Inc., Clos Belmont 2, 1208 Genève, Suisse - http://www.CAcert.org',0,0,'C');
 			$this->Ln(3);
 			$this->SetFont('Arial','',6);
 			if($_SESSION['_config']['language'] == "ja")
 				$this->SetFont('SJIS','',6);
-			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints"). _(" (since 2019)")),0,0,'C');
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], _("CAcert's Root Certificate fingerprints"). _(" (since 2021)")),0,0,'C');
 			$this->ln(3);
-			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA1: root: DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5 "._("and")." class3: A7C4 8FBE 6B02 6DBD 0EC1 B465 B88D D813 EE1D EFA0"),0,0,'C');
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA1: root: DDFC DA54 1E75 77AD DCA8 7E88 27A9 8A50 6032 52A5 "._("and")." class3: D8A8 3A64 117F FD21 94FE E198 3DD2 5C7B 32A8 FFC8"),0,0,'C');
 			$this->ln(3);
-			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA256: root: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5 "._("and")." class3: F687 3D70 D675 96C2 ACBA 3440 1E69 738B 5270 1DD6 AB06 B497 49BC 5515 0936 D544"),0,0,'C');
+			$this->Cell(0,0, recode($_SESSION['_config']['recode'], "SHA256: root: 07ED BD82 4A49 88CF EF42 15DA 20D4 8C2B 41D7 1529 D7C9 00F5 7092 6F27 7CC2 30C5 "._("and")." class3: 1BC5 A61A 2C0C 0132 C52B 284F 3DA0 D8DA CF71 7A0F 6C1D DF81 D80B 36EE E444 2869"),0,0,'C');
 			$this->SetLineWidth(0.05); // added 3 points to the abcissa 43 -> 46 to get second line fingerprints
 			$this->Line(1, 46, $this->w - 1, 46);
 			$this->SetLineWidth(0.2);
