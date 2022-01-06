@@ -297,7 +297,7 @@ define('LLBLUE','#D6E2EB'); // lighhter blue RGB 173 197 215
 define('LIME', '#C7FF00');  // RGB 199 255 0
 define('GREEN', '#00BE00'); // 0 190 0
 
-define('POBOX','Clos Belmont 2, 1208 GenÃ¨ve, Suisse');
+define('POBOX','Clos Belmont 2, 1208 Genève, Suisse');
 define('WEB', 'http://www.cacert.org');
 define('WIKI','http://wiki.cacert.org/wiki');
 define('ROOTKEYS','http://www.cacert.org/index.php?id=3');
