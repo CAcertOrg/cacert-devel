@@ -49,7 +49,7 @@ table#TAB1 td { border: 0 }
 	echo '<big><big><span style="font-weight: bold;">'._("Organisation Information (COAP) form").'</span></big></big><br>', "\n";
 ?>
 </div>
-<div style="text-align: right;">Hangar 10 Airfield Avenue, Murwillumbah NSW 2484, New South Wales, (Commonwealth of) Australia - <a href="http://www.cacert.org/">http://www.cacert.org</a><br></div>
+<div style="text-align: right;">Clos Belmont 2, 1208 Geneve, Switzerland - <a href="http://www.cacert.org/">http://www.cacert.org</a><br></div>
 <br>
 <table style="border-bottom: solid; border-color: rgb(17, 86, 140)"  cellspacing="0" cellpadding="0" width="100%">
 <tbody>
