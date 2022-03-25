@@ -737,6 +737,7 @@ sub HandleCerts($$)
   my $sth = $dbh->prepare("select * from $table where crt_name='' and csr_name!='' and warning<3");
   $sth->execute();
   #$rowdata;
+  WHILE_CRT_REQUEST:
   while ( my $rowdata = $sth->fetchrow_hashref() )
   {
     my %row=%{$rowdata};
@@ -828,9 +829,25 @@ sub HandleCerts($$)
       SysLog "Subject: --$row{'subject'}--\n" if($debug);
 
       my ($SAN,$subject)=X509extractSAN($row{'subject'});
+
       SysLog "Subject: --$subject--\n" if($debug);
       SysLog "SAN: --$SAN--\n" if($debug);
       SysLog "memid: $row{'memid'}\n" if($debug);
+
+      my $valid = 1;
+      if ($SAN =~ m/[ \n\r\t\x00#"'\\]/) {
+        SysLog "E: Invalid characters in SubjectAltName!\n";
+        $valid = 0;
+      }
+      if ($subject =~ m/[\n\r\t\x00#"'\\]]/) {
+        SysLog "E: Invalid characters in Subject\n";
+        $valid = 0;
+      }
+      if ($valid != 1) {
+        SysLog("W: Will not send the signing request to the signer\n");
+        $dbh->do(sprintf("update `$table` set warning=warning+1 where `id`=%d", $row{'id'}));
+        next WHILE_CRT_REQUEST;
+      }
 
       my $days=$org?($server?(365*2):365):calculateDays($row{"memid"});
 
