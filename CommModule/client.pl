@@ -839,7 +839,7 @@ sub HandleCerts($$)
         SysLog "E: Invalid characters in SubjectAltName!\n";
         $valid = 0;
       }
-      if ($subject =~ m/[\n\r\t\x00#"'\\]]/) {
+      if ($subject =~ m/[\n\r\t\x00#"'\\]/) {
         SysLog "E: Invalid characters in Subject\n";
         $valid = 0;
       }
