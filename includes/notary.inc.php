@@ -1234,7 +1234,7 @@ function get_user_agreements($memid, $type=null, $active=null){
 		if (0==$cca) {
 			$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>NOW()";
 		}else{
-			$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>( ADDDATE( NOW(), 90 ))";
+			$query = "select 1 from `gpg` where `memid`='$uid' and `expire`>( SUBDATE( NOW(), 90 ))";
 		}
 		$res = mysql_query($query);
 		return mysql_num_rows($res) > 0;
@@ -1248,8 +1248,8 @@ function get_user_agreements($memid, $type=null, $active=null){
 			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>NOW() and `revoked`<`created`";
 			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>NOW()";
 		}else{
-			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>( ADDDATE( NOW(), 90 ))  and `revoked`<`created`";
-			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>( ADDDATE( NOW(), 90 ))";
+			$query1 = "select 1 from `emailcerts` where `memid`='$uid' and `expire`>( SUBDATE( NOW(), 90 ))  and `revoked`<`created`";
+			$query2 = "select 1 from `emailcerts` where `memid`='$uid' and `revoked`>( SUBDATE( NOW(), 90 ))";
 		}
 		$res = mysql_query($query1);
 		$r1 = mysql_num_rows($res)>0;
@@ -1279,13 +1279,13 @@ function get_user_agreements($memid, $type=null, $active=null){
 				select 1 from `domaincerts` join `domains`
 					on `domaincerts`.`domid` = `domains`.`id`
 				where `domains`.`memid` = '$uid'
-					and `expire`>( ADDDATE( NOW(), 90 ))
+					and `expire`>( SUBDATE( NOW(), 90 ))
 					and `revoked`<`created`";
 			$query2 = "
 				select 1 from `domaincerts` join `domains`
 					on `domaincerts`.`domid` = `domains`.`id`
 				where `domains`.`memid` = '$uid'
-					and `revoked`>( ADDDATE( NOW(), 90 ))";
+					and `revoked`>( SUBDATE( NOW(), 90 ))";
 		}
 		$res = mysql_query($query1);
 		$r1 = mysql_num_rows($res)>0;
